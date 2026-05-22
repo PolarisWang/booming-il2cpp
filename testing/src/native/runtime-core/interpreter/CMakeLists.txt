@@ -90,3 +90,12 @@ add_chaos_test(test_interpreter_tiering_benchmark
     LIBS ${CHAOS_FULL_LIBS}
     LABELS "benchmark;interpreter"
 )
+
+# Stress / soak tests for FastExecute — multi-threaded concurrency, loop backedge OSR,
+# mixed opcode sequences. Each test runs 10k-50k iterations with result validation.
+# TIMEOUT: 120 seconds per test (kDefaultStressTimeoutMs).
+add_chaos_test(test_interpreter_stress
+    interpreter_stress_test.cpp
+    LIBS ${CHAOS_CORE_LIBS}
+    LABELS "stress;interpreter"
+)

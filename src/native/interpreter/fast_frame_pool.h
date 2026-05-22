@@ -46,7 +46,7 @@ private:
 extern thread_local FastFramePool tls_frame_pool;
 
 // ── SetupFastFrame ────────────────────────────────────────────────────────
-// Lightweight FastFrame field setup — replaces ~416-byte memset + field fills.
+// Lightweight FastFrame field setup — replaces ~1.4KB memset + field fills.
 // Resets only the fields that change between calls (pc, sp, tracked, args,
 // dispatch, call_cache).  O(1) ~10 scalar assignments (~20ns) vs ~200ns memset.
 void SetupFastFrame(FastFrame* ff,

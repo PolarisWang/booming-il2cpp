@@ -21,11 +21,12 @@ CodeBuffer::~CodeBuffer() noexcept {
 }
 
 CodeBuffer::CodeBuffer(CodeBuffer&& other) noexcept
-    : data_(other.data_), pos_(other.pos_), capacity_(other.capacity_), alloc_size_(other.alloc_size_) {
+    : data_(other.data_), pos_(other.pos_), capacity_(other.capacity_), alloc_size_(other.alloc_size_), failed_(other.failed_) {
     other.data_ = nullptr;
     other.pos_ = 0;
     other.capacity_ = 0;
     other.alloc_size_ = 0;
+    other.failed_ = false;
 }
 
 CodeBuffer& CodeBuffer::operator=(CodeBuffer&& other) noexcept {
@@ -35,15 +36,18 @@ CodeBuffer& CodeBuffer::operator=(CodeBuffer&& other) noexcept {
         pos_ = other.pos_;
         capacity_ = other.capacity_;
         alloc_size_ = other.alloc_size_;
+        failed_ = other.failed_;
         other.data_ = nullptr;
         other.pos_ = 0;
         other.capacity_ = 0;
         other.alloc_size_ = 0;
+        other.failed_ = false;
     }
     return *this;
 }
 
 void CodeBuffer::Ensure(uint32_t needed) noexcept {
+    if (failed_) return;
     if (pos_ + needed > capacity_) {
         uint32_t new_cap = capacity_ * 2;
         if (new_cap < kCodeBufferInitSize) new_cap = kCodeBufferInitSize;
@@ -53,10 +57,13 @@ void CodeBuffer::Ensure(uint32_t needed) noexcept {
             if (new_cap > kCodeBufferMaxSize) {
                 CHAOS_IL2CPP_LOG_ERROR_M("codegen", "CodeBuffer: would exceed max size {}",
                                          kCodeBufferMaxSize);
+                failed_ = true;
                 return;
             }
         }
-        Grow(new_cap);
+        if (!Grow(new_cap)) {
+            failed_ = true;
+        }
     }
 }
 
@@ -95,7 +102,7 @@ bool CodeBuffer::Grow(uint32_t min_capacity) noexcept {
 }
 
 void* CodeBuffer::Seal() noexcept {
-    if (data_ == nullptr || pos_ == 0) return nullptr;
+    if (data_ == nullptr || pos_ == 0 || failed_) return nullptr;
 
     // Trim to actual size (round up to page)
     uint32_t needed = (pos_ + 4095) & ~4095u;

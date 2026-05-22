@@ -22,6 +22,11 @@
 
 #if defined(_WIN32) || defined(_WIN64)
     #include <windows.h>
+#elif defined(__linux__)
+    #include <time.h>
+#elif defined(__APPLE__)
+    #include <sys/resource.h>
+    #include <sys/time.h>
 #endif
 
 namespace chaos::il2cpp::runtime_core::threading {
@@ -62,6 +67,42 @@ HillClimbingController                    s_hill_climbing;
 
 /// Thread-local pointer to the current worker's local queue (for LIFO push).
 thread_local WorkerLocalQueue*            tls_worker_queue = nullptr;
+
+/// Measure total CPU time consumed by the process (all threads) in nanoseconds.
+/// Returns 0 if the platform does not support process-level CPU time measurement.
+uint64_t GetProcessCpuTimeNs() noexcept {
+#if defined(_WIN32) || defined(_WIN64)
+    FILETIME create_time, exit_time, kernel_time, user_time;
+    if (!GetProcessTimes(GetCurrentProcess(), &create_time, &exit_time, &kernel_time, &user_time)) {
+        return 0;
+    }
+    uint64_t kernel = (static_cast<uint64_t>(kernel_time.dwHighDateTime) << 32)
+                    | static_cast<uint64_t>(kernel_time.dwLowDateTime);
+    uint64_t user = (static_cast<uint64_t>(user_time.dwHighDateTime) << 32)
+                  | static_cast<uint64_t>(user_time.dwLowDateTime);
+    // FILETIME is in 100-ns intervals; convert to ns.
+    return (kernel + user) * 100;
+#elif defined(__linux__)
+    struct timespec ts;
+    if (clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &ts) == 0) {
+        return static_cast<uint64_t>(ts.tv_sec) * 1'000'000'000ULL
+             + static_cast<uint64_t>(ts.tv_nsec);
+    }
+    return 0;
+#elif defined(__APPLE__)
+    struct rusage usage;
+    if (getrusage(RUSAGE_SELF, &usage) == 0) {
+        uint64_t utime = static_cast<uint64_t>(usage.ru_utime.tv_sec) * 1'000'000'000ULL
+                       + static_cast<uint64_t>(usage.ru_utime.tv_usec) * 1000ULL;
+        uint64_t stime = static_cast<uint64_t>(usage.ru_stime.tv_sec) * 1'000'000'000ULL
+                       + static_cast<uint64_t>(usage.ru_stime.tv_usec) * 1000ULL;
+        return utime + stime;
+    }
+    return 0;
+#else
+    return 0;
+#endif
+}
 
 #if defined(_WIN32) || defined(_WIN64)
 HANDLE                                    s_iocp_port = INVALID_HANDLE_VALUE;
@@ -176,7 +217,7 @@ void WorkerLoop() noexcept {
                 auto now = std::chrono::steady_clock::now();
                 if (now - last_work_time >= kThreadPoolIdleTimeout) {
                     // Before exiting, check one more time if work appeared.
-                    if (s_global_queue.empty() && !s_shutdown.load(std::memory_order_relaxed)) {
+                    if (s_global_queue.empty() && !s_shutdown.load(std::memory_order_acquire)) {
                         // Remove our queue from the global list.
                         auto it = std::find(s_worker_queues.begin(), s_worker_queues.end(), local_q);
                         if (it != s_worker_queues.end()) s_worker_queues.erase(it);
@@ -330,21 +371,34 @@ int32_t HillClimbingController::OnGateTick(int32_t completed_count, int32_t curr
 
     // ── Measure CPU utilization ───────────────────────────────────
     {
-        auto now_cpu = std::chrono::steady_clock::now();
-        uint64_t now_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(
-            now_cpu.time_since_epoch()).count();
-        if (last_cpu_time_ns_ > 0) {
-            uint64_t delta_ns = now_ns - last_cpu_time_ns_;
-            // Gate tick is ~15ms ≈ 15,000,000 ns. CPU util is fraction of wall time
-            // spent doing work (inferred from completed_count relative to capacity).
-            // Simple heuristic: if we completed work, CPU was busy.
+        auto now_wall = std::chrono::steady_clock::now();
+        uint64_t now_wall_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(
+            now_wall.time_since_epoch()).count();
+
+        uint64_t now_cpu_ns = GetProcessCpuTimeNs();
+
+        if (last_wall_time_ns_ > 0 && last_process_cpu_ns_ > 0 && now_cpu_ns > 0) {
+            uint64_t wall_delta = now_wall_ns - last_wall_time_ns_;
+            uint64_t cpu_delta = now_cpu_ns - last_process_cpu_ns_;
+            if (wall_delta > 0) {
+                float measured = static_cast<float>(
+                    (std::min)(cpu_delta, wall_delta)) / static_cast<float>(wall_delta);
+                cpu_utilization_ = cpu_utilization_ * 0.7f + measured * 0.3f;  // EMA
+            }
+        } else {
+            // Platform does not support process CPU time measurement;
+            // fall back to throughput heuristic.
             float busy_ratio = (completed_count > 0)
                 ? (std::min)(1.0f, static_cast<float>(completed_count) * 0.01f)
                 : 0.0f;
             cpu_utilization_ = cpu_utilization_ * 0.7f + busy_ratio * 0.3f;  // EMA
-            cpu_filter_.Feed(cpu_utilization_);
         }
-        last_cpu_time_ns_ = now_ns;
+        cpu_filter_.Feed(cpu_utilization_);
+
+        last_wall_time_ns_ = now_wall_ns;
+        if (now_cpu_ns > 0) {
+            last_process_cpu_ns_ = now_cpu_ns;
+        }
     }
 
     float throughput_power = throughput_filter_.Power();
@@ -589,7 +643,8 @@ void HillClimbingController::Reset() noexcept {
     steady_hold_ticks_ = 0;
     steady_base_threads_ = 0;
     square_wave_phase_ = 0;
-    last_cpu_time_ns_ = 0;
+    last_wall_time_ns_ = 0;
+    last_process_cpu_ns_ = 0;
     cpu_utilization_ = 0.0f;
     throughput_filter_.Reset();
     cpu_filter_.Reset();
@@ -687,6 +742,19 @@ void ThreadPoolQueueUserWorkItem(void (*callback)(void*), void* context) noexcep
 void ThreadPoolQueueUserWorkItemUnsafe(void (*callback)(void*), void* context) noexcept {
     if (callback == nullptr) return;
 
+    // Backpressure: if the global queue is full, yield-spin to let workers drain.
+    // We use yield (not blocking wait) to avoid holding any lock, which prevents
+    // deadlock when the consumer (worker) needs the same lock to pop items.
+    int spin_count = 0;
+    while (s_queue_depth.load(std::memory_order_relaxed) >= kThreadPoolMaxQueueDepth) {
+        std::this_thread::yield();
+        spin_count++;
+        if (spin_count > 1000) {
+            CHAOS_IL2CPP_LOG_WARN("ThreadPool", "queue full, spinning");
+            spin_count = 0;
+        }
+    }
+
     {
         std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(s_mutex);
         s_global_queue.push({callback, context});
@@ -698,10 +766,13 @@ void ThreadPoolQueueUserWorkItemUnsafe(void (*callback)(void*), void* context) n
 
     s_work_available.notify_one();
 
-    // Grow workers if queue depth exceeds active worker capacity.
+    // Rate-limited worker growth: only add workers in extreme starvation
+    // (queue depth > 3× workers). Normal growth is managed by the gate tick
+    // (every 15 ms) via HillClimbing, which makes optimal decisions based on
+    // throughput, CPU utilization, and frequency-domain analysis.
     int32_t depth = s_queue_depth.load(std::memory_order_relaxed);
     int32_t current_workers = static_cast<int32_t>(s_workers.size());
-    if (depth > current_workers && current_workers < kThreadPoolMaxWorkerCount) {
+    if (depth > current_workers * 3 && current_workers < kThreadPoolMaxWorkerCount) {
         s_desired_workers.store(
             (std::min)(current_workers + 1, kThreadPoolMaxWorkerCount),
             std::memory_order_relaxed);

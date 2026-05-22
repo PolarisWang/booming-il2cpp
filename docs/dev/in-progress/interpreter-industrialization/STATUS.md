@@ -1,49 +1,123 @@
-# Interpreter 工业化补齐 — Brainstorm
+# Interpreter 工业化补齐 — Roadmap
 
 > **task_id**: interpreter-industrialization
 > **创建日期**: 2026-05-22
-> **phase**: brainstorming
+> **更新日期**: 2026-05-23
+> **task_type**: roadmap
+> **phase**: roadmap — 执行中
+> **lifecycle_status**: question_clearance = cleared, clearance_confirmed_by_user = true
+> **child_execution_mode**: auto
+> **auto_continue**: true
+> **auto_stop_policy**: blocking-only
+> **dispatch_model**: sequential
 
 ## 背景
 
-基于工业化差距分析，Interpreter 子系统在 12 个维度上存在缺口（I-01 ~ I-12），涵盖调试器、诊断、性能、测试、OSR、COM interop 等多个方面。当前执行引擎成熟度评估 ~45%。
+基于工业化差距分析，Interpreter 子系统在 15 个维度上存在缺口，涵盖调试器、诊断、性能、测试、OSR、COM interop 等多个方面。当前执行引擎成熟度评估 ~35%。
 
-## 12 项差距总览
+## 拍板确认
 
-| ID | 差距 | 优先级 | 当前状态 | 涉及子系统 |
-|----|------|--------|---------|-----------|
-| I-01 | Debugger 基础设施缺失 | P0 | 无 debugger 目录，无单步/断点/IL sequence point | interpreter, diagnostics |
-| I-02 | Tier upgrade 策略缺失 | P0 | OSR state 框架存在但无激活策略 | interpreter, codegen |
-| I-03 | EventPipe/诊断事件缺失 | P0 | 无 EventPipe 引用 | diagnostics |
-| I-04 | 多线程 Stress 测试缺失 | P1 | interpreter 测试无 stress 目标 | testing |
-| I-05 | GC 交互验证缺失 | P1 | GC 与 interpreter 测试完全隔离 | gc, interpreter, testing |
-| I-06 | 解释器性能远低于工业标准 | P1 | ~200-290x vs AOT；已有 MIC/FastFrame/TLS 优化 | interpreter |
-| I-07 | Benchmark 回归检测缺失 | P1 | 无 interpreter benchmark 基线管理 | testing, tools |
-| I-08 | IR opcode 覆盖未工具化验证 | P2 | 100 opcodes 定义，但覆盖率未验证 | interpreter, testing |
-| I-09 | 长时间稳定性测试缺失 | P2 | 无 interpreter soak test | testing |
-| I-10 | COM interop 缺失 | P2 | COM 基础设施存在但 interpreter 未接 | interpreter, runtime-core |
-| I-11 | Overflow-check 变体测试不足 | P2 | 实现存在但无专项测试 | interpreter, testing |
-| I-12 | OSR 无激活策略 | P2 | OSR API 存在但 tier upgrade 未联动 | interpreter, codegen, tier_manager |
+| 问题 | 决策 | 说明 |
+|------|------|------|
+| Q1: 平台 | Windows x64 专注 | CI 和测试覆盖集中，当前开发平台 |
+| Q2: OSR | 方案 C: 混合 OSR | Backedge + Call-site 双向 OSR，当前帧 + 下次调用双触发 |
+| Q3: Debugger | 方案 C-2: 自定义 IL-level 调试协议 | 非 ICorDebug（COM 兼容成本过高），走 DAP 协议接 VSCode |
+| Q4: EventPipe | 方案 B-1: 核心层先行 | IPC + GC/TP/Exception 3 类事件，自定义 receiver CLI |
 
-## 全局优先级约束
+## 最终方案：4 层架构
 
-沿用项目三条优先级（来自 CLAUDE.md）：
-1. **性能最优 (P1)** — 生成的 C++ 代码性能第一
-2. **方案完美性 (P2)** — 架构完整性第二
-3. **HotUpdate 支持 (P3)** — 热更新友好第三
+```
+Layer 1: 核心执行引擎加固 (Core Engine)           ~2 周 ✅ 完成
+  ├── R-5: FastFrame 容量扩展                   1 天 ✅
+  ├── R-1: SEH in FastExecute                   1 周 ✅
+  ├── R-3: Cpblk/InitBlk 实现                   0.5 天 ✅
+  ├── R-4: CallVirtConstrained 实现              0.5 天 ✅
+  ├── R-10: Calli 实现                           0.5 天 ✅
+  └── R-12: Tracked 对象泄漏修复                 0.5 天 ✅
 
-## blocking_questions
+Layer 2: Tier 升级与自适应 (Tiering)              ~3.5 周 ✅ 完成
+  ├── R-2 Phase 1: Call-site tier upgrade        3 天 ✅
+  ├── R-2 Phase 2: Backedge OSR                 2 周 ✅
+  └── R-11: T4 Native Codegen 加固               1 周 ✅
 
-待在本阶段清零的问题：
+Layer 3: 交叉验证 (Cross-cutting)                 ~2 周  ← 当前
+  ├── R-6: GC × Interpreter 交互验证             5 天
+  ├── R-7: Stress / Soak 测试                    5 天
+  ├── R-8: Benchmark 回归管线                    3 天
+  └── R-9: Overflow-check 测试补齐               1 天
 
-1. **范围边界** — I-01 (Debugger) 做到什么程度？完整 IL-level 调试器 vs 最小化调试信息输出？
-2. **平台目标** — 是否绑定 Windows x64 或需要跨平台？
-3. **预算约束** — 各 gap 的投入比例和预期里程碑？
-4. **验收标准** — 解释器工业化的"完成定义"是什么？
+Layer 4: 诊断与可观测 (Diagnostics)               ~4-6 周
+  ├── Debugger Phase 1-4 (MVP: FastExecute+RegisterExecute)  3 周
+  ├── Debugger Phase 5-6 (完整: 4 层)                        +2 周
+  ├── EventPipe Phase 1-3 (IPC + 3 类事件)                   1.5 周
+  └── EventPipe Phase 4-5 (计数器 + receiver CLI)             1 周
+
+预估总工期: ~8-10 周（Layer 3+4 与 Layer 1+2 可并行）
+```
+
+## 子任务状态
+
+| task_id | phase | status | purpose | estimated_effort |
+|---------|-------|--------|---------|-----------------|
+| I-R5 | 1 | **completed** | FastFrame 容量扩展 | 1 天 |
+| I-R1 | 1 | **completed** | SEH in FastExecute | 1 周 |
+| I-R3 | 1 | **completed** | Cpblk/InitBlk 实现 | 0.5 天 |
+| I-R4 | 1 | **completed** | CallVirtConstrained 实现 | 0.5 天 |
+| I-R10 | 1 | **completed** | Calli 实现 | 0.5 天 |
+| I-R12 | 1 | **completed** | Tracked 泄漏修复 | 0.5 天 |
+| I-R2a | 2 | **completed** | Call-site tier upgrade | 3 天 |
+| I-R2b | 2 | **completed** | Backedge OSR | 2 周 |
+| I-R11 | 2 | **completed** | T4 Codegen 加固 | 1 周 |
+| I-R6 | 3 | **completed** | GC×Interpreter 验证 | 5 天 |
+| I-R7 | 3 | planned | Stress/Soak 测试 | 5 天 |
+| I-R8 | 3 | planned | Benchmark 回归管线 | 3 天 |
+| I-R9 | 3 | planned | Overflow 测试 | 1 天 |
+| I-DBG | 4 | planned | Debugger MVP | 3 周 |
+| I-EVP | 4 | planned | EventPipe 核心层 | 1.5 周 |
+
+## 最近摘要
+
+### Phase 1 (Layer 1: 核心执行引擎加固) — 全部完成 ✅
+
+所有 6 个子任务完成，编译通过 0 errors：
+
+| 子任务 | 改动 | 说明 |
+|--------|------|------|
+| I-R5 | fast_dispatch.h, osr_state.h | kMaxStack 16→64, kMaxLocals 8→32, kMaxTracked 8→32 |
+| I-R1 | fast_dispatch.h/cpp, fast_frame_pool.cpp | 5 个 SEH handler（Throw/Leave/EndFinally/EndFilter/Rethrow） |
+| I-R3 | fast_dispatch.cpp | Cpblk (memcpy) + InitBlk (memset) 实现 |
+| I-R4 | fast_dispatch.cpp | CallVirtConstrained：struct direct call + ObjectRef MIC |
+| I-R10 | fast_dispatch.cpp | Calli：函数指针 + PopCallArgs + InterpreterDispatchRaw |
+| I-R12 | fast_dispatch.h, fast_frame_pool.cpp | TrackedBlock 溢出块修复泄漏 |
+
+### Phase 2 (Layer 2: Tier 升级与自适应) — 全部完成 ✅
+
+所有 3 个子任务完成，chaos_codegen.lib 编译通过 0 errors：
+
+| 子任务 | 改动 | 说明 |
+|--------|------|------|
+| I-R2a | entry_direct.cpp | Call-site tier upgrade：T1→T2→T3→T4 状态机 + 自适应阈值 |
+| I-R2b | fast_dispatch.h/cpp, fast_frame_pool.cpp | Backedge OSR：loop_counter + TryFastOsrPromotion + T4 OSR 入口 |
+| I-R11 | code_buffer.h/cpp, code_generator.cpp | T4 Codegen 加固：数组溢出修复、OOM 安全、SEH 验证、Failed 标记 |
+
+### Phase 3 (Layer 3: 交叉验证) — 执行中
+
+I-R6 (GC×Interpreter 交互验证) 已完成，审计结论：当前交互安全，FastFrame TLS 在并发 BGC 下存在极小间隙但不影响实际运行。接下来启动 I-R7 (Stress + Soak 测试)。
+
+## latest_stop_point
+
+Phase 2 全部完成。Phase 3 中 I-R6 完成，开始 I-R7。
+
+## 下一步
+
+开始执行 I-R7（Stress/Soak 测试）
+
+## recommended_next_child
+
+I-R7
 
 ## 关键文档
 
+- `roadmap-v1-01.md` — 阶段路线图
 - `wiki/03-功能模块/06-il2cpp核心架构/21-interpreter-optimizations.md` — 现有优化
-- `docs/reports/infrastructure-comparison-vs-coreclr-unity-mono.md` — 成熟度评估 ~45%
-- `docs/discuss/20260513-architecture-comparison-report.md` — Interpreter 作为差异化能力
-- `docs/discuss/20260513-hotupdate-comparison-report.md` — 性能对比 ~200-290x vs AOT
+- `docs/reports/infrastructure-comparison-vs-coreclr-unity-mono.md` — 成熟度评估

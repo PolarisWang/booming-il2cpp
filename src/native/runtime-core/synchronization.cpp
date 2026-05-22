@@ -2,11 +2,12 @@
 #include "thread_state.h"
 #include "gc_transition.h"
 
+#include <chaos/log.h>
+
 #include <atomic>
 #include <chrono>
 #include <condition_variable>
 #include <cstdint>
-#include <list>
 #include <mutex>
 #include <new>
 
@@ -16,15 +17,19 @@
 
 namespace chaos::il2cpp::runtime_core::threading {
 
-// ── SemaphoreSlim ───────────────────────────────────────────────────────
+// ── SemaphoreSlim — Fixed array O(1) ───────────────────────────────────
 
 namespace {
 
-struct SemaphoreEntry {
-    uint32_t id;
-    std::atomic<int32_t> count;
-    int32_t max_count;
-    bool active;
+constexpr uint32_t kMaxSemaphoreCount = 1024;
+constexpr uint32_t kMaxBarrierCount    = 1024;
+constexpr uint32_t kMaxCountdownEventCount = 1024;
+
+struct SemaphoreEntryFixed {
+    uint32_t id{0};
+    std::atomic<int32_t> count{0};
+    int32_t max_count{0};
+    bool active{false};
     CHAOS_IL2CPP_MUTEX mutex;
     CHAOS_IL2CPP_CONDITION_VARIABLE cv;
 };
@@ -49,48 +54,45 @@ struct RWLockEntryFixed {
     int32_t waiting_readers{0};
     int32_t waiting_writers{0};
     std::atomic<int32_t> upgradeable_reader_tid{0};  // TID of upgradeable reader, 0 = none
+    #ifndef NDEBUG
+    int32_t debug_writer_tid{0};  // TID of current writer (DEBUG only)
+    #endif
 };
 
-struct BarrierEntry {
-    uint32_t id;
-    bool active;
+struct BarrierEntryFixed {
+    uint32_t id{0};
+    bool active{false};
     CHAOS_IL2CPP_MUTEX mutex;
     CHAOS_IL2CPP_CONDITION_VARIABLE cv;
-    int32_t participant_count;
-    int32_t remaining;
-    int64_t phase_number;
+    int32_t participant_count{0};
+    int32_t remaining{0};
+    int64_t phase_number{0};
 };
 
-struct CountdownEventEntry {
-    uint32_t id;
-    bool active;
+struct CountdownEventEntryFixed {
+    uint32_t id{0};
+    bool active{false};
     CHAOS_IL2CPP_MUTEX mutex;
     CHAOS_IL2CPP_CONDITION_VARIABLE cv;
-    int32_t count;
+    int32_t count{0};
 };
 
-CHAOS_IL2CPP_MUTEX s_sem_table_mutex;
-std::list<SemaphoreEntry> s_semaphores;
+// Fixed arrays: handle = index, O(1) lookup. Entries are never freed
+// (only marked active=false), so pointer stability is guaranteed.
+SemaphoreEntryFixed     g_semaphores[kMaxSemaphoreCount];
+RWLockEntryFixed        g_rwlocks[kMaxRWLockCount];
+BarrierEntryFixed       g_barriers[kMaxBarrierCount];
+CountdownEventEntryFixed g_countdown_events[kMaxCountdownEventCount];
+
 uint32_t s_next_sem_id = 1;
-
-// RWLock: fixed array for O(1) lookup. Entries are never freed (only marked
-// active=false), so pointer stability is guaranteed.
-RWLockEntryFixed g_rwlocks[kMaxRWLockCount];
-uint32_t s_next_rw_id = 1;
-
-CHAOS_IL2CPP_MUTEX s_barrier_table_mutex;
-std::list<BarrierEntry> s_barriers;
+uint32_t s_next_rw_id  = 1;
 uint32_t s_next_barrier_id = 1;
+uint32_t s_next_ce_id  = 1;
 
-CHAOS_IL2CPP_MUTEX s_ce_table_mutex;
-std::list<CountdownEventEntry> s_countdown_events;
-uint32_t s_next_ce_id = 1;
-
-SemaphoreEntry* FindSemaphore(uint32_t id) noexcept {
-    for (auto& s : s_semaphores) {
-        if (s.id == id && s.active) return &s;
-    }
-    return nullptr;
+SemaphoreEntryFixed* FindSemaphore(uint32_t handle) noexcept {
+    if (handle == 0 || handle >= kMaxSemaphoreCount) return nullptr;
+    auto* entry = &g_semaphores[handle];
+    return entry->active ? entry : nullptr;
 }
 
 /// O(1) RWLock lookup: handle is the array index.
@@ -100,18 +102,16 @@ RWLockEntryFixed* FindRWLockFixed(uint32_t handle) noexcept {
     return entry->active ? entry : nullptr;
 }
 
-BarrierEntry* FindBarrier(uint32_t id) noexcept {
-    for (auto& b : s_barriers) {
-        if (b.id == id && b.active) return &b;
-    }
-    return nullptr;
+BarrierEntryFixed* FindBarrier(uint32_t handle) noexcept {
+    if (handle == 0 || handle >= kMaxBarrierCount) return nullptr;
+    auto* entry = &g_barriers[handle];
+    return entry->active ? entry : nullptr;
 }
 
-CountdownEventEntry* FindCountdownEvent(uint32_t id) noexcept {
-    for (auto& ce : s_countdown_events) {
-        if (ce.id == id && ce.active) return &ce;
-    }
-    return nullptr;
+CountdownEventEntryFixed* FindCountdownEvent(uint32_t handle) noexcept {
+    if (handle == 0 || handle >= kMaxCountdownEventCount) return nullptr;
+    auto* entry = &g_countdown_events[handle];
+    return entry->active ? entry : nullptr;
 }
 
 }  // anonymous namespace
@@ -119,23 +119,21 @@ CountdownEventEntry* FindCountdownEvent(uint32_t id) noexcept {
 uint32_t SemaphoreSlimCreate(int32_t initial_count, int32_t max_count) noexcept {
     if (initial_count < 0 || max_count <= 0) return 0;
 
-    std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(s_sem_table_mutex);
-
-    uint32_t id = s_next_sem_id++;
-    if (id == 0) id = s_next_sem_id++;
-
-    s_semaphores.emplace_back();
-    auto& entry = s_semaphores.back();
-    entry.id = id;
-    entry.count.store(initial_count, std::memory_order_relaxed);
-    entry.max_count = max_count;
-    entry.active = true;
-
-    return id;
+    for (uint32_t i = 1; i < kMaxSemaphoreCount; i++) {
+        auto& entry = g_semaphores[i];
+        if (entry.id == 0) {
+            entry.id = s_next_sem_id++;
+            if (entry.id == 0) entry.id = s_next_sem_id++;
+            entry.count.store(initial_count, std::memory_order_relaxed);
+            entry.max_count = max_count;
+            entry.active = true;
+            return i;
+        }
+    }
+    return 0;  // table full
 }
 
 bool SemaphoreSlimDestroy(uint32_t sem_id) noexcept {
-    std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(s_sem_table_mutex);
     auto* entry = FindSemaphore(sem_id);
     if (entry == nullptr) return false;
     entry->active = false;
@@ -144,11 +142,7 @@ bool SemaphoreSlimDestroy(uint32_t sem_id) noexcept {
 }
 
 int32_t SemaphoreSlimWait(uint32_t sem_id, int32_t timeout_ms) noexcept {
-    SemaphoreEntry* entry;
-    {
-        std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(s_sem_table_mutex);
-        entry = FindSemaphore(sem_id);
-    }
+    auto* entry = FindSemaphore(sem_id);
     if (entry == nullptr) return -1;
 
     GC_TRANSITION_TO_PREEMPTIVE();
@@ -192,11 +186,7 @@ int32_t SemaphoreSlimWait(uint32_t sem_id, int32_t timeout_ms) noexcept {
 int32_t SemaphoreSlimRelease(uint32_t sem_id, int32_t count) noexcept {
     if (count <= 0) return -1;
 
-    SemaphoreEntry* entry;
-    {
-        std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(s_sem_table_mutex);
-        entry = FindSemaphore(sem_id);
-    }
+    auto* entry = FindSemaphore(sem_id);
     if (entry == nullptr) return -1;
 
     {
@@ -335,6 +325,9 @@ int32_t ReaderWriterLockSlimEnterWrite(uint32_t rw_handle, int32_t timeout_ms) n
     if (entry->state.compare_exchange_strong(expected, -1,
             std::memory_order_acquire, std::memory_order_relaxed)) {
         if (entry->upgradeable_reader_tid.load(std::memory_order_acquire) == 0) {
+            #ifndef NDEBUG
+            entry->debug_writer_tid = threading::GetCurrentThreadId();
+            #endif
             return 1;  // Acquired without any syscall.
         }
         // Upgradeable reader is active — undo CAS and fall through.
@@ -351,6 +344,9 @@ int32_t ReaderWriterLockSlimEnterWrite(uint32_t rw_handle, int32_t timeout_ms) n
         expected = 0;
         if (entry->state.compare_exchange_strong(expected, -1,
                 std::memory_order_acquire, std::memory_order_relaxed)) {
+            #ifndef NDEBUG
+            entry->debug_writer_tid = threading::GetCurrentThreadId();
+            #endif
             return 1;
         }
     }
@@ -382,6 +378,9 @@ int32_t ReaderWriterLockSlimEnterWrite(uint32_t rw_handle, int32_t timeout_ms) n
 
         if (result == 1) {
             entry->state.store(-1, std::memory_order_release);
+            #ifndef NDEBUG
+            entry->debug_writer_tid = threading::GetCurrentThreadId();
+            #endif
         }
         GC_TRANSITION_TO_COOPERATIVE();
         return result;
@@ -391,6 +390,16 @@ int32_t ReaderWriterLockSlimEnterWrite(uint32_t rw_handle, int32_t timeout_ms) n
 bool ReaderWriterLockSlimExitWrite(uint32_t rw_handle) noexcept {
     auto* entry = FindRWLockFixed(rw_handle);
     if (entry == nullptr) return false;
+
+    #ifndef NDEBUG
+    int32_t tid = threading::GetCurrentThreadId();
+    if (entry->debug_writer_tid != tid) {
+        CHAOS_IL2CPP_LOG_ERROR("RWLock",
+            "ExitWrite by TID %d but writer is TID %d", tid, entry->debug_writer_tid);
+        return false;
+    }
+    entry->debug_writer_tid = 0;
+    #endif
 
     int32_t prev = entry->state.exchange(0, std::memory_order_release);
     if (prev != -1) return false;  // Not the writer.
@@ -521,6 +530,9 @@ int32_t ReaderWriterLockSlimUpgradeToWrite(uint32_t rw_handle, int32_t timeout_m
         if (s == 0) {
             if (entry->state.compare_exchange_strong(s, -1,
                     std::memory_order_acquire, std::memory_order_relaxed)) {
+                #ifndef NDEBUG
+                entry->debug_writer_tid = tid;
+                #endif
                 return 1;  // Upgraded to write.
             }
         }
@@ -551,6 +563,9 @@ int32_t ReaderWriterLockSlimUpgradeToWrite(uint32_t rw_handle, int32_t timeout_m
 
         if (result == 1) {
             entry->state.store(-1, std::memory_order_release);
+            #ifndef NDEBUG
+            entry->debug_writer_tid = tid;
+            #endif
         }
         GC_TRANSITION_TO_COOPERATIVE();
         return result;
@@ -587,24 +602,22 @@ bool ReaderWriterLockSlimDowngradeFromWrite(uint32_t rw_handle) noexcept {
 uint32_t BarrierCreate(int32_t participant_count) noexcept {
     if (participant_count < 1) return 0;
 
-    std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(s_barrier_table_mutex);
-
-    uint32_t id = s_next_barrier_id++;
-    if (id == 0) id = s_next_barrier_id++;
-
-    s_barriers.emplace_back();
-    auto& entry = s_barriers.back();
-    entry.id = id;
-    entry.active = true;
-    entry.participant_count = participant_count;
-    entry.remaining = participant_count;
-    entry.phase_number = 0;
-
-    return id;
+    for (uint32_t i = 1; i < kMaxBarrierCount; i++) {
+        auto& entry = g_barriers[i];
+        if (entry.id == 0) {
+            entry.id = s_next_barrier_id++;
+            if (entry.id == 0) entry.id = s_next_barrier_id++;
+            entry.active = true;
+            entry.participant_count = participant_count;
+            entry.remaining = participant_count;
+            entry.phase_number = 0;
+            return i;
+        }
+    }
+    return 0;  // table full
 }
 
 bool BarrierDestroy(uint32_t barrier_id) noexcept {
-    std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(s_barrier_table_mutex);
     auto* entry = FindBarrier(barrier_id);
     if (entry == nullptr) return false;
     entry->active = false;
@@ -613,11 +626,7 @@ bool BarrierDestroy(uint32_t barrier_id) noexcept {
 }
 
 int32_t BarrierSignalAndWait(uint32_t barrier_id, int32_t timeout_ms) noexcept {
-    BarrierEntry* entry;
-    {
-        std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(s_barrier_table_mutex);
-        entry = FindBarrier(barrier_id);
-    }
+    auto* entry = FindBarrier(barrier_id);
     if (entry == nullptr) return -1;
 
     GC_TRANSITION_TO_PREEMPTIVE();
@@ -658,13 +667,11 @@ int32_t BarrierSignalAndWait(uint32_t barrier_id, int32_t timeout_ms) noexcept {
 }
 
 int32_t BarrierGetRemainingParticipants(uint32_t barrier_id) noexcept {
-    std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(s_barrier_table_mutex);
     auto* entry = FindBarrier(barrier_id);
     return (entry != nullptr) ? entry->remaining : -1;
 }
 
 int64_t BarrierGetCurrentPhaseNumber(uint32_t barrier_id) noexcept {
-    std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(s_barrier_table_mutex);
     auto* entry = FindBarrier(barrier_id);
     return (entry != nullptr) ? entry->phase_number : -1;
 }
@@ -674,22 +681,20 @@ int64_t BarrierGetCurrentPhaseNumber(uint32_t barrier_id) noexcept {
 uint32_t CountdownEventCreate(int32_t initial_count) noexcept {
     if (initial_count < 1) return 0;
 
-    std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(s_ce_table_mutex);
-
-    uint32_t id = s_next_ce_id++;
-    if (id == 0) id = s_next_ce_id++;
-
-    s_countdown_events.emplace_back();
-    auto& entry = s_countdown_events.back();
-    entry.id = id;
-    entry.active = true;
-    entry.count = initial_count;
-
-    return id;
+    for (uint32_t i = 1; i < kMaxCountdownEventCount; i++) {
+        auto& entry = g_countdown_events[i];
+        if (entry.id == 0) {
+            entry.id = s_next_ce_id++;
+            if (entry.id == 0) entry.id = s_next_ce_id++;
+            entry.active = true;
+            entry.count = initial_count;
+            return i;
+        }
+    }
+    return 0;  // table full
 }
 
 bool CountdownEventDestroy(uint32_t ce_id) noexcept {
-    std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(s_ce_table_mutex);
     auto* entry = FindCountdownEvent(ce_id);
     if (entry == nullptr) return false;
     entry->active = false;
@@ -700,11 +705,7 @@ bool CountdownEventDestroy(uint32_t ce_id) noexcept {
 int32_t CountdownEventSignal(uint32_t ce_id, int32_t count) noexcept {
     if (count <= 0) return -1;
 
-    CountdownEventEntry* entry;
-    {
-        std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(s_ce_table_mutex);
-        entry = FindCountdownEvent(ce_id);
-    }
+    auto* entry = FindCountdownEvent(ce_id);
     if (entry == nullptr) return -1;
 
     {
@@ -724,11 +725,7 @@ int32_t CountdownEventSignal(uint32_t ce_id, int32_t count) noexcept {
 }
 
 int32_t CountdownEventWait(uint32_t ce_id, int32_t timeout_ms) noexcept {
-    CountdownEventEntry* entry;
-    {
-        std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(s_ce_table_mutex);
-        entry = FindCountdownEvent(ce_id);
-    }
+    auto* entry = FindCountdownEvent(ce_id);
     if (entry == nullptr) return -1;
 
     GC_TRANSITION_TO_PREEMPTIVE();
@@ -760,7 +757,6 @@ int32_t CountdownEventWait(uint32_t ce_id, int32_t timeout_ms) noexcept {
 }
 
 int32_t CountdownEventGetCurrentCount(uint32_t ce_id) noexcept {
-    std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(s_ce_table_mutex);
     auto* entry = FindCountdownEvent(ce_id);
     return (entry != nullptr) ? entry->count : -1;
 }
@@ -768,7 +764,6 @@ int32_t CountdownEventGetCurrentCount(uint32_t ce_id) noexcept {
 bool CountdownEventReset(uint32_t ce_id, int32_t count) noexcept {
     if (count < 1) return false;
 
-    std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(s_ce_table_mutex);
     auto* entry = FindCountdownEvent(ce_id);
     if (entry == nullptr) return false;
 

@@ -158,6 +158,31 @@ void ClearAllCards() noexcept {
     }
 }
 
+void ClearCardRange(uintptr_t start, uintptr_t end) noexcept {
+    if (start >= end || g_heap_base == 0) return;
+
+    uintptr_t first_idx = (start - g_heap_base) >> kCardShift;
+    uintptr_t last_idx  = (end - 1 - g_heap_base) >> kCardShift;
+
+    uintptr_t first_seg = first_idx / kCardsPerSegment;
+    uintptr_t last_seg  = last_idx / kCardsPerSegment;
+
+    size_t l1_size = g_card_l1_size.load(std::memory_order_acquire);
+
+    for (uintptr_t si = first_seg; si <= last_seg && si < l1_size; si++) {
+        auto* seg = g_card_l1[si].load(std::memory_order_acquire);
+        if (seg == nullptr) continue;
+
+        // Determine which card bytes within this segment to clear.
+        uintptr_t seg_first_card = (si == first_seg) ? (first_idx % kCardsPerSegment) : 0;
+        uintptr_t seg_last_card  = (si == last_seg)  ? (last_idx  % kCardsPerSegment) : (kCardsPerSegment - 1);
+
+        // Clear the overlapping card range with a single memset.
+        uintptr_t len = seg_last_card - seg_first_card + 1;
+        std::memset(&seg->cards[seg_first_card], 0, len);
+    }
+}
+
 void GcUnregisterHeapRange(uintptr_t start, uintptr_t end) noexcept {
     if (start >= end) return;
     if (g_heap_base == 0) return;

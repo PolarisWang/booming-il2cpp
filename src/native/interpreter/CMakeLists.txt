@@ -13,6 +13,9 @@ add_library(chaos_interpreter STATIC
     token_resolver.h
     ir_reg_alloc.cpp
     ir_reg_alloc.h
+    osr_state.cpp
+    osr_state.h
+    register_vm.h
     )
 
 target_compile_features(chaos_interpreter PUBLIC cxx_std_17)

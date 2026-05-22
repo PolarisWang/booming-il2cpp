@@ -15,7 +15,7 @@ using namespace chaos::il2cpp::runtime_instantiation;
 //   - callee has NO LdSFld/StSFld — no static field complexity
 //   - callee has NO SEH clauses — no SEH region merging
 //   - callee return is NOT a struct — no struct buf mapping
-//   - caller + callee stack usage ≤ FastFrame::kMaxStack (16)
+//   - caller + callee stack usage ≤ FastFrame::kMaxStack (64)
 
 static bool IsCalleeEligibleForInline(
     const interpreter::IRMethod& callee_ir,

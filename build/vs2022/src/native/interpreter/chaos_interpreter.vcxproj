@@ -281,6 +281,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\interpreter\token_resolver.h" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\interpreter\ir_reg_alloc.cpp" />
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\interpreter\ir_reg_alloc.h" />
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\interpreter\osr_state.cpp" />
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\interpreter\osr_state.h" />
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\interpreter\register_vm.cpp" />
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\interpreter\register_vm.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\src\native\codegen\chaos_codegen.vcxproj">

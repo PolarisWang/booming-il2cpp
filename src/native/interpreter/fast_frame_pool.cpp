@@ -47,6 +47,12 @@ void SetupFastFrame(FastFrame* ff,
     ff->threw_exception = false;
     ff->exception_obj_val = 0;
     ff->tracked_cnt = 0;  // CleanupTracked already freed all objects
+    ff->tracked_overflow = nullptr;
+
+    // OSR state: reset backedge counter, wire patch_method for tier access.
+    ff->patch_method = const_cast<void*>(patch_method);
+    ff->loop_counter = 0;
+    ff->osr_reenable = false;
 
     // Set arg count, args buffer, and arg type tags.
     auto* pm = static_cast<const PatchMethod*>(patch_method);
@@ -84,6 +90,18 @@ void SetupFastFrame(FastFrame* ff,
     ff->call_cache = pm->call_cache;
     auto* method_ir = static_cast<const interpreter::IRMethod*>(ir);
     ff->call_count = static_cast<uint32_t>(method_ir->instructions.size());
+
+    // Wire SEH clauses (nullptr/0 when method has none).
+    ff->seh_clauses = method_ir->seh_clauses.data();
+    ff->seh_clause_count = static_cast<uint32_t>(method_ir->seh_clauses.size());
+
+    // Reset SEH state.
+    ff->exception_in_flight = false;
+    ff->unwind_catch_clause = -1;
+    ff->unwind_finally_count = 0;
+    ff->unwind_finally_current = 0;
+    ff->pending_leave = false;
+    ff->pending_leave_target = 0;
 }
 
 }  // namespace chaos::il2cpp::runtime_core

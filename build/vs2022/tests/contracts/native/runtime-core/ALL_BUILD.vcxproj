@@ -205,6 +205,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{E2143D41-59E3-3087-A9C7-8A1A45BC7E3A}</Project>
       <Name>chaos_gc_atomic_alloc_test</Name>
     </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_bgc_race_test.vcxproj">
+      <Project>{1287FD44-81A5-3F15-AEA4-D1639D2863D5}</Project>
+      <Name>chaos_gc_bgc_race_test</Name>
+    </ProjectReference>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_bgc_root_scan_test.vcxproj">
       <Project>{3E0513A5-3029-32B9-A180-EEE41EF1F993}</Project>
       <Name>chaos_gc_bgc_root_scan_test</Name>

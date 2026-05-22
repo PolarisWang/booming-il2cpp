@@ -83,12 +83,17 @@ void ChaosInterlockedStoreNoBarrier(CHAOS_IL2CPP_INTPTR location, CHAOS_IL2CPP_I
 
 CHAOS_IL2CPP_INT32 ChaosVolatileRead(CHAOS_IL2CPP_INTPTR ptr) noexcept
 {
-    return *reinterpret_cast<volatile CHAOS_IL2CPP_INT32*>(ptr);
+    return std::atomic_load_explicit(
+        reinterpret_cast<std::atomic<CHAOS_IL2CPP_INT32>*>(ptr),
+        std::memory_order_acquire);
 }
 
 void ChaosVolatileWrite(CHAOS_IL2CPP_INTPTR ptr, CHAOS_IL2CPP_INT32 value) noexcept
 {
-    *reinterpret_cast<volatile CHAOS_IL2CPP_INT32*>(ptr) = value;
+    std::atomic_store_explicit(
+        reinterpret_cast<std::atomic<CHAOS_IL2CPP_INT32>*>(ptr),
+        value,
+        std::memory_order_release);
 }
 
 }  // extern "C"

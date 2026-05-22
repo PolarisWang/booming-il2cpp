@@ -329,6 +329,15 @@ void* GcScavengeObjectKnownNursery(void* obj, YoungCollectionResult* result) {
 // ======================================================================
 
 YoungCollectionResult GcYoungCollection(bool force_skip_gen1) {
+    // If BGC is in concurrent mark, skip Young GC to avoid any potential
+    // race between forwarding pointer writes and BGC's concurrent object
+    // scan.  The caller (allocation path) falls through to old-gen
+    // allocation or full GC, which is safe under concurrent mark.
+    if (g_bgc_is_marking.load(std::memory_order_acquire)) [[unlikely]] {
+        CHAOS_IL2CPP_LOG_WARN("CRAG", "young_collection_skipped_bgc_marking");
+        return YoungCollectionResult{};
+    }
+
     // If force_skip_gen1 is true, skip Phase 4 Gen1 collection even if
     // promotion_age_threshold_ would normally trigger it.  Used for the
     // gen=0 (young-only) path in chaos_gc_collect_with_mode.
@@ -762,7 +771,10 @@ phase3:
     // Reset this thread's TLAB.
     tls_tlab = TLAB();
 
-    // Clear card table entries covering the young range.
+    // Clear card table entries covering the nursery range (and Gen1 range if
+    // Gen1 objects exist).  This is more precise than ClearAllCards() — it
+    // preserves old-gen card data that concurrent BGC mark may depend on for
+    // STW re-mark (C2 fix: targeted range clear instead of global hammer).
     // When the promotion limit was reached (timed_out), keep cards dirty
     // so the next young GC correctly rescans old→nursery references from
     // partially-promoted objects.  Stale entries pointing to dead nursery
@@ -773,7 +785,19 @@ phase3:
             "keeping card table dirty",
             static_cast<unsigned long long>(result.objects_promoted));
     } else {
-        ClearAllCards();
+        // Clear nursery range — all nursery objects were promoted or dead.
+        if (nursery_used > nursery_begin) {
+            ClearCardRange(nursery_begin, nursery_used);
+        }
+        // Clear Gen1 range — Phase 2b already scanned all Gen1→nursery refs.
+        auto* gen1 = G_YoungGen().gen1_region.load(std::memory_order_acquire);
+        if (gen1 != nullptr) {
+            char* g1_bump = G_YoungGen().gen1_bump.load(std::memory_order_acquire);
+            if (g1_bump > gen1->begin) {
+                ClearCardRange(reinterpret_cast<uintptr_t>(gen1->begin),
+                               reinterpret_cast<uintptr_t>(g1_bump));
+            }
+        }
     }
 
     auto pause_end = std::chrono::steady_clock::now();

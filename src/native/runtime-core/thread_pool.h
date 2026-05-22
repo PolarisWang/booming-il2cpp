@@ -86,6 +86,9 @@ struct HillClimbingController {
     /// Current hill-climbing state (public for ETW diagnostics).
     HillClimbState GetState() const noexcept { return state_; }
 
+    /// Current CPU utilization (0.0–1.0, for diagnostics/testing).
+    float GetCpuUtilization() const noexcept { return cpu_utilization_; }
+
 private:
     // --- V1 legacy fields (kept for compatibility) ---
     int32_t samples_[kHillClimbingSampleWindow]{};
@@ -105,7 +108,8 @@ private:
     int32_t square_wave_phase_{0};         // 0=normal, 1=+1 probe, 2=-1 probe
 
     // CPU utilization tracking
-    uint64_t last_cpu_time_ns_{0};         // CPU time at last tick (ns)
+    uint64_t last_wall_time_ns_{0};        // Wall time at last tick (ns)
+    uint64_t last_process_cpu_ns_{0};      // Process CPU time at last tick (ns)
     float cpu_utilization_{0.0f};          // Last measured CPU util (0.0-1.0)
 
     // Goertzel filters
@@ -182,6 +186,10 @@ int32_t ThreadPoolWorkerCount() noexcept;
 
 constexpr int32_t kThreadPoolMinWorkerCount = 1;
 constexpr int32_t kThreadPoolMaxWorkerCount = 32767;
+
+/// Maximum depth of the global work-item queue before backpressure kicks in.
+/// Prevents unbounded growth from producer threads outpacing workers.
+constexpr int32_t kThreadPoolMaxQueueDepth = 8192;
 
 /// Idle timeout before a worker thread exits (30 seconds).
 constexpr auto kThreadPoolIdleTimeout = std::chrono::seconds(30);

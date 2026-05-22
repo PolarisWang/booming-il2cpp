@@ -5,6 +5,18 @@
 namespace ri = chaos::il2cpp::runtime_instantiation;
 namespace vr = chaos::il2cpp::vtable_registry;
 
+#include "osr_state.h"
+#include "ir_reg_alloc.h"
+#include <tier_manager.h>
+#include <code_generator.h>
+#include <t4_seh_handler.h>
+#include <codegen_helpers.h>
+
+// Forward declarations from entry_direct.cpp
+namespace chaos::il2cpp::runtime_core {
+bool OptimizeToTier2(PatchMethod* pm) noexcept;
+}
+
 #include <climits>
 #include <cstdint>
 #include <cstdio>
@@ -116,6 +128,68 @@ interpreter::InterpreterValue FastFrame::PopIV() noexcept {
         break;
     }
     return result;
+}
+
+// ── SEH helper: find innermost try clause covering idx with finally/fault ──
+static int FindEnclosingFinally(const interpreter::SEHClause* clauses,
+                                 uint32_t clause_count,
+                                 uint32_t idx) noexcept {
+    for (int i = static_cast<int>(clause_count) - 1; i >= 0; --i) {
+        const auto& clause = clauses[static_cast<uint32_t>(i)];
+        if (idx >= clause.try_start_idx && idx < clause.try_end_idx) {
+            const auto flags = static_cast<uint32_t>(clause.flags);
+            if (flags == static_cast<uint32_t>(interpreter::SEHFlags::Finally) ||
+                flags == static_cast<uint32_t>(interpreter::SEHFlags::Fault)) {
+                return i;
+            }
+        }
+    }
+    return -1;
+}
+
+// ── SEH helper: find innermost try clause covering idx with catch handler ──
+static int FindEnclosingCatch(const interpreter::SEHClause* clauses,
+                               uint32_t clause_count,
+                               uint32_t idx) noexcept {
+    for (int i = static_cast<int>(clause_count) - 1; i >= 0; --i) {
+        const auto& clause = clauses[static_cast<uint32_t>(i)];
+        if (idx >= clause.try_start_idx && idx < clause.try_end_idx) {
+            const auto flags = static_cast<uint32_t>(clause.flags);
+            if (flags == static_cast<uint32_t>(interpreter::SEHFlags::Exception) ||
+                flags == static_cast<uint32_t>(interpreter::SEHFlags::Filter)) {
+                return i;
+            }
+        }
+    }
+    return -1;
+}
+
+// ── SEH helper: build finally/fault unwind list for a given catch clause ──
+// Stores indices in frame.unwind_finally_list and returns count.
+static int SetupFinallyUnwind(FastFrame& frame,
+                               const interpreter::SEHClause* clauses,
+                               uint32_t clause_count,
+                               int catch_idx,
+                               uint32_t ip) noexcept {
+    frame.unwind_finally_count = 0;
+    if (catch_idx < 0) return 0;
+    const auto& catch_clause = clauses[static_cast<uint32_t>(catch_idx)];
+    for (uint32_t i = 0; i < clause_count; ++i) {
+        if (static_cast<int>(i) == catch_idx) continue;
+        const auto& clause = clauses[i];
+        const auto flags = static_cast<uint32_t>(clause.flags);
+        if (flags == static_cast<uint32_t>(interpreter::SEHFlags::Finally) ||
+            flags == static_cast<uint32_t>(interpreter::SEHFlags::Fault)) {
+            // Only unwind finally/fault blocks nested within the catch's try region.
+            if (ip >= clause.try_start_idx && ip < clause.try_end_idx &&
+                clause.try_start_idx >= catch_clause.try_start_idx &&
+                clause.try_end_idx <= catch_clause.try_end_idx &&
+                frame.unwind_finally_count < FastFrame::kMaxUnwindDepth) {
+                frame.unwind_finally_list[frame.unwind_finally_count++] = static_cast<int32_t>(i);
+            }
+        }
+    }
+    return frame.unwind_finally_count;
 }
 
 // ── Op Handlers ────────────────────────────────────────────────────────
@@ -1156,13 +1230,163 @@ static void Handle_CallVirt(FastFrame& frame, const interpreter::IRInstruction& 
 }
 
 static void Handle_CallBridge(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept { Handle_Call(frame, instr); }
-static void Handle_Throw(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept { Handle_Unsupported(frame, instr); }
-static void Handle_Leave(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
-    frame.pc = static_cast<uint32_t>(instr.branch_target);
+
+// ── SEH handlers ──────────────────────────────────────────────────────────
+// These replace the previous Handle_Unsupported stubs.  SEH methods now
+// execute entirely within FastExecute instead of falling back to InterpreterVM.
+
+static void Handle_Throw(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Handle_Throw");
+    (void)instr;
+    // Pop the exception object from the stack.
+    if (frame.sp == 0) { frame.threw_exception = true; frame.pc = 9999; return; }
+    void* exc_obj = reinterpret_cast<void*>(frame.stack[--frame.sp]);
+
+    // Phase 1: Search for a matching catch handler (innermost first).
+    if (frame.seh_clauses != nullptr && frame.seh_clause_count > 0) {
+        int catch_idx = FindEnclosingCatch(frame.seh_clauses, frame.seh_clause_count, frame.pc);
+        if (catch_idx >= 0) {
+            // Found a catch handler.  Build the finally unwind list.
+            SetupFinallyUnwind(frame, frame.seh_clauses, frame.seh_clause_count, catch_idx, frame.pc);
+            const auto& catch_clause = frame.seh_clauses[static_cast<uint32_t>(catch_idx)];
+
+            if (frame.unwind_finally_count > 0) {
+                // Phase 2: start unwinding through finally/fault handlers.
+                frame.exception_in_flight = true;
+                frame.unwind_catch_clause = static_cast<int32_t>(catch_idx);
+                frame.unwind_finally_current = 0;
+                int first_finally = frame.unwind_finally_list[0];
+                frame.pc = static_cast<uint32_t>(frame.seh_clauses[static_cast<uint32_t>(first_finally)].handler_start_idx);
+                // Store exception for later delivery to catch.
+                frame.exception_obj_val = exc_obj;
+            } else {
+                // No finally blocks — jump directly to catch handler.
+                frame.pc = static_cast<uint32_t>(catch_clause.handler_start_idx);
+                // Push exception object onto stack for catch handler.
+                frame.stack[frame.sp] = reinterpret_cast<uint64_t>(exc_obj);
+                frame.stack_tags[frame.sp] = static_cast<uint8_t>(interpreter::ValueTag::ObjectRef);
+                ++frame.sp;
+            }
+            return;
+        }
+    }
+
+    // No catch handler found — propagate to caller via DispatchResult.
+    frame.threw_exception = true;
+    frame.exception_obj_val = exc_obj;
+    frame.pc = 9999;
 }
-static void Handle_EndFinally(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept { Handle_Unsupported(frame, instr); }
-static void Handle_EndFilter(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept { Handle_Unsupported(frame, instr); }
-static void Handle_Rethrow(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept { Handle_Unsupported(frame, instr); }
+
+static void Handle_Rethrow(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Handle_Rethrow");
+    (void)instr;
+    // Rethrow uses the currently active exception (stored in exception_obj_val
+    // by the catch handler).  Same propagation logic as Handle_Throw but uses
+    // the stored exception rather than popping from the stack.
+
+    // Continue SEH search from current pc (after catch handler completes,
+    // rethrow searches for enclosing handlers).
+    if (frame.seh_clauses != nullptr && frame.seh_clause_count > 0) {
+        // Use the already-stored exception_obj_val, or fall back to stack pop.
+        void* exc_obj = frame.exception_obj_val;
+        if (exc_obj == nullptr && frame.sp > 0) {
+            exc_obj = reinterpret_cast<void*>(frame.stack[--frame.sp]);
+        }
+        if (exc_obj == nullptr) { frame.threw_exception = true; frame.pc = 9999; return; }
+
+        // Walk up: search for catch handlers OUTSIDE the current handler's try region.
+        // We re-use FindEnclosingCatch which naturally finds enclosing handlers
+        // since pc is now past the original try block.
+        int catch_idx = FindEnclosingCatch(frame.seh_clauses, frame.seh_clause_count, frame.pc);
+        if (catch_idx >= 0) {
+            SetupFinallyUnwind(frame, frame.seh_clauses, frame.seh_clause_count, catch_idx, frame.pc);
+            const auto& catch_clause = frame.seh_clauses[static_cast<uint32_t>(catch_idx)];
+
+            if (frame.unwind_finally_count > 0) {
+                frame.exception_in_flight = true;
+                frame.unwind_catch_clause = static_cast<int32_t>(catch_idx);
+                frame.unwind_finally_current = 0;
+                int first_finally = frame.unwind_finally_list[0];
+                frame.pc = static_cast<uint32_t>(frame.seh_clauses[static_cast<uint32_t>(first_finally)].handler_start_idx);
+                frame.exception_obj_val = exc_obj;
+            } else {
+                frame.pc = static_cast<uint32_t>(catch_clause.handler_start_idx);
+                frame.stack[frame.sp] = reinterpret_cast<uint64_t>(exc_obj);
+                frame.stack_tags[frame.sp] = static_cast<uint8_t>(interpreter::ValueTag::ObjectRef);
+                ++frame.sp;
+            }
+            return;
+        }
+    }
+
+    // No enclosing catch — propagate to caller.
+    frame.threw_exception = true;
+    frame.pc = 9999;
+}
+
+static void Handle_Leave(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Handle_Leave");
+    uint32_t target = static_cast<uint32_t>(instr.branch_target);
+
+    // Check if we're inside a try block that has a finally/fault handler.
+    if (frame.seh_clauses != nullptr && frame.seh_clause_count > 0) {
+        int finally_idx = FindEnclosingFinally(frame.seh_clauses, frame.seh_clause_count, frame.pc);
+        if (finally_idx >= 0) {
+            // Leave from inside a try with finally — execute the finally first.
+            const auto& clause = frame.seh_clauses[static_cast<uint32_t>(finally_idx)];
+            frame.pending_leave = true;
+            frame.pending_leave_target = target;
+            frame.pc = static_cast<uint32_t>(clause.handler_start_idx);
+            return;
+        }
+    }
+
+    // No finally — direct branch.
+    frame.pc = target;
+}
+
+static void Handle_EndFinally(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Handle_EndFinally");
+
+    if (frame.exception_in_flight) {
+        // Phase 2 unwind: advance to the next finally/fault handler.
+        frame.unwind_finally_current++;
+        if (frame.unwind_finally_current < frame.unwind_finally_count) {
+            int next_finally = frame.unwind_finally_list[frame.unwind_finally_current];
+            frame.pc = static_cast<uint32_t>(frame.seh_clauses[static_cast<uint32_t>(next_finally)].handler_start_idx);
+            return;
+        }
+        // All finally/fault handlers done — transfer to catch handler.
+        frame.exception_in_flight = false;
+        const auto& catch_clause = frame.seh_clauses[static_cast<uint32_t>(frame.unwind_catch_clause)];
+        frame.pc = static_cast<uint32_t>(catch_clause.handler_start_idx);
+        // Push exception object onto stack for the catch handler.
+        frame.stack[frame.sp] = reinterpret_cast<uint64_t>(frame.exception_obj_val);
+        frame.stack_tags[frame.sp] = static_cast<uint8_t>(interpreter::ValueTag::ObjectRef);
+        ++frame.sp;
+        frame.exception_obj_val = nullptr;
+        return;
+    }
+
+    if (frame.pending_leave) {
+        // Normal finally completion after Leave — jump to the leave target.
+        uint32_t target = frame.pending_leave_target;
+        frame.pending_leave = false;
+        frame.pc = target;
+        return;
+    }
+
+    // Normal endfinally — continue sequentially.
+    ++frame.pc;
+}
+
+static void Handle_EndFilter(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Handle_EndFilter");
+    // EndFilter pops the filter result and branches to the catch handler
+    // if the result is non-zero.  For now, treat as EndFinally (continue).
+    // Full filter support would check the filter result and conditionally branch.
+    ++frame.pc;
+}
 
 // ── Extended fast-path handlers ────────────────────────────────────────
 
@@ -1383,11 +1607,29 @@ static void Handle_StObj(FastFrame& frame, const interpreter::IRInstruction&) no
 }
 
 static void Handle_Cpblk(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
-    Handle_Unsupported(frame, {});
+    CHAOS_IL2CPP_PROFILE_SCOPE("Handle_Cpblk");
+    // Stack (bottom→top): dst, src, size
+    if (frame.sp < 3) { frame.threw_exception = true; frame.pc = 9999; return; }
+    uint32_t cp_size = static_cast<uint32_t>(frame.stack[--frame.sp]);
+    void* src_ptr = reinterpret_cast<void*>(frame.stack[--frame.sp]);
+    void* dst_ptr = reinterpret_cast<void*>(frame.stack[--frame.sp]);
+    if (dst_ptr != nullptr && src_ptr != nullptr) {
+        std::memcpy(dst_ptr, src_ptr, cp_size);
+    }
+    ++frame.pc;
 }
 
 static void Handle_InitBlk(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
-    Handle_Unsupported(frame, {});
+    CHAOS_IL2CPP_PROFILE_SCOPE("Handle_InitBlk");
+    // Stack (bottom→top): addr, value, size
+    if (frame.sp < 3) { frame.threw_exception = true; frame.pc = 9999; return; }
+    uint32_t init_size = static_cast<uint32_t>(frame.stack[--frame.sp]);
+    int32_t init_value = static_cast<int32_t>(frame.stack[--frame.sp]);
+    void* ptr = reinterpret_cast<void*>(frame.stack[--frame.sp]);
+    if (ptr != nullptr) {
+        std::memset(ptr, init_value, init_size);
+    }
+    ++frame.pc;
 }
 
 static void Handle_LdElemA(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
@@ -1423,7 +1665,111 @@ static void Handle_IsInst(FastFrame& frame, const interpreter::IRInstruction&) n
 }
 
 static void Handle_CallVirtConstrained(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
-    Handle_Unsupported(frame, instr);
+    CHAOS_IL2CPP_PROFILE_SCOPE("Handle_CallVirtConstrained");
+    if (frame.sp < instr.arg_count) {
+        frame.threw_exception = true; frame.pc = 9999; return;
+    }
+
+    uint32_t ac = static_cast<uint32_t>(instr.arg_count);
+
+    // ── Common arg pop via RAII ─────────────────────────────────────
+    PopCallArgs pa(frame, ac);
+    if (pa.args == nullptr || pa.tags == nullptr) {
+        frame.threw_exception = true; frame.pc = 9999; return;
+    }
+
+    // ── Check receiver type ───────────────────────────────────────
+    // If the receiver is a value type (not ObjectRef), call directly
+    // without boxing or vtable dispatch (the .constrained. prefix semantic).
+    if (ac > 0 && pa.tags[0] != static_cast<uint8_t>(interpreter::ValueTag::ObjectRef)) {
+        // Struct / value type receiver — call directly.
+        if (instr.direct_fn != nullptr) {
+            // AotDirectDispatch for constrained call.
+            if (ac > 8) {
+                Handle_Call_DoRaw(frame, instr, pa.args, pa.tags, ac, nullptr);
+                return;
+            }
+            Handle_Call_DoAotDirect(frame, instr, pa.args, pa.tags, ac);
+            return;
+        }
+        // Raw dispatch fallback for constrained call.
+        const ri::CachedCallInfo* cache_info = nullptr;
+        if (frame.call_cache != nullptr && frame.pc < frame.call_count) {
+            const auto* cc = static_cast<const ri::CachedCallInfo*>(frame.call_cache);
+            if (cc[frame.pc].ret_tag != 0xFF) cache_info = &cc[frame.pc];
+        }
+        Handle_Call_DoRaw(frame, instr, pa.args, pa.tags, ac, cache_info);
+        return;
+    }
+
+    // ── ObjectRef receiver — normal virtual dispatch (same as CallVirt) ──
+    // MIC fast path: cached vtable entry.
+    if (ac > 0 && pa.args[0] != 0 &&
+        frame.call_cache != nullptr && frame.pc < frame.call_count) {
+        auto* cc = static_cast<ri::CachedCallInfo*>(const_cast<void*>(frame.call_cache));
+        auto& mic = cc[frame.pc];
+
+        if (mic.ret_tag != 0xFF &&
+            mic.ret_tag != static_cast<uint8_t>(interpreter::ValueTag::Struct)) {
+            uint32_t receiver_token = static_cast<interpreter::InterpreterObject*>(
+                reinterpret_cast<void*>(pa.args[0]))->type_token;
+
+            // MIC read: relaxed load (benign race — all racers compute same value).
+            if (mic.mic_type_token.load(std::memory_order_relaxed) == receiver_token &&
+                mic.mic_dispatch_ptr.load(std::memory_order_relaxed) != nullptr &&
+                mic.mic_generation.load(std::memory_order_relaxed) ==
+                    g_patch_generation.load(std::memory_order_relaxed)) {
+                // MIC hit — call cached vtable entry directly.
+                CHAOS_IL2CPP_PROFILE_SCOPE("Handle_CallVirtConstrained_MicHit");
+                uint64_t result = CallDirectVoidPtr(
+                    mic.mic_dispatch_ptr.load(std::memory_order_relaxed), pa.args, ac);
+
+                if (mic.ret_tag != static_cast<uint8_t>(interpreter::ValueTag::Void)) {
+                    frame.stack[frame.sp] = result;
+                    frame.stack_tags[frame.sp] = mic.ret_tag;
+                    ++frame.sp;
+                }
+
+                ++frame.pc;
+                return;
+            }
+
+            // MIC miss: resolve vtable and cache.
+            CHAOS_IL2CPP_PROFILE_SCOPE("Handle_CallVirtConstrained_MicMiss");
+            uint32_t declared_method_token = static_cast<uint32_t>(instr.secondary_index);
+            if (receiver_token != 0 && declared_method_token != 0) {
+                void* resolved = vr::ResolveVirtualMethodPointer(
+                    receiver_token, declared_method_token);
+                if (resolved != nullptr) {
+                    mic.mic_dispatch_ptr.store(resolved, std::memory_order_relaxed);
+                    mic.mic_type_token.store(receiver_token, std::memory_order_relaxed);
+                    mic.mic_generation.store(
+                        g_patch_generation.load(std::memory_order_relaxed),
+                        std::memory_order_relaxed);
+
+                    uint64_t result = CallDirectVoidPtr(resolved, pa.args, ac);
+
+                    if (mic.ret_tag != static_cast<uint8_t>(interpreter::ValueTag::Void)) {
+                        frame.stack[frame.sp] = result;
+                        frame.stack_tags[frame.sp] = mic.ret_tag;
+                        ++frame.sp;
+                    }
+
+                    ++frame.pc;
+                    return;
+                }
+            }
+        }
+    }
+
+    // ── Raw dispatch fallback ─────────────────────────────────────────
+    const ri::CachedCallInfo* cache_info = nullptr;
+    if (frame.call_cache != nullptr && frame.pc < frame.call_count) {
+        const auto* cc = static_cast<const ri::CachedCallInfo*>(frame.call_cache);
+        if (cc[frame.pc].ret_tag != 0xFF) cache_info = &cc[frame.pc];
+    }
+
+    Handle_Call_DoRaw(frame, instr, pa.args, pa.tags, ac, cache_info);
 }
 
 static bool AddOverflowI32(int32_t l, int32_t r, int32_t& result) noexcept {
@@ -1431,6 +1777,61 @@ static bool AddOverflowI32(int32_t l, int32_t r, int32_t& result) noexcept {
     if (wide > INT32_MAX || wide < INT32_MIN) return true;
     result = static_cast<int32_t>(wide);
     return false;
+}
+
+// ── Calli: indirect call through function pointer ──────────────────────────
+// IL stack layout (bottom→top): ..., arg0, arg1, ..., argN-1, fn_ptr
+// Pop fn_ptr first, then args, then call through InterpreterDispatchRaw.
+static void Handle_Calli(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Handle_Calli");
+    // Need at least fn_ptr (+ args) on stack.
+    if (frame.sp < 1) { frame.threw_exception = true; frame.pc = 9999; return; }
+
+    uint32_t ac = static_cast<uint32_t>(instr.arg_count);
+
+    // Pop function pointer from top of stack.
+    void* fn_ptr = reinterpret_cast<void*>(frame.stack[--frame.sp]);
+
+    if (fn_ptr == nullptr) { ++frame.pc; return; }
+
+    // ── Common arg pop via RAII ─────────────────────────────────────
+    PopCallArgs pa(frame, ac);
+    if (pa.args == nullptr || pa.tags == nullptr) {
+        frame.threw_exception = true; frame.pc = 9999; return;
+    }
+
+    // ── Dispatch through InterpreterDispatchRaw ──────────────────────
+    const ri::CachedCallInfo* cache_info = nullptr;
+    if (frame.call_cache != nullptr && frame.pc < frame.call_count) {
+        const auto* cc = static_cast<const ri::CachedCallInfo*>(frame.call_cache);
+        if (cc[frame.pc].ret_tag != 0xFF) cache_info = &cc[frame.pc];
+    }
+
+    auto dret = ri::InterpreterDispatchRaw(
+        fn_ptr, pa.args, pa.tags, ac,
+        instr.is_instance_call,
+        frame.dispatch_ctx,
+        cache_info);
+
+    if (dret.threw_exception) {
+        frame.threw_exception = true;
+        frame.exception_obj_val = dret.exception_obj;
+        frame.pc = 9999;
+        return;
+    }
+
+    if (dret.has_value) {
+        if (dret.tag == static_cast<uint8_t>(interpreter::ValueTag::Struct) &&
+            dret.struct_data != nullptr) {
+            frame.stack[frame.sp] = reinterpret_cast<uint64_t>(dret.struct_data);
+            frame.Track(dret.struct_data, [](void* p) noexcept { std::free(p); });
+        } else {
+            frame.stack[frame.sp] = dret.value;
+        }
+        frame.stack_tags[frame.sp] = dret.tag;
+        ++frame.sp;
+    }
+    ++frame.pc;
 }
 
 static bool SubOverflowI32(int32_t l, int32_t r, int32_t& result) noexcept {
@@ -1569,6 +1970,145 @@ static void Handle_ConvOvfU8(FastFrame& frame, const interpreter::IRInstruction&
 
 // ── FastExecute ────────────────────────────────────────────────────────
 
+// OSR loop threshold — matched to ir_reg_alloc.cpp kOsrLoopThreshold.
+static constexpr uint32_t kFastOsrLoopThreshold = 100;
+
+// ── TryFastOsrPromotion ─────────────────────────────────────────────────
+// Called from the FastExecute main loop when a hot backedge is detected.
+// Triggers tier upgrades (T1→T2, T2→T3, T3→T4) and, when T4 codegen
+// succeeds with an OSR entry point, performs full on-stack replacement
+// to transfer execution to native code mid-loop.
+//
+// Returns true if OSR took over execution (frame.pc set to sentinel),
+// false if the caller should continue FastExecute normally.
+static bool TryFastOsrPromotion(FastFrame& frame) noexcept {
+    if (frame.patch_method == nullptr) return false;
+    auto* pm = static_cast<chaos::il2cpp::runtime_core::PatchMethod*>(frame.patch_method);
+    using PM = chaos::il2cpp::runtime_core::PatchMethod;
+
+    auto call_count = pm->call_count.load(std::memory_order_relaxed);
+    auto tier = pm->tier_state.load(std::memory_order_acquire);
+
+    // ── T1→T2: Optimize to register IR ────────────────────────────────
+    if (tier == PM::kT1Cold && call_count >= TierManager::Get().GetAdaptiveT1Threshold()) {
+        uint32_t expected = PM::kT1Cold;
+        if (pm->tier_state.compare_exchange_strong(expected, PM::kT2Lowering, std::memory_order_acq_rel)) {
+            OptimizeToTier2(pm);
+            pm->tier_state.store(PM::kT2Ready, std::memory_order_release);
+        }
+    }
+
+    // ── T2→T3: Enqueue for background optimization ────────────────────
+    tier = pm->tier_state.load(std::memory_order_acquire);
+    if (tier == PM::kT2Ready && call_count >= TierManager::Get().GetAdaptiveT2Threshold()) {
+        uint32_t expected = PM::kT2Ready;
+        if (pm->tier_state.compare_exchange_strong(expected, PM::kT3Lowering, std::memory_order_acq_rel)) {
+            if (!TierManager::Get().EnqueueOptimization(pm)) {
+                pm->tier_state.store(PM::kT2Ready, std::memory_order_release);
+            }
+        }
+    }
+
+    // ── T3→T4: Trigger native codegen + optional OSR ──────────────────
+    tier = pm->tier_state.load(std::memory_order_acquire);
+    if (tier == PM::kT3Ready) {
+        uint32_t backoff_base = PM::kT3NativeThreshold + pm->codegen_fail_count * 1000;
+        if (call_count >= backoff_base) {
+            uint32_t t4_expected = PM::kT3Ready;
+            if (pm->tier_state.compare_exchange_strong(t4_expected, PM::kT4Ready, std::memory_order_acq_rel)) {
+                auto* rm = static_cast<interpreter::RegisterMethod*>(pm->cached_optimized_reg_method);
+                if (rm == nullptr) rm = static_cast<interpreter::RegisterMethod*>(pm->cached_reg_method);
+                if (rm != nullptr && rm->instructions.size() > 0) {
+                    chaos::il2cpp::codegen::CodeGenConfig cfg;
+                    cfg.enable_deopt = true;
+                    cfg.safepoint_fn = nullptr;
+                    auto* nm = chaos::il2cpp::codegen::GenerateNativeCode(*rm, cfg);
+                    if (nm != nullptr) {
+                        pm->cached_native_method = nm;
+                        chaos::il2cpp::codegen::RegisterT4Code(nm->code, nm->code_size, nm);
+
+                        // OSR V2: If native code has an OSR entry, transfer
+                        // execution to native code with full frame state.
+                        if (nm->osr_entry_offset != 0 &&
+                            frame.pc < static_cast<uint32_t>(rm->instructions.size()) &&
+                            frame.pc < static_cast<uint32_t>(rm->stack_map.entries.size())) {
+
+                            // Capture FastFrame state into OsrState.
+                            interpreter::OsrState osr;
+                            interpreter::CaptureFastFrame(osr, frame);
+                            frame.tracked_cnt = 0;  // Ownership transferred to OsrState
+
+                            // Build RegisterFrame from captured state.
+                            interpreter::RegisterFrame rf = {};
+                            rf.patch_method = pm;
+                            rf.args = frame.args;
+                            rf.arg_count = frame.arg_count;
+                            rf.dispatch_fn = frame.dispatch_fn;
+                            rf.dispatch_ctx = frame.dispatch_ctx;
+                            rf.call_cache = pm->call_cache;
+                            rf.call_count = static_cast<uint32_t>(rm->instructions.size());
+                            rf.seh_clauses = rm->seh_clauses.data();
+                            rf.seh_clause_count = static_cast<uint32_t>(rm->seh_clauses.size());
+                            rf.catch_handler_entries = rm->catch_handler_entries.data();
+                            rf.catch_handler_count = static_cast<uint32_t>(rm->catch_handler_entries.size());
+                            rf.pc = frame.pc;  // Loop header PC (backedge target)
+
+                            // Restore captured state into RegisterFrame using
+                            // the stack map entry at the loop header PC.
+                            const auto& stack_entry = rm->stack_map.entries[frame.pc];
+                            interpreter::RestoreOsrToRegisterFrame(
+                                osr, rf, stack_entry, frame.arg_count, frame.local_count);
+
+                            // Set OSR resume PC to trigger OSR entry on
+                            // the next backward branch check in RegisterExecute.
+                            chaos::il2cpp::codegen::t_deopt_state.osr_resume_pc = frame.pc;
+
+                            // Transfer tracked objects from OsrState to RegisterFrame.
+                            for (uint32_t i = 0; i < osr.tracked_cnt && i < interpreter::RegisterFrame::kMaxTracked; ++i) {
+                                rf.tracked_objs[rf.tracked_cnt] = osr.tracked_objs[i];
+                                rf.tracked_dtors[rf.tracked_cnt] = osr.tracked_dtors[i];
+                                ++rf.tracked_cnt;
+                            }
+                            // Clear OsrState to prevent double-free on destructor.
+                            osr.tracked_cnt = 0;
+
+                            // Re-dispatch into RegisterExecute (which will
+                            // detect OSR entry and promote to native code).
+                            bool reg_ok = interpreter::RegisterExecute(
+                                rf, rm->instructions.data(),
+                                static_cast<uint32_t>(rm->instructions.size()));
+
+                            if (reg_ok) {
+                                frame.has_ret = rf.has_ret;
+                                frame.ret_val = rf.ret_val;
+                                frame.ret_tag = rf.ret_tag;
+                                frame.pc = 0xFFffFFffu;
+                                return true;  // OSR succeeded
+                            }
+                            // OSR failed — fall through to continue FastExecute.
+                            // FastFrame state was captured to OsrState but with
+                            // tracked_cnt=0 the pool Release won't double-free.
+                            // The OsrState destructor cleans up original tracked
+                            // objects. The caller (FastExecute loop) is at the
+                            // backedge target PC which is the loop header — the
+                            // loop will re-execute naturally.
+                        }
+                    } else {
+                        ++pm->codegen_fail_count;
+                        if (pm->codegen_fail_count >= PM::kMaxCodegenFailures) {
+                            pm->tier_state.store(PM::kT4Skip, std::memory_order_release);
+                        } else {
+                            pm->tier_state.store(PM::kT3Ready, std::memory_order_release);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return false;
+}
+
 // Opcode frequency histogram (thread-local, zero-cost when unread).
 // Dump with DumpFastExecuteOpcodeHistogram().
 static thread_local uint64_t g_fast_op_freq[99] = {};
@@ -1601,11 +2141,13 @@ bool FastExecute(FastFrame& frame,
     while (frame.pc < instr_count) {
         CHAOS_IL2CPP_PROFILE_SCOPE("FastExecute");
         uint32_t op_val = static_cast<uint32_t>(instrs[frame.pc].op_code);
-        if (op_val >= 99) {
+        if (op_val > 99) {
             frame.threw_exception = true;
             return false;
         }
         ++g_fast_op_freq[op_val];  // opcode histogram (thread-local, ~1 cycle)
+
+        uint32_t prev_pc = frame.pc;
 
         switch (op_val) {
             DISPATCH_CASE( 0, LdcI4);
@@ -1707,9 +2249,24 @@ bool FastExecute(FastFrame& frame,
             DISPATCH_CASE(96, Cpblk);
             DISPATCH_CASE(97, InitBlk);
             DISPATCH_CASE(98, CallVirtConstrained);
+            DISPATCH_CASE(99, Calli);
             default:
                 Handle_Unsupported(frame, instrs[frame.pc]);
                 break;
+        }
+
+        // OSR: Detect hot-loop backward branch — if the handler took a branch
+        // and the target is an earlier instruction, it's a loop backedge.
+        if (frame.pc < instr_count && frame.pc < prev_pc) {
+            uint32_t threshold = frame.osr_reenable ? 1 : kFastOsrLoopThreshold;
+            frame.osr_reenable = false;  // one-shot
+            if (++frame.loop_counter >= threshold) {
+                if (TryFastOsrPromotion(frame)) continue;  // OSR took over
+            }
+        } else if (frame.pc == prev_pc + 1) {
+            // Sequential execution — slowly decay loop_counter to prevent
+            // unbounded growth in methods that exit loops.
+            if (frame.loop_counter > 0) --frame.loop_counter;
         }
 
         // Decimated thread abort/interrupt check — every 64 instructions.

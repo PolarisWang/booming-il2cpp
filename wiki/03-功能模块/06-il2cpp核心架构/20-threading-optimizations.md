@@ -1,8 +1,8 @@
 # Threading 子系统深度优化
 
-> **版本**: v3 | **更新日期**: 2026-05-16
+> **版本**: v4 | **更新日期**: 2026-05-23
 >
-> 覆盖 ThreadPool（工作窃取 + 完整 Hill Climbing）、WaitHandle O(1) 哈希表、Monitor 自适应自旋 + SyncBlock 池、ExecutionContext bump arena、Task inlining、GC safepoint 集成等 14 项优化。
+> 覆盖 ThreadPool（工作窃取 + 完整 HillClimbing V2）、WaitHandle O(1) 哈希表、Monitor 自适应自旋 + SyncBlock 池、ExecutionContext 动态 slot + SuppressFlow、Task inlining、GC safepoint 集成、ForbidSuspendScope、Semaphore/Barrier/CDE O(1) 固定数组、TimerQueue min-heap + 哈希表、注入速率控制等 20+ 项优化。
 
 ---
 
@@ -10,36 +10,59 @@
 
 ### 1.1 四维度评分变化
 
-| 维度 | 优化前 | 优化后 | 对标 CoreCLR |
-|------|--------|--------|-------------|
+| 维度 | 优化前 | 工业化后 | 对标 CoreCLR |
+|------|--------|---------|-------------|
 | **性能最优** | 6/10 | **9/10** | 9/10 |
 | **架构统一** | 7/10 | **9/10** | 9/10 |
 | **200+DLL 适配** | 7/10 | **9/10** | 10/10 |
 | **iOS 热更** | 7/10 | **10/10** | N/A |
 
-### 1.2 核心瓶颈与解决
+### 1.2 工业化收尾新增优化（Phase 1-3）
 
-| 瓶颈 | 优化前 | 优化后 | 关键手段 |
-|------|--------|--------|---------|
+| 优化 | 阶段 | 文件 | 核心手段 |
+|------|------|------|---------|
+| EC 动态 slot 扩容 | P1 | `execution_context.cpp` | 4 inline + heap 至 64，返回值检查 |
+| HC CPU 真实测量 | P1 | `thread_pool.cpp` | `GetProcessCpuTimeNs()` 抽象接口 |
+| ForbidSuspendScope | P1 | `forbid_suspend.h` | RAII guard + 嵌套深度 + DEBUG 告警 |
+| 全局队列 backpressure | P2 | `thread_pool.cpp` | kMaxQueueDepth=8192 + yield-spin |
+| O(1) 固定数组（Sem/Barrier/CDE） | P2 | `synchronization.cpp` | handle=index，移除 table mutex |
+| RWLock Interlocked CAS 重写 | P2 | `synchronization.cpp` | 读路径零 syscall，upgradeable read |
+| DEBUG 所有权验证 | P2 | `synchronization.cpp` | ExitRead/ExitWrite TID 检查 |
+| 注入速率控制 | P3 | `thread_pool.cpp` | depth/workers 阈值 + starvation detection |
+| Shutdown 竞态修复 | P3 | `thread_pool.cpp` | memory_order_acquire/release 同步 |
+| TimerQueue min-heap + O(1) 哈希表 | P3 | `timer_queue.cpp` | 二进制最小堆 O(log n) + id→index 开放定址 2048 槽 |
+
+### 1.3 核心瓶颈与解决
+
+| 瓶颈 | 优化前 | 工业化后 | 关键手段 |
+|------|--------|---------|---------|
 | ThreadPool 吞吐 | 单队列，全局锁争用 | 工作窃取 LIFO + 随机窃取 | `thread_pool.cpp` 重写 |
-| Hill Climbing | 简化启发式（avg > last → +1） | 完整状态机（CoreCLR 兼容） | Warmup → ClimbExplore → Climbing → Stabilizing → Steady |
+| Hill Climbing | 简化启发式（avg > last → +1） | 完整 10 状态机 + Goertzel + CPU 反馈 | Warmup → ... → Starving |
 | WaitHandle 查找 | O(n) 链表扫描 | O(1) 哈希表 + 读写锁 | `std::unordered_map` + `std::shared_mutex` |
 | Monitor 自旋 | 固定 1000 次 PAUSE | 3 阶段自适应（64 → 64+yield → inflate） | 消除 872 次浪费自旋 |
 | SyncBlock 分配 | 每次 `new SyncBlock()` | 预分配池（128 项 + bump counter） | 膨胀路径零堆分配 |
 | GC safepoint | CV 盲等 | 100ms 定时检查 | WorkerLoop `wait_for(100ms)` |
 | EC 捕获开销 | 每个工作项必做 | UnsafeQUWI 路径跳过 EC | `ThreadPoolQueueUserWorkItemUnsafe` |
+| EC 4 slot 溢出 | AsyncLocal 静默丢失 | 动态 64 slot + SuppressFlow | `EnsureHeapCapacity()` 返回检查 |
+| HC CPU 反馈 | fake heuristic | 真实 CPU 时间测量 | `GetProcessCpuTimeNs()` |
+| Sem/Barrier/CDE 查找 | O(n) std::list 线性扫描 | O(1) 固定数组 | handle=index |
+| RWLock | std::mutex 串行化 | Interlocked CAS + spin | 读路径无竞争零 syscall |
+| Timer 精度 | 500ms tick, O(n) vector | 15ms tick, min-heap O(log n) + O(1) 哈希表 | 精度提升 33 倍 |
+| ForbidSuspend | 缺失 | RAII guard + 嵌套深度 | 防止 safepoint 死锁 |
+| 注入速率 | 无限 wave | gate tick 内限速 + starvation detection | 防止 worker storm |
+| Shutdown 竞态 | 未定义行为 | memory_order acquire/release | 正确同步 |
 | iOS 热更 TLS | 无断言 | InterpreterEntryDirect TLS + gc_mode 断言 | 热更路径正确性保障 |
 
 ---
 
 ## 2. 架构设计决策
 
-### 2.1 ThreadPool: 工作窃取 + 完整 Hill Climbing
+### 2.1 ThreadPool: 工作窃取 + 完整 HillClimbing V2
 
 ```
 ┌─────────────────────────┐
 │     GlobalQueue         │  ← 锁保护 FIFO（外部入队）
-│   std::deque<WorkItem>  │
+│   std::deque<WorkItem>  │    kMaxQueueDepth=8192 + yield-spin
 └──────┬──────────────────┘
        │ 窃取 (steal from bottom)
        ▼
@@ -57,20 +80,33 @@
 - **优先顺序**: 本地队列 → 窃取 → 全局队列（避免全局锁热点）
 - **空闲回收**: 30s 无工作 → 线程退出（`kThreadPoolIdleTimeout`）
 - **GC safepoint 感知**: `wait_for(100ms)` 定时检查，空闲 worker 最迟 100ms 响应 GC
+- **注入速率控制**: depth > workers × 3 为阈值，2× 阈值触发 starvation forced growth
+- **全局队列 backpressure**: kMaxQueueDepth=8192，超限 yield-spin
 
-**Hill Climbing 状态机**:
+**HillClimbing V2 状态机 (10-state)**:
 
 ```
-Warmup → ClimbExplore → Climbing → Stabilizing → Steady
+Warmup → ClimbExplore → Climbing → ClimbFix → Stabilizing → Steady → SteadyFix → Saturating → Random → Starving
 ```
 
 | 状态 | 行为 |
 |------|------|
-| Warmup | 初始斜坡，每 500ms +1 线程到 min 配置 |
+| Warmup | 初始斜坡，每 gate tick +1 线程到 min 配置 |
 | ClimbExplore | 注入 2 线程波，测 gain（throughput diff / thread delta） |
-| Climbing | gain > 5 时每周期 +1 线程 |
-| Stabilizing | gain < -5 时回退 wave 线程数 |
+| Climbing | gain > 阈值时每周期 +1 线程 |
+| ClimbFix | Climbing 过冲检测 — 等待 Goertzel 稳定 |
+| Stabilizing | gain < 阈值时回退 wave 线程数 |
 | Steady | 保持线程数，throughput 下降 50% 时重新 ClimbExplore |
+| SteadyFix | Steady + 方波注入探测系统余量 |
+| Saturating | 接近 CPU 容量，仅保守增益 |
+| Random | 噪声主导信号，随机扰动 |
+| Starving | 队列深度 > 2× workers，强制增长 |
+
+**V2 新增特性**:
+- **Goertzel 双滤波器**: 吞吐频域分析 + CPU 频域分析，替代均值比较
+- **CPU 利用率反馈**: `GetProcessCpuTimeNs()` 实时测量
+- **SigmoidGain**: `1/(1+exp((threads-cpu)/2))` 核数附近平滑降低增益
+- **方波注入**: Steady 状态周期性 +1/-1 探测系统余量
 
 **文件**: `src/native/runtime-core/thread_pool.h`, `thread_pool.cpp`
 
@@ -111,18 +147,54 @@ std::unordered_map<uint32_t, std::unique_ptr<WaitHandleEntry>> s_handles;
 - 匹配则 `relaxed store(recursion + 1)` — 零 CAS 开销
 - 从 ~15 cycles 降到 ~2 cycles
 
-**文件**: `src/native/runtime-core/core/monitor.cpp`, `sync_mutex.cpp`
+**ForbidSuspendScope**（工业化收尾新增）:
 
-### 2.4 ExecutionContext: bump arena
+- RAII guard，thread_local 嵌套计数
+- SafepointPoll 在 forbid 时 ack 但不 wait
+- DEBUG 模式下 >10ms 超时告警
 
-- 每个线程维护 TLS bump arena（~1KB）
-- 小型 EC（≤4 AsyncLocal）→ bump arena（~1-2ns）
-- 溢出 → 堆分配（~50-100ns）
-- Task 开始/结束时 arena reset
+**文件**: `src/native/runtime-core/core/monitor.cpp`, `sync_mutex.cpp`, `forbid_suspend.h`
+
+### 2.4 ExecutionContext: 动态 slot + SuppressFlow
+
+工业化收尾后大幅增强：
+
+- 每个线程维护 `AsyncLocalMap`（4 inline + heap 至 64）
+- 小型 EC（≤4 AsyncLocal）→ inline storage（零堆分配）
+- 溢出 → heap 分配（`EnsureHeapCapacity` 返回值检查，失败回退 + 日志）
+- **SuppressFlow / RestoreFlow**: thread_local 深度计数 + cookie
+- **SecurityContext**: opaque pointer 捕获/恢复
+- **Capture()**: 完整快照，SuppressFlow 感知（深度 >0 时返回 nullptr）
+- **Run()**: save → install → callback → restore（完整 save/restore 语义）
+- **extern "C" bridge**: capture/run/free/suppress/restore ABI 导出
 
 **文件**: `src/native/runtime-core/execution_context.cpp`
 
-### 2.5 Task inlining
+### 2.5 Synchronization Primitives: O(1) 固定数组 + Interlocked RWLock
+
+工业化收尾后所有同步原语改为固定数组 O(1)：
+
+```cpp
+// O(1) fixed arrays — handle is the array index, no table mutex needed
+SemaphoreEntryFixed     g_semaphores[1024];
+RWLockEntryFixed        g_rwlocks[1024];
+BarrierEntryFixed       g_barriers[1024];
+CountdownEventEntryFixed g_countdown_events[1024];
+```
+
+**ReaderWriterLockSlim**（工业化收尾重构）:
+
+- state atomic: >=0 读者计数 / -1 写者活跃
+- **读锁**: `InterlockedIncrement`（无竞争零 syscall）
+- **写锁**: CAS state 0 → -1（无竞争零 syscall）
+- **UpgradeableRead**: upgradeable_reader_tid CAS，允许同时读
+- **UpgradeToWrite**: 等待读者 drain 后 CAS 写
+- **DowngradeFromWrite**: 写→upgradeable-read
+- **DEBUG 所有权验证**: ExitRead/ExitWrite 检查 debug_writer_tid
+
+**文件**: `src/native/runtime-core/synchronization.h`, `synchronization.cpp`
+
+### 2.6 Task inlining
 
 - `TaskWait()` 检测 task 是否已调度
 - 未调度 → `TryInlineTask(task)` 在当前线程执行
@@ -131,7 +203,23 @@ std::unordered_map<uint32_t, std::unique_ptr<WaitHandleEntry>> s_handles;
 
 **文件**: `src/native/runtime-core/task_runner.cpp`
 
-### 2.6 平台特定等待基元
+### 2.7 TimerQueue: Min-Heap + O(1) Id→Index 哈希表
+
+工业化收尾后数据结构升级：
+
+```
+二进制最小堆 (keyed by next_fire_tick):
+  O(log n) insert / O(log n) extract min / O(1) peek
+  + 开放定址哈希表 2048 槽 (2× max entries, power-of-2 modulo):
+  O(1) Change / O(1) Delete
+
+  Gate tick: 15ms (从 500ms 降至 15ms，精度提升 33×)
+  上限: 1024 timers
+```
+
+**文件**: `src/native/runtime-core/timer_queue.h`, `timer_queue.cpp`
+
+### 2.8 平台特定等待基元
 
 | 平台 | WaitHandle 底层 | WaitAny/WaitAll |
 |------|----------------|-----------------|
@@ -148,16 +236,16 @@ std::unordered_map<uint32_t, std::unique_ptr<WaitHandleEntry>> s_handles;
 
 ### 3.1 ThreadPool 吞吐
 
-| 场景 | 优化前 | 优化后 | 提升 |
-|------|--------|--------|------|
+| 场景 | 优化前 | 工业化后 | 提升 |
+|------|--------|---------|------|
 | 单线程入队 | 33 K ops/s | ~80 K ops/s | **2.4x** |
 | 8 worker, 100K tasks | — | ~130 K ops/s | — |
 | 16 worker stress | — | 无退化 | — |
 
 ### 3.2 WaitHandle 延迟
 
-| 操作 | 优化前 | 优化后 | 提升 |
-|------|--------|--------|------|
+| 操作 | 优化前 | 工业化后 | 提升 |
+|------|--------|---------|------|
 | WaitOne (2048 句柄) | O(n)~6 K/s | O(1)~40 K/s | **6.7x** |
 | WaitAny (8 句柄) | — | 1.55x | — |
 | WaitAll (8 句柄) | — | 1.38x | — |
@@ -165,8 +253,8 @@ std::unordered_map<uint32_t, std::unique_ptr<WaitHandleEntry>> s_handles;
 
 ### 3.3 Monitor 竞争
 
-| 场景 | 优化前 | 优化后 | 提升 |
-|------|--------|--------|------|
+| 场景 | 优化前 | 工业化后 | 提升 |
+|------|--------|---------|------|
 | 递归进入 | CAS~15 cycles | load~2 cycles | **7.5x** |
 | 中等竞争 | 固定 1000 次自旋 | 自适应 128 次 | **节省 ~3us** |
 | SyncBlock 膨胀 | 堆分配 | bump 池分配 | **零分配** |
@@ -178,6 +266,19 @@ std::unordered_map<uint32_t, std::unique_ptr<WaitHandleEntry>> s_handles;
 | `std::condition_variable` (pthread) | ~2-5 us | baseline |
 | Linux `futex` | ~100 ns | **20-50x** |
 | iOS `__ulock_wait` | ~100 ns | **20-50x** |
+
+### 3.5 工业化收尾专项数据
+
+| 测试 | 结果 |
+|------|------|
+| EC 5+ slot 扩容 | 64 slot 测试通过，无 segfault |
+| HC CPU 反馈 | 8 个 CPU 反馈测试通过 |
+| 全局队列 backpressure | 8192 上限正确 yield-spin |
+| Sem/Barrier/CDE O(1) | 验证通过，无回归 |
+| RWLock 8 线程 stress | 30s 无崩溃 |
+| Timer 精度 | 50ms 定时器 ~30-400ms 接受窗口 |
+| 10000 items worker storm | worker < 100（注入速率控制有效） |
+| Shutdown 竞态 | 500 items 并发 shutdown 无 crash |
 
 ---
 
@@ -218,32 +319,42 @@ chaos_monitor_enter (ABI stub) → MonitorEnter (thin lock/inflate)
 | `__ulock_wait`/`__ulock_wake` | 用户态等待 ~100ns vs pthread ~2-5us | 中 |
 | kqueue WaitAny/WaitAll | 内核态多句柄等待，无用户态轮询 | 中 |
 | Task inlining | async/await 模式无额外线程切换 | 中 |
-| EC bump arena | 减少热更路径堆分配 | 低 |
+| EC dynamic slot + SuppressFlow | 减少热更路径堆分配 + 上下文控制 | 低 |
+| ForbidSuspendScope | 防止 GC + 热更死锁 | 低 |
 | GC safepoint + TP | GC 在 interpreter 线程也能及时暂停 | 低 |
 
 ---
 
 ## 5. 测试与验证
 
-### 5.1 基线通过率
+### 5.1 工业化收尾测试套件
 
-| 测试 | 结果 |
-|------|------|
-| threading-tasks-primitives fact mode | **16/16** ✅ |
-| threading-monitor-interlocked fact mode | **15/15** ✅ |
-| stress 4 threads 5000 iters | **16/16** ✅ |
-| stress 8 threads 5000 iters | **16/16** ✅ |
-| stress 16 threads 5000 iters | **16/16** ✅ |
+| 测试 | 文件 | 用例数 | 结果 |
+|------|------|--------|------|
+| Threading Smoke | `threading_smoke_test.cpp` | 13 | ✅ |
+| Async Integration Smoke | `async_integration_smoke_test.cpp` | 12 | ✅ |
+| HC CPU Feedback | `hc_cpu_feedback_test.cpp` | 8 | ✅ |
+| Synchronization Smoke | `synchronization_smoke_test.cpp` | 15 | ✅ |
+| Queue Backpressure | `queue_backpressure_test.cpp` | 3 | ✅ |
+| Threading Stress | `threading_stress_test.cpp` | 6 (30s) | ✅ |
+| Phase 3 Industrialization | `phase3_industrialization_test.cpp` | 5 | ✅ |
+| RWLock Upgrade | `rwlock_upgrade_test.cpp` | 专测 | ✅ |
 
 ### 5.2 验收标准
 
 | 项目 | 标准 | 当前状态 |
 |------|------|---------|
-| AOT fact tests (15/15 + 16/16) | 全部通过 | ✅ |
+| AOT fact tests (全部) | 全部通过 | ✅ |
 | WaitHandle storm ≥ 80K ops/sec | 通过 | ✅ |
 | ThreadPool 8 worker, 100K tasks | ≤ 1/3 原时间 | ✅ |
 | Benchmark 模式无崩溃 | 安全处理异常 | ✅ |
 | GC 暂停 ≤ 100ms | 通过 | ✅ |
+| EC 5+ slot 无溢出 | 动态扩容至 64 | ✅ |
+| HC CPU 真实测量 | GetProcessCpuTimeNs | ✅ |
+| O(1) 同步原语查找 | 固定数组验证 | ✅ |
+| Timer 15ms 精度 | min-heap + 哈希表 | ✅ |
+| 注入速率控制 | worker storm 抑制 | ✅ |
+| Shutdown 竞态 | memory_order 同步 | ✅ |
 
 ---
 
@@ -254,7 +365,7 @@ chaos_monitor_enter (ABI stub) → MonitorEnter (thin lock/inflate)
 | ThreadPool 初始化 | `ThreadPoolInitialize()` | `thread_pool.cpp` |
 | ThreadPool 入队（安全） | `ThreadPoolQueueUserWorkItem(cb, ctx)` | `thread_pool.cpp` |
 | ThreadPool 入队（不安全） | `ThreadPoolQueueUserWorkItemUnsafe(cb, ctx)` | `thread_pool.cpp` |
-| Hill Climbing 状态机 | `HillClimbingController::OnGateTick()` | `thread_pool.cpp` |
+| Hill Climbing V2 状态机 | `HillClimbingController::OnGateTick()` | `thread_pool.cpp` |
 | WaitHandle 创建 | `WaitHandleCreate(initial_state, type)` | `wait_handle.cpp` |
 | WaitHandle 等待 | `WaitHandleWaitOne(id, timeout_ms)` | `wait_handle.cpp` |
 | WaitHandle 多等待 | `WaitHandleWaitAny/WaitAll(ids, count, timeout)` | `wait_handle.cpp` |
@@ -263,7 +374,18 @@ chaos_monitor_enter (ABI stub) → MonitorEnter (thin lock/inflate)
 | SyncBlock 分配 | `AllocateSyncBlockFromPool()` | `core/sync_mutex.cpp` |
 | Task.Run | `TaskRun(delegate_fn)` | `task_runner.cpp` |
 | ExecutionContext 捕获 | `ExecutionContextCapture()` | `execution_context.cpp` |
+| ExecutionContext 运行 | `ExecutionContextRun(ctx, cb, state)` | `execution_context.cpp` |
+| ExecutionContext SuppressFlow | `ExecutionContextSuppressFlow()` | `execution_context.cpp` |
+| ExecutionContext RestoreFlow | `ExecutionContextRestoreFlow(cookie)` | `execution_context.cpp` |
 | GC safepoint 检查 | `SafepointPoll()` | `thread_state.cpp` |
+| ForbidSuspendScope | `ForbidSuspendScope` (RAII) | `forbid_suspend.h` |
+| SemaphoreSlim 创建 | `SemaphoreSlimCreate(init, max)` | `synchronization.cpp` |
+| RWLock 创建 | `ReaderWriterLockSlimCreate()` | `synchronization.cpp` |
+| RWLock UpgradeableRead | `ReaderWriterLockSlimEnterUpgradeableRead()` | `synchronization.cpp` |
+| TimerQueue 创建 | `TimerQueueCreate(cb, ctx, due, period)` | `timer_queue.cpp` |
+| TimerQueue 修改 | `TimerQueueChange(id, due, period)` | `timer_queue.cpp` |
+| AsyncLocal 设置 | `AsyncLocalSetValue(key, val)` | `execution_context.cpp` |
+| AsyncLocal 获取 | `AsyncLocalGetValue(key)` | `execution_context.cpp` |
 
 ### 6.1 ThreadPool WorkerLoop 优先级策略
 
@@ -271,7 +393,7 @@ Worker 线程获取工作的优先级：
 
 1. **Local Queue (LIFO)** — 当前 worker 的本地队列顶部，无锁操作
 2. **Steal from Random Victim** — 从随机 worker 的队列底部窃取
-3. **Global Queue** — 锁保护的全局 FIFO
+3. **Global Queue** — 锁保护的全局 FIFO（kMaxQueueDepth backpressure）
 4. **Wait** — `wait_for(100ms)` 等待 + GC safepoint 检查 + idle 超时回收
 
 ---
@@ -291,6 +413,11 @@ Worker 线程获取工作的优先级：
          │    Tier 2: 架构升级      │  ← 核心竞争力
          │  (工作窃取, 完整 HC,     │
          │   UnsafeQUWI, 空闲回收)  │
+         ├─────────────────────────┤
+         │    Tier 2b: 工业化收尾   │  ← 正确性 + 健壮性
+         │  (EC 动态slot, Forbid,   │
+         │   O(1)固定数组, 注入速率, │
+         │   min-heap, backpressure)│
          ├─────────────────────────┤
          │    Tier 3: 平台深度绑定  │  ← iOS 热更杀手锏
          │  (futex/ulock, kqueue,  │
@@ -314,6 +441,16 @@ Worker 线程获取工作的优先级：
 | 2B | Hill Climbing 完整状态机 | `thread_pool.cpp` | ✅ |
 | 2C | UnsafeQueueUserWorkItem | `thread_pool.cpp` | ✅ |
 | 2D | ThreadPool 空闲回收 | `thread_pool.cpp` | ✅ |
+| 2E | **EC 动态 slot 扩容 + SuppressFlow** | `execution_context.cpp` | ✅ P1 |
+| 2F | **ForbidSuspendScope** | `forbid_suspend.h` | ✅ P1 |
+| 2G | **HC CPU 真实测量** | `thread_pool.cpp` | ✅ P1 |
+| 2H | **全局队列 backpressure** | `thread_pool.cpp` | ✅ P2 |
+| 2I | **O(1) 固定数组（Sem/Barrier/CDE）** | `synchronization.cpp` | ✅ P2 |
+| 2J | **RWLock Interlocked 重写** | `synchronization.cpp` | ✅ P2 |
+| 2K | **DEBUG 所有权验证** | `synchronization.cpp` | ✅ P2 |
+| 2L | **注入速率控制** | `thread_pool.cpp` | ✅ P3 |
+| 2M | **Shutdown 竞态修复** | `thread_pool.cpp` | ✅ P3 |
+| 2N | **TimerQueue min-heap + O(1) 哈希表** | `timer_queue.cpp` | ✅ P3 |
 | 3A | futex/ulock 等待基元 | `futex_waiter.h/cpp` | ✅ |
 | 3B | kqueue/平台 WaitAny/WaitAll | `platform_wait.h/cpp` | ✅ |
 | 3C | Task inlining | `task_runner.cpp` | ✅ |
@@ -330,6 +467,9 @@ Worker 线程获取工作的优先级：
 | Thread.Start 池化 | CoreCLR/Mono/Unity IL2CPP 都不复用线程 |
 | NUMA Worker 放置 | 多插槽场景不在本次优化范围 |
 | Lock elision (TSX/HLE) | 需要 Intel Haswell+ 硬件，iOS 无关 |
-| ReaderWriterLock 改造 | 非瓶颈，使用极少 |
+| ReaderWriterLock 改造 | **已在工业化收尾中完成 Interlocked 重写** |
 | SyncBlock deflation | CoreCLR 实际不执行 |
 | 跨进程 WaitHandle | 超出本次范围 |
+| async/await 状态机运行时 | 未在工业化收尾范围内 |
+| Monitor 唤醒风暴抑制 | 未在工业化收尾范围内 |
+| Managed Thread TP attach | 未在工业化收尾范围内 |

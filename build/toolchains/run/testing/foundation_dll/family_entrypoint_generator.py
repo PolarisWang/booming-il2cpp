@@ -82,7 +82,7 @@ def _add_type_using_from_full_path(full_type_path: str, usings: set[str]) -> Non
 
 def _add_type_using(t: str, usings: set[str]) -> None:
     """Add using directive based on a CLR type string (parameter or return type)."""
-    bare = t.rstrip("&*?").strip()
+    bare = t.rstrip("&*?()").strip()
     # Strip CLR generic argument braces: Action{System.Threading.Tasks.Task} -> Action
     # Handle partial braces from comma-split parameter types (e.g. System.Func{System.String when
     # the closing } is in a subsequent split part)

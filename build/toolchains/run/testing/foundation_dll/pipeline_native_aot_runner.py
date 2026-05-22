@@ -40,6 +40,7 @@ FAMILIES = [
     "collections-generic-core",
     "convert-char",
     "enum-parsing",
+    "garbage-collection",
     "generic-nullable-value",
     "guid-random-hashcode",
     "math-numerics",
