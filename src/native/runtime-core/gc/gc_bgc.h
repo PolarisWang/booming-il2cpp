@@ -452,13 +452,29 @@ private:
 
     // ── Finalizer drain sync ──────────────────────────────────────
 
-    /// Incremented by PublishFinalizationWork, decremented by
-    /// FinalizerThreadMain after processing a batch.
+    /// Raised when finalizer work is published.
     std::atomic<int> bgc_finalizer_batches_pending_{0};
 
     /// Condition variable for WaitForFinalizerDrain.
     std::condition_variable bgc_finalizer_drain_cv_;
     std::mutex bgc_finalizer_drain_mutex_;
+
+    // ── Finalizer thread identification ──────────────────────────
+
+public:
+    /// Returns true if the calling thread is the dedicated finalizer thread.
+    /// Used by the allocation slow path to grant access to the emergency
+    /// reserve during OOM conditions (G-12 Finalizer OOM guarantee).
+    static bool IsFinalizerThread() noexcept {
+        auto& ctrl = Instance();
+        if (!ctrl.finalizer_running_.load(std::memory_order_acquire)) return false;
+        return std::this_thread::get_id() == ctrl.finalizer_thread_id_;
+    }
+
+private:
+    /// The std::thread::id of the dedicated finalizer thread.
+    /// Set in FinalizerThreadMain, read by IsFinalizerThread().
+    std::thread::id finalizer_thread_id_;
 };
 
 // ======================================================================

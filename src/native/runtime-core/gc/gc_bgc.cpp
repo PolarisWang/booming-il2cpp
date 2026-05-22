@@ -525,6 +525,10 @@ void BgcController::ForceComplete() {
     g_bgc_is_marking.store(false, std::memory_order_release);
     bgc_start_requested_.store(false, std::memory_order_release);
     phase_.store(BgcPhase::IDLE, std::memory_order_release);
+
+    // Replenish the emergency reserve after a forced BGC completion.
+    g_old_gen.ReplenishEmergencyReserve();
+
     cycle_complete_.store(true, std::memory_order_release);
     NotifyBgc();
 
@@ -1057,6 +1061,11 @@ void BgcController::BgcThreadMain() {
             g_bgc_is_marking.store(false, std::memory_order_release);
             bgc_start_requested_.store(false, std::memory_order_release);
             phase_.store(BgcPhase::IDLE, std::memory_order_release);
+
+            // Replenish the emergency reserve before signaling completion,
+            // so the reserve is ready for the next cycle's allocations.
+            g_old_gen.ReplenishEmergencyReserve();
+
             cycle_complete_.store(true, std::memory_order_release);
             NotifyBgc();
             CHAOS_IL2CPP_LOG_DEBUG("BGC", "cycle_finished");
@@ -1101,6 +1110,7 @@ void BgcController::FinalizerThreadMain() noexcept {
     int thread_id = threading::AllocateThreadId();
     threading::RegisterThread(thread_id, nullptr);
     threading::EnterPreemptiveMode();
+    finalizer_thread_id_ = std::this_thread::get_id();
     CHAOS_IL2CPP_LOG_DEBUG("Finalizer", "thread_started id={0}", thread_id);
 
     while (finalizer_running_.load(std::memory_order_acquire)) {

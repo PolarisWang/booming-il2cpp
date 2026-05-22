@@ -186,6 +186,35 @@ public:
     /// Register a pinned root (object that must never be moved/collected).
     void AddPinnedRoot(void* addr, CHAOS_IL2CPP_SIZE size);
 
+    // ── Emergency reserve (Finalizer OOM guarantee) ───────────────
+    //
+    // Pre-allocated memory pool that the finalizer thread can draw from
+    // when the GC heap is exhausted.  Prevents finalizer deadlock during
+    // OOM conditions (CoreCLR equivalent: gc_heap::emergency_allocation).
+    static constexpr CHAOS_IL2CPP_SIZE kEmergencyReserveSize = 64 * 1024;  // 64 KB
+
+    /// Allocate from the emergency reserve (bump-pointer, zeroed).
+    /// Returns nullptr if the reserve is exhausted.
+    void* AllocateFromEmergencyReserve(CHAOS_IL2CPP_SIZE size) noexcept;
+
+    /// Reset the emergency reserve bump pointer (called after GC).
+    /// Only resets if the reserve was activated during the cycle.
+    void ReplenishEmergencyReserve() noexcept;
+
+    /// Pre-allocate the emergency reserve during init.
+    bool InitEmergencyReserve() noexcept;
+
+    /// Initialize the emergency reserve with externally-provided memory
+    /// (for testing with known addresses).
+    void InitEmergencyReserveForTest(void* base, CHAOS_IL2CPP_SIZE size) noexcept;
+
+    /// Check if the emergency reserve has available space.
+    bool HasEmergencyReserveSpace() const noexcept {
+        return emergency_reserve_base_ != nullptr &&
+               emergency_reserve_current_.load(std::memory_order_acquire) <
+                   emergency_reserve_base_ + emergency_reserve_size_;
+    }
+
     // ── Root scanning helpers ────────────────────────────────────
 
     /// Try to mark a root from a stack slot value: read the pointer at @a addr
@@ -551,6 +580,20 @@ public:
     std::vector<void*> suppressed_finalizers_;
 
     std::vector<FinalizerEntry> finalizers_;
+
+    // ── Emergency reserve state ──────────────────────────────────
+
+    /// Base address of the pre-allocated emergency reserve.
+    char* emergency_reserve_base_{nullptr};
+
+    /// Total size of the emergency reserve in bytes.
+    CHAOS_IL2CPP_SIZE emergency_reserve_size_{0};
+
+    /// Bump-pointer into the emergency reserve (atomic for thread safety).
+    std::atomic<char*> emergency_reserve_current_{nullptr};
+
+    /// True if the emergency reserve was used since the last replenish.
+    std::atomic<bool> emergency_reserve_activated_{false};
 };
 
 // Global old-generation instance.  Defined in gc_old_gen.cpp.
