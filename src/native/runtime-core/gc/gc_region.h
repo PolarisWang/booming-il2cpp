@@ -162,7 +162,17 @@ inline void* NurseryAllocate(CHAOS_IL2CPP_SIZE size) noexcept {
         tls_alloc_since_last_gc += size;
         tls_total_allocated_bytes += size;
         if (threading::SafepointRequested()) [[unlikely]] {
-            threading::SafepointPoll();
+            // SPB: thread is at a safe point (object initialized).  Ack the
+            // safepoint so GC doesn't wait for this thread, then continue
+            // using the current TLAB.  If the TLAB runs out while the
+            // safepoint is still active, NurseryAllocateSlow handles it.
+            auto* mt = threading::GetCurrentThread();
+            if (mt) [[likely]] {
+                uint32_t seq = mt->suspend_seq.load(std::memory_order_acquire);
+                if (seq != 0) {
+                    mt->suspend_ack.store(seq, std::memory_order_release);
+                }
+            }
         }
         return ptr;
     }
@@ -189,7 +199,17 @@ inline void* NurseryAllocateAtomic(CHAOS_IL2CPP_SIZE size) noexcept {
         tls_alloc_since_last_gc += size;
         tls_total_allocated_bytes += size;
         if (threading::SafepointRequested()) [[unlikely]] {
-            threading::SafepointPoll();
+            // SPB: thread is at a safe point (object initialized).  Ack the
+            // safepoint so GC doesn't wait for this thread, then continue
+            // using the current TLAB.  If the TLAB runs out while the
+            // safepoint is still active, NurseryAllocateSlow handles it.
+            auto* mt = threading::GetCurrentThread();
+            if (mt) [[likely]] {
+                uint32_t seq = mt->suspend_seq.load(std::memory_order_acquire);
+                if (seq != 0) {
+                    mt->suspend_ack.store(seq, std::memory_order_release);
+                }
+            }
         }
         return ptr;
     }

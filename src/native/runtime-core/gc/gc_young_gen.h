@@ -91,6 +91,21 @@ struct YoungGeneration {
     /// Young GC counter, incremented each young GC cycle.
     /// Used by the dynamic promotion threshold to decide drain intervals.
     std::atomic<int> young_gc_count_{0};
+
+    // ── Safepoint-Bypass (SPB) emergency allocation reserve ──────
+    /// Size of the emergency TLAB pool carved from the nursery end.
+    /// 256 KB = ~1.5% of the default 16 MB nursery, sufficient for 4
+    /// threads × 128 KB emergency TLABs to ride through BGC pauses.
+    static constexpr CHAOS_IL2CPP_SIZE kEmergencyTlabSize = 256 * 1024;  // 256 KB
+
+    /// Start of the emergency reserve (nursery end - kEmergencyTlabSize).
+    /// The young GC skips this region by using region_end = emergency_start.
+    char* emergency_start{nullptr};
+
+    /// Emergency bump pointer — CAS-claimed, lock-free.
+    /// Threads in safepoint-bypass mode claim TLABs from this pointer
+    /// instead of blocking on WaitForSingleObject(INFINITE).
+    std::atomic<char*> emergency_bump{nullptr};
 };
 
 // ── Global state ─────────────────────────────────────────────
