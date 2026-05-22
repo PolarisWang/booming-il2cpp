@@ -22,6 +22,14 @@
 
 namespace chaos::il2cpp::runtime_core {
 
+// Thread-local BFS worklist cache for young collection, shared across the
+// setup block (before Phase 1) and the Phase 3 BFS loop.  Allocated on first
+// use at 64K entries; grown via realloc when capacity is exceeded.
+namespace {
+thread_local void* tls_bfs_worklist = nullptr;
+thread_local int tls_bfs_capacity = 0;
+}
+
 // ======================================================================
 // Forwarding pointer protocol
 //
@@ -136,6 +144,13 @@ void* GcScavengeObject(void* obj, YoungCollectionResult* result) {
         return GetForwardingAddress(obj);
     }
 
+    // If the promotion limit was reached, stop promoting.  The object
+    // remains in the nursery and is treated as unreachable — its memory
+    // will be reclaimed when the nursery is reset.
+    if (result && result->timed_out) [[unlikely]] {
+        return nullptr;
+    }
+
     // Determine object size.  Try precise TypeInfo-based sizing first for
     // all objects (own-thread and cross-thread).  Fall back to nursery-bounds
     // estimation when the layout is not available (e.g., unregistered types).
@@ -167,14 +182,45 @@ void* GcScavengeObject(void* obj, YoungCollectionResult* result) {
     // Place forwarding pointer at the nursery location.
     SetForwardingAddress(obj, tenured);
 
+    // Re-register finalizer at the promoted address.
+    // The TypeInfo* was copied by memcpy into tenured — read from there.
+    if (auto* ti = *static_cast<const TypeInfoHot* const*>(tenured)) {
+        if (ti->flags & kTypeInfoHasFinalizer) [[unlikely]] {
+            auto& reg = GcLayoutRegistry::Instance();
+            if (auto* cb = reg.LookupFinalizer(ti->stable_id)) {
+                g_old_gen.RegisterFinalizer(tenured, cb);
+            }
+        }
+    }
+
     // Count promotion.
     if (result) {
         result->objects_promoted++;
         result->bytes_promoted += obj_size;
 
+        // Check kMaxPromoteObjects guard — stop promoting once the limit
+        // is reached.  Beyond this limit, remaining nursery objects are
+        // treated as unreachable (not promoted).
+        if (result->objects_promoted >= kMaxPromoteObjects) [[unlikely]] {
+            result->timed_out = true;
+        }
+
         // Add to Cheney BFS worklist for transitive closure (Phase 3).
-        if (result->bfs_worklist && result->bfs_worklist_count < result->bfs_worklist_capacity) {
-            result->bfs_worklist[result->bfs_worklist_count++] = tenured;
+        if (!result->timed_out && result->bfs_worklist) {
+            if (result->bfs_worklist_count >= result->bfs_worklist_capacity) {
+                int new_cap = result->bfs_worklist_capacity * 2;
+                auto* new_wl = static_cast<void**>(std::realloc(
+                    result->bfs_worklist, static_cast<size_t>(new_cap) * sizeof(void*)));
+                if (new_wl != nullptr) {
+                    result->bfs_worklist = new_wl;
+                    result->bfs_worklist_capacity = new_cap;
+                    tls_bfs_worklist = new_wl;
+                    tls_bfs_capacity = new_cap;
+                }
+            }
+            if (result->bfs_worklist_count < result->bfs_worklist_capacity) {
+                result->bfs_worklist[result->bfs_worklist_count++] = tenured;
+            }
         }
     }
 
@@ -187,6 +233,11 @@ void* GcScavengeObjectKnownNursery(void* obj, YoungCollectionResult* result) {
     // Caller already verified obj is in nursery — skip IsInNursery check.
     if (IsForwarded(obj)) {
         return GetForwardingAddress(obj);
+    }
+
+    // If the promotion limit was reached, stop promoting.
+    if (result && result->timed_out) [[unlikely]] {
+        return nullptr;
     }
 
     CHAOS_IL2CPP_SIZE obj_size = PreciseObjectSize(obj);
@@ -230,11 +281,40 @@ void* GcScavengeObjectKnownNursery(void* obj, YoungCollectionResult* result) {
     std::memcpy(target, obj, obj_size);
     SetForwardingAddress(obj, target);
 
+    // Re-register finalizer at the promoted address.
+    if (auto* ti = *static_cast<const TypeInfoHot* const*>(target)) {
+        if (ti->flags & kTypeInfoHasFinalizer) [[unlikely]] {
+            auto& reg = GcLayoutRegistry::Instance();
+            if (auto* cb = reg.LookupFinalizer(ti->stable_id)) {
+                g_old_gen.RegisterFinalizer(target, cb);
+            }
+        }
+    }
+
     if (result) {
         result->objects_promoted++;
         result->bytes_promoted += obj_size;
-        if (result->bfs_worklist && result->bfs_worklist_count < result->bfs_worklist_capacity) {
-            result->bfs_worklist[result->bfs_worklist_count++] = target;
+
+        // Check kMaxPromoteObjects guard.
+        if (result->objects_promoted >= kMaxPromoteObjects) [[unlikely]] {
+            result->timed_out = true;
+        }
+
+        if (!result->timed_out && result->bfs_worklist) {
+            if (result->bfs_worklist_count >= result->bfs_worklist_capacity) {
+                int new_cap = result->bfs_worklist_capacity * 2;
+                auto* new_wl = static_cast<void**>(std::realloc(
+                    result->bfs_worklist, static_cast<size_t>(new_cap) * sizeof(void*)));
+                if (new_wl != nullptr) {
+                    result->bfs_worklist = new_wl;
+                    result->bfs_worklist_capacity = new_cap;
+                    tls_bfs_worklist = new_wl;
+                    tls_bfs_capacity = new_cap;
+                }
+            }
+            if (result->bfs_worklist_count < result->bfs_worklist_capacity) {
+                result->bfs_worklist[result->bfs_worklist_count++] = target;
+            }
         }
     }
 
@@ -289,6 +369,24 @@ YoungCollectionResult GcYoungCollection(bool force_skip_gen1) {
         static_cast<unsigned long long>(nursery_used - nursery_begin));
 
     GcFireEvent(GcEvent::GC_YOUNG_START);
+
+    // ── BFS worklist setup: initialize before any scavenge phase so that
+    // GcScavengeObjectKnownNursery can enqueue promoted objects for
+    // transitive closure in Phase 3.  Previously the worklist was set up
+    // at Phase 3 entry, which meant Phases 1 and 2 could never populate it.
+    {
+        int worklist_cap = 256 * 1024;
+        if (tls_bfs_worklist == nullptr) {
+            tls_bfs_worklist = static_cast<void*>(std::malloc(
+                static_cast<size_t>(worklist_cap) * sizeof(void*)));
+            tls_bfs_capacity = (tls_bfs_worklist != nullptr) ? worklist_cap : 0;
+        }
+        if (tls_bfs_worklist != nullptr) {
+            result.bfs_worklist = static_cast<void**>(tls_bfs_worklist);
+            result.bfs_worklist_capacity = tls_bfs_capacity;
+            result.bfs_worklist_count = 0;
+        }
+    }
 
     // ── Phase 1: Scan dirty cards for old→young cross-gen references ──
     {
@@ -459,22 +557,13 @@ YoungCollectionResult GcYoungCollection(bool force_skip_gen1) {
 
 phase3:
     // ── Phase 3: Cheney BFS ──
+    // Process the worklist populated during Phases 1 and 2.  Each promoted
+    // object is scanned for nursery pointers; discovered nursery objects are
+    // scavenged and appended for further BFS.  The worklist was set up and
+    // result.bfs_worklist was assigned before Phase 1.
     {
         CHAOS_IL2CPP_PROFILE_SCOPE("GcYoungCollection::CheneyBfs");
-        thread_local void* tls_bfs_worklist = nullptr;
-        thread_local int tls_bfs_capacity = 0;
-
-        int worklist_cap = 64 * 1024;
-        if (tls_bfs_worklist == nullptr) {
-            tls_bfs_worklist = std::malloc(static_cast<size_t>(worklist_cap) * sizeof(void*));
-            tls_bfs_capacity = (tls_bfs_worklist != nullptr) ? worklist_cap : 0;
-        }
-        auto* worklist = static_cast<void**>(tls_bfs_worklist);
-        if (worklist != nullptr) {
-            result.bfs_worklist = worklist;
-            result.bfs_worklist_capacity = tls_bfs_capacity;
-            result.bfs_worklist_count = 0;
-
+        if (result.bfs_worklist != nullptr) {
             int idx = 0;
             auto& layout_registry = GcLayoutRegistry::Instance();
             while (idx < result.bfs_worklist_count) {
@@ -485,7 +574,6 @@ phase3:
                     if (new_wl != nullptr) {
                         result.bfs_worklist = new_wl;
                         result.bfs_worklist_capacity = new_cap;
-                        worklist = new_wl;
                         tls_bfs_worklist = new_wl;
                         tls_bfs_capacity = new_cap;
                     } else {
@@ -493,7 +581,7 @@ phase3:
                     }
                 }
 
-                void* promoted = worklist[idx++];
+                void* promoted = result.bfs_worklist[idx++];
                 const void* type_info_ptr = *static_cast<const void* const*>(promoted);
                 if (type_info_ptr == nullptr) continue;
                 if (!layout_registry.IsValidTypeInfoPointer(type_info_ptr)) continue;
@@ -667,7 +755,18 @@ phase3:
     tls_tlab = TLAB();
 
     // Clear card table entries covering the young range.
-    ClearAllCards();
+    // When the promotion limit was reached (timed_out), keep cards dirty
+    // so the next young GC correctly rescans old→nursery references from
+    // partially-promoted objects.  Stale entries pointing to dead nursery
+    // objects are skipped by IsInNursery.
+    if (result.timed_out) {
+        CHAOS_IL2CPP_LOG_WARN_M("CRAG",
+            "young_collection timed_out: {0} objects promoted, "
+            "keeping card table dirty",
+            static_cast<unsigned long long>(result.objects_promoted));
+    } else {
+        ClearAllCards();
+    }
 
     auto pause_end = std::chrono::steady_clock::now();
     uint64_t pause_ns = static_cast<uint64_t>(

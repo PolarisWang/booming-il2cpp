@@ -3,12 +3,14 @@
 
 #include <chaos/native_types.h>
 #include <chaos/type_info.h>
+#include <chaos/unordered_dense.h>
 
 #include <atomic>
 #include <cstddef>
 #include <cstdint>
 #include <cstring>
 #include <mutex>
+#include <unordered_map>
 #include <vector>
 
 namespace chaos::il2cpp::runtime_core {
@@ -207,6 +209,18 @@ public:
     /// Called from Collect() after mark-sweep completes.
     void ReclaimRetiredTables();
 
+    // ── Finalizer callback side map ─────────────────────────────────
+    // Maps stable_id → finalizer callback.  Populated at startup by
+    // managed codegen (RegisterTypeInfo).  Read during GC promotion to
+    // re-register finalizers at the tenured address.
+
+    /// Register a finalizer callback for the given stable_id.
+    void RegisterFinalizerCallback(uint64_t stable_id, void (*cb)(void*));
+
+    /// Look up a finalizer callback by stable_id.
+    /// Returns nullptr if no callback is registered.
+    void (*LookupFinalizer(uint64_t stable_id))(void*);
+
 private:
     GcLayoutRegistry();
     ~GcLayoutRegistry() = default;
@@ -248,6 +262,11 @@ private:
     // Retired tables pending safe reclamation.
     // Access is serialized by register_mutex_.
     std::vector<GcLayoutTable*> retired_tables_;
+
+    // Finalizer side map: stable_id → callback.  Protected by register_mutex_.
+    // Using std::unordered_map instead of dense map to avoid third-party
+    // include path issues in directly-compiled test source files.
+    std::unordered_map<uint64_t, void (*)(void*)> finalizer_map_;
 };
 
 // ======================================================================

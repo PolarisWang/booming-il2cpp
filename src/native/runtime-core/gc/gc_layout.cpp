@@ -309,4 +309,25 @@ int ScanObjectPointers(void* obj, const GcTypeLayout* layout,
 
     return found;
 }
+
+// ======================================================================
+// Finalizer callback side map
+// ======================================================================
+
+void GcLayoutRegistry::RegisterFinalizerCallback(uint64_t stable_id, void (*cb)(void*)) {
+    if (cb == nullptr) return;
+    std::lock_guard<std::mutex> lock(register_mutex_);
+    finalizer_map_[stable_id] = cb;
+}
+
+void (*GcLayoutRegistry::LookupFinalizer(uint64_t stable_id))(void*) {
+    // Lock-free read: the map is write-once at startup, so concurrent
+    // writes don't happen during GC.  The mutex is only needed if we
+    // want strict safety; for startup-registered callbacks, relaxed is
+    // sufficient.  Use mutex for correctness in all scenarios.
+    std::lock_guard<std::mutex> lock(register_mutex_);
+    auto it = finalizer_map_.find(stable_id);
+    return (it != finalizer_map_.end()) ? it->second : nullptr;
+}
+
 }  // namespace chaos::il2cpp::runtime_core

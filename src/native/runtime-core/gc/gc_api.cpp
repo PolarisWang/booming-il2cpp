@@ -449,12 +449,23 @@ extern "C" CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL chaos_gc_end_no_gc_region()
 }
 
 void chaos_gc_register_finalizable(void* obj) noexcept {
-    // Minimal stub: records the object for future finalization.
-    // The finalizer lookup from type_info is not yet wired — the GC will
-    // not invoke the finalizer until a full registration path is added.
-    // This is sufficient for testing scenarios that don't exercise the
-    // finalization pipeline (e.g. hotupdate emit-patch-data flow).
-    (void)obj;
+    if (obj == nullptr) return;
+
+    // Read TypeInfoHot* from the object's first word.
+    auto* type_info = *static_cast<const TypeInfoHot**>(obj);
+    if (type_info == nullptr) return;
+
+    // Only finalize types with the has_finalizer flag.
+    if ((type_info->flags & kTypeInfoHasFinalizer) == 0) return;
+
+    // Look up the finalizer callback from the side map (stable_id → callback).
+    auto& registry = GcLayoutRegistry::Instance();
+    auto* callback = registry.LookupFinalizer(type_info->stable_id);
+    if (callback == nullptr) return;
+
+    // Register with old gen so RunFinalizers() can invoke the callback
+    // when the object becomes unreachable.
+    g_old_gen.RegisterFinalizer(obj, callback);
 }
 
 // ======================================================================
