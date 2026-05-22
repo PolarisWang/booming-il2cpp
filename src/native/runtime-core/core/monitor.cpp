@@ -237,6 +237,10 @@ bool MonitorWait(void* monitor_target, int32_t timeout_ms) {
 
     // Lock condition mutex and wait (cond.wait atomically unlocks during sleep).
     std::unique_lock<CHAOS_IL2CPP_RECURSIVE_LOCK_MUTEX> wait_lock(sb->mutex);
+
+    // Increment wait_count for chain-signal tracking.
+    sb->wait_count.fetch_add(1, std::memory_order_relaxed);
+
     bool result;
     if (timeout_ms < 0) {
         sb->cond.wait(wait_lock);
@@ -245,6 +249,17 @@ bool MonitorWait(void* monitor_target, int32_t timeout_ms) {
         result = sb->cond.wait_for(wait_lock,
             std::chrono::milliseconds(timeout_ms)) == std::cv_status::no_timeout;
     }
+
+    // Decrement wait_count after waking.
+    uint32_t remaining = sb->wait_count.fetch_sub(1, std::memory_order_relaxed) - 1;
+
+    // Chain-signal: if woken by a pulse (not timeout) and more waiters
+    // remain, wake the next one.  This avoids the PulseAll thundering herd:
+    // only one thread wakes at a time, chained sequentially.
+    if (result && remaining > 0) {
+        sb->cond.notify_one();
+    }
+
     wait_lock.unlock();
 
     // Re-acquire the monitor after wait completes.
@@ -274,7 +289,21 @@ bool MonitorPulseAll(void* monitor_target) {
     uint64_t sync = *sync_ptr;
     if ((sync & kSyncInflatedBit) != 0) {
         auto* sb = reinterpret_cast<SyncBlock*>(sync & ~3ull);
-        if (sb != nullptr) { sb->cond.notify_all(); return true; }
+        if (sb != nullptr) {
+            // Chain-signal PulseAll: increment pulse_count, then wake one
+            // waiter.  Each woken thread calls notify_one for the next,
+            // creating a sequential wake chain that avoids thundering herd.
+            // Only if wait_count is 0 (no waiters) do we fall back to
+            // notify_all for safety.
+            uint32_t wc = sb->wait_count.load(std::memory_order_acquire);
+            if (wc > 0) {
+                sb->pulse_count.fetch_add(1, std::memory_order_release);
+                sb->cond.notify_one();
+            } else {
+                sb->cond.notify_all();
+            }
+            return true;
+        }
     }
     return false;
 }

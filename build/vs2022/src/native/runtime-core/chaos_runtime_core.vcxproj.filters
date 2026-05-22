@@ -196,6 +196,9 @@
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_events.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_etw.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_gen1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -379,6 +382,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_events.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_etw.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_gen1.h">

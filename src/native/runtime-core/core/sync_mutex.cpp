@@ -72,6 +72,17 @@ struct SyncBlock {
     CHAOS_IL2CPP_RECURSIVE_LOCK_MUTEX    mutex;
     std::condition_variable_any          cond;
     std::atomic<int32_t>                 owner_tid{0};  // ThreadId that owns mutex, 0 = none
+
+    /// Number of threads currently waiting on cond (MonitorWait).
+    /// Used to gauge PulseAll fan-out.
+    std::atomic<uint32_t>                wait_count{0};
+
+    /// Monotonically increasing pulse generation counter.
+    /// Incremented by MonitorPulseAll to notify_one and track which pulses
+    /// have been delivered.  Each waiter snapshots pulse_count before
+    /// waiting; after waking, if pulse_count has advanced, the waiter
+    /// chains the signal by calling notify_one for the next waiter.
+    std::atomic<uint32_t>                pulse_count{0};
 };
 
 struct SyncBlockStripe {

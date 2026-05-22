@@ -26,6 +26,7 @@
 #include <thread>
 #include <atomic>
 #include <chrono>
+#include <vector>
 
 #include <chaos/native_types.h>
 #include "gc/gc_bgc.h"

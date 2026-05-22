@@ -134,7 +134,10 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
             TLAB tlab2 = TlabClaimFromYoungGen();
             if (tlab2.current != nullptr) {
                 tls_tlab = tlab2;
-                return NurseryAllocate(size);
+                if (size <= kMaxTlabAlloc) {
+                    return NurseryAllocate(size);
+                }
+                // Oversized: TLAB is set up for future small allocs, fall through to old gen.
             }
 
             // TLAB still exhausted — do young GC with force_skip_gen1=true
@@ -177,7 +180,10 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
     tlab = TlabClaimFromYoungGen();
     if (tlab.current != nullptr) {
         tls_tlab = tlab;
-        return NurseryAllocate(size);
+        if (size <= kMaxTlabAlloc) {
+            return NurseryAllocate(size);
+        }
+        // Oversized: TLAB is set up for future small allocs, fall through to old gen.
     }
 
     // Phase 4: Young region full — fall back to old gen.
@@ -271,7 +277,10 @@ void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
     tlab = TlabClaimFromYoungGen();
     if (tlab.current != nullptr) {
         tls_tlab = tlab;
-        return NurseryAllocateAtomic(size);
+        if (size <= kMaxTlabAlloc) {
+            return NurseryAllocateAtomic(size);
+        }
+        // Oversized: TLAB is set up for future small allocs, fall through to old gen.
     }
 
     // Phase 4: Fall back to old gen (no scanning needed).

@@ -327,6 +327,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{124D2FF0-F81F-3588-9A33-B07002DE9D63}</Project>
       <Name>chaos_gc_sanity_test</Name>
     </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_satb_stress_test.vcxproj">
+      <Project>{4241FD21-FB76-3621-893B-C4CBC4A3E1E6}</Project>
+      <Name>chaos_gc_satb_stress_test</Name>
+    </ProjectReference>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_scheduler_test.vcxproj">
       <Project>{3C233281-DE01-374C-91C4-FBAEF738F047}</Project>
       <Name>chaos_gc_scheduler_test</Name>

@@ -25,6 +25,7 @@
 #include "gc_young_collector.h"
 #include "gc_scheduler.h"
 #include "gc_stats.h"
+#include "gc_old_gen.h"
 #include "thread_state.h"
 
 using namespace chaos::il2cpp::runtime_core;
@@ -265,6 +266,7 @@ int main() {
 
     // Warm up CRAG globals.
     InitYoungGeneration();
+    g_old_gen.Init(0, 2);
     void* warmup = NurseryAllocate(64);
     (void)warmup;
 

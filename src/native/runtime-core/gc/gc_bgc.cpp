@@ -5,6 +5,7 @@
 #include <chaos/asan_interface.h>
 
 #include "gc_events.h"
+#include "gc_etw.h"
 #include "gc_gen1.h"
 #include "gc_layout.h"
 #include "gc_loh.h"
@@ -266,6 +267,7 @@ void BgcController::StwCompact() {
         char* sv_begin = (gen1 != nullptr) ? gen1->begin : nullptr;
         char* sv_bump  = g_young_gen.gen1_bump.load(std::memory_order_acquire);
         if (sv_begin != nullptr && sv_bump > sv_begin) {
+            GcEtwFireGcGen1Collect(0, 0, 0);  // placeholder — actual stats recorded in GcGen1Collection
             GcFireEvent(GcEvent::GC_GEN1_COLLECT);
 
             uintptr_t gen1_base = gen1_bitmap_base_;
