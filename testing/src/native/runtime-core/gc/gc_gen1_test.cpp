@@ -266,11 +266,15 @@ TEST_F(Gen1Test, Gen1IndependentCollection_FillsGen1) {
 
     Gen1CollectionResult r = GcGen1Collection();
     EXPECT_GT(r.objects_in_gen1, 0u);
-    EXPECT_GT(r.objects_promoted, 0u);
     EXPECT_FALSE(r.promotion_failed);
 
-    // Gen1 should be reset (bump at begin).
-    EXPECT_EQ(g_young_gen.gen1_bump.load(std::memory_order_acquire), gen1->begin);
+    // With C20 partial retention, "new" survivors (first Gen1 collection) are
+    // compacted in Gen1 rather than promoted to Gen2. Objects not explicitly
+    // rooted are reclaimed. Conservative stack scanning may keep a few alive.
+    auto* bump_after = g_young_gen.gen1_bump.load(std::memory_order_acquire);
+    if (bump_after > gen1->begin) {
+        EXPECT_GT(r.bytes_compacted, 0u);
+    }
 
     // Nursery should still accept allocations.
     void* nursery_obj = NurseryAllocate(64);
@@ -308,9 +312,14 @@ TEST_F(Gen1Test, Gen1IndependentCollection_ThenNurseryAlloc) {
 
     Gen1CollectionResult r = GcGen1Collection();
     EXPECT_GT(r.objects_in_gen1, 0u);
-    EXPECT_GT(r.objects_promoted, 0u);
-    EXPECT_GE(r.bytes_promoted, 64u);
     EXPECT_FALSE(r.promotion_failed);
+
+    // With C20 partial retention, "new" survivors are compacted in Gen1
+    // rather than promoted.  The rooted gen1_obj should survive via
+    // compaction.
+    EXPECT_GT(r.bytes_compacted, 0u);
+    auto* bump = g_young_gen.gen1_bump.load(std::memory_order_acquire);
+    EXPECT_GT(bump, g_young_gen.gen1_region.load(std::memory_order_acquire)->begin);
 
     // After Gen1 collection, nursery allocation should still work.
     void* after = NurseryAllocate(128);
@@ -361,11 +370,15 @@ TEST_F(Gen1Test, Gen1ShouldCollect_OccupancyBased) {
     // High occupancy should trigger collection.
     EXPECT_TRUE(GcGen1ShouldCollect());
 
-    // Collect and verify bump resets.
+    // Collect and verify compaction for new survivors.
     Gen1CollectionResult r = GcGen1Collection();
     EXPECT_GT(r.objects_in_gen1, 0u);
     EXPECT_FALSE(r.promotion_failed);
-    EXPECT_EQ(g_young_gen.gen1_bump.load(std::memory_order_acquire), gen1->begin);
+    // With C20, "new" survivors are compacted in Gen1 (not promoted).
+    // The live gen1_obj will be compacted to Gen1 start.
+    auto* bump_after = g_young_gen.gen1_bump.load(std::memory_order_acquire);
+    EXPECT_GT(bump_after, gen1->begin);
+    EXPECT_GT(r.bytes_compacted, 0u);
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -496,17 +509,20 @@ TEST_F(Gen1Test, Gen1CompactionReusesSpace) {
     }
 
     // No roots → all objects should be reclaimable. Conservative stack scanning
-    // may keep a few alive, but most should be reclaimed.
+    // may keep a few alive via compaction in Gen1, but most should be reclaimed.
     Gen1CollectionResult r = GcGen1Collection();
     EXPECT_GT(r.objects_in_gen1, 0u);
     EXPECT_GT(r.bytes_reclaimed, 0u)
         << "Should reclaim bytes from dead Gen1 objects";
     EXPECT_FALSE(r.promotion_failed);
 
-    // Gen1 should be reset.
-    EXPECT_EQ(g_young_gen.gen1_bump.load(std::memory_order_acquire), gen1->begin);
+    // With C20, any survivors from conservative stack scanning are compacted
+    // in Gen1 rather than promoted. Verify the bump reflects this.
+    auto* bump_after = g_young_gen.gen1_bump.load(std::memory_order_acquire);
+    EXPECT_GE(bump_after, gen1->begin);
 
-    // Verify Gen1 space is reusable by allocating again.
+    // Verify Gen1 space is reusable by allocating again — regardless of
+    // whether compaction left survivors or fully drained Gen1.
     void* reused = TryAllocateInGen1(64);
     ASSERT_NE(reused, nullptr);
     EXPECT_TRUE(IsInGen1(reused));

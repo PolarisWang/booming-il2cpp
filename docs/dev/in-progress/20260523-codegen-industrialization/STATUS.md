@@ -96,10 +96,10 @@ Phase 1 exit criteria 全部满足，进入 Phase 2 生产覆盖阶段。
 dispatch_doc: DISPATCH.md
 dispatch_model: hybrid
 active_batches: [P2A, P2B, P2C]
-completed_batches: [P1A, P1B, P1C, P1-merge]
+completed_batches: [P1A, P1B, P1C, P1-merge, P2A, P2C]
 terminals_active: {}
-pending_batches: [P2-merge, P3A, P3B, P3C]
-recommended_next_child: A-P2-1
+pending_batches: [P2-merge, P2B, P3A, P3B, P3C]
+recommended_next_child: B-P2-1
 ```
 
 ## 子任务状态
@@ -113,12 +113,12 @@ recommended_next_child: A-P2-1
 | **C-P1-1** | P1 | **completed** | HT | V4 CI/CD regression gate ✅ (.github/workflows/codegen-regression.yml) |
 | **C-P1-2** | P1 | **completed** | HT | V3 Snapshot baseline expansion ✅ (8 EH fixtures 新增) |
 | **C-P1-3** | P1 | **completed** | HT | D1+D2 API docs + troubleshooting ✅ (已归档) |
-| **A-P2-1** | P2 | **ready** | FT | G3 ABI + G4 flat fallback |
-| **A-P2-2** | P2 | **planned** | FT | G2 Virtual/interface dispatch |
-| **A-P2-3** | P2 | **planned** | FT | G5 Metadata closure |
+| **A-P2-1** | P2 | **completed** | FT | G3 ABI ✅ + G4 flat fallback ✅ (2 边缘 case 剩余) |
+| **A-P2-2** | P2 | **completed** | FT | G2 Virtual/interface dispatch ✅ (IfaceMap 接口分派) |
+| **A-P2-3** | P2 | **completed** | FT | G5 Metadata closure ✅ (token/returnType/paramCount, Scriban 模板修复, 快照基线更新) |
 | **B-P2-1** | P2 | **ready** | HT | T2 OSR deopt (溢出→OSR) |
 | **B-P2-2** | P2 | **planned** | HT | T4 PIC + T3 TLAB inline |
-| **C-P2-1** | P2 | **ready** | HT | C0(A3) verification pipeline |
+| **C-P2-1** | P2 | **completed** | HT | C0(A3) verification pipeline ✅ (13 阶段全通, CI 更新) |
 | **C-P2-2** | P2 | **planned** | HT | V1 first 50 families |
 | **C-P2-3** | P2 | **planned** | HT | V2 Coverage gate |
 | A-P3-1 | P3 | planned | FT | G6 Generics/sharing |
@@ -141,7 +141,7 @@ auto_stop_policy: blocking-only
 
 ## Latest Stop Point
 
-Phase 1 全部完成。Phase 2 启动。
+Phase 1 全部完成。Phase 2: A-P2-1(G3✅G4✅) A-P2-2(G2✅) C-P2-1(验证管线✅) A-P2-3(G5 元数据闭包✅). 当前: B-P2-1(T2 OSR) 待启动.
 
 ## 下一步
 
@@ -149,9 +149,9 @@ Phase 2 当前可启动子任务:
 
 | 子任务 | 前置依赖 | 预估工作量 | 描述 |
 |--------|---------|-----------|------|
-| **A-P2-1** (G3+G4 ABI + flat fallback) | A-P1-2 | 3-4 周 | 非 Int32 参数/返回值 ABI、runtime-self-test 100% 结构化 |
 | **B-P2-1** (T2 OSR deopt) | B-P1-2 | 3-4 周 | 真正 OSR 栈上替换，Backedge 触发 |
-| **C-P2-1** (C0/A3 验证管线) | A-P1-2 稳定 | 1-2 周 | 验证管线全 13 阶段可运行 |
+| **B-P2-2** (T4 PIC + T3 TLAB inline) | B-P2-1 | 2-3 周 | PIC 内联缓存 + TLAB 内联分配 |
+| **C-P2-2** (V1 first 50 families) | C-P2-1 | 4-6 周 | 50 family 全 13 阶段验证通过 |
 
 ## 入口
 

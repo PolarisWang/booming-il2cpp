@@ -151,7 +151,7 @@ gc-iw-e3 ─┘
 
 串行推进 Phase A → Phase B → Phase C → Phase D → Phase E
 
-当前进度：Phase A — gc-iw-a1 ✅ completed, gc-iw-a2 ✅ completed。**下一步：gc-iw-a3（Codegen verification 管线打通）**。
+当前进度：Phase A ✅, Phase B ✅。**下一步：gc-iw-c1（LatencyMode 差异化行为实现）**。
 
 ## 子任务执行策略
 

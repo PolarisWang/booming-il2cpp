@@ -207,7 +207,7 @@ CHAOS_IL2CPP_UINT64 GcCreateStrongHandle(void* object_instance) noexcept {
     auto* shard_map = &s_gc_handle_shards[HandleShardIndex(handle)];
     auto* shard_mutex = &s_gc_handle_shard_mutexes[HandleShardIndex(handle)];
     std::lock_guard<std::mutex> lock(*shard_mutex);
-    (*shard_map)[handle] = GcHandleEntry{ object_instance, false, false, false };
+    (*shard_map)[handle] = GcHandleEntry{ object_instance, false, false, false, false };
     s_gc_handle_count.fetch_add(1, std::memory_order_relaxed);
     return handle;
 }
@@ -218,7 +218,7 @@ CHAOS_IL2CPP_UINT64 GcCreateWeakHandle(void* object_instance) noexcept {
     auto& shard_map = HandleShardMap(handle);
     auto& shard_mutex = HandleShardMutex(handle);
     std::lock_guard<std::mutex> lock(shard_mutex);
-    shard_map[handle] = GcHandleEntry{ object_instance, false, true, false };
+    shard_map[handle] = GcHandleEntry{ object_instance, false, true, false, false };
     s_gc_handle_count.fetch_add(1, std::memory_order_relaxed);
     return handle;
 }
@@ -229,7 +229,7 @@ CHAOS_IL2CPP_UINT64 GcCreateLongWeakHandle(void* object_instance) noexcept {
     auto& shard_map = HandleShardMap(handle);
     auto& shard_mutex = HandleShardMutex(handle);
     std::lock_guard<std::mutex> lock(shard_mutex);
-    shard_map[handle] = GcHandleEntry{ object_instance, false, true, true };
+    shard_map[handle] = GcHandleEntry{ object_instance, false, true, true, false };
     s_gc_handle_count.fetch_add(1, std::memory_order_relaxed);
     return handle;
 }
@@ -240,7 +240,19 @@ CHAOS_IL2CPP_UINT64 GcCreatePinnedHandle(void* object_instance) noexcept {
     auto& shard_map = HandleShardMap(handle);
     auto& shard_mutex = HandleShardMutex(handle);
     std::lock_guard<std::mutex> lock(shard_mutex);
-    shard_map[handle] = GcHandleEntry{ object_instance, true, false, false };
+    shard_map[handle] = GcHandleEntry{ object_instance, true, false, false, false };
+    s_gc_handle_count.fetch_add(1, std::memory_order_relaxed);
+    GcAddPinnedObject(object_instance);
+    return handle;
+}
+
+CHAOS_IL2CPP_UINT64 GcCreateAsyncPinnedHandle(void* object_instance) noexcept {
+    if (object_instance == nullptr) return 0;
+    CHAOS_IL2CPP_UINT64 handle = s_next_gc_handle.fetch_add(1, std::memory_order_relaxed);
+    auto& shard_map = HandleShardMap(handle);
+    auto& shard_mutex = HandleShardMutex(handle);
+    std::lock_guard<std::mutex> lock(shard_mutex);
+    shard_map[handle] = GcHandleEntry{ object_instance, true, false, false, true };
     s_gc_handle_count.fetch_add(1, std::memory_order_relaxed);
     GcAddPinnedObject(object_instance);
     return handle;
@@ -253,7 +265,7 @@ void GcFreeHandle(CHAOS_IL2CPP_UINT64 handle_id) noexcept {
     std::lock_guard<std::mutex> lock(shard_mutex);
     auto it = shard_map.find(handle_id);
     if (it != shard_map.end()) {
-        if (it->second.pinned) {
+        if (it->second.pinned || it->second.async_pinned) {
             GcRemovePinnedObject(it->second.object_instance);
         }
         shard_map.erase(it);

@@ -4,13 +4,13 @@
 > **创建日期**: 2026-05-23
 > **更新日期**: 2026-05-23
 > **task_type**: roadmap
-> **phase**: roadmap
-> **lifecycle_status**: question_clearance = cleared, clearance_confirmed_by_user = true
+> **phase**: hanging
+> **lifecycle_status**: hanging — 等待外部依赖（hotupdate C1/C9, interpreter Layer 3）
 > **child_execution_mode**: auto
 > **auto_continue**: true
 > **auto_stop_policy**: blocking-only
 > **dispatch_model**: sequential
-> **recommended_next_child**: T0-2
+> **latest_stop_point**: Phase 2 完成（T2-3 阻塞），等待外部依赖
 
 ## 背景
 
@@ -38,9 +38,23 @@
 | 项目 | 值 |
 |------|-----|
 | 调度模式 | sequential |
-| 当前阶段 | Phase 0 |
-| 当前子任务 | T0-2（即将启动） |
+| 当前阶段 | Phase 2（收尾中） |
+| 当前子任务 | — |
 | 已完成 | T0-1 ✅ type_registry API 单元测试 (12 tests) |
+|  | T0-2 ✅ vtable_registry 隔离测试 (44 tests) |
+|  | T0-3 ✅ VTable 查找性能基准 (3 benchmarks) |
+|  | T0-4 ✅ 并发/压力测试 (6 tests) |
+|  | T0-5 ✅ TCVC epoch 风险分析+修复 |
+|  | T1-1 ✅ ObjectHeader 瘦身 |
+|  | T2-1 ✅ vtable_registry 双路径合并 |
+|  | T2-2 ✅ vtable 一致性验证断言 |
+|  | T2-4 ✅ MetadataRegistry 冷路径回退补齐 |
+|  | T2-5 ✅ 动态类型注册表哈希表升级（unordered_dense，无硬上限） |
+
+## 阻塞
+
+- **T2-3 (EEClass 动态类型填充)**: 部分阻塞。AOT 路径已实现（module registry reverse-lookup → ReflectionQueryTypeDescriptor），动态类型路径需等待 hotupdate pipeline 提供 PatchMetadataCache 描述符。当前动态路径为 stub（`filled=true` 无实际数据）。
+- **Phase 3 (T3-1, T3-2, T3-3)**: 阻塞。依赖 hotupdate C1（寄存器 VM）、interpreter Layer 3、hotupdate C9（AutoBridge）。外部 roadmap 未就绪。
 
 ## 风险评估摘要
 
@@ -58,15 +72,34 @@
 
 ## 最新摘要
 
-T0-1 (type_registry API 单元测试) ✅ 已完成并归档：
-- 新增 `testing/src/native/runtime-core/type_registry_test.cpp`
-- 12 个测试用例覆盖正常注册/查找/多类型/接口追加/幂等性/空值/容量溢出
-- CHECK 配置下全部通过 (12/12)
-- 修复关键问题：共享 domain 避免 registry dangling pointer（使用 SetUpTestSuite/TearDownTestSuite）
+Phase 0 全部完成 ✅ | Phase 1 (T1-1) 完成 ✅ | Phase 2 推进中：
+
+- T2-1 (vtable_registry 双路径合并) ✅
+- T2-2 (vtable 一致性验证断言) ✅ — 44 tests passing
+- T2-4 (MetadataRegistry 冷路径回退补齐) ✅
+  - GetMethodName: 通过 ReflectionQueryImageDescriptor 扫描返回方法名
+  - FindToken: 扫描所有模块的 ImageDescriptor 查找 method token
+  - 13 metadata_registry_test, 44 vtable_registry_test, 12 type_registry_test, 6 concurrent_stress_test 全部通过
+- T2-5 (动态类型注册表哈希表) ✅ — 已使用 CHAOS_IL2CPP_UNORDERED_DENSE_MAP_IDENTITY，无硬上限，>256 类型通过测试
+- T2-3 ⏳ 部分阻塞 — EEClass 动态类型填充需等待 hotupdate PatchMetadataCache
+- Phase 3 ⏳ 阻塞 — 依赖 hotupdate C1、interpreter Layer 3、hotupdate C9
+
+可独立推进的子任务已全部完成。本 roadmap 已达到最大独立推进边界，等待外部依赖。
 
 ## 下一步
 
-→ 启动 T0-2：vtable_registry 隔离测试（TCVC、IOC、继承链走行、幂等性、epoch 传播）
+→ 本 roadmap 所有可独立推进的子任务已完成
+→ T2-3 待 hotupdate PatchMetadataCache 就绪后恢复
+→ Phase 3 待外部依赖（hotupdate C1, interpreter Layer 3, hotupdate C9）就绪后恢复
+
+## 完成证据
+
+- **Phase 0**: 5/5 子任务完成 (T0-1~T0-5)
+- **Phase 1**: 1/10 子任务完成 (T1-1)。T1-2~T1-10 (A4-Dual+V2 全量优化) 未排入当前工作树
+- **Phase 2**: 4/5 子任务完成 (T2-1, T2-2, T2-4, T2-5)。T2-3 阻塞
+- **Phase 3**: 0/3 (T3-1~T3-3) 阻塞，依赖外部 roadmap
+
+roadmap 达到当前可执行边界，等待外部依赖就绪后继续。
 
 ## 关键文档
 

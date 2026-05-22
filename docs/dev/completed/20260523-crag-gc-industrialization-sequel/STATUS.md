@@ -2,11 +2,12 @@
 task_id: 20260523-crag-gc-industrialization-sequel
 title: CRAG GC 工业化后续 — 解决全部差距项，达 CoreCLR 对等
 task_type: roadmap
-lifecycle_status: roadmap
-phase: roadmap
+lifecycle_status: completed
+phase: completed
 created_at: 2026-05-23
 updated_at: 2026-05-23
-current_dir: docs/dev/in-progress/20260523-crag-gc-industrialization-sequel
+completed_at: 2026-05-23
+current_dir: docs/dev/completed/20260523-crag-gc-industrialization-sequel
 clearance_source: brainstorm
 ---
 
@@ -90,7 +91,7 @@ Phase E — 性能优化与高级功能（6-10 周，内部串行）
 
 ### 下一步入口
 
-已创建路线图 `roadmap-v1-01.md`。自动启动下一个子任务 `gc-iw-a3`。
+**全部阶段已完成** — 五个阶段（A/B/C/D/E）共 18 个子任务全部完成，CRAG GC 工业化差距项已全部关闭。无需进一步推进。
 
 ### 子任务完成状态
 
@@ -98,14 +99,27 @@ Phase E — 性能优化与高级功能（6-10 周，内部串行）
 |---------|------|------|
 | gc-iw-a1 | ✅ completed | BGC-YoungGC 并发 segfault 修复完成 |
 | gc-iw-a2 | ✅ completed | Young collector card dirty 时序失败修复 — ClearCardRange + 替换 ClearAllCards |
-| gc-iw-a3 | ⏳ planned | Codegen verification 管线打通 |
+| gc-iw-a3 | ✅ completed | Codegen verification 管线打通 + 托管 API 完整验证 |
+| gc-iw-b1 | ✅ completed | 并发根扫描接入点集成（BgcRecordRootChange → 静态字段/GCHandle 写入路径） |
+| gc-iw-b2 | ✅ completed | Parallel mark lock-free deque 改造（Chase-Lev work-stealing） |
+| gc-iw-b3 | ✅ completed | CrossPageCompact 最小存活阈值优化（kMinCrossPageSurvivorBytes=512） |
+| gc-iw-b4 | ✅ completed | retired_arrays_ 内存泄漏修复（kMaxRetiredPageArrays=4） |
+| gc-iw-b5 | ✅ completed | Finalizer 线程内联执行替代 std::async，移除专用 finalizer 线程 |
+| gc-iw-c1 | ✅ completed | LatencyMode 差异化行为实现（Batch/LowLatency/SustainedLowLatency） |
+| gc-iw-c2 | ✅ completed | GCMemoryInfo 托管侧结构体 |
+| gc-iw-c3 | ✅ completed | GcEndStubbornChange 实现 |
+| gc-iw-d1 | ✅ completed | ARM64 编译验证 + 写屏障 UT（回退方案） |
+| gc-iw-d2 | ✅ completed | Server GC 生产硬化 + E2E 压力测试 |
+| gc-iw-e1 | ✅ completed | NUMA 完善 + Card bundle + CPU 亲和性 |
+| gc-iw-e2 | ✅ completed | 写屏障假阳性消除 + OS 低内存通知集成；C15 无需变更，C18 已实现 |
+| gc-iw-e3 | ✅ completed | AsyncPinned handle + Gen1 部分保留 |
 
 ## 子任务执行策略
 
 - `child_execution_mode`: auto
 - `auto_continue`: true
 - `auto_stop_policy`: blocking-only
-- `recommended_next_child`: gc-iw-a3 (codegen verification pipeline)
+- `recommended_next_child`: n/a（全部完成）
 
 ## blocking_questions
 

@@ -146,6 +146,8 @@ add_library(chaos_runtime_core STATIC
     gc/gc_heap.h
     gc/gc_heap_manager.h
     gc/gc_heap_manager.cpp
+    gc/gc_low_mem.h
+    gc/gc_low_mem.cpp
     com_rcw.h
     com_rcw.cpp
     com_ccw.h

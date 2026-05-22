@@ -13,6 +13,8 @@
 #include "gc_young_collector.h"
 #include "gc_bgc.h"
 
+#include "../core/engine_lifecycle.h"
+
 #if defined(_WIN32)
 #include <windows.h>
 #endif
@@ -162,6 +164,16 @@ void CHAOS_RUNTIME_ABI_CALL chaos_gc_remove_memory_pressure(
 }
 
 // ======================================================================
+// chaos_gc_create_async_pinned_handle
+// ======================================================================
+
+extern "C" CHAOS_IL2CPP_UINT64 CHAOS_RUNTIME_ABI_CALL chaos_gc_create_async_pinned_handle(
+    void* object_instance) noexcept
+{
+    return GcCreateAsyncPinnedHandle(object_instance);
+}
+
+// ======================================================================
 // chaos_gc_collect_with_mode
 // ======================================================================
 
@@ -264,6 +276,19 @@ extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_set_latency_mode(
     }
 
     G_Scheduler().SetLatencyMode(lm);
+
+    // If switching to BATCH, stop any in-progress BGC cycle.
+    // BGC thread stays alive but won't start new concurrent cycles.
+    if (lm == GcLatencyMode::BATCH) {
+        auto& bgc = BgcController::Instance();
+        if (bgc.IsBusy()) {
+            // Stop BGC under safepoint to prevent concurrent mark from
+            // interfering with the now-STW-only GC policy.
+            uint32_t gen = threading::RequestGlobalSafepoint();
+            bgc.StopConcurrentMark();
+            threading::ReleaseGlobalSafepoint(gen);
+        }
+    }
 
     // If switching away from NO_GC_REGION, trigger any deferred GC.
     if (lm != GcLatencyMode::NO_GC_REGION) {
@@ -376,7 +401,13 @@ extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_get_memory_info(
     info->memory_load_bytes = mem.total_phys - mem.avail_phys;
     info->heap_size_bytes = heap_size;
     info->fragmented_bytes = fragmented;
-    info->total_committed_bytes = heap_size;
+    // Total committed memory: old-gen pages × page size + LOH total allocated.
+    // This reflects actual virtual memory commitment, not just allocated payload.
+    // Use std::max with heap_size to guarantee the invariant that committed >= heap
+    // (partial pages at end of old-gen can make TotalAllocated > TotalPages × pageSize).
+    auto committed_raw = static_cast<CHAOS_IL2CPP_INT64>(
+        G_OldGen().TotalPages() * kOldGenPageSize + G_Loh().TotalAllocated());
+    info->total_committed_bytes = (committed_raw > heap_size) ? committed_raw : heap_size;
     info->promoted_bytes = promoted;
     info->pinned_objects_count = 0;
     info->finalization_pending_count = static_cast<int64_t>(snap.finalization_pending_count);

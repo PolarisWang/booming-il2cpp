@@ -45,6 +45,7 @@ static constexpr CHAOS_IL2CPP_SIZE kGen1MinPromoteThreshold = 64;
 struct Gen1CollectionResult {
     CHAOS_IL2CPP_SIZE objects_promoted{0};   // Objects promoted to Gen2
     CHAOS_IL2CPP_SIZE bytes_promoted{0};     // Bytes copied to Gen2
+    CHAOS_IL2CPP_SIZE bytes_compacted{0};    // Bytes kept in Gen1 (compacted survivors)
     CHAOS_IL2CPP_SIZE bytes_reclaimed{0};    // Bytes freed from Gen1 (dead objects)
     CHAOS_IL2CPP_SIZE objects_in_gen1{0};    // Total objects in Gen1 before collection
     uint64_t           pause_ns{0};           // STW pause duration

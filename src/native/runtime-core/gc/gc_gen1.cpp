@@ -253,7 +253,14 @@ Gen1CollectionResult GcGen1Collection() {
             }
             tiny_cur += obj_size;
         }
-        g_young_gen.gen1_bump.store(gen1->begin, std::memory_order_release);
+        if (result.promotion_failed) {
+            // Don't reset gen1_bump — data is still in Gen1 and needs retry.
+            result.bytes_promoted = 0;
+            result.objects_promoted = 0;
+        } else {
+            g_young_gen.gen1_bump.store(gen1->begin, std::memory_order_release);
+            g_young_gen.gen1_prev_compact_end = nullptr;
+        }
         auto pause_end = std::chrono::steady_clock::now();
         result.pause_ns = static_cast<uint64_t>(
             std::chrono::duration_cast<std::chrono::nanoseconds>(pause_end - pause_start).count());
@@ -317,7 +324,13 @@ Gen1CollectionResult GcGen1Collection() {
                 }
                 ec2_cur += sz2;
             }
-            g_young_gen.gen1_bump.store(gen1->begin, std::memory_order_release);
+            if (result.promotion_failed) {
+                result.bytes_promoted = 0;
+                result.objects_promoted = 0;
+            } else {
+                g_young_gen.gen1_bump.store(gen1->begin, std::memory_order_release);
+                g_young_gen.gen1_prev_compact_end = nullptr;
+            }
             auto pause_end = std::chrono::steady_clock::now();
             result.pause_ns = static_cast<uint64_t>(
                 std::chrono::duration_cast<std::chrono::nanoseconds>(pause_end - pause_start).count());
@@ -377,10 +390,13 @@ Gen1CollectionResult GcGen1Collection() {
             }
             drain_cur += obj_size;
         }
-        // Reset Gen1 even if some promotions failed — better to lose Gen1 space
-        // than to leave dangling pointers. Mutators have already been told their
-        // objects are in Gen2 (via forwarding or reference updates in the caller).
-        g_young_gen.gen1_bump.store(gen1->begin, std::memory_order_release);
+        if (result.promotion_failed) {
+            result.bytes_promoted = 0;
+            result.objects_promoted = 0;
+        } else {
+            g_young_gen.gen1_bump.store(gen1->begin, std::memory_order_release);
+            g_young_gen.gen1_prev_compact_end = nullptr;
+        }
         auto pause_end = std::chrono::steady_clock::now();
         result.pause_ns = static_cast<uint64_t>(
             std::chrono::duration_cast<std::chrono::nanoseconds>(pause_end - pause_start).count());
@@ -497,37 +513,89 @@ Gen1CollectionResult GcGen1Collection() {
             }, &hctx);
     }
 
-    // ── Phase 4: Walk Gen1 objects, promote marked / reclaim unmarked ──
-    // (objects_in_gen1 was already counted in Phase 1b counting pass)
+    // ── Phase 4: Walk Gen1 objects, promote old survivors / compact new ──
 
     {
-        CHAOS_IL2CPP_PROFILE_SCOPE("Gen1_PromoteAndSweep");
+        CHAOS_IL2CPP_PROFILE_SCOPE("Gen1_PromoteAndCompact");
         char* s_cur = s_begin;
         auto& sv_layout_registry = GcLayoutRegistry::Instance();
         // Track in local vars; only commit to result if no failures.
-        CHAOS_IL2CPP_SIZE local_promoted = 0;
+        CHAOS_IL2CPP_SIZE local_promoted_count = 0;
         CHAOS_IL2CPP_SIZE local_bytes_promoted = 0;
+        CHAOS_IL2CPP_SIZE local_compacted = 0;
+        CHAOS_IL2CPP_SIZE local_bytes_compacted = 0;
         CHAOS_IL2CPP_SIZE local_reclaimed = 0;
         bool local_failed = false;
 
-        // ── Phase 4a: Collect live objects with their sizes ──
-        // Using a stack-allocated batch buffer for the common case.
-        // If the batch overflows (>256 live objects), fall through to
-        // the direct interleaved promote path.
+        // ── Phase 4a: Determine old/new boundary ──
+        // Objects below gen1_prev_compact_end have survived >=1 Gen1 collection
+        // and are promoted to Gen2.  Objects above are freshly promoted from
+        // Gen0 and stay in Gen1 via compaction.
+        char* boundary = g_young_gen.gen1_prev_compact_end;
+        if (boundary == nullptr || boundary < s_begin) {
+            boundary = s_begin;  // No previous collection → all are "new"
+        }
+        if (boundary > s_bump) {
+            boundary = s_bump;   // Clamp to current range.
+        }
+
+        // Allocate compaction buffer.  Max size = full Gen1 capacity.
+        CHAOS_IL2CPP_SIZE gen1_capacity = static_cast<CHAOS_IL2CPP_SIZE>(
+            g_young_gen.gen1_end - s_begin);
+        char* compact_buf = static_cast<char*>(CHAOS_IL2CPP_MALLOC(gen1_capacity));
+        if (compact_buf == nullptr) {
+            CHAOS_IL2CPP_LOG_ERROR("CRAG", "gen1 OOM allocating compact buffer, falling back to promote-all");
+            // Fall back to promote-all (drain Gen1) — conservative.
+            auto& drain_layout = GcLayoutRegistry::Instance();
+            char* drain_cur = s_begin;
+            while (drain_cur < s_bump) {
+                const void* ti = *reinterpret_cast<const void* const*>(drain_cur);
+                CHAOS_IL2CPP_SIZE obj_size = kGen1MaxEstObjectSize;
+                if (ti != nullptr && drain_layout.IsValidTypeInfoPointer(ti)) {
+                    uint64_t sid = drain_layout.ReadStableId(ti);
+                    const auto* layout = drain_layout.Lookup(sid);
+                    if (layout != nullptr && layout->instance_size > 0) {
+                        obj_size = static_cast<CHAOS_IL2CPP_SIZE>(layout->instance_size);
+                    }
+                }
+                void* gen2_addr = g_old_gen.Allocate(obj_size, true);
+                if (gen2_addr != nullptr) {
+                    std::memcpy(gen2_addr, drain_cur, obj_size);
+                    local_promoted_count++;
+                    local_bytes_promoted += obj_size;
+                } else {
+                    local_failed = true;
+                    CHAOS_IL2CPP_LOG_ERROR("CRAG", "gen1 drain: Gen2 OOM");
+                }
+                drain_cur += obj_size;
+            }
+            if (!local_failed) {
+                g_young_gen.gen1_bump.store(gen1->begin, std::memory_order_release);
+                g_young_gen.gen1_prev_compact_end = nullptr;
+            }
+            result.objects_promoted = local_promoted_count;
+            result.bytes_promoted = local_bytes_promoted;
+            result.bytes_reclaimed = local_reclaimed;
+            result.promotion_failed = local_failed;
+            goto phase6_cleanup;
+        }
+
+        // ── Phase 4b: Collect "old" live objects (promote batch) ──
+        // and "new" live objects (compaction buffer).
+        // Use a stack-allocated batch buffer for old-object promotion.
         static constexpr int kPromoteBatchMax = 256;
         struct PromoteEntry { char* src; CHAOS_IL2CPP_SIZE size; };
         PromoteEntry batch_buf[kPromoteBatchMax];
         int batch_count = 0;
-        bool batch_overflow = false;
 
         while (s_cur < s_bump) {
             const void* ti = *reinterpret_cast<const void* const*>(s_cur);
-            CHAOS_IL2CPP_SIZE sv_size = kGen1MaxEstObjectSize;
+            CHAOS_IL2CPP_SIZE obj_size = kGen1MaxEstObjectSize;
             if (ti != nullptr && sv_layout_registry.IsValidTypeInfoPointer(ti)) {
-                uint64_t sv_sid = sv_layout_registry.ReadStableId(ti);
-                const auto* sv_layout = sv_layout_registry.Lookup(sv_sid);
-                if (sv_layout != nullptr && sv_layout->instance_size > 0) {
-                    sv_size = static_cast<CHAOS_IL2CPP_SIZE>(sv_layout->instance_size);
+                uint64_t sid = sv_layout_registry.ReadStableId(ti);
+                const auto* layout = sv_layout_registry.Lookup(sid);
+                if (layout != nullptr && layout->instance_size > 0) {
+                    obj_size = static_cast<CHAOS_IL2CPP_SIZE>(layout->instance_size);
                 }
             }
 
@@ -536,109 +604,79 @@ Gen1CollectionResult GcGen1Collection() {
             bool is_live = mark_bm.TestSlot(slot_idx);
 
             if (is_live) {
-                if (batch_count < kPromoteBatchMax) {
-                    batch_buf[batch_count++] = {s_cur, sv_size};
+                if (s_cur < boundary) {
+                    // "Old" survivor (survived >=1 Gen1 collection) → promote to Gen2.
+                    if (batch_count < kPromoteBatchMax) {
+                        batch_buf[batch_count++] = {s_cur, obj_size};
+                    } else {
+                        // Batch overflow: promote directly.
+                        void* gen2_addr = g_old_gen.Allocate(obj_size, true);
+                        if (gen2_addr != nullptr) {
+                            std::memcpy(gen2_addr, s_cur, obj_size);
+                            local_promoted_count++;
+                            local_bytes_promoted += obj_size;
+                        } else {
+                            local_failed = true;
+                            CHAOS_IL2CPP_LOG_ERROR("CRAG",
+                                "gen1 Gen2 OOM promoting old object");
+                        }
+                    }
                 } else {
-                    batch_overflow = true;
-                    break;
+                    // "New" survivor (fresh from Gen0) → compact in Gen1.
+                    std::memcpy(compact_buf + local_bytes_compacted, s_cur, obj_size);
+                    local_compacted++;
+                    local_bytes_compacted += obj_size;
                 }
             } else {
-                local_reclaimed += sv_size;
+                local_reclaimed += obj_size;
             }
 
-            s_cur += sv_size;
+            s_cur += obj_size;
         }
 
-        // ── Phase 4b: Promote from batch (or fall through to direct) ──
-        if (!batch_overflow) {
-            // Tight promote loop from batch — Allocate calls for the same
-            // size class hit the free list with better locality.
-            for (int i = 0; i < batch_count; i++) {
-                void* gen2_addr = g_old_gen.Allocate(batch_buf[i].size, true);
-                if (gen2_addr != nullptr) {
-                    std::memcpy(gen2_addr, batch_buf[i].src, batch_buf[i].size);
-                    local_promoted++;
-                    local_bytes_promoted += batch_buf[i].size;
-                } else {
-                    local_failed = true;
-                    CHAOS_IL2CPP_LOG_ERROR("CRAG",
-                        "gen1 Gen2 OOM promoting batched object");
-                }
-            }
-        } else {
-            // Batch overflow (>256 live objects): promote remaining objects
-            // including the one that triggered the overflow in interleaved mode.
-            CHAOS_IL2CPP_LOG_DEBUG("CRAG",
-                "gen1_batch_overflow: promoting %d batched + remaining", kPromoteBatchMax);
-
-            // Promote what we collected so far.
-            for (int i = 0; i < kPromoteBatchMax; i++) {
-                void* gen2_addr = g_old_gen.Allocate(batch_buf[i].size, true);
-                if (gen2_addr != nullptr) {
-                    std::memcpy(gen2_addr, batch_buf[i].src, batch_buf[i].size);
-                    local_promoted++;
-                    local_bytes_promoted += batch_buf[i].size;
-                } else {
-                    local_failed = true;
-                    CHAOS_IL2CPP_LOG_ERROR("CRAG",
-                        "gen1 Gen2 OOM promoting batched object (overflow)");
-                }
-            }
-
-            // Then continue with interleaved promote for the rest.
-            while (s_cur < s_bump) {
-                const void* ti2 = *reinterpret_cast<const void* const*>(s_cur);
-                CHAOS_IL2CPP_SIZE sv2 = kGen1MaxEstObjectSize;
-                if (ti2 != nullptr && sv_layout_registry.IsValidTypeInfoPointer(ti2)) {
-                    uint64_t sid2 = sv_layout_registry.ReadStableId(ti2);
-                    const auto* l2 = sv_layout_registry.Lookup(sid2);
-                    if (l2 != nullptr && l2->instance_size > 0) {
-                        sv2 = static_cast<CHAOS_IL2CPP_SIZE>(l2->instance_size);
-                    }
-                }
-                uintptr_t oa2 = reinterpret_cast<uintptr_t>(s_cur);
-                CHAOS_IL2CPP_SIZE si2 = (oa2 - gen1_begin) / sizeof(void*);
-                if (mark_bm.TestSlot(si2)) {
-                    void* dst = g_old_gen.Allocate(sv2, true);
-                    if (dst != nullptr) {
-                        std::memcpy(dst, s_cur, sv2);
-                        local_promoted++;
-                        local_bytes_promoted += sv2;
-                    } else {
-                        local_failed = true;
-                        CHAOS_IL2CPP_LOG_ERROR("CRAG",
-                            "gen1 Gen2 OOM (overflow)");
-                    }
-                } else {
-                    local_reclaimed += sv2;
-                }
-                s_cur += sv2;
+        // ── Phase 4c: Promote batched old objects to Gen2 ──
+        for (int i = 0; i < batch_count && !local_failed; i++) {
+            void* gen2_addr = g_old_gen.Allocate(batch_buf[i].size, true);
+            if (gen2_addr != nullptr) {
+                std::memcpy(gen2_addr, batch_buf[i].src, batch_buf[i].size);
+                local_promoted_count++;
+                local_bytes_promoted += batch_buf[i].size;
+            } else {
+                local_failed = true;
+                CHAOS_IL2CPP_LOG_ERROR("CRAG",
+                    "gen1 Gen2 OOM promoting batched old object");
             }
         }
 
-        // Commit only if no failures.  If any Gen2 alloc failed, we leave Gen1
-        // content intact (gen1_bump NOT reset) for the next cycle to retry.
-        // Reporting partial promotions would create duplicates on the next retry.
+        // Commit results (only if no failures).
         if (!local_failed) {
-            result.objects_promoted = local_promoted;
+            // Phase 4d: Compact "new" survivors back to Gen1 start.
+            std::memcpy(s_begin, compact_buf, local_bytes_compacted);
+            g_young_gen.gen1_bump.store(s_begin + local_bytes_compacted,
+                                         std::memory_order_release);
+            g_young_gen.gen1_prev_compact_end = s_begin + local_bytes_compacted;
+
+            result.objects_promoted = local_promoted_count;
             result.bytes_promoted = local_bytes_promoted;
+            result.bytes_compacted = local_compacted;
             result.bytes_reclaimed = local_reclaimed;
             result.promotion_failed = false;
         } else {
+            // Some promotions failed — preserve Gen1 state for retry.
+            // Don't update gen1_bump or gen1_prev_compact_end.
             result.promotion_failed = true;
-            result.bytes_reclaimed = 0;  // Nothing reclaimed — Gen1 preserved
+            result.bytes_reclaimed = 0;
         }
+
+        CHAOS_IL2CPP_FREE(compact_buf);
     }
 
-    // ── Phase 5: Reset Gen1 (only if all promotions succeeded) ──
-    // If Gen2 OOM occurred, preserve Gen1 content for retry on next cycle.
-    if (!result.promotion_failed) {
-        g_young_gen.gen1_bump.store(gen1->begin, std::memory_order_release);
-    } else {
-        CHAOS_IL2CPP_LOG_WARN("CRAG", "gen1_collection promotion_failed — gen1_bump NOT reset");
-    }
+    // ── Phase 5: Skip (gen1_bump and gen1_prev_compact_end updated in Phase 4d) ──
 
-    // ── Phase 6: Cleanup ──
+    goto phase6_cleanup;
+
+phase6_cleanup:
+    // ── Phase 6: Cleanup (shared with fallback paths above) ──
     if (!used_stack) {
         CHAOS_IL2CPP_FREE(bitmap_raw);
     }
@@ -653,9 +691,10 @@ Gen1CollectionResult GcGen1Collection() {
     g_gen1_state.last_survived_bytes = result.bytes_promoted;
 
     CHAOS_IL2CPP_LOG_INFO_M("CRAG",
-        "gen1_collection done: promoted={0} objs, {1} bytes; reclaimed={2} bytes; pause={3} ns",
+        "gen1_collection done: promoted={0} objs, {1} bytes; compacted={2} bytes; reclaimed={3} bytes; pause={4} ns",
         static_cast<unsigned long long>(result.objects_promoted),
         static_cast<unsigned long long>(result.bytes_promoted),
+        static_cast<unsigned long long>(result.bytes_compacted),
         static_cast<unsigned long long>(result.bytes_reclaimed),
         static_cast<unsigned long long>(result.pause_ns));
 
