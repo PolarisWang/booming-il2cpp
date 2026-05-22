@@ -301,6 +301,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{70347751-9D41-3C2F-B03E-E337FC925D20}</Project>
       <Name>test_fuzz_il</Name>
     </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing\runtime-core\gc\test_gc_atomic_alloc.vcxproj">
+      <Project>{BF13DEE6-4D3E-3058-8F54-E9FD86ECC11D}</Project>
+      <Name>test_gc_atomic_alloc</Name>
+    </ProjectReference>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\testing\runtime-core\gc\test_gc_bgc_root_scan.vcxproj">
       <Project>{C4323E56-62AD-38F0-A8C1-66A9A68FEEA6}</Project>
       <Name>test_gc_bgc_root_scan</Name>
@@ -329,9 +333,17 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{75989CF7-9553-3B33-924C-E4A81B9E5A5B}</Project>
       <Name>test_gc_card_table_ext</Name>
     </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing\runtime-core\gc\test_gc_debug_contract.vcxproj">
+      <Project>{E9E0A424-A7FA-3793-A672-D076C8981447}</Project>
+      <Name>test_gc_debug_contract</Name>
+    </ProjectReference>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\testing\runtime-core\gc\test_gc_delegate_stress.vcxproj">
       <Project>{6CE2D56E-6C64-3596-85F4-E142F9D0859F}</Project>
       <Name>test_gc_delegate_stress</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing\runtime-core\gc\test_gc_demotion.vcxproj">
+      <Project>{70008193-03D1-350F-A2C8-494CABB98F89}</Project>
+      <Name>test_gc_demotion</Name>
     </ProjectReference>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\testing\runtime-core\gc\test_gc_domain_unload.vcxproj">
       <Project>{CD0F2292-50C7-3C45-84E9-2D3F43E4AFA5}</Project>
@@ -372,6 +384,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\testing\runtime-core\gc\test_gc_handle.vcxproj">
       <Project>{D2FC065E-E5F1-3CB9-A93E-AC23BFB88D2A}</Project>
       <Name>test_gc_handle</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing\runtime-core\gc\test_gc_heap_limit.vcxproj">
+      <Project>{505BD2DF-1CF5-35F8-982F-43EFC64FCDEB}</Project>
+      <Name>test_gc_heap_limit</Name>
     </ProjectReference>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\testing\runtime-core\gc\test_gc_layout.vcxproj">
       <Project>{E6AE7F7E-0D99-3B92-BE13-97609FF5BA00}</Project>
@@ -429,6 +445,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{CBB1F9A8-4D74-3A6D-9721-B54D0FF6D10B}</Project>
       <Name>test_gc_region</Name>
     </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing\runtime-core\gc\test_gc_regression_benchmark.vcxproj">
+      <Project>{E9416DA8-D21C-3D1C-A379-8935131835CE}</Project>
+      <Name>test_gc_regression_benchmark</Name>
+    </ProjectReference>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\testing\runtime-core\gc\test_gc_root_scanner.vcxproj">
       <Project>{C8FCE8C2-0AC5-3491-98E4-2662E6C253FA}</Project>
       <Name>test_gc_root_scanner</Name>
@@ -441,9 +461,17 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{C2AB5D9A-2672-3CDB-847D-BAB48065F5DB}</Project>
       <Name>test_gc_sanity</Name>
     </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing\runtime-core\gc\test_gc_satb_stress.vcxproj">
+      <Project>{089FDEE4-44DD-389D-B332-745615903FE5}</Project>
+      <Name>test_gc_satb_stress</Name>
+    </ProjectReference>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\testing\runtime-core\gc\test_gc_scheduler.vcxproj">
       <Project>{F812FDAE-6760-3E2E-B0C1-89E2159ED6CD}</Project>
       <Name>test_gc_scheduler</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing\runtime-core\gc\test_gc_soak.vcxproj">
+      <Project>{8B29D81A-9907-3793-AE2A-C1B972A34E56}</Project>
+      <Name>test_gc_soak</Name>
     </ProjectReference>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\testing\runtime-core\gc\test_gc_stats.vcxproj">
       <Project>{E4668278-0823-3E57-931C-CC8120E82AE6}</Project>
@@ -469,9 +497,25 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{8EC5B337-671D-3E85-8356-B0FBBC9487A9}</Project>
       <Name>test_gc_young_collector</Name>
     </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing\hot-update\test_hotupdate_generics.vcxproj">
+      <Project>{11058002-12A8-3FE1-8894-8E8C8D3E7340}</Project>
+      <Name>test_hotupdate_generics</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing\hot-update\test_hotupdate_package_e2e.vcxproj">
+      <Project>{CD5BE7E2-E151-3075-A98F-1875FCD55218}</Project>
+      <Name>test_hotupdate_package_e2e</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing\hot-update\test_hotupdate_replacement_benchmark.vcxproj">
+      <Project>{821BB86E-E478-3EF1-A03C-97431B678022}</Project>
+      <Name>test_hotupdate_replacement_benchmark</Name>
+    </ProjectReference>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\testing\hot-update\test_hotupdate_verification.vcxproj">
       <Project>{B90C0315-620C-3497-A5C3-CCD765B3C428}</Project>
       <Name>test_hotupdate_verification</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing\hot-update\test_hotupdate_vtable_sync.vcxproj">
+      <Project>{DD128A3A-CB8B-38A7-BE34-59A82F3015AB}</Project>
+      <Name>test_hotupdate_vtable_sync</Name>
     </ProjectReference>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\testing\runtime-core\interpreter\test_interpreter_bridge.vcxproj">
       <Project>{8DEE324A-E639-375A-9E95-C64C8BC0C711}</Project>
@@ -488,6 +532,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\testing\runtime-core\interpreter\test_interpreter_mini_smoke.vcxproj">
       <Project>{DCE6D437-2C09-38DD-AD88-942D314C8667}</Project>
       <Name>test_interpreter_mini_smoke</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing\hot-update\test_interpreter_mixed_execution.vcxproj">
+      <Project>{569B7639-620A-381F-9092-305C63B07341}</Project>
+      <Name>test_interpreter_mixed_execution</Name>
     </ProjectReference>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\testing\runtime-core\interpreter\test_interpreter_new_features.vcxproj">
       <Project>{1CB8068C-C0E3-3698-9B60-2749205C6ABB}</Project>
@@ -516,10 +564,6 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\testing\hot-update\test_method_replacement_smoke.vcxproj">
       <Project>{5CFDFFE1-4BB7-3895-8D58-39FF69FE5692}</Project>
       <Name>test_method_replacement_smoke</Name>
-    </ProjectReference>
-    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing\runtime-core\threading\test_monitor_pulseall_stress.vcxproj">
-      <Project>{868D7E3B-6F46-3924-BADC-6456EAEACED4}</Project>
-      <Name>test_monitor_pulseall_stress</Name>
     </ProjectReference>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\testing\runtime-core\threading\test_synchronization_smoke.vcxproj">
       <Project>{622E6165-B06C-332F-968A-8694F849595C}</Project>

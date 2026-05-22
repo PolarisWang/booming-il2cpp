@@ -67,6 +67,8 @@ struct AsyncLocalMap {
 
 thread_local AsyncLocalMap tls_async_locals;
 thread_local int32_t tls_suppress_flow_depth = 0;
+thread_local void (*tls_async_local_value_changed)(uint64_t, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR) = nullptr;
+thread_local void* tls_security_context = nullptr;
 
 uint32_t FindValueIndex(uint64_t key) noexcept {
     for (uint32_t i = 0; i < tls_async_locals.count; i++) {
@@ -88,7 +90,9 @@ AsyncLocalValue* FindValue(uint64_t key) noexcept {
 
 void AsyncLocalSetValue(uint64_t key, CHAOS_IL2CPP_INTPTR value) noexcept {
     uint32_t existing_idx = FindValueIndex(key);
+    CHAOS_IL2CPP_INTPTR old_value = 0;
     if (existing_idx != UINT32_MAX) {
+        old_value = tls_async_locals.ValueAt(existing_idx).value;
         if (value == 0) {
             // Remove the entry by shifting remaining entries left.
             uint32_t count = tls_async_locals.count;
@@ -97,27 +101,32 @@ void AsyncLocalSetValue(uint64_t key, CHAOS_IL2CPP_INTPTR value) noexcept {
             }
             tls_async_locals.count--;
         } else {
+            if (old_value == value) return;  // No change — skip callback.
             tls_async_locals.ValueAt(existing_idx).value = value;
         }
-        return;
+    } else {
+        if (value == 0) return;  // Don't add a zero-valued entry.
+
+        if (tls_async_locals.count >= kMaxValues) {
+            CHAOS_IL2CPP_LOG_WARN("AsyncLocal", "exceeded max values");
+            return;
+        }
+
+        uint32_t idx = tls_async_locals.count;
+        if (!tls_async_locals.EnsureHeapCapacity(idx + 1)) {
+            CHAOS_IL2CPP_LOG_WARN("AsyncLocal", "failed to allocate heap storage");
+            return;
+        }
+
+        tls_async_locals.ValueAt(idx).key = key;
+        tls_async_locals.ValueAt(idx).value = value;
+        tls_async_locals.count++;
     }
 
-    if (value == 0) return;  // Don't add a zero-valued entry.
-
-    if (tls_async_locals.count >= kMaxValues) {
-        CHAOS_IL2CPP_LOG_WARN("AsyncLocal", "exceeded max values");
-        return;
+    // Notify managed AsyncLocal<T> of the value change.
+    if (tls_async_local_value_changed != nullptr) {
+        tls_async_local_value_changed(key, old_value, value);
     }
-
-    uint32_t idx = tls_async_locals.count;
-    if (!tls_async_locals.EnsureHeapCapacity(idx + 1)) {
-        CHAOS_IL2CPP_LOG_WARN("AsyncLocal", "failed to allocate heap storage");
-        return;
-    }
-
-    tls_async_locals.ValueAt(idx).key = key;
-    tls_async_locals.ValueAt(idx).value = value;
-    tls_async_locals.count++;
 }
 
 CHAOS_IL2CPP_INTPTR AsyncLocalGetValue(uint64_t key) noexcept {
@@ -164,6 +173,9 @@ ExecutionContext* ExecutionContextCapture() noexcept {
         ctx->values[i] = tls_async_locals.ValueAt(i);
     }
 
+    // Capture SecurityContext (opaque pointer, managed code owns lifetime).
+    ctx->security_context = tls_security_context;
+
     return ctx;
 }
 
@@ -206,6 +218,10 @@ void ExecutionContextRun(ExecutionContext* ctx, void (*callback)(void*), void* s
         tls_async_locals.EnsureHeapCapacity(ctx->value_count);
     }
 
+    // Install SecurityContext.
+    void* saved_sc = tls_security_context;
+    tls_security_context = ctx->security_context;
+
     // Install context values.
     tls_async_locals.count = ctx->value_count;
     for (uint32_t i = 0; i < ctx->value_count; i++) {
@@ -215,7 +231,10 @@ void ExecutionContextRun(ExecutionContext* ctx, void (*callback)(void*), void* s
     // Run the callback.
     if (callback) callback(state);
 
-    // Restore saved values.
+    // Restore SecurityContext.
+    tls_security_context = saved_sc;
+
+    // Restore saved AsyncLocal values.
     tls_async_locals.count = saved_count;
     if (saved_values != nullptr) {
         for (uint32_t i = 0; i < saved_count; i++) {

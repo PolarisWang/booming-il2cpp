@@ -119,7 +119,11 @@ Phase 3:          ▼
 
 ## 当前建议推进顺序
 
-串行推进，当前进度：**gc-p2-04→05→06 已完成。下一步：gc-p2-07（测试覆盖增强）**。
+串行推进，当前进度：**Phase 1 全部完成（gc-p2-01~07 + gc-p1-vfy）。下一步：Phase 2（gc-p3-01~04）**。
+- gc-p3-02（基准回归测试套件 G-15）— CMake target 已就绪，恢复 gc_benchmark.cpp
+- gc-p3-04（Arrhenius 72h soak G-17）— CMake target 已就绪（test_gc_soak）
+- gc-p3-01（ETW G-7）— 源码已存在，需 CMake 集成
+- gc-p3-03（SOS 调试扩展 G-16）— 源码已存在，需 CMake 集成
 
 ---
 
