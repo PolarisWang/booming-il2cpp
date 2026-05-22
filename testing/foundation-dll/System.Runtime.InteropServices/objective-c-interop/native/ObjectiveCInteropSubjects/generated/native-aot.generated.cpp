@@ -38,8 +38,8 @@ inline TypeInfoV0 chaos_mt_ObjectiveCInteropSubjects_ObjectiveCInteropSubjects =
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_ObjectiveCInteropSubjects_ObjectiveCInteropSubjects = static_cast<CHAOS_IL2CPP_INTPTR>(9832254467438778692ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_IntPtr = {{nullptr, nullptr, 15622295425673451578ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_IntPtr = static_cast<CHAOS_IL2CPP_INTPTR>(15622295425673451578ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_PlatformNotSupportedException = {{nullptr, nullptr, 3627294964229478006ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_PlatformNotSupportedException = static_cast<CHAOS_IL2CPP_INTPTR>(3627294964229478006ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Object = {{nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_INTPTR>(15228727185366376748ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {{nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
@@ -99,13 +99,9 @@ struct chaos_type_System_Private_CoreLib_System_IntPtr
 	ThinLockableHeader header{};
 };
 
-struct chaos_type_System_Private_CoreLib_System_PlatformNotSupportedException
+struct chaos_type_System_Private_CoreLib_System_Object
 {
 	ThinLockableHeader header{};
-	CHAOS_IL2CPP_INTPTR _message = 0;
-	CHAOS_IL2CPP_INTPTR _innerException = 0;
-	CHAOS_IL2CPP_INTPTR _stackTrace = 0;
-	CHAOS_IL2CPP_INT32 _HResult = 0;
 };
 
 struct chaos_type_System_Private_CoreLib_System_Reflection_Assembly
@@ -338,16 +334,18 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // ── External Runtime Dispatch Table ──────────────────────────
 // Startup-time-resolved function pointers for cross-assembly calls.
 
-extern "C" const char* kChaosExternalRuntimeSubjects[6] = {
+extern "C" const char* kChaosExternalRuntimeSubjects[7] = {
 	"System.Private.CoreLib/System.Int32",
 	"System.Runtime.InteropServices/System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal::CreateReferenceTrackingHandle:System.Runtime.InteropServices.GCHandle(System.Object,System.Span<System.IntPtr>&)",
+	"System.Private.CoreLib/System.Runtime.InteropServices.GCHandle::GetHashCode:System.Int32()",
 	"ObjectiveCInteropSubjects/ObjectiveCInteropSubjects::_exitCode",
 	"System.Private.CoreLib/System.IntPtr::Zero",
 	"System.Runtime.InteropServices/System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal::SetMessageSendCallback:System.Void(System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal+MessageSendFunction,System.IntPtr)",
 	"System.Runtime.InteropServices/System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal::SetMessageSendPendingException:System.Void(System.Exception)",
 };
 
-extern "C" void* kChaosExternalRuntimeFnTable[6] = {
+extern "C" void* kChaosExternalRuntimeFnTable[7] = {
+	nullptr,
 	nullptr,
 	nullptr,
 	nullptr,
@@ -356,7 +354,7 @@ extern "C" void* kChaosExternalRuntimeFnTable[6] = {
 	nullptr,
 };
 
-extern "C" int32_t kChaosExternalRuntimeCount = 6;
+extern "C" int32_t kChaosExternalRuntimeCount = 7;
 // (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
@@ -484,7 +482,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[10];
 	} entry0;
 	/* ── Entry 1: ObjectiveCInteropSubjects_ObjectiveCInteropSubjects_Subject_2 ── */
 	struct {
@@ -505,11 +503,11 @@ static const struct {
 } kChaosGcSlotMapsSection = {
 	/* entry0 = ObjectiveCInteropSubjects_ObjectiveCInteropSubjects_Subject_0 */
 	.entry0 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 60 */ 60u,
 		/* code_address */ reinterpret_cast<const void*>(&ObjectiveCInteropSubjects_ObjectiveCInteropSubjects_Subject_0),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 80 */ 80u,
+		/* num_gc_slots = 10 */ 10u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u, 72u }
 	},
 	/* entry1 = ObjectiveCInteropSubjects_ObjectiveCInteropSubjects_Subject_2 */
 	.entry1 = {
@@ -532,7 +530,7 @@ static const struct {
 #pragma pack(pop)
 #endif
 
-static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 88u;
+static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 112u;
 
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
@@ -659,7 +657,7 @@ struct ChaosGenericRegistrationInit {
 extern "C" void ObjectiveCInteropSubjects_ObjectiveCInteropSubjects_Subject_0(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
@@ -667,6 +665,20 @@ extern "C" void ObjectiveCInteropSubjects_ObjectiveCInteropSubjects_Subject_0(vo
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
+	CHAOS_IL2CPP_INTPTR _s17{};
+	CHAOS_IL2CPP_INTPTR _s18{};
+	CHAOS_IL2CPP_INTPTR _s19{};
+	CHAOS_IL2CPP_INTPTR _s20{};
 
 
 	CHAOS_EH_TRY
@@ -678,16 +690,49 @@ extern "C" void ObjectiveCInteropSubjects_ObjectiveCInteropSubjects_Subject_0(vo
 				chaos_boxed->value = chaos_value;
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 			}
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
 			{
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[1])(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			chaos_locals[2] = _s0;
+			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[2]);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[2])();
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_value = _s2;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+			}
+			_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[3]);
+			{
+				const auto chaos_arg_1 = _s3;
+				const auto chaos_arg_0 = _s2;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[1])(chaos_arg_0, chaos_arg_1);
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			chaos_locals[2] = _s2;
+			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[2]);
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[2])();
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
 				chaos_static_ObjectiveCInteropSubjects_ObjectiveCInteropSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -695,10 +740,15 @@ extern "C" void ObjectiveCInteropSubjects_ObjectiveCInteropSubjects_Subject_0(vo
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_PlatformNotSupportedException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ObjectiveCInteropSubjects_ObjectiveCInteropSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -730,22 +780,22 @@ extern "C" void ObjectiveCInteropSubjects_ObjectiveCInteropSubjects_Subject_2(vo
 			{
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[4])(chaos_arg_0, chaos_arg_1);
-			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_ObjectiveCInteropSubjects_ObjectiveCInteropSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[5])(chaos_arg_0, chaos_arg_1);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_PlatformNotSupportedException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ObjectiveCInteropSubjects_ObjectiveCInteropSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -764,22 +814,22 @@ extern "C" void ObjectiveCInteropSubjects_ObjectiveCInteropSubjects_Subject_3(vo
 			_s0 = 0;
 			{
 				const auto chaos_arg_0 = _s0;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[5])(chaos_arg_0);
-			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_ObjectiveCInteropSubjects_ObjectiveCInteropSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[6])(chaos_arg_0);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_PlatformNotSupportedException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ObjectiveCInteropSubjects_ObjectiveCInteropSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }

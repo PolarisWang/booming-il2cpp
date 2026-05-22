@@ -3,7 +3,7 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ThreadingMonitorInterlockedSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/threading-monitor-interlocked/codegen/_subjects_input/ThreadingMonitorInterlockedSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/threading-monitor-interlocked/managed/subjects/build-output/ThreadingMonitorInterlockedSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
@@ -16,11 +16,11 @@
     },
     {
       "assemblyName": "ThreadingMonitorInterlockedSubjects",
-      "path": "testing/foundation-dll/System.Private.CoreLib/threading-monitor-interlocked/codegen/_subjects_input/ThreadingMonitorInterlockedSubjects.dll"
+      "path": "testing/foundation-dll/System.Private.CoreLib/threading-monitor-interlocked/managed/subjects/build-output/ThreadingMonitorInterlockedSubjects.dll"
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "c1bce215-d3d6-4131-a6fe-d9f30f761ea8",
+  "inputModuleVersionId": "f789180a-0d23-4a81-800f-9d7838e3d2d1",
   "artifacts": [
     {
       "kind": "typedIlIr",

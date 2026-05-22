@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Text.Json",
+  "familyId": "family/System.Text.Json/schema",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Schema.JsonSchemaExporter::GetJsonSchemaAsNode:System.Text.Json.Nodes.JsonNode(System.Text.Json.JsonSerializerOptions,System.Type,System.Text.Json.Schema.JsonSchemaExporterOptions)",
+      "status": "passed",
+      "prePatchNsPerOp": 124571.09,
+      "postPatchNsPerOp": 74230.7,
+      "slowdownPercent": -40.41
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Schema.JsonSchemaExporter::GetJsonSchemaAsNode:System.Text.Json.Nodes.JsonNode(System.Text.Json.Serialization.Metadata.JsonTypeInfo,System.Text.Json.Schema.JsonSchemaExporterOptions)",
+      "status": "passed",
+      "prePatchNsPerOp": 78516.74,
+      "postPatchNsPerOp": 62702.2,
+      "slowdownPercent": -20.14
+    }
+  ],
+  "summary": {
+    "totalMethods": 2,
+    "nonStubMethods": 2,
+    "averageSlowdownPercent": -30.27,
+    "slowdownFactor": 0.6973,
+    "slowdownThresholdX": 50.0
+  }
+}

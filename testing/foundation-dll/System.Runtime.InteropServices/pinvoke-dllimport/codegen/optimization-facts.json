@@ -76,15 +76,75 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/DllImportAttribute::get_Value:System.String()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_2:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Runtime.InteropServices/LibraryImportAttribute::get_EntryPoint:System.String()",
       "devirtualized": false
     },
     {
+      "methodSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_2:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_2:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/LibraryImportAttribute::get_EntryPoint:System.String()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_2:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_3:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Runtime.InteropServices/LibraryImportAttribute::get_LibraryName:System.String()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/LibraryImportAttribute::get_LibraryName:System.String()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_4:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/LibraryImportAttribute::get_SetLastError:System.Boolean()",
       "devirtualized": false
     },
     {
@@ -100,9 +160,45 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_5:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_5:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/LibraryImportAttribute::get_StringMarshalling:StringMarshalling()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_5:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_6:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Runtime.InteropServices/LibraryImportAttribute::get_StringMarshallingCustomType:System.Type()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_6:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_6:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/LibraryImportAttribute::get_StringMarshallingCustomType:System.Type()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_6:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
     },
     {
@@ -142,52 +238,62 @@
     {
       "methodSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_0:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_1:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_2:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_3:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_4:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_5:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_6:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_7:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_8:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_9:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_10:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_11:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     }
   ]
 }

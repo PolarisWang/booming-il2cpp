@@ -44,6 +44,24 @@
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\u003CSystem.Byte,System.Byte\u003E::get_Comparer:System.Collections.Generic.IEqualityComparer\u003CSystem.Byte\u003E()",
       "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\u003CSystem.Byte,System.Byte\u003E::get_Comparer:System.Collections.Generic.IEqualityComparer\u003CSystem.Byte\u003E()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
     }
   ],
   "layoutFacts": [
@@ -58,7 +76,7 @@
     {
       "methodSubjectId": "ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::Subject_1:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     }
   ]
 }

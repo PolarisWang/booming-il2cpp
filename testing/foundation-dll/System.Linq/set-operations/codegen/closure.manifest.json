@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "SetOperationsSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Linq/set-operations/managed/subjects/build-output/SetOperationsSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Linq/set-operations/managed/subjects/build-output/SetOperationsSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "SetOperationsSubjects",
-      "path": "verification/foundation-dll/System.Linq/set-operations/managed/subjects/build-output/SetOperationsSubjects.dll"
+      "path": "testing/foundation-dll/System.Linq/set-operations/managed/subjects/build-output/SetOperationsSubjects.dll"
     },
     {
       "assemblyName": "System.Collections",
@@ -24,7 +24,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "b8ae6c49-826c-4b6d-bb37-6d97a79e6dd2",
+  "inputModuleVersionId": "5e0122c6-3e35-41af-89c1-5b72466f3b47",
   "artifacts": [
     {
       "kind": "typedIlIr",

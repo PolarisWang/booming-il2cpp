@@ -1,0 +1,246 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.IO.Pipelines",
+  "familyId": "family/System.IO.Pipelines/reader/writer",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::AdvanceTo:System.Void(System.SequencePosition)",
+      "elapsedMilliseconds": 0.291,
+      "calibratedMs": 0.291,
+      "opsPerSecond": 343406593.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::AdvanceTo:System.Void(System.SequencePosition,System.SequencePosition)",
+      "elapsedMilliseconds": 0.556,
+      "calibratedMs": 0.556,
+      "opsPerSecond": 179985601.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::AsStream:System.IO.Stream(System.Boolean)",
+      "elapsedMilliseconds": 0.75,
+      "calibratedMs": 0.75,
+      "opsPerSecond": 133262260.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::CancelPendingRead:System.Void()",
+      "elapsedMilliseconds": 0.293,
+      "calibratedMs": 0.293,
+      "opsPerSecond": 341646737.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::Complete:System.Void(System.Exception)",
+      "elapsedMilliseconds": 0.294,
+      "calibratedMs": 0.294,
+      "opsPerSecond": 339673913.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::CompleteAsync:System.Threading.Tasks.ValueTask(System.Exception)",
+      "elapsedMilliseconds": 0.514,
+      "calibratedMs": 0.514,
+      "opsPerSecond": 194704049.8,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::CopyToAsync:System.Threading.Tasks.Task(System.IO.Pipelines.PipeWriter,System.Threading.CancellationToken)",
+      "elapsedMilliseconds": 0.564,
+      "calibratedMs": 0.564,
+      "opsPerSecond": 177336407.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::CopyToAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Threading.CancellationToken)",
+      "elapsedMilliseconds": 0.572,
+      "calibratedMs": 0.572,
+      "opsPerSecond": 174886323.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::Create:System.IO.Pipelines.PipeReader(System.IO.Stream,System.IO.Pipelines.StreamPipeReaderOptions)",
+      "elapsedMilliseconds": 18.341,
+      "calibratedMs": 18.341,
+      "opsPerSecond": 5452116.8,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::Create:System.IO.Pipelines.PipeReader(System.Buffers.ReadOnlySequence{System.Byte})",
+      "elapsedMilliseconds": 1.068,
+      "calibratedMs": 1.068,
+      "opsPerSecond": 93641726.8,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::OnWriterCompleted:System.Void(System.Action{System.Exception,System.Object},System.Object)",
+      "elapsedMilliseconds": -1.0,
+      "status": "stub"
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::ReadAsync:System.Threading.Tasks.ValueTask{System.IO.Pipelines.ReadResult}(System.Threading.CancellationToken)",
+      "elapsedMilliseconds": 0.536,
+      "calibratedMs": 0.536,
+      "opsPerSecond": 186567164.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::ReadAtLeastAsync:System.Threading.Tasks.ValueTask{System.IO.Pipelines.ReadResult}(System.Int32,System.Threading.CancellationToken)",
+      "elapsedMilliseconds": 0.763,
+      "calibratedMs": 0.763,
+      "opsPerSecond": 130975769.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 13,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::TryRead:System.Boolean(System.IO.Pipelines.ReadResult&)",
+      "elapsedMilliseconds": 0.559,
+      "calibratedMs": 0.559,
+      "opsPerSecond": 178986934.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 14,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::Advance:System.Void(System.Int32)",
+      "elapsedMilliseconds": 0.299,
+      "calibratedMs": 0.299,
+      "opsPerSecond": 334336342.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 15,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::AsStream:System.IO.Stream(System.Boolean)",
+      "elapsedMilliseconds": 0.57,
+      "calibratedMs": 0.57,
+      "opsPerSecond": 175315568.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 16,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::CancelPendingFlush:System.Void()",
+      "elapsedMilliseconds": 0.294,
+      "calibratedMs": 0.294,
+      "opsPerSecond": 339673913.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 17,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::Complete:System.Void(System.Exception)",
+      "elapsedMilliseconds": 0.291,
+      "calibratedMs": 0.291,
+      "opsPerSecond": 343053173.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 18,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::CompleteAsync:System.Threading.Tasks.ValueTask(System.Exception)",
+      "elapsedMilliseconds": 0.513,
+      "calibratedMs": 0.513,
+      "opsPerSecond": 195007800.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 19,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::Create:System.IO.Pipelines.PipeWriter(System.IO.Stream,System.IO.Pipelines.StreamPipeWriterOptions)",
+      "elapsedMilliseconds": 17.994,
+      "calibratedMs": 17.994,
+      "opsPerSecond": 5557408.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 20,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::FlushAsync:System.Threading.Tasks.ValueTask{System.IO.Pipelines.FlushResult}(System.Threading.CancellationToken)",
+      "elapsedMilliseconds": 0.527,
+      "calibratedMs": 0.527,
+      "opsPerSecond": 189825360.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 21,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::get_CanGetUnflushedBytes:System.Boolean()",
+      "elapsedMilliseconds": 0.347,
+      "calibratedMs": 0.347,
+      "opsPerSecond": 288267512.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 22,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::get_UnflushedBytes:System.Int64()",
+      "elapsedMilliseconds": 0.584,
+      "calibratedMs": 0.584,
+      "opsPerSecond": 171262202.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 23,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::GetMemory:System.Memory{System.Byte}(System.Int32)",
+      "elapsedMilliseconds": 0.501,
+      "calibratedMs": 0.501,
+      "opsPerSecond": 199521149.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 24,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::GetSpan:System.Span{System.Byte}(System.Int32)",
+      "elapsedMilliseconds": 0.525,
+      "calibratedMs": 0.525,
+      "opsPerSecond": 190621425.8,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 25,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::OnReaderCompleted:System.Void(System.Action{System.Exception,System.Object},System.Object)",
+      "elapsedMilliseconds": -1.0,
+      "status": "stub"
+    },
+    {
+      "methodIndex": 26,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::WriteAsync:System.Threading.Tasks.ValueTask{System.IO.Pipelines.FlushResult}(System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)",
+      "elapsedMilliseconds": 0.572,
+      "calibratedMs": 0.572,
+      "opsPerSecond": 174703004.9,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}

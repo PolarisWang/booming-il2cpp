@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ImmutableInterlockedSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Collections.Immutable/immutable-interlocked/managed/subjects/build-output/ImmutableInterlockedSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Collections.Immutable/immutable-interlocked/managed/subjects/build-output/ImmutableInterlockedSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "ImmutableInterlockedSubjects",
-      "path": "verification/foundation-dll/System.Collections.Immutable/immutable-interlocked/managed/subjects/build-output/ImmutableInterlockedSubjects.dll"
+      "path": "testing/foundation-dll/System.Collections.Immutable/immutable-interlocked/managed/subjects/build-output/ImmutableInterlockedSubjects.dll"
     },
     {
       "assemblyName": "System.Collections.Immutable",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "a6fa8c3f-78a1-42f4-b891-d304f6ccd917",
+  "inputModuleVersionId": "ddd944fd-ec47-452c-9d17-29b2b9ab9f4c",
   "artifacts": [
     {
       "kind": "typedIlIr",

@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Net.ServerSentEvents",
+  "familyId": "family/System.Net.ServerSentEvents/parser",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseParser::Create:System.Net.ServerSentEvents.SseParser{System.String}(System.IO.Stream)",
+      "status": "passed",
+      "prePatchNsPerOp": 229.56,
+      "postPatchNsPerOp": 301.0,
+      "slowdownPercent": 31.12
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseParser::Create{T}:System.Net.ServerSentEvents.SseParser{T}(System.IO.Stream,System.Net.ServerSentEvents.SseItemParser{T})",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseParser`1::Enumerate:System.Collections.Generic.IEnumerable{System.Net.ServerSentEvents.SseItem{T}}()",
+      "status": "passed",
+      "prePatchNsPerOp": 9.28,
+      "postPatchNsPerOp": 10.3,
+      "slowdownPercent": 10.99
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseParser`1::EnumerateAsync:System.Collections.Generic.IAsyncEnumerable{System.Net.ServerSentEvents.SseItem{T}}(System.Threading.CancellationToken)",
+      "status": "passed",
+      "prePatchNsPerOp": 9.55,
+      "postPatchNsPerOp": 10.7,
+      "slowdownPercent": 12.04
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseParser`1::get_LastEventId:System.String()",
+      "status": "passed",
+      "prePatchNsPerOp": 54.64,
+      "postPatchNsPerOp": 10.1,
+      "slowdownPercent": -81.52
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseParser`1::get_ReconnectionInterval:System.TimeSpan()",
+      "status": "passed",
+      "prePatchNsPerOp": 8.19,
+      "postPatchNsPerOp": 8.9,
+      "slowdownPercent": 8.67
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseParser`1::set_LastEventId:System.Void(System.String)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseParser`1::set_ReconnectionInterval:System.Void(System.TimeSpan)",
+      "status": "stub"
+    }
+  ],
+  "summary": {
+    "totalMethods": 8,
+    "nonStubMethods": 5,
+    "averageSlowdownPercent": -3.74,
+    "slowdownFactor": 0.9626,
+    "slowdownThresholdX": 50.0
+  }
+}

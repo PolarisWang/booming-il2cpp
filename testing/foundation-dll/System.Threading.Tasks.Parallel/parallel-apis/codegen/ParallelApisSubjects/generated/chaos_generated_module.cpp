@@ -154,7 +154,15 @@ extern "C" void ParallelApisSubjects_ParallelApisSubjects___c_Subject_0_b__1_0_S
             CHAOS_IL2CPP_INTPTR, 
             CHAOS_IL2CPP_INT32
 );
+extern "C" void ParallelApisSubjects_ParallelApisSubjects___c_Subject_0_b__1_1_System_Int32(
+            CHAOS_IL2CPP_INTPTR, 
+            CHAOS_IL2CPP_INT32
+);
 extern "C" void ParallelApisSubjects_ParallelApisSubjects___c_Subject_1_b__2_0_System_Int32(
+            CHAOS_IL2CPP_INTPTR, 
+            CHAOS_IL2CPP_INT32
+);
+extern "C" void ParallelApisSubjects_ParallelApisSubjects___c_Subject_1_b__2_1_System_Int32(
             CHAOS_IL2CPP_INTPTR, 
             CHAOS_IL2CPP_INT32
 );
@@ -162,7 +170,15 @@ extern "C" void ParallelApisSubjects_ParallelApisSubjects___c_Subject_2_b__3_0_S
             CHAOS_IL2CPP_INTPTR, 
             CHAOS_IL2CPP_INT32
 );
+extern "C" void ParallelApisSubjects_ParallelApisSubjects___c_Subject_2_b__3_1_System_Int32(
+            CHAOS_IL2CPP_INTPTR, 
+            CHAOS_IL2CPP_INT32
+);
 extern "C" void ParallelApisSubjects_ParallelApisSubjects___c_Subject_3_b__4_0_System_Int32(
+            CHAOS_IL2CPP_INTPTR, 
+            CHAOS_IL2CPP_INT32
+);
+extern "C" void ParallelApisSubjects_ParallelApisSubjects___c_Subject_3_b__4_1_System_Int32(
             CHAOS_IL2CPP_INTPTR, 
             CHAOS_IL2CPP_INT32
 );
@@ -173,7 +189,15 @@ extern "C" void ParallelApisSubjects_ParallelApisSubjects___c_Subject_4_b__5_0_S
             CHAOS_IL2CPP_INTPTR, 
             CHAOS_IL2CPP_INT32
 );
+extern "C" void ParallelApisSubjects_ParallelApisSubjects___c_Subject_4_b__5_1_System_Int32(
+            CHAOS_IL2CPP_INTPTR, 
+            CHAOS_IL2CPP_INT32
+);
 extern "C" void ParallelApisSubjects_ParallelApisSubjects___c_Subject_5_b__6_0_System_Int32(
+            CHAOS_IL2CPP_INTPTR, 
+            CHAOS_IL2CPP_INT32
+);
+extern "C" void ParallelApisSubjects_ParallelApisSubjects___c_Subject_5_b__6_1_System_Int32(
             CHAOS_IL2CPP_INTPTR, 
             CHAOS_IL2CPP_INT32
 );
@@ -232,14 +256,20 @@ static const Functions s_functions = {
         &ParallelApisSubjects_ParallelApisSubjects___c_cctor,
         &ParallelApisSubjects_ParallelApisSubjects___c__ctor,
         &ParallelApisSubjects_ParallelApisSubjects___c_Subject_0_b__1_0_System_Int32,
+        &ParallelApisSubjects_ParallelApisSubjects___c_Subject_0_b__1_1_System_Int32,
         &ParallelApisSubjects_ParallelApisSubjects___c_Subject_1_b__2_0_System_Int32,
+        &ParallelApisSubjects_ParallelApisSubjects___c_Subject_1_b__2_1_System_Int32,
         &ParallelApisSubjects_ParallelApisSubjects___c_Subject_2_b__3_0_System_Int32,
+        &ParallelApisSubjects_ParallelApisSubjects___c_Subject_2_b__3_1_System_Int32,
         &ParallelApisSubjects_ParallelApisSubjects___c_Subject_3_b__4_0_System_Int32,
+        &ParallelApisSubjects_ParallelApisSubjects___c_Subject_3_b__4_1_System_Int32,
         &ParallelApisSubjects_ParallelApisSubjects___c_Subject_41_b__42_0,
         &ParallelApisSubjects_ParallelApisSubjects___c_Subject_4_b__5_0_System_Int32,
+        &ParallelApisSubjects_ParallelApisSubjects___c_Subject_4_b__5_1_System_Int32,
         &ParallelApisSubjects_ParallelApisSubjects___c_Subject_5_b__6_0_System_Int32,
+        &ParallelApisSubjects_ParallelApisSubjects___c_Subject_5_b__6_1_System_Int32,
     },
-    52,
+    58,
 };
 
 const Functions kFunctions = s_functions;
@@ -247,8 +277,8 @@ const Functions kFunctions = s_functions;
 // Flat function pointer array for indexed dispatch (benchmarking).
 // Avoids fragile reinterpret_cast<void* const*>(&kFunctions) which depends on
 // struct layout uniformity across sub-struct members.
-extern "C" void* kFunctionsFlat[52];
-void* kFunctionsFlat[52] = {
+extern "C" void* kFunctionsFlat[58];
+void* kFunctionsFlat[58] = {
     reinterpret_cast<void*>(&ParallelApisSubjects_ParallelApisSubjects_CustomEntrySubject_10),
     reinterpret_cast<void*>(&ParallelApisSubjects_ParallelApisSubjects_CustomEntrySubject_11),
     reinterpret_cast<void*>(&ParallelApisSubjects_ParallelApisSubjects_CustomEntrySubject_12),
@@ -295,12 +325,18 @@ void* kFunctionsFlat[52] = {
     reinterpret_cast<void*>(&ParallelApisSubjects_ParallelApisSubjects___c_cctor),
     reinterpret_cast<void*>(&ParallelApisSubjects_ParallelApisSubjects___c__ctor),
     reinterpret_cast<void*>(&ParallelApisSubjects_ParallelApisSubjects___c_Subject_0_b__1_0_System_Int32),
+    reinterpret_cast<void*>(&ParallelApisSubjects_ParallelApisSubjects___c_Subject_0_b__1_1_System_Int32),
     reinterpret_cast<void*>(&ParallelApisSubjects_ParallelApisSubjects___c_Subject_1_b__2_0_System_Int32),
+    reinterpret_cast<void*>(&ParallelApisSubjects_ParallelApisSubjects___c_Subject_1_b__2_1_System_Int32),
     reinterpret_cast<void*>(&ParallelApisSubjects_ParallelApisSubjects___c_Subject_2_b__3_0_System_Int32),
+    reinterpret_cast<void*>(&ParallelApisSubjects_ParallelApisSubjects___c_Subject_2_b__3_1_System_Int32),
     reinterpret_cast<void*>(&ParallelApisSubjects_ParallelApisSubjects___c_Subject_3_b__4_0_System_Int32),
+    reinterpret_cast<void*>(&ParallelApisSubjects_ParallelApisSubjects___c_Subject_3_b__4_1_System_Int32),
     reinterpret_cast<void*>(&ParallelApisSubjects_ParallelApisSubjects___c_Subject_41_b__42_0),
     reinterpret_cast<void*>(&ParallelApisSubjects_ParallelApisSubjects___c_Subject_4_b__5_0_System_Int32),
+    reinterpret_cast<void*>(&ParallelApisSubjects_ParallelApisSubjects___c_Subject_4_b__5_1_System_Int32),
     reinterpret_cast<void*>(&ParallelApisSubjects_ParallelApisSubjects___c_Subject_5_b__6_0_System_Int32),
+    reinterpret_cast<void*>(&ParallelApisSubjects_ParallelApisSubjects___c_Subject_5_b__6_1_System_Int32),
 };
 
 

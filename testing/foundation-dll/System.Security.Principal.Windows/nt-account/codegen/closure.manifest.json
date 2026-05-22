@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "NtAccountSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Security.Principal.Windows/nt-account/managed/subjects/build-output/NtAccountSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Security.Principal.Windows/nt-account/managed/subjects/build-output/NtAccountSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "NtAccountSubjects",
-      "path": "verification/foundation-dll/System.Security.Principal.Windows/nt-account/managed/subjects/build-output/NtAccountSubjects.dll"
+      "path": "testing/foundation-dll/System.Security.Principal.Windows/nt-account/managed/subjects/build-output/NtAccountSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "e61b6211-e5bb-4479-9411-2a9d18ea90b2",
+  "inputModuleVersionId": "ee4edf9b-4951-4413-8a79-d03c3d040504",
   "artifacts": [
     {
       "kind": "typedIlIr",

@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "CommandTypeMetadataSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.ObjectModel/command-type-metadata/managed/subjects/build-output/CommandTypeMetadataSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.ObjectModel/command-type-metadata/managed/subjects/build-output/CommandTypeMetadataSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "CommandTypeMetadataSubjects",
-      "path": "verification/foundation-dll/System.ObjectModel/command-type-metadata/managed/subjects/build-output/CommandTypeMetadataSubjects.dll"
+      "path": "testing/foundation-dll/System.ObjectModel/command-type-metadata/managed/subjects/build-output/CommandTypeMetadataSubjects.dll"
     },
     {
       "assemblyName": "System.ObjectModel",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "70d21160-8695-4d96-9277-61a2729b863d",
+  "inputModuleVersionId": "a334630b-6a80-4463-aaf1-d57ce78d4818",
   "artifacts": [
     {
       "kind": "typedIlIr",

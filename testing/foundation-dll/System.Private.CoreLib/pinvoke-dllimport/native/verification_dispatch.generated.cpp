@@ -1,5 +1,5 @@
 // verification_dispatch.generated.cpp — auto-generated
-// Assembly: PinvokeDllimportSubjects, Methods: 14
+// Assembly: PinvokeDllimportSubjects, Methods: 12
 #include <cstdint>
 #include <chrono>
 #include <chaos/native_types.h>

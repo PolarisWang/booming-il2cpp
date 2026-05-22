@@ -23,16 +23,16 @@
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 1,
+      "localCount": 4,
       "exceptionRegionCount": 1,
       "exceptionRegions": [
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 25,
-          "handlerOffset": 26,
-          "handlerLength": 5,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.PlatformNotSupportedException"
+          "tryLength": 75,
+          "handlerOffset": 76,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
@@ -72,7 +72,7 @@
         {
           "op": "ldloca",
           "opCode": 76,
-          "operand": 0,
+          "operand": 1,
           "ilOffset": 9,
           "resultType": "System.IntPtr",
           "isPreserveSig": false
@@ -103,16 +103,205 @@
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 2,
           "ilOffset": 16,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 2,
+          "ilOffset": 17,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 25,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Runtime.InteropServices.GCHandle::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 1,
+          "constrainedTypeSubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.GCHandle",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 30,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "box",
+          "opCode": 35,
+          "operand": "System.Private.CoreLib/System.Int32",
+          "ilOffset": 32,
+          "resultType": "System.Object",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Int32"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 3,
+          "ilOffset": 37,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 39,
+          "resultType": "System.Runtime.InteropServices.GCHandle",
+          "callee": "System.Runtime.InteropServices/System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal::CreateReferenceTrackingHandle:System.Runtime.InteropServices.GCHandle(System.Object,System.Span\u003CSystem.IntPtr\u003E\u0026)",
+          "reference": {
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectKind": "method",
+            "subjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal::CreateReferenceTrackingHandle:System.Runtime.InteropServices.GCHandle(System.Object,System.Span\u003CSystem.IntPtr\u003E\u0026)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal::CreateReferenceTrackingHandle:System.Runtime.InteropServices.GCHandle(System.Object,System.Span\u003CSystem.IntPtr\u003E\u0026)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 2,
+          "ilOffset": 44,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 2,
+          "ilOffset": 45,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 53,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Runtime.InteropServices.GCHandle::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 1,
+          "constrainedTypeSubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.GCHandle",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 58,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 60,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 61,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 63,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 64,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 73,
+          "ilOffset": 65,
+          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 17,
+          "ilOffset": 67,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -120,7 +309,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects::_exitCode",
-          "ilOffset": 18,
+          "ilOffset": 68,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "ObjectiveCInteropSubjects",
@@ -146,29 +335,64 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 31,
-          "ilOffset": 24,
+          "operand": 87,
+          "ilOffset": 74,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 26,
+          "ilOffset": 76,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 78,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects::_exitCode",
+          "ilOffset": 79,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ObjectiveCInteropSubjects",
+            "subjectKind": "field",
+            "subjectId": "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ObjectiveCInteropSubjects",
+            "subjectId": "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
           "isPreserveSig": false
         },
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 31,
-          "ilOffset": 29,
+          "operand": 87,
+          "ilOffset": 85,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 31,
+          "ilOffset": 87,
           "isPreserveSig": false
         }
       ],
@@ -251,10 +475,10 @@
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 22,
-          "handlerOffset": 23,
-          "handlerLength": 5,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.PlatformNotSupportedException"
+          "tryLength": 16,
+          "handlerOffset": 17,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
@@ -318,10 +542,24 @@
           "isPreserveSig": false
         },
         {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 28,
+          "ilOffset": 15,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 17,
+          "isPreserveSig": false
+        },
+        {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 14,
+          "ilOffset": 19,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -329,7 +567,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects::_exitCode",
-          "ilOffset": 15,
+          "ilOffset": 20,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "ObjectiveCInteropSubjects",
@@ -350,20 +588,6 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 28,
-          "ilOffset": 21,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 23,
           "isPreserveSig": false
         },
         {
@@ -418,10 +642,10 @@
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 17,
-          "handlerOffset": 18,
-          "handlerLength": 5,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.PlatformNotSupportedException"
+          "tryLength": 11,
+          "handlerOffset": 12,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
@@ -458,10 +682,24 @@
           "isPreserveSig": false
         },
         {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 12,
+          "isPreserveSig": false
+        },
+        {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 9,
+          "ilOffset": 14,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -469,7 +707,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects::_exitCode",
-          "ilOffset": 10,
+          "ilOffset": 15,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "ObjectiveCInteropSubjects",
@@ -490,20 +728,6 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 23,
-          "ilOffset": 16,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 18,
           "isPreserveSig": false
         },
         {

@@ -17,49 +17,50 @@ public static partial class ParallelOptionsSubjects
     // [0] System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::get_CancellationToken:System.Threading.CancellationToken()
     public static void Subject_0()
     {
-        try { _ = default(ParallelOptions)!.CancellationToken; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(ParallelOptions)!.CancellationToken).GetHashCode()) != ((default(ParallelOptions)!.CancellationToken).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [1] System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::get_MaxDegreeOfParallelism:System.Int32()
     public static void Subject_1()
     {
-        try { _ = default(ParallelOptions)!.MaxDegreeOfParallelism; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (default(ParallelOptions)!.MaxDegreeOfParallelism != default(ParallelOptions)!.MaxDegreeOfParallelism) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [2] System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::get_TaskScheduler:System.Threading.Tasks.TaskScheduler()
     public static void Subject_2()
     {
-        try { _ = default(ParallelOptions)!.TaskScheduler; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(ParallelOptions)!.TaskScheduler).GetHashCode()) != ((default(ParallelOptions)!.TaskScheduler).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [3] System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::set_CancellationToken:System.Void(System.Threading.CancellationToken)
     public static void Subject_3()
     {
-        try { _ = default(ParallelOptions)!.CancellationToken = default; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { default(ParallelOptions)!.CancellationToken = default; }
+        catch { _exitCode = 1; }
     }
 
     // [4] System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::set_MaxDegreeOfParallelism:System.Void(System.Int32)
     public static void Subject_4()
     {
-        try { _ = default(ParallelOptions)!.MaxDegreeOfParallelism = 42; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { default(ParallelOptions)!.MaxDegreeOfParallelism = 42; }
+        catch { _exitCode = 1; }
     }
 
     // [5] System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::set_TaskScheduler:System.Void(System.Threading.Tasks.TaskScheduler)
     public static void Subject_5()
     {
-        try { _ = default(ParallelOptions)!.TaskScheduler = default; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { default(ParallelOptions)!.TaskScheduler = default; }
+        catch { _exitCode = 1; }
     }
 
     // [6] System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::.ctor:System.Void()
     public static void Subject_6()
     {
-        new ParallelOptions();
+        try { new ParallelOptions(); }
+        catch { _exitCode = 1; }
     }
 
 }

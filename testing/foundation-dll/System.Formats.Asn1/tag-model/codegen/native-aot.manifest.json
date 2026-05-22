@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "TagModelSubjects",
   "entrySubjectId": "TagModelSubjects/TagModelSubjects::Subject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Formats.Asn1/tag-model/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.Formats.Asn1/tag-model/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

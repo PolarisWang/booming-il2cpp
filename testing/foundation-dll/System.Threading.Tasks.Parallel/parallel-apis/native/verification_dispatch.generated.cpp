@@ -1,5 +1,5 @@
 // verification_dispatch.generated.cpp — auto-generated
-// Assembly: ParallelApisSubjects, Methods: 19
+// Assembly: ParallelApisSubjects, Methods: 58
 #include <cstdint>
 #include <chrono>
 #include <chaos/native_types.h>

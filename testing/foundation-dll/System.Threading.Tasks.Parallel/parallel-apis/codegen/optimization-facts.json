@@ -244,7 +244,17 @@
     },
     {
       "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_0\u003Eb__1_1:System.Void(System.Int32)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_1\u003Eb__2_0:System.Void(System.Int32)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_1\u003Eb__2_1:System.Void(System.Int32)",
       "reason": "closed-world-method"
     },
     {
@@ -254,7 +264,17 @@
     },
     {
       "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_1:System.Void(System.Int32)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_0:System.Void(System.Int32)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_1:System.Void(System.Int32)",
       "reason": "closed-world-method"
     },
     {
@@ -264,7 +284,17 @@
     },
     {
       "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_1:System.Void(System.Int32)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_0:System.Void(System.Int32)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_1:System.Void(System.Int32)",
       "reason": "closed-world-method"
     },
     {
@@ -281,7 +311,67 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_2:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_2:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_4:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_4:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_5:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_5:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
@@ -293,9 +383,21 @@
       "devirtualized": true
     },
     {
+      "methodSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_0:System.Void()",
+      "dispatchKind": "delegate.exact-target-direct",
+      "targetSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_0\u003Eb__1_1:System.Void(System.Int32)",
+      "devirtualized": true
+    },
+    {
       "methodSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_1:System.Void()",
       "dispatchKind": "delegate.exact-target-direct",
       "targetSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_1\u003Eb__2_0:System.Void(System.Int32)",
+      "devirtualized": true
+    },
+    {
+      "methodSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_1:System.Void()",
+      "dispatchKind": "delegate.exact-target-direct",
+      "targetSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_1\u003Eb__2_1:System.Void(System.Int32)",
       "devirtualized": true
     },
     {
@@ -305,9 +407,21 @@
       "devirtualized": true
     },
     {
+      "methodSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_2:System.Void()",
+      "dispatchKind": "delegate.exact-target-direct",
+      "targetSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_1:System.Void(System.Int32)",
+      "devirtualized": true
+    },
+    {
       "methodSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_3:System.Void()",
       "dispatchKind": "delegate.exact-target-direct",
       "targetSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_0:System.Void(System.Int32)",
+      "devirtualized": true
+    },
+    {
+      "methodSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_3:System.Void()",
+      "dispatchKind": "delegate.exact-target-direct",
+      "targetSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_1:System.Void(System.Int32)",
       "devirtualized": true
     },
     {
@@ -317,9 +431,21 @@
       "devirtualized": true
     },
     {
+      "methodSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_4:System.Void()",
+      "dispatchKind": "delegate.exact-target-direct",
+      "targetSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_1:System.Void(System.Int32)",
+      "devirtualized": true
+    },
+    {
       "methodSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_5:System.Void()",
       "dispatchKind": "delegate.exact-target-direct",
       "targetSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_0:System.Void(System.Int32)",
+      "devirtualized": true
+    },
+    {
+      "methodSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_5:System.Void()",
+      "dispatchKind": "delegate.exact-target-direct",
+      "targetSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_1:System.Void(System.Int32)",
       "devirtualized": true
     },
     {
@@ -350,7 +476,19 @@
     },
     {
       "subjectKind": "field",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_1",
+      "dataKind": "reference",
+      "requiresBoxing": false
+    },
+    {
+      "subjectKind": "field",
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_0",
+      "dataKind": "reference",
+      "requiresBoxing": false
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_1",
       "dataKind": "reference",
       "requiresBoxing": false
     },
@@ -362,7 +500,19 @@
     },
     {
       "subjectKind": "field",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_1",
+      "dataKind": "reference",
+      "requiresBoxing": false
+    },
+    {
+      "subjectKind": "field",
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_0",
+      "dataKind": "reference",
+      "requiresBoxing": false
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_1",
       "dataKind": "reference",
       "requiresBoxing": false
     },
@@ -374,7 +524,19 @@
     },
     {
       "subjectKind": "field",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_1",
+      "dataKind": "reference",
+      "requiresBoxing": false
+    },
+    {
+      "subjectKind": "field",
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__6_0",
+      "dataKind": "reference",
+      "requiresBoxing": false
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__6_1",
       "dataKind": "reference",
       "requiresBoxing": false
     },
@@ -387,24 +549,39 @@
   ],
   "exceptionFacts": [
     {
+      "methodSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_0:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_1:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
       "methodSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_2:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.ArgumentNullException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_3:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.ArgumentNullException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_4:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.ArgumentNullException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_5:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.ArgumentNullException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_41:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     }
   ]
 }

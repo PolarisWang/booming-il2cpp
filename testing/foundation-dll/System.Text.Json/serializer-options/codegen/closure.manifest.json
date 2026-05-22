@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "SerializerOptionsSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Text.Json/serializer-options/managed/subjects/build-output/SerializerOptionsSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Text.Json/serializer-options/managed/subjects/build-output/SerializerOptionsSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "SerializerOptionsSubjects",
-      "path": "verification/foundation-dll/System.Text.Json/serializer-options/managed/subjects/build-output/SerializerOptionsSubjects.dll"
+      "path": "testing/foundation-dll/System.Text.Json/serializer-options/managed/subjects/build-output/SerializerOptionsSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "3dcff796-ed6a-495d-b635-95357f09cdc0",
+  "inputModuleVersionId": "a4e4a7f6-076f-4775-976a-fc3e1d70925a",
   "artifacts": [
     {
       "kind": "typedIlIr",

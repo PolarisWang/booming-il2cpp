@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Linq",
+  "familyId": "family/System.Linq/generation/concat",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Append{TSource}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},TSource)",
+      "status": "passed",
+      "prePatchNsPerOp": 205.41,
+      "postPatchNsPerOp": 197.0,
+      "slowdownPercent": -4.09
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Concat{TSource}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEnumerable{TSource})",
+      "status": "passed",
+      "prePatchNsPerOp": 428.1,
+      "postPatchNsPerOp": 478.7,
+      "slowdownPercent": 11.82
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::DefaultIfEmpty{TSource}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource})",
+      "status": "passed",
+      "prePatchNsPerOp": 196.41,
+      "postPatchNsPerOp": 201.1,
+      "slowdownPercent": 2.39
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::DefaultIfEmpty{TSource}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},TSource)",
+      "status": "passed",
+      "prePatchNsPerOp": 207.03,
+      "postPatchNsPerOp": 204.2,
+      "slowdownPercent": -1.37
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Empty{TResult}:System.Collections.Generic.IEnumerable{TResult}()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.62,
+      "postPatchNsPerOp": 4.1,
+      "slowdownPercent": 13.26
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::InfiniteSequence{T}:System.Collections.Generic.IEnumerable{T}(T,T)",
+      "status": "passed",
+      "prePatchNsPerOp": 3.63,
+      "postPatchNsPerOp": 3.6,
+      "slowdownPercent": -0.83
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Prepend{TSource}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},TSource)",
+      "status": "passed",
+      "prePatchNsPerOp": 201.8,
+      "postPatchNsPerOp": 196.9,
+      "slowdownPercent": -2.43
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Range:System.Collections.Generic.IEnumerable{System.Int32}(System.Int32,System.Int32)",
+      "status": "passed",
+      "prePatchNsPerOp": 3.88,
+      "postPatchNsPerOp": 4.2,
+      "slowdownPercent": 8.25
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Repeat{TResult}:System.Collections.Generic.IEnumerable{TResult}(TResult,System.Int32)",
+      "status": "passed",
+      "prePatchNsPerOp": 3.67,
+      "postPatchNsPerOp": 4.0,
+      "slowdownPercent": 8.99
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Sequence{T}:System.Collections.Generic.IEnumerable{T}(T,T,T)",
+      "status": "passed",
+      "prePatchNsPerOp": 202.69,
+      "postPatchNsPerOp": 194.5,
+      "slowdownPercent": -4.04
+    }
+  ],
+  "summary": {
+    "totalMethods": 10,
+    "nonStubMethods": 10,
+    "averageSlowdownPercent": 3.2,
+    "slowdownFactor": 1.032,
+    "slowdownThresholdX": 50.0
+  }
+}

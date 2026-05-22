@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/enum/parsing",
-  "capturedAt": "2026-05-22T00:24:30",
+  "capturedAt": "2026-05-22T01:19:22",
   "batchMode": true,
   "summary": {
     "totalMethods": 13,
@@ -11,9 +11,9 @@
     "skippedCount": 0,
     "jitInstructionCount": {
       "min": 44,
-      "max": 44,
-      "avg": 44.0,
-      "total": 572
+      "max": 986,
+      "avg": 116.5,
+      "total": 1514
     },
     "aotInstructionCount": {
       "min": 1,
@@ -27,8 +27,8 @@
     "topInstructionCategories": {
       "external_runtime_call": 58
     },
-    "overallIrExpansionRatio": 0.57,
-    "averageExpansionRatio": 0.57,
+    "overallIrExpansionRatio": 0.21,
+    "averageExpansionRatio": 0.52,
     "maxExpansionRatio": 0.77,
     "minExpansionRatio": 0.02
   },
@@ -314,15 +314,15 @@
       "shortName": "Subject_5",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 986,
         "aotInstructionCount": 32,
-        "ratio": 0.73,
-        "jitCodeSize": 256
+        "ratio": 0.03,
+        "jitCodeSize": 3650
       },
       "jit": {
         "status": "ok",
-        "size": 256,
-        "instructions": 44
+        "size": 3650,
+        "instructions": 986
       },
       "aot": {
         "status": "ok",

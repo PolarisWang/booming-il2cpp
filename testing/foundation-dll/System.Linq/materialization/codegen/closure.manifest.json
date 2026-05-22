@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "MaterializationSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Linq/materialization/managed/subjects/build-output/MaterializationSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Linq/materialization/managed/subjects/build-output/MaterializationSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "MaterializationSubjects",
-      "path": "verification/foundation-dll/System.Linq/materialization/managed/subjects/build-output/MaterializationSubjects.dll"
+      "path": "testing/foundation-dll/System.Linq/materialization/managed/subjects/build-output/MaterializationSubjects.dll"
     },
     {
       "assemblyName": "System.Collections",
@@ -24,7 +24,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "d88e79fa-8c0b-4b88-9b08-aaba9ea2f37b",
+  "inputModuleVersionId": "be20135e-97f2-4383-bc25-a5c587203262",
   "artifacts": [
     {
       "kind": "typedIlIr",

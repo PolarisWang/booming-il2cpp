@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Threading.Tasks.Parallel",
+  "familyId": "family/System.Threading.Tasks.Parallel/parallel/apis",
+  "capturedAt": "2026-05-22T07:21:36",
+  "metrics": {
+    "framePool": {
+      "acquireReleaseNsPerOp": 2.9,
+      "batchCount": 1000,
+      "framesPerBatch": 32
+    },
+    "fastExecute": {
+      "runCount": 100000,
+      "nsPerCall": 265.7
+    },
+    "callVirt": {
+      "handlerDispatchNs": 243.6,
+      "emptyStackNs": 268.0
+    },
+    "poolSize": 32
+  },
+  "rawOutput": "[2026-05-22T07:21:36][DEBUG][codegen] T4 VEH handler registered\n[2026-05-22T07:21:36][DEBUG][GcEvents] registered callback 0x7ff7347c6450 at slot 0\n[2026-05-22T07:21:36][WARN][CRAG] young_collection_no_region\n[2026-05-22T07:21:36][INFO][NUMA] numa_init count=%d\n[2026-05-22T07:21:36][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-22T07:21:36][INFO][OldGen] init done base=0x1477205295104 pages=8\n[2026-05-22T07:21:36][DEBUG][codegen] T4 VEH handler registered\n[2026-05-22T07:21:36][DEBUG][GcEvents] registered callback 0x7ff7347c6450 at slot 1\nBenchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 2.9 ns/op (1000 batches x 32 frames)\n[2026-05-22T07:21:36][DEBUG][BGC] thread_started\n[2026-05-22T07:21:36][DEBUG][Finalizer] thread_started id={0}\nBenchmark 2: FastExecute (Subject_0): 100000 runs: 265.7 ns/op\n[2026-05-22T07:21:36][WARN][CRAG] young_collection_no_region\n[2026-05-22T07:21:36][DEBUG][BGC] start_cycle\n[2026-05-22T07:21:36][DEBUG][BGC] root_scan heap=679 oldgen=11 valid=0 marked=0\n[2026-05-22T07:21:36][DEBUG][BGC] root_set_populated\n[2026-05-22T07:21:36][DEBUG][BGC] concurrent_mark_started\n[2026-05-22T07:21:36][DEBUG][BGC] concurrent_mark_begin\n[2026-05-22T07:21:36][DEBUG][BGC] parallel_workers spawned=8\n[2026-05-22T07:21:36][DEBUG][BGC] concurrent_mark_complete\nHandler dispatch overhead (LdcI4): 243.6 ns/call\nCallVirt empty-stack: 268.0 ns/call\n"
+}

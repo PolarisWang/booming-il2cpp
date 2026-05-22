@@ -75,7 +75,7 @@
                 "value": "stub:definition=System.Collections.Immutable/ImmutableDictionary::Create:ImmutableDictionary\u003C!!0,!!1\u003E();type=[];method=[System.String,System.Int32]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:methodSpec"
             },
             "genericDiagnostic": {
@@ -156,7 +156,7 @@
                 "value": "stub:definition=System.Collections.Immutable/ImmutableDictionary\u00602::get_Count:System.Int32();type=[System.String,System.Int32];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -403,7 +403,7 @@
                 "value": "stub:definition=System.Collections.Immutable/ImmutableDictionary::Create:ImmutableDictionary\u003C!!0,!!1\u003E();type=[];method=[System.Byte,System.Byte]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:methodSpec"
             },
             "genericDiagnostic": {
@@ -484,7 +484,7 @@
                 "value": "stub:definition=System.Collections.Immutable/ImmutableDictionary\u00602::get_Count:System.Int32();type=[System.Byte,System.Byte];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -731,7 +731,7 @@
                 "value": "stub:definition=System.Collections.Immutable/ImmutableDictionary::Create:ImmutableDictionary\u003C!!0,!!1\u003E();type=[];method=[System.String,System.String]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:methodSpec"
             },
             "genericDiagnostic": {
@@ -812,7 +812,7 @@
                 "value": "stub:definition=System.Collections.Immutable/ImmutableDictionary\u00602::get_Count:System.Int32();type=[System.String,System.String];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {

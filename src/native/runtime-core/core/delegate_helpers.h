@@ -50,6 +50,24 @@ bool DelegateHotpatchCheckpoint(
     uint64_t* ret_buf,
     uint32_t arg_count);
 
+// ── chaos_delegate_object_invoke ─────────────────────────────────────────
+// Universal delegate invoke function that directly handles DelegateObject format
+// (56-byte managed delegate struct), bypassing the bridge's DelegateInstance
+// format. Supports both single and multicast delegates, hotpatch routing, and
+// 0-4 pointer-sized arguments.
+//
+//   delegate_ptr: DelegateObject* from codegen
+//   args_buf:     array of arg_count pointer-sized arguments (nullptr if count==0)
+//   ret_buf:      return value slot (nullptr means void return)
+//   arg_count:    number of arguments (0-4)
+//
+// ABI export: required for C-language linkage from threading/interpreter stubs
+extern "C" void chaos_delegate_object_invoke(
+    CHAOS_IL2CPP_INTPTR delegate_ptr,
+    CHAOS_IL2CPP_INTPTR* args_buf,
+    CHAOS_IL2CPP_INTPTR* ret_buf,
+    CHAOS_IL2CPP_UINT32 arg_count) noexcept;
+
 }  // namespace chaos::il2cpp::runtime_core
 
 #endif  // CHAOS_IL2CPP_DELEGATE_HELPERS_H_

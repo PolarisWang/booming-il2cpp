@@ -24,6 +24,12 @@
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
+    },
+    {
+      "methodSubjectId": "LoopResultSubjects/LoopResultSubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
     }
   ],
   "layoutFacts": [
@@ -34,5 +40,16 @@
       "requiresBoxing": true
     }
   ],
-  "exceptionFacts": []
+  "exceptionFacts": [
+    {
+      "methodSubjectId": "LoopResultSubjects/LoopResultSubjects::Subject_0:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "LoopResultSubjects/LoopResultSubjects::Subject_1:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    }
+  ]
 }

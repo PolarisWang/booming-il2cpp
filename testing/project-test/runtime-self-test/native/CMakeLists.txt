@@ -10,7 +10,7 @@ add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=0)
 # Paths
 set(CHAOS_PROJECT_ROOT "D:/agent/booming-il2cpp")
 set(CHAOS_CODEGEN_DIR "D:/agent/booming-il2cpp/testing/project-test/runtime-self-test/codegen")
-set(CHAOS_NATIVE_BUILD "D:/agent/booming-il2cpp/artifacts/presets/windows-x64-reference")
+set(CHAOS_NATIVE_BUILD "D:/agent/booming-il2cpp/artifacts/presets/debug")
 
 # Source files — GLOB matches any assembly directory (not just *Subjects/)
 file(GLOB CHAOS_CODEGEN_CPP "${CHAOS_CODEGEN_DIR}/*/generated/native-aot.generated.cpp")

@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Formats.Asn1",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.Formats.Asn1/writer",
+  "displayName": "ASN.1 Writer",
+  "methodSubjectIds": [
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::CopyTo:System.Void(System.Formats.Asn1.AsnWriter)",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::Encode:System.Int32(System.Span{System.Byte})",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::Encode:System.Byte{}()",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::Encode{TReturn}:TReturn(System.Func{System.ReadOnlySpan{System.Byte},TReturn})",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::Encode{TState,TReturn}:TReturn(TState,System.Func{TState,System.ReadOnlySpan{System.Byte},TReturn})",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::Encode{TState}:System.Void(TState,System.Action{TState,System.ReadOnlySpan{System.Byte}})",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::EncodedValueEquals:System.Boolean(System.ReadOnlySpan{System.Byte})",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::EncodedValueEquals:System.Boolean(System.Formats.Asn1.AsnWriter)",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::get_RuleSet:System.Formats.Asn1.AsnEncodingRules()",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::GetEncodedLength:System.Int32()",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::PopOctetString:System.Void(System.Nullable{System.Formats.Asn1.Asn1Tag})",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::PopSequence:System.Void(System.Nullable{System.Formats.Asn1.Asn1Tag})",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::PopSetOf:System.Void(System.Nullable{System.Formats.Asn1.Asn1Tag})",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::PushOctetString:System.Formats.Asn1.AsnWriter+Scope(System.Nullable{System.Formats.Asn1.Asn1Tag})",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::PushSequence:System.Formats.Asn1.AsnWriter+Scope(System.Nullable{System.Formats.Asn1.Asn1Tag})",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::PushSetOf:System.Formats.Asn1.AsnWriter+Scope(System.Nullable{System.Formats.Asn1.Asn1Tag})",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::Reset:System.Void()",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::TryEncode:System.Boolean(System.Span{System.Byte},System.Int32&)",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteBitString:System.Void(System.ReadOnlySpan{System.Byte},System.Int32,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteBoolean:System.Void(System.Boolean,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteCharacterString:System.Void(System.Formats.Asn1.UniversalTagNumber,System.String,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteCharacterString:System.Void(System.Formats.Asn1.UniversalTagNumber,System.ReadOnlySpan{System.Char},System.Nullable{System.Formats.Asn1.Asn1Tag})",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteEncodedValue:System.Void(System.ReadOnlySpan{System.Byte})",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteEnumeratedValue:System.Void(System.Enum,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteEnumeratedValue{TEnum}:System.Void(TEnum,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteGeneralizedTime:System.Void(System.DateTimeOffset,System.Boolean,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.Int64,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.UInt64,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.Numerics.BigInteger,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.ReadOnlySpan{System.Byte},System.Nullable{System.Formats.Asn1.Asn1Tag})",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteIntegerUnsigned:System.Void(System.ReadOnlySpan{System.Byte},System.Nullable{System.Formats.Asn1.Asn1Tag})",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteNamedBitList:System.Void(System.Enum,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteNamedBitList{TEnum}:System.Void(TEnum,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteNamedBitList:System.Void(System.Collections.BitArray,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteNull:System.Void(System.Nullable{System.Formats.Asn1.Asn1Tag})",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteObjectIdentifier:System.Void(System.String,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteObjectIdentifier:System.Void(System.ReadOnlySpan{System.Char},System.Nullable{System.Formats.Asn1.Asn1Tag})",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteOctetString:System.Void(System.ReadOnlySpan{System.Byte},System.Nullable{System.Formats.Asn1.Asn1Tag})",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteUtcTime:System.Void(System.DateTimeOffset,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteUtcTime:System.Void(System.DateTimeOffset,System.Int32,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::.ctor:System.Void(System.Formats.Asn1.AsnEncodingRules)",
+    "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::.ctor:System.Void(System.Formats.Asn1.AsnEncodingRules,System.Int32)"
+  ],
+  "methodSubjectCount": 42,
+  "customEntryIndices": [
+    3,
+    4,
+    5,
+    24,
+    32
+  ],
+  "functionalObligation": {
+    "required": true
+  },
+  "performanceObligation": {
+    "required": false
+  },
+  "hotupdateFunctionalObligation": {
+    "required": false
+  },
+  "hotupdatePerformanceObligation": {
+    "required": false
+  },
+  "reviewBundleRequired": true
+}

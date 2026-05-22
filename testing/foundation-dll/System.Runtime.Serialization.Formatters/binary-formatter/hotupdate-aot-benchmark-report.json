@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Runtime.Serialization.Formatters",
+  "familyId": "family/System.Runtime.Serialization.Formatters/binary/formatter",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::Deserialize:System.Object(System.IO.Stream)",
+      "status": "passed",
+      "prePatchNsPerOp": 230.36,
+      "postPatchNsPerOp": 179.5,
+      "slowdownPercent": -22.08
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::get_AssemblyFormat:System.Runtime.Serialization.Formatters.FormatterAssemblyStyle()",
+      "status": "passed",
+      "prePatchNsPerOp": 8.27,
+      "postPatchNsPerOp": 5.4,
+      "slowdownPercent": -34.7
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::get_Binder:System.Runtime.Serialization.SerializationBinder()",
+      "status": "passed",
+      "prePatchNsPerOp": 7.32,
+      "postPatchNsPerOp": 5.7,
+      "slowdownPercent": -22.13
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::get_Context:System.Runtime.Serialization.StreamingContext()",
+      "status": "passed",
+      "prePatchNsPerOp": 5.32,
+      "postPatchNsPerOp": 5.6,
+      "slowdownPercent": 5.26
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::get_FilterLevel:System.Runtime.Serialization.Formatters.TypeFilterLevel()",
+      "status": "passed",
+      "prePatchNsPerOp": 6.05,
+      "postPatchNsPerOp": 5.4,
+      "slowdownPercent": -10.74
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::get_SurrogateSelector:System.Runtime.Serialization.ISurrogateSelector()",
+      "status": "passed",
+      "prePatchNsPerOp": 9.39,
+      "postPatchNsPerOp": 5.9,
+      "slowdownPercent": -37.17
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::get_TypeFormat:System.Runtime.Serialization.Formatters.FormatterTypeStyle()",
+      "status": "passed",
+      "prePatchNsPerOp": 7.3,
+      "postPatchNsPerOp": 5.3,
+      "slowdownPercent": -27.4
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::Serialize:System.Void(System.IO.Stream,System.Object)",
+      "status": "passed",
+      "prePatchNsPerOp": 184.84,
+      "postPatchNsPerOp": 182.7,
+      "slowdownPercent": -1.16
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::set_AssemblyFormat:System.Void(System.Runtime.Serialization.Formatters.FormatterAssemblyStyle)",
+      "status": "passed",
+      "prePatchNsPerOp": 2.89,
+      "postPatchNsPerOp": 3.1,
+      "slowdownPercent": 7.27
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::set_Binder:System.Void(System.Runtime.Serialization.SerializationBinder)",
+      "status": "passed",
+      "prePatchNsPerOp": 2.97,
+      "postPatchNsPerOp": 3.1,
+      "slowdownPercent": 4.38
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::set_Context:System.Void(System.Runtime.Serialization.StreamingContext)",
+      "status": "passed",
+      "prePatchNsPerOp": 2.91,
+      "postPatchNsPerOp": 3.3,
+      "slowdownPercent": 13.4
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::set_FilterLevel:System.Void(System.Runtime.Serialization.Formatters.TypeFilterLevel)",
+      "status": "passed",
+      "prePatchNsPerOp": 2.9,
+      "postPatchNsPerOp": 3.1,
+      "slowdownPercent": 6.9
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::set_SurrogateSelector:System.Void(System.Runtime.Serialization.ISurrogateSelector)",
+      "status": "passed",
+      "prePatchNsPerOp": 2.86,
+      "postPatchNsPerOp": 3.1,
+      "slowdownPercent": 8.39
+    },
+    {
+      "methodIndex": 13,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::set_TypeFormat:System.Void(System.Runtime.Serialization.Formatters.FormatterTypeStyle)",
+      "status": "passed",
+      "prePatchNsPerOp": 4.58,
+      "postPatchNsPerOp": 3.0,
+      "slowdownPercent": -34.5
+    },
+    {
+      "methodIndex": 14,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::.ctor:System.Void()",
+      "status": "passed",
+      "prePatchNsPerOp": 97.8,
+      "postPatchNsPerOp": 92.8,
+      "slowdownPercent": -5.11
+    },
+    {
+      "methodIndex": 15,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.Binary.BinaryFormatter::.ctor:System.Void(System.Runtime.Serialization.ISurrogateSelector,System.Runtime.Serialization.StreamingContext)",
+      "status": "passed",
+      "prePatchNsPerOp": 106.78,
+      "postPatchNsPerOp": 89.6,
+      "slowdownPercent": -16.09
+    }
+  ],
+  "summary": {
+    "totalMethods": 16,
+    "nonStubMethods": 16,
+    "averageSlowdownPercent": -10.34,
+    "slowdownFactor": 0.8966,
+    "slowdownThresholdX": 50.0
+  }
+}

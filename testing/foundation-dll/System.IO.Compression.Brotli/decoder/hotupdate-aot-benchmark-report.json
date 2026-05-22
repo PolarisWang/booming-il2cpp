@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.IO.Compression.Brotli",
+  "familyId": "family/System.IO.Compression.Brotli/decoder",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Decompress:System.Buffers.OperationStatus(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32&,System.Int32&)",
+      "status": "passed",
+      "prePatchNsPerOp": 7.59,
+      "postPatchNsPerOp": 6.3,
+      "slowdownPercent": -17.0
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Dispose:System.Void()",
+      "status": "passed",
+      "prePatchNsPerOp": 2.87,
+      "postPatchNsPerOp": 10.9,
+      "slowdownPercent": 279.79
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::TryDecompress:System.Boolean(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32&)",
+      "status": "passed",
+      "prePatchNsPerOp": 4.53,
+      "postPatchNsPerOp": 4.6,
+      "slowdownPercent": 1.55
+    }
+  ],
+  "summary": {
+    "totalMethods": 3,
+    "nonStubMethods": 3,
+    "averageSlowdownPercent": 88.11,
+    "slowdownFactor": 1.8811000000000002,
+    "slowdownThresholdX": 50.0
+  }
+}

@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "OptionsErrorsSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Formats.Asn1/options-errors/managed/subjects/build-output/OptionsErrorsSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Formats.Asn1/options-errors/managed/subjects/build-output/OptionsErrorsSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "OptionsErrorsSubjects",
-      "path": "verification/foundation-dll/System.Formats.Asn1/options-errors/managed/subjects/build-output/OptionsErrorsSubjects.dll"
+      "path": "testing/foundation-dll/System.Formats.Asn1/options-errors/managed/subjects/build-output/OptionsErrorsSubjects.dll"
     },
     {
       "assemblyName": "System.Formats.Asn1",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "c7df0c2b-1541-4747-b362-e457ee5e41a7",
+  "inputModuleVersionId": "d40e304e-3d5e-425f-a07f-8e25d438c0ca",
   "artifacts": [
     {
       "kind": "typedIlIr",

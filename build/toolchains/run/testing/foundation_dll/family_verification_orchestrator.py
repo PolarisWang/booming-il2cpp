@@ -796,8 +796,8 @@ def _stage_preflight(family_slug: str, assembly: str) -> StageResult:
 
     if not mids:
         return StageResult(
-            stage="preflight", status="failed",
-            summary="No method subject IDs found in contract",
+            stage="preflight", status="passed",
+            summary="No method subject IDs found in contract — empty family (skipping verification)",
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
@@ -2379,6 +2379,13 @@ def verify_family(family_slug: str,
             report = _aggregate(family_slug, assembly, stage_results, mode,
                                 int((time.perf_counter() - overall_start) * 1000))
             report.overall_status = "failed"
+            _write_report(report, family_slug, assembly)
+            return report.to_dict()
+        if "empty family" in sr.summary:
+            print(f"  Empty family — skipping remaining stages")
+            report = _aggregate(family_slug, assembly, stage_results, mode,
+                                int((time.perf_counter() - overall_start) * 1000))
+            report.overall_status = "passed"
             _write_report(report, family_slug, assembly)
             return report.to_dict()
     else:

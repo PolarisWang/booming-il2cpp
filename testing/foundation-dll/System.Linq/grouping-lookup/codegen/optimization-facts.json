@@ -134,22 +134,12 @@
     },
     {
       "subjectKind": "method",
-      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
       "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_0:System.Int32(System.Int32)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
       "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_1:System.Int32(System.Int32)",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
       "reason": "closed-world-method"
     }
   ],
@@ -229,7 +219,7 @@
     {
       "methodSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_6:System.Void()",
       "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E()",
+      "targetSubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E()",
       "devirtualized": false
     },
     {
@@ -241,7 +231,7 @@
     {
       "methodSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_7:System.Void()",
       "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E()",
+      "targetSubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E()",
       "devirtualized": false
     },
     {
@@ -323,12 +313,6 @@
       "devirtualized": true
     },
     {
-      "methodSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_6:System.Void()",
-      "dispatchKind": "delegate.exact-target-direct",
-      "targetSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-      "devirtualized": true
-    },
-    {
       "methodSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_7:System.Void()",
       "dispatchKind": "delegate.exact-target-direct",
       "targetSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_0:System.Int32(System.Int32)",
@@ -338,12 +322,6 @@
       "methodSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_7:System.Void()",
       "dispatchKind": "delegate.exact-target-direct",
       "targetSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_1:System.Int32(System.Int32)",
-      "devirtualized": true
-    },
-    {
-      "methodSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_7:System.Void()",
-      "dispatchKind": "delegate.exact-target-direct",
-      "targetSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
       "devirtualized": true
     }
   ],
@@ -357,6 +335,12 @@
     {
       "subjectKind": "field",
       "subjectId": "GroupingLookupSubjects/\u003CPrivateImplementationDetails\u003E::4F6ADDC9659D6FB90FE94B6688A79F2A1FA8D36EC43F8F3E1D9B6528C448A384",
+      "dataKind": "reference",
+      "requiresBoxing": false
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/\u003CPrivateImplementationDetails\u003E::6E28B4D41AF8A88650219653A728E0FD6760BB2B1DFEB7A9EB8DEB5B4E7010E0",
       "dataKind": "reference",
       "requiresBoxing": false
     },
@@ -446,12 +430,6 @@
     },
     {
       "subjectKind": "field",
-      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__7_2",
-      "dataKind": "reference",
-      "requiresBoxing": false
-    },
-    {
-      "subjectKind": "field",
       "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_0",
       "dataKind": "reference",
       "requiresBoxing": false
@@ -459,12 +437,6 @@
     {
       "subjectKind": "field",
       "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_1",
-      "dataKind": "reference",
-      "requiresBoxing": false
-    },
-    {
-      "subjectKind": "field",
-      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_2",
       "dataKind": "reference",
       "requiresBoxing": false
     }

@@ -7,18 +7,6 @@
       "subjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects",
       "definitionSubjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects",
       "metadataToken": 33554434
-    },
-    {
-      "assemblyName": "FrozenCollectionsSubjects",
-      "subjectId": "FrozenCollectionsSubjects/\u003CPrivateImplementationDetails\u003E",
-      "definitionSubjectId": "FrozenCollectionsSubjects/\u003CPrivateImplementationDetails\u003E",
-      "metadataToken": 33554435
-    },
-    {
-      "assemblyName": "FrozenCollectionsSubjects",
-      "subjectId": "FrozenCollectionsSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=4_Align=4",
-      "definitionSubjectId": "FrozenCollectionsSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=4_Align=4",
-      "metadataToken": 33554436
     }
   ],
   "registeredMethods": [

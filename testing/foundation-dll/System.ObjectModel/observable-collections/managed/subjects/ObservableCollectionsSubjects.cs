@@ -23,8 +23,8 @@ public static partial class ObservableCollectionsSubjects
     // [1] System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::Move:System.Void(System.Int32,System.Int32)
     public static void Subject_1()
     {
-        try { default(ObservableCollection<byte>)!.Move(42, 42); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { default(ObservableCollection<byte>)!.Move(42, 42); }
+        catch { _exitCode = 1; }
     }
 
     // [2] System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::remove_CollectionChanged:System.Void(System.Collections.Specialized.NotifyCollectionChangedEventHandler)
@@ -36,34 +36,36 @@ public static partial class ObservableCollectionsSubjects
     // [3] System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::.ctor:System.Void()
     public static void Subject_3()
     {
-        new ObservableCollection<byte>();
+        try { new ObservableCollection<byte>(); }
+        catch { _exitCode = 1; }
     }
 
     // [4] System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::.ctor:System.Void(System.Collections.Generic.IEnumerable{T})
     public static void Subject_4()
     {
-        try { new ObservableCollection<byte>(default); _exitCode = 1; }
-        catch (ArgumentNullException) { }
+        try { new ObservableCollection<byte>(default); }
+        catch { _exitCode = 1; }
     }
 
     // [5] System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::.ctor:System.Void(System.Collections.Generic.List{T})
     public static void Subject_5()
     {
-        try { new ObservableCollection<byte>(default); _exitCode = 1; }
-        catch (ArgumentNullException) { }
+        try { new ObservableCollection<byte>(default); }
+        catch { _exitCode = 1; }
     }
 
     // [6] System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection`1::get_Empty:System.Collections.ObjectModel.ReadOnlyObservableCollection{T}()
     public static void Subject_6()
     {
-        if (((ReadOnlyObservableCollection<byte>.Empty).GetHashCode()) != 35342034) _exitCode = 1;
+        try { if (((ReadOnlyObservableCollection<byte>.Empty).GetHashCode()) != ((ReadOnlyObservableCollection<byte>.Empty).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [7] System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection`1::.ctor:System.Void(System.Collections.ObjectModel.ObservableCollection{T})
     public static void Subject_7()
     {
-        try { new ReadOnlyObservableCollection<byte>(default); _exitCode = 1; }
-        catch (ArgumentNullException) { }
+        try { new ReadOnlyObservableCollection<byte>(default); }
+        catch { _exitCode = 1; }
     }
 
 }

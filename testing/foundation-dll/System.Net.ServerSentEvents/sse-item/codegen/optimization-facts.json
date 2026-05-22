@@ -45,9 +45,33 @@
   ],
   "dispatchFacts": [
     {
+      "methodSubjectId": "SseItemSubjects/SseItemSubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SseItemSubjects/SseItemSubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "SseItemSubjects/SseItemSubjects::Subject_2:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SseItemSubjects/SseItemSubjects::Subject_2:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SseItemSubjects/SseItemSubjects::Subject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
     },
     {
@@ -67,9 +91,24 @@
   ],
   "exceptionFacts": [
     {
+      "methodSubjectId": "SseItemSubjects/SseItemSubjects::Subject_0:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
       "methodSubjectId": "SseItemSubjects/SseItemSubjects::Subject_1:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "SseItemSubjects/SseItemSubjects::Subject_2:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "SseItemSubjects/SseItemSubjects::Subject_3:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     }
   ]
 }

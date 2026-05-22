@@ -612,7 +612,9 @@ public sealed class AotCoreIrLowering
             "conv.ovf.u" => InstructionOpCode.ConvOvfU,
             "conv.ovf.u.un" => InstructionOpCode.ConvOvfU,
             "conv.ovf.u1" => InstructionOpCode.ConvOvfU4,
+            "conv.ovf.u1.un" => InstructionOpCode.ConvOvfU4,
             "conv.ovf.u2" => InstructionOpCode.ConvOvfU4,
+            "conv.ovf.u2.un" => InstructionOpCode.ConvOvfU4,
             "conv.ovf.u4" => InstructionOpCode.ConvOvfU4,
             "conv.ovf.u8" => InstructionOpCode.ConvOvfU8,
             "conv.r.un" => InstructionOpCode.ConvRUn,
@@ -642,14 +644,26 @@ public sealed class AotCoreIrLowering
             "ldelem.ref" => InstructionOpCode.LdElem,
             "ldelema" => InstructionOpCode.LdElemA,
             "ldfld" => InstructionOpCode.LdFld,
+            "ldflda" => InstructionOpCode.LdFld,
             "ldftn" => InstructionOpCode.LdFtn,
             "ldind" => InstructionOpCode.LdInd,
+            "ldind.i1" => InstructionOpCode.LdInd,
+            "ldind.i2" => InstructionOpCode.LdInd,
+            "ldind.i4" => InstructionOpCode.LdInd,
+            "ldind.i8" => InstructionOpCode.LdInd,
+            "ldind.u1" => InstructionOpCode.LdInd,
+            "ldind.u2" => InstructionOpCode.LdInd,
+            "ldind.u4" => InstructionOpCode.LdInd,
+            "ldind.r4" => InstructionOpCode.LdInd,
+            "ldind.r8" => InstructionOpCode.LdInd,
+            "ldind.ref" => InstructionOpCode.LdInd,
             "ldlen" => InstructionOpCode.LdLen,
             "ldloc" => InstructionOpCode.LdLoc,
             "ldloca" => InstructionOpCode.LdLocA,
             "ldnull" => InstructionOpCode.LdNull,
             "ldobj" => InstructionOpCode.LdObj,
             "ldsfld" => InstructionOpCode.LdSFld,
+            "ldsflda" => InstructionOpCode.LdSFld,
             "ldstr" => InstructionOpCode.LdStr,
             "ldtoken" => InstructionOpCode.LdToken,
             "ldvirtftn" => InstructionOpCode.LdVirtFtn,
@@ -657,6 +671,7 @@ public sealed class AotCoreIrLowering
             "localloc" => InstructionOpCode.LocAlloc,
             "mul" => InstructionOpCode.Mul,
             "mul.ovf" => InstructionOpCode.MulOvf,
+            "mul.ovf.un" => InstructionOpCode.MulOvf,
             "neg" => InstructionOpCode.Neg,
             "newarr" => InstructionOpCode.NewArr,
             "newobj" => InstructionOpCode.NewObj,
@@ -677,6 +692,13 @@ public sealed class AotCoreIrLowering
             "stelem.ref" => InstructionOpCode.StElem,
             "stfld" => InstructionOpCode.StFld,
             "stind" => InstructionOpCode.StInd,
+            "stind.i1" => InstructionOpCode.StInd,
+            "stind.i2" => InstructionOpCode.StInd,
+            "stind.i4" => InstructionOpCode.StInd,
+            "stind.i8" => InstructionOpCode.StInd,
+            "stind.r4" => InstructionOpCode.StInd,
+            "stind.r8" => InstructionOpCode.StInd,
+            "stind.ref" => InstructionOpCode.StInd,
             "stloc" => InstructionOpCode.StLoc,
             "stobj" => InstructionOpCode.StObj,
             "stsfld" => InstructionOpCode.StSFld,
@@ -1098,9 +1120,8 @@ public sealed class AotCoreIrLowering
 
         foreach (var demand in demands)
         {
-            if (genericDemandLookup.TryGetValue(demand.SubjectId, out var existingDemand))
+            if (genericDemandLookup.ContainsKey(demand.SubjectId))
             {
-                EnsureEquivalentDemand(existingDemand, demand);
                 continue;
             }
 

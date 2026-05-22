@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/ccw/basic",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "CcwBasicNativeEntry/CcwBasicNativeEntry::Run:System.Int32(System.Int32)",
+      "status": "passed",
+      "prePatchNsPerOp": 2.16,
+      "postPatchNsPerOp": 2.3,
+      "slowdownPercent": 6.48
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "CcwBasicNativeEntry/CcwBasicNativeEntry::TestSimpleMathAdd:System.Int32()",
+      "status": "passed",
+      "prePatchNsPerOp": 2.2,
+      "postPatchNsPerOp": 2.7,
+      "slowdownPercent": 22.73
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "CcwBasicNativeEntry/CcwBasicNativeEntry::TestSimpleMathMul:System.Int32()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.81,
+      "postPatchNsPerOp": 2.3,
+      "slowdownPercent": -39.63
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "CcwBasicNativeEntry/CcwBasicNativeEntry::TestConstantValue:System.Int32()",
+      "status": "passed",
+      "prePatchNsPerOp": 2.76,
+      "postPatchNsPerOp": 2.6,
+      "slowdownPercent": -5.8
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "CcwBasicNativeEntry/CcwBasicNativeEntry::TestDualInterface:System.Int32()",
+      "status": "passed",
+      "prePatchNsPerOp": 2.11,
+      "postPatchNsPerOp": 2.3,
+      "slowdownPercent": 9.0
+    }
+  ],
+  "summary": {
+    "totalMethods": 5,
+    "nonStubMethods": 5,
+    "averageSlowdownPercent": -1.44,
+    "slowdownFactor": 0.9856,
+    "slowdownThresholdX": 50.0
+  }
+}

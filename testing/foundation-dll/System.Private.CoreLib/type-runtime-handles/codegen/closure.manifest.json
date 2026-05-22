@@ -3,7 +3,7 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "TypeRuntimeHandlesSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/type-runtime-handles/codegen/_subjects_input/TypeRuntimeHandlesSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/type-runtime-handles/managed/subjects/build-output/TypeRuntimeHandlesSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
@@ -12,11 +12,11 @@
     },
     {
       "assemblyName": "TypeRuntimeHandlesSubjects",
-      "path": "testing/foundation-dll/System.Private.CoreLib/type-runtime-handles/codegen/_subjects_input/TypeRuntimeHandlesSubjects.dll"
+      "path": "testing/foundation-dll/System.Private.CoreLib/type-runtime-handles/managed/subjects/build-output/TypeRuntimeHandlesSubjects.dll"
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "7572b22b-3229-4957-9b44-3b708f32ca60",
+  "inputModuleVersionId": "a7826c5d-bf48-43c7-93e0-628b13a53629",
   "artifacts": [
     {
       "kind": "typedIlIr",

@@ -1,0 +1,12 @@
+{
+  "familyId": "family/System.Runtime.InteropServices/unmanaged-calling-conventions",
+  "assemblyName": "System.Runtime.InteropServices",
+  "methodSubjectIds": [
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.SuppressGCTransitionAttribute::.ctor:System.Void()"
+  ],
+  "displayName": "unmanaged-calling-conventions",
+  "description": "",
+  "closureStatus": "in-progress",
+  "methodCount": 1,
+  "customEntryIndices": []
+}

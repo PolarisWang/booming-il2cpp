@@ -166,13 +166,31 @@
     },
     {
       "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_25:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_26:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
       "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_27:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_28:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_29:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
@@ -220,6 +238,12 @@
     },
     {
       "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_37:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_38:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
@@ -233,6 +257,12 @@
     {
       "subjectKind": "method",
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_40:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_41:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
@@ -275,6 +305,12 @@
     {
       "subjectKind": "method",
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_48:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_49:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
@@ -340,6 +376,12 @@
     },
     {
       "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_60:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_61:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
@@ -352,7 +394,19 @@
     },
     {
       "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_63:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_64:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_65:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
@@ -413,6 +467,12 @@
     {
       "subjectKind": "method",
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_75:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_76:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
@@ -491,6 +551,18 @@
     {
       "subjectKind": "method",
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_89:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_90:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_91:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
@@ -670,7 +742,19 @@
     },
     {
       "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_121:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_122:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_123:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
@@ -730,6 +814,12 @@
     },
     {
       "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_133:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_134:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
@@ -749,6 +839,12 @@
     {
       "subjectKind": "method",
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_137:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_138:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },
@@ -922,6 +1018,18 @@
     },
     {
       "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_167:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_168:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_169:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
@@ -1073,6 +1181,18 @@
     {
       "subjectKind": "method",
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_194:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_195:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_196:System.Void()",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     },

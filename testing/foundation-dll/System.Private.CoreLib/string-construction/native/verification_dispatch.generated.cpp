@@ -1,5 +1,5 @@
 // verification_dispatch.generated.cpp — auto-generated
-// Assembly: StringConstructionSubjects, Methods: 10
+// Assembly: StringConstructionSubjects, Methods: 8
 #include <cstdint>
 #include <chrono>
 #include <chaos/native_types.h>

@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "BinaryFormatterSubjects",
   "entrySubjectId": "BinaryFormatterSubjects/BinaryFormatterSubjects::Subject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Runtime.Serialization.Formatters/binary-formatter/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.Runtime.Serialization.Formatters/binary-formatter/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

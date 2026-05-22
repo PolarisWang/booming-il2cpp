@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.IO.Pipelines",
+  "familyId": "family/System.IO.Pipelines/stream/adapters",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeExtensions::CopyToAsync:System.Threading.Tasks.Task(System.IO.Stream,System.IO.Pipelines.PipeWriter,System.Threading.CancellationToken)",
+      "status": "passed",
+      "prePatchNsPerOp": 179.76,
+      "postPatchNsPerOp": 182.1,
+      "slowdownPercent": 1.3
+    }
+  ],
+  "summary": {
+    "totalMethods": 1,
+    "nonStubMethods": 1,
+    "averageSlowdownPercent": 1.3,
+    "slowdownFactor": 1.013,
+    "slowdownThresholdX": 50.0
+  }
+}

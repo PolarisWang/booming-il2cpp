@@ -29,10 +29,10 @@
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 34,
-          "handlerOffset": 35,
-          "handlerLength": 5,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+          "tryLength": 28,
+          "handlerOffset": 29,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
@@ -149,10 +149,24 @@
           "isPreserveSig": false
         },
         {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 40,
+          "ilOffset": 27,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 29,
+          "isPreserveSig": false
+        },
+        {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 26,
+          "ilOffset": 31,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -160,7 +174,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::_exitCode",
-          "ilOffset": 27,
+          "ilOffset": 32,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "SurrogateSelectionSubjects",
@@ -181,20 +195,6 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 40,
-          "ilOffset": 33,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 35,
           "isPreserveSig": false
         },
         {
@@ -243,16 +243,16 @@
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 1,
+      "localCount": 2,
       "exceptionRegionCount": 1,
       "exceptionRegions": [
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 35,
-          "handlerOffset": 36,
-          "handlerLength": 5,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+          "tryLength": 77,
+          "handlerOffset": 78,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
@@ -306,7 +306,7 @@
         {
           "op": "ldloca",
           "opCode": 76,
-          "operand": 0,
+          "operand": 1,
           "ilOffset": 11,
           "resultType": "System.IntPtr",
           "isPreserveSig": false
@@ -339,7 +339,7 @@
         {
           "op": "ldloc",
           "opCode": 7,
-          "operand": 0,
+          "operand": 1,
           "ilOffset": 19,
           "isPreserveSig": false
         },
@@ -376,16 +376,224 @@
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
+          "op": "callvirt",
+          "opCode": 15,
           "ilOffset": 26,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 31,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 32,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "box",
+          "opCode": 35,
+          "operand": "System.Private.CoreLib/System.Int32",
+          "ilOffset": 34,
+          "resultType": "System.Object",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Int32"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 39,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 1,
+          "ilOffset": 40,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "initobj",
+          "opCode": 71,
+          "operand": "System.Private.CoreLib/System.Runtime.Serialization.StreamingContext",
+          "ilOffset": 42,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Runtime.Serialization.StreamingContext"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Runtime.Serialization.StreamingContext",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 14,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 48,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 49,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 50,
+          "resultType": "System.Object",
+          "callee": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ISerializationSurrogate::SetObjectData:System.Object(System.Object,System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext,System.Runtime.Serialization.ISurrogateSelector)",
+          "reference": {
+            "assemblyName": "System.Runtime.Serialization.Formatters",
+            "subjectKind": "method",
+            "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ISerializationSurrogate::SetObjectData:System.Object(System.Object,System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext,System.Runtime.Serialization.ISurrogateSelector)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Runtime.Serialization.Formatters",
+            "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ISerializationSurrogate::SetObjectData:System.Object(System.Object,System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext,System.Runtime.Serialization.ISurrogateSelector)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 55,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 60,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 62,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 63,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 65,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 66,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 75,
+          "ilOffset": 67,
+          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 27,
+          "ilOffset": 69,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -393,7 +601,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::_exitCode",
-          "ilOffset": 28,
+          "ilOffset": 70,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "SurrogateSelectionSubjects",
@@ -419,29 +627,64 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 41,
-          "ilOffset": 34,
+          "operand": 89,
+          "ilOffset": 76,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 36,
+          "ilOffset": 78,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 80,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::_exitCode",
+          "ilOffset": 81,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "SurrogateSelectionSubjects",
+            "subjectKind": "field",
+            "subjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "SurrogateSelectionSubjects",
+            "subjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
           "isPreserveSig": false
         },
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 41,
-          "ilOffset": 39,
+          "operand": 89,
+          "ilOffset": 87,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 41,
+          "ilOffset": 89,
           "isPreserveSig": false
         }
       ],
@@ -482,10 +725,10 @@
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 18,
-          "handlerOffset": 19,
-          "handlerLength": 5,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+          "tryLength": 12,
+          "handlerOffset": 13,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
@@ -529,10 +772,24 @@
           "isPreserveSig": false
         },
         {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 24,
+          "ilOffset": 11,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 13,
+          "isPreserveSig": false
+        },
+        {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 10,
+          "ilOffset": 15,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -540,7 +797,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::_exitCode",
-          "ilOffset": 11,
+          "ilOffset": 16,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "SurrogateSelectionSubjects",
@@ -561,20 +818,6 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 24,
-          "ilOffset": 17,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 19,
           "isPreserveSig": false
         },
         {
@@ -623,16 +866,16 @@
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 0,
+      "localCount": 1,
       "exceptionRegionCount": 1,
       "exceptionRegions": [
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 17,
-          "handlerOffset": 18,
-          "handlerLength": 5,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+          "tryLength": 41,
+          "handlerOffset": 42,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
@@ -669,16 +912,137 @@
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
+          "op": "callvirt",
+          "opCode": 15,
           "ilOffset": 8,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 13,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 14,
+          "resultType": "System.Runtime.Serialization.ISurrogateSelector",
+          "callee": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ISurrogateSelector::GetNextSelector:System.Runtime.Serialization.ISurrogateSelector()",
+          "reference": {
+            "assemblyName": "System.Runtime.Serialization.Formatters",
+            "subjectKind": "method",
+            "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ISurrogateSelector::GetNextSelector:System.Runtime.Serialization.ISurrogateSelector()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Runtime.Serialization.Formatters",
+            "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ISurrogateSelector::GetNextSelector:System.Runtime.Serialization.ISurrogateSelector()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 19,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 24,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 26,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 27,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 29,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 30,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 39,
+          "ilOffset": 31,
+          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 9,
+          "ilOffset": 33,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -686,7 +1050,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::_exitCode",
-          "ilOffset": 10,
+          "ilOffset": 34,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "SurrogateSelectionSubjects",
@@ -712,29 +1076,64 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 23,
-          "ilOffset": 16,
+          "operand": 53,
+          "ilOffset": 40,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 18,
+          "ilOffset": 42,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 44,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::_exitCode",
+          "ilOffset": 45,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "SurrogateSelectionSubjects",
+            "subjectKind": "field",
+            "subjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "SurrogateSelectionSubjects",
+            "subjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
           "isPreserveSig": false
         },
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 23,
-          "ilOffset": 21,
+          "operand": 53,
+          "ilOffset": 51,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 23,
+          "ilOffset": 53,
           "isPreserveSig": false
         }
       ],
@@ -769,16 +1168,16 @@
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 2,
+      "localCount": 3,
       "exceptionRegionCount": 1,
       "exceptionRegions": [
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 38,
-          "handlerOffset": 39,
-          "handlerLength": 5,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+          "tryLength": 83,
+          "handlerOffset": 84,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
@@ -841,7 +1240,7 @@
         {
           "op": "ldloca",
           "opCode": 76,
-          "operand": 1,
+          "operand": 2,
           "ilOffset": 13,
           "resultType": "System.IntPtr",
           "isPreserveSig": false
@@ -874,14 +1273,14 @@
         {
           "op": "ldloc",
           "opCode": 7,
-          "operand": 1,
+          "operand": 2,
           "ilOffset": 21,
           "isPreserveSig": false
         },
         {
           "op": "ldloca",
           "opCode": 76,
-          "operand": 0,
+          "operand": 1,
           "ilOffset": 22,
           "resultType": "System.IntPtr",
           "isPreserveSig": false
@@ -912,16 +1311,234 @@
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
+          "op": "callvirt",
+          "opCode": 15,
           "ilOffset": 29,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 34,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldtoken",
+          "opCode": 70,
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 35,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 40,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 2,
+          "ilOffset": 45,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "initobj",
+          "opCode": 71,
+          "operand": "System.Private.CoreLib/System.Runtime.Serialization.StreamingContext",
+          "ilOffset": 47,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Runtime.Serialization.StreamingContext"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Runtime.Serialization.StreamingContext",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 14,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 2,
+          "ilOffset": 53,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 1,
+          "ilOffset": 54,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 56,
+          "resultType": "System.Runtime.Serialization.ISerializationSurrogate",
+          "callee": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ISurrogateSelector::GetSurrogate:System.Runtime.Serialization.ISerializationSurrogate(System.Type,System.Runtime.Serialization.StreamingContext,System.Runtime.Serialization.ISurrogateSelector\u0026)",
+          "reference": {
+            "assemblyName": "System.Runtime.Serialization.Formatters",
+            "subjectKind": "method",
+            "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ISurrogateSelector::GetSurrogate:System.Runtime.Serialization.ISerializationSurrogate(System.Type,System.Runtime.Serialization.StreamingContext,System.Runtime.Serialization.ISurrogateSelector\u0026)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Runtime.Serialization.Formatters",
+            "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ISurrogateSelector::GetSurrogate:System.Runtime.Serialization.ISerializationSurrogate(System.Type,System.Runtime.Serialization.StreamingContext,System.Runtime.Serialization.ISurrogateSelector\u0026)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 61,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 66,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 68,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 69,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 71,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 72,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 81,
+          "ilOffset": 73,
+          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 30,
+          "ilOffset": 75,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -929,7 +1546,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::_exitCode",
-          "ilOffset": 31,
+          "ilOffset": 76,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "SurrogateSelectionSubjects",
@@ -955,29 +1572,64 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 44,
-          "ilOffset": 37,
+          "operand": 95,
+          "ilOffset": 82,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 39,
+          "ilOffset": 84,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 86,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::_exitCode",
+          "ilOffset": 87,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "SurrogateSelectionSubjects",
+            "subjectKind": "field",
+            "subjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "SurrogateSelectionSubjects",
+            "subjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
           "isPreserveSig": false
         },
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 44,
-          "ilOffset": 42,
+          "operand": 95,
+          "ilOffset": 93,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 44,
+          "ilOffset": 95,
           "isPreserveSig": false
         }
       ],
@@ -1018,10 +1670,10 @@
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 37,
-          "handlerOffset": 38,
-          "handlerLength": 5,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+          "tryLength": 31,
+          "handlerOffset": 32,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
@@ -1154,10 +1806,24 @@
           "isPreserveSig": false
         },
         {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 43,
+          "ilOffset": 30,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 32,
+          "isPreserveSig": false
+        },
+        {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 29,
+          "ilOffset": 34,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1165,7 +1831,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::_exitCode",
-          "ilOffset": 30,
+          "ilOffset": 35,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "SurrogateSelectionSubjects",
@@ -1186,20 +1852,6 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 43,
-          "ilOffset": 36,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 38,
           "isPreserveSig": false
         },
         {
@@ -1254,10 +1906,10 @@
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 18,
-          "handlerOffset": 19,
-          "handlerLength": 5,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+          "tryLength": 12,
+          "handlerOffset": 13,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
@@ -1301,10 +1953,24 @@
           "isPreserveSig": false
         },
         {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 24,
+          "ilOffset": 11,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 13,
+          "isPreserveSig": false
+        },
+        {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 10,
+          "ilOffset": 15,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1312,7 +1978,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::_exitCode",
-          "ilOffset": 11,
+          "ilOffset": 16,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "SurrogateSelectionSubjects",
@@ -1333,20 +1999,6 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 24,
-          "ilOffset": 17,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 19,
           "isPreserveSig": false
         },
         {
@@ -1395,16 +2047,16 @@
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 0,
+      "localCount": 1,
       "exceptionRegionCount": 1,
       "exceptionRegions": [
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 17,
-          "handlerOffset": 18,
-          "handlerLength": 5,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+          "tryLength": 41,
+          "handlerOffset": 42,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
@@ -1441,16 +2093,137 @@
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
+          "op": "callvirt",
+          "opCode": 15,
           "ilOffset": 8,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 13,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 14,
+          "resultType": "System.Runtime.Serialization.ISurrogateSelector",
+          "callee": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::GetNextSelector:System.Runtime.Serialization.ISurrogateSelector()",
+          "reference": {
+            "assemblyName": "System.Runtime.Serialization.Formatters",
+            "subjectKind": "method",
+            "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::GetNextSelector:System.Runtime.Serialization.ISurrogateSelector()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Runtime.Serialization.Formatters",
+            "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::GetNextSelector:System.Runtime.Serialization.ISurrogateSelector()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 19,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 24,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 26,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 27,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 29,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 30,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 39,
+          "ilOffset": 31,
+          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 9,
+          "ilOffset": 33,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1458,7 +2231,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::_exitCode",
-          "ilOffset": 10,
+          "ilOffset": 34,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "SurrogateSelectionSubjects",
@@ -1484,29 +2257,64 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 23,
-          "ilOffset": 16,
+          "operand": 53,
+          "ilOffset": 40,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 18,
+          "ilOffset": 42,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 44,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::_exitCode",
+          "ilOffset": 45,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "SurrogateSelectionSubjects",
+            "subjectKind": "field",
+            "subjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "SurrogateSelectionSubjects",
+            "subjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
           "isPreserveSig": false
         },
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 23,
-          "ilOffset": 21,
+          "operand": 53,
+          "ilOffset": 51,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 23,
+          "ilOffset": 53,
           "isPreserveSig": false
         }
       ],
@@ -1541,16 +2349,16 @@
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 2,
+      "localCount": 3,
       "exceptionRegionCount": 1,
       "exceptionRegions": [
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 38,
-          "handlerOffset": 39,
-          "handlerLength": 5,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+          "tryLength": 83,
+          "handlerOffset": 84,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
@@ -1613,7 +2421,7 @@
         {
           "op": "ldloca",
           "opCode": 76,
-          "operand": 1,
+          "operand": 2,
           "ilOffset": 13,
           "resultType": "System.IntPtr",
           "isPreserveSig": false
@@ -1646,14 +2454,14 @@
         {
           "op": "ldloc",
           "opCode": 7,
-          "operand": 1,
+          "operand": 2,
           "ilOffset": 21,
           "isPreserveSig": false
         },
         {
           "op": "ldloca",
           "opCode": 76,
-          "operand": 0,
+          "operand": 1,
           "ilOffset": 22,
           "resultType": "System.IntPtr",
           "isPreserveSig": false
@@ -1684,16 +2492,234 @@
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
+          "op": "callvirt",
+          "opCode": 15,
           "ilOffset": 29,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 34,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldtoken",
+          "opCode": 70,
+          "operand": "System.Private.CoreLib/System.Byte",
+          "ilOffset": 35,
+          "resultType": "System.RuntimeTypeHandle",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Byte"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 40,
+          "resultType": "System.Type",
+          "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 2,
+          "ilOffset": 45,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "initobj",
+          "opCode": 71,
+          "operand": "System.Private.CoreLib/System.Runtime.Serialization.StreamingContext",
+          "ilOffset": 47,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Runtime.Serialization.StreamingContext"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Runtime.Serialization.StreamingContext",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 14,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 2,
+          "ilOffset": 53,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 1,
+          "ilOffset": 54,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 56,
+          "resultType": "System.Runtime.Serialization.ISerializationSurrogate",
+          "callee": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::GetSurrogate:System.Runtime.Serialization.ISerializationSurrogate(System.Type,System.Runtime.Serialization.StreamingContext,System.Runtime.Serialization.ISurrogateSelector\u0026)",
+          "reference": {
+            "assemblyName": "System.Runtime.Serialization.Formatters",
+            "subjectKind": "method",
+            "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::GetSurrogate:System.Runtime.Serialization.ISerializationSurrogate(System.Type,System.Runtime.Serialization.StreamingContext,System.Runtime.Serialization.ISurrogateSelector\u0026)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Runtime.Serialization.Formatters",
+            "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::GetSurrogate:System.Runtime.Serialization.ISerializationSurrogate(System.Type,System.Runtime.Serialization.StreamingContext,System.Runtime.Serialization.ISurrogateSelector\u0026)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 61,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 66,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 68,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 69,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 71,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 72,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 81,
+          "ilOffset": 73,
+          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 30,
+          "ilOffset": 75,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1701,7 +2727,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::_exitCode",
-          "ilOffset": 31,
+          "ilOffset": 76,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "SurrogateSelectionSubjects",
@@ -1727,29 +2753,64 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 44,
-          "ilOffset": 37,
+          "operand": 95,
+          "ilOffset": 82,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 39,
+          "ilOffset": 84,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 86,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::_exitCode",
+          "ilOffset": 87,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "SurrogateSelectionSubjects",
+            "subjectKind": "field",
+            "subjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "SurrogateSelectionSubjects",
+            "subjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
           "isPreserveSig": false
         },
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 44,
-          "ilOffset": 42,
+          "operand": 95,
+          "ilOffset": 93,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 44,
+          "ilOffset": 95,
           "isPreserveSig": false
         }
       ],
@@ -1790,10 +2851,10 @@
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 36,
-          "handlerOffset": 37,
-          "handlerLength": 5,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+          "tryLength": 30,
+          "handlerOffset": 31,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
@@ -1919,10 +2980,24 @@
           "isPreserveSig": false
         },
         {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 42,
+          "ilOffset": 29,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 31,
+          "isPreserveSig": false
+        },
+        {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 28,
+          "ilOffset": 33,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1930,7 +3005,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::_exitCode",
-          "ilOffset": 29,
+          "ilOffset": 34,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "SurrogateSelectionSubjects",
@@ -1951,20 +3026,6 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 42,
-          "ilOffset": 35,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 37,
           "isPreserveSig": false
         },
         {
@@ -2014,13 +3075,22 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 10,
+          "handlerOffset": 11,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
       "instructions": [
         {
           "op": "newobj",
           "opCode": 34,
-          "ilOffset": 1,
+          "ilOffset": 2,
           "resultType": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector",
           "callee": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::.ctor:System.Void()",
           "reference": {
@@ -2045,13 +3115,70 @@
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 6,
+          "ilOffset": 7,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 22,
+          "ilOffset": 9,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 11,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 13,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::_exitCode",
+          "ilOffset": 14,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "SurrogateSelectionSubjects",
+            "subjectKind": "field",
+            "subjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "SurrogateSelectionSubjects",
+            "subjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 22,
+          "ilOffset": 20,
+          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 7,
+          "ilOffset": 22,
           "isPreserveSig": false
         }
       ],

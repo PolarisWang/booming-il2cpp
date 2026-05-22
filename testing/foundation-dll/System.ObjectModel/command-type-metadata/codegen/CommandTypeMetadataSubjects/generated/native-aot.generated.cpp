@@ -40,8 +40,6 @@ inline TypeInfoV0 chaos_mt_System_ObjectModel_System_ComponentModel_TypeConverte
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_ObjectModel_System_ComponentModel_TypeConverterAttribute = static_cast<CHAOS_IL2CPP_INTPTR>(2940222666049428610ULL);
 inline TypeInfoV0 chaos_mt_System_ObjectModel_System_Windows_Markup_ValueSerializerAttribute = {{nullptr, nullptr, 8956408850458546114ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_ObjectModel_System_Windows_Markup_ValueSerializerAttribute = static_cast<CHAOS_IL2CPP_INTPTR>(8956408850458546114ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_NullReferenceException = {{nullptr, nullptr, 5314911908653589872ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_NullReferenceException = static_cast<CHAOS_IL2CPP_INTPTR>(5314911908653589872ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Object = {{nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_INTPTR>(15228727185366376748ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
@@ -108,15 +106,6 @@ struct chaos_type_System_ObjectModel_System_ComponentModel_TypeConverterAttribut
 struct chaos_type_System_ObjectModel_System_Windows_Markup_ValueSerializerAttribute
 {
 	ThinLockableHeader header{};
-};
-
-struct chaos_type_System_Private_CoreLib_System_NullReferenceException
-{
-	ThinLockableHeader header{};
-	CHAOS_IL2CPP_INTPTR _message = 0;
-	CHAOS_IL2CPP_INTPTR _innerException = 0;
-	CHAOS_IL2CPP_INTPTR _stackTrace = 0;
-	CHAOS_IL2CPP_INT32 _HResult = 0;
 };
 
 struct chaos_type_System_Private_CoreLib_System_Object
@@ -682,6 +671,24 @@ static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_O
 	return ChaosObjectGetHashCode(chaos_fn_arg_0);
 }
 
+static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(CHAOS_IL2CPP_INTPTR chaos_arg_0)
+{
+	if (chaos_arg_0 == 0)
+	{
+		CHAOS_IL2CPP_FAIL();
+	}
+
+	if (chaos_is_string_id(chaos_arg_0))
+	{
+		return static_cast<CHAOS_IL2CPP_INT32>(
+			chaos::il2cpp::string_table::Resolve(
+				chaos_extract_string_id(chaos_arg_0)).byte_count);
+	}
+
+	auto* chaos_string = reinterpret_cast<CHAOS_IL2CPP_STRING_TYPE*>(chaos_arg_0);
+	return static_cast<CHAOS_IL2CPP_INT32>(chaos_string->length);
+}
+
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	return ChaosReflectionGetTypeFromHandle(chaos_fn_arg_0);
@@ -888,21 +895,21 @@ static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[15] = {
 
 // Dispatch table (function pointers)
 static HotpatchEntryV0 s_hotpatch_entries[15] = {
-	{ reinterpret_cast<void*>(&CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // CommandTypeMetadataSubjects::Subject_0
-	{ reinterpret_cast<void*>(&CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // CommandTypeMetadataSubjects::Subject_1
-	{ reinterpret_cast<void*>(&CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // CommandTypeMetadataSubjects::Subject_2
-	{ reinterpret_cast<void*>(&CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // CommandTypeMetadataSubjects::Subject_3
-	{ reinterpret_cast<void*>(&CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // CommandTypeMetadataSubjects::Subject_4
-	{ reinterpret_cast<void*>(&CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_5), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // CommandTypeMetadataSubjects::Subject_5
-	{ reinterpret_cast<void*>(&CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_6), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // CommandTypeMetadataSubjects::Subject_6
-	{ reinterpret_cast<void*>(&CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_7), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // CommandTypeMetadataSubjects::Subject_7
-	{ reinterpret_cast<void*>(&CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_8), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // CommandTypeMetadataSubjects::Subject_8
-	{ reinterpret_cast<void*>(&CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_9), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // CommandTypeMetadataSubjects::Subject_9
-	{ reinterpret_cast<void*>(&CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_10), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // CommandTypeMetadataSubjects::Subject_10
-	{ reinterpret_cast<void*>(&CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_11), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // CommandTypeMetadataSubjects::Subject_11
-	{ reinterpret_cast<void*>(&CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_12), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // CommandTypeMetadataSubjects::Subject_12
-	{ reinterpret_cast<void*>(&CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_13), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // CommandTypeMetadataSubjects::Subject_13
-	{ reinterpret_cast<void*>(&CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_14), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // CommandTypeMetadataSubjects::Subject_14
+	{ reinterpret_cast<void*>(&CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // CommandTypeMetadataSubjects::Subject_0
+	{ reinterpret_cast<void*>(&CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // CommandTypeMetadataSubjects::Subject_1
+	{ reinterpret_cast<void*>(&CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // CommandTypeMetadataSubjects::Subject_2
+	{ reinterpret_cast<void*>(&CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // CommandTypeMetadataSubjects::Subject_3
+	{ reinterpret_cast<void*>(&CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // CommandTypeMetadataSubjects::Subject_4
+	{ reinterpret_cast<void*>(&CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_5), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // CommandTypeMetadataSubjects::Subject_5
+	{ reinterpret_cast<void*>(&CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_6), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // CommandTypeMetadataSubjects::Subject_6
+	{ reinterpret_cast<void*>(&CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_7), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // CommandTypeMetadataSubjects::Subject_7
+	{ reinterpret_cast<void*>(&CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_8), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // CommandTypeMetadataSubjects::Subject_8
+	{ reinterpret_cast<void*>(&CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_9), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // CommandTypeMetadataSubjects::Subject_9
+	{ reinterpret_cast<void*>(&CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_10), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // CommandTypeMetadataSubjects::Subject_10
+	{ reinterpret_cast<void*>(&CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_11), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // CommandTypeMetadataSubjects::Subject_11
+	{ reinterpret_cast<void*>(&CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_12), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // CommandTypeMetadataSubjects::Subject_12
+	{ reinterpret_cast<void*>(&CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_13), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // CommandTypeMetadataSubjects::Subject_13
+	{ reinterpret_cast<void*>(&CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_14), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // CommandTypeMetadataSubjects::Subject_14
 };
 
 // Module hotpatch bundle
@@ -924,11 +931,12 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // ── External Runtime Dispatch Table ──────────────────────────
 // Startup-time-resolved function pointers for cross-assembly calls.
 
-extern "C" const char* kChaosExternalRuntimeSubjects[17] = {
+extern "C" const char* kChaosExternalRuntimeSubjects[18] = {
 	"System.Private.CoreLib/System.Int32",
 	"System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)",
 	"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode",
 	"System.ObjectModel/System.ComponentModel.TypeConverterAttribute::get_ConverterTypeName:System.String()",
+	"System.Private.CoreLib/System.String::get_Length:System.Int32()",
 	"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
 	"System.ObjectModel/System.ComponentModel.TypeConverterAttribute::.ctor:System.Void()",
 	"System.Private.CoreLib/System.Byte",
@@ -944,11 +952,12 @@ extern "C" const char* kChaosExternalRuntimeSubjects[17] = {
 	"System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::.ctor:System.Void(System.String)",
 };
 
-extern "C" void* kChaosExternalRuntimeFnTable[17] = {
+extern "C" void* kChaosExternalRuntimeFnTable[18] = {
 	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object__Equals_System_Boolean_System_Object_),
 	nullptr,
 	nullptr,
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__),
 	nullptr,
 	nullptr,
@@ -964,7 +973,7 @@ extern "C" void* kChaosExternalRuntimeFnTable[17] = {
 	nullptr,
 };
 
-extern "C" int32_t kChaosExternalRuntimeCount = 17;
+extern "C" int32_t kChaosExternalRuntimeCount = 18;
 // (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
@@ -1125,7 +1134,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry0;
 	/* ── Entry 1: CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_1 ── */
 	struct {
@@ -1133,7 +1142,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry1;
 	/* ── Entry 2: CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_2 ── */
 	struct {
@@ -1141,7 +1150,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry2;
 	/* ── Entry 3: CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_3 ── */
 	struct {
@@ -1173,7 +1182,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry6;
 	/* ── Entry 7: CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_8 ── */
 	struct {
@@ -1181,7 +1190,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry7;
 	/* ── Entry 8: CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_9 ── */
 	struct {
@@ -1197,7 +1206,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry9;
 	/* ── Entry 10: CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_12 ── */
 	struct {
@@ -1205,7 +1214,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry10;
 	/* ── Entry 11: CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_13 ── */
 	struct {
@@ -1226,27 +1235,27 @@ static const struct {
 } kChaosGcSlotMapsSection = {
 	/* entry0 = CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_0 */
 	.entry0 = {
-		/* entry_total_size = 32 */ 32u,
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_0),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
 	/* entry1 = CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_1 */
 	.entry1 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_1),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
 	/* entry2 = CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_2 */
 	.entry2 = {
-		/* entry_total_size = 24 */ 24u,
+		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_2),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
 	},
 	/* entry3 = CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_3 */
 	.entry3 = {
@@ -1274,19 +1283,19 @@ static const struct {
 	},
 	/* entry6 = CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_6 */
 	.entry6 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_6),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
 	/* entry7 = CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_8 */
 	.entry7 = {
-		/* entry_total_size = 32 */ 32u,
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_8),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
 	/* entry8 = CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_9 */
 	.entry8 = {
@@ -1298,19 +1307,19 @@ static const struct {
 	},
 	/* entry9 = CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_11 */
 	.entry9 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_11),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
 	/* entry10 = CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_12 */
 	.entry10 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_12),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
 	/* entry11 = CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_13 */
 	.entry11 = {
@@ -1333,7 +1342,7 @@ static const struct {
 #pragma pack(pop)
 #endif
 
-static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 352u;
+static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 424u;
 
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
@@ -1490,6 +1499,20 @@ extern "C" void CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
+	CHAOS_IL2CPP_INTPTR _s17{};
+	CHAOS_IL2CPP_INTPTR _s18{};
+	CHAOS_IL2CPP_INTPTR _s19{};
+	CHAOS_IL2CPP_INTPTR _s20{};
 
 
 	CHAOS_EH_TRY
@@ -1508,9 +1531,38 @@ extern "C" void CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_
 				const auto chaos_result = chaos_object_equals(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			// brtrue (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s3 = 0;
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_value = _s4;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+			}
+			{
+				const auto chaos_arg_1 = _s4;
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = chaos_object_equals(chaos_arg_0, chaos_arg_1);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			// brtrue (structured EH branch)
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			chaos_locals[0] = _s4;
+			_s4 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s5;
 				chaos_static_CommandTypeMetadataSubjects_CommandTypeMetadataSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -1518,10 +1570,15 @@ extern "C" void CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_CommandTypeMetadataSubjects_CommandTypeMetadataSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -1535,6 +1592,15 @@ extern "C" void CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	CHAOS_EH_TRY
@@ -1543,9 +1609,38 @@ extern "C" void CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[3])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s1;
+				const auto chaos_arg_0 = _s1;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = 0;
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[3])();
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s3;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
 				chaos_static_CommandTypeMetadataSubjects_CommandTypeMetadataSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -1553,10 +1648,15 @@ extern "C" void CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_CommandTypeMetadataSubjects_CommandTypeMetadataSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -1570,6 +1670,13 @@ extern "C" void CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
 
 
 	CHAOS_EH_TRY
@@ -1579,9 +1686,21 @@ extern "C" void CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_
 				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s1 = 0;
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_CommandTypeMetadataSubjects_CommandTypeMetadataSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -1589,10 +1708,15 @@ extern "C" void CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_CommandTypeMetadataSubjects_CommandTypeMetadataSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -1603,13 +1727,31 @@ extern "C" void CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
 
 
-	{
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_ObjectModel_System_ComponentModel_TypeConverterAttribute, {});
-		chaos_object->header.type_info = &chaos_mt_System_ObjectModel_System_ComponentModel_TypeConverterAttribute.hot;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
+	CHAOS_EH_TRY
+			{
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_ObjectModel_System_ComponentModel_TypeConverterAttribute, {});
+				chaos_object->header.type_info = &chaos_mt_System_ObjectModel_System_ComponentModel_TypeConverterAttribute.hot;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_CommandTypeMetadataSubjects_CommandTypeMetadataSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_END
 	return;
 }
 
@@ -1621,19 +1763,37 @@ extern "C" void CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
 
 
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_ObjectModel_System_ComponentModel_TypeConverterAttribute, {});
-		chaos_object->header.type_info = &chaos_mt_System_ObjectModel_System_ComponentModel_TypeConverterAttribute.hot;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
+	CHAOS_EH_TRY
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_ObjectModel_System_ComponentModel_TypeConverterAttribute, {});
+				chaos_object->header.type_info = &chaos_mt_System_ObjectModel_System_ComponentModel_TypeConverterAttribute.hot;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_CommandTypeMetadataSubjects_CommandTypeMetadataSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_END
 	return;
 }
 
@@ -1644,16 +1804,34 @@ extern "C" void CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
 
 
-	{{
-		_s0 = CHAOS_IL2CPP_STRING_ID("hello");
-	}}
-	{
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_ObjectModel_System_ComponentModel_TypeConverterAttribute, {});
-		chaos_object->header.type_info = &chaos_mt_System_ObjectModel_System_ComponentModel_TypeConverterAttribute.hot;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
+	CHAOS_EH_TRY
+			{{
+				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
+			}}
+			{
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_ObjectModel_System_ComponentModel_TypeConverterAttribute, {});
+				chaos_object->header.type_info = &chaos_mt_System_ObjectModel_System_ComponentModel_TypeConverterAttribute.hot;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_CommandTypeMetadataSubjects_CommandTypeMetadataSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_END
 	return;
 }
 
@@ -1666,17 +1844,47 @@ extern "C" void CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[10])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[11])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s1;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = 0;
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[11])();
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
 				chaos_static_CommandTypeMetadataSubjects_CommandTypeMetadataSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -1684,10 +1892,15 @@ extern "C" void CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_CommandTypeMetadataSubjects_CommandTypeMetadataSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -1714,6 +1927,20 @@ extern "C" void CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
+	CHAOS_IL2CPP_INTPTR _s17{};
+	CHAOS_IL2CPP_INTPTR _s18{};
+	CHAOS_IL2CPP_INTPTR _s19{};
+	CHAOS_IL2CPP_INTPTR _s20{};
 
 
 	CHAOS_EH_TRY
@@ -1728,12 +1955,40 @@ extern "C" void CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_
 			}
 			{
 				const auto chaos_arg_0 = _s1;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[11])(chaos_arg_0);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[12])(chaos_arg_0);
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			// brtrue (structured EH branch)
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s4 = 0;
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
-				auto chaos_value = _s1;
+				const auto chaos_value = _s5;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+			}
+			{
+				const auto chaos_arg_0 = _s5;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[12])(chaos_arg_0);
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			// brtrue (structured EH branch)
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			chaos_locals[0] = _s6;
+			_s6 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s7;
 				chaos_static_CommandTypeMetadataSubjects_CommandTypeMetadataSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -1741,10 +1996,15 @@ extern "C" void CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_CommandTypeMetadataSubjects_CommandTypeMetadataSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -1774,22 +2034,22 @@ extern "C" void CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_
 			}
 			{
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[12])(chaos_arg_0);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_CommandTypeMetadataSubjects_CommandTypeMetadataSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[13])(chaos_arg_0);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_CommandTypeMetadataSubjects_CommandTypeMetadataSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -1813,17 +2073,47 @@ extern "C" void CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[13])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[14])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s1;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = 0;
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[14])();
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
 				chaos_static_CommandTypeMetadataSubjects_CommandTypeMetadataSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -1831,10 +2121,15 @@ extern "C" void CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_CommandTypeMetadataSubjects_CommandTypeMetadataSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -1848,17 +2143,55 @@ extern "C" void CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[14])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[15])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s1;
+				const auto chaos_arg_0 = _s1;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = 0;
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[15])();
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s3;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
 				chaos_static_CommandTypeMetadataSubjects_CommandTypeMetadataSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -1866,10 +2199,15 @@ extern "C" void CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_CommandTypeMetadataSubjects_CommandTypeMetadataSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -1882,19 +2220,37 @@ extern "C" void CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
 
 
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_ObjectModel_System_Windows_Markup_ValueSerializerAttribute, {});
-		chaos_object->header.type_info = &chaos_mt_System_ObjectModel_System_Windows_Markup_ValueSerializerAttribute.hot;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
+	CHAOS_EH_TRY
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_ObjectModel_System_Windows_Markup_ValueSerializerAttribute, {});
+				chaos_object->header.type_info = &chaos_mt_System_ObjectModel_System_Windows_Markup_ValueSerializerAttribute.hot;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_CommandTypeMetadataSubjects_CommandTypeMetadataSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_END
 	return;
 }
 
@@ -1905,16 +2261,34 @@ extern "C" void CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
 
 
-	{{
-		_s0 = CHAOS_IL2CPP_STRING_ID("hello");
-	}}
-	{
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_ObjectModel_System_Windows_Markup_ValueSerializerAttribute, {});
-		chaos_object->header.type_info = &chaos_mt_System_ObjectModel_System_Windows_Markup_ValueSerializerAttribute.hot;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
+	CHAOS_EH_TRY
+			{{
+				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
+			}}
+			{
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_ObjectModel_System_Windows_Markup_ValueSerializerAttribute, {});
+				chaos_object->header.type_info = &chaos_mt_System_ObjectModel_System_Windows_Markup_ValueSerializerAttribute.hot;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_CommandTypeMetadataSubjects_CommandTypeMetadataSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_END
 	return;
 }
 
@@ -1926,4 +2300,48 @@ extern "C" void CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_
 // extern "C" definition for link-time visibility from runtime-entry.cpp
 extern "C" const int kAotMethodCount = 15;
 
-extern "C" void ChaosJitRegisterAll() {}
+// ── JIT Method Entry Table ───────────────────────────────────────────
+// Auto-generated by chaos-il2cpp codegen for --mode jit.
+#include <cstdint>
+#include "jit_registration.h"
+
+static const char kMethodJson_0[] = "{\"methodId\":\"command-type-metadata-subjects.command-type-metadata-subjects.subject-0\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_0:System.Void()\",\"signature\":\"System.Void CommandTypeMetadataSubjects::Subject_0()\",\"identity\":{\"assemblyName\":\"CommandTypeMetadataSubjects\",\"declaringTypeSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects\",\"definitionSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_0:System.Void()\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_0:System.Void()\",\"methodId\":\"command-type-metadata-subjects.command-type-metadata-subjects.subject-0\",\"signature\":\"System.Void CommandTypeMetadataSubjects::Subject_0()\"},\"nativeSymbol\":\"CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_0\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":57,\"handlerOffset\":58,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"box\",\"opCode\":35,\"operand\":\"System.Private.CoreLib/System.Int32\",\"ilOffset\":5,\"resultType\":\"System.Object\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Int32\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Int32\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":9,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":10,\"resultType\":\"System.Boolean\",\"callee\":\"System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":20,\"ilOffset\":15,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":17,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":21,\"ilOffset\":18,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":20,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":21,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":22,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"box\",\"opCode\":35,\"operand\":\"System.Private.CoreLib/System.Int32\",\"ilOffset\":24,\"resultType\":\"System.Object\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Int32\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Int32\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":9,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":29,\"resultType\":\"System.Boolean\",\"callee\":\"System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":39,\"ilOffset\":34,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":36,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":40,\"ilOffset\":37,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":39,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":40,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":42,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":43,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":45,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":46,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":55,\"ilOffset\":47,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":49,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"ilOffset\":50,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":69,\"ilOffset\":56,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":58,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":60,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"ilOffset\":61,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":69,\"ilOffset\":67,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":69,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CommandTypeMetadataSubjects\"}";
+static const char kMethodJson_1[] = "{\"methodId\":\"command-type-metadata-subjects.command-type-metadata-subjects.subject-1\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_1:System.Void()\",\"signature\":\"System.Void CommandTypeMetadataSubjects::Subject_1()\",\"identity\":{\"assemblyName\":\"CommandTypeMetadataSubjects\",\"declaringTypeSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects\",\"definitionSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_1:System.Void()\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_1:System.Void()\",\"methodId\":\"command-type-metadata-subjects.command-type-metadata-subjects.subject-1\",\"signature\":\"System.Void CommandTypeMetadataSubjects::Subject_1()\"},\"nativeSymbol\":\"CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_1\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":41,\"handlerOffset\":42,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.String\",\"callee\":\"System.ObjectModel/System.ComponentModel.TypeConverterAttribute::get_ConverterTypeName:System.String()\",\"reference\":{\"assemblyName\":\"System.ObjectModel\",\"subjectKind\":\"method\",\"subjectId\":\"System.ObjectModel/System.ComponentModel.TypeConverterAttribute::get_ConverterTypeName:System.String()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.ObjectModel\",\"subjectId\":\"System.ObjectModel/System.ComponentModel.TypeConverterAttribute::get_ConverterTypeName:System.String()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":8,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":13,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":14,\"resultType\":\"System.String\",\"callee\":\"System.ObjectModel/System.ComponentModel.TypeConverterAttribute::get_ConverterTypeName:System.String()\",\"reference\":{\"assemblyName\":\"System.ObjectModel\",\"subjectKind\":\"method\",\"subjectId\":\"System.ObjectModel/System.ComponentModel.TypeConverterAttribute::get_ConverterTypeName:System.String()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.ObjectModel\",\"subjectId\":\"System.ObjectModel/System.ComponentModel.TypeConverterAttribute::get_ConverterTypeName:System.String()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":19,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":24,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":26,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":27,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":29,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":30,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":39,\"ilOffset\":31,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":33,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"ilOffset\":34,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":53,\"ilOffset\":40,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":42,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":44,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"ilOffset\":45,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":53,\"ilOffset\":51,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":53,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CommandTypeMetadataSubjects\"}";
+static const char kMethodJson_2[] = "{\"methodId\":\"command-type-metadata-subjects.command-type-metadata-subjects.subject-2\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_2:System.Void()\",\"signature\":\"System.Void CommandTypeMetadataSubjects::Subject_2()\",\"identity\":{\"assemblyName\":\"CommandTypeMetadataSubjects\",\"declaringTypeSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects\",\"definitionSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_2:System.Void()\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_2:System.Void()\",\"methodId\":\"command-type-metadata-subjects.command-type-metadata-subjects.subject-2\",\"signature\":\"System.Void CommandTypeMetadataSubjects::Subject_2()\"},\"nativeSymbol\":\"CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_2\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":31,\"handlerOffset\":32,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":8,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":9,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":14,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":16,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":17,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":19,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":20,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":29,\"ilOffset\":21,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":23,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"ilOffset\":24,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":43,\"ilOffset\":30,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":32,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":34,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"ilOffset\":35,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":43,\"ilOffset\":41,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":43,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CommandTypeMetadataSubjects\"}";
+static const char kMethodJson_3[] = "{\"methodId\":\"command-type-metadata-subjects.command-type-metadata-subjects.subject-3\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_3:System.Void()\",\"signature\":\"System.Void CommandTypeMetadataSubjects::Subject_3()\",\"identity\":{\"assemblyName\":\"CommandTypeMetadataSubjects\",\"declaringTypeSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects\",\"definitionSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_3:System.Void()\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_3:System.Void()\",\"methodId\":\"command-type-metadata-subjects.command-type-metadata-subjects.subject-3\",\"signature\":\"System.Void CommandTypeMetadataSubjects::Subject_3()\"},\"nativeSymbol\":\"CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_3\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":10,\"handlerOffset\":11,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":2,\"resultType\":\"System.ObjectModel/System.ComponentModel.TypeConverterAttribute\",\"callee\":\"System.ObjectModel/System.ComponentModel.TypeConverterAttribute::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"System.ObjectModel\",\"subjectKind\":\"method\",\"subjectId\":\"System.ObjectModel/System.ComponentModel.TypeConverterAttribute::.ctor:System.Void()\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.ObjectModel\",\"subjectId\":\"System.ObjectModel/System.ComponentModel.TypeConverterAttribute\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":22,\"ilOffset\":9,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":11,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":13,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"ilOffset\":14,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":22,\"ilOffset\":20,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":22,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CommandTypeMetadataSubjects\"}";
+static const char kMethodJson_4[] = "{\"methodId\":\"command-type-metadata-subjects.command-type-metadata-subjects.subject-4\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_4:System.Void()\",\"signature\":\"System.Void CommandTypeMetadataSubjects::Subject_4()\",\"identity\":{\"assemblyName\":\"CommandTypeMetadataSubjects\",\"declaringTypeSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects\",\"definitionSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_4:System.Void()\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_4:System.Void()\",\"methodId\":\"command-type-metadata-subjects.command-type-metadata-subjects.subject-4\",\"signature\":\"System.Void CommandTypeMetadataSubjects::Subject_4()\"},\"nativeSymbol\":\"CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_4\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":20,\"handlerOffset\":21,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldtoken\",\"opCode\":70,\"operand\":\"System.Private.CoreLib/System.Byte\",\"ilOffset\":2,\"resultType\":\"System.RuntimeTypeHandle\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Byte\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Byte\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":7,\"resultType\":\"System.Type\",\"callee\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":12,\"resultType\":\"System.ObjectModel/System.ComponentModel.TypeConverterAttribute\",\"callee\":\"System.ObjectModel/System.ComponentModel.TypeConverterAttribute::.ctor:System.Void(System.Type)\",\"reference\":{\"assemblyName\":\"System.ObjectModel\",\"subjectKind\":\"method\",\"subjectId\":\"System.ObjectModel/System.ComponentModel.TypeConverterAttribute::.ctor:System.Void(System.Type)\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.ObjectModel\",\"subjectId\":\"System.ObjectModel/System.ComponentModel.TypeConverterAttribute\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":17,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":32,\"ilOffset\":19,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":21,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":23,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"ilOffset\":24,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":32,\"ilOffset\":30,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":32,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CommandTypeMetadataSubjects\"}";
+static const char kMethodJson_5[] = "{\"methodId\":\"command-type-metadata-subjects.command-type-metadata-subjects.subject-5\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_5:System.Void()\",\"signature\":\"System.Void CommandTypeMetadataSubjects::Subject_5()\",\"identity\":{\"assemblyName\":\"CommandTypeMetadataSubjects\",\"declaringTypeSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects\",\"definitionSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_5:System.Void()\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_5:System.Void()\",\"methodId\":\"command-type-metadata-subjects.command-type-metadata-subjects.subject-5\",\"signature\":\"System.Void CommandTypeMetadataSubjects::Subject_5()\"},\"nativeSymbol\":\"CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_5\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":15,\"handlerOffset\":16,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldstr\",\"opCode\":4,\"operand\":\"hello\",\"ilOffset\":2,\"resultType\":\"System.String\",\"isPreserveSig\":false},{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":7,\"resultType\":\"System.ObjectModel/System.ComponentModel.TypeConverterAttribute\",\"callee\":\"System.ObjectModel/System.ComponentModel.TypeConverterAttribute::.ctor:System.Void(System.String)\",\"reference\":{\"assemblyName\":\"System.ObjectModel\",\"subjectKind\":\"method\",\"subjectId\":\"System.ObjectModel/System.ComponentModel.TypeConverterAttribute::.ctor:System.Void(System.String)\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.ObjectModel\",\"subjectId\":\"System.ObjectModel/System.ComponentModel.TypeConverterAttribute\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":12,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":27,\"ilOffset\":14,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":16,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":18,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"ilOffset\":19,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":27,\"ilOffset\":25,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":27,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CommandTypeMetadataSubjects\"}";
+static const char kMethodJson_6[] = "{\"methodId\":\"command-type-metadata-subjects.command-type-metadata-subjects.subject-6\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_6:System.Void()\",\"signature\":\"System.Void CommandTypeMetadataSubjects::Subject_6()\",\"identity\":{\"assemblyName\":\"CommandTypeMetadataSubjects\",\"declaringTypeSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects\",\"definitionSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_6:System.Void()\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_6:System.Void()\",\"methodId\":\"command-type-metadata-subjects.command-type-metadata-subjects.subject-6\",\"signature\":\"System.Void CommandTypeMetadataSubjects::Subject_6()\"},\"nativeSymbol\":\"CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_6\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":41,\"handlerOffset\":42,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Type\",\"callee\":\"System.ObjectModel/System.Reflection.ICustomTypeProvider::GetCustomType:System.Type()\",\"reference\":{\"assemblyName\":\"System.ObjectModel\",\"subjectKind\":\"method\",\"subjectId\":\"System.ObjectModel/System.Reflection.ICustomTypeProvider::GetCustomType:System.Type()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.ObjectModel\",\"subjectId\":\"System.ObjectModel/System.Reflection.ICustomTypeProvider::GetCustomType:System.Type()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":8,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":13,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":14,\"resultType\":\"System.Type\",\"callee\":\"System.ObjectModel/System.Reflection.ICustomTypeProvider::GetCustomType:System.Type()\",\"reference\":{\"assemblyName\":\"System.ObjectModel\",\"subjectKind\":\"method\",\"subjectId\":\"System.ObjectModel/System.Reflection.ICustomTypeProvider::GetCustomType:System.Type()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.ObjectModel\",\"subjectId\":\"System.ObjectModel/System.Reflection.ICustomTypeProvider::GetCustomType:System.Type()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":19,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":24,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":26,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":27,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":29,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":30,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":39,\"ilOffset\":31,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":33,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"ilOffset\":34,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":53,\"ilOffset\":40,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":42,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":44,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"ilOffset\":45,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":53,\"ilOffset\":51,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":53,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CommandTypeMetadataSubjects\"}";
+static const char kMethodJson_7[] = "{\"methodId\":\"command-type-metadata-subjects.command-type-metadata-subjects.subject-7\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_7:System.Void()\",\"signature\":\"System.Void CommandTypeMetadataSubjects::Subject_7()\",\"identity\":{\"assemblyName\":\"CommandTypeMetadataSubjects\",\"declaringTypeSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects\",\"definitionSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_7:System.Void()\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_7:System.Void()\",\"methodId\":\"command-type-metadata-subjects.command-type-metadata-subjects.subject-7\",\"signature\":\"System.Void CommandTypeMetadataSubjects::Subject_7()\"},\"nativeSymbol\":\"CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_7\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CommandTypeMetadataSubjects\"}";
+static const char kMethodJson_8[] = "{\"methodId\":\"command-type-metadata-subjects.command-type-metadata-subjects.subject-8\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_8:System.Void()\",\"signature\":\"System.Void CommandTypeMetadataSubjects::Subject_8()\",\"identity\":{\"assemblyName\":\"CommandTypeMetadataSubjects\",\"declaringTypeSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects\",\"definitionSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_8:System.Void()\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_8:System.Void()\",\"methodId\":\"command-type-metadata-subjects.command-type-metadata-subjects.subject-8\",\"signature\":\"System.Void CommandTypeMetadataSubjects::Subject_8()\"},\"nativeSymbol\":\"CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_8\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":57,\"handlerOffset\":58,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"box\",\"opCode\":35,\"operand\":\"System.Private.CoreLib/System.Int32\",\"ilOffset\":5,\"resultType\":\"System.Object\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Int32\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Int32\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":9,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":10,\"resultType\":\"System.Boolean\",\"callee\":\"System.ObjectModel/System.Windows.Input.ICommand::CanExecute:System.Boolean(System.Object)\",\"reference\":{\"assemblyName\":\"System.ObjectModel\",\"subjectKind\":\"method\",\"subjectId\":\"System.ObjectModel/System.Windows.Input.ICommand::CanExecute:System.Boolean(System.Object)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.ObjectModel\",\"subjectId\":\"System.ObjectModel/System.Windows.Input.ICommand::CanExecute:System.Boolean(System.Object)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":20,\"ilOffset\":15,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":17,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":21,\"ilOffset\":18,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":20,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":21,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":22,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"box\",\"opCode\":35,\"operand\":\"System.Private.CoreLib/System.Int32\",\"ilOffset\":24,\"resultType\":\"System.Object\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Int32\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Int32\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":9,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":29,\"resultType\":\"System.Boolean\",\"callee\":\"System.ObjectModel/System.Windows.Input.ICommand::CanExecute:System.Boolean(System.Object)\",\"reference\":{\"assemblyName\":\"System.ObjectModel\",\"subjectKind\":\"method\",\"subjectId\":\"System.ObjectModel/System.Windows.Input.ICommand::CanExecute:System.Boolean(System.Object)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.ObjectModel\",\"subjectId\":\"System.ObjectModel/System.Windows.Input.ICommand::CanExecute:System.Boolean(System.Object)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":39,\"ilOffset\":34,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":36,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":40,\"ilOffset\":37,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":39,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":40,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":42,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":43,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":45,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":46,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":55,\"ilOffset\":47,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":49,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"ilOffset\":50,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":69,\"ilOffset\":56,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":58,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":60,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"ilOffset\":61,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":69,\"ilOffset\":67,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":69,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CommandTypeMetadataSubjects\"}";
+static const char kMethodJson_9[] = "{\"methodId\":\"command-type-metadata-subjects.command-type-metadata-subjects.subject-9\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_9:System.Void()\",\"signature\":\"System.Void CommandTypeMetadataSubjects::Subject_9()\",\"identity\":{\"assemblyName\":\"CommandTypeMetadataSubjects\",\"declaringTypeSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects\",\"definitionSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_9:System.Void()\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_9:System.Void()\",\"methodId\":\"command-type-metadata-subjects.command-type-metadata-subjects.subject-9\",\"signature\":\"System.Void CommandTypeMetadataSubjects::Subject_9()\"},\"nativeSymbol\":\"CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_9\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":18,\"handlerOffset\":19,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"box\",\"opCode\":35,\"operand\":\"System.Private.CoreLib/System.Int32\",\"ilOffset\":5,\"resultType\":\"System.Object\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Int32\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Int32\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":9,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":10,\"resultType\":\"System.Void\",\"callee\":\"System.ObjectModel/System.Windows.Input.ICommand::Execute:System.Void(System.Object)\",\"reference\":{\"assemblyName\":\"System.ObjectModel\",\"subjectKind\":\"method\",\"subjectId\":\"System.ObjectModel/System.Windows.Input.ICommand::Execute:System.Void(System.Object)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.ObjectModel\",\"subjectId\":\"System.ObjectModel/System.Windows.Input.ICommand::Execute:System.Void(System.Object)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":30,\"ilOffset\":17,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":19,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":21,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"ilOffset\":22,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":30,\"ilOffset\":28,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":30,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CommandTypeMetadataSubjects\"}";
+static const char kMethodJson_10[] = "{\"methodId\":\"command-type-metadata-subjects.command-type-metadata-subjects.subject-10\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_10:System.Void()\",\"signature\":\"System.Void CommandTypeMetadataSubjects::Subject_10()\",\"identity\":{\"assemblyName\":\"CommandTypeMetadataSubjects\",\"declaringTypeSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects\",\"definitionSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_10:System.Void()\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_10:System.Void()\",\"methodId\":\"command-type-metadata-subjects.command-type-metadata-subjects.subject-10\",\"signature\":\"System.Void CommandTypeMetadataSubjects::Subject_10()\"},\"nativeSymbol\":\"CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_10\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CommandTypeMetadataSubjects\"}";
+static const char kMethodJson_11[] = "{\"methodId\":\"command-type-metadata-subjects.command-type-metadata-subjects.subject-11\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_11:System.Void()\",\"signature\":\"System.Void CommandTypeMetadataSubjects::Subject_11()\",\"identity\":{\"assemblyName\":\"CommandTypeMetadataSubjects\",\"declaringTypeSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects\",\"definitionSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_11:System.Void()\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_11:System.Void()\",\"methodId\":\"command-type-metadata-subjects.command-type-metadata-subjects.subject-11\",\"signature\":\"System.Void CommandTypeMetadataSubjects::Subject_11()\"},\"nativeSymbol\":\"CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_11\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":41,\"handlerOffset\":42,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Type\",\"callee\":\"System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::get_ValueSerializerType:System.Type()\",\"reference\":{\"assemblyName\":\"System.ObjectModel\",\"subjectKind\":\"method\",\"subjectId\":\"System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::get_ValueSerializerType:System.Type()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.ObjectModel\",\"subjectId\":\"System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::get_ValueSerializerType:System.Type()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":8,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":13,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":14,\"resultType\":\"System.Type\",\"callee\":\"System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::get_ValueSerializerType:System.Type()\",\"reference\":{\"assemblyName\":\"System.ObjectModel\",\"subjectKind\":\"method\",\"subjectId\":\"System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::get_ValueSerializerType:System.Type()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.ObjectModel\",\"subjectId\":\"System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::get_ValueSerializerType:System.Type()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":19,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":24,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":26,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":27,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":29,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":30,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":39,\"ilOffset\":31,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":33,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"ilOffset\":34,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":53,\"ilOffset\":40,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":42,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":44,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"ilOffset\":45,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":53,\"ilOffset\":51,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":53,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CommandTypeMetadataSubjects\"}";
+static const char kMethodJson_12[] = "{\"methodId\":\"command-type-metadata-subjects.command-type-metadata-subjects.subject-12\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_12:System.Void()\",\"signature\":\"System.Void CommandTypeMetadataSubjects::Subject_12()\",\"identity\":{\"assemblyName\":\"CommandTypeMetadataSubjects\",\"declaringTypeSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects\",\"definitionSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_12:System.Void()\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_12:System.Void()\",\"methodId\":\"command-type-metadata-subjects.command-type-metadata-subjects.subject-12\",\"signature\":\"System.Void CommandTypeMetadataSubjects::Subject_12()\"},\"nativeSymbol\":\"CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_12\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":41,\"handlerOffset\":42,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.String\",\"callee\":\"System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::get_ValueSerializerTypeName:System.String()\",\"reference\":{\"assemblyName\":\"System.ObjectModel\",\"subjectKind\":\"method\",\"subjectId\":\"System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::get_ValueSerializerTypeName:System.String()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.ObjectModel\",\"subjectId\":\"System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::get_ValueSerializerTypeName:System.String()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":8,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":13,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":14,\"resultType\":\"System.String\",\"callee\":\"System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::get_ValueSerializerTypeName:System.String()\",\"reference\":{\"assemblyName\":\"System.ObjectModel\",\"subjectKind\":\"method\",\"subjectId\":\"System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::get_ValueSerializerTypeName:System.String()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.ObjectModel\",\"subjectId\":\"System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::get_ValueSerializerTypeName:System.String()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":19,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":24,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":26,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":27,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":29,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":30,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":39,\"ilOffset\":31,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":33,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"ilOffset\":34,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":53,\"ilOffset\":40,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":42,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":44,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"ilOffset\":45,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":53,\"ilOffset\":51,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":53,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CommandTypeMetadataSubjects\"}";
+static const char kMethodJson_13[] = "{\"methodId\":\"command-type-metadata-subjects.command-type-metadata-subjects.subject-13\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_13:System.Void()\",\"signature\":\"System.Void CommandTypeMetadataSubjects::Subject_13()\",\"identity\":{\"assemblyName\":\"CommandTypeMetadataSubjects\",\"declaringTypeSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects\",\"definitionSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_13:System.Void()\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_13:System.Void()\",\"methodId\":\"command-type-metadata-subjects.command-type-metadata-subjects.subject-13\",\"signature\":\"System.Void CommandTypeMetadataSubjects::Subject_13()\"},\"nativeSymbol\":\"CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_13\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":20,\"handlerOffset\":21,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldtoken\",\"opCode\":70,\"operand\":\"System.Private.CoreLib/System.Byte\",\"ilOffset\":2,\"resultType\":\"System.RuntimeTypeHandle\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Byte\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Byte\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":7,\"resultType\":\"System.Type\",\"callee\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":12,\"resultType\":\"System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute\",\"callee\":\"System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::.ctor:System.Void(System.Type)\",\"reference\":{\"assemblyName\":\"System.ObjectModel\",\"subjectKind\":\"method\",\"subjectId\":\"System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::.ctor:System.Void(System.Type)\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.ObjectModel\",\"subjectId\":\"System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":17,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":32,\"ilOffset\":19,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":21,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":23,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"ilOffset\":24,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":32,\"ilOffset\":30,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":32,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CommandTypeMetadataSubjects\"}";
+static const char kMethodJson_14[] = "{\"methodId\":\"command-type-metadata-subjects.command-type-metadata-subjects.subject-14\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_14:System.Void()\",\"signature\":\"System.Void CommandTypeMetadataSubjects::Subject_14()\",\"identity\":{\"assemblyName\":\"CommandTypeMetadataSubjects\",\"declaringTypeSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects\",\"definitionSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_14:System.Void()\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::Subject_14:System.Void()\",\"methodId\":\"command-type-metadata-subjects.command-type-metadata-subjects.subject-14\",\"signature\":\"System.Void CommandTypeMetadataSubjects::Subject_14()\"},\"nativeSymbol\":\"CommandTypeMetadataSubjects_CommandTypeMetadataSubjects_Subject_14\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":15,\"handlerOffset\":16,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldstr\",\"opCode\":4,\"operand\":\"hello\",\"ilOffset\":2,\"resultType\":\"System.String\",\"isPreserveSig\":false},{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":7,\"resultType\":\"System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute\",\"callee\":\"System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::.ctor:System.Void(System.String)\",\"reference\":{\"assemblyName\":\"System.ObjectModel\",\"subjectKind\":\"method\",\"subjectId\":\"System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::.ctor:System.Void(System.String)\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.ObjectModel\",\"subjectId\":\"System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":12,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":27,\"ilOffset\":14,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":16,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":18,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"ilOffset\":19,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"CommandTypeMetadataSubjects\",\"subjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"CommandTypeMetadataSubjects/CommandTypeMetadataSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":27,\"ilOffset\":25,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":27,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"CommandTypeMetadataSubjects\"}";
+
+extern "C" const JitMethodEntry kChaosJitMethodEntries[15] =
+{
+    { kMethodJson_0, 7620u, 0x00000003u, 0u },
+    { kMethodJson_1, 6916u, 0x00000004u, 0u },
+    { kMethodJson_2, 5467u, 0x00000005u, 0u },
+    { kMethodJson_3, 3389u, 0x00000006u, 0u },
+    { kMethodJson_4, 4627u, 0x00000007u, 0u },
+    { kMethodJson_5, 3525u, 0x00000008u, 0u },
+    { kMethodJson_6, 6816u, 0x00000009u, 0u },
+    { kMethodJson_7, 1355u, 0x0000000Au, 0u },
+    { kMethodJson_8, 7700u, 0x0000000Bu, 0u },
+    { kMethodJson_9, 4023u, 0x0000000Cu, 0u },
+    { kMethodJson_10, 1363u, 0x0000000Du, 0u },
+    { kMethodJson_11, 6938u, 0x0000000Eu, 0u },
+    { kMethodJson_12, 6972u, 0x0000000Fu, 0u },
+    { kMethodJson_13, 4643u, 0x00000010u, 0u },
+    { kMethodJson_14, 3541u, 0x00000011u, 0u }
+};
+
+extern "C" const uint32_t kChaosJitMethodEntryCount = 15u;
+
+extern "C" void ChaosJitRegisterAll() {
+    RegisterJitMethods(kChaosJitMethodEntries, kChaosJitMethodEntryCount);
+}

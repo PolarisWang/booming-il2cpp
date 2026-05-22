@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "FormatterSubjects",
   "entrySubjectId": "FormatterSubjects/FormatterSubjects::CustomEntrySubject_1:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Net.ServerSentEvents/formatter/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.Net.ServerSentEvents/formatter/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

@@ -195,6 +195,12 @@
       "reason": "external-call"
     },
     {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
       "assemblyName": "System.IO.Pipelines",
       "subjectKind": "method",
       "subjectId": "System.IO.Pipelines/PipeReader::CancelPendingRead:System.Void()",
@@ -234,12 +240,6 @@
       "assemblyName": "System.IO.Pipelines",
       "subjectKind": "method",
       "subjectId": "System.IO.Pipelines/PipeReader::Create:PipeReader(System.IO.Stream,StreamPipeReaderOptions)",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "reason": "external-call"
     },
     {

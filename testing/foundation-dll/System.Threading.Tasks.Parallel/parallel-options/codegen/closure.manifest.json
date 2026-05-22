@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ParallelOptionsSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Threading.Tasks.Parallel/parallel-options/managed/subjects/build-output/ParallelOptionsSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Threading.Tasks.Parallel/parallel-options/managed/subjects/build-output/ParallelOptionsSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "ParallelOptionsSubjects",
-      "path": "verification/foundation-dll/System.Threading.Tasks.Parallel/parallel-options/managed/subjects/build-output/ParallelOptionsSubjects.dll"
+      "path": "testing/foundation-dll/System.Threading.Tasks.Parallel/parallel-options/managed/subjects/build-output/ParallelOptionsSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "7e87b1fd-fd35-4b83-922b-a493eef615cd",
+  "inputModuleVersionId": "8109f6f0-6c01-4da9-83ce-4569c502e971",
   "artifacts": [
     {
       "kind": "typedIlIr",

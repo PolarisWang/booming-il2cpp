@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "MetadataTypeinfoSubjects",
   "entrySubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::CustomEntrySubject_1:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Text.Json/metadata-typeinfo/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.Text.Json/metadata-typeinfo/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

@@ -1,0 +1,18 @@
+{
+  "familyId": "family/System.IO.Pipelines/read-flush-results",
+  "assemblyName": "System.IO.Pipelines",
+  "methodSubjectIds": [
+    "System.IO.Pipelines/System.IO.Pipelines.FlushResult::get_IsCanceled:System.Boolean()",
+    "System.IO.Pipelines/System.IO.Pipelines.FlushResult::get_IsCompleted:System.Boolean()",
+    "System.IO.Pipelines/System.IO.Pipelines.FlushResult::.ctor:System.Void(System.Boolean,System.Boolean)",
+    "System.IO.Pipelines/System.IO.Pipelines.ReadResult::get_Buffer:System.Buffers.ReadOnlySequence{System.Byte}()",
+    "System.IO.Pipelines/System.IO.Pipelines.ReadResult::get_IsCanceled:System.Boolean()",
+    "System.IO.Pipelines/System.IO.Pipelines.ReadResult::get_IsCompleted:System.Boolean()",
+    "System.IO.Pipelines/System.IO.Pipelines.ReadResult::.ctor:System.Void(System.Buffers.ReadOnlySequence{System.Byte},System.Boolean,System.Boolean)"
+  ],
+  "displayName": "read-flush-results",
+  "description": "",
+  "closureStatus": "in-progress",
+  "methodCount": 7,
+  "customEntryIndices": []
+}

@@ -39,6 +39,12 @@
       "reason": "external-call"
     },
     {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
       "assemblyName": "System.Text.Json",
       "subjectKind": "method",
       "subjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter::get_Type:System.Type()",

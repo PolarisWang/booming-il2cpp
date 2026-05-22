@@ -66,9 +66,45 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "MarshallingAttributesSubjects/MarshallingAttributesSubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MarshallingAttributesSubjects/MarshallingAttributesSubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.StructLayoutAttribute::get_Value:System.Runtime.InteropServices.LayoutKind()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MarshallingAttributesSubjects/MarshallingAttributesSubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "MarshallingAttributesSubjects/MarshallingAttributesSubjects::Subject_3:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Runtime.InteropServices/MarshalAsAttribute::get_Value:System.Runtime.InteropServices.UnmanagedType()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MarshallingAttributesSubjects/MarshallingAttributesSubjects::Subject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MarshallingAttributesSubjects/MarshallingAttributesSubjects::Subject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/MarshalAsAttribute::get_Value:System.Runtime.InteropServices.UnmanagedType()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MarshallingAttributesSubjects/MarshallingAttributesSubjects::Subject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
     }
   ],
@@ -84,12 +120,52 @@
     {
       "methodSubjectId": "MarshallingAttributesSubjects/MarshallingAttributesSubjects::Subject_0:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "MarshallingAttributesSubjects/MarshallingAttributesSubjects::Subject_1:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "MarshallingAttributesSubjects/MarshallingAttributesSubjects::Subject_2:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "MarshallingAttributesSubjects/MarshallingAttributesSubjects::Subject_3:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "MarshallingAttributesSubjects/MarshallingAttributesSubjects::Subject_4:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "MarshallingAttributesSubjects/MarshallingAttributesSubjects::Subject_5:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "MarshallingAttributesSubjects/MarshallingAttributesSubjects::Subject_6:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "MarshallingAttributesSubjects/MarshallingAttributesSubjects::Subject_7:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "MarshallingAttributesSubjects/MarshallingAttributesSubjects::Subject_8:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "MarshallingAttributesSubjects/MarshallingAttributesSubjects::Subject_9:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     }
   ]
 }

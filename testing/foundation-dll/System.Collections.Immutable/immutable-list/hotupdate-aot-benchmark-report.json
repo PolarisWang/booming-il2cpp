@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Collections.Immutable",
+  "familyId": "family/System.Collections.Immutable/immutable/list",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableList::Create<Byte>:System.Collections.Immutable.ImmutableList<System.Byte>()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.43,
+      "postPatchNsPerOp": 3.4,
+      "slowdownPercent": -0.87
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableList::Create<Byte>:System.Collections.Immutable.ImmutableList<System.Byte>(System.Byte)",
+      "status": "passed",
+      "prePatchNsPerOp": 3.48,
+      "postPatchNsPerOp": 3.5,
+      "slowdownPercent": 0.57
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableList::Create<Byte>:System.Collections.Immutable.ImmutableList<System.Byte>(System.Byte,System.Byte)",
+      "status": "passed",
+      "prePatchNsPerOp": 189.98,
+      "postPatchNsPerOp": 193.6,
+      "slowdownPercent": 1.91
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableList::Create<Int32>:System.Collections.Immutable.ImmutableList<System.Int32>()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.43,
+      "postPatchNsPerOp": 3.4,
+      "slowdownPercent": -0.87
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableList::Create<Int32>:System.Collections.Immutable.ImmutableList<System.Int32>(System.Int32)",
+      "status": "passed",
+      "prePatchNsPerOp": 3.66,
+      "postPatchNsPerOp": 3.4,
+      "slowdownPercent": -7.1
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableList::Create<String>:System.Collections.Immutable.ImmutableList<System.String>(System.String)",
+      "status": "passed",
+      "prePatchNsPerOp": 5.03,
+      "postPatchNsPerOp": 4.7,
+      "slowdownPercent": -6.56
+    }
+  ],
+  "summary": {
+    "totalMethods": 6,
+    "nonStubMethods": 6,
+    "averageSlowdownPercent": -2.15,
+    "slowdownFactor": 0.9784999999999999,
+    "slowdownThresholdX": 50.0
+  }
+}

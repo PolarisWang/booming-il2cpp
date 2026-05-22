@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ReaderWriterSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.IO.Pipelines/reader-writer/managed/subjects/build-output/ReaderWriterSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.IO.Pipelines/reader-writer/managed/subjects/build-output/ReaderWriterSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "ReaderWriterSubjects",
-      "path": "verification/foundation-dll/System.IO.Pipelines/reader-writer/managed/subjects/build-output/ReaderWriterSubjects.dll"
+      "path": "testing/foundation-dll/System.IO.Pipelines/reader-writer/managed/subjects/build-output/ReaderWriterSubjects.dll"
     },
     {
       "assemblyName": "System.Memory",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "115ddd4d-776e-4f3f-a0ff-338aacd71a61",
+  "inputModuleVersionId": "151c1e99-c8df-4c0a-8f9f-d9822aaba326",
   "artifacts": [
     {
       "kind": "typedIlIr",

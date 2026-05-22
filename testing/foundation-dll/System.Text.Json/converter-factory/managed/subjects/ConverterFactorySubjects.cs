@@ -17,15 +17,15 @@ public static partial class ConverterFactorySubjects
     // [0] System.Text.Json/System.Text.Json.Serialization.JsonConverterFactory::CreateConverter:System.Text.Json.Serialization.JsonConverter(System.Type,System.Text.Json.JsonSerializerOptions)
     public static void Subject_0()
     {
-        try { default(JsonConverterFactory)!.CreateConverter(typeof(byte), null!); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(JsonConverterFactory)!.CreateConverter(typeof(byte), null!)).GetHashCode()) != ((default(JsonConverterFactory)!.CreateConverter(typeof(byte), null!)).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [1] System.Text.Json/System.Text.Json.Serialization.JsonConverterFactory::get_Type:System.Type()
     public static void Subject_1()
     {
-        try { _ = default(JsonConverterFactory)!.Type; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(JsonConverterFactory)!.Type).GetHashCode()) != ((default(JsonConverterFactory)!.Type).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
 }

@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.IO.Pipelines",
+  "familyId": "family/System.IO.Pipelines/stream/adapters",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.StreamPipeExtensions::CopyToAsync:System.Threading.Tasks.Task(System.IO.Stream,System.IO.Pipelines.PipeWriter,System.Threading.CancellationToken)",
+      "elapsedMilliseconds": 9385.158,
+      "calibratedMs": 9385.158,
+      "opsPerSecond": 10655.1,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}

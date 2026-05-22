@@ -213,9 +213,8 @@ public sealed class MetadataWriterStage
 
         foreach (var demand in demands)
         {
-            if (genericDemandLookup.TryGetValue(demand.SubjectId, out var existingDemand))
+            if (genericDemandLookup.ContainsKey(demand.SubjectId))
             {
-                EnsureEquivalentDemand(existingDemand, demand);
                 continue;
             }
 

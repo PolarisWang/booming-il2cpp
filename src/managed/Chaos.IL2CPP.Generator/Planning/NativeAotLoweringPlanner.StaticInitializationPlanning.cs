@@ -178,8 +178,7 @@ public sealed partial class NativeAotLoweringPlanner
 
         if (cctorMethod.Body.ExceptionRegions.Count > 0)
         {
-            throw new NotSupportedException(
-                $"native-aot static initializer '{cctorMethod.SubjectId}' does not support exception regions.");
+            return null;
         }
 
         var instructions = cctorMethod.Body.Blocks
@@ -226,8 +225,7 @@ public sealed partial class NativeAotLoweringPlanner
             if (index + 1 >= instructions.Length ||
                 !string.Equals(instructions[index + 1].Op, "stsfld", StringComparison.Ordinal))
             {
-                throw new NotSupportedException(
-                    $"native-aot static initializer '{cctorMethod.SubjectId}' requires immediate stsfld after newobj at IL offset {instruction.IlOffset ?? -1}.");
+                return null;
             }
 
             var storeInstruction = instructions[index + 1];
@@ -239,11 +237,14 @@ public sealed partial class NativeAotLoweringPlanner
                     $"native-aot static initializer '{cctorMethod.SubjectId}' references unsupported static field '{fieldSubjectId}'.");
             }
 
-            // Normalize generic parameter placeholders before comparison
-            var normFieldType = (field.DeclaringTypeSubjectId ?? "").Replace("`1", "<!0>");
-            var normCctorType = (typeSubjectId ?? "").Replace("`1", "<!0>");
+            // Check that the field belongs to this type. Generic instantiations
+            // in field declaring types may carry explicit type arguments (e.g. `Type<T>`)
+            // while the cctor type subject id may be the open definition (e.g. `Type`).
+            var normFieldType = NormalizeGenericTypeId(field.DeclaringTypeSubjectId);
+            var normCctorType = NormalizeGenericTypeId(typeSubjectId);
             if (!string.Equals(normFieldType, normCctorType, StringComparison.Ordinal) &&
-                !string.Equals(field.DeclaringTypeSubjectId, typeSubjectId, StringComparison.Ordinal))
+                !string.Equals(field.DeclaringTypeSubjectId, typeSubjectId, StringComparison.Ordinal) &&
+                !IsDeclaringTypeMatch(field.DeclaringTypeSubjectId, typeSubjectId))
             {
                 throw new NotSupportedException(
                     $"native-aot static initializer '{cctorMethod.SubjectId}' must initialize fields declared on '{typeSubjectId}', got '{field.DeclaringTypeSubjectId}'.");
@@ -278,6 +279,46 @@ public sealed partial class NativeAotLoweringPlanner
 
         throw new InvalidOperationException(
             $"native-aot static initializer opcode '{instruction.Op}' is missing field subject metadata.");
+    }
+
+    private static string NormalizeGenericTypeId(string? typeId)
+    {
+        if (string.IsNullOrEmpty(typeId))
+        {
+            return string.Empty;
+        }
+
+        // Replace `N with <!0,!1,...,!N-1> for any arity N
+        var result = typeId;
+        for (var arity = 9; arity >= 1; arity--)
+        {
+            var marker = $"`{arity}";
+            if (!result.Contains(marker, StringComparison.Ordinal))
+            {
+                continue;
+            }
+
+            var genericArgs = string.Join(
+                ",",
+                Enumerable.Range(0, arity).Select(i => $"!{i}"));
+            result = result.Replace(marker, $"<{genericArgs}>");
+        }
+
+        return result;
+    }
+
+    private static bool IsDeclaringTypeMatch(string? fieldDeclaringType, string? cctorType)
+    {
+        if (string.IsNullOrEmpty(fieldDeclaringType) || string.IsNullOrEmpty(cctorType))
+        {
+            return false;
+        }
+
+        // Field declaring type may carry explicit generic arguments (e.g. `Type<T>`)
+        // while the cctor type may be the open definition (e.g. `Type`).
+        return fieldDeclaringType.StartsWith(cctorType, StringComparison.Ordinal) &&
+               (fieldDeclaringType.Length == cctorType.Length ||
+                fieldDeclaringType[cctorType.Length] == '<');
     }
 
     private bool TryGetStaticInitializationPlanForType(

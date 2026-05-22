@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "DocumentElementSubjects",
   "entrySubjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Text.Json/document-element/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.Text.Json/document-element/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

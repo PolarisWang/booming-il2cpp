@@ -17,14 +17,15 @@ public static partial class DataErrorsSubjects
     // [0] System.ObjectModel/System.ComponentModel.DataErrorsChangedEventArgs::get_PropertyName:System.String()
     public static void Subject_0()
     {
-        try { _ = default(DataErrorsChangedEventArgs)!.PropertyName; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(DataErrorsChangedEventArgs)!.PropertyName).Length) != ((default(DataErrorsChangedEventArgs)!.PropertyName).Length)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [1] System.ObjectModel/System.ComponentModel.DataErrorsChangedEventArgs::.ctor:System.Void(System.String)
     public static void Subject_1()
     {
-        new DataErrorsChangedEventArgs("hello");
+        try { new DataErrorsChangedEventArgs("hello"); }
+        catch { _exitCode = 1; }
     }
 
     // [2] System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::add_ErrorsChanged:System.Void(System.EventHandler{System.ComponentModel.DataErrorsChangedEventArgs})
@@ -36,15 +37,15 @@ public static partial class DataErrorsSubjects
     // [3] System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::get_HasErrors:System.Boolean()
     public static void Subject_3()
     {
-        try { _ = default(INotifyDataErrorInfo)!.HasErrors; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(INotifyDataErrorInfo)!.HasErrors) ? 1 : 0) != ((default(INotifyDataErrorInfo)!.HasErrors) ? 1 : 0)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [4] System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::GetErrors:System.Collections.IEnumerable(System.String)
     public static void Subject_4()
     {
-        try { default(INotifyDataErrorInfo)!.GetErrors("hello"); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(INotifyDataErrorInfo)!.GetErrors("hello")).GetHashCode()) != ((default(INotifyDataErrorInfo)!.GetErrors("hello")).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [5] System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::remove_ErrorsChanged:System.Void(System.EventHandler{System.ComponentModel.DataErrorsChangedEventArgs})

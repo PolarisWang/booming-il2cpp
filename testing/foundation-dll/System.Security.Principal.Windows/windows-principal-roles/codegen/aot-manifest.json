@@ -63,6 +63,12 @@
       "reason": "external-call"
     },
     {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
       "assemblyName": "System.Security.Claims",
       "subjectKind": "method",
       "subjectId": "System.Security.Claims/ClaimsPrincipal::get_Identity:System.Security.Principal.IIdentity()",

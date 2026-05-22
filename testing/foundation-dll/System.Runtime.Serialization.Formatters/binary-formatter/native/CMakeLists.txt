@@ -11,7 +11,7 @@ add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
 
 # Paths
 set(CHAOS_PROJECT_ROOT "D:/agent/booming-il2cpp")
-set(CHAOS_CODEGEN_DIR "D:/agent/booming-il2cpp/verification/foundation-dll/System.Runtime.Serialization.Formatters/binary-formatter/codegen")
+set(CHAOS_CODEGEN_DIR "D:/agent/booming-il2cpp/testing/foundation-dll/System.Runtime.Serialization.Formatters/binary-formatter/codegen")
 set(CHAOS_NATIVE_BUILD "D:/agent/booming-il2cpp/artifacts/presets/windows-x64-reference")
 
 # Source files — codegen outputs to codegen/<AssemblyName>/generated/

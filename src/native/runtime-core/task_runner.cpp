@@ -6,6 +6,7 @@
 
 #include "thread_pool.h"
 #include "execution_context.h"
+#include "core/delegate_helpers.h"
 #include "bootstrap/bootstrap.h"
 
 #include <chaos/async.h>
@@ -31,15 +32,8 @@ static void TaskRunCallback(void* state) noexcept {
     // Invoke the delegate under the captured ExecutionContext.
     ExecutionContextRun(rc->ctx, [](void* s) {
         auto* inner = static_cast<TaskRunContext*>(s);
-        auto* bridge = chaos::il2cpp::bootstrap::GetCodegenBridgeV0();
-        if (bridge != nullptr && bridge->delegate_invoke != nullptr && inner->delegate != 0) {
-            void* return_value = nullptr;
-            bridge->delegate_invoke(
-                nullptr, nullptr,
-                reinterpret_cast<void*>(inner->delegate),
-                nullptr, 0,
-                &return_value, sizeof(void*),
-                nullptr);
+        if (inner->delegate != 0) {
+            chaos_delegate_object_invoke(inner->delegate, nullptr, nullptr, 0);
         }
         inner->task->completed = true;
     }, rc);

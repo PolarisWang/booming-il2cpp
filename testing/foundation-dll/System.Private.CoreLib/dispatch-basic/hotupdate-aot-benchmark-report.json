@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/dispatch/basic",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "DispatchBasicNativeEntry/DispatchBasicNativeEntry::Run:System.Int32(System.Int32)",
+      "status": "passed",
+      "prePatchNsPerOp": 3.74,
+      "postPatchNsPerOp": 3.5,
+      "slowdownPercent": -6.42
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "DispatchBasicNativeEntry/DispatchBasicNativeEntry::TestIDispatchAdd:System.Int32()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.5,
+      "postPatchNsPerOp": 3.6,
+      "slowdownPercent": 2.86
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "DispatchBasicNativeEntry/DispatchBasicNativeEntry::TestIDispatchSub:System.Int32()",
+      "status": "passed",
+      "prePatchNsPerOp": 5.09,
+      "postPatchNsPerOp": 3.7,
+      "slowdownPercent": -27.31
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "DispatchBasicNativeEntry/DispatchBasicNativeEntry::TestDualGetStatus:System.Int32()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.42,
+      "postPatchNsPerOp": 3.4,
+      "slowdownPercent": -0.58
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "DispatchBasicNativeEntry/DispatchBasicNativeEntry::TestIUnknownGetValue:System.Int32()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.34,
+      "postPatchNsPerOp": 3.4,
+      "slowdownPercent": 1.8
+    }
+  ],
+  "summary": {
+    "totalMethods": 5,
+    "nonStubMethods": 5,
+    "averageSlowdownPercent": -5.93,
+    "slowdownFactor": 0.9407,
+    "slowdownThresholdX": 50.0
+  }
+}

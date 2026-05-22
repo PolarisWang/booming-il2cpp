@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "BinaryFormatterSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Runtime.Serialization.Formatters/binary-formatter/managed/subjects/build-output/BinaryFormatterSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Runtime.Serialization.Formatters/binary-formatter/managed/subjects/build-output/BinaryFormatterSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "BinaryFormatterSubjects",
-      "path": "verification/foundation-dll/System.Runtime.Serialization.Formatters/binary-formatter/managed/subjects/build-output/BinaryFormatterSubjects.dll"
+      "path": "testing/foundation-dll/System.Runtime.Serialization.Formatters/binary-formatter/managed/subjects/build-output/BinaryFormatterSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "95001f81-9fd3-432e-90e1-e094ff56c0af",
+  "inputModuleVersionId": "1952fc25-45e9-4e0c-8ab1-c6afb4044ee3",
   "artifacts": [
     {
       "kind": "typedIlIr",

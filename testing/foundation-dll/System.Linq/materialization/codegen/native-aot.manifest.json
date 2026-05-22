@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "MaterializationSubjects",
   "entrySubjectId": "MaterializationSubjects/MaterializationSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Linq/materialization/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.Linq/materialization/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

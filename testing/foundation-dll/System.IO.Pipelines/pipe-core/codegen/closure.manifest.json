@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "PipeCoreSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.IO.Pipelines/pipe-core/managed/subjects/build-output/PipeCoreSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.IO.Pipelines/pipe-core/managed/subjects/build-output/PipeCoreSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "PipeCoreSubjects",
-      "path": "verification/foundation-dll/System.IO.Pipelines/pipe-core/managed/subjects/build-output/PipeCoreSubjects.dll"
+      "path": "testing/foundation-dll/System.IO.Pipelines/pipe-core/managed/subjects/build-output/PipeCoreSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "e175d6cd-90c3-40e3-ae6e-3b38c70ee01e",
+  "inputModuleVersionId": "3040cbd9-09cb-446f-be1c-d1330ee62375",
   "artifacts": [
     {
       "kind": "typedIlIr",

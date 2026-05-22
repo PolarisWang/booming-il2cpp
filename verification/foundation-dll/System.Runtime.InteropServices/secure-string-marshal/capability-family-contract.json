@@ -1,0 +1,15 @@
+{
+  "familyId": "family/System.Runtime.InteropServices/secure-string-marshal",
+  "assemblyName": "System.Runtime.InteropServices",
+  "methodSubjectIds": [
+    "System.Runtime.InteropServices/System.Security.SecureStringMarshal::SecureStringToCoTaskMemAnsi:System.IntPtr(System.Security.SecureString)",
+    "System.Runtime.InteropServices/System.Security.SecureStringMarshal::SecureStringToCoTaskMemUnicode:System.IntPtr(System.Security.SecureString)",
+    "System.Runtime.InteropServices/System.Security.SecureStringMarshal::SecureStringToGlobalAllocAnsi:System.IntPtr(System.Security.SecureString)",
+    "System.Runtime.InteropServices/System.Security.SecureStringMarshal::SecureStringToGlobalAllocUnicode:System.IntPtr(System.Security.SecureString)"
+  ],
+  "displayName": "secure-string-marshal",
+  "description": "",
+  "closureStatus": "in-progress",
+  "methodCount": 4,
+  "customEntryIndices": []
+}

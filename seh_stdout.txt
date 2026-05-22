@@ -1,0 +1,751 @@
+Starting codegen test...
+Native codegen integration tests (Phase 3d)
+==========================================
+  Test_LdcI4_Ret...
+    [GC] 0 GPR callee colors (2 instrs): r0→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 2 instrs, 95 bytes code, 0 call sites
+    nm->code=000001CC62480000 nm->code_size=95
+    calling entry=000001CC62480000
+    after call
+    result=42
+  PASS: LdcI4_Ret
+    [GC] 0 GPR callee colors (4 instrs): r0→x8 r1→x7 r2→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 4 instrs, 136 bytes code, 0 call sites
+    calling entry=000001CC62A40000
+    after call
+  PASS: Add_Ret
+    [GC] 0 GPR callee colors (8 instrs): r0→x8 r1→x7 r2→x8 r3→x7 r4→x8 r5→x7 r6→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 8 instrs, 190 bytes code, 0 call sites
+    calling entry=000001CC62A50000
+    after call
+  PASS: ArithmeticChain
+  Test_FoldAdd...
+    [GC] 0 GPR callee colors (4 instrs): r0→x8 r1→x7 r2→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 4 instrs, 136 bytes code, 0 call sites
+    calling entry=000001CC62A60000
+    after call
+    result=30
+  PASS: FoldAdd
+  Test_FoldMul...
+    [GC] 0 GPR callee colors (4 instrs): r0→x8 r1→x7 r2→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 4 instrs, 136 bytes code, 0 call sites
+    calling entry=000001CC62A70000
+    after call
+    result=42
+  PASS: FoldMul
+  Test_FoldChain...
+    [GC] 0 GPR callee colors (8 instrs): r0→x8 r1→x7 r2→x8 r3→x7 r4→x8 r5→x7 r6→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 8 instrs, 190 bytes code, 0 call sites
+    calling entry=000001CC62A80000
+    after call
+    result=85
+  PASS: FoldChain
+  Test_FoldBrFalse...
+    [GC] 0 GPR callee colors (6 instrs): r0→x7 r1→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 6 instrs, 146 bytes code, 0 call sites
+    calling entry=000001CC62A90000
+    after call
+    result=42
+  PASS: FoldBrFalse
+  Test_FoldBrFalseNonZero...
+    [GC] 0 GPR callee colors (7 instrs): r0→x8 r1→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 7 instrs, 155 bytes code, 0 call sites
+    calling entry=000001CC63F90000
+    after call
+    result=42
+  PASS: FoldBrFalseNonZero
+  Test_UnboxElim...
+    [GC] 0 GPR callee colors (4 instrs): r0→x7 r1→x7 r2→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 4 instrs, 105 bytes code, 0 call sites
+    calling entry=000001CC63FA0000
+    after call
+    result=42
+  PASS: UnboxElim
+  Test_DeadStLoc...
+    [GC] 0 GPR callee colors (6 instrs): r0→x7 r1→x8 r2→x7 r8→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 6 instrs, 135 bytes code, 0 call sites
+    calling entry=000001CC63FB0000
+    after call
+    result=99 (expected 99)
+  PASS: DeadStLoc
+  Test_DeadDup...
+    [GC] 0 GPR callee colors (3 instrs): r0→x8 r1→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 3 instrs, 112 bytes code, 0 call sites
+    calling entry=000001CC63FC0000
+    after call
+    result=42 (expected 42)
+  PASS: DeadDup
+  Test_CopyProp...
+    [GC] 0 GPR callee colors (3 instrs): r0→x7 r1→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 3 instrs, 95 bytes code, 0 call sites
+    calling entry=000001CC63FD0000
+    after call
+    result=42 (expected 42)
+  PASS: CopyProp
+  Test_DeadLdLoc...
+    [GC] 0 GPR callee colors (5 instrs): r0→x7 r1→x8 r2→x7 r8→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 5 instrs, 134 bytes code, 0 call sites
+    calling entry=000001CC63FE0000
+    after call
+    result=99 (expected 99)
+  PASS: DeadLdLoc
+  Test_RedundantLdLoc...
+    [GC] 0 GPR callee colors (4 instrs): r0→x7 r1→x7 r8→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 4 instrs, 108 bytes code, 0 call sites
+    calling entry=000001CC64000000
+    after call
+    result=42 (expected 42)
+  PASS: RedundantLdLoc
+  Test_BranchUncond...
+    [GC] 0 GPR callee colors (4 instrs): r0→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 4 instrs, 110 bytes code, 0 call sites
+    calling entry=000001CC64010000
+    after call
+  PASS: BranchUncond
+  Test_BranchTaken...
+    [GC] 0 GPR callee colors (6 instrs): r0→x7 r1→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 6 instrs, 126 bytes code, 0 call sites
+    calling entry=000001CC64020000
+    after call
+  PASS: BranchTaken
+  Test_BranchNotTaken...
+    [GC] 0 GPR callee colors (6 instrs): r0→x7 r1→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 6 instrs, 131 bytes code, 0 call sites
+    calling entry=000001CC64030000
+    after call
+  PASS: BranchNotTaken
+  Test_DeadBr...
+    [GC] 0 GPR callee colors (3 instrs): r0→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 3 instrs, 95 bytes code, 0 call sites
+    calling entry=000001CC64040000
+    after call
+    result=42 (expected 42)
+  PASS: DeadBr
+  Test_BrChain...
+    [GC] 0 GPR callee colors (6 instrs): r0→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 6 instrs, 120 bytes code, 0 call sites
+    calling entry=000001CC64050000
+    after call
+    result=42 (expected 42)
+  PASS: BrChain
+  Test_BrChainConditional...
+    [GC] 0 GPR callee colors (6 instrs): r0→x8 r1→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 6 instrs, 142 bytes code, 0 call sites
+    calling entry=000001CC64060000
+    after call
+    result=0 (expected 0)
+  PASS: BrChainConditional
+  Test_ArithIdentity...
+    [GC] 0 GPR callee colors (4 instrs): r0→x8 r1→x7 r2→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 4 instrs, 136 bytes code, 0 call sites
+    calling entry=000001CC64070000
+    after call
+    result=42 (expected 42)
+  PASS: ArithIdentity
+  Test_MulOneIntrinsic...
+    [GC] 0 GPR callee colors (4 instrs): r0→x8 r1→x7 r2→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 4 instrs, 136 bytes code, 0 call sites
+    calling entry=000001CC64080000
+    after call
+    result=42 (expected 42)
+  PASS: MulOneIntrinsic
+  Test_MulZeroIntrinsic...
+    [GC] 0 GPR callee colors (4 instrs): r0→x8 r1→x7 r2→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 4 instrs, 136 bytes code, 0 call sites
+    calling entry=000001CC64090000
+    after call
+    result=0 (expected 0)
+  PASS: MulZeroIntrinsic
+  Test_AndSelfIntrinsic...
+    [GC] 0 GPR callee colors (3 instrs): r0→x7 r1→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 3 instrs, 109 bytes code, 0 call sites
+    calling entry=000001CC640A0000
+    after call
+    result=42 (expected 42)
+  PASS: AndSelfIntrinsic
+  Test_SubSelfIntrinsic...
+    [GC] 0 GPR callee colors (3 instrs): r0→x7 r1→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 3 instrs, 109 bytes code, 0 call sites
+    calling entry=000001CC640B0000
+    after call
+    result=0 (expected 0)
+  PASS: SubSelfIntrinsic
+  PASS: CanGenerate_Unsupported
+  Test_DeoptMetadata_Call...
+    [GC] 0 GPR callee colors (2 instrs): r0→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 2 instrs, 95 bytes code, 0 call sites
+    deopt_entry_count=0
+  PASS: DeoptMetadata_Call
+  Test_DeoptSequence_Generated...
+    [GC] 0 GPR callee colors (2 instrs): r0→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 2 instrs, 95 bytes code, 0 call sites
+    calling entry=000001CC640D0000
+    after call
+    result=7 (expected 7)
+  PASS: DeoptSequence_Generated
+  Test_DeoptEntry_Registration...
+    [GC] 0 GPR callee colors (2 instrs): r0→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 2 instrs, 95 bytes code, 0 call sites
+[2026-05-22T01:43:47][DEBUG][codegen] RegisterT4Code: code=0x1cc640e0000 size=95 seh_offset=0 token=0
+    FAIL: out-of-range should be null
+  FAIL: DeoptEntry_Registration
+  Test_NewObj...
+    [GC] 0 GPR callee colors (3 instrs): r0→x7 r1→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 3 instrs, 242 bytes code, 2 call sites
+    calling entry=000001CC640F0000
+    after call
+    result=0 (expected 0)
+  PASS: NewObj
+  Test_LdFld_StFld...
+    [GC] 0 GPR callee colors (5 instrs): r0→x8 r1→x7 r2→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 5 instrs, 314 bytes code, 2 call sites
+      [  0] LdcI4    dst=r0 imm=42
+      [  1] ???      dst=r1 imm=1
+      [  2] ???      src1=r1 src2=r0 imm=0
+      [  3] ???      dst=r2 src1=r1 imm=0
+      [  4] Ret      src1=r2
+    calling entry=000001CC64100000
+    after call
+    result=42 (expected 42)
+  PASS: LdFld_StFld
+  Test_Box...
+    [GC] 0 GPR callee colors (3 instrs): r0→x7 r1→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 3 instrs, 206 bytes code, 1 call sites
+      [  0] LdcI4    dst=r0 imm=7
+      [  1] ???      dst=r1 src1=r0 imm=42
+      [  2] Ret      src1=r1
+    calling entry=000001CC64110000
+    after call
+    result=1977334743856 (expected non-null pointer)
+  PASS: Box
+  Test_Unbox...
+    [GC] 0 GPR callee colors (5 instrs): r0→x8 r1→x7 r2→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 5 instrs, 317 bytes code, 2 call sites
+    calling entry=000001CC64120000
+    after call
+    result=42 (expected 42)
+  PASS: Unbox
+  Test_TlabNewObj...
+    TLAB: [000001CC64130000, 000001CC64140000) current=000001CC64130000
+    [GC] 0 GPR callee colors (3 instrs): r0→x7 r1→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 3 instrs, 242 bytes code, 2 call sites
+    calling entry=000001CC64140000
+    after call
+    result=0 (expected 0)
+  PASS: TlabNewObj
+  Test_TlabBox...
+    TLAB: [000001CC64130000, 000001CC64140000) current=000001CC64130040
+    [GC] 0 GPR callee colors (3 instrs): r0→x7 r1→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 3 instrs, 206 bytes code, 1 call sites
+    calling entry=000001CC64150000
+    after call
+    result=1977363923008 (expected non-null pointer)
+  PASS: TlabBox
+  Test_TlabNewObjBox...
+    TLAB: [000001CC64130000, 000001CC64140000) current=000001CC64130050
+    [GC] 0 GPR callee colors (5 instrs): r0→x8 r1→x7 r2→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 5 instrs, 317 bytes code, 2 call sites
+      [  0] ???      dst=r0 imm=1
+      [  1] LdcI4    dst=r1 imm=42
+      [  2] ???      src1=r0 src2=r1 imm=0
+      [  3] ???      dst=r2 src1=r0
+      [  4] Ret      src1=r2
+    calling entry=000001CC64160000
+    after call
+    result=42 (expected 42)
+  PASS: TlabNewObjBox
+  Test_LdLen...
+    [GC] 0 GPR callee colors (4 instrs): r0→x7 r1→x7 r2→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 4 instrs, 221 bytes code, 1 call sites
+    calling entry=000001CC64170000
+    after call
+    result=5 (expected 5)
+  PASS: LdLen
+  Test_NewArr...
+    [GC] 0 GPR callee colors (3 instrs): r0→x7 r1→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 3 instrs, 194 bytes code, 1 call sites
+    calling entry=000001CC64180000
+    after call
+    result=1977363923120 (expected non-null)
+  PASS: NewArr
+  Test_NewArrTlab...
+    TLAB: [000001CC64130000, 000001CC64140000) current=000001CC641300D0
+    [GC] 0 GPR callee colors (4 instrs): r0→x7 r1→x7 r2→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 4 instrs, 221 bytes code, 1 call sites
+    calling entry=000001CC64190000
+    after call
+    result=42 (expected 42)
+  PASS: NewArrTlab
+  Test_LdElem_StElem...
+    [GC] 0 GPR callee colors (8 instrs): r0→x7 r1→x9 r2→x8 r3→x7 r4→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 8 instrs, 360 bytes code, 2 call sites
+    calling entry=000001CC641A0000
+    after call
+    result=42 (expected 42)
+  PASS: LdElem_StElem
+  Test_StElemFix...
+    [GC] 0 GPR callee colors (8 instrs): r0→x7 r1→x9 r2→x8 r3→x7 r4→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 8 instrs, 360 bytes code, 2 call sites
+    calling entry=000001CC641B0000
+    after call
+    result=42 (expected 42)
+  PASS: StElemFix
+  Test_Dup...
+    [GC] 0 GPR callee colors (4 instrs): r0→x8 r1→x7 r2→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 4 instrs, 126 bytes code, 0 call sites
+    calling entry=000001CC641C0000
+    after call
+    result=84 (expected 84)
+  PASS: Dup
+  Test_GcSlotMap...
+    [GC] 0 GPR callee colors (4 instrs): r0→x7 r1→x8 r2→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 4 instrs, 269 bytes code, 2 call sites
+    gc_point_count=2, slot_map_data=000001CC6255D3C0, slot_map_size=12
+    gc_point[0]: offset=171 slot_count=0
+    gc_point[1]: offset=204 slot_count=1
+      slot[0]: kind=1 index=4
+    GcSlotMapV0: frame_size=872 num_gc_slots=1
+      slot[0]: encoding=0x0020
+  PASS: GcSlotMap
+  Test_GcSlotMapRegistration...
+    [GC] 0 GPR callee colors (3 instrs): r0→x7 r1→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 3 instrs, 242 bytes code, 2 call sites
+    slot_map_data=000001CC6255D5F0, slot_map_size=12
+    registered slot map for entry=000001CC641E0000
+    GcLookupSlotMap succeeded: num_gc_slots=1
+      slot[0]: encoding=0x0020
+  PASS: GcSlotMapRegistration
+  Test_SehTable...
+    [GC] 0 GPR callee colors (2 instrs): r0→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 2 instrs, 131 bytes code, 0 call sites
+    seh_table_offset=79
+    clause_count=1
+    clause[0]: flags=0x0 try=[39,79) handler=39 class_token=0
+  PASS: SehTable
+  Test_SehCanGenerate...
+    CanGenerateNativeCode returned true (OK)
+  PASS: SehCanGenerate
+  Test_UnwindInfoLayout...
+    [DEBUG] after CodeBuffer ctor
+    [DEBUG] after EmitUnwindInfo, unwind_off=0, pos=16
+    Header OK (vf=1, sop=1, coc=5, fr=5)
+  PASS: UnwindInfoLayout
+  Test_UnwindInfoSehFlag...
+    EHANDLER flag OK (vf=9), thunk at +16
+  PASS: UnwindInfoSehFlag
+  Test_UnwindInfoAllocSmall...
+    ALLOC_SMALL OK (sub_scale=15)
+  PASS: UnwindInfoAllocSmall
+  Test_UnwindInfoAllocLarge...
+    ALLOC_LARGE OK (scaled=16385)
+  PASS: UnwindInfoAllocLarge
+  Test_UnwindInfoPadding...
+    Padding OK (codes=8, pad=0, code_bytes=16)
+  PASS: UnwindInfoPadding
+  Test_AllocRuntimeFunction...
+    RUNTIME_FUNCTION OK (begin=0, end=4096, unwind=42)
+  PASS: AllocRuntimeFunction
+  Test_UnwindInfoInGenerate...
+    [GC] 0 GPR callee colors (2 instrs): r0→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 2 instrs, 95 bytes code, 0 call sites
+    runtime_function: begin=0x0 end=0x4F unwind=0x4F
+    nm->code_size=95
+  PASS: UnwindInfoInGenerate
+  Test_UnwindInfoSehMethods...
+    [GC] 0 GPR callee colors (2 instrs): r0→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 2 instrs, 131 bytes code, 0 call sites
+    SEH method: runtime_function begin=0x0 end=0x67 unwind=0x67 seh_off=79
+  PASS: UnwindInfoSehMethods
+  Test_RtlAddFunctionTable...
+    [GC] 0 GPR callee colors (2 instrs): r0→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 2 instrs, 95 bytes code, 0 call sites
+[2026-05-22T01:43:47][DEBUG][codegen] RegisterT4Code: code=0x1cc64220000 size=95 seh_offset=0 token=0
+    RtlAddFunctionTable OK (function table entry found, image_base=0x1CC64220000)
+  PASS: RtlAddFunctionTable
+  Test_BrToSwitch...
+    [GC] 0 GPR callee colors (16 instrs): r0→x8 r1→x7 r2→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 16 instrs, 290 bytes code, 0 call sites
+[2026-05-22T01:43:47][DEBUG][codegen] RegisterT4Code: code=0x1cc64230000 size=290 seh_offset=0 token=0
+    calling entry=000001CC64230000
+    after call
+    T4 r0=1 → 200 ✓
+  PASS: BrToSwitch
+  Test_CastClass...
+    [GC] 0 GPR callee colors (3 instrs): r0→x7 r1→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 3 instrs, 242 bytes code, 1 call sites
+    calling entry=000001CC64240000
+    after call
+    case1 (match): result=000001CC64130130 (non-null ✓)
+    [GC] 0 GPR callee colors (3 instrs): r0→x7 r1→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 3 instrs, 242 bytes code, 1 call sites
+    calling entry=000001CC64250000
+    after call
+    case2 (no-match): result=0 ✓
+    [GC] 0 GPR callee colors (3 instrs): r0→x7 r1→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 3 instrs, 127 bytes code, 0 call sites
+    calling entry=000001CC64260000
+    after call
+    case3 (null input): result=0 ✓
+  Test_CastClass OK (3 cases) ✓
+  PASS: CastClass
+  Test_IsInst...
+    [GC] 0 GPR callee colors (3 instrs): r0→x7 r1→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 3 instrs, 242 bytes code, 1 call sites
+    calling entry=000001CC64270000
+    after call
+    case1 (match): result=000001CC641301B0 ✓
+    [GC] 0 GPR callee colors (3 instrs): r0→x7 r1→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 3 instrs, 242 bytes code, 1 call sites
+    calling entry=000001CC64280000
+    after call
+    case2 (no-match): result=0 ✓
+    [GC] 0 GPR callee colors (3 instrs): r0→x7 r1→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 3 instrs, 127 bytes code, 0 call sites
+    calling entry=000001CC64290000
+    after call
+    case3 (null input): result=0 ✓
+  Test_IsInst OK (3 cases) ✓
+  PASS: IsInst
+  Test_LdSFld_StSFld...
+    [GC] 0 GPR callee colors (4 instrs): r0→x7 r1→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 4 instrs, 149 bytes code, 1 call sites
+    calling entry=000001CC642A0000
+    after call
+    case1 (store/load): result=42 ✓
+    [GC] 0 GPR callee colors (2 instrs): r0→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 2 instrs, 110 bytes code, 1 call sites
+    calling entry=000001CC643B0000
+    after call
+    case2 (default read): result=0 ✓
+  Test_LdSFld_StSFld OK (2 cases) ✓
+  PASS: LdSFld_StSFld
+  Test_ConvRUn...
+    [GC] 0 GPR callee colors (3 instrs): r0→x7 r1→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 3 instrs, 113 bytes code, 0 call sites
+    calling entry=000001CC643C0000
+    after call
+    val=0: re=0x0000000000000000 ✓
+    [GC] 0 GPR callee colors (3 instrs): r0→x7 r1→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 3 instrs, 113 bytes code, 0 call sites
+    calling entry=000001CC643D0000
+    after call
+    val=1: re=0x3FF0000000000000 ✓
+    [GC] 0 GPR callee colors (3 instrs): r0→x7 r1→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 3 instrs, 113 bytes code, 0 call sites
+    calling entry=000001CC643E0000
+    after call
+    val=100: re=0x4059000000000000 ✓
+    [GC] 0 GPR callee colors (3 instrs): r0→x7 r1→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 3 instrs, 113 bytes code, 0 call sites
+    calling entry=000001CC643F0000
+    after call
+    val=2147483647: re=0x41DFFFFFFFC00000 ✓
+  Test_ConvRUn OK (4 cases) ✓
+  PASS: ConvRUn
+  Test_Blt...
+    [GC] 0 GPR callee colors (7 instrs): r0→x8 r1→x7 r2→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 7 instrs, 177 bytes code, 0 call sites
+    calling entry=000001CC64400000
+    after call
+    case1 (1 < 200 → taken): result=42 ✓
+    [GC] 0 GPR callee colors (7 instrs): r0→x8 r1→x7 r2→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 7 instrs, 177 bytes code, 0 call sites
+    calling entry=000001CC64410000
+    after call
+    case2 (200 < 1 → not taken): result=99 ✓
+    [GC] 0 GPR callee colors (7 instrs): r0→x8 r1→x7 r2→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 7 instrs, 177 bytes code, 0 call sites
+    calling entry=000001CC64420000
+    after call
+    case3 (-5 < 0 → taken): result=77 ✓
+  Test_Blt OK (3 cases) ✓
+  PASS: Blt
+  Test_LdInd_StInd...
+    [GC] 0 GPR callee colors (5 instrs): r0→x8 r1→x7 r2→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 5 instrs, 274 bytes code, 1 call sites
+    calling entry=000001CC64430000
+    after call
+    result=42 (expected 42) ✓
+  Test_LdInd_StInd OK ✓
+  PASS: LdInd_StInd
+
+  ═════════════════════════════════════════════════════
+  Performance Benchmarks
+  ═════════════════════════════════════════════════════
+  RegisterExecute:  29026844 cycles  (  145 results=0, ok=1)
+    [GC] 0 GPR callee colors (5 instrs): r0→x8 r1→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 5 instrs, 237 bytes code, 0 call sites
+    calling entry=000001CC64440000
+    after call
+  T4 Native (cold):    464684 cycles  (    2/iter, result=0)
+    calling entry=000001CC64440000
+    after call
+    calling entry=000001CC64440000
+    after call
+    calling entry=000001CC64440000
+    after call
+    calling entry=000001CC64440000
+    after call
+    calling entry=000001CC64440000
+    after call
+    calling entry=000001CC64440000
+    after call
+    calling entry=000001CC64440000
+    after call
+    calling entry=000001CC64440000
+    after call
+    calling entry=000001CC64440000
+    after call
+    calling entry=000001CC64440000
+    after call
+  T4 Native (warm):    583809 avg,   466708 best  (    2 avg/iter)
+
+  ── Summary (200000 iterations) ──
+  Tier                   Total cycles   Cycles/iter  Speedup
+  RegisterExecute            29026844           145  1.00x (baseline)
+  T4 Native (cold)             464684             2  62.47x
+  T4 Native (warm avg)         583809             2  49.72x
+  T4 Native (warm best)        466708             2  62.19x
+
+  ── Graph Coloring Comparison (200000 iterations) ──
+
+    ── 2-reg loop ──
+    [GC] 0 GPR callee colors (5 instrs): r0→x8 r1→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 5 instrs, 237 bytes code, 0 call sites
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 5 instrs, 195 bytes code, 0 call sites
+    code sizes: coloring=ON 237B, OFF 195B
+    calling entry=000001CC64450000
+    after call
+    calling entry=000001CC64450000
+    after call
+    calling entry=000001CC64450000
+    after call
+    calling entry=000001CC64450000
+    after call
+    calling entry=000001CC64450000
+    after call
+    calling entry=000001CC64450000
+    after call
+    calling entry=000001CC64450000
+    after call
+    calling entry=000001CC64450000
+    after call
+    calling entry=000001CC64450000
+    after call
+    calling entry=000001CC64450000
+    after call
+    calling entry=000001CC64460000
+    after call
+    calling entry=000001CC64460000
+    after call
+    calling entry=000001CC64460000
+    after call
+    calling entry=000001CC64460000
+    after call
+    calling entry=000001CC64460000
+    after call
+    calling entry=000001CC64460000
+    after call
+    calling entry=000001CC64460000
+    after call
+    calling entry=000001CC64460000
+    after call
+    calling entry=000001CC64460000
+    after call
+    calling entry=000001CC64460000
+    after call
+    coloring ON:    585568 avg  (    2/iter)
+    coloring OFF:   510923 avg  (    2/iter)
+    speedup: 0.87x
+
+    ── 8-reg heavy ──
+    [GC] 0 GPR callee colors (18 instrs): r0→x14 r1→x13 r2→x12 r3→x11 r4→x10 r5→x9 r6→x8 r7→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 18 instrs, 430 bytes code, 0 call sites
+[2026-05-22T01:43:47][DEBUG][codegen] GenerateNativeCode: 18 instrs, 386 bytes code, 0 call sites
+    code sizes: coloring=ON 430B, OFF 386B
+    calling entry=000001CC64470000
+    after call
+    calling entry=000001CC64470000
+    after call
+    calling entry=000001CC64470000
+    after call
+    calling entry=000001CC64470000
+    after call
+    calling entry=000001CC64470000
+    after call
+    calling entry=000001CC64470000
+    after call
+    calling entry=000001CC64470000
+    after call
+    calling entry=000001CC64470000
+    after call
+    calling entry=000001CC64470000
+    after call
+    calling entry=000001CC64470000
+    after call
+    calling entry=000001CC64480000
+    after call
+    calling entry=000001CC64480000
+    after call
+    calling entry=000001CC64480000
+    after call
+    calling entry=000001CC64480000
+    after call
+    calling entry=000001CC64480000
+    after call
+    calling entry=000001CC64480000
+    after call
+    calling entry=000001CC64480000
+    after call
+    calling entry=000001CC64480000
+    after call
+    calling entry=000001CC64480000
+    after call
+    calling entry=000001CC64480000
+    after call
+    coloring ON:  9218090332 avg  (46090/iter)
+    coloring OFF: 10661559772 avg  (53307/iter)
+    speedup: 1.16x
+
+  PASS: Benchmark
+
+  ═════════════════════════════════════════════════════
+  Extended Benchmarks
+  ═════════════════════════════════════════════════════
+
+  ── Deopt Overhead ──
+    [GC] 0 GPR callee colors (2 instrs): r0→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:44:32][DEBUG][codegen] GenerateNativeCode: 2 instrs, 95 bytes code, 0 call sites
+    calling entry=000001CC64490000
+    after call
+  T4 cold:         988460 cycles, result=42
+    calling entry=000001CC64490000
+    after call
+    calling entry=000001CC64490000
+    after call
+    calling entry=000001CC64490000
+    after call
+    calling entry=000001CC64490000
+    after call
+    calling entry=000001CC64490000
+    after call
+    calling entry=000001CC64490000
+    after call
+    calling entry=000001CC64490000
+    after call
+    calling entry=000001CC64490000
+    after call
+    calling entry=000001CC64490000
+    after call
+    calling entry=000001CC64490000
+    after call
+  T4 warm avg:    2272933 cycles (10 runs)
+  RegisterExecute:    44440 cycles
+
+  ── Mixed Workload (arithmetic + field access) ──
+  RegisterExecute: 68566449 cycles, result=200100
+    [GC] 0 GPR callee colors (7 instrs): r0→x9 r1→x8 r2→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:44:32][DEBUG][codegen] GenerateNativeCode: 7 instrs, 260 bytes code, 0 call sites
+    calling entry=000001CC644A0000
+    after call
+  T4 Native (cold):   714384 cycles, result=200100
+    calling entry=000001CC644A0000
+    after call
+    calling entry=000001CC644A0000
+    after call
+    calling entry=000001CC644A0000
+    after call
+    calling entry=000001CC644A0000
+    after call
+    calling entry=000001CC644A0000
+    after call
+    calling entry=000001CC644A0000
+    after call
+    calling entry=000001CC644A0000
+    after call
+    calling entry=000001CC644A0000
+    after call
+    calling entry=000001CC644A0000
+    after call
+    calling entry=000001CC644A0000
+    after call
+  T4 Native (warm):   689246 avg,   683980 best  (99.48x vs RegisterExecute)
+
+  PASS: BenchmarkExtended
+  Test_SehV3_ClauseTable...
+    [GC] 0 GPR callee colors (5 instrs): r0→x8 r1→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:44:32][DEBUG][codegen] GenerateNativeCode: 5 instrs, 234 bytes code, 0 call sites
+    SEH table at offset 142 ✓
+    SEH clause count = 3 ✓
+    clause[0]: flags=0x0 try=[51,76) handler=76 class_token=0
+      expected byte offsets: try_start=51 try_end=76 handler=76
+    clause[1]: flags=0x2 try=[51,76) handler=94 class_token=0
+      expected byte offsets: try_start=51 try_end=76 handler=94
+    clause[2]: flags=0x4 try=[51,76) handler=112 class_token=0
+      expected byte offsets: try_start=51 try_end=76 handler=112
+    All SEH clauses match expected values ✓
+  PASS: SehV3_ClauseTable
+  Test_SehV3_LeaveFinally...
+    [GC] 0 GPR callee colors (5 instrs): r0→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:44:32][DEBUG][codegen] GenerateNativeCode: 5 instrs, 280 bytes code, 0 call sites
+[2026-05-22T01:44:32][DEBUG][codegen] RegisterT4Code: code=0x1cc644c0000 size=280 seh_offset=160 token=0
+    calling entry=000001CC644C0000
+    after call
+    LeaveFinally result = 100
+    instr_offsets: [0]=39 [1]=49 [2]=92 [3]=102 [4]=130
+    seh_table_offset=160
+    LeaveFinally: finally executed, result=100 ✓
+  PASS: SehV3_LeaveFinally
+  Test_SehV3_TryCatchFinally...
+    [GC] 0 GPR callee colors (7 instrs): r0→x8 r1→x7 r2→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:44:32][DEBUG][codegen] GenerateNativeCode: 7 instrs, 265 bytes code, 0 call sites
+    TryCatchFinally: 2 clauses at offset 193 ✓
+    clause[0]: flags=0x0 (Exception) ✓
+    clause[1]: flags=0x2 (Finally) ✓
+[2026-05-22T01:44:32][DEBUG][codegen] RegisterT4Code: code=0x1cc644d0000 size=265 seh_offset=193 token=0
+    calling entry=000001CC644D0000
+    after call
+    TryCatchFinally result = 70
+    FAIL: expected 50 (10+40 via finally)
+  FAIL: SehV3_TryCatchFinally
+  Test_SehV3_FaultClause...
+    [GC] 0 GPR callee colors (4 instrs): r0→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:44:32][DEBUG][codegen] GenerateNativeCode: 4 instrs, 184 bytes code, 0 call sites
+    Fault clause flags=4 ✓
+[2026-05-22T01:44:32][DEBUG][codegen] RegisterT4Code: code=0x1cc644e0000 size=184 seh_offset=132 token=0
+    calling entry=000001CC644E0000
+    after call
+    FaultClause result = 0
+    FAIL: expected 99 (fault should NOT execute on normal leave)
+  FAIL: SehV3_FaultClause
+  Test_SehV3_ReclaimDemotedCode...
+    ReclaimDemotedCode (empty) OK ✓
+    [GC] 0 GPR callee colors (2 instrs): r0→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:44:32][DEBUG][codegen] GenerateNativeCode: 2 instrs, 95 bytes code, 0 call sites
+[2026-05-22T01:44:32][DEBUG][codegen] RegisterT4Code: code=0x1cc64220000 size=95 seh_offset=0 token=42
+[2026-05-22T01:44:32][DEBUG][codegen] DemoteT4ByToken: token=42 demoted 1 entries
+    Demoted code enqueued for deferred free ✓
+    ReclaimDemotedCode (after demotion) OK ✓
+  PASS: SehV3_ReclaimDemotedCode
+  Test_SehTryCatch...
+    [GC] 0 GPR callee colors (2 instrs): r0→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:44:32][DEBUG][codegen] GenerateNativeCode: 2 instrs, 131 bytes code, 0 call sites
+    SEH table at offset 79 ✓
+[2026-05-22T01:44:32][DEBUG][codegen] RegisterT4Code: code=0x1cc64220000 size=131 seh_offset=79 token=0
+    FAIL: VEH lookup failed
+  FAIL: SehTryCatch
+  Test_OsrPromote...
+    [GC] 0 GPR callee colors (5 instrs): r0→x8 r1→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:44:32][DEBUG][codegen] GenerateNativeCode: 5 instrs, 237 bytes code, 0 call sites
+[2026-05-22T01:44:32][DEBUG][codegen] RegisterT4Code: code=0x1cc644f0000 size=237 seh_offset=0 token=0
+[2026-05-22T01:44:32][DEBUG][osr] TryOsrPromotion: calling osr_entry at offset=139
+[2026-05-22T01:44:33][DEBUG][osr] TryOsrPromotion: osr_entry returned, ret_val=0x0
+    tier_state=6 (expected 6 = kT4Ready)
+    cached_native_method=000001CC625614D0 code_size=237
+  PASS: OsrPromote
+  Test_OsrEntry...
+    [GC] 0 GPR callee colors (5 instrs): r0→x8 r1→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:44:33][DEBUG][codegen] GenerateNativeCode: 5 instrs, 237 bytes code, 0 call sites
+    osr_entry_offset=139 code_size=237
+    [GC] 0 GPR callee colors (2 instrs): r0→x7 | caller_mask=0x0 filtered_mask=0x0
+[2026-05-22T01:44:33][DEBUG][codegen] GenerateNativeCode: 2 instrs, 95 bytes code, 0 call sites

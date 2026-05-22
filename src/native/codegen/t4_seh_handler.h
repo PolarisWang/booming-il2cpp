@@ -83,6 +83,38 @@ extern thread_local void* g_t4_throw_ret_addr;
 /// register file for exception object placement.
 extern thread_local void* g_t4_frame_rsp;
 
+// ── SEH V3: Finally/Fault Unwind State ─────────────────────────────────────
+
+static constexpr uint32_t kMaxUnwindDepth = 64;
+
+/// Thread-local unwind state for T4 finally/fault two-phase execution.
+/// Set up by the VEH handler (Phase 1), consumed by T4EndFinallyHelper.
+struct T4UnwindState {
+    uint32_t unwind_list[kMaxUnwindDepth];  // finally/fault clause indices (innermost→outermost)
+    uint32_t unwind_count  = 0;             // number of finally/fault clauses to unwind
+    uint32_t unwind_index  = 0;             // current position in unwind_list
+    bool     exception_in_flight = false;   // true = unwinding for exception (not Leave)
+    bool     pending_leave = false;         // true = Leave triggered unwind (not exception)
+    uint32_t leave_target_offset = 0;       // native byte offset of leave target (for pending_leave)
+    bool     has_catch    = false;          // true = a catch handler was found (Phase 1)
+    uint32_t catch_handler_offset = 0;      // native byte offset of catch handler
+};
+
+/// Thread-local SEH V3 unwind state.
+extern thread_local T4UnwindState g_t4_unwind;
+
+/// Called by EndFinally/EndFilter at runtime to advance the finally unwind chain.
+/// Returns the native byte offset of the next handler to execute, or 0 if
+/// unwinding is complete (normal execution should continue after the EndFinally).
+extern "C" void* T4EndFinallyHelper() noexcept;
+
+/// Called by Leave at runtime when a finally/fault clause covers the current
+/// try block.  Resolves byte offsets and finds the innermost finally.
+/// Returns the native byte offset of the first finally handler, or 0 if no
+/// finally/fault covers the path (caller should fall through to normal JMP).
+extern "C" void* T4LeaveHelper(uint32_t target_instr_idx,
+                                uint32_t current_instr_idx) noexcept;
+
 /// Demote all T4 code entries matching the given method_token.
 /// Clears their NativeMethod reference so the VEH handler stops dispatching
 /// to them.  Returns the number of entries demoted.
@@ -93,6 +125,11 @@ uint32_t DemoteT4ByToken(uint32_t method_token) noexcept;
 /// This handles the case where a T4 method calls a now-hotpatched method.
 /// Returns the number of entries demoted.
 uint32_t DemoteT4ByCallSiteToken(uint32_t method_token) noexcept;
+
+/// Free all demoted T4 code regions whose VirtualFree was deferred to the
+/// next GC safepoint.  Called from the GC event callback registered in
+/// RegisterT4SehHandler.  Exposed for testing and explicit reclamation.
+void ReclaimDemotedCode() noexcept;
 
 }  // namespace chaos::il2cpp::codegen
 

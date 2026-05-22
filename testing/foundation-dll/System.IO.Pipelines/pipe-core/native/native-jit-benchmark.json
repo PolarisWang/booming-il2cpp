@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.IO.Pipelines",
+  "familyId": "family/System.IO.Pipelines/pipe/core",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.IDuplexPipe::get_Input:System.IO.Pipelines.PipeReader()",
+      "elapsedMilliseconds": 9058.791,
+      "calibratedMs": 9058.791,
+      "opsPerSecond": 11039.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.IDuplexPipe::get_Output:System.IO.Pipelines.PipeWriter()",
+      "elapsedMilliseconds": 8689.322,
+      "calibratedMs": 8689.322,
+      "opsPerSecond": 11508.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe::get_Reader:System.IO.Pipelines.PipeReader()",
+      "elapsedMilliseconds": 7756.303,
+      "calibratedMs": 7756.303,
+      "opsPerSecond": 12892.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe::get_Writer:System.IO.Pipelines.PipeWriter()",
+      "elapsedMilliseconds": 7464.839,
+      "calibratedMs": 7464.839,
+      "opsPerSecond": 13396.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe::Reset:System.Void()",
+      "elapsedMilliseconds": 4351.926,
+      "calibratedMs": 4351.926,
+      "opsPerSecond": 22978.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe::.ctor:System.Void()",
+      "elapsedMilliseconds": 1111.098,
+      "calibratedMs": 1111.098,
+      "opsPerSecond": 90001.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe::.ctor:System.Void(System.IO.Pipelines.PipeOptions)",
+      "elapsedMilliseconds": 1185.528,
+      "calibratedMs": 1185.528,
+      "opsPerSecond": 84350.6,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}

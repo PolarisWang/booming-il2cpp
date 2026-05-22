@@ -51,6 +51,12 @@
       "reason": "external-call"
     },
     {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "reason": "external-call"
+    },
+    {
       "assemblyName": "System.ObjectModel",
       "subjectKind": "method",
       "subjectId": "System.ObjectModel/System.ComponentModel.DataErrorsChangedEventArgs::.ctor:System.Void(System.String)",
@@ -66,6 +72,12 @@
       "assemblyName": "System.ObjectModel",
       "subjectKind": "method",
       "subjectId": "System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::GetErrors:System.Collections.IEnumerable(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "reason": "external-call"
     }
   ]

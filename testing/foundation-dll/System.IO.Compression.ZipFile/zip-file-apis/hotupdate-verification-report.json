@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.IO.Compression.ZipFile",
+  "familyId": "family/System.IO.Compression.ZipFile/zip/file/apis",
+  "passedMethods": 34,
+  "failedMethods": 0,
+  "totalMethods": 34,
+  "stubMethods": 8,
+  "realMethods": 26,
+  "allMethodsRevertVerified": false,
+  "allMethodsSemanticVerified": false,
+  "d3PatchApplied": false,
+  "d3PatchedCount": 0,
+  "verificationKind": "hotupdate-proof",
+  "summary": {
+    "totalMethods": 34,
+    "passedMethods": 34,
+    "failedMethods": 0,
+    "unmatchedMethods": 0
+  },
+  "methodResults": []
+}

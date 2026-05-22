@@ -31,6 +31,12 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "OptionsSubjects/OptionsSubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliCompressionOptions::get_Quality:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "OptionsSubjects/OptionsSubjects::Subject_1:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliCompressionOptions::set_Quality:System.Void(System.Int32)",
@@ -49,12 +55,17 @@
     {
       "methodSubjectId": "OptionsSubjects/OptionsSubjects::Subject_0:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "OptionsSubjects/OptionsSubjects::Subject_1:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "OptionsSubjects/OptionsSubjects::Subject_2:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     }
   ]
 }

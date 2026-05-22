@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.IO.Pipelines",
+  "familyId": "family/System.IO.Pipelines/reader/writer",
+  "summary": {
+    "totalMethods": 27,
+    "matchedCount": 0,
+    "unmatchedCount": 0,
+    "invalidCount": 27,
+    "nativeAotFasterCount": 0,
+    "nativeJitFasterCount": 0,
+    "managedFasterCount": 0,
+    "equalCount": 0,
+    "averageSpeedupPercent": 0.0,
+    "averageNativeAotSpeedupPercent": 0.0,
+    "averageNativeJitSpeedupPercent": null,
+    "nativeJitSlowdownFactor": null
+  },
+  "methodResults": [
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::AdvanceTo:System.Void(System.SequencePosition)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::AdvanceTo:System.Void(System.SequencePosition,System.SequencePosition)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::AsStream:System.IO.Stream(System.Boolean)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::CancelPendingRead:System.Void()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::Complete:System.Void(System.Exception)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::CompleteAsync:System.Threading.Tasks.ValueTask(System.Exception)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::CopyToAsync:System.Threading.Tasks.Task(System.IO.Pipelines.PipeWriter,System.Threading.CancellationToken)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::CopyToAsync:System.Threading.Tasks.Task(System.IO.Stream,System.Threading.CancellationToken)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::Create:System.IO.Pipelines.PipeReader(System.IO.Stream,System.IO.Pipelines.StreamPipeReaderOptions)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::Create:System.IO.Pipelines.PipeReader(System.Buffers.ReadOnlySequence{System.Byte})",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::OnWriterCompleted:System.Void(System.Action{System.Exception,System.Object},System.Object)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::ReadAsync:System.Threading.Tasks.ValueTask{System.IO.Pipelines.ReadResult}(System.Threading.CancellationToken)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::ReadAtLeastAsync:System.Threading.Tasks.ValueTask{System.IO.Pipelines.ReadResult}(System.Int32,System.Threading.CancellationToken)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeReader::TryRead:System.Boolean(System.IO.Pipelines.ReadResult&)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::Advance:System.Void(System.Int32)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::AsStream:System.IO.Stream(System.Boolean)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::CancelPendingFlush:System.Void()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::Complete:System.Void(System.Exception)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::CompleteAsync:System.Threading.Tasks.ValueTask(System.Exception)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::Create:System.IO.Pipelines.PipeWriter(System.IO.Stream,System.IO.Pipelines.StreamPipeWriterOptions)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::FlushAsync:System.Threading.Tasks.ValueTask{System.IO.Pipelines.FlushResult}(System.Threading.CancellationToken)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::get_CanGetUnflushedBytes:System.Boolean()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::get_UnflushedBytes:System.Int64()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::GetMemory:System.Memory{System.Byte}(System.Int32)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::GetSpan:System.Span{System.Byte}(System.Int32)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::OnReaderCompleted:System.Void(System.Action{System.Exception,System.Object},System.Object)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::WriteAsync:System.Threading.Tasks.ValueTask{System.IO.Pipelines.FlushResult}(System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)",
+      "status": "managed_harness_unavailable"
+    }
+  ]
+}

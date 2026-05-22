@@ -3597,18 +3597,18 @@
         {
           "op": "ldtoken",
           "opCode": 70,
-          "operand": "GroupingLookupSubjects/\u003CPrivateImplementationDetails\u003E::4F6ADDC9659D6FB90FE94B6688A79F2A1FA8D36EC43F8F3E1D9B6528C448A384",
+          "operand": "GroupingLookupSubjects/\u003CPrivateImplementationDetails\u003E::6E28B4D41AF8A88650219653A728E0FD6760BB2B1DFEB7A9EB8DEB5B4E7010E0",
           "ilOffset": 8,
           "resultType": "System.RuntimeFieldHandle",
           "reference": {
             "assemblyName": "GroupingLookupSubjects",
             "subjectKind": "field",
-            "subjectId": "GroupingLookupSubjects/\u003CPrivateImplementationDetails\u003E::4F6ADDC9659D6FB90FE94B6688A79F2A1FA8D36EC43F8F3E1D9B6528C448A384"
+            "subjectId": "GroupingLookupSubjects/\u003CPrivateImplementationDetails\u003E::6E28B4D41AF8A88650219653A728E0FD6760BB2B1DFEB7A9EB8DEB5B4E7010E0"
           },
           "targetReference": {
             "kind": 2,
             "assemblyName": "GroupingLookupSubjects",
-            "subjectId": "GroupingLookupSubjects/\u003CPrivateImplementationDetails\u003E::4F6ADDC9659D6FB90FE94B6688A79F2A1FA8D36EC43F8F3E1D9B6528C448A384",
+            "subjectId": "GroupingLookupSubjects/\u003CPrivateImplementationDetails\u003E::6E28B4D41AF8A88650219653A728E0FD6760BB2B1DFEB7A9EB8DEB5B4E7010E0",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
@@ -3960,216 +3960,57 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldsfld",
-          "opCode": 12,
-          "operand": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__7_2",
-          "ilOffset": 80,
-          "resultType": "System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E",
-          "reference": {
-            "assemblyName": "GroupingLookupSubjects",
-            "subjectKind": "field",
-            "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__7_2"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "GroupingLookupSubjects",
-            "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__7_2",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E"
-          },
-          "runtimeServiceKind": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "dup",
-          "opCode": 54,
-          "ilOffset": 85,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brtrue",
-          "opCode": 18,
-          "operand": 111,
-          "ilOffset": 86,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 88,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldsfld",
-          "opCode": 12,
-          "operand": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
-          "ilOffset": 89,
-          "resultType": "GroupingLookupSubjects\u002B\u003C\u003Ec",
-          "reference": {
-            "assemblyName": "GroupingLookupSubjects",
-            "subjectKind": "field",
-            "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "GroupingLookupSubjects",
-            "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "GroupingLookupSubjects\u002B\u003C\u003Ec"
-          },
-          "runtimeServiceKind": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldftn",
-          "opCode": 73,
-          "operand": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-          "ilOffset": 94,
-          "resultType": "System.IntPtr",
-          "callee": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-          "reference": {
-            "assemblyName": "GroupingLookupSubjects",
-            "subjectKind": "method",
-            "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "GroupingLookupSubjects",
-            "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "isPreserveSig": false
-        },
-        {
-          "op": "newobj",
-          "opCode": 34,
-          "ilOffset": 100,
-          "resultType": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E",
-          "callee": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "dup",
-          "opCode": 54,
-          "ilOffset": 105,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__7_2",
-          "ilOffset": 106,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "GroupingLookupSubjects",
-            "subjectKind": "field",
-            "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__7_2"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "GroupingLookupSubjects",
-            "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__7_2",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 111,
-          "resultType": "System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E",
-          "callee": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E)",
+          "ilOffset": 80,
+          "resultType": "System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E",
+          "callee": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
           "reference": {
             "assemblyName": "System.Linq",
             "subjectKind": "method",
-            "subjectId": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E)"
+            "subjectId": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)"
           },
           "targetReference": {
             "kind": 3,
             "assemblyName": "System.Linq",
-            "subjectId": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E)",
-            "openDefinitionSubjectId": "System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,System.Collections.Generic.IEnumerable\u003C!!2\u003E,!!3\u003E)",
+            "subjectId": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+            "openDefinitionSubjectId": "System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CIGrouping\u003C!!1,!!2\u003E\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Func\u003C!!0,!!2\u003E)",
             "sharedGenericBodyId": {
-              "value": "body:definition=System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,System.Collections.Generic.IEnumerable\u003C!!2\u003E,!!3\u003E);type=[];method=[System.Int32,System.Int32,System.Int32,System.Int32]"
+              "value": "body:definition=System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CIGrouping\u003C!!1,!!2\u003E\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Func\u003C!!0,!!2\u003E);type=[];method=[System.Int32,System.Int32,System.Int32]"
             },
             "instantiationStubId": {
-              "value": "stub:definition=System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,System.Collections.Generic.IEnumerable\u003C!!2\u003E,!!3\u003E);type=[];method=[System.Int32,System.Int32,System.Int32,System.Int32]"
+              "value": "stub:definition=System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CIGrouping\u003C!!1,!!2\u003E\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Func\u003C!!0,!!2\u003E);type=[];method=[System.Int32,System.Int32,System.Int32]"
             },
             "runtimeGenericContext": {
               "instantiationKey": {
                 "contextKind": 2,
-                "definitionSubjectId": "System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,System.Collections.Generic.IEnumerable\u003C!!2\u003E,!!3\u003E)",
+                "definitionSubjectId": "System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CIGrouping\u003C!!1,!!2\u003E\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Func\u003C!!0,!!2\u003E)",
                 "typeArguments": [],
                 "methodArguments": [
-                  "System.Int32",
                   "System.Int32",
                   "System.Int32",
                   "System.Int32"
                 ]
               },
               "sharedGenericBodyId": {
-                "value": "body:definition=System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,System.Collections.Generic.IEnumerable\u003C!!2\u003E,!!3\u003E);type=[];method=[System.Int32,System.Int32,System.Int32,System.Int32]"
+                "value": "body:definition=System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CIGrouping\u003C!!1,!!2\u003E\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Func\u003C!!0,!!2\u003E);type=[];method=[System.Int32,System.Int32,System.Int32]"
               },
               "instantiationStubId": {
-                "value": "stub:definition=System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,System.Collections.Generic.IEnumerable\u003C!!2\u003E,!!3\u003E);type=[];method=[System.Int32,System.Int32,System.Int32,System.Int32]"
+                "value": "stub:definition=System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CIGrouping\u003C!!1,!!2\u003E\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Func\u003C!!0,!!2\u003E);type=[];method=[System.Int32,System.Int32,System.Int32]"
               },
               "supportKindCode": 3,
               "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:methodSpec"
             },
             "genericDiagnostic": {
-              "subjectId": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E)",
-              "definitionSubjectId": "System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,System.Collections.Generic.IEnumerable\u003C!!2\u003E,!!3\u003E)",
-              "displaySubjectId": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32,System.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E)",
+              "subjectId": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+              "definitionSubjectId": "System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CIGrouping\u003C!!1,!!2\u003E\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Func\u003C!!0,!!2\u003E)",
+              "displaySubjectId": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
               "instantiationKey": {
                 "contextKind": 2,
-                "definitionSubjectId": "System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,System.Collections.Generic.IEnumerable\u003C!!2\u003E,!!3\u003E)",
+                "definitionSubjectId": "System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CIGrouping\u003C!!1,!!2\u003E\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Func\u003C!!0,!!2\u003E)",
                 "typeArguments": [],
                 "methodArguments": [
-                  "System.Int32",
                   "System.Int32",
                   "System.Int32",
                   "System.Int32"
@@ -4189,53 +4030,53 @@
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 116,
-          "resultType": "System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E",
-          "callee": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E()",
+          "ilOffset": 85,
+          "resultType": "System.Collections.Generic.IEnumerator\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E",
+          "callee": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E()",
           "reference": {
             "assemblyName": "System.Private.CoreLib",
             "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E()"
+            "subjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E()"
           },
           "targetReference": {
             "kind": 3,
             "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E()",
+            "subjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E()",
             "openDefinitionSubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E()",
             "sharedGenericBodyId": {
-              "value": "body:definition=System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E();type=[System.Int32];method=[]"
+              "value": "body:definition=System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E();type=[IGrouping\u003CSystem.Int32,System.Int32\u003E];method=[]"
             },
             "instantiationStubId": {
-              "value": "stub:definition=System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E();type=[System.Int32];method=[]"
+              "value": "stub:definition=System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E();type=[IGrouping\u003CSystem.Int32,System.Int32\u003E];method=[]"
             },
             "runtimeGenericContext": {
               "instantiationKey": {
                 "contextKind": 1,
                 "definitionSubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E()",
                 "typeArguments": [
-                  "System.Int32"
+                  "IGrouping\u003CSystem.Int32,System.Int32\u003E"
                 ],
                 "methodArguments": []
               },
               "sharedGenericBodyId": {
-                "value": "body:definition=System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E();type=[System.Int32];method=[]"
+                "value": "body:definition=System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E();type=[IGrouping\u003CSystem.Int32,System.Int32\u003E];method=[]"
               },
               "instantiationStubId": {
-                "value": "stub:definition=System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E();type=[System.Int32];method=[]"
+                "value": "stub:definition=System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E();type=[IGrouping\u003CSystem.Int32,System.Int32\u003E];method=[]"
               },
               "supportKindCode": 3,
               "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
-              "subjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E()",
+              "subjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E()",
               "definitionSubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E()",
-              "displaySubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E::GetEnumerator()",
+              "displaySubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E::GetEnumerator()",
               "instantiationKey": {
                 "contextKind": 1,
                 "definitionSubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E()",
                 "typeArguments": [
-                  "System.Int32"
+                  "IGrouping\u003CSystem.Int32,System.Int32\u003E"
                 ],
                 "methodArguments": []
               }
@@ -4253,7 +4094,7 @@
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 121,
+          "ilOffset": 90,
           "resultType": "System.Boolean",
           "callee": "System.Private.CoreLib/System.Collections.IEnumerator::MoveNext:System.Boolean()",
           "reference": {
@@ -4278,13 +4119,13 @@
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 126,
+          "ilOffset": 95,
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 127,
+          "ilOffset": 96,
           "isPreserveSig": false
         }
       ],
@@ -4365,18 +4206,18 @@
         {
           "op": "ldtoken",
           "opCode": 70,
-          "operand": "GroupingLookupSubjects/\u003CPrivateImplementationDetails\u003E::4F6ADDC9659D6FB90FE94B6688A79F2A1FA8D36EC43F8F3E1D9B6528C448A384",
+          "operand": "GroupingLookupSubjects/\u003CPrivateImplementationDetails\u003E::6E28B4D41AF8A88650219653A728E0FD6760BB2B1DFEB7A9EB8DEB5B4E7010E0",
           "ilOffset": 8,
           "resultType": "System.RuntimeFieldHandle",
           "reference": {
             "assemblyName": "GroupingLookupSubjects",
             "subjectKind": "field",
-            "subjectId": "GroupingLookupSubjects/\u003CPrivateImplementationDetails\u003E::4F6ADDC9659D6FB90FE94B6688A79F2A1FA8D36EC43F8F3E1D9B6528C448A384"
+            "subjectId": "GroupingLookupSubjects/\u003CPrivateImplementationDetails\u003E::6E28B4D41AF8A88650219653A728E0FD6760BB2B1DFEB7A9EB8DEB5B4E7010E0"
           },
           "targetReference": {
             "kind": 2,
             "assemblyName": "GroupingLookupSubjects",
-            "subjectId": "GroupingLookupSubjects/\u003CPrivateImplementationDetails\u003E::4F6ADDC9659D6FB90FE94B6688A79F2A1FA8D36EC43F8F3E1D9B6528C448A384",
+            "subjectId": "GroupingLookupSubjects/\u003CPrivateImplementationDetails\u003E::6E28B4D41AF8A88650219653A728E0FD6760BB2B1DFEB7A9EB8DEB5B4E7010E0",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
@@ -4728,166 +4569,9 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldsfld",
-          "opCode": 12,
-          "operand": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_2",
-          "ilOffset": 80,
-          "resultType": "System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E",
-          "reference": {
-            "assemblyName": "GroupingLookupSubjects",
-            "subjectKind": "field",
-            "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_2"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "GroupingLookupSubjects",
-            "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_2",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E"
-          },
-          "runtimeServiceKind": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "dup",
-          "opCode": 54,
-          "ilOffset": 85,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brtrue",
-          "opCode": 18,
-          "operand": 111,
-          "ilOffset": 86,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 88,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldsfld",
-          "opCode": 12,
-          "operand": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
-          "ilOffset": 89,
-          "resultType": "GroupingLookupSubjects\u002B\u003C\u003Ec",
-          "reference": {
-            "assemblyName": "GroupingLookupSubjects",
-            "subjectKind": "field",
-            "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "GroupingLookupSubjects",
-            "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "GroupingLookupSubjects\u002B\u003C\u003Ec"
-          },
-          "runtimeServiceKind": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldftn",
-          "opCode": 73,
-          "operand": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-          "ilOffset": 94,
-          "resultType": "System.IntPtr",
-          "callee": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-          "reference": {
-            "assemblyName": "GroupingLookupSubjects",
-            "subjectKind": "method",
-            "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "GroupingLookupSubjects",
-            "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "isPreserveSig": false
-        },
-        {
-          "op": "newobj",
-          "opCode": 34,
-          "ilOffset": 100,
-          "resultType": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E",
-          "callee": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "dup",
-          "opCode": 54,
-          "ilOffset": 105,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_2",
-          "ilOffset": 106,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "GroupingLookupSubjects",
-            "subjectKind": "field",
-            "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_2"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "GroupingLookupSubjects",
-            "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_2",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 111,
+          "ilOffset": 80,
           "resultType": "System.Collections.Generic.EqualityComparer\u003CSystem.Int32\u003E",
           "callee": "System.Collections/System.Collections.Generic.EqualityComparer\u003CSystem.Int32\u003E::get_Default:System.Collections.Generic.EqualityComparer\u003CSystem.Int32\u003E()",
           "reference": {
@@ -4951,57 +4635,55 @@
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 116,
-          "resultType": "System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E",
-          "callee": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+          "ilOffset": 85,
+          "resultType": "System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E",
+          "callee": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
           "reference": {
             "assemblyName": "System.Linq",
             "subjectKind": "method",
-            "subjectId": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)"
+            "subjectId": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)"
           },
           "targetReference": {
             "kind": 3,
             "assemblyName": "System.Linq",
-            "subjectId": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
-            "openDefinitionSubjectId": "System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,System.Collections.Generic.IEnumerable\u003C!!2\u003E,!!3\u003E,System.Collections.Generic.IEqualityComparer\u003C!!1\u003E)",
+            "subjectId": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+            "openDefinitionSubjectId": "System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CIGrouping\u003C!!1,!!2\u003E\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Collections.Generic.IEqualityComparer\u003C!!1\u003E)",
             "sharedGenericBodyId": {
-              "value": "body:definition=System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,System.Collections.Generic.IEnumerable\u003C!!2\u003E,!!3\u003E,System.Collections.Generic.IEqualityComparer\u003C!!1\u003E);type=[];method=[System.Int32,System.Int32,System.Int32,System.Int32]"
+              "value": "body:definition=System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CIGrouping\u003C!!1,!!2\u003E\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Collections.Generic.IEqualityComparer\u003C!!1\u003E);type=[];method=[System.Int32,System.Int32,System.Int32]"
             },
             "instantiationStubId": {
-              "value": "stub:definition=System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,System.Collections.Generic.IEnumerable\u003C!!2\u003E,!!3\u003E,System.Collections.Generic.IEqualityComparer\u003C!!1\u003E);type=[];method=[System.Int32,System.Int32,System.Int32,System.Int32]"
+              "value": "stub:definition=System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CIGrouping\u003C!!1,!!2\u003E\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Collections.Generic.IEqualityComparer\u003C!!1\u003E);type=[];method=[System.Int32,System.Int32,System.Int32]"
             },
             "runtimeGenericContext": {
               "instantiationKey": {
                 "contextKind": 2,
-                "definitionSubjectId": "System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,System.Collections.Generic.IEnumerable\u003C!!2\u003E,!!3\u003E,System.Collections.Generic.IEqualityComparer\u003C!!1\u003E)",
+                "definitionSubjectId": "System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CIGrouping\u003C!!1,!!2\u003E\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Collections.Generic.IEqualityComparer\u003C!!1\u003E)",
                 "typeArguments": [],
                 "methodArguments": [
-                  "System.Int32",
                   "System.Int32",
                   "System.Int32",
                   "System.Int32"
                 ]
               },
               "sharedGenericBodyId": {
-                "value": "body:definition=System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,System.Collections.Generic.IEnumerable\u003C!!2\u003E,!!3\u003E,System.Collections.Generic.IEqualityComparer\u003C!!1\u003E);type=[];method=[System.Int32,System.Int32,System.Int32,System.Int32]"
+                "value": "body:definition=System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CIGrouping\u003C!!1,!!2\u003E\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Collections.Generic.IEqualityComparer\u003C!!1\u003E);type=[];method=[System.Int32,System.Int32,System.Int32]"
               },
               "instantiationStubId": {
-                "value": "stub:definition=System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,System.Collections.Generic.IEnumerable\u003C!!2\u003E,!!3\u003E,System.Collections.Generic.IEqualityComparer\u003C!!1\u003E);type=[];method=[System.Int32,System.Int32,System.Int32,System.Int32]"
+                "value": "stub:definition=System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CIGrouping\u003C!!1,!!2\u003E\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Collections.Generic.IEqualityComparer\u003C!!1\u003E);type=[];method=[System.Int32,System.Int32,System.Int32]"
               },
               "supportKindCode": 3,
               "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:methodSpec"
             },
             "genericDiagnostic": {
-              "subjectId": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
-              "definitionSubjectId": "System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,System.Collections.Generic.IEnumerable\u003C!!2\u003E,!!3\u003E,System.Collections.Generic.IEqualityComparer\u003C!!1\u003E)",
-              "displaySubjectId": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32,System.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+              "subjectId": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+              "definitionSubjectId": "System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CIGrouping\u003C!!1,!!2\u003E\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Collections.Generic.IEqualityComparer\u003C!!1\u003E)",
+              "displaySubjectId": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
               "instantiationKey": {
                 "contextKind": 2,
-                "definitionSubjectId": "System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,System.Collections.Generic.IEnumerable\u003C!!2\u003E,!!3\u003E,System.Collections.Generic.IEqualityComparer\u003C!!1\u003E)",
+                "definitionSubjectId": "System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CIGrouping\u003C!!1,!!2\u003E\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Collections.Generic.IEqualityComparer\u003C!!1\u003E)",
                 "typeArguments": [],
                 "methodArguments": [
-                  "System.Int32",
                   "System.Int32",
                   "System.Int32",
                   "System.Int32"
@@ -5021,53 +4703,53 @@
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 121,
-          "resultType": "System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E",
-          "callee": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E()",
+          "ilOffset": 90,
+          "resultType": "System.Collections.Generic.IEnumerator\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E",
+          "callee": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E()",
           "reference": {
             "assemblyName": "System.Private.CoreLib",
             "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E()"
+            "subjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E()"
           },
           "targetReference": {
             "kind": 3,
             "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E()",
+            "subjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E()",
             "openDefinitionSubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E()",
             "sharedGenericBodyId": {
-              "value": "body:definition=System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E();type=[System.Int32];method=[]"
+              "value": "body:definition=System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E();type=[IGrouping\u003CSystem.Int32,System.Int32\u003E];method=[]"
             },
             "instantiationStubId": {
-              "value": "stub:definition=System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E();type=[System.Int32];method=[]"
+              "value": "stub:definition=System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E();type=[IGrouping\u003CSystem.Int32,System.Int32\u003E];method=[]"
             },
             "runtimeGenericContext": {
               "instantiationKey": {
                 "contextKind": 1,
                 "definitionSubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E()",
                 "typeArguments": [
-                  "System.Int32"
+                  "IGrouping\u003CSystem.Int32,System.Int32\u003E"
                 ],
                 "methodArguments": []
               },
               "sharedGenericBodyId": {
-                "value": "body:definition=System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E();type=[System.Int32];method=[]"
+                "value": "body:definition=System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E();type=[IGrouping\u003CSystem.Int32,System.Int32\u003E];method=[]"
               },
               "instantiationStubId": {
-                "value": "stub:definition=System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E();type=[System.Int32];method=[]"
+                "value": "stub:definition=System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E();type=[IGrouping\u003CSystem.Int32,System.Int32\u003E];method=[]"
               },
               "supportKindCode": 3,
               "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
-              "subjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E()",
+              "subjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E()",
               "definitionSubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E()",
-              "displaySubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E::GetEnumerator()",
+              "displaySubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E::GetEnumerator()",
               "instantiationKey": {
                 "contextKind": 1,
                 "definitionSubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E()",
                 "typeArguments": [
-                  "System.Int32"
+                  "IGrouping\u003CSystem.Int32,System.Int32\u003E"
                 ],
                 "methodArguments": []
               }
@@ -5085,7 +4767,7 @@
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 126,
+          "ilOffset": 95,
           "resultType": "System.Boolean",
           "callee": "System.Private.CoreLib/System.Collections.IEnumerator::MoveNext:System.Boolean()",
           "reference": {
@@ -5110,13 +4792,13 @@
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 131,
+          "ilOffset": 100,
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 132,
+          "ilOffset": 101,
           "isPreserveSig": false
         }
       ],
@@ -6020,7 +5702,7 @@
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 2,
+          "operand": 3,
           "ilOffset": 1,
           "resultType": "System.Int32",
           "isPreserveSig": false
@@ -6090,7 +5772,7 @@
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 10,
+          "operand": 100,
           "ilOffset": 1,
           "resultType": "System.Int32",
           "isPreserveSig": false
@@ -6106,65 +5788,6 @@
           "op": "ret",
           "opCode": 53,
           "ilOffset": 4,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "GroupingLookupSubjects"
-    },
-    {
-      "methodId": "grouping-lookup-subjects.grouping-lookup-subjects-c.custom-entry-subject-6-b-7-2",
-      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-      "signature": "System.Int32 GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_2(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-      "identity": {
-        "assemblyName": "GroupingLookupSubjects",
-        "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
-        "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-        "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-        "methodId": "grouping-lookup-subjects.grouping-lookup-subjects-c.custom-entry-subject-6-b-7-2",
-        "signature": "System.Int32 GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_2(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)"
-      },
-      "nativeSymbol": "GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_6_b__7_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32",
-      "isStatic": false,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 2,
-      "parameterAbis": [
-        {
-          "carrierKindCode": 1,
-          "typeShape": 2
-        },
-        {
-          "carrierKindCode": 2,
-          "typeShape": 1
-        }
-      ],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldarg",
-          "opCode": 6,
-          "operand": 1,
-          "ilOffset": 0,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 1,
           "isPreserveSig": false
         }
       ],
@@ -6219,7 +5842,7 @@
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 2,
+          "operand": 3,
           "ilOffset": 1,
           "resultType": "System.Int32",
           "isPreserveSig": false
@@ -6289,7 +5912,7 @@
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 10,
+          "operand": 100,
           "ilOffset": 1,
           "resultType": "System.Int32",
           "isPreserveSig": false
@@ -6305,65 +5928,6 @@
           "op": "ret",
           "opCode": 53,
           "ilOffset": 4,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "GroupingLookupSubjects"
-    },
-    {
-      "methodId": "grouping-lookup-subjects.grouping-lookup-subjects-c.custom-entry-subject-7-b-8-2",
-      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-      "signature": "System.Int32 GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_2(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-      "identity": {
-        "assemblyName": "GroupingLookupSubjects",
-        "declaringTypeSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec",
-        "definitionSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-        "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-        "methodId": "grouping-lookup-subjects.grouping-lookup-subjects-c.custom-entry-subject-7-b-8-2",
-        "signature": "System.Int32 GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_2(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)"
-      },
-      "nativeSymbol": "GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_7_b__8_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32",
-      "isStatic": false,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 2,
-      "parameterAbis": [
-        {
-          "carrierKindCode": 1,
-          "typeShape": 2
-        },
-        {
-          "carrierKindCode": 2,
-          "typeShape": 1
-        }
-      ],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldarg",
-          "opCode": 6,
-          "operand": 1,
-          "ilOffset": 0,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 1,
           "isPreserveSig": false
         }
       ],

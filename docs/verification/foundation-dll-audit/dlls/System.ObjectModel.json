@@ -1,0 +1,2933 @@
+{
+  "assemblyName": "System.ObjectModel",
+  "orderIndex": 9,
+  "phase": "roadmap-closed",
+  "roadmapTaskId": "TASK-20260427-04",
+  "dllState": "not-started",
+  "currentProject": "audit-input-and-ledger",
+  "blockingReason": "",
+  "riskTags": [],
+  "projects": [
+    {
+      "projectCode": "audit-input-and-ledger",
+      "displayName": "Audit Input And Ledger",
+      "policyState": "required",
+      "executionState": "pending",
+      "verificationMethod": "Formal verification for Audit Input And Ledger",
+      "verificationTarget": "System.ObjectModel",
+      "completionRule": "",
+      "artifacts": [],
+      "supportRefs": [
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
+      ],
+      "blockers": [],
+      "updatedAt": ""
+    },
+    {
+      "projectCode": "managed-proof",
+      "displayName": "Managed Proof",
+      "policyState": "required",
+      "executionState": "pending",
+      "verificationMethod": "Formal verification for Managed Proof",
+      "verificationTarget": "System.ObjectModel",
+      "completionRule": "",
+      "artifacts": [],
+      "supportRefs": [
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
+      ],
+      "blockers": [],
+      "updatedAt": ""
+    },
+    {
+      "projectCode": "native-proof",
+      "displayName": "Native Proof",
+      "policyState": "required",
+      "executionState": "pending",
+      "verificationMethod": "Formal verification for Native Proof",
+      "verificationTarget": "System.ObjectModel",
+      "completionRule": "",
+      "artifacts": [],
+      "supportRefs": [
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
+      ],
+      "blockers": [],
+      "updatedAt": ""
+    },
+    {
+      "projectCode": "hotupdate-proof",
+      "displayName": "Hotupdate Proof",
+      "policyState": "required",
+      "executionState": "pending",
+      "verificationMethod": "Formal verification for Hotupdate Proof",
+      "verificationTarget": "System.ObjectModel",
+      "completionRule": "",
+      "artifacts": [],
+      "supportRefs": [
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
+      ],
+      "blockers": [],
+      "updatedAt": ""
+    },
+    {
+      "projectCode": "benchmark",
+      "displayName": "Benchmark",
+      "policyState": "required",
+      "executionState": "pending",
+      "verificationMethod": "Formal verification for Benchmark",
+      "verificationTarget": "System.ObjectModel",
+      "completionRule": "",
+      "artifacts": [],
+      "supportRefs": [
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
+      ],
+      "blockers": [],
+      "updatedAt": ""
+    },
+    {
+      "projectCode": "codegen-review",
+      "displayName": "Codegen Review",
+      "policyState": "required",
+      "executionState": "pending",
+      "verificationMethod": "Formal verification for Codegen Review",
+      "verificationTarget": "System.ObjectModel",
+      "completionRule": "",
+      "artifacts": [],
+      "supportRefs": [
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
+      ],
+      "blockers": [],
+      "updatedAt": ""
+    },
+    {
+      "projectCode": "completion-certification",
+      "displayName": "Completion Certification",
+      "policyState": "required",
+      "executionState": "pending",
+      "verificationMethod": "Formal verification for Completion Certification",
+      "verificationTarget": "System.ObjectModel",
+      "completionRule": "",
+      "artifacts": [],
+      "supportRefs": [
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
+      ],
+      "blockers": [],
+      "updatedAt": ""
+    }
+  ],
+  "capabilityClosure": {
+    "totalFamilies": 6,
+    "closedFamilies": 0,
+    "waivedFamilies": 0,
+    "excludedFamilies": 0,
+    "platformBlockedFamilies": 0,
+    "inProgressFamilies": 6,
+    "closurePercent": 0.0
+  },
+  "workflowProgress": {
+    "totalRequiredGates": 0,
+    "passedGates": 0,
+    "progressPercent": 0.0
+  },
+  "capabilityFamilies": [
+    {
+      "familyId": "family/System.ObjectModel/collection-change-notifications",
+      "methodSubjectIds": [
+        "System.ObjectModel/System.Collections.Specialized.INotifyCollectionChanged::add_CollectionChanged:System.Void(System.Collections.Specialized.NotifyCollectionChangedEventHandler)",
+        "System.ObjectModel/System.Collections.Specialized.INotifyCollectionChanged::remove_CollectionChanged:System.Void(System.Collections.Specialized.NotifyCollectionChangedEventHandler)"
+      ],
+      "methodCount": 2,
+      "implementationFamilies": [],
+      "closureStatus": "in-progress",
+      "denominatorStatus": "audit-confirmed",
+      "description": "",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 2,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 2,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate",
+        "d3PatchApplied": false,
+        "d3PatchedCount": 0,
+        "d3SchemaVersion": 0,
+        "d3MethodResults": [],
+        "passedMethodCount": 0,
+        "failedMethodCount": 0,
+        "unmatchedMethodCount": 0,
+        "verificationMethodResults": []
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 2,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "",
+        "denominator": 2,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "",
+        "denominator": 2,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "nativeCorrect": {
+        "status": "pending",
+        "passed": 0,
+        "total": 0,
+        "reason": "未接入批量验证管线"
+      },
+      "reviewBundle": {}
+    },
+    {
+      "familyId": "family/System.ObjectModel/command-type-metadata",
+      "methodSubjectIds": [
+        "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::Equals:System.Boolean(System.Object)",
+        "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::get_ConverterTypeName:System.String()",
+        "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::GetHashCode:System.Int32()",
+        "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::.ctor:System.Void()",
+        "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::.ctor:System.Void(System.Type)",
+        "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::.ctor:System.Void(System.String)",
+        "System.ObjectModel/System.Reflection.ICustomTypeProvider::GetCustomType:System.Type()",
+        "System.ObjectModel/System.Windows.Input.ICommand::add_CanExecuteChanged:System.Void(System.EventHandler)",
+        "System.ObjectModel/System.Windows.Input.ICommand::CanExecute:System.Boolean(System.Object)",
+        "System.ObjectModel/System.Windows.Input.ICommand::Execute:System.Void(System.Object)",
+        "System.ObjectModel/System.Windows.Input.ICommand::remove_CanExecuteChanged:System.Void(System.EventHandler)",
+        "System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::get_ValueSerializerType:System.Type()",
+        "System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::get_ValueSerializerTypeName:System.String()",
+        "System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::.ctor:System.Void(System.Type)",
+        "System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::.ctor:System.Void(System.String)"
+      ],
+      "methodCount": 15,
+      "implementationFamilies": [],
+      "closureStatus": "in-progress",
+      "denominatorStatus": "audit-confirmed",
+      "description": "",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 15,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 15,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate",
+        "d3PatchApplied": false,
+        "d3PatchedCount": 0,
+        "d3SchemaVersion": 0,
+        "d3MethodResults": [],
+        "passedMethodCount": 0,
+        "failedMethodCount": 0,
+        "unmatchedMethodCount": 0,
+        "verificationMethodResults": []
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 15,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "",
+        "denominator": 15,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "",
+        "denominator": 15,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "nativeCorrect": {
+        "status": "pending",
+        "passed": 0,
+        "total": 0,
+        "reason": "未接入批量验证管线"
+      },
+      "reviewBundle": {}
+    },
+    {
+      "familyId": "family/System.ObjectModel/data-errors",
+      "methodSubjectIds": [
+        "System.ObjectModel/System.ComponentModel.DataErrorsChangedEventArgs::get_PropertyName:System.String()",
+        "System.ObjectModel/System.ComponentModel.DataErrorsChangedEventArgs::.ctor:System.Void(System.String)",
+        "System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::add_ErrorsChanged:System.Void(System.EventHandler{System.ComponentModel.DataErrorsChangedEventArgs})",
+        "System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::get_HasErrors:System.Boolean()",
+        "System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::GetErrors:System.Collections.IEnumerable(System.String)",
+        "System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::remove_ErrorsChanged:System.Void(System.EventHandler{System.ComponentModel.DataErrorsChangedEventArgs})"
+      ],
+      "methodCount": 6,
+      "implementationFamilies": [],
+      "closureStatus": "in-progress",
+      "denominatorStatus": "audit-confirmed",
+      "description": "",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 6,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 6,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate",
+        "d3PatchApplied": false,
+        "d3PatchedCount": 0,
+        "d3SchemaVersion": 0,
+        "d3MethodResults": [],
+        "passedMethodCount": 0,
+        "failedMethodCount": 0,
+        "unmatchedMethodCount": 0,
+        "verificationMethodResults": []
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 6,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "",
+        "denominator": 6,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "",
+        "denominator": 6,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "nativeCorrect": {
+        "status": "pending",
+        "passed": 0,
+        "total": 0,
+        "reason": "未接入批量验证管线"
+      },
+      "reviewBundle": {}
+    },
+    {
+      "familyId": "family/System.ObjectModel/object-model-collections",
+      "methodSubjectIds": [
+        "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::Contains:System.Boolean(TKey)",
+        "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::get_Comparer:System.Collections.Generic.IEqualityComparer{TKey}()",
+        "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::get_Item:TItem(TKey)",
+        "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::Remove:System.Boolean(TKey)",
+        "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::TryGetValue:System.Boolean(TKey,TItem&)",
+        "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::get_Item:TItem()"
+      ],
+      "methodCount": 6,
+      "implementationFamilies": [],
+      "closureStatus": "in-progress",
+      "denominatorStatus": "audit-confirmed",
+      "description": "",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 6,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 6,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate",
+        "d3PatchApplied": false,
+        "d3PatchedCount": 0,
+        "d3SchemaVersion": 0,
+        "d3MethodResults": [],
+        "passedMethodCount": 0,
+        "failedMethodCount": 0,
+        "unmatchedMethodCount": 0,
+        "verificationMethodResults": []
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 6,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "",
+        "denominator": 6,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "",
+        "denominator": 6,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "nativeCorrect": {
+        "status": "pending",
+        "passed": 0,
+        "total": 0,
+        "reason": "未接入批量验证管线"
+      },
+      "reviewBundle": {}
+    },
+    {
+      "familyId": "family/System.ObjectModel/observable-collections",
+      "methodSubjectIds": [
+        "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::add_CollectionChanged:System.Void(System.Collections.Specialized.NotifyCollectionChangedEventHandler)",
+        "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::Move:System.Void(System.Int32,System.Int32)",
+        "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::remove_CollectionChanged:System.Void(System.Collections.Specialized.NotifyCollectionChangedEventHandler)",
+        "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::.ctor:System.Void()",
+        "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::.ctor:System.Void(System.Collections.Generic.IEnumerable{T})",
+        "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::.ctor:System.Void(System.Collections.Generic.List{T})",
+        "System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection`1::get_Empty:System.Collections.ObjectModel.ReadOnlyObservableCollection{T}()",
+        "System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection`1::.ctor:System.Void(System.Collections.ObjectModel.ObservableCollection{T})"
+      ],
+      "methodCount": 8,
+      "implementationFamilies": [],
+      "closureStatus": "in-progress",
+      "denominatorStatus": "audit-confirmed",
+      "description": "",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 8,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 8,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate",
+        "d3PatchApplied": false,
+        "d3PatchedCount": 0,
+        "d3SchemaVersion": 0,
+        "d3MethodResults": [],
+        "passedMethodCount": 0,
+        "failedMethodCount": 0,
+        "unmatchedMethodCount": 0,
+        "verificationMethodResults": []
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 8,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "",
+        "denominator": 8,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "",
+        "denominator": 8,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "nativeCorrect": {
+        "status": "pending",
+        "passed": 0,
+        "total": 0,
+        "reason": "未接入批量验证管线"
+      },
+      "reviewBundle": {}
+    },
+    {
+      "familyId": "family/System.ObjectModel/property-change-notifications",
+      "methodSubjectIds": [
+        "System.ObjectModel/System.ComponentModel.INotifyPropertyChanged::add_PropertyChanged:System.Void(System.ComponentModel.PropertyChangedEventHandler)",
+        "System.ObjectModel/System.ComponentModel.INotifyPropertyChanged::remove_PropertyChanged:System.Void(System.ComponentModel.PropertyChangedEventHandler)",
+        "System.ObjectModel/System.ComponentModel.INotifyPropertyChanging::add_PropertyChanging:System.Void(System.ComponentModel.PropertyChangingEventHandler)",
+        "System.ObjectModel/System.ComponentModel.INotifyPropertyChanging::remove_PropertyChanging:System.Void(System.ComponentModel.PropertyChangingEventHandler)"
+      ],
+      "methodCount": 4,
+      "implementationFamilies": [],
+      "closureStatus": "in-progress",
+      "denominatorStatus": "audit-confirmed",
+      "description": "",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 4,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 4,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate",
+        "d3PatchApplied": false,
+        "d3PatchedCount": 0,
+        "d3SchemaVersion": 0,
+        "d3MethodResults": [],
+        "passedMethodCount": 0,
+        "failedMethodCount": 0,
+        "unmatchedMethodCount": 0,
+        "verificationMethodResults": []
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 4,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "",
+        "denominator": 4,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "",
+        "denominator": 4,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "nativeCorrect": {
+        "status": "pending",
+        "passed": 0,
+        "total": 0,
+        "reason": "未接入批量验证管线"
+      },
+      "reviewBundle": {}
+    }
+  ],
+  "familyVerificationClaims": {
+    "schemaVersion": 1,
+    "assemblyName": "System.ObjectModel",
+    "ownerSubjectId": "SolutionCorePack",
+    "methodUniverseArtifactPaths": [],
+    "claims": [
+      {
+        "claimId": "family/System.ObjectModel/collection-change-notifications::native-proof",
+        "familyId": "family/System.ObjectModel/collection-change-notifications",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 2,
+        "methodSubjectIds": [
+          "System.ObjectModel/System.Collections.Specialized.INotifyCollectionChanged::add_CollectionChanged:System.Void(System.Collections.Specialized.NotifyCollectionChangedEventHandler)",
+          "System.ObjectModel/System.Collections.Specialized.INotifyCollectionChanged::remove_CollectionChanged:System.Void(System.Collections.Specialized.NotifyCollectionChangedEventHandler)"
+        ],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "inline-family:methodSubjectIds",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.ObjectModel/collection-change-notifications::managed-proof",
+        "familyId": "family/System.ObjectModel/collection-change-notifications",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.ObjectModel/collection-change-notifications::hotupdate-proof",
+        "familyId": "family/System.ObjectModel/collection-change-notifications",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.ObjectModel/collection-change-notifications::benchmark",
+        "familyId": "family/System.ObjectModel/collection-change-notifications",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.ObjectModel/collection-change-notifications::test-code",
+        "familyId": "family/System.ObjectModel/collection-change-notifications",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 2,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.ObjectModel/command-type-metadata::native-proof",
+        "familyId": "family/System.ObjectModel/command-type-metadata",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 15,
+        "methodSubjectIds": [
+          "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::Equals:System.Boolean(System.Object)",
+          "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::get_ConverterTypeName:System.String()",
+          "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::GetHashCode:System.Int32()",
+          "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::.ctor:System.Void()",
+          "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::.ctor:System.Void(System.Type)",
+          "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::.ctor:System.Void(System.String)",
+          "System.ObjectModel/System.Reflection.ICustomTypeProvider::GetCustomType:System.Type()",
+          "System.ObjectModel/System.Windows.Input.ICommand::add_CanExecuteChanged:System.Void(System.EventHandler)",
+          "System.ObjectModel/System.Windows.Input.ICommand::CanExecute:System.Boolean(System.Object)",
+          "System.ObjectModel/System.Windows.Input.ICommand::Execute:System.Void(System.Object)",
+          "System.ObjectModel/System.Windows.Input.ICommand::remove_CanExecuteChanged:System.Void(System.EventHandler)",
+          "System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::get_ValueSerializerType:System.Type()",
+          "System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::get_ValueSerializerTypeName:System.String()",
+          "System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::.ctor:System.Void(System.Type)",
+          "System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::.ctor:System.Void(System.String)"
+        ],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "inline-family:methodSubjectIds",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.ObjectModel/command-type-metadata::managed-proof",
+        "familyId": "family/System.ObjectModel/command-type-metadata",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.ObjectModel/command-type-metadata::hotupdate-proof",
+        "familyId": "family/System.ObjectModel/command-type-metadata",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.ObjectModel/command-type-metadata::benchmark",
+        "familyId": "family/System.ObjectModel/command-type-metadata",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.ObjectModel/command-type-metadata::test-code",
+        "familyId": "family/System.ObjectModel/command-type-metadata",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 15,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.ObjectModel/data-errors::native-proof",
+        "familyId": "family/System.ObjectModel/data-errors",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 6,
+        "methodSubjectIds": [
+          "System.ObjectModel/System.ComponentModel.DataErrorsChangedEventArgs::get_PropertyName:System.String()",
+          "System.ObjectModel/System.ComponentModel.DataErrorsChangedEventArgs::.ctor:System.Void(System.String)",
+          "System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::add_ErrorsChanged:System.Void(System.EventHandler{System.ComponentModel.DataErrorsChangedEventArgs})",
+          "System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::get_HasErrors:System.Boolean()",
+          "System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::GetErrors:System.Collections.IEnumerable(System.String)",
+          "System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::remove_ErrorsChanged:System.Void(System.EventHandler{System.ComponentModel.DataErrorsChangedEventArgs})"
+        ],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "inline-family:methodSubjectIds",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.ObjectModel/data-errors::managed-proof",
+        "familyId": "family/System.ObjectModel/data-errors",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.ObjectModel/data-errors::hotupdate-proof",
+        "familyId": "family/System.ObjectModel/data-errors",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.ObjectModel/data-errors::benchmark",
+        "familyId": "family/System.ObjectModel/data-errors",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.ObjectModel/data-errors::test-code",
+        "familyId": "family/System.ObjectModel/data-errors",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 6,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.ObjectModel/object-model-collections::native-proof",
+        "familyId": "family/System.ObjectModel/object-model-collections",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 6,
+        "methodSubjectIds": [
+          "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::Contains:System.Boolean(TKey)",
+          "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::get_Comparer:System.Collections.Generic.IEqualityComparer{TKey}()",
+          "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::get_Item:TItem(TKey)",
+          "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::Remove:System.Boolean(TKey)",
+          "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::TryGetValue:System.Boolean(TKey,TItem&)",
+          "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::get_Item:TItem()"
+        ],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "inline-family:methodSubjectIds",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.ObjectModel/object-model-collections::managed-proof",
+        "familyId": "family/System.ObjectModel/object-model-collections",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.ObjectModel/object-model-collections::hotupdate-proof",
+        "familyId": "family/System.ObjectModel/object-model-collections",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.ObjectModel/object-model-collections::benchmark",
+        "familyId": "family/System.ObjectModel/object-model-collections",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.ObjectModel/object-model-collections::test-code",
+        "familyId": "family/System.ObjectModel/object-model-collections",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 6,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.ObjectModel/observable-collections::native-proof",
+        "familyId": "family/System.ObjectModel/observable-collections",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 8,
+        "methodSubjectIds": [
+          "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::add_CollectionChanged:System.Void(System.Collections.Specialized.NotifyCollectionChangedEventHandler)",
+          "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::Move:System.Void(System.Int32,System.Int32)",
+          "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::remove_CollectionChanged:System.Void(System.Collections.Specialized.NotifyCollectionChangedEventHandler)",
+          "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::.ctor:System.Void()",
+          "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::.ctor:System.Void(System.Collections.Generic.IEnumerable{T})",
+          "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::.ctor:System.Void(System.Collections.Generic.List{T})",
+          "System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection`1::get_Empty:System.Collections.ObjectModel.ReadOnlyObservableCollection{T}()",
+          "System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection`1::.ctor:System.Void(System.Collections.ObjectModel.ObservableCollection{T})"
+        ],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "inline-family:methodSubjectIds",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.ObjectModel/observable-collections::managed-proof",
+        "familyId": "family/System.ObjectModel/observable-collections",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.ObjectModel/observable-collections::hotupdate-proof",
+        "familyId": "family/System.ObjectModel/observable-collections",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.ObjectModel/observable-collections::benchmark",
+        "familyId": "family/System.ObjectModel/observable-collections",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.ObjectModel/observable-collections::test-code",
+        "familyId": "family/System.ObjectModel/observable-collections",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 8,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.ObjectModel/property-change-notifications::native-proof",
+        "familyId": "family/System.ObjectModel/property-change-notifications",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 4,
+        "methodSubjectIds": [
+          "System.ObjectModel/System.ComponentModel.INotifyPropertyChanged::add_PropertyChanged:System.Void(System.ComponentModel.PropertyChangedEventHandler)",
+          "System.ObjectModel/System.ComponentModel.INotifyPropertyChanged::remove_PropertyChanged:System.Void(System.ComponentModel.PropertyChangedEventHandler)",
+          "System.ObjectModel/System.ComponentModel.INotifyPropertyChanging::add_PropertyChanging:System.Void(System.ComponentModel.PropertyChangingEventHandler)",
+          "System.ObjectModel/System.ComponentModel.INotifyPropertyChanging::remove_PropertyChanging:System.Void(System.ComponentModel.PropertyChangingEventHandler)"
+        ],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "inline-family:methodSubjectIds",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.ObjectModel/property-change-notifications::managed-proof",
+        "familyId": "family/System.ObjectModel/property-change-notifications",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.ObjectModel/property-change-notifications::hotupdate-proof",
+        "familyId": "family/System.ObjectModel/property-change-notifications",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.ObjectModel/property-change-notifications::benchmark",
+        "familyId": "family/System.ObjectModel/property-change-notifications",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.ObjectModel/property-change-notifications::test-code",
+        "familyId": "family/System.ObjectModel/property-change-notifications",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 4,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      }
+    ]
+  },
+  "familyVerificationSnapshot": {
+    "schemaVersion": 1,
+    "assemblyName": "System.ObjectModel",
+    "ownerSubjectId": "SolutionCorePack",
+    "families": [
+      {
+        "familyId": "family/System.ObjectModel/collection-change-notifications",
+        "methodSubjectIds": [
+          "System.ObjectModel/System.Collections.Specialized.INotifyCollectionChanged::add_CollectionChanged:System.Void(System.Collections.Specialized.NotifyCollectionChangedEventHandler)",
+          "System.ObjectModel/System.Collections.Specialized.INotifyCollectionChanged::remove_CollectionChanged:System.Void(System.Collections.Specialized.NotifyCollectionChangedEventHandler)"
+        ],
+        "methodCount": 2,
+        "implementationFamilies": [],
+        "closureStatus": "in-progress",
+        "denominatorStatus": "audit-confirmed",
+        "description": "",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 2,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 2,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate",
+          "d3PatchApplied": false,
+          "d3PatchedCount": 0,
+          "d3SchemaVersion": 0,
+          "d3MethodResults": [],
+          "passedMethodCount": 0,
+          "failedMethodCount": 0,
+          "unmatchedMethodCount": 0,
+          "verificationMethodResults": []
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 2,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "",
+          "denominator": 2,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "",
+          "denominator": 2,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "nativeCorrect": {
+          "status": "pending",
+          "passed": 0,
+          "total": 0,
+          "reason": "未接入批量验证管线"
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.ObjectModel/command-type-metadata",
+        "methodSubjectIds": [
+          "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::Equals:System.Boolean(System.Object)",
+          "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::get_ConverterTypeName:System.String()",
+          "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::GetHashCode:System.Int32()",
+          "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::.ctor:System.Void()",
+          "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::.ctor:System.Void(System.Type)",
+          "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::.ctor:System.Void(System.String)",
+          "System.ObjectModel/System.Reflection.ICustomTypeProvider::GetCustomType:System.Type()",
+          "System.ObjectModel/System.Windows.Input.ICommand::add_CanExecuteChanged:System.Void(System.EventHandler)",
+          "System.ObjectModel/System.Windows.Input.ICommand::CanExecute:System.Boolean(System.Object)",
+          "System.ObjectModel/System.Windows.Input.ICommand::Execute:System.Void(System.Object)",
+          "System.ObjectModel/System.Windows.Input.ICommand::remove_CanExecuteChanged:System.Void(System.EventHandler)",
+          "System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::get_ValueSerializerType:System.Type()",
+          "System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::get_ValueSerializerTypeName:System.String()",
+          "System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::.ctor:System.Void(System.Type)",
+          "System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::.ctor:System.Void(System.String)"
+        ],
+        "methodCount": 15,
+        "implementationFamilies": [],
+        "closureStatus": "in-progress",
+        "denominatorStatus": "audit-confirmed",
+        "description": "",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 15,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 15,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate",
+          "d3PatchApplied": false,
+          "d3PatchedCount": 0,
+          "d3SchemaVersion": 0,
+          "d3MethodResults": [],
+          "passedMethodCount": 0,
+          "failedMethodCount": 0,
+          "unmatchedMethodCount": 0,
+          "verificationMethodResults": []
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 15,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "",
+          "denominator": 15,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "",
+          "denominator": 15,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "nativeCorrect": {
+          "status": "pending",
+          "passed": 0,
+          "total": 0,
+          "reason": "未接入批量验证管线"
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.ObjectModel/data-errors",
+        "methodSubjectIds": [
+          "System.ObjectModel/System.ComponentModel.DataErrorsChangedEventArgs::get_PropertyName:System.String()",
+          "System.ObjectModel/System.ComponentModel.DataErrorsChangedEventArgs::.ctor:System.Void(System.String)",
+          "System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::add_ErrorsChanged:System.Void(System.EventHandler{System.ComponentModel.DataErrorsChangedEventArgs})",
+          "System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::get_HasErrors:System.Boolean()",
+          "System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::GetErrors:System.Collections.IEnumerable(System.String)",
+          "System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::remove_ErrorsChanged:System.Void(System.EventHandler{System.ComponentModel.DataErrorsChangedEventArgs})"
+        ],
+        "methodCount": 6,
+        "implementationFamilies": [],
+        "closureStatus": "in-progress",
+        "denominatorStatus": "audit-confirmed",
+        "description": "",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 6,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 6,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate",
+          "d3PatchApplied": false,
+          "d3PatchedCount": 0,
+          "d3SchemaVersion": 0,
+          "d3MethodResults": [],
+          "passedMethodCount": 0,
+          "failedMethodCount": 0,
+          "unmatchedMethodCount": 0,
+          "verificationMethodResults": []
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 6,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "",
+          "denominator": 6,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "",
+          "denominator": 6,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "nativeCorrect": {
+          "status": "pending",
+          "passed": 0,
+          "total": 0,
+          "reason": "未接入批量验证管线"
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.ObjectModel/object-model-collections",
+        "methodSubjectIds": [
+          "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::Contains:System.Boolean(TKey)",
+          "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::get_Comparer:System.Collections.Generic.IEqualityComparer{TKey}()",
+          "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::get_Item:TItem(TKey)",
+          "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::Remove:System.Boolean(TKey)",
+          "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::TryGetValue:System.Boolean(TKey,TItem&)",
+          "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::get_Item:TItem()"
+        ],
+        "methodCount": 6,
+        "implementationFamilies": [],
+        "closureStatus": "in-progress",
+        "denominatorStatus": "audit-confirmed",
+        "description": "",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 6,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 6,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate",
+          "d3PatchApplied": false,
+          "d3PatchedCount": 0,
+          "d3SchemaVersion": 0,
+          "d3MethodResults": [],
+          "passedMethodCount": 0,
+          "failedMethodCount": 0,
+          "unmatchedMethodCount": 0,
+          "verificationMethodResults": []
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 6,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "",
+          "denominator": 6,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "",
+          "denominator": 6,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "nativeCorrect": {
+          "status": "pending",
+          "passed": 0,
+          "total": 0,
+          "reason": "未接入批量验证管线"
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.ObjectModel/observable-collections",
+        "methodSubjectIds": [
+          "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::add_CollectionChanged:System.Void(System.Collections.Specialized.NotifyCollectionChangedEventHandler)",
+          "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::Move:System.Void(System.Int32,System.Int32)",
+          "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::remove_CollectionChanged:System.Void(System.Collections.Specialized.NotifyCollectionChangedEventHandler)",
+          "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::.ctor:System.Void()",
+          "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::.ctor:System.Void(System.Collections.Generic.IEnumerable{T})",
+          "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::.ctor:System.Void(System.Collections.Generic.List{T})",
+          "System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection`1::get_Empty:System.Collections.ObjectModel.ReadOnlyObservableCollection{T}()",
+          "System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection`1::.ctor:System.Void(System.Collections.ObjectModel.ObservableCollection{T})"
+        ],
+        "methodCount": 8,
+        "implementationFamilies": [],
+        "closureStatus": "in-progress",
+        "denominatorStatus": "audit-confirmed",
+        "description": "",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 8,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 8,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate",
+          "d3PatchApplied": false,
+          "d3PatchedCount": 0,
+          "d3SchemaVersion": 0,
+          "d3MethodResults": [],
+          "passedMethodCount": 0,
+          "failedMethodCount": 0,
+          "unmatchedMethodCount": 0,
+          "verificationMethodResults": []
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 8,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "",
+          "denominator": 8,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "",
+          "denominator": 8,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "nativeCorrect": {
+          "status": "pending",
+          "passed": 0,
+          "total": 0,
+          "reason": "未接入批量验证管线"
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.ObjectModel/property-change-notifications",
+        "methodSubjectIds": [
+          "System.ObjectModel/System.ComponentModel.INotifyPropertyChanged::add_PropertyChanged:System.Void(System.ComponentModel.PropertyChangedEventHandler)",
+          "System.ObjectModel/System.ComponentModel.INotifyPropertyChanged::remove_PropertyChanged:System.Void(System.ComponentModel.PropertyChangedEventHandler)",
+          "System.ObjectModel/System.ComponentModel.INotifyPropertyChanging::add_PropertyChanging:System.Void(System.ComponentModel.PropertyChangingEventHandler)",
+          "System.ObjectModel/System.ComponentModel.INotifyPropertyChanging::remove_PropertyChanging:System.Void(System.ComponentModel.PropertyChangingEventHandler)"
+        ],
+        "methodCount": 4,
+        "implementationFamilies": [],
+        "closureStatus": "in-progress",
+        "denominatorStatus": "audit-confirmed",
+        "description": "",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 4,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 4,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate",
+          "d3PatchApplied": false,
+          "d3PatchedCount": 0,
+          "d3SchemaVersion": 0,
+          "d3MethodResults": [],
+          "passedMethodCount": 0,
+          "failedMethodCount": 0,
+          "unmatchedMethodCount": 0,
+          "verificationMethodResults": []
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 4,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "",
+          "denominator": 4,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "",
+          "denominator": 4,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "nativeCorrect": {
+          "status": "pending",
+          "passed": 0,
+          "total": 0,
+          "reason": "未接入批量验证管线"
+        },
+        "reviewBundle": {}
+      }
+    ]
+  },
+  "truthContracts": {
+    "schemaVersion": 1,
+    "dllCapabilityManifest": {
+      "assemblyName": "System.ObjectModel",
+      "ownerSubjectId": "SolutionCorePack",
+      "capabilityFamilies": [
+        "family/System.ObjectModel/collection-change-notifications",
+        "family/System.ObjectModel/command-type-metadata",
+        "family/System.ObjectModel/data-errors",
+        "family/System.ObjectModel/object-model-collections",
+        "family/System.ObjectModel/observable-collections",
+        "family/System.ObjectModel/property-change-notifications"
+      ],
+      "capabilityFamilyCount": 6,
+      "methodUniverseCount": 41
+    },
+    "capabilityFamilyVerificationContracts": [
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/collection-change-notifications",
+        "displayName": "",
+        "methodSubjectIds": [
+          "System.ObjectModel/System.Collections.Specialized.INotifyCollectionChanged::add_CollectionChanged:System.Void(System.Collections.Specialized.NotifyCollectionChangedEventHandler)",
+          "System.ObjectModel/System.Collections.Specialized.INotifyCollectionChanged::remove_CollectionChanged:System.Void(System.Collections.Specialized.NotifyCollectionChangedEventHandler)"
+        ],
+        "methodSubjectCount": 2,
+        "functionalObligation": {
+          "required": true
+        },
+        "performanceObligation": {
+          "required": true
+        },
+        "hotupdateFunctionalObligation": {
+          "required": true
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/command-type-metadata",
+        "displayName": "",
+        "methodSubjectIds": [
+          "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::Equals:System.Boolean(System.Object)",
+          "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::get_ConverterTypeName:System.String()",
+          "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::GetHashCode:System.Int32()",
+          "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::.ctor:System.Void()",
+          "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::.ctor:System.Void(System.Type)",
+          "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::.ctor:System.Void(System.String)",
+          "System.ObjectModel/System.Reflection.ICustomTypeProvider::GetCustomType:System.Type()",
+          "System.ObjectModel/System.Windows.Input.ICommand::add_CanExecuteChanged:System.Void(System.EventHandler)",
+          "System.ObjectModel/System.Windows.Input.ICommand::CanExecute:System.Boolean(System.Object)",
+          "System.ObjectModel/System.Windows.Input.ICommand::Execute:System.Void(System.Object)",
+          "System.ObjectModel/System.Windows.Input.ICommand::remove_CanExecuteChanged:System.Void(System.EventHandler)",
+          "System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::get_ValueSerializerType:System.Type()",
+          "System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::get_ValueSerializerTypeName:System.String()",
+          "System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::.ctor:System.Void(System.Type)",
+          "System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::.ctor:System.Void(System.String)"
+        ],
+        "methodSubjectCount": 15,
+        "functionalObligation": {
+          "required": true
+        },
+        "performanceObligation": {
+          "required": true
+        },
+        "hotupdateFunctionalObligation": {
+          "required": true
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/data-errors",
+        "displayName": "",
+        "methodSubjectIds": [
+          "System.ObjectModel/System.ComponentModel.DataErrorsChangedEventArgs::get_PropertyName:System.String()",
+          "System.ObjectModel/System.ComponentModel.DataErrorsChangedEventArgs::.ctor:System.Void(System.String)",
+          "System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::add_ErrorsChanged:System.Void(System.EventHandler{System.ComponentModel.DataErrorsChangedEventArgs})",
+          "System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::get_HasErrors:System.Boolean()",
+          "System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::GetErrors:System.Collections.IEnumerable(System.String)",
+          "System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::remove_ErrorsChanged:System.Void(System.EventHandler{System.ComponentModel.DataErrorsChangedEventArgs})"
+        ],
+        "methodSubjectCount": 6,
+        "functionalObligation": {
+          "required": true
+        },
+        "performanceObligation": {
+          "required": true
+        },
+        "hotupdateFunctionalObligation": {
+          "required": true
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/object-model-collections",
+        "displayName": "",
+        "methodSubjectIds": [
+          "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::Contains:System.Boolean(TKey)",
+          "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::get_Comparer:System.Collections.Generic.IEqualityComparer{TKey}()",
+          "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::get_Item:TItem(TKey)",
+          "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::Remove:System.Boolean(TKey)",
+          "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::TryGetValue:System.Boolean(TKey,TItem&)",
+          "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::get_Item:TItem()"
+        ],
+        "methodSubjectCount": 6,
+        "functionalObligation": {
+          "required": true
+        },
+        "performanceObligation": {
+          "required": true
+        },
+        "hotupdateFunctionalObligation": {
+          "required": true
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/observable-collections",
+        "displayName": "",
+        "methodSubjectIds": [
+          "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::add_CollectionChanged:System.Void(System.Collections.Specialized.NotifyCollectionChangedEventHandler)",
+          "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::Move:System.Void(System.Int32,System.Int32)",
+          "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::remove_CollectionChanged:System.Void(System.Collections.Specialized.NotifyCollectionChangedEventHandler)",
+          "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::.ctor:System.Void()",
+          "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::.ctor:System.Void(System.Collections.Generic.IEnumerable{T})",
+          "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::.ctor:System.Void(System.Collections.Generic.List{T})",
+          "System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection`1::get_Empty:System.Collections.ObjectModel.ReadOnlyObservableCollection{T}()",
+          "System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection`1::.ctor:System.Void(System.Collections.ObjectModel.ObservableCollection{T})"
+        ],
+        "methodSubjectCount": 8,
+        "functionalObligation": {
+          "required": true
+        },
+        "performanceObligation": {
+          "required": true
+        },
+        "hotupdateFunctionalObligation": {
+          "required": true
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/property-change-notifications",
+        "displayName": "",
+        "methodSubjectIds": [
+          "System.ObjectModel/System.ComponentModel.INotifyPropertyChanged::add_PropertyChanged:System.Void(System.ComponentModel.PropertyChangedEventHandler)",
+          "System.ObjectModel/System.ComponentModel.INotifyPropertyChanged::remove_PropertyChanged:System.Void(System.ComponentModel.PropertyChangedEventHandler)",
+          "System.ObjectModel/System.ComponentModel.INotifyPropertyChanging::add_PropertyChanging:System.Void(System.ComponentModel.PropertyChangingEventHandler)",
+          "System.ObjectModel/System.ComponentModel.INotifyPropertyChanging::remove_PropertyChanging:System.Void(System.ComponentModel.PropertyChangingEventHandler)"
+        ],
+        "methodSubjectCount": 4,
+        "functionalObligation": {
+          "required": true
+        },
+        "performanceObligation": {
+          "required": true
+        },
+        "hotupdateFunctionalObligation": {
+          "required": true
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": true
+      }
+    ],
+    "methodCapabilityContracts": [
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/collection-change-notifications",
+        "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.INotifyCollectionChanged::add_CollectionChanged:System.Void(System.Collections.Specialized.NotifyCollectionChangedEventHandler)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/collection-change-notifications",
+        "methodSubjectId": "System.ObjectModel/System.Collections.Specialized.INotifyCollectionChanged::remove_CollectionChanged:System.Void(System.Collections.Specialized.NotifyCollectionChangedEventHandler)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/command-type-metadata",
+        "methodSubjectId": "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::Equals:System.Boolean(System.Object)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/command-type-metadata",
+        "methodSubjectId": "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::get_ConverterTypeName:System.String()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/command-type-metadata",
+        "methodSubjectId": "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::GetHashCode:System.Int32()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/command-type-metadata",
+        "methodSubjectId": "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::.ctor:System.Void()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/command-type-metadata",
+        "methodSubjectId": "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::.ctor:System.Void(System.Type)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/command-type-metadata",
+        "methodSubjectId": "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::.ctor:System.Void(System.String)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/command-type-metadata",
+        "methodSubjectId": "System.ObjectModel/System.Reflection.ICustomTypeProvider::GetCustomType:System.Type()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/command-type-metadata",
+        "methodSubjectId": "System.ObjectModel/System.Windows.Input.ICommand::add_CanExecuteChanged:System.Void(System.EventHandler)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/command-type-metadata",
+        "methodSubjectId": "System.ObjectModel/System.Windows.Input.ICommand::CanExecute:System.Boolean(System.Object)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/command-type-metadata",
+        "methodSubjectId": "System.ObjectModel/System.Windows.Input.ICommand::Execute:System.Void(System.Object)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/command-type-metadata",
+        "methodSubjectId": "System.ObjectModel/System.Windows.Input.ICommand::remove_CanExecuteChanged:System.Void(System.EventHandler)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/command-type-metadata",
+        "methodSubjectId": "System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::get_ValueSerializerType:System.Type()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/command-type-metadata",
+        "methodSubjectId": "System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::get_ValueSerializerTypeName:System.String()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/command-type-metadata",
+        "methodSubjectId": "System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::.ctor:System.Void(System.Type)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/command-type-metadata",
+        "methodSubjectId": "System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::.ctor:System.Void(System.String)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/data-errors",
+        "methodSubjectId": "System.ObjectModel/System.ComponentModel.DataErrorsChangedEventArgs::get_PropertyName:System.String()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/data-errors",
+        "methodSubjectId": "System.ObjectModel/System.ComponentModel.DataErrorsChangedEventArgs::.ctor:System.Void(System.String)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/data-errors",
+        "methodSubjectId": "System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::add_ErrorsChanged:System.Void(System.EventHandler{System.ComponentModel.DataErrorsChangedEventArgs})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/data-errors",
+        "methodSubjectId": "System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::get_HasErrors:System.Boolean()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/data-errors",
+        "methodSubjectId": "System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::GetErrors:System.Collections.IEnumerable(System.String)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/data-errors",
+        "methodSubjectId": "System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::remove_ErrorsChanged:System.Void(System.EventHandler{System.ComponentModel.DataErrorsChangedEventArgs})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/object-model-collections",
+        "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::Contains:System.Boolean(TKey)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/object-model-collections",
+        "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::get_Comparer:System.Collections.Generic.IEqualityComparer{TKey}()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/object-model-collections",
+        "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::get_Item:TItem(TKey)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/object-model-collections",
+        "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::Remove:System.Boolean(TKey)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/object-model-collections",
+        "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::TryGetValue:System.Boolean(TKey,TItem&)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/object-model-collections",
+        "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::get_Item:TItem()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/observable-collections",
+        "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::add_CollectionChanged:System.Void(System.Collections.Specialized.NotifyCollectionChangedEventHandler)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/observable-collections",
+        "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::Move:System.Void(System.Int32,System.Int32)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/observable-collections",
+        "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::remove_CollectionChanged:System.Void(System.Collections.Specialized.NotifyCollectionChangedEventHandler)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/observable-collections",
+        "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::.ctor:System.Void()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/observable-collections",
+        "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::.ctor:System.Void(System.Collections.Generic.IEnumerable{T})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/observable-collections",
+        "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::.ctor:System.Void(System.Collections.Generic.List{T})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/observable-collections",
+        "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection`1::get_Empty:System.Collections.ObjectModel.ReadOnlyObservableCollection{T}()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/observable-collections",
+        "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection`1::.ctor:System.Void(System.Collections.ObjectModel.ObservableCollection{T})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/property-change-notifications",
+        "methodSubjectId": "System.ObjectModel/System.ComponentModel.INotifyPropertyChanged::add_PropertyChanged:System.Void(System.ComponentModel.PropertyChangedEventHandler)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/property-change-notifications",
+        "methodSubjectId": "System.ObjectModel/System.ComponentModel.INotifyPropertyChanged::remove_PropertyChanged:System.Void(System.ComponentModel.PropertyChangedEventHandler)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/property-change-notifications",
+        "methodSubjectId": "System.ObjectModel/System.ComponentModel.INotifyPropertyChanging::add_PropertyChanging:System.Void(System.ComponentModel.PropertyChangingEventHandler)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.ObjectModel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.ObjectModel/property-change-notifications",
+        "methodSubjectId": "System.ObjectModel/System.ComponentModel.INotifyPropertyChanging::remove_PropertyChanging:System.Void(System.ComponentModel.PropertyChangingEventHandler)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      }
+    ]
+  },
+  "sourceLinks": {},
+  "waiverSummary": {
+    "totalWaivers": 0,
+    "activeWaivers": 0,
+    "expiredWaivers": 0,
+    "totalExclusions": 0,
+    "totalPlatformBlocked": 0
+  },
+  "denominatorStatus": "audit-confirmed",
+  "schemaVersion": 2
+}

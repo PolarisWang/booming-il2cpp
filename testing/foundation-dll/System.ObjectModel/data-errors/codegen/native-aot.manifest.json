@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "DataErrorsSubjects",
   "entrySubjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.ObjectModel/data-errors/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.ObjectModel/data-errors/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

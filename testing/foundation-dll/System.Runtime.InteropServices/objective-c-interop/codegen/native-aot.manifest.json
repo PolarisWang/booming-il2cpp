@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "ObjectiveCInteropSubjects",
   "entrySubjectId": "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects::Subject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Runtime.InteropServices/objective-c-interop/codegen",
+  "managedClosureRootPath": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Runtime.InteropServices/objective-c-interop/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

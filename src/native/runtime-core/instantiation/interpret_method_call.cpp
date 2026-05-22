@@ -23,7 +23,7 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL InterpretMethodCall(
     }
 
     // ── Recover RuntimeInstantiatedMethod* from MethodInfoHandle ──
-    const auto* desc = chaos::il2cpp::runtime_core::TryDecodeReflectionQueryMethodHandle(method);
+    const auto* desc = runtime_core::TryDecodeReflectionQueryMethodHandle(method);
     if (desc == nullptr) {
         return CHAOS_RUNTIME_STATUS_NOT_FOUND;
     }

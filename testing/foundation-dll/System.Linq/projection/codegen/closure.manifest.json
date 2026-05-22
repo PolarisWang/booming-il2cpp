@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ProjectionSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Linq/projection/managed/subjects/build-output/ProjectionSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Linq/projection/managed/subjects/build-output/ProjectionSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "ProjectionSubjects",
-      "path": "verification/foundation-dll/System.Linq/projection/managed/subjects/build-output/ProjectionSubjects.dll"
+      "path": "testing/foundation-dll/System.Linq/projection/managed/subjects/build-output/ProjectionSubjects.dll"
     },
     {
       "assemblyName": "System.Linq",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "73c1c270-13f2-486e-895d-b47b51b4252a",
+  "inputModuleVersionId": "51e794c0-6191-4cb6-a8ec-20b5ea4dc2b6",
   "artifacts": [
     {
       "kind": "typedIlIr",

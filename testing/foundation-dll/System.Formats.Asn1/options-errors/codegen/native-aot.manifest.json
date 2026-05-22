@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "OptionsErrorsSubjects",
   "entrySubjectId": "OptionsErrorsSubjects/OptionsErrorsSubjects::Subject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Formats.Asn1/options-errors/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.Formats.Asn1/options-errors/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

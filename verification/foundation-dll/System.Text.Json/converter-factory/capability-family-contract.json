@@ -1,0 +1,13 @@
+{
+  "familyId": "family/System.Text.Json/converter-factory",
+  "assemblyName": "System.Text.Json",
+  "methodSubjectIds": [
+    "System.Text.Json/System.Text.Json.Serialization.JsonConverterFactory::CreateConverter:System.Text.Json.Serialization.JsonConverter(System.Type,System.Text.Json.JsonSerializerOptions)",
+    "System.Text.Json/System.Text.Json.Serialization.JsonConverterFactory::get_Type:System.Type()"
+  ],
+  "displayName": "converter-factory",
+  "description": "",
+  "closureStatus": "in-progress",
+  "methodCount": 2,
+  "customEntryIndices": []
+}

@@ -1,5 +1,5 @@
 // verification_dispatch.generated.cpp — auto-generated
-// Assembly: InterfaceDispatchSubjects, Methods: 37
+// Assembly: InterfaceDispatchSubjects, Methods: 35
 #include <cstdint>
 #include <chrono>
 #include <chaos/native_types.h>

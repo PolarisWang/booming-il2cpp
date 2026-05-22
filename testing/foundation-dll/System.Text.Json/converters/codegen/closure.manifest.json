@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ConvertersSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Text.Json/converters/managed/subjects/build-output/ConvertersSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Text.Json/converters/managed/subjects/build-output/ConvertersSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "ConvertersSubjects",
-      "path": "verification/foundation-dll/System.Text.Json/converters/managed/subjects/build-output/ConvertersSubjects.dll"
+      "path": "testing/foundation-dll/System.Text.Json/converters/managed/subjects/build-output/ConvertersSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "006d4e13-ce51-4220-b39a-e84ed3fb8014",
+  "inputModuleVersionId": "596d69eb-fd42-4d32-9434-60e5ed93e4a8",
   "artifacts": [
     {
       "kind": "typedIlIr",

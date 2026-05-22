@@ -1,5 +1,5 @@
 // verification_dispatch.generated.cpp — auto-generated
-// Assembly: CollectionsGenericCoreSubjects, Methods: 18
+// Assembly: CollectionsGenericCoreSubjects, Methods: 16
 #include <cstdint>
 #include <chrono>
 #include <chaos/native_types.h>

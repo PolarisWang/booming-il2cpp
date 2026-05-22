@@ -1,5 +1,5 @@
 // verification_dispatch.generated.cpp — auto-generated
-// Assembly: FormatterSubjects, Methods: 1
+// Assembly: FormatterSubjects, Methods: 2
 #include <cstdint>
 #include <chrono>
 #include <chaos/native_types.h>

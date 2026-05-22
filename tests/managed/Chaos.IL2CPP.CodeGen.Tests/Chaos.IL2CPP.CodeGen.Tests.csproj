@@ -8,7 +8,10 @@
     <IsTestProject>true</IsTestProject>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
-    <ExcludeByFile>**/obj/**/*.cs;**/ReferenceProof/**/*.cs;**/PatchData*.cs;**/NativeReferenceProofEmitter*.cs;**/RuntimeSkeleton*.cs;**/NativeReferenceLoweringPlanner.PlanBuilders*.cs;**/NativeReferenceLoweringPlanner.GeneratedPluginExports*.cs</ExcludeByFile>
+    <Exclude>[Scriban]*</Exclude>
+    <_RepoRoot>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..\..\..\'))</_RepoRoot>
+    <_GenDir>$(_RepoRoot)src\managed\Chaos.IL2CPP.Generator\</_GenDir>
+    <ExcludeByFile>$(_GenDir)ReferenceProof\**,$(_GenDir)NativeReferenceProofEmitter.cs,$(_GenDir)PatchData*.cs,$(_GenDir)**\obj\**\*.cs,$(MSBuildProjectDirectory)\obj\**\*.cs</ExcludeByFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -29,6 +32,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\managed\Chaos.IL2CPP.Generator\Chaos.IL2CPP.Generator.csproj" />
+    <ProjectReference Include="..\..\..\src\managed\Chaos.IL2CPP.Pipeline\Chaos.IL2CPP.Pipeline.csproj" />
     <ProjectReference Include="StubAssembly\StubAssembly.csproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <SkipGetTargetFrameworkProperties>true</SkipGetTargetFrameworkProperties>

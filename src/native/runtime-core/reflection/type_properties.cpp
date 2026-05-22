@@ -133,15 +133,32 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetConstructorsDefault(CHAOS_IL2CPP_INTPTR ty
     auto* desc = ResolveTypeFromReflectionOrGcHandle(type_handle);
     if (desc == nullptr || desc->methods == nullptr) return 0;
 
-    // Count only .ctor methods (method_count includes all methods)
-    uint32_t ctor_count = 0;
-    for (uint32_t i = 0; i < desc->method_count; i++) {
+    constexpr CHAOS_IL2CPP_UINT32 kMaxCtors = 64;
+    struct GetCtorsBuf {
+        ThinLockableHeader header;
+        CHAOS_IL2CPP_UINT8  element_type_shape;
+        CHAOS_IL2CPP_INTPTR element_type_info;
+        CHAOS_IL2CPP_INTPTR length;
+        CHAOS_IL2CPP_INTPTR* elements;
+    };
+    static GetCtorsBuf s_buf{};
+    static CHAOS_IL2CPP_INTPTR s_elements[kMaxCtors]{};
+
+    uint32_t idx = 0;
+    for (uint32_t i = 0; i < desc->method_count && idx < kMaxCtors; i++) {
         if (desc->methods[i].name_utf8 != nullptr &&
             std::strcmp(desc->methods[i].name_utf8, ".ctor") == 0) {
-            ctor_count++;
+            s_elements[idx++] = static_cast<CHAOS_IL2CPP_INTPTR>(
+                EncodeReflectionQueryMethodHandle(&desc->methods[i]));
         }
     }
-    return static_cast<CHAOS_IL2CPP_INTPTR>(ctor_count);
+
+    s_buf = GetCtorsBuf{};
+    s_buf.element_type_shape = 1;
+    s_buf.length = static_cast<CHAOS_IL2CPP_INTPTR>(idx);
+    s_buf.elements = s_elements;
+
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_buf);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetConstructors(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INT32 binding_flags) {
@@ -150,15 +167,32 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetConstructors(CHAOS_IL2CPP_INTPTR type_hand
     auto* desc = ResolveTypeFromReflectionOrGcHandle(type_handle);
     if (desc == nullptr || desc->methods == nullptr) return 0;
 
-    // Count only .ctor methods
-    uint32_t ctor_count = 0;
-    for (uint32_t i = 0; i < desc->method_count; i++) {
+    constexpr CHAOS_IL2CPP_UINT32 kMaxCtors = 64;
+    struct GetCtorsBuf {
+        ThinLockableHeader header;
+        CHAOS_IL2CPP_UINT8  element_type_shape;
+        CHAOS_IL2CPP_INTPTR element_type_info;
+        CHAOS_IL2CPP_INTPTR length;
+        CHAOS_IL2CPP_INTPTR* elements;
+    };
+    static GetCtorsBuf s_buf{};
+    static CHAOS_IL2CPP_INTPTR s_elements[kMaxCtors]{};
+
+    uint32_t idx = 0;
+    for (uint32_t i = 0; i < desc->method_count && idx < kMaxCtors; i++) {
         if (desc->methods[i].name_utf8 != nullptr &&
             std::strcmp(desc->methods[i].name_utf8, ".ctor") == 0) {
-            ctor_count++;
+            s_elements[idx++] = static_cast<CHAOS_IL2CPP_INTPTR>(
+                EncodeReflectionQueryMethodHandle(&desc->methods[i]));
         }
     }
-    return static_cast<CHAOS_IL2CPP_INTPTR>(ctor_count);
+
+    s_buf = GetCtorsBuf{};
+    s_buf.element_type_shape = 1;
+    s_buf.length = static_cast<CHAOS_IL2CPP_INTPTR>(idx);
+    s_buf.elements = s_elements;
+
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_buf);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethods(CHAOS_IL2CPP_INTPTR type_handle) {
@@ -166,8 +200,24 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethods(CHAOS_IL2CPP_INTPTR type_handle) {
     auto* desc = ResolveTypeFromReflectionOrGcHandle(type_handle);
     if (desc == nullptr) return 0;
 
-    // codegen reads .Length via (int32)result — return total count directly
-    uint32_t total = desc->method_count;
+    constexpr CHAOS_IL2CPP_UINT32 kMaxMethods = 512;
+    struct GetMethodsBuf {
+        ThinLockableHeader header;
+        CHAOS_IL2CPP_UINT8  element_type_shape;
+        CHAOS_IL2CPP_INTPTR element_type_info;
+        CHAOS_IL2CPP_INTPTR length;
+        CHAOS_IL2CPP_INTPTR* elements;
+    };
+    static GetMethodsBuf s_buf{};
+    static CHAOS_IL2CPP_INTPTR s_elements[kMaxMethods]{};
+
+    uint32_t idx = 0;
+
+    // Self methods
+    for (uint32_t i = 0; i < desc->method_count && idx < kMaxMethods; i++) {
+        s_elements[idx++] = static_cast<CHAOS_IL2CPP_INTPTR>(
+            EncodeReflectionQueryMethodHandle(&desc->methods[i]));
+    }
 
     // Walk the parent TypeInfo chain to include inherited methods
     auto* type_info = GetTypeInfoFromReflectionOrGcHandle(type_handle);
@@ -182,7 +232,13 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethods(CHAOS_IL2CPP_INTPTR type_handle) {
                 if (mod == nullptr || mod->type_info_ptrs == nullptr || mod->image == nullptr) continue;
                 for (uint32_t j = 0; j < mod->type_count && j < mod->image->type_count && !found; j++) {
                     if (mod->type_info_ptrs[j] == parent) {
-                        total += mod->image->types[j]->method_count;
+                        const auto* parent_desc = mod->image->types[j];
+                        if (parent_desc != nullptr && parent_desc->methods != nullptr) {
+                            for (uint32_t k = 0; k < parent_desc->method_count && idx < kMaxMethods; k++) {
+                                s_elements[idx++] = static_cast<CHAOS_IL2CPP_INTPTR>(
+                                    EncodeReflectionQueryMethodHandle(&parent_desc->methods[k]));
+                            }
+                        }
                         found = true;
                     }
                 }
@@ -193,7 +249,12 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethods(CHAOS_IL2CPP_INTPTR type_handle) {
         }
     }
 
-    return static_cast<CHAOS_IL2CPP_INTPTR>(total);
+    s_buf = GetMethodsBuf{};
+    s_buf.element_type_shape = 1;
+    s_buf.length = static_cast<CHAOS_IL2CPP_INTPTR>(idx);
+    s_buf.elements = s_elements;
+
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_buf);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetFields(CHAOS_IL2CPP_INTPTR type_handle) {

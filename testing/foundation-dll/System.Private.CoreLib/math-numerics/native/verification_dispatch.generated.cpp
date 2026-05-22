@@ -1,5 +1,5 @@
 // verification_dispatch.generated.cpp — auto-generated
-// Assembly: MathNumericsSubjects, Methods: 20
+// Assembly: MathNumericsSubjects, Methods: 18
 #include <cstdint>
 #include <chrono>
 #include <chaos/native_types.h>

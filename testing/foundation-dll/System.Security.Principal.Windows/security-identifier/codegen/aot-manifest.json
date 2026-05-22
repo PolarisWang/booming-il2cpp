@@ -159,6 +159,12 @@
       "reason": "external-call"
     },
     {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
       "assemblyName": "System.Security.Principal.Windows",
       "subjectKind": "method",
       "subjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::get_BinaryLength:System.Int32()",
@@ -171,15 +177,15 @@
       "reason": "external-call"
     },
     {
-      "assemblyName": "System.Security.Principal.Windows",
+      "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
-      "subjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::GetBinaryForm:System.Void(System.Byte[],System.Int32)",
+      "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
       "reason": "external-call"
     },
     {
-      "assemblyName": "System.Private.CoreLib",
+      "assemblyName": "System.Security.Principal.Windows",
       "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "subjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::GetBinaryForm:System.Void(System.Byte[],System.Int32)",
       "reason": "external-call"
     },
     {

@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/io/streams/basics",
-  "capturedAt": "2026-05-21T23:32:58",
+  "capturedAt": "2026-05-22T01:19:22",
   "batchMode": true,
   "summary": {
     "totalMethods": 18,
@@ -11,9 +11,9 @@
     "skippedCount": 0,
     "jitInstructionCount": {
       "min": 44,
-      "max": 44,
-      "avg": 44.0,
-      "total": 792
+      "max": 76,
+      "avg": 45.8,
+      "total": 824
     },
     "aotInstructionCount": {
       "min": 8,
@@ -27,8 +27,8 @@
     "topInstructionCategories": {
       "external_runtime_call": 33
     },
-    "overallIrExpansionRatio": 0.38,
-    "averageExpansionRatio": 0.38,
+    "overallIrExpansionRatio": 0.37,
+    "averageExpansionRatio": 0.37,
     "maxExpansionRatio": 0.68,
     "minExpansionRatio": 0.18
   },
@@ -505,15 +505,15 @@
       "shortName": "Subject_13",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 76,
         "aotInstructionCount": 24,
-        "ratio": 0.55,
+        "ratio": 0.32,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 76
       },
       "aot": {
         "status": "ok",

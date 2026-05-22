@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "StringConstructionSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/string-construction/codegen/_subjects_input/StringConstructionSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/string-construction/managed/subjects/build-output/StringConstructionSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "StringConstructionSubjects",
-      "path": "testing/foundation-dll/System.Private.CoreLib/string-construction/codegen/_subjects_input/StringConstructionSubjects.dll"
+      "path": "testing/foundation-dll/System.Private.CoreLib/string-construction/managed/subjects/build-output/StringConstructionSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "f0d265d7-605c-4dfc-95fd-8f98f1b7b4ff",
+  "inputModuleVersionId": "d89d5f75-b724-475f-84fa-4347ea95f918",
   "artifacts": [
     {
       "kind": "typedIlIr",

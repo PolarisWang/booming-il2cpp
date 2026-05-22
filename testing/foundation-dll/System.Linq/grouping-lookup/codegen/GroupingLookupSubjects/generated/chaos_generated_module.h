@@ -118,11 +118,6 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
-        CHAOS_IL2CPP_INT32 (*<CustomEntrySubject_6>b__7_2)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INT32, 
-                    CHAOS_IL2CPP_INTPTR
-        );
         CHAOS_IL2CPP_INT32 (*<CustomEntrySubject_7>b__8_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
@@ -130,11 +125,6 @@ struct Functions {
         CHAOS_IL2CPP_INT32 (*<CustomEntrySubject_7>b__8_1)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
-        );
-        CHAOS_IL2CPP_INT32 (*<CustomEntrySubject_7>b__8_2)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INT32, 
-                    CHAOS_IL2CPP_INTPTR
         );
     } groupingLookupSubjects___c;
     int32_t method_count;
@@ -325,17 +315,6 @@ struct GroupingLookupSubjects___c {
                     arg_1
         );
     }
-    static inline CHAOS_IL2CPP_INT32 <CustomEntrySubject_6>b__7_2(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INT32 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.groupingLookupSubjects___c.<CustomEntrySubject_6>b__7_2(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
     static inline CHAOS_IL2CPP_INT32 <CustomEntrySubject_7>b__8_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -354,19 +333,8 @@ struct GroupingLookupSubjects___c {
                     arg_1
         );
     }
-    static inline CHAOS_IL2CPP_INT32 <CustomEntrySubject_7>b__8_2(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INT32 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.groupingLookupSubjects___c.<CustomEntrySubject_7>b__8_2(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 18;
+    static constexpr int32_t MethodCount = 16;
 };
 
 

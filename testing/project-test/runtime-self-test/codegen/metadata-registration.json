@@ -106,6 +106,15 @@
     {
       "registrationKind": "field",
       "slot": 12,
+      "subjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::iterations",
+      "name": "iterations",
+      "definitionSubjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::iterations",
+      "declaringTypeSubjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 13,
       "subjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::sync",
       "name": "sync",
       "definitionSubjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::sync",
@@ -114,19 +123,10 @@
     },
     {
       "registrationKind": "field",
-      "slot": 13,
+      "slot": 14,
       "subjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::sharedCounter",
       "name": "sharedCounter",
       "definitionSubjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::sharedCounter",
-      "declaringTypeSubjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0",
-      "memberType": "System.Int32"
-    },
-    {
-      "registrationKind": "field",
-      "slot": 14,
-      "subjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::iterations",
-      "name": "iterations",
-      "definitionSubjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::iterations",
       "declaringTypeSubjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0",
       "memberType": "System.Int32"
     },

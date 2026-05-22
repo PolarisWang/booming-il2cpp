@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "PartitioningSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Linq/partitioning/managed/subjects/build-output/PartitioningSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Linq/partitioning/managed/subjects/build-output/PartitioningSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "PartitioningSubjects",
-      "path": "verification/foundation-dll/System.Linq/partitioning/managed/subjects/build-output/PartitioningSubjects.dll"
+      "path": "testing/foundation-dll/System.Linq/partitioning/managed/subjects/build-output/PartitioningSubjects.dll"
     },
     {
       "assemblyName": "System.Linq",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "f4c3f459-afde-4bd6-a04c-783372343620",
+  "inputModuleVersionId": "edf4519d-ffed-489f-9190-e434c44c8f8d",
   "artifacts": [
     {
       "kind": "typedIlIr",

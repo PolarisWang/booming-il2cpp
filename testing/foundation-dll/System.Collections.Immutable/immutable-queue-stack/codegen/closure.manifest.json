@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ImmutableQueueStackSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Collections.Immutable/immutable-queue-stack/managed/subjects/build-output/ImmutableQueueStackSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Collections.Immutable/immutable-queue-stack/managed/subjects/build-output/ImmutableQueueStackSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "ImmutableQueueStackSubjects",
-      "path": "verification/foundation-dll/System.Collections.Immutable/immutable-queue-stack/managed/subjects/build-output/ImmutableQueueStackSubjects.dll"
+      "path": "testing/foundation-dll/System.Collections.Immutable/immutable-queue-stack/managed/subjects/build-output/ImmutableQueueStackSubjects.dll"
     },
     {
       "assemblyName": "System.Collections.Immutable",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "8b16db0c-6b8e-4f1d-8014-e933809c0b81",
+  "inputModuleVersionId": "8fa33113-91a2-4ff9-9e82-1322f8e605ff",
   "artifacts": [
     {
       "kind": "typedIlIr",

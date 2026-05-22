@@ -43,6 +43,16 @@
       "reason": "closed-world-type"
     },
     {
+      "subjectKind": "type",
+      "subjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=20",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=24",
+      "reason": "closed-world-type"
+    },
+    {
       "subjectKind": "method",
       "subjectId": "JoinsSubjects/JoinsSubjects::CustomEntrySubject_0:System.Void()",
       "reason": "closed-world-method"
@@ -99,57 +109,12 @@
     },
     {
       "subjectKind": "method",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_1:System.Int32(System.Int32)",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
       "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_0:System.Int32(System.Int32)",
       "reason": "closed-world-method"
     },
     {
       "subjectKind": "method",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_1:System.Int32(System.Int32)",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_0:System.Int32(System.Int32)",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_1:System.Int32(System.Int32)",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_2:System.Int32(System.Int32,System.Int32)",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
       "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_0:System.Int32(System.Int32)",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_1:System.Int32(System.Int32)",
-      "reason": "closed-world-method"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_2:System.Int32(System.Int32,System.Int32)",
       "reason": "closed-world-method"
     },
     {
@@ -237,7 +202,7 @@
     {
       "methodSubjectId": "JoinsSubjects/JoinsSubjects::CustomEntrySubject_0:System.Void()",
       "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E()",
+      "targetSubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E()",
       "devirtualized": false
     },
     {
@@ -249,7 +214,7 @@
     {
       "methodSubjectId": "JoinsSubjects/JoinsSubjects::CustomEntrySubject_1:System.Void()",
       "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E()",
+      "targetSubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E()",
       "devirtualized": false
     },
     {
@@ -337,69 +302,15 @@
       "devirtualized": true
     },
     {
-      "methodSubjectId": "JoinsSubjects/JoinsSubjects::CustomEntrySubject_0:System.Void()",
-      "dispatchKind": "delegate.exact-target-direct",
-      "targetSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_1:System.Int32(System.Int32)",
-      "devirtualized": true
-    },
-    {
-      "methodSubjectId": "JoinsSubjects/JoinsSubjects::CustomEntrySubject_0:System.Void()",
-      "dispatchKind": "delegate.exact-target-direct",
-      "targetSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-      "devirtualized": true
-    },
-    {
       "methodSubjectId": "JoinsSubjects/JoinsSubjects::CustomEntrySubject_1:System.Void()",
       "dispatchKind": "delegate.exact-target-direct",
       "targetSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_0:System.Int32(System.Int32)",
       "devirtualized": true
     },
     {
-      "methodSubjectId": "JoinsSubjects/JoinsSubjects::CustomEntrySubject_1:System.Void()",
-      "dispatchKind": "delegate.exact-target-direct",
-      "targetSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_1:System.Int32(System.Int32)",
-      "devirtualized": true
-    },
-    {
-      "methodSubjectId": "JoinsSubjects/JoinsSubjects::CustomEntrySubject_1:System.Void()",
-      "dispatchKind": "delegate.exact-target-direct",
-      "targetSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-      "devirtualized": true
-    },
-    {
-      "methodSubjectId": "JoinsSubjects/JoinsSubjects::CustomEntrySubject_2:System.Void()",
-      "dispatchKind": "delegate.exact-target-direct",
-      "targetSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_0:System.Int32(System.Int32)",
-      "devirtualized": true
-    },
-    {
-      "methodSubjectId": "JoinsSubjects/JoinsSubjects::CustomEntrySubject_2:System.Void()",
-      "dispatchKind": "delegate.exact-target-direct",
-      "targetSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_1:System.Int32(System.Int32)",
-      "devirtualized": true
-    },
-    {
-      "methodSubjectId": "JoinsSubjects/JoinsSubjects::CustomEntrySubject_2:System.Void()",
-      "dispatchKind": "delegate.exact-target-direct",
-      "targetSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_2:System.Int32(System.Int32,System.Int32)",
-      "devirtualized": true
-    },
-    {
       "methodSubjectId": "JoinsSubjects/JoinsSubjects::CustomEntrySubject_3:System.Void()",
       "dispatchKind": "delegate.exact-target-direct",
       "targetSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_0:System.Int32(System.Int32)",
-      "devirtualized": true
-    },
-    {
-      "methodSubjectId": "JoinsSubjects/JoinsSubjects::CustomEntrySubject_3:System.Void()",
-      "dispatchKind": "delegate.exact-target-direct",
-      "targetSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_1:System.Int32(System.Int32)",
-      "devirtualized": true
-    },
-    {
-      "methodSubjectId": "JoinsSubjects/JoinsSubjects::CustomEntrySubject_3:System.Void()",
-      "dispatchKind": "delegate.exact-target-direct",
-      "targetSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_2:System.Int32(System.Int32,System.Int32)",
       "devirtualized": true
     },
     {
@@ -490,7 +401,25 @@
     },
     {
       "subjectKind": "field",
+      "subjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::A0FEBE8D859AC7FE1E225E18F8632CFA942D34C2F58386AE0B982B55FD4EB116",
+      "dataKind": "reference",
+      "requiresBoxing": false
+    },
+    {
+      "subjectKind": "field",
       "subjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::A10494D90314704E24CA5786F6376A6097558F10BB7880B539C8B80312DCA080",
+      "dataKind": "reference",
+      "requiresBoxing": false
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::CBF03EFCA28AF3C84560CE82FEAE66B8AE0A9321EC14BE8F40D06EB0AD7BFE73",
+      "dataKind": "reference",
+      "requiresBoxing": false
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::D8D4F55129E2966F2C74F35D6AC1769A713230A8B8371D030F18C6DEA1AAFD77",
       "dataKind": "reference",
       "requiresBoxing": false
     },
@@ -508,67 +437,13 @@
     },
     {
       "subjectKind": "field",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_1",
-      "dataKind": "reference",
-      "requiresBoxing": false
-    },
-    {
-      "subjectKind": "field",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_2",
-      "dataKind": "reference",
-      "requiresBoxing": false
-    },
-    {
-      "subjectKind": "field",
       "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_0",
       "dataKind": "reference",
       "requiresBoxing": false
     },
     {
       "subjectKind": "field",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_1",
-      "dataKind": "reference",
-      "requiresBoxing": false
-    },
-    {
-      "subjectKind": "field",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_2",
-      "dataKind": "reference",
-      "requiresBoxing": false
-    },
-    {
-      "subjectKind": "field",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_0",
-      "dataKind": "reference",
-      "requiresBoxing": false
-    },
-    {
-      "subjectKind": "field",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_1",
-      "dataKind": "reference",
-      "requiresBoxing": false
-    },
-    {
-      "subjectKind": "field",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_2",
-      "dataKind": "reference",
-      "requiresBoxing": false
-    },
-    {
-      "subjectKind": "field",
       "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_0",
-      "dataKind": "reference",
-      "requiresBoxing": false
-    },
-    {
-      "subjectKind": "field",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_1",
-      "dataKind": "reference",
-      "requiresBoxing": false
-    },
-    {
-      "subjectKind": "field",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_2",
       "dataKind": "reference",
       "requiresBoxing": false
     },

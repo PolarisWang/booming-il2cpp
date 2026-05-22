@@ -386,10 +386,26 @@
     },
     {
       "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_0\u003Eb__1_1:System.Void(System.Int32)",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_0\u003Eb__1_1:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663343,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_1\u003Eb__2_0:System.Void(System.Int32)",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_1\u003Eb__2_0:System.Void(System.Int32)",
       "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
-      "metadataToken": 100663343,
+      "metadataToken": 100663344,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_1\u003Eb__2_1:System.Void(System.Int32)",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_1\u003Eb__2_1:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663345,
       "parameterCount": 1
     },
     {
@@ -397,7 +413,15 @@
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_0:System.Void(System.Int32)",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_0:System.Void(System.Int32)",
       "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
-      "metadataToken": 100663344,
+      "metadataToken": 100663346,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_1:System.Void(System.Int32)",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_1:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663347,
       "parameterCount": 1
     },
     {
@@ -405,7 +429,15 @@
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_0:System.Void(System.Int32)",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_0:System.Void(System.Int32)",
       "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
-      "metadataToken": 100663345,
+      "metadataToken": 100663348,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_1:System.Void(System.Int32)",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_1:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663349,
       "parameterCount": 1
     },
     {
@@ -413,7 +445,15 @@
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_0:System.Void(System.Int32)",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_0:System.Void(System.Int32)",
       "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
-      "metadataToken": 100663346,
+      "metadataToken": 100663350,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_1:System.Void(System.Int32)",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_1:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663351,
       "parameterCount": 1
     },
     {
@@ -421,7 +461,15 @@
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_0:System.Void(System.Int32)",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_0:System.Void(System.Int32)",
       "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
-      "metadataToken": 100663347,
+      "metadataToken": 100663352,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "ParallelApisSubjects",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_1:System.Void(System.Int32)",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_1:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 100663353,
       "parameterCount": 1
     },
     {
@@ -429,7 +477,7 @@
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_41\u003Eb__42_0:System.Void()",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_41\u003Eb__42_0:System.Void()",
       "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
-      "metadataToken": 100663348,
+      "metadataToken": 100663354,
       "parameterCount": 0
     }
   ],

@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/reflection/module",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Module::get_FullyQualifiedName:System.String()",
+      "status": "passed",
+      "prePatchNsPerOp": 2.98,
+      "postPatchNsPerOp": 3.4,
+      "slowdownPercent": 14.09
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Module::get_Name:System.String()",
+      "status": "passed",
+      "prePatchNsPerOp": 2.92,
+      "postPatchNsPerOp": 3.3,
+      "slowdownPercent": 13.01
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Module::get_Assembly:System.Reflection.Assembly()",
+      "status": "passed",
+      "prePatchNsPerOp": 2.88,
+      "postPatchNsPerOp": 3.4,
+      "slowdownPercent": 18.06
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Module::GetType:System.Type(System.String)",
+      "status": "passed",
+      "prePatchNsPerOp": 4.85,
+      "postPatchNsPerOp": 4.7,
+      "slowdownPercent": -3.09
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Module::GetTypes:System.Type[]()",
+      "status": "passed",
+      "prePatchNsPerOp": 2.95,
+      "postPatchNsPerOp": 3.3,
+      "slowdownPercent": 11.86
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.Module::GetCustomAttributes:System.Object[](System.Type)",
+      "status": "stub"
+    }
+  ],
+  "summary": {
+    "totalMethods": 6,
+    "nonStubMethods": 5,
+    "averageSlowdownPercent": 10.79,
+    "slowdownFactor": 1.1078999999999999,
+    "slowdownThresholdX": 50.0
+  }
+}

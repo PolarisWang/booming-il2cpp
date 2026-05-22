@@ -1,5 +1,5 @@
 // verification_dispatch.generated.cpp — auto-generated
-// Assembly: GenericNullableValueSubjects, Methods: 12
+// Assembly: GenericNullableValueSubjects, Methods: 10
 #include <cstdint>
 #include <chrono>
 #include <chaos/native_types.h>

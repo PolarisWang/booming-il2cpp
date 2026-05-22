@@ -1,0 +1,13 @@
+{
+  "familyId": "family/System.Runtime.Serialization.Formatters/binder-type-style",
+  "assemblyName": "System.Runtime.Serialization.Formatters",
+  "methodSubjectIds": [
+    "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationBinder::BindToName:System.Void(System.Type,System.String&,System.String&)",
+    "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationBinder::BindToType:System.Type(System.String,System.String)"
+  ],
+  "displayName": "binder-type-style",
+  "description": "",
+  "closureStatus": "in-progress",
+  "methodCount": 2,
+  "customEntryIndices": []
+}

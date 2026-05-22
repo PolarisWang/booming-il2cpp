@@ -28,6 +28,40 @@ extern "C" void ChaosRegisterExternalType(
 
 namespace chaos { namespace il2cpp { namespace codegen {
 
+// ── Enum: System.Collections/System.Collections.Generic.NodeColor ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_COLLECTIONS_SYSTEM_COLLECTIONS_GENERIC_NODECOLOR[] = {
+    { "Black", 0 },
+    { "Red", 1 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_COLLECTIONS_SYSTEM_COLLECTIONS_GENERIC_NODECOLOR = {
+    kEnumFields_SYSTEM_COLLECTIONS_SYSTEM_COLLECTIONS_GENERIC_NODECOLOR, 2
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_COLLECTIONS_SYSTEM_COLLECTIONS_GENERIC_NODECOLOR = {
+    0u,
+    0u,
+    "System.Collections/System.Collections.Generic.NodeColor"
+};
+
+// ── Enum: System.Collections/System.Collections.Generic.TreeRotation ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_COLLECTIONS_SYSTEM_COLLECTIONS_GENERIC_TREEROTATION[] = {
+    { "Left", 0 },
+    { "LeftRight", 1 },
+    { "Right", 2 },
+    { "RightLeft", 3 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_COLLECTIONS_SYSTEM_COLLECTIONS_GENERIC_TREEROTATION = {
+    kEnumFields_SYSTEM_COLLECTIONS_SYSTEM_COLLECTIONS_GENERIC_TREEROTATION, 4
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_COLLECTIONS_SYSTEM_COLLECTIONS_GENERIC_TREEROTATION = {
+    0u,
+    0u,
+    "System.Collections/System.Collections.Generic.TreeRotation"
+};
+
 // ── Enum: System.Private.CoreLib/Interop+Globalization+ResultCode ──────────────────────────────
 static constexpr EnumFieldEntry kEnumFields_SYSTEM_PRIVATE_CORELIB_INTEROP_GLOBALIZATION_RESULTCODE[] = {
     { "Success", 0 },
@@ -7005,6 +7039,11 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.ReaderWriterLockSlim+EnterLockType") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_READERWRITERLOCKSLIM_ENTERLOCKTYPE;
         }
+        case 0x41B60CDCu: {
+            // Verify: System.Collections/System.Collections.Generic.NodeColor
+            if (std::strcmp(subject_id, "System.Collections/System.Collections.Generic.NodeColor") != 0) break;
+            return &kEnumTable_SYSTEM_COLLECTIONS_SYSTEM_COLLECTIONS_GENERIC_NODECOLOR;
+        }
         case 0x437EAD33u: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.PARAMFLAG
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.PARAMFLAG") != 0) break;
@@ -8025,6 +8064,11 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventManifestOptions") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTMANIFESTOPTIONS;
         }
+        case 0xF67C68ABu: {
+            // Verify: System.Collections/System.Collections.Generic.TreeRotation
+            if (std::strcmp(subject_id, "System.Collections/System.Collections.Generic.TreeRotation") != 0) break;
+            return &kEnumTable_SYSTEM_COLLECTIONS_SYSTEM_COLLECTIONS_GENERIC_TREEROTATION;
+        }
         case 0xF722539Au: {
             // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventTask
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventTask") != 0) break;
@@ -8217,6 +8261,7 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata_by_fnv24(
         case 0x78DAA3u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TIMESPANFORMAT_STANDARDFORMAT;
         case 0x7A11CEu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TIMEZONEINFO_STRINGSERIALIZER_STATE;
         case 0x7B6C3Fu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_POSIXSIGNAL;
+        case 0x7C68ABu: return &kEnumTable_SYSTEM_COLLECTIONS_SYSTEM_COLLECTIONS_GENERIC_TREEROTATION;
         case 0x7D6640u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_ASSEMBLYBUILDERACCESS;
         case 0x7E0E81u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TEXT_UNICODE_GRAPHEMECLUSTERBREAKTYPE;
         case 0x7E83BEu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_SECURITYCRITICALSCOPE;
@@ -8278,6 +8323,7 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata_by_fnv24(
         case 0xB038F0u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_VARFLAGS;
         case 0xB0D003u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_VERSIONING_SXSREQUIREMENTS;
         case 0xB43E05u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EVENTATTRIBUTES;
+        case 0xB60CDCu: return &kEnumTable_SYSTEM_COLLECTIONS_SYSTEM_COLLECTIONS_GENERIC_NODECOLOR;
         case 0xB6DC0Bu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILEACCESS;
         case 0xB9E5EEu: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_LIBFLAGS;
         case 0xBB0FE9u: return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_RESOURCEATTRIBUTES;
@@ -8682,6 +8728,10 @@ struct _EnumMetadataRegistrar {
             compute_enum_hash24("System.Private.CoreLib/System.Threading.ReaderWriterLockSlim+EnterLockType"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_READERWRITERLOCKSLIM_ENTERLOCKTYPE));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Collections/System.Collections.Generic.NodeColor"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_COLLECTIONS_SYSTEM_COLLECTIONS_GENERIC_NODECOLOR));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.PARAMFLAG"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -9498,6 +9548,10 @@ struct _EnumMetadataRegistrar {
             compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventManifestOptions"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTMANIFESTOPTIONS));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Collections/System.Collections.Generic.TreeRotation"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_COLLECTIONS_SYSTEM_COLLECTIONS_GENERIC_TREEROTATION));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventTask"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(

@@ -1,5 +1,5 @@
 // verification_dispatch.generated.cpp — auto-generated
-// Assembly: RcwBasicSubjects, Methods: 31
+// Assembly: RcwBasicSubjects, Methods: 29
 #include <cstdint>
 #include <chrono>
 #include <chaos/native_types.h>

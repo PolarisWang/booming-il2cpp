@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.ObjectModel",
+  "familyId": "family/System.ObjectModel/data/errors",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.ObjectModel/System.ComponentModel.DataErrorsChangedEventArgs::get_PropertyName:System.String()",
+      "status": "passed",
+      "prePatchNsPerOp": 5.43,
+      "postPatchNsPerOp": 5.3,
+      "slowdownPercent": -2.39
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.ObjectModel/System.ComponentModel.DataErrorsChangedEventArgs::.ctor:System.Void(System.String)",
+      "status": "passed",
+      "prePatchNsPerOp": 109.75,
+      "postPatchNsPerOp": 89.5,
+      "slowdownPercent": -18.45
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::add_ErrorsChanged:System.Void(System.EventHandler{System.ComponentModel.DataErrorsChangedEventArgs})",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::get_HasErrors:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.41,
+      "postPatchNsPerOp": 4.7,
+      "slowdownPercent": 37.83
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::GetErrors:System.Collections.IEnumerable(System.String)",
+      "status": "passed",
+      "prePatchNsPerOp": 7.85,
+      "postPatchNsPerOp": 7.8,
+      "slowdownPercent": -0.64
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::remove_ErrorsChanged:System.Void(System.EventHandler{System.ComponentModel.DataErrorsChangedEventArgs})",
+      "status": "stub"
+    }
+  ],
+  "summary": {
+    "totalMethods": 6,
+    "nonStubMethods": 4,
+    "averageSlowdownPercent": 4.09,
+    "slowdownFactor": 1.0409,
+    "slowdownThresholdX": 50.0
+  }
+}

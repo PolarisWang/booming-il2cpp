@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "PropertyChangeNotificationsSubjects",
   "entrySubjectId": "PropertyChangeNotificationsSubjects/PropertyChangeNotificationsSubjects::Subject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.ObjectModel/property-change-notifications/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.ObjectModel/property-change-notifications/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

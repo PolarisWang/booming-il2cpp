@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Text.Json",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.Text.Json/converter-factory",
+  "displayName": "JSON Converter Factory",
+  "methodSubjectIds": [
+    "System.Text.Json/System.Text.Json.Serialization.JsonConverterFactory::CreateConverter:System.Text.Json.Serialization.JsonConverter(System.Type,System.Text.Json.JsonSerializerOptions)",
+    "System.Text.Json/System.Text.Json.Serialization.JsonConverterFactory::get_Type:System.Type()"
+  ],
+  "methodSubjectCount": 2,
+  "customEntryIndices": [],
+  "functionalObligation": {
+    "required": true
+  },
+  "performanceObligation": {
+    "required": false
+  },
+  "hotupdateFunctionalObligation": {
+    "required": false
+  },
+  "hotupdatePerformanceObligation": {
+    "required": false
+  },
+  "reviewBundleRequired": true
+}

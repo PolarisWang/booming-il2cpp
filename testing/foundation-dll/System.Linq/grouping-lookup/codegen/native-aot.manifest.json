@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "GroupingLookupSubjects",
   "entrySubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Linq/grouping-lookup/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.Linq/grouping-lookup/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

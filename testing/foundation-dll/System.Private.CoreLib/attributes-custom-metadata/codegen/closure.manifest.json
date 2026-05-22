@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "AttributesCustomMetadataSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/attributes-custom-metadata/codegen/_subjects_input/AttributesCustomMetadataSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/attributes-custom-metadata/managed/subjects/build-output/AttributesCustomMetadataSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "AttributesCustomMetadataSubjects",
-      "path": "testing/foundation-dll/System.Private.CoreLib/attributes-custom-metadata/codegen/_subjects_input/AttributesCustomMetadataSubjects.dll"
+      "path": "testing/foundation-dll/System.Private.CoreLib/attributes-custom-metadata/managed/subjects/build-output/AttributesCustomMetadataSubjects.dll"
     },
     {
       "assemblyName": "System.Collections",
@@ -24,7 +24,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "baf24257-477b-4688-b5ea-3f7b4748cd66",
+  "inputModuleVersionId": "151dd037-6739-45aa-8318-16076b62bab6",
   "artifacts": [
     {
       "kind": "typedIlIr",

@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "NumericAggregationSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Linq/numeric-aggregation/managed/subjects/build-output/NumericAggregationSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Linq/numeric-aggregation/managed/subjects/build-output/NumericAggregationSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "NumericAggregationSubjects",
-      "path": "verification/foundation-dll/System.Linq/numeric-aggregation/managed/subjects/build-output/NumericAggregationSubjects.dll"
+      "path": "testing/foundation-dll/System.Linq/numeric-aggregation/managed/subjects/build-output/NumericAggregationSubjects.dll"
     },
     {
       "assemblyName": "System.Linq",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "97f2f775-a290-4550-9074-f63e418b72bd",
+  "inputModuleVersionId": "1a7d03d5-0294-4626-85b9-1847f77675b9",
   "artifacts": [
     {
       "kind": "typedIlIr",

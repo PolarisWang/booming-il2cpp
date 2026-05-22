@@ -3,7 +3,7 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ZipFileApisSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.IO.Compression.ZipFile/zip-file-apis/managed/subjects/build-output/ZipFileApisSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.IO.Compression.ZipFile/zip-file-apis/managed/subjects/build-output/ZipFileApisSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
@@ -16,11 +16,11 @@
     },
     {
       "assemblyName": "ZipFileApisSubjects",
-      "path": "verification/foundation-dll/System.IO.Compression.ZipFile/zip-file-apis/managed/subjects/build-output/ZipFileApisSubjects.dll"
+      "path": "testing/foundation-dll/System.IO.Compression.ZipFile/zip-file-apis/managed/subjects/build-output/ZipFileApisSubjects.dll"
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "ea4d52a8-6576-47e9-baeb-68b89f53b4cd",
+  "inputModuleVersionId": "427330b9-0963-45d0-b5ca-fa8bfe36dd0f",
   "artifacts": [
     {
       "kind": "typedIlIr",

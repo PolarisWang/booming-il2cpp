@@ -24,14 +24,23 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 2,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 125,
+          "handlerOffset": 126,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
       "instructions": [
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 1,
+          "ilOffset": 2,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -39,7 +48,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 42,
-          "ilOffset": 2,
+          "ilOffset": 3,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -47,7 +56,7 @@
           "op": "ldsfld",
           "opCode": 12,
           "operand": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_0",
-          "ilOffset": 4,
+          "ilOffset": 5,
           "resultType": "System.Action\u003CSystem.Int32\u003E",
           "reference": {
             "assemblyName": "ParallelApisSubjects",
@@ -73,28 +82,28 @@
         {
           "op": "dup",
           "opCode": 54,
-          "ilOffset": 9,
+          "ilOffset": 10,
           "isPreserveSig": false
         },
         {
           "op": "brtrue",
           "opCode": 18,
-          "operand": 35,
-          "ilOffset": 10,
+          "operand": 36,
+          "ilOffset": 11,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 12,
+          "ilOffset": 13,
           "isPreserveSig": false
         },
         {
           "op": "ldsfld",
           "opCode": 12,
           "operand": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
-          "ilOffset": 13,
+          "ilOffset": 14,
           "resultType": "ParallelApisSubjects\u002B\u003C\u003Ec",
           "reference": {
             "assemblyName": "ParallelApisSubjects",
@@ -121,7 +130,7 @@
           "op": "ldftn",
           "opCode": 73,
           "operand": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_0\u003Eb__1_0:System.Void(System.Int32)",
-          "ilOffset": 18,
+          "ilOffset": 19,
           "resultType": "System.IntPtr",
           "callee": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_0\u003Eb__1_0:System.Void(System.Int32)",
           "reference": {
@@ -145,7 +154,7 @@
         {
           "op": "newobj",
           "opCode": 34,
-          "ilOffset": 24,
+          "ilOffset": 25,
           "resultType": "System.Private.CoreLib/System.Action\u003CSystem.Int32\u003E",
           "callee": "System.Private.CoreLib/System.Action\u003CSystem.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
           "reference": {
@@ -170,14 +179,14 @@
         {
           "op": "dup",
           "opCode": 54,
-          "ilOffset": 29,
+          "ilOffset": 30,
           "isPreserveSig": false
         },
         {
           "op": "stsfld",
           "opCode": 13,
           "operand": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_0",
-          "ilOffset": 30,
+          "ilOffset": 31,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "ParallelApisSubjects",
@@ -203,7 +212,7 @@
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 35,
+          "ilOffset": 36,
           "resultType": "System.Threading.Tasks.ParallelLoopResult",
           "callee": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action\u003CSystem.Int32\u003E)",
           "reference": {
@@ -229,7 +238,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 1,
-          "ilOffset": 40,
+          "ilOffset": 41,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -237,14 +246,14 @@
           "op": "ldloca",
           "opCode": 76,
           "operand": 1,
-          "ilOffset": 41,
+          "ilOffset": 42,
           "resultType": "System.IntPtr",
           "isPreserveSig": false
         },
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 49,
+          "ilOffset": 50,
           "resultType": "System.Int32",
           "callee": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::GetHashCode:System.Int32()",
           "reference": {
@@ -270,15 +279,247 @@
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 410570569,
-          "ilOffset": 54,
+          "operand": 0,
+          "ilOffset": 55,
           "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 56,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_1",
+          "ilOffset": 58,
+          "resultType": "System.Action\u003CSystem.Int32\u003E",
+          "reference": {
+            "assemblyName": "ParallelApisSubjects",
+            "subjectKind": "field",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_1"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ParallelApisSubjects",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_1",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Action\u003CSystem.Int32\u003E"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 63,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 89,
+          "ilOffset": 64,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 66,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+          "ilOffset": 67,
+          "resultType": "ParallelApisSubjects\u002B\u003C\u003Ec",
+          "reference": {
+            "assemblyName": "ParallelApisSubjects",
+            "subjectKind": "field",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ParallelApisSubjects",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "ParallelApisSubjects\u002B\u003C\u003Ec"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldftn",
+          "opCode": 73,
+          "operand": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_0\u003Eb__1_1:System.Void(System.Int32)",
+          "ilOffset": 72,
+          "resultType": "System.IntPtr",
+          "callee": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_0\u003Eb__1_1:System.Void(System.Int32)",
+          "reference": {
+            "assemblyName": "ParallelApisSubjects",
+            "subjectKind": "method",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_0\u003Eb__1_1:System.Void(System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ParallelApisSubjects",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_0\u003Eb__1_1:System.Void(System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "isPreserveSig": false
+        },
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 78,
+          "resultType": "System.Private.CoreLib/System.Action\u003CSystem.Int32\u003E",
+          "callee": "System.Private.CoreLib/System.Action\u003CSystem.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Action\u003CSystem.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Action\u003CSystem.Int32\u003E",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 83,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_1",
+          "ilOffset": 84,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ParallelApisSubjects",
+            "subjectKind": "field",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_1"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ParallelApisSubjects",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_1",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Action\u003CSystem.Int32\u003E"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 89,
+          "resultType": "System.Threading.Tasks.ParallelLoopResult",
+          "callee": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action\u003CSystem.Int32\u003E)",
+          "reference": {
+            "assemblyName": "System.Threading.Tasks.Parallel",
+            "subjectKind": "method",
+            "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action\u003CSystem.Int32\u003E)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Threading.Tasks.Parallel",
+            "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action\u003CSystem.Int32\u003E)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 94,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 1,
+          "ilOffset": 95,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 103,
+          "resultType": "System.Int32",
+          "callee": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 1,
+          "constrainedTypeSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 59,
+          "ilOffset": 108,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -286,14 +527,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 61,
+          "ilOffset": 110,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 62,
+          "ilOffset": 111,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -301,7 +542,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 64,
+          "ilOffset": 113,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -309,14 +550,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 65,
+          "ilOffset": 114,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 74,
-          "ilOffset": 66,
+          "operand": 123,
+          "ilOffset": 115,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -324,7 +565,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 68,
+          "ilOffset": 117,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -332,7 +573,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "ParallelApisSubjects/ParallelApisSubjects::_exitCode",
-          "ilOffset": 69,
+          "ilOffset": 118,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "ParallelApisSubjects",
@@ -356,9 +597,66 @@
           "isPreserveSig": false
         },
         {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 137,
+          "ilOffset": 124,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 126,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 128,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ParallelApisSubjects/ParallelApisSubjects::_exitCode",
+          "ilOffset": 129,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ParallelApisSubjects",
+            "subjectKind": "field",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ParallelApisSubjects",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 137,
+          "ilOffset": 135,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 74,
+          "ilOffset": 137,
           "isPreserveSig": false
         }
       ],
@@ -394,14 +692,23 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 2,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 125,
+          "handlerOffset": 126,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
       "instructions": [
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 1,
+          "ilOffset": 2,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -409,7 +716,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 42,
-          "ilOffset": 2,
+          "ilOffset": 3,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -417,7 +724,7 @@
           "op": "ldsfld",
           "opCode": 12,
           "operand": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_0",
-          "ilOffset": 4,
+          "ilOffset": 5,
           "resultType": "System.Action\u003CSystem.Int32\u003E",
           "reference": {
             "assemblyName": "ParallelApisSubjects",
@@ -443,28 +750,28 @@
         {
           "op": "dup",
           "opCode": 54,
-          "ilOffset": 9,
+          "ilOffset": 10,
           "isPreserveSig": false
         },
         {
           "op": "brtrue",
           "opCode": 18,
-          "operand": 35,
-          "ilOffset": 10,
+          "operand": 36,
+          "ilOffset": 11,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 12,
+          "ilOffset": 13,
           "isPreserveSig": false
         },
         {
           "op": "ldsfld",
           "opCode": 12,
           "operand": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
-          "ilOffset": 13,
+          "ilOffset": 14,
           "resultType": "ParallelApisSubjects\u002B\u003C\u003Ec",
           "reference": {
             "assemblyName": "ParallelApisSubjects",
@@ -491,7 +798,7 @@
           "op": "ldftn",
           "opCode": 73,
           "operand": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_1\u003Eb__2_0:System.Void(System.Int32)",
-          "ilOffset": 18,
+          "ilOffset": 19,
           "resultType": "System.IntPtr",
           "callee": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_1\u003Eb__2_0:System.Void(System.Int32)",
           "reference": {
@@ -515,7 +822,7 @@
         {
           "op": "newobj",
           "opCode": 34,
-          "ilOffset": 24,
+          "ilOffset": 25,
           "resultType": "System.Private.CoreLib/System.Action\u003CSystem.Int32\u003E",
           "callee": "System.Private.CoreLib/System.Action\u003CSystem.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
           "reference": {
@@ -540,14 +847,14 @@
         {
           "op": "dup",
           "opCode": 54,
-          "ilOffset": 29,
+          "ilOffset": 30,
           "isPreserveSig": false
         },
         {
           "op": "stsfld",
           "opCode": 13,
           "operand": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_0",
-          "ilOffset": 30,
+          "ilOffset": 31,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "ParallelApisSubjects",
@@ -573,7 +880,7 @@
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 35,
+          "ilOffset": 36,
           "resultType": "System.Threading.Tasks.ParallelLoopResult",
           "callee": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action\u003CSystem.Int32\u003E)",
           "reference": {
@@ -599,7 +906,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 1,
-          "ilOffset": 40,
+          "ilOffset": 41,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -607,14 +914,14 @@
           "op": "ldloca",
           "opCode": 76,
           "operand": 1,
-          "ilOffset": 41,
+          "ilOffset": 42,
           "resultType": "System.IntPtr",
           "isPreserveSig": false
         },
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 49,
+          "ilOffset": 50,
           "resultType": "System.Int32",
           "callee": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::GetHashCode:System.Int32()",
           "reference": {
@@ -640,15 +947,247 @@
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 410570569,
-          "ilOffset": 54,
+          "operand": 0,
+          "ilOffset": 55,
           "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 56,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_1",
+          "ilOffset": 58,
+          "resultType": "System.Action\u003CSystem.Int32\u003E",
+          "reference": {
+            "assemblyName": "ParallelApisSubjects",
+            "subjectKind": "field",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_1"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ParallelApisSubjects",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_1",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Action\u003CSystem.Int32\u003E"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 63,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 89,
+          "ilOffset": 64,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 66,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+          "ilOffset": 67,
+          "resultType": "ParallelApisSubjects\u002B\u003C\u003Ec",
+          "reference": {
+            "assemblyName": "ParallelApisSubjects",
+            "subjectKind": "field",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ParallelApisSubjects",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "ParallelApisSubjects\u002B\u003C\u003Ec"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldftn",
+          "opCode": 73,
+          "operand": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_1\u003Eb__2_1:System.Void(System.Int32)",
+          "ilOffset": 72,
+          "resultType": "System.IntPtr",
+          "callee": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_1\u003Eb__2_1:System.Void(System.Int32)",
+          "reference": {
+            "assemblyName": "ParallelApisSubjects",
+            "subjectKind": "method",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_1\u003Eb__2_1:System.Void(System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ParallelApisSubjects",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_1\u003Eb__2_1:System.Void(System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "isPreserveSig": false
+        },
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 78,
+          "resultType": "System.Private.CoreLib/System.Action\u003CSystem.Int32\u003E",
+          "callee": "System.Private.CoreLib/System.Action\u003CSystem.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Action\u003CSystem.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Action\u003CSystem.Int32\u003E",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 83,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_1",
+          "ilOffset": 84,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ParallelApisSubjects",
+            "subjectKind": "field",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_1"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ParallelApisSubjects",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_1",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Action\u003CSystem.Int32\u003E"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 89,
+          "resultType": "System.Threading.Tasks.ParallelLoopResult",
+          "callee": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action\u003CSystem.Int32\u003E)",
+          "reference": {
+            "assemblyName": "System.Threading.Tasks.Parallel",
+            "subjectKind": "method",
+            "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action\u003CSystem.Int32\u003E)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Threading.Tasks.Parallel",
+            "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action\u003CSystem.Int32\u003E)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 94,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 1,
+          "ilOffset": 95,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 103,
+          "resultType": "System.Int32",
+          "callee": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 1,
+          "constrainedTypeSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 59,
+          "ilOffset": 108,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -656,14 +1195,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 61,
+          "ilOffset": 110,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 62,
+          "ilOffset": 111,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -671,7 +1210,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 64,
+          "ilOffset": 113,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -679,14 +1218,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 65,
+          "ilOffset": 114,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 74,
-          "ilOffset": 66,
+          "operand": 123,
+          "ilOffset": 115,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -694,7 +1233,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 68,
+          "ilOffset": 117,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -702,7 +1241,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "ParallelApisSubjects/ParallelApisSubjects::_exitCode",
-          "ilOffset": 69,
+          "ilOffset": 118,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "ParallelApisSubjects",
@@ -726,9 +1265,66 @@
           "isPreserveSig": false
         },
         {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 137,
+          "ilOffset": 124,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 126,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 128,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ParallelApisSubjects/ParallelApisSubjects::_exitCode",
+          "ilOffset": 129,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ParallelApisSubjects",
+            "subjectKind": "field",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ParallelApisSubjects",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 137,
+          "ilOffset": 135,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 74,
+          "ilOffset": 137,
           "isPreserveSig": false
         }
       ],
@@ -763,16 +1359,16 @@
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 0,
+      "localCount": 2,
       "exceptionRegionCount": 1,
       "exceptionRegions": [
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 51,
-          "handlerOffset": 52,
-          "handlerLength": 5,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.ArgumentNullException"
+          "tryLength": 127,
+          "handlerOffset": 128,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
@@ -982,16 +1578,344 @@
           "isPreserveSig": false
         },
         {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 42,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 1,
+          "ilOffset": 43,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 51,
+          "resultType": "System.Int32",
+          "callee": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 1,
+          "constrainedTypeSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 56,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 57,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 59,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_1",
+          "ilOffset": 60,
+          "resultType": "System.Action\u003CSystem.Int32\u003E",
+          "reference": {
+            "assemblyName": "ParallelApisSubjects",
+            "subjectKind": "field",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_1"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ParallelApisSubjects",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_1",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Action\u003CSystem.Int32\u003E"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 65,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 91,
+          "ilOffset": 66,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 42,
+          "ilOffset": 68,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+          "ilOffset": 69,
+          "resultType": "ParallelApisSubjects\u002B\u003C\u003Ec",
+          "reference": {
+            "assemblyName": "ParallelApisSubjects",
+            "subjectKind": "field",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ParallelApisSubjects",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "ParallelApisSubjects\u002B\u003C\u003Ec"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldftn",
+          "opCode": 73,
+          "operand": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_1:System.Void(System.Int32)",
+          "ilOffset": 74,
+          "resultType": "System.IntPtr",
+          "callee": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_1:System.Void(System.Int32)",
+          "reference": {
+            "assemblyName": "ParallelApisSubjects",
+            "subjectKind": "method",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_1:System.Void(System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ParallelApisSubjects",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_1:System.Void(System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "isPreserveSig": false
+        },
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 80,
+          "resultType": "System.Private.CoreLib/System.Action\u003CSystem.Int32\u003E",
+          "callee": "System.Private.CoreLib/System.Action\u003CSystem.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Action\u003CSystem.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Action\u003CSystem.Int32\u003E",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 85,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_1",
+          "ilOffset": 86,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ParallelApisSubjects",
+            "subjectKind": "field",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_1"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ParallelApisSubjects",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_1",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Action\u003CSystem.Int32\u003E"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 91,
+          "resultType": "System.Threading.Tasks.ParallelLoopResult",
+          "callee": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32\u003E)",
+          "reference": {
+            "assemblyName": "System.Threading.Tasks.Parallel",
+            "subjectKind": "method",
+            "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32\u003E)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Threading.Tasks.Parallel",
+            "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32\u003E)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 96,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 1,
+          "ilOffset": 97,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 105,
+          "resultType": "System.Int32",
+          "callee": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 1,
+          "constrainedTypeSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 110,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 112,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 113,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 115,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 116,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 125,
+          "ilOffset": 117,
+          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 43,
+          "ilOffset": 119,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -999,7 +1923,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "ParallelApisSubjects/ParallelApisSubjects::_exitCode",
-          "ilOffset": 44,
+          "ilOffset": 120,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "ParallelApisSubjects",
@@ -1025,29 +1949,64 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 57,
-          "ilOffset": 50,
+          "operand": 139,
+          "ilOffset": 126,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 52,
+          "ilOffset": 128,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 130,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ParallelApisSubjects/ParallelApisSubjects::_exitCode",
+          "ilOffset": 131,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ParallelApisSubjects",
+            "subjectKind": "field",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ParallelApisSubjects",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
           "isPreserveSig": false
         },
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 57,
-          "ilOffset": 55,
+          "operand": 139,
+          "ilOffset": 137,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 57,
+          "ilOffset": 139,
           "isPreserveSig": false
         }
       ],
@@ -1082,16 +2041,16 @@
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 0,
+      "localCount": 2,
       "exceptionRegionCount": 1,
       "exceptionRegions": [
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 51,
-          "handlerOffset": 52,
-          "handlerLength": 5,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.ArgumentNullException"
+          "tryLength": 127,
+          "handlerOffset": 128,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
@@ -1301,16 +2260,344 @@
           "isPreserveSig": false
         },
         {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 42,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 1,
+          "ilOffset": 43,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 51,
+          "resultType": "System.Int32",
+          "callee": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 1,
+          "constrainedTypeSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 56,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 57,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 59,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_1",
+          "ilOffset": 60,
+          "resultType": "System.Action\u003CSystem.Int32\u003E",
+          "reference": {
+            "assemblyName": "ParallelApisSubjects",
+            "subjectKind": "field",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_1"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ParallelApisSubjects",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_1",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Action\u003CSystem.Int32\u003E"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 65,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 91,
+          "ilOffset": 66,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 42,
+          "ilOffset": 68,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+          "ilOffset": 69,
+          "resultType": "ParallelApisSubjects\u002B\u003C\u003Ec",
+          "reference": {
+            "assemblyName": "ParallelApisSubjects",
+            "subjectKind": "field",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ParallelApisSubjects",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "ParallelApisSubjects\u002B\u003C\u003Ec"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldftn",
+          "opCode": 73,
+          "operand": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_1:System.Void(System.Int32)",
+          "ilOffset": 74,
+          "resultType": "System.IntPtr",
+          "callee": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_1:System.Void(System.Int32)",
+          "reference": {
+            "assemblyName": "ParallelApisSubjects",
+            "subjectKind": "method",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_1:System.Void(System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ParallelApisSubjects",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_1:System.Void(System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "isPreserveSig": false
+        },
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 80,
+          "resultType": "System.Private.CoreLib/System.Action\u003CSystem.Int32\u003E",
+          "callee": "System.Private.CoreLib/System.Action\u003CSystem.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Action\u003CSystem.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Action\u003CSystem.Int32\u003E",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 85,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_1",
+          "ilOffset": 86,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ParallelApisSubjects",
+            "subjectKind": "field",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_1"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ParallelApisSubjects",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_1",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Action\u003CSystem.Int32\u003E"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 91,
+          "resultType": "System.Threading.Tasks.ParallelLoopResult",
+          "callee": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32\u003E)",
+          "reference": {
+            "assemblyName": "System.Threading.Tasks.Parallel",
+            "subjectKind": "method",
+            "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32\u003E)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Threading.Tasks.Parallel",
+            "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32\u003E)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 96,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 1,
+          "ilOffset": 97,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 105,
+          "resultType": "System.Int32",
+          "callee": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 1,
+          "constrainedTypeSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 110,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 112,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 113,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 115,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 116,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 125,
+          "ilOffset": 117,
+          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 43,
+          "ilOffset": 119,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1318,7 +2605,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "ParallelApisSubjects/ParallelApisSubjects::_exitCode",
-          "ilOffset": 44,
+          "ilOffset": 120,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "ParallelApisSubjects",
@@ -1344,29 +2631,64 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 57,
-          "ilOffset": 50,
+          "operand": 139,
+          "ilOffset": 126,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 52,
+          "ilOffset": 128,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 130,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ParallelApisSubjects/ParallelApisSubjects::_exitCode",
+          "ilOffset": 131,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ParallelApisSubjects",
+            "subjectKind": "field",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ParallelApisSubjects",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
           "isPreserveSig": false
         },
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 57,
-          "ilOffset": 55,
+          "operand": 139,
+          "ilOffset": 137,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 57,
+          "ilOffset": 139,
           "isPreserveSig": false
         }
       ],
@@ -1401,16 +2723,16 @@
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 0,
+      "localCount": 2,
       "exceptionRegionCount": 1,
       "exceptionRegions": [
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 51,
-          "handlerOffset": 52,
-          "handlerLength": 5,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.ArgumentNullException"
+          "tryLength": 127,
+          "handlerOffset": 128,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
@@ -1620,16 +2942,344 @@
           "isPreserveSig": false
         },
         {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 42,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 1,
+          "ilOffset": 43,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 51,
+          "resultType": "System.Int32",
+          "callee": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 1,
+          "constrainedTypeSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 56,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 57,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 59,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_1",
+          "ilOffset": 60,
+          "resultType": "System.Action\u003CSystem.Int32\u003E",
+          "reference": {
+            "assemblyName": "ParallelApisSubjects",
+            "subjectKind": "field",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_1"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ParallelApisSubjects",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_1",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Action\u003CSystem.Int32\u003E"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 65,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 91,
+          "ilOffset": 66,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 42,
+          "ilOffset": 68,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+          "ilOffset": 69,
+          "resultType": "ParallelApisSubjects\u002B\u003C\u003Ec",
+          "reference": {
+            "assemblyName": "ParallelApisSubjects",
+            "subjectKind": "field",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ParallelApisSubjects",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "ParallelApisSubjects\u002B\u003C\u003Ec"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldftn",
+          "opCode": 73,
+          "operand": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_1:System.Void(System.Int32)",
+          "ilOffset": 74,
+          "resultType": "System.IntPtr",
+          "callee": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_1:System.Void(System.Int32)",
+          "reference": {
+            "assemblyName": "ParallelApisSubjects",
+            "subjectKind": "method",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_1:System.Void(System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ParallelApisSubjects",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_1:System.Void(System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "isPreserveSig": false
+        },
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 80,
+          "resultType": "System.Private.CoreLib/System.Action\u003CSystem.Int32\u003E",
+          "callee": "System.Private.CoreLib/System.Action\u003CSystem.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Action\u003CSystem.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Action\u003CSystem.Int32\u003E",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 85,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_1",
+          "ilOffset": 86,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ParallelApisSubjects",
+            "subjectKind": "field",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_1"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ParallelApisSubjects",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_1",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Action\u003CSystem.Int32\u003E"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 91,
+          "resultType": "System.Threading.Tasks.ParallelLoopResult",
+          "callee": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32\u003E)",
+          "reference": {
+            "assemblyName": "System.Threading.Tasks.Parallel",
+            "subjectKind": "method",
+            "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32\u003E)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Threading.Tasks.Parallel",
+            "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32\u003E)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 96,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 1,
+          "ilOffset": 97,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 105,
+          "resultType": "System.Int32",
+          "callee": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 1,
+          "constrainedTypeSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 110,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 112,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 113,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 115,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 116,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 125,
+          "ilOffset": 117,
+          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 43,
+          "ilOffset": 119,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1637,7 +3287,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "ParallelApisSubjects/ParallelApisSubjects::_exitCode",
-          "ilOffset": 44,
+          "ilOffset": 120,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "ParallelApisSubjects",
@@ -1663,29 +3313,64 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 57,
-          "ilOffset": 50,
+          "operand": 139,
+          "ilOffset": 126,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 52,
+          "ilOffset": 128,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 130,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ParallelApisSubjects/ParallelApisSubjects::_exitCode",
+          "ilOffset": 131,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ParallelApisSubjects",
+            "subjectKind": "field",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ParallelApisSubjects",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
           "isPreserveSig": false
         },
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 57,
-          "ilOffset": 55,
+          "operand": 139,
+          "ilOffset": 137,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 57,
+          "ilOffset": 139,
           "isPreserveSig": false
         }
       ],
@@ -1720,16 +3405,16 @@
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 0,
+      "localCount": 2,
       "exceptionRegionCount": 1,
       "exceptionRegions": [
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 51,
-          "handlerOffset": 52,
-          "handlerLength": 5,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.ArgumentNullException"
+          "tryLength": 127,
+          "handlerOffset": 128,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
@@ -1939,16 +3624,344 @@
           "isPreserveSig": false
         },
         {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 42,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 1,
+          "ilOffset": 43,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 51,
+          "resultType": "System.Int32",
+          "callee": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 1,
+          "constrainedTypeSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 56,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 57,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 59,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__6_1",
+          "ilOffset": 60,
+          "resultType": "System.Action\u003CSystem.Int32\u003E",
+          "reference": {
+            "assemblyName": "ParallelApisSubjects",
+            "subjectKind": "field",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__6_1"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ParallelApisSubjects",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__6_1",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Action\u003CSystem.Int32\u003E"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 65,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 91,
+          "ilOffset": 66,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 42,
+          "ilOffset": 68,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+          "ilOffset": 69,
+          "resultType": "ParallelApisSubjects\u002B\u003C\u003Ec",
+          "reference": {
+            "assemblyName": "ParallelApisSubjects",
+            "subjectKind": "field",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ParallelApisSubjects",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "ParallelApisSubjects\u002B\u003C\u003Ec"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldftn",
+          "opCode": 73,
+          "operand": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_1:System.Void(System.Int32)",
+          "ilOffset": 74,
+          "resultType": "System.IntPtr",
+          "callee": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_1:System.Void(System.Int32)",
+          "reference": {
+            "assemblyName": "ParallelApisSubjects",
+            "subjectKind": "method",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_1:System.Void(System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ParallelApisSubjects",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_1:System.Void(System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "isPreserveSig": false
+        },
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 80,
+          "resultType": "System.Private.CoreLib/System.Action\u003CSystem.Int32\u003E",
+          "callee": "System.Private.CoreLib/System.Action\u003CSystem.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Action\u003CSystem.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Action\u003CSystem.Int32\u003E",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 85,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__6_1",
+          "ilOffset": 86,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ParallelApisSubjects",
+            "subjectKind": "field",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__6_1"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ParallelApisSubjects",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__6_1",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Action\u003CSystem.Int32\u003E"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 91,
+          "resultType": "System.Threading.Tasks.ParallelLoopResult",
+          "callee": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32\u003E)",
+          "reference": {
+            "assemblyName": "System.Threading.Tasks.Parallel",
+            "subjectKind": "method",
+            "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32\u003E)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Threading.Tasks.Parallel",
+            "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action\u003CSystem.Int32\u003E)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 96,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 1,
+          "ilOffset": 97,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 105,
+          "resultType": "System.Int32",
+          "callee": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 1,
+          "constrainedTypeSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 110,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 112,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 113,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 115,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 116,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 125,
+          "ilOffset": 117,
+          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 43,
+          "ilOffset": 119,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1956,7 +3969,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "ParallelApisSubjects/ParallelApisSubjects::_exitCode",
-          "ilOffset": 44,
+          "ilOffset": 120,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "ParallelApisSubjects",
@@ -1982,29 +3995,64 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 57,
-          "ilOffset": 50,
+          "operand": 139,
+          "ilOffset": 126,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 52,
+          "ilOffset": 128,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 130,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ParallelApisSubjects/ParallelApisSubjects::_exitCode",
+          "ilOffset": 131,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ParallelApisSubjects",
+            "subjectKind": "field",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ParallelApisSubjects",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
           "isPreserveSig": false
         },
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 57,
-          "ilOffset": 55,
+          "operand": 139,
+          "ilOffset": 137,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 57,
+          "ilOffset": 139,
           "isPreserveSig": false
         }
       ],
@@ -3510,14 +5558,23 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 50,
+          "handlerOffset": 51,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
       "instructions": [
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 1,
+          "ilOffset": 2,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -3525,7 +5582,7 @@
           "op": "newarr",
           "opCode": 43,
           "operand": "System.Private.CoreLib/System.Action",
-          "ilOffset": 2,
+          "ilOffset": 3,
           "resultType": "System.Action[]",
           "reference": {
             "assemblyName": "System.Private.CoreLib",
@@ -3549,14 +5606,14 @@
         {
           "op": "dup",
           "opCode": 54,
-          "ilOffset": 7,
+          "ilOffset": 8,
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 8,
+          "ilOffset": 9,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -3564,7 +5621,7 @@
           "op": "ldsfld",
           "opCode": 12,
           "operand": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__42_0",
-          "ilOffset": 9,
+          "ilOffset": 10,
           "resultType": "System.Action",
           "reference": {
             "assemblyName": "ParallelApisSubjects",
@@ -3590,28 +5647,28 @@
         {
           "op": "dup",
           "opCode": 54,
-          "ilOffset": 14,
+          "ilOffset": 15,
           "isPreserveSig": false
         },
         {
           "op": "brtrue",
           "opCode": 18,
-          "operand": 40,
-          "ilOffset": 15,
+          "operand": 41,
+          "ilOffset": 16,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 17,
+          "ilOffset": 18,
           "isPreserveSig": false
         },
         {
           "op": "ldsfld",
           "opCode": 12,
           "operand": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
-          "ilOffset": 18,
+          "ilOffset": 19,
           "resultType": "ParallelApisSubjects\u002B\u003C\u003Ec",
           "reference": {
             "assemblyName": "ParallelApisSubjects",
@@ -3638,7 +5695,7 @@
           "op": "ldftn",
           "opCode": 73,
           "operand": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_41\u003Eb__42_0:System.Void()",
-          "ilOffset": 23,
+          "ilOffset": 24,
           "resultType": "System.IntPtr",
           "callee": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_41\u003Eb__42_0:System.Void()",
           "reference": {
@@ -3662,7 +5719,7 @@
         {
           "op": "newobj",
           "opCode": 34,
-          "ilOffset": 29,
+          "ilOffset": 30,
           "resultType": "System.Private.CoreLib/System.Action",
           "callee": "System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)",
           "reference": {
@@ -3687,14 +5744,14 @@
         {
           "op": "dup",
           "opCode": 54,
-          "ilOffset": 34,
+          "ilOffset": 35,
           "isPreserveSig": false
         },
         {
           "op": "stsfld",
           "opCode": 13,
           "operand": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__42_0",
-          "ilOffset": 35,
+          "ilOffset": 36,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "ParallelApisSubjects",
@@ -3720,7 +5777,7 @@
         {
           "op": "stelem.ref",
           "opCode": 45,
-          "ilOffset": 40,
+          "ilOffset": 41,
           "resultType": "System.Void",
           "runtimeServiceKind": 13,
           "isPreserveSig": false
@@ -3728,7 +5785,7 @@
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 41,
+          "ilOffset": 42,
           "resultType": "System.Void",
           "callee": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::Invoke:System.Void(System.Action[])",
           "reference": {
@@ -3751,9 +5808,66 @@
           "isPreserveSig": false
         },
         {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 62,
+          "ilOffset": 49,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 51,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 53,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ParallelApisSubjects/ParallelApisSubjects::_exitCode",
+          "ilOffset": 54,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ParallelApisSubjects",
+            "subjectKind": "field",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ParallelApisSubjects",
+            "subjectId": "ParallelApisSubjects/ParallelApisSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 62,
+          "ilOffset": 60,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 47,
+          "ilOffset": 62,
           "isPreserveSig": false
         }
       ],
@@ -4028,6 +6142,53 @@
       "declaringAssemblyName": "ParallelApisSubjects"
     },
     {
+      "methodId": "parallel-apis-subjects.parallel-apis-subjects-c.subject-0-b-1-1",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_0\u003Eb__1_1:System.Void(System.Int32)",
+      "signature": "System.Void ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_0\u003Eb__1_1(System.Int32)",
+      "identity": {
+        "assemblyName": "ParallelApisSubjects",
+        "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+        "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_0\u003Eb__1_1:System.Void(System.Int32)",
+        "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_0\u003Eb__1_1:System.Void(System.Int32)",
+        "methodId": "parallel-apis-subjects.parallel-apis-subjects-c.subject-0-b-1-1",
+        "signature": "System.Void ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_0\u003Eb__1_1(System.Int32)"
+      },
+      "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects___c_Subject_0_b__1_1_System_Int32",
+      "isStatic": false,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ParallelApisSubjects"
+    },
+    {
       "methodId": "parallel-apis-subjects.parallel-apis-subjects-c.subject-1-b-2-0",
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_1\u003Eb__2_0:System.Void(System.Int32)",
       "signature": "System.Void ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_1\u003Eb__2_0(System.Int32)",
@@ -4040,6 +6201,53 @@
         "signature": "System.Void ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_1\u003Eb__2_0(System.Int32)"
       },
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects___c_Subject_1_b__2_0_System_Int32",
+      "isStatic": false,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ParallelApisSubjects"
+    },
+    {
+      "methodId": "parallel-apis-subjects.parallel-apis-subjects-c.subject-1-b-2-1",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_1\u003Eb__2_1:System.Void(System.Int32)",
+      "signature": "System.Void ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_1\u003Eb__2_1(System.Int32)",
+      "identity": {
+        "assemblyName": "ParallelApisSubjects",
+        "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+        "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_1\u003Eb__2_1:System.Void(System.Int32)",
+        "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_1\u003Eb__2_1:System.Void(System.Int32)",
+        "methodId": "parallel-apis-subjects.parallel-apis-subjects-c.subject-1-b-2-1",
+        "signature": "System.Void ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_1\u003Eb__2_1(System.Int32)"
+      },
+      "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects___c_Subject_1_b__2_1_System_Int32",
       "isStatic": false,
       "returnType": "System.Void",
       "returnAbi": {
@@ -4122,6 +6330,53 @@
       "declaringAssemblyName": "ParallelApisSubjects"
     },
     {
+      "methodId": "parallel-apis-subjects.parallel-apis-subjects-c.subject-2-b-3-1",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_1:System.Void(System.Int32)",
+      "signature": "System.Void ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_1(System.Int32)",
+      "identity": {
+        "assemblyName": "ParallelApisSubjects",
+        "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+        "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_1:System.Void(System.Int32)",
+        "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_1:System.Void(System.Int32)",
+        "methodId": "parallel-apis-subjects.parallel-apis-subjects-c.subject-2-b-3-1",
+        "signature": "System.Void ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_1(System.Int32)"
+      },
+      "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects___c_Subject_2_b__3_1_System_Int32",
+      "isStatic": false,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ParallelApisSubjects"
+    },
+    {
       "methodId": "parallel-apis-subjects.parallel-apis-subjects-c.subject-3-b-4-0",
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_0:System.Void(System.Int32)",
       "signature": "System.Void ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_0(System.Int32)",
@@ -4134,6 +6389,53 @@
         "signature": "System.Void ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_0(System.Int32)"
       },
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects___c_Subject_3_b__4_0_System_Int32",
+      "isStatic": false,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ParallelApisSubjects"
+    },
+    {
+      "methodId": "parallel-apis-subjects.parallel-apis-subjects-c.subject-3-b-4-1",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_1:System.Void(System.Int32)",
+      "signature": "System.Void ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_1(System.Int32)",
+      "identity": {
+        "assemblyName": "ParallelApisSubjects",
+        "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+        "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_1:System.Void(System.Int32)",
+        "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_1:System.Void(System.Int32)",
+        "methodId": "parallel-apis-subjects.parallel-apis-subjects-c.subject-3-b-4-1",
+        "signature": "System.Void ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_1(System.Int32)"
+      },
+      "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects___c_Subject_3_b__4_1_System_Int32",
       "isStatic": false,
       "returnType": "System.Void",
       "returnAbi": {
@@ -4216,6 +6518,53 @@
       "declaringAssemblyName": "ParallelApisSubjects"
     },
     {
+      "methodId": "parallel-apis-subjects.parallel-apis-subjects-c.subject-4-b-5-1",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_1:System.Void(System.Int32)",
+      "signature": "System.Void ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_1(System.Int32)",
+      "identity": {
+        "assemblyName": "ParallelApisSubjects",
+        "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+        "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_1:System.Void(System.Int32)",
+        "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_1:System.Void(System.Int32)",
+        "methodId": "parallel-apis-subjects.parallel-apis-subjects-c.subject-4-b-5-1",
+        "signature": "System.Void ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_1(System.Int32)"
+      },
+      "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects___c_Subject_4_b__5_1_System_Int32",
+      "isStatic": false,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ParallelApisSubjects"
+    },
+    {
       "methodId": "parallel-apis-subjects.parallel-apis-subjects-c.subject-5-b-6-0",
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_0:System.Void(System.Int32)",
       "signature": "System.Void ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_0(System.Int32)",
@@ -4228,6 +6577,53 @@
         "signature": "System.Void ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_0(System.Int32)"
       },
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects___c_Subject_5_b__6_0_System_Int32",
+      "isStatic": false,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ParallelApisSubjects"
+    },
+    {
+      "methodId": "parallel-apis-subjects.parallel-apis-subjects-c.subject-5-b-6-1",
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_1:System.Void(System.Int32)",
+      "signature": "System.Void ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_1(System.Int32)",
+      "identity": {
+        "assemblyName": "ParallelApisSubjects",
+        "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+        "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_1:System.Void(System.Int32)",
+        "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_1:System.Void(System.Int32)",
+        "methodId": "parallel-apis-subjects.parallel-apis-subjects-c.subject-5-b-6-1",
+        "signature": "System.Void ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_1(System.Int32)"
+      },
+      "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects___c_Subject_5_b__6_1_System_Int32",
       "isStatic": false,
       "returnType": "System.Void",
       "returnAbi": {

@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "ComWrappersSubjects",
   "entrySubjectId": "ComWrappersSubjects/ComWrappersSubjects::Subject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Runtime.InteropServices/com-wrappers/codegen",
+  "managedClosureRootPath": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Runtime.InteropServices/com-wrappers/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

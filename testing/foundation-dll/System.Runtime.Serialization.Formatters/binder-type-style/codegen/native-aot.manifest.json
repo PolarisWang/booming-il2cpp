@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "BinderTypeStyleSubjects",
   "entrySubjectId": "BinderTypeStyleSubjects/BinderTypeStyleSubjects::Subject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Runtime.Serialization.Formatters/binder-type-style/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.Runtime.Serialization.Formatters/binder-type-style/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

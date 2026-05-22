@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Collections.Immutable",
+  "familyId": "family/System.Collections.Immutable/immutable/hash/set",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableHashSet::Create<Byte>:System.Collections.Immutable.ImmutableHashSet<System.Byte>()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.46,
+      "postPatchNsPerOp": 3.4,
+      "slowdownPercent": -1.73
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableHashSet::Create<Byte>:System.Collections.Immutable.ImmutableHashSet<System.Byte>(System.Byte)",
+      "status": "passed",
+      "prePatchNsPerOp": 3.44,
+      "postPatchNsPerOp": 3.4,
+      "slowdownPercent": -1.16
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableHashSet::Create<Byte>:System.Collections.Immutable.ImmutableHashSet<System.Byte>(System.Byte,System.Byte)",
+      "status": "passed",
+      "prePatchNsPerOp": 190.2,
+      "postPatchNsPerOp": 193.0,
+      "slowdownPercent": 1.47
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableHashSet::Create<Int32>:System.Collections.Immutable.ImmutableHashSet<System.Int32>()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.54,
+      "postPatchNsPerOp": 3.5,
+      "slowdownPercent": -1.13
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableHashSet::Create<Int32>:System.Collections.Immutable.ImmutableHashSet<System.Int32>(System.Int32)",
+      "status": "passed",
+      "prePatchNsPerOp": 3.5,
+      "postPatchNsPerOp": 3.5,
+      "slowdownPercent": 0.0
+    }
+  ],
+  "summary": {
+    "totalMethods": 5,
+    "nonStubMethods": 5,
+    "averageSlowdownPercent": -0.51,
+    "slowdownFactor": 0.9948999999999999,
+    "slowdownThresholdX": 50.0
+  }
+}

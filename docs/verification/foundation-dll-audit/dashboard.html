@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Foundation DLL Audit</title>
+  <link rel="stylesheet" href="./dashboard.css">
+</head>
+<body>
+  <main>
+    <div class="page-header">
+      <div class="eyebrow">Verification Program</div>
+      <h1>Foundation DLL Audit</h1>
+      <p>Unified view for `System.Private.CoreLib + 13 DLLs`, including DLL status, family detail, verification projects, and evidence entry points.</p>
+      <div class="top-nav">
+        <a href="./artifact-index.html">Artifact Index</a>
+      </div>
+      <div class="tab-bar">
+        <button class="tab-button active" data-tab="overview" onclick="switchTab('overview')">Overview</button>
+        <button class="tab-button" data-tab="matrix" onclick="switchTab('matrix')">Matrix</button>
+        <button class="tab-button" data-tab="families" onclick="switchTab('families')">Families</button>
+        <button class="tab-button" data-tab="gates" onclick="switchTab('gates')">Gates</button>
+      </div>
+    </div>
+    
+<div id="tab-overview" class="tab-content active">
+  <div class="summary-grid">
+    <div class="summary-card"><strong>DLL Count</strong>14</div>
+    <div class="summary-card"><strong>Completed</strong>0</div>
+    <div class="summary-card"><strong>In Progress</strong>1</div>
+    <div class="summary-card"><strong>Blocked</strong>0</div>
+    <div class="summary-card"><strong>Not Started</strong>13</div>
+    <div class="summary-card"><strong>Active Assembly</strong>System.Private.CoreLib</div>
+  </div>
+  <div class="progress-axis"><div class="progress-bar-container"><div class="progress-label"><span>DLL Completion</span><span>0/14 (0.0%)</span></div><div class="progress-bar"><div class="progress-bar-fill dll-completion" style="width: 0.0%"></div></div></div><div class="progress-bar-container"><div class="progress-label"><span>Capability Closure</span><span>0/139 (0.0%)</span></div><div class="progress-bar"><div class="progress-bar-fill capability-closure" style="width: 0.0%"></div></div></div><div class="progress-bar-container"><div class="progress-label"><span>Workflow Progress</span><span>0/0 (0.0%)</span></div><div class="progress-bar"><div class="progress-bar-fill workflow-progress" style="width: 0.0%"></div></div></div></div>
+  <section>
+    <h2>Program Overview</h2>
+    <p>Foundation DLL Translation Audit</p>
+    <div class="meta-grid">
+      <div class="meta-card"><strong>Roadmap</strong><a href="../../../docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md" target="_blank" rel="noreferrer">docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md</a></div>
+      <div class="meta-card"><strong>Design</strong>n/a</div>
+      <div class="meta-card"><strong>Status</strong><a href="../../../docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md" target="_blank" rel="noreferrer">docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md</a></div>
+      <div class="meta-card"><strong>Subject Entry</strong><a href="../../../subjects/SolutionCorePack/source/EngineeringScenarios/FoundationDllTranslationSolution/FoundationDllTranslationSolution.sln" target="_blank" rel="noreferrer">subjects/SolutionCorePack/source/EngineeringScenarios/FoundationDllTranslationSolution/FoundationDllTranslationSolution.sln</a></div>
+    </div>
+  </section>
+  <section>
+    <h2>DLL Detail</h2>
+    <div class="dll-card" id="system-private-corelib">
+  <div class="dll-card-header">
+    <div>
+      <h3>System.Private.CoreLib</h3>
+      <p>24 families all gates passed. Completion certification evidence generated. Remaining: full CoreLib coverage widening (54310 uncovered methods in supplemental skeleton).</p>
+    </div>
+    <div class="dll-card-links">
+      <span class="status status-in-progress">in-progress</span>
+      <a class="pill-link" href="./dlls/System.Private.CoreLib.html">Detail Page</a>
+      <a class="pill-link" href="./dlls/System.Private.CoreLib.json">JSON</a>
+    </div>
+  </div>
+  
+  
+  <div class="meta-grid">
+    <div class="meta-card"><strong>Current Project</strong>completion-certification</div>
+    <div class="meta-card"><strong>Closure</strong>0/47 families</div>
+    <div class="meta-card"><strong>Phase</strong>roadmap-closed</div>
+    <div class="meta-card"><strong>Evidence Count</strong>0</div>
+  </div>
+</div><div class="dll-card" id="system-collections-immutable">
+  <div class="dll-card-header">
+    <div>
+      <h3>System.Collections.Immutable</h3>
+      <p>n/a</p>
+    </div>
+    <div class="dll-card-links">
+      <span class="status status-not-started">not-started</span>
+      <a class="pill-link" href="./dlls/System.Collections.Immutable.html">Detail Page</a>
+      <a class="pill-link" href="./dlls/System.Collections.Immutable.json">JSON</a>
+    </div>
+  </div>
+  
+  
+  <div class="meta-grid">
+    <div class="meta-card"><strong>Current Project</strong>audit-input-and-ledger</div>
+    <div class="meta-card"><strong>Closure</strong>0/10 families</div>
+    <div class="meta-card"><strong>Phase</strong>roadmap-closed</div>
+    <div class="meta-card"><strong>Evidence Count</strong>0</div>
+  </div>
+</div><div class="dll-card" id="system-formats-asn1">
+  <div class="dll-card-header">
+    <div>
+      <h3>System.Formats.Asn1</h3>
+      <p>n/a</p>
+    </div>
+    <div class="dll-card-links">
+      <span class="status status-not-started">not-started</span>
+      <a class="pill-link" href="./dlls/System.Formats.Asn1.html">Detail Page</a>
+      <a class="pill-link" href="./dlls/System.Formats.Asn1.json">JSON</a>
+    </div>
+  </div>
+  
+  
+  <div class="meta-grid">
+    <div class="meta-card"><strong>Current Project</strong>audit-input-and-ledger</div>
+    <div class="meta-card"><strong>Closure</strong>0/6 families</div>
+    <div class="meta-card"><strong>Phase</strong>roadmap-closed</div>
+    <div class="meta-card"><strong>Evidence Count</strong>0</div>
+  </div>
+</div><div class="dll-card" id="system-io-compression-brotli">
+  <div class="dll-card-header">
+    <div>
+      <h3>System.IO.Compression.Brotli</h3>
+      <p>n/a</p>
+    </div>
+    <div class="dll-card-links">
+      <span class="status status-not-started">not-started</span>
+      <a class="pill-link" href="./dlls/System.IO.Compression.Brotli.html">Detail Page</a>
+      <a class="pill-link" href="./dlls/System.IO.Compression.Brotli.json">JSON</a>
+    </div>
+  </div>
+  
+  
+  <div class="meta-grid">
+    <div class="meta-card"><strong>Current Project</strong>audit-input-and-ledger</div>
+    <div class="meta-card"><strong>Closure</strong>0/4 families</div>
+    <div class="meta-card"><strong>Phase</strong>roadmap-closed</div>
+    <div class="meta-card"><strong>Evidence Count</strong>0</div>
+  </div>
+</div><div class="dll-card" id="system-io-compression-zipfile">
+  <div class="dll-card-header">
+    <div>
+      <h3>System.IO.Compression.ZipFile</h3>
+      <p>n/a</p>
+    </div>
+    <div class="dll-card-links">
+      <span class="status status-not-started">not-started</span>
+      <a class="pill-link" href="./dlls/System.IO.Compression.ZipFile.html">Detail Page</a>
+      <a class="pill-link" href="./dlls/System.IO.Compression.ZipFile.json">JSON</a>
+    </div>
+  </div>
+  
+  
+  <div class="meta-grid">
+    <div class="meta-card"><strong>Current Project</strong>audit-input-and-ledger</div>
+    <div class="meta-card"><strong>Closure</strong>0/2 families</div>
+    <div class="meta-card"><strong>Phase</strong>roadmap-closed</div>
+    <div class="meta-card"><strong>Evidence Count</strong>0</div>
+  </div>
+</div><div class="dll-card" id="system-io-pipelines">
+  <div class="dll-card-header">
+    <div>
+      <h3>System.IO.Pipelines</h3>
+      <p>n/a</p>
+    </div>
+    <div class="dll-card-links">
+      <span class="status status-not-started">not-started</span>
+      <a class="pill-link" href="./dlls/System.IO.Pipelines.html">Detail Page</a>
+      <a class="pill-link" href="./dlls/System.IO.Pipelines.json">JSON</a>
+    </div>
+  </div>
+  
+  
+  <div class="meta-grid">
+    <div class="meta-card"><strong>Current Project</strong>audit-input-and-ledger</div>
+    <div class="meta-card"><strong>Closure</strong>0/5 families</div>
+    <div class="meta-card"><strong>Phase</strong>roadmap-closed</div>
+    <div class="meta-card"><strong>Evidence Count</strong>0</div>
+  </div>
+</div><div class="dll-card" id="system-linq">
+  <div class="dll-card-header">
+    <div>
+      <h3>System.Linq</h3>
+      <p>n/a</p>
+    </div>
+    <div class="dll-card-links">
+      <span class="status status-not-started">not-started</span>
+      <a class="pill-link" href="./dlls/System.Linq.html">Detail Page</a>
+      <a class="pill-link" href="./dlls/System.Linq.json">JSON</a>
+    </div>
+  </div>
+  
+  
+  <div class="meta-grid">
+    <div class="meta-card"><strong>Current Project</strong>audit-input-and-ledger</div>
+    <div class="meta-card"><strong>Closure</strong>0/12 families</div>
+    <div class="meta-card"><strong>Phase</strong>roadmap-closed</div>
+    <div class="meta-card"><strong>Evidence Count</strong>0</div>
+  </div>
+</div><div class="dll-card" id="system-net-serversentevents">
+  <div class="dll-card-header">
+    <div>
+      <h3>System.Net.ServerSentEvents</h3>
+      <p>n/a</p>
+    </div>
+    <div class="dll-card-links">
+      <span class="status status-not-started">not-started</span>
+      <a class="pill-link" href="./dlls/System.Net.ServerSentEvents.html">Detail Page</a>
+      <a class="pill-link" href="./dlls/System.Net.ServerSentEvents.json">JSON</a>
+    </div>
+  </div>
+  
+  
+  <div class="meta-grid">
+    <div class="meta-card"><strong>Current Project</strong>audit-input-and-ledger</div>
+    <div class="meta-card"><strong>Closure</strong>0/4 families</div>
+    <div class="meta-card"><strong>Phase</strong>roadmap-closed</div>
+    <div class="meta-card"><strong>Evidence Count</strong>0</div>
+  </div>
+</div><div class="dll-card" id="system-objectmodel">
+  <div class="dll-card-header">
+    <div>
+      <h3>System.ObjectModel</h3>
+      <p>n/a</p>
+    </div>
+    <div class="dll-card-links">
+      <span class="status status-not-started">not-started</span>
+      <a class="pill-link" href="./dlls/System.ObjectModel.html">Detail Page</a>
+      <a class="pill-link" href="./dlls/System.ObjectModel.json">JSON</a>
+    </div>
+  </div>
+  
+  
+  <div class="meta-grid">
+    <div class="meta-card"><strong>Current Project</strong>audit-input-and-ledger</div>
+    <div class="meta-card"><strong>Closure</strong>0/6 families</div>
+    <div class="meta-card"><strong>Phase</strong>roadmap-closed</div>
+    <div class="meta-card"><strong>Evidence Count</strong>0</div>
+  </div>
+</div><div class="dll-card" id="system-runtime-interopservices">
+  <div class="dll-card-header">
+    <div>
+      <h3>System.Runtime.InteropServices</h3>
+      <p>n/a</p>
+    </div>
+    <div class="dll-card-links">
+      <span class="status status-not-started">not-started</span>
+      <a class="pill-link" href="./dlls/System.Runtime.InteropServices.html">Detail Page</a>
+      <a class="pill-link" href="./dlls/System.Runtime.InteropServices.json">JSON</a>
+    </div>
+  </div>
+  
+  
+  <div class="meta-grid">
+    <div class="meta-card"><strong>Current Project</strong>audit-input-and-ledger</div>
+    <div class="meta-card"><strong>Closure</strong>0/14 families</div>
+    <div class="meta-card"><strong>Phase</strong>roadmap-closed</div>
+    <div class="meta-card"><strong>Evidence Count</strong>0</div>
+  </div>
+</div><div class="dll-card" id="system-runtime-serialization-formatters">
+  <div class="dll-card-header">
+    <div>
+      <h3>System.Runtime.Serialization.Formatters</h3>
+      <p>n/a</p>
+    </div>
+    <div class="dll-card-links">
+      <span class="status status-not-started">not-started</span>
+      <a class="pill-link" href="./dlls/System.Runtime.Serialization.Formatters.html">Detail Page</a>
+      <a class="pill-link" href="./dlls/System.Runtime.Serialization.Formatters.json">JSON</a>
+    </div>
+  </div>
+  
+  
+  <div class="meta-grid">
+    <div class="meta-card"><strong>Current Project</strong>audit-input-and-ledger</div>
+    <div class="meta-card"><strong>Closure</strong>0/6 families</div>
+    <div class="meta-card"><strong>Phase</strong>roadmap-closed</div>
+    <div class="meta-card"><strong>Evidence Count</strong>0</div>
+  </div>
+</div><div class="dll-card" id="system-security-principal-windows">
+  <div class="dll-card-header">
+    <div>
+      <h3>System.Security.Principal.Windows</h3>
+      <p>n/a</p>
+    </div>
+    <div class="dll-card-links">
+      <span class="status status-not-started">not-started</span>
+      <a class="pill-link" href="./dlls/System.Security.Principal.Windows.html">Detail Page</a>
+      <a class="pill-link" href="./dlls/System.Security.Principal.Windows.json">JSON</a>
+    </div>
+  </div>
+  
+  
+  <div class="meta-grid">
+    <div class="meta-card"><strong>Current Project</strong>audit-input-and-ledger</div>
+    <div class="meta-card"><strong>Closure</strong>0/6 families</div>
+    <div class="meta-card"><strong>Phase</strong>roadmap-closed</div>
+    <div class="meta-card"><strong>Evidence Count</strong>0</div>
+  </div>
+</div><div class="dll-card" id="system-text-json">
+  <div class="dll-card-header">
+    <div>
+      <h3>System.Text.Json</h3>
+      <p>n/a</p>
+    </div>
+    <div class="dll-card-links">
+      <span class="status status-not-started">not-started</span>
+      <a class="pill-link" href="./dlls/System.Text.Json.html">Detail Page</a>
+      <a class="pill-link" href="./dlls/System.Text.Json.json">JSON</a>
+    </div>
+  </div>
+  
+  
+  <div class="meta-grid">
+    <div class="meta-card"><strong>Current Project</strong>audit-input-and-ledger</div>
+    <div class="meta-card"><strong>Closure</strong>0/13 families</div>
+    <div class="meta-card"><strong>Phase</strong>roadmap-closed</div>
+    <div class="meta-card"><strong>Evidence Count</strong>0</div>
+  </div>
+</div><div class="dll-card" id="system-threading-tasks-parallel">
+  <div class="dll-card-header">
+    <div>
+      <h3>System.Threading.Tasks.Parallel</h3>
+      <p>n/a</p>
+    </div>
+    <div class="dll-card-links">
+      <span class="status status-not-started">not-started</span>
+      <a class="pill-link" href="./dlls/System.Threading.Tasks.Parallel.html">Detail Page</a>
+      <a class="pill-link" href="./dlls/System.Threading.Tasks.Parallel.json">JSON</a>
+    </div>
+  </div>
+  
+  
+  <div class="meta-grid">
+    <div class="meta-card"><strong>Current Project</strong>audit-input-and-ledger</div>
+    <div class="meta-card"><strong>Closure</strong>0/4 families</div>
+    <div class="meta-card"><strong>Phase</strong>roadmap-closed</div>
+    <div class="meta-card"><strong>Evidence Count</strong>0</div>
+  </div>
+</div>
+  </section>
+</div>
+
+    
+<div id="tab-matrix" class="tab-content">
+  <section>
+    <h2>DLL Matrix</h2>
+    <p>Full verification matrix for all DLLs. Click a row to expand details. Cell colors indicate gate state: green=passed, blue=in-progress, red=blocked, gray=pending, light gray=not-required, orange=missing-evidence.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>assemblyName</th><th>dllState</th><th>currentProject</th><th>denominatorStatus</th><th>capabilityClosure</th><th>workflowProgress</th><th>audit-input-and-ledger</th><th>managed-proof</th><th>native-proof</th><th>hotupdate-proof</th><th>benchmark</th><th>codegen-review</th><th>completion-certification</th></tr></thead>
+        <tbody><tr class="matrix-row-expandable" onclick="toggleRow(this)"><td><a href="./dlls/System.Private.CoreLib.html">System.Private.CoreLib</a></td><td class="heatmap-cell-in-progress">in-progress</td><td class="">completion-certification</td><td class="">audit-confirmed</td><td><span class="mini-bar" title="0/47"><span class="mini-fill low" style="width: 0.0%"></span></span> <span class="mini-label">0/47</span></td><td><span class="mini-bar"><span class="mini-fill" style="width:0%"></span></span> <span class="mini-label">0/0</span></td><td class="heatmap-cell-in-progress">in-progress</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-in-progress">in-progress</td></tr>
+<tr class="matrix-row-detail"><td colspan="13"><div style="display:flex;gap:20px;flex-wrap:wrap"><div><strong>Current Project:</strong> completion-certification</div><div><strong>Risk Tags:</strong> none</div><div><strong>Denominator:</strong> audit-confirmed</div></div></td></tr>
+<tr class="matrix-row-expandable" onclick="toggleRow(this)"><td><a href="./dlls/System.Collections.Immutable.html">System.Collections.Immutable</a></td><td class="heatmap-cell-pending">not-started</td><td class="">audit-input-and-ledger</td><td class="">audit-confirmed</td><td><span class="mini-bar" title="0/10"><span class="mini-fill low" style="width: 0.0%"></span></span> <span class="mini-label">0/10</span></td><td><span class="mini-bar"><span class="mini-fill" style="width:0%"></span></span> <span class="mini-label">0/0</span></td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td></tr>
+<tr class="matrix-row-detail"><td colspan="13"><div style="display:flex;gap:20px;flex-wrap:wrap"><div><strong>Current Project:</strong> audit-input-and-ledger</div><div><strong>Risk Tags:</strong> none</div><div><strong>Denominator:</strong> audit-confirmed</div></div></td></tr>
+<tr class="matrix-row-expandable" onclick="toggleRow(this)"><td><a href="./dlls/System.Formats.Asn1.html">System.Formats.Asn1</a></td><td class="heatmap-cell-pending">not-started</td><td class="">audit-input-and-ledger</td><td class="">audit-confirmed</td><td><span class="mini-bar" title="0/6"><span class="mini-fill low" style="width: 0.0%"></span></span> <span class="mini-label">0/6</span></td><td><span class="mini-bar"><span class="mini-fill" style="width:0%"></span></span> <span class="mini-label">0/0</span></td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td></tr>
+<tr class="matrix-row-detail"><td colspan="13"><div style="display:flex;gap:20px;flex-wrap:wrap"><div><strong>Current Project:</strong> audit-input-and-ledger</div><div><strong>Risk Tags:</strong> none</div><div><strong>Denominator:</strong> audit-confirmed</div></div></td></tr>
+<tr class="matrix-row-expandable" onclick="toggleRow(this)"><td><a href="./dlls/System.IO.Compression.Brotli.html">System.IO.Compression.Brotli</a></td><td class="heatmap-cell-pending">not-started</td><td class="">audit-input-and-ledger</td><td class="">audit-confirmed</td><td><span class="mini-bar" title="0/4"><span class="mini-fill low" style="width: 0.0%"></span></span> <span class="mini-label">0/4</span></td><td><span class="mini-bar"><span class="mini-fill" style="width:0%"></span></span> <span class="mini-label">0/0</span></td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td></tr>
+<tr class="matrix-row-detail"><td colspan="13"><div style="display:flex;gap:20px;flex-wrap:wrap"><div><strong>Current Project:</strong> audit-input-and-ledger</div><div><strong>Risk Tags:</strong> none</div><div><strong>Denominator:</strong> audit-confirmed</div></div></td></tr>
+<tr class="matrix-row-expandable" onclick="toggleRow(this)"><td><a href="./dlls/System.IO.Compression.ZipFile.html">System.IO.Compression.ZipFile</a></td><td class="heatmap-cell-pending">not-started</td><td class="">audit-input-and-ledger</td><td class="">audit-confirmed</td><td><span class="mini-bar" title="0/2"><span class="mini-fill low" style="width: 0.0%"></span></span> <span class="mini-label">0/2</span></td><td><span class="mini-bar"><span class="mini-fill" style="width:0%"></span></span> <span class="mini-label">0/0</span></td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td></tr>
+<tr class="matrix-row-detail"><td colspan="13"><div style="display:flex;gap:20px;flex-wrap:wrap"><div><strong>Current Project:</strong> audit-input-and-ledger</div><div><strong>Risk Tags:</strong> none</div><div><strong>Denominator:</strong> audit-confirmed</div></div></td></tr>
+<tr class="matrix-row-expandable" onclick="toggleRow(this)"><td><a href="./dlls/System.IO.Pipelines.html">System.IO.Pipelines</a></td><td class="heatmap-cell-pending">not-started</td><td class="">audit-input-and-ledger</td><td class="">audit-confirmed</td><td><span class="mini-bar" title="0/5"><span class="mini-fill low" style="width: 0.0%"></span></span> <span class="mini-label">0/5</span></td><td><span class="mini-bar"><span class="mini-fill" style="width:0%"></span></span> <span class="mini-label">0/0</span></td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td></tr>
+<tr class="matrix-row-detail"><td colspan="13"><div style="display:flex;gap:20px;flex-wrap:wrap"><div><strong>Current Project:</strong> audit-input-and-ledger</div><div><strong>Risk Tags:</strong> none</div><div><strong>Denominator:</strong> audit-confirmed</div></div></td></tr>
+<tr class="matrix-row-expandable" onclick="toggleRow(this)"><td><a href="./dlls/System.Linq.html">System.Linq</a></td><td class="heatmap-cell-pending">not-started</td><td class="">audit-input-and-ledger</td><td class="">audit-confirmed</td><td><span class="mini-bar" title="0/12"><span class="mini-fill low" style="width: 0.0%"></span></span> <span class="mini-label">0/12</span></td><td><span class="mini-bar"><span class="mini-fill" style="width:0%"></span></span> <span class="mini-label">0/0</span></td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td></tr>
+<tr class="matrix-row-detail"><td colspan="13"><div style="display:flex;gap:20px;flex-wrap:wrap"><div><strong>Current Project:</strong> audit-input-and-ledger</div><div><strong>Risk Tags:</strong> none</div><div><strong>Denominator:</strong> audit-confirmed</div></div></td></tr>
+<tr class="matrix-row-expandable" onclick="toggleRow(this)"><td><a href="./dlls/System.Net.ServerSentEvents.html">System.Net.ServerSentEvents</a></td><td class="heatmap-cell-pending">not-started</td><td class="">audit-input-and-ledger</td><td class="">audit-confirmed</td><td><span class="mini-bar" title="0/4"><span class="mini-fill low" style="width: 0.0%"></span></span> <span class="mini-label">0/4</span></td><td><span class="mini-bar"><span class="mini-fill" style="width:0%"></span></span> <span class="mini-label">0/0</span></td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td></tr>
+<tr class="matrix-row-detail"><td colspan="13"><div style="display:flex;gap:20px;flex-wrap:wrap"><div><strong>Current Project:</strong> audit-input-and-ledger</div><div><strong>Risk Tags:</strong> none</div><div><strong>Denominator:</strong> audit-confirmed</div></div></td></tr>
+<tr class="matrix-row-expandable" onclick="toggleRow(this)"><td><a href="./dlls/System.ObjectModel.html">System.ObjectModel</a></td><td class="heatmap-cell-pending">not-started</td><td class="">audit-input-and-ledger</td><td class="">audit-confirmed</td><td><span class="mini-bar" title="0/6"><span class="mini-fill low" style="width: 0.0%"></span></span> <span class="mini-label">0/6</span></td><td><span class="mini-bar"><span class="mini-fill" style="width:0%"></span></span> <span class="mini-label">0/0</span></td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td></tr>
+<tr class="matrix-row-detail"><td colspan="13"><div style="display:flex;gap:20px;flex-wrap:wrap"><div><strong>Current Project:</strong> audit-input-and-ledger</div><div><strong>Risk Tags:</strong> none</div><div><strong>Denominator:</strong> audit-confirmed</div></div></td></tr>
+<tr class="matrix-row-expandable" onclick="toggleRow(this)"><td><a href="./dlls/System.Runtime.InteropServices.html">System.Runtime.InteropServices</a></td><td class="heatmap-cell-pending">not-started</td><td class="">audit-input-and-ledger</td><td class="">audit-confirmed</td><td><span class="mini-bar" title="0/14"><span class="mini-fill low" style="width: 0.0%"></span></span> <span class="mini-label">0/14</span></td><td><span class="mini-bar"><span class="mini-fill" style="width:0%"></span></span> <span class="mini-label">0/0</span></td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td></tr>
+<tr class="matrix-row-detail"><td colspan="13"><div style="display:flex;gap:20px;flex-wrap:wrap"><div><strong>Current Project:</strong> audit-input-and-ledger</div><div><strong>Risk Tags:</strong> none</div><div><strong>Denominator:</strong> audit-confirmed</div></div></td></tr>
+<tr class="matrix-row-expandable" onclick="toggleRow(this)"><td><a href="./dlls/System.Runtime.Serialization.Formatters.html">System.Runtime.Serialization.Formatters</a></td><td class="heatmap-cell-pending">not-started</td><td class="">audit-input-and-ledger</td><td class="">audit-confirmed</td><td><span class="mini-bar" title="0/6"><span class="mini-fill low" style="width: 0.0%"></span></span> <span class="mini-label">0/6</span></td><td><span class="mini-bar"><span class="mini-fill" style="width:0%"></span></span> <span class="mini-label">0/0</span></td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td></tr>
+<tr class="matrix-row-detail"><td colspan="13"><div style="display:flex;gap:20px;flex-wrap:wrap"><div><strong>Current Project:</strong> audit-input-and-ledger</div><div><strong>Risk Tags:</strong> none</div><div><strong>Denominator:</strong> audit-confirmed</div></div></td></tr>
+<tr class="matrix-row-expandable" onclick="toggleRow(this)"><td><a href="./dlls/System.Security.Principal.Windows.html">System.Security.Principal.Windows</a></td><td class="heatmap-cell-pending">not-started</td><td class="">audit-input-and-ledger</td><td class="">audit-confirmed</td><td><span class="mini-bar" title="0/6"><span class="mini-fill low" style="width: 0.0%"></span></span> <span class="mini-label">0/6</span></td><td><span class="mini-bar"><span class="mini-fill" style="width:0%"></span></span> <span class="mini-label">0/0</span></td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td></tr>
+<tr class="matrix-row-detail"><td colspan="13"><div style="display:flex;gap:20px;flex-wrap:wrap"><div><strong>Current Project:</strong> audit-input-and-ledger</div><div><strong>Risk Tags:</strong> none</div><div><strong>Denominator:</strong> audit-confirmed</div></div></td></tr>
+<tr class="matrix-row-expandable" onclick="toggleRow(this)"><td><a href="./dlls/System.Text.Json.html">System.Text.Json</a></td><td class="heatmap-cell-pending">not-started</td><td class="">audit-input-and-ledger</td><td class="">audit-confirmed</td><td><span class="mini-bar" title="0/13"><span class="mini-fill low" style="width: 0.0%"></span></span> <span class="mini-label">0/13</span></td><td><span class="mini-bar"><span class="mini-fill" style="width:0%"></span></span> <span class="mini-label">0/0</span></td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td></tr>
+<tr class="matrix-row-detail"><td colspan="13"><div style="display:flex;gap:20px;flex-wrap:wrap"><div><strong>Current Project:</strong> audit-input-and-ledger</div><div><strong>Risk Tags:</strong> none</div><div><strong>Denominator:</strong> audit-confirmed</div></div></td></tr>
+<tr class="matrix-row-expandable" onclick="toggleRow(this)"><td><a href="./dlls/System.Threading.Tasks.Parallel.html">System.Threading.Tasks.Parallel</a></td><td class="heatmap-cell-pending">not-started</td><td class="">audit-input-and-ledger</td><td class="">audit-confirmed</td><td><span class="mini-bar" title="0/4"><span class="mini-fill low" style="width: 0.0%"></span></span> <span class="mini-label">0/4</span></td><td><span class="mini-bar"><span class="mini-fill" style="width:0%"></span></span> <span class="mini-label">0/0</span></td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td><td class="heatmap-cell-pending">pending</td></tr>
+<tr class="matrix-row-detail"><td colspan="13"><div style="display:flex;gap:20px;flex-wrap:wrap"><div><strong>Current Project:</strong> audit-input-and-ledger</div><div><strong>Risk Tags:</strong> none</div><div><strong>Denominator:</strong> audit-confirmed</div></div></td></tr>
+</tbody>
+      </table>
+    </div>
+  </section>
+</div>
+
+    
+<div id="tab-families" class="tab-content">
+  <section>
+    <h2>Families Overview</h2>
+    <p>Per-DLL capability family closure status. Each card shows the closure distribution for one assembly's families.</p>
+    <div class="family-summary-grid">
+      
+<div class="family-summary-card" style="border-left:4px solid var(--accent);background:var(--accent-soft)">
+  <strong>All DLLs Combined</strong>
+  <div>Total Families: 139</div>
+  <div>Closed: 0 (0.0%) | In Progress: 139 | Waived: 0</div>
+  <div class="progress-bar" style="margin-top:8px;height:12px"><div class="progress-bar-fill capability-closure" style="width:0.0%;height:100%"></div></div>
+</div>
+      
+<div class="family-summary-card">
+  <strong>System.Private.CoreLib</strong>
+  <div>Total Families: 47</div>
+  <div>Closed: 0 (0.0%)</div>
+  <div>In Progress: 47 | Blocked: 0</div>
+  <div>Waived: 0 | Excluded: 0</div>
+  <div class="progress-bar" style="margin-top:8px;height:8px"><div class="progress-bar-fill capability-closure" style="width:0.0%;height:100%"></div></div>
+</div>
+<div class="family-summary-card">
+  <strong>System.Collections.Immutable</strong>
+  <div>Total Families: 10</div>
+  <div>Closed: 0 (0.0%)</div>
+  <div>In Progress: 10 | Blocked: 0</div>
+  <div>Waived: 0 | Excluded: 0</div>
+  <div class="progress-bar" style="margin-top:8px;height:8px"><div class="progress-bar-fill capability-closure" style="width:0.0%;height:100%"></div></div>
+</div>
+<div class="family-summary-card">
+  <strong>System.Formats.Asn1</strong>
+  <div>Total Families: 6</div>
+  <div>Closed: 0 (0.0%)</div>
+  <div>In Progress: 6 | Blocked: 0</div>
+  <div>Waived: 0 | Excluded: 0</div>
+  <div class="progress-bar" style="margin-top:8px;height:8px"><div class="progress-bar-fill capability-closure" style="width:0.0%;height:100%"></div></div>
+</div>
+<div class="family-summary-card">
+  <strong>System.IO.Compression.Brotli</strong>
+  <div>Total Families: 4</div>
+  <div>Closed: 0 (0.0%)</div>
+  <div>In Progress: 4 | Blocked: 0</div>
+  <div>Waived: 0 | Excluded: 0</div>
+  <div class="progress-bar" style="margin-top:8px;height:8px"><div class="progress-bar-fill capability-closure" style="width:0.0%;height:100%"></div></div>
+</div>
+<div class="family-summary-card">
+  <strong>System.IO.Compression.ZipFile</strong>
+  <div>Total Families: 2</div>
+  <div>Closed: 0 (0.0%)</div>
+  <div>In Progress: 2 | Blocked: 0</div>
+  <div>Waived: 0 | Excluded: 0</div>
+  <div class="progress-bar" style="margin-top:8px;height:8px"><div class="progress-bar-fill capability-closure" style="width:0.0%;height:100%"></div></div>
+</div>
+<div class="family-summary-card">
+  <strong>System.IO.Pipelines</strong>
+  <div>Total Families: 5</div>
+  <div>Closed: 0 (0.0%)</div>
+  <div>In Progress: 5 | Blocked: 0</div>
+  <div>Waived: 0 | Excluded: 0</div>
+  <div class="progress-bar" style="margin-top:8px;height:8px"><div class="progress-bar-fill capability-closure" style="width:0.0%;height:100%"></div></div>
+</div>
+<div class="family-summary-card">
+  <strong>System.Linq</strong>
+  <div>Total Families: 12</div>
+  <div>Closed: 0 (0.0%)</div>
+  <div>In Progress: 12 | Blocked: 0</div>
+  <div>Waived: 0 | Excluded: 0</div>
+  <div class="progress-bar" style="margin-top:8px;height:8px"><div class="progress-bar-fill capability-closure" style="width:0.0%;height:100%"></div></div>
+</div>
+<div class="family-summary-card">
+  <strong>System.Net.ServerSentEvents</strong>
+  <div>Total Families: 4</div>
+  <div>Closed: 0 (0.0%)</div>
+  <div>In Progress: 4 | Blocked: 0</div>
+  <div>Waived: 0 | Excluded: 0</div>
+  <div class="progress-bar" style="margin-top:8px;height:8px"><div class="progress-bar-fill capability-closure" style="width:0.0%;height:100%"></div></div>
+</div>
+<div class="family-summary-card">
+  <strong>System.ObjectModel</strong>
+  <div>Total Families: 6</div>
+  <div>Closed: 0 (0.0%)</div>
+  <div>In Progress: 6 | Blocked: 0</div>
+  <div>Waived: 0 | Excluded: 0</div>
+  <div class="progress-bar" style="margin-top:8px;height:8px"><div class="progress-bar-fill capability-closure" style="width:0.0%;height:100%"></div></div>
+</div>
+<div class="family-summary-card">
+  <strong>System.Runtime.InteropServices</strong>
+  <div>Total Families: 14</div>
+  <div>Closed: 0 (0.0%)</div>
+  <div>In Progress: 14 | Blocked: 0</div>
+  <div>Waived: 0 | Excluded: 0</div>
+  <div class="progress-bar" style="margin-top:8px;height:8px"><div class="progress-bar-fill capability-closure" style="width:0.0%;height:100%"></div></div>
+</div>
+<div class="family-summary-card">
+  <strong>System.Runtime.Serialization.Formatters</strong>
+  <div>Total Families: 6</div>
+  <div>Closed: 0 (0.0%)</div>
+  <div>In Progress: 6 | Blocked: 0</div>
+  <div>Waived: 0 | Excluded: 0</div>
+  <div class="progress-bar" style="margin-top:8px;height:8px"><div class="progress-bar-fill capability-closure" style="width:0.0%;height:100%"></div></div>
+</div>
+<div class="family-summary-card">
+  <strong>System.Security.Principal.Windows</strong>
+  <div>Total Families: 6</div>
+  <div>Closed: 0 (0.0%)</div>
+  <div>In Progress: 6 | Blocked: 0</div>
+  <div>Waived: 0 | Excluded: 0</div>
+  <div class="progress-bar" style="margin-top:8px;height:8px"><div class="progress-bar-fill capability-closure" style="width:0.0%;height:100%"></div></div>
+</div>
+<div class="family-summary-card">
+  <strong>System.Text.Json</strong>
+  <div>Total Families: 13</div>
+  <div>Closed: 0 (0.0%)</div>
+  <div>In Progress: 13 | Blocked: 0</div>
+  <div>Waived: 0 | Excluded: 0</div>
+  <div class="progress-bar" style="margin-top:8px;height:8px"><div class="progress-bar-fill capability-closure" style="width:0.0%;height:100%"></div></div>
+</div>
+<div class="family-summary-card">
+  <strong>System.Threading.Tasks.Parallel</strong>
+  <div>Total Families: 4</div>
+  <div>Closed: 0 (0.0%)</div>
+  <div>In Progress: 4 | Blocked: 0</div>
+  <div>Waived: 0 | Excluded: 0</div>
+  <div class="progress-bar" style="margin-top:8px;height:8px"><div class="progress-bar-fill capability-closure" style="width:0.0%;height:100%"></div></div>
+</div>
+    </div>
+  </section>
+</div>
+
+    
+<div id="tab-gates" class="tab-content">
+  <section>
+    <h2>Gates Progress</h2>
+    <p>Per-gate global progress across all DLLs and families. Shows how many gate evaluations have passed versus total required.</p>
+    <div class="gate-progress-grid">
+      
+<div class="gate-progress-card">
+  <h4>Audit Input</h4>
+  <div>Passed: 0/0 (0%)</div>
+  <div>Blocked: 0 | Pending: 0</div>
+  <div class="progress-bar" style="margin-top:8px;height:8px"><div class="progress-bar-fill workflow-progress" style="width:0%;height:100%"></div></div>
+</div>
+<div class="gate-progress-card">
+  <h4>Benchmark</h4>
+  <div>Passed: 0/0 (0%)</div>
+  <div>Blocked: 0 | Pending: 0</div>
+  <div class="progress-bar" style="margin-top:8px;height:8px"><div class="progress-bar-fill workflow-progress" style="width:0%;height:100%"></div></div>
+</div>
+<div class="gate-progress-card">
+  <h4>CodeGen Review</h4>
+  <div>Passed: 0/0 (0%)</div>
+  <div>Blocked: 0 | Pending: 0</div>
+  <div class="progress-bar" style="margin-top:8px;height:8px"><div class="progress-bar-fill workflow-progress" style="width:0%;height:100%"></div></div>
+</div>
+<div class="gate-progress-card">
+  <h4>HotUpdate</h4>
+  <div>Passed: 0/0 (0%)</div>
+  <div>Blocked: 0 | Pending: 0</div>
+  <div class="progress-bar" style="margin-top:8px;height:8px"><div class="progress-bar-fill workflow-progress" style="width:0%;height:100%"></div></div>
+</div>
+<div class="gate-progress-card">
+  <h4>Managed Proof</h4>
+  <div>Passed: 0/0 (0%)</div>
+  <div>Blocked: 0 | Pending: 0</div>
+  <div class="progress-bar" style="margin-top:8px;height:8px"><div class="progress-bar-fill workflow-progress" style="width:0%;height:100%"></div></div>
+</div>
+<div class="gate-progress-card">
+  <h4>Native Correct</h4>
+  <div>Passed: 0/0 (0%)</div>
+  <div>Blocked: 0 | Pending: 0</div>
+  <div class="progress-bar" style="margin-top:8px;height:8px"><div class="progress-bar-fill workflow-progress" style="width:0%;height:100%"></div></div>
+</div>
+<div class="gate-progress-card">
+  <h4>Native Proof (CodeGen)</h4>
+  <div>Passed: 0/0 (0%)</div>
+  <div>Blocked: 0 | Pending: 0</div>
+  <div class="progress-bar" style="margin-top:8px;height:8px"><div class="progress-bar-fill workflow-progress" style="width:0%;height:100%"></div></div>
+</div>
+<div class="gate-progress-card">
+  <h4>Test Code</h4>
+  <div>Passed: 0/0 (0%)</div>
+  <div>Blocked: 0 | Pending: 0</div>
+  <div class="progress-bar" style="margin-top:8px;height:8px"><div class="progress-bar-fill workflow-progress" style="width:0%;height:100%"></div></div>
+</div>
+    </div>
+  </section>
+</div>
+
+  </main>
+  <script>
+// Tab switching
+function switchTab(tabName) {
+  var contents = document.querySelectorAll('.tab-content');
+  for (var i = 0; i < contents.length; i++) { contents[i].classList.remove('active'); }
+  var buttons = document.querySelectorAll('.tab-button');
+  for (var i = 0; i < buttons.length; i++) { buttons[i].classList.remove('active'); }
+  var target = document.getElementById('tab-' + tabName);
+  if (target) { target.classList.add('active'); }
+  var btn = document.querySelector('.tab-button[data-tab="' + tabName + '"]');
+  if (btn) { btn.classList.add('active'); }
+  window.location.hash = tabName;
+}
+document.addEventListener('DOMContentLoaded', function() {
+  var hash = window.location.hash.replace('#', '');
+  if (hash) {
+    var btn = document.querySelector('.tab-button[data-tab="' + hash + '"]');
+    if (btn) switchTab(hash);
+  }
+});
+// Expandable rows
+function toggleRow(btn) {
+  var row = btn.closest('tr');
+  var detail = row.nextElementSibling;
+  if (detail && detail.classList.contains('matrix-row-detail')) {
+    row.classList.toggle('expanded');
+    detail.classList.toggle('expanded');
+  }
+}
+// Native proof tooltips
+(function() {
+  var triggers = document.querySelectorAll('.native-proof-trigger');
+  for (var i = 0; i < triggers.length; i++) {
+    var trigger = triggers[i];
+    var delayMs = Number(trigger.dataset.tooltipDelayMs || '500');
+    var hideTimer = null;
+    var clearHide = function() {
+      if (hideTimer !== null) { window.clearTimeout(hideTimer); hideTimer = null; }
+    };
+    var show = function() { clearHide(); trigger.classList.add('is-visible'); };
+    var hide = function() {
+      clearHide();
+      hideTimer = window.setTimeout(function() {
+        trigger.classList.remove('is-visible');
+        hideTimer = null;
+      }, delayMs);
+    };
+    trigger.addEventListener('pointerenter', show);
+    trigger.addEventListener('pointerleave', hide);
+    trigger.addEventListener('focusin', show);
+    trigger.addEventListener('focusout', function(event) {
+      if (trigger.contains(event.relatedTarget)) { return; }
+      hide();
+    });
+  }
+})();
+</script>
+</body>
+</html>

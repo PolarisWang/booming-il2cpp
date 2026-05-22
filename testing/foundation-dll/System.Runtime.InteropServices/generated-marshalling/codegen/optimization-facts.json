@@ -361,9 +361,45 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_19:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_19:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.GeneratedComInterfaceAttribute::get_ExceptionToUnmanagedMarshaller:System.Type()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_19:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_20:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.GeneratedComInterfaceAttribute::get_Options:System.Runtime.InteropServices.Marshalling.ComInterfaceOptions()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_20:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_20:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.GeneratedComInterfaceAttribute::get_Options:System.Runtime.InteropServices.Marshalling.ComInterfaceOptions()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_20:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
     },
     {
@@ -373,9 +409,45 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_21:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_21:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.GeneratedComInterfaceAttribute::get_StringMarshalling:StringMarshalling()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_21:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_22:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.GeneratedComInterfaceAttribute::get_StringMarshallingCustomType:System.Type()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_22:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_22:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.GeneratedComInterfaceAttribute::get_StringMarshallingCustomType:System.Type()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_22:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
     },
     {
@@ -415,15 +487,69 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_65:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_65:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.CustomMarshallerAttribute::get_ManagedType:System.Type()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_65:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_66:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.CustomMarshallerAttribute::get_MarshallerType:System.Type()",
       "devirtualized": false
     },
     {
+      "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_66:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_66:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.CustomMarshallerAttribute::get_MarshallerType:System.Type()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_66:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_67:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.CustomMarshallerAttribute::get_MarshalMode:System.Runtime.InteropServices.Marshalling.MarshalMode()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_67:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_67:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.CustomMarshallerAttribute::get_MarshalMode:System.Runtime.InteropServices.Marshalling.MarshalMode()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_67:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
     }
   ],
@@ -437,64 +563,89 @@
   ],
   "exceptionFacts": [
     {
+      "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_17:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_18:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
       "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_19:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_20:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_21:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_22:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_23:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_24:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_25:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_26:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_27:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_30:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_57:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_65:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_66:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_67:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_68:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     }
   ]
 }

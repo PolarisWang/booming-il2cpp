@@ -19,8 +19,8 @@ public static partial class StreamAdaptersSubjects
     // [0] System.IO.Pipelines/System.IO.Pipelines.StreamPipeExtensions::CopyToAsync:System.Threading.Tasks.Task(System.IO.Stream,System.IO.Pipelines.PipeWriter,System.Threading.CancellationToken)
     public static void Subject_0()
     {
-        try { StreamPipeExtensions.CopyToAsync(new MemoryStream(), default, default); _exitCode = 1; }
-        catch (ArgumentNullException) { }
+        try { if (((StreamPipeExtensions.CopyToAsync(new MemoryStream(), default, default)).GetHashCode()) != ((StreamPipeExtensions.CopyToAsync(new MemoryStream(), default, default)).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
 }

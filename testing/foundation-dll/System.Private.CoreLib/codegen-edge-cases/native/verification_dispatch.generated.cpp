@@ -1,5 +1,5 @@
 // verification_dispatch.generated.cpp — auto-generated
-// Assembly: CodegenEdgeCasesSubjects, Methods: 6
+// Assembly: CodegenEdgeCasesSubjects, Methods: 4
 #include <cstdint>
 #include <chrono>
 #include <chaos/native_types.h>

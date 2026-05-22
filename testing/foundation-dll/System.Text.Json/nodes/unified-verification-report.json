@@ -1,0 +1,373 @@
+{
+  "family": "nodes",
+  "assembly": "System.Text.Json",
+  "mode": "standard",
+  "timestamp": "2026-05-22T07:45:37",
+  "duration_ms": 39297,
+  "overall_status": "passed",
+  "stages": {
+    "preflight": {
+      "stage": "preflight",
+      "status": "passed",
+      "summary": "174 methods, 174 custom entries",
+      "details": {
+        "methodCount": 174,
+        "customMethodCount": 174,
+        "hasCustomEntryFile": false,
+        "customMethods": [
+          "System.Text.Json/System.Text.Json.Nodes.JsonArray::Add{T}:System.Void(T)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonArray::Add:System.Void(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonArray::Clear:System.Void()",
+          "System.Text.Json/System.Text.Json.Nodes.JsonArray::Contains:System.Boolean(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonArray::Create:System.Text.Json.Nodes.JsonArray(System.Text.Json.JsonElement,System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonArray::get_Count:System.Int32()",
+          "System.Text.Json/System.Text.Json.Nodes.JsonArray::GetEnumerator:System.Collections.Generic.IEnumerator{System.Text.Json.Nodes.JsonNode}()",
+          "System.Text.Json/System.Text.Json.Nodes.JsonArray::GetValues{T}:System.Collections.Generic.IEnumerable{T}()",
+          "System.Text.Json/System.Text.Json.Nodes.JsonArray::IndexOf:System.Int32(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonArray::Insert:System.Void(System.Int32,System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonArray::Remove:System.Boolean(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonArray::RemoveAll:System.Int32(System.Func{System.Text.Json.Nodes.JsonNode,System.Boolean})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonArray::RemoveAt:System.Void(System.Int32)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonArray::RemoveRange:System.Void(System.Int32,System.Int32)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonArray::WriteTo:System.Void(System.Text.Json.Utf8JsonWriter,System.Text.Json.JsonSerializerOptions)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonArray::.ctor:System.Void(System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonArray::.ctor:System.Void(System.Text.Json.Nodes.JsonNodeOptions,System.Text.Json.Nodes.JsonNode{})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonArray::.ctor:System.Void(System.Text.Json.Nodes.JsonNodeOptions,System.ReadOnlySpan{System.Text.Json.Nodes.JsonNode})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonArray::.ctor:System.Void(System.Text.Json.Nodes.JsonNode{})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonArray::.ctor:System.Void(System.ReadOnlySpan{System.Text.Json.Nodes.JsonNode})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::AsArray:System.Text.Json.Nodes.JsonArray()",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::AsObject:System.Text.Json.Nodes.JsonObject()",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::AsValue:System.Text.Json.Nodes.JsonValue()",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::DeepClone:System.Text.Json.Nodes.JsonNode()",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::DeepEquals:System.Boolean(System.Text.Json.Nodes.JsonNode,System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::get_Item:System.Text.Json.Nodes.JsonNode(System.Int32)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::get_Item:System.Text.Json.Nodes.JsonNode(System.String)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::get_Options:System.Nullable{System.Text.Json.Nodes.JsonNodeOptions}()",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::get_Parent:System.Text.Json.Nodes.JsonNode()",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::get_Root:System.Text.Json.Nodes.JsonNode()",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::GetElementIndex:System.Int32()",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::GetPath:System.String()",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::GetPropertyName:System.String()",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::GetValue{T}:T()",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::GetValueKind:System.Text.Json.JsonValueKind()",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Explicit:System.Boolean(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Explicit:System.Nullable{System.Boolean}(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Explicit:System.Byte(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Explicit:System.Nullable{System.Byte}(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Explicit:System.Char(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Explicit:System.Nullable{System.Char}(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Explicit:System.DateTime(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Explicit:System.Nullable{System.DateTime}(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Explicit:System.DateTimeOffset(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Explicit:System.Nullable{System.DateTimeOffset}(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Explicit:System.Decimal(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Explicit:System.Nullable{System.Decimal}(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Explicit:System.Double(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Explicit:System.Nullable{System.Double}(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Explicit:System.Guid(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Explicit:System.Nullable{System.Guid}(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Explicit:System.Int16(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Explicit:System.Nullable{System.Int16}(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Explicit:System.Int32(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Explicit:System.Nullable{System.Int32}(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Explicit:System.Int64(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Explicit:System.Nullable{System.Int64}(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Explicit:System.SByte(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Explicit:System.Nullable{System.SByte}(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Explicit:System.Single(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Explicit:System.Nullable{System.Single}(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Explicit:System.String(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Explicit:System.UInt16(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Explicit:System.Nullable{System.UInt16}(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Explicit:System.UInt32(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Explicit:System.Nullable{System.UInt32}(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Explicit:System.UInt64(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Explicit:System.Nullable{System.UInt64}(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Implicit:System.Text.Json.Nodes.JsonNode(System.Boolean)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Implicit:System.Text.Json.Nodes.JsonNode(System.Nullable{System.Boolean})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Implicit:System.Text.Json.Nodes.JsonNode(System.Byte)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Implicit:System.Text.Json.Nodes.JsonNode(System.Nullable{System.Byte})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Implicit:System.Text.Json.Nodes.JsonNode(System.Char)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Implicit:System.Text.Json.Nodes.JsonNode(System.Nullable{System.Char})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Implicit:System.Text.Json.Nodes.JsonNode(System.DateTime)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Implicit:System.Text.Json.Nodes.JsonNode(System.Nullable{System.DateTime})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Implicit:System.Text.Json.Nodes.JsonNode(System.DateTimeOffset)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Implicit:System.Text.Json.Nodes.JsonNode(System.Nullable{System.DateTimeOffset})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Implicit:System.Text.Json.Nodes.JsonNode(System.Decimal)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Implicit:System.Text.Json.Nodes.JsonNode(System.Nullable{System.Decimal})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Implicit:System.Text.Json.Nodes.JsonNode(System.Double)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Implicit:System.Text.Json.Nodes.JsonNode(System.Nullable{System.Double})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Implicit:System.Text.Json.Nodes.JsonNode(System.Guid)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Implicit:System.Text.Json.Nodes.JsonNode(System.Nullable{System.Guid})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Implicit:System.Text.Json.Nodes.JsonNode(System.Int16)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Implicit:System.Text.Json.Nodes.JsonNode(System.Nullable{System.Int16})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Implicit:System.Text.Json.Nodes.JsonNode(System.Int32)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Implicit:System.Text.Json.Nodes.JsonNode(System.Nullable{System.Int32})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Implicit:System.Text.Json.Nodes.JsonNode(System.Int64)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Implicit:System.Text.Json.Nodes.JsonNode(System.Nullable{System.Int64})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Implicit:System.Text.Json.Nodes.JsonNode(System.SByte)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Implicit:System.Text.Json.Nodes.JsonNode(System.Nullable{System.SByte})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Implicit:System.Text.Json.Nodes.JsonNode(System.Single)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Implicit:System.Text.Json.Nodes.JsonNode(System.Nullable{System.Single})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Implicit:System.Text.Json.Nodes.JsonNode(System.String)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Implicit:System.Text.Json.Nodes.JsonNode(System.UInt16)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Implicit:System.Text.Json.Nodes.JsonNode(System.Nullable{System.UInt16})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Implicit:System.Text.Json.Nodes.JsonNode(System.UInt32)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Implicit:System.Text.Json.Nodes.JsonNode(System.Nullable{System.UInt32})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Implicit:System.Text.Json.Nodes.JsonNode(System.UInt64)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::op_Implicit:System.Text.Json.Nodes.JsonNode(System.Nullable{System.UInt64})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::Parse:System.Text.Json.Nodes.JsonNode(System.Text.Json.Utf8JsonReader&,System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::Parse:System.Text.Json.Nodes.JsonNode(System.String,System.Nullable{System.Text.Json.Nodes.JsonNodeOptions},System.Text.Json.JsonDocumentOptions)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::Parse:System.Text.Json.Nodes.JsonNode(System.ReadOnlySpan{System.Byte},System.Nullable{System.Text.Json.Nodes.JsonNodeOptions},System.Text.Json.JsonDocumentOptions)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::Parse:System.Text.Json.Nodes.JsonNode(System.IO.Stream,System.Nullable{System.Text.Json.Nodes.JsonNodeOptions},System.Text.Json.JsonDocumentOptions)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::ParseAsync:System.Threading.Tasks.Task{System.Text.Json.Nodes.JsonNode}(System.IO.Stream,System.Nullable{System.Text.Json.Nodes.JsonNodeOptions},System.Text.Json.JsonDocumentOptions,System.Threading.CancellationToken)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::ReplaceWith{T}:System.Void(T)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::set_Item:System.Void(System.Int32,System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::set_Item:System.Void(System.String,System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::ToJsonString:System.String(System.Text.Json.JsonSerializerOptions)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::ToString:System.String()",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::WriteTo:System.Void(System.Text.Json.Utf8JsonWriter,System.Text.Json.JsonSerializerOptions)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::set_Parent:System.Void(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::get_Item:System.Text.Json.Nodes.JsonNode()",
+          "System.Text.Json/System.Text.Json.Nodes.JsonNode::set_Item:System.Void(System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonObject::Add:System.Void(System.String,System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonObject::Add:System.Void(System.Collections.Generic.KeyValuePair{System.String,System.Text.Json.Nodes.JsonNode})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonObject::Clear:System.Void()",
+          "System.Text.Json/System.Text.Json.Nodes.JsonObject::ContainsKey:System.Boolean(System.String)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonObject::Create:System.Text.Json.Nodes.JsonObject(System.Text.Json.JsonElement,System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonObject::get_Count:System.Int32()",
+          "System.Text.Json/System.Text.Json.Nodes.JsonObject::GetAt:System.Collections.Generic.KeyValuePair{System.String,System.Text.Json.Nodes.JsonNode}(System.Int32)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonObject::GetEnumerator:System.Collections.Generic.IEnumerator{System.Collections.Generic.KeyValuePair{System.String,System.Text.Json.Nodes.JsonNode}}()",
+          "System.Text.Json/System.Text.Json.Nodes.JsonObject::IndexOf:System.Int32(System.String)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonObject::Insert:System.Void(System.Int32,System.String,System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonObject::Remove:System.Boolean(System.String)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonObject::RemoveAt:System.Void(System.Int32)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonObject::SetAt:System.Void(System.Int32,System.String,System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonObject::SetAt:System.Void(System.Int32,System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonObject::TryAdd:System.Boolean(System.String,System.Text.Json.Nodes.JsonNode)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonObject::TryAdd:System.Boolean(System.String,System.Text.Json.Nodes.JsonNode,System.Int32&)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonObject::TryGetPropertyValue:System.Boolean(System.String,System.Text.Json.Nodes.JsonNode&)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonObject::TryGetPropertyValue:System.Boolean(System.String,System.Text.Json.Nodes.JsonNode&,System.Int32&)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonObject::WriteTo:System.Void(System.Text.Json.Utf8JsonWriter,System.Text.Json.JsonSerializerOptions)",
+          "System.Text.Json/System.Text.Json.Nodes.JsonObject::.ctor:System.Void(System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonObject::.ctor:System.Void(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.Text.Json.Nodes.JsonNode}},System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::Create:System.Text.Json.Nodes.JsonValue(System.Boolean,System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::Create:System.Text.Json.Nodes.JsonValue(System.Nullable{System.Boolean},System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::Create:System.Text.Json.Nodes.JsonValue(System.Byte,System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::Create:System.Text.Json.Nodes.JsonValue(System.Nullable{System.Byte},System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::Create:System.Text.Json.Nodes.JsonValue(System.Char,System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::Create:System.Text.Json.Nodes.JsonValue(System.Nullable{System.Char},System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::Create:System.Text.Json.Nodes.JsonValue(System.DateTime,System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::Create:System.Text.Json.Nodes.JsonValue(System.Nullable{System.DateTime},System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::Create:System.Text.Json.Nodes.JsonValue(System.DateTimeOffset,System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::Create:System.Text.Json.Nodes.JsonValue(System.Nullable{System.DateTimeOffset},System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::Create:System.Text.Json.Nodes.JsonValue(System.Decimal,System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::Create:System.Text.Json.Nodes.JsonValue(System.Nullable{System.Decimal},System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::Create:System.Text.Json.Nodes.JsonValue(System.Double,System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::Create:System.Text.Json.Nodes.JsonValue(System.Nullable{System.Double},System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::Create:System.Text.Json.Nodes.JsonValue(System.Guid,System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::Create:System.Text.Json.Nodes.JsonValue(System.Nullable{System.Guid},System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::Create:System.Text.Json.Nodes.JsonValue(System.Int16,System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::Create:System.Text.Json.Nodes.JsonValue(System.Nullable{System.Int16},System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::Create:System.Text.Json.Nodes.JsonValue(System.Int32,System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::Create:System.Text.Json.Nodes.JsonValue(System.Nullable{System.Int32},System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::Create:System.Text.Json.Nodes.JsonValue(System.Int64,System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::Create:System.Text.Json.Nodes.JsonValue(System.Nullable{System.Int64},System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::Create:System.Text.Json.Nodes.JsonValue(System.SByte,System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::Create:System.Text.Json.Nodes.JsonValue(System.Nullable{System.SByte},System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::Create:System.Text.Json.Nodes.JsonValue(System.Single,System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::Create:System.Text.Json.Nodes.JsonValue(System.Nullable{System.Single},System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::Create:System.Text.Json.Nodes.JsonValue(System.String,System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::Create:System.Text.Json.Nodes.JsonValue(System.UInt16,System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::Create:System.Text.Json.Nodes.JsonValue(System.Nullable{System.UInt16},System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::Create:System.Text.Json.Nodes.JsonValue(System.UInt32,System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::Create:System.Text.Json.Nodes.JsonValue(System.Nullable{System.UInt32},System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::Create:System.Text.Json.Nodes.JsonValue(System.UInt64,System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::Create:System.Text.Json.Nodes.JsonValue(System.Nullable{System.UInt64},System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::Create:System.Text.Json.Nodes.JsonValue(System.Text.Json.JsonElement,System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::Create:System.Text.Json.Nodes.JsonValue(System.Nullable{System.Text.Json.JsonElement},System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::Create{T}:System.Text.Json.Nodes.JsonValue(T,System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::Create{T}:System.Text.Json.Nodes.JsonValue(T,System.Text.Json.Serialization.Metadata.JsonTypeInfo{T},System.Nullable{System.Text.Json.Nodes.JsonNodeOptions})",
+          "System.Text.Json/System.Text.Json.Nodes.JsonValue::TryGetValue{T}:System.Boolean(T&)"
+        ]
+      },
+      "errors": [],
+      "duration_ms": 1
+    },
+    "codegen": {
+      "stage": "codegen",
+      "status": "passed",
+      "summary": "Entrypoint built and IL2CPP compile OK",
+      "details": {
+        "methodCount": 174,
+        "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Text.Json\\nodes\\managed\\subjects\\build-output\\NodesSubjects.dll"
+      },
+      "errors": [],
+      "duration_ms": 36277
+    },
+    "jit_codegen": {
+      "stage": "jit_codegen",
+      "status": "passed",
+      "summary": "entry-jit.exe already exists, skipping rebuild",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "fact": {
+      "stage": "fact",
+      "status": "passed",
+      "summary": "Fact verify=passed (174/174)",
+      "details": {
+        "fact": {
+          "status": "passed",
+          "passed": 174,
+          "total": 174
+        }
+      },
+      "errors": [],
+      "duration_ms": 39
+    },
+    "fact_jit": {
+      "stage": "fact_jit",
+      "status": "passed",
+      "summary": "Fact JIT verify=passed (174/174)",
+      "details": {
+        "fact_jit": {
+          "status": "passed",
+          "passed": 174,
+          "total": 174,
+          "exit_code": 0
+        }
+      },
+      "errors": [],
+      "duration_ms": 38
+    },
+    "audit": {
+      "stage": "audit",
+      "status": "passed",
+      "summary": "false_passing=0, principle=CONCERN",
+      "details": {
+        "falsePassing": 0,
+        "stubsFound": 0,
+        "skipsFound": 9,
+        "principleStatus": "CONCERN",
+        "methodsWithoutLowering": 0
+      },
+      "errors": [],
+      "duration_ms": 2829
+    },
+    "asm_compare": {
+      "stage": "asm_compare",
+      "status": "skipped",
+      "summary": "Subjects DLL not found — run codegen stage first",
+      "details": {},
+      "errors": [],
+      "duration_ms": 34
+    },
+    "microbench": {
+      "stage": "microbench",
+      "status": "passed",
+      "summary": "FramePool=2.7ns/op | FastExecute=2.2ns/op | CallVirt dispatch=2.1ns",
+      "details": {
+        "framePool": {
+          "acquireReleaseNsPerOp": 2.7,
+          "batchCount": 1000,
+          "framesPerBatch": 32
+        },
+        "fastExecute": {
+          "runCount": 100000,
+          "nsPerCall": 2.2
+        },
+        "callVirt": {
+          "handlerDispatchNs": 2.1,
+          "emptyStackNs": 2.3
+        },
+        "poolSize": 32
+      },
+      "errors": [],
+      "duration_ms": 30
+    },
+    "benchmark": {
+      "stage": "benchmark",
+      "status": "skipped",
+      "summary": "All methods are stubs — no benchmark possible",
+      "details": {},
+      "errors": [],
+      "duration_ms": 3
+    },
+    "hotupdate": {
+      "stage": "hotupdate",
+      "status": "skipped",
+      "summary": "All methods are stubs — no hotupdate possible",
+      "details": {},
+      "errors": [],
+      "duration_ms": 1
+    },
+    "hotupdate_aot_benchmark": {
+      "stage": "hotupdate_aot_benchmark",
+      "status": "skipped",
+      "summary": "All methods are stubs — no benchmark possible",
+      "details": {},
+      "errors": [],
+      "duration_ms": 1
+    },
+    "hotupdate_jit_fact": {
+      "stage": "hotupdate_jit_fact",
+      "status": "passed",
+      "summary": "174/174 passed, 0 failed",
+      "details": {
+        "passed": 174,
+        "failed": 0,
+        "total": 174
+      },
+      "errors": [],
+      "duration_ms": 35
+    },
+    "hotupdate_jit_benchmark": {
+      "stage": "hotupdate_jit_benchmark",
+      "status": "skipped",
+      "summary": "All methods are stubs — no benchmark possible",
+      "details": {},
+      "errors": [],
+      "duration_ms": 1
+    }
+  },
+  "coverage": {
+    "methodCoverage": 100.0,
+    "testedRate": 94.83,
+    "overall": 97.41
+  },
+  "dashboard": {
+    "interpreter": {
+      "fastFramePoolNsPerOp": 2.7,
+      "fastExecuteNsPerInstr": 0,
+      "callVirtHandlerDispatchNs": 2.1,
+      "callVirtMicHitNs": 0,
+      "callVirtRawFallbackNs": 0,
+      "poolSize": 32
+    },
+    "irTranslation": {},
+    "performance": {},
+    "hotupdate": {
+      "jitFunctional": {
+        "passedMethods": 174,
+        "failedMethods": 0,
+        "totalMethods": 174
+      }
+    },
+    "keyRatios": {
+      "nativeFasterRatio": 0,
+      "irExpansionRatio": 0,
+      "interpreterSlowdownFactor": 0,
+      "asmPassRate": 0.0
+    }
+  },
+  "regression": {
+    "benchmark": {
+      "status": "skipped",
+      "message": "No benchmark report found"
+    },
+    "hasRegression": false,
+    "regressions": []
+  }
+}

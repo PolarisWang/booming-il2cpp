@@ -52,6 +52,11 @@ inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_String = {{nullptr, nul
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Type = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, nullptr, 3222174513575444759ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Type = static_cast<CHAOS_IL2CPP_INTPTR>(3222174513575444759ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_DayOfWeek = {{nullptr, nullptr, 2017024780185438178ULL, 0u, 32, 2, 0}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_DayOfWeek = static_cast<CHAOS_IL2CPP_INTPTR>(2017024780185438178ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Byte = {{nullptr, nullptr, 3217969471912086765ULL, 0u, 32, 2, 0}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_boxed_type_id_System_Private_CoreLib_System_Byte = static_cast<CHAOS_IL2CPP_INTPTR>(3217969471912086765ULL);
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_boxed_type_id_System_Private_CoreLib_System_DayOfWeek = static_cast<CHAOS_IL2CPP_INTPTR>(2017024780185438178ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Int32 = {{nullptr, nullptr, 11009693519287992193ULL, 0u, 32, 2, 0}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_boxed_type_id_System_Private_CoreLib_System_Int32 = static_cast<CHAOS_IL2CPP_INTPTR>(11009693519287992193ULL);
 
@@ -154,6 +159,26 @@ struct chaos_type_System_Private_CoreLib_System_Type : public chaos_type_System_
 	CHAOS_IL2CPP_INTPTR runtime_type_handle = 0;
 	CHAOS_IL2CPP_INTPTR runtime_name_value = 0;
 	CHAOS_IL2CPP_INT32 runtime_metadata_token_value = 0;
+};
+
+struct chaos_valuetype_System_Private_CoreLib_System_DayOfWeek
+{
+	CHAOS_IL2CPP_INTPTR _backing = 0;
+	chaos_valuetype_System_Private_CoreLib_System_DayOfWeek() = default;
+	// cppcheck-suppress noExplicitConstructor
+	chaos_valuetype_System_Private_CoreLib_System_DayOfWeek(CHAOS_IL2CPP_INTPTR v) noexcept : _backing(v) {}
+};
+
+struct chaos_boxed_type_System_Private_CoreLib_System_Byte
+{
+	PureTypeHeader header{};
+	CHAOS_IL2CPP_INTPTR value = 0;
+};
+
+struct chaos_boxed_type_System_Private_CoreLib_System_DayOfWeek
+{
+	PureTypeHeader header{};
+	chaos_valuetype_System_Private_CoreLib_System_DayOfWeek value{};
 };
 
 struct chaos_boxed_type_System_Private_CoreLib_System_Int32
@@ -385,37 +410,35 @@ CHAOS_IL2CPP_INTPTR chaos_reflection_resolve_method_handle(CHAOS_IL2CPP_INTPTR c
 
 	switch (chaos_type_handle)
 	{
-		case static_cast<CHAOS_IL2CPP_INTPTR>(39506858u):
-			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, ".ctor") == 0)
-			{
-				return static_cast<CHAOS_IL2CPP_INTPTR>(112817288u);
-			}
-
-			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "Main") == 0)
-			{
-				return static_cast<CHAOS_IL2CPP_INTPTR>(115406629u);
-			}
-
-			break;
 		case static_cast<CHAOS_IL2CPP_INTPTR>(40218264u):
+			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "CustomEntrySubject_10") == 0)
+			{
+				return static_cast<CHAOS_IL2CPP_INTPTR>(116893819u);
+			}
+
+			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "CustomEntrySubject_11") == 0)
+			{
+				return static_cast<CHAOS_IL2CPP_INTPTR>(108618060u);
+			}
+
 			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "CustomEntrySubject_12") == 0)
 			{
 				return static_cast<CHAOS_IL2CPP_INTPTR>(103466469u);
 			}
 
+			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "CustomEntrySubject_6") == 0)
+			{
+				return static_cast<CHAOS_IL2CPP_INTPTR>(113914080u);
+			}
+
+			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "CustomEntrySubject_7") == 0)
+			{
+				return static_cast<CHAOS_IL2CPP_INTPTR>(103835759u);
+			}
+
 			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "Subject_0") == 0)
 			{
 				return static_cast<CHAOS_IL2CPP_INTPTR>(100913489u);
-			}
-
-			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "Subject_10") == 0)
-			{
-				return static_cast<CHAOS_IL2CPP_INTPTR>(114009146u);
-			}
-
-			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "Subject_11") == 0)
-			{
-				return static_cast<CHAOS_IL2CPP_INTPTR>(103443889u);
 			}
 
 			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "Subject_1") == 0)
@@ -441,16 +464,6 @@ CHAOS_IL2CPP_INTPTR chaos_reflection_resolve_method_handle(CHAOS_IL2CPP_INTPTR c
 			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "Subject_5") == 0)
 			{
 				return static_cast<CHAOS_IL2CPP_INTPTR>(106713982u);
-			}
-
-			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "Subject_6") == 0)
-			{
-				return static_cast<CHAOS_IL2CPP_INTPTR>(101247403u);
-			}
-
-			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "Subject_7") == 0)
-			{
-				return static_cast<CHAOS_IL2CPP_INTPTR>(105940028u);
 			}
 
 			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "Subject_8") == 0)
@@ -578,7 +591,9 @@ CHAOS_IL2CPP_INT32 chaos_static_EnumParsingSubjects_EnumParsingSubjects___exitCo
 
 	// AOT-baked string table: sorted by StringId for binary search at runtime.
 	constexpr chaos::il2cpp::string_table::StringEntry chaos_aot_string_entries[] = {
+		{ 114449842370127641U, "monday", 6u },
 		{ 2607821981565500683U, "hello", 5u },
+		{ 3414848149049712519U, "G", 1u },
 		{ 3414877835863674215U, "X", 1u },
 		{ 7637945102111706361U, "Monday", 6u },
 	};
@@ -644,9 +659,9 @@ static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_O
 	return ChaosObjectGetHashCode(chaos_fn_arg_0);
 }
 
-static void chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Object__ToString_System_String__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
-	ChaosObjectCtor(chaos_fn_arg_0);
+	return ChaosObjectToString(chaos_fn_arg_0);
 }
 
 static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(CHAOS_IL2CPP_INTPTR chaos_arg_0)
@@ -689,15 +704,13 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_2(void);
 extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_3(void);
 extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_4(void);
 extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_5(void);
-extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_6(void);
-extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_7(void);
+extern "C" void EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_6(void);
+extern "C" void EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_7(void);
 extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_8(void);
 extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_9(void);
-extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_10(void);
-extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_11(void);
+extern "C" void EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_10(void);
+extern "C" void EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_11(void);
 extern "C" void EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_12(void);
-extern "C" void EnumParsingSubjects_AutoGeneratedProgram__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void EnumParsingSubjects_AutoGeneratedProgram_Main_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 
 
 // Forward declaration for module.image (defined in Step 3 below)
@@ -711,7 +724,7 @@ extern "C" const int kAotMethodCount;
 // so CHAOS_ABI_MANIFEST_ENTRIES/CHAOS_ABI_MANIFEST_PARAMETERS find them by offset.
 
 // Param offset prefix-sum: [i] = cumulative parameter count before method i
-static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[16] = {
+static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[14] = {
 	0u,
 	0u,
 	0u,
@@ -726,20 +739,18 @@ static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[16] = {
 	0u,
 	0u,
 	0u,
-	0u,
-	1u,
 };
 
 static constexpr struct {
 	::ChaosAbiManifestV0 header;
-	::ChaosAbiMethodEntryV0 entries[15];
+	::ChaosAbiMethodEntryV0 entries[13];
 	CHAOS_IL2CPP_UINT8 params[1];
 } s_abi_manifest_storage = {
 	{
 		CHAOS_ABI_MANIFEST_VERSION,
-		15u,
-		1u,
-		1654918200u,  // FNV-1a over entries+params
+		13u,
+		0u,
+		1400052141u,  // FNV-1a over entries+params
 		s_abi_manifest_prefix_sum  // O(1) prefix-sum
 	},
 	{
@@ -749,63 +760,53 @@ static constexpr struct {
 		{ 0u, 0u },  // EnumParsingSubjects_EnumParsingSubjects_Subject_3
 		{ 0u, 0u },  // EnumParsingSubjects_EnumParsingSubjects_Subject_4
 		{ 0u, 0u },  // EnumParsingSubjects_EnumParsingSubjects_Subject_5
-		{ 0u, 0u },  // EnumParsingSubjects_EnumParsingSubjects_Subject_6
-		{ 0u, 0u },  // EnumParsingSubjects_EnumParsingSubjects_Subject_7
+		{ 0u, 0u },  // EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_6
+		{ 0u, 0u },  // EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_7
 		{ 0u, 0u },  // EnumParsingSubjects_EnumParsingSubjects_Subject_8
 		{ 0u, 0u },  // EnumParsingSubjects_EnumParsingSubjects_Subject_9
-		{ 0u, 0u },  // EnumParsingSubjects_EnumParsingSubjects_Subject_10
-		{ 0u, 0u },  // EnumParsingSubjects_EnumParsingSubjects_Subject_11
+		{ 0u, 0u },  // EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_10
+		{ 0u, 0u },  // EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_11
 		{ 0u, 0u },  // EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_12
-		{ 0u, 0u },  // EnumParsingSubjects_AutoGeneratedProgram__ctor
-		{ 0u, 1u },  // EnumParsingSubjects_AutoGeneratedProgram_Main_System_String
 	},
 	{
-		2u,
 	},
 };
 static const ::ChaosAbiManifestV0* const s_abi_manifest =
 	reinterpret_cast<const ::ChaosAbiManifestV0*>(&s_abi_manifest_storage);
 // ── Module registration ──
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_type_flags[3] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_type_flags[2] = {
 		0u,
 		1548u,
-		0u,
 	};
 
-	static constexpr const char* s_type_names[3] = {
+	static constexpr const char* s_type_names[2] = {
 		"<Module>",
 		"EnumParsingSubjects",
-		"AutoGeneratedProgram",
 	};
 
-	static constexpr const char* s_type_namespaces[3] = {
-		"",
+	static constexpr const char* s_type_namespaces[2] = {
 		"",
 		"",
 	};
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_type_parent_tokens[3] = {
-		0u,
+	static constexpr CHAOS_IL2CPP_UINT32 s_type_parent_tokens[2] = {
 		0u,
 		0u,
 	};
 
-	static const TypeInfoHot* const s_type_info_ptrs[3] = {
+	static const TypeInfoHot* const s_type_info_ptrs[2] = {
 		nullptr,
 		&chaos_mt_EnumParsingSubjects_EnumParsingSubjects.hot,
-		nullptr,
 	};
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_offset[4] = {
-		0u,
+	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_offset[3] = {
 		0u,
 		0u,
 		0u,
 	};
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_generic_param_constraint_offset[4] = {
-		0u,
+	static constexpr CHAOS_IL2CPP_UINT32 s_generic_param_constraint_offset[3] = {
 		0u,
 		0u,
 		0u,
@@ -825,7 +826,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		/* .nested_type_offset = */ s_nested_type_offset,
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
-		/* .type_count        = */ 3u,
+		/* .type_count        = */ 2u,
 	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
@@ -837,79 +838,72 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		::chaos::il2cpp::runtime_core::RegisterModule("EnumParsingSubjects", &s_native_aot_module);
 // ── Hotpatch name index + dispatch table ────────────────────
 // Method name index entries
-static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[15] = {
-	{ ".ctor", 0x00000012u, 0u },  // AutoGeneratedProgram
-	{ "Main", 0x00000011u, 1u },  // AutoGeneratedProgram
-	{ "Subject_0", 0x00000004u, 0u },  // EnumParsingSubjects
-	{ "Subject_1", 0x00000005u, 0u },  // EnumParsingSubjects
-	{ "Subject_2", 0x00000006u, 0u },  // EnumParsingSubjects
-	{ "Subject_3", 0x00000007u, 0u },  // EnumParsingSubjects
-	{ "Subject_4", 0x00000008u, 0u },  // EnumParsingSubjects
-	{ "Subject_5", 0x00000009u, 0u },  // EnumParsingSubjects
-	{ "Subject_6", 0x0000000Au, 0u },  // EnumParsingSubjects
-	{ "Subject_7", 0x0000000Bu, 0u },  // EnumParsingSubjects
-	{ "Subject_8", 0x0000000Cu, 0u },  // EnumParsingSubjects
-	{ "Subject_9", 0x0000000Du, 0u },  // EnumParsingSubjects
-	{ "Subject_10", 0x0000000Eu, 0u },  // EnumParsingSubjects
-	{ "Subject_11", 0x0000000Fu, 0u },  // EnumParsingSubjects
-	{ "CustomEntrySubject_12", 0x00000010u, 0u },  // EnumParsingSubjects
+static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[13] = {
+	{ "Subject_0", 0x00000003u, 0u },  // EnumParsingSubjects
+	{ "Subject_1", 0x00000004u, 0u },  // EnumParsingSubjects
+	{ "Subject_2", 0x00000005u, 0u },  // EnumParsingSubjects
+	{ "Subject_3", 0x00000006u, 0u },  // EnumParsingSubjects
+	{ "Subject_4", 0x00000007u, 0u },  // EnumParsingSubjects
+	{ "Subject_5", 0x00000008u, 0u },  // EnumParsingSubjects
+	{ "CustomEntrySubject_6", 0x0000000Bu, 0u },  // EnumParsingSubjects
+	{ "CustomEntrySubject_7", 0x0000000Cu, 0u },  // EnumParsingSubjects
+	{ "Subject_8", 0x00000009u, 0u },  // EnumParsingSubjects
+	{ "Subject_9", 0x0000000Au, 0u },  // EnumParsingSubjects
+	{ "CustomEntrySubject_10", 0x0000000Du, 0u },  // EnumParsingSubjects
+	{ "CustomEntrySubject_11", 0x0000000Eu, 0u },  // EnumParsingSubjects
+	{ "CustomEntrySubject_12", 0x0000000Fu, 0u },  // EnumParsingSubjects
 };
 
 // Type name index entries (namespace, short_name)
-static constexpr HotpatchTypeEntryV0 s_hotpatch_types[2] = {
-	{ "AutoGeneratedProgram", "", 0u, 2u },
-	{ "EnumParsingSubjects", "", 2u, 13u },
+static constexpr HotpatchTypeEntryV0 s_hotpatch_types[1] = {
+	{ "EnumParsingSubjects", "", 0u, 13u },
 };
 
 // Token→Slot mapping (sorted by token for binary search)
-static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[15] = {
-	{ 0x00000004u, 0u },
-	{ 0x00000005u, 1u },
-	{ 0x00000006u, 2u },
-	{ 0x00000007u, 3u },
-	{ 0x00000008u, 4u },
-	{ 0x00000009u, 5u },
-	{ 0x0000000Au, 6u },
-	{ 0x0000000Bu, 7u },
-	{ 0x0000000Cu, 8u },
-	{ 0x0000000Du, 9u },
-	{ 0x0000000Eu, 10u },
-	{ 0x0000000Fu, 11u },
-	{ 0x00000010u, 12u },
-	{ 0x00000011u, 14u },
-	{ 0x00000012u, 13u },
+static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[13] = {
+	{ 0x00000003u, 0u },
+	{ 0x00000004u, 1u },
+	{ 0x00000005u, 2u },
+	{ 0x00000006u, 3u },
+	{ 0x00000007u, 4u },
+	{ 0x00000008u, 5u },
+	{ 0x00000009u, 8u },
+	{ 0x0000000Au, 9u },
+	{ 0x0000000Bu, 6u },
+	{ 0x0000000Cu, 7u },
+	{ 0x0000000Du, 10u },
+	{ 0x0000000Eu, 11u },
+	{ 0x0000000Fu, 12u },
 };
 
 // Dispatch table (function pointers)
-static HotpatchEntryV0 s_hotpatch_entries[15] = {
-	{ reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // EnumParsingSubjects::Subject_0
-	{ reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // EnumParsingSubjects::Subject_1
-	{ reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // EnumParsingSubjects::Subject_2
-	{ reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // EnumParsingSubjects::Subject_3
-	{ reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // EnumParsingSubjects::Subject_4
-	{ reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_5), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // EnumParsingSubjects::Subject_5
-	{ reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_6), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // EnumParsingSubjects::Subject_6
-	{ reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_7), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // EnumParsingSubjects::Subject_7
-	{ reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_8), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // EnumParsingSubjects::Subject_8
-	{ reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_9), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // EnumParsingSubjects::Subject_9
-	{ reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_10), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // EnumParsingSubjects::Subject_10
-	{ reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_11), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // EnumParsingSubjects::Subject_11
-	{ reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_12), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // EnumParsingSubjects::CustomEntrySubject_12
-	{ reinterpret_cast<void*>(&EnumParsingSubjects_AutoGeneratedProgram__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // AutoGeneratedProgram::.ctor
-	{ reinterpret_cast<void*>(&EnumParsingSubjects_AutoGeneratedProgram_Main_System_String), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // AutoGeneratedProgram::Main
+static HotpatchEntryV0 s_hotpatch_entries[13] = {
+	{ reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // EnumParsingSubjects::Subject_0
+	{ reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // EnumParsingSubjects::Subject_1
+	{ reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // EnumParsingSubjects::Subject_2
+	{ reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // EnumParsingSubjects::Subject_3
+	{ reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // EnumParsingSubjects::Subject_4
+	{ reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_5), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // EnumParsingSubjects::Subject_5
+	{ reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_6), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // EnumParsingSubjects::CustomEntrySubject_6
+	{ reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_7), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // EnumParsingSubjects::CustomEntrySubject_7
+	{ reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_8), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // EnumParsingSubjects::Subject_8
+	{ reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_9), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // EnumParsingSubjects::Subject_9
+	{ reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_10), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // EnumParsingSubjects::CustomEntrySubject_10
+	{ reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_11), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // EnumParsingSubjects::CustomEntrySubject_11
+	{ reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_12), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // EnumParsingSubjects::CustomEntrySubject_12
 };
 
 // Module hotpatch bundle
 static constexpr HotpatchModuleV0 s_hotpatch_module = {
 	"EnumParsingSubjects",
 	s_hotpatch_types,
-	2u,
+	1u,
 	s_hotpatch_methods,
-	15u,
+	13u,
 	s_hotpatch_slots,
-	15u,
+	13u,
 	s_hotpatch_entries,
-	15u,
+	13u,
 };
 
 // Expose hotpatch module to BootstrapRuntime
@@ -918,7 +912,7 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // ── External Runtime Dispatch Table ──────────────────────────
 // Startup-time-resolved function pointers for cross-assembly calls.
 
-extern "C" const char* kChaosExternalRuntimeSubjects[19] = {
+extern "C" const char* kChaosExternalRuntimeSubjects[17] = {
 	"System.Private.CoreLib/System.Byte",
 	"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
 	"System.Private.CoreLib/System.Int32",
@@ -933,14 +927,12 @@ extern "C" const char* kChaosExternalRuntimeSubjects[19] = {
 	"System.Private.CoreLib/System.Enum::IsDefined:System.Boolean(System.Type,System.Object)",
 	"System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String)",
 	"System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String,System.Boolean)",
-	"System.Private.CoreLib/System.DayOfWeek::ToString:System.String()",
-	"System.Private.CoreLib/System.Int32::ToString:System.String(System.String)",
 	"System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Boolean,System.Object&)",
 	"System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Object&)",
-	"System.Private.CoreLib/System.Object::.ctor:System.Void()",
+	"System.Private.CoreLib/System.Object::ToString:System.String()",
 };
 
-extern "C" void* kChaosExternalRuntimeFnTable[19] = {
+extern "C" void* kChaosExternalRuntimeFnTable[17] = {
 	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_),
 	nullptr,
@@ -955,33 +947,29 @@ extern "C" void* kChaosExternalRuntimeFnTable[19] = {
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Enum__IsDefined_System_Boolean_System_Type_System_Object_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Enum__Parse_System_Object_System_Type_System_String_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Enum__Parse_System_Object_System_Type_System_String_System_Boolean_),
-	nullptr,
-	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Enum__TryParse_System_Boolean_System_Type_System_String_System_Boolean_System_Object__),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Enum__TryParse_System_Boolean_System_Type_System_String_System_Object__),
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object__ToString_System_String__),
 };
 
-extern "C" int32_t kChaosExternalRuntimeCount = 19;
+extern "C" int32_t kChaosExternalRuntimeCount = 17;
 // (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
-static void (*kAotMethods[15])() = {
+static void (*kAotMethods[13])() = {
 	reinterpret_cast<void(*)()>(&EnumParsingSubjects_EnumParsingSubjects_Subject_0),
 	reinterpret_cast<void(*)()>(&EnumParsingSubjects_EnumParsingSubjects_Subject_1),
 	reinterpret_cast<void(*)()>(&EnumParsingSubjects_EnumParsingSubjects_Subject_2),
 	reinterpret_cast<void(*)()>(&EnumParsingSubjects_EnumParsingSubjects_Subject_3),
 	reinterpret_cast<void(*)()>(&EnumParsingSubjects_EnumParsingSubjects_Subject_4),
 	reinterpret_cast<void(*)()>(&EnumParsingSubjects_EnumParsingSubjects_Subject_5),
-	reinterpret_cast<void(*)()>(&EnumParsingSubjects_EnumParsingSubjects_Subject_6),
-	reinterpret_cast<void(*)()>(&EnumParsingSubjects_EnumParsingSubjects_Subject_7),
+	reinterpret_cast<void(*)()>(&EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_6),
+	reinterpret_cast<void(*)()>(&EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_7),
 	reinterpret_cast<void(*)()>(&EnumParsingSubjects_EnumParsingSubjects_Subject_8),
 	reinterpret_cast<void(*)()>(&EnumParsingSubjects_EnumParsingSubjects_Subject_9),
-	reinterpret_cast<void(*)()>(&EnumParsingSubjects_EnumParsingSubjects_Subject_10),
-	reinterpret_cast<void(*)()>(&EnumParsingSubjects_EnumParsingSubjects_Subject_11),
+	reinterpret_cast<void(*)()>(&EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_10),
+	reinterpret_cast<void(*)()>(&EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_11),
 	reinterpret_cast<void(*)()>(&EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_12),
-	reinterpret_cast<void(*)()>(&EnumParsingSubjects_AutoGeneratedProgram__ctor),
-	reinterpret_cast<void(*)()>(&EnumParsingSubjects_AutoGeneratedProgram_Main_System_String),
 };
 
 // ── Benchmark wrappers (kBenchmarkWrappers[]) ──────────────────────────
@@ -989,7 +977,7 @@ static void (*kAotMethods[15])() = {
 // String params receive a valid StringId; all others receive 0.
 // Instance methods receive a sentinel this-pointer so they don't crash on null.
 static CHAOS_IL2CPP_UINT8 __g_benchmark_this_sentinel = 0;
-extern "C" void (*kBenchmarkWrappers[15])() = {
+extern "C" void (*kBenchmarkWrappers[13])() = {
 	[]() {kAotMethods[0]();},
 	[]() {kAotMethods[1]();},
 	[]() {kAotMethods[2]();},
@@ -1003,8 +991,6 @@ extern "C" void (*kBenchmarkWrappers[15])() = {
 	[]() {kAotMethods[10]();},
 	[]() {kAotMethods[11]();},
 	[]() {kAotMethods[12]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[13])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[14])(0);},
 };
 
 // ── Subject entry index mapping ─────────────────────────────────
@@ -1163,21 +1149,21 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry5;
-	/* ── Entry 6: EnumParsingSubjects_EnumParsingSubjects_Subject_6 ── */
+	/* ── Entry 6: EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_6 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry6;
+	/* ── Entry 7: EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_7 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry6;
-	/* ── Entry 7: EnumParsingSubjects_EnumParsingSubjects_Subject_7 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry7;
 	/* ── Entry 8: EnumParsingSubjects_EnumParsingSubjects_Subject_8 ── */
 	struct {
@@ -1185,7 +1171,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
+		CHAOS_IL2CPP_UINT32 slots[7];
 	} entry8;
 	/* ── Entry 9: EnumParsingSubjects_EnumParsingSubjects_Subject_9 ── */
 	struct {
@@ -1193,40 +1179,32 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
-	} entry9;
-	/* ── Entry 10: EnumParsingSubjects_EnumParsingSubjects_Subject_10 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[7];
-	} entry10;
-	/* ── Entry 11: EnumParsingSubjects_EnumParsingSubjects_Subject_11 ── */
+	} entry9;
+	/* ── Entry 10: EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_10 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[6];
+	} entry10;
+	/* ── Entry 11: EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_11 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry11;
-	/* ── Entry 12: EnumParsingSubjects_AutoGeneratedProgram__ctor ── */
+	/* ── Entry 12: EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_12 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry12;
-	/* ── Entry 13: EnumParsingSubjects_AutoGeneratedProgram_Main_System_String ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
-	} entry13;
 } kChaosGcSlotMapsSection = {
 	/* entry0 = EnumParsingSubjects_EnumParsingSubjects_Subject_0 */
 	.entry0 = {
@@ -1276,95 +1254,85 @@ static const struct {
 		/* num_gc_slots = 5 */ 5u,
 		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
-	/* entry6 = EnumParsingSubjects_EnumParsingSubjects_Subject_6 */
+	/* entry6 = EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_6 */
 	.entry6 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_6),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry7 = EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_7 */
+	.entry7 = {
 		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_6),
+		/* code_address */ reinterpret_cast<const void*>(&EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_7),
 		/* frame_size = 32 */ 32u,
 		/* num_gc_slots = 4 */ 4u,
 		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry7 = EnumParsingSubjects_EnumParsingSubjects_Subject_7 */
-	.entry7 = {
-		/* entry_total_size = 40 */ 40u,
-		/* code_address */ reinterpret_cast<const void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_7),
-		/* frame_size = 40 */ 40u,
-		/* num_gc_slots = 5 */ 5u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u }
-	},
 	/* entry8 = EnumParsingSubjects_EnumParsingSubjects_Subject_8 */
 	.entry8 = {
-		/* entry_total_size = 44 */ 44u,
-		/* code_address */ reinterpret_cast<const void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_8),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
-	},
-	/* entry9 = EnumParsingSubjects_EnumParsingSubjects_Subject_9 */
-	.entry9 = {
-		/* entry_total_size = 44 */ 44u,
-		/* code_address */ reinterpret_cast<const void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_9),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
-	},
-	/* entry10 = EnumParsingSubjects_EnumParsingSubjects_Subject_10 */
-	.entry10 = {
 		/* entry_total_size = 48 */ 48u,
-		/* code_address */ reinterpret_cast<const void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_10),
+		/* code_address */ reinterpret_cast<const void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_8),
 		/* frame_size = 56 */ 56u,
 		/* num_gc_slots = 7 */ 7u,
 		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
 	},
-	/* entry11 = EnumParsingSubjects_EnumParsingSubjects_Subject_11 */
-	.entry11 = {
+	/* entry9 = EnumParsingSubjects_EnumParsingSubjects_Subject_9 */
+	.entry9 = {
+		/* entry_total_size = 48 */ 48u,
+		/* code_address */ reinterpret_cast<const void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_9),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
+	},
+	/* entry10 = EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_10 */
+	.entry10 = {
 		/* entry_total_size = 44 */ 44u,
-		/* code_address */ reinterpret_cast<const void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_11),
+		/* code_address */ reinterpret_cast<const void*>(&EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_10),
 		/* frame_size = 48 */ 48u,
 		/* num_gc_slots = 6 */ 6u,
 		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
 	},
-	/* entry12 = EnumParsingSubjects_AutoGeneratedProgram__ctor */
-	.entry12 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&EnumParsingSubjects_AutoGeneratedProgram__ctor),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+	/* entry11 = EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_11 */
+	.entry11 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_11),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
-	/* entry13 = EnumParsingSubjects_AutoGeneratedProgram_Main_System_String */
-	.entry13 = {
-		/* entry_total_size = 24 */ 24u,
-		/* code_address */ reinterpret_cast<const void*>(&EnumParsingSubjects_AutoGeneratedProgram_Main_System_String),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
+	/* entry12 = EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_12 */
+	.entry12 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_12),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	}
 };
 #if defined(_MSC_VER)
 #pragma pack(pop)
 #endif
 
-static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 564u;
+static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 540u;
 
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
-static void* const kMethodPointers[15] = {
+static void* const kMethodPointers[13] = {
 	reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_0),
 	reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_1),
 	reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_2),
 	reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_3),
 	reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_4),
 	reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_5),
-	reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_6),
-	reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_7),
+	reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_6),
+	reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_7),
 	reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_8),
 	reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_9),
-	reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_10),
-	reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_11),
+	reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_10),
+	reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_11),
 	reinterpret_cast<void*>(&EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_12),
-	reinterpret_cast<void*>(&EnumParsingSubjects_AutoGeneratedProgram__ctor),
-	reinterpret_cast<void*>(&EnumParsingSubjects_AutoGeneratedProgram_Main_System_String),
 };
 
 // CodeRegistrationV0 struct (invoker_pointers = nullptr for native-aot path)
@@ -1372,7 +1340,7 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	= {
 	.struct_size               = sizeof(CodeRegistrationV0),
 	.method_pointers           = kMethodPointers,
-	.method_pointer_count      = 15u,
+	.method_pointer_count      = 13u,
 	.reverse_pinvoke_wrappers  = nullptr,
 	.reverse_pinvoke_wrapper_count = 0u,
 	.invoker_pointers          = nullptr,
@@ -1431,33 +1399,25 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_EnumParsingSubject
 	{ 0u, "EnumParsingSubjects/EnumParsingSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u },
 	{ 0u, "EnumParsingSubjects/EnumParsingSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u },
 	{ 0u, "EnumParsingSubjects/EnumParsingSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u },
-	{ 0u, "EnumParsingSubjects/EnumParsingSubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u },
-	{ 0u, "EnumParsingSubjects/EnumParsingSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u },
+	{ 0u, "EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_6:System.Void()", "CustomEntrySubject_6", "System.Void", 0, nullptr, 0u },
+	{ 0u, "EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_7:System.Void()", "CustomEntrySubject_7", "System.Void", 0, nullptr, 0u },
 	{ 0u, "EnumParsingSubjects/EnumParsingSubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u },
 	{ 0u, "EnumParsingSubjects/EnumParsingSubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u },
-	{ 0u, "EnumParsingSubjects/EnumParsingSubjects::Subject_10:System.Void()", "Subject_10", "System.Void", 0, nullptr, 0u },
-	{ 0u, "EnumParsingSubjects/EnumParsingSubjects::Subject_11:System.Void()", "Subject_11", "System.Void", 0, nullptr, 0u },
+	{ 0u, "EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_10:System.Void()", "CustomEntrySubject_10", "System.Void", 0, nullptr, 0u },
+	{ 0u, "EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_11:System.Void()", "CustomEntrySubject_11", "System.Void", 0, nullptr, 0u },
 	{ 0u, "EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_12:System.Void()", "CustomEntrySubject_12", "System.Void", 0, nullptr, 0u },
 };
 
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_EnumParsingSubjects_AutoGeneratedProgram[2] = {
-	{ 0u, "EnumParsingSubjects/AutoGeneratedProgram::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u },
-	{ 0u, "EnumParsingSubjects/AutoGeneratedProgram::Main:System.Void(System.String[])", "Main", "System.Void", 0, nullptr, 0u },
-};
-
-static const ReflectionQueryTypeDescriptor kReflTypes[2] = {
+static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
 	{ 0u, "EnumParsingSubjects/EnumParsingSubjects", "EnumParsingSubjects/EnumParsingSubjects", "", "EnumParsingSubjects", "EnumParsingSubjects", nullptr, kReflFields_EnumParsingSubjects_EnumParsingSubjects, 1u, nullptr, 0u,
 	kReflMethods_EnumParsingSubjects_EnumParsingSubjects, 13u },
-	{ 0u, "EnumParsingSubjects/AutoGeneratedProgram", "EnumParsingSubjects/AutoGeneratedProgram", "", "AutoGeneratedProgram", "AutoGeneratedProgram", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_EnumParsingSubjects_AutoGeneratedProgram, 2u },
 };
 
-static const ReflectionQueryTypeDescriptor* kReflTypePtrs[2] = {
+static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
-	&kReflTypes[1],
 };
 
-static const ReflectionQueryImageDescriptor kReflImage = { "EnumParsingSubjects", kReflTypePtrs, 2u };
+static const ReflectionQueryImageDescriptor kReflImage = { "EnumParsingSubjects", kReflTypePtrs, 1u };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -2130,8 +2090,8 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_5(void)
 	return;
 }
 
-// Managed method: EnumParsingSubjects/EnumParsingSubjects::Subject_6()
-extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_6(void)
+// Managed method: EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_6()
+extern "C" void EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_6(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -2143,89 +2103,40 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_6(void)
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
 
 
-	CHAOS_EH_TRY
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
-			{
-				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			{{
-				_s1 = CHAOS_IL2CPP_STRING_ID("hello");
-			}}
-			{
-				const auto chaos_arg_1 = _s1;
-				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = ChaosEnumParse(chaos_arg_0, chaos_arg_1);
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			{
-				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
-			{
-				const auto chaos_arg_0 = _s1;
-				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			{{
-				_s2 = CHAOS_IL2CPP_STRING_ID("hello");
-			}}
-			{
-				const auto chaos_arg_1 = _s2;
-				const auto chaos_arg_0 = _s1;
-				const auto chaos_result = ChaosEnumParse(chaos_arg_0, chaos_arg_1);
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			{
-				const auto chaos_arg_0 = _s1;
-				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-			chaos_locals[0] = _s0;
-			_s0 = chaos_locals[0];
-			// brfalse (structured EH branch)
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_EnumParsingSubjects_EnumParsingSubjects___exitCode = chaos_value;
-			}
-	CHAOS_EH_CATCH_BEGIN
-		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
-		if (chaos_header != nullptr)
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(46500194u);
+	{
+		const auto chaos_arg_0 = _s0;
+		const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{{
+		_s1 = CHAOS_IL2CPP_STRING_ID("Monday");
+	}}
+	{
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
+		const auto chaos_result = ChaosEnumParse(chaos_arg_0, chaos_arg_1);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = 0;
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	{
+		if (_s0 != 0)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{ CHAOS_EH_RETHROW; }
-		}
-		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_EnumParsingSubjects_EnumParsingSubjects___exitCode = chaos_value;
 			}
-	CHAOS_EH_END
-	return;
+		}
+		return;
+	}
 }
 
-// Managed method: EnumParsingSubjects/EnumParsingSubjects::Subject_7()
-extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_7(void)
+// Managed method: EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_7()
+extern "C" void EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_7(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
@@ -2238,275 +2149,45 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_7(void)
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
 	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	CHAOS_IL2CPP_INTPTR _s18{};
 
 
-	CHAOS_EH_TRY
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
-			{
-				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			{{
-				_s1 = CHAOS_IL2CPP_STRING_ID("hello");
-			}}
-			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				const auto chaos_arg_2 = _s2;
-				const auto chaos_arg_1 = _s1;
-				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = ChaosEnumParseWithIgnoreCase(chaos_arg_0, chaos_arg_1, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2));
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			{
-				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
-			{
-				const auto chaos_arg_0 = _s1;
-				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			{{
-				_s2 = CHAOS_IL2CPP_STRING_ID("hello");
-			}}
-			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				const auto chaos_arg_2 = _s3;
-				const auto chaos_arg_1 = _s2;
-				const auto chaos_arg_0 = _s1;
-				const auto chaos_result = ChaosEnumParseWithIgnoreCase(chaos_arg_0, chaos_arg_1, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2));
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			{
-				const auto chaos_arg_0 = _s1;
-				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-			chaos_locals[0] = _s0;
-			_s0 = chaos_locals[0];
-			// brfalse (structured EH branch)
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_EnumParsingSubjects_EnumParsingSubjects___exitCode = chaos_value;
-			}
-	CHAOS_EH_CATCH_BEGIN
-		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
-		if (chaos_header != nullptr)
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(46500194u);
+	{
+		const auto chaos_arg_0 = _s0;
+		const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{{
+		_s1 = CHAOS_IL2CPP_STRING_ID("monday");
+	}}
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+	{
+		const auto chaos_arg_2 = _s2;
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
+		const auto chaos_result = ChaosEnumParseWithIgnoreCase(chaos_arg_0, chaos_arg_1, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2));
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = 0;
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	{
+		if (_s0 != 0)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{ CHAOS_EH_RETHROW; }
-		}
-		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_EnumParsingSubjects_EnumParsingSubjects___exitCode = chaos_value;
 			}
-	CHAOS_EH_END
-	return;
+		}
+		return;
+	}
 }
 
 // Managed method: EnumParsingSubjects/EnumParsingSubjects::Subject_8()
 extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_8(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-
-
-	CHAOS_EH_TRY
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			chaos_locals[1] = _s0;
-			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
-			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[14])();
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			{
-				const auto chaos_arg_0 = _s1;
-				if (chaos_arg_0 == 0)
-				{
-					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-				}
-				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			chaos_locals[1] = _s2;
-			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
-			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[14])();
-				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			{
-				const auto chaos_arg_0 = _s3;
-				if (chaos_arg_0 == 0)
-				{
-					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-				}
-				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
-				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
-			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
-			chaos_locals[0] = _s2;
-			_s2 = chaos_locals[0];
-			// brfalse (structured EH branch)
-			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s3;
-				chaos_static_EnumParsingSubjects_EnumParsingSubjects___exitCode = chaos_value;
-			}
-	CHAOS_EH_CATCH_BEGIN
-		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{ CHAOS_EH_RETHROW; }
-		}
-		_s0 = CHAOS_EH_EXCEPTION_OBJ;
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_EnumParsingSubjects_EnumParsingSubjects___exitCode = chaos_value;
-			}
-	CHAOS_EH_END
-	return;
-}
-
-// Managed method: EnumParsingSubjects/EnumParsingSubjects::Subject_9()
-extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_9(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-
-
-	CHAOS_EH_TRY
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			chaos_locals[1] = _s0;
-			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
-			{{
-				_s1 = CHAOS_IL2CPP_STRING_ID("X");
-			}}
-			{
-				const auto chaos_arg_0 = _s1;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[15])(chaos_arg_0);
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			{
-				const auto chaos_arg_0 = _s1;
-				if (chaos_arg_0 == 0)
-				{
-					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-				}
-				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			chaos_locals[1] = _s2;
-			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
-			{{
-				_s3 = CHAOS_IL2CPP_STRING_ID("X");
-			}}
-			{
-				const auto chaos_arg_0 = _s3;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[15])(chaos_arg_0);
-				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			{
-				const auto chaos_arg_0 = _s3;
-				if (chaos_arg_0 == 0)
-				{
-					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-				}
-				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
-				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
-			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
-			chaos_locals[0] = _s2;
-			_s2 = chaos_locals[0];
-			// brfalse (structured EH branch)
-			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s3;
-				chaos_static_EnumParsingSubjects_EnumParsingSubjects___exitCode = chaos_value;
-			}
-	CHAOS_EH_CATCH_BEGIN
-		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{ CHAOS_EH_RETHROW; }
-		}
-		_s0 = CHAOS_EH_EXCEPTION_OBJ;
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_EnumParsingSubjects_EnumParsingSubjects___exitCode = chaos_value;
-			}
-	CHAOS_EH_END
-	return;
-}
-
-// Managed method: EnumParsingSubjects/EnumParsingSubjects::Subject_10()
-extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_10(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
@@ -2533,61 +2214,81 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_10(void)
 
 
 	CHAOS_EH_TRY
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(46500194u);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
 			{
 				const auto chaos_arg_0 = _s0;
 				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			{{
-				_s1 = CHAOS_IL2CPP_STRING_ID("Monday");
-			}}
-			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
-				const auto chaos_arg_3 = _s3;
+				const auto chaos_value = _s1;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Byte, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+				chaos_boxed->value = chaos_value;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+			}
+			{{
+				_s2 = CHAOS_IL2CPP_STRING_ID("G");
+			}}
+			{
 				const auto chaos_arg_2 = _s2;
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = ChaosEnumTryParseWithIgnoreCase(chaos_arg_0, chaos_arg_1, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2), chaos_arg_3);
+				const auto chaos_result = ChaosEnumFormat(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			// brtrue (structured EH branch)
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			// br (handled via structured EH branches)
-			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(46500194u);
 			{
-				const auto chaos_arg_0 = _s3;
+				const auto chaos_arg_0 = _s0;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+			{
+				const auto chaos_arg_0 = _s1;
 				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_value = _s2;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Byte, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+				chaos_boxed->value = chaos_value;
+				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 			}
 			{{
-				_s4 = CHAOS_IL2CPP_STRING_ID("Monday");
+				_s3 = CHAOS_IL2CPP_STRING_ID("G");
 			}}
-			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s6 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
 			{
-				const auto chaos_arg_3 = _s6;
-				const auto chaos_arg_2 = _s5;
-				const auto chaos_arg_1 = _s4;
-				const auto chaos_arg_0 = _s3;
-				const auto chaos_result = ChaosEnumTryParseWithIgnoreCase(chaos_arg_0, chaos_arg_1, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2), chaos_arg_3);
-				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				const auto chaos_arg_2 = _s3;
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosEnumFormat(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			// brtrue (structured EH branch)
-			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			// br (handled via structured EH branches)
-			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
-			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
-			chaos_locals[0] = _s4;
-			_s4 = chaos_locals[0];
-			// brfalse (structured EH branch)
-			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s5;
+				const auto chaos_arg_0 = _s1;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_EnumParsingSubjects_EnumParsingSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -2608,11 +2309,11 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_10(void)
 	return;
 }
 
-// Managed method: EnumParsingSubjects/EnumParsingSubjects::Subject_11()
-extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_11(void)
+// Managed method: EnumParsingSubjects/EnumParsingSubjects::Subject_9()
+extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_9(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
@@ -2634,60 +2335,86 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_11(void)
 	CHAOS_IL2CPP_INTPTR _s18{};
 	CHAOS_IL2CPP_INTPTR _s19{};
 	CHAOS_IL2CPP_INTPTR _s20{};
+	CHAOS_IL2CPP_INTPTR _s21{};
+	CHAOS_IL2CPP_INTPTR _s22{};
 
 
 	CHAOS_EH_TRY
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(46500194u);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
 			{
 				const auto chaos_arg_0 = _s0;
 				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_value = _s1;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Byte, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+				chaos_boxed->value = chaos_value;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+			}
 			{{
-				_s1 = CHAOS_IL2CPP_STRING_ID("Monday");
+				_s2 = CHAOS_IL2CPP_STRING_ID("X");
 			}}
-			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
 			{
 				const auto chaos_arg_2 = _s2;
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = ChaosEnumTryParse(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+				const auto chaos_result = ChaosEnumFormat(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			// brtrue (structured EH branch)
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			// br (handled via structured EH branches)
-			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(46500194u);
 			{
-				const auto chaos_arg_0 = _s3;
+				const auto chaos_arg_0 = _s0;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+			{
+				const auto chaos_arg_0 = _s1;
 				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_value = _s2;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Byte, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+				chaos_boxed->value = chaos_value;
+				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 			}
 			{{
-				_s4 = CHAOS_IL2CPP_STRING_ID("Monday");
+				_s3 = CHAOS_IL2CPP_STRING_ID("X");
 			}}
-			_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
 			{
-				const auto chaos_arg_2 = _s5;
-				const auto chaos_arg_1 = _s4;
-				const auto chaos_arg_0 = _s3;
-				const auto chaos_result = ChaosEnumTryParse(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				const auto chaos_arg_2 = _s3;
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosEnumFormat(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			// brtrue (structured EH branch)
-			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			// br (handled via structured EH branches)
-			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
-			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
-			chaos_locals[0] = _s4;
-			_s4 = chaos_locals[0];
-			// brfalse (structured EH branch)
-			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s5;
+				const auto chaos_arg_0 = _s1;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_EnumParsingSubjects_EnumParsingSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -2708,40 +2435,152 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_11(void)
 	return;
 }
 
+// Managed method: EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_10()
+extern "C" void EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_10(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(46500194u);
+	{
+		const auto chaos_arg_0 = _s0;
+		const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{{
+		_s1 = CHAOS_IL2CPP_STRING_ID("Monday");
+	}}
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+	_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_arg_3 = _s3;
+		const auto chaos_arg_2 = _s2;
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
+		const auto chaos_result = ChaosEnumTryParseWithIgnoreCase(chaos_arg_0, chaos_arg_1, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2), chaos_arg_3);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	{
+		if (_s0 != 0)
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_EnumParsingSubjects_EnumParsingSubjects___exitCode = chaos_value;
+			}
+		}
+		return;
+	}
+}
+
+// Managed method: EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_11()
+extern "C" void EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_11(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(46500194u);
+	{
+		const auto chaos_arg_0 = _s0;
+		const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{{
+		_s1 = CHAOS_IL2CPP_STRING_ID("Monday");
+	}}
+	_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_arg_2 = _s2;
+		const auto chaos_arg_1 = _s1;
+		const auto chaos_arg_0 = _s0;
+		const auto chaos_result = ChaosEnumTryParse(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	{
+		if (_s0 != 0)
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_EnumParsingSubjects_EnumParsingSubjects___exitCode = chaos_value;
+			}
+		}
+		return;
+	}
+}
+
 // Managed method: EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_12()
 extern "C" void EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_12(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-
-	return;
-}
-
-// Managed method: EnumParsingSubjects/AutoGeneratedProgram::.ctor()
-extern "C" void EnumParsingSubjects_AutoGeneratedProgram__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
 
-	_s0 = chaos_args[0];
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+	{
+		const auto chaos_result = ChaosEnumToStringRaw(static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(46500194u)), static_cast<CHAOS_IL2CPP_INT64>(_s0));
+		_s0 = chaos_result;
+	}
 	{
 		const auto chaos_arg_0 = _s0;
-		ChaosObjectCtor(chaos_arg_0);
+		if (chaos_arg_0 == 0)
+		{
+			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+		}
+		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	return;
-}
-
-// Managed method: EnumParsingSubjects/AutoGeneratedProgram::Main(System.String[])
-extern "C" void EnumParsingSubjects_AutoGeneratedProgram_Main_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	return;
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(6);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+	{
+		if (_s0 != 0)
+		{
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_EnumParsingSubjects_EnumParsingSubjects___exitCode = chaos_value;
+			}
+		}
+		return;
+	}
 }
 
 
@@ -2750,6 +2589,46 @@ extern "C" void EnumParsingSubjects_AutoGeneratedProgram_Main_System_String(CHAO
 #pragma warning(pop)
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
-extern "C" const int kAotMethodCount = 15;
+extern "C" const int kAotMethodCount = 13;
 
-extern "C" void ChaosJitRegisterAll() {}
+// ── JIT Method Entry Table ───────────────────────────────────────────
+// Auto-generated by chaos-il2cpp codegen for --mode jit.
+#include <cstdint>
+#include "jit_registration.h"
+
+static const char kMethodJson_0[] = "{\"methodId\":\"enum-parsing-subjects.enum-parsing-subjects.subject-0\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::Subject_0:System.Void()\",\"signature\":\"System.Void EnumParsingSubjects::Subject_0()\",\"identity\":{\"assemblyName\":\"EnumParsingSubjects\",\"declaringTypeSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects\",\"definitionSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects::Subject_0:System.Void()\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::Subject_0:System.Void()\",\"methodId\":\"enum-parsing-subjects.enum-parsing-subjects.subject-0\",\"signature\":\"System.Void EnumParsingSubjects::Subject_0()\"},\"nativeSymbol\":\"EnumParsingSubjects_EnumParsingSubjects_Subject_0\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":83,\"handlerOffset\":84,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldtoken\",\"opCode\":70,\"operand\":\"System.Private.CoreLib/System.Byte\",\"ilOffset\":2,\"resultType\":\"System.RuntimeTypeHandle\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Byte\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Byte\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":7,\"resultType\":\"System.Type\",\"callee\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":12,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"box\",\"opCode\":35,\"operand\":\"System.Private.CoreLib/System.Int32\",\"ilOffset\":14,\"resultType\":\"System.Object\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Int32\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Int32\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":9,\"isPreserveSig\":false},{\"op\":\"ldstr\",\"opCode\":4,\"operand\":\"hello\",\"ilOffset\":19,\"resultType\":\"System.String\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":24,\"resultType\":\"System.String\",\"callee\":\"System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":29,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldtoken\",\"opCode\":70,\"operand\":\"System.Private.CoreLib/System.Byte\",\"ilOffset\":34,\"resultType\":\"System.RuntimeTypeHandle\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Byte\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Byte\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":39,\"resultType\":\"System.Type\",\"callee\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":44,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"box\",\"opCode\":35,\"operand\":\"System.Private.CoreLib/System.Int32\",\"ilOffset\":46,\"resultType\":\"System.Object\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Int32\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Int32\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":9,\"isPreserveSig\":false},{\"op\":\"ldstr\",\"opCode\":4,\"operand\":\"hello\",\"ilOffset\":51,\"resultType\":\"System.String\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":56,\"resultType\":\"System.String\",\"callee\":\"System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":61,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":66,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":68,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":69,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":71,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":72,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":81,\"ilOffset\":73,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":75,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"ilOffset\":76,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"EnumParsingSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"EnumParsingSubjects\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":95,\"ilOffset\":82,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":84,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":86,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"ilOffset\":87,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"EnumParsingSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"EnumParsingSubjects\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":95,\"ilOffset\":93,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":95,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"EnumParsingSubjects\"}";
+static const char kMethodJson_1[] = "{\"methodId\":\"enum-parsing-subjects.enum-parsing-subjects.subject-1\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::Subject_1:System.Void()\",\"signature\":\"System.Void EnumParsingSubjects::Subject_1()\",\"identity\":{\"assemblyName\":\"EnumParsingSubjects\",\"declaringTypeSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects\",\"definitionSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects::Subject_1:System.Void()\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::Subject_1:System.Void()\",\"methodId\":\"enum-parsing-subjects.enum-parsing-subjects.subject-1\",\"signature\":\"System.Void EnumParsingSubjects::Subject_1()\"},\"nativeSymbol\":\"EnumParsingSubjects_EnumParsingSubjects_Subject_1\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":71,\"handlerOffset\":72,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldtoken\",\"opCode\":70,\"operand\":\"System.Private.CoreLib/System.DayOfWeek\",\"ilOffset\":2,\"resultType\":\"System.RuntimeTypeHandle\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.DayOfWeek\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.DayOfWeek\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":7,\"resultType\":\"System.Type\",\"callee\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":12,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"box\",\"opCode\":35,\"operand\":\"System.Private.CoreLib/System.Int32\",\"ilOffset\":13,\"resultType\":\"System.Object\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Int32\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Int32\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":9,\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":18,\"resultType\":\"System.String\",\"callee\":\"System.Private.CoreLib/System.Enum::GetName:System.String(System.Type,System.Object)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Enum::GetName:System.String(System.Type,System.Object)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Enum::GetName:System.String(System.Type,System.Object)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":23,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldtoken\",\"opCode\":70,\"operand\":\"System.Private.CoreLib/System.DayOfWeek\",\"ilOffset\":28,\"resultType\":\"System.RuntimeTypeHandle\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.DayOfWeek\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.DayOfWeek\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":33,\"resultType\":\"System.Type\",\"callee\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":38,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"box\",\"opCode\":35,\"operand\":\"System.Private.CoreLib/System.Int32\",\"ilOffset\":39,\"resultType\":\"System.Object\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Int32\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Int32\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":9,\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":44,\"resultType\":\"System.String\",\"callee\":\"System.Private.CoreLib/System.Enum::GetName:System.String(System.Type,System.Object)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Enum::GetName:System.String(System.Type,System.Object)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Enum::GetName:System.String(System.Type,System.Object)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":49,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":54,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":56,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":57,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":59,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":60,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":69,\"ilOffset\":61,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":63,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"ilOffset\":64,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"EnumParsingSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"EnumParsingSubjects\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":83,\"ilOffset\":70,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":72,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":74,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"ilOffset\":75,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"EnumParsingSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"EnumParsingSubjects\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":83,\"ilOffset\":81,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":83,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"EnumParsingSubjects\"}";
+static const char kMethodJson_2[] = "{\"methodId\":\"enum-parsing-subjects.enum-parsing-subjects.subject-2\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::Subject_2:System.Void()\",\"signature\":\"System.Void EnumParsingSubjects::Subject_2()\",\"identity\":{\"assemblyName\":\"EnumParsingSubjects\",\"declaringTypeSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects\",\"definitionSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects::Subject_2:System.Void()\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::Subject_2:System.Void()\",\"methodId\":\"enum-parsing-subjects.enum-parsing-subjects.subject-2\",\"signature\":\"System.Void EnumParsingSubjects::Subject_2()\"},\"nativeSymbol\":\"EnumParsingSubjects_EnumParsingSubjects_Subject_2\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":71,\"handlerOffset\":72,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldtoken\",\"opCode\":70,\"operand\":\"System.Private.CoreLib/System.DayOfWeek\",\"ilOffset\":2,\"resultType\":\"System.RuntimeTypeHandle\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.DayOfWeek\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.DayOfWeek\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":7,\"resultType\":\"System.Type\",\"callee\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":12,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"box\",\"opCode\":35,\"operand\":\"System.Private.CoreLib/System.Int32\",\"ilOffset\":13,\"resultType\":\"System.Object\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Int32\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Int32\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":9,\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":18,\"resultType\":\"System.String\",\"callee\":\"System.Private.CoreLib/System.Enum::GetName:System.String(System.Type,System.Object)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Enum::GetName:System.String(System.Type,System.Object)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Enum::GetName:System.String(System.Type,System.Object)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":23,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldtoken\",\"opCode\":70,\"operand\":\"System.Private.CoreLib/System.DayOfWeek\",\"ilOffset\":28,\"resultType\":\"System.RuntimeTypeHandle\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.DayOfWeek\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.DayOfWeek\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":33,\"resultType\":\"System.Type\",\"callee\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":38,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"box\",\"opCode\":35,\"operand\":\"System.Private.CoreLib/System.Int32\",\"ilOffset\":39,\"resultType\":\"System.Object\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Int32\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Int32\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":9,\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":44,\"resultType\":\"System.String\",\"callee\":\"System.Private.CoreLib/System.Enum::GetName:System.String(System.Type,System.Object)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Enum::GetName:System.String(System.Type,System.Object)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Enum::GetName:System.String(System.Type,System.Object)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":49,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":54,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":56,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":57,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":59,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":60,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":69,\"ilOffset\":61,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":63,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"ilOffset\":64,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"EnumParsingSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"EnumParsingSubjects\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":83,\"ilOffset\":70,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":72,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":74,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"ilOffset\":75,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"EnumParsingSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"EnumParsingSubjects\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":83,\"ilOffset\":81,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":83,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"EnumParsingSubjects\"}";
+static const char kMethodJson_3[] = "{\"methodId\":\"enum-parsing-subjects.enum-parsing-subjects.subject-3\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::Subject_3:System.Void()\",\"signature\":\"System.Void EnumParsingSubjects::Subject_3()\",\"identity\":{\"assemblyName\":\"EnumParsingSubjects\",\"declaringTypeSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects\",\"definitionSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects::Subject_3:System.Void()\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::Subject_3:System.Void()\",\"methodId\":\"enum-parsing-subjects.enum-parsing-subjects.subject-3\",\"signature\":\"System.Void EnumParsingSubjects::Subject_3()\"},\"nativeSymbol\":\"EnumParsingSubjects_EnumParsingSubjects_Subject_3\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":53,\"handlerOffset\":54,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldtoken\",\"opCode\":70,\"operand\":\"System.Private.CoreLib/System.Byte\",\"ilOffset\":2,\"resultType\":\"System.RuntimeTypeHandle\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Byte\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Byte\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":7,\"resultType\":\"System.Type\",\"callee\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":12,\"resultType\":\"System.String[]\",\"callee\":\"System.Private.CoreLib/System.Enum::GetNames:System.String[](System.Type)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Enum::GetNames:System.String[](System.Type)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Enum::GetNames:System.String[](System.Type)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldlen\",\"opCode\":46,\"ilOffset\":17,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"conv.i4\",\"opCode\":39,\"ilOffset\":18,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldtoken\",\"opCode\":70,\"operand\":\"System.Private.CoreLib/System.Byte\",\"ilOffset\":19,\"resultType\":\"System.RuntimeTypeHandle\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Byte\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Byte\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":24,\"resultType\":\"System.Type\",\"callee\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":29,\"resultType\":\"System.String[]\",\"callee\":\"System.Private.CoreLib/System.Enum::GetNames:System.String[](System.Type)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Enum::GetNames:System.String[](System.Type)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Enum::GetNames:System.String[](System.Type)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldlen\",\"opCode\":46,\"ilOffset\":34,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"conv.i4\",\"opCode\":39,\"ilOffset\":35,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":36,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":38,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":39,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":41,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":42,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":51,\"ilOffset\":43,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":45,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"ilOffset\":46,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"EnumParsingSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"EnumParsingSubjects\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":65,\"ilOffset\":52,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":54,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":56,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"ilOffset\":57,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"EnumParsingSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"EnumParsingSubjects\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":65,\"ilOffset\":63,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":65,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"EnumParsingSubjects\"}";
+static const char kMethodJson_4[] = "{\"methodId\":\"enum-parsing-subjects.enum-parsing-subjects.subject-4\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::Subject_4:System.Void()\",\"signature\":\"System.Void EnumParsingSubjects::Subject_4()\",\"identity\":{\"assemblyName\":\"EnumParsingSubjects\",\"declaringTypeSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects\",\"definitionSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects::Subject_4:System.Void()\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::Subject_4:System.Void()\",\"methodId\":\"enum-parsing-subjects.enum-parsing-subjects.subject-4\",\"signature\":\"System.Void EnumParsingSubjects::Subject_4()\"},\"nativeSymbol\":\"EnumParsingSubjects_EnumParsingSubjects_Subject_4\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":59,\"handlerOffset\":60,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldtoken\",\"opCode\":70,\"operand\":\"System.Private.CoreLib/System.Byte\",\"ilOffset\":2,\"resultType\":\"System.RuntimeTypeHandle\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Byte\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Byte\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":7,\"resultType\":\"System.Type\",\"callee\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":12,\"resultType\":\"System.Array\",\"callee\":\"System.Private.CoreLib/System.Enum::GetValues:System.Array(System.Type)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Enum::GetValues:System.Array(System.Type)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Enum::GetValues:System.Array(System.Type)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":17,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldtoken\",\"opCode\":70,\"operand\":\"System.Private.CoreLib/System.Byte\",\"ilOffset\":22,\"resultType\":\"System.RuntimeTypeHandle\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Byte\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Byte\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":27,\"resultType\":\"System.Type\",\"callee\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":32,\"resultType\":\"System.Array\",\"callee\":\"System.Private.CoreLib/System.Enum::GetValues:System.Array(System.Type)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Enum::GetValues:System.Array(System.Type)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Enum::GetValues:System.Array(System.Type)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":37,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":42,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":44,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":45,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":47,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":48,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":57,\"ilOffset\":49,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":51,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"ilOffset\":52,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"EnumParsingSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"EnumParsingSubjects\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":71,\"ilOffset\":58,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":60,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":62,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"ilOffset\":63,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"EnumParsingSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"EnumParsingSubjects\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":71,\"ilOffset\":69,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":71,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"EnumParsingSubjects\"}";
+static const char kMethodJson_5[] = "{\"methodId\":\"enum-parsing-subjects.enum-parsing-subjects.subject-5\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::Subject_5:System.Void()\",\"signature\":\"System.Void EnumParsingSubjects::Subject_5()\",\"identity\":{\"assemblyName\":\"EnumParsingSubjects\",\"declaringTypeSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects\",\"definitionSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects::Subject_5:System.Void()\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::Subject_5:System.Void()\",\"methodId\":\"enum-parsing-subjects.enum-parsing-subjects.subject-5\",\"signature\":\"System.Void EnumParsingSubjects::Subject_5()\"},\"nativeSymbol\":\"EnumParsingSubjects_EnumParsingSubjects_Subject_5\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":75,\"handlerOffset\":76,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldtoken\",\"opCode\":70,\"operand\":\"System.Private.CoreLib/System.Byte\",\"ilOffset\":2,\"resultType\":\"System.RuntimeTypeHandle\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Byte\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Byte\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":7,\"resultType\":\"System.Type\",\"callee\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":12,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"box\",\"opCode\":35,\"operand\":\"System.Private.CoreLib/System.Int32\",\"ilOffset\":14,\"resultType\":\"System.Object\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Int32\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Int32\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":9,\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":19,\"resultType\":\"System.Boolean\",\"callee\":\"System.Private.CoreLib/System.Enum::IsDefined:System.Boolean(System.Type,System.Object)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Enum::IsDefined:System.Boolean(System.Type,System.Object)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Enum::IsDefined:System.Boolean(System.Type,System.Object)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":29,\"ilOffset\":24,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":26,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":30,\"ilOffset\":27,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":29,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldtoken\",\"opCode\":70,\"operand\":\"System.Private.CoreLib/System.Byte\",\"ilOffset\":30,\"resultType\":\"System.RuntimeTypeHandle\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Byte\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Byte\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":35,\"resultType\":\"System.Type\",\"callee\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":40,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"box\",\"opCode\":35,\"operand\":\"System.Private.CoreLib/System.Int32\",\"ilOffset\":42,\"resultType\":\"System.Object\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Int32\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Int32\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":9,\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":47,\"resultType\":\"System.Boolean\",\"callee\":\"System.Private.CoreLib/System.Enum::IsDefined:System.Boolean(System.Type,System.Object)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Enum::IsDefined:System.Boolean(System.Type,System.Object)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Enum::IsDefined:System.Boolean(System.Type,System.Object)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":57,\"ilOffset\":52,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":54,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":58,\"ilOffset\":55,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":57,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":58,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":60,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":61,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":63,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":64,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":73,\"ilOffset\":65,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":67,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"ilOffset\":68,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"EnumParsingSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"EnumParsingSubjects\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":87,\"ilOffset\":74,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":76,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":78,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"ilOffset\":79,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"EnumParsingSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"EnumParsingSubjects\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":87,\"ilOffset\":85,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":87,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"EnumParsingSubjects\"}";
+static const char kMethodJson_6[] = "{\"methodId\":\"enum-parsing-subjects.enum-parsing-subjects.custom-entry-subject-6\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_6:System.Void()\",\"signature\":\"System.Void EnumParsingSubjects::CustomEntrySubject_6()\",\"identity\":{\"assemblyName\":\"EnumParsingSubjects\",\"declaringTypeSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects\",\"definitionSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_6:System.Void()\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_6:System.Void()\",\"methodId\":\"enum-parsing-subjects.enum-parsing-subjects.custom-entry-subject-6\",\"signature\":\"System.Void EnumParsingSubjects::CustomEntrySubject_6()\"},\"nativeSymbol\":\"EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_6\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldtoken\",\"opCode\":70,\"operand\":\"System.Private.CoreLib/System.DayOfWeek\",\"ilOffset\":1,\"resultType\":\"System.RuntimeTypeHandle\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.DayOfWeek\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.DayOfWeek\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":6,\"resultType\":\"System.Type\",\"callee\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldstr\",\"opCode\":4,\"operand\":\"Monday\",\"ilOffset\":11,\"resultType\":\"System.String\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":16,\"resultType\":\"System.Object\",\"callee\":\"System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":21,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":22,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":24,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":25,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":34,\"ilOffset\":26,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":28,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"ilOffset\":29,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"EnumParsingSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"EnumParsingSubjects\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":34,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"EnumParsingSubjects\"}";
+static const char kMethodJson_7[] = "{\"methodId\":\"enum-parsing-subjects.enum-parsing-subjects.custom-entry-subject-7\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_7:System.Void()\",\"signature\":\"System.Void EnumParsingSubjects::CustomEntrySubject_7()\",\"identity\":{\"assemblyName\":\"EnumParsingSubjects\",\"declaringTypeSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects\",\"definitionSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_7:System.Void()\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_7:System.Void()\",\"methodId\":\"enum-parsing-subjects.enum-parsing-subjects.custom-entry-subject-7\",\"signature\":\"System.Void EnumParsingSubjects::CustomEntrySubject_7()\"},\"nativeSymbol\":\"EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_7\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldtoken\",\"opCode\":70,\"operand\":\"System.Private.CoreLib/System.DayOfWeek\",\"ilOffset\":1,\"resultType\":\"System.RuntimeTypeHandle\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.DayOfWeek\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.DayOfWeek\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":6,\"resultType\":\"System.Type\",\"callee\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldstr\",\"opCode\":4,\"operand\":\"monday\",\"ilOffset\":11,\"resultType\":\"System.String\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":16,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":17,\"resultType\":\"System.Object\",\"callee\":\"System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String,System.Boolean)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String,System.Boolean)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String,System.Boolean)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":22,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":23,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":25,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":26,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":35,\"ilOffset\":27,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":29,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"ilOffset\":30,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"EnumParsingSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"EnumParsingSubjects\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":35,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"EnumParsingSubjects\"}";
+static const char kMethodJson_8[] = "{\"methodId\":\"enum-parsing-subjects.enum-parsing-subjects.subject-8\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::Subject_8:System.Void()\",\"signature\":\"System.Void EnumParsingSubjects::Subject_8()\",\"identity\":{\"assemblyName\":\"EnumParsingSubjects\",\"declaringTypeSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects\",\"definitionSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects::Subject_8:System.Void()\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::Subject_8:System.Void()\",\"methodId\":\"enum-parsing-subjects.enum-parsing-subjects.subject-8\",\"signature\":\"System.Void EnumParsingSubjects::Subject_8()\"},\"nativeSymbol\":\"EnumParsingSubjects_EnumParsingSubjects_Subject_8\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":83,\"handlerOffset\":84,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldtoken\",\"opCode\":70,\"operand\":\"System.Private.CoreLib/System.Byte\",\"ilOffset\":2,\"resultType\":\"System.RuntimeTypeHandle\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Byte\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Byte\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":7,\"resultType\":\"System.Type\",\"callee\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":12,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"box\",\"opCode\":35,\"operand\":\"System.Private.CoreLib/System.Byte\",\"ilOffset\":14,\"resultType\":\"System.Object\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Byte\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Byte\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":9,\"isPreserveSig\":false},{\"op\":\"ldstr\",\"opCode\":4,\"operand\":\"G\",\"ilOffset\":19,\"resultType\":\"System.String\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":24,\"resultType\":\"System.String\",\"callee\":\"System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":29,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldtoken\",\"opCode\":70,\"operand\":\"System.Private.CoreLib/System.Byte\",\"ilOffset\":34,\"resultType\":\"System.RuntimeTypeHandle\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Byte\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Byte\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":39,\"resultType\":\"System.Type\",\"callee\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":44,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"box\",\"opCode\":35,\"operand\":\"System.Private.CoreLib/System.Byte\",\"ilOffset\":46,\"resultType\":\"System.Object\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Byte\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Byte\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":9,\"isPreserveSig\":false},{\"op\":\"ldstr\",\"opCode\":4,\"operand\":\"G\",\"ilOffset\":51,\"resultType\":\"System.String\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":56,\"resultType\":\"System.String\",\"callee\":\"System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":61,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":66,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":68,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":69,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":71,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":72,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":81,\"ilOffset\":73,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":75,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"ilOffset\":76,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"EnumParsingSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"EnumParsingSubjects\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":95,\"ilOffset\":82,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":84,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":86,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"ilOffset\":87,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"EnumParsingSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"EnumParsingSubjects\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":95,\"ilOffset\":93,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":95,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"EnumParsingSubjects\"}";
+static const char kMethodJson_9[] = "{\"methodId\":\"enum-parsing-subjects.enum-parsing-subjects.subject-9\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::Subject_9:System.Void()\",\"signature\":\"System.Void EnumParsingSubjects::Subject_9()\",\"identity\":{\"assemblyName\":\"EnumParsingSubjects\",\"declaringTypeSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects\",\"definitionSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects::Subject_9:System.Void()\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::Subject_9:System.Void()\",\"methodId\":\"enum-parsing-subjects.enum-parsing-subjects.subject-9\",\"signature\":\"System.Void EnumParsingSubjects::Subject_9()\"},\"nativeSymbol\":\"EnumParsingSubjects_EnumParsingSubjects_Subject_9\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":83,\"handlerOffset\":84,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldtoken\",\"opCode\":70,\"operand\":\"System.Private.CoreLib/System.Byte\",\"ilOffset\":2,\"resultType\":\"System.RuntimeTypeHandle\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Byte\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Byte\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":7,\"resultType\":\"System.Type\",\"callee\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":12,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"box\",\"opCode\":35,\"operand\":\"System.Private.CoreLib/System.Byte\",\"ilOffset\":14,\"resultType\":\"System.Object\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Byte\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Byte\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":9,\"isPreserveSig\":false},{\"op\":\"ldstr\",\"opCode\":4,\"operand\":\"X\",\"ilOffset\":19,\"resultType\":\"System.String\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":24,\"resultType\":\"System.String\",\"callee\":\"System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":29,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldtoken\",\"opCode\":70,\"operand\":\"System.Private.CoreLib/System.Byte\",\"ilOffset\":34,\"resultType\":\"System.RuntimeTypeHandle\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Byte\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Byte\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":39,\"resultType\":\"System.Type\",\"callee\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":44,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"box\",\"opCode\":35,\"operand\":\"System.Private.CoreLib/System.Byte\",\"ilOffset\":46,\"resultType\":\"System.Object\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Byte\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Byte\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":9,\"isPreserveSig\":false},{\"op\":\"ldstr\",\"opCode\":4,\"operand\":\"X\",\"ilOffset\":51,\"resultType\":\"System.String\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":56,\"resultType\":\"System.String\",\"callee\":\"System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":61,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":66,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":68,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":69,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":71,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":72,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":81,\"ilOffset\":73,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":75,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"ilOffset\":76,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"EnumParsingSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"EnumParsingSubjects\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":95,\"ilOffset\":82,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":84,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":86,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"ilOffset\":87,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"EnumParsingSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"EnumParsingSubjects\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":95,\"ilOffset\":93,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":95,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"EnumParsingSubjects\"}";
+static const char kMethodJson_10[] = "{\"methodId\":\"enum-parsing-subjects.enum-parsing-subjects.custom-entry-subject-10\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_10:System.Void()\",\"signature\":\"System.Void EnumParsingSubjects::CustomEntrySubject_10()\",\"identity\":{\"assemblyName\":\"EnumParsingSubjects\",\"declaringTypeSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects\",\"definitionSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_10:System.Void()\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_10:System.Void()\",\"methodId\":\"enum-parsing-subjects.enum-parsing-subjects.custom-entry-subject-10\",\"signature\":\"System.Void EnumParsingSubjects::CustomEntrySubject_10()\"},\"nativeSymbol\":\"EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_10\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldtoken\",\"opCode\":70,\"operand\":\"System.Private.CoreLib/System.DayOfWeek\",\"ilOffset\":1,\"resultType\":\"System.RuntimeTypeHandle\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.DayOfWeek\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.DayOfWeek\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":6,\"resultType\":\"System.Type\",\"callee\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldstr\",\"opCode\":4,\"operand\":\"Monday\",\"ilOffset\":11,\"resultType\":\"System.String\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":16,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":0,\"ilOffset\":17,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":19,\"resultType\":\"System.Boolean\",\"callee\":\"System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Boolean,System.Object\\u0026)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Boolean,System.Object\\u0026)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Boolean,System.Object\\u0026)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":24,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":25,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":27,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":28,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":37,\"ilOffset\":29,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":31,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"ilOffset\":32,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"EnumParsingSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"EnumParsingSubjects\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":37,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"EnumParsingSubjects\"}";
+static const char kMethodJson_11[] = "{\"methodId\":\"enum-parsing-subjects.enum-parsing-subjects.custom-entry-subject-11\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_11:System.Void()\",\"signature\":\"System.Void EnumParsingSubjects::CustomEntrySubject_11()\",\"identity\":{\"assemblyName\":\"EnumParsingSubjects\",\"declaringTypeSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects\",\"definitionSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_11:System.Void()\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_11:System.Void()\",\"methodId\":\"enum-parsing-subjects.enum-parsing-subjects.custom-entry-subject-11\",\"signature\":\"System.Void EnumParsingSubjects::CustomEntrySubject_11()\"},\"nativeSymbol\":\"EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_11\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldtoken\",\"opCode\":70,\"operand\":\"System.Private.CoreLib/System.DayOfWeek\",\"ilOffset\":1,\"resultType\":\"System.RuntimeTypeHandle\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.DayOfWeek\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.DayOfWeek\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":6,\"resultType\":\"System.Type\",\"callee\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldstr\",\"opCode\":4,\"operand\":\"Monday\",\"ilOffset\":11,\"resultType\":\"System.String\",\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":0,\"ilOffset\":16,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":18,\"resultType\":\"System.Boolean\",\"callee\":\"System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Object\\u0026)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Object\\u0026)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Object\\u0026)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":23,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":24,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":26,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":1,\"ilOffset\":27,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":36,\"ilOffset\":28,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":30,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"ilOffset\":31,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"EnumParsingSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"EnumParsingSubjects\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":36,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"EnumParsingSubjects\"}";
+static const char kMethodJson_12[] = "{\"methodId\":\"enum-parsing-subjects.enum-parsing-subjects.custom-entry-subject-12\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_12:System.Void()\",\"signature\":\"System.Void EnumParsingSubjects::CustomEntrySubject_12()\",\"identity\":{\"assemblyName\":\"EnumParsingSubjects\",\"declaringTypeSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects\",\"definitionSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_12:System.Void()\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_12:System.Void()\",\"methodId\":\"enum-parsing-subjects.enum-parsing-subjects.custom-entry-subject-12\",\"signature\":\"System.Void EnumParsingSubjects::CustomEntrySubject_12()\"},\"nativeSymbol\":\"EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_12\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":1,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"box\",\"opCode\":35,\"operand\":\"System.Private.CoreLib/System.DayOfWeek\",\"ilOffset\":2,\"resultType\":\"System.Object\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.DayOfWeek\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.DayOfWeek\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":9,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":7,\"resultType\":\"System.String\",\"callee\":\"System.Private.CoreLib/System.Object::ToString:System.String()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::ToString:System.String()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::ToString:System.String()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":12,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":6,\"ilOffset\":17,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":18,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":20,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":21,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":23,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":24,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":33,\"ilOffset\":25,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":27,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"ilOffset\":28,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"EnumParsingSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"EnumParsingSubjects\",\"subjectId\":\"EnumParsingSubjects/EnumParsingSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"EnumParsingSubjects/EnumParsingSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":33,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"EnumParsingSubjects\"}";
+
+extern "C" const JitMethodEntry kChaosJitMethodEntries[13] =
+{
+    { kMethodJson_0, 10319u, 0x00000003u, 0u },
+    { kMethodJson_1, 10051u, 0x00000004u, 0u },
+    { kMethodJson_2, 10051u, 0x00000005u, 0u },
+    { kMethodJson_3, 7829u, 0x00000006u, 0u },
+    { kMethodJson_4, 8681u, 0x00000007u, 0u },
+    { kMethodJson_5, 9629u, 0x00000008u, 0u },
+    { kMethodJson_6, 4547u, 0x0000000Bu, 0u },
+    { kMethodJson_7, 4695u, 0x0000000Cu, 0u },
+    { kMethodJson_8, 10305u, 0x00000009u, 0u },
+    { kMethodJson_9, 10305u, 0x0000000Au, 0u },
+    { kMethodJson_10, 4892u, 0x0000000Du, 0u },
+    { kMethodJson_11, 4744u, 0x0000000Eu, 0u },
+    { kMethodJson_12, 4623u, 0x0000000Fu, 0u }
+};
+
+extern "C" const uint32_t kChaosJitMethodEntryCount = 13u;
+
+extern "C" void ChaosJitRegisterAll() {
+    RegisterJitMethods(kChaosJitMethodEntries, kChaosJitMethodEntryCount);
+}

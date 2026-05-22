@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Formats.Asn1",
+  "familyId": "family/System.Formats.Asn1/options/errors",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnContentException::.ctor:System.Void()",
+      "status": "passed",
+      "prePatchNsPerOp": 10143.52,
+      "postPatchNsPerOp": 15303.5,
+      "slowdownPercent": 50.87
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnContentException::.ctor:System.Void(System.String)",
+      "status": "passed",
+      "prePatchNsPerOp": 25713.68,
+      "postPatchNsPerOp": 20545.4,
+      "slowdownPercent": -20.1
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnContentException::.ctor:System.Void(System.String,System.Exception)",
+      "status": "passed",
+      "prePatchNsPerOp": 11686.98,
+      "postPatchNsPerOp": 17853.1,
+      "slowdownPercent": 52.76
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReaderOptions::get_SkipSetSortOrderVerification:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 99752.08,
+      "postPatchNsPerOp": 82418.6,
+      "slowdownPercent": -17.38
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReaderOptions::get_UtcTimeTwoDigitYearMax:System.Int32()",
+      "status": "passed",
+      "prePatchNsPerOp": 82268.73,
+      "postPatchNsPerOp": 69351.3,
+      "slowdownPercent": -15.7
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReaderOptions::set_SkipSetSortOrderVerification:System.Void(System.Boolean)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReaderOptions::set_UtcTimeTwoDigitYearMax:System.Void(System.Int32)",
+      "status": "stub"
+    }
+  ],
+  "summary": {
+    "totalMethods": 7,
+    "nonStubMethods": 5,
+    "averageSlowdownPercent": 10.09,
+    "slowdownFactor": 1.1009,
+    "slowdownThresholdX": 50.0
+  }
+}

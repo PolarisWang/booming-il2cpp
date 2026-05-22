@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "PrimitiveNumericConversionsSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/primitive-numeric-conversions/codegen/_subjects_input/PrimitiveNumericConversionsSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/primitive-numeric-conversions/managed/subjects/build-output/PrimitiveNumericConversionsSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "PrimitiveNumericConversionsSubjects",
-      "path": "testing/foundation-dll/System.Private.CoreLib/primitive-numeric-conversions/codegen/_subjects_input/PrimitiveNumericConversionsSubjects.dll"
+      "path": "testing/foundation-dll/System.Private.CoreLib/primitive-numeric-conversions/managed/subjects/build-output/PrimitiveNumericConversionsSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "d31026a3-ba44-4b5c-b25a-5ba84cb81d6a",
+  "inputModuleVersionId": "c29174d9-a148-4456-8722-055328daf02b",
   "artifacts": [
     {
       "kind": "typedIlIr",

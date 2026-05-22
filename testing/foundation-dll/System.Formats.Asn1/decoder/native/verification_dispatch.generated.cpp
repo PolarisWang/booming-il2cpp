@@ -1,5 +1,5 @@
 // verification_dispatch.generated.cpp — auto-generated
-// Assembly: DecoderSubjects, Methods: 31
+// Assembly: DecoderSubjects, Methods: 33
 #include <cstdint>
 #include <chrono>
 #include <chaos/native_types.h>

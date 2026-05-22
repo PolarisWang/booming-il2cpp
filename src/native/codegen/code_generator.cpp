@@ -102,6 +102,14 @@ private:
     };
     std::vector<DeoptJumpPatch> deopt_jump_patches_;
 
+    // Cold-path jump patch records (for Throw/Rethrow).
+    // A short JMP rel32 at patch_offset redirects to the cold section
+    // appended after the epilogue so hot-path code stays contiguous.
+    struct ColdPatch {
+        uint32_t patch_offset;  // offset of JMP rel32 displacement field
+    };
+    std::vector<ColdPatch> cold_patches_;
+
     // Jump table patch records (for Switch with >=4 cases).
     struct JumpTablePatch {
         uint32_t table_entry_offset;  // buffer offset of this .int32 entry
@@ -838,7 +846,7 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
 
     case IROpCode::LdcI4: {
         if (!instr.has_dst()) return false;
-        EmitMovRIImm32(buf_, kRAX, static_cast<uint32_t>(instr.imm.i4));
+        EmitMovRI32(buf_, kRAX, instr.imm.i4);
         StoreGpr(kRAX, instr.dst_reg());
         return true;
     }
@@ -1130,39 +1138,85 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
 
     // ── SEH opcodes ─────────────────────────────────────────────────
     case IROpCode::Leave: {
-        // Leave is semantically equivalent to Br in native code:
-        // the VEH handler manages exception unwinding if an exception
-        // is in flight; the non-exceptional path just branches.
         uint32_t target = instr.imm.branch_target;
-        if (target < current_instr_index_) EmitSafepointPoll();
-        uint32_t patch_off = buf_.pos() + 1;
-        EmitJmpRel32(buf_, 0);
-        branch_patches_.push_back({patch_off, target});
+
+        // SEH V3: Check if any finally/fault clause covers the current
+        // instruction.  If so, emit T4LeaveHelper call to set up pending_leave
+        // and redirect to the innermost finally handler.
+        bool has_finally_covering = false;
+        for (const auto& clause : rm_.seh_clauses) {
+            uint32_t flags = static_cast<uint32_t>(clause.flags);
+            uint32_t try_start = static_cast<uint32_t>(clause.try_start_idx);
+            uint32_t try_end = static_cast<uint32_t>(clause.try_end_idx);
+            if ((flags == 2 || flags == 4) &&
+                current_instr_index_ >= try_start &&
+                current_instr_index_ < try_end) {
+                has_finally_covering = true;
+                break;
+            }
+        }
+
+        if (has_finally_covering) {
+            // Leave crossing a finally/fault boundary: call T4LeaveHelper
+            // to resolve byte offsets at runtime and find the innermost handler.
+            EmitMovRIImm32(buf_, kRCX, target);              // arg1: target_instr_idx
+            EmitMovRIImm32(buf_, kRDX, current_instr_index_); // arg2: current_instr_idx
+            EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(T4LeaveHelper));
+            EmitCallWithSpill(kRAX);                          // RAX = handler addr or 0
+            EmitTestRR(buf_, kRAX, kRAX);                     // test rax, rax
+            uint32_t jz_pos = buf_.pos();
+            EmitJccRel32(buf_, kCC_E, 0);                     // jz .normal_jmp
+            EmitJmpReg(buf_, kRAX);                            // jmp rax → handler
+            // .normal_jmp: fall through to normal leave JMP
+            uint32_t normal_pos = buf_.pos();
+            int32_t jz_disp = static_cast<int32_t>(normal_pos - (jz_pos + 6));
+            buf_.Patch32(jz_pos + 2, static_cast<uint32_t>(jz_disp));
+            // Normal JMP to leave target (T4LeaveHelper returned 0 or
+            // finally chain completed and returned to leave path).
+            uint32_t patch_off = buf_.pos() + 1;
+            EmitJmpRel32(buf_, 0);
+            branch_patches_.push_back({patch_off, target});
+        } else {
+            // No finally/fault covering — normal JMP (current behavior).
+            if (target < current_instr_index_) EmitSafepointPoll();
+            uint32_t patch_off = buf_.pos() + 1;
+            EmitJmpRel32(buf_, 0);
+            branch_patches_.push_back({patch_off, target});
+        }
         return true;
     }
 
     case IROpCode::EndFinally:
     case IROpCode::EndFilter: {
-        // No-op in native code for V1.  The VEH handler redirects RIP
-        // on the exceptional path; non-exceptional fall-through works.
+        // SEH V3: call T4EndFinallyHelper to advance the finally/fault
+        // unwind chain.  Returns next handler address (non-zero) or 0
+        // (continue normally).
+        EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(T4EndFinallyHelper));
+        EmitCallWithSpill(kRAX);
+        EmitTestRR(buf_, kRAX, kRAX);
+        uint32_t jz_pos = buf_.pos();
+        EmitJccRel32(buf_, kCC_E, 0);     // jz .continue
+        EmitJmpReg(buf_, kRAX);            // jmp rax → next handler/leave target
+        // .continue: normal fall-through
+        uint32_t continue_pos = buf_.pos();
+        int32_t jz_disp = static_cast<int32_t>(continue_pos - (jz_pos + 6));
+        buf_.Patch32(jz_pos + 2, static_cast<uint32_t>(jz_disp));
         return true;
     }
 
     case IROpCode::Throw:
     case IROpCode::Rethrow: {
-        // Native throw via VEH: load exception object into RCX and call
-        // ChaosT4RaiseException.  The VEH handler walks the SEH clause table
-        // embedded in this method's code, finds a matching catch/finally
-        // handler, writes the exception object into all GPR register file
-        // slots, and redirects RIP to the handler code.
-        // If no handler is found, RaiseException returns and we hit INT3.
-        if (!instr.has_src1()) return false;  // Should not happen
+        // Deoptimize when register allocation is inconsistent
+        // (should not happen — the interpreter verifier ensures correct
+        //  src1 count for Throw/Rethrow; this is a safety check).
+        if (!instr.has_src1()) return false;
         LoadGpr(kRCX, instr.src1_reg());  // RCX = exception object
-        EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(ChaosT4RaiseException));
-        EmitCallWithSpill(kRAX);
-        // VEH handler redirects RIP on success — execution never returns here.
-        // INT3 safety net for the case where no handler is found.
-        buf_.EmitByte(0xCC);  // INT3
+        // JMP to cold section (patched after epilogue emission).
+        // Cold section contains ChaosT4RaiseException call + INT3 safety net.
+        // This keeps hot-path code contiguous for better icache behavior.
+        uint32_t jmp_off = buf_.pos();
+        EmitJmpRel32(buf_, 0);
+        cold_patches_.push_back({jmp_off + 1});
         return true;
     }
 
@@ -1716,7 +1770,7 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         if (!instr.has_src1() || !instr.has_src2()) return false;
         LoadGpr(kRAX, instr.src1_reg());
         LoadGpr(kRCX, instr.src2_reg());
-        EmitMovMR(buf_, kRCX, 0, kRAX);
+        EmitMovMR(buf_, kRAX, 0, kRCX);
         return true;
     }
 
@@ -2043,7 +2097,8 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
 
 static void OptimizeInstructions(
     CHAOS_IL2CPP_VECTOR(interpreter::RegisterInstruction)& instrs,
-    std::vector<uint8_t>& removed_mask) noexcept
+    std::vector<uint8_t>& removed_mask,
+    bool has_seh) noexcept
 {
     uint32_t n = static_cast<uint32_t>(instrs.size());
     if (n == 0) return;
@@ -2148,8 +2203,11 @@ static void OptimizeInstructions(
         auto& ri = instrs[i];
         auto opc = ri.op_code();
 
-        // (a) Constant folding — binary pure arithmetic with both srcs constant
-        if (IsFoldable(opc) && ri.has_dst() && ri.has_src1() && ri.has_src2()) {
+        // (a) Constant folding — binary pure arithmetic with both srcs constant.
+        // Skip when SEH exists: handler code placed linearly between branches
+        // and join points can define registers that don't reach the use through
+        // normal control flow, causing incorrect constant propagation.
+        if (!has_seh && IsFoldable(opc) && ri.has_dst() && ri.has_src1() && ri.has_src2()) {
             const int32_t* v1 = FindDefLdcI4(i, ri.src1_reg());
             const int32_t* v2 = FindDefLdcI4(i, ri.src2_reg());
             if (v1 && v2) {
@@ -2911,7 +2969,7 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
     auto opt_instrs = rm_.instructions;
     std::vector<uint8_t> removed_mask;
     if (config_.enable_optimizer)
-        OptimizeInstructions(opt_instrs, removed_mask);
+        OptimizeInstructions(opt_instrs, removed_mask, !rm_.seh_clauses.empty());
 
     // Emit instructions
     for (uint32_t i = 0; i < n_instrs; ++i) {
@@ -2951,6 +3009,24 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
     // Sentinel entry for instr_offsets_ — SEH clause end indices may point
     // one past the last instruction (exclusive-end convention).
     instr_offsets_.push_back(buf_.pos());
+
+    // ── Cold section (Throw/Rethrow handlers) ────────────────────────────
+    // Emitted after the epilogue so hot-path instructions stay contiguous
+    // (better icache utilization).  Each cold patch emits a short call to
+    // ChaosT4RaiseException + INT3.  The VEH handler redirects RIP on
+    // success, so we don't need register spill/reload (EmitCallReg is safe).
+    //
+    // NOTE: Do NOT use EmitCallWithSpill here — the cold path never returns
+    // normally (VEH redirects RIP), so register state preservation is not
+    // needed and would introduce unnecessary code in the hot section.
+    for (auto& cp : cold_patches_) {
+        uint32_t cold_target = buf_.pos();
+        EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(ChaosT4RaiseException));
+        EmitCallReg(buf_, kRAX);
+        buf_.EmitByte(0xCC);  // INT3 safety net
+        int32_t disp = static_cast<int32_t>(cold_target - (cp.patch_offset + 4));
+        buf_.Patch32(cp.patch_offset, static_cast<uint32_t>(disp));
+    }
 
     if (buf_.pos() == 0 || instr_offsets_.empty()) return nullptr;
 
@@ -2997,6 +3073,8 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
                      num_push_regs_, push_reg_nums_);
         eh_frame_offset_ = cie_off;
     }
+#endif
+
 #endif
 
     // ── Emit OSR entry stub ─────────────────────────────────────────────

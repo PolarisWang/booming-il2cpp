@@ -160,4 +160,52 @@ static void* ResolveDirectFn(
     return nullptr;
 }
 
+/// Tier 1 + Tier 2 only resolver for call_target resolution.
+///
+/// Excludes Tier 3 (kChaosExternalRuntimeFnTable) because those stubs use
+/// managed calling conventions that are incompatible with MethodInvoke.
+/// This is used by ResolveSubjectId for the call_target path; ResolveDirectFn
+/// (with all 3 tiers) is still used by DeserializeAotCoreIr for the direct_fn
+/// path where function pointers are called directly.
+void* ResolveDirectFnSafe(
+    const char* subject_id) noexcept
+{
+    if (subject_id == nullptr) return nullptr;
+
+    // Step 1: Try legacy AotDirectDispatch table.
+    if (g_direct_fn_count > 0) {
+        for (int i = 0; i < g_direct_fn_count; ++i) {
+            if (g_direct_fn_subjects[i] != nullptr &&
+                std::strcmp(g_direct_fn_subjects[i], subject_id) == 0) {
+                return const_cast<void*>(g_direct_fn_table[i]);
+            }
+        }
+    }
+
+    // Step 2: HotpatchNameRegistry — resolves cross-module calls to native
+    // AOT direct_ptr registered during BootstrapRuntime.
+    {
+        std::string ns, type_name, method_name;
+        ParseSubjectIdForHotpatchLookup(subject_id, ns, type_name, method_name);
+        if (!type_name.empty() && !method_name.empty()) {
+            auto& registry = GetHotpatchNameRegistry();
+            uint64_t lookup = registry.LookupMethod(
+                ns.c_str(), type_name.c_str(), method_name.c_str());
+            if (lookup != 0) {
+                uint32_t module_id = ExtractModuleId(lookup);
+                uint32_t token = ExtractToken(lookup);
+                uint32_t slot = registry.TokenToSlot(module_id, token);
+                if (slot != ~0u) {
+                    auto* entry = registry.GetDispatchEntryBySlot(module_id, slot);
+                    if (entry != nullptr && entry->direct_ptr != nullptr) {
+                        return entry->direct_ptr;
+                    }
+                }
+            }
+        }
+    }
+
+    return nullptr;
+}
+
 }  // namespace chaos::il2cpp::runtime_core

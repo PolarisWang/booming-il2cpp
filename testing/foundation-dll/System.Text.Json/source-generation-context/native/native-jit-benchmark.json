@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Text.Json",
+  "familyId": "family/System.Text.Json/source/generation/context",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.JsonSerializerContext::get_Options:System.Text.Json.JsonSerializerOptions()",
+      "elapsedMilliseconds": 10294.706,
+      "calibratedMs": 10294.706,
+      "opsPerSecond": 9713.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.JsonSerializerContext::GetTypeInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo(System.Type)",
+      "elapsedMilliseconds": 10602.012,
+      "calibratedMs": 10602.012,
+      "opsPerSecond": 9432.2,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}

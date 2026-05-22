@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Linq",
+  "familyId": "family/System.Linq/projection",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Select{TSource,TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TResult})",
+      "status": "passed",
+      "prePatchNsPerOp": 207.22,
+      "postPatchNsPerOp": 237.7,
+      "slowdownPercent": 14.71
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Select{TSource,TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Int32,TResult})",
+      "status": "passed",
+      "prePatchNsPerOp": 1.95,
+      "postPatchNsPerOp": 3.4,
+      "slowdownPercent": 74.36
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::SelectMany{TSource,TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Collections.Generic.IEnumerable{TResult}})",
+      "status": "passed",
+      "prePatchNsPerOp": 231.19,
+      "postPatchNsPerOp": 266.0,
+      "slowdownPercent": 15.06
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::SelectMany{TSource,TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Int32,System.Collections.Generic.IEnumerable{TResult}})",
+      "status": "passed",
+      "prePatchNsPerOp": 2.06,
+      "postPatchNsPerOp": 4.4,
+      "slowdownPercent": 113.59
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::SelectMany{TSource,TCollection,TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Int32,System.Collections.Generic.IEnumerable{TCollection}},System.Func{TSource,TCollection,TResult})",
+      "status": "passed",
+      "prePatchNsPerOp": 229.47,
+      "postPatchNsPerOp": 297.0,
+      "slowdownPercent": 29.43
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::SelectMany{TSource,TCollection,TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Collections.Generic.IEnumerable{TCollection}},System.Func{TSource,TCollection,TResult})",
+      "status": "passed",
+      "prePatchNsPerOp": 196.94,
+      "postPatchNsPerOp": 244.1,
+      "slowdownPercent": 23.95
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Zip{TFirst,TSecond,TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.Generic.IEnumerable{TFirst},System.Collections.Generic.IEnumerable{TSecond},System.Func{TFirst,TSecond,TResult})",
+      "status": "passed",
+      "prePatchNsPerOp": 232.52,
+      "postPatchNsPerOp": 283.4,
+      "slowdownPercent": 21.88
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Zip{TFirst,TSecond}:System.Collections.Generic.IEnumerable{System.ValueTuple{TFirst,TSecond}}(System.Collections.Generic.IEnumerable{TFirst},System.Collections.Generic.IEnumerable{TSecond})",
+      "status": "passed",
+      "prePatchNsPerOp": 213.78,
+      "postPatchNsPerOp": 273.2,
+      "slowdownPercent": 27.79
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Zip{TFirst,TSecond,TThird}:System.Collections.Generic.IEnumerable{System.ValueTuple{TFirst,TSecond,TThird}}(System.Collections.Generic.IEnumerable{TFirst},System.Collections.Generic.IEnumerable{TSecond},System.Collections.Generic.IEnumerable{TThird})",
+      "status": "passed",
+      "prePatchNsPerOp": 236.47,
+      "postPatchNsPerOp": 244.7,
+      "slowdownPercent": 3.48
+    }
+  ],
+  "summary": {
+    "totalMethods": 9,
+    "nonStubMethods": 9,
+    "averageSlowdownPercent": 36.03,
+    "slowdownFactor": 1.3603,
+    "slowdownThresholdX": 50.0
+  }
+}

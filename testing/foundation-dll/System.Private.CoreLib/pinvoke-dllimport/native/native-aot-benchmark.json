@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/pinvoke/dllimport",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "PinvokeDllimportNativeEntry/PinvokeDllimportNativeEntry::TestGetCurrentProcess:System.Int32()",
+      "elapsedMilliseconds": 0.381,
+      "calibratedMs": 0.381,
+      "opsPerSecond": 262260687.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "PinvokeDllimportNativeEntry/PinvokeDllimportNativeEntry::TestGetCurrentThread:System.Int32()",
+      "elapsedMilliseconds": 0.361,
+      "calibratedMs": 0.361,
+      "opsPerSecond": 277085065.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "PinvokeDllimportNativeEntry/PinvokeDllimportNativeEntry::TestGetProcessId:System.Int32()",
+      "elapsedMilliseconds": 0.379,
+      "calibratedMs": 0.379,
+      "opsPerSecond": 263574064.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "PinvokeDllimportNativeEntry/PinvokeDllimportNativeEntry::TestGetModuleHandle:System.Int32()",
+      "elapsedMilliseconds": 0.387,
+      "calibratedMs": 0.387,
+      "opsPerSecond": 258598396.7,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}

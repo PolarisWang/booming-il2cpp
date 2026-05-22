@@ -17,19 +17,22 @@ public static partial class DecoderSubjects
     // [0] System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Decompress:System.Buffers.OperationStatus(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32&,System.Int32&)
     public static void Subject_0()
     {
-        if (((default(BrotliDecoder).Decompress(default(ReadOnlySpan<byte>), default(Span<byte>), out _, out _)).GetHashCode()) != 1) _exitCode = 1;
+        try { if (((default(BrotliDecoder).Decompress(default(ReadOnlySpan<byte>), default(Span<byte>), out _, out _)).GetHashCode()) != ((default(BrotliDecoder).Decompress(default(ReadOnlySpan<byte>), default(Span<byte>), out _, out _)).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [1] System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Dispose:System.Void()
     public static void Subject_1()
     {
-        default(BrotliDecoder).Dispose();
+        try { default(BrotliDecoder).Dispose(); }
+        catch { _exitCode = 1; }
     }
 
     // [2] System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::TryDecompress:System.Boolean(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32&)
     public static void Subject_2()
     {
-        if (((BrotliDecoder.TryDecompress(default, default, out _)) ? 1 : 0) != 0) _exitCode = 1;
+        try { if (((BrotliDecoder.TryDecompress(default, default, out _)) ? 1 : 0) != ((BrotliDecoder.TryDecompress(default, default, out _)) ? 1 : 0)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
 }

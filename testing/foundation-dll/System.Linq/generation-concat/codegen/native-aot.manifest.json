@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "GenerationConcatSubjects",
   "entrySubjectId": "GenerationConcatSubjects/GenerationConcatSubjects::CustomEntrySubject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Linq/generation-concat/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.Linq/generation-concat/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

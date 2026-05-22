@@ -24,28 +24,37 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 3,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 63,
+          "handlerOffset": 64,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
       "instructions": [
         {
           "op": "ldloca",
           "opCode": 76,
           "operand": 1,
-          "ilOffset": 1,
+          "ilOffset": 2,
           "resultType": "System.IntPtr",
           "isPreserveSig": false
         },
         {
           "op": "dup",
           "opCode": 54,
-          "ilOffset": 3,
+          "ilOffset": 4,
           "isPreserveSig": false
         },
         {
           "op": "initobj",
           "opCode": 71,
           "operand": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E",
-          "ilOffset": 4,
+          "ilOffset": 5,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "System.Net.ServerSentEvents",
@@ -69,7 +78,7 @@
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 10,
+          "ilOffset": 11,
           "resultType": "System.Byte",
           "callee": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E::get_Data:System.Byte()",
           "reference": {
@@ -134,7 +143,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 2,
-          "ilOffset": 15,
+          "ilOffset": 16,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -142,14 +151,14 @@
           "op": "ldloca",
           "opCode": 76,
           "operand": 2,
-          "ilOffset": 16,
+          "ilOffset": 17,
           "resultType": "System.IntPtr",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 18,
+          "ilOffset": 19,
           "resultType": "System.Int32",
           "callee": "System.Private.CoreLib/System.Byte::GetHashCode:System.Int32()",
           "reference": {
@@ -172,17 +181,168 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 23,
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 1,
+          "ilOffset": 24,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 26,
+          "isPreserveSig": false
+        },
+        {
+          "op": "initobj",
+          "opCode": 71,
+          "operand": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E",
+          "ilOffset": 27,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "System.Net.ServerSentEvents",
+            "subjectKind": "type",
+            "subjectId": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Net.ServerSentEvents",
+            "subjectId": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 14,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 33,
+          "resultType": "System.Byte",
+          "callee": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E::get_Data:System.Byte()",
+          "reference": {
+            "assemblyName": "System.Net.ServerSentEvents",
+            "subjectKind": "method",
+            "subjectId": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E::get_Data:System.Byte()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Net.ServerSentEvents",
+            "subjectId": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E::get_Data:System.Byte()",
+            "openDefinitionSubjectId": "System.Net.ServerSentEvents/SseItem\u00601::get_Data:!0()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Net.ServerSentEvents/SseItem\u00601::get_Data:!0();type=[System.Byte];method=[]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Net.ServerSentEvents/SseItem\u00601::get_Data:!0();type=[System.Byte];method=[]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Net.ServerSentEvents/SseItem\u00601::get_Data:!0()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Net.ServerSentEvents/SseItem\u00601::get_Data:!0();type=[System.Byte];method=[]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Net.ServerSentEvents/SseItem\u00601::get_Data:!0();type=[System.Byte];method=[]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 1,
+              "statusReasonCode": "loader-demand:memberReference"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E::get_Data:System.Byte()",
+              "definitionSubjectId": "System.Net.ServerSentEvents/SseItem\u00601::get_Data:!0()",
+              "displaySubjectId": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E::get_Data()",
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Net.ServerSentEvents/SseItem\u00601::get_Data:!0()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 2,
+          "ilOffset": 38,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 2,
+          "ilOffset": 39,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 41,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Byte::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Byte::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Byte::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 46,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
-          "op": "cgt.un",
-          "opCode": 33,
-          "ilOffset": 24,
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 48,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 49,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -190,7 +350,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 26,
+          "ilOffset": 51,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -198,14 +358,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 27,
+          "ilOffset": 52,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 36,
-          "ilOffset": 28,
+          "operand": 61,
+          "ilOffset": 53,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -213,7 +373,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 30,
+          "ilOffset": 55,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -221,7 +381,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "SseItemSubjects/SseItemSubjects::_exitCode",
-          "ilOffset": 31,
+          "ilOffset": 56,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "SseItemSubjects",
@@ -245,9 +405,66 @@
           "isPreserveSig": false
         },
         {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 75,
+          "ilOffset": 62,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 64,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 66,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "SseItemSubjects/SseItemSubjects::_exitCode",
+          "ilOffset": 67,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "SseItemSubjects",
+            "subjectKind": "field",
+            "subjectId": "SseItemSubjects/SseItemSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "SseItemSubjects",
+            "subjectId": "SseItemSubjects/SseItemSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "SseItemSubjects/SseItemSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 75,
+          "ilOffset": 73,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 36,
+          "ilOffset": 75,
           "isPreserveSig": false
         }
       ],
@@ -282,23 +499,23 @@
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 1,
+      "localCount": 2,
       "exceptionRegionCount": 1,
       "exceptionRegions": [
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 25,
-          "handlerOffset": 26,
-          "handlerLength": 5,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+          "tryLength": 57,
+          "handlerOffset": 58,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
         {
           "op": "ldloca",
           "opCode": 76,
-          "operand": 0,
+          "operand": 1,
           "ilOffset": 2,
           "resultType": "System.IntPtr",
           "isPreserveSig": false
@@ -399,16 +616,208 @@
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
+          "op": "callvirt",
+          "opCode": 15,
           "ilOffset": 16,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 1,
+          "ilOffset": 21,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        },
+        {
+          "op": "initobj",
+          "opCode": 71,
+          "operand": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E",
+          "ilOffset": 24,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "System.Net.ServerSentEvents",
+            "subjectKind": "type",
+            "subjectId": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Net.ServerSentEvents",
+            "subjectId": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 14,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 30,
+          "resultType": "System.String",
+          "callee": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E::get_EventId:System.String()",
+          "reference": {
+            "assemblyName": "System.Net.ServerSentEvents",
+            "subjectKind": "method",
+            "subjectId": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E::get_EventId:System.String()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Net.ServerSentEvents",
+            "subjectId": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E::get_EventId:System.String()",
+            "openDefinitionSubjectId": "System.Net.ServerSentEvents/SseItem\u00601::get_EventId:System.String()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Net.ServerSentEvents/SseItem\u00601::get_EventId:System.String();type=[System.Byte];method=[]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Net.ServerSentEvents/SseItem\u00601::get_EventId:System.String();type=[System.Byte];method=[]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Net.ServerSentEvents/SseItem\u00601::get_EventId:System.String()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Net.ServerSentEvents/SseItem\u00601::get_EventId:System.String();type=[System.Byte];method=[]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Net.ServerSentEvents/SseItem\u00601::get_EventId:System.String();type=[System.Byte];method=[]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 1,
+              "statusReasonCode": "loader-demand:memberReference"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E::get_EventId:System.String()",
+              "definitionSubjectId": "System.Net.ServerSentEvents/SseItem\u00601::get_EventId:System.String()",
+              "displaySubjectId": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E::get_EventId()",
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Net.ServerSentEvents/SseItem\u00601::get_EventId:System.String()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 35,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 40,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 42,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 43,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 45,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 46,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 55,
+          "ilOffset": 47,
+          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 17,
+          "ilOffset": 49,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -416,7 +825,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "SseItemSubjects/SseItemSubjects::_exitCode",
-          "ilOffset": 18,
+          "ilOffset": 50,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "SseItemSubjects",
@@ -442,29 +851,64 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 31,
-          "ilOffset": 24,
+          "operand": 69,
+          "ilOffset": 56,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 26,
+          "ilOffset": 58,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 60,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "SseItemSubjects/SseItemSubjects::_exitCode",
+          "ilOffset": 61,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "SseItemSubjects",
+            "subjectKind": "field",
+            "subjectId": "SseItemSubjects/SseItemSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "SseItemSubjects",
+            "subjectId": "SseItemSubjects/SseItemSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "SseItemSubjects/SseItemSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
           "isPreserveSig": false
         },
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 31,
-          "ilOffset": 29,
+          "operand": 69,
+          "ilOffset": 67,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 31,
+          "ilOffset": 69,
           "isPreserveSig": false
         }
       ],
@@ -500,28 +944,37 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 2,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 57,
+          "handlerOffset": 58,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
       "instructions": [
         {
           "op": "ldloca",
           "opCode": 76,
           "operand": 1,
-          "ilOffset": 1,
+          "ilOffset": 2,
           "resultType": "System.IntPtr",
           "isPreserveSig": false
         },
         {
           "op": "dup",
           "opCode": 54,
-          "ilOffset": 3,
+          "ilOffset": 4,
           "isPreserveSig": false
         },
         {
           "op": "initobj",
           "opCode": 71,
           "operand": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E",
-          "ilOffset": 4,
+          "ilOffset": 5,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "System.Net.ServerSentEvents",
@@ -545,7 +998,7 @@
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 10,
+          "ilOffset": 11,
           "resultType": "System.String",
           "callee": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E::get_EventType:System.String()",
           "reference": {
@@ -609,7 +1062,7 @@
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 15,
+          "ilOffset": 16,
           "resultType": "System.Int32",
           "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
           "reference": {
@@ -632,17 +1085,137 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 7,
-          "ilOffset": 20,
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 1,
+          "ilOffset": 21,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 23,
+          "isPreserveSig": false
+        },
+        {
+          "op": "initobj",
+          "opCode": 71,
+          "operand": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E",
+          "ilOffset": 24,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "System.Net.ServerSentEvents",
+            "subjectKind": "type",
+            "subjectId": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Net.ServerSentEvents",
+            "subjectId": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 14,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 30,
+          "resultType": "System.String",
+          "callee": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E::get_EventType:System.String()",
+          "reference": {
+            "assemblyName": "System.Net.ServerSentEvents",
+            "subjectKind": "method",
+            "subjectId": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E::get_EventType:System.String()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Net.ServerSentEvents",
+            "subjectId": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E::get_EventType:System.String()",
+            "openDefinitionSubjectId": "System.Net.ServerSentEvents/SseItem\u00601::get_EventType:System.String()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Net.ServerSentEvents/SseItem\u00601::get_EventType:System.String();type=[System.Byte];method=[]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Net.ServerSentEvents/SseItem\u00601::get_EventType:System.String();type=[System.Byte];method=[]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Net.ServerSentEvents/SseItem\u00601::get_EventType:System.String()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Net.ServerSentEvents/SseItem\u00601::get_EventType:System.String();type=[System.Byte];method=[]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Net.ServerSentEvents/SseItem\u00601::get_EventType:System.String();type=[System.Byte];method=[]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 1,
+              "statusReasonCode": "loader-demand:memberReference"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E::get_EventType:System.String()",
+              "definitionSubjectId": "System.Net.ServerSentEvents/SseItem\u00601::get_EventType:System.String()",
+              "displaySubjectId": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E::get_EventType()",
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Net.ServerSentEvents/SseItem\u00601::get_EventType:System.String()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 35,
           "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 21,
+          "ilOffset": 40,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -650,14 +1223,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 23,
+          "ilOffset": 42,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 24,
+          "ilOffset": 43,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -665,7 +1238,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 26,
+          "ilOffset": 45,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -673,14 +1246,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 27,
+          "ilOffset": 46,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 36,
-          "ilOffset": 28,
+          "operand": 55,
+          "ilOffset": 47,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -688,7 +1261,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 30,
+          "ilOffset": 49,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -696,7 +1269,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "SseItemSubjects/SseItemSubjects::_exitCode",
-          "ilOffset": 31,
+          "ilOffset": 50,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "SseItemSubjects",
@@ -720,9 +1293,66 @@
           "isPreserveSig": false
         },
         {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 69,
+          "ilOffset": 56,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 58,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 60,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "SseItemSubjects/SseItemSubjects::_exitCode",
+          "ilOffset": 61,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "SseItemSubjects",
+            "subjectKind": "field",
+            "subjectId": "SseItemSubjects/SseItemSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "SseItemSubjects",
+            "subjectId": "SseItemSubjects/SseItemSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "SseItemSubjects/SseItemSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 69,
+          "ilOffset": 67,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 36,
+          "ilOffset": 69,
           "isPreserveSig": false
         }
       ],
@@ -758,28 +1388,37 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 3,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 75,
+          "handlerOffset": 76,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
       "instructions": [
         {
           "op": "ldloca",
           "opCode": 76,
           "operand": 1,
-          "ilOffset": 1,
+          "ilOffset": 2,
           "resultType": "System.IntPtr",
           "isPreserveSig": false
         },
         {
           "op": "dup",
           "opCode": 54,
-          "ilOffset": 3,
+          "ilOffset": 4,
           "isPreserveSig": false
         },
         {
           "op": "initobj",
           "opCode": 71,
           "operand": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E",
-          "ilOffset": 4,
+          "ilOffset": 5,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "System.Net.ServerSentEvents",
@@ -803,7 +1442,7 @@
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 10,
+          "ilOffset": 11,
           "resultType": "System.Nullable\u003CSystem.TimeSpan\u003E",
           "callee": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E::get_ReconnectionInterval:System.Nullable\u003CSystem.TimeSpan\u003E()",
           "reference": {
@@ -868,7 +1507,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 2,
-          "ilOffset": 15,
+          "ilOffset": 16,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -876,14 +1515,14 @@
           "op": "ldloca",
           "opCode": 76,
           "operand": 2,
-          "ilOffset": 16,
+          "ilOffset": 17,
           "resultType": "System.IntPtr",
           "isPreserveSig": false
         },
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 24,
+          "ilOffset": 25,
           "resultType": "System.Int32",
           "callee": "System.Private.CoreLib/System.Nullable\u003CSystem.TimeSpan\u003E::GetHashCode:System.Int32()",
           "reference": {
@@ -907,17 +1546,169 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 29,
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 1,
+          "ilOffset": 30,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 32,
+          "isPreserveSig": false
+        },
+        {
+          "op": "initobj",
+          "opCode": 71,
+          "operand": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E",
+          "ilOffset": 33,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "System.Net.ServerSentEvents",
+            "subjectKind": "type",
+            "subjectId": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Net.ServerSentEvents",
+            "subjectId": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 14,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 39,
+          "resultType": "System.Nullable\u003CSystem.TimeSpan\u003E",
+          "callee": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E::get_ReconnectionInterval:System.Nullable\u003CSystem.TimeSpan\u003E()",
+          "reference": {
+            "assemblyName": "System.Net.ServerSentEvents",
+            "subjectKind": "method",
+            "subjectId": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E::get_ReconnectionInterval:System.Nullable\u003CSystem.TimeSpan\u003E()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Net.ServerSentEvents",
+            "subjectId": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E::get_ReconnectionInterval:System.Nullable\u003CSystem.TimeSpan\u003E()",
+            "openDefinitionSubjectId": "System.Net.ServerSentEvents/SseItem\u00601::get_ReconnectionInterval:System.Nullable\u003CSystem.TimeSpan\u003E()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Net.ServerSentEvents/SseItem\u00601::get_ReconnectionInterval:System.Nullable\u003CSystem.TimeSpan\u003E();type=[System.Byte];method=[]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Net.ServerSentEvents/SseItem\u00601::get_ReconnectionInterval:System.Nullable\u003CSystem.TimeSpan\u003E();type=[System.Byte];method=[]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Net.ServerSentEvents/SseItem\u00601::get_ReconnectionInterval:System.Nullable\u003CSystem.TimeSpan\u003E()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Net.ServerSentEvents/SseItem\u00601::get_ReconnectionInterval:System.Nullable\u003CSystem.TimeSpan\u003E();type=[System.Byte];method=[]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Net.ServerSentEvents/SseItem\u00601::get_ReconnectionInterval:System.Nullable\u003CSystem.TimeSpan\u003E();type=[System.Byte];method=[]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 1,
+              "statusReasonCode": "loader-demand:memberReference"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E::get_ReconnectionInterval:System.Nullable\u003CSystem.TimeSpan\u003E()",
+              "definitionSubjectId": "System.Net.ServerSentEvents/SseItem\u00601::get_ReconnectionInterval:System.Nullable\u003CSystem.TimeSpan\u003E()",
+              "displaySubjectId": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E::get_ReconnectionInterval()",
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.Net.ServerSentEvents/SseItem\u00601::get_ReconnectionInterval:System.Nullable\u003CSystem.TimeSpan\u003E()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 2,
+          "ilOffset": 44,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 2,
+          "ilOffset": 45,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 53,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Nullable\u003CSystem.TimeSpan\u003E::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 1,
+          "constrainedTypeSubjectId": "System.Private.CoreLib/System.Nullable\u003CSystem.TimeSpan\u003E",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 58,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
-          "op": "cgt.un",
-          "opCode": 33,
-          "ilOffset": 30,
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 60,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 61,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -925,7 +1716,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 32,
+          "ilOffset": 63,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -933,14 +1724,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 33,
+          "ilOffset": 64,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 42,
-          "ilOffset": 34,
+          "operand": 73,
+          "ilOffset": 65,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -948,7 +1739,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 36,
+          "ilOffset": 67,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -956,7 +1747,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "SseItemSubjects/SseItemSubjects::_exitCode",
-          "ilOffset": 37,
+          "ilOffset": 68,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "SseItemSubjects",
@@ -980,9 +1771,66 @@
           "isPreserveSig": false
         },
         {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 87,
+          "ilOffset": 74,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 76,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 78,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "SseItemSubjects/SseItemSubjects::_exitCode",
+          "ilOffset": 79,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "SseItemSubjects",
+            "subjectKind": "field",
+            "subjectId": "SseItemSubjects/SseItemSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "SseItemSubjects",
+            "subjectId": "SseItemSubjects/SseItemSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "SseItemSubjects/SseItemSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 87,
+          "ilOffset": 85,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 42,
+          "ilOffset": 87,
           "isPreserveSig": false
         }
       ],

@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "StreamAdaptersSubjects",
   "entrySubjectId": "StreamAdaptersSubjects/StreamAdaptersSubjects::Subject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.IO.Pipelines/stream-adapters/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.IO.Pipelines/stream-adapters/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Runtime.Serialization.Formatters",
+  "familyId": "family/System.Runtime.Serialization.Formatters/formatter/base",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatter::Deserialize:System.Object(System.IO.Stream)",
+      "elapsedMilliseconds": 8428.558,
+      "calibratedMs": 8428.558,
+      "opsPerSecond": 11864.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatter::get_Binder:System.Runtime.Serialization.SerializationBinder()",
+      "elapsedMilliseconds": 7238.809,
+      "calibratedMs": 7238.809,
+      "opsPerSecond": 13814.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatter::get_Context:System.Runtime.Serialization.StreamingContext()",
+      "elapsedMilliseconds": 7942.874,
+      "calibratedMs": 7942.874,
+      "opsPerSecond": 12589.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatter::get_SurrogateSelector:System.Runtime.Serialization.ISurrogateSelector()",
+      "elapsedMilliseconds": 8613.861,
+      "calibratedMs": 8613.861,
+      "opsPerSecond": 11609.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatter::Serialize:System.Void(System.IO.Stream,System.Object)",
+      "elapsedMilliseconds": 3915.416,
+      "calibratedMs": 3915.416,
+      "opsPerSecond": 25540.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatter::set_Binder:System.Void(System.Runtime.Serialization.SerializationBinder)",
+      "elapsedMilliseconds": 3522.228,
+      "calibratedMs": 3522.228,
+      "opsPerSecond": 28391.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatter::set_Context:System.Void(System.Runtime.Serialization.StreamingContext)",
+      "elapsedMilliseconds": 4195.319,
+      "calibratedMs": 4195.319,
+      "opsPerSecond": 23836.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatter::set_SurrogateSelector:System.Void(System.Runtime.Serialization.ISurrogateSelector)",
+      "elapsedMilliseconds": 3979.019,
+      "calibratedMs": 3979.019,
+      "opsPerSecond": 25131.8,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.IFormatter::Deserialize:System.Object(System.IO.Stream)",
+      "elapsedMilliseconds": 8687.024,
+      "calibratedMs": 8687.024,
+      "opsPerSecond": 11511.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.IFormatter::get_Binder:System.Runtime.Serialization.SerializationBinder()",
+      "elapsedMilliseconds": 11770.695,
+      "calibratedMs": 11770.695,
+      "opsPerSecond": 8495.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.IFormatter::get_Context:System.Runtime.Serialization.StreamingContext()",
+      "elapsedMilliseconds": 15287.567,
+      "calibratedMs": 15287.567,
+      "opsPerSecond": 6541.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.IFormatter::get_SurrogateSelector:System.Runtime.Serialization.ISurrogateSelector()",
+      "elapsedMilliseconds": 12412.273,
+      "calibratedMs": 12412.273,
+      "opsPerSecond": 8056.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.IFormatter::Serialize:System.Void(System.IO.Stream,System.Object)",
+      "elapsedMilliseconds": 6120.704,
+      "calibratedMs": 6120.704,
+      "opsPerSecond": 16338.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 13,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.IFormatter::set_Binder:System.Void(System.Runtime.Serialization.SerializationBinder)",
+      "elapsedMilliseconds": 5650.914,
+      "calibratedMs": 5650.914,
+      "opsPerSecond": 17696.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 14,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.IFormatter::set_Context:System.Void(System.Runtime.Serialization.StreamingContext)",
+      "elapsedMilliseconds": 8807.649,
+      "calibratedMs": 8807.649,
+      "opsPerSecond": 11353.8,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 15,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.IFormatter::set_SurrogateSelector:System.Void(System.Runtime.Serialization.ISurrogateSelector)",
+      "elapsedMilliseconds": 7523.672,
+      "calibratedMs": 7523.672,
+      "opsPerSecond": 13291.4,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}

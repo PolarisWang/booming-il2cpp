@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Linq",
+  "familyId": "family/System.Linq/grouping/lookup",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::GroupBy{TSource,TKey}:System.Collections.Generic.IEnumerable{System.Linq.IGrouping{TKey,TSource}}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey})",
+      "status": "passed",
+      "prePatchNsPerOp": 85594.26,
+      "postPatchNsPerOp": 81140.9,
+      "slowdownPercent": -5.2
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::GroupBy{TSource,TKey}:System.Collections.Generic.IEnumerable{System.Linq.IGrouping{TKey,TSource}}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey},System.Collections.Generic.IEqualityComparer{TKey})",
+      "status": "passed",
+      "prePatchNsPerOp": 9504.29,
+      "postPatchNsPerOp": 19087.1,
+      "slowdownPercent": 100.83
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::GroupBy{TSource,TKey,TElement}:System.Collections.Generic.IEnumerable{System.Linq.IGrouping{TKey,TElement}}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey},System.Func{TSource,TElement})",
+      "status": "passed",
+      "prePatchNsPerOp": 76045.39,
+      "postPatchNsPerOp": 85140.5,
+      "slowdownPercent": 11.96
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::GroupBy{TSource,TKey,TElement}:System.Collections.Generic.IEnumerable{System.Linq.IGrouping{TKey,TElement}}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey},System.Func{TSource,TElement},System.Collections.Generic.IEqualityComparer{TKey})",
+      "status": "passed",
+      "prePatchNsPerOp": 14644.39,
+      "postPatchNsPerOp": 20837.6,
+      "slowdownPercent": 42.29
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::GroupBy{TSource,TKey,TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey},System.Func{TKey,System.Collections.Generic.IEnumerable{TSource},TResult})",
+      "status": "passed",
+      "prePatchNsPerOp": 96788.26,
+      "postPatchNsPerOp": 86189.3,
+      "slowdownPercent": -10.95
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::GroupBy{TSource,TKey,TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey},System.Func{TKey,System.Collections.Generic.IEnumerable{TSource},TResult},System.Collections.Generic.IEqualityComparer{TKey})",
+      "status": "passed",
+      "prePatchNsPerOp": 12889.4,
+      "postPatchNsPerOp": 25778.8,
+      "slowdownPercent": 100.0
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::GroupBy{TSource,TKey,TElement,TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey},System.Func{TSource,TElement},System.Func{TKey,System.Collections.Generic.IEnumerable{TElement},TResult})",
+      "status": "passed",
+      "prePatchNsPerOp": 11848.24,
+      "postPatchNsPerOp": 19870.6,
+      "slowdownPercent": 67.71
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::GroupBy{TSource,TKey,TElement,TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey},System.Func{TSource,TElement},System.Func{TKey,System.Collections.Generic.IEnumerable{TElement},TResult},System.Collections.Generic.IEqualityComparer{TKey})",
+      "status": "passed",
+      "prePatchNsPerOp": 100508.48,
+      "postPatchNsPerOp": 95410.1,
+      "slowdownPercent": -5.07
+    }
+  ],
+  "summary": {
+    "totalMethods": 8,
+    "nonStubMethods": 8,
+    "averageSlowdownPercent": 37.7,
+    "slowdownFactor": 1.3769999999999998,
+    "slowdownThresholdX": 50.0
+  }
+}

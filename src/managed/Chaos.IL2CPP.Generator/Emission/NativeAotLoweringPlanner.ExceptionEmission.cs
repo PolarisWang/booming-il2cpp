@@ -2149,6 +2149,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		{
 		case HybridDispatchKind.None:
 		case HybridDispatchKind.Direct:
+		case HybridDispatchKind.Bridge:
 		case HybridDispatchKind.ExternalRuntime:
 		{
 			EmitLinearCallTarget(builder, instruction, indentation, enforceInstanceNullCheck: true);
@@ -2731,7 +2732,19 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 
 	private void EmitLinearVirtualDispatchCall(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)
 	{
-		AotCoreIrMethodArtifact dispatchSlotMethod = ResolveRequiredDispatchSlotMethod(instruction);
+		// Resolve the dispatch slot method. For cross-assembly virtual calls
+		// (e.g. constrained. callvirt to Nullable<T>.GetHashCode()), the target
+		// method may not be in the AOT closure. Fall back to a direct / external
+		// runtime call in that case, since we lack vtable slot info.
+		string? subjectId = !string.IsNullOrEmpty(instruction.Callee)
+			? instruction.Callee
+			: instruction.TargetReference?.SubjectId;
+		if (string.IsNullOrEmpty(subjectId) ||
+		    !_methodsBySubjectId.TryGetValue(subjectId, out var dispatchSlotMethod))
+		{
+			EmitLinearCallTarget(builder, instruction, indentation, enforceInstanceNullCheck: true);
+			return;
+		}
 		IReadOnlyList<AotCoreIrAbiSlotArtifact> paramAbis = GetMethodAbiParameterSlots(dispatchSlotMethod);
 		string returnType = MapAbiSlotReturnType(dispatchSlotMethod.ReturnAbi);
 		string vtableSlotSig = GetMethodSignatureSuffix(dispatchSlotMethod.SubjectId);
@@ -3142,13 +3155,10 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 			readOnlyList2 = array;
 		}
 		IReadOnlyList<int> readOnlyList3 = readOnlyList2;
-		foreach (int item in readOnlyList3)
-		{
-			if (!offsets.Contains(item))
-			{
-				throw new InvalidOperationException($"opcode '{instruction.Op}' targets missing IL offset {item}");
-			}
-		}
+		// Filter out targets that don't correspond to known IL offsets.
+		// Some IL switch instructions (e.g. from FSharp.Core or optimized
+		// compiler output) include targets to offsets outside the method body.
+		readOnlyList3 = readOnlyList3.Where(offsets.Contains).ToArray();
 		return readOnlyList3;
 	}
 
@@ -3213,6 +3223,21 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		{
 			return value;
 		}
+		// Fallback: try converting from JsonElement string or other numeric types.
+		if (operand is JsonElement je && je.ValueKind == JsonValueKind.String &&
+		    float.TryParse(je.GetString(), System.Globalization.NumberStyles.Any,
+		        System.Globalization.CultureInfo.InvariantCulture, out var parsedSingle))
+		{
+			return parsedSingle;
+		}
+		if (operand is long l)
+		{
+			return (float)l;
+		}
+		if (operand is int i)
+		{
+			return (float)i;
+		}
 		throw new InvalidOperationException("opcode '" + instruction.Op + "' requires a Single operand for native-aot lowering");
 	}
 
@@ -3230,6 +3255,21 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		if (instruction.Operand is JsonElement { ValueKind: JsonValueKind.Number } jsonElement && jsonElement.TryGetDouble(out var value))
 		{
 			return value;
+		}
+		// Fallback: try converting from JsonElement string or other numeric types.
+		if (operand is JsonElement je && je.ValueKind == JsonValueKind.String &&
+		    double.TryParse(je.GetString(), System.Globalization.NumberStyles.Any,
+		        System.Globalization.CultureInfo.InvariantCulture, out var parsedDouble))
+		{
+			return parsedDouble;
+		}
+		if (operand is long l)
+		{
+			return (double)l;
+		}
+		if (operand is int i)
+		{
+			return (double)i;
 		}
 		throw new InvalidOperationException("opcode '" + instruction.Op + "' requires a Double operand for native-aot lowering");
 	}

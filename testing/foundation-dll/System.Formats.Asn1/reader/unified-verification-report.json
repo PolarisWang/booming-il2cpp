@@ -1,0 +1,232 @@
+{
+  "family": "reader",
+  "assembly": "System.Formats.Asn1",
+  "mode": "standard",
+  "timestamp": "2026-05-22T06:40:14",
+  "duration_ms": 116002,
+  "overall_status": "passed",
+  "stages": {
+    "preflight": {
+      "stage": "preflight",
+      "status": "passed",
+      "summary": "40 methods, 2 custom entries",
+      "details": {
+        "methodCount": 40,
+        "customMethodCount": 2,
+        "hasCustomEntryFile": false,
+        "customMethods": [
+          "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadEnumeratedValue{TEnum}:TEnum(System.Nullable{System.Formats.Asn1.Asn1Tag})",
+          "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadNamedBitListValue{TFlagsEnum}:TFlagsEnum(System.Nullable{System.Formats.Asn1.Asn1Tag})"
+        ]
+      },
+      "errors": [],
+      "duration_ms": 0
+    },
+    "codegen": {
+      "stage": "codegen",
+      "status": "passed",
+      "summary": "Entrypoint built and IL2CPP compile OK",
+      "details": {
+        "methodCount": 40,
+        "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Formats.Asn1\\reader\\managed\\subjects\\build-output\\ReaderSubjects.dll"
+      },
+      "errors": [],
+      "duration_ms": 33881
+    },
+    "jit_codegen": {
+      "stage": "jit_codegen",
+      "status": "passed",
+      "summary": "JIT entry-jit.exe built and AOT entry.exe restored",
+      "details": {},
+      "errors": [],
+      "duration_ms": 33548
+    },
+    "fact": {
+      "stage": "fact",
+      "status": "passed",
+      "summary": "Fact verify=passed (40/40)",
+      "details": {
+        "fact": {
+          "status": "passed",
+          "passed": 40,
+          "total": 40
+        }
+      },
+      "errors": [],
+      "duration_ms": 481
+    },
+    "fact_jit": {
+      "stage": "fact_jit",
+      "status": "passed",
+      "summary": "Fact JIT verify=passed (40/40)",
+      "details": {
+        "fact_jit": {
+          "status": "passed",
+          "passed": 40,
+          "total": 40,
+          "exit_code": 0
+        }
+      },
+      "errors": [],
+      "duration_ms": 973
+    },
+    "audit": {
+      "stage": "audit",
+      "status": "passed",
+      "summary": "false_passing=0, principle=CONCERN",
+      "details": {
+        "falsePassing": 0,
+        "stubsFound": 0,
+        "skipsFound": 0,
+        "principleStatus": "CONCERN",
+        "methodsWithoutLowering": 0
+      },
+      "errors": [],
+      "duration_ms": 3559
+    },
+    "asm_compare": {
+      "stage": "asm_compare",
+      "status": "skipped",
+      "summary": "Subjects DLL not found — run codegen stage first",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "microbench": {
+      "stage": "microbench",
+      "status": "passed",
+      "summary": "FramePool=3.1ns/op | FastExecute=5.4ns/op | CallVirt dispatch=5.3ns",
+      "details": {
+        "framePool": {
+          "acquireReleaseNsPerOp": 3.1,
+          "batchCount": 1000,
+          "framesPerBatch": 32
+        },
+        "fastExecute": {
+          "runCount": 100000,
+          "nsPerCall": 5.4
+        },
+        "callVirt": {
+          "handlerDispatchNs": 5.3,
+          "emptyStackNs": 5.9
+        },
+        "poolSize": 32
+      },
+      "errors": [],
+      "duration_ms": 30
+    },
+    "benchmark": {
+      "stage": "benchmark",
+      "status": "failed",
+      "summary": "Benchmark stage crashed: [Errno 22] Invalid argument",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "hotupdate": {
+      "stage": "hotupdate",
+      "status": "passed",
+      "summary": "40/40 passed, 0 failed (stub=2)",
+      "details": {
+        "passedMethods": 40,
+        "failedMethods": 0,
+        "totalMethods": 40,
+        "realMethods": 40,
+        "stubMethods": 2
+      },
+      "errors": [],
+      "duration_ms": 34
+    },
+    "hotupdate_aot_benchmark": {
+      "stage": "hotupdate_aot_benchmark",
+      "status": "passed",
+      "summary": "avg_slowdown=0.0% (1.0x) over 0 methods (AOT patched path)",
+      "details": {
+        "averageSlowdownPercent": 0.0,
+        "slowdownFactor": 1.0,
+        "threshold": 50.0,
+        "nonStubMethods": 0
+      },
+      "errors": [],
+      "duration_ms": 1148
+    },
+    "hotupdate_jit_fact": {
+      "stage": "hotupdate_jit_fact",
+      "status": "passed",
+      "summary": "40/40 passed, 0 failed",
+      "details": {
+        "passed": 40,
+        "failed": 0,
+        "total": 40
+      },
+      "errors": [],
+      "duration_ms": 49
+    },
+    "hotupdate_jit_benchmark": {
+      "stage": "hotupdate_jit_benchmark",
+      "status": "passed",
+      "summary": "avg_slowdown=0.0% (1.0x) over 0 methods (JIT patched path)",
+      "details": {
+        "averageSlowdownPercent": 0.0,
+        "slowdownFactor": 1.0,
+        "threshold": 50.0,
+        "nonStubMethods": 0
+      },
+      "errors": [],
+      "duration_ms": 40028
+    }
+  },
+  "coverage": {
+    "methodCoverage": 100.0,
+    "testedRate": 100.0,
+    "overall": 100.0
+  },
+  "dashboard": {
+    "interpreter": {
+      "fastFramePoolNsPerOp": 3.1,
+      "fastExecuteNsPerInstr": 0,
+      "callVirtHandlerDispatchNs": 5.3,
+      "callVirtMicHitNs": 0,
+      "callVirtRawFallbackNs": 0,
+      "poolSize": 32
+    },
+    "irTranslation": {},
+    "performance": {},
+    "hotupdate": {
+      "aotFunctional": {
+        "passedMethods": 40,
+        "failedMethods": 0,
+        "totalMethods": 40
+      },
+      "aotOverhead": {
+        "averageSlowdownPercent": 0.0,
+        "slowdownFactor": 1.0,
+        "nonStubMethods": 0
+      },
+      "jitFunctional": {
+        "passedMethods": 40,
+        "failedMethods": 0,
+        "totalMethods": 40
+      },
+      "jitOverhead": {
+        "averageSlowdownPercent": 0.0,
+        "slowdownFactor": 1.0,
+        "nonStubMethods": 0
+      }
+    },
+    "keyRatios": {
+      "nativeFasterRatio": 0,
+      "irExpansionRatio": 0,
+      "interpreterSlowdownFactor": 1.0,
+      "asmPassRate": 0.0
+    }
+  },
+  "regression": {
+    "benchmark": {
+      "status": "skipped",
+      "message": "No benchmark report found"
+    },
+    "hasRegression": false,
+    "regressions": []
+  }
+}

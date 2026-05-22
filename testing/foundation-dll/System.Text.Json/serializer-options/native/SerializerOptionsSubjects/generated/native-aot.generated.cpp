@@ -36,8 +36,6 @@ using namespace chaos::il2cpp::runtime_core;
 
 inline TypeInfoV0 chaos_mt_SerializerOptionsSubjects_SerializerOptionsSubjects = {{nullptr, nullptr, 9066421592269645544ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SerializerOptionsSubjects_SerializerOptionsSubjects = static_cast<CHAOS_IL2CPP_INTPTR>(9066421592269645544ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_NullReferenceException = {{nullptr, nullptr, 5314911908653589872ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_NullReferenceException = static_cast<CHAOS_IL2CPP_INTPTR>(5314911908653589872ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Object = {{nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_INTPTR>(15228727185366376748ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
@@ -94,15 +92,6 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 struct chaos_type_SerializerOptionsSubjects_SerializerOptionsSubjects
 {
 	ThinLockableHeader header{};
-};
-
-struct chaos_type_System_Private_CoreLib_System_NullReferenceException
-{
-	ThinLockableHeader header{};
-	CHAOS_IL2CPP_INTPTR _message = 0;
-	CHAOS_IL2CPP_INTPTR _innerException = 0;
-	CHAOS_IL2CPP_INTPTR _stackTrace = 0;
-	CHAOS_IL2CPP_INT32 _HResult = 0;
 };
 
 struct chaos_type_System_Private_CoreLib_System_Object
@@ -905,6 +894,24 @@ static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_O
 	return ChaosObjectGetHashCode(chaos_fn_arg_0);
 }
 
+static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(CHAOS_IL2CPP_INTPTR chaos_arg_0)
+{
+	if (chaos_arg_0 == 0)
+	{
+		CHAOS_IL2CPP_FAIL();
+	}
+
+	if (chaos_is_string_id(chaos_arg_0))
+	{
+		return static_cast<CHAOS_IL2CPP_INT32>(
+			chaos::il2cpp::string_table::Resolve(
+				chaos_extract_string_id(chaos_arg_0)).byte_count);
+	}
+
+	auto* chaos_string = reinterpret_cast<CHAOS_IL2CPP_STRING_TYPE*>(chaos_arg_0);
+	return static_cast<CHAOS_IL2CPP_INT32>(chaos_string->length);
+}
+
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	return ChaosReflectionGetTypeFromHandle(chaos_fn_arg_0);
@@ -1411,81 +1418,81 @@ static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[75] = {
 
 // Dispatch table (function pointers)
 static HotpatchEntryV0 s_hotpatch_entries[75] = {
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_0
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_1
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_2
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_3
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_4
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_5), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_5
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_6), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SerializerOptionsSubjects::Subject_6
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_7), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_7
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_8), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_8
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_9), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_9
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_10), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_10
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_CustomEntrySubject_11), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // SerializerOptionsSubjects::CustomEntrySubject_11
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_12), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_12
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_13), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_13
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_14), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_14
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_15), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_15
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_16), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_16
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_17), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_17
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_18), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_18
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_19), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_19
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_20), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_20
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_21), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_21
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_22), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_22
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_23), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_23
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_24), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_24
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_25), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_25
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_26), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_26
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_27), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_27
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_28), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_28
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_29), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_29
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_30), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_30
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_31), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_31
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_32
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_33), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_33
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_34), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_34
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_35), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_35
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_36), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_36
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_37), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_37
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_38), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_38
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_39), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_39
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_40), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_40
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_41), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_41
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_42), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_42
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_43), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_43
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_44), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_44
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_45), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_45
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_46), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_46
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_47), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_47
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_48), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_48
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_49), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_49
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_50), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_50
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_51), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_51
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_52), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_52
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_53), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_53
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_54), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_54
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_55), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_55
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_56), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_56
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_57), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_57
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_58), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_58
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_59), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_59
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_60), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_60
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_61), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_61
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_62), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_62
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_63), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_63
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_64), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_64
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_65), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_65
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_66), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_66
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_67), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_67
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_68), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_68
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_69), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_69
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_70), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_70
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_71), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_71
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_72), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_72
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_73), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_73
-	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_74), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // SerializerOptionsSubjects::Subject_74
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_0
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_1
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_2
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_3
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_4
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_5), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_5
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_6), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_6
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_7), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_7
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_8), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_8
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_9), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_9
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_10), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_10
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_CustomEntrySubject_11), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::CustomEntrySubject_11
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_12), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_12
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_13), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_13
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_14), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_14
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_15), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_15
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_16), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_16
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_17), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_17
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_18), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_18
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_19), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_19
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_20), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_20
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_21), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_21
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_22), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_22
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_23), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_23
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_24), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_24
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_25), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_25
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_26), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_26
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_27), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_27
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_28), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_28
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_29), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_29
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_30), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_30
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_31), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_31
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_32
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_33), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_33
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_34), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_34
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_35), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_35
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_36), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_36
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_37), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_37
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_38), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_38
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_39), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_39
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_40), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_40
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_41), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_41
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_42), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_42
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_43), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_43
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_44), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_44
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_45), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_45
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_46), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_46
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_47), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_47
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_48), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_48
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_49), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_49
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_50), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_50
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_51), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_51
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_52), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_52
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_53), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_53
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_54), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_54
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_55), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_55
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_56), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_56
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_57), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_57
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_58), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_58
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_59), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_59
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_60), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_60
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_61), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_61
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_62), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_62
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_63), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_63
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_64), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_64
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_65), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_65
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_66), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_66
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_67), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_67
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_68), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_68
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_69), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_69
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_70), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_70
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_71), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_71
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_72), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_72
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_73), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_73
+	{ reinterpret_cast<void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_74), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // SerializerOptionsSubjects::Subject_74
 };
 
 // Module hotpatch bundle
@@ -1507,8 +1514,9 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // ── External Runtime Dispatch Table ──────────────────────────
 // Startup-time-resolved function pointers for cross-assembly calls.
 
-extern "C" const char* kChaosExternalRuntimeSubjects[76] = {
+extern "C" const char* kChaosExternalRuntimeSubjects[83] = {
 	"System.Text.Json/JsonNamingPolicy::ConvertName:System.String(System.String)",
+	"System.Private.CoreLib/System.String::get_Length:System.Int32()",
 	"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode",
 	"System.Text.Json/JsonNamingPolicy::get_CamelCase:JsonNamingPolicy()",
 	"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
@@ -1522,6 +1530,7 @@ extern "C" const char* kChaosExternalRuntimeSubjects[76] = {
 	"System.Text.Json/JsonSerializerOptions::get_Converters:System.Collections.Generic.IList<System.Text.Json.Serialization.JsonConverter>()",
 	"System.Text.Json/JsonSerializerOptions::get_DefaultBufferSize:System.Int32()",
 	"System.Text.Json/JsonSerializerOptions::get_DefaultIgnoreCondition:System.Text.Json.Serialization.JsonIgnoreCondition()",
+	"System.Text.Json/System.Text.Json.Serialization.JsonIgnoreCondition::GetHashCode:System.Int32()",
 	"System.Text.Json/JsonSerializerOptions::get_DictionaryKeyPolicy:JsonNamingPolicy()",
 	"System.Text.Json/JsonSerializerOptions::get_Encoder:JavaScriptEncoder()",
 	"System.Text.Json/JsonSerializerOptions::get_IgnoreNullValues:System.Boolean()",
@@ -1534,10 +1543,13 @@ extern "C" const char* kChaosExternalRuntimeSubjects[76] = {
 	"System.Text.Json/JsonSerializerOptions::get_MaxDepth:System.Int32()",
 	"System.Text.Json/JsonSerializerOptions::get_NewLine:System.String()",
 	"System.Text.Json/JsonSerializerOptions::get_NumberHandling:System.Text.Json.Serialization.JsonNumberHandling()",
+	"System.Text.Json/System.Text.Json.Serialization.JsonNumberHandling::GetHashCode:System.Int32()",
 	"System.Text.Json/JsonSerializerOptions::get_PreferredObjectCreationHandling:System.Text.Json.Serialization.JsonObjectCreationHandling()",
+	"System.Text.Json/System.Text.Json.Serialization.JsonObjectCreationHandling::GetHashCode:System.Int32()",
 	"System.Text.Json/JsonSerializerOptions::get_PropertyNameCaseInsensitive:System.Boolean()",
 	"System.Text.Json/JsonSerializerOptions::get_PropertyNamingPolicy:JsonNamingPolicy()",
 	"System.Text.Json/JsonSerializerOptions::get_ReadCommentHandling:JsonCommentHandling()",
+	"System.Text.Json/JsonCommentHandling::GetHashCode:System.Int32()",
 	"System.Text.Json/JsonSerializerOptions::get_ReferenceHandler:System.Text.Json.Serialization.ReferenceHandler()",
 	"System.Text.Json/JsonSerializerOptions::get_RespectNullableAnnotations:System.Boolean()",
 	"System.Text.Json/JsonSerializerOptions::get_RespectRequiredConstructorParameters:System.Boolean()",
@@ -1545,7 +1557,9 @@ extern "C" const char* kChaosExternalRuntimeSubjects[76] = {
 	"System.Text.Json/JsonSerializerOptions::get_TypeInfoResolver:System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver()",
 	"System.Text.Json/JsonSerializerOptions::get_TypeInfoResolverChain:System.Collections.Generic.IList<System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver>()",
 	"System.Text.Json/JsonSerializerOptions::get_UnknownTypeHandling:System.Text.Json.Serialization.JsonUnknownTypeHandling()",
+	"System.Text.Json/System.Text.Json.Serialization.JsonUnknownTypeHandling::GetHashCode:System.Int32()",
 	"System.Text.Json/JsonSerializerOptions::get_UnmappedMemberHandling:System.Text.Json.Serialization.JsonUnmappedMemberHandling()",
+	"System.Text.Json/System.Text.Json.Serialization.JsonUnmappedMemberHandling::GetHashCode:System.Int32()",
 	"System.Text.Json/JsonSerializerOptions::get_Web:JsonSerializerOptions()",
 	"System.Text.Json/JsonSerializerOptions::get_WriteIndented:System.Boolean()",
 	"System.Private.CoreLib/System.Byte",
@@ -1586,11 +1600,18 @@ extern "C" const char* kChaosExternalRuntimeSubjects[76] = {
 	"System.Text.Json/JsonSerializerOptions::.ctor:System.Void(JsonSerializerDefaults)",
 };
 
-extern "C" void* kChaosExternalRuntimeFnTable[76] = {
+extern "C" void* kChaosExternalRuntimeFnTable[83] = {
 	nullptr,
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__),
 	nullptr,
 	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__),
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
+	nullptr,
 	nullptr,
 	nullptr,
 	nullptr,
@@ -1665,7 +1686,7 @@ extern "C" void* kChaosExternalRuntimeFnTable[76] = {
 	nullptr,
 };
 
-extern "C" int32_t kChaosExternalRuntimeCount = 76;
+extern "C" int32_t kChaosExternalRuntimeCount = 83;
 // (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
@@ -2006,7 +2027,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry0;
 	/* ── Entry 1: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_1 ── */
 	struct {
@@ -2054,7 +2075,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry6;
 	/* ── Entry 7: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_8 ── */
 	struct {
@@ -2062,7 +2083,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry7;
 	/* ── Entry 8: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_9 ── */
 	struct {
@@ -2070,7 +2091,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry8;
 	/* ── Entry 9: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_10 ── */
 	struct {
@@ -2078,7 +2099,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry9;
 	/* ── Entry 10: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_12 ── */
 	struct {
@@ -2086,7 +2107,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry10;
 	/* ── Entry 11: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_13 ── */
 	struct {
@@ -2094,7 +2115,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry11;
 	/* ── Entry 12: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_14 ── */
 	struct {
@@ -2102,7 +2123,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry12;
 	/* ── Entry 13: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_15 ── */
 	struct {
@@ -2110,7 +2131,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry13;
 	/* ── Entry 14: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_16 ── */
 	struct {
@@ -2118,7 +2139,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry14;
 	/* ── Entry 15: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_17 ── */
 	struct {
@@ -2126,7 +2147,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry15;
 	/* ── Entry 16: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_18 ── */
 	struct {
@@ -2134,7 +2155,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry16;
 	/* ── Entry 17: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_19 ── */
 	struct {
@@ -2142,7 +2163,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry17;
 	/* ── Entry 18: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_20 ── */
 	struct {
@@ -2150,7 +2171,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry18;
 	/* ── Entry 19: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_21 ── */
 	struct {
@@ -2158,7 +2179,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry19;
 	/* ── Entry 20: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_22 ── */
 	struct {
@@ -2166,7 +2187,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry20;
 	/* ── Entry 21: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_23 ── */
 	struct {
@@ -2174,7 +2195,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry21;
 	/* ── Entry 22: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_24 ── */
 	struct {
@@ -2182,7 +2203,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry22;
 	/* ── Entry 23: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_25 ── */
 	struct {
@@ -2190,7 +2211,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry23;
 	/* ── Entry 24: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_26 ── */
 	struct {
@@ -2198,7 +2219,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry24;
 	/* ── Entry 25: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_27 ── */
 	struct {
@@ -2206,7 +2227,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry25;
 	/* ── Entry 26: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_28 ── */
 	struct {
@@ -2214,7 +2235,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry26;
 	/* ── Entry 27: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_29 ── */
 	struct {
@@ -2222,7 +2243,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry27;
 	/* ── Entry 28: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_30 ── */
 	struct {
@@ -2230,7 +2251,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry28;
 	/* ── Entry 29: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_31 ── */
 	struct {
@@ -2238,7 +2259,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry29;
 	/* ── Entry 30: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_32 ── */
 	struct {
@@ -2246,7 +2267,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry30;
 	/* ── Entry 31: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_33 ── */
 	struct {
@@ -2262,7 +2283,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry32;
 	/* ── Entry 33: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_35 ── */
 	struct {
@@ -2270,7 +2291,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry33;
 	/* ── Entry 34: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_36 ── */
 	struct {
@@ -2278,7 +2299,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry34;
 	/* ── Entry 35: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_37 ── */
 	struct {
@@ -2286,7 +2307,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry35;
 	/* ── Entry 36: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_38 ── */
 	struct {
@@ -2302,7 +2323,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry37;
 	/* ── Entry 38: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_40 ── */
 	struct {
@@ -2310,7 +2331,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry38;
 	/* ── Entry 39: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_41 ── */
 	struct {
@@ -2318,7 +2339,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry39;
 	/* ── Entry 40: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_42 ── */
 	struct {
@@ -2326,7 +2347,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[1];
 	} entry40;
 	/* ── Entry 41: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_43 ── */
 	struct {
@@ -2342,7 +2363,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry42;
 	/* ── Entry 43: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_45 ── */
 	struct {
@@ -2350,7 +2371,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry43;
 	/* ── Entry 44: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_46 ── */
 	struct {
@@ -2358,7 +2379,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry44;
 	/* ── Entry 45: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_47 ── */
 	struct {
@@ -2366,7 +2387,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry45;
 	/* ── Entry 46: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_48 ── */
 	struct {
@@ -2374,7 +2395,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry46;
 	/* ── Entry 47: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_49 ── */
 	struct {
@@ -2382,7 +2403,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry47;
 	/* ── Entry 48: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_50 ── */
 	struct {
@@ -2390,7 +2411,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry48;
 	/* ── Entry 49: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_51 ── */
 	struct {
@@ -2398,7 +2419,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry49;
 	/* ── Entry 50: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_52 ── */
 	struct {
@@ -2406,7 +2427,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry50;
 	/* ── Entry 51: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_53 ── */
 	struct {
@@ -2414,7 +2435,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry51;
 	/* ── Entry 52: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_54 ── */
 	struct {
@@ -2422,7 +2443,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry52;
 	/* ── Entry 53: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_55 ── */
 	struct {
@@ -2430,7 +2451,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry53;
 	/* ── Entry 54: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_56 ── */
 	struct {
@@ -2438,7 +2459,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry54;
 	/* ── Entry 55: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_57 ── */
 	struct {
@@ -2446,7 +2467,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry55;
 	/* ── Entry 56: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_58 ── */
 	struct {
@@ -2454,7 +2475,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry56;
 	/* ── Entry 57: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_59 ── */
 	struct {
@@ -2462,7 +2483,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry57;
 	/* ── Entry 58: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_60 ── */
 	struct {
@@ -2470,7 +2491,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry58;
 	/* ── Entry 59: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_61 ── */
 	struct {
@@ -2478,7 +2499,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry59;
 	/* ── Entry 60: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_62 ── */
 	struct {
@@ -2486,7 +2507,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry60;
 	/* ── Entry 61: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_63 ── */
 	struct {
@@ -2494,7 +2515,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry61;
 	/* ── Entry 62: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_64 ── */
 	struct {
@@ -2502,7 +2523,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry62;
 	/* ── Entry 63: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_65 ── */
 	struct {
@@ -2510,7 +2531,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry63;
 	/* ── Entry 64: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_66 ── */
 	struct {
@@ -2518,7 +2539,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry64;
 	/* ── Entry 65: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_67 ── */
 	struct {
@@ -2526,7 +2547,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry65;
 	/* ── Entry 66: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_68 ── */
 	struct {
@@ -2534,7 +2555,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry66;
 	/* ── Entry 67: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_69 ── */
 	struct {
@@ -2542,7 +2563,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry67;
 	/* ── Entry 68: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_70 ── */
 	struct {
@@ -2550,7 +2571,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry68;
 	/* ── Entry 69: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_71 ── */
 	struct {
@@ -2558,7 +2579,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[6];
 	} entry69;
 	/* ── Entry 70: SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_72 ── */
 	struct {
@@ -2587,11 +2608,11 @@ static const struct {
 } kChaosGcSlotMapsSection = {
 	/* entry0 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_0 */
 	.entry0 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_0),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
 	/* entry1 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_1 */
 	.entry1 = {
@@ -2635,203 +2656,203 @@ static const struct {
 	},
 	/* entry6 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_7 */
 	.entry6 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_7),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
 	/* entry7 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_8 */
 	.entry7 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_8),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
 	/* entry8 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_9 */
 	.entry8 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_9),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
 	/* entry9 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_10 */
 	.entry9 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_10),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
 	/* entry10 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_12 */
 	.entry10 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_12),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
 	/* entry11 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_13 */
 	.entry11 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_13),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
 	/* entry12 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_14 */
 	.entry12 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_14),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
 	/* entry13 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_15 */
 	.entry13 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_15),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
 	/* entry14 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_16 */
 	.entry14 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_16),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
 	/* entry15 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_17 */
 	.entry15 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_17),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
 	/* entry16 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_18 */
 	.entry16 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_18),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
 	/* entry17 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_19 */
 	.entry17 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_19),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
 	/* entry18 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_20 */
 	.entry18 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_20),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
 	/* entry19 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_21 */
 	.entry19 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_21),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
 	/* entry20 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_22 */
 	.entry20 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_22),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
 	/* entry21 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_23 */
 	.entry21 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_23),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
 	/* entry22 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_24 */
 	.entry22 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_24),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
 	/* entry23 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_25 */
 	.entry23 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_25),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
 	/* entry24 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_26 */
 	.entry24 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_26),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
 	/* entry25 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_27 */
 	.entry25 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_27),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
 	/* entry26 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_28 */
 	.entry26 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_28),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
 	/* entry27 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_29 */
 	.entry27 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_29),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
 	/* entry28 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_30 */
 	.entry28 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_30),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
 	/* entry29 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_31 */
 	.entry29 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_31),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
 	/* entry30 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_32 */
 	.entry30 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_32),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
 	/* entry31 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_33 */
 	.entry31 = {
@@ -2843,35 +2864,35 @@ static const struct {
 	},
 	/* entry32 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_34 */
 	.entry32 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_34),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
 	/* entry33 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_35 */
 	.entry33 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_35),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
 	/* entry34 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_36 */
 	.entry34 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_36),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
 	/* entry35 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_37 */
 	.entry35 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_37),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
 	/* entry36 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_38 */
 	.entry36 = {
@@ -2883,35 +2904,35 @@ static const struct {
 	},
 	/* entry37 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_39 */
 	.entry37 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_39),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
 	/* entry38 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_40 */
 	.entry38 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_40),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
 	/* entry39 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_41 */
 	.entry39 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_41),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
 	/* entry40 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_42 */
 	.entry40 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 24 */ 24u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_42),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
 	},
 	/* entry41 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_43 */
 	.entry41 = {
@@ -2923,227 +2944,227 @@ static const struct {
 	},
 	/* entry42 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_44 */
 	.entry42 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_44),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
 	/* entry43 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_45 */
 	.entry43 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_45),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
 	/* entry44 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_46 */
 	.entry44 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_46),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
 	/* entry45 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_47 */
 	.entry45 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_47),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
 	/* entry46 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_48 */
 	.entry46 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_48),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
 	/* entry47 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_49 */
 	.entry47 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_49),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
 	/* entry48 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_50 */
 	.entry48 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_50),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
 	/* entry49 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_51 */
 	.entry49 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_51),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
 	/* entry50 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_52 */
 	.entry50 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_52),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
 	/* entry51 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_53 */
 	.entry51 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_53),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
 	/* entry52 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_54 */
 	.entry52 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_54),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
 	/* entry53 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_55 */
 	.entry53 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_55),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
 	/* entry54 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_56 */
 	.entry54 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_56),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
 	/* entry55 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_57 */
 	.entry55 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_57),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
 	/* entry56 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_58 */
 	.entry56 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_58),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
 	/* entry57 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_59 */
 	.entry57 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_59),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
 	/* entry58 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_60 */
 	.entry58 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_60),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
 	/* entry59 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_61 */
 	.entry59 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_61),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
 	/* entry60 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_62 */
 	.entry60 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_62),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
 	/* entry61 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_63 */
 	.entry61 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_63),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
 	/* entry62 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_64 */
 	.entry62 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_64),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
 	/* entry63 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_65 */
 	.entry63 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_65),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
 	/* entry64 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_66 */
 	.entry64 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_66),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
 	/* entry65 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_67 */
 	.entry65 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_67),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
 	/* entry66 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_68 */
 	.entry66 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_68),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
 	/* entry67 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_69 */
 	.entry67 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_69),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
 	/* entry68 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_70 */
 	.entry68 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_70),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
 	/* entry69 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_71 */
 	.entry69 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 44 */ 44u,
 		/* code_address */ reinterpret_cast<const void*>(&SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_71),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 48 */ 48u,
+		/* num_gc_slots = 6 */ 6u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
 	},
 	/* entry70 = SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_72 */
 	.entry70 = {
@@ -3174,7 +3195,7 @@ static const struct {
 #pragma pack(pop)
 #endif
 
-static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 2284u;
+static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 2492u;
 
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
@@ -3449,6 +3470,16 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_0(vo
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
@@ -3461,9 +3492,42 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_0(vo
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[0])(chaos_arg_0);
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s1;
+				const auto chaos_arg_0 = _s1;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = 0;
+			{{
+				_s3 = CHAOS_IL2CPP_STRING_ID("hello");
+			}}
+			{
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[0])(chaos_arg_0);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s3;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -3471,10 +3535,15 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_0(vo
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -3492,32 +3561,57 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_1(vo
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
 
 
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[2])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(7880838);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
+	CHAOS_EH_TRY
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[3])();
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[3])();
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
 		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
-		}
-		return;
-	}
+	CHAOS_EH_END
+	return;
 }
 
 // Managed method: SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_2()
@@ -3533,32 +3627,57 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_2(vo
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
 
 
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[4])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(56793269);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
+	CHAOS_EH_TRY
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[5])();
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[5])();
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
 		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
-		}
-		return;
-	}
+	CHAOS_EH_END
+	return;
 }
 
 // Managed method: SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_3()
@@ -3574,32 +3693,57 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_3(vo
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
 
 
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[5])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(115000);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
+	CHAOS_EH_TRY
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[6])();
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[6])();
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
 		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
-		}
-		return;
-	}
+	CHAOS_EH_END
+	return;
 }
 
 // Managed method: SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_4()
@@ -3615,32 +3759,57 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_4(vo
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
 
 
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[6])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1495009);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
+	CHAOS_EH_TRY
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[7])();
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[7])();
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
 		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
-		}
-		return;
-	}
+	CHAOS_EH_END
+	return;
 }
 
 // Managed method: SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_5()
@@ -3656,32 +3825,57 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_5(vo
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
 
 
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[7])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(19435124);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
+	CHAOS_EH_TRY
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
 		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
-		}
-		return;
-	}
+	CHAOS_EH_END
+	return;
 }
 
 // Managed method: SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_6()
@@ -3703,17 +3897,47 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_7(vo
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[9])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			// brtrue (structured EH branch)
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s4 = 0;
 			{
-				auto chaos_value = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[9])();
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			// brtrue (structured EH branch)
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			chaos_locals[0] = _s6;
+			_s6 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s7;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -3721,10 +3945,15 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_7(vo
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -3738,17 +3967,47 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_8(vo
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[9])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[10])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			// brtrue (structured EH branch)
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s4 = 0;
 			{
-				auto chaos_value = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[10])();
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			// brtrue (structured EH branch)
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			chaos_locals[0] = _s6;
+			_s6 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s7;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -3756,10 +4015,15 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_8(vo
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -3773,17 +4037,47 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_9(vo
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[10])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[11])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			// brtrue (structured EH branch)
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s4 = 0;
 			{
-				auto chaos_value = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[11])();
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			// brtrue (structured EH branch)
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			chaos_locals[0] = _s6;
+			_s6 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s7;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -3791,10 +4085,15 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_9(vo
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -3808,17 +4107,47 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_10(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[11])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[12])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s1;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = 0;
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[12])();
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -3826,10 +4155,15 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_10(v
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -3853,17 +4187,35 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_12(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[12])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[13])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s2 = 0;
 			{
-				auto chaos_value = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[13])();
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -3871,10 +4223,15 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_12(v
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -3883,22 +4240,56 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_12(v
 extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_13(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[13])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[14])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			chaos_locals[1] = _s1;
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
 			{
-				auto chaos_value = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[15])();
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s3 = 0;
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[14])();
+				_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			chaos_locals[1] = _s4;
+			_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[15])();
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			chaos_locals[0] = _s4;
+			_s4 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s5;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -3906,10 +4297,15 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_13(v
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -3923,17 +4319,47 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_14(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[14])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[16])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s1;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = 0;
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[16])();
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -3941,10 +4367,15 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_14(v
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -3958,17 +4389,47 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_15(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[15])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[17])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s1;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = 0;
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[17])();
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -3976,10 +4437,15 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_15(v
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -3993,17 +4459,47 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_16(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[16])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[18])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			// brtrue (structured EH branch)
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s4 = 0;
 			{
-				auto chaos_value = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[18])();
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			// brtrue (structured EH branch)
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			chaos_locals[0] = _s6;
+			_s6 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s7;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -4011,10 +4507,15 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_16(v
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -4028,17 +4529,47 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_17(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[17])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[19])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			// brtrue (structured EH branch)
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s4 = 0;
 			{
-				auto chaos_value = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[19])();
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			// brtrue (structured EH branch)
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			chaos_locals[0] = _s6;
+			_s6 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s7;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -4046,10 +4577,15 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_17(v
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -4063,17 +4599,47 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_18(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[18])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[20])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			// brtrue (structured EH branch)
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s4 = 0;
 			{
-				auto chaos_value = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[20])();
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			// brtrue (structured EH branch)
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			chaos_locals[0] = _s6;
+			_s6 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s7;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -4081,10 +4647,15 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_18(v
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -4098,17 +4669,47 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_19(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[19])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[21])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			// brtrue (structured EH branch)
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s4 = 0;
 			{
-				auto chaos_value = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[21])();
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			// brtrue (structured EH branch)
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			chaos_locals[0] = _s6;
+			_s6 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s7;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -4116,10 +4717,15 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_19(v
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -4133,17 +4739,35 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_20(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[20])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[22])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s2 = 0;
 			{
-				auto chaos_value = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[22])();
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -4151,10 +4775,15 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_20(v
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -4168,17 +4797,35 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_21(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[21])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[23])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s2 = 0;
 			{
-				auto chaos_value = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[23])();
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -4186,10 +4833,15 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_21(v
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -4203,17 +4855,47 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_22(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[22])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[24])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			// brtrue (structured EH branch)
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s4 = 0;
 			{
-				auto chaos_value = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[24])();
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			// brtrue (structured EH branch)
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			chaos_locals[0] = _s6;
+			_s6 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s7;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -4221,10 +4903,15 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_22(v
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -4238,17 +4925,35 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_23(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[23])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[25])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s2 = 0;
 			{
-				auto chaos_value = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[25])();
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -4256,10 +4961,15 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_23(v
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -4273,76 +4983,15 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_24(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-
-
-	CHAOS_EH_TRY
-			_s0 = 0;
-			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[24])();
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
-			}
-	CHAOS_EH_CATCH_BEGIN
-		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
-			{ CHAOS_EH_RETHROW; }
-		}
-		_s0 = CHAOS_EH_EXCEPTION_OBJ;
-	CHAOS_EH_END
-	return;
-}
-
-// Managed method: SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_25()
-extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_25(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-
-
-	CHAOS_EH_TRY
-			_s0 = 0;
-			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[25])();
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
-			}
-	CHAOS_EH_CATCH_BEGIN
-		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
-			{ CHAOS_EH_RETHROW; }
-		}
-		_s0 = CHAOS_EH_EXCEPTION_OBJ;
-	CHAOS_EH_END
-	return;
-}
-
-// Managed method: SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_26()
-extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_26(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	CHAOS_EH_TRY
@@ -4351,9 +5000,38 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_26(v
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[26])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s1;
+				const auto chaos_arg_0 = _s1;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = 0;
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[26])();
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s3;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -4361,10 +5039,163 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_26(v
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_END
+	return;
+}
+
+// Managed method: SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_25()
+extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_25(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+
+
+	CHAOS_EH_TRY
+			_s0 = 0;
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[27])();
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			chaos_locals[1] = _s1;
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[28])();
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s3 = 0;
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[27])();
+				_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			chaos_locals[1] = _s4;
+			_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[28])();
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			chaos_locals[0] = _s4;
+			_s4 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s5;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_END
+	return;
+}
+
+// Managed method: SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_26()
+extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_26(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+
+
+	CHAOS_EH_TRY
+			_s0 = 0;
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[29])();
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			chaos_locals[1] = _s1;
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s3 = 0;
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[29])();
+				_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			chaos_locals[1] = _s4;
+			_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			chaos_locals[0] = _s4;
+			_s4 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s5;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -4378,17 +5209,47 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_27(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[27])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[31])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			// brtrue (structured EH branch)
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s4 = 0;
 			{
-				auto chaos_value = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[31])();
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			// brtrue (structured EH branch)
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			chaos_locals[0] = _s6;
+			_s6 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s7;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -4396,10 +5257,15 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_27(v
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -4413,17 +5279,47 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_28(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[28])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[32])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s1;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = 0;
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[32])();
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -4431,10 +5327,15 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_28(v
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -4443,22 +5344,56 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_28(v
 extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_29(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[29])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[33])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			chaos_locals[1] = _s1;
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
 			{
-				auto chaos_value = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[34])();
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s3 = 0;
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[33])();
+				_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			chaos_locals[1] = _s4;
+			_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[34])();
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			chaos_locals[0] = _s4;
+			_s4 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s5;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -4466,10 +5401,15 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_29(v
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -4483,17 +5423,47 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_30(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[35])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s1;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = 0;
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[35])();
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -4501,10 +5471,15 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_30(v
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -4518,17 +5493,47 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_31(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[31])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[36])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			// brtrue (structured EH branch)
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s4 = 0;
 			{
-				auto chaos_value = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[36])();
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			// brtrue (structured EH branch)
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			chaos_locals[0] = _s6;
+			_s6 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s7;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -4536,10 +5541,15 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_31(v
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -4553,17 +5563,47 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_32(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[32])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[37])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			// brtrue (structured EH branch)
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s4 = 0;
 			{
-				auto chaos_value = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[37])();
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			// brtrue (structured EH branch)
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			chaos_locals[0] = _s6;
+			_s6 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s7;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -4571,10 +5611,15 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_32(v
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -4592,32 +5637,57 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_33(v
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
 
 
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[33])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(51330024);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
+	CHAOS_EH_TRY
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[38])();
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[38])();
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
 		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
-		}
-		return;
-	}
+	CHAOS_EH_END
+	return;
 }
 
 // Managed method: SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_34()
@@ -4629,17 +5699,47 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_34(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[34])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[39])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s1;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = 0;
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[39])();
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -4647,10 +5747,15 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_34(v
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -4664,17 +5769,47 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_35(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[35])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[40])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s1;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = 0;
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[40])();
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -4682,10 +5817,15 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_35(v
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -4694,22 +5834,56 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_35(v
 extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_36(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[36])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[41])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			chaos_locals[1] = _s1;
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
 			{
-				auto chaos_value = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[42])();
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s3 = 0;
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[41])();
+				_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			chaos_locals[1] = _s4;
+			_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[42])();
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			chaos_locals[0] = _s4;
+			_s4 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s5;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -4717,10 +5891,15 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_36(v
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -4729,22 +5908,56 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_36(v
 extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_37(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[37])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[43])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			chaos_locals[1] = _s1;
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
 			{
-				auto chaos_value = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[44])();
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s3 = 0;
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[43])();
+				_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			chaos_locals[1] = _s4;
+			_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[44])();
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			chaos_locals[0] = _s4;
+			_s4 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s5;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -4752,10 +5965,15 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_37(v
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -4773,32 +5991,57 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_38(v
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
 
 
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[38])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(17730647);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
+	CHAOS_EH_TRY
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[45])();
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[45])();
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
 		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
-		}
-		return;
-	}
+	CHAOS_EH_END
+	return;
 }
 
 // Managed method: SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_39()
@@ -4810,17 +6053,47 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_39(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[39])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[46])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			// brtrue (structured EH branch)
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s4 = 0;
 			{
-				auto chaos_value = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[46])();
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			// brtrue (structured EH branch)
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			chaos_locals[0] = _s6;
+			_s6 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s7;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -4828,10 +6101,15 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_39(v
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -4847,6 +6125,17 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_40(v
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
 
 
 	CHAOS_EH_TRY
@@ -4859,12 +6148,40 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_40(v
 			}
 			{
 				const auto chaos_arg_0 = _s1;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[42])(chaos_arg_0);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[49])(chaos_arg_0);
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s1;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = 0;
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+			{
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[49])(chaos_arg_0);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -4872,10 +6189,15 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_40(v
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -4891,6 +6213,17 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_41(v
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
 
 
 	CHAOS_EH_TRY
@@ -4903,12 +6236,40 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_41(v
 			}
 			{
 				const auto chaos_arg_0 = _s1;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[43])(chaos_arg_0);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[50])(chaos_arg_0);
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s1;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = 0;
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+			{
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[50])(chaos_arg_0);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -4916,10 +6277,15 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_41(v
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -4937,22 +6303,22 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_42(v
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
-				reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[44])();
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[51])();
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -4973,22 +6339,22 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_43(v
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[45])(chaos_arg_0);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[52])(chaos_arg_0);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -5002,32 +6368,29 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_44(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s2 = _s1;
-			chaos_locals[0] = _s2;
 			{
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[46])(chaos_arg_0);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[53])(chaos_arg_0);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -5041,32 +6404,29 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_45(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s2 = _s1;
-			chaos_locals[0] = _s2;
 			{
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[47])(chaos_arg_0);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[54])(chaos_arg_0);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -5080,32 +6440,29 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_46(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s2 = _s1;
-			chaos_locals[0] = _s2;
 			{
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[48])(chaos_arg_0);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[55])(chaos_arg_0);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -5119,32 +6476,29 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_47(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			_s2 = _s1;
-			chaos_locals[0] = _s2;
 			{
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[49])(chaos_arg_0);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[56])(chaos_arg_0);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -5158,32 +6512,29 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_48(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			_s2 = _s1;
-			chaos_locals[0] = _s2;
 			{
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[50])(chaos_arg_0);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[57])(chaos_arg_0);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -5197,32 +6548,29 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_49(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			_s1 = 0;
-			_s2 = _s1;
-			chaos_locals[0] = _s2;
 			{
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[51])(chaos_arg_0);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[58])(chaos_arg_0);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -5236,32 +6584,29 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_50(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			_s1 = 0;
-			_s2 = _s1;
-			chaos_locals[0] = _s2;
 			{
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[52])(chaos_arg_0);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[59])(chaos_arg_0);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -5275,32 +6620,29 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_51(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s2 = _s1;
-			chaos_locals[0] = _s2;
 			{
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[53])(chaos_arg_0);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[60])(chaos_arg_0);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -5314,32 +6656,29 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_52(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s2 = _s1;
-			chaos_locals[0] = _s2;
 			{
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[54])(chaos_arg_0);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[61])(chaos_arg_0);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -5353,32 +6692,29 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_53(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s2 = _s1;
-			chaos_locals[0] = _s2;
 			{
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[55])(chaos_arg_0);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[62])(chaos_arg_0);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -5392,32 +6728,29 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_54(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s2 = _s1;
-			chaos_locals[0] = _s2;
 			{
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[56])(chaos_arg_0);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[63])(chaos_arg_0);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -5431,32 +6764,29 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_55(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(65);
-			_s2 = _s1;
-			chaos_locals[0] = _s2;
 			{
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[57])(chaos_arg_0);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[64])(chaos_arg_0);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -5470,32 +6800,29 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_56(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			_s2 = _s1;
-			chaos_locals[0] = _s2;
 			{
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[58])(chaos_arg_0);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[65])(chaos_arg_0);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -5509,32 +6836,29 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_57(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			_s2 = _s1;
-			chaos_locals[0] = _s2;
 			{
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[59])(chaos_arg_0);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[66])(chaos_arg_0);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -5548,7 +6872,6 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_58(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
 
 
 	CHAOS_EH_TRY
@@ -5556,26 +6879,24 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_58(v
 			{{
 				_s1 = CHAOS_IL2CPP_STRING_ID("hello");
 			}}
-			_s2 = _s1;
-			chaos_locals[0] = _s2;
 			{
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[60])(chaos_arg_0);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[67])(chaos_arg_0);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -5589,32 +6910,29 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_59(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			_s2 = _s1;
-			chaos_locals[0] = _s2;
 			{
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[61])(chaos_arg_0);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[68])(chaos_arg_0);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -5628,32 +6946,29 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_60(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			_s2 = _s1;
-			chaos_locals[0] = _s2;
 			{
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[62])(chaos_arg_0);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[69])(chaos_arg_0);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -5667,32 +6982,29 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_61(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s2 = _s1;
-			chaos_locals[0] = _s2;
 			{
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[63])(chaos_arg_0);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[70])(chaos_arg_0);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -5706,32 +7018,29 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_62(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			_s1 = 0;
-			_s2 = _s1;
-			chaos_locals[0] = _s2;
 			{
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[64])(chaos_arg_0);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[71])(chaos_arg_0);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -5745,32 +7054,29 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_63(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			_s2 = _s1;
-			chaos_locals[0] = _s2;
 			{
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[65])(chaos_arg_0);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[72])(chaos_arg_0);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -5784,32 +7090,29 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_64(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			_s1 = 0;
-			_s2 = _s1;
-			chaos_locals[0] = _s2;
 			{
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[66])(chaos_arg_0);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[73])(chaos_arg_0);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -5823,32 +7126,29 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_65(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s2 = _s1;
-			chaos_locals[0] = _s2;
 			{
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[67])(chaos_arg_0);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[74])(chaos_arg_0);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -5862,32 +7162,29 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_66(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s2 = _s1;
-			chaos_locals[0] = _s2;
 			{
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[68])(chaos_arg_0);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[75])(chaos_arg_0);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -5901,32 +7198,29 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_67(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			_s1 = 0;
-			_s2 = _s1;
-			chaos_locals[0] = _s2;
 			{
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[69])(chaos_arg_0);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[76])(chaos_arg_0);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -5940,32 +7234,29 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_68(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			_s2 = _s1;
-			chaos_locals[0] = _s2;
 			{
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[70])(chaos_arg_0);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[77])(chaos_arg_0);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -5979,32 +7270,29 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_69(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			_s2 = _s1;
-			chaos_locals[0] = _s2;
 			{
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[71])(chaos_arg_0);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[78])(chaos_arg_0);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -6018,32 +7306,29 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_70(v
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s2 = _s1;
-			chaos_locals[0] = _s2;
 			{
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[72])(chaos_arg_0);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[79])(chaos_arg_0);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -6052,7 +7337,7 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_70(v
 extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_71(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
@@ -6060,6 +7345,20 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_71(v
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
+	CHAOS_IL2CPP_INTPTR _s17{};
+	CHAOS_IL2CPP_INTPTR _s18{};
+	CHAOS_IL2CPP_INTPTR _s19{};
+	CHAOS_IL2CPP_INTPTR _s20{};
 
 
 	CHAOS_EH_TRY
@@ -6070,16 +7369,44 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_71(v
 				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
 			{
 				const auto chaos_arg_1 = _s2;
 				const auto chaos_arg_0 = _s1;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[73])(chaos_arg_0, chaos_arg_1);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[80])(chaos_arg_0, chaos_arg_1);
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			// brtrue (structured EH branch)
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s4 = 0;
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
 			{
-				auto chaos_value = _s1;
+				const auto chaos_arg_0 = _s5;
+				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s6 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{
+				const auto chaos_arg_1 = _s6;
+				const auto chaos_arg_0 = _s5;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[80])(chaos_arg_0, chaos_arg_1);
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			// brtrue (structured EH branch)
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			chaos_locals[0] = _s6;
+			_s6 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s7;
 				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -6087,10 +7414,15 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_71(v
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -6101,13 +7433,31 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_72(v
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
 
 
-	{
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Text_Json_JsonSerializerOptions, {});
-		chaos_object->header.type_info = &chaos_mt_System_Text_Json_JsonSerializerOptions.hot;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
+	CHAOS_EH_TRY
+			{
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Text_Json_JsonSerializerOptions, {});
+				chaos_object->header.type_info = &chaos_mt_System_Text_Json_JsonSerializerOptions.hot;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_END
 	return;
 }
 
@@ -6118,14 +7468,32 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_73(v
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
 
 
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Text_Json_JsonSerializerOptions, {});
-		chaos_object->header.type_info = &chaos_mt_System_Text_Json_JsonSerializerOptions.hot;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
+	CHAOS_EH_TRY
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			{
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Text_Json_JsonSerializerOptions, {});
+				chaos_object->header.type_info = &chaos_mt_System_Text_Json_JsonSerializerOptions.hot;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_END
 	return;
 }
 
@@ -6136,14 +7504,32 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_74(v
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
 
 
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	{
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Text_Json_JsonSerializerOptions, {});
-		chaos_object->header.type_info = &chaos_mt_System_Text_Json_JsonSerializerOptions.hot;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
+	CHAOS_EH_TRY
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			{
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Text_Json_JsonSerializerOptions, {});
+				chaos_object->header.type_info = &chaos_mt_System_Text_Json_JsonSerializerOptions.hot;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_SerializerOptionsSubjects_SerializerOptionsSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_END
 	return;
 }
 
@@ -6155,4 +7541,168 @@ extern "C" void SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_74(v
 // extern "C" definition for link-time visibility from runtime-entry.cpp
 extern "C" const int kAotMethodCount = 75;
 
-extern "C" void ChaosJitRegisterAll() {}
+// ── JIT Method Entry Table ───────────────────────────────────────────
+// Auto-generated by chaos-il2cpp codegen for --mode jit.
+#include <cstdint>
+#include "jit_registration.h"
+
+static const char kMethodJson_0[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-0\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_0:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_0()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_0:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_0:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-0\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_0()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_0\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":51,\"handlerOffset\":52,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldstr\",\"opCode\":4,\"operand\":\"hello\",\"ilOffset\":3,\"resultType\":\"System.String\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":8,\"resultType\":\"System.String\",\"callee\":\"System.Text.Json/JsonNamingPolicy::ConvertName:System.String(System.String)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonNamingPolicy::ConvertName:System.String(System.String)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonNamingPolicy::ConvertName:System.String(System.String)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":13,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":18,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldstr\",\"opCode\":4,\"operand\":\"hello\",\"ilOffset\":19,\"resultType\":\"System.String\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":24,\"resultType\":\"System.String\",\"callee\":\"System.Text.Json/JsonNamingPolicy::ConvertName:System.String(System.String)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonNamingPolicy::ConvertName:System.String(System.String)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonNamingPolicy::ConvertName:System.String(System.String)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":29,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":34,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":36,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":37,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":39,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":40,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":49,\"ilOffset\":41,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":43,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":44,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":63,\"ilOffset\":50,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":52,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":54,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":55,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":63,\"ilOffset\":61,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":63,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_1[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-1\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_1:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_1()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_1:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_1:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-1\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_1()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_1\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":39,\"handlerOffset\":40,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"call\",\"opCode\":14,\"ilOffset\":2,\"resultType\":\"JsonNamingPolicy\",\"callee\":\"System.Text.Json/JsonNamingPolicy::get_CamelCase:JsonNamingPolicy()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonNamingPolicy::get_CamelCase:JsonNamingPolicy()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonNamingPolicy::get_CamelCase:JsonNamingPolicy()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":12,\"resultType\":\"JsonNamingPolicy\",\"callee\":\"System.Text.Json/JsonNamingPolicy::get_CamelCase:JsonNamingPolicy()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonNamingPolicy::get_CamelCase:JsonNamingPolicy()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonNamingPolicy::get_CamelCase:JsonNamingPolicy()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":17,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":22,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":24,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":25,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":27,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":28,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":37,\"ilOffset\":29,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":31,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":32,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":51,\"ilOffset\":38,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":40,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":42,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":43,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":51,\"ilOffset\":49,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":51,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_2[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-2\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_2:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_2()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_2:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_2:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-2\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_2()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_2\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":39,\"handlerOffset\":40,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"call\",\"opCode\":14,\"ilOffset\":2,\"resultType\":\"JsonNamingPolicy\",\"callee\":\"System.Text.Json/JsonNamingPolicy::get_KebabCaseLower:JsonNamingPolicy()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonNamingPolicy::get_KebabCaseLower:JsonNamingPolicy()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonNamingPolicy::get_KebabCaseLower:JsonNamingPolicy()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":12,\"resultType\":\"JsonNamingPolicy\",\"callee\":\"System.Text.Json/JsonNamingPolicy::get_KebabCaseLower:JsonNamingPolicy()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonNamingPolicy::get_KebabCaseLower:JsonNamingPolicy()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonNamingPolicy::get_KebabCaseLower:JsonNamingPolicy()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":17,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":22,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":24,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":25,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":27,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":28,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":37,\"ilOffset\":29,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":31,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":32,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":51,\"ilOffset\":38,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":40,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":42,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":43,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":51,\"ilOffset\":49,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":51,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_3[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-3\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_3:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_3()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_3:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_3:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-3\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_3()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_3\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":39,\"handlerOffset\":40,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"call\",\"opCode\":14,\"ilOffset\":2,\"resultType\":\"JsonNamingPolicy\",\"callee\":\"System.Text.Json/JsonNamingPolicy::get_KebabCaseUpper:JsonNamingPolicy()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonNamingPolicy::get_KebabCaseUpper:JsonNamingPolicy()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonNamingPolicy::get_KebabCaseUpper:JsonNamingPolicy()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":12,\"resultType\":\"JsonNamingPolicy\",\"callee\":\"System.Text.Json/JsonNamingPolicy::get_KebabCaseUpper:JsonNamingPolicy()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonNamingPolicy::get_KebabCaseUpper:JsonNamingPolicy()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonNamingPolicy::get_KebabCaseUpper:JsonNamingPolicy()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":17,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":22,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":24,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":25,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":27,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":28,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":37,\"ilOffset\":29,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":31,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":32,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":51,\"ilOffset\":38,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":40,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":42,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":43,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":51,\"ilOffset\":49,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":51,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_4[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-4\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_4:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_4()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_4:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_4:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-4\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_4()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_4\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":39,\"handlerOffset\":40,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"call\",\"opCode\":14,\"ilOffset\":2,\"resultType\":\"JsonNamingPolicy\",\"callee\":\"System.Text.Json/JsonNamingPolicy::get_SnakeCaseLower:JsonNamingPolicy()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonNamingPolicy::get_SnakeCaseLower:JsonNamingPolicy()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonNamingPolicy::get_SnakeCaseLower:JsonNamingPolicy()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":12,\"resultType\":\"JsonNamingPolicy\",\"callee\":\"System.Text.Json/JsonNamingPolicy::get_SnakeCaseLower:JsonNamingPolicy()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonNamingPolicy::get_SnakeCaseLower:JsonNamingPolicy()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonNamingPolicy::get_SnakeCaseLower:JsonNamingPolicy()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":17,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":22,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":24,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":25,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":27,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":28,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":37,\"ilOffset\":29,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":31,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":32,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":51,\"ilOffset\":38,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":40,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":42,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":43,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":51,\"ilOffset\":49,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":51,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_5[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-5\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_5:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_5()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_5:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_5:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-5\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_5()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_5\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":39,\"handlerOffset\":40,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"call\",\"opCode\":14,\"ilOffset\":2,\"resultType\":\"JsonNamingPolicy\",\"callee\":\"System.Text.Json/JsonNamingPolicy::get_SnakeCaseUpper:JsonNamingPolicy()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonNamingPolicy::get_SnakeCaseUpper:JsonNamingPolicy()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonNamingPolicy::get_SnakeCaseUpper:JsonNamingPolicy()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":12,\"resultType\":\"JsonNamingPolicy\",\"callee\":\"System.Text.Json/JsonNamingPolicy::get_SnakeCaseUpper:JsonNamingPolicy()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonNamingPolicy::get_SnakeCaseUpper:JsonNamingPolicy()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonNamingPolicy::get_SnakeCaseUpper:JsonNamingPolicy()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":17,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":22,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":24,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":25,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":27,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":28,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":37,\"ilOffset\":29,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":31,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":32,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":51,\"ilOffset\":38,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":40,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":42,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":43,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":51,\"ilOffset\":49,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":51,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_6[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-6\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_6:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_6()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_6:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_6:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-6\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_6()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_6\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_7[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-7\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_7:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_7()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_7:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_7:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-7\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_7()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_7\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":43,\"handlerOffset\":44,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Boolean\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_AllowDuplicateProperties:System.Boolean()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_AllowDuplicateProperties:System.Boolean()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_AllowDuplicateProperties:System.Boolean()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":13,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":10,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":14,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":13,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":14,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":15,\"resultType\":\"System.Boolean\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_AllowDuplicateProperties:System.Boolean()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_AllowDuplicateProperties:System.Boolean()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_AllowDuplicateProperties:System.Boolean()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":25,\"ilOffset\":20,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":22,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":26,\"ilOffset\":23,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":25,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":26,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":28,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":29,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":31,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":32,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":41,\"ilOffset\":33,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":35,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":36,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":55,\"ilOffset\":42,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":44,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":46,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":47,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":55,\"ilOffset\":53,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":55,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_8[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-8\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_8:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_8()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_8:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_8:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-8\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_8()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_8\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":43,\"handlerOffset\":44,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Boolean\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_AllowOutOfOrderMetadataProperties:System.Boolean()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_AllowOutOfOrderMetadataProperties:System.Boolean()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_AllowOutOfOrderMetadataProperties:System.Boolean()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":13,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":10,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":14,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":13,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":14,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":15,\"resultType\":\"System.Boolean\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_AllowOutOfOrderMetadataProperties:System.Boolean()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_AllowOutOfOrderMetadataProperties:System.Boolean()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_AllowOutOfOrderMetadataProperties:System.Boolean()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":25,\"ilOffset\":20,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":22,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":26,\"ilOffset\":23,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":25,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":26,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":28,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":29,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":31,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":32,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":41,\"ilOffset\":33,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":35,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":36,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":55,\"ilOffset\":42,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":44,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":46,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":47,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":55,\"ilOffset\":53,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":55,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_9[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-9\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_9:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_9()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_9:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_9:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-9\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_9()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_9\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":43,\"handlerOffset\":44,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Boolean\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_AllowTrailingCommas:System.Boolean()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_AllowTrailingCommas:System.Boolean()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_AllowTrailingCommas:System.Boolean()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":13,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":10,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":14,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":13,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":14,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":15,\"resultType\":\"System.Boolean\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_AllowTrailingCommas:System.Boolean()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_AllowTrailingCommas:System.Boolean()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_AllowTrailingCommas:System.Boolean()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":25,\"ilOffset\":20,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":22,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":26,\"ilOffset\":23,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":25,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":26,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":28,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":29,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":31,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":32,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":41,\"ilOffset\":33,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":35,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":36,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":55,\"ilOffset\":42,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":44,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":46,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":47,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":55,\"ilOffset\":53,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":55,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_10[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-10\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_10:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_10()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_10:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_10:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-10\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_10()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_10\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":41,\"handlerOffset\":42,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Collections.Generic.IList\\u003CSystem.Text.Json.Serialization.JsonConverter\\u003E\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_Converters:System.Collections.Generic.IList\\u003CSystem.Text.Json.Serialization.JsonConverter\\u003E()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_Converters:System.Collections.Generic.IList\\u003CSystem.Text.Json.Serialization.JsonConverter\\u003E()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_Converters:System.Collections.Generic.IList\\u003CSystem.Text.Json.Serialization.JsonConverter\\u003E()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":8,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":13,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":14,\"resultType\":\"System.Collections.Generic.IList\\u003CSystem.Text.Json.Serialization.JsonConverter\\u003E\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_Converters:System.Collections.Generic.IList\\u003CSystem.Text.Json.Serialization.JsonConverter\\u003E()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_Converters:System.Collections.Generic.IList\\u003CSystem.Text.Json.Serialization.JsonConverter\\u003E()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_Converters:System.Collections.Generic.IList\\u003CSystem.Text.Json.Serialization.JsonConverter\\u003E()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":19,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":24,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":26,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":27,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":29,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":30,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":39,\"ilOffset\":31,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":33,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":34,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":53,\"ilOffset\":40,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":42,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":44,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":45,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":53,\"ilOffset\":51,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":53,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_11[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.custom-entry-subject-11\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::CustomEntrySubject_11:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::CustomEntrySubject_11()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::CustomEntrySubject_11:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::CustomEntrySubject_11:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.custom-entry-subject-11\",\"signature\":\"System.Void SerializerOptionsSubjects::CustomEntrySubject_11()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_CustomEntrySubject_11\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_12[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-12\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_12:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_12()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_12:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_12:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-12\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_12()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_12\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":31,\"handlerOffset\":32,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_DefaultBufferSize:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_DefaultBufferSize:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_DefaultBufferSize:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":8,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":9,\"resultType\":\"System.Int32\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_DefaultBufferSize:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_DefaultBufferSize:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_DefaultBufferSize:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":14,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":16,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":17,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":19,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":20,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":29,\"ilOffset\":21,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":23,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":24,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":43,\"ilOffset\":30,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":32,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":34,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":35,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":43,\"ilOffset\":41,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":43,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_13[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-13\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_13:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_13()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_13:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_13:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-13\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_13()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_13\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":59,\"handlerOffset\":60,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Text.Json.Serialization.JsonIgnoreCondition\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_DefaultIgnoreCondition:System.Text.Json.Serialization.JsonIgnoreCondition()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_DefaultIgnoreCondition:System.Text.Json.Serialization.JsonIgnoreCondition()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_DefaultIgnoreCondition:System.Text.Json.Serialization.JsonIgnoreCondition()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":1,\"ilOffset\":9,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":17,\"resultType\":\"System.Int32\",\"callee\":\"System.Text.Json/System.Text.Json.Serialization.JsonIgnoreCondition::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":1,\"constrainedTypeSubjectId\":\"System.Text.Json/System.Text.Json.Serialization.JsonIgnoreCondition\",\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":22,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":23,\"resultType\":\"System.Text.Json.Serialization.JsonIgnoreCondition\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_DefaultIgnoreCondition:System.Text.Json.Serialization.JsonIgnoreCondition()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_DefaultIgnoreCondition:System.Text.Json.Serialization.JsonIgnoreCondition()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_DefaultIgnoreCondition:System.Text.Json.Serialization.JsonIgnoreCondition()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":28,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":1,\"ilOffset\":29,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":37,\"resultType\":\"System.Int32\",\"callee\":\"System.Text.Json/System.Text.Json.Serialization.JsonIgnoreCondition::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":1,\"constrainedTypeSubjectId\":\"System.Text.Json/System.Text.Json.Serialization.JsonIgnoreCondition\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":42,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":44,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":45,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":47,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":48,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":57,\"ilOffset\":49,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":51,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":52,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":71,\"ilOffset\":58,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":60,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":62,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":63,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":71,\"ilOffset\":69,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":71,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_14[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-14\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_14:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_14()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_14:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_14:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-14\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_14()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_14\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":41,\"handlerOffset\":42,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"JsonNamingPolicy\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_DictionaryKeyPolicy:JsonNamingPolicy()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_DictionaryKeyPolicy:JsonNamingPolicy()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_DictionaryKeyPolicy:JsonNamingPolicy()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":8,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":13,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":14,\"resultType\":\"JsonNamingPolicy\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_DictionaryKeyPolicy:JsonNamingPolicy()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_DictionaryKeyPolicy:JsonNamingPolicy()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_DictionaryKeyPolicy:JsonNamingPolicy()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":19,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":24,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":26,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":27,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":29,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":30,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":39,\"ilOffset\":31,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":33,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":34,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":53,\"ilOffset\":40,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":42,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":44,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":45,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":53,\"ilOffset\":51,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":53,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_15[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-15\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_15:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_15()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_15:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_15:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-15\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_15()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_15\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":41,\"handlerOffset\":42,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"JavaScriptEncoder\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_Encoder:JavaScriptEncoder()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_Encoder:JavaScriptEncoder()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_Encoder:JavaScriptEncoder()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":8,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":13,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":14,\"resultType\":\"JavaScriptEncoder\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_Encoder:JavaScriptEncoder()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_Encoder:JavaScriptEncoder()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_Encoder:JavaScriptEncoder()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":19,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":24,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":26,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":27,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":29,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":30,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":39,\"ilOffset\":31,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":33,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":34,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":53,\"ilOffset\":40,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":42,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":44,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":45,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":53,\"ilOffset\":51,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":53,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_16[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-16\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_16:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_16()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_16:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_16:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-16\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_16()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_16\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":43,\"handlerOffset\":44,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Boolean\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_IgnoreNullValues:System.Boolean()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_IgnoreNullValues:System.Boolean()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_IgnoreNullValues:System.Boolean()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":13,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":10,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":14,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":13,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":14,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":15,\"resultType\":\"System.Boolean\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_IgnoreNullValues:System.Boolean()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_IgnoreNullValues:System.Boolean()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_IgnoreNullValues:System.Boolean()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":25,\"ilOffset\":20,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":22,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":26,\"ilOffset\":23,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":25,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":26,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":28,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":29,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":31,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":32,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":41,\"ilOffset\":33,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":35,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":36,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":55,\"ilOffset\":42,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":44,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":46,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":47,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":55,\"ilOffset\":53,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":55,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_17[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-17\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_17:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_17()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_17:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_17:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-17\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_17()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_17\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":43,\"handlerOffset\":44,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Boolean\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_IgnoreReadOnlyFields:System.Boolean()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_IgnoreReadOnlyFields:System.Boolean()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_IgnoreReadOnlyFields:System.Boolean()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":13,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":10,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":14,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":13,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":14,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":15,\"resultType\":\"System.Boolean\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_IgnoreReadOnlyFields:System.Boolean()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_IgnoreReadOnlyFields:System.Boolean()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_IgnoreReadOnlyFields:System.Boolean()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":25,\"ilOffset\":20,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":22,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":26,\"ilOffset\":23,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":25,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":26,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":28,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":29,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":31,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":32,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":41,\"ilOffset\":33,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":35,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":36,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":55,\"ilOffset\":42,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":44,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":46,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":47,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":55,\"ilOffset\":53,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":55,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_18[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-18\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_18:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_18()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_18:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_18:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-18\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_18()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_18\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":43,\"handlerOffset\":44,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Boolean\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_IgnoreReadOnlyProperties:System.Boolean()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_IgnoreReadOnlyProperties:System.Boolean()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_IgnoreReadOnlyProperties:System.Boolean()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":13,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":10,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":14,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":13,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":14,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":15,\"resultType\":\"System.Boolean\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_IgnoreReadOnlyProperties:System.Boolean()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_IgnoreReadOnlyProperties:System.Boolean()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_IgnoreReadOnlyProperties:System.Boolean()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":25,\"ilOffset\":20,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":22,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":26,\"ilOffset\":23,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":25,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":26,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":28,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":29,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":31,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":32,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":41,\"ilOffset\":33,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":35,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":36,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":55,\"ilOffset\":42,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":44,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":46,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":47,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":55,\"ilOffset\":53,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":55,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_19[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-19\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_19:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_19()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_19:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_19:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-19\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_19()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_19\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":43,\"handlerOffset\":44,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Boolean\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_IncludeFields:System.Boolean()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_IncludeFields:System.Boolean()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_IncludeFields:System.Boolean()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":13,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":10,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":14,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":13,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":14,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":15,\"resultType\":\"System.Boolean\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_IncludeFields:System.Boolean()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_IncludeFields:System.Boolean()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_IncludeFields:System.Boolean()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":25,\"ilOffset\":20,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":22,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":26,\"ilOffset\":23,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":25,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":26,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":28,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":29,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":31,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":32,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":41,\"ilOffset\":33,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":35,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":36,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":55,\"ilOffset\":42,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":44,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":46,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":47,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":55,\"ilOffset\":53,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":55,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_20[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-20\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_20:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_20()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_20:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_20:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-20\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_20()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_20\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":31,\"handlerOffset\":32,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Char\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_IndentCharacter:System.Char()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_IndentCharacter:System.Char()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_IndentCharacter:System.Char()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":8,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":9,\"resultType\":\"System.Char\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_IndentCharacter:System.Char()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_IndentCharacter:System.Char()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_IndentCharacter:System.Char()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":14,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":16,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":17,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":19,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":20,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":29,\"ilOffset\":21,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":23,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":24,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":43,\"ilOffset\":30,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":32,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":34,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":35,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":43,\"ilOffset\":41,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":43,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_21[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-21\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_21:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_21()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_21:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_21:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-21\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_21()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_21\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":31,\"handlerOffset\":32,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_IndentSize:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_IndentSize:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_IndentSize:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":8,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":9,\"resultType\":\"System.Int32\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_IndentSize:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_IndentSize:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_IndentSize:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":14,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":16,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":17,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":19,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":20,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":29,\"ilOffset\":21,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":23,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":24,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":43,\"ilOffset\":30,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":32,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":34,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":35,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":43,\"ilOffset\":41,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":43,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_22[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-22\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_22:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_22()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_22:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_22:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-22\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_22()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_22\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":43,\"handlerOffset\":44,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Boolean\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_IsReadOnly:System.Boolean()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_IsReadOnly:System.Boolean()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_IsReadOnly:System.Boolean()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":13,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":10,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":14,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":13,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":14,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":15,\"resultType\":\"System.Boolean\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_IsReadOnly:System.Boolean()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_IsReadOnly:System.Boolean()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_IsReadOnly:System.Boolean()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":25,\"ilOffset\":20,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":22,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":26,\"ilOffset\":23,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":25,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":26,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":28,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":29,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":31,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":32,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":41,\"ilOffset\":33,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":35,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":36,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":55,\"ilOffset\":42,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":44,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":46,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":47,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":55,\"ilOffset\":53,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":55,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_23[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-23\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_23:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_23()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_23:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_23:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-23\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_23()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_23\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":31,\"handlerOffset\":32,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_MaxDepth:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_MaxDepth:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_MaxDepth:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":8,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":9,\"resultType\":\"System.Int32\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_MaxDepth:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_MaxDepth:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_MaxDepth:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":14,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":16,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":17,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":19,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":20,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":29,\"ilOffset\":21,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":23,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":24,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":43,\"ilOffset\":30,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":32,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":34,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":35,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":43,\"ilOffset\":41,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":43,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_24[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-24\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_24:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_24()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_24:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_24:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-24\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_24()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_24\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":41,\"handlerOffset\":42,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.String\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_NewLine:System.String()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_NewLine:System.String()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_NewLine:System.String()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":8,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":13,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":14,\"resultType\":\"System.String\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_NewLine:System.String()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_NewLine:System.String()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_NewLine:System.String()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":19,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.String::get_Length:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":24,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":26,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":27,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":29,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":30,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":39,\"ilOffset\":31,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":33,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":34,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":53,\"ilOffset\":40,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":42,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":44,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":45,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":53,\"ilOffset\":51,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":53,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_25[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-25\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_25:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_25()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_25:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_25:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-25\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_25()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_25\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":59,\"handlerOffset\":60,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Text.Json.Serialization.JsonNumberHandling\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_NumberHandling:System.Text.Json.Serialization.JsonNumberHandling()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_NumberHandling:System.Text.Json.Serialization.JsonNumberHandling()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_NumberHandling:System.Text.Json.Serialization.JsonNumberHandling()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":1,\"ilOffset\":9,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":17,\"resultType\":\"System.Int32\",\"callee\":\"System.Text.Json/System.Text.Json.Serialization.JsonNumberHandling::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":1,\"constrainedTypeSubjectId\":\"System.Text.Json/System.Text.Json.Serialization.JsonNumberHandling\",\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":22,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":23,\"resultType\":\"System.Text.Json.Serialization.JsonNumberHandling\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_NumberHandling:System.Text.Json.Serialization.JsonNumberHandling()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_NumberHandling:System.Text.Json.Serialization.JsonNumberHandling()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_NumberHandling:System.Text.Json.Serialization.JsonNumberHandling()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":28,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":1,\"ilOffset\":29,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":37,\"resultType\":\"System.Int32\",\"callee\":\"System.Text.Json/System.Text.Json.Serialization.JsonNumberHandling::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":1,\"constrainedTypeSubjectId\":\"System.Text.Json/System.Text.Json.Serialization.JsonNumberHandling\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":42,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":44,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":45,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":47,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":48,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":57,\"ilOffset\":49,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":51,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":52,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":71,\"ilOffset\":58,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":60,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":62,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":63,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":71,\"ilOffset\":69,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":71,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_26[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-26\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_26:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_26()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_26:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_26:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-26\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_26()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_26\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":59,\"handlerOffset\":60,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Text.Json.Serialization.JsonObjectCreationHandling\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_PreferredObjectCreationHandling:System.Text.Json.Serialization.JsonObjectCreationHandling()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_PreferredObjectCreationHandling:System.Text.Json.Serialization.JsonObjectCreationHandling()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_PreferredObjectCreationHandling:System.Text.Json.Serialization.JsonObjectCreationHandling()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":1,\"ilOffset\":9,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":17,\"resultType\":\"System.Int32\",\"callee\":\"System.Text.Json/System.Text.Json.Serialization.JsonObjectCreationHandling::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":1,\"constrainedTypeSubjectId\":\"System.Text.Json/System.Text.Json.Serialization.JsonObjectCreationHandling\",\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":22,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":23,\"resultType\":\"System.Text.Json.Serialization.JsonObjectCreationHandling\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_PreferredObjectCreationHandling:System.Text.Json.Serialization.JsonObjectCreationHandling()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_PreferredObjectCreationHandling:System.Text.Json.Serialization.JsonObjectCreationHandling()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_PreferredObjectCreationHandling:System.Text.Json.Serialization.JsonObjectCreationHandling()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":28,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":1,\"ilOffset\":29,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":37,\"resultType\":\"System.Int32\",\"callee\":\"System.Text.Json/System.Text.Json.Serialization.JsonObjectCreationHandling::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":1,\"constrainedTypeSubjectId\":\"System.Text.Json/System.Text.Json.Serialization.JsonObjectCreationHandling\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":42,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":44,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":45,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":47,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":48,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":57,\"ilOffset\":49,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":51,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":52,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":71,\"ilOffset\":58,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":60,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":62,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":63,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":71,\"ilOffset\":69,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":71,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_27[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-27\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_27:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_27()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_27:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_27:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-27\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_27()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_27\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":43,\"handlerOffset\":44,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Boolean\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_PropertyNameCaseInsensitive:System.Boolean()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_PropertyNameCaseInsensitive:System.Boolean()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_PropertyNameCaseInsensitive:System.Boolean()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":13,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":10,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":14,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":13,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":14,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":15,\"resultType\":\"System.Boolean\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_PropertyNameCaseInsensitive:System.Boolean()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_PropertyNameCaseInsensitive:System.Boolean()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_PropertyNameCaseInsensitive:System.Boolean()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":25,\"ilOffset\":20,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":22,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":26,\"ilOffset\":23,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":25,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":26,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":28,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":29,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":31,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":32,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":41,\"ilOffset\":33,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":35,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":36,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":55,\"ilOffset\":42,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":44,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":46,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":47,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":55,\"ilOffset\":53,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":55,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_28[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-28\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_28:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_28()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_28:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_28:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-28\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_28()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_28\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":41,\"handlerOffset\":42,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"JsonNamingPolicy\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_PropertyNamingPolicy:JsonNamingPolicy()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_PropertyNamingPolicy:JsonNamingPolicy()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_PropertyNamingPolicy:JsonNamingPolicy()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":8,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":13,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":14,\"resultType\":\"JsonNamingPolicy\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_PropertyNamingPolicy:JsonNamingPolicy()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_PropertyNamingPolicy:JsonNamingPolicy()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_PropertyNamingPolicy:JsonNamingPolicy()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":19,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":24,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":26,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":27,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":29,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":30,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":39,\"ilOffset\":31,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":33,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":34,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":53,\"ilOffset\":40,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":42,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":44,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":45,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":53,\"ilOffset\":51,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":53,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_29[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-29\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_29:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_29()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_29:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_29:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-29\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_29()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_29\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":59,\"handlerOffset\":60,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"JsonCommentHandling\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_ReadCommentHandling:JsonCommentHandling()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_ReadCommentHandling:JsonCommentHandling()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_ReadCommentHandling:JsonCommentHandling()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":1,\"ilOffset\":9,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":17,\"resultType\":\"System.Int32\",\"callee\":\"System.Text.Json/JsonCommentHandling::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":1,\"constrainedTypeSubjectId\":\"System.Text.Json/JsonCommentHandling\",\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":22,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":23,\"resultType\":\"JsonCommentHandling\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_ReadCommentHandling:JsonCommentHandling()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_ReadCommentHandling:JsonCommentHandling()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_ReadCommentHandling:JsonCommentHandling()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":28,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":1,\"ilOffset\":29,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":37,\"resultType\":\"System.Int32\",\"callee\":\"System.Text.Json/JsonCommentHandling::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":1,\"constrainedTypeSubjectId\":\"System.Text.Json/JsonCommentHandling\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":42,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":44,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":45,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":47,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":48,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":57,\"ilOffset\":49,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":51,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":52,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":71,\"ilOffset\":58,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":60,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":62,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":63,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":71,\"ilOffset\":69,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":71,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_30[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-30\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_30:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_30()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_30:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_30:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-30\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_30()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_30\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":41,\"handlerOffset\":42,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Text.Json.Serialization.ReferenceHandler\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_ReferenceHandler:System.Text.Json.Serialization.ReferenceHandler()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_ReferenceHandler:System.Text.Json.Serialization.ReferenceHandler()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_ReferenceHandler:System.Text.Json.Serialization.ReferenceHandler()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":8,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":13,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":14,\"resultType\":\"System.Text.Json.Serialization.ReferenceHandler\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_ReferenceHandler:System.Text.Json.Serialization.ReferenceHandler()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_ReferenceHandler:System.Text.Json.Serialization.ReferenceHandler()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_ReferenceHandler:System.Text.Json.Serialization.ReferenceHandler()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":19,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":24,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":26,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":27,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":29,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":30,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":39,\"ilOffset\":31,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":33,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":34,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":53,\"ilOffset\":40,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":42,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":44,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":45,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":53,\"ilOffset\":51,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":53,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_31[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-31\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_31:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_31()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_31:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_31:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-31\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_31()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_31\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":43,\"handlerOffset\":44,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Boolean\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_RespectNullableAnnotations:System.Boolean()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_RespectNullableAnnotations:System.Boolean()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_RespectNullableAnnotations:System.Boolean()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":13,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":10,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":14,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":13,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":14,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":15,\"resultType\":\"System.Boolean\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_RespectNullableAnnotations:System.Boolean()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_RespectNullableAnnotations:System.Boolean()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_RespectNullableAnnotations:System.Boolean()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":25,\"ilOffset\":20,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":22,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":26,\"ilOffset\":23,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":25,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":26,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":28,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":29,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":31,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":32,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":41,\"ilOffset\":33,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":35,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":36,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":55,\"ilOffset\":42,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":44,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":46,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":47,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":55,\"ilOffset\":53,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":55,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_32[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-32\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_32:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_32()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_32:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_32:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-32\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_32()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_32\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":43,\"handlerOffset\":44,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Boolean\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_RespectRequiredConstructorParameters:System.Boolean()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_RespectRequiredConstructorParameters:System.Boolean()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_RespectRequiredConstructorParameters:System.Boolean()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":13,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":10,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":14,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":13,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":14,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":15,\"resultType\":\"System.Boolean\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_RespectRequiredConstructorParameters:System.Boolean()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_RespectRequiredConstructorParameters:System.Boolean()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_RespectRequiredConstructorParameters:System.Boolean()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":25,\"ilOffset\":20,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":22,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":26,\"ilOffset\":23,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":25,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":26,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":28,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":29,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":31,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":32,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":41,\"ilOffset\":33,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":35,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":36,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":55,\"ilOffset\":42,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":44,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":46,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":47,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":55,\"ilOffset\":53,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":55,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_33[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-33\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_33:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_33()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_33:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_33:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-33\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_33()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_33\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":39,\"handlerOffset\":40,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"call\",\"opCode\":14,\"ilOffset\":2,\"resultType\":\"JsonSerializerOptions\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_Strict:JsonSerializerOptions()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_Strict:JsonSerializerOptions()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_Strict:JsonSerializerOptions()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":12,\"resultType\":\"JsonSerializerOptions\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_Strict:JsonSerializerOptions()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_Strict:JsonSerializerOptions()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_Strict:JsonSerializerOptions()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":17,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":22,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":24,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":25,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":27,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":28,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":37,\"ilOffset\":29,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":31,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":32,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":51,\"ilOffset\":38,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":40,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":42,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":43,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":51,\"ilOffset\":49,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":51,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_34[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-34\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_34:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_34()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_34:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_34:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-34\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_34()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_34\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":41,\"handlerOffset\":42,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_TypeInfoResolver:System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_TypeInfoResolver:System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_TypeInfoResolver:System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":8,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":13,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":14,\"resultType\":\"System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_TypeInfoResolver:System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_TypeInfoResolver:System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_TypeInfoResolver:System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":19,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":24,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":26,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":27,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":29,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":30,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":39,\"ilOffset\":31,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":33,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":34,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":53,\"ilOffset\":40,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":42,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":44,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":45,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":53,\"ilOffset\":51,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":53,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_35[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-35\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_35:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_35()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_35:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_35:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-35\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_35()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_35\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":41,\"handlerOffset\":42,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Collections.Generic.IList\\u003CSystem.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver\\u003E\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_TypeInfoResolverChain:System.Collections.Generic.IList\\u003CSystem.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver\\u003E()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_TypeInfoResolverChain:System.Collections.Generic.IList\\u003CSystem.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver\\u003E()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_TypeInfoResolverChain:System.Collections.Generic.IList\\u003CSystem.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver\\u003E()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":8,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":13,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":14,\"resultType\":\"System.Collections.Generic.IList\\u003CSystem.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver\\u003E\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_TypeInfoResolverChain:System.Collections.Generic.IList\\u003CSystem.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver\\u003E()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_TypeInfoResolverChain:System.Collections.Generic.IList\\u003CSystem.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver\\u003E()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_TypeInfoResolverChain:System.Collections.Generic.IList\\u003CSystem.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver\\u003E()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":19,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":24,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":26,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":27,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":29,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":30,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":39,\"ilOffset\":31,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":33,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":34,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":53,\"ilOffset\":40,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":42,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":44,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":45,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":53,\"ilOffset\":51,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":53,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_36[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-36\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_36:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_36()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_36:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_36:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-36\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_36()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_36\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":59,\"handlerOffset\":60,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Text.Json.Serialization.JsonUnknownTypeHandling\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_UnknownTypeHandling:System.Text.Json.Serialization.JsonUnknownTypeHandling()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_UnknownTypeHandling:System.Text.Json.Serialization.JsonUnknownTypeHandling()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_UnknownTypeHandling:System.Text.Json.Serialization.JsonUnknownTypeHandling()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":1,\"ilOffset\":9,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":17,\"resultType\":\"System.Int32\",\"callee\":\"System.Text.Json/System.Text.Json.Serialization.JsonUnknownTypeHandling::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":1,\"constrainedTypeSubjectId\":\"System.Text.Json/System.Text.Json.Serialization.JsonUnknownTypeHandling\",\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":22,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":23,\"resultType\":\"System.Text.Json.Serialization.JsonUnknownTypeHandling\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_UnknownTypeHandling:System.Text.Json.Serialization.JsonUnknownTypeHandling()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_UnknownTypeHandling:System.Text.Json.Serialization.JsonUnknownTypeHandling()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_UnknownTypeHandling:System.Text.Json.Serialization.JsonUnknownTypeHandling()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":28,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":1,\"ilOffset\":29,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":37,\"resultType\":\"System.Int32\",\"callee\":\"System.Text.Json/System.Text.Json.Serialization.JsonUnknownTypeHandling::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":1,\"constrainedTypeSubjectId\":\"System.Text.Json/System.Text.Json.Serialization.JsonUnknownTypeHandling\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":42,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":44,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":45,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":47,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":48,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":57,\"ilOffset\":49,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":51,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":52,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":71,\"ilOffset\":58,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":60,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":62,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":63,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":71,\"ilOffset\":69,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":71,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_37[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-37\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_37:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_37()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_37:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_37:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-37\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_37()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_37\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":59,\"handlerOffset\":60,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Text.Json.Serialization.JsonUnmappedMemberHandling\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_UnmappedMemberHandling:System.Text.Json.Serialization.JsonUnmappedMemberHandling()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_UnmappedMemberHandling:System.Text.Json.Serialization.JsonUnmappedMemberHandling()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_UnmappedMemberHandling:System.Text.Json.Serialization.JsonUnmappedMemberHandling()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":1,\"ilOffset\":9,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":17,\"resultType\":\"System.Int32\",\"callee\":\"System.Text.Json/System.Text.Json.Serialization.JsonUnmappedMemberHandling::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":1,\"constrainedTypeSubjectId\":\"System.Text.Json/System.Text.Json.Serialization.JsonUnmappedMemberHandling\",\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":22,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":23,\"resultType\":\"System.Text.Json.Serialization.JsonUnmappedMemberHandling\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_UnmappedMemberHandling:System.Text.Json.Serialization.JsonUnmappedMemberHandling()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_UnmappedMemberHandling:System.Text.Json.Serialization.JsonUnmappedMemberHandling()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_UnmappedMemberHandling:System.Text.Json.Serialization.JsonUnmappedMemberHandling()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":1,\"ilOffset\":28,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":1,\"ilOffset\":29,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":37,\"resultType\":\"System.Int32\",\"callee\":\"System.Text.Json/System.Text.Json.Serialization.JsonUnmappedMemberHandling::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":1,\"constrainedTypeSubjectId\":\"System.Text.Json/System.Text.Json.Serialization.JsonUnmappedMemberHandling\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":42,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":44,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":45,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":47,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":48,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":57,\"ilOffset\":49,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":51,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":52,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":71,\"ilOffset\":58,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":60,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":62,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":63,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":71,\"ilOffset\":69,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":71,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_38[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-38\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_38:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_38()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_38:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_38:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-38\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_38()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_38\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":39,\"handlerOffset\":40,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"call\",\"opCode\":14,\"ilOffset\":2,\"resultType\":\"JsonSerializerOptions\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_Web:JsonSerializerOptions()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_Web:JsonSerializerOptions()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_Web:JsonSerializerOptions()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":12,\"resultType\":\"JsonSerializerOptions\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_Web:JsonSerializerOptions()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_Web:JsonSerializerOptions()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_Web:JsonSerializerOptions()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":17,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":22,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":24,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":25,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":27,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":28,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":37,\"ilOffset\":29,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":31,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":32,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":51,\"ilOffset\":38,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":40,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":42,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":43,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":51,\"ilOffset\":49,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":51,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_39[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-39\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_39:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_39()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_39:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_39:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-39\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_39()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_39\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":43,\"handlerOffset\":44,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Boolean\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_WriteIndented:System.Boolean()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_WriteIndented:System.Boolean()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_WriteIndented:System.Boolean()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":13,\"ilOffset\":8,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":10,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":14,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":13,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":14,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":15,\"resultType\":\"System.Boolean\",\"callee\":\"System.Text.Json/JsonSerializerOptions::get_WriteIndented:System.Boolean()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_WriteIndented:System.Boolean()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::get_WriteIndented:System.Boolean()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":25,\"ilOffset\":20,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":22,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":26,\"ilOffset\":23,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":25,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":26,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":28,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":29,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":31,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":32,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":41,\"ilOffset\":33,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":35,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":36,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":55,\"ilOffset\":42,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":44,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":46,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":47,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":55,\"ilOffset\":53,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":55,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_40[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-40\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_40:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_40()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_40:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_40:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-40\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_40()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_40\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":61,\"handlerOffset\":62,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldtoken\",\"opCode\":70,\"operand\":\"System.Private.CoreLib/System.Byte\",\"ilOffset\":3,\"resultType\":\"System.RuntimeTypeHandle\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Byte\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Byte\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":8,\"resultType\":\"System.Type\",\"callee\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":13,\"resultType\":\"System.Text.Json.Serialization.JsonConverter\",\"callee\":\"System.Text.Json/JsonSerializerOptions::GetConverter:System.Text.Json.Serialization.JsonConverter(System.Type)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::GetConverter:System.Text.Json.Serialization.JsonConverter(System.Type)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::GetConverter:System.Text.Json.Serialization.JsonConverter(System.Type)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":18,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":23,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldtoken\",\"opCode\":70,\"operand\":\"System.Private.CoreLib/System.Byte\",\"ilOffset\":24,\"resultType\":\"System.RuntimeTypeHandle\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Byte\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Byte\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":29,\"resultType\":\"System.Type\",\"callee\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":34,\"resultType\":\"System.Text.Json.Serialization.JsonConverter\",\"callee\":\"System.Text.Json/JsonSerializerOptions::GetConverter:System.Text.Json.Serialization.JsonConverter(System.Type)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::GetConverter:System.Text.Json.Serialization.JsonConverter(System.Type)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::GetConverter:System.Text.Json.Serialization.JsonConverter(System.Type)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":39,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":44,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":46,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":47,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":49,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":50,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":59,\"ilOffset\":51,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":53,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":54,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":73,\"ilOffset\":60,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":62,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":64,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":65,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":73,\"ilOffset\":71,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":73,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_41[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-41\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_41:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_41()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_41:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_41:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-41\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_41()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_41\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":61,\"handlerOffset\":62,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldtoken\",\"opCode\":70,\"operand\":\"System.Private.CoreLib/System.Byte\",\"ilOffset\":3,\"resultType\":\"System.RuntimeTypeHandle\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Byte\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Byte\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":8,\"resultType\":\"System.Type\",\"callee\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":13,\"resultType\":\"System.Text.Json.Serialization.Metadata.JsonTypeInfo\",\"callee\":\"System.Text.Json/JsonSerializerOptions::GetTypeInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo(System.Type)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::GetTypeInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo(System.Type)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::GetTypeInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo(System.Type)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":18,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":23,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldtoken\",\"opCode\":70,\"operand\":\"System.Private.CoreLib/System.Byte\",\"ilOffset\":24,\"resultType\":\"System.RuntimeTypeHandle\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Byte\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Byte\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":29,\"resultType\":\"System.Type\",\"callee\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":34,\"resultType\":\"System.Text.Json.Serialization.Metadata.JsonTypeInfo\",\"callee\":\"System.Text.Json/JsonSerializerOptions::GetTypeInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo(System.Type)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::GetTypeInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo(System.Type)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::GetTypeInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo(System.Type)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":39,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":44,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":46,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":47,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":49,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":50,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":59,\"ilOffset\":51,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":53,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":54,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":73,\"ilOffset\":60,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":62,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":64,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":65,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":73,\"ilOffset\":71,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":73,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_42[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-42\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_42:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_42()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_42:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_42:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-42\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_42()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_42\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":11,\"handlerOffset\":12,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Void\",\"callee\":\"System.Text.Json/JsonSerializerOptions::MakeReadOnly:System.Void()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::MakeReadOnly:System.Void()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::MakeReadOnly:System.Void()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":23,\"ilOffset\":10,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":12,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":14,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":15,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":23,\"ilOffset\":21,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":23,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_43[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-43\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_43:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_43()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_43:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_43:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-43\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_43()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_43\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":12,\"handlerOffset\":13,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":4,\"resultType\":\"System.Void\",\"callee\":\"System.Text.Json/JsonSerializerOptions::MakeReadOnly:System.Void(System.Boolean)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::MakeReadOnly:System.Void(System.Boolean)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::MakeReadOnly:System.Void(System.Boolean)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":13,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":16,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":22,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":24,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_44[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-44\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_44:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_44()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_44:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_44:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-44\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_44()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_44\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":12,\"handlerOffset\":13,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":4,\"resultType\":\"System.Void\",\"callee\":\"System.Text.Json/JsonSerializerOptions::set_AllowDuplicateProperties:System.Void(System.Boolean)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_AllowDuplicateProperties:System.Void(System.Boolean)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_AllowDuplicateProperties:System.Void(System.Boolean)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":13,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":16,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":22,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":24,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_45[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-45\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_45:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_45()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_45:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_45:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-45\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_45()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_45\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":12,\"handlerOffset\":13,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":4,\"resultType\":\"System.Void\",\"callee\":\"System.Text.Json/JsonSerializerOptions::set_AllowOutOfOrderMetadataProperties:System.Void(System.Boolean)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_AllowOutOfOrderMetadataProperties:System.Void(System.Boolean)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_AllowOutOfOrderMetadataProperties:System.Void(System.Boolean)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":13,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":16,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":22,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":24,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_46[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-46\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_46:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_46()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_46:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_46:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-46\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_46()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_46\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":12,\"handlerOffset\":13,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":4,\"resultType\":\"System.Void\",\"callee\":\"System.Text.Json/JsonSerializerOptions::set_AllowTrailingCommas:System.Void(System.Boolean)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_AllowTrailingCommas:System.Void(System.Boolean)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_AllowTrailingCommas:System.Void(System.Boolean)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":13,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":16,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":22,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":24,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_47[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-47\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_47:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_47()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_47:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_47:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-47\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_47()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_47\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":13,\"handlerOffset\":14,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":5,\"resultType\":\"System.Void\",\"callee\":\"System.Text.Json/JsonSerializerOptions::set_DefaultBufferSize:System.Void(System.Int32)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_DefaultBufferSize:System.Void(System.Int32)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_DefaultBufferSize:System.Void(System.Int32)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":25,\"ilOffset\":12,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":14,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":16,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":17,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":25,\"ilOffset\":23,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":25,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_48[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-48\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_48:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_48()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_48:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_48:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-48\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_48()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_48\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":12,\"handlerOffset\":13,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":4,\"resultType\":\"System.Void\",\"callee\":\"System.Text.Json/JsonSerializerOptions::set_DefaultIgnoreCondition:System.Void(System.Text.Json.Serialization.JsonIgnoreCondition)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_DefaultIgnoreCondition:System.Void(System.Text.Json.Serialization.JsonIgnoreCondition)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_DefaultIgnoreCondition:System.Void(System.Text.Json.Serialization.JsonIgnoreCondition)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":13,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":16,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":22,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":24,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_49[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-49\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_49:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_49()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_49:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_49:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-49\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_49()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_49\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":12,\"handlerOffset\":13,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":3,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":4,\"resultType\":\"System.Void\",\"callee\":\"System.Text.Json/JsonSerializerOptions::set_DictionaryKeyPolicy:System.Void(JsonNamingPolicy)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_DictionaryKeyPolicy:System.Void(JsonNamingPolicy)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_DictionaryKeyPolicy:System.Void(JsonNamingPolicy)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":13,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":16,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":22,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":24,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_50[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-50\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_50:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_50()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_50:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_50:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-50\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_50()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_50\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":12,\"handlerOffset\":13,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":3,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":4,\"resultType\":\"System.Void\",\"callee\":\"System.Text.Json/JsonSerializerOptions::set_Encoder:System.Void(JavaScriptEncoder)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_Encoder:System.Void(JavaScriptEncoder)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_Encoder:System.Void(JavaScriptEncoder)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":13,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":16,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":22,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":24,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_51[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-51\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_51:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_51()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_51:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_51:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-51\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_51()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_51\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":12,\"handlerOffset\":13,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":4,\"resultType\":\"System.Void\",\"callee\":\"System.Text.Json/JsonSerializerOptions::set_IgnoreNullValues:System.Void(System.Boolean)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_IgnoreNullValues:System.Void(System.Boolean)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_IgnoreNullValues:System.Void(System.Boolean)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":13,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":16,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":22,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":24,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_52[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-52\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_52:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_52()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_52:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_52:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-52\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_52()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_52\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":12,\"handlerOffset\":13,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":4,\"resultType\":\"System.Void\",\"callee\":\"System.Text.Json/JsonSerializerOptions::set_IgnoreReadOnlyFields:System.Void(System.Boolean)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_IgnoreReadOnlyFields:System.Void(System.Boolean)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_IgnoreReadOnlyFields:System.Void(System.Boolean)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":13,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":16,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":22,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":24,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_53[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-53\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_53:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_53()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_53:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_53:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-53\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_53()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_53\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":12,\"handlerOffset\":13,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":4,\"resultType\":\"System.Void\",\"callee\":\"System.Text.Json/JsonSerializerOptions::set_IgnoreReadOnlyProperties:System.Void(System.Boolean)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_IgnoreReadOnlyProperties:System.Void(System.Boolean)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_IgnoreReadOnlyProperties:System.Void(System.Boolean)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":13,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":16,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":22,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":24,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_54[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-54\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_54:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_54()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_54:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_54:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-54\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_54()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_54\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":12,\"handlerOffset\":13,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":4,\"resultType\":\"System.Void\",\"callee\":\"System.Text.Json/JsonSerializerOptions::set_IncludeFields:System.Void(System.Boolean)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_IncludeFields:System.Void(System.Boolean)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_IncludeFields:System.Void(System.Boolean)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":13,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":16,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":22,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":24,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_55[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-55\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_55:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_55()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_55:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_55:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-55\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_55()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_55\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":13,\"handlerOffset\":14,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":65,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":5,\"resultType\":\"System.Void\",\"callee\":\"System.Text.Json/JsonSerializerOptions::set_IndentCharacter:System.Void(System.Char)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_IndentCharacter:System.Void(System.Char)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_IndentCharacter:System.Void(System.Char)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":25,\"ilOffset\":12,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":14,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":16,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":17,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":25,\"ilOffset\":23,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":25,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_56[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-56\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_56:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_56()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_56:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_56:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-56\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_56()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_56\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":13,\"handlerOffset\":14,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":5,\"resultType\":\"System.Void\",\"callee\":\"System.Text.Json/JsonSerializerOptions::set_IndentSize:System.Void(System.Int32)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_IndentSize:System.Void(System.Int32)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_IndentSize:System.Void(System.Int32)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":25,\"ilOffset\":12,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":14,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":16,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":17,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":25,\"ilOffset\":23,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":25,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_57[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-57\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_57:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_57()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_57:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_57:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-57\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_57()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_57\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":13,\"handlerOffset\":14,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":42,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":5,\"resultType\":\"System.Void\",\"callee\":\"System.Text.Json/JsonSerializerOptions::set_MaxDepth:System.Void(System.Int32)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_MaxDepth:System.Void(System.Int32)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_MaxDepth:System.Void(System.Int32)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":25,\"ilOffset\":12,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":14,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":16,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":17,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":25,\"ilOffset\":23,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":25,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_58[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-58\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_58:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_58()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_58:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_58:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-58\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_58()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_58\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":16,\"handlerOffset\":17,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldstr\",\"opCode\":4,\"operand\":\"hello\",\"ilOffset\":3,\"resultType\":\"System.String\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":8,\"resultType\":\"System.Void\",\"callee\":\"System.Text.Json/JsonSerializerOptions::set_NewLine:System.Void(System.String)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_NewLine:System.Void(System.String)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_NewLine:System.Void(System.String)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":28,\"ilOffset\":15,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":17,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":19,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":20,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":28,\"ilOffset\":26,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":28,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_59[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-59\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_59:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_59()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_59:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_59:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-59\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_59()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_59\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":12,\"handlerOffset\":13,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":4,\"resultType\":\"System.Void\",\"callee\":\"System.Text.Json/JsonSerializerOptions::set_NumberHandling:System.Void(System.Text.Json.Serialization.JsonNumberHandling)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_NumberHandling:System.Void(System.Text.Json.Serialization.JsonNumberHandling)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_NumberHandling:System.Void(System.Text.Json.Serialization.JsonNumberHandling)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":13,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":16,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":22,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":24,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_60[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-60\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_60:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_60()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_60:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_60:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-60\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_60()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_60\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":12,\"handlerOffset\":13,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":4,\"resultType\":\"System.Void\",\"callee\":\"System.Text.Json/JsonSerializerOptions::set_PreferredObjectCreationHandling:System.Void(System.Text.Json.Serialization.JsonObjectCreationHandling)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_PreferredObjectCreationHandling:System.Void(System.Text.Json.Serialization.JsonObjectCreationHandling)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_PreferredObjectCreationHandling:System.Void(System.Text.Json.Serialization.JsonObjectCreationHandling)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":13,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":16,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":22,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":24,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_61[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-61\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_61:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_61()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_61:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_61:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-61\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_61()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_61\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":12,\"handlerOffset\":13,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":4,\"resultType\":\"System.Void\",\"callee\":\"System.Text.Json/JsonSerializerOptions::set_PropertyNameCaseInsensitive:System.Void(System.Boolean)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_PropertyNameCaseInsensitive:System.Void(System.Boolean)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_PropertyNameCaseInsensitive:System.Void(System.Boolean)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":13,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":16,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":22,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":24,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_62[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-62\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_62:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_62()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_62:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_62:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-62\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_62()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_62\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":12,\"handlerOffset\":13,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":3,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":4,\"resultType\":\"System.Void\",\"callee\":\"System.Text.Json/JsonSerializerOptions::set_PropertyNamingPolicy:System.Void(JsonNamingPolicy)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_PropertyNamingPolicy:System.Void(JsonNamingPolicy)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_PropertyNamingPolicy:System.Void(JsonNamingPolicy)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":13,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":16,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":22,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":24,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_63[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-63\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_63:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_63()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_63:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_63:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-63\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_63()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_63\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":12,\"handlerOffset\":13,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":4,\"resultType\":\"System.Void\",\"callee\":\"System.Text.Json/JsonSerializerOptions::set_ReadCommentHandling:System.Void(JsonCommentHandling)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_ReadCommentHandling:System.Void(JsonCommentHandling)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_ReadCommentHandling:System.Void(JsonCommentHandling)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":13,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":16,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":22,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":24,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_64[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-64\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_64:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_64()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_64:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_64:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-64\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_64()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_64\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":12,\"handlerOffset\":13,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":3,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":4,\"resultType\":\"System.Void\",\"callee\":\"System.Text.Json/JsonSerializerOptions::set_ReferenceHandler:System.Void(System.Text.Json.Serialization.ReferenceHandler)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_ReferenceHandler:System.Void(System.Text.Json.Serialization.ReferenceHandler)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_ReferenceHandler:System.Void(System.Text.Json.Serialization.ReferenceHandler)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":13,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":16,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":22,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":24,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_65[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-65\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_65:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_65()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_65:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_65:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-65\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_65()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_65\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":12,\"handlerOffset\":13,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":4,\"resultType\":\"System.Void\",\"callee\":\"System.Text.Json/JsonSerializerOptions::set_RespectNullableAnnotations:System.Void(System.Boolean)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_RespectNullableAnnotations:System.Void(System.Boolean)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_RespectNullableAnnotations:System.Void(System.Boolean)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":13,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":16,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":22,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":24,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_66[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-66\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_66:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_66()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_66:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_66:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-66\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_66()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_66\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":12,\"handlerOffset\":13,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":4,\"resultType\":\"System.Void\",\"callee\":\"System.Text.Json/JsonSerializerOptions::set_RespectRequiredConstructorParameters:System.Void(System.Boolean)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_RespectRequiredConstructorParameters:System.Void(System.Boolean)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_RespectRequiredConstructorParameters:System.Void(System.Boolean)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":13,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":16,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":22,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":24,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_67[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-67\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_67:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_67()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_67:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_67:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-67\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_67()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_67\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":12,\"handlerOffset\":13,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":3,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":4,\"resultType\":\"System.Void\",\"callee\":\"System.Text.Json/JsonSerializerOptions::set_TypeInfoResolver:System.Void(System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_TypeInfoResolver:System.Void(System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_TypeInfoResolver:System.Void(System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":13,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":16,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":22,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":24,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_68[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-68\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_68:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_68()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_68:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_68:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-68\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_68()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_68\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":12,\"handlerOffset\":13,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":4,\"resultType\":\"System.Void\",\"callee\":\"System.Text.Json/JsonSerializerOptions::set_UnknownTypeHandling:System.Void(System.Text.Json.Serialization.JsonUnknownTypeHandling)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_UnknownTypeHandling:System.Void(System.Text.Json.Serialization.JsonUnknownTypeHandling)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_UnknownTypeHandling:System.Void(System.Text.Json.Serialization.JsonUnknownTypeHandling)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":13,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":16,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":22,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":24,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_69[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-69\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_69:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_69()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_69:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_69:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-69\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_69()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_69\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":12,\"handlerOffset\":13,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":4,\"resultType\":\"System.Void\",\"callee\":\"System.Text.Json/JsonSerializerOptions::set_UnmappedMemberHandling:System.Void(System.Text.Json.Serialization.JsonUnmappedMemberHandling)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_UnmappedMemberHandling:System.Void(System.Text.Json.Serialization.JsonUnmappedMemberHandling)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_UnmappedMemberHandling:System.Void(System.Text.Json.Serialization.JsonUnmappedMemberHandling)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":13,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":16,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":22,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":24,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_70[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-70\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_70:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_70()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_70:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_70:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-70\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_70()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_70\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":12,\"handlerOffset\":13,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":3,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":4,\"resultType\":\"System.Void\",\"callee\":\"System.Text.Json/JsonSerializerOptions::set_WriteIndented:System.Void(System.Boolean)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_WriteIndented:System.Void(System.Boolean)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::set_WriteIndented:System.Void(System.Boolean)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":11,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":13,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":15,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":16,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":24,\"ilOffset\":22,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":24,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_71[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-71\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_71:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_71()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_71:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_71:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-71\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_71()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_71\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":2,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":67,\"handlerOffset\":68,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldtoken\",\"opCode\":70,\"operand\":\"System.Private.CoreLib/System.Byte\",\"ilOffset\":3,\"resultType\":\"System.RuntimeTypeHandle\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Byte\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Byte\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":8,\"resultType\":\"System.Type\",\"callee\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":1,\"ilOffset\":13,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":15,\"resultType\":\"System.Boolean\",\"callee\":\"System.Text.Json/JsonSerializerOptions::TryGetTypeInfo:System.Boolean(System.Type,System.Text.Json.Serialization.Metadata.JsonTypeInfo\\u0026)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::TryGetTypeInfo:System.Boolean(System.Type,System.Text.Json.Serialization.Metadata.JsonTypeInfo\\u0026)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::TryGetTypeInfo:System.Boolean(System.Type,System.Text.Json.Serialization.Metadata.JsonTypeInfo\\u0026)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":25,\"ilOffset\":20,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":22,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":26,\"ilOffset\":23,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":25,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":26,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"ldtoken\",\"opCode\":70,\"operand\":\"System.Private.CoreLib/System.Byte\",\"ilOffset\":27,\"resultType\":\"System.RuntimeTypeHandle\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Byte\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Byte\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":32,\"resultType\":\"System.Type\",\"callee\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":1,\"ilOffset\":37,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":39,\"resultType\":\"System.Boolean\",\"callee\":\"System.Text.Json/JsonSerializerOptions::TryGetTypeInfo:System.Boolean(System.Type,System.Text.Json.Serialization.Metadata.JsonTypeInfo\\u0026)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::TryGetTypeInfo:System.Boolean(System.Type,System.Text.Json.Serialization.Metadata.JsonTypeInfo\\u0026)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::TryGetTypeInfo:System.Boolean(System.Type,System.Text.Json.Serialization.Metadata.JsonTypeInfo\\u0026)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":49,\"ilOffset\":44,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":46,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":50,\"ilOffset\":47,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":49,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":50,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":52,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":53,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":55,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":56,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":65,\"ilOffset\":57,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":59,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":60,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":79,\"ilOffset\":66,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":68,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":70,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":71,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":79,\"ilOffset\":77,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":79,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_72[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-72\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_72:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_72()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_72:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_72:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-72\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_72()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_72\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":10,\"handlerOffset\":11,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":2,\"resultType\":\"System.Text.Json/JsonSerializerOptions\",\"callee\":\"System.Text.Json/JsonSerializerOptions::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::.ctor:System.Void()\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":22,\"ilOffset\":9,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":11,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":13,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":14,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":22,\"ilOffset\":20,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":22,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_73[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-73\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_73:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_73()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_73:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_73:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-73\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_73()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_73\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":11,\"handlerOffset\":12,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":2,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":3,\"resultType\":\"System.Text.Json/JsonSerializerOptions\",\"callee\":\"System.Text.Json/JsonSerializerOptions::.ctor:System.Void(JsonSerializerDefaults)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::.ctor:System.Void(JsonSerializerDefaults)\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":8,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":23,\"ilOffset\":10,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":12,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":14,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":15,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":23,\"ilOffset\":21,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":23,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+static const char kMethodJson_74[] = "{\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-74\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_74:System.Void()\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_74()\",\"identity\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"definitionSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_74:System.Void()\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_74:System.Void()\",\"methodId\":\"serializer-options-subjects.serializer-options-subjects.subject-74\",\"signature\":\"System.Void SerializerOptionsSubjects::Subject_74()\"},\"nativeSymbol\":\"SerializerOptionsSubjects_SerializerOptionsSubjects_Subject_74\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":11,\"handlerOffset\":12,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":2,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":3,\"resultType\":\"System.Text.Json/JsonSerializerOptions\",\"callee\":\"System.Text.Json/JsonSerializerOptions::.ctor:System.Void(JsonSerializerDefaults)\",\"reference\":{\"assemblyName\":\"System.Text.Json\",\"subjectKind\":\"method\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions::.ctor:System.Void(JsonSerializerDefaults)\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Text.Json\",\"subjectId\":\"System.Text.Json/JsonSerializerOptions\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":8,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":23,\"ilOffset\":10,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":12,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":14,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"ilOffset\":15,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"SerializerOptionsSubjects\",\"subjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"SerializerOptionsSubjects/SerializerOptionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":23,\"ilOffset\":21,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":23,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"SerializerOptionsSubjects\"}";
+
+extern "C" const JitMethodEntry kChaosJitMethodEntries[75] =
+{
+    { kMethodJson_0, 6884u, 0x00000003u, 0u },
+    { kMethodJson_1, 6439u, 0x00000004u, 0u },
+    { kMethodJson_2, 6469u, 0x00000005u, 0u },
+    { kMethodJson_3, 6469u, 0x00000006u, 0u },
+    { kMethodJson_4, 6469u, 0x00000007u, 0u },
+    { kMethodJson_5, 6469u, 0x00000008u, 0u },
+    { kMethodJson_6, 1315u, 0x00000009u, 0u },
+    { kMethodJson_7, 6314u, 0x0000000Au, 0u },
+    { kMethodJson_8, 6368u, 0x0000000Bu, 0u },
+    { kMethodJson_9, 6284u, 0x0000000Cu, 0u },
+    { kMethodJson_10, 7250u, 0x0000000Du, 0u },
+    { kMethodJson_11, 1415u, 0x0000000Eu, 0u },
+    { kMethodJson_12, 5443u, 0x0000000Fu, 0u },
+    { kMethodJson_13, 7685u, 0x00000010u, 0u },
+    { kMethodJson_14, 6728u, 0x00000011u, 0u },
+    { kMethodJson_15, 6664u, 0x00000012u, 0u },
+    { kMethodJson_16, 6274u, 0x00000013u, 0u },
+    { kMethodJson_17, 6298u, 0x00000014u, 0u },
+    { kMethodJson_18, 6322u, 0x00000015u, 0u },
+    { kMethodJson_19, 6256u, 0x00000016u, 0u },
+    { kMethodJson_20, 5423u, 0x00000017u, 0u },
+    { kMethodJson_21, 5401u, 0x00000018u, 0u },
+    { kMethodJson_22, 6238u, 0x00000019u, 0u },
+    { kMethodJson_23, 5389u, 0x0000001Au, 0u },
+    { kMethodJson_24, 6626u, 0x0000001Bu, 0u },
+    { kMethodJson_25, 7625u, 0x0000001Cu, 0u },
+    { kMethodJson_26, 7823u, 0x0000001Du, 0u },
+    { kMethodJson_27, 6340u, 0x0000001Eu, 0u },
+    { kMethodJson_28, 6734u, 0x0000001Fu, 0u },
+    { kMethodJson_29, 7295u, 0x00000020u, 0u },
+    { kMethodJson_30, 6958u, 0x00000021u, 0u },
+    { kMethodJson_31, 6334u, 0x00000022u, 0u },
+    { kMethodJson_32, 6394u, 0x00000023u, 0u },
+    { kMethodJson_33, 6499u, 0x00000024u, 0u },
+    { kMethodJson_34, 7070u, 0x00000025u, 0u },
+    { kMethodJson_35, 7452u, 0x00000026u, 0u },
+    { kMethodJson_36, 7715u, 0x00000027u, 0u },
+    { kMethodJson_37, 7769u, 0x00000028u, 0u },
+    { kMethodJson_38, 6481u, 0x00000029u, 0u },
+    { kMethodJson_39, 6256u, 0x0000002Au, 0u },
+    { kMethodJson_40, 9382u, 0x0000002Bu, 0u },
+    { kMethodJson_41, 9440u, 0x0000002Cu, 0u },
+    { kMethodJson_42, 3280u, 0x0000002Du, 0u },
+    { kMethodJson_43, 3424u, 0x0000002Eu, 0u },
+    { kMethodJson_44, 3472u, 0x0000002Fu, 0u },
+    { kMethodJson_45, 3499u, 0x00000030u, 0u },
+    { kMethodJson_46, 3457u, 0x00000031u, 0u },
+    { kMethodJson_47, 3446u, 0x00000032u, 0u },
+    { kMethodJson_48, 3574u, 0x00000033u, 0u },
+    { kMethodJson_49, 3452u, 0x00000034u, 0u },
+    { kMethodJson_50, 3419u, 0x00000035u, 0u },
+    { kMethodJson_51, 3448u, 0x00000036u, 0u },
+    { kMethodJson_52, 3460u, 0x00000037u, 0u },
+    { kMethodJson_53, 3472u, 0x00000038u, 0u },
+    { kMethodJson_54, 3439u, 0x00000039u, 0u },
+    { kMethodJson_55, 3437u, 0x0000003Au, 0u },
+    { kMethodJson_56, 3425u, 0x0000003Bu, 0u },
+    { kMethodJson_57, 3419u, 0x0000003Cu, 0u },
+    { kMethodJson_58, 3424u, 0x0000003Du, 0u },
+    { kMethodJson_59, 3547u, 0x0000003Eu, 0u },
+    { kMethodJson_60, 3622u, 0x0000003Fu, 0u },
+    { kMethodJson_61, 3481u, 0x00000040u, 0u },
+    { kMethodJson_62, 3455u, 0x00000041u, 0u },
+    { kMethodJson_63, 3472u, 0x00000042u, 0u },
+    { kMethodJson_64, 3536u, 0x00000043u, 0u },
+    { kMethodJson_65, 3478u, 0x00000044u, 0u },
+    { kMethodJson_66, 3508u, 0x00000045u, 0u },
+    { kMethodJson_67, 3578u, 0x00000046u, 0u },
+    { kMethodJson_68, 3577u, 0x00000047u, 0u },
+    { kMethodJson_69, 3595u, 0x00000048u, 0u },
+    { kMethodJson_70, 3439u, 0x00000049u, 0u },
+    { kMethodJson_71, 9298u, 0x0000004Au, 0u },
+    { kMethodJson_72, 3233u, 0x0000004Bu, 0u },
+    { kMethodJson_73, 3380u, 0x0000004Cu, 0u },
+    { kMethodJson_74, 3380u, 0x0000004Du, 0u }
+};
+
+extern "C" const uint32_t kChaosJitMethodEntryCount = 75u;
+
+extern "C" void ChaosJitRegisterAll() {
+    RegisterJitMethods(kChaosJitMethodEntries, kChaosJitMethodEntryCount);
+}

@@ -1,0 +1,13 @@
+{
+  "familyId": "family/System.Text.Json/source-generation-context",
+  "assemblyName": "System.Text.Json",
+  "methodSubjectIds": [
+    "System.Text.Json/System.Text.Json.Serialization.JsonSerializerContext::get_Options:System.Text.Json.JsonSerializerOptions()",
+    "System.Text.Json/System.Text.Json.Serialization.JsonSerializerContext::GetTypeInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo(System.Type)"
+  ],
+  "displayName": "source-generation-context",
+  "description": "",
+  "closureStatus": "in-progress",
+  "methodCount": 2,
+  "customEntryIndices": []
+}

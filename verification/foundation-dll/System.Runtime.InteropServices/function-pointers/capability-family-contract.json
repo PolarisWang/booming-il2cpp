@@ -1,0 +1,12 @@
+{
+  "familyId": "family/System.Runtime.InteropServices/function-pointers",
+  "assemblyName": "System.Runtime.InteropServices",
+  "methodSubjectIds": [
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute::.ctor:System.Void()"
+  ],
+  "displayName": "function-pointers",
+  "description": "",
+  "closureStatus": "in-progress",
+  "methodCount": 1,
+  "customEntryIndices": []
+}

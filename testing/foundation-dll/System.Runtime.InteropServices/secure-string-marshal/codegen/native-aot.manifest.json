@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "SecureStringMarshalSubjects",
   "entrySubjectId": "SecureStringMarshalSubjects/SecureStringMarshalSubjects::Subject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Runtime.InteropServices/secure-string-marshal/codegen",
+  "managedClosureRootPath": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Runtime.InteropServices/secure-string-marshal/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

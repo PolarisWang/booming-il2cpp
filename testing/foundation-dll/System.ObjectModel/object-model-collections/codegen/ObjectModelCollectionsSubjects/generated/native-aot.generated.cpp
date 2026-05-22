@@ -36,8 +36,8 @@ using namespace chaos::il2cpp::runtime_core;
 
 inline TypeInfoV0 chaos_mt_ObjectModelCollectionsSubjects_ObjectModelCollectionsSubjects = {{nullptr, nullptr, 5869716835039938294ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_ObjectModelCollectionsSubjects_ObjectModelCollectionsSubjects = static_cast<CHAOS_IL2CPP_INTPTR>(5869716835039938294ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_NullReferenceException = {{nullptr, nullptr, 5314911908653589872ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_NullReferenceException = static_cast<CHAOS_IL2CPP_INTPTR>(5314911908653589872ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Object = {{nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_INTPTR>(15228727185366376748ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {{nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
@@ -90,13 +90,9 @@ struct chaos_type_ObjectModelCollectionsSubjects_ObjectModelCollectionsSubjects
 	ThinLockableHeader header{};
 };
 
-struct chaos_type_System_Private_CoreLib_System_NullReferenceException
+struct chaos_type_System_Private_CoreLib_System_Object
 {
 	ThinLockableHeader header{};
-	CHAOS_IL2CPP_INTPTR _message = 0;
-	CHAOS_IL2CPP_INTPTR _innerException = 0;
-	CHAOS_IL2CPP_INTPTR _stackTrace = 0;
-	CHAOS_IL2CPP_INT32 _HResult = 0;
 };
 
 struct chaos_type_System_Private_CoreLib_System_Reflection_Assembly
@@ -150,6 +146,11 @@ struct chaos_type_System_Private_CoreLib_System_String
 };
 
 CHAOS_IL2CPP_INT32 chaos_static_ObjectModelCollectionsSubjects_ObjectModelCollectionsSubjects___exitCode = 0;
+
+static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	return ChaosObjectGetHashCode(chaos_fn_arg_0);
+}
 
 static constexpr CHAOS_IL2CPP_UINT32 kGenericTypeArgTokens[1] = { 0 };
 
@@ -307,12 +308,12 @@ static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[6] = {
 
 // Dispatch table (function pointers)
 static HotpatchEntryV0 s_hotpatch_entries[6] = {
-	{ reinterpret_cast<void*>(&ObjectModelCollectionsSubjects_ObjectModelCollectionsSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ObjectModelCollectionsSubjects::Subject_0
-	{ reinterpret_cast<void*>(&ObjectModelCollectionsSubjects_ObjectModelCollectionsSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ObjectModelCollectionsSubjects::Subject_1
-	{ reinterpret_cast<void*>(&ObjectModelCollectionsSubjects_ObjectModelCollectionsSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ObjectModelCollectionsSubjects::Subject_2
-	{ reinterpret_cast<void*>(&ObjectModelCollectionsSubjects_ObjectModelCollectionsSubjects_Subject_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ObjectModelCollectionsSubjects::Subject_3
-	{ reinterpret_cast<void*>(&ObjectModelCollectionsSubjects_ObjectModelCollectionsSubjects_Subject_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ObjectModelCollectionsSubjects::Subject_4
-	{ reinterpret_cast<void*>(&ObjectModelCollectionsSubjects_ObjectModelCollectionsSubjects_Subject_5), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ObjectModelCollectionsSubjects::Subject_5
+	{ reinterpret_cast<void*>(&ObjectModelCollectionsSubjects_ObjectModelCollectionsSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // ObjectModelCollectionsSubjects::Subject_0
+	{ reinterpret_cast<void*>(&ObjectModelCollectionsSubjects_ObjectModelCollectionsSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // ObjectModelCollectionsSubjects::Subject_1
+	{ reinterpret_cast<void*>(&ObjectModelCollectionsSubjects_ObjectModelCollectionsSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // ObjectModelCollectionsSubjects::Subject_2
+	{ reinterpret_cast<void*>(&ObjectModelCollectionsSubjects_ObjectModelCollectionsSubjects_Subject_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // ObjectModelCollectionsSubjects::Subject_3
+	{ reinterpret_cast<void*>(&ObjectModelCollectionsSubjects_ObjectModelCollectionsSubjects_Subject_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // ObjectModelCollectionsSubjects::Subject_4
+	{ reinterpret_cast<void*>(&ObjectModelCollectionsSubjects_ObjectModelCollectionsSubjects_Subject_5), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // ObjectModelCollectionsSubjects::Subject_5
 };
 
 // Module hotpatch bundle
@@ -334,17 +335,19 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // ── External Runtime Dispatch Table ──────────────────────────
 // Startup-time-resolved function pointers for cross-assembly calls.
 
-extern "C" const char* kChaosExternalRuntimeSubjects[2] = {
+extern "C" const char* kChaosExternalRuntimeSubjects[3] = {
 	"System.ObjectModel/System.Collections.ObjectModel.KeyedCollection<System.Byte,System.Byte>::get_Comparer:System.Collections.Generic.IEqualityComparer<System.Byte>()",
+	"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
 	"ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::_exitCode",
 };
 
-extern "C" void* kChaosExternalRuntimeFnTable[2] = {
+extern "C" void* kChaosExternalRuntimeFnTable[3] = {
 	nullptr,
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__),
 	nullptr,
 };
 
-extern "C" int32_t kChaosExternalRuntimeCount = 2;
+extern "C" int32_t kChaosExternalRuntimeCount = 3;
 // (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
@@ -478,23 +481,23 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry0;
 } kChaosGcSlotMapsSection = {
 	/* entry0 = ObjectModelCollectionsSubjects_ObjectModelCollectionsSubjects_Subject_1 */
 	.entry0 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&ObjectModelCollectionsSubjects_ObjectModelCollectionsSubjects_Subject_1),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	}
 };
 #if defined(_MSC_VER)
 #pragma pack(pop)
 #endif
 
-static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 28u;
+static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 40u;
 
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
@@ -640,6 +643,15 @@ extern "C" void ObjectModelCollectionsSubjects_ObjectModelCollectionsSubjects_Su
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	CHAOS_EH_TRY
@@ -648,9 +660,30 @@ extern "C" void ObjectModelCollectionsSubjects_ObjectModelCollectionsSubjects_Su
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[0])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s1;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = 0;
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[0])();
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
 				chaos_static_ObjectModelCollectionsSubjects_ObjectModelCollectionsSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -658,10 +691,15 @@ extern "C" void ObjectModelCollectionsSubjects_ObjectModelCollectionsSubjects_Su
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ObjectModelCollectionsSubjects_ObjectModelCollectionsSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -714,4 +752,30 @@ extern "C" void ObjectModelCollectionsSubjects_ObjectModelCollectionsSubjects_Su
 // extern "C" definition for link-time visibility from runtime-entry.cpp
 extern "C" const int kAotMethodCount = 6;
 
-extern "C" void ChaosJitRegisterAll() {}
+// ── JIT Method Entry Table ───────────────────────────────────────────
+// Auto-generated by chaos-il2cpp codegen for --mode jit.
+#include <cstdint>
+#include "jit_registration.h"
+
+static const char kMethodJson_0[] = "{\"methodId\":\"object-model-collections-subjects.object-model-collections-subjects.subject-0\",\"subjectId\":\"ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::Subject_0:System.Void()\",\"signature\":\"System.Void ObjectModelCollectionsSubjects::Subject_0()\",\"identity\":{\"assemblyName\":\"ObjectModelCollectionsSubjects\",\"declaringTypeSubjectId\":\"ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects\",\"definitionSubjectId\":\"ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::Subject_0:System.Void()\",\"subjectId\":\"ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::Subject_0:System.Void()\",\"methodId\":\"object-model-collections-subjects.object-model-collections-subjects.subject-0\",\"signature\":\"System.Void ObjectModelCollectionsSubjects::Subject_0()\"},\"nativeSymbol\":\"ObjectModelCollectionsSubjects_ObjectModelCollectionsSubjects_Subject_0\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"ObjectModelCollectionsSubjects\"}";
+static const char kMethodJson_1[] = "{\"methodId\":\"object-model-collections-subjects.object-model-collections-subjects.subject-1\",\"subjectId\":\"ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::Subject_1:System.Void()\",\"signature\":\"System.Void ObjectModelCollectionsSubjects::Subject_1()\",\"identity\":{\"assemblyName\":\"ObjectModelCollectionsSubjects\",\"declaringTypeSubjectId\":\"ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects\",\"definitionSubjectId\":\"ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::Subject_1:System.Void()\",\"subjectId\":\"ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::Subject_1:System.Void()\",\"methodId\":\"object-model-collections-subjects.object-model-collections-subjects.subject-1\",\"signature\":\"System.Void ObjectModelCollectionsSubjects::Subject_1()\"},\"nativeSymbol\":\"ObjectModelCollectionsSubjects_ObjectModelCollectionsSubjects_Subject_1\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":41,\"handlerOffset\":42,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Collections.Generic.IEqualityComparer\\u003CSystem.Byte\\u003E\",\"callee\":\"System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\\u003CSystem.Byte,System.Byte\\u003E::get_Comparer:System.Collections.Generic.IEqualityComparer\\u003CSystem.Byte\\u003E()\",\"reference\":{\"assemblyName\":\"System.ObjectModel\",\"subjectKind\":\"method\",\"subjectId\":\"System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\\u003CSystem.Byte,System.Byte\\u003E::get_Comparer:System.Collections.Generic.IEqualityComparer\\u003CSystem.Byte\\u003E()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.ObjectModel\",\"subjectId\":\"System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\\u003CSystem.Byte,System.Byte\\u003E::get_Comparer:System.Collections.Generic.IEqualityComparer\\u003CSystem.Byte\\u003E()\",\"openDefinitionSubjectId\":\"System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\\u00602::get_Comparer:System.Collections.Generic.IEqualityComparer\\u003C!0\\u003E()\",\"sharedGenericBodyId\":{\"value\":\"body:definition=System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\\u00602::get_Comparer:System.Collections.Generic.IEqualityComparer\\u003C!0\\u003E();type=[System.Byte,System.Byte];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\\u00602::get_Comparer:System.Collections.Generic.IEqualityComparer\\u003C!0\\u003E();type=[System.Byte,System.Byte];method=[]\"},\"runtimeGenericContext\":{\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\\u00602::get_Comparer:System.Collections.Generic.IEqualityComparer\\u003C!0\\u003E()\",\"typeArguments\":[\"System.Byte\",\"System.Byte\"],\"methodArguments\":[]},\"sharedGenericBodyId\":{\"value\":\"body:definition=System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\\u00602::get_Comparer:System.Collections.Generic.IEqualityComparer\\u003C!0\\u003E();type=[System.Byte,System.Byte];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\\u00602::get_Comparer:System.Collections.Generic.IEqualityComparer\\u003C!0\\u003E();type=[System.Byte,System.Byte];method=[]\"},\"supportKindCode\":3,\"specializationKindCode\":1,\"statusReasonCode\":\"loader-demand:memberReference\"},\"genericDiagnostic\":{\"subjectId\":\"System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\\u003CSystem.Byte,System.Byte\\u003E::get_Comparer:System.Collections.Generic.IEqualityComparer\\u003CSystem.Byte\\u003E()\",\"definitionSubjectId\":\"System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\\u00602::get_Comparer:System.Collections.Generic.IEqualityComparer\\u003C!0\\u003E()\",\"displaySubjectId\":\"System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\\u003CSystem.Byte,System.Byte\\u003E::get_Comparer()\",\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\\u00602::get_Comparer:System.Collections.Generic.IEqualityComparer\\u003C!0\\u003E()\",\"typeArguments\":[\"System.Byte\",\"System.Byte\"],\"methodArguments\":[]}},\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":8,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":13,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":14,\"resultType\":\"System.Collections.Generic.IEqualityComparer\\u003CSystem.Byte\\u003E\",\"callee\":\"System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\\u003CSystem.Byte,System.Byte\\u003E::get_Comparer:System.Collections.Generic.IEqualityComparer\\u003CSystem.Byte\\u003E()\",\"reference\":{\"assemblyName\":\"System.ObjectModel\",\"subjectKind\":\"method\",\"subjectId\":\"System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\\u003CSystem.Byte,System.Byte\\u003E::get_Comparer:System.Collections.Generic.IEqualityComparer\\u003CSystem.Byte\\u003E()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.ObjectModel\",\"subjectId\":\"System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\\u003CSystem.Byte,System.Byte\\u003E::get_Comparer:System.Collections.Generic.IEqualityComparer\\u003CSystem.Byte\\u003E()\",\"openDefinitionSubjectId\":\"System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\\u00602::get_Comparer:System.Collections.Generic.IEqualityComparer\\u003C!0\\u003E()\",\"sharedGenericBodyId\":{\"value\":\"body:definition=System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\\u00602::get_Comparer:System.Collections.Generic.IEqualityComparer\\u003C!0\\u003E();type=[System.Byte,System.Byte];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\\u00602::get_Comparer:System.Collections.Generic.IEqualityComparer\\u003C!0\\u003E();type=[System.Byte,System.Byte];method=[]\"},\"runtimeGenericContext\":{\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\\u00602::get_Comparer:System.Collections.Generic.IEqualityComparer\\u003C!0\\u003E()\",\"typeArguments\":[\"System.Byte\",\"System.Byte\"],\"methodArguments\":[]},\"sharedGenericBodyId\":{\"value\":\"body:definition=System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\\u00602::get_Comparer:System.Collections.Generic.IEqualityComparer\\u003C!0\\u003E();type=[System.Byte,System.Byte];method=[]\"},\"instantiationStubId\":{\"value\":\"stub:definition=System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\\u00602::get_Comparer:System.Collections.Generic.IEqualityComparer\\u003C!0\\u003E();type=[System.Byte,System.Byte];method=[]\"},\"supportKindCode\":3,\"specializationKindCode\":1,\"statusReasonCode\":\"loader-demand:memberReference\"},\"genericDiagnostic\":{\"subjectId\":\"System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\\u003CSystem.Byte,System.Byte\\u003E::get_Comparer:System.Collections.Generic.IEqualityComparer\\u003CSystem.Byte\\u003E()\",\"definitionSubjectId\":\"System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\\u00602::get_Comparer:System.Collections.Generic.IEqualityComparer\\u003C!0\\u003E()\",\"displaySubjectId\":\"System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\\u003CSystem.Byte,System.Byte\\u003E::get_Comparer()\",\"instantiationKey\":{\"contextKind\":1,\"definitionSubjectId\":\"System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\\u00602::get_Comparer:System.Collections.Generic.IEqualityComparer\\u003C!0\\u003E()\",\"typeArguments\":[\"System.Byte\",\"System.Byte\"],\"methodArguments\":[]}},\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":19,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":24,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":26,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":27,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":29,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":30,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":39,\"ilOffset\":31,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":33,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::_exitCode\",\"ilOffset\":34,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"ObjectModelCollectionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"ObjectModelCollectionsSubjects\",\"subjectId\":\"ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":53,\"ilOffset\":40,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":42,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":44,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::_exitCode\",\"ilOffset\":45,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"ObjectModelCollectionsSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"ObjectModelCollectionsSubjects\",\"subjectId\":\"ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":53,\"ilOffset\":51,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":53,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"ObjectModelCollectionsSubjects\"}";
+static const char kMethodJson_2[] = "{\"methodId\":\"object-model-collections-subjects.object-model-collections-subjects.subject-2\",\"subjectId\":\"ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::Subject_2:System.Void()\",\"signature\":\"System.Void ObjectModelCollectionsSubjects::Subject_2()\",\"identity\":{\"assemblyName\":\"ObjectModelCollectionsSubjects\",\"declaringTypeSubjectId\":\"ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects\",\"definitionSubjectId\":\"ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::Subject_2:System.Void()\",\"subjectId\":\"ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::Subject_2:System.Void()\",\"methodId\":\"object-model-collections-subjects.object-model-collections-subjects.subject-2\",\"signature\":\"System.Void ObjectModelCollectionsSubjects::Subject_2()\"},\"nativeSymbol\":\"ObjectModelCollectionsSubjects_ObjectModelCollectionsSubjects_Subject_2\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"ObjectModelCollectionsSubjects\"}";
+static const char kMethodJson_3[] = "{\"methodId\":\"object-model-collections-subjects.object-model-collections-subjects.subject-3\",\"subjectId\":\"ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::Subject_3:System.Void()\",\"signature\":\"System.Void ObjectModelCollectionsSubjects::Subject_3()\",\"identity\":{\"assemblyName\":\"ObjectModelCollectionsSubjects\",\"declaringTypeSubjectId\":\"ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects\",\"definitionSubjectId\":\"ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::Subject_3:System.Void()\",\"subjectId\":\"ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::Subject_3:System.Void()\",\"methodId\":\"object-model-collections-subjects.object-model-collections-subjects.subject-3\",\"signature\":\"System.Void ObjectModelCollectionsSubjects::Subject_3()\"},\"nativeSymbol\":\"ObjectModelCollectionsSubjects_ObjectModelCollectionsSubjects_Subject_3\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"ObjectModelCollectionsSubjects\"}";
+static const char kMethodJson_4[] = "{\"methodId\":\"object-model-collections-subjects.object-model-collections-subjects.subject-4\",\"subjectId\":\"ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::Subject_4:System.Void()\",\"signature\":\"System.Void ObjectModelCollectionsSubjects::Subject_4()\",\"identity\":{\"assemblyName\":\"ObjectModelCollectionsSubjects\",\"declaringTypeSubjectId\":\"ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects\",\"definitionSubjectId\":\"ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::Subject_4:System.Void()\",\"subjectId\":\"ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::Subject_4:System.Void()\",\"methodId\":\"object-model-collections-subjects.object-model-collections-subjects.subject-4\",\"signature\":\"System.Void ObjectModelCollectionsSubjects::Subject_4()\"},\"nativeSymbol\":\"ObjectModelCollectionsSubjects_ObjectModelCollectionsSubjects_Subject_4\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"ObjectModelCollectionsSubjects\"}";
+static const char kMethodJson_5[] = "{\"methodId\":\"object-model-collections-subjects.object-model-collections-subjects.subject-5\",\"subjectId\":\"ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::Subject_5:System.Void()\",\"signature\":\"System.Void ObjectModelCollectionsSubjects::Subject_5()\",\"identity\":{\"assemblyName\":\"ObjectModelCollectionsSubjects\",\"declaringTypeSubjectId\":\"ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects\",\"definitionSubjectId\":\"ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::Subject_5:System.Void()\",\"subjectId\":\"ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::Subject_5:System.Void()\",\"methodId\":\"object-model-collections-subjects.object-model-collections-subjects.subject-5\",\"signature\":\"System.Void ObjectModelCollectionsSubjects::Subject_5()\"},\"nativeSymbol\":\"ObjectModelCollectionsSubjects_ObjectModelCollectionsSubjects_Subject_5\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":0,\"exceptionRegions\":[],\"instructions\":[{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":1,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"ObjectModelCollectionsSubjects\"}";
+
+extern "C" const JitMethodEntry kChaosJitMethodEntries[6] =
+{
+    { kMethodJson_0, 1409u, 0x00000003u, 0u },
+    { kMethodJson_1, 12314u, 0x00000004u, 0u },
+    { kMethodJson_2, 1409u, 0x00000005u, 0u },
+    { kMethodJson_3, 1409u, 0x00000006u, 0u },
+    { kMethodJson_4, 1409u, 0x00000007u, 0u },
+    { kMethodJson_5, 1409u, 0x00000008u, 0u }
+};
+
+extern "C" const uint32_t kChaosJitMethodEntryCount = 6u;
+
+extern "C" void ChaosJitRegisterAll() {
+    RegisterJitMethods(kChaosJitMethodEntries, kChaosJitMethodEntryCount);
+}

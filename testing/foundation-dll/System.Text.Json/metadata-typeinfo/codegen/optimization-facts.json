@@ -211,9 +211,57 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::CreateJsonPropertyInfo:System.Text.Json.Serialization.Metadata.JsonPropertyInfo(System.Type,System.String)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_2:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_2:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_3:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_ConstructorAttributeProvider:System.Reflection.ICustomAttributeProvider()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_ConstructorAttributeProvider:System.Reflection.ICustomAttributeProvider()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
     },
     {
@@ -223,15 +271,75 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_4:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_4:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_Converter:System.Text.Json.Serialization.JsonConverter()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_4:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_5:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_CreateObject:System.Func\u003CSystem.Object\u003E()",
       "devirtualized": false
     },
     {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_5:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_5:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_CreateObject:System.Func\u003CSystem.Object\u003E()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_5:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_6:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_ElementType:System.Type()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_6:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_6:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_ElementType:System.Type()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_6:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_7:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_IsReadOnly:System.Boolean()",
       "devirtualized": false
     },
     {
@@ -247,9 +355,45 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_8:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_8:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_KeyType:System.Type()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_8:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_9:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_Kind:System.Text.Json.Serialization.Metadata.JsonTypeInfoKind()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_9:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_9:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_Kind:System.Text.Json.Serialization.Metadata.JsonTypeInfoKind()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_9:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
     },
     {
@@ -259,9 +403,45 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_10:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_10:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_NumberHandling:System.Nullable\u003CSystem.Text.Json.Serialization.JsonNumberHandling\u003E()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_10:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_11:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_OnDeserialized:System.Action\u003CSystem.Object\u003E()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_11:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_11:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_OnDeserialized:System.Action\u003CSystem.Object\u003E()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_11:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
     },
     {
@@ -271,9 +451,45 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_12:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_12:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_OnDeserializing:System.Action\u003CSystem.Object\u003E()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_12:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_13:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_OnSerialized:System.Action\u003CSystem.Object\u003E()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_13:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_13:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_OnSerialized:System.Action\u003CSystem.Object\u003E()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_13:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
     },
     {
@@ -283,9 +499,45 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_14:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_14:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_OnSerializing:System.Action\u003CSystem.Object\u003E()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_14:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_15:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_Options:JsonSerializerOptions()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_15:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_15:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_Options:JsonSerializerOptions()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_15:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
     },
     {
@@ -295,9 +547,45 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_16:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_16:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_OriginatingResolver:System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_16:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_17:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_PolymorphismOptions:System.Text.Json.Serialization.Metadata.JsonPolymorphismOptions()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_17:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_17:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_PolymorphismOptions:System.Text.Json.Serialization.Metadata.JsonPolymorphismOptions()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_17:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
     },
     {
@@ -307,9 +595,45 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_18:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_18:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_PreferredPropertyObjectCreationHandling:System.Nullable\u003CSystem.Text.Json.Serialization.JsonObjectCreationHandling\u003E()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_18:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_19:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_Properties:System.Collections.Generic.IList\u003CSystem.Text.Json.Serialization.Metadata.JsonPropertyInfo\u003E()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_19:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_19:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_Properties:System.Collections.Generic.IList\u003CSystem.Text.Json.Serialization.Metadata.JsonPropertyInfo\u003E()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_19:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
     },
     {
@@ -319,9 +643,45 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_20:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_20:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_Type:System.Type()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_20:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_21:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_UnmappedMemberHandling:System.Nullable\u003CSystem.Text.Json.Serialization.JsonUnmappedMemberHandling\u003E()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_21:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_21:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_UnmappedMemberHandling:System.Nullable\u003CSystem.Text.Json.Serialization.JsonUnmappedMemberHandling\u003E()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_21:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
     },
     {
@@ -367,6 +727,24 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_35:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_35:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_CreateObject:System.Func\u003CSystem.Object\u003E()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_35:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_37:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_CreateObject:System.Void(System.Func\u003CSystem.Object\u003E)",
@@ -385,147 +763,147 @@
     {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_0:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_2:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.ArgumentNullException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_3:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_4:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_5:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_6:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_7:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_8:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_9:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_10:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_11:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_12:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_13:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_14:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_15:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_16:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_17:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_18:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_19:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_20:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_21:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_22:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_24:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_29:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_30:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_31:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_32:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_35:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "MetadataTypeinfoSubjects/MetadataTypeinfoSubjects::Subject_37:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     }
   ]
 }

@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "FilteringSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Linq/filtering/managed/subjects/build-output/FilteringSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Linq/filtering/managed/subjects/build-output/FilteringSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "FilteringSubjects",
-      "path": "verification/foundation-dll/System.Linq/filtering/managed/subjects/build-output/FilteringSubjects.dll"
+      "path": "testing/foundation-dll/System.Linq/filtering/managed/subjects/build-output/FilteringSubjects.dll"
     },
     {
       "assemblyName": "System.Collections",
@@ -24,7 +24,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "863719cd-6d4a-4161-91f0-491f71b2db0f",
+  "inputModuleVersionId": "1d5ebc3d-c46d-49e0-ad01-efd232369d5c",
   "artifacts": [
     {
       "kind": "typedIlIr",

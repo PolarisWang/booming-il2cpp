@@ -243,9 +243,21 @@
       "reason": "external-call"
     },
     {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.DateTime::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
       "assemblyName": "System.Runtime.Serialization.Formatters",
       "subjectKind": "method",
       "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToDecimal:System.Decimal(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Decimal::op_Explicit:System.Int32(System.Decimal)",
       "reason": "external-call"
     },
     {
@@ -288,6 +300,12 @@
       "assemblyName": "System.Runtime.Serialization.Formatters",
       "subjectKind": "method",
       "subjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToString:System.String(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
       "reason": "external-call"
     },
     {

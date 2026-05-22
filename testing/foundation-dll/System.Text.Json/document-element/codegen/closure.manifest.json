@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "DocumentElementSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Text.Json/document-element/managed/subjects/build-output/DocumentElementSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Text.Json/document-element/managed/subjects/build-output/DocumentElementSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "DocumentElementSubjects",
-      "path": "verification/foundation-dll/System.Text.Json/document-element/managed/subjects/build-output/DocumentElementSubjects.dll"
+      "path": "testing/foundation-dll/System.Text.Json/document-element/managed/subjects/build-output/DocumentElementSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "1a77d61d-7bc2-471d-ac20-7ce442199673",
+  "inputModuleVersionId": "40e5ac18-1120-47e8-834b-d357e11e8353",
   "artifacts": [
     {
       "kind": "typedIlIr",

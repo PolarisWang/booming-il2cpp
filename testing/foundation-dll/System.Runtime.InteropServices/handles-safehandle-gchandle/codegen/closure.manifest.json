@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "HandlesSafehandleGchandleSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Runtime.InteropServices/handles-safehandle-gchandle/managed/subjects/build-output/HandlesSafehandleGchandleSubjects.dll",
+  "inputAssemblyPath": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Runtime.InteropServices/handles-safehandle-gchandle/managed/subjects/build-output/HandlesSafehandleGchandleSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "HandlesSafehandleGchandleSubjects",
-      "path": "verification/foundation-dll/System.Runtime.InteropServices/handles-safehandle-gchandle/managed/subjects/build-output/HandlesSafehandleGchandleSubjects.dll"
+      "path": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Runtime.InteropServices/handles-safehandle-gchandle/managed/subjects/build-output/HandlesSafehandleGchandleSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "091a0470-f616-4712-99f4-4a725230eae7",
+  "inputModuleVersionId": "e45842db-b17e-4e2a-8e15-19e9bcdde109",
   "artifacts": [
     {
       "kind": "typedIlIr",

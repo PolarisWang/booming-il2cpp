@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/object/equality/identity",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)",
+      "status": "passed",
+      "prePatchNsPerOp": 230.91,
+      "postPatchNsPerOp": 225.9,
+      "slowdownPercent": -2.17
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object,System.Object)",
+      "status": "passed",
+      "prePatchNsPerOp": 185.98,
+      "postPatchNsPerOp": 190.9,
+      "slowdownPercent": 2.65
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/System.Object::ReferenceEquals:System.Boolean(System.Object,System.Object)",
+      "status": "passed",
+      "prePatchNsPerOp": 185.58,
+      "postPatchNsPerOp": 391.7,
+      "slowdownPercent": 111.07
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "status": "passed",
+      "prePatchNsPerOp": 97.95,
+      "postPatchNsPerOp": 99.1,
+      "slowdownPercent": 1.17
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Private.CoreLib/System.Object::ToString:System.String()",
+      "status": "passed",
+      "prePatchNsPerOp": 134.25,
+      "postPatchNsPerOp": 96.2,
+      "slowdownPercent": -28.34
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Private.CoreLib/System.Object::GetType:System.Type()",
+      "status": "passed",
+      "prePatchNsPerOp": 100.99,
+      "postPatchNsPerOp": 109.1,
+      "slowdownPercent": 8.03
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Private.CoreLib/System.Object::MemberwiseClone:System.Object()",
+      "status": "stub"
+    }
+  ],
+  "summary": {
+    "totalMethods": 7,
+    "nonStubMethods": 6,
+    "averageSlowdownPercent": 15.4,
+    "slowdownFactor": 1.1540000000000001,
+    "slowdownThresholdX": 50.0
+  }
+}

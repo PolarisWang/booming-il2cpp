@@ -1,0 +1,17 @@
+{
+  "familyId": "family/System.ObjectModel/object-model-collections",
+  "assemblyName": "System.ObjectModel",
+  "methodSubjectIds": [
+    "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::Contains:System.Boolean(TKey)",
+    "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::get_Comparer:System.Collections.Generic.IEqualityComparer{TKey}()",
+    "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::get_Item:TItem(TKey)",
+    "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::Remove:System.Boolean(TKey)",
+    "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::TryGetValue:System.Boolean(TKey,TItem&)",
+    "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::get_Item:TItem()"
+  ],
+  "displayName": "object-model-collections",
+  "description": "",
+  "closureStatus": "in-progress",
+  "methodCount": 6,
+  "customEntryIndices": []
+}

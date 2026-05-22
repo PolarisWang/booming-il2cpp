@@ -1,5 +1,5 @@
 // verification_dispatch.generated.cpp — auto-generated
-// Assembly: BoxingUnboxingCastsSubjects, Methods: 13
+// Assembly: BoxingUnboxingCastsSubjects, Methods: 11
 #include <cstdint>
 #include <chrono>
 #include <chaos/native_types.h>

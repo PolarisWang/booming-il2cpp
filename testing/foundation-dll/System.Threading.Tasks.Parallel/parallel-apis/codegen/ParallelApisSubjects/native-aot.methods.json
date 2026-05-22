@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "assemblyName": "ParallelApisSubjects",
-  "methodCount": 52,
+  "methodCount": 58,
   "defaultStringId": 0,
   "methods": [
     {
@@ -30,6 +30,22 @@
     },
     {
       "index": 2,
+      "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects___c_Subject_0_b__1_1_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 3,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_Subject_1",
       "paramCount": 0,
       "params": [],
@@ -37,7 +53,7 @@
       "subjectIndex": 1
     },
     {
-      "index": 3,
+      "index": 4,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects___c_Subject_1_b__2_0_System_Int32",
       "paramCount": 2,
       "params": [
@@ -53,16 +69,8 @@
       "isInstance": true
     },
     {
-      "index": 4,
-      "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_Subject_2",
-      "paramCount": 0,
-      "params": [],
-      "isInstance": false,
-      "subjectIndex": 2
-    },
-    {
       "index": 5,
-      "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects___c_Subject_2_b__3_0_System_Int32",
+      "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects___c_Subject_1_b__2_1_System_Int32",
       "paramCount": 2,
       "params": [
         {
@@ -78,15 +86,15 @@
     },
     {
       "index": 6,
-      "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_Subject_3",
+      "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_Subject_2",
       "paramCount": 0,
       "params": [],
       "isInstance": false,
-      "subjectIndex": 3
+      "subjectIndex": 2
     },
     {
       "index": 7,
-      "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects___c_Subject_3_b__4_0_System_Int32",
+      "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects___c_Subject_2_b__3_0_System_Int32",
       "paramCount": 2,
       "params": [
         {
@@ -102,15 +110,7 @@
     },
     {
       "index": 8,
-      "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_Subject_4",
-      "paramCount": 0,
-      "params": [],
-      "isInstance": false,
-      "subjectIndex": 4
-    },
-    {
-      "index": 9,
-      "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects___c_Subject_4_b__5_0_System_Int32",
+      "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects___c_Subject_2_b__3_1_System_Int32",
       "paramCount": 2,
       "params": [
         {
@@ -125,16 +125,32 @@
       "isInstance": true
     },
     {
-      "index": 10,
-      "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_Subject_5",
+      "index": 9,
+      "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_Subject_3",
       "paramCount": 0,
       "params": [],
       "isInstance": false,
-      "subjectIndex": 5
+      "subjectIndex": 3
+    },
+    {
+      "index": 10,
+      "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects___c_Subject_3_b__4_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
     },
     {
       "index": 11,
-      "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects___c_Subject_5_b__6_0_System_Int32",
+      "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects___c_Subject_3_b__4_1_System_Int32",
       "paramCount": 2,
       "params": [
         {
@@ -150,6 +166,86 @@
     },
     {
       "index": 12,
+      "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_Subject_4",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 4
+    },
+    {
+      "index": 13,
+      "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects___c_Subject_4_b__5_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 14,
+      "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects___c_Subject_4_b__5_1_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 15,
+      "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_Subject_5",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 5
+    },
+    {
+      "index": 16,
+      "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects___c_Subject_5_b__6_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 17,
+      "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects___c_Subject_5_b__6_1_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 18,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_Subject_6",
       "paramCount": 0,
       "params": [],
@@ -157,7 +253,7 @@
       "subjectIndex": 6
     },
     {
-      "index": 13,
+      "index": 19,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_Subject_7",
       "paramCount": 0,
       "params": [],
@@ -165,7 +261,7 @@
       "subjectIndex": 7
     },
     {
-      "index": 14,
+      "index": 20,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_CustomEntrySubject_8",
       "paramCount": 0,
       "params": [],
@@ -173,7 +269,7 @@
       "subjectIndex": 8
     },
     {
-      "index": 15,
+      "index": 21,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_CustomEntrySubject_9",
       "paramCount": 0,
       "params": [],
@@ -181,7 +277,7 @@
       "subjectIndex": 9
     },
     {
-      "index": 16,
+      "index": 22,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_CustomEntrySubject_10",
       "paramCount": 0,
       "params": [],
@@ -189,7 +285,7 @@
       "subjectIndex": 10
     },
     {
-      "index": 17,
+      "index": 23,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_CustomEntrySubject_11",
       "paramCount": 0,
       "params": [],
@@ -197,7 +293,7 @@
       "subjectIndex": 11
     },
     {
-      "index": 18,
+      "index": 24,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_CustomEntrySubject_12",
       "paramCount": 0,
       "params": [],
@@ -205,7 +301,7 @@
       "subjectIndex": 12
     },
     {
-      "index": 19,
+      "index": 25,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_CustomEntrySubject_13",
       "paramCount": 0,
       "params": [],
@@ -213,7 +309,7 @@
       "subjectIndex": 13
     },
     {
-      "index": 20,
+      "index": 26,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_CustomEntrySubject_14",
       "paramCount": 0,
       "params": [],
@@ -221,7 +317,7 @@
       "subjectIndex": 14
     },
     {
-      "index": 21,
+      "index": 27,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_CustomEntrySubject_15",
       "paramCount": 0,
       "params": [],
@@ -229,7 +325,7 @@
       "subjectIndex": 15
     },
     {
-      "index": 22,
+      "index": 28,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_CustomEntrySubject_16",
       "paramCount": 0,
       "params": [],
@@ -237,7 +333,7 @@
       "subjectIndex": 16
     },
     {
-      "index": 23,
+      "index": 29,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_CustomEntrySubject_17",
       "paramCount": 0,
       "params": [],
@@ -245,7 +341,7 @@
       "subjectIndex": 17
     },
     {
-      "index": 24,
+      "index": 30,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_CustomEntrySubject_18",
       "paramCount": 0,
       "params": [],
@@ -253,7 +349,7 @@
       "subjectIndex": 18
     },
     {
-      "index": 25,
+      "index": 31,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_CustomEntrySubject_19",
       "paramCount": 0,
       "params": [],
@@ -261,7 +357,7 @@
       "subjectIndex": 19
     },
     {
-      "index": 26,
+      "index": 32,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_CustomEntrySubject_20",
       "paramCount": 0,
       "params": [],
@@ -269,7 +365,7 @@
       "subjectIndex": 20
     },
     {
-      "index": 27,
+      "index": 33,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_CustomEntrySubject_21",
       "paramCount": 0,
       "params": [],
@@ -277,7 +373,7 @@
       "subjectIndex": 21
     },
     {
-      "index": 28,
+      "index": 34,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_CustomEntrySubject_22",
       "paramCount": 0,
       "params": [],
@@ -285,7 +381,7 @@
       "subjectIndex": 22
     },
     {
-      "index": 29,
+      "index": 35,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_CustomEntrySubject_23",
       "paramCount": 0,
       "params": [],
@@ -293,7 +389,7 @@
       "subjectIndex": 23
     },
     {
-      "index": 30,
+      "index": 36,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_CustomEntrySubject_24",
       "paramCount": 0,
       "params": [],
@@ -301,7 +397,7 @@
       "subjectIndex": 24
     },
     {
-      "index": 31,
+      "index": 37,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_CustomEntrySubject_25",
       "paramCount": 0,
       "params": [],
@@ -309,7 +405,7 @@
       "subjectIndex": 25
     },
     {
-      "index": 32,
+      "index": 38,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_CustomEntrySubject_26",
       "paramCount": 0,
       "params": [],
@@ -317,7 +413,7 @@
       "subjectIndex": 26
     },
     {
-      "index": 33,
+      "index": 39,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_CustomEntrySubject_27",
       "paramCount": 0,
       "params": [],
@@ -325,7 +421,7 @@
       "subjectIndex": 27
     },
     {
-      "index": 34,
+      "index": 40,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_CustomEntrySubject_28",
       "paramCount": 0,
       "params": [],
@@ -333,7 +429,7 @@
       "subjectIndex": 28
     },
     {
-      "index": 35,
+      "index": 41,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_CustomEntrySubject_29",
       "paramCount": 0,
       "params": [],
@@ -341,7 +437,7 @@
       "subjectIndex": 29
     },
     {
-      "index": 36,
+      "index": 42,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_CustomEntrySubject_30",
       "paramCount": 0,
       "params": [],
@@ -349,7 +445,7 @@
       "subjectIndex": 30
     },
     {
-      "index": 37,
+      "index": 43,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_CustomEntrySubject_31",
       "paramCount": 0,
       "params": [],
@@ -357,7 +453,7 @@
       "subjectIndex": 31
     },
     {
-      "index": 38,
+      "index": 44,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_CustomEntrySubject_32",
       "paramCount": 0,
       "params": [],
@@ -365,7 +461,7 @@
       "subjectIndex": 32
     },
     {
-      "index": 39,
+      "index": 45,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_CustomEntrySubject_33",
       "paramCount": 0,
       "params": [],
@@ -373,7 +469,7 @@
       "subjectIndex": 33
     },
     {
-      "index": 40,
+      "index": 46,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_CustomEntrySubject_34",
       "paramCount": 0,
       "params": [],
@@ -381,7 +477,7 @@
       "subjectIndex": 34
     },
     {
-      "index": 41,
+      "index": 47,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_CustomEntrySubject_35",
       "paramCount": 0,
       "params": [],
@@ -389,7 +485,7 @@
       "subjectIndex": 35
     },
     {
-      "index": 42,
+      "index": 48,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_CustomEntrySubject_36",
       "paramCount": 0,
       "params": [],
@@ -397,7 +493,7 @@
       "subjectIndex": 36
     },
     {
-      "index": 43,
+      "index": 49,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_CustomEntrySubject_37",
       "paramCount": 0,
       "params": [],
@@ -405,7 +501,7 @@
       "subjectIndex": 37
     },
     {
-      "index": 44,
+      "index": 50,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_CustomEntrySubject_38",
       "paramCount": 0,
       "params": [],
@@ -413,7 +509,7 @@
       "subjectIndex": 38
     },
     {
-      "index": 45,
+      "index": 51,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_CustomEntrySubject_39",
       "paramCount": 0,
       "params": [],
@@ -421,7 +517,7 @@
       "subjectIndex": 39
     },
     {
-      "index": 46,
+      "index": 52,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_CustomEntrySubject_40",
       "paramCount": 0,
       "params": [],
@@ -429,7 +525,7 @@
       "subjectIndex": 40
     },
     {
-      "index": 47,
+      "index": 53,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_Subject_41",
       "paramCount": 0,
       "params": [],
@@ -437,7 +533,7 @@
       "subjectIndex": 41
     },
     {
-      "index": 48,
+      "index": 54,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects___c_Subject_41_b__42_0",
       "paramCount": 1,
       "params": [
@@ -449,7 +545,7 @@
       "isInstance": true
     },
     {
-      "index": 49,
+      "index": 55,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects_Subject_42",
       "paramCount": 0,
       "params": [],
@@ -457,14 +553,14 @@
       "subjectIndex": 42
     },
     {
-      "index": 50,
+      "index": 56,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects___c_cctor",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 51,
+      "index": 57,
       "nativeSymbol": "ParallelApisSubjects_ParallelApisSubjects___c__ctor",
       "paramCount": 1,
       "params": [

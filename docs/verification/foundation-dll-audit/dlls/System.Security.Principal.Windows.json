@@ -1,0 +1,4308 @@
+{
+  "assemblyName": "System.Security.Principal.Windows",
+  "orderIndex": 12,
+  "phase": "roadmap-closed",
+  "roadmapTaskId": "TASK-20260427-04",
+  "dllState": "not-started",
+  "currentProject": "audit-input-and-ledger",
+  "blockingReason": "",
+  "riskTags": [],
+  "projects": [
+    {
+      "projectCode": "audit-input-and-ledger",
+      "displayName": "Audit Input And Ledger",
+      "policyState": "required",
+      "executionState": "pending",
+      "verificationMethod": "Formal verification for Audit Input And Ledger",
+      "verificationTarget": "System.Security.Principal.Windows",
+      "completionRule": "",
+      "artifacts": [],
+      "supportRefs": [
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
+      ],
+      "blockers": [],
+      "updatedAt": ""
+    },
+    {
+      "projectCode": "managed-proof",
+      "displayName": "Managed Proof",
+      "policyState": "required",
+      "executionState": "pending",
+      "verificationMethod": "Formal verification for Managed Proof",
+      "verificationTarget": "System.Security.Principal.Windows",
+      "completionRule": "",
+      "artifacts": [],
+      "supportRefs": [
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
+      ],
+      "blockers": [],
+      "updatedAt": ""
+    },
+    {
+      "projectCode": "native-proof",
+      "displayName": "Native Proof",
+      "policyState": "required",
+      "executionState": "pending",
+      "verificationMethod": "Formal verification for Native Proof",
+      "verificationTarget": "System.Security.Principal.Windows",
+      "completionRule": "",
+      "artifacts": [],
+      "supportRefs": [
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
+      ],
+      "blockers": [],
+      "updatedAt": ""
+    },
+    {
+      "projectCode": "hotupdate-proof",
+      "displayName": "Hotupdate Proof",
+      "policyState": "required",
+      "executionState": "pending",
+      "verificationMethod": "Formal verification for Hotupdate Proof",
+      "verificationTarget": "System.Security.Principal.Windows",
+      "completionRule": "",
+      "artifacts": [],
+      "supportRefs": [
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
+      ],
+      "blockers": [],
+      "updatedAt": ""
+    },
+    {
+      "projectCode": "benchmark",
+      "displayName": "Benchmark",
+      "policyState": "required",
+      "executionState": "pending",
+      "verificationMethod": "Formal verification for Benchmark",
+      "verificationTarget": "System.Security.Principal.Windows",
+      "completionRule": "",
+      "artifacts": [],
+      "supportRefs": [
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
+      ],
+      "blockers": [],
+      "updatedAt": ""
+    },
+    {
+      "projectCode": "codegen-review",
+      "displayName": "Codegen Review",
+      "policyState": "required",
+      "executionState": "pending",
+      "verificationMethod": "Formal verification for Codegen Review",
+      "verificationTarget": "System.Security.Principal.Windows",
+      "completionRule": "",
+      "artifacts": [],
+      "supportRefs": [
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
+      ],
+      "blockers": [],
+      "updatedAt": ""
+    },
+    {
+      "projectCode": "completion-certification",
+      "displayName": "Completion Certification",
+      "policyState": "required",
+      "executionState": "pending",
+      "verificationMethod": "Formal verification for Completion Certification",
+      "verificationTarget": "System.Security.Principal.Windows",
+      "completionRule": "",
+      "artifacts": [],
+      "supportRefs": [
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
+      ],
+      "blockers": [],
+      "updatedAt": ""
+    }
+  ],
+  "capabilityClosure": {
+    "totalFamilies": 6,
+    "closedFamilies": 0,
+    "waivedFamilies": 0,
+    "excludedFamilies": 0,
+    "platformBlockedFamilies": 0,
+    "inProgressFamilies": 6,
+    "closurePercent": 0.0
+  },
+  "workflowProgress": {
+    "totalRequiredGates": 0,
+    "passedGates": 0,
+    "progressPercent": 0.0
+  },
+  "capabilityFamilies": [
+    {
+      "familyId": "family/System.Security.Principal.Windows/identity-reference",
+      "methodSubjectIds": [
+        "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::Equals:System.Boolean(System.Object)",
+        "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::get_Value:System.String()",
+        "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::GetHashCode:System.Int32()",
+        "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::IsValidTargetType:System.Boolean(System.Type)",
+        "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::op_Equality:System.Boolean(System.Security.Principal.IdentityReference,System.Security.Principal.IdentityReference)",
+        "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::op_Inequality:System.Boolean(System.Security.Principal.IdentityReference,System.Security.Principal.IdentityReference)",
+        "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::ToString:System.String()",
+        "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::Translate:System.Security.Principal.IdentityReference(System.Type)",
+        "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Add:System.Void(System.Security.Principal.IdentityReference)",
+        "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Clear:System.Void()",
+        "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Contains:System.Boolean(System.Security.Principal.IdentityReference)",
+        "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::CopyTo:System.Void(System.Security.Principal.IdentityReference{},System.Int32)",
+        "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::get_Count:System.Int32()",
+        "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::get_Item:System.Security.Principal.IdentityReference(System.Int32)",
+        "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::GetEnumerator:System.Collections.Generic.IEnumerator{System.Security.Principal.IdentityReference}()",
+        "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Remove:System.Boolean(System.Security.Principal.IdentityReference)",
+        "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::set_Item:System.Void(System.Int32,System.Security.Principal.IdentityReference)",
+        "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Translate:System.Security.Principal.IdentityReferenceCollection(System.Type)",
+        "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Translate:System.Security.Principal.IdentityReferenceCollection(System.Type,System.Boolean)",
+        "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::.ctor:System.Void()",
+        "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::.ctor:System.Void(System.Int32)",
+        "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::get_Item:System.Security.Principal.IdentityReference()",
+        "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::set_Item:System.Void(System.Security.Principal.IdentityReference)"
+      ],
+      "methodCount": 23,
+      "implementationFamilies": [],
+      "closureStatus": "in-progress",
+      "denominatorStatus": "audit-confirmed",
+      "description": "",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 23,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 23,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate",
+        "d3PatchApplied": false,
+        "d3PatchedCount": 0,
+        "d3SchemaVersion": 0,
+        "d3MethodResults": [],
+        "passedMethodCount": 0,
+        "failedMethodCount": 0,
+        "unmatchedMethodCount": 0,
+        "verificationMethodResults": []
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 23,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "",
+        "denominator": 23,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "",
+        "denominator": 23,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "nativeCorrect": {
+        "status": "pending",
+        "passed": 0,
+        "total": 0,
+        "reason": "未接入批量验证管线"
+      },
+      "reviewBundle": {}
+    },
+    {
+      "familyId": "family/System.Security.Principal.Windows/nt-account",
+      "methodSubjectIds": [
+        "System.Security.Principal.Windows/System.Security.Principal.NTAccount::Equals:System.Boolean(System.Object)",
+        "System.Security.Principal.Windows/System.Security.Principal.NTAccount::get_Value:System.String()",
+        "System.Security.Principal.Windows/System.Security.Principal.NTAccount::GetHashCode:System.Int32()",
+        "System.Security.Principal.Windows/System.Security.Principal.NTAccount::IsValidTargetType:System.Boolean(System.Type)",
+        "System.Security.Principal.Windows/System.Security.Principal.NTAccount::op_Equality:System.Boolean(System.Security.Principal.NTAccount,System.Security.Principal.NTAccount)",
+        "System.Security.Principal.Windows/System.Security.Principal.NTAccount::op_Inequality:System.Boolean(System.Security.Principal.NTAccount,System.Security.Principal.NTAccount)",
+        "System.Security.Principal.Windows/System.Security.Principal.NTAccount::ToString:System.String()",
+        "System.Security.Principal.Windows/System.Security.Principal.NTAccount::Translate:System.Security.Principal.IdentityReference(System.Type)",
+        "System.Security.Principal.Windows/System.Security.Principal.NTAccount::.ctor:System.Void(System.String,System.String)",
+        "System.Security.Principal.Windows/System.Security.Principal.NTAccount::.ctor:System.Void(System.String)"
+      ],
+      "methodCount": 10,
+      "implementationFamilies": [],
+      "closureStatus": "in-progress",
+      "denominatorStatus": "audit-confirmed",
+      "description": "",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 10,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 10,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate",
+        "d3PatchApplied": false,
+        "d3PatchedCount": 0,
+        "d3SchemaVersion": 0,
+        "d3MethodResults": [],
+        "passedMethodCount": 0,
+        "failedMethodCount": 0,
+        "unmatchedMethodCount": 0,
+        "verificationMethodResults": []
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 10,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "",
+        "denominator": 10,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "",
+        "denominator": 10,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "nativeCorrect": {
+        "status": "pending",
+        "passed": 0,
+        "total": 0,
+        "reason": "未接入批量验证管线"
+      },
+      "reviewBundle": {}
+    },
+    {
+      "familyId": "family/System.Security.Principal.Windows/security-identifier",
+      "methodSubjectIds": [
+        "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::CompareTo:System.Int32(System.Security.Principal.SecurityIdentifier)",
+        "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::Equals:System.Boolean(System.Object)",
+        "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::Equals:System.Boolean(System.Security.Principal.SecurityIdentifier)",
+        "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::get_AccountDomainSid:System.Security.Principal.SecurityIdentifier()",
+        "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::get_BinaryLength:System.Int32()",
+        "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::get_Value:System.String()",
+        "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::GetBinaryForm:System.Void(System.Byte{},System.Int32)",
+        "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::GetHashCode:System.Int32()",
+        "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::IsAccountSid:System.Boolean()",
+        "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::IsEqualDomainSid:System.Boolean(System.Security.Principal.SecurityIdentifier)",
+        "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::IsValidTargetType:System.Boolean(System.Type)",
+        "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::IsWellKnown:System.Boolean(System.Security.Principal.WellKnownSidType)",
+        "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::op_Equality:System.Boolean(System.Security.Principal.SecurityIdentifier,System.Security.Principal.SecurityIdentifier)",
+        "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::op_Inequality:System.Boolean(System.Security.Principal.SecurityIdentifier,System.Security.Principal.SecurityIdentifier)",
+        "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::ToString:System.String()",
+        "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::Translate:System.Security.Principal.IdentityReference(System.Type)",
+        "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::.ctor:System.Void(System.String)",
+        "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::.ctor:System.Void(System.Byte{},System.Int32)",
+        "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::.ctor:System.Void(System.IntPtr)",
+        "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::.ctor:System.Void(System.Security.Principal.WellKnownSidType,System.Security.Principal.SecurityIdentifier)"
+      ],
+      "methodCount": 20,
+      "implementationFamilies": [],
+      "closureStatus": "in-progress",
+      "denominatorStatus": "audit-confirmed",
+      "description": "",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 20,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 20,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate",
+        "d3PatchApplied": false,
+        "d3PatchedCount": 0,
+        "d3SchemaVersion": 0,
+        "d3MethodResults": [],
+        "passedMethodCount": 0,
+        "failedMethodCount": 0,
+        "unmatchedMethodCount": 0,
+        "verificationMethodResults": []
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 20,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "",
+        "denominator": 20,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "",
+        "denominator": 20,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "nativeCorrect": {
+        "status": "pending",
+        "passed": 0,
+        "total": 0,
+        "reason": "未接入批量验证管线"
+      },
+      "reviewBundle": {}
+    },
+    {
+      "familyId": "family/System.Security.Principal.Windows/token-access",
+      "methodSubjectIds": [
+        "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::get_InvalidHandle:Microsoft.Win32.SafeHandles.SafeAccessTokenHandle()",
+        "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::get_IsInvalid:System.Boolean()",
+        "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::.ctor:System.Void()",
+        "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::.ctor:System.Void(System.IntPtr)"
+      ],
+      "methodCount": 4,
+      "implementationFamilies": [],
+      "closureStatus": "in-progress",
+      "denominatorStatus": "audit-confirmed",
+      "description": "",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 4,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 4,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate",
+        "d3PatchApplied": false,
+        "d3PatchedCount": 0,
+        "d3SchemaVersion": 0,
+        "d3MethodResults": [],
+        "passedMethodCount": 0,
+        "failedMethodCount": 0,
+        "unmatchedMethodCount": 0,
+        "verificationMethodResults": []
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 4,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "",
+        "denominator": 4,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "",
+        "denominator": 4,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "nativeCorrect": {
+        "status": "pending",
+        "passed": 0,
+        "total": 0,
+        "reason": "未接入批量验证管线"
+      },
+      "reviewBundle": {}
+    },
+    {
+      "familyId": "family/System.Security.Principal.Windows/windows-identity",
+      "methodSubjectIds": [
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::Clone:System.Security.Claims.ClaimsIdentity()",
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::Dispose:System.Void()",
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_AccessToken:Microsoft.Win32.SafeHandles.SafeAccessTokenHandle()",
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_AuthenticationType:System.String()",
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_Claims:System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}()",
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_DeviceClaims:System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}()",
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_Groups:System.Security.Principal.IdentityReferenceCollection()",
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_ImpersonationLevel:System.Security.Principal.TokenImpersonationLevel()",
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_IsAnonymous:System.Boolean()",
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_IsAuthenticated:System.Boolean()",
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_IsGuest:System.Boolean()",
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_IsSystem:System.Boolean()",
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_Name:System.String()",
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_Owner:System.Security.Principal.SecurityIdentifier()",
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_Token:System.IntPtr()",
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_User:System.Security.Principal.SecurityIdentifier()",
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_UserClaims:System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}()",
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::GetAnonymous:System.Security.Principal.WindowsIdentity()",
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::GetCurrent:System.Security.Principal.WindowsIdentity()",
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::GetCurrent:System.Security.Principal.WindowsIdentity(System.Boolean)",
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::GetCurrent:System.Security.Principal.WindowsIdentity(System.Security.Principal.TokenAccessLevels)",
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonated:System.Void(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Action)",
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonated{T}:T(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Func{T})",
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonatedAsync:System.Threading.Tasks.Task(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Func{System.Threading.Tasks.Task})",
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonatedAsync{T}:System.Threading.Tasks.Task{T}(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Func{System.Threading.Tasks.Task{T}})",
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.IntPtr)",
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.IntPtr,System.String)",
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.IntPtr,System.String,System.Security.Principal.WindowsAccountType)",
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.IntPtr,System.String,System.Security.Principal.WindowsAccountType,System.Boolean)",
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.String)",
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)"
+      ],
+      "methodCount": 31,
+      "implementationFamilies": [],
+      "closureStatus": "in-progress",
+      "denominatorStatus": "audit-confirmed",
+      "description": "",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 31,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 31,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate",
+        "d3PatchApplied": false,
+        "d3PatchedCount": 0,
+        "d3SchemaVersion": 0,
+        "d3MethodResults": [],
+        "passedMethodCount": 0,
+        "failedMethodCount": 0,
+        "unmatchedMethodCount": 0,
+        "verificationMethodResults": []
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 31,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "",
+        "denominator": 31,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "",
+        "denominator": 31,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "nativeCorrect": {
+        "status": "pending",
+        "passed": 0,
+        "total": 0,
+        "reason": "未接入批量验证管线"
+      },
+      "reviewBundle": {}
+    },
+    {
+      "familyId": "family/System.Security.Principal.Windows/windows-principal-roles",
+      "methodSubjectIds": [
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::get_DeviceClaims:System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}()",
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::get_Identity:System.Security.Principal.IIdentity()",
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::get_UserClaims:System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}()",
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::IsInRole:System.Boolean(System.String)",
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::IsInRole:System.Boolean(System.Security.Principal.WindowsBuiltInRole)",
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::IsInRole:System.Boolean(System.Int32)",
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::IsInRole:System.Boolean(System.Security.Principal.SecurityIdentifier)",
+        "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::.ctor:System.Void(System.Security.Principal.WindowsIdentity)"
+      ],
+      "methodCount": 8,
+      "implementationFamilies": [],
+      "closureStatus": "in-progress",
+      "denominatorStatus": "audit-confirmed",
+      "description": "",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 8,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 8,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate",
+        "d3PatchApplied": false,
+        "d3PatchedCount": 0,
+        "d3SchemaVersion": 0,
+        "d3MethodResults": [],
+        "passedMethodCount": 0,
+        "failedMethodCount": 0,
+        "unmatchedMethodCount": 0,
+        "verificationMethodResults": []
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 8,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "",
+        "denominator": 8,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "",
+        "denominator": 8,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "nativeCorrect": {
+        "status": "pending",
+        "passed": 0,
+        "total": 0,
+        "reason": "未接入批量验证管线"
+      },
+      "reviewBundle": {}
+    }
+  ],
+  "familyVerificationClaims": {
+    "schemaVersion": 1,
+    "assemblyName": "System.Security.Principal.Windows",
+    "ownerSubjectId": "SolutionCorePack",
+    "methodUniverseArtifactPaths": [],
+    "claims": [
+      {
+        "claimId": "family/System.Security.Principal.Windows/identity-reference::native-proof",
+        "familyId": "family/System.Security.Principal.Windows/identity-reference",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 23,
+        "methodSubjectIds": [
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::Equals:System.Boolean(System.Object)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::get_Value:System.String()",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::GetHashCode:System.Int32()",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::IsValidTargetType:System.Boolean(System.Type)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::op_Equality:System.Boolean(System.Security.Principal.IdentityReference,System.Security.Principal.IdentityReference)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::op_Inequality:System.Boolean(System.Security.Principal.IdentityReference,System.Security.Principal.IdentityReference)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::ToString:System.String()",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::Translate:System.Security.Principal.IdentityReference(System.Type)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Add:System.Void(System.Security.Principal.IdentityReference)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Clear:System.Void()",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Contains:System.Boolean(System.Security.Principal.IdentityReference)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::CopyTo:System.Void(System.Security.Principal.IdentityReference{},System.Int32)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::get_Count:System.Int32()",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::get_Item:System.Security.Principal.IdentityReference(System.Int32)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::GetEnumerator:System.Collections.Generic.IEnumerator{System.Security.Principal.IdentityReference}()",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Remove:System.Boolean(System.Security.Principal.IdentityReference)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::set_Item:System.Void(System.Int32,System.Security.Principal.IdentityReference)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Translate:System.Security.Principal.IdentityReferenceCollection(System.Type)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Translate:System.Security.Principal.IdentityReferenceCollection(System.Type,System.Boolean)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::.ctor:System.Void()",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::.ctor:System.Void(System.Int32)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::get_Item:System.Security.Principal.IdentityReference()",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::set_Item:System.Void(System.Security.Principal.IdentityReference)"
+        ],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "inline-family:methodSubjectIds",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Security.Principal.Windows/identity-reference::managed-proof",
+        "familyId": "family/System.Security.Principal.Windows/identity-reference",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Security.Principal.Windows/identity-reference::hotupdate-proof",
+        "familyId": "family/System.Security.Principal.Windows/identity-reference",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Security.Principal.Windows/identity-reference::benchmark",
+        "familyId": "family/System.Security.Principal.Windows/identity-reference",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Security.Principal.Windows/identity-reference::test-code",
+        "familyId": "family/System.Security.Principal.Windows/identity-reference",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 23,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Security.Principal.Windows/nt-account::native-proof",
+        "familyId": "family/System.Security.Principal.Windows/nt-account",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 10,
+        "methodSubjectIds": [
+          "System.Security.Principal.Windows/System.Security.Principal.NTAccount::Equals:System.Boolean(System.Object)",
+          "System.Security.Principal.Windows/System.Security.Principal.NTAccount::get_Value:System.String()",
+          "System.Security.Principal.Windows/System.Security.Principal.NTAccount::GetHashCode:System.Int32()",
+          "System.Security.Principal.Windows/System.Security.Principal.NTAccount::IsValidTargetType:System.Boolean(System.Type)",
+          "System.Security.Principal.Windows/System.Security.Principal.NTAccount::op_Equality:System.Boolean(System.Security.Principal.NTAccount,System.Security.Principal.NTAccount)",
+          "System.Security.Principal.Windows/System.Security.Principal.NTAccount::op_Inequality:System.Boolean(System.Security.Principal.NTAccount,System.Security.Principal.NTAccount)",
+          "System.Security.Principal.Windows/System.Security.Principal.NTAccount::ToString:System.String()",
+          "System.Security.Principal.Windows/System.Security.Principal.NTAccount::Translate:System.Security.Principal.IdentityReference(System.Type)",
+          "System.Security.Principal.Windows/System.Security.Principal.NTAccount::.ctor:System.Void(System.String,System.String)",
+          "System.Security.Principal.Windows/System.Security.Principal.NTAccount::.ctor:System.Void(System.String)"
+        ],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "inline-family:methodSubjectIds",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Security.Principal.Windows/nt-account::managed-proof",
+        "familyId": "family/System.Security.Principal.Windows/nt-account",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Security.Principal.Windows/nt-account::hotupdate-proof",
+        "familyId": "family/System.Security.Principal.Windows/nt-account",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Security.Principal.Windows/nt-account::benchmark",
+        "familyId": "family/System.Security.Principal.Windows/nt-account",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Security.Principal.Windows/nt-account::test-code",
+        "familyId": "family/System.Security.Principal.Windows/nt-account",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 10,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Security.Principal.Windows/security-identifier::native-proof",
+        "familyId": "family/System.Security.Principal.Windows/security-identifier",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 20,
+        "methodSubjectIds": [
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::CompareTo:System.Int32(System.Security.Principal.SecurityIdentifier)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::Equals:System.Boolean(System.Object)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::Equals:System.Boolean(System.Security.Principal.SecurityIdentifier)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::get_AccountDomainSid:System.Security.Principal.SecurityIdentifier()",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::get_BinaryLength:System.Int32()",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::get_Value:System.String()",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::GetBinaryForm:System.Void(System.Byte{},System.Int32)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::GetHashCode:System.Int32()",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::IsAccountSid:System.Boolean()",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::IsEqualDomainSid:System.Boolean(System.Security.Principal.SecurityIdentifier)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::IsValidTargetType:System.Boolean(System.Type)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::IsWellKnown:System.Boolean(System.Security.Principal.WellKnownSidType)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::op_Equality:System.Boolean(System.Security.Principal.SecurityIdentifier,System.Security.Principal.SecurityIdentifier)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::op_Inequality:System.Boolean(System.Security.Principal.SecurityIdentifier,System.Security.Principal.SecurityIdentifier)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::ToString:System.String()",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::Translate:System.Security.Principal.IdentityReference(System.Type)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::.ctor:System.Void(System.String)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::.ctor:System.Void(System.Byte{},System.Int32)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::.ctor:System.Void(System.IntPtr)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::.ctor:System.Void(System.Security.Principal.WellKnownSidType,System.Security.Principal.SecurityIdentifier)"
+        ],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "inline-family:methodSubjectIds",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Security.Principal.Windows/security-identifier::managed-proof",
+        "familyId": "family/System.Security.Principal.Windows/security-identifier",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Security.Principal.Windows/security-identifier::hotupdate-proof",
+        "familyId": "family/System.Security.Principal.Windows/security-identifier",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Security.Principal.Windows/security-identifier::benchmark",
+        "familyId": "family/System.Security.Principal.Windows/security-identifier",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Security.Principal.Windows/security-identifier::test-code",
+        "familyId": "family/System.Security.Principal.Windows/security-identifier",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 20,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Security.Principal.Windows/token-access::native-proof",
+        "familyId": "family/System.Security.Principal.Windows/token-access",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 4,
+        "methodSubjectIds": [
+          "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::get_InvalidHandle:Microsoft.Win32.SafeHandles.SafeAccessTokenHandle()",
+          "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::get_IsInvalid:System.Boolean()",
+          "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::.ctor:System.Void()",
+          "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::.ctor:System.Void(System.IntPtr)"
+        ],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "inline-family:methodSubjectIds",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Security.Principal.Windows/token-access::managed-proof",
+        "familyId": "family/System.Security.Principal.Windows/token-access",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Security.Principal.Windows/token-access::hotupdate-proof",
+        "familyId": "family/System.Security.Principal.Windows/token-access",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Security.Principal.Windows/token-access::benchmark",
+        "familyId": "family/System.Security.Principal.Windows/token-access",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Security.Principal.Windows/token-access::test-code",
+        "familyId": "family/System.Security.Principal.Windows/token-access",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 4,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Security.Principal.Windows/windows-identity::native-proof",
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 31,
+        "methodSubjectIds": [
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::Clone:System.Security.Claims.ClaimsIdentity()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::Dispose:System.Void()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_AccessToken:Microsoft.Win32.SafeHandles.SafeAccessTokenHandle()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_AuthenticationType:System.String()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_Claims:System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_DeviceClaims:System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_Groups:System.Security.Principal.IdentityReferenceCollection()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_ImpersonationLevel:System.Security.Principal.TokenImpersonationLevel()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_IsAnonymous:System.Boolean()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_IsAuthenticated:System.Boolean()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_IsGuest:System.Boolean()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_IsSystem:System.Boolean()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_Name:System.String()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_Owner:System.Security.Principal.SecurityIdentifier()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_Token:System.IntPtr()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_User:System.Security.Principal.SecurityIdentifier()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_UserClaims:System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::GetAnonymous:System.Security.Principal.WindowsIdentity()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::GetCurrent:System.Security.Principal.WindowsIdentity()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::GetCurrent:System.Security.Principal.WindowsIdentity(System.Boolean)",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::GetCurrent:System.Security.Principal.WindowsIdentity(System.Security.Principal.TokenAccessLevels)",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonated:System.Void(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Action)",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonated{T}:T(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Func{T})",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonatedAsync:System.Threading.Tasks.Task(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Func{System.Threading.Tasks.Task})",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonatedAsync{T}:System.Threading.Tasks.Task{T}(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Func{System.Threading.Tasks.Task{T}})",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.IntPtr)",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.IntPtr,System.String)",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.IntPtr,System.String,System.Security.Principal.WindowsAccountType)",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.IntPtr,System.String,System.Security.Principal.WindowsAccountType,System.Boolean)",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.String)",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)"
+        ],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "inline-family:methodSubjectIds",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Security.Principal.Windows/windows-identity::managed-proof",
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Security.Principal.Windows/windows-identity::hotupdate-proof",
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Security.Principal.Windows/windows-identity::benchmark",
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Security.Principal.Windows/windows-identity::test-code",
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 31,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Security.Principal.Windows/windows-principal-roles::native-proof",
+        "familyId": "family/System.Security.Principal.Windows/windows-principal-roles",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 8,
+        "methodSubjectIds": [
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::get_DeviceClaims:System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::get_Identity:System.Security.Principal.IIdentity()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::get_UserClaims:System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::IsInRole:System.Boolean(System.String)",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::IsInRole:System.Boolean(System.Security.Principal.WindowsBuiltInRole)",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::IsInRole:System.Boolean(System.Int32)",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::IsInRole:System.Boolean(System.Security.Principal.SecurityIdentifier)",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::.ctor:System.Void(System.Security.Principal.WindowsIdentity)"
+        ],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "inline-family:methodSubjectIds",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Security.Principal.Windows/windows-principal-roles::managed-proof",
+        "familyId": "family/System.Security.Principal.Windows/windows-principal-roles",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Security.Principal.Windows/windows-principal-roles::hotupdate-proof",
+        "familyId": "family/System.Security.Principal.Windows/windows-principal-roles",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Security.Principal.Windows/windows-principal-roles::benchmark",
+        "familyId": "family/System.Security.Principal.Windows/windows-principal-roles",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Security.Principal.Windows/windows-principal-roles::test-code",
+        "familyId": "family/System.Security.Principal.Windows/windows-principal-roles",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 8,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      }
+    ]
+  },
+  "familyVerificationSnapshot": {
+    "schemaVersion": 1,
+    "assemblyName": "System.Security.Principal.Windows",
+    "ownerSubjectId": "SolutionCorePack",
+    "families": [
+      {
+        "familyId": "family/System.Security.Principal.Windows/identity-reference",
+        "methodSubjectIds": [
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::Equals:System.Boolean(System.Object)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::get_Value:System.String()",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::GetHashCode:System.Int32()",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::IsValidTargetType:System.Boolean(System.Type)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::op_Equality:System.Boolean(System.Security.Principal.IdentityReference,System.Security.Principal.IdentityReference)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::op_Inequality:System.Boolean(System.Security.Principal.IdentityReference,System.Security.Principal.IdentityReference)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::ToString:System.String()",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::Translate:System.Security.Principal.IdentityReference(System.Type)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Add:System.Void(System.Security.Principal.IdentityReference)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Clear:System.Void()",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Contains:System.Boolean(System.Security.Principal.IdentityReference)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::CopyTo:System.Void(System.Security.Principal.IdentityReference{},System.Int32)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::get_Count:System.Int32()",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::get_Item:System.Security.Principal.IdentityReference(System.Int32)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::GetEnumerator:System.Collections.Generic.IEnumerator{System.Security.Principal.IdentityReference}()",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Remove:System.Boolean(System.Security.Principal.IdentityReference)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::set_Item:System.Void(System.Int32,System.Security.Principal.IdentityReference)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Translate:System.Security.Principal.IdentityReferenceCollection(System.Type)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Translate:System.Security.Principal.IdentityReferenceCollection(System.Type,System.Boolean)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::.ctor:System.Void()",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::.ctor:System.Void(System.Int32)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::get_Item:System.Security.Principal.IdentityReference()",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::set_Item:System.Void(System.Security.Principal.IdentityReference)"
+        ],
+        "methodCount": 23,
+        "implementationFamilies": [],
+        "closureStatus": "in-progress",
+        "denominatorStatus": "audit-confirmed",
+        "description": "",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 23,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 23,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate",
+          "d3PatchApplied": false,
+          "d3PatchedCount": 0,
+          "d3SchemaVersion": 0,
+          "d3MethodResults": [],
+          "passedMethodCount": 0,
+          "failedMethodCount": 0,
+          "unmatchedMethodCount": 0,
+          "verificationMethodResults": []
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 23,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "",
+          "denominator": 23,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "",
+          "denominator": 23,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "nativeCorrect": {
+          "status": "pending",
+          "passed": 0,
+          "total": 0,
+          "reason": "未接入批量验证管线"
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.Security.Principal.Windows/nt-account",
+        "methodSubjectIds": [
+          "System.Security.Principal.Windows/System.Security.Principal.NTAccount::Equals:System.Boolean(System.Object)",
+          "System.Security.Principal.Windows/System.Security.Principal.NTAccount::get_Value:System.String()",
+          "System.Security.Principal.Windows/System.Security.Principal.NTAccount::GetHashCode:System.Int32()",
+          "System.Security.Principal.Windows/System.Security.Principal.NTAccount::IsValidTargetType:System.Boolean(System.Type)",
+          "System.Security.Principal.Windows/System.Security.Principal.NTAccount::op_Equality:System.Boolean(System.Security.Principal.NTAccount,System.Security.Principal.NTAccount)",
+          "System.Security.Principal.Windows/System.Security.Principal.NTAccount::op_Inequality:System.Boolean(System.Security.Principal.NTAccount,System.Security.Principal.NTAccount)",
+          "System.Security.Principal.Windows/System.Security.Principal.NTAccount::ToString:System.String()",
+          "System.Security.Principal.Windows/System.Security.Principal.NTAccount::Translate:System.Security.Principal.IdentityReference(System.Type)",
+          "System.Security.Principal.Windows/System.Security.Principal.NTAccount::.ctor:System.Void(System.String,System.String)",
+          "System.Security.Principal.Windows/System.Security.Principal.NTAccount::.ctor:System.Void(System.String)"
+        ],
+        "methodCount": 10,
+        "implementationFamilies": [],
+        "closureStatus": "in-progress",
+        "denominatorStatus": "audit-confirmed",
+        "description": "",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 10,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 10,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate",
+          "d3PatchApplied": false,
+          "d3PatchedCount": 0,
+          "d3SchemaVersion": 0,
+          "d3MethodResults": [],
+          "passedMethodCount": 0,
+          "failedMethodCount": 0,
+          "unmatchedMethodCount": 0,
+          "verificationMethodResults": []
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 10,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "",
+          "denominator": 10,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "",
+          "denominator": 10,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "nativeCorrect": {
+          "status": "pending",
+          "passed": 0,
+          "total": 0,
+          "reason": "未接入批量验证管线"
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.Security.Principal.Windows/security-identifier",
+        "methodSubjectIds": [
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::CompareTo:System.Int32(System.Security.Principal.SecurityIdentifier)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::Equals:System.Boolean(System.Object)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::Equals:System.Boolean(System.Security.Principal.SecurityIdentifier)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::get_AccountDomainSid:System.Security.Principal.SecurityIdentifier()",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::get_BinaryLength:System.Int32()",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::get_Value:System.String()",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::GetBinaryForm:System.Void(System.Byte{},System.Int32)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::GetHashCode:System.Int32()",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::IsAccountSid:System.Boolean()",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::IsEqualDomainSid:System.Boolean(System.Security.Principal.SecurityIdentifier)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::IsValidTargetType:System.Boolean(System.Type)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::IsWellKnown:System.Boolean(System.Security.Principal.WellKnownSidType)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::op_Equality:System.Boolean(System.Security.Principal.SecurityIdentifier,System.Security.Principal.SecurityIdentifier)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::op_Inequality:System.Boolean(System.Security.Principal.SecurityIdentifier,System.Security.Principal.SecurityIdentifier)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::ToString:System.String()",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::Translate:System.Security.Principal.IdentityReference(System.Type)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::.ctor:System.Void(System.String)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::.ctor:System.Void(System.Byte{},System.Int32)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::.ctor:System.Void(System.IntPtr)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::.ctor:System.Void(System.Security.Principal.WellKnownSidType,System.Security.Principal.SecurityIdentifier)"
+        ],
+        "methodCount": 20,
+        "implementationFamilies": [],
+        "closureStatus": "in-progress",
+        "denominatorStatus": "audit-confirmed",
+        "description": "",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 20,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 20,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate",
+          "d3PatchApplied": false,
+          "d3PatchedCount": 0,
+          "d3SchemaVersion": 0,
+          "d3MethodResults": [],
+          "passedMethodCount": 0,
+          "failedMethodCount": 0,
+          "unmatchedMethodCount": 0,
+          "verificationMethodResults": []
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 20,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "",
+          "denominator": 20,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "",
+          "denominator": 20,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "nativeCorrect": {
+          "status": "pending",
+          "passed": 0,
+          "total": 0,
+          "reason": "未接入批量验证管线"
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.Security.Principal.Windows/token-access",
+        "methodSubjectIds": [
+          "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::get_InvalidHandle:Microsoft.Win32.SafeHandles.SafeAccessTokenHandle()",
+          "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::get_IsInvalid:System.Boolean()",
+          "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::.ctor:System.Void()",
+          "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::.ctor:System.Void(System.IntPtr)"
+        ],
+        "methodCount": 4,
+        "implementationFamilies": [],
+        "closureStatus": "in-progress",
+        "denominatorStatus": "audit-confirmed",
+        "description": "",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 4,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 4,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate",
+          "d3PatchApplied": false,
+          "d3PatchedCount": 0,
+          "d3SchemaVersion": 0,
+          "d3MethodResults": [],
+          "passedMethodCount": 0,
+          "failedMethodCount": 0,
+          "unmatchedMethodCount": 0,
+          "verificationMethodResults": []
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 4,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "",
+          "denominator": 4,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "",
+          "denominator": 4,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "nativeCorrect": {
+          "status": "pending",
+          "passed": 0,
+          "total": 0,
+          "reason": "未接入批量验证管线"
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "methodSubjectIds": [
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::Clone:System.Security.Claims.ClaimsIdentity()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::Dispose:System.Void()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_AccessToken:Microsoft.Win32.SafeHandles.SafeAccessTokenHandle()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_AuthenticationType:System.String()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_Claims:System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_DeviceClaims:System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_Groups:System.Security.Principal.IdentityReferenceCollection()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_ImpersonationLevel:System.Security.Principal.TokenImpersonationLevel()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_IsAnonymous:System.Boolean()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_IsAuthenticated:System.Boolean()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_IsGuest:System.Boolean()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_IsSystem:System.Boolean()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_Name:System.String()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_Owner:System.Security.Principal.SecurityIdentifier()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_Token:System.IntPtr()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_User:System.Security.Principal.SecurityIdentifier()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_UserClaims:System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::GetAnonymous:System.Security.Principal.WindowsIdentity()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::GetCurrent:System.Security.Principal.WindowsIdentity()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::GetCurrent:System.Security.Principal.WindowsIdentity(System.Boolean)",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::GetCurrent:System.Security.Principal.WindowsIdentity(System.Security.Principal.TokenAccessLevels)",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonated:System.Void(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Action)",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonated{T}:T(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Func{T})",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonatedAsync:System.Threading.Tasks.Task(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Func{System.Threading.Tasks.Task})",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonatedAsync{T}:System.Threading.Tasks.Task{T}(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Func{System.Threading.Tasks.Task{T}})",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.IntPtr)",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.IntPtr,System.String)",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.IntPtr,System.String,System.Security.Principal.WindowsAccountType)",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.IntPtr,System.String,System.Security.Principal.WindowsAccountType,System.Boolean)",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.String)",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)"
+        ],
+        "methodCount": 31,
+        "implementationFamilies": [],
+        "closureStatus": "in-progress",
+        "denominatorStatus": "audit-confirmed",
+        "description": "",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 31,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 31,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate",
+          "d3PatchApplied": false,
+          "d3PatchedCount": 0,
+          "d3SchemaVersion": 0,
+          "d3MethodResults": [],
+          "passedMethodCount": 0,
+          "failedMethodCount": 0,
+          "unmatchedMethodCount": 0,
+          "verificationMethodResults": []
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 31,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "",
+          "denominator": 31,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "",
+          "denominator": 31,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "nativeCorrect": {
+          "status": "pending",
+          "passed": 0,
+          "total": 0,
+          "reason": "未接入批量验证管线"
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.Security.Principal.Windows/windows-principal-roles",
+        "methodSubjectIds": [
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::get_DeviceClaims:System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::get_Identity:System.Security.Principal.IIdentity()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::get_UserClaims:System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::IsInRole:System.Boolean(System.String)",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::IsInRole:System.Boolean(System.Security.Principal.WindowsBuiltInRole)",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::IsInRole:System.Boolean(System.Int32)",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::IsInRole:System.Boolean(System.Security.Principal.SecurityIdentifier)",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::.ctor:System.Void(System.Security.Principal.WindowsIdentity)"
+        ],
+        "methodCount": 8,
+        "implementationFamilies": [],
+        "closureStatus": "in-progress",
+        "denominatorStatus": "audit-confirmed",
+        "description": "",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 8,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 8,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate",
+          "d3PatchApplied": false,
+          "d3PatchedCount": 0,
+          "d3SchemaVersion": 0,
+          "d3MethodResults": [],
+          "passedMethodCount": 0,
+          "failedMethodCount": 0,
+          "unmatchedMethodCount": 0,
+          "verificationMethodResults": []
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 8,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "",
+          "denominator": 8,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "",
+          "denominator": 8,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "nativeCorrect": {
+          "status": "pending",
+          "passed": 0,
+          "total": 0,
+          "reason": "未接入批量验证管线"
+        },
+        "reviewBundle": {}
+      }
+    ]
+  },
+  "truthContracts": {
+    "schemaVersion": 1,
+    "dllCapabilityManifest": {
+      "assemblyName": "System.Security.Principal.Windows",
+      "ownerSubjectId": "SolutionCorePack",
+      "capabilityFamilies": [
+        "family/System.Security.Principal.Windows/identity-reference",
+        "family/System.Security.Principal.Windows/nt-account",
+        "family/System.Security.Principal.Windows/security-identifier",
+        "family/System.Security.Principal.Windows/token-access",
+        "family/System.Security.Principal.Windows/windows-identity",
+        "family/System.Security.Principal.Windows/windows-principal-roles"
+      ],
+      "capabilityFamilyCount": 6,
+      "methodUniverseCount": 96
+    },
+    "capabilityFamilyVerificationContracts": [
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/identity-reference",
+        "displayName": "",
+        "methodSubjectIds": [
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::Equals:System.Boolean(System.Object)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::get_Value:System.String()",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::GetHashCode:System.Int32()",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::IsValidTargetType:System.Boolean(System.Type)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::op_Equality:System.Boolean(System.Security.Principal.IdentityReference,System.Security.Principal.IdentityReference)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::op_Inequality:System.Boolean(System.Security.Principal.IdentityReference,System.Security.Principal.IdentityReference)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::ToString:System.String()",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::Translate:System.Security.Principal.IdentityReference(System.Type)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Add:System.Void(System.Security.Principal.IdentityReference)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Clear:System.Void()",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Contains:System.Boolean(System.Security.Principal.IdentityReference)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::CopyTo:System.Void(System.Security.Principal.IdentityReference{},System.Int32)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::get_Count:System.Int32()",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::get_Item:System.Security.Principal.IdentityReference(System.Int32)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::GetEnumerator:System.Collections.Generic.IEnumerator{System.Security.Principal.IdentityReference}()",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Remove:System.Boolean(System.Security.Principal.IdentityReference)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::set_Item:System.Void(System.Int32,System.Security.Principal.IdentityReference)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Translate:System.Security.Principal.IdentityReferenceCollection(System.Type)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Translate:System.Security.Principal.IdentityReferenceCollection(System.Type,System.Boolean)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::.ctor:System.Void()",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::.ctor:System.Void(System.Int32)",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::get_Item:System.Security.Principal.IdentityReference()",
+          "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::set_Item:System.Void(System.Security.Principal.IdentityReference)"
+        ],
+        "methodSubjectCount": 23,
+        "functionalObligation": {
+          "required": true
+        },
+        "performanceObligation": {
+          "required": true
+        },
+        "hotupdateFunctionalObligation": {
+          "required": true
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/nt-account",
+        "displayName": "",
+        "methodSubjectIds": [
+          "System.Security.Principal.Windows/System.Security.Principal.NTAccount::Equals:System.Boolean(System.Object)",
+          "System.Security.Principal.Windows/System.Security.Principal.NTAccount::get_Value:System.String()",
+          "System.Security.Principal.Windows/System.Security.Principal.NTAccount::GetHashCode:System.Int32()",
+          "System.Security.Principal.Windows/System.Security.Principal.NTAccount::IsValidTargetType:System.Boolean(System.Type)",
+          "System.Security.Principal.Windows/System.Security.Principal.NTAccount::op_Equality:System.Boolean(System.Security.Principal.NTAccount,System.Security.Principal.NTAccount)",
+          "System.Security.Principal.Windows/System.Security.Principal.NTAccount::op_Inequality:System.Boolean(System.Security.Principal.NTAccount,System.Security.Principal.NTAccount)",
+          "System.Security.Principal.Windows/System.Security.Principal.NTAccount::ToString:System.String()",
+          "System.Security.Principal.Windows/System.Security.Principal.NTAccount::Translate:System.Security.Principal.IdentityReference(System.Type)",
+          "System.Security.Principal.Windows/System.Security.Principal.NTAccount::.ctor:System.Void(System.String,System.String)",
+          "System.Security.Principal.Windows/System.Security.Principal.NTAccount::.ctor:System.Void(System.String)"
+        ],
+        "methodSubjectCount": 10,
+        "functionalObligation": {
+          "required": true
+        },
+        "performanceObligation": {
+          "required": true
+        },
+        "hotupdateFunctionalObligation": {
+          "required": true
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/security-identifier",
+        "displayName": "",
+        "methodSubjectIds": [
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::CompareTo:System.Int32(System.Security.Principal.SecurityIdentifier)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::Equals:System.Boolean(System.Object)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::Equals:System.Boolean(System.Security.Principal.SecurityIdentifier)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::get_AccountDomainSid:System.Security.Principal.SecurityIdentifier()",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::get_BinaryLength:System.Int32()",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::get_Value:System.String()",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::GetBinaryForm:System.Void(System.Byte{},System.Int32)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::GetHashCode:System.Int32()",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::IsAccountSid:System.Boolean()",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::IsEqualDomainSid:System.Boolean(System.Security.Principal.SecurityIdentifier)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::IsValidTargetType:System.Boolean(System.Type)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::IsWellKnown:System.Boolean(System.Security.Principal.WellKnownSidType)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::op_Equality:System.Boolean(System.Security.Principal.SecurityIdentifier,System.Security.Principal.SecurityIdentifier)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::op_Inequality:System.Boolean(System.Security.Principal.SecurityIdentifier,System.Security.Principal.SecurityIdentifier)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::ToString:System.String()",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::Translate:System.Security.Principal.IdentityReference(System.Type)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::.ctor:System.Void(System.String)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::.ctor:System.Void(System.Byte{},System.Int32)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::.ctor:System.Void(System.IntPtr)",
+          "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::.ctor:System.Void(System.Security.Principal.WellKnownSidType,System.Security.Principal.SecurityIdentifier)"
+        ],
+        "methodSubjectCount": 20,
+        "functionalObligation": {
+          "required": true
+        },
+        "performanceObligation": {
+          "required": true
+        },
+        "hotupdateFunctionalObligation": {
+          "required": true
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/token-access",
+        "displayName": "",
+        "methodSubjectIds": [
+          "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::get_InvalidHandle:Microsoft.Win32.SafeHandles.SafeAccessTokenHandle()",
+          "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::get_IsInvalid:System.Boolean()",
+          "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::.ctor:System.Void()",
+          "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::.ctor:System.Void(System.IntPtr)"
+        ],
+        "methodSubjectCount": 4,
+        "functionalObligation": {
+          "required": true
+        },
+        "performanceObligation": {
+          "required": true
+        },
+        "hotupdateFunctionalObligation": {
+          "required": true
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "displayName": "",
+        "methodSubjectIds": [
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::Clone:System.Security.Claims.ClaimsIdentity()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::Dispose:System.Void()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_AccessToken:Microsoft.Win32.SafeHandles.SafeAccessTokenHandle()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_AuthenticationType:System.String()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_Claims:System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_DeviceClaims:System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_Groups:System.Security.Principal.IdentityReferenceCollection()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_ImpersonationLevel:System.Security.Principal.TokenImpersonationLevel()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_IsAnonymous:System.Boolean()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_IsAuthenticated:System.Boolean()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_IsGuest:System.Boolean()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_IsSystem:System.Boolean()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_Name:System.String()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_Owner:System.Security.Principal.SecurityIdentifier()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_Token:System.IntPtr()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_User:System.Security.Principal.SecurityIdentifier()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_UserClaims:System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::GetAnonymous:System.Security.Principal.WindowsIdentity()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::GetCurrent:System.Security.Principal.WindowsIdentity()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::GetCurrent:System.Security.Principal.WindowsIdentity(System.Boolean)",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::GetCurrent:System.Security.Principal.WindowsIdentity(System.Security.Principal.TokenAccessLevels)",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonated:System.Void(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Action)",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonated{T}:T(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Func{T})",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonatedAsync:System.Threading.Tasks.Task(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Func{System.Threading.Tasks.Task})",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonatedAsync{T}:System.Threading.Tasks.Task{T}(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Func{System.Threading.Tasks.Task{T}})",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.IntPtr)",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.IntPtr,System.String)",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.IntPtr,System.String,System.Security.Principal.WindowsAccountType)",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.IntPtr,System.String,System.Security.Principal.WindowsAccountType,System.Boolean)",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.String)",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)"
+        ],
+        "methodSubjectCount": 31,
+        "functionalObligation": {
+          "required": true
+        },
+        "performanceObligation": {
+          "required": true
+        },
+        "hotupdateFunctionalObligation": {
+          "required": true
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-principal-roles",
+        "displayName": "",
+        "methodSubjectIds": [
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::get_DeviceClaims:System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::get_Identity:System.Security.Principal.IIdentity()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::get_UserClaims:System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}()",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::IsInRole:System.Boolean(System.String)",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::IsInRole:System.Boolean(System.Security.Principal.WindowsBuiltInRole)",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::IsInRole:System.Boolean(System.Int32)",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::IsInRole:System.Boolean(System.Security.Principal.SecurityIdentifier)",
+          "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::.ctor:System.Void(System.Security.Principal.WindowsIdentity)"
+        ],
+        "methodSubjectCount": 8,
+        "functionalObligation": {
+          "required": true
+        },
+        "performanceObligation": {
+          "required": true
+        },
+        "hotupdateFunctionalObligation": {
+          "required": true
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": true
+      }
+    ],
+    "methodCapabilityContracts": [
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/identity-reference",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::Equals:System.Boolean(System.Object)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/identity-reference",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::get_Value:System.String()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/identity-reference",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::GetHashCode:System.Int32()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/identity-reference",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::IsValidTargetType:System.Boolean(System.Type)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/identity-reference",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::op_Equality:System.Boolean(System.Security.Principal.IdentityReference,System.Security.Principal.IdentityReference)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/identity-reference",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::op_Inequality:System.Boolean(System.Security.Principal.IdentityReference,System.Security.Principal.IdentityReference)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/identity-reference",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::ToString:System.String()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/identity-reference",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::Translate:System.Security.Principal.IdentityReference(System.Type)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/identity-reference",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Add:System.Void(System.Security.Principal.IdentityReference)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/identity-reference",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Clear:System.Void()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/identity-reference",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Contains:System.Boolean(System.Security.Principal.IdentityReference)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/identity-reference",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::CopyTo:System.Void(System.Security.Principal.IdentityReference{},System.Int32)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/identity-reference",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::get_Count:System.Int32()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/identity-reference",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::get_Item:System.Security.Principal.IdentityReference(System.Int32)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/identity-reference",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::GetEnumerator:System.Collections.Generic.IEnumerator{System.Security.Principal.IdentityReference}()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/identity-reference",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Remove:System.Boolean(System.Security.Principal.IdentityReference)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/identity-reference",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::set_Item:System.Void(System.Int32,System.Security.Principal.IdentityReference)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/identity-reference",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Translate:System.Security.Principal.IdentityReferenceCollection(System.Type)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/identity-reference",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::Translate:System.Security.Principal.IdentityReferenceCollection(System.Type,System.Boolean)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/identity-reference",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::.ctor:System.Void()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/identity-reference",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::.ctor:System.Void(System.Int32)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/identity-reference",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::get_Item:System.Security.Principal.IdentityReference()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/identity-reference",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::set_Item:System.Void(System.Security.Principal.IdentityReference)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/nt-account",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.NTAccount::Equals:System.Boolean(System.Object)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/nt-account",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.NTAccount::get_Value:System.String()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/nt-account",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.NTAccount::GetHashCode:System.Int32()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/nt-account",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.NTAccount::IsValidTargetType:System.Boolean(System.Type)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/nt-account",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.NTAccount::op_Equality:System.Boolean(System.Security.Principal.NTAccount,System.Security.Principal.NTAccount)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/nt-account",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.NTAccount::op_Inequality:System.Boolean(System.Security.Principal.NTAccount,System.Security.Principal.NTAccount)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/nt-account",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.NTAccount::ToString:System.String()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/nt-account",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.NTAccount::Translate:System.Security.Principal.IdentityReference(System.Type)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/nt-account",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.NTAccount::.ctor:System.Void(System.String,System.String)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/nt-account",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.NTAccount::.ctor:System.Void(System.String)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/security-identifier",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::CompareTo:System.Int32(System.Security.Principal.SecurityIdentifier)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/security-identifier",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::Equals:System.Boolean(System.Object)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/security-identifier",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::Equals:System.Boolean(System.Security.Principal.SecurityIdentifier)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/security-identifier",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::get_AccountDomainSid:System.Security.Principal.SecurityIdentifier()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/security-identifier",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::get_BinaryLength:System.Int32()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/security-identifier",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::get_Value:System.String()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/security-identifier",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::GetBinaryForm:System.Void(System.Byte{},System.Int32)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/security-identifier",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::GetHashCode:System.Int32()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/security-identifier",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::IsAccountSid:System.Boolean()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/security-identifier",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::IsEqualDomainSid:System.Boolean(System.Security.Principal.SecurityIdentifier)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/security-identifier",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::IsValidTargetType:System.Boolean(System.Type)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/security-identifier",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::IsWellKnown:System.Boolean(System.Security.Principal.WellKnownSidType)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/security-identifier",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::op_Equality:System.Boolean(System.Security.Principal.SecurityIdentifier,System.Security.Principal.SecurityIdentifier)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/security-identifier",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::op_Inequality:System.Boolean(System.Security.Principal.SecurityIdentifier,System.Security.Principal.SecurityIdentifier)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/security-identifier",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::ToString:System.String()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/security-identifier",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::Translate:System.Security.Principal.IdentityReference(System.Type)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/security-identifier",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::.ctor:System.Void(System.String)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/security-identifier",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::.ctor:System.Void(System.Byte{},System.Int32)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/security-identifier",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::.ctor:System.Void(System.IntPtr)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/security-identifier",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::.ctor:System.Void(System.Security.Principal.WellKnownSidType,System.Security.Principal.SecurityIdentifier)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/token-access",
+        "methodSubjectId": "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::get_InvalidHandle:Microsoft.Win32.SafeHandles.SafeAccessTokenHandle()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/token-access",
+        "methodSubjectId": "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::get_IsInvalid:System.Boolean()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/token-access",
+        "methodSubjectId": "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::.ctor:System.Void()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/token-access",
+        "methodSubjectId": "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::.ctor:System.Void(System.IntPtr)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::Clone:System.Security.Claims.ClaimsIdentity()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::Dispose:System.Void()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_AccessToken:Microsoft.Win32.SafeHandles.SafeAccessTokenHandle()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_AuthenticationType:System.String()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_Claims:System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_DeviceClaims:System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_Groups:System.Security.Principal.IdentityReferenceCollection()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_ImpersonationLevel:System.Security.Principal.TokenImpersonationLevel()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_IsAnonymous:System.Boolean()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_IsAuthenticated:System.Boolean()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_IsGuest:System.Boolean()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_IsSystem:System.Boolean()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_Name:System.String()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_Owner:System.Security.Principal.SecurityIdentifier()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_Token:System.IntPtr()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_User:System.Security.Principal.SecurityIdentifier()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_UserClaims:System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::GetAnonymous:System.Security.Principal.WindowsIdentity()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::GetCurrent:System.Security.Principal.WindowsIdentity()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::GetCurrent:System.Security.Principal.WindowsIdentity(System.Boolean)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::GetCurrent:System.Security.Principal.WindowsIdentity(System.Security.Principal.TokenAccessLevels)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonated:System.Void(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Action)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonated{T}:T(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Func{T})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonatedAsync:System.Threading.Tasks.Task(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Func{System.Threading.Tasks.Task})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonatedAsync{T}:System.Threading.Tasks.Task{T}(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Func{System.Threading.Tasks.Task{T}})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.IntPtr)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.IntPtr,System.String)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.IntPtr,System.String,System.Security.Principal.WindowsAccountType)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.IntPtr,System.String,System.Security.Principal.WindowsAccountType,System.Boolean)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.String)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-identity",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-principal-roles",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::get_DeviceClaims:System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-principal-roles",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::get_Identity:System.Security.Principal.IIdentity()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-principal-roles",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::get_UserClaims:System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-principal-roles",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::IsInRole:System.Boolean(System.String)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-principal-roles",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::IsInRole:System.Boolean(System.Security.Principal.WindowsBuiltInRole)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-principal-roles",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::IsInRole:System.Boolean(System.Int32)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-principal-roles",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::IsInRole:System.Boolean(System.Security.Principal.SecurityIdentifier)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Security.Principal.Windows",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Security.Principal.Windows/windows-principal-roles",
+        "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::.ctor:System.Void(System.Security.Principal.WindowsIdentity)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      }
+    ]
+  },
+  "sourceLinks": {},
+  "waiverSummary": {
+    "totalWaivers": 0,
+    "activeWaivers": 0,
+    "expiredWaivers": 0,
+    "totalExclusions": 0,
+    "totalPlatformBlocked": 0
+  },
+  "denominatorStatus": "audit-confirmed",
+  "schemaVersion": 2
+}

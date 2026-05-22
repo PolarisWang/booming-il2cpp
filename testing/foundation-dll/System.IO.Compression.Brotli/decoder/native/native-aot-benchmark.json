@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.IO.Compression.Brotli",
+  "familyId": "family/System.IO.Compression.Brotli/decoder",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Decompress:System.Buffers.OperationStatus(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32&,System.Int32&)",
+      "elapsedMilliseconds": 0.759,
+      "calibratedMs": 0.759,
+      "opsPerSecond": 131787032.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Dispose:System.Void()",
+      "elapsedMilliseconds": 0.287,
+      "calibratedMs": 0.287,
+      "opsPerSecond": 348189415.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::TryDecompress:System.Boolean(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32&)",
+      "elapsedMilliseconds": 0.453,
+      "calibratedMs": 0.453,
+      "opsPerSecond": 220848056.5,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}

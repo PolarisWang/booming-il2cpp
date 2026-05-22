@@ -434,8 +434,10 @@ void InterpreterEntryDirect(
     // ── Step B: RegisterExecute path (Layer R) ─────────────────────────
     auto* reg_method = static_cast<interpreter::RegisterMethod*>(
         patch_method->cached_reg_method);
+    CHAOS_IL2CPP_LOG_DEBUG("diag", "Step-B: reg_method=%p", (void*)reg_method);
     if (reg_method != nullptr &&
         instr_count > 2 && interpreter::CanRegisterExecute(*reg_method)) {
+        CHAOS_IL2CPP_LOG_DEBUG("diag", "Step-B: can_reg=true");
         GetTierCounters().step_reg.fetch_add(1, std::memory_order_relaxed);
         CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterEntryDirect.RegisterExecute");
         if (!patch_method->cached_sig_valid) CacheSignature(patch_method);
@@ -453,7 +455,9 @@ void InterpreterEntryDirect(
 
         auto call_count = patch_method->call_count.fetch_add(1, std::memory_order_relaxed) + 1;
         auto tier = patch_method->tier_state.load(std::memory_order_acquire);
+        CHAOS_IL2CPP_LOG_DEBUG("diag", "Step-B: before instructions.data() reg_method=%p", (void*)reg_method);
         const interpreter::RegisterInstruction* exec_instrs = reg_method->instructions.data();
+        std::fprintf(stderr, "[diag:StepB] data=%p size=%llu\n", (void*)exec_instrs, (unsigned long long)reg_method->instructions.size());
         uint32_t exec_instr_count = static_cast<uint32_t>(reg_method->instructions.size());
 
         if (tier == PatchMethod::kT1Cold && call_count >= TierManager::Get().GetAdaptiveT1Threshold()) {
@@ -547,8 +551,10 @@ void InterpreterEntryDirect(
             chaos::il2cpp::codegen::t_deopt_state = {};
         }
 
+        CHAOS_IL2CPP_LOG_DEBUG("diag", "Step-B: before RegisterExecute");
         bool ok = interpreter::RegisterExecute(rf, reg_method->instructions.data(),
             static_cast<uint32_t>(reg_method->instructions.size()));
+        CHAOS_IL2CPP_LOG_DEBUG("diag", "Step-B: RegisterExecute ok=%d", ok);
         if (ok) {
             if (rf.has_ret && ret_buf != nullptr) {
                 auto ret_tag = static_cast<interpreter::ValueTag>(rf.ret_tag);

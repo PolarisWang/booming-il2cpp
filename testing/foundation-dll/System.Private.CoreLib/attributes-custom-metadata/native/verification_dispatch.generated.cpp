@@ -1,5 +1,5 @@
 // verification_dispatch.generated.cpp — auto-generated
-// Assembly: AttributesCustomMetadataSubjects, Methods: 11
+// Assembly: AttributesCustomMetadataSubjects, Methods: 9
 #include <cstdint>
 #include <chrono>
 #include <chaos/native_types.h>

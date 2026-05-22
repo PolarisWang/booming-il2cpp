@@ -1,0 +1,249 @@
+{
+  "family": "immutable-list",
+  "assembly": "System.Collections.Immutable",
+  "mode": "standard",
+  "timestamp": "2026-05-22T06:44:19",
+  "duration_ms": 86831,
+  "overall_status": "passed",
+  "stages": {
+    "preflight": {
+      "stage": "preflight",
+      "status": "passed",
+      "summary": "6 methods, 6 custom entries",
+      "details": {
+        "methodCount": 6,
+        "customMethodCount": 6,
+        "hasCustomEntryFile": true,
+        "customMethods": [
+          "System.Collections.Immutable/System.Collections.Immutable.ImmutableList::Create<Byte>:System.Collections.Immutable.ImmutableList<System.Byte>()",
+          "System.Collections.Immutable/System.Collections.Immutable.ImmutableList::Create<Byte>:System.Collections.Immutable.ImmutableList<System.Byte>(System.Byte)",
+          "System.Collections.Immutable/System.Collections.Immutable.ImmutableList::Create<Byte>:System.Collections.Immutable.ImmutableList<System.Byte>(System.Byte,System.Byte)",
+          "System.Collections.Immutable/System.Collections.Immutable.ImmutableList::Create<Int32>:System.Collections.Immutable.ImmutableList<System.Int32>()",
+          "System.Collections.Immutable/System.Collections.Immutable.ImmutableList::Create<Int32>:System.Collections.Immutable.ImmutableList<System.Int32>(System.Int32)",
+          "System.Collections.Immutable/System.Collections.Immutable.ImmutableList::Create<String>:System.Collections.Immutable.ImmutableList<System.String>(System.String)"
+        ]
+      },
+      "errors": [],
+      "duration_ms": 0
+    },
+    "codegen": {
+      "stage": "codegen",
+      "status": "passed",
+      "summary": "Entrypoint built and IL2CPP compile OK",
+      "details": {
+        "methodCount": 6,
+        "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Collections.Immutable\\immutable-list\\managed\\subjects\\build-output\\ImmutableListSubjects.dll"
+      },
+      "errors": [],
+      "duration_ms": 33278
+    },
+    "jit_codegen": {
+      "stage": "jit_codegen",
+      "status": "passed",
+      "summary": "entry-jit.exe already exists, skipping rebuild",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "fact": {
+      "stage": "fact",
+      "status": "passed",
+      "summary": "Fact verify=passed (6/6)",
+      "details": {
+        "fact": {
+          "status": "passed",
+          "passed": 6,
+          "total": 6
+        }
+      },
+      "errors": [],
+      "duration_ms": 362
+    },
+    "fact_jit": {
+      "stage": "fact_jit",
+      "status": "passed",
+      "summary": "Fact JIT verify=passed (6/6)",
+      "details": {
+        "fact_jit": {
+          "status": "passed",
+          "passed": 6,
+          "total": 6,
+          "exit_code": 0
+        }
+      },
+      "errors": [],
+      "duration_ms": 29
+    },
+    "audit": {
+      "stage": "audit",
+      "status": "passed",
+      "summary": "false_passing=0, principle=ALIGNED",
+      "details": {
+        "falsePassing": 0,
+        "stubsFound": 0,
+        "skipsFound": 0,
+        "principleStatus": "ALIGNED",
+        "methodsWithoutLowering": 0
+      },
+      "errors": [],
+      "duration_ms": 1202
+    },
+    "asm_compare": {
+      "stage": "asm_compare",
+      "status": "skipped",
+      "summary": "Subjects DLL not found — run codegen stage first",
+      "details": {},
+      "errors": [],
+      "duration_ms": 25
+    },
+    "microbench": {
+      "stage": "microbench",
+      "status": "passed",
+      "summary": "FramePool=3.0ns/op | FastExecute=3.4ns/op | CallVirt dispatch=3.5ns",
+      "details": {
+        "framePool": {
+          "acquireReleaseNsPerOp": 3.0,
+          "batchCount": 1000,
+          "framesPerBatch": 32
+        },
+        "fastExecute": {
+          "runCount": 100000,
+          "nsPerCall": 3.4
+        },
+        "callVirt": {
+          "handlerDispatchNs": 3.5,
+          "emptyStackNs": 3.8
+        },
+        "poolSize": 32
+      },
+      "errors": [],
+      "duration_ms": 26
+    },
+    "benchmark": {
+      "stage": "benchmark",
+      "status": "skipped",
+      "summary": "All 6 non-stub methods are invalid (no managed harness)",
+      "details": {},
+      "errors": [],
+      "duration_ms": 47989
+    },
+    "hotupdate": {
+      "stage": "hotupdate",
+      "status": "passed",
+      "summary": "6/6 passed, 0 failed (stub=0)",
+      "details": {
+        "passedMethods": 6,
+        "failedMethods": 0,
+        "totalMethods": 6,
+        "realMethods": 6,
+        "stubMethods": 0
+      },
+      "errors": [],
+      "duration_ms": 27
+    },
+    "hotupdate_aot_benchmark": {
+      "stage": "hotupdate_aot_benchmark",
+      "status": "passed",
+      "summary": "avg_slowdown=-2.15% (1.0x) over 6 methods (AOT patched path)",
+      "details": {
+        "averageSlowdownPercent": -2.15,
+        "slowdownFactor": 0.9784999999999999,
+        "threshold": 50.0,
+        "nonStubMethods": 6
+      },
+      "errors": [],
+      "duration_ms": 153
+    },
+    "hotupdate_jit_fact": {
+      "stage": "hotupdate_jit_fact",
+      "status": "passed",
+      "summary": "6/6 passed, 0 failed",
+      "details": {
+        "passed": 6,
+        "failed": 0,
+        "total": 6
+      },
+      "errors": [],
+      "duration_ms": 26
+    },
+    "hotupdate_jit_benchmark": {
+      "stage": "hotupdate_jit_benchmark",
+      "status": "passed",
+      "summary": "avg_slowdown=-4.87% (1.0x) over 5 methods (JIT patched path)",
+      "details": {
+        "averageSlowdownPercent": -4.87,
+        "slowdownFactor": 0.9512999999999999,
+        "threshold": 50.0,
+        "nonStubMethods": 5
+      },
+      "errors": [],
+      "duration_ms": 3706
+    }
+  },
+  "coverage": {
+    "methodCoverage": 100.0,
+    "testedRate": 100.0,
+    "overall": 100.0
+  },
+  "dashboard": {
+    "interpreter": {
+      "fastFramePoolNsPerOp": 3.0,
+      "fastExecuteNsPerInstr": 0,
+      "callVirtHandlerDispatchNs": 3.5,
+      "callVirtMicHitNs": 0,
+      "callVirtRawFallbackNs": 0,
+      "poolSize": 32
+    },
+    "irTranslation": {},
+    "performance": {},
+    "hotupdate": {
+      "aotFunctional": {
+        "passedMethods": 6,
+        "failedMethods": 0,
+        "totalMethods": 6
+      },
+      "aotOverhead": {
+        "averageSlowdownPercent": -2.15,
+        "slowdownFactor": 0.9784999999999999,
+        "nonStubMethods": 6
+      },
+      "jitFunctional": {
+        "passedMethods": 6,
+        "failedMethods": 0,
+        "totalMethods": 6
+      },
+      "jitOverhead": {
+        "averageSlowdownPercent": -4.87,
+        "slowdownFactor": 0.9512999999999999,
+        "nonStubMethods": 5
+      }
+    },
+    "keyRatios": {
+      "nativeFasterRatio": 0,
+      "irExpansionRatio": 0,
+      "interpreterSlowdownFactor": 0.9784999999999999,
+      "asmPassRate": 0.0
+    }
+  },
+  "regression": {
+    "benchmark": {
+      "status": "matched",
+      "baselineMetrics": {
+        "totalMethods": 6,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      },
+      "currentMetrics": {
+        "totalMethods": 6,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      }
+    },
+    "hasRegression": false,
+    "regressions": []
+  }
+}

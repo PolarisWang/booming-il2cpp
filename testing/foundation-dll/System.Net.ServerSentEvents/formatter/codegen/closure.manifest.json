@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "FormatterSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Net.ServerSentEvents/formatter/managed/subjects/build-output/FormatterSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Net.ServerSentEvents/formatter/managed/subjects/build-output/FormatterSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "FormatterSubjects",
-      "path": "verification/foundation-dll/System.Net.ServerSentEvents/formatter/managed/subjects/build-output/FormatterSubjects.dll"
+      "path": "testing/foundation-dll/System.Net.ServerSentEvents/formatter/managed/subjects/build-output/FormatterSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "03436963-3bb0-49a7-819f-3620d6784270",
+  "inputModuleVersionId": "b7a62d30-55bb-4936-8115-277013959339",
   "artifacts": [
     {
       "kind": "typedIlIr",

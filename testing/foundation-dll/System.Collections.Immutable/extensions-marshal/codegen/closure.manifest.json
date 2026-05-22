@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ExtensionsMarshalSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Collections.Immutable/extensions-marshal/managed/subjects/build-output/ExtensionsMarshalSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Collections.Immutable/extensions-marshal/managed/subjects/build-output/ExtensionsMarshalSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "ExtensionsMarshalSubjects",
-      "path": "verification/foundation-dll/System.Collections.Immutable/extensions-marshal/managed/subjects/build-output/ExtensionsMarshalSubjects.dll"
+      "path": "testing/foundation-dll/System.Collections.Immutable/extensions-marshal/managed/subjects/build-output/ExtensionsMarshalSubjects.dll"
     },
     {
       "assemblyName": "System.Collections.Immutable",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "0545bba2-cf95-41d1-a256-5c7de340fb2f",
+  "inputModuleVersionId": "7306bdb4-89d8-4467-828a-a986dae2ad26",
   "artifacts": [
     {
       "kind": "typedIlIr",

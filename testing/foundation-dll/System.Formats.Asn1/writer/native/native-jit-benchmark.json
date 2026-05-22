@@ -1,0 +1,372 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Formats.Asn1",
+  "familyId": "family/System.Formats.Asn1/writer",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::CopyTo:System.Void(System.Formats.Asn1.AsnWriter)",
+      "elapsedMilliseconds": 4286.43,
+      "calibratedMs": 4286.43,
+      "opsPerSecond": 23329.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::Encode:System.Int32(System.Span{System.Byte})",
+      "elapsedMilliseconds": 7434.788,
+      "calibratedMs": 7434.788,
+      "opsPerSecond": 13450.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::Encode:System.Byte{}()",
+      "elapsedMilliseconds": 6370.575,
+      "calibratedMs": 6370.575,
+      "opsPerSecond": 15697.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::Encode{TReturn}:TReturn(System.Func{System.ReadOnlySpan{System.Byte},TReturn})",
+      "elapsedMilliseconds": -1.0,
+      "status": "stub"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::Encode{TState,TReturn}:TReturn(TState,System.Func{TState,System.ReadOnlySpan{System.Byte},TReturn})",
+      "elapsedMilliseconds": -1.0,
+      "status": "stub"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::Encode{TState}:System.Void(TState,System.Action{TState,System.ReadOnlySpan{System.Byte}})",
+      "elapsedMilliseconds": -1.0,
+      "status": "stub"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::EncodedValueEquals:System.Boolean(System.ReadOnlySpan{System.Byte})",
+      "elapsedMilliseconds": 6670.494,
+      "calibratedMs": 6670.494,
+      "opsPerSecond": 14991.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::EncodedValueEquals:System.Boolean(System.Formats.Asn1.AsnWriter)",
+      "elapsedMilliseconds": 6690.323,
+      "calibratedMs": 6690.323,
+      "opsPerSecond": 14947.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::get_RuleSet:System.Formats.Asn1.AsnEncodingRules()",
+      "elapsedMilliseconds": 7244.768,
+      "calibratedMs": 7244.768,
+      "opsPerSecond": 13803.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::GetEncodedLength:System.Int32()",
+      "elapsedMilliseconds": 6189.124,
+      "calibratedMs": 6189.124,
+      "opsPerSecond": 16157.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::PopOctetString:System.Void(System.Nullable{System.Formats.Asn1.Asn1Tag})",
+      "elapsedMilliseconds": 4785.338,
+      "calibratedMs": 4785.338,
+      "opsPerSecond": 20897.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::PopSequence:System.Void(System.Nullable{System.Formats.Asn1.Asn1Tag})",
+      "elapsedMilliseconds": 4794.083,
+      "calibratedMs": 4794.083,
+      "opsPerSecond": 20859.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::PopSetOf:System.Void(System.Nullable{System.Formats.Asn1.Asn1Tag})",
+      "elapsedMilliseconds": 4362.493,
+      "calibratedMs": 4362.493,
+      "opsPerSecond": 22922.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 13,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::PushOctetString:System.Formats.Asn1.AsnWriter+Scope(System.Nullable{System.Formats.Asn1.Asn1Tag})",
+      "elapsedMilliseconds": 8111.498,
+      "calibratedMs": 8111.498,
+      "opsPerSecond": 12328.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 14,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::PushSequence:System.Formats.Asn1.AsnWriter+Scope(System.Nullable{System.Formats.Asn1.Asn1Tag})",
+      "elapsedMilliseconds": 9312.958,
+      "calibratedMs": 9312.958,
+      "opsPerSecond": 10737.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 15,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::PushSetOf:System.Formats.Asn1.AsnWriter+Scope(System.Nullable{System.Formats.Asn1.Asn1Tag})",
+      "elapsedMilliseconds": 8714.424,
+      "calibratedMs": 8714.424,
+      "opsPerSecond": 11475.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 16,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::Reset:System.Void()",
+      "elapsedMilliseconds": 3284.289,
+      "calibratedMs": 3284.289,
+      "opsPerSecond": 30448.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 17,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::TryEncode:System.Boolean(System.Span{System.Byte},System.Int32&)",
+      "elapsedMilliseconds": 7993.765,
+      "calibratedMs": 7993.765,
+      "opsPerSecond": 12509.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 18,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteBitString:System.Void(System.ReadOnlySpan{System.Byte},System.Int32,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+      "elapsedMilliseconds": 4357.782,
+      "calibratedMs": 4357.782,
+      "opsPerSecond": 22947.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 19,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteBoolean:System.Void(System.Boolean,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+      "elapsedMilliseconds": 4661.351,
+      "calibratedMs": 4661.351,
+      "opsPerSecond": 21453.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 20,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteCharacterString:System.Void(System.Formats.Asn1.UniversalTagNumber,System.String,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+      "elapsedMilliseconds": 4595.303,
+      "calibratedMs": 4595.303,
+      "opsPerSecond": 21761.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 21,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteCharacterString:System.Void(System.Formats.Asn1.UniversalTagNumber,System.ReadOnlySpan{System.Char},System.Nullable{System.Formats.Asn1.Asn1Tag})",
+      "elapsedMilliseconds": 4502.665,
+      "calibratedMs": 4502.665,
+      "opsPerSecond": 22209.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 22,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteEncodedValue:System.Void(System.ReadOnlySpan{System.Byte})",
+      "elapsedMilliseconds": 3669.333,
+      "calibratedMs": 3669.333,
+      "opsPerSecond": 27252.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 23,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteEnumeratedValue:System.Void(System.Enum,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+      "elapsedMilliseconds": 4359.317,
+      "calibratedMs": 4359.317,
+      "opsPerSecond": 22939.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 24,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteEnumeratedValue{TEnum}:System.Void(TEnum,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+      "elapsedMilliseconds": -1.0,
+      "status": "stub"
+    },
+    {
+      "methodIndex": 25,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteGeneralizedTime:System.Void(System.DateTimeOffset,System.Boolean,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+      "elapsedMilliseconds": 5248.329,
+      "calibratedMs": 5248.329,
+      "opsPerSecond": 19053.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 26,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.Int64,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+      "elapsedMilliseconds": 4552.644,
+      "calibratedMs": 4552.644,
+      "opsPerSecond": 21965.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 27,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.UInt64,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+      "elapsedMilliseconds": 4188.725,
+      "calibratedMs": 4188.725,
+      "opsPerSecond": 23873.6,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 28,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.Numerics.BigInteger,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+      "elapsedMilliseconds": 4208.124,
+      "calibratedMs": 4208.124,
+      "opsPerSecond": 23763.6,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 29,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteInteger:System.Void(System.ReadOnlySpan{System.Byte},System.Nullable{System.Formats.Asn1.Asn1Tag})",
+      "elapsedMilliseconds": 4920.231,
+      "calibratedMs": 4920.231,
+      "opsPerSecond": 20324.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 30,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteIntegerUnsigned:System.Void(System.ReadOnlySpan{System.Byte},System.Nullable{System.Formats.Asn1.Asn1Tag})",
+      "elapsedMilliseconds": 4800.517,
+      "calibratedMs": 4800.517,
+      "opsPerSecond": 20831.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 31,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteNamedBitList:System.Void(System.Enum,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+      "elapsedMilliseconds": 4038.786,
+      "calibratedMs": 4038.786,
+      "opsPerSecond": 24759.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 32,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteNamedBitList{TEnum}:System.Void(TEnum,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+      "elapsedMilliseconds": -1.0,
+      "status": "stub"
+    },
+    {
+      "methodIndex": 33,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteNamedBitList:System.Void(System.Collections.BitArray,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+      "elapsedMilliseconds": 4163.72,
+      "calibratedMs": 4163.72,
+      "opsPerSecond": 24017.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 34,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteNull:System.Void(System.Nullable{System.Formats.Asn1.Asn1Tag})",
+      "elapsedMilliseconds": 4484.194,
+      "calibratedMs": 4484.194,
+      "opsPerSecond": 22300.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 35,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteObjectIdentifier:System.Void(System.String,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+      "elapsedMilliseconds": 4547.059,
+      "calibratedMs": 4547.059,
+      "opsPerSecond": 21992.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 36,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteObjectIdentifier:System.Void(System.ReadOnlySpan{System.Char},System.Nullable{System.Formats.Asn1.Asn1Tag})",
+      "elapsedMilliseconds": 4837.815,
+      "calibratedMs": 4837.815,
+      "opsPerSecond": 20670.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 37,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteOctetString:System.Void(System.ReadOnlySpan{System.Byte},System.Nullable{System.Formats.Asn1.Asn1Tag})",
+      "elapsedMilliseconds": 5147.203,
+      "calibratedMs": 5147.203,
+      "opsPerSecond": 19428.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 38,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteUtcTime:System.Void(System.DateTimeOffset,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+      "elapsedMilliseconds": 4813.504,
+      "calibratedMs": 4813.504,
+      "opsPerSecond": 20774.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 39,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::WriteUtcTime:System.Void(System.DateTimeOffset,System.Int32,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+      "elapsedMilliseconds": 5924.108,
+      "calibratedMs": 5924.108,
+      "opsPerSecond": 16880.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 40,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::.ctor:System.Void(System.Formats.Asn1.AsnEncodingRules)",
+      "elapsedMilliseconds": 986.388,
+      "calibratedMs": 986.388,
+      "opsPerSecond": 101380.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 41,
+      "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::.ctor:System.Void(System.Formats.Asn1.AsnEncodingRules,System.Int32)",
+      "elapsedMilliseconds": 953.467,
+      "calibratedMs": 953.467,
+      "opsPerSecond": 104880.3,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}

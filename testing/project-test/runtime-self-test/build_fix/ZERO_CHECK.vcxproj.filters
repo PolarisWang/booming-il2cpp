@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\agent\booming-il2cpp\testing\project-test\runtime-self-test\build_fix\CMakeFiles\e795beadd0bba50ebefcf8e947f9059d\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{B01E7BA4-79B0-35BF-8694-2A00523870CA}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

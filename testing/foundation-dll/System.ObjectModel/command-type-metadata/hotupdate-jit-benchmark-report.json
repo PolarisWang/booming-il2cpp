@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.ObjectModel",
+  "familyId": "family/System.ObjectModel/command/type/metadata",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::Equals:System.Boolean(System.Object)",
+      "status": "passed",
+      "prePatchNsPerOp": 71628.42,
+      "postPatchNsPerOp": 55817.6,
+      "slowdownPercent": -22.07
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::get_ConverterTypeName:System.String()",
+      "status": "passed",
+      "prePatchNsPerOp": 54276.14,
+      "postPatchNsPerOp": 49852.8,
+      "slowdownPercent": -8.15
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::GetHashCode:System.Int32()",
+      "status": "passed",
+      "prePatchNsPerOp": 45120.11,
+      "postPatchNsPerOp": 42777.2,
+      "slowdownPercent": -5.19
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::.ctor:System.Void()",
+      "status": "passed",
+      "prePatchNsPerOp": 8141.22,
+      "postPatchNsPerOp": 12684.6,
+      "slowdownPercent": 55.81
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::.ctor:System.Void(System.Type)",
+      "status": "passed",
+      "prePatchNsPerOp": 32114.63,
+      "postPatchNsPerOp": 36247.4,
+      "slowdownPercent": 12.87
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.ObjectModel/System.ComponentModel.TypeConverterAttribute::.ctor:System.Void(System.String)",
+      "status": "passed",
+      "prePatchNsPerOp": 8250.68,
+      "postPatchNsPerOp": 13729.9,
+      "slowdownPercent": 66.41
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.ObjectModel/System.Reflection.ICustomTypeProvider::GetCustomType:System.Type()",
+      "status": "passed",
+      "prePatchNsPerOp": 54881.32,
+      "postPatchNsPerOp": 50703.9,
+      "slowdownPercent": -7.61
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.ObjectModel/System.Windows.Input.ICommand::add_CanExecuteChanged:System.Void(System.EventHandler)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.ObjectModel/System.Windows.Input.ICommand::CanExecute:System.Boolean(System.Object)",
+      "status": "passed",
+      "prePatchNsPerOp": 61194.84,
+      "postPatchNsPerOp": 56255.4,
+      "slowdownPercent": -8.07
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.ObjectModel/System.Windows.Input.ICommand::Execute:System.Void(System.Object)",
+      "status": "passed",
+      "prePatchNsPerOp": 32320.45,
+      "postPatchNsPerOp": 32594.0,
+      "slowdownPercent": 0.85
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.ObjectModel/System.Windows.Input.ICommand::remove_CanExecuteChanged:System.Void(System.EventHandler)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::get_ValueSerializerType:System.Type()",
+      "status": "passed",
+      "prePatchNsPerOp": 53397.26,
+      "postPatchNsPerOp": 52266.6,
+      "slowdownPercent": -2.12
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::get_ValueSerializerTypeName:System.String()",
+      "status": "passed",
+      "prePatchNsPerOp": 53612.31,
+      "postPatchNsPerOp": 49757.1,
+      "slowdownPercent": -7.19
+    },
+    {
+      "methodIndex": 13,
+      "methodSubjectId": "System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::.ctor:System.Void(System.Type)",
+      "status": "passed",
+      "prePatchNsPerOp": 31981.04,
+      "postPatchNsPerOp": 33866.1,
+      "slowdownPercent": 5.89
+    },
+    {
+      "methodIndex": 14,
+      "methodSubjectId": "System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::.ctor:System.Void(System.String)",
+      "status": "passed",
+      "prePatchNsPerOp": 8036.06,
+      "postPatchNsPerOp": 12296.3,
+      "slowdownPercent": 53.01
+    }
+  ],
+  "summary": {
+    "totalMethods": 15,
+    "nonStubMethods": 13,
+    "averageSlowdownPercent": 10.34,
+    "slowdownFactor": 1.1034,
+    "slowdownThresholdX": 50.0
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.IO.Pipelines",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.IO.Pipelines/read-flush-results",
+  "displayName": "Read And Flush Results",
+  "methodSubjectIds": [
+    "System.IO.Pipelines/System.IO.Pipelines.FlushResult::get_IsCanceled:System.Boolean()",
+    "System.IO.Pipelines/System.IO.Pipelines.FlushResult::get_IsCompleted:System.Boolean()",
+    "System.IO.Pipelines/System.IO.Pipelines.FlushResult::.ctor:System.Void(System.Boolean,System.Boolean)",
+    "System.IO.Pipelines/System.IO.Pipelines.ReadResult::get_Buffer:System.Buffers.ReadOnlySequence{System.Byte}()",
+    "System.IO.Pipelines/System.IO.Pipelines.ReadResult::get_IsCanceled:System.Boolean()",
+    "System.IO.Pipelines/System.IO.Pipelines.ReadResult::get_IsCompleted:System.Boolean()",
+    "System.IO.Pipelines/System.IO.Pipelines.ReadResult::.ctor:System.Void(System.Buffers.ReadOnlySequence{System.Byte},System.Boolean,System.Boolean)"
+  ],
+  "methodSubjectCount": 7,
+  "customEntryIndices": [],
+  "functionalObligation": {
+    "required": true
+  },
+  "performanceObligation": {
+    "required": false
+  },
+  "hotupdateFunctionalObligation": {
+    "required": false
+  },
+  "hotupdatePerformanceObligation": {
+    "required": false
+  },
+  "reviewBundleRequired": true
+}

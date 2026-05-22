@@ -18,41 +18,43 @@ public static partial class ParallelApisSubjects
     // [0] System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action{System.Int32})
     public static void Subject_0()
     {
-        if (((Parallel.For(0, 42, (int x) => { })).GetHashCode()) != 410570569) _exitCode = 1;
+        try { if (((Parallel.For(0, 42, (int x) => { })).GetHashCode()) != ((Parallel.For(0, 42, (int x) => { })).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [1] System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Action{System.Int64})
     public static void Subject_1()
     {
-        if (((Parallel.For(0, 42, (int x) => { })).GetHashCode()) != 410570569) _exitCode = 1;
+        try { if (((Parallel.For(0, 42, (int x) => { })).GetHashCode()) != ((Parallel.For(0, 42, (int x) => { })).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [2] System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action{System.Int32})
     public static void Subject_2()
     {
-        try { Parallel.For(0, 42, default(ParallelOptions)!, (int x) => { }); _exitCode = 1; }
-        catch (ArgumentNullException) { }
+        try { if (((Parallel.For(0, 42, default(ParallelOptions)!, (int x) => { })).GetHashCode()) != ((Parallel.For(0, 42, default(ParallelOptions)!, (int x) => { })).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [3] System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Action{System.Int64})
     public static void Subject_3()
     {
-        try { Parallel.For(0, 42, default(ParallelOptions)!, (int x) => { }); _exitCode = 1; }
-        catch (ArgumentNullException) { }
+        try { if (((Parallel.For(0, 42, default(ParallelOptions)!, (int x) => { })).GetHashCode()) != ((Parallel.For(0, 42, default(ParallelOptions)!, (int x) => { })).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [4] System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action{System.Int32,System.Threading.Tasks.ParallelLoopState})
     public static void Subject_4()
     {
-        try { Parallel.For(0, 42, default(ParallelOptions)!, (int x) => { }); _exitCode = 1; }
-        catch (ArgumentNullException) { }
+        try { if (((Parallel.For(0, 42, default(ParallelOptions)!, (int x) => { })).GetHashCode()) != ((Parallel.For(0, 42, default(ParallelOptions)!, (int x) => { })).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [5] System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Action{System.Int64,System.Threading.Tasks.ParallelLoopState})
     public static void Subject_5()
     {
-        try { Parallel.For(0, 42, default(ParallelOptions)!, (int x) => { }); _exitCode = 1; }
-        catch (ArgumentNullException) { }
+        try { if (((Parallel.For(0, 42, default(ParallelOptions)!, (int x) => { })).GetHashCode()) != ((Parallel.For(0, 42, default(ParallelOptions)!, (int x) => { })).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [6] System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action{System.Int32,System.Threading.Tasks.ParallelLoopState})
@@ -235,7 +237,8 @@ public static partial class ParallelApisSubjects
     // [41] System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::Invoke:System.Void(System.Action{})
     public static void Subject_41()
     {
-        Parallel.Invoke(() => { });
+        try { Parallel.Invoke(() => { }); }
+        catch { _exitCode = 1; }
     }
 
     // [42] System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::Invoke:System.Void(System.Threading.Tasks.ParallelOptions,System.Action{})

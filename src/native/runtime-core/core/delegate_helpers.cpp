@@ -159,4 +159,138 @@ CHAOS_IL2CPP_INTPTR DelegateRemove(
     return source;
 }
 
+// ── Invoke a single delegate entry's thunk ────────────────────────────
+// Dispatches to the codegen-generated thunk with the correct calling
+// convention based on arg_count. Handles closed (target != 0) vs open
+// (target == 0) delegates.
+namespace {
+static void InvokeSingleEntry(void* method_ptr, CHAOS_IL2CPP_INTPTR target,
+                               CHAOS_IL2CPP_INTPTR* args_buf,
+                               CHAOS_IL2CPP_INTPTR* ret_buf,
+                               CHAOS_IL2CPP_UINT32 arg_count) noexcept {
+    switch (arg_count) {
+        case 0:
+            fprintf(stderr, "[TRACE] InvokeSingleEntry(0): calling thunk 0x%llx target=0x%llx\n",
+                    (unsigned long long)method_ptr, (unsigned long long)target);
+            if (target) {
+                auto fn = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(method_ptr);
+                auto result = fn(target);
+                fprintf(stderr, "[TRACE] InvokeSingleEntry(0): closed returned\n");
+                if (ret_buf) *ret_buf = result;
+            } else {
+                auto fn = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(method_ptr);
+                auto result = fn();
+                if (ret_buf) *ret_buf = result;
+            }
+            break;
+        case 1:
+            if (target) {
+                auto fn = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(method_ptr);
+                auto result = fn(target, args_buf[0]);
+                if (ret_buf) *ret_buf = result;
+            } else {
+                auto fn = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(method_ptr);
+                auto result = fn(args_buf[0]);
+                if (ret_buf) *ret_buf = result;
+            }
+            break;
+        case 2:
+            if (target) {
+                auto fn = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(method_ptr);
+                auto result = fn(target, args_buf[0], args_buf[1]);
+                if (ret_buf) *ret_buf = result;
+            } else {
+                auto fn = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(method_ptr);
+                auto result = fn(args_buf[0], args_buf[1]);
+                if (ret_buf) *ret_buf = result;
+            }
+            break;
+        case 3:
+            if (target) {
+                auto fn = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(method_ptr);
+                auto result = fn(target, args_buf[0], args_buf[1], args_buf[2]);
+                if (ret_buf) *ret_buf = result;
+            } else {
+                auto fn = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(method_ptr);
+                auto result = fn(args_buf[0], args_buf[1], args_buf[2]);
+                if (ret_buf) *ret_buf = result;
+            }
+            break;
+        case 4:
+            if (target) {
+                auto fn = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(method_ptr);
+                auto result = fn(target, args_buf[0], args_buf[1], args_buf[2], args_buf[3]);
+                if (ret_buf) *ret_buf = result;
+            } else {
+                auto fn = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(method_ptr);
+                auto result = fn(args_buf[0], args_buf[1], args_buf[2], args_buf[3]);
+                if (ret_buf) *ret_buf = result;
+            }
+            break;
+        default:
+            CHAOS_IL2CPP_FAIL(); // unsupported arg count
+            break;
+    }
+}
+}  // anonymous namespace
+
+extern "C" void chaos_delegate_object_invoke(
+    CHAOS_IL2CPP_INTPTR delegate_ptr,
+    CHAOS_IL2CPP_INTPTR* args_buf,
+    CHAOS_IL2CPP_INTPTR* ret_buf,
+    CHAOS_IL2CPP_UINT32 arg_count) noexcept
+{
+    fprintf(stderr, "[TRACE] chaos_delegate_object_invoke: delegate_ptr=0x%llx arg_count=%u\n",
+            (unsigned long long)delegate_ptr, (unsigned)arg_count);
+    if (delegate_ptr == 0 || arg_count > 4) {
+        fprintf(stderr, "[TRACE] chaos_delegate_object_invoke: EARLY RETURN (ptr=0 count=%u)\n",
+                (unsigned)arg_count);
+        return;
+    }
+
+    auto* del = reinterpret_cast<DelegateObject*>(delegate_ptr);
+
+    // ── Multicast path ────────────────────────────────────────────────
+    if (del->chaos_delegate_invocation_count > 0) {
+        fprintf(stderr, "[TRACE] chaos_delegate_object_invoke: multicast count=%lld\n",
+                (long long)del->chaos_delegate_invocation_count);
+        auto* list = reinterpret_cast<const std::vector<CHAOS_IL2CPP_INTPTR>*>(
+            del->chaos_delegate_invocation_list);
+        if (list != nullptr) {
+            for (auto entry_value : *list) {
+                chaos_delegate_object_invoke(entry_value, args_buf, ret_buf, arg_count);
+            }
+        }
+        return;
+    }
+
+    // ── Single delegate path ──────────────────────────────────────────
+    auto* method_ptr = reinterpret_cast<void*>(del->chaos_delegate_method_ptr);
+    fprintf(stderr, "[TRACE] chaos_delegate_object_invoke: single, target=0x%llx method_ptr=0x%llx token=%u\n",
+            (unsigned long long)del->chaos_delegate_target,
+            (unsigned long long)del->chaos_delegate_method_ptr,
+            (unsigned)del->chaos_delegate_method_token);
+    if (method_ptr == nullptr) {
+        fprintf(stderr, "[TRACE] chaos_delegate_object_invoke: method_ptr is NULL!\n");
+        return;
+    }
+
+    // Hotpatch checkpoint: if the method has been hotpatched, route through
+    // InterpreterEntryDirect.
+    if (del->chaos_delegate_method_token != 0) {
+        if (DelegateHotpatchCheckpoint(
+                del->chaos_delegate_method_token,
+                reinterpret_cast<uint64_t*>(args_buf),
+                reinterpret_cast<uint64_t*>(ret_buf),
+                arg_count)) {
+            return;
+        }
+    }
+
+    // Direct thunk call: thunk(target, args...) for closed delegates,
+    // thunk(args...) for open/static delegates.
+    InvokeSingleEntry(method_ptr, del->chaos_delegate_target,
+                       args_buf, ret_buf, arg_count);
+}
+
 }  // namespace chaos::il2cpp::runtime_core

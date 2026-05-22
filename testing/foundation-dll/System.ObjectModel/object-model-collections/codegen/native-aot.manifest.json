@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "ObjectModelCollectionsSubjects",
   "entrySubjectId": "ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::Subject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.ObjectModel/object-model-collections/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.ObjectModel/object-model-collections/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

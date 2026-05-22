@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.Linq",
+  "familyId": "family/System.Linq/ordering",
+  "passedMethods": 28,
+  "failedMethods": 0,
+  "totalMethods": 28,
+  "stubMethods": 0,
+  "realMethods": 14,
+  "allMethodsRevertVerified": false,
+  "allMethodsSemanticVerified": false,
+  "d3PatchApplied": false,
+  "d3PatchedCount": 0,
+  "verificationKind": "hotupdate-proof",
+  "summary": {
+    "totalMethods": 28,
+    "passedMethods": 28,
+    "failedMethods": 0,
+    "unmatchedMethods": 0
+  },
+  "methodResults": []
+}

@@ -4,6 +4,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>disable</ImplicitUsings>
+    <IsTestProject>false</IsTestProject>
     <AssemblyName>StringCharTextCoreSubjects</AssemblyName>
     <RootNamespace>StringCharTextCoreSubjects</RootNamespace>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
@@ -12,5 +13,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="StringCharTextCoreSubjects.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Remove="Microsoft.NET.Test.Sdk" />
+    <PackageReference Remove="xunit" />
+    <PackageReference Remove="xunit.runner.visualstudio" />
+    <PackageReference Remove="FsCheck.Xunit" />
   </ItemGroup>
 </Project>

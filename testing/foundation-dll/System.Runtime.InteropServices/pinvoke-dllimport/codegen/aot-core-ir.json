@@ -23,16 +23,16 @@
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 0,
+      "localCount": 1,
       "exceptionRegionCount": 1,
       "exceptionRegions": [
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 17,
-          "handlerOffset": 18,
-          "handlerLength": 5,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+          "tryLength": 41,
+          "handlerOffset": 42,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
@@ -69,16 +69,137 @@
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
+          "op": "callvirt",
+          "opCode": 15,
           "ilOffset": 8,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 13,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 14,
+          "resultType": "System.String",
+          "callee": "System.Runtime.InteropServices/DllImportAttribute::get_Value:System.String()",
+          "reference": {
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectKind": "method",
+            "subjectId": "System.Runtime.InteropServices/DllImportAttribute::get_Value:System.String()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectId": "System.Runtime.InteropServices/DllImportAttribute::get_Value:System.String()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 19,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 24,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 26,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 27,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 29,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 30,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 39,
+          "ilOffset": 31,
+          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 9,
+          "ilOffset": 33,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -86,7 +207,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode",
-          "ilOffset": 10,
+          "ilOffset": 34,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "PinvokeDllimportSubjects",
@@ -112,29 +233,64 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 23,
-          "ilOffset": 16,
+          "operand": 53,
+          "ilOffset": 40,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 18,
+          "ilOffset": 42,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 44,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode",
+          "ilOffset": 45,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "PinvokeDllimportSubjects",
+            "subjectKind": "field",
+            "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "PinvokeDllimportSubjects",
+            "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
           "isPreserveSig": false
         },
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 23,
-          "ilOffset": 21,
+          "operand": 53,
+          "ilOffset": 51,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 23,
+          "ilOffset": 53,
           "isPreserveSig": false
         }
       ],
@@ -170,21 +326,30 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 15,
+          "handlerOffset": 16,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
       "instructions": [
         {
           "op": "ldstr",
           "opCode": 4,
           "operand": "hello",
-          "ilOffset": 1,
+          "ilOffset": 2,
           "resultType": "System.String",
           "isPreserveSig": false
         },
         {
           "op": "newobj",
           "opCode": 34,
-          "ilOffset": 6,
+          "ilOffset": 7,
           "resultType": "System.Runtime.InteropServices/DllImportAttribute",
           "callee": "System.Runtime.InteropServices/DllImportAttribute::.ctor:System.Void(System.String)",
           "reference": {
@@ -209,13 +374,70 @@
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 11,
+          "ilOffset": 12,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 27,
+          "ilOffset": 14,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 16,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 18,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode",
+          "ilOffset": 19,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "PinvokeDllimportSubjects",
+            "subjectKind": "field",
+            "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "PinvokeDllimportSubjects",
+            "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 27,
+          "ilOffset": 25,
+          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 12,
+          "ilOffset": 27,
           "isPreserveSig": false
         }
       ],
@@ -250,16 +472,16 @@
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 0,
+      "localCount": 1,
       "exceptionRegionCount": 1,
       "exceptionRegions": [
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 17,
-          "handlerOffset": 18,
-          "handlerLength": 5,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+          "tryLength": 41,
+          "handlerOffset": 42,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
@@ -296,16 +518,137 @@
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
+          "op": "callvirt",
+          "opCode": 15,
           "ilOffset": 8,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 13,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 14,
+          "resultType": "System.String",
+          "callee": "System.Runtime.InteropServices/LibraryImportAttribute::get_EntryPoint:System.String()",
+          "reference": {
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectKind": "method",
+            "subjectId": "System.Runtime.InteropServices/LibraryImportAttribute::get_EntryPoint:System.String()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectId": "System.Runtime.InteropServices/LibraryImportAttribute::get_EntryPoint:System.String()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 19,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 24,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 26,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 27,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 29,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 30,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 39,
+          "ilOffset": 31,
+          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 9,
+          "ilOffset": 33,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -313,7 +656,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode",
-          "ilOffset": 10,
+          "ilOffset": 34,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "PinvokeDllimportSubjects",
@@ -339,29 +682,64 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 23,
-          "ilOffset": 16,
+          "operand": 53,
+          "ilOffset": 40,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 18,
+          "ilOffset": 42,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 44,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode",
+          "ilOffset": 45,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "PinvokeDllimportSubjects",
+            "subjectKind": "field",
+            "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "PinvokeDllimportSubjects",
+            "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
           "isPreserveSig": false
         },
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 23,
-          "ilOffset": 21,
+          "operand": 53,
+          "ilOffset": 51,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 23,
+          "ilOffset": 53,
           "isPreserveSig": false
         }
       ],
@@ -396,16 +774,16 @@
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 0,
+      "localCount": 1,
       "exceptionRegionCount": 1,
       "exceptionRegions": [
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 17,
-          "handlerOffset": 18,
-          "handlerLength": 5,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+          "tryLength": 41,
+          "handlerOffset": 42,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
@@ -442,16 +820,137 @@
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
+          "op": "callvirt",
+          "opCode": 15,
           "ilOffset": 8,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 13,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 14,
+          "resultType": "System.String",
+          "callee": "System.Runtime.InteropServices/LibraryImportAttribute::get_LibraryName:System.String()",
+          "reference": {
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectKind": "method",
+            "subjectId": "System.Runtime.InteropServices/LibraryImportAttribute::get_LibraryName:System.String()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectId": "System.Runtime.InteropServices/LibraryImportAttribute::get_LibraryName:System.String()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 19,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 24,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 26,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 27,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 29,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 30,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 39,
+          "ilOffset": 31,
+          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 9,
+          "ilOffset": 33,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -459,7 +958,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode",
-          "ilOffset": 10,
+          "ilOffset": 34,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "PinvokeDllimportSubjects",
@@ -485,29 +984,64 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 23,
-          "ilOffset": 16,
+          "operand": 53,
+          "ilOffset": 40,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 18,
+          "ilOffset": 42,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 44,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode",
+          "ilOffset": 45,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "PinvokeDllimportSubjects",
+            "subjectKind": "field",
+            "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "PinvokeDllimportSubjects",
+            "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
           "isPreserveSig": false
         },
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 23,
-          "ilOffset": 21,
+          "operand": 53,
+          "ilOffset": 51,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 23,
+          "ilOffset": 53,
           "isPreserveSig": false
         }
       ],
@@ -542,16 +1076,16 @@
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 0,
+      "localCount": 1,
       "exceptionRegionCount": 1,
       "exceptionRegions": [
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 17,
-          "handlerOffset": 18,
-          "handlerLength": 5,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+          "tryLength": 43,
+          "handlerOffset": 44,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
@@ -588,16 +1122,151 @@
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 13,
           "ilOffset": 8,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 10,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 14,
+          "ilOffset": 11,
+          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 9,
+          "ilOffset": 13,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 14,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 15,
+          "resultType": "System.Boolean",
+          "callee": "System.Runtime.InteropServices/LibraryImportAttribute::get_SetLastError:System.Boolean()",
+          "reference": {
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectKind": "method",
+            "subjectId": "System.Runtime.InteropServices/LibraryImportAttribute::get_SetLastError:System.Boolean()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectId": "System.Runtime.InteropServices/LibraryImportAttribute::get_SetLastError:System.Boolean()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 25,
+          "ilOffset": 20,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 22,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 26,
+          "ilOffset": 23,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 25,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 26,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 28,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 29,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 31,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 32,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 41,
+          "ilOffset": 33,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 35,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -605,7 +1274,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode",
-          "ilOffset": 10,
+          "ilOffset": 36,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "PinvokeDllimportSubjects",
@@ -631,29 +1300,64 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 23,
-          "ilOffset": 16,
+          "operand": 55,
+          "ilOffset": 42,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 18,
+          "ilOffset": 44,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 46,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode",
+          "ilOffset": 47,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "PinvokeDllimportSubjects",
+            "subjectKind": "field",
+            "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "PinvokeDllimportSubjects",
+            "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
           "isPreserveSig": false
         },
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 23,
-          "ilOffset": 21,
+          "operand": 55,
+          "ilOffset": 53,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 23,
+          "ilOffset": 55,
           "isPreserveSig": false
         }
       ],
@@ -688,16 +1392,16 @@
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 0,
+      "localCount": 2,
       "exceptionRegionCount": 1,
       "exceptionRegions": [
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 17,
-          "handlerOffset": 18,
-          "handlerLength": 5,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+          "tryLength": 59,
+          "handlerOffset": 60,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
@@ -734,16 +1438,171 @@
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
           "ilOffset": 8,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 1,
+          "ilOffset": 9,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 17,
+          "resultType": "System.Int32",
+          "callee": "System.Runtime.InteropServices/StringMarshalling::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 1,
+          "constrainedTypeSubjectId": "System.Runtime.InteropServices/StringMarshalling",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 22,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 23,
+          "resultType": "StringMarshalling",
+          "callee": "System.Runtime.InteropServices/LibraryImportAttribute::get_StringMarshalling:StringMarshalling()",
+          "reference": {
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectKind": "method",
+            "subjectId": "System.Runtime.InteropServices/LibraryImportAttribute::get_StringMarshalling:StringMarshalling()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectId": "System.Runtime.InteropServices/LibraryImportAttribute::get_StringMarshalling:StringMarshalling()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 1,
+          "ilOffset": 29,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 37,
+          "resultType": "System.Int32",
+          "callee": "System.Runtime.InteropServices/StringMarshalling::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 1,
+          "constrainedTypeSubjectId": "System.Runtime.InteropServices/StringMarshalling",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 42,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 44,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 45,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 47,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 48,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 57,
+          "ilOffset": 49,
+          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 9,
+          "ilOffset": 51,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -751,7 +1610,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode",
-          "ilOffset": 10,
+          "ilOffset": 52,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "PinvokeDllimportSubjects",
@@ -777,29 +1636,64 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 23,
-          "ilOffset": 16,
+          "operand": 71,
+          "ilOffset": 58,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 18,
+          "ilOffset": 60,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 62,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode",
+          "ilOffset": 63,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "PinvokeDllimportSubjects",
+            "subjectKind": "field",
+            "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "PinvokeDllimportSubjects",
+            "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
           "isPreserveSig": false
         },
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 23,
-          "ilOffset": 21,
+          "operand": 71,
+          "ilOffset": 69,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 23,
+          "ilOffset": 71,
           "isPreserveSig": false
         }
       ],
@@ -834,16 +1728,16 @@
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 0,
+      "localCount": 1,
       "exceptionRegionCount": 1,
       "exceptionRegions": [
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 17,
-          "handlerOffset": 18,
-          "handlerLength": 5,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+          "tryLength": 41,
+          "handlerOffset": 42,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
@@ -880,16 +1774,137 @@
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
+          "op": "callvirt",
+          "opCode": 15,
           "ilOffset": 8,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 13,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 14,
+          "resultType": "System.Type",
+          "callee": "System.Runtime.InteropServices/LibraryImportAttribute::get_StringMarshallingCustomType:System.Type()",
+          "reference": {
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectKind": "method",
+            "subjectId": "System.Runtime.InteropServices/LibraryImportAttribute::get_StringMarshallingCustomType:System.Type()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Runtime.InteropServices",
+            "subjectId": "System.Runtime.InteropServices/LibraryImportAttribute::get_StringMarshallingCustomType:System.Type()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 19,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 24,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 26,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 27,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 29,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 30,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 39,
+          "ilOffset": 31,
+          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 9,
+          "ilOffset": 33,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -897,7 +1912,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode",
-          "ilOffset": 10,
+          "ilOffset": 34,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "PinvokeDllimportSubjects",
@@ -923,29 +1938,64 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 23,
-          "ilOffset": 16,
+          "operand": 53,
+          "ilOffset": 40,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 18,
+          "ilOffset": 42,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 44,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode",
+          "ilOffset": 45,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "PinvokeDllimportSubjects",
+            "subjectKind": "field",
+            "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "PinvokeDllimportSubjects",
+            "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
           "isPreserveSig": false
         },
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 23,
-          "ilOffset": 21,
+          "operand": 53,
+          "ilOffset": 51,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 23,
+          "ilOffset": 53,
           "isPreserveSig": false
         }
       ],
@@ -980,16 +2030,16 @@
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 1,
+      "localCount": 0,
       "exceptionRegionCount": 1,
       "exceptionRegions": [
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 24,
-          "handlerOffset": 25,
-          "handlerLength": 5,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+          "tryLength": 16,
+          "handlerOffset": 17,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
@@ -1009,23 +2059,9 @@
           "isPreserveSig": false
         },
         {
-          "op": "dup",
-          "opCode": 54,
-          "ilOffset": 8,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 9,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 10,
+          "ilOffset": 8,
           "resultType": "System.Void",
           "callee": "System.Runtime.InteropServices/LibraryImportAttribute::set_EntryPoint:System.Void(System.String)",
           "reference": {
@@ -1048,10 +2084,24 @@
           "isPreserveSig": false
         },
         {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 28,
+          "ilOffset": 15,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 17,
+          "isPreserveSig": false
+        },
+        {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 16,
+          "ilOffset": 19,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1059,7 +2109,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode",
-          "ilOffset": 17,
+          "ilOffset": 20,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "PinvokeDllimportSubjects",
@@ -1085,29 +2135,15 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 30,
-          "ilOffset": 23,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 25,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 30,
-          "ilOffset": 28,
+          "operand": 28,
+          "ilOffset": 26,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 30,
+          "ilOffset": 28,
           "isPreserveSig": false
         }
       ],
@@ -1142,16 +2178,16 @@
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 1,
+      "localCount": 0,
       "exceptionRegionCount": 1,
       "exceptionRegions": [
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 20,
-          "handlerOffset": 21,
-          "handlerLength": 5,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+          "tryLength": 12,
+          "handlerOffset": 13,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
@@ -1171,23 +2207,9 @@
           "isPreserveSig": false
         },
         {
-          "op": "dup",
-          "opCode": 54,
-          "ilOffset": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 5,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 6,
+          "ilOffset": 4,
           "resultType": "System.Void",
           "callee": "System.Runtime.InteropServices/LibraryImportAttribute::set_SetLastError:System.Void(System.Boolean)",
           "reference": {
@@ -1210,10 +2232,24 @@
           "isPreserveSig": false
         },
         {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 24,
+          "ilOffset": 11,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 13,
+          "isPreserveSig": false
+        },
+        {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 12,
+          "ilOffset": 15,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1221,7 +2257,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode",
-          "ilOffset": 13,
+          "ilOffset": 16,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "PinvokeDllimportSubjects",
@@ -1247,29 +2283,15 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 26,
-          "ilOffset": 19,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 21,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 26,
-          "ilOffset": 24,
+          "operand": 24,
+          "ilOffset": 22,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 26,
+          "ilOffset": 24,
           "isPreserveSig": false
         }
       ],
@@ -1304,16 +2326,16 @@
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 1,
+      "localCount": 0,
       "exceptionRegionCount": 1,
       "exceptionRegions": [
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 20,
-          "handlerOffset": 21,
-          "handlerLength": 5,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+          "tryLength": 12,
+          "handlerOffset": 13,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
@@ -1333,23 +2355,9 @@
           "isPreserveSig": false
         },
         {
-          "op": "dup",
-          "opCode": 54,
-          "ilOffset": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 5,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 6,
+          "ilOffset": 4,
           "resultType": "System.Void",
           "callee": "System.Runtime.InteropServices/LibraryImportAttribute::set_StringMarshalling:System.Void(StringMarshalling)",
           "reference": {
@@ -1372,10 +2380,24 @@
           "isPreserveSig": false
         },
         {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 24,
+          "ilOffset": 11,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 13,
+          "isPreserveSig": false
+        },
+        {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 12,
+          "ilOffset": 15,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1383,7 +2405,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode",
-          "ilOffset": 13,
+          "ilOffset": 16,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "PinvokeDllimportSubjects",
@@ -1409,29 +2431,15 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 26,
-          "ilOffset": 19,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 21,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 26,
-          "ilOffset": 24,
+          "operand": 24,
+          "ilOffset": 22,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 26,
+          "ilOffset": 24,
           "isPreserveSig": false
         }
       ],
@@ -1472,10 +2480,10 @@
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 27,
-          "handlerOffset": 28,
-          "handlerLength": 5,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+          "tryLength": 21,
+          "handlerOffset": 22,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
@@ -1561,10 +2569,24 @@
           "isPreserveSig": false
         },
         {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 33,
+          "ilOffset": 20,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 22,
+          "isPreserveSig": false
+        },
+        {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 19,
+          "ilOffset": 24,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -1572,7 +2594,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode",
-          "ilOffset": 20,
+          "ilOffset": 25,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "PinvokeDllimportSubjects",
@@ -1593,20 +2615,6 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 33,
-          "ilOffset": 26,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 28,
           "isPreserveSig": false
         },
         {
@@ -1656,21 +2664,30 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 15,
+          "handlerOffset": 16,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
       "instructions": [
         {
           "op": "ldstr",
           "opCode": 4,
           "operand": "hello",
-          "ilOffset": 1,
+          "ilOffset": 2,
           "resultType": "System.String",
           "isPreserveSig": false
         },
         {
           "op": "newobj",
           "opCode": 34,
-          "ilOffset": 6,
+          "ilOffset": 7,
           "resultType": "System.Runtime.InteropServices/LibraryImportAttribute",
           "callee": "System.Runtime.InteropServices/LibraryImportAttribute::.ctor:System.Void(System.String)",
           "reference": {
@@ -1695,13 +2712,70 @@
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 11,
+          "ilOffset": 12,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 27,
+          "ilOffset": 14,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 16,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 18,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode",
+          "ilOffset": 19,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "PinvokeDllimportSubjects",
+            "subjectKind": "field",
+            "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "PinvokeDllimportSubjects",
+            "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 27,
+          "ilOffset": 25,
+          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 12,
+          "ilOffset": 27,
           "isPreserveSig": false
         }
       ],

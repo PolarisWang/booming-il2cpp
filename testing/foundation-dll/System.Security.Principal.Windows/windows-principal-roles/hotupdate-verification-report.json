@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.Security.Principal.Windows",
+  "familyId": "family/System.Security.Principal.Windows/windows/principal/roles",
+  "passedMethods": 8,
+  "failedMethods": 0,
+  "totalMethods": 8,
+  "stubMethods": 0,
+  "realMethods": 8,
+  "allMethodsRevertVerified": false,
+  "allMethodsSemanticVerified": false,
+  "d3PatchApplied": false,
+  "d3PatchedCount": 0,
+  "verificationKind": "hotupdate-proof",
+  "summary": {
+    "totalMethods": 8,
+    "passedMethods": 8,
+    "failedMethods": 0,
+    "unmatchedMethods": 0
+  },
+  "methodResults": []
+}

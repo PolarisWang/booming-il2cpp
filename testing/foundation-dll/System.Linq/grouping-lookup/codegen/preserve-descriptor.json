@@ -40,6 +40,12 @@
     },
     {
       "subjectKind": "field",
+      "subjectId": "GroupingLookupSubjects/\u003CPrivateImplementationDetails\u003E::6E28B4D41AF8A88650219653A728E0FD6760BB2B1DFEB7A9EB8DEB5B4E7010E0",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
       "subjectId": "GroupingLookupSubjects/\u003CPrivateImplementationDetails\u003E::D8D4F55129E2966F2C74F35D6AC1769A713230A8B8371D030F18C6DEA1AAFD77",
       "preserve": "members",
       "reason": "full-assembly-closure"
@@ -124,12 +130,6 @@
     },
     {
       "subjectKind": "field",
-      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__7_2",
-      "preserve": "members",
-      "reason": "full-assembly-closure"
-    },
-    {
-      "subjectKind": "field",
       "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_0",
       "preserve": "members",
       "reason": "full-assembly-closure"
@@ -137,12 +137,6 @@
     {
       "subjectKind": "field",
       "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_1",
-      "preserve": "members",
-      "reason": "full-assembly-closure"
-    },
-    {
-      "subjectKind": "field",
-      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_2",
       "preserve": "members",
       "reason": "full-assembly-closure"
     },
@@ -280,12 +274,6 @@
     },
     {
       "subjectKind": "method",
-      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-      "preserve": "signature",
-      "reason": "full-assembly-closure"
-    },
-    {
-      "subjectKind": "method",
       "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_0:System.Int32(System.Int32)",
       "preserve": "signature",
       "reason": "full-assembly-closure"
@@ -293,12 +281,6 @@
     {
       "subjectKind": "method",
       "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_1:System.Int32(System.Int32)",
-      "preserve": "signature",
-      "reason": "full-assembly-closure"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     }

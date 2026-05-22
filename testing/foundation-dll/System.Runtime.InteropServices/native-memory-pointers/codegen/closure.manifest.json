@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "NativeMemoryPointersSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Runtime.InteropServices/native-memory-pointers/managed/subjects/build-output/NativeMemoryPointersSubjects.dll",
+  "inputAssemblyPath": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Runtime.InteropServices/native-memory-pointers/managed/subjects/build-output/NativeMemoryPointersSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "NativeMemoryPointersSubjects",
-      "path": "verification/foundation-dll/System.Runtime.InteropServices/native-memory-pointers/managed/subjects/build-output/NativeMemoryPointersSubjects.dll"
+      "path": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Runtime.InteropServices/native-memory-pointers/managed/subjects/build-output/NativeMemoryPointersSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "462e6207-1c22-4a57-b60e-7f5ce7853589",
+  "inputModuleVersionId": "d08592eb-a844-47ba-a4a8-718b52955505",
   "artifacts": [
     {
       "kind": "typedIlIr",

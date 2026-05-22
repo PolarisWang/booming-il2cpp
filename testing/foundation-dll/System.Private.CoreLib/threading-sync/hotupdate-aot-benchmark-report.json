@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/threading/sync",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.SemaphoreSlim::.ctor:System.Void(System.Int32)",
+      "status": "passed",
+      "prePatchNsPerOp": 90.42,
+      "postPatchNsPerOp": 99.3,
+      "slowdownPercent": 9.82
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.SemaphoreSlim::.ctor:System.Void(System.Int32,System.Int32)",
+      "status": "passed",
+      "prePatchNsPerOp": 89.46,
+      "postPatchNsPerOp": 98.1,
+      "slowdownPercent": 9.66
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.SemaphoreSlim::Wait:System.Void()",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.SemaphoreSlim::Release:System.Int32()",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.SemaphoreSlim::get_CurrentCount:System.Int32()",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.ManualResetEvent::.ctor:System.Void(System.Boolean)",
+      "status": "passed",
+      "prePatchNsPerOp": 15.24,
+      "postPatchNsPerOp": 4.4,
+      "slowdownPercent": -71.13
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.ManualResetEvent::Set:System.Boolean()",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.ManualResetEvent::Reset:System.Boolean()",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.ManualResetEvent::WaitOne:System.Boolean()",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.AutoResetEvent::.ctor:System.Void(System.Boolean)",
+      "status": "passed",
+      "prePatchNsPerOp": 0.0,
+      "postPatchNsPerOp": 2.0,
+      "slowdownPercent": 0.0
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.AutoResetEvent::Set:System.Boolean()",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.AutoResetEvent::Reset:System.Boolean()",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.AutoResetEvent::WaitOne:System.Boolean()",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 13,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.SpinLock::.ctor:System.Void(System.Boolean)",
+      "status": "passed",
+      "prePatchNsPerOp": 0.0,
+      "postPatchNsPerOp": 1.8,
+      "slowdownPercent": 0.0
+    },
+    {
+      "methodIndex": 14,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.SpinLock::Enter:System.Void(System.Boolean&)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 15,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.SpinLock::Exit:System.Void()",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 16,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.SpinWait::SpinOnce:System.Void()",
+      "status": "stub"
+    }
+  ],
+  "summary": {
+    "totalMethods": 17,
+    "nonStubMethods": 3,
+    "averageSlowdownPercent": -17.22,
+    "slowdownFactor": 0.8278,
+    "slowdownThresholdX": 50.0
+  }
+}

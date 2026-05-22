@@ -3,9 +3,9 @@
   "artifactKind": "nativeAotLoweringPlan",
   "planKind": "full-assembly-entry",
   "assemblyName": "NativeMemoryPointersSubjects",
-  "entrySubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_0:System.Void()",
+  "entrySubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_121:System.Void()",
   "nativeEntryFunctionName": "",
-  "entrySymbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_0",
+  "entrySymbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_121",
   "entryMethodToken": "0u",
   "workloadAbi": "full-assembly"
 }

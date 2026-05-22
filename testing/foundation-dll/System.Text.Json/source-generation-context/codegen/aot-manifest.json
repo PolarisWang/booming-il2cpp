@@ -28,6 +28,12 @@
     },
     {
       "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
       "subjectKind": "type",
       "subjectId": "System.Private.CoreLib/System.Byte",
       "reason": "external-call"

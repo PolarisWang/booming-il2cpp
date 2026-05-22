@@ -49,52 +49,12 @@ extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject
             CHAOS_IL2CPP_INTPTR, 
             CHAOS_IL2CPP_INT32
 );
-extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_1_System_Int32(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INT32
-);
-extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INT32, 
-            CHAOS_IL2CPP_INTPTR
-);
 extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_0_System_Int32(
             CHAOS_IL2CPP_INTPTR, 
             CHAOS_IL2CPP_INT32
 );
-extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_1_System_Int32(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INT32
-);
-extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INT32, 
-            CHAOS_IL2CPP_INTPTR
-);
-extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_0_System_Int32(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INT32
-);
-extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_1_System_Int32(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INT32
-);
-extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_2_System_Int32_System_Int32(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INT32, 
-            CHAOS_IL2CPP_INT32
-);
 extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_0_System_Int32(
             CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INT32
-);
-extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_1_System_Int32(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INT32
-);
-extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_2_System_Int32_System_Int32(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INT32, 
             CHAOS_IL2CPP_INT32
 );
 extern "C" CHAOS_IL2CPP_INTPTR JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_4_b__5_0_System_Int32(
@@ -177,17 +137,8 @@ static const Functions s_functions = {
         &JoinsSubjects_JoinsSubjects___c_cctor,
         &JoinsSubjects_JoinsSubjects___c__ctor,
         &JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_0_System_Int32,
-        &JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_1_System_Int32,
-        &JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32,
         &JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_0_System_Int32,
-        &JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_1_System_Int32,
-        &JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32,
-        &JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_0_System_Int32,
-        &JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_1_System_Int32,
-        &JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_2_System_Int32_System_Int32,
         &JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_0_System_Int32,
-        &JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_1_System_Int32,
-        &JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_2_System_Int32_System_Int32,
         &JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_4_b__5_0_System_Int32,
         &JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_5_b__6_0_System_Int32,
         &JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_6_b__7_0_System_Int32,
@@ -213,7 +164,7 @@ static const Functions s_functions = {
         &JoinsSubjects_JoinsSubjects___c__DisplayClass8_0_CustomEntrySubject_7_b__1_System_Int32,
         &JoinsSubjects_JoinsSubjects___c__DisplayClass8_0_CustomEntrySubject_7_b__2_System_Int32,
     },
-    38,
+    29,
 };
 
 const Functions kFunctions = s_functions;
@@ -221,8 +172,8 @@ const Functions kFunctions = s_functions;
 // Flat function pointer array for indexed dispatch (benchmarking).
 // Avoids fragile reinterpret_cast<void* const*>(&kFunctions) which depends on
 // struct layout uniformity across sub-struct members.
-extern "C" void* kFunctionsFlat[38];
-void* kFunctionsFlat[38] = {
+extern "C" void* kFunctionsFlat[29];
+void* kFunctionsFlat[29] = {
     reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects_CustomEntrySubject_0),
     reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects_CustomEntrySubject_1),
     reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects_CustomEntrySubject_2),
@@ -234,17 +185,8 @@ void* kFunctionsFlat[38] = {
     reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_cctor),
     reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c__ctor),
     reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_0_System_Int32),
-    reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_1_System_Int32),
-    reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32),
     reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_0_System_Int32),
-    reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_1_System_Int32),
-    reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32),
-    reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_0_System_Int32),
-    reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_1_System_Int32),
-    reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_2_System_Int32_System_Int32),
     reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_0_System_Int32),
-    reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_1_System_Int32),
-    reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_2_System_Int32_System_Int32),
     reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_4_b__5_0_System_Int32),
     reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_5_b__6_0_System_Int32),
     reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_6_b__7_0_System_Int32),

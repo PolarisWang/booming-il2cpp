@@ -1,0 +1,325 @@
+{
+  "family": "writer",
+  "assembly": "System.Text.Json",
+  "mode": "standard",
+  "timestamp": "2026-05-22T07:20:28",
+  "duration_ms": 72934,
+  "overall_status": "failed",
+  "stages": {
+    "preflight": {
+      "stage": "preflight",
+      "status": "passed",
+      "summary": "126 methods, 126 custom entries",
+      "details": {
+        "methodCount": 126,
+        "customMethodCount": 126,
+        "hasCustomEntryFile": false,
+        "customMethods": [
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::Dispose:System.Void()",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::DisposeAsync:System.Threading.Tasks.ValueTask()",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::Flush:System.Void()",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::FlushAsync:System.Threading.Tasks.Task(System.Threading.CancellationToken)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::get_BytesCommitted:System.Int64()",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::get_BytesPending:System.Int32()",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::get_CurrentDepth:System.Int32()",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::get_Options:System.Text.Json.JsonWriterOptions()",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::Reset:System.Void()",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::Reset:System.Void(System.IO.Stream)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::Reset:System.Void(System.Buffers.IBufferWriter{System.Byte})",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteBase64String:System.Void(System.Text.Json.JsonEncodedText,System.ReadOnlySpan{System.Byte})",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteBase64String:System.Void(System.String,System.ReadOnlySpan{System.Byte})",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteBase64String:System.Void(System.ReadOnlySpan{System.Char},System.ReadOnlySpan{System.Byte})",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteBase64String:System.Void(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte})",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteBase64StringSegment:System.Void(System.ReadOnlySpan{System.Byte},System.Boolean)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteBase64StringValue:System.Void(System.ReadOnlySpan{System.Byte})",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteBoolean:System.Void(System.Text.Json.JsonEncodedText,System.Boolean)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteBoolean:System.Void(System.String,System.Boolean)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteBoolean:System.Void(System.ReadOnlySpan{System.Char},System.Boolean)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteBoolean:System.Void(System.ReadOnlySpan{System.Byte},System.Boolean)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteBooleanValue:System.Void(System.Boolean)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteCommentValue:System.Void(System.String)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteCommentValue:System.Void(System.ReadOnlySpan{System.Char})",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteCommentValue:System.Void(System.ReadOnlySpan{System.Byte})",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteEndArray:System.Void()",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteEndObject:System.Void()",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNull:System.Void(System.Text.Json.JsonEncodedText)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNull:System.Void(System.String)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNull:System.Void(System.ReadOnlySpan{System.Char})",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNull:System.Void(System.ReadOnlySpan{System.Byte})",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNullValue:System.Void()",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.Text.Json.JsonEncodedText,System.Decimal)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.String,System.Decimal)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan{System.Char},System.Decimal)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan{System.Byte},System.Decimal)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.Text.Json.JsonEncodedText,System.Double)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.String,System.Double)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan{System.Char},System.Double)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan{System.Byte},System.Double)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.Text.Json.JsonEncodedText,System.Single)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.String,System.Single)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan{System.Char},System.Single)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan{System.Byte},System.Single)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.Text.Json.JsonEncodedText,System.Int64)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.String,System.Int64)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan{System.Char},System.Int64)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan{System.Byte},System.Int64)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.Text.Json.JsonEncodedText,System.Int32)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.String,System.Int32)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan{System.Char},System.Int32)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan{System.Byte},System.Int32)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.Text.Json.JsonEncodedText,System.UInt64)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.String,System.UInt64)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan{System.Char},System.UInt64)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan{System.Byte},System.UInt64)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.Text.Json.JsonEncodedText,System.UInt32)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.String,System.UInt32)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan{System.Char},System.UInt32)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumber:System.Void(System.ReadOnlySpan{System.Byte},System.UInt32)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumberValue:System.Void(System.Decimal)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumberValue:System.Void(System.Double)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumberValue:System.Void(System.Single)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumberValue:System.Void(System.Int32)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumberValue:System.Void(System.Int64)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumberValue:System.Void(System.UInt32)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteNumberValue:System.Void(System.UInt64)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WritePropertyName:System.Void(System.Text.Json.JsonEncodedText)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WritePropertyName:System.Void(System.String)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WritePropertyName:System.Void(System.ReadOnlySpan{System.Char})",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WritePropertyName:System.Void(System.ReadOnlySpan{System.Byte})",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteRawValue:System.Void(System.String,System.Boolean)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteRawValue:System.Void(System.ReadOnlySpan{System.Char},System.Boolean)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteRawValue:System.Void(System.ReadOnlySpan{System.Byte},System.Boolean)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteRawValue:System.Void(System.Buffers.ReadOnlySequence{System.Byte},System.Boolean)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStartArray:System.Void()",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStartArray:System.Void(System.Text.Json.JsonEncodedText)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStartArray:System.Void(System.ReadOnlySpan{System.Byte})",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStartArray:System.Void(System.String)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStartArray:System.Void(System.ReadOnlySpan{System.Char})",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStartObject:System.Void()",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStartObject:System.Void(System.Text.Json.JsonEncodedText)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStartObject:System.Void(System.ReadOnlySpan{System.Byte})",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStartObject:System.Void(System.String)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStartObject:System.Void(System.ReadOnlySpan{System.Char})",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.Text.Json.JsonEncodedText,System.DateTime)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.String,System.DateTime)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan{System.Char},System.DateTime)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan{System.Byte},System.DateTime)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.Text.Json.JsonEncodedText,System.DateTimeOffset)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.String,System.DateTimeOffset)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan{System.Char},System.DateTimeOffset)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan{System.Byte},System.DateTimeOffset)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.Text.Json.JsonEncodedText,System.Guid)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.String,System.Guid)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan{System.Char},System.Guid)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan{System.Byte},System.Guid)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.Text.Json.JsonEncodedText,System.Text.Json.JsonEncodedText)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.String,System.Text.Json.JsonEncodedText)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.String,System.String)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan{System.Char},System.ReadOnlySpan{System.Char})",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte})",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.Text.Json.JsonEncodedText,System.String)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.Text.Json.JsonEncodedText,System.ReadOnlySpan{System.Char})",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.String,System.ReadOnlySpan{System.Char})",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Char})",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.Text.Json.JsonEncodedText,System.ReadOnlySpan{System.Byte})",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.String,System.ReadOnlySpan{System.Byte})",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan{System.Char},System.ReadOnlySpan{System.Byte})",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan{System.Char},System.Text.Json.JsonEncodedText)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan{System.Char},System.String)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan{System.Byte},System.Text.Json.JsonEncodedText)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteString:System.Void(System.ReadOnlySpan{System.Byte},System.String)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStringValue:System.Void(System.DateTime)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStringValue:System.Void(System.DateTimeOffset)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStringValue:System.Void(System.Guid)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStringValue:System.Void(System.Text.Json.JsonEncodedText)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStringValue:System.Void(System.String)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStringValue:System.Void(System.ReadOnlySpan{System.Char})",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStringValue:System.Void(System.ReadOnlySpan{System.Byte})",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStringValueSegment:System.Void(System.ReadOnlySpan{System.Char},System.Boolean)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::WriteStringValueSegment:System.Void(System.ReadOnlySpan{System.Byte},System.Boolean)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::.ctor:System.Void(System.Buffers.IBufferWriter{System.Byte},System.Text.Json.JsonWriterOptions)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::.ctor:System.Void(System.IO.Stream,System.Text.Json.JsonWriterOptions)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::set_BytesPending:System.Void(System.Int32)",
+          "System.Text.Json/System.Text.Json.Utf8JsonWriter::set_BytesCommitted:System.Void(System.Int64)"
+        ]
+      },
+      "errors": [],
+      "duration_ms": 1
+    },
+    "codegen": {
+      "stage": "codegen",
+      "status": "passed",
+      "summary": "Entrypoint built and IL2CPP compile OK",
+      "details": {
+        "methodCount": 126,
+        "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Text.Json\\writer\\managed\\subjects\\build-output\\WriterSubjects.dll"
+      },
+      "errors": [],
+      "duration_ms": 34755
+    },
+    "jit_codegen": {
+      "stage": "jit_codegen",
+      "status": "passed",
+      "summary": "JIT entry-jit.exe built and AOT entry.exe restored",
+      "details": {},
+      "errors": [],
+      "duration_ms": 33331
+    },
+    "fact": {
+      "stage": "fact",
+      "status": "passed",
+      "summary": "Fact verify=passed (126/126)",
+      "details": {
+        "fact": {
+          "status": "passed",
+          "passed": 126,
+          "total": 126
+        }
+      },
+      "errors": [],
+      "duration_ms": 343
+    },
+    "fact_jit": {
+      "stage": "fact_jit",
+      "status": "passed",
+      "summary": "Fact JIT verify=passed (126/126)",
+      "details": {
+        "fact_jit": {
+          "status": "passed",
+          "passed": 126,
+          "total": 126,
+          "exit_code": 0
+        }
+      },
+      "errors": [],
+      "duration_ms": 391
+    },
+    "audit": {
+      "stage": "audit",
+      "status": "failed",
+      "summary": "false_passing=0, principle=VIOLATION",
+      "details": {
+        "falsePassing": 0,
+        "stubsFound": 0,
+        "skipsFound": 2,
+        "principleStatus": "VIOLATION",
+        "methodsWithoutLowering": 0
+      },
+      "errors": [],
+      "duration_ms": 4045
+    },
+    "asm_compare": {
+      "stage": "asm_compare",
+      "status": "skipped",
+      "summary": "Subjects DLL not found — run codegen stage first",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "microbench": {
+      "stage": "microbench",
+      "status": "passed",
+      "summary": "FramePool=5.2ns/op | FastExecute=2.2ns/op | CallVirt dispatch=1.9ns",
+      "details": {
+        "framePool": {
+          "acquireReleaseNsPerOp": 5.2,
+          "batchCount": 1000,
+          "framesPerBatch": 32
+        },
+        "fastExecute": {
+          "runCount": 100000,
+          "nsPerCall": 2.2
+        },
+        "callVirt": {
+          "handlerDispatchNs": 1.9,
+          "emptyStackNs": 2.1
+        },
+        "poolSize": 32
+      },
+      "errors": [],
+      "duration_ms": 28
+    },
+    "benchmark": {
+      "stage": "benchmark",
+      "status": "skipped",
+      "summary": "All methods are stubs — no benchmark possible",
+      "details": {},
+      "errors": [],
+      "duration_ms": 1
+    },
+    "hotupdate": {
+      "stage": "hotupdate",
+      "status": "skipped",
+      "summary": "All methods are stubs — no hotupdate possible",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "hotupdate_aot_benchmark": {
+      "stage": "hotupdate_aot_benchmark",
+      "status": "skipped",
+      "summary": "All methods are stubs — no benchmark possible",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "hotupdate_jit_fact": {
+      "stage": "hotupdate_jit_fact",
+      "status": "passed",
+      "summary": "126/126 passed, 0 failed",
+      "details": {
+        "passed": 126,
+        "failed": 0,
+        "total": 126
+      },
+      "errors": [],
+      "duration_ms": 31
+    },
+    "hotupdate_jit_benchmark": {
+      "stage": "hotupdate_jit_benchmark",
+      "status": "failed",
+      "summary": "HotUpdate JIT benchmark stage crashed: [Errno 22] Invalid argument",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    }
+  },
+  "coverage": {
+    "methodCoverage": 100.0,
+    "testedRate": 98.41,
+    "overall": 99.2
+  },
+  "dashboard": {
+    "interpreter": {
+      "fastFramePoolNsPerOp": 5.2,
+      "fastExecuteNsPerInstr": 0,
+      "callVirtHandlerDispatchNs": 1.9,
+      "callVirtMicHitNs": 0,
+      "callVirtRawFallbackNs": 0,
+      "poolSize": 32
+    },
+    "irTranslation": {},
+    "performance": {},
+    "hotupdate": {
+      "jitFunctional": {
+        "passedMethods": 126,
+        "failedMethods": 0,
+        "totalMethods": 126
+      }
+    },
+    "keyRatios": {
+      "nativeFasterRatio": 0,
+      "irExpansionRatio": 0,
+      "interpreterSlowdownFactor": 0,
+      "asmPassRate": 0.0
+    }
+  },
+  "regression": {
+    "benchmark": {
+      "status": "skipped",
+      "message": "No benchmark report found"
+    },
+    "hasRegression": false,
+    "regressions": []
+  }
+}

@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "DecoderSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Formats.Asn1/decoder/managed/subjects/build-output/DecoderSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Formats.Asn1/decoder/managed/subjects/build-output/DecoderSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "DecoderSubjects",
-      "path": "verification/foundation-dll/System.Formats.Asn1/decoder/managed/subjects/build-output/DecoderSubjects.dll"
+      "path": "testing/foundation-dll/System.Formats.Asn1/decoder/managed/subjects/build-output/DecoderSubjects.dll"
     },
     {
       "assemblyName": "System.Formats.Asn1",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "09f2bb5c-7d1f-4c15-a290-f01ae5acb430",
+  "inputModuleVersionId": "bbcdb4c7-be08-403e-aec1-3c4105f9f2d4",
   "artifacts": [
     {
       "kind": "typedIlIr",

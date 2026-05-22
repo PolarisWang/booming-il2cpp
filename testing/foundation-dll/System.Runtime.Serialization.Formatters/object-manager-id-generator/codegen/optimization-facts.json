@@ -96,6 +96,18 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectIDGenerator::GetId:System.Int64(System.Object,System.Boolean\u0026)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectIDGenerator::HasId:System.Int64(System.Object,System.Boolean\u0026)",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::Subject_1:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectIDGenerator::HasId:System.Int64(System.Object,System.Boolean\u0026)",
@@ -111,6 +123,24 @@
       "methodSubjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::Subject_4:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::GetObject:System.Object(System.Int64)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::Subject_4:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::Subject_4:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::GetObject:System.Object(System.Int64)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::Subject_4:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
     },
     {
@@ -174,62 +204,72 @@
     {
       "methodSubjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::Subject_0:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::Subject_1:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::Subject_2:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::Subject_3:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::Subject_4:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::Subject_5:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::Subject_6:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::Subject_9:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::Subject_10:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::Subject_11:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::Subject_12:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::Subject_13:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::Subject_14:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "ObjectManagerIdGeneratorSubjects/ObjectManagerIdGeneratorSubjects::Subject_15:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     }
   ]
 }

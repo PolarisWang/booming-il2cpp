@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "ImmutableArraySubjects",
   "entrySubjectId": "ImmutableArraySubjects/ImmutableArraySubjects::CustomEntrySubject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Collections.Immutable/immutable-array/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.Collections.Immutable/immutable-array/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {
@@ -17,6 +17,14 @@
     {
       "kind": "generatedTranslationUnit",
       "path": "generated/native-aot.generated.cpp"
+    },
+    {
+      "kind": "generatedModuleHeader",
+      "path": "generated/chaos_generated_module.h"
+    },
+    {
+      "kind": "generatedModuleSource",
+      "path": "generated/chaos_generated_module.cpp"
     },
     {
       "kind": "codegenMetrics",

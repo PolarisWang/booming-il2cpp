@@ -16,7 +16,8 @@ public static partial class UnmanagedCallingConventionsSubjects
     // [0] System.Runtime.InteropServices/System.Runtime.InteropServices.SuppressGCTransitionAttribute::.ctor:System.Void()
     public static void Subject_0()
     {
-        new SuppressGCTransitionAttribute();
+        try { new SuppressGCTransitionAttribute(); }
+        catch { _exitCode = 1; }
     }
 
 }

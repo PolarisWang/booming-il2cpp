@@ -1,0 +1,942 @@
+{
+  "family": "custom-marshaller-contracts",
+  "assembly": "System.Runtime.InteropServices",
+  "total_methods": 0,
+  "audited": 0,
+  "false_passing": 0,
+  "stubs_found": 0,
+  "skips_found": 154,
+  "methods_without_lowering": 0,
+  "methods_without_assert": 0,
+  "passed": true,
+  "method_details": [],
+  "skip_details": [
+    {
+      "type_name": "Buffer",
+      "method_name": "BulkMoveWithWriteBarrier",
+      "param_count": 3,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Buffer",
+      "method_name": "Memmove",
+      "param_count": 3,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Monitor",
+      "method_name": "Exit",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Monitor",
+      "method_name": "Pulse",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Monitor",
+      "method_name": "PulseAll",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Monitor",
+      "method_name": "Wait",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Delegate",
+      "method_name": "CreateDelegate",
+      "param_count": 3,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Delegate",
+      "method_name": "CreateDelegate",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Delegate",
+      "method_name": "op_Equality",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Delegate",
+      "method_name": "op_Inequality",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Type",
+      "method_name": "GetType",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Type",
+      "method_name": "GetType",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Type",
+      "method_name": "GetType",
+      "param_count": 3,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "MethodBase",
+      "method_name": "Invoke",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "MethodInfo",
+      "method_name": "GetParameters",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "RuntimeHelpers",
+      "method_name": "InitializeArray",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "RuntimeHelpers",
+      "method_name": "GetSubArray",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Thread",
+      "method_name": "ResetAbort",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Activator",
+      "method_name": "CreateInstance",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Module",
+      "method_name": "GetCustomAttributes",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Attribute",
+      "method_name": "get_TypeId",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "ICommand",
+      "method_name": "add_CanExecuteChanged",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "ICommand",
+      "method_name": "remove_CanExecuteChanged",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "INotifyCollectionChanged",
+      "method_name": "add_CollectionChanged",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "INotifyCollectionChanged",
+      "method_name": "remove_CollectionChanged",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "INotifyDataErrorInfo",
+      "method_name": "add_ErrorsChanged",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "INotifyDataErrorInfo",
+      "method_name": "remove_ErrorsChanged",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "INotifyPropertyChanged",
+      "method_name": "add_PropertyChanged",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "INotifyPropertyChanged",
+      "method_name": "remove_PropertyChanged",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "INotifyPropertyChanging",
+      "method_name": "add_PropertyChanging",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "INotifyPropertyChanging",
+      "method_name": "remove_PropertyChanging",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "ObservableCollection",
+      "method_name": "add_CollectionChanged",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "ObservableCollection",
+      "method_name": "remove_CollectionChanged",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "AsnReaderOptions",
+      "method_name": "set_SkipSetSortOrderVerification",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "KeyedCollection",
+      "method_name": "get_Item",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "FormatterConverter",
+      "method_name": "Convert",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "ObjectManager",
+      "method_name": "RecordArrayElementFixup",
+      "param_count": 3,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "ZipFile",
+      "method_name": "ExtractToDirectory",
+      "param_count": 3,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "ZipFile",
+      "method_name": "ExtractToDirectoryAsync",
+      "param_count": 4,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "AsnReaderOptions",
+      "method_name": "set_UtcTimeTwoDigitYearMax",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "SseItemParser",
+      "method_name": "BeginInvoke",
+      "param_count": 4,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "SseItemParser",
+      "method_name": "EndInvoke",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "SseItemParser",
+      "method_name": "Invoke",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "SseItemParser",
+      "method_name": ".ctor",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "SseItem",
+      "method_name": "set_EventId",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "SseItem",
+      "method_name": "set_ReconnectionInterval",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "SseParser",
+      "method_name": "set_LastEventId",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "SseParser",
+      "method_name": "set_ReconnectionInterval",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IdentityReferenceCollection",
+      "method_name": "set_Item",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IAdviseSink",
+      "method_name": "OnDataChange",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IDataObject",
+      "method_name": "DAdvise",
+      "param_count": 4,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IDataObject",
+      "method_name": "EnumDAdvise",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IDataObject",
+      "method_name": "GetCanonicalFormatEtc",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IDataObject",
+      "method_name": "GetData",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IDataObject",
+      "method_name": "GetDataHere",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IDataObject",
+      "method_name": "QueryGetData",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IDataObject",
+      "method_name": "SetData",
+      "param_count": 3,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IEnumFORMATETC",
+      "method_name": "Clone",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IEnumSTATDATA",
+      "method_name": "Clone",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "GCHandle",
+      "method_name": "op_Explicit",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "GCHandle",
+      "method_name": "set_Target",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "SafeHandle",
+      "method_name": "DangerousAddRef",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Marshal",
+      "method_name": "Copy",
+      "param_count": 4,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Marshal",
+      "method_name": "QueryInterface",
+      "param_count": 3,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Marshal",
+      "method_name": "ThrowExceptionForHR",
+      "param_count": 3,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "ObjectiveCMarshal",
+      "method_name": "Initialize",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "ObjectiveCMarshal",
+      "method_name": "Initialize",
+      "param_count": 4,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "ComExposedClassAttribute",
+      "method_name": "GetComInterfaceEntries",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "ComExposedClassAttribute",
+      "method_name": ".ctor",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "ComObject",
+      "method_name": "FinalRelease",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "ComVariantMarshaller",
+      "method_name": "ConvertToManaged",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "ComVariantMarshaller",
+      "method_name": "ConvertToUnmanaged",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "ComVariantMarshaller",
+      "method_name": "Free",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "ComVariantMarshaller.RefPropagate",
+      "method_name": "Free",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "ComVariantMarshaller.RefPropagate",
+      "method_name": "FromManaged",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "ComVariantMarshaller.RefPropagate",
+      "method_name": "FromUnmanaged",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "ComVariantMarshaller.RefPropagate",
+      "method_name": "ToManaged",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "ComVariantMarshaller.RefPropagate",
+      "method_name": "ToUnmanaged",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "ExceptionAsDefaultMarshaller",
+      "method_name": "ConvertToUnmanaged",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "ExceptionAsHResultMarshaller",
+      "method_name": "ConvertToUnmanaged",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "ExceptionAsNaNMarshaller",
+      "method_name": "ConvertToUnmanaged",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IComExposedClass",
+      "method_name": "GetComInterfaceEntries",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IComExposedDetails",
+      "method_name": "GetComInterfaceEntries",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IIUnknownCacheStrategy",
+      "method_name": "Clear",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IIUnknownCacheStrategy",
+      "method_name": "ConstructTableInfo",
+      "param_count": 3,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IIUnknownCacheStrategy",
+      "method_name": "TryGetTableInfo",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IIUnknownCacheStrategy",
+      "method_name": "TrySetTableInfo",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IIUnknownCacheStrategy.TableInfo",
+      "method_name": "get_ManagedType",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IIUnknownCacheStrategy.TableInfo",
+      "method_name": "get_Table",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IIUnknownCacheStrategy.TableInfo",
+      "method_name": "get_ThisPtr",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IIUnknownCacheStrategy.TableInfo",
+      "method_name": "set_ManagedType",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IIUnknownCacheStrategy.TableInfo",
+      "method_name": "set_Table",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IIUnknownCacheStrategy.TableInfo",
+      "method_name": "set_ThisPtr",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IIUnknownDerivedDetails",
+      "method_name": "get_Iid",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IIUnknownDerivedDetails",
+      "method_name": "get_Implementation",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IIUnknownDerivedDetails",
+      "method_name": "get_ManagedVirtualMethodTable",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IIUnknownInterfaceDetailsStrategy",
+      "method_name": "GetComExposedTypeDetails",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IIUnknownInterfaceDetailsStrategy",
+      "method_name": "GetIUnknownDerivedDetails",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IIUnknownInterfaceType",
+      "method_name": "get_Iid",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IIUnknownInterfaceType",
+      "method_name": "get_ManagedVirtualMethodTable",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IIUnknownStrategy",
+      "method_name": "CreateInstancePointer",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IIUnknownStrategy",
+      "method_name": "QueryInterface",
+      "param_count": 3,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IIUnknownStrategy",
+      "method_name": "Release",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IUnknownDerivedAttribute",
+      "method_name": "get_Iid",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IUnknownDerivedAttribute",
+      "method_name": "get_Implementation",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IUnknownDerivedAttribute",
+      "method_name": "get_ManagedVirtualMethodTable",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IUnknownDerivedAttribute",
+      "method_name": ".ctor",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "IUnmanagedVirtualMethodTableProvider",
+      "method_name": "GetVirtualMethodTableInfoForKey",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "StrategyBasedComWrappers",
+      "method_name": "get_DefaultIUnknownInterfaceDetailsStrategy",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "StrategyBasedComWrappers",
+      "method_name": "get_DefaultIUnknownStrategy",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "UniqueComInterfaceMarshaller",
+      "method_name": "ConvertToManaged",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "UniqueComInterfaceMarshaller",
+      "method_name": "ConvertToUnmanaged",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "VirtualMethodTableInfo",
+      "method_name": ".ctor",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "VirtualMethodTableInfo",
+      "method_name": "Deconstruct",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "VirtualMethodTableInfo",
+      "method_name": "get_ThisPointer",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "VirtualMethodTableInfo",
+      "method_name": "get_VirtualMethodTable",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Parallel",
+      "method_name": "For",
+      "param_count": 5,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Parallel",
+      "method_name": "ForAsync",
+      "param_count": 3,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Parallel",
+      "method_name": "ForEach",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Parallel",
+      "method_name": "ForEach",
+      "param_count": 3,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Parallel",
+      "method_name": "ForEach",
+      "param_count": 4,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Parallel",
+      "method_name": "ForEach",
+      "param_count": 5,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Parallel",
+      "method_name": "ForEachAsync",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Parallel",
+      "method_name": "ForEachAsync",
+      "param_count": 3,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Parallel",
+      "method_name": "Invoke",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "JsonElement",
+      "method_name": "get_Item",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "JsonDocument",
+      "method_name": "ParseValue",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "JsonDocument",
+      "method_name": "TryParseValue",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "JsonElement",
+      "method_name": "ParseValue",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "JsonElement",
+      "method_name": "TryParseValue",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "JsonNode",
+      "method_name": "Parse",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "JsonNode",
+      "method_name": "Parse",
+      "param_count": 3,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "JsonNode",
+      "method_name": "get_Item",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "JsonNode",
+      "method_name": "set_Item",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "JsonNode",
+      "method_name": "GetValue{T}",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "JsonNode",
+      "method_name": "set_Parent",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Utf8JsonReader",
+      "method_name": "set_ValueSpan",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Utf8JsonReader",
+      "method_name": "set_TokenStartIndex",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Utf8JsonReader",
+      "method_name": "set_HasValueSequence",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Utf8JsonReader",
+      "method_name": "set_ValueIsEscaped",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Utf8JsonReader",
+      "method_name": "set_ValueSequence",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Utf8JsonReader",
+      "method_name": "CopyString",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Utf8JsonWriter",
+      "method_name": "set_BytesPending",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "Utf8JsonWriter",
+      "method_name": "set_BytesCommitted",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "JsonArray",
+      "method_name": ".ctor",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "JsonArray",
+      "method_name": ".ctor",
+      "param_count": 2,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "JsonObject",
+      "method_name": ".ctor",
+      "param_count": 3,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "JsonConverter",
+      "method_name": "Read",
+      "param_count": 3,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "JsonConverter",
+      "method_name": "ReadAsPropertyName",
+      "param_count": 3,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "ReferenceHandler",
+      "method_name": "CreateResolver",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "ReferenceHandler",
+      "method_name": ".ctor",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "JsonSerializerOptions",
+      "method_name": "AddContext{TContext}",
+      "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "JsonTypeInfo",
+      "method_name": "set_IsReadOnly",
+      "param_count": 1,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "JsonTypeInfo",
+      "method_name": "set_ConstructorAttributeProvider",
+      "param_count": 1,
+      "override_value": "skip"
+    }
+  ],
+  "errors": [
+    "Generated C++ not found"
+  ]
+}

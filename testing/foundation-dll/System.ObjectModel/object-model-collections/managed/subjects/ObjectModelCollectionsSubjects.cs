@@ -22,8 +22,8 @@ public static partial class ObjectModelCollectionsSubjects
     // [1] System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::get_Comparer:System.Collections.Generic.IEqualityComparer{TKey}()
     public static void Subject_1()
     {
-        try { _ = default(KeyedCollection<byte, byte>)!.Comparer; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(KeyedCollection<byte, byte>)!.Comparer).GetHashCode()) != ((default(KeyedCollection<byte, byte>)!.Comparer).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [2] System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::get_Item:TItem(TKey)

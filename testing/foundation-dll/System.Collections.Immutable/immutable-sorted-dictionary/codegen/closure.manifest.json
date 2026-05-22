@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ImmutableSortedDictionarySubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Collections.Immutable/immutable-sorted-dictionary/managed/subjects/build-output/ImmutableSortedDictionarySubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Collections.Immutable/immutable-sorted-dictionary/managed/subjects/build-output/ImmutableSortedDictionarySubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "ImmutableSortedDictionarySubjects",
-      "path": "verification/foundation-dll/System.Collections.Immutable/immutable-sorted-dictionary/managed/subjects/build-output/ImmutableSortedDictionarySubjects.dll"
+      "path": "testing/foundation-dll/System.Collections.Immutable/immutable-sorted-dictionary/managed/subjects/build-output/ImmutableSortedDictionarySubjects.dll"
     },
     {
       "assemblyName": "System.Collections.Immutable",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "5c4c7e06-35ce-4d78-ba30-66dce6ed7127",
+  "inputModuleVersionId": "ca2867a5-e951-4a8c-ab2c-591e2ed45665",
   "artifacts": [
     {
       "kind": "typedIlIr",

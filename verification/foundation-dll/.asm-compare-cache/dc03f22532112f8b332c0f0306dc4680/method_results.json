@@ -1,0 +1,410 @@
+[
+  {
+    "methodIndex": 0,
+    "methodSubjectId": "System.Private.CoreLib/System.Threading.SemaphoreSlim::.ctor:System.Void(System.Int32)",
+    "shortName": "Subject_0",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 9,
+      "ratio": 0.2,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_Subject_0",
+      "instructions": 9
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 1,
+    "methodSubjectId": "System.Private.CoreLib/System.Threading.SemaphoreSlim::.ctor:System.Void(System.Int32,System.Int32)",
+    "shortName": "Subject_1",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 10,
+      "ratio": 0.23,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_Subject_1",
+      "instructions": 10
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 2,
+    "methodSubjectId": "System.Private.CoreLib/System.Threading.SemaphoreSlim::Wait:System.Void()",
+    "shortName": "Subject_2",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 1,
+      "ratio": 0.02,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_2",
+      "instructions": 1
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 3,
+    "methodSubjectId": "System.Private.CoreLib/System.Threading.SemaphoreSlim::Release:System.Int32()",
+    "shortName": "Subject_3",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 1,
+      "ratio": 0.02,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_3",
+      "instructions": 1
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 4,
+    "methodSubjectId": "System.Private.CoreLib/System.Threading.SemaphoreSlim::get_CurrentCount:System.Int32()",
+    "shortName": "Subject_4",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 1,
+      "ratio": 0.02,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_4",
+      "instructions": 1
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 5,
+    "methodSubjectId": "System.Private.CoreLib/System.Threading.ManualResetEvent::.ctor:System.Void(System.Boolean)",
+    "shortName": "Subject_5",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 9,
+      "ratio": 0.2,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_Subject_5",
+      "instructions": 9
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 6,
+    "methodSubjectId": "System.Private.CoreLib/System.Threading.ManualResetEvent::Set:System.Boolean()",
+    "shortName": "Subject_6",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 1,
+      "ratio": 0.02,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_6",
+      "instructions": 1
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 7,
+    "methodSubjectId": "System.Private.CoreLib/System.Threading.ManualResetEvent::Reset:System.Boolean()",
+    "shortName": "Subject_7",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 1,
+      "ratio": 0.02,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_7",
+      "instructions": 1
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 8,
+    "methodSubjectId": "System.Private.CoreLib/System.Threading.ManualResetEvent::WaitOne:System.Boolean()",
+    "shortName": "Subject_8",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 1,
+      "ratio": 0.02,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_8",
+      "instructions": 1
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 9,
+    "methodSubjectId": "System.Private.CoreLib/System.Threading.AutoResetEvent::.ctor:System.Void(System.Boolean)",
+    "shortName": "Subject_9",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 9,
+      "ratio": 0.2,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_Subject_9",
+      "instructions": 9
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 10,
+    "methodSubjectId": "System.Private.CoreLib/System.Threading.AutoResetEvent::Set:System.Boolean()",
+    "shortName": "Subject_10",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 1,
+      "ratio": 0.02,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_10",
+      "instructions": 1
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 11,
+    "methodSubjectId": "System.Private.CoreLib/System.Threading.AutoResetEvent::Reset:System.Boolean()",
+    "shortName": "Subject_11",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 1,
+      "ratio": 0.02,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_11",
+      "instructions": 1
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 12,
+    "methodSubjectId": "System.Private.CoreLib/System.Threading.AutoResetEvent::WaitOne:System.Boolean()",
+    "shortName": "Subject_12",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 1,
+      "ratio": 0.02,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_12",
+      "instructions": 1
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 13,
+    "methodSubjectId": "System.Private.CoreLib/System.Threading.SpinLock::.ctor:System.Void(System.Boolean)",
+    "shortName": "Subject_13",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 9,
+      "ratio": 0.2,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_Subject_13",
+      "instructions": 9
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 14,
+    "methodSubjectId": "System.Private.CoreLib/System.Threading.SpinLock::Enter:System.Void(System.Boolean&)",
+    "shortName": "Subject_14",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 1,
+      "ratio": 0.02,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_14",
+      "instructions": 1
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 15,
+    "methodSubjectId": "System.Private.CoreLib/System.Threading.SpinLock::Exit:System.Void()",
+    "shortName": "Subject_15",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 1,
+      "ratio": 0.02,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_15",
+      "instructions": 1
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 16,
+    "methodSubjectId": "System.Private.CoreLib/System.Threading.SpinWait::SpinOnce:System.Void()",
+    "shortName": "Subject_16",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 1,
+      "ratio": 0.02,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_16",
+      "instructions": 1
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  }
+]

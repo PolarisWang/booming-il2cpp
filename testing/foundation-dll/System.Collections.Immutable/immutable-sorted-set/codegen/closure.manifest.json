@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ImmutableSortedSetSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Collections.Immutable/immutable-sorted-set/managed/subjects/build-output/ImmutableSortedSetSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Collections.Immutable/immutable-sorted-set/managed/subjects/build-output/ImmutableSortedSetSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "ImmutableSortedSetSubjects",
-      "path": "verification/foundation-dll/System.Collections.Immutable/immutable-sorted-set/managed/subjects/build-output/ImmutableSortedSetSubjects.dll"
+      "path": "testing/foundation-dll/System.Collections.Immutable/immutable-sorted-set/managed/subjects/build-output/ImmutableSortedSetSubjects.dll"
     },
     {
       "assemblyName": "System.Collections.Immutable",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "1029a1e0-e272-4e94-adaa-304feb3600e5",
+  "inputModuleVersionId": "11871020-bbfa-4e27-b747-0f77a673847f",
   "artifacts": [
     {
       "kind": "typedIlIr",

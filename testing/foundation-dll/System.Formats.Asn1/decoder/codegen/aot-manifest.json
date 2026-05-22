@@ -220,6 +220,12 @@
     },
     {
       "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
       "subjectKind": "type",
       "subjectId": "System.Private.CoreLib/System.Nullable\u003CAsn1Tag\u003E",
       "reason": "external-call"
@@ -240,6 +246,12 @@
       "assemblyName": "System.Formats.Asn1",
       "subjectKind": "method",
       "subjectId": "System.Formats.Asn1/AsnDecoder::ReadCharacterString:System.String(System.ReadOnlySpan\u003CSystem.Byte\u003E,AsnEncodingRules,UniversalTagNumber,System.Int32\u0026,System.Nullable\u003CAsn1Tag\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
       "reason": "external-call"
     },
     {

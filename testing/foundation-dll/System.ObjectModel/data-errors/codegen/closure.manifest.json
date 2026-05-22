@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "DataErrorsSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.ObjectModel/data-errors/managed/subjects/build-output/DataErrorsSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.ObjectModel/data-errors/managed/subjects/build-output/DataErrorsSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "DataErrorsSubjects",
-      "path": "verification/foundation-dll/System.ObjectModel/data-errors/managed/subjects/build-output/DataErrorsSubjects.dll"
+      "path": "testing/foundation-dll/System.ObjectModel/data-errors/managed/subjects/build-output/DataErrorsSubjects.dll"
     },
     {
       "assemblyName": "System.ObjectModel",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "aec2948c-f4b7-459b-a451-3f48532d190d",
+  "inputModuleVersionId": "72779b71-c967-4a00-92f0-e041afb19b7a",
   "artifacts": [
     {
       "kind": "typedIlIr",

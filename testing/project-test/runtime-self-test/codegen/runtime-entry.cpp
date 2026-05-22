@@ -166,7 +166,17 @@ int main(int argc, char* argv[]) {
     } else {
         // Fact mode: call entry point directly.
         chaos::il2cpp::common::g_chaos_fail_hook = []() { chaos::il2cpp::runtime_core::chaos_raise_exception(0); };
+#ifdef _MSC_VER
+        __try {
+            RunNativeAot(kProjectEntryIndex);
+        } __except (EXCEPTION_EXECUTE_HANDLER) {
+            std::fprintf(stderr, "FATAL: SEH exception code=0x%08X\n",
+                static_cast<unsigned>(GetExceptionCode()));
+            _Exit(1);
+        }
+#else
         RunNativeAot(kProjectEntryIndex);
+#endif
         chaos::il2cpp::common::g_chaos_fail_hook = nullptr;
         std::fflush(stdout);
         _Exit(0);  // avoid GC background threads during CRT cleanup

@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/delegate/core/invocation",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/System.Delegate::Combine:System.Delegate(System.Delegate,System.Delegate)",
+      "status": "passed",
+      "prePatchNsPerOp": 5.9,
+      "postPatchNsPerOp": 5.9,
+      "slowdownPercent": 0.0
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/System.Delegate::Remove:System.Delegate(System.Delegate,System.Delegate)",
+      "status": "passed",
+      "prePatchNsPerOp": 6.31,
+      "postPatchNsPerOp": 6.9,
+      "slowdownPercent": 9.35
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/System.Delegate::DynamicInvoke:System.Object(System.Object[])",
+      "status": "passed",
+      "prePatchNsPerOp": 13.51,
+      "postPatchNsPerOp": 12.3,
+      "slowdownPercent": -8.96
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Private.CoreLib/System.Delegate::get_Method:System.Reflection.MethodInfo()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.4,
+      "postPatchNsPerOp": 3.8,
+      "slowdownPercent": 11.76
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Private.CoreLib/System.Delegate::get_Target:System.Object()",
+      "status": "passed",
+      "prePatchNsPerOp": 12.02,
+      "postPatchNsPerOp": 12.7,
+      "slowdownPercent": 5.66
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Private.CoreLib/System.Delegate::CreateDelegate:System.Delegate(System.Type,System.Object,System.String)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Private.CoreLib/System.Delegate::CreateDelegate:System.Delegate(System.Type,System.Reflection.MethodInfo)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Private.CoreLib/System.MulticastDelegate::GetInvocationList:System.Delegate[]()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.49,
+      "postPatchNsPerOp": 3.6,
+      "slowdownPercent": 3.15
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Private.CoreLib/System.Delegate::op_Equality:System.Boolean(System.Delegate,System.Delegate)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Private.CoreLib/System.Delegate::op_Inequality:System.Boolean(System.Delegate,System.Delegate)",
+      "status": "stub"
+    }
+  ],
+  "summary": {
+    "totalMethods": 10,
+    "nonStubMethods": 6,
+    "averageSlowdownPercent": 3.49,
+    "slowdownFactor": 1.0349,
+    "slowdownThresholdX": 50.0
+  }
+}

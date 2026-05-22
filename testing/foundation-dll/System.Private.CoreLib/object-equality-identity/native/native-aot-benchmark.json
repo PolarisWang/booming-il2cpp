@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/object/equality/identity",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)",
+      "elapsedMilliseconds": 23.091,
+      "calibratedMs": 23.091,
+      "opsPerSecond": 4330729.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object,System.Object)",
+      "elapsedMilliseconds": 18.598,
+      "calibratedMs": 18.598,
+      "opsPerSecond": 5376893.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/System.Object::ReferenceEquals:System.Boolean(System.Object,System.Object)",
+      "elapsedMilliseconds": 18.558,
+      "calibratedMs": 18.558,
+      "opsPerSecond": 5388395.6,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "elapsedMilliseconds": 9.795,
+      "calibratedMs": 9.795,
+      "opsPerSecond": 10209707.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Private.CoreLib/System.Object::ToString:System.String()",
+      "elapsedMilliseconds": 13.425,
+      "calibratedMs": 13.425,
+      "opsPerSecond": 7448845.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Private.CoreLib/System.Object::GetType:System.Type()",
+      "elapsedMilliseconds": 10.099,
+      "calibratedMs": 10.099,
+      "opsPerSecond": 9901676.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Private.CoreLib/System.Object::MemberwiseClone:System.Object()",
+      "elapsedMilliseconds": -1.0,
+      "status": "stub"
+    }
+  ]
+}

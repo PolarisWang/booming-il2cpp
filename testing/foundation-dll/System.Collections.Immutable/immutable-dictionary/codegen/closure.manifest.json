@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ImmutableDictionarySubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Collections.Immutable/immutable-dictionary/managed/subjects/build-output/ImmutableDictionarySubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Collections.Immutable/immutable-dictionary/managed/subjects/build-output/ImmutableDictionarySubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "ImmutableDictionarySubjects",
-      "path": "verification/foundation-dll/System.Collections.Immutable/immutable-dictionary/managed/subjects/build-output/ImmutableDictionarySubjects.dll"
+      "path": "testing/foundation-dll/System.Collections.Immutable/immutable-dictionary/managed/subjects/build-output/ImmutableDictionarySubjects.dll"
     },
     {
       "assemblyName": "System.Collections.Immutable",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "9ff7cf7d-da2b-4fd1-a76e-34e5383b114e",
+  "inputModuleVersionId": "9366bd0c-7b4c-46ba-99d9-d2623893cd54",
   "artifacts": [
     {
       "kind": "typedIlIr",

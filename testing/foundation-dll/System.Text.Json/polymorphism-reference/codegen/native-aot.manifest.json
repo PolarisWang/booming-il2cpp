@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "PolymorphismReferenceSubjects",
   "entrySubjectId": "PolymorphismReferenceSubjects/PolymorphismReferenceSubjects::CustomEntrySubject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Text.Json/polymorphism-reference/codegen",
+  "managedClosureRootPath": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/polymorphism-reference/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

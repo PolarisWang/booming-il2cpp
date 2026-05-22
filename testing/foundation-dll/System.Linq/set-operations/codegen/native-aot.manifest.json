@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "SetOperationsSubjects",
   "entrySubjectId": "SetOperationsSubjects/SetOperationsSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Linq/set-operations/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.Linq/set-operations/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "OptionsSchedulerSubjects",
   "entrySubjectId": "OptionsSchedulerSubjects/OptionsSchedulerSubjects::CustomEntrySubject_19:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.IO.Pipelines/options-scheduler/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.IO.Pipelines/options-scheduler/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

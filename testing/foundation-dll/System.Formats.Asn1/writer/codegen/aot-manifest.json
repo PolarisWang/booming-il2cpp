@@ -297,6 +297,12 @@
       "reason": "external-call"
     },
     {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
       "assemblyName": "System.Formats.Asn1",
       "subjectKind": "method",
       "subjectId": "System.Formats.Asn1/AsnWriter::GetEncodedLength:System.Int32()",

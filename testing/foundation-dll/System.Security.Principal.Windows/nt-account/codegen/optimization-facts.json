@@ -66,9 +66,39 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_1:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::get_Value:System.String()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::get_Value:System.String()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_2:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
     },
     {
@@ -84,15 +114,57 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::IsValidTargetType:System.Boolean(System.Type)",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_6:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Object::ToString:System.String()",
       "devirtualized": false
     },
     {
+      "methodSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_6:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_6:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::ToString:System.String()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_6:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_7:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::Translate:System.Security.Principal.IdentityReference(System.Type)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_7:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_7:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Security.Principal.Windows/System.Security.Principal.IdentityReference::Translate:System.Security.Principal.IdentityReference(System.Type)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_7:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
     }
   ],
@@ -108,32 +180,52 @@
     {
       "methodSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_0:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_1:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_2:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_3:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_4:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_5:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_6:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_7:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_8:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_9:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     }
   ]
 }

@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "ProjectionSubjects",
   "entrySubjectId": "ProjectionSubjects/ProjectionSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Linq/projection/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.Linq/projection/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

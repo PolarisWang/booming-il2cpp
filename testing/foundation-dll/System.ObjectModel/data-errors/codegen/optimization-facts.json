@@ -46,6 +46,30 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.ObjectModel/System.ComponentModel.DataErrorsChangedEventArgs::get_PropertyName:System.String()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::get_HasErrors:System.Boolean()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_3:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::get_HasErrors:System.Boolean()",
@@ -55,6 +79,24 @@
       "methodSubjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_4:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::GetErrors:System.Collections.IEnumerable(System.String)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_4:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_4:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::GetErrors:System.Collections.IEnumerable(System.String)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_4:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
     }
   ],
@@ -70,17 +112,22 @@
     {
       "methodSubjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_0:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_1:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_3:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "DataErrorsSubjects/DataErrorsSubjects::Subject_4:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     }
   ]
 }

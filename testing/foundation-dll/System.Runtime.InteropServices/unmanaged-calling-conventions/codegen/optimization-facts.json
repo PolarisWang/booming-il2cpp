@@ -22,5 +22,11 @@
       "requiresBoxing": true
     }
   ],
-  "exceptionFacts": []
+  "exceptionFacts": [
+    {
+      "methodSubjectId": "UnmanagedCallingConventionsSubjects/UnmanagedCallingConventionsSubjects::Subject_0:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    }
+  ]
 }

@@ -71,67 +71,13 @@
     {
       "assemblyName": "JoinsSubjects",
       "subjectKind": "method",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_1:System.Int32(System.Int32)",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "JoinsSubjects",
-      "subjectKind": "method",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "JoinsSubjects",
-      "subjectKind": "method",
       "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_0:System.Int32(System.Int32)",
       "reason": "generated-direct-call"
     },
     {
       "assemblyName": "JoinsSubjects",
       "subjectKind": "method",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_1:System.Int32(System.Int32)",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "JoinsSubjects",
-      "subjectKind": "method",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "JoinsSubjects",
-      "subjectKind": "method",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_0:System.Int32(System.Int32)",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "JoinsSubjects",
-      "subjectKind": "method",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_1:System.Int32(System.Int32)",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "JoinsSubjects",
-      "subjectKind": "method",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_2:System.Int32(System.Int32,System.Int32)",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "JoinsSubjects",
-      "subjectKind": "method",
       "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_0:System.Int32(System.Int32)",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "JoinsSubjects",
-      "subjectKind": "method",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_1:System.Int32(System.Int32)",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "JoinsSubjects",
-      "subjectKind": "method",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_2:System.Int32(System.Int32,System.Int32)",
       "reason": "generated-direct-call"
     },
     {
@@ -245,7 +191,25 @@
     {
       "assemblyName": "JoinsSubjects",
       "subjectKind": "field",
+      "subjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::A0FEBE8D859AC7FE1E225E18F8632CFA942D34C2F58386AE0B982B55FD4EB116",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "JoinsSubjects",
+      "subjectKind": "field",
       "subjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::A10494D90314704E24CA5786F6376A6097558F10BB7880B539C8B80312DCA080",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "JoinsSubjects",
+      "subjectKind": "field",
+      "subjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::CBF03EFCA28AF3C84560CE82FEAE66B8AE0A9321EC14BE8F40D06EB0AD7BFE73",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "JoinsSubjects",
+      "subjectKind": "field",
+      "subjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::D8D4F55129E2966F2C74F35D6AC1769A713230A8B8371D030F18C6DEA1AAFD77",
       "reason": "instance-field-state"
     },
     {
@@ -263,67 +227,13 @@
     {
       "assemblyName": "JoinsSubjects",
       "subjectKind": "field",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_1",
-      "reason": "instance-field-state"
-    },
-    {
-      "assemblyName": "JoinsSubjects",
-      "subjectKind": "field",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_2",
-      "reason": "instance-field-state"
-    },
-    {
-      "assemblyName": "JoinsSubjects",
-      "subjectKind": "field",
       "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_0",
       "reason": "instance-field-state"
     },
     {
       "assemblyName": "JoinsSubjects",
       "subjectKind": "field",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_1",
-      "reason": "instance-field-state"
-    },
-    {
-      "assemblyName": "JoinsSubjects",
-      "subjectKind": "field",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_2",
-      "reason": "instance-field-state"
-    },
-    {
-      "assemblyName": "JoinsSubjects",
-      "subjectKind": "field",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_0",
-      "reason": "instance-field-state"
-    },
-    {
-      "assemblyName": "JoinsSubjects",
-      "subjectKind": "field",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_1",
-      "reason": "instance-field-state"
-    },
-    {
-      "assemblyName": "JoinsSubjects",
-      "subjectKind": "field",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_2",
-      "reason": "instance-field-state"
-    },
-    {
-      "assemblyName": "JoinsSubjects",
-      "subjectKind": "field",
       "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_0",
-      "reason": "instance-field-state"
-    },
-    {
-      "assemblyName": "JoinsSubjects",
-      "subjectKind": "field",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_1",
-      "reason": "instance-field-state"
-    },
-    {
-      "assemblyName": "JoinsSubjects",
-      "subjectKind": "field",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_2",
       "reason": "instance-field-state"
     },
     {
@@ -393,21 +303,15 @@
       "reason": "external-call"
     },
     {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
-      "reason": "external-call"
-    },
-    {
       "assemblyName": "System.Linq",
       "subjectKind": "method",
-      "subjectId": "System.Linq/Enumerable::GroupJoin\u003CSystem.Int32,System.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E)",
+      "subjectId": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
       "reason": "external-call"
     },
     {
       "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E()",
+      "subjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E()",
       "reason": "external-call"
     },
     {
@@ -425,25 +329,25 @@
     {
       "assemblyName": "System.Linq",
       "subjectKind": "method",
-      "subjectId": "System.Linq/Enumerable::GroupJoin\u003CSystem.Int32,System.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "subjectId": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Distinct\u003CSystem.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
       "reason": "external-call"
     },
     {
       "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
+      "subjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E()",
       "reason": "external-call"
     },
     {
       "assemblyName": "System.Linq",
       "subjectKind": "method",
-      "subjectId": "System.Linq/Enumerable::Join\u003CSystem.Int32,System.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E)",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Linq",
-      "subjectKind": "method",
-      "subjectId": "System.Linq/Enumerable::Join\u003CSystem.Int32,System.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "subjectId": "System.Linq/Enumerable::OrderBy\u003CSystem.Int32,System.Int32\u003E:IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
       "reason": "external-call"
     },
     {

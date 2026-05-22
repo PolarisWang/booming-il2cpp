@@ -68,6 +68,23 @@ static const Functions s_functions = {
 
 const Functions kFunctions = s_functions;
 
+// Flat function pointer array for indexed dispatch (benchmarking).
+// Avoids fragile reinterpret_cast<void* const*>(&kFunctions) which depends on
+// struct layout uniformity across sub-struct members.
+extern "C" void* kFunctionsFlat[10];
+void* kFunctionsFlat[10] = {
+    reinterpret_cast<void*>(&ImmutableQueueStackSubjects_ImmutableQueueStackSubjects_CustomEntrySubject_0),
+    reinterpret_cast<void*>(&ImmutableQueueStackSubjects_ImmutableQueueStackSubjects_CustomEntrySubject_1),
+    reinterpret_cast<void*>(&ImmutableQueueStackSubjects_ImmutableQueueStackSubjects_CustomEntrySubject_2),
+    reinterpret_cast<void*>(&ImmutableQueueStackSubjects_ImmutableQueueStackSubjects_CustomEntrySubject_3),
+    reinterpret_cast<void*>(&ImmutableQueueStackSubjects_ImmutableQueueStackSubjects_CustomEntrySubject_4),
+    reinterpret_cast<void*>(&ImmutableQueueStackSubjects_ImmutableQueueStackSubjects_CustomEntrySubject_5),
+    reinterpret_cast<void*>(&ImmutableQueueStackSubjects_ImmutableQueueStackSubjects_CustomEntrySubject_6),
+    reinterpret_cast<void*>(&ImmutableQueueStackSubjects_ImmutableQueueStackSubjects_CustomEntrySubject_7),
+    reinterpret_cast<void*>(&ImmutableQueueStackSubjects_ImmutableQueueStackSubjects_CustomEntrySubject_8),
+    reinterpret_cast<void*>(&ImmutableQueueStackSubjects_ImmutableQueueStackSubjects_CustomEntrySubject_9),
+};
+
 
 bool ChaosGeneratedModuleActivate(ChaosRuntimeHost* host) {
     if (!host) return false;

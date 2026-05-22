@@ -72,52 +72,12 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
-        CHAOS_IL2CPP_INT32 (*<CustomEntrySubject_0>b__1_1)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INT32
-        );
-        CHAOS_IL2CPP_INT32 (*<CustomEntrySubject_0>b__1_2)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INT32, 
-                    CHAOS_IL2CPP_INTPTR
-        );
         CHAOS_IL2CPP_INT32 (*<CustomEntrySubject_1>b__2_0)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
-        CHAOS_IL2CPP_INT32 (*<CustomEntrySubject_1>b__2_1)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INT32
-        );
-        CHAOS_IL2CPP_INT32 (*<CustomEntrySubject_1>b__2_2)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INT32, 
-                    CHAOS_IL2CPP_INTPTR
-        );
-        CHAOS_IL2CPP_INT32 (*<CustomEntrySubject_2>b__3_0)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INT32
-        );
-        CHAOS_IL2CPP_INT32 (*<CustomEntrySubject_2>b__3_1)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INT32
-        );
-        CHAOS_IL2CPP_INT32 (*<CustomEntrySubject_2>b__3_2)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INT32, 
-                    CHAOS_IL2CPP_INT32
-        );
         CHAOS_IL2CPP_INT32 (*<CustomEntrySubject_3>b__4_0)(
                     CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INT32
-        );
-        CHAOS_IL2CPP_INT32 (*<CustomEntrySubject_3>b__4_1)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INT32
-        );
-        CHAOS_IL2CPP_INT32 (*<CustomEntrySubject_3>b__4_2)(
-                    CHAOS_IL2CPP_INTPTR, 
-                    CHAOS_IL2CPP_INT32, 
                     CHAOS_IL2CPP_INT32
         );
         CHAOS_IL2CPP_INTPTR (*<CustomEntrySubject_4>b__5_0)(
@@ -274,26 +234,6 @@ struct JoinsSubjects___c {
                     arg_1
         );
     }
-    static inline CHAOS_IL2CPP_INT32 <CustomEntrySubject_0>b__1_1(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INT32 arg_1
-    ) {
-        return kFunctions.joinsSubjects___c.<CustomEntrySubject_0>b__1_1(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    static inline CHAOS_IL2CPP_INT32 <CustomEntrySubject_0>b__1_2(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INT32 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.joinsSubjects___c.<CustomEntrySubject_0>b__1_2(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
     static inline CHAOS_IL2CPP_INT32 <CustomEntrySubject_1>b__2_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -303,55 +243,6 @@ struct JoinsSubjects___c {
                     arg_1
         );
     }
-    static inline CHAOS_IL2CPP_INT32 <CustomEntrySubject_1>b__2_1(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INT32 arg_1
-    ) {
-        return kFunctions.joinsSubjects___c.<CustomEntrySubject_1>b__2_1(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    static inline CHAOS_IL2CPP_INT32 <CustomEntrySubject_1>b__2_2(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INT32 arg_1, 
-                CHAOS_IL2CPP_INTPTR arg_2
-    ) {
-        return kFunctions.joinsSubjects___c.<CustomEntrySubject_1>b__2_2(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
-    static inline CHAOS_IL2CPP_INT32 <CustomEntrySubject_2>b__3_0(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INT32 arg_1
-    ) {
-        return kFunctions.joinsSubjects___c.<CustomEntrySubject_2>b__3_0(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    static inline CHAOS_IL2CPP_INT32 <CustomEntrySubject_2>b__3_1(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INT32 arg_1
-    ) {
-        return kFunctions.joinsSubjects___c.<CustomEntrySubject_2>b__3_1(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    static inline CHAOS_IL2CPP_INT32 <CustomEntrySubject_2>b__3_2(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INT32 arg_1, 
-                CHAOS_IL2CPP_INT32 arg_2
-    ) {
-        return kFunctions.joinsSubjects___c.<CustomEntrySubject_2>b__3_2(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
-        );
-    }
     static inline CHAOS_IL2CPP_INT32 <CustomEntrySubject_3>b__4_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -359,26 +250,6 @@ struct JoinsSubjects___c {
         return kFunctions.joinsSubjects___c.<CustomEntrySubject_3>b__4_0(
                     arg_0, 
                     arg_1
-        );
-    }
-    static inline CHAOS_IL2CPP_INT32 <CustomEntrySubject_3>b__4_1(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INT32 arg_1
-    ) {
-        return kFunctions.joinsSubjects___c.<CustomEntrySubject_3>b__4_1(
-                    arg_0, 
-                    arg_1
-        );
-    }
-    static inline CHAOS_IL2CPP_INT32 <CustomEntrySubject_3>b__4_2(
-                CHAOS_IL2CPP_INTPTR arg_0, 
-                CHAOS_IL2CPP_INT32 arg_1, 
-                CHAOS_IL2CPP_INT32 arg_2
-    ) {
-        return kFunctions.joinsSubjects___c.<CustomEntrySubject_3>b__4_2(
-                    arg_0, 
-                    arg_1, 
-                    arg_2
         );
     }
     static inline CHAOS_IL2CPP_INTPTR <CustomEntrySubject_4>b__5_0(
@@ -418,7 +289,7 @@ struct JoinsSubjects___c {
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 18;
+    static constexpr int32_t MethodCount = 9;
 };
 
 struct JoinsSubjects___c__DisplayClass5_0 {

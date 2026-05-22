@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ReflectionMemberBasicsSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/reflection-member-basics/codegen/_subjects_input/ReflectionMemberBasicsSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/reflection-member-basics/managed/subjects/build-output/ReflectionMemberBasicsSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "ReflectionMemberBasicsSubjects",
-      "path": "testing/foundation-dll/System.Private.CoreLib/reflection-member-basics/codegen/_subjects_input/ReflectionMemberBasicsSubjects.dll"
+      "path": "testing/foundation-dll/System.Private.CoreLib/reflection-member-basics/managed/subjects/build-output/ReflectionMemberBasicsSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "773fd01b-5c31-4e5d-8585-d202390c715c",
+  "inputModuleVersionId": "dd547655-cb12-49ed-bf3b-2ac8b49b0359",
   "artifacts": [
     {
       "kind": "typedIlIr",

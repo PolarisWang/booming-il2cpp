@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> - Benchmark Detail - System.Private.CoreLib - Foundation DLL Audit</title>
+  <link rel="stylesheet" href="../../../../../dashboard.css">
+</head>
+<body>
+  <main>
+    <div class="page-header">
+      <a class="back-link" href="../System.Private.CoreLib.html">Back to System.Private.CoreLib</a>
+      <div class="eyebrow">Benchmark Detail — Performance Comparison</div>
+      <h1></h1>
+      <div class="summary-grid">
+        <div class="summary-card"><strong>Closure Status</strong><span class="status status-in-progress">in-progress</span></div>
+        <div class="summary-card"><strong>Methods</strong>7</div>
+        <div class="summary-card"><strong>Avg Speedup</strong>0.0%</div>
+        <div class="summary-card"><strong>Native Faster</strong>0</div>
+        <div class="summary-card"><strong>Managed Faster</strong>0</div>
+      </div>
+      <p>Average Speedup: 0.0% (Native faster: 0, Managed faster: 0, Total methods: 7)</p>
+    </div>
+
+    <section class="detail-section">
+      <h2>Benchmark Results</h2>
+      <p>Managed vs Native execution time comparison per method. Expand code blocks to inspect the benchmark source code.</p>
+      <div class="table-wrap">
+        <table class="family-detail-table">
+          <thead><tr><th>Method</th><th>Managed (ms)</th><th>Native (ms)</th><th>Speedup %</th><th>Status</th><th>Managed Benchmark Code</th><th>Native Benchmark Code</th></tr></thead>
+          <tbody><tr><td>RcwBasicNativeEntry::Run(System.Int32)</td><td>n/a</td><td>n/a</td><td>n/a</td><td><span class="status status-managed-harness-unavailable">managed_harness_unavailable</span></td><td><span class="status-muted">Code not found</span></td><td><details class="code-detail-card"><summary class="code-summary">BenchmarkNativeEntry.cpp (C++)</summary><div class="code-note">This is a synthetic benchmark stub (dispatch overhead measurement, not actual conversion logic). The real native AOT codegen is shown on the Fact page.</div><pre class="code-block"><code>1377  	{ 0u, &quot;RcwBasicSubjects/RcwBasicNativeEntry::MarshalReleaseRcw:System.Void(System.IntPtr)&quot;, &quot;MarshalReleaseRcw&quot;, &quot;System.Void&quot;, 0, nullptr, 0u },
+1378  	{ 0u, &quot;RcwBasicSubjects/RcwBasicNativeEntry::Run:System.Int32(System.Int32)&quot;, &quot;Run&quot;, &quot;System.Void&quot;, 0, nullptr, 0u },
+1379  	{ 0u, &quot;RcwBasicSubjects/RcwBasicNativeEntry::TestRcwDirectVtable:System.Int32()&quot;, &quot;TestRcwDirectVtable&quot;, &quot;System.Void&quot;, 0, nullptr, 0u },</code></pre></details></td></tr><tr><td>RcwBasicNativeEntry::TestRcwRoundTripIdentity()</td><td>n/a</td><td>n/a</td><td>n/a</td><td><span class="status status-managed-harness-unavailable">managed_harness_unavailable</span></td><td><span class="status-muted">Code not found</span></td><td><details class="code-detail-card"><summary class="code-summary">BenchmarkNativeEntry.cpp (C++)</summary><div class="code-note">This is a synthetic benchmark stub (dispatch overhead measurement, not actual conversion logic). The real native AOT codegen is shown on the Fact page.</div><pre class="code-block"><code>1381  	{ 0u, &quot;RcwBasicSubjects/RcwBasicNativeEntry::TestRcwQiUnknownInterface:System.Int32()&quot;, &quot;TestRcwQiUnknownInterface&quot;, &quot;System.Void&quot;, 0, nullptr, 0u },
+1382  	{ 0u, &quot;RcwBasicSubjects/RcwBasicNativeEntry::TestRcwRoundTripIdentity:System.Int32()&quot;, &quot;TestRcwRoundTripIdentity&quot;, &quot;System.Void&quot;, 0, nullptr, 0u },
+1383  	{ 0u, &quot;RcwBasicSubjects/RcwBasicNativeEntry::TestRcwRoundTripQi:System.Int32()&quot;, &quot;TestRcwRoundTripQi&quot;, &quot;System.Void&quot;, 0, nullptr, 0u },</code></pre></details></td></tr><tr><td>RcwBasicNativeEntry::TestRcwRoundTripQi()</td><td>n/a</td><td>n/a</td><td>n/a</td><td><span class="status status-managed-harness-unavailable">managed_harness_unavailable</span></td><td><span class="status-muted">Code not found</span></td><td><details class="code-detail-card"><summary class="code-summary">BenchmarkNativeEntry.cpp (C++)</summary><div class="code-note">This is a synthetic benchmark stub (dispatch overhead measurement, not actual conversion logic). The real native AOT codegen is shown on the Fact page.</div><pre class="code-block"><code>1382  	{ 0u, &quot;RcwBasicSubjects/RcwBasicNativeEntry::TestRcwRoundTripIdentity:System.Int32()&quot;, &quot;TestRcwRoundTripIdentity&quot;, &quot;System.Void&quot;, 0, nullptr, 0u },
+1383  	{ 0u, &quot;RcwBasicSubjects/RcwBasicNativeEntry::TestRcwRoundTripQi:System.Int32()&quot;, &quot;TestRcwRoundTripQi&quot;, &quot;System.Void&quot;, 0, nullptr, 0u },
+1384  	{ 0u, &quot;RcwBasicSubjects/RcwBasicNativeEntry::TestRcwVtableMethodCall:System.Int32()&quot;, &quot;TestRcwVtableMethodCall&quot;, &quot;System.Void&quot;, 0, nullptr, 0u },</code></pre></details></td></tr><tr><td>RcwBasicNativeEntry::TestRcwMultipleWrappers()</td><td>n/a</td><td>n/a</td><td>n/a</td><td><span class="status status-managed-harness-unavailable">managed_harness_unavailable</span></td><td><span class="status-muted">Code not found</span></td><td><details class="code-detail-card"><summary class="code-summary">BenchmarkNativeEntry.cpp (C++)</summary><div class="code-note">This is a synthetic benchmark stub (dispatch overhead measurement, not actual conversion logic). The real native AOT codegen is shown on the Fact page.</div><pre class="code-block"><code>1379  	{ 0u, &quot;RcwBasicSubjects/RcwBasicNativeEntry::TestRcwDirectVtable:System.Int32()&quot;, &quot;TestRcwDirectVtable&quot;, &quot;System.Void&quot;, 0, nullptr, 0u },
+1380  	{ 0u, &quot;RcwBasicSubjects/RcwBasicNativeEntry::TestRcwMultipleWrappers:System.Int32()&quot;, &quot;TestRcwMultipleWrappers&quot;, &quot;System.Void&quot;, 0, nullptr, 0u },
+1381  	{ 0u, &quot;RcwBasicSubjects/RcwBasicNativeEntry::TestRcwQiUnknownInterface:System.Int32()&quot;, &quot;TestRcwQiUnknownInterface&quot;, &quot;System.Void&quot;, 0, nullptr, 0u },</code></pre></details></td></tr><tr><td>RcwBasicNativeEntry::TestRcwQiUnknownInterface()</td><td>n/a</td><td>n/a</td><td>n/a</td><td><span class="status status-managed-harness-unavailable">managed_harness_unavailable</span></td><td><span class="status-muted">Code not found</span></td><td><details class="code-detail-card"><summary class="code-summary">BenchmarkNativeEntry.cpp (C++)</summary><div class="code-note">This is a synthetic benchmark stub (dispatch overhead measurement, not actual conversion logic). The real native AOT codegen is shown on the Fact page.</div><pre class="code-block"><code>1380  	{ 0u, &quot;RcwBasicSubjects/RcwBasicNativeEntry::TestRcwMultipleWrappers:System.Int32()&quot;, &quot;TestRcwMultipleWrappers&quot;, &quot;System.Void&quot;, 0, nullptr, 0u },
+1381  	{ 0u, &quot;RcwBasicSubjects/RcwBasicNativeEntry::TestRcwQiUnknownInterface:System.Int32()&quot;, &quot;TestRcwQiUnknownInterface&quot;, &quot;System.Void&quot;, 0, nullptr, 0u },
+1382  	{ 0u, &quot;RcwBasicSubjects/RcwBasicNativeEntry::TestRcwRoundTripIdentity:System.Int32()&quot;, &quot;TestRcwRoundTripIdentity&quot;, &quot;System.Void&quot;, 0, nullptr, 0u },</code></pre></details></td></tr><tr><td>RcwBasicNativeEntry::TestRcwVtableMethodCall()</td><td>n/a</td><td>n/a</td><td>n/a</td><td><span class="status status-managed-harness-unavailable">managed_harness_unavailable</span></td><td><span class="status-muted">Code not found</span></td><td><details class="code-detail-card"><summary class="code-summary">BenchmarkNativeEntry.cpp (C++)</summary><div class="code-note">This is a synthetic benchmark stub (dispatch overhead measurement, not actual conversion logic). The real native AOT codegen is shown on the Fact page.</div><pre class="code-block"><code>1383  	{ 0u, &quot;RcwBasicSubjects/RcwBasicNativeEntry::TestRcwRoundTripQi:System.Int32()&quot;, &quot;TestRcwRoundTripQi&quot;, &quot;System.Void&quot;, 0, nullptr, 0u },
+1384  	{ 0u, &quot;RcwBasicSubjects/RcwBasicNativeEntry::TestRcwVtableMethodCall:System.Int32()&quot;, &quot;TestRcwVtableMethodCall&quot;, &quot;System.Void&quot;, 0, nullptr, 0u },
+1385  };
+1386  
+1387  static constexpr ReflectionQueryFieldDescriptor kReflFields_RcwBasicSubjects_RuntimeState[1] = {
+1388  	{ 0u, &quot;RcwBasicSubjects/RuntimeState::_state&quot;, &quot;_state&quot;, &quot;System.Int32&quot;, 0LL },
+1389  };</code></pre></details></td></tr><tr><td>RcwBasicNativeEntry::TestRcwDirectVtable()</td><td>n/a</td><td>n/a</td><td>n/a</td><td><span class="status status-managed-harness-unavailable">managed_harness_unavailable</span></td><td><span class="status-muted">Code not found</span></td><td><details class="code-detail-card"><summary class="code-summary">BenchmarkNativeEntry.cpp (C++)</summary><div class="code-note">This is a synthetic benchmark stub (dispatch overhead measurement, not actual conversion logic). The real native AOT codegen is shown on the Fact page.</div><pre class="code-block"><code>1378  	{ 0u, &quot;RcwBasicSubjects/RcwBasicNativeEntry::Run:System.Int32(System.Int32)&quot;, &quot;Run&quot;, &quot;System.Void&quot;, 0, nullptr, 0u },
+1379  	{ 0u, &quot;RcwBasicSubjects/RcwBasicNativeEntry::TestRcwDirectVtable:System.Int32()&quot;, &quot;TestRcwDirectVtable&quot;, &quot;System.Void&quot;, 0, nullptr, 0u },
+1380  	{ 0u, &quot;RcwBasicSubjects/RcwBasicNativeEntry::TestRcwMultipleWrappers:System.Int32()&quot;, &quot;TestRcwMultipleWrappers&quot;, &quot;System.Void&quot;, 0, nullptr, 0u },</code></pre></details></td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <h2>Evidence</h2>
+      <div class="source-links">
+        <span class="status-muted">n/a</span>
+      </div>
+    </section>
+  </main>
+  <script>
+// Tab switching
+function switchTab(tabName) {
+  var contents = document.querySelectorAll('.tab-content');
+  for (var i = 0; i < contents.length; i++) { contents[i].classList.remove('active'); }
+  var buttons = document.querySelectorAll('.tab-button');
+  for (var i = 0; i < buttons.length; i++) { buttons[i].classList.remove('active'); }
+  var target = document.getElementById('tab-' + tabName);
+  if (target) { target.classList.add('active'); }
+  var btn = document.querySelector('.tab-button[data-tab="' + tabName + '"]');
+  if (btn) { btn.classList.add('active'); }
+  window.location.hash = tabName;
+}
+document.addEventListener('DOMContentLoaded', function() {
+  var hash = window.location.hash.replace('#', '');
+  if (hash) {
+    var btn = document.querySelector('.tab-button[data-tab="' + hash + '"]');
+    if (btn) switchTab(hash);
+  }
+});
+// Expandable rows
+function toggleRow(btn) {
+  var row = btn.closest('tr');
+  var detail = row.nextElementSibling;
+  if (detail && detail.classList.contains('matrix-row-detail')) {
+    row.classList.toggle('expanded');
+    detail.classList.toggle('expanded');
+  }
+}
+// Native proof tooltips
+(function() {
+  var triggers = document.querySelectorAll('.native-proof-trigger');
+  for (var i = 0; i < triggers.length; i++) {
+    var trigger = triggers[i];
+    var delayMs = Number(trigger.dataset.tooltipDelayMs || '500');
+    var hideTimer = null;
+    var clearHide = function() {
+      if (hideTimer !== null) { window.clearTimeout(hideTimer); hideTimer = null; }
+    };
+    var show = function() { clearHide(); trigger.classList.add('is-visible'); };
+    var hide = function() {
+      clearHide();
+      hideTimer = window.setTimeout(function() {
+        trigger.classList.remove('is-visible');
+        hideTimer = null;
+      }, delayMs);
+    };
+    trigger.addEventListener('pointerenter', show);
+    trigger.addEventListener('pointerleave', hide);
+    trigger.addEventListener('focusin', show);
+    trigger.addEventListener('focusout', function(event) {
+      if (trigger.contains(event.relatedTarget)) { return; }
+      hide();
+    });
+  }
+})();
+</script>
+</body>
+</html>

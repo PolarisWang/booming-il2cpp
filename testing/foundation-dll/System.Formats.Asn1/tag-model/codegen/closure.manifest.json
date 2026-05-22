@@ -3,7 +3,7 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "TagModelSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Formats.Asn1/tag-model/managed/subjects/build-output/TagModelSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Formats.Asn1/tag-model/managed/subjects/build-output/TagModelSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
@@ -16,11 +16,11 @@
     },
     {
       "assemblyName": "TagModelSubjects",
-      "path": "verification/foundation-dll/System.Formats.Asn1/tag-model/managed/subjects/build-output/TagModelSubjects.dll"
+      "path": "testing/foundation-dll/System.Formats.Asn1/tag-model/managed/subjects/build-output/TagModelSubjects.dll"
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "2216ca05-7d44-4088-b0d9-af43eed9a695",
+  "inputModuleVersionId": "a94b31af-8cad-48c8-96e7-252a23db1943",
   "artifacts": [
     {
       "kind": "typedIlIr",

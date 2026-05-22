@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "SchemaSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Text.Json/schema/managed/subjects/build-output/SchemaSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Text.Json/schema/managed/subjects/build-output/SchemaSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "SchemaSubjects",
-      "path": "verification/foundation-dll/System.Text.Json/schema/managed/subjects/build-output/SchemaSubjects.dll"
+      "path": "testing/foundation-dll/System.Text.Json/schema/managed/subjects/build-output/SchemaSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "f7d3d8aa-8f25-40d3-abca-986f69fd1dc2",
+  "inputModuleVersionId": "83b97813-4c8f-4861-9164-eab448ee45cf",
   "artifacts": [
     {
       "kind": "typedIlIr",

@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "WindowsPrincipalRolesSubjects",
   "entrySubjectId": "WindowsPrincipalRolesSubjects/WindowsPrincipalRolesSubjects::Subject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Security.Principal.Windows/windows-principal-roles/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.Security.Principal.Windows/windows-principal-roles/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "TokenAccessSubjects",
   "entrySubjectId": "TokenAccessSubjects/TokenAccessSubjects::Subject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Security.Principal.Windows/token-access/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.Security.Principal.Windows/token-access/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

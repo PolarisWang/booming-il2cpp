@@ -1,0 +1,280 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Runtime.Serialization.Formatters",
+  "familyId": "family/System.Runtime.Serialization.Formatters/formatter/services/converter",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::Convert:System.Object(System.Object,System.Type)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::Convert:System.Object(System.Object,System.TypeCode)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToBoolean:System.Boolean(System.Object)",
+      "status": "passed",
+      "prePatchNsPerOp": 232.21,
+      "postPatchNsPerOp": 171.8,
+      "slowdownPercent": -26.02
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToByte:System.Byte(System.Object)",
+      "status": "passed",
+      "prePatchNsPerOp": 253.54,
+      "postPatchNsPerOp": 172.1,
+      "slowdownPercent": -32.12
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToChar:System.Char(System.Object)",
+      "status": "passed",
+      "prePatchNsPerOp": 251.13,
+      "postPatchNsPerOp": 172.3,
+      "slowdownPercent": -31.39
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToDateTime:System.DateTime(System.Object)",
+      "status": "passed",
+      "prePatchNsPerOp": 246.62,
+      "postPatchNsPerOp": 174.2,
+      "slowdownPercent": -29.37
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToDecimal:System.Decimal(System.Object)",
+      "status": "passed",
+      "prePatchNsPerOp": 261.43,
+      "postPatchNsPerOp": 187.2,
+      "slowdownPercent": -28.39
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToDouble:System.Double(System.Object)",
+      "status": "passed",
+      "prePatchNsPerOp": 256.25,
+      "postPatchNsPerOp": 172.4,
+      "slowdownPercent": -32.72
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToInt16:System.Int16(System.Object)",
+      "status": "passed",
+      "prePatchNsPerOp": 232.78,
+      "postPatchNsPerOp": 173.2,
+      "slowdownPercent": -25.59
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToInt32:System.Int32(System.Object)",
+      "status": "passed",
+      "prePatchNsPerOp": 243.37,
+      "postPatchNsPerOp": 183.7,
+      "slowdownPercent": -24.52
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToInt64:System.Int64(System.Object)",
+      "status": "passed",
+      "prePatchNsPerOp": 253.0,
+      "postPatchNsPerOp": 175.2,
+      "slowdownPercent": -30.75
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToSByte:System.SByte(System.Object)",
+      "status": "passed",
+      "prePatchNsPerOp": 241.94,
+      "postPatchNsPerOp": 171.2,
+      "slowdownPercent": -29.24
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToSingle:System.Single(System.Object)",
+      "status": "passed",
+      "prePatchNsPerOp": 248.1,
+      "postPatchNsPerOp": 173.9,
+      "slowdownPercent": -29.91
+    },
+    {
+      "methodIndex": 13,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToString:System.String(System.Object)",
+      "status": "passed",
+      "prePatchNsPerOp": 273.6,
+      "postPatchNsPerOp": 178.4,
+      "slowdownPercent": -34.8
+    },
+    {
+      "methodIndex": 14,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToUInt16:System.UInt16(System.Object)",
+      "status": "passed",
+      "prePatchNsPerOp": 282.63,
+      "postPatchNsPerOp": 174.4,
+      "slowdownPercent": -38.29
+    },
+    {
+      "methodIndex": 15,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToUInt32:System.UInt32(System.Object)",
+      "status": "passed",
+      "prePatchNsPerOp": 282.36,
+      "postPatchNsPerOp": 188.8,
+      "slowdownPercent": -33.14
+    },
+    {
+      "methodIndex": 16,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::ToUInt64:System.UInt64(System.Object)",
+      "status": "passed",
+      "prePatchNsPerOp": 235.56,
+      "postPatchNsPerOp": 173.9,
+      "slowdownPercent": -26.18
+    },
+    {
+      "methodIndex": 17,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterConverter::.ctor:System.Void()",
+      "status": "passed",
+      "prePatchNsPerOp": 118.59,
+      "postPatchNsPerOp": 89.3,
+      "slowdownPercent": -24.7
+    },
+    {
+      "methodIndex": 18,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.IFieldInfo::get_FieldNames:System.String{}()",
+      "status": "passed",
+      "prePatchNsPerOp": 9.13,
+      "postPatchNsPerOp": 3.7,
+      "slowdownPercent": -59.47
+    },
+    {
+      "methodIndex": 19,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.IFieldInfo::get_FieldTypes:System.Type{}()",
+      "status": "passed",
+      "prePatchNsPerOp": 6.34,
+      "postPatchNsPerOp": 3.8,
+      "slowdownPercent": -40.06
+    },
+    {
+      "methodIndex": 20,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.IFieldInfo::set_FieldNames:System.Void(System.String{})",
+      "status": "passed",
+      "prePatchNsPerOp": 4.62,
+      "postPatchNsPerOp": 2.8,
+      "slowdownPercent": -39.39
+    },
+    {
+      "methodIndex": 21,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.Formatters.IFieldInfo::set_FieldTypes:System.Void(System.Type{})",
+      "status": "passed",
+      "prePatchNsPerOp": 4.82,
+      "postPatchNsPerOp": 2.8,
+      "slowdownPercent": -41.91
+    },
+    {
+      "methodIndex": 22,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::CheckTypeSecurity:System.Void(System.Type,System.Runtime.Serialization.Formatters.TypeFilterLevel)",
+      "status": "passed",
+      "prePatchNsPerOp": 135.6,
+      "postPatchNsPerOp": 96.9,
+      "slowdownPercent": -28.54
+    },
+    {
+      "methodIndex": 23,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetObjectData:System.Object{}(System.Object,System.Reflection.MemberInfo{})",
+      "status": "passed",
+      "prePatchNsPerOp": 255.23,
+      "postPatchNsPerOp": 174.5,
+      "slowdownPercent": -31.63
+    },
+    {
+      "methodIndex": 24,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetSafeUninitializedObject:System.Object(System.Type)",
+      "status": "passed",
+      "prePatchNsPerOp": 279.31,
+      "postPatchNsPerOp": 193.9,
+      "slowdownPercent": -30.58
+    },
+    {
+      "methodIndex": 25,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetSerializableMembers:System.Reflection.MemberInfo{}(System.Type)",
+      "status": "passed",
+      "prePatchNsPerOp": 291.93,
+      "postPatchNsPerOp": 230.2,
+      "slowdownPercent": -21.15
+    },
+    {
+      "methodIndex": 26,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetSerializableMembers:System.Reflection.MemberInfo{}(System.Type,System.Runtime.Serialization.StreamingContext)",
+      "status": "passed",
+      "prePatchNsPerOp": 297.6,
+      "postPatchNsPerOp": 210.8,
+      "slowdownPercent": -29.17
+    },
+    {
+      "methodIndex": 27,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetSurrogateForCyclicalReference:System.Runtime.Serialization.ISerializationSurrogate(System.Runtime.Serialization.ISerializationSurrogate)",
+      "status": "passed",
+      "prePatchNsPerOp": 9.62,
+      "postPatchNsPerOp": 5.8,
+      "slowdownPercent": -39.71
+    },
+    {
+      "methodIndex": 28,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetTypeFromAssembly:System.Type(System.Reflection.Assembly,System.String)",
+      "status": "passed",
+      "prePatchNsPerOp": 610.36,
+      "postPatchNsPerOp": 382.7,
+      "slowdownPercent": -37.3
+    },
+    {
+      "methodIndex": 29,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::GetUninitializedObject:System.Object(System.Type)",
+      "status": "passed",
+      "prePatchNsPerOp": 295.97,
+      "postPatchNsPerOp": 191.3,
+      "slowdownPercent": -35.37
+    },
+    {
+      "methodIndex": 30,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.FormatterServices::PopulateObjectMembers:System.Object(System.Object,System.Reflection.MemberInfo{},System.Object{})",
+      "status": "passed",
+      "prePatchNsPerOp": 260.06,
+      "postPatchNsPerOp": 173.8,
+      "slowdownPercent": -33.17
+    },
+    {
+      "methodIndex": 31,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationObjectManager::RaiseOnSerializedEvent:System.Void()",
+      "status": "passed",
+      "prePatchNsPerOp": 4.69,
+      "postPatchNsPerOp": 2.8,
+      "slowdownPercent": -40.3
+    },
+    {
+      "methodIndex": 32,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationObjectManager::RegisterObject:System.Void(System.Object)",
+      "status": "passed",
+      "prePatchNsPerOp": 135.22,
+      "postPatchNsPerOp": 92.1,
+      "slowdownPercent": -31.89
+    },
+    {
+      "methodIndex": 33,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationObjectManager::.ctor:System.Void(System.Runtime.Serialization.StreamingContext)",
+      "status": "passed",
+      "prePatchNsPerOp": 140.94,
+      "postPatchNsPerOp": 91.1,
+      "slowdownPercent": -35.36
+    }
+  ],
+  "summary": {
+    "totalMethods": 34,
+    "nonStubMethods": 32,
+    "averageSlowdownPercent": -32.88,
+    "slowdownFactor": 0.6712,
+    "slowdownThresholdX": 50.0
+  }
+}

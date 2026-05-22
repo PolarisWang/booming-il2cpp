@@ -2,8 +2,8 @@
   "formatVersion": "v0",
   "artifactKind": "nativeAotManifest",
   "assemblyName": "NativeMemoryPointersSubjects",
-  "entrySubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Runtime.InteropServices/native-memory-pointers/codegen",
+  "entrySubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_121:System.Void()",
+  "managedClosureRootPath": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Runtime.InteropServices/native-memory-pointers/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

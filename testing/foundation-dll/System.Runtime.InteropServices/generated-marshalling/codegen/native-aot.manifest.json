@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "GeneratedMarshallingSubjects",
   "entrySubjectId": "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Runtime.InteropServices/generated-marshalling/codegen",
+  "managedClosureRootPath": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Runtime.InteropServices/generated-marshalling/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

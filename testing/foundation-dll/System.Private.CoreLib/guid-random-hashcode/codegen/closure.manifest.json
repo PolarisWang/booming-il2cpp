@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "GuidRandomHashcodeSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/guid-random-hashcode/codegen/_subjects_input/GuidRandomHashcodeSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/guid-random-hashcode/managed/subjects/build-output/GuidRandomHashcodeSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "GuidRandomHashcodeSubjects",
-      "path": "testing/foundation-dll/System.Private.CoreLib/guid-random-hashcode/codegen/_subjects_input/GuidRandomHashcodeSubjects.dll"
+      "path": "testing/foundation-dll/System.Private.CoreLib/guid-random-hashcode/managed/subjects/build-output/GuidRandomHashcodeSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "79eed408-6938-44b2-b945-6a85c00892d2",
+  "inputModuleVersionId": "1c994ead-4bff-4b57-86b1-b6bf2069b057",
   "artifacts": [
     {
       "kind": "typedIlIr",

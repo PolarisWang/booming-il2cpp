@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/rcw/basic",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "RcwBasicNativeEntry/RcwBasicNativeEntry::Run:System.Int32(System.Int32)",
+      "elapsedMilliseconds": 0.231,
+      "calibratedMs": 0.231,
+      "opsPerSecond": 432152117.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwRoundTripIdentity:System.Int32()",
+      "elapsedMilliseconds": 0.268,
+      "calibratedMs": 0.268,
+      "opsPerSecond": 373273609.6,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwRoundTripQi:System.Int32()",
+      "elapsedMilliseconds": 0.215,
+      "calibratedMs": 0.215,
+      "opsPerSecond": 464900046.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwMultipleWrappers:System.Int32()",
+      "elapsedMilliseconds": 0.216,
+      "calibratedMs": 0.216,
+      "opsPerSecond": 462748727.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwQiUnknownInterface:System.Int32()",
+      "elapsedMilliseconds": 0.218,
+      "calibratedMs": 0.218,
+      "opsPerSecond": 457665903.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwVtableMethodCall:System.Int32()",
+      "elapsedMilliseconds": 0.221,
+      "calibratedMs": 0.221,
+      "opsPerSecond": 453514739.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwDirectVtable:System.Int32()",
+      "elapsedMilliseconds": 0.212,
+      "calibratedMs": 0.212,
+      "opsPerSecond": 471920717.3,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}

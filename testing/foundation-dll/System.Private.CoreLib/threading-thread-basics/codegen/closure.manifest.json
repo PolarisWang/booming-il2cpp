@@ -3,7 +3,7 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ThreadingThreadBasicsSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/threading-thread-basics/codegen/_subjects_input/ThreadingThreadBasicsSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/threading-thread-basics/managed/subjects/build-output/ThreadingThreadBasicsSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
@@ -16,11 +16,11 @@
     },
     {
       "assemblyName": "ThreadingThreadBasicsSubjects",
-      "path": "testing/foundation-dll/System.Private.CoreLib/threading-thread-basics/codegen/_subjects_input/ThreadingThreadBasicsSubjects.dll"
+      "path": "testing/foundation-dll/System.Private.CoreLib/threading-thread-basics/managed/subjects/build-output/ThreadingThreadBasicsSubjects.dll"
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "2c5a3ef6-4510-4e72-8006-0044e1561f0d",
+  "inputModuleVersionId": "22811ebd-00de-4c33-88b8-162ecd02960c",
   "artifacts": [
     {
       "kind": "typedIlIr",

@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "CodegenEdgeCasesSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/codegen-edge-cases/codegen/_subjects_input/CodegenEdgeCasesSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/codegen-edge-cases/managed/subjects/build-output/CodegenEdgeCasesSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "CodegenEdgeCasesSubjects",
-      "path": "testing/foundation-dll/System.Private.CoreLib/codegen-edge-cases/codegen/_subjects_input/CodegenEdgeCasesSubjects.dll"
+      "path": "testing/foundation-dll/System.Private.CoreLib/codegen-edge-cases/managed/subjects/build-output/CodegenEdgeCasesSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "031fbac6-d75f-4b71-aec1-1bf2b0a7966d",
+  "inputModuleVersionId": "4e6e7081-e5f6-4952-9748-e6b489657e04",
   "artifacts": [
     {
       "kind": "typedIlIr",

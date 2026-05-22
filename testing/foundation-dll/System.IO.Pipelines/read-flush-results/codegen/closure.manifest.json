@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ReadFlushResultsSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.IO.Pipelines/read-flush-results/managed/subjects/build-output/ReadFlushResultsSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.IO.Pipelines/read-flush-results/managed/subjects/build-output/ReadFlushResultsSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "ReadFlushResultsSubjects",
-      "path": "verification/foundation-dll/System.IO.Pipelines/read-flush-results/managed/subjects/build-output/ReadFlushResultsSubjects.dll"
+      "path": "testing/foundation-dll/System.IO.Pipelines/read-flush-results/managed/subjects/build-output/ReadFlushResultsSubjects.dll"
     },
     {
       "assemblyName": "System.Memory",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "c3d153fa-ca1a-485d-901f-ddde33771710",
+  "inputModuleVersionId": "dae6f2e7-b3f8-4857-a407-7a37eadc7ed9",
   "artifacts": [
     {
       "kind": "typedIlIr",

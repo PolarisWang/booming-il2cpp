@@ -1,0 +1,2782 @@
+{
+  "assemblyName": "System.Threading.Tasks.Parallel",
+  "orderIndex": 14,
+  "phase": "roadmap-closed",
+  "roadmapTaskId": "TASK-20260427-04",
+  "dllState": "not-started",
+  "currentProject": "audit-input-and-ledger",
+  "blockingReason": "",
+  "riskTags": [],
+  "projects": [
+    {
+      "projectCode": "audit-input-and-ledger",
+      "displayName": "Audit Input And Ledger",
+      "policyState": "required",
+      "executionState": "pending",
+      "verificationMethod": "Formal verification for Audit Input And Ledger",
+      "verificationTarget": "System.Threading.Tasks.Parallel",
+      "completionRule": "",
+      "artifacts": [],
+      "supportRefs": [
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
+      ],
+      "blockers": [],
+      "updatedAt": ""
+    },
+    {
+      "projectCode": "managed-proof",
+      "displayName": "Managed Proof",
+      "policyState": "required",
+      "executionState": "pending",
+      "verificationMethod": "Formal verification for Managed Proof",
+      "verificationTarget": "System.Threading.Tasks.Parallel",
+      "completionRule": "",
+      "artifacts": [],
+      "supportRefs": [
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
+      ],
+      "blockers": [],
+      "updatedAt": ""
+    },
+    {
+      "projectCode": "native-proof",
+      "displayName": "Native Proof",
+      "policyState": "required",
+      "executionState": "pending",
+      "verificationMethod": "Formal verification for Native Proof",
+      "verificationTarget": "System.Threading.Tasks.Parallel",
+      "completionRule": "",
+      "artifacts": [],
+      "supportRefs": [
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
+      ],
+      "blockers": [],
+      "updatedAt": ""
+    },
+    {
+      "projectCode": "hotupdate-proof",
+      "displayName": "Hotupdate Proof",
+      "policyState": "required",
+      "executionState": "pending",
+      "verificationMethod": "Formal verification for Hotupdate Proof",
+      "verificationTarget": "System.Threading.Tasks.Parallel",
+      "completionRule": "",
+      "artifacts": [],
+      "supportRefs": [
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
+      ],
+      "blockers": [],
+      "updatedAt": ""
+    },
+    {
+      "projectCode": "benchmark",
+      "displayName": "Benchmark",
+      "policyState": "required",
+      "executionState": "pending",
+      "verificationMethod": "Formal verification for Benchmark",
+      "verificationTarget": "System.Threading.Tasks.Parallel",
+      "completionRule": "",
+      "artifacts": [],
+      "supportRefs": [
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
+      ],
+      "blockers": [],
+      "updatedAt": ""
+    },
+    {
+      "projectCode": "codegen-review",
+      "displayName": "Codegen Review",
+      "policyState": "required",
+      "executionState": "pending",
+      "verificationMethod": "Formal verification for Codegen Review",
+      "verificationTarget": "System.Threading.Tasks.Parallel",
+      "completionRule": "",
+      "artifacts": [],
+      "supportRefs": [
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
+      ],
+      "blockers": [],
+      "updatedAt": ""
+    },
+    {
+      "projectCode": "completion-certification",
+      "displayName": "Completion Certification",
+      "policyState": "required",
+      "executionState": "pending",
+      "verificationMethod": "Formal verification for Completion Certification",
+      "verificationTarget": "System.Threading.Tasks.Parallel",
+      "completionRule": "",
+      "artifacts": [],
+      "supportRefs": [
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
+      ],
+      "blockers": [],
+      "updatedAt": ""
+    }
+  ],
+  "capabilityClosure": {
+    "totalFamilies": 4,
+    "closedFamilies": 0,
+    "waivedFamilies": 0,
+    "excludedFamilies": 0,
+    "platformBlockedFamilies": 0,
+    "inProgressFamilies": 4,
+    "closurePercent": 0.0
+  },
+  "workflowProgress": {
+    "totalRequiredGates": 0,
+    "passedGates": 0,
+    "progressPercent": 0.0
+  },
+  "capabilityFamilies": [
+    {
+      "familyId": "family/System.Threading.Tasks.Parallel/loop-result",
+      "methodSubjectIds": [
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::get_IsCompleted:System.Boolean()",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::get_LowestBreakIteration:System.Nullable{System.Int64}()"
+      ],
+      "methodCount": 2,
+      "implementationFamilies": [],
+      "closureStatus": "in-progress",
+      "denominatorStatus": "audit-confirmed",
+      "description": "",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 2,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 2,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate",
+        "d3PatchApplied": false,
+        "d3PatchedCount": 0,
+        "d3SchemaVersion": 0,
+        "d3MethodResults": [],
+        "passedMethodCount": 0,
+        "failedMethodCount": 0,
+        "unmatchedMethodCount": 0,
+        "verificationMethodResults": []
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 2,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "",
+        "denominator": 2,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "",
+        "denominator": 2,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "nativeCorrect": {
+        "status": "pending",
+        "passed": 0,
+        "total": 0,
+        "reason": "未接入批量验证管线"
+      },
+      "reviewBundle": {}
+    },
+    {
+      "familyId": "family/System.Threading.Tasks.Parallel/loop-state",
+      "methodSubjectIds": [
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Break:System.Void()",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_IsExceptional:System.Boolean()",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_IsStopped:System.Boolean()",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_LowestBreakIteration:System.Nullable{System.Int64}()",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_ShouldExitCurrentIteration:System.Boolean()",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Stop:System.Void()"
+      ],
+      "methodCount": 6,
+      "implementationFamilies": [],
+      "closureStatus": "in-progress",
+      "denominatorStatus": "audit-confirmed",
+      "description": "",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 6,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 6,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate",
+        "d3PatchApplied": false,
+        "d3PatchedCount": 0,
+        "d3SchemaVersion": 0,
+        "d3MethodResults": [],
+        "passedMethodCount": 0,
+        "failedMethodCount": 0,
+        "unmatchedMethodCount": 0,
+        "verificationMethodResults": []
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 6,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "",
+        "denominator": 6,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "",
+        "denominator": 6,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "nativeCorrect": {
+        "status": "pending",
+        "passed": 0,
+        "total": 0,
+        "reason": "未接入批量验证管线"
+      },
+      "reviewBundle": {}
+    },
+    {
+      "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+      "methodSubjectIds": [
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action{System.Int32})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Action{System.Int64})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action{System.Int32})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Action{System.Int64})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action{System.Int32,System.Threading.Tasks.ParallelLoopState})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Action{System.Int64,System.Threading.Tasks.ParallelLoopState})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action{System.Int32,System.Threading.Tasks.ParallelLoopState})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Action{System.Int64,System.Threading.Tasks.ParallelLoopState})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For{TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Func{TLocal},System.Func{System.Int32,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For{TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Func{TLocal},System.Func{System.Int64,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For{TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{System.Int32,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For{TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{System.Int64,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync{T}:System.Threading.Tasks.Task(T,T,System.Func{T,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync{T}:System.Threading.Tasks.Task(T,T,System.Threading.CancellationToken,System.Func{T,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync{T}:System.Threading.Tasks.Task(T,T,System.Threading.Tasks.ParallelOptions,System.Func{T,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Action{TSource})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Action{TSource,System.Threading.Tasks.ParallelLoopState})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource,System.Threading.Tasks.ParallelLoopState})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Action{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64,TLocal,TLocal},System.Action{TLocal})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64,TLocal,TLocal},System.Action{TLocal})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Action{TSource})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Action{TSource,System.Threading.Tasks.ParallelLoopState})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner{TSource},System.Action{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner{TSource},System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64,TLocal,TLocal},System.Action{TLocal})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource,System.Threading.Tasks.ParallelLoopState})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64,TLocal,TLocal},System.Action{TLocal})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable{TSource},System.Threading.CancellationToken,System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable{TSource},System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable{TSource},System.Threading.CancellationToken,System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::Invoke:System.Void(System.Action{})",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::Invoke:System.Void(System.Threading.Tasks.ParallelOptions,System.Action{})"
+      ],
+      "methodCount": 43,
+      "implementationFamilies": [],
+      "closureStatus": "in-progress",
+      "denominatorStatus": "audit-confirmed",
+      "description": "",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 43,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 43,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate",
+        "d3PatchApplied": false,
+        "d3PatchedCount": 0,
+        "d3SchemaVersion": 0,
+        "d3MethodResults": [],
+        "passedMethodCount": 0,
+        "failedMethodCount": 0,
+        "unmatchedMethodCount": 0,
+        "verificationMethodResults": []
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 43,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "",
+        "denominator": 43,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "",
+        "denominator": 43,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "nativeCorrect": {
+        "status": "pending",
+        "passed": 0,
+        "total": 0,
+        "reason": "未接入批量验证管线"
+      },
+      "reviewBundle": {}
+    },
+    {
+      "familyId": "family/System.Threading.Tasks.Parallel/parallel-options",
+      "methodSubjectIds": [
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::get_CancellationToken:System.Threading.CancellationToken()",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::get_MaxDegreeOfParallelism:System.Int32()",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::get_TaskScheduler:System.Threading.Tasks.TaskScheduler()",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::set_CancellationToken:System.Void(System.Threading.CancellationToken)",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::set_MaxDegreeOfParallelism:System.Void(System.Int32)",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::set_TaskScheduler:System.Void(System.Threading.Tasks.TaskScheduler)",
+        "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::.ctor:System.Void()"
+      ],
+      "methodCount": 7,
+      "implementationFamilies": [],
+      "closureStatus": "in-progress",
+      "denominatorStatus": "audit-confirmed",
+      "description": "",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 7,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 7,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate",
+        "d3PatchApplied": false,
+        "d3PatchedCount": 0,
+        "d3SchemaVersion": 0,
+        "d3MethodResults": [],
+        "passedMethodCount": 0,
+        "failedMethodCount": 0,
+        "unmatchedMethodCount": 0,
+        "verificationMethodResults": []
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 7,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "",
+        "denominator": 7,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "",
+        "denominator": 7,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "nativeCorrect": {
+        "status": "pending",
+        "passed": 0,
+        "total": 0,
+        "reason": "未接入批量验证管线"
+      },
+      "reviewBundle": {}
+    }
+  ],
+  "familyVerificationClaims": {
+    "schemaVersion": 1,
+    "assemblyName": "System.Threading.Tasks.Parallel",
+    "ownerSubjectId": "SolutionCorePack",
+    "methodUniverseArtifactPaths": [],
+    "claims": [
+      {
+        "claimId": "family/System.Threading.Tasks.Parallel/loop-result::native-proof",
+        "familyId": "family/System.Threading.Tasks.Parallel/loop-result",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 2,
+        "methodSubjectIds": [
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::get_IsCompleted:System.Boolean()",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::get_LowestBreakIteration:System.Nullable{System.Int64}()"
+        ],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "inline-family:methodSubjectIds",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Threading.Tasks.Parallel/loop-result::managed-proof",
+        "familyId": "family/System.Threading.Tasks.Parallel/loop-result",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Threading.Tasks.Parallel/loop-result::hotupdate-proof",
+        "familyId": "family/System.Threading.Tasks.Parallel/loop-result",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Threading.Tasks.Parallel/loop-result::benchmark",
+        "familyId": "family/System.Threading.Tasks.Parallel/loop-result",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Threading.Tasks.Parallel/loop-result::test-code",
+        "familyId": "family/System.Threading.Tasks.Parallel/loop-result",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 2,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Threading.Tasks.Parallel/loop-state::native-proof",
+        "familyId": "family/System.Threading.Tasks.Parallel/loop-state",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 6,
+        "methodSubjectIds": [
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Break:System.Void()",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_IsExceptional:System.Boolean()",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_IsStopped:System.Boolean()",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_LowestBreakIteration:System.Nullable{System.Int64}()",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_ShouldExitCurrentIteration:System.Boolean()",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Stop:System.Void()"
+        ],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "inline-family:methodSubjectIds",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Threading.Tasks.Parallel/loop-state::managed-proof",
+        "familyId": "family/System.Threading.Tasks.Parallel/loop-state",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Threading.Tasks.Parallel/loop-state::hotupdate-proof",
+        "familyId": "family/System.Threading.Tasks.Parallel/loop-state",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Threading.Tasks.Parallel/loop-state::benchmark",
+        "familyId": "family/System.Threading.Tasks.Parallel/loop-state",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Threading.Tasks.Parallel/loop-state::test-code",
+        "familyId": "family/System.Threading.Tasks.Parallel/loop-state",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 6,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Threading.Tasks.Parallel/parallel-apis::native-proof",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 43,
+        "methodSubjectIds": [
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action{System.Int32})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Action{System.Int64})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action{System.Int32})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Action{System.Int64})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action{System.Int32,System.Threading.Tasks.ParallelLoopState})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Action{System.Int64,System.Threading.Tasks.ParallelLoopState})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action{System.Int32,System.Threading.Tasks.ParallelLoopState})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Action{System.Int64,System.Threading.Tasks.ParallelLoopState})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For{TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Func{TLocal},System.Func{System.Int32,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For{TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Func{TLocal},System.Func{System.Int64,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For{TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{System.Int32,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For{TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{System.Int64,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync{T}:System.Threading.Tasks.Task(T,T,System.Func{T,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync{T}:System.Threading.Tasks.Task(T,T,System.Threading.CancellationToken,System.Func{T,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync{T}:System.Threading.Tasks.Task(T,T,System.Threading.Tasks.ParallelOptions,System.Func{T,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Action{TSource})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Action{TSource,System.Threading.Tasks.ParallelLoopState})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource,System.Threading.Tasks.ParallelLoopState})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Action{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Action{TSource})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Action{TSource,System.Threading.Tasks.ParallelLoopState})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner{TSource},System.Action{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner{TSource},System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource,System.Threading.Tasks.ParallelLoopState})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable{TSource},System.Threading.CancellationToken,System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable{TSource},System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable{TSource},System.Threading.CancellationToken,System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::Invoke:System.Void(System.Action{})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::Invoke:System.Void(System.Threading.Tasks.ParallelOptions,System.Action{})"
+        ],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "inline-family:methodSubjectIds",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Threading.Tasks.Parallel/parallel-apis::managed-proof",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Threading.Tasks.Parallel/parallel-apis::hotupdate-proof",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Threading.Tasks.Parallel/parallel-apis::benchmark",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Threading.Tasks.Parallel/parallel-apis::test-code",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 43,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Threading.Tasks.Parallel/parallel-options::native-proof",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-options",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 7,
+        "methodSubjectIds": [
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::get_CancellationToken:System.Threading.CancellationToken()",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::get_MaxDegreeOfParallelism:System.Int32()",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::get_TaskScheduler:System.Threading.Tasks.TaskScheduler()",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::set_CancellationToken:System.Void(System.Threading.CancellationToken)",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::set_MaxDegreeOfParallelism:System.Void(System.Int32)",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::set_TaskScheduler:System.Void(System.Threading.Tasks.TaskScheduler)",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::.ctor:System.Void()"
+        ],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "inline-family:methodSubjectIds",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Threading.Tasks.Parallel/parallel-options::managed-proof",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-options",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Threading.Tasks.Parallel/parallel-options::hotupdate-proof",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-options",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Threading.Tasks.Parallel/parallel-options::benchmark",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-options",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.Threading.Tasks.Parallel/parallel-options::test-code",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-options",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 7,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      }
+    ]
+  },
+  "familyVerificationSnapshot": {
+    "schemaVersion": 1,
+    "assemblyName": "System.Threading.Tasks.Parallel",
+    "ownerSubjectId": "SolutionCorePack",
+    "families": [
+      {
+        "familyId": "family/System.Threading.Tasks.Parallel/loop-result",
+        "methodSubjectIds": [
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::get_IsCompleted:System.Boolean()",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::get_LowestBreakIteration:System.Nullable{System.Int64}()"
+        ],
+        "methodCount": 2,
+        "implementationFamilies": [],
+        "closureStatus": "in-progress",
+        "denominatorStatus": "audit-confirmed",
+        "description": "",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 2,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 2,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate",
+          "d3PatchApplied": false,
+          "d3PatchedCount": 0,
+          "d3SchemaVersion": 0,
+          "d3MethodResults": [],
+          "passedMethodCount": 0,
+          "failedMethodCount": 0,
+          "unmatchedMethodCount": 0,
+          "verificationMethodResults": []
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 2,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "",
+          "denominator": 2,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "",
+          "denominator": 2,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "nativeCorrect": {
+          "status": "pending",
+          "passed": 0,
+          "total": 0,
+          "reason": "未接入批量验证管线"
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.Threading.Tasks.Parallel/loop-state",
+        "methodSubjectIds": [
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Break:System.Void()",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_IsExceptional:System.Boolean()",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_IsStopped:System.Boolean()",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_LowestBreakIteration:System.Nullable{System.Int64}()",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_ShouldExitCurrentIteration:System.Boolean()",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Stop:System.Void()"
+        ],
+        "methodCount": 6,
+        "implementationFamilies": [],
+        "closureStatus": "in-progress",
+        "denominatorStatus": "audit-confirmed",
+        "description": "",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 6,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 6,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate",
+          "d3PatchApplied": false,
+          "d3PatchedCount": 0,
+          "d3SchemaVersion": 0,
+          "d3MethodResults": [],
+          "passedMethodCount": 0,
+          "failedMethodCount": 0,
+          "unmatchedMethodCount": 0,
+          "verificationMethodResults": []
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 6,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "",
+          "denominator": 6,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "",
+          "denominator": 6,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "nativeCorrect": {
+          "status": "pending",
+          "passed": 0,
+          "total": 0,
+          "reason": "未接入批量验证管线"
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectIds": [
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action{System.Int32})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Action{System.Int64})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action{System.Int32})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Action{System.Int64})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action{System.Int32,System.Threading.Tasks.ParallelLoopState})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Action{System.Int64,System.Threading.Tasks.ParallelLoopState})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action{System.Int32,System.Threading.Tasks.ParallelLoopState})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Action{System.Int64,System.Threading.Tasks.ParallelLoopState})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For{TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Func{TLocal},System.Func{System.Int32,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For{TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Func{TLocal},System.Func{System.Int64,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For{TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{System.Int32,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For{TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{System.Int64,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync{T}:System.Threading.Tasks.Task(T,T,System.Func{T,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync{T}:System.Threading.Tasks.Task(T,T,System.Threading.CancellationToken,System.Func{T,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync{T}:System.Threading.Tasks.Task(T,T,System.Threading.Tasks.ParallelOptions,System.Func{T,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Action{TSource})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Action{TSource,System.Threading.Tasks.ParallelLoopState})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource,System.Threading.Tasks.ParallelLoopState})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Action{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Action{TSource})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Action{TSource,System.Threading.Tasks.ParallelLoopState})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner{TSource},System.Action{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner{TSource},System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource,System.Threading.Tasks.ParallelLoopState})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable{TSource},System.Threading.CancellationToken,System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable{TSource},System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable{TSource},System.Threading.CancellationToken,System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::Invoke:System.Void(System.Action{})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::Invoke:System.Void(System.Threading.Tasks.ParallelOptions,System.Action{})"
+        ],
+        "methodCount": 43,
+        "implementationFamilies": [],
+        "closureStatus": "in-progress",
+        "denominatorStatus": "audit-confirmed",
+        "description": "",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 43,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 43,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate",
+          "d3PatchApplied": false,
+          "d3PatchedCount": 0,
+          "d3SchemaVersion": 0,
+          "d3MethodResults": [],
+          "passedMethodCount": 0,
+          "failedMethodCount": 0,
+          "unmatchedMethodCount": 0,
+          "verificationMethodResults": []
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 43,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "",
+          "denominator": 43,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "",
+          "denominator": 43,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "nativeCorrect": {
+          "status": "pending",
+          "passed": 0,
+          "total": 0,
+          "reason": "未接入批量验证管线"
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-options",
+        "methodSubjectIds": [
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::get_CancellationToken:System.Threading.CancellationToken()",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::get_MaxDegreeOfParallelism:System.Int32()",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::get_TaskScheduler:System.Threading.Tasks.TaskScheduler()",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::set_CancellationToken:System.Void(System.Threading.CancellationToken)",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::set_MaxDegreeOfParallelism:System.Void(System.Int32)",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::set_TaskScheduler:System.Void(System.Threading.Tasks.TaskScheduler)",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::.ctor:System.Void()"
+        ],
+        "methodCount": 7,
+        "implementationFamilies": [],
+        "closureStatus": "in-progress",
+        "denominatorStatus": "audit-confirmed",
+        "description": "",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 7,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 7,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate",
+          "d3PatchApplied": false,
+          "d3PatchedCount": 0,
+          "d3SchemaVersion": 0,
+          "d3MethodResults": [],
+          "passedMethodCount": 0,
+          "failedMethodCount": 0,
+          "unmatchedMethodCount": 0,
+          "verificationMethodResults": []
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 7,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "",
+          "denominator": 7,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "",
+          "denominator": 7,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "nativeCorrect": {
+          "status": "pending",
+          "passed": 0,
+          "total": 0,
+          "reason": "未接入批量验证管线"
+        },
+        "reviewBundle": {}
+      }
+    ]
+  },
+  "truthContracts": {
+    "schemaVersion": 1,
+    "dllCapabilityManifest": {
+      "assemblyName": "System.Threading.Tasks.Parallel",
+      "ownerSubjectId": "SolutionCorePack",
+      "capabilityFamilies": [
+        "family/System.Threading.Tasks.Parallel/loop-result",
+        "family/System.Threading.Tasks.Parallel/loop-state",
+        "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "family/System.Threading.Tasks.Parallel/parallel-options"
+      ],
+      "capabilityFamilyCount": 4,
+      "methodUniverseCount": 58
+    },
+    "capabilityFamilyVerificationContracts": [
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/loop-result",
+        "displayName": "",
+        "methodSubjectIds": [
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::get_IsCompleted:System.Boolean()",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::get_LowestBreakIteration:System.Nullable{System.Int64}()"
+        ],
+        "methodSubjectCount": 2,
+        "functionalObligation": {
+          "required": true
+        },
+        "performanceObligation": {
+          "required": true
+        },
+        "hotupdateFunctionalObligation": {
+          "required": true
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/loop-state",
+        "displayName": "",
+        "methodSubjectIds": [
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Break:System.Void()",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_IsExceptional:System.Boolean()",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_IsStopped:System.Boolean()",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_LowestBreakIteration:System.Nullable{System.Int64}()",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_ShouldExitCurrentIteration:System.Boolean()",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Stop:System.Void()"
+        ],
+        "methodSubjectCount": 6,
+        "functionalObligation": {
+          "required": true
+        },
+        "performanceObligation": {
+          "required": true
+        },
+        "hotupdateFunctionalObligation": {
+          "required": true
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "displayName": "",
+        "methodSubjectIds": [
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action{System.Int32})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Action{System.Int64})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action{System.Int32})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Action{System.Int64})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action{System.Int32,System.Threading.Tasks.ParallelLoopState})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Action{System.Int64,System.Threading.Tasks.ParallelLoopState})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action{System.Int32,System.Threading.Tasks.ParallelLoopState})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Action{System.Int64,System.Threading.Tasks.ParallelLoopState})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For{TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Func{TLocal},System.Func{System.Int32,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For{TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Func{TLocal},System.Func{System.Int64,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For{TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{System.Int32,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For{TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{System.Int64,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync{T}:System.Threading.Tasks.Task(T,T,System.Func{T,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync{T}:System.Threading.Tasks.Task(T,T,System.Threading.CancellationToken,System.Func{T,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync{T}:System.Threading.Tasks.Task(T,T,System.Threading.Tasks.ParallelOptions,System.Func{T,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Action{TSource})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Action{TSource,System.Threading.Tasks.ParallelLoopState})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource,System.Threading.Tasks.ParallelLoopState})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Action{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Action{TSource})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Action{TSource,System.Threading.Tasks.ParallelLoopState})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner{TSource},System.Action{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner{TSource},System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource,System.Threading.Tasks.ParallelLoopState})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64,TLocal,TLocal},System.Action{TLocal})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable{TSource},System.Threading.CancellationToken,System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable{TSource},System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable{TSource},System.Threading.CancellationToken,System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::Invoke:System.Void(System.Action{})",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::Invoke:System.Void(System.Threading.Tasks.ParallelOptions,System.Action{})"
+        ],
+        "methodSubjectCount": 43,
+        "functionalObligation": {
+          "required": true
+        },
+        "performanceObligation": {
+          "required": true
+        },
+        "hotupdateFunctionalObligation": {
+          "required": true
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-options",
+        "displayName": "",
+        "methodSubjectIds": [
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::get_CancellationToken:System.Threading.CancellationToken()",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::get_MaxDegreeOfParallelism:System.Int32()",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::get_TaskScheduler:System.Threading.Tasks.TaskScheduler()",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::set_CancellationToken:System.Void(System.Threading.CancellationToken)",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::set_MaxDegreeOfParallelism:System.Void(System.Int32)",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::set_TaskScheduler:System.Void(System.Threading.Tasks.TaskScheduler)",
+          "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::.ctor:System.Void()"
+        ],
+        "methodSubjectCount": 7,
+        "functionalObligation": {
+          "required": true
+        },
+        "performanceObligation": {
+          "required": true
+        },
+        "hotupdateFunctionalObligation": {
+          "required": true
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": true
+      }
+    ],
+    "methodCapabilityContracts": [
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/loop-result",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::get_IsCompleted:System.Boolean()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/loop-result",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::get_LowestBreakIteration:System.Nullable{System.Int64}()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/loop-state",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Break:System.Void()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/loop-state",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_IsExceptional:System.Boolean()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/loop-state",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_IsStopped:System.Boolean()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/loop-state",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_LowestBreakIteration:System.Nullable{System.Int64}()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/loop-state",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_ShouldExitCurrentIteration:System.Boolean()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/loop-state",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Stop:System.Void()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action{System.Int32})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Action{System.Int64})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action{System.Int32})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Action{System.Int64})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Action{System.Int32,System.Threading.Tasks.ParallelLoopState})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Action{System.Int64,System.Threading.Tasks.ParallelLoopState})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Action{System.Int32,System.Threading.Tasks.ParallelLoopState})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Action{System.Int64,System.Threading.Tasks.ParallelLoopState})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For{TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Func{TLocal},System.Func{System.Int32,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For{TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Func{TLocal},System.Func{System.Int64,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For{TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Int32,System.Int32,System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{System.Int32,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::For{TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Int64,System.Int64,System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{System.Int64,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync{T}:System.Threading.Tasks.Task(T,T,System.Func{T,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync{T}:System.Threading.Tasks.Task(T,T,System.Threading.CancellationToken,System.Func{T,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForAsync{T}:System.Threading.Tasks.Task(T,T,System.Threading.Tasks.ParallelOptions,System.Func{T,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Action{TSource})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Action{TSource,System.Threading.Tasks.ParallelLoopState})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource,System.Threading.Tasks.ParallelLoopState})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Action{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64,TLocal,TLocal},System.Action{TLocal})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64,TLocal,TLocal},System.Action{TLocal})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Action{TSource})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Action{TSource,System.Threading.Tasks.ParallelLoopState})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner{TSource},System.Action{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner{TSource},System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64,TLocal,TLocal},System.Action{TLocal})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource,System.Threading.Tasks.ParallelLoopState})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner{TSource},System.Threading.Tasks.ParallelOptions,System.Action{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.Partitioner{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,TLocal,TLocal},System.Action{TLocal})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEach{TSource,TLocal}:System.Threading.Tasks.ParallelLoopResult(System.Collections.Concurrent.OrderablePartitioner{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TLocal},System.Func{TSource,System.Threading.Tasks.ParallelLoopState,System.Int64,TLocal,TLocal},System.Action{TLocal})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable{TSource},System.Threading.CancellationToken,System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable{TSource},System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable{TSource},System.Threading.CancellationToken,System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::ForEachAsync{TSource}:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable{TSource},System.Threading.Tasks.ParallelOptions,System.Func{TSource,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::Invoke:System.Void(System.Action{})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-apis",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.Parallel::Invoke:System.Void(System.Threading.Tasks.ParallelOptions,System.Action{})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-options",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::get_CancellationToken:System.Threading.CancellationToken()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-options",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::get_MaxDegreeOfParallelism:System.Int32()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-options",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::get_TaskScheduler:System.Threading.Tasks.TaskScheduler()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-options",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::set_CancellationToken:System.Void(System.Threading.CancellationToken)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-options",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::set_MaxDegreeOfParallelism:System.Void(System.Int32)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-options",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::set_TaskScheduler:System.Void(System.Threading.Tasks.TaskScheduler)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.Threading.Tasks.Parallel",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.Threading.Tasks.Parallel/parallel-options",
+        "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::.ctor:System.Void()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      }
+    ]
+  },
+  "sourceLinks": {},
+  "waiverSummary": {
+    "totalWaivers": 0,
+    "activeWaivers": 0,
+    "expiredWaivers": 0,
+    "totalExclusions": 0,
+    "totalPlatformBlocked": 0
+  },
+  "denominatorStatus": "audit-confirmed",
+  "schemaVersion": 2
+}

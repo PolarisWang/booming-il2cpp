@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/exception/throw/diagnostics",
+  "capturedAt": "2026-05-22T08:39:30",
+  "metrics": {
+    "framePool": {
+      "acquireReleaseNsPerOp": 5.1,
+      "batchCount": 1000,
+      "framesPerBatch": 32
+    },
+    "fastExecute": {
+      "runCount": 100000,
+      "nsPerCall": 546.1
+    },
+    "callVirt": {
+      "handlerDispatchNs": 1686.3,
+      "emptyStackNs": 1854.9
+    },
+    "poolSize": 32
+  },
+  "rawOutput": "[2026-05-22T08:39:29][DEBUG][codegen] T4 VEH handler registered\n[2026-05-22T08:39:29][DEBUG][GcEvents] registered callback 0x7ff7b04c6aa0 at slot 0\n[2026-05-22T08:39:29][WARN][CRAG] young_collection_no_region\n[2026-05-22T08:39:29][INFO][NUMA] numa_init count=%d\n[2026-05-22T08:39:29][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-22T08:39:29][INFO][OldGen] init done base=0x2569880993792 pages=8\n[2026-05-22T08:39:29][DEBUG][codegen] T4 VEH handler registered\n[2026-05-22T08:39:29][DEBUG][GcEvents] registered callback 0x7ff7b04c6aa0 at slot 1\nBenchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 5.1 ns/op (1000 batches x 32 frames)\n[2026-05-22T08:39:29][DEBUG][Finalizer] thread_started id={0}\n[2026-05-22T08:39:29][DEBUG][BGC] thread_started\n[2026-05-22T08:39:30][WARN][CRAG] young_collection_no_region\n[2026-05-22T08:39:30][DEBUG][BGC] start_cycle\n[2026-05-22T08:39:30][DEBUG][BGC] root_scan heap=675 oldgen=3 valid=0 marked=0\n[2026-05-22T08:39:30][DEBUG][BGC] root_set_populated\n[2026-05-22T08:39:30][DEBUG][BGC] concurrent_mark_started\n[2026-05-22T08:39:30][DEBUG][BGC] concurrent_mark_begin\n[2026-05-22T08:39:30][DEBUG][BGC] parallel_workers spawned=8\nBenchmark 2: FastExecute (Subject_0): 100000 runs: 546.1 ns/op\n[2026-05-22T08:39:30][DEBUG][CRAG] chaos_gc_collect requested\n[2026-05-22T08:39:30][INFO][OldGen] collect_start page_count=124\n[2026-05-22T08:39:30][DEBUG][BGC] stop_concurrent_mark\n[2026-05-22T08:39:30][DEBUG][BGC] concurrent_mark_complete\n[2026-05-22T08:39:30][DEBUG][BGC] cycle_finished\n[2026-05-22T08:39:30][INFO][OldGen] collect_done reclaimed=8126464 pause_ns=81058800\n[2026-05-22T08:39:30][DEBUG][CRAG] chaos_gc_collect completed\nHandler dispatch overhead (LdcI4): 1686.3 ns/call\nCallVirt empty-stack: 1854.9 ns/call\n"
+}

@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/globalization/culture",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_CurrentCulture:System.Globalization.CultureInfo()",
+      "elapsedMilliseconds": 0.644,
+      "calibratedMs": 0.644,
+      "opsPerSecond": 155303618.6,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()",
+      "elapsedMilliseconds": 0.634,
+      "calibratedMs": 0.634,
+      "opsPerSecond": 157778479.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::GetCultureInfo:System.Globalization.CultureInfo(System.String)",
+      "elapsedMilliseconds": 11.98,
+      "calibratedMs": 11.98,
+      "opsPerSecond": 8347454.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_Name:System.String()",
+      "elapsedMilliseconds": 0.769,
+      "calibratedMs": 0.769,
+      "opsPerSecond": 130005200.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_DisplayName:System.String()",
+      "elapsedMilliseconds": 0.74,
+      "calibratedMs": 0.74,
+      "opsPerSecond": 135171668.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_DateTimeFormat:System.Globalization.DateTimeFormatInfo()",
+      "elapsedMilliseconds": 0.805,
+      "calibratedMs": 0.805,
+      "opsPerSecond": 124285359.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_NumberFormat:System.Globalization.NumberFormatInfo()",
+      "elapsedMilliseconds": 0.784,
+      "calibratedMs": 0.784,
+      "opsPerSecond": 127599846.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CompareInfo::Compare:System.Int32(System.String,System.String)",
+      "elapsedMilliseconds": 23.875,
+      "calibratedMs": 23.875,
+      "opsPerSecond": 4188499.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CompareInfo::Compare:System.Int32(System.String,System.String,System.Globalization.CompareOptions)",
+      "elapsedMilliseconds": 0.994,
+      "calibratedMs": 0.994,
+      "opsPerSecond": 100613743.8,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.CompareInfo::IndexOf:System.Int32(System.String,System.String)",
+      "elapsedMilliseconds": 21.876,
+      "calibratedMs": 21.876,
+      "opsPerSecond": 4571261.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.TextInfo::ToUpper:System.String(System.String)",
+      "elapsedMilliseconds": 0.963,
+      "calibratedMs": 0.963,
+      "opsPerSecond": 103831377.8,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.TextInfo::ToLower:System.String(System.String)",
+      "elapsedMilliseconds": 0.884,
+      "calibratedMs": 0.884,
+      "opsPerSecond": 113083795.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "System.Private.CoreLib/System.Globalization.TextInfo::get_CultureName:System.String()",
+      "elapsedMilliseconds": 0.873,
+      "calibratedMs": 0.873,
+      "opsPerSecond": 114508187.3,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}

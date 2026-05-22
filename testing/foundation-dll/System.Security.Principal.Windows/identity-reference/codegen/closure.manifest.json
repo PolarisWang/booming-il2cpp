@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "IdentityReferenceSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Security.Principal.Windows/identity-reference/managed/subjects/build-output/IdentityReferenceSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Security.Principal.Windows/identity-reference/managed/subjects/build-output/IdentityReferenceSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "IdentityReferenceSubjects",
-      "path": "verification/foundation-dll/System.Security.Principal.Windows/identity-reference/managed/subjects/build-output/IdentityReferenceSubjects.dll"
+      "path": "testing/foundation-dll/System.Security.Principal.Windows/identity-reference/managed/subjects/build-output/IdentityReferenceSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "c5c87e3b-b263-47ce-b2b8-29ce1a480796",
+  "inputModuleVersionId": "7a8c9e3f-cf28-43be-a12c-57b55d58fa66",
   "artifacts": [
     {
       "kind": "typedIlIr",

@@ -4004,49 +4004,49 @@
           "opCode": 14,
           "ilOffset": 20,
           "resultType": "System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E",
-          "callee": "System.Linq/Enumerable::Reverse\u003CSystem.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+          "callee": "System.Linq/Enumerable::Reverse\u003CSystem.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32[])",
           "reference": {
             "assemblyName": "System.Linq",
             "subjectKind": "method",
-            "subjectId": "System.Linq/Enumerable::Reverse\u003CSystem.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)"
+            "subjectId": "System.Linq/Enumerable::Reverse\u003CSystem.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32[])"
           },
           "targetReference": {
             "kind": 3,
             "assemblyName": "System.Linq",
-            "subjectId": "System.Linq/Enumerable::Reverse\u003CSystem.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-            "openDefinitionSubjectId": "System.Linq/Enumerable::Reverse:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E)",
+            "subjectId": "System.Linq/Enumerable::Reverse\u003CSystem.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32[])",
+            "openDefinitionSubjectId": "System.Linq/Enumerable::Reverse:System.Collections.Generic.IEnumerable\u003C!!0\u003E(!!0[])",
             "sharedGenericBodyId": {
-              "value": "body:definition=System.Linq/Enumerable::Reverse:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E);type=[];method=[System.Int32]"
+              "value": "body:definition=System.Linq/Enumerable::Reverse:System.Collections.Generic.IEnumerable\u003C!!0\u003E(!!0[]);type=[];method=[System.Int32]"
             },
             "instantiationStubId": {
-              "value": "stub:definition=System.Linq/Enumerable::Reverse:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E);type=[];method=[System.Int32]"
+              "value": "stub:definition=System.Linq/Enumerable::Reverse:System.Collections.Generic.IEnumerable\u003C!!0\u003E(!!0[]);type=[];method=[System.Int32]"
             },
             "runtimeGenericContext": {
               "instantiationKey": {
                 "contextKind": 2,
-                "definitionSubjectId": "System.Linq/Enumerable::Reverse:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E)",
+                "definitionSubjectId": "System.Linq/Enumerable::Reverse:System.Collections.Generic.IEnumerable\u003C!!0\u003E(!!0[])",
                 "typeArguments": [],
                 "methodArguments": [
                   "System.Int32"
                 ]
               },
               "sharedGenericBodyId": {
-                "value": "body:definition=System.Linq/Enumerable::Reverse:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E);type=[];method=[System.Int32]"
+                "value": "body:definition=System.Linq/Enumerable::Reverse:System.Collections.Generic.IEnumerable\u003C!!0\u003E(!!0[]);type=[];method=[System.Int32]"
               },
               "instantiationStubId": {
-                "value": "stub:definition=System.Linq/Enumerable::Reverse:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E);type=[];method=[System.Int32]"
+                "value": "stub:definition=System.Linq/Enumerable::Reverse:System.Collections.Generic.IEnumerable\u003C!!0\u003E(!!0[]);type=[];method=[System.Int32]"
               },
               "supportKindCode": 3,
               "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:methodSpec"
             },
             "genericDiagnostic": {
-              "subjectId": "System.Linq/Enumerable::Reverse\u003CSystem.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-              "definitionSubjectId": "System.Linq/Enumerable::Reverse:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E)",
-              "displaySubjectId": "System.Linq/Enumerable::Reverse\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+              "subjectId": "System.Linq/Enumerable::Reverse\u003CSystem.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32[])",
+              "definitionSubjectId": "System.Linq/Enumerable::Reverse:System.Collections.Generic.IEnumerable\u003C!!0\u003E(!!0[])",
+              "displaySubjectId": "System.Linq/Enumerable::Reverse\u003CSystem.Int32\u003E(System.Int32[])",
               "instantiationKey": {
                 "contextKind": 2,
-                "definitionSubjectId": "System.Linq/Enumerable::Reverse:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E)",
+                "definitionSubjectId": "System.Linq/Enumerable::Reverse:System.Collections.Generic.IEnumerable\u003C!!0\u003E(!!0[])",
                 "typeArguments": [],
                 "methodArguments": [
                   "System.Int32"

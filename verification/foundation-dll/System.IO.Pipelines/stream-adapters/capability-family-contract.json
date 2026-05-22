@@ -1,0 +1,12 @@
+{
+  "familyId": "family/System.IO.Pipelines/stream-adapters",
+  "assemblyName": "System.IO.Pipelines",
+  "methodSubjectIds": [
+    "System.IO.Pipelines/System.IO.Pipelines.StreamPipeExtensions::CopyToAsync:System.Threading.Tasks.Task(System.IO.Stream,System.IO.Pipelines.PipeWriter,System.Threading.CancellationToken)"
+  ],
+  "displayName": "stream-adapters",
+  "description": "",
+  "closureStatus": "in-progress",
+  "methodCount": 1,
+  "customEntryIndices": []
+}

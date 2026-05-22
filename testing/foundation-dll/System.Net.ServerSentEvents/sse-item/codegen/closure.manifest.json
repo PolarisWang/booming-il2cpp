@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "SseItemSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Net.ServerSentEvents/sse-item/managed/subjects/build-output/SseItemSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Net.ServerSentEvents/sse-item/managed/subjects/build-output/SseItemSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "SseItemSubjects",
-      "path": "verification/foundation-dll/System.Net.ServerSentEvents/sse-item/managed/subjects/build-output/SseItemSubjects.dll"
+      "path": "testing/foundation-dll/System.Net.ServerSentEvents/sse-item/managed/subjects/build-output/SseItemSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "9e5cb387-2f79-4466-83f8-76c3fe529e7c",
+  "inputModuleVersionId": "36a0774c-10d6-4940-9fc8-620fb0ce5079",
   "artifacts": [
     {
       "kind": "typedIlIr",

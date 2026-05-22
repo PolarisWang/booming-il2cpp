@@ -4,6 +4,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>disable</ImplicitUsings>
+    <IsTestProject>false</IsTestProject>
     <AssemblyName>SnapshotProverSubjects</AssemblyName>
     <RootNamespace>SnapshotProverSubjects</RootNamespace>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
@@ -15,5 +16,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../../../../../../tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests/FixtureAssembly/SnapshotTestFixtures.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Remove="Microsoft.NET.Test.Sdk" />
+    <PackageReference Remove="xunit" />
+    <PackageReference Remove="xunit.runner.visualstudio" />
+    <PackageReference Remove="FsCheck.Xunit" />
   </ItemGroup>
 </Project>

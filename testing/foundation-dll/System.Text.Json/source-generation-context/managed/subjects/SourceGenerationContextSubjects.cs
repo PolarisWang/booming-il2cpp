@@ -18,15 +18,15 @@ public static partial class SourceGenerationContextSubjects
     // [0] System.Text.Json/System.Text.Json.Serialization.JsonSerializerContext::get_Options:System.Text.Json.JsonSerializerOptions()
     public static void Subject_0()
     {
-        try { _ = default(JsonSerializerContext)!.Options; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(JsonSerializerContext)!.Options).GetHashCode()) != ((default(JsonSerializerContext)!.Options).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [1] System.Text.Json/System.Text.Json.Serialization.JsonSerializerContext::GetTypeInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo(System.Type)
     public static void Subject_1()
     {
-        try { default(JsonSerializerContext)!.GetTypeInfo(typeof(byte)); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(JsonSerializerContext)!.GetTypeInfo(typeof(byte))).GetHashCode()) != ((default(JsonSerializerContext)!.GetTypeInfo(typeof(byte))).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
 }

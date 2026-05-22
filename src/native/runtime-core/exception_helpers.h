@@ -48,6 +48,11 @@ extern "C" void SetExceptionFallback(void (*fn)());
         "Value cannot be null.");
 }
 
+/// Throws a managed ArgumentException.
+[[noreturn]] inline void RaiseArgumentException(const char* message) {
+    RaiseManagedException("System.ArgumentException", message);
+}
+
 /// Throws a managed NullReferenceException.
 /// Uses RaiseManagedException to resolve the type by name and dispatch through
 /// the runtime ABI.  This is the correct exception for callvirt on null `this`,

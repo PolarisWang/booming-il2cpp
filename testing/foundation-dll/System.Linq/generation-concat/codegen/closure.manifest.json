@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "GenerationConcatSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Linq/generation-concat/managed/subjects/build-output/GenerationConcatSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Linq/generation-concat/managed/subjects/build-output/GenerationConcatSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "GenerationConcatSubjects",
-      "path": "verification/foundation-dll/System.Linq/generation-concat/managed/subjects/build-output/GenerationConcatSubjects.dll"
+      "path": "testing/foundation-dll/System.Linq/generation-concat/managed/subjects/build-output/GenerationConcatSubjects.dll"
     },
     {
       "assemblyName": "System.Linq",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "14ae9210-ba86-4cdc-89f5-4eee12fc1761",
+  "inputModuleVersionId": "ed7f2c76-1df5-4a65-9197-236550f3b782",
   "artifacts": [
     {
       "kind": "typedIlIr",

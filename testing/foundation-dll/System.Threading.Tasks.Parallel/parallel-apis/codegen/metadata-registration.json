@@ -53,6 +53,15 @@
     {
       "registrationKind": "field",
       "slot": 6,
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_1",
+      "name": "\u003C\u003E9__1_1",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_1",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Action\u003CSystem.Int32\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 7,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_0",
       "name": "\u003C\u003E9__2_0",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_0",
@@ -61,7 +70,16 @@
     },
     {
       "registrationKind": "field",
-      "slot": 7,
+      "slot": 8,
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_1",
+      "name": "\u003C\u003E9__2_1",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_1",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Action\u003CSystem.Int32\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 9,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_0",
       "name": "\u003C\u003E9__3_0",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_0",
@@ -70,7 +88,16 @@
     },
     {
       "registrationKind": "field",
-      "slot": 8,
+      "slot": 10,
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_1",
+      "name": "\u003C\u003E9__3_1",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_1",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Action\u003CSystem.Int32\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 11,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_0",
       "name": "\u003C\u003E9__4_0",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_0",
@@ -79,7 +106,16 @@
     },
     {
       "registrationKind": "field",
-      "slot": 9,
+      "slot": 12,
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_1",
+      "name": "\u003C\u003E9__4_1",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_1",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Action\u003CSystem.Int32\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 13,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_0",
       "name": "\u003C\u003E9__5_0",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_0",
@@ -88,7 +124,16 @@
     },
     {
       "registrationKind": "field",
-      "slot": 10,
+      "slot": 14,
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_1",
+      "name": "\u003C\u003E9__5_1",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_1",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Action\u003CSystem.Int32\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 15,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__6_0",
       "name": "\u003C\u003E9__6_0",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__6_0",
@@ -97,7 +142,16 @@
     },
     {
       "registrationKind": "field",
-      "slot": 11,
+      "slot": 16,
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__6_1",
+      "name": "\u003C\u003E9__6_1",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__6_1",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Action\u003CSystem.Int32\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 17,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__42_0",
       "name": "\u003C\u003E9__42_0",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003C\u003E9__42_0",
@@ -106,7 +160,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 12,
+      "slot": 18,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_0:System.Void()",
       "name": "Subject_0",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_0:System.Void()",
@@ -117,7 +171,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 13,
+      "slot": 19,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_1:System.Void()",
       "name": "Subject_1",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_1:System.Void()",
@@ -128,7 +182,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 14,
+      "slot": 20,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_2:System.Void()",
       "name": "Subject_2",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_2:System.Void()",
@@ -139,7 +193,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 15,
+      "slot": 21,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_3:System.Void()",
       "name": "Subject_3",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_3:System.Void()",
@@ -150,7 +204,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 16,
+      "slot": 22,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_4:System.Void()",
       "name": "Subject_4",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_4:System.Void()",
@@ -161,7 +215,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 17,
+      "slot": 23,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_5:System.Void()",
       "name": "Subject_5",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_5:System.Void()",
@@ -172,7 +226,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 18,
+      "slot": 24,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_6:System.Void()",
       "name": "Subject_6",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_6:System.Void()",
@@ -183,7 +237,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 19,
+      "slot": 25,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_7:System.Void()",
       "name": "Subject_7",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_7:System.Void()",
@@ -194,7 +248,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 20,
+      "slot": 26,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_8:System.Void()",
       "name": "CustomEntrySubject_8",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_8:System.Void()",
@@ -205,7 +259,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 21,
+      "slot": 27,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_9:System.Void()",
       "name": "CustomEntrySubject_9",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_9:System.Void()",
@@ -216,7 +270,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 22,
+      "slot": 28,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_10:System.Void()",
       "name": "CustomEntrySubject_10",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_10:System.Void()",
@@ -227,7 +281,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 23,
+      "slot": 29,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_11:System.Void()",
       "name": "CustomEntrySubject_11",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_11:System.Void()",
@@ -238,7 +292,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 24,
+      "slot": 30,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_12:System.Void()",
       "name": "CustomEntrySubject_12",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_12:System.Void()",
@@ -249,7 +303,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 25,
+      "slot": 31,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_13:System.Void()",
       "name": "CustomEntrySubject_13",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_13:System.Void()",
@@ -260,7 +314,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 26,
+      "slot": 32,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_14:System.Void()",
       "name": "CustomEntrySubject_14",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_14:System.Void()",
@@ -271,7 +325,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 27,
+      "slot": 33,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_15:System.Void()",
       "name": "CustomEntrySubject_15",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_15:System.Void()",
@@ -282,7 +336,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 28,
+      "slot": 34,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_16:System.Void()",
       "name": "CustomEntrySubject_16",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_16:System.Void()",
@@ -293,7 +347,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 29,
+      "slot": 35,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_17:System.Void()",
       "name": "CustomEntrySubject_17",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_17:System.Void()",
@@ -304,7 +358,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 30,
+      "slot": 36,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_18:System.Void()",
       "name": "CustomEntrySubject_18",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_18:System.Void()",
@@ -315,7 +369,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 31,
+      "slot": 37,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_19:System.Void()",
       "name": "CustomEntrySubject_19",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_19:System.Void()",
@@ -326,7 +380,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 32,
+      "slot": 38,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_20:System.Void()",
       "name": "CustomEntrySubject_20",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_20:System.Void()",
@@ -337,7 +391,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 33,
+      "slot": 39,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_21:System.Void()",
       "name": "CustomEntrySubject_21",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_21:System.Void()",
@@ -348,7 +402,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 34,
+      "slot": 40,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_22:System.Void()",
       "name": "CustomEntrySubject_22",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_22:System.Void()",
@@ -359,7 +413,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 35,
+      "slot": 41,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_23:System.Void()",
       "name": "CustomEntrySubject_23",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_23:System.Void()",
@@ -370,7 +424,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 36,
+      "slot": 42,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_24:System.Void()",
       "name": "CustomEntrySubject_24",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_24:System.Void()",
@@ -381,7 +435,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 37,
+      "slot": 43,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_25:System.Void()",
       "name": "CustomEntrySubject_25",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_25:System.Void()",
@@ -392,7 +446,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 38,
+      "slot": 44,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_26:System.Void()",
       "name": "CustomEntrySubject_26",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_26:System.Void()",
@@ -403,7 +457,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 39,
+      "slot": 45,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_27:System.Void()",
       "name": "CustomEntrySubject_27",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_27:System.Void()",
@@ -414,7 +468,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 40,
+      "slot": 46,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_28:System.Void()",
       "name": "CustomEntrySubject_28",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_28:System.Void()",
@@ -425,7 +479,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 41,
+      "slot": 47,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_29:System.Void()",
       "name": "CustomEntrySubject_29",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_29:System.Void()",
@@ -436,7 +490,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 42,
+      "slot": 48,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_30:System.Void()",
       "name": "CustomEntrySubject_30",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_30:System.Void()",
@@ -447,7 +501,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 43,
+      "slot": 49,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_31:System.Void()",
       "name": "CustomEntrySubject_31",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_31:System.Void()",
@@ -458,7 +512,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 44,
+      "slot": 50,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_32:System.Void()",
       "name": "CustomEntrySubject_32",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_32:System.Void()",
@@ -469,7 +523,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 45,
+      "slot": 51,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_33:System.Void()",
       "name": "CustomEntrySubject_33",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_33:System.Void()",
@@ -480,7 +534,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 46,
+      "slot": 52,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_34:System.Void()",
       "name": "CustomEntrySubject_34",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_34:System.Void()",
@@ -491,7 +545,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 47,
+      "slot": 53,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_35:System.Void()",
       "name": "CustomEntrySubject_35",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_35:System.Void()",
@@ -502,7 +556,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 48,
+      "slot": 54,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_36:System.Void()",
       "name": "CustomEntrySubject_36",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_36:System.Void()",
@@ -513,7 +567,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 49,
+      "slot": 55,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_37:System.Void()",
       "name": "CustomEntrySubject_37",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_37:System.Void()",
@@ -524,7 +578,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 50,
+      "slot": 56,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_38:System.Void()",
       "name": "CustomEntrySubject_38",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_38:System.Void()",
@@ -535,7 +589,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 51,
+      "slot": 57,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_39:System.Void()",
       "name": "CustomEntrySubject_39",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_39:System.Void()",
@@ -546,7 +600,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 52,
+      "slot": 58,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_40:System.Void()",
       "name": "CustomEntrySubject_40",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::CustomEntrySubject_40:System.Void()",
@@ -557,7 +611,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 53,
+      "slot": 59,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_41:System.Void()",
       "name": "Subject_41",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_41:System.Void()",
@@ -568,7 +622,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 54,
+      "slot": 60,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_42:System.Void()",
       "name": "Subject_42",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects::Subject_42:System.Void()",
@@ -579,7 +633,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 55,
+      "slot": 61,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
       "name": ".cctor",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
@@ -590,7 +644,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 56,
+      "slot": 62,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
       "name": ".ctor",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
@@ -601,7 +655,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 57,
+      "slot": 63,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_0\u003Eb__1_0:System.Void(System.Int32)",
       "name": "\u003CSubject_0\u003Eb__1_0",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_0\u003Eb__1_0:System.Void(System.Int32)",
@@ -612,7 +666,18 @@
     },
     {
       "registrationKind": "method",
-      "slot": 58,
+      "slot": 64,
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_0\u003Eb__1_1:System.Void(System.Int32)",
+      "name": "\u003CSubject_0\u003Eb__1_1",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_0\u003Eb__1_1:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Void",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 65,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_1\u003Eb__2_0:System.Void(System.Int32)",
       "name": "\u003CSubject_1\u003Eb__2_0",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_1\u003Eb__2_0:System.Void(System.Int32)",
@@ -623,7 +688,18 @@
     },
     {
       "registrationKind": "method",
-      "slot": 59,
+      "slot": 66,
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_1\u003Eb__2_1:System.Void(System.Int32)",
+      "name": "\u003CSubject_1\u003Eb__2_1",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_1\u003Eb__2_1:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Void",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 67,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_0:System.Void(System.Int32)",
       "name": "\u003CSubject_2\u003Eb__3_0",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_0:System.Void(System.Int32)",
@@ -634,7 +710,18 @@
     },
     {
       "registrationKind": "method",
-      "slot": 60,
+      "slot": 68,
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_1:System.Void(System.Int32)",
+      "name": "\u003CSubject_2\u003Eb__3_1",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_1:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Void",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 69,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_0:System.Void(System.Int32)",
       "name": "\u003CSubject_3\u003Eb__4_0",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_0:System.Void(System.Int32)",
@@ -645,7 +732,18 @@
     },
     {
       "registrationKind": "method",
-      "slot": 61,
+      "slot": 70,
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_1:System.Void(System.Int32)",
+      "name": "\u003CSubject_3\u003Eb__4_1",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_1:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Void",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 71,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_0:System.Void(System.Int32)",
       "name": "\u003CSubject_4\u003Eb__5_0",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_0:System.Void(System.Int32)",
@@ -656,7 +754,18 @@
     },
     {
       "registrationKind": "method",
-      "slot": 62,
+      "slot": 72,
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_1:System.Void(System.Int32)",
+      "name": "\u003CSubject_4\u003Eb__5_1",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_1:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Void",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 73,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_0:System.Void(System.Int32)",
       "name": "\u003CSubject_5\u003Eb__6_0",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_0:System.Void(System.Int32)",
@@ -667,7 +776,18 @@
     },
     {
       "registrationKind": "method",
-      "slot": 63,
+      "slot": 74,
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_1:System.Void(System.Int32)",
+      "name": "\u003CSubject_5\u003Eb__6_1",
+      "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_1:System.Void(System.Int32)",
+      "declaringTypeSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Void",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 75,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_41\u003Eb__42_0:System.Void()",
       "name": "\u003CSubject_41\u003Eb__42_0",
       "definitionSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_41\u003Eb__42_0:System.Void()",
@@ -678,7 +798,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 64,
+      "slot": 76,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_0\u003Eb__1_0:System.Void(System.Int32)::parameter[0]:x",
       "name": "x",
       "declaringMethodSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_0\u003Eb__1_0:System.Void(System.Int32)",
@@ -687,7 +807,16 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 65,
+      "slot": 77,
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_0\u003Eb__1_1:System.Void(System.Int32)::parameter[0]:x",
+      "name": "x",
+      "declaringMethodSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_0\u003Eb__1_1:System.Void(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 78,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_1\u003Eb__2_0:System.Void(System.Int32)::parameter[0]:x",
       "name": "x",
       "declaringMethodSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_1\u003Eb__2_0:System.Void(System.Int32)",
@@ -696,7 +825,16 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 66,
+      "slot": 79,
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_1\u003Eb__2_1:System.Void(System.Int32)::parameter[0]:x",
+      "name": "x",
+      "declaringMethodSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_1\u003Eb__2_1:System.Void(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 80,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_0:System.Void(System.Int32)::parameter[0]:x",
       "name": "x",
       "declaringMethodSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_0:System.Void(System.Int32)",
@@ -705,7 +843,16 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 67,
+      "slot": 81,
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_1:System.Void(System.Int32)::parameter[0]:x",
+      "name": "x",
+      "declaringMethodSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_1:System.Void(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 82,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_0:System.Void(System.Int32)::parameter[0]:x",
       "name": "x",
       "declaringMethodSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_0:System.Void(System.Int32)",
@@ -714,7 +861,16 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 68,
+      "slot": 83,
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_1:System.Void(System.Int32)::parameter[0]:x",
+      "name": "x",
+      "declaringMethodSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_1:System.Void(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 84,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_0:System.Void(System.Int32)::parameter[0]:x",
       "name": "x",
       "declaringMethodSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_0:System.Void(System.Int32)",
@@ -723,10 +879,28 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 69,
+      "slot": 85,
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_1:System.Void(System.Int32)::parameter[0]:x",
+      "name": "x",
+      "declaringMethodSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_1:System.Void(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 86,
       "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_0:System.Void(System.Int32)::parameter[0]:x",
       "name": "x",
       "declaringMethodSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_0:System.Void(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 87,
+      "subjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_1:System.Void(System.Int32)::parameter[0]:x",
+      "name": "x",
+      "declaringMethodSubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_1:System.Void(System.Int32)",
       "memberType": "System.Int32",
       "parameterIndex": 0
     }

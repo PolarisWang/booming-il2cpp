@@ -8,13 +8,14 @@
     "generated/enum_metadata.generated.h",
     "generated/native-aot.generated.cpp",
     "generated/chaos_generated_module.h",
-    "generated/chaos_generated_module.cpp"
+    "generated/chaos_generated_module.cpp",
+    "native-aot.methods.json"
   ],
-  "generatedCppFileCount": 5,
-  "generatedCppTotalBytes": 639547,
+  "generatedCppFileCount": 6,
+  "generatedCppTotalBytes": 666038,
   "largestGeneratedCppBytes": 522275,
   "generatedSymbolCount": 9,
-  "peakWorkingSetBytes": 544878592,
+  "peakWorkingSetBytes": 544579584,
   "structuredMethodCount": 0,
   "structuredExceptionBodyCount": 2,
   "flatFallbackCount": 0,

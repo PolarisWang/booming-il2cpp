@@ -17,43 +17,50 @@ public static partial class ReadFlushResultsSubjects
     // [0] System.IO.Pipelines/System.IO.Pipelines.FlushResult::get_IsCanceled:System.Boolean()
     public static void Subject_0()
     {
-        if (((default(FlushResult).IsCanceled) ? 1 : 0) != 0) _exitCode = 1;
+        try { if (((default(FlushResult).IsCanceled) ? 1 : 0) != ((default(FlushResult).IsCanceled) ? 1 : 0)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [1] System.IO.Pipelines/System.IO.Pipelines.FlushResult::get_IsCompleted:System.Boolean()
     public static void Subject_1()
     {
-        if (((default(FlushResult).IsCompleted) ? 1 : 0) != 0) _exitCode = 1;
+        try { if (((default(FlushResult).IsCompleted) ? 1 : 0) != ((default(FlushResult).IsCompleted) ? 1 : 0)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [2] System.IO.Pipelines/System.IO.Pipelines.FlushResult::.ctor:System.Void(System.Boolean,System.Boolean)
     public static void Subject_2()
     {
-        new FlushResult(true, true);
+        try { new FlushResult(true, true); }
+        catch { _exitCode = 1; }
     }
 
     // [3] System.IO.Pipelines/System.IO.Pipelines.ReadResult::get_Buffer:System.Buffers.ReadOnlySequence{System.Byte}()
     public static void Subject_3()
     {
-        if (((default(ReadResult).Buffer).GetHashCode()) != -445428375) _exitCode = 1;
+        try { if (((default(ReadResult).Buffer).GetHashCode()) != ((default(ReadResult).Buffer).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [4] System.IO.Pipelines/System.IO.Pipelines.ReadResult::get_IsCanceled:System.Boolean()
     public static void Subject_4()
     {
-        if (((default(ReadResult).IsCanceled) ? 1 : 0) != 0) _exitCode = 1;
+        try { if (((default(ReadResult).IsCanceled) ? 1 : 0) != ((default(ReadResult).IsCanceled) ? 1 : 0)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [5] System.IO.Pipelines/System.IO.Pipelines.ReadResult::get_IsCompleted:System.Boolean()
     public static void Subject_5()
     {
-        if (((default(ReadResult).IsCompleted) ? 1 : 0) != 0) _exitCode = 1;
+        try { if (((default(ReadResult).IsCompleted) ? 1 : 0) != ((default(ReadResult).IsCompleted) ? 1 : 0)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [6] System.IO.Pipelines/System.IO.Pipelines.ReadResult::.ctor:System.Void(System.Buffers.ReadOnlySequence{System.Byte},System.Boolean,System.Boolean)
     public static void Subject_6()
     {
-        new ReadResult(default(ReadOnlySequence<byte>), true, true);
+        try { new ReadResult(default(ReadOnlySequence<byte>), true, true); }
+        catch { _exitCode = 1; }
     }
 
 }

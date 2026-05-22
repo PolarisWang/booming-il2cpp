@@ -1,5 +1,5 @@
 // verification_dispatch.generated.cpp — auto-generated
-// Assembly: ThreadingTasksPrimitivesSubjects, Methods: 39
+// Assembly: ThreadingTasksPrimitivesSubjects, Methods: 37
 #include <cstdint>
 #include <chrono>
 #include <chaos/native_types.h>

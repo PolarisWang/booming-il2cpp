@@ -26,9 +26,45 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "ConverterFactorySubjects/ConverterFactorySubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ConverterFactorySubjects/ConverterFactorySubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverterFactory::CreateConverter:System.Text.Json.Serialization.JsonConverter(System.Type,JsonSerializerOptions)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ConverterFactorySubjects/ConverterFactorySubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "ConverterFactorySubjects/ConverterFactorySubjects::Subject_1:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter::get_Type:System.Type()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ConverterFactorySubjects/ConverterFactorySubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ConverterFactorySubjects/ConverterFactorySubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter::get_Type:System.Type()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ConverterFactorySubjects/ConverterFactorySubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
     }
   ],
@@ -44,12 +80,12 @@
     {
       "methodSubjectId": "ConverterFactorySubjects/ConverterFactorySubjects::Subject_0:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "ConverterFactorySubjects/ConverterFactorySubjects::Subject_1:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     }
   ]
 }

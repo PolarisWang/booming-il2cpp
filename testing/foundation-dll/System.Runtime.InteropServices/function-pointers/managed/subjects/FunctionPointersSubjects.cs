@@ -16,7 +16,8 @@ public static partial class FunctionPointersSubjects
     // [0] System.Runtime.InteropServices/System.Runtime.InteropServices.UnmanagedCallersOnlyAttribute::.ctor:System.Void()
     public static void Subject_0()
     {
-        new UnmanagedCallersOnlyAttribute();
+        try { new UnmanagedCallersOnlyAttribute(); }
+        catch { _exitCode = 1; }
     }
 
 }

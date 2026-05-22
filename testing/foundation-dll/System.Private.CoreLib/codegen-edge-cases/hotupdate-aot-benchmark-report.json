@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/codegen/edge/cases",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_0:System.Void()",
+      "status": "passed",
+      "prePatchNsPerOp": 2.1,
+      "postPatchNsPerOp": 2.5,
+      "slowdownPercent": 19.05
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_1:System.Void(System.Int32)",
+      "status": "passed",
+      "prePatchNsPerOp": 3.26,
+      "postPatchNsPerOp": 2.5,
+      "slowdownPercent": -23.31
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_2:System.Void()",
+      "status": "passed",
+      "prePatchNsPerOp": 2.11,
+      "postPatchNsPerOp": 2.9,
+      "slowdownPercent": 37.44
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_3:System.Int32(System.Int32)",
+      "status": "passed",
+      "prePatchNsPerOp": 2.12,
+      "postPatchNsPerOp": 3.7,
+      "slowdownPercent": 74.53
+    }
+  ],
+  "summary": {
+    "totalMethods": 4,
+    "nonStubMethods": 4,
+    "averageSlowdownPercent": 26.93,
+    "slowdownFactor": 1.2693,
+    "slowdownThresholdX": 50.0
+  }
+}

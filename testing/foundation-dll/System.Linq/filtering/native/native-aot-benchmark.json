@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Linq",
+  "familyId": "family/System.Linq/filtering",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::All{TSource}:System.Boolean(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Boolean})",
+      "elapsedMilliseconds": 19.713,
+      "calibratedMs": 19.713,
+      "opsPerSecond": 5072820.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Any{TSource}:System.Boolean(System.Collections.Generic.IEnumerable{TSource})",
+      "elapsedMilliseconds": 0.198,
+      "calibratedMs": 0.198,
+      "opsPerSecond": 504540867.8,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Any{TSource}:System.Boolean(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Boolean})",
+      "elapsedMilliseconds": 19.889,
+      "calibratedMs": 19.889,
+      "opsPerSecond": 5027980.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Cast{TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.IEnumerable)",
+      "elapsedMilliseconds": 20.605,
+      "calibratedMs": 20.605,
+      "opsPerSecond": 4853214.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::DistinctBy{TSource,TKey}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey})",
+      "elapsedMilliseconds": 0.193,
+      "calibratedMs": 0.193,
+      "opsPerSecond": 519480519.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::DistinctBy{TSource,TKey}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey},System.Collections.Generic.IEqualityComparer{TKey})",
+      "elapsedMilliseconds": 35.588,
+      "calibratedMs": 35.588,
+      "opsPerSecond": 2809920.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::OfType{TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.IEnumerable)",
+      "elapsedMilliseconds": 20.522,
+      "calibratedMs": 20.522,
+      "opsPerSecond": 4872748.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Where{TSource}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Boolean})",
+      "elapsedMilliseconds": 0.205,
+      "calibratedMs": 0.205,
+      "opsPerSecond": 488519785.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Where{TSource}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Int32,System.Boolean})",
+      "elapsedMilliseconds": 20.961,
+      "calibratedMs": 20.961,
+      "opsPerSecond": 4770787.5,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}

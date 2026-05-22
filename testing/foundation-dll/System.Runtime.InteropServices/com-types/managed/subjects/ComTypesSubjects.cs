@@ -16,8 +16,8 @@ public static partial class ComTypesSubjects
     // [0] System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IAdviseSink::OnClose:System.Void()
     public static void Subject_0()
     {
-        try { default(IAdviseSink)!.OnClose(); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { default(IAdviseSink)!.OnClose(); }
+        catch { _exitCode = 1; }
     }
 
     // [1] System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IAdviseSink::OnDataChange:System.Void(System.Runtime.InteropServices.ComTypes.FORMATETC&,System.Runtime.InteropServices.ComTypes.STGMEDIUM&)
@@ -29,22 +29,22 @@ public static partial class ComTypesSubjects
     // [2] System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IAdviseSink::OnRename:System.Void(System.Runtime.InteropServices.ComTypes.IMoniker)
     public static void Subject_2()
     {
-        try { default(IAdviseSink)!.OnRename(default); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { default(IAdviseSink)!.OnRename(default); }
+        catch { _exitCode = 1; }
     }
 
     // [3] System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IAdviseSink::OnSave:System.Void()
     public static void Subject_3()
     {
-        try { default(IAdviseSink)!.OnSave(); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { default(IAdviseSink)!.OnSave(); }
+        catch { _exitCode = 1; }
     }
 
     // [4] System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IAdviseSink::OnViewChange:System.Void(System.Int32,System.Int32)
     public static void Subject_4()
     {
-        try { default(IAdviseSink)!.OnViewChange(42, 42); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { default(IAdviseSink)!.OnViewChange(42, 42); }
+        catch { _exitCode = 1; }
     }
 
     // [5] System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IDataObject::DAdvise:System.Int32(System.Runtime.InteropServices.ComTypes.FORMATETC&,System.Runtime.InteropServices.ComTypes.ADVF,System.Runtime.InteropServices.ComTypes.IAdviseSink,System.Int32&)
@@ -56,8 +56,8 @@ public static partial class ComTypesSubjects
     // [6] System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IDataObject::DUnadvise:System.Void(System.Int32)
     public static void Subject_6()
     {
-        try { default(IDataObject)!.DUnadvise(42); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { default(IDataObject)!.DUnadvise(42); }
+        catch { _exitCode = 1; }
     }
 
     // [7] System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IDataObject::EnumDAdvise:System.Int32(System.Runtime.InteropServices.ComTypes.IEnumSTATDATA&)
@@ -69,8 +69,8 @@ public static partial class ComTypesSubjects
     // [8] System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IDataObject::EnumFormatEtc:System.Runtime.InteropServices.ComTypes.IEnumFORMATETC(System.Runtime.InteropServices.ComTypes.DATADIR)
     public static void Subject_8()
     {
-        try { default(IDataObject)!.EnumFormatEtc(default); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(IDataObject)!.EnumFormatEtc(default)).GetHashCode()) != ((default(IDataObject)!.EnumFormatEtc(default)).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [9] System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IDataObject::GetCanonicalFormatEtc:System.Int32(System.Runtime.InteropServices.ComTypes.FORMATETC&,System.Runtime.InteropServices.ComTypes.FORMATETC&)
@@ -112,22 +112,22 @@ public static partial class ComTypesSubjects
     // [15] System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IEnumFORMATETC::Next:System.Int32(System.Int32,System.Runtime.InteropServices.ComTypes.FORMATETC{},System.Int32{})
     public static void Subject_15()
     {
-        try { default(IEnumFORMATETC)!.Next(42, default, default); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (default(IEnumFORMATETC)!.Next(42, default, default) != default(IEnumFORMATETC)!.Next(42, default, default)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [16] System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IEnumFORMATETC::Reset:System.Int32()
     public static void Subject_16()
     {
-        try { default(IEnumFORMATETC)!.Reset(); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (default(IEnumFORMATETC)!.Reset() != default(IEnumFORMATETC)!.Reset()) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [17] System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IEnumFORMATETC::Skip:System.Int32(System.Int32)
     public static void Subject_17()
     {
-        try { default(IEnumFORMATETC)!.Skip(42); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (default(IEnumFORMATETC)!.Skip(42) != default(IEnumFORMATETC)!.Skip(42)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [18] System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IEnumSTATDATA::Clone:System.Void(System.Runtime.InteropServices.ComTypes.IEnumSTATDATA&)
@@ -139,22 +139,22 @@ public static partial class ComTypesSubjects
     // [19] System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IEnumSTATDATA::Next:System.Int32(System.Int32,System.Runtime.InteropServices.ComTypes.STATDATA{},System.Int32{})
     public static void Subject_19()
     {
-        try { default(IEnumSTATDATA)!.Next(42, default, default); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (default(IEnumSTATDATA)!.Next(42, default, default) != default(IEnumSTATDATA)!.Next(42, default, default)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [20] System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IEnumSTATDATA::Reset:System.Int32()
     public static void Subject_20()
     {
-        try { default(IEnumSTATDATA)!.Reset(); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (default(IEnumSTATDATA)!.Reset() != default(IEnumSTATDATA)!.Reset()) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [21] System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IEnumSTATDATA::Skip:System.Int32(System.Int32)
     public static void Subject_21()
     {
-        try { default(IEnumSTATDATA)!.Skip(42); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (default(IEnumSTATDATA)!.Skip(42) != default(IEnumSTATDATA)!.Skip(42)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
 }

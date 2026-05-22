@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "SseItemSubjects",
   "entrySubjectId": "SseItemSubjects/SseItemSubjects::Subject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Net.ServerSentEvents/sse-item/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.Net.ServerSentEvents/sse-item/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

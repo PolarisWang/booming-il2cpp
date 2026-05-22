@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/exception/throw/diagnostics",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/System.Exception::.ctor:System.Void(System.String)",
+      "status": "passed",
+      "prePatchNsPerOp": 843.75,
+      "postPatchNsPerOp": 518.3,
+      "slowdownPercent": -38.57
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/System.Exception::.ctor:System.Void(System.String,System.Exception)",
+      "status": "passed",
+      "prePatchNsPerOp": 116.21,
+      "postPatchNsPerOp": 117.2,
+      "slowdownPercent": 0.85
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/System.Exception::get_Message:System.String()",
+      "status": "passed",
+      "prePatchNsPerOp": 519.23,
+      "postPatchNsPerOp": 435.5,
+      "slowdownPercent": -16.13
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Private.CoreLib/System.Exception::get_InnerException:System.Exception()",
+      "status": "passed",
+      "prePatchNsPerOp": 921.74,
+      "postPatchNsPerOp": 422.7,
+      "slowdownPercent": -54.14
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Private.CoreLib/System.Exception::get_StackTrace:System.String()",
+      "status": "passed",
+      "prePatchNsPerOp": 612.16,
+      "postPatchNsPerOp": 436.7,
+      "slowdownPercent": -28.66
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Private.CoreLib/System.Exception::get_HResult:System.Int32()",
+      "status": "passed",
+      "prePatchNsPerOp": 420.32,
+      "postPatchNsPerOp": 441.0,
+      "slowdownPercent": 4.92
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Private.CoreLib/System.Exception::ToString:System.String()",
+      "status": "passed",
+      "prePatchNsPerOp": 462.91,
+      "postPatchNsPerOp": 449.3,
+      "slowdownPercent": -2.94
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Private.CoreLib/System.Exception::GetBaseException:System.Exception()",
+      "status": "passed",
+      "prePatchNsPerOp": 455.5,
+      "postPatchNsPerOp": 417.4,
+      "slowdownPercent": -8.36
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Private.CoreLib/System.ArgumentException::.ctor:System.Void(System.String,System.String)",
+      "status": "passed",
+      "prePatchNsPerOp": 116.97,
+      "postPatchNsPerOp": 124.4,
+      "slowdownPercent": 6.35
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Private.CoreLib/System.ArgumentNullException::.ctor:System.Void(System.String)",
+      "status": "passed",
+      "prePatchNsPerOp": 115.57,
+      "postPatchNsPerOp": 126.1,
+      "slowdownPercent": 9.11
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Private.CoreLib/System.ArgumentOutOfRangeException::.ctor:System.Void(System.String)",
+      "status": "passed",
+      "prePatchNsPerOp": 117.48,
+      "postPatchNsPerOp": 126.2,
+      "slowdownPercent": 7.42
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Private.CoreLib/System.InvalidOperationException::.ctor:System.Void(System.String)",
+      "status": "passed",
+      "prePatchNsPerOp": 518.8,
+      "postPatchNsPerOp": 509.7,
+      "slowdownPercent": -1.75
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "System.Private.CoreLib/System.NotSupportedException::.ctor:System.Void(System.String)",
+      "status": "passed",
+      "prePatchNsPerOp": 128.36,
+      "postPatchNsPerOp": 156.2,
+      "slowdownPercent": 21.69
+    },
+    {
+      "methodIndex": 13,
+      "methodSubjectId": "System.Private.CoreLib/System.NotImplementedException::.ctor:System.Void(System.String)",
+      "status": "passed",
+      "prePatchNsPerOp": 122.91,
+      "postPatchNsPerOp": 127.1,
+      "slowdownPercent": 3.41
+    }
+  ],
+  "summary": {
+    "totalMethods": 14,
+    "nonStubMethods": 14,
+    "averageSlowdownPercent": -6.91,
+    "slowdownFactor": 0.9309000000000001,
+    "slowdownThresholdX": 50.0
+  }
+}

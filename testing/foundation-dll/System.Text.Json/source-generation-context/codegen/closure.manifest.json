@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "SourceGenerationContextSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Text.Json/source-generation-context/managed/subjects/build-output/SourceGenerationContextSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Text.Json/source-generation-context/managed/subjects/build-output/SourceGenerationContextSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "SourceGenerationContextSubjects",
-      "path": "verification/foundation-dll/System.Text.Json/source-generation-context/managed/subjects/build-output/SourceGenerationContextSubjects.dll"
+      "path": "testing/foundation-dll/System.Text.Json/source-generation-context/managed/subjects/build-output/SourceGenerationContextSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "c788fa09-4296-42c8-a83f-9ec1f4751219",
+  "inputModuleVersionId": "2127d6f6-2d87-4061-91aa-26b0a9ff7875",
   "artifacts": [
     {
       "kind": "typedIlIr",

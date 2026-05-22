@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Linq",
+  "familyId": "family/System.Linq/grouping/lookup",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::GroupBy{TSource,TKey}:System.Collections.Generic.IEnumerable{System.Linq.IGrouping{TKey,TSource}}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey})",
+      "elapsedMilliseconds": 8559.426,
+      "calibratedMs": 8559.426,
+      "opsPerSecond": 11683.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::GroupBy{TSource,TKey}:System.Collections.Generic.IEnumerable{System.Linq.IGrouping{TKey,TSource}}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey},System.Collections.Generic.IEqualityComparer{TKey})",
+      "elapsedMilliseconds": 950.429,
+      "calibratedMs": 950.429,
+      "opsPerSecond": 105215.6,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::GroupBy{TSource,TKey,TElement}:System.Collections.Generic.IEnumerable{System.Linq.IGrouping{TKey,TElement}}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey},System.Func{TSource,TElement})",
+      "elapsedMilliseconds": 7604.539,
+      "calibratedMs": 7604.539,
+      "opsPerSecond": 13150.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::GroupBy{TSource,TKey,TElement}:System.Collections.Generic.IEnumerable{System.Linq.IGrouping{TKey,TElement}}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey},System.Func{TSource,TElement},System.Collections.Generic.IEqualityComparer{TKey})",
+      "elapsedMilliseconds": 1464.439,
+      "calibratedMs": 1464.439,
+      "opsPerSecond": 68285.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::GroupBy{TSource,TKey,TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey},System.Func{TKey,System.Collections.Generic.IEnumerable{TSource},TResult})",
+      "elapsedMilliseconds": 9678.826,
+      "calibratedMs": 9678.826,
+      "opsPerSecond": 10331.8,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::GroupBy{TSource,TKey,TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey},System.Func{TKey,System.Collections.Generic.IEnumerable{TSource},TResult},System.Collections.Generic.IEqualityComparer{TKey})",
+      "elapsedMilliseconds": 1288.94,
+      "calibratedMs": 1288.94,
+      "opsPerSecond": 77583.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::GroupBy{TSource,TKey,TElement,TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey},System.Func{TSource,TElement},System.Func{TKey,System.Collections.Generic.IEnumerable{TElement},TResult})",
+      "elapsedMilliseconds": 1184.824,
+      "calibratedMs": 1184.824,
+      "opsPerSecond": 84400.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::GroupBy{TSource,TKey,TElement,TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey},System.Func{TSource,TElement},System.Func{TKey,System.Collections.Generic.IEnumerable{TElement},TResult},System.Collections.Generic.IEqualityComparer{TKey})",
+      "elapsedMilliseconds": 10050.848,
+      "calibratedMs": 10050.848,
+      "opsPerSecond": 9949.4,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}
