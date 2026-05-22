@@ -11,6 +11,7 @@
 
 #include "gc_bgc.h"
 #include "gc_events.h"
+#include "gc_etw.h"
 #include "gc_layout.h"
 #include "gc_mark_bitmap.h"
 #include "gc_old_gen.h"
@@ -656,6 +657,8 @@ Gen1CollectionResult GcGen1Collection() {
         static_cast<unsigned long long>(result.bytes_promoted),
         static_cast<unsigned long long>(result.bytes_reclaimed),
         static_cast<unsigned long long>(result.pause_ns));
+
+    GcEtwFireGcGen1Collect(result.pause_ns, result.objects_promoted, result.bytes_reclaimed);
 
     return result;
 }

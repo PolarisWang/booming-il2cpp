@@ -122,6 +122,8 @@ add_library(chaos_runtime_core STATIC
     gc/gc_parallel_mark.cpp
     gc/gc_events.h
     gc/gc_events.cpp
+    gc/gc_etw.h
+    gc/gc_etw.cpp
     gc/gc_gen1.h
     gc/gc_gen1.cpp
     gc/gc_stats.h

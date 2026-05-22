@@ -517,6 +517,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{5CFDFFE1-4BB7-3895-8D58-39FF69FE5692}</Project>
       <Name>test_method_replacement_smoke</Name>
     </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing\runtime-core\threading\test_monitor_pulseall_stress.vcxproj">
+      <Project>{868D7E3B-6F46-3924-BADC-6456EAEACED4}</Project>
+      <Name>test_monitor_pulseall_stress</Name>
+    </ProjectReference>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\testing\runtime-core\threading\test_synchronization_smoke.vcxproj">
       <Project>{622E6165-B06C-332F-968A-8694F849595C}</Project>
       <Name>test_synchronization_smoke</Name>

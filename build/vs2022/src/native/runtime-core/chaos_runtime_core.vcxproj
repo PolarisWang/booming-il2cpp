@@ -381,6 +381,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_parallel_mark.cpp" />
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_events.h" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_events.cpp" />
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_etw.h" />
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_etw.cpp" />
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_gen1.h" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_gen1.cpp" />
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_stats.h" />

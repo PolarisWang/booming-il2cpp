@@ -9,6 +9,7 @@
 #include "gc_bit_utils.h"
 #include "gc_card_table.h"
 #include "gc_events.h"
+#include "gc_etw.h"
 #include "gc_helpers.h"
 #include "gc_layout.h"
 #include "gc_loh.h"
@@ -2375,6 +2376,8 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     auto pause_start = std::chrono::steady_clock::now();
 
     CHAOS_IL2CPP_LOG_INFO_M("OldGen", "collect_start page_count={0}", page_count_);
+    GcEtwFireGcFullStart(static_cast<uint32_t>(page_count_));
+    GcEtwFireGcStart(2);  // generation=2 (full GC)
 
     // Stop any in-progress BGC concurrent mark before we clear bitmaps
     // and re-mark from roots.  BGC runs in preemptive mode and would
@@ -2771,6 +2774,9 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
         static_cast<unsigned long long>(total_reclaimed), pause_ns);
 
     // Fire GC_FULL_DONE event.
+    GcEtwFireGcFullEnd(pause_ns, total_reclaimed, marked_count,
+                       static_cast<uint64_t>(page_count_));
+    GcEtwFireGcEnd(pause_ns, total_reclaimed);
     GcFireEvent(GcEvent::GC_FULL_DONE);
 
     // Signal full GC complete for registered notification waiters.

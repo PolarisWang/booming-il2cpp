@@ -6,6 +6,7 @@
 
 #include "gc_card_table.h"
 #include "gc_events.h"
+#include "gc_etw.h"
 #include "gc_bgc.h"
 #include "gc_gen1.h"
 #include "gc_layout.h"
@@ -368,6 +369,7 @@ YoungCollectionResult GcYoungCollection(bool force_skip_gen1) {
         static_cast<void*>(nursery->end),
         static_cast<unsigned long long>(nursery_used - nursery_begin));
 
+    GcEtwFireGcYoungStart(static_cast<uint64_t>(nursery_used - nursery_begin));
     GcFireEvent(GcEvent::GC_YOUNG_START);
 
     // ── BFS worklist setup: initialize before any scavenge phase so that
@@ -802,6 +804,7 @@ phase3:
         pt.phase3b_ns / 1000,
         pt.phase4_ns / 1000);
 
+    GcEtwFireGcYoungEnd(pause_ns, result.objects_promoted, result.bytes_promoted, result.bytes_reclaimed);
     GcFireEvent(GcEvent::GC_YOUNG_DONE);
     return result;
 }

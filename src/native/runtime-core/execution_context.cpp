@@ -68,13 +68,18 @@ struct AsyncLocalMap {
 thread_local AsyncLocalMap tls_async_locals;
 thread_local int32_t tls_suppress_flow_depth = 0;
 
-AsyncLocalValue* FindValue(uint64_t key) noexcept {
+uint32_t FindValueIndex(uint64_t key) noexcept {
     for (uint32_t i = 0; i < tls_async_locals.count; i++) {
         if (tls_async_locals.ValueAt(i).key == key) {
-            return &tls_async_locals.ValueAt(i);
+            return i;
         }
     }
-    return nullptr;
+    return UINT32_MAX;
+}
+
+AsyncLocalValue* FindValue(uint64_t key) noexcept {
+    uint32_t idx = FindValueIndex(key);
+    return (idx != UINT32_MAX) ? &tls_async_locals.ValueAt(idx) : nullptr;
 }
 
 }  // anonymous namespace
@@ -82,11 +87,22 @@ AsyncLocalValue* FindValue(uint64_t key) noexcept {
 // ── AsyncLocalSetValue / AsyncLocalGetValue ───────────────────────────
 
 void AsyncLocalSetValue(uint64_t key, CHAOS_IL2CPP_INTPTR value) noexcept {
-    auto* existing = FindValue(key);
-    if (existing != nullptr) {
-        existing->value = value;
+    uint32_t existing_idx = FindValueIndex(key);
+    if (existing_idx != UINT32_MAX) {
+        if (value == 0) {
+            // Remove the entry by shifting remaining entries left.
+            uint32_t count = tls_async_locals.count;
+            for (uint32_t i = existing_idx + 1; i < count; i++) {
+                tls_async_locals.ValueAt(i - 1) = tls_async_locals.ValueAt(i);
+            }
+            tls_async_locals.count--;
+        } else {
+            tls_async_locals.ValueAt(existing_idx).value = value;
+        }
         return;
     }
+
+    if (value == 0) return;  // Don't add a zero-valued entry.
 
     if (tls_async_locals.count >= kMaxValues) {
         CHAOS_IL2CPP_LOG_WARN("AsyncLocal", "exceeded max values");
