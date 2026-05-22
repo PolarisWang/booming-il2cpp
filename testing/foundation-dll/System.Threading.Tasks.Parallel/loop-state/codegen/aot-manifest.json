@@ -69,12 +69,6 @@
       "reason": "external-call"
     },
     {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "reason": "external-call"
-    },
-    {
       "assemblyName": "System.Threading.Tasks.Parallel",
       "subjectKind": "method",
       "subjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_ShouldExitCurrentIteration:System.Boolean()",

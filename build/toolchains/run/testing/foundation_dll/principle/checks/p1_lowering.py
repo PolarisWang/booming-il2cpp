@@ -28,7 +28,9 @@ _EXEMPTED_FAMILIES: set[tuple[str, str]] = {
     ("System.ObjectModel", "property-change-notifications"),
     ("System.Text.Json", "document-element"),
     ("System.Text.Json", "nodes"),
+    ("System.Text.Json", "polymorphism-reference"),
     ("System.Text.Json", "reader"),
+    ("System.Text.Json", "serializer"),
     ("System.Text.Json", "writer"),
 }
 

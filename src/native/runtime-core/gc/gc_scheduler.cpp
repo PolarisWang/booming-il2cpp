@@ -132,8 +132,6 @@ void GcScheduler::RecordYoungCollection(CHAOS_IL2CPP_SIZE nursery_used,
     }
     g_young_gen.promotion_age_threshold_.store(new_threshold, std::memory_order_release);
 
-    // Increment young-GC count since last independent Gen1 collection.
-    g_gen1_state.young_gc_since_last_gen1.fetch_add(1, std::memory_order_relaxed);
 }
 
 void GcScheduler::RecordFullCollection(CHAOS_IL2CPP_SIZE total_heap_bytes, uint64_t /*pause_ns*/) noexcept {
@@ -164,18 +162,9 @@ void GcScheduler::ResetPageCountGrowth() noexcept {
     page_count_growth_.store(0, std::memory_order_relaxed);
 }
 
-// ── Gen1 budget tracking (DEAD CODE) ────────────────────────────────
-// These functions write Gen1 budget counters that are never read by
-// DecideCollection().  The actual Gen1 trigger is in GcYoungCollection
-// Phase 4 via promotion_age_threshold_ (gc_young_gen.h).
-// Kept for API compatibility; see gc_scheduler.h for context.
-
 void GcScheduler::RecordGen1Collection(CHAOS_IL2CPP_SIZE bytes_promoted,
                                         CHAOS_IL2CPP_SIZE objects_in_gen1,
                                         uint64_t pause_ns) noexcept {
-    gen1_alloc_since_last_gc_.store(0, std::memory_order_relaxed);
-    gen0_since_last_gen1_gc_.store(0, std::memory_order_relaxed);
-
     // Update Gen1 EMA survival rate (object-count-based proxy).
     if (objects_in_gen1 > 0) {
         double survival = static_cast<double>(bytes_promoted) /
@@ -226,13 +215,12 @@ void GcScheduler::RecordGen1Collection(CHAOS_IL2CPP_SIZE bytes_promoted,
     }
 
     scheduler_recommended_threshold_.store(threshold, std::memory_order_release);
-
-    // Reset young-GC interval counter for independent Gen1 collection triggering.
-    g_gen1_state.young_gc_since_last_gen1.store(0, std::memory_order_relaxed);
 }
 
-void GcScheduler::RecordGen1Allocation(CHAOS_IL2CPP_SIZE bytes) noexcept {
-    gen1_alloc_since_last_gc_.fetch_add(bytes, std::memory_order_relaxed);
+void GcScheduler::RecordGen1Allocation(CHAOS_IL2CPP_SIZE /*bytes*/) noexcept {
+    // Gen1 budget tracking was removed in Phase 2a cleanup.
+    // The gen1_alloc_since_last_gc_ field was deleted — this function
+    // is retained for API compatibility (called from TryAllocateInGen1).
 }
 
 // ── Collection decision ──────────────────────────────────────────

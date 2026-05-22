@@ -2,6 +2,7 @@
 #include "thread_state.h"
 #include "gc_transition.h"
 
+#include <algorithm>
 #include <atomic>
 #include <chrono>
 #include <condition_variable>
@@ -349,10 +350,96 @@ int32_t WaitHandleWaitAll(const uint32_t* handle_ids, uint32_t count, int32_t ti
 
     return (ret == WAIT_OBJECT_0) ? 0 : -1;
 #else
-    // Non-Windows: not yet supported.
-    (void)handle_ids;
-    (void)count;
-    (void)timeout_ms;
+    // Polling implementation for non-Windows: lock handles in sorted order
+    // (by handle_id to avoid deadlock), check all are signalled.
+    auto deadline = (timeout_ms >= 0)
+        ? std::chrono::steady_clock::now() + std::chrono::milliseconds(timeout_ms)
+        : std::chrono::steady_clock::time_point::max();
+
+    // O(count) O(1) lookups under shared lock.
+    std::vector<WaitHandleEntry*> entries(count, nullptr);
+    {
+        std::shared_lock<std::shared_mutex> lock(s_handle_table_mutex);
+        for (uint32_t i = 0; i < count; i++) {
+            auto it = s_handles.find(handle_ids[i]);
+            if (it != s_handles.end() && it->second->active) {
+                entries[i] = it->second.get();
+            }
+        }
+    }
+
+    // Sort by pointer to establish consistent lock ordering.
+    // Build index array sorted by entry pointer.
+    std::vector<uint32_t> sorted_idx(count);
+    for (uint32_t i = 0; i < count; i++) sorted_idx[i] = i;
+    std::sort(sorted_idx.begin(), sorted_idx.end(),
+        [&entries](uint32_t a, uint32_t b) {
+            return entries[a] < entries[b];
+        });
+
+    // Poll once first.
+    {
+        bool all_set = true;
+        for (uint32_t i = 0; i < count; i++) {
+            if (entries[i] == nullptr) { all_set = false; break; }
+            std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(entries[i]->mutex);
+            if (!entries[i]->signalled) { all_set = false; break; }
+        }
+        if (all_set) {
+            // Consume AutoResetEvent signals.
+            for (uint32_t i = 0; i < count; i++) {
+                if (entries[i]->type == WaitHandleType::AutoResetEvent) {
+                    std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(entries[i]->mutex);
+                    entries[i]->signalled = false;
+                }
+            }
+            return 0;
+        }
+    }
+
+    if (timeout_ms == 0) return -1;
+
+    GC_TRANSITION_TO_PREEMPTIVE();
+
+    while (std::chrono::steady_clock::now() < deadline) {
+        // Lock all in sorted order and check.
+        bool all_set = true;
+        for (uint32_t si = 0; si < count; si++) {
+            uint32_t i = sorted_idx[si];
+            if (entries[i] == nullptr) { all_set = false; break; }
+            std::unique_lock<CHAOS_IL2CPP_MUTEX> lock(entries[i]->mutex);
+            if (!entries[i]->signalled) {
+                all_set = false;
+                break;
+            }
+        }
+        if (all_set) {
+            // Consume AutoResetEvent signals.
+            for (uint32_t si = 0; si < count; si++) {
+                uint32_t i = sorted_idx[si];
+                if (entries[i] != nullptr && entries[i]->type == WaitHandleType::AutoResetEvent) {
+                    std::unique_lock<CHAOS_IL2CPP_MUTEX> lock(entries[i]->mutex);
+                    entries[i]->signalled = false;
+                }
+            }
+            GC_TRANSITION_TO_COOPERATIVE();
+            return 0;
+        }
+
+        // Wait on first handle's CV with remaining time.
+        auto remaining = std::chrono::duration_cast<std::chrono::milliseconds>(
+            deadline - std::chrono::steady_clock::now());
+        if (remaining.count() <= 0) break;
+
+        if (entries[sorted_idx[0]] != nullptr) {
+            std::unique_lock<CHAOS_IL2CPP_MUTEX> lock(entries[sorted_idx[0]]->mutex);
+            entries[sorted_idx[0]]->cv.wait_for(lock, remaining);
+        } else {
+            std::this_thread::sleep_for(std::chrono::milliseconds(1));
+        }
+    }
+
+    GC_TRANSITION_TO_COOPERATIVE();
     return -1;
 #endif
 }

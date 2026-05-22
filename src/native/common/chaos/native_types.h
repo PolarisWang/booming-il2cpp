@@ -128,9 +128,9 @@ namespace chaos { namespace il2cpp { namespace common {
 
 // CPU pause hint (spinlock hint, yields pipeline slot on x86/x64).
 #if defined(_MSC_VER)
-    #define CHAOS_IL2CPP_PAUSE_HINT   _mm_pause()
+    #define CHAOS_IL2CPP_PAUSE_HINT()   _mm_pause()
 #else
-    #define CHAOS_IL2CPP_PAUSE_HINT   __builtin_ia32_pause()
+    #define CHAOS_IL2CPP_PAUSE_HINT()   __builtin_ia32_pause()
 #endif
 
 // ── Threading ───────────────────────────────────────────────

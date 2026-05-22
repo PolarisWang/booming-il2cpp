@@ -337,6 +337,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_scheduler.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_card_table.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_stats.cpp" />
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_layout.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\testing\ZERO_CHECK.vcxproj">

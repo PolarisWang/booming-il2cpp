@@ -88,7 +88,6 @@ enum class GcCollectionKind {
     YOUNG = 1,
     FULL = 2,       // STW full GC (memory pressure / emergency)
     FULL_BGC = 3,   // Background concurrent mark (low-latency)
-    GEN1 = 4,       // Gen1 mark-sweep collection — DEAD CODE (never returned)
 };
 
 class GcScheduler {
@@ -137,12 +136,6 @@ public:
     /// Record Gen0→Gen1 promotions. Called from young collector when
     /// objects are promoted into the survivor area (Gen1).
     void RecordGen1Allocation(CHAOS_IL2CPP_SIZE bytes) noexcept;
-
-    /// Total Gen1 allocation (in bytes) since the last Gen1 collection.
-    /// Used by GcGen1ShouldCollect() for budget-based triggering.
-    CHAOS_IL2CPP_SIZE Gen1AllocSinceLastGc() const noexcept {
-        return gen1_alloc_since_last_gc_.load(std::memory_order_relaxed);
-    }
 
     /// EMA-smoothed Gen1 survival rate as a float in [0, 1].
     /// Used by GcGen1ShouldCollect() to adapt the occupancy threshold.
@@ -413,27 +406,6 @@ private:
     // Reduced from 32 to 16 for earlier BGC intervention.
     static constexpr int kMaxPageGrowthThreshold = 16;
 
-    // ── Gen1 constants ─────────────────────────────────────────────
-    // NOTE: These constants and the Gen1 budget tracking fields below are
-    // dead code.  GcScheduler::DecideCollection() never returns GEN1 — the
-    // actual Gen1 trigger is in GcYoungCollection Phase 4 via
-    // promotion_age_threshold_ (gc_young_gen.h).  The budget-based Gen1
-    // trigger was part of the original design but was replaced by the
-    // age-based trigger before release.
-    //
-    // If Gen1 budget-based triggering is re-enabled in the future:
-    //   - kGen1TriggerMultiplier: trigger when Gen1 alloc exceeds this ×
-    //     survivor capacity
-    //   - kGen1MaxInterval: trigger at least every N young GCs
-
-    // Gen1 trigger: allocation into Gen1 (0→1 promotion bytes) exceeds
-    // this multiplier × survivor capacity since last Gen1 collection.
-    static constexpr float kGen1TriggerMultiplier = 4.0f;
-
-    // Max interval: trigger Gen1 at least every N young GCs even if the
-    // byte-based budget has not been exhausted.
-    static constexpr int kGen1MaxInterval = 8;
-
     // ── State ────────────────────────────────────────────────────
 
     // V4-M8: survival_rate_ stored as atomic<uint64_t> (bitcast from double)
@@ -455,17 +427,6 @@ private:
 
     // Total bytes allocated since the last full GC.
     std::atomic<CHAOS_IL2CPP_SIZE> alloc_since_last_full_gc_{0};
-
-    // ── Gen1 budget tracking ──────────────────────────────────────
-    // DEAD CODE: These fields are written by RecordGen1Collection /
-    // RecordGen1Allocation but never read by the collection decision.
-    // See the Gen1 constants note above for context.
-
-    // Gen0→Gen1 promotion bytes accumulated since last Gen1 collection.
-    std::atomic<CHAOS_IL2CPP_SIZE> gen1_alloc_since_last_gc_{0};
-
-    // Number of young (Gen0) collections since last Gen1 collection.
-    std::atomic<int> gen0_since_last_gen1_gc_{0};
 
     // ── Gen1 EMA survival tracking ──────────────────────────────────
     /// EMA-smoothed Gen1 survival rate (survivor→Gen2 promotion).

@@ -16,14 +16,14 @@ public static partial class TokenAccessSubjects
     // [0] System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::get_InvalidHandle:Microsoft.Win32.SafeHandles.SafeAccessTokenHandle()
     public static void Subject_0()
     {
-        try { if (((SafeAccessTokenHandle.InvalidHandle).GetHashCode()) != ((SafeAccessTokenHandle.InvalidHandle).GetHashCode())) _exitCode = 1; }
+        try { _ = SafeAccessTokenHandle.InvalidHandle; }
         catch { _exitCode = 1; }
     }
 
     // [1] System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::get_IsInvalid:System.Boolean()
     public static void Subject_1()
     {
-        try { if (((default(SafeAccessTokenHandle)!.IsInvalid) ? 1 : 0) != ((default(SafeAccessTokenHandle)!.IsInvalid) ? 1 : 0)) _exitCode = 1; }
+        try { _ = default(SafeAccessTokenHandle)!.IsInvalid; }
         catch { _exitCode = 1; }
     }
 

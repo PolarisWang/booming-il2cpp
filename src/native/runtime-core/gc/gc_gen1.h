@@ -63,9 +63,8 @@ struct Gen1State {
     /// Bytes that survived the last Gen1 collection (promoted to Gen2).
     CHAOS_IL2CPP_SIZE last_survived_bytes{0};
 
-    /// Young GCs since last Gen1 collection (for interval-based triggering).
-    std::atomic<int> young_gc_since_last_gen1{0};
 };
+
 
 extern Gen1State g_gen1_state;
 
@@ -100,9 +99,8 @@ float Gen1Fragmentation();
 ///   1. Gen1 has data (gen1_bump > gen1->begin)
 ///   2. BGC is NOT actively marking Gen1 (IsGen1MarkingActive() == false)
 ///   3. Any of:
-///      a. Gen1 occupancy > 80%
+///      a. Gen1 occupancy > 80% (adaptive: lower when survival rate is low)
 ///      b. Gen1 fragmentation > 50%
-///      c. young_gc_since_last_gen1 >= kGen1MaxInterval (8)
 bool GcGen1ShouldCollect();
 
 }  // namespace chaos::il2cpp::runtime_core

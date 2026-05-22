@@ -17,7 +17,7 @@ public abstract class SnapshotTestBase
     {
         var repoRoot = LocateRepoRoot();
         var testProjectDir = Path.Combine(
-            repoRoot, "tests", "snapshots", "Chaos.IL2CPP.Generator.SnapshotTests");
+            repoRoot, "tests", "snapshots", "Chaos.IL2CPP.CodeGen.SnapshotTests");
         var fixtureDir = Path.Combine(testProjectDir, "Fixtures", fixtureName);
         var baselineDir = Path.Combine(testProjectDir, "Baselines", fixtureName);
 

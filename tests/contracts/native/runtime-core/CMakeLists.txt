@@ -76,6 +76,33 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_bump_cache_test.cpp")
             ${CHAOS_GC_COMMON_LIBS})
 endif()
 
+# gc_atomic_alloc_test — NurseryAllocateAtomic unit tests
+# Tests: small/TLAB path, oversized/old-gen fallback, multi-threaded concurrent,
+# mixed atomic+non-atomic, and allocation-after-GC scenarios.
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_atomic_alloc_test.cpp")
+    add_executable(chaos_gc_atomic_alloc_test gc_atomic_alloc_test.cpp ${CHAOS_GC_TEST_STUBS})
+    target_compile_features(chaos_gc_atomic_alloc_test PRIVATE cxx_std_17)
+    target_compile_definitions(chaos_gc_atomic_alloc_test PRIVATE
+        _CRT_SECURE_NO_WARNINGS)
+    target_compile_options(chaos_gc_atomic_alloc_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+    target_include_directories(
+        chaos_gc_atomic_alloc_test
+        PRIVATE
+            "${REPO_ROOT}/src/native/common"
+            "${REPO_ROOT}/src/native/runtime-core"
+            "${REPO_ROOT}/src/native/runtime-core/gc"
+            "${REPO_ROOT}/third_party/fmt/include"
+            "${REPO_ROOT}/third_party/unordered_dense/include")
+    target_link_libraries(
+        chaos_gc_atomic_alloc_test
+        PRIVATE
+            ${CHAOS_GC_COMMON_LIBS})
+    target_link_options(
+        chaos_gc_atomic_alloc_test
+        PRIVATE
+            $<$<CXX_COMPILER_ID:MSVC>:/IGNORE:4006>)
+endif()
+
 # gc_region_test — CRAG region framework + card table unit tests (C0.1-C0.3)
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_region_test.cpp")
     add_executable(chaos_gc_region_test gc_region_test.cpp ${CHAOS_GC_TEST_STUBS})
@@ -389,6 +416,25 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/threading_smoke.cpp")
             chaos_common
             chaos_support
             chaos_hot_update)
+
+    # execution_context_smoke — ExecutionContext capture, SuppressFlow/RestoreFlow
+    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/execution_context_smoke.cpp")
+        add_executable(chaos_execution_context_smoke execution_context_smoke.cpp ${CHAOS_GC_TEST_STUBS})
+        target_compile_features(chaos_execution_context_smoke PRIVATE cxx_std_17)
+        target_compile_definitions(chaos_execution_context_smoke PRIVATE
+            _CRT_SECURE_NO_WARNINGS)
+        target_include_directories(
+            chaos_execution_context_smoke
+            PRIVATE
+                "${REPO_ROOT}/contracts/native/v0"
+                "${REPO_ROOT}/src/native/common"
+                "${REPO_ROOT}/src/native/runtime-core")
+        target_link_libraries(
+            chaos_execution_context_smoke
+            PRIVATE
+                chaos_runtime_core
+                chaos_common)
+    endif()
 
     # synchronization_smoke — SemaphoreSlim, RWLock, WaitHandle, TimerQueue
     if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/synchronization_smoke.cpp")
@@ -1045,6 +1091,28 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_tlab_test.cpp")
             "${REPO_ROOT}/third_party/unordered_dense/include")
     target_link_libraries(
         chaos_gc_tlab_test
+        PRIVATE
+            ${CHAOS_GC_COMMON_LIBS})
+endif()
+
+# gc_satb_stress_test — SATB buffer overflow + freeze convergence stress tests
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gc_satb_stress_test.cpp")
+    add_executable(chaos_gc_satb_stress_test gc_satb_stress_test.cpp ${CHAOS_GC_TEST_STUBS})
+    target_compile_features(chaos_gc_satb_stress_test PRIVATE cxx_std_17)
+    target_compile_definitions(chaos_gc_satb_stress_test PRIVATE
+        _CRT_SECURE_NO_WARNINGS)
+    target_compile_options(chaos_gc_satb_stress_test PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+    target_include_directories(
+        chaos_gc_satb_stress_test
+        PRIVATE
+            "${REPO_ROOT}/contracts/native/v0"
+            "${REPO_ROOT}/src/native/common"
+            "${REPO_ROOT}/src/native/runtime-core"
+            "${REPO_ROOT}/src/native/runtime-core/gc"
+            "${REPO_ROOT}/third_party/fmt/include"
+            "${REPO_ROOT}/third_party/unordered_dense/include")
+    target_link_libraries(
+        chaos_gc_satb_stress_test
         PRIVATE
             ${CHAOS_GC_COMMON_LIBS})
 endif()

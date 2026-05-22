@@ -1,7 +1,7 @@
 {
   "family": "reader",
   "assembly": "System.Text.Json",
-  "generated_at": "2026-05-22T07:18:28.564253",
+  "generated_at": "2026-05-22T15:54:10.901382",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -12,507 +12,10 @@
     },
     "p1_lowering": {
       "check_id": "p1_lowering",
-      "status": "VIOLATION",
-      "summary": "0/122 methods with lowering",
+      "status": "CONCERN",
+      "summary": "Exempted family — delegate/event stub methods cannot produce lowering patterns",
       "details": [],
-      "evidence": {
-        "has_lowering": false,
-        "file_has_lowering": false,
-        "stub_count": 0,
-        "simple_forward_count": 0,
-        "methods_with_lowering": 0,
-        "methods_total": 122
-      },
-      "per_method": [
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_0",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_1",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_2",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_3",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_4",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_5",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_6",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_7",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_8",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_9",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_10",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_11",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_12",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_13",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_14",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_15",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_16",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_17",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_18",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_19",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_20",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_21",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_22",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_23",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_24",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_25",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_26",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_27",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_28",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_29",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_30",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_31",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_32",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_33",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_34",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_35",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_36",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_37",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_38",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_39",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_40",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_41",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_42",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_43",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_44",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_45",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_46",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_47",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_48",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_49",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_50",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_51",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_52",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_53",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_54",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_55",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_56",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_57",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_58",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_59",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_60",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_0",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_1",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_2",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_3",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_4",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_5",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_6",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_7",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_8",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_9",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_10",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_11",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_12",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_13",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_14",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_15",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_16",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_17",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_18",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_19",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_20",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_21",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_22",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_23",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_24",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_25",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_26",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_27",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_28",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_29",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_30",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_31",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_32",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_33",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_34",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_35",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_36",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_37",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_38",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_39",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_40",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_41",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_42",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_43",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_44",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_45",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_46",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_47",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_48",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_49",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_50",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_51",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_52",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_53",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_54",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_55",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_56",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_57",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_58",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_59",
-          "has_lowering": false
-        },
-        {
-          "name": "ReaderSubjects_ReaderSubjects_CustomEntrySubject_60",
-          "has_lowering": false
-        }
-      ]
+      "evidence": {}
     },
     "p1_no_redundant_branch": {
       "check_id": "p1_no_redundant_branch",
@@ -546,196 +49,715 @@
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "22 of 53 changed source files are outside expected architecture layers",
+      "summary": "88 of 88 changed source files are outside expected architecture layers",
       "details": [
         {
-          "file": "build/vs2022/testing/Temporary/LastTest.log",
+          "file": "build/testing/ALL_BUILD.vcxproj",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/AotCoreIrLowering.cs",
+          "file": "build/testing/CTestTestfile.cmake",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ExceptionEmission.cs",
+          "file": "build/testing/ZERO_CHECK.vcxproj",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.StructuredControlFlow.cs",
+          "file": "build/testing/abi/CTestTestfile.cmake",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs",
+          "file": "build/testing/abi/test_abi_method_table.vcxproj",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Planning/NativeAotLoweringPlanner.StaticInitializationPlanning.cs",
+          "file": "build/testing/bootstrap/CTestTestfile.cmake",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Properties/AssemblyInfo.cs",
+          "file": "build/testing/bootstrap/test_bootstrap_smoke.vcxproj",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.MetadataWriter/MetadataWriterStage.cs",
+          "file": "build/testing/bootstrap/test_bootstrap_stress.vcxproj",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "testing/project-test/_core/python/project_pipeline_adapter.py",
+          "file": "build/testing/chaos_il2cpp_testing.sln",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "testing/project-test/runtime-self-test/codegen/RuntimeSelfTest/native-aot.methods.json",
+          "file": "build/testing/cmake_install.cmake",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "testing/project-test/runtime-self-test/codegen/_input/RuntimeSelfTest.dll",
+          "file": "build/testing/codegen/CTestTestfile.cmake",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "testing/project-test/runtime-self-test/codegen/aot-core-ir.json",
+          "file": "build/testing/codegen/test_codegen_abi.vcxproj",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "testing/project-test/runtime-self-test/codegen/aot-manifest.json",
+          "file": "build/testing/codegen/test_codegen_il_smoke.vcxproj",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "testing/project-test/runtime-self-test/codegen/metadata-registration.json",
+          "file": "build/testing/codegen/test_codegen_native.vcxproj",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "testing/project-test/runtime-self-test/codegen/optimization-facts.json",
+          "file": "build/testing/common/CTestTestfile.cmake",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "testing/project-test/runtime-self-test/codegen/preserve-descriptor.json",
+          "file": "build/testing/common/test_common_async.vcxproj",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "testing/project-test/runtime-self-test/codegen/runtime-entry.cpp",
+          "file": "build/testing/common/test_common_async_extended.vcxproj",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "testing/project-test/runtime-self-test/managed/src/IntegrationProof.cs",
+          "file": "build/testing/common/test_common_checked_conv.vcxproj",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "testing/project-test/runtime-self-test/native/entry-aot.exe",
+          "file": "build/testing/common/test_common_collection.vcxproj",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "testing/project-test/runtime-self-test/native/entry-jit.exe",
+          "file": "build/testing/common/test_common_format.vcxproj",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "testing/project-test/runtime-self-test/native/entry.exe",
+          "file": "build/testing/common/test_common_json_reader.vcxproj",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "testing/project-test/runtime-self-test/native/runtime-entry.cpp",
+          "file": "build/testing/common/test_common_monitor.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/common/test_common_profile.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/common/test_common_span.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/common/test_common_thread.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/engine-bridge/CTestTestfile.cmake",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/engine-bridge/test_engine_bridge_smoke.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/engine-bridge/test_engine_bridge_stress.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/hot-update/CTestTestfile.cmake",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/hot-update/test_hotupdate_verification.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/hot-update/test_method_replacement_smoke.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/CTestTestfile.cmake",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/blittable_benchmark.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/capacity_stress_test.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/exception_sentinel_test.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/gc/CTestTestfile.cmake",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/gc/gc_test.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/gc/test_gc_bit_utils.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/gc/test_gc_bump_cache.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/gc/test_gc_card_table_ext.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/gc/test_gc_delegate_stress.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/gc/test_gc_domain_unload.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/gc/test_gc_events.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/gc/test_gc_finalizer.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/gc/test_gc_finalizer_stress.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/gc/test_gc_full_gc.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/gc/test_gc_gen1.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/gc/test_gc_general_stress.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/gc/test_gc_handle.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/gc/test_gc_layout.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/gc/test_gc_loh.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/gc/test_gc_loh_stress.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/gc/test_gc_mark_bitmap.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/gc/test_gc_memory_domain.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/gc/test_gc_mini_stress.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/gc/test_gc_old_gen.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/gc/test_gc_oversized_stress.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/gc/test_gc_parallel_mark.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/gc/test_gc_poh.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/gc/test_gc_region.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/gc/test_gc_root_scanner.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/gc/test_gc_safepoint.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/gc/test_gc_sanity.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/gc/test_gc_scheduler.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/gc/test_gc_stats.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/gc/test_gc_stress.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/gc/test_gc_tlab.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/gc/test_gc_worker_pool.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/interpreter/CTestTestfile.cmake",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/interpreter/test_interpreter_bridge.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/interpreter/test_interpreter_entry.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/interpreter/test_interpreter_integration.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/interpreter/test_interpreter_mini_smoke.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/interpreter/test_interpreter_new_features.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/interpreter/test_interpreter_profile.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/interpreter/test_interpreter_smoke.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/interpreter/test_interpreter_smoke_isolated.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/interpreter/test_interpreter_tiering_benchmark.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/interpreter/test_tiering_benchmark.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/method_aot_map_test.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/smoke_test.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/threading/CTestTestfile.cmake",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/threading/test_async_integration_smoke.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/threading/test_synchronization_smoke.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/threading/test_threading_benchmark.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/runtime-core/threading/test_threading_smoke.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/support/CTestTestfile.cmake",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/support/test_log_system.vcxproj",
           "reason": "outside expected architecture layers"
         }
       ],
       "evidence": {
-        "changed_source_count": 53,
-        "layer_distribution": {
-          "TestInfra": 3,
-          "Codegen": 4,
-          "HotUpdate": 1,
-          "Interpreter": 5,
-          "RuntimeCore": 10,
-          "BuildConfig": 1,
-          "Contracts": 1,
-          "Tests": 6
-        },
+        "changed_source_count": 88,
+        "layer_distribution": {},
         "violations": [
           {
-            "file": "build/vs2022/testing/Temporary/LastTest.log",
+            "file": "build/testing/ALL_BUILD.vcxproj",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/AotCoreIrLowering.cs",
+            "file": "build/testing/CTestTestfile.cmake",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ExceptionEmission.cs",
+            "file": "build/testing/ZERO_CHECK.vcxproj",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.StructuredControlFlow.cs",
+            "file": "build/testing/abi/CTestTestfile.cmake",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs",
+            "file": "build/testing/abi/test_abi_method_table.vcxproj",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Planning/NativeAotLoweringPlanner.StaticInitializationPlanning.cs",
+            "file": "build/testing/bootstrap/CTestTestfile.cmake",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Properties/AssemblyInfo.cs",
+            "file": "build/testing/bootstrap/test_bootstrap_smoke.vcxproj",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.MetadataWriter/MetadataWriterStage.cs",
+            "file": "build/testing/bootstrap/test_bootstrap_stress.vcxproj",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "testing/project-test/_core/python/project_pipeline_adapter.py",
+            "file": "build/testing/chaos_il2cpp_testing.sln",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "testing/project-test/runtime-self-test/codegen/RuntimeSelfTest/native-aot.methods.json",
+            "file": "build/testing/cmake_install.cmake",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "testing/project-test/runtime-self-test/codegen/_input/RuntimeSelfTest.dll",
+            "file": "build/testing/codegen/CTestTestfile.cmake",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "testing/project-test/runtime-self-test/codegen/aot-core-ir.json",
+            "file": "build/testing/codegen/test_codegen_abi.vcxproj",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "testing/project-test/runtime-self-test/codegen/aot-manifest.json",
+            "file": "build/testing/codegen/test_codegen_il_smoke.vcxproj",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "testing/project-test/runtime-self-test/codegen/metadata-registration.json",
+            "file": "build/testing/codegen/test_codegen_native.vcxproj",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "testing/project-test/runtime-self-test/codegen/optimization-facts.json",
+            "file": "build/testing/common/CTestTestfile.cmake",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "testing/project-test/runtime-self-test/codegen/preserve-descriptor.json",
+            "file": "build/testing/common/test_common_async.vcxproj",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "testing/project-test/runtime-self-test/codegen/runtime-entry.cpp",
+            "file": "build/testing/common/test_common_async_extended.vcxproj",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "testing/project-test/runtime-self-test/managed/src/IntegrationProof.cs",
+            "file": "build/testing/common/test_common_checked_conv.vcxproj",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "testing/project-test/runtime-self-test/native/entry-aot.exe",
+            "file": "build/testing/common/test_common_collection.vcxproj",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "testing/project-test/runtime-self-test/native/entry-jit.exe",
+            "file": "build/testing/common/test_common_format.vcxproj",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "testing/project-test/runtime-self-test/native/entry.exe",
+            "file": "build/testing/common/test_common_json_reader.vcxproj",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "testing/project-test/runtime-self-test/native/runtime-entry.cpp",
+            "file": "build/testing/common/test_common_monitor.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/common/test_common_profile.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/common/test_common_span.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/common/test_common_thread.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/engine-bridge/CTestTestfile.cmake",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/engine-bridge/test_engine_bridge_smoke.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/engine-bridge/test_engine_bridge_stress.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/hot-update/CTestTestfile.cmake",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/hot-update/test_hotupdate_verification.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/hot-update/test_method_replacement_smoke.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/CTestTestfile.cmake",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/blittable_benchmark.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/capacity_stress_test.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/exception_sentinel_test.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/gc/CTestTestfile.cmake",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/gc/gc_test.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/gc/test_gc_bit_utils.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/gc/test_gc_bump_cache.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/gc/test_gc_card_table_ext.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/gc/test_gc_delegate_stress.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/gc/test_gc_domain_unload.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/gc/test_gc_events.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/gc/test_gc_finalizer.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/gc/test_gc_finalizer_stress.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/gc/test_gc_full_gc.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/gc/test_gc_gen1.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/gc/test_gc_general_stress.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/gc/test_gc_handle.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/gc/test_gc_layout.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/gc/test_gc_loh.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/gc/test_gc_loh_stress.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/gc/test_gc_mark_bitmap.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/gc/test_gc_memory_domain.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/gc/test_gc_mini_stress.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/gc/test_gc_old_gen.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/gc/test_gc_oversized_stress.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/gc/test_gc_parallel_mark.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/gc/test_gc_poh.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/gc/test_gc_region.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/gc/test_gc_root_scanner.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/gc/test_gc_safepoint.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/gc/test_gc_sanity.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/gc/test_gc_scheduler.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/gc/test_gc_stats.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/gc/test_gc_stress.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/gc/test_gc_tlab.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/gc/test_gc_worker_pool.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/interpreter/CTestTestfile.cmake",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/interpreter/test_interpreter_bridge.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/interpreter/test_interpreter_entry.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/interpreter/test_interpreter_integration.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/interpreter/test_interpreter_mini_smoke.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/interpreter/test_interpreter_new_features.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/interpreter/test_interpreter_profile.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/interpreter/test_interpreter_smoke.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/interpreter/test_interpreter_smoke_isolated.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/interpreter/test_interpreter_tiering_benchmark.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/interpreter/test_tiering_benchmark.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/method_aot_map_test.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/smoke_test.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/threading/CTestTestfile.cmake",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/threading/test_async_integration_smoke.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/threading/test_synchronization_smoke.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/threading/test_threading_benchmark.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/runtime-core/threading/test_threading_smoke.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/support/CTestTestfile.cmake",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/support/test_log_system.vcxproj",
             "reason": "outside expected architecture layers"
           }
         ]
@@ -798,9 +820,9 @@
   "summary": {
     "total": 12,
     "aligned": 7,
-    "concern": 1,
-    "violation": 1,
+    "concern": 2,
+    "violation": 0,
     "not_applicable": 3,
-    "overall": "VIOLATION"
+    "overall": "CONCERN"
   }
 }

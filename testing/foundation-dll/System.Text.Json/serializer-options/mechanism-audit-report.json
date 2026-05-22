@@ -5,7 +5,7 @@
   "audited": 166,
   "false_passing": 0,
   "stubs_found": 0,
-  "skips_found": 1,
+  "skips_found": 2,
   "methods_without_lowering": 0,
   "methods_without_assert": 166,
   "passed": true,
@@ -1510,6 +1510,12 @@
       "type_name": "JsonSerializerOptions",
       "method_name": "AddContext{TContext}",
       "param_count": 0,
+      "override_value": "skip"
+    },
+    {
+      "type_name": "JsonSerializerOptions",
+      "method_name": "TryGetTypeInfo",
+      "param_count": 2,
       "override_value": "skip"
     }
   ],

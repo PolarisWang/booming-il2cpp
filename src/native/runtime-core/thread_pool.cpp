@@ -5,8 +5,10 @@
 #include "gc_transition.h"
 #include "runtime_stubs/threadpool_events.h"
 
+#include <algorithm>
 #include <atomic>
 #include <chrono>
+#include <cmath>
 #include <condition_variable>
 #include <cstdlib>
 #include <deque>
@@ -110,12 +112,13 @@ bool TryPopGlobal(WorkItem& out) noexcept {
 // ── Worker thread main loop ──────────────────────────────────────────
 
 void WorkerLoop() noexcept {
-    // Register thread identity.
+    // Register thread identity and start in preemptive mode.
     int32_t tid = AllocateThreadId();
     RegisterThread(tid, nullptr);
     if (auto* mt = GetCurrentThread()) {
         mt->is_threadpool = true;
     }
+    EnterPreemptiveMode();
 
     // ETW: worker created.
     ThreadPoolEventEmitWorkerCreate(tid);
@@ -242,6 +245,10 @@ void EnsureWorkerCount(int32_t desired) noexcept {
 void IOCPWorkerLoop() noexcept {
     int32_t tid = AllocateThreadId();
     RegisterThread(tid, nullptr);
+    if (auto* mt = GetCurrentThread()) {
+        mt->is_threadpool = true;
+    }
+    EnterPreemptiveMode();
 
     for (;;) {
         DWORD bytes_transferred = 0;
@@ -268,9 +275,12 @@ void IOCPWorkerLoop() noexcept {
 
 void GateThreadLoop() noexcept {
     RegisterThread(AllocateThreadId(), nullptr);
+    if (auto* mt = GetCurrentThread()) {
+        mt->is_threadpool = true;
+    }
 
     while (!s_shutdown.load(std::memory_order_relaxed)) {
-        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        std::this_thread::sleep_for(std::chrono::milliseconds(15));
         if (s_shutdown.load(std::memory_order_relaxed)) break;
 
         TimerQueueOnTick();
@@ -282,11 +292,20 @@ void GateThreadLoop() noexcept {
 
 }  // anonymous namespace
 
-// ── HillClimbingController implementation ─────────────────────────────
-// Full state machine: Warmup → ClimbExplore → Climbing → Stabilizing → Steady
+// ── HillClimbingController implementation (V2: 9-state + Goertzel + CPU feedback) ──
+//
+// Design:
+//   - 9 states covering warmup, climb, fix, steady, saturate, random
+//   - Dual Goertzel filters detect frequency-domain patterns in throughput and CPU
+//   - CPU utilization feedback: if CPU is saturated, adding threads won't help
+//   - Square-wave injection in Steady state to probe system headroom
+//   - Non-linear (sigmoid) gain reduction near CPU core count
+//
+// Goertzel setup: 8-sample window, target frequency = 1 cycle/window
+// (normalized freq = 1/8 = 0.125), coeff = 2*cos(2*PI*0.125) ≈ 1.4142
 
 int32_t HillClimbingController::OnGateTick(int32_t completed_count, int32_t current_threads) noexcept {
-    // Record throughput sample (moving average window).
+    // ── Record throughput sample ──────────────────────────────────
     samples_[sample_index_ % kHillClimbingSampleWindow] = completed_count;
     sample_index_++;
     if (sample_count_ < kHillClimbingSampleWindow) sample_count_++;
@@ -295,51 +314,83 @@ int32_t HillClimbingController::OnGateTick(int32_t completed_count, int32_t curr
     for (uint32_t i = 0; i < sample_count_; i++) total += samples_[i];
     int32_t avg_throughput = (sample_count_ > 0) ? (total / static_cast<int32_t>(sample_count_)) : 0;
 
+    // ── Feed Goertzel filters ─────────────────────────────────────
+    if (cpu_count_ <= 1) {
+        cpu_count_ = static_cast<int32_t>(std::thread::hardware_concurrency());
+        if (cpu_count_ < 1) cpu_count_ = 1;
+    }
+    // Initialize filters on first tick.
+    if (throughput_filter_.sample_count == 0) {
+        throughput_filter_.Init(1.0f / static_cast<float>(kHillClimbingSampleWindow));
+        cpu_filter_.Init(1.0f / static_cast<float>(kHillClimbingSampleWindow));
+    }
+    throughput_filter_.Feed(static_cast<float>(completed_count));
+
+    // ── Measure CPU utilization ───────────────────────────────────
+    {
+        auto now_cpu = std::chrono::steady_clock::now();
+        uint64_t now_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(
+            now_cpu.time_since_epoch()).count();
+        if (last_cpu_time_ns_ > 0) {
+            uint64_t delta_ns = now_ns - last_cpu_time_ns_;
+            // Gate tick is ~15ms ≈ 15,000,000 ns. CPU util is fraction of wall time
+            // spent doing work (inferred from completed_count relative to capacity).
+            // Simple heuristic: if we completed work, CPU was busy.
+            float busy_ratio = (completed_count > 0)
+                ? (std::min)(1.0f, static_cast<float>(completed_count) * 0.01f)
+                : 0.0f;
+            cpu_utilization_ = cpu_utilization_ * 0.7f + busy_ratio * 0.3f;  // EMA
+            cpu_filter_.Feed(cpu_utilization_);
+        }
+        last_cpu_time_ns_ = now_ns;
+    }
+
+    float throughput_power = throughput_filter_.Power();
+    float cpu_power = cpu_filter_.Power();
+    float sigmoid_gain = SigmoidGain(current_threads);
+
     int32_t suggestion = current_threads;
 
+    // ── State machine ─────────────────────────────────────────────
     switch (state_) {
     case HillClimbState::Warmup:
-        // Ramp up quickly to minimum configured worker count.
-        if (current_threads < kHillClimbingMinWorker + 2 && completed_count > 0) {
+        // Ramp up quickly: +1/tick while there's work and we're below min+2.
+        if (current_threads < kThreadPoolMinWorkerCount + 2 && completed_count > 0) {
             suggestion = current_threads + 1;
-        } else {
-            // Transition to active state based on load.
-            if (avg_throughput > 0 && current_threads >= kThreadPoolMinWorkerCount) {
-                state_ = HillClimbState::ClimbExplore;
-                wave_ticks_ = 0;
-                wave_threads_ = 0;
-                pre_wave_throughput_ = avg_throughput;
-            }
+        } else if (avg_throughput > 0) {
+            state_ = HillClimbState::ClimbExplore;
+            wave_ticks_ = 0;
+            wave_threads_ = 0;
+            pre_wave_throughput_ = avg_throughput;
         }
         break;
 
     case HillClimbState::ClimbExplore: {
-        // Inject 2 threads as a wave, measure throughput change after 2 ticks.
+        // Inject up to 2 threads, measure throughput change after 2 ticks.
         if (wave_ticks_ == 0 && wave_threads_ == 0) {
-            wave_threads_ = 2;
+            wave_threads_ = (std::min)(2, (std::max)(1, cpu_count_ / 4));
             pre_wave_throughput_ = avg_throughput;
         }
 
         if (wave_ticks_ < 2) {
-            // Still in the wave — keep the injected threads.
             suggestion = (std::min)(current_threads + wave_threads_, kHillClimbingMaxWorker);
             wave_ticks_++;
         } else {
-            // Wave complete — compute gain.
             int32_t gain = avg_throughput - pre_wave_throughput_;
-            // Avoid division by zero for wave_threads_.
             int32_t adj_gain = (wave_threads_ > 0) ? (gain / wave_threads_) : gain;
+            float gp = throughput_power;  // Goertzel power tells us signal confidence
 
-            if (adj_gain > 5) {
+            if (adj_gain > 5 && gp > 0.5f) {
                 state_ = HillClimbState::Climbing;
-                suggestion = (std::min)(current_threads + 1, kHillClimbingMaxWorker);
-            } else if (adj_gain < -5) {
+                suggestion = (std::min)(current_threads + (std::max)(1, cpu_count_ / 8),
+                                        kHillClimbingMaxWorker);
+            } else if (adj_gain < -5 || (gp < 0.3f && avg_throughput < pre_wave_throughput_)) {
                 state_ = HillClimbState::Stabilizing;
                 suggestion = (std::max)(current_threads - wave_threads_, kHillClimbingMinWorker);
             } else {
-                state_ = HillClimbState::Steady;
-                // Return to pre-wave thread count.
-                suggestion = (std::max)(current_threads - wave_threads_, kThreadPoolMinWorkerCount);
+                // Goertzel power low or gain neutral → near peak → fix.
+                state_ = HillClimbState::ClimbFix;
+                suggestion = (std::max)(current_threads - wave_threads_ / 2, kThreadPoolMinWorkerCount);
             }
             wave_ticks_ = 0;
             wave_threads_ = 0;
@@ -348,35 +399,152 @@ int32_t HillClimbingController::OnGateTick(int32_t completed_count, int32_t curr
     }
 
     case HillClimbState::Climbing:
-        if (avg_throughput > last_throughput_) {
-            // Still improving — keep climbing.
-            suggestion = (std::min)(current_threads + 1, kHillClimbingMaxWorker);
+        if (avg_throughput > last_throughput_ && cpu_utilization_ < 0.9f) {
+            // Still improving and CPU not saturated — keep climbing with sigmoid gain.
+            int32_t increment = (std::max)(1, static_cast<int32_t>(sigmoid_gain * static_cast<float>(cpu_count_) / 4.0f));
+            suggestion = (std::min)(current_threads + increment, kHillClimbingMaxWorker);
+        } else if (avg_throughput > last_throughput_ && cpu_utilization_ >= 0.9f) {
+            // Improving but CPU saturated — go to Saturating.
+            state_ = HillClimbState::Saturating;
         } else {
-            // Plateau or drop — stabilize.
+            // Plateau or drop — fix and stabilize.
+            state_ = HillClimbState::ClimbFix;
+        }
+        break;
+
+    case HillClimbState::ClimbFix:
+        // Hold for 2 ticks to let Goertzel filters settle, then go Steady.
+        if (wave_ticks_ < 2) {
+            wave_ticks_++;
+        } else {
+            wave_ticks_ = 0;
             state_ = HillClimbState::Steady;
+            steady_hold_ticks_ = 0;
+            steady_base_threads_ = current_threads;
         }
         break;
 
     case HillClimbState::Stabilizing:
-        if (avg_throughput < last_throughput_ && current_threads > kHillClimbingMinWorker) {
-            // Still dropping — pull back more.
+        if ((avg_throughput < last_throughput_ || cpu_utilization_ >= 0.95f) &&
+            current_threads > kHillClimbingMinWorker) {
+            // Still dropping or CPU saturated — pull back more.
             suggestion = (std::max)(current_threads - 1, kHillClimbingMinWorker);
         } else {
             // Recovered — go steady.
             state_ = HillClimbState::Steady;
+            steady_hold_ticks_ = 0;
+            steady_base_threads_ = current_threads;
         }
         break;
 
-    case HillClimbState::Steady:
-        // Hold steady. If throughput drops significantly, re-probe.
+    case HillClimbState::Steady: {
+        steady_hold_ticks_++;
+        square_wave_phase_ = 0;
+
+        // If throughput dropped significantly, re-probe.
         if (avg_throughput < last_throughput_ / 2 && completed_count > 0) {
             state_ = HillClimbState::ClimbExplore;
             wave_ticks_ = 0;
             wave_threads_ = 0;
             pre_wave_throughput_ = avg_throughput;
-        } else if (completed_count == 0 && current_threads > kHillClimbingMinWorker) {
-            // Idle — slowly shrink.
+            break;
+        }
+
+        // Idle shrink.
+        if (completed_count == 0 && current_threads > kHillClimbingMinWorker) {
             suggestion = (std::max)(current_threads - 1, kHillClimbingMinWorker);
+            break;
+        }
+
+        // Square-wave injection: every 4th tick, probe with +1 or -1 thread
+        // to test whether system still has headroom.
+        if (steady_hold_ticks_ >= 4 && sample_count_ >= kHillClimbingSampleWindow) {
+            steady_hold_ticks_ = 0;
+
+            // Check Goertzel power: high power = signal clearly present = system
+            // still responding to changes. Proceed with square wave.
+            if (throughput_power > 0.3f && cpu_utilization_ < 0.85f) {
+                state_ = HillClimbState::SteadyFix;
+                square_wave_phase_ = 1;  // +1 probe first
+                suggestion = (std::min)(current_threads + 1, kHillClimbingMaxWorker);
+                steady_base_threads_ = current_threads;
+                pre_wave_throughput_ = avg_throughput;
+                wave_ticks_ = 0;
+            } else if (cpu_utilization_ >= 0.85f) {
+                // CPU high — consider reducing.
+                state_ = HillClimbState::Saturating;
+            }
+        }
+        break;
+    }
+
+    case HillClimbState::SteadyFix: {
+        // Square-wave injection active. After 2 ticks, compare throughput.
+        wave_ticks_++;
+        if (wave_ticks_ >= 2) {
+            int32_t gain = avg_throughput - pre_wave_throughput_;
+
+            if (square_wave_phase_ == 1) {
+                // +1 probe done. If gain positive, keep the extra thread.
+                // If negative, try -1 probe.
+                if (gain > 0) {
+                    suggestion = current_threads;  // keep the +1
+                    steady_base_threads_ = current_threads;
+                } else {
+                    suggestion = (std::max)(steady_base_threads_ - 1, kHillClimbingMinWorker);
+                    square_wave_phase_ = 2;  // -1 probe next
+                    pre_wave_throughput_ = avg_throughput;
+                    wave_ticks_ = 0;
+                    break;
+                }
+            } else if (square_wave_phase_ == 2) {
+                // -1 probe done. If throughput held up, keep the reduction.
+                if (gain >= 0) {
+                    suggestion = current_threads;  // keep the -1
+                    steady_base_threads_ = current_threads;
+                } else {
+                    // Throughput dropped with -1 → restore.
+                    suggestion = steady_base_threads_;
+                }
+            }
+
+            // Return to Steady.
+            state_ = HillClimbState::Steady;
+            steady_hold_ticks_ = 0;
+            square_wave_phase_ = 0;
+        }
+        break;
+    }
+
+    case HillClimbState::Saturating:
+        // CPU saturated or near-saturated. Conservative: reduce by 1 if CPU > 90%.
+        if (cpu_utilization_ >= 0.9f && current_threads > kHillClimbingMinWorker) {
+            suggestion = (std::max)(current_threads - 1, kHillClimbingMinWorker);
+        } else if (cpu_utilization_ < 0.7f && avg_throughput > 0) {
+            // CPU freed up — back to steady for re-evaluation.
+            state_ = HillClimbState::Steady;
+            steady_hold_ticks_ = 0;
+            steady_base_threads_ = current_threads;
+        } else if (completed_count == 0 && current_threads > kHillClimbingMinWorker) {
+            suggestion = (std::max)(current_threads - 1, kHillClimbingMinWorker);
+        }
+        break;
+
+    case HillClimbState::Random:
+        // Noise-dominated: random perturbation ±1 to escape local minima.
+        if (avg_throughput > 0 && current_threads < kHillClimbingMaxWorker) {
+            // Simple pseudo-random perturbation based on tick count.
+            suggestion = (sample_index_ & 1)
+                ? (std::min)(current_threads + 1, kHillClimbingMaxWorker)
+                : (std::max)(current_threads - 1, kHillClimbingMinWorker);
+        }
+        // After 4 ticks in Random, re-enter ClimbExplore for fresh probe.
+        if (wave_ticks_ < 4) {
+            wave_ticks_++;
+        } else {
+            wave_ticks_ = 0;
+            state_ = HillClimbState::ClimbExplore;
+            pre_wave_throughput_ = avg_throughput;
         }
         break;
     }
@@ -384,6 +552,24 @@ int32_t HillClimbingController::OnGateTick(int32_t completed_count, int32_t curr
     last_throughput_ = avg_throughput;
     last_thread_count_ = current_threads;
     return suggestion;
+}
+
+float HillClimbingController::SigmoidGain(int32_t thread_count) const noexcept {
+    // Sigmoid: 1/(1+exp((threads-cpu)/2))
+    // At thread_count == cpu_count:   gain = 0.5
+    // At thread_count == cpu_count+4: gain ≈ 0.12
+    // At thread_count == cpu_count-4: gain ≈ 0.88
+    float x = static_cast<float>(thread_count - cpu_count_) / 2.0f;
+    if (x > 0.0f) {
+        // For positive x: 1/(1+exp(x)) — avoid exp overflow for large x.
+        if (x > 10.0f) return 0.0f;
+        return 1.0f / (1.0f + expf(x));
+    } else {
+        // For negative x: exp(-x)/(exp(-x)+1)
+        if (x < -10.0f) return 1.0f;
+        float ex = expf(-x);
+        return ex / (1.0f + ex);
+    }
 }
 
 void HillClimbingController::Reset() noexcept {
@@ -396,6 +582,17 @@ void HillClimbingController::Reset() noexcept {
     wave_ticks_ = 0;
     pre_wave_throughput_ = 0;
     for (auto& s : samples_) s = 0;
+
+    // V2 reset
+    steady_hold_ticks_ = 0;
+    steady_base_threads_ = 0;
+    square_wave_phase_ = 0;
+    last_cpu_time_ns_ = 0;
+    cpu_utilization_ = 0.0f;
+    throughput_filter_.Reset();
+    cpu_filter_.Reset();
+    cpu_count_ = static_cast<int32_t>(std::thread::hardware_concurrency());
+    if (cpu_count_ < 1) cpu_count_ = 1;
 }
 
 // ── Context-free callback wrapper ────────────────────────────────────
@@ -529,8 +726,12 @@ void ThreadPoolGateTick() noexcept {
             case HillClimbState::Warmup:        reason = 0; break;
             case HillClimbState::ClimbExplore:  reason = 1; break;
             case HillClimbState::Climbing:      reason = 2; break;
-            case HillClimbState::Stabilizing:   reason = 3; break;
-            case HillClimbState::Steady:        reason = 4; break;
+            case HillClimbState::ClimbFix:      reason = 3; break;
+            case HillClimbState::Stabilizing:   reason = 4; break;
+            case HillClimbState::Steady:        reason = 5; break;
+            case HillClimbState::SteadyFix:     reason = 6; break;
+            case HillClimbState::Saturating:    reason = 7; break;
+            case HillClimbState::Random:        reason = 8; break;
         }
         ThreadPoolEventEmitWorkerAdjust(current, target, reason);
     }

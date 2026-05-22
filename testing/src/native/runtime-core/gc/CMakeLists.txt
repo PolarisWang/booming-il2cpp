@@ -151,6 +151,7 @@ add_chaos_test(test_gc_young_collector
     ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_young_collector.cpp
     ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_scheduler.cpp
     ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_card_table.cpp
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_layout.cpp
     LIBS ${CHAOS_GC_LIBS}
     LABELS "unit;gc"
 )
@@ -182,6 +183,37 @@ add_chaos_test(test_gc_finalizer
     LABELS "unit;gc"
 )
 
+# gc_finalizer_integration_test — End-to-end finalizer via public ABI
+# NOTE: gc_young_collector.cpp + gc_layout.cpp compiled directly
+# (same /FORCE:MULTIPLE pattern).
+add_chaos_test(test_gc_finalizer_integration
+    gc_finalizer_integration_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_young_collector.cpp
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_scheduler.cpp
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_card_table.cpp
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_layout.cpp
+    LIBS ${CHAOS_GC_LIBS}
+    LABELS "unit;gc"
+)
+target_include_directories(test_gc_finalizer_integration PRIVATE
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc)
+target_link_options(test_gc_finalizer_integration PRIVATE /FORCE:MULTIPLE)
+
+# gc_max_promote_test — kMaxPromoteObjects guard verification
+# NOTE: gc_young_collector.cpp + gc_layout.cpp compiled directly.
+add_chaos_test(test_gc_max_promote
+    gc_max_promote_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_young_collector.cpp
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_scheduler.cpp
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_card_table.cpp
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_layout.cpp
+    LIBS ${CHAOS_GC_LIBS}
+    LABELS "unit;gc"
+)
+target_include_directories(test_gc_max_promote PRIVATE
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc)
+target_link_options(test_gc_max_promote PRIVATE /FORCE:MULTIPLE)
+
 # gc_full_gc_test — Full GC collection channel tests
 add_chaos_test(test_gc_full_gc
     gc_full_gc_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
@@ -200,6 +232,7 @@ add_chaos_test(test_gc_managed_api
     ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_scheduler.cpp
     ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_card_table.cpp
     ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_stats.cpp
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_layout.cpp
     LIBS ${CHAOS_GC_LIBS}
     LABELS "unit;gc"
 )
@@ -301,6 +334,7 @@ add_chaos_test(test_gc_monitor_stress
     ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_young_collector.cpp
     ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_scheduler.cpp
     ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_card_table.cpp
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_layout.cpp
     LIBS ${CHAOS_GC_LIBS}
 )
 target_include_directories(test_gc_monitor_stress PRIVATE
@@ -343,6 +377,7 @@ add_chaos_test(test_gc_bgc_smoke
     ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_young_collector.cpp
     ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_scheduler.cpp
     ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_card_table.cpp
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_layout.cpp
     LIBS ${CHAOS_GC_LIBS}
 )
 target_include_directories(test_gc_bgc_smoke PRIVATE

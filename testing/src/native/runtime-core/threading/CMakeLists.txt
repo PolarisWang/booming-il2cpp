@@ -42,3 +42,12 @@ add_chaos_test(test_async_integration_smoke
     LIBS ${CHAOS_THREADING_LIBS}
     LABELS "unit;threading"
 )
+
+# execution_context_smoke_test — ExecutionContext SuppressFlow/RestoreFlow
+# Compiles execution_context.cpp directly to avoid stale prebuilt lib issues.
+add_chaos_test(test_execution_context_smoke
+    execution_context_smoke_test.cpp
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/execution_context.cpp
+    LIBS chaos_common chaos_fmt
+    LABELS "unit;threading"
+)

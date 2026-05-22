@@ -8,6 +8,11 @@
 #include <cstdint>
 #include <list>
 #include <mutex>
+#include <new>
+
+#if defined(_MSC_VER)
+#include <intrin.h>
+#endif
 
 namespace chaos::il2cpp::runtime_core::threading {
 
@@ -24,14 +29,25 @@ struct SemaphoreEntry {
     CHAOS_IL2CPP_CONDITION_VARIABLE cv;
 };
 
-struct RWLockEntry {
-    uint32_t id;
-    bool active;
+// ── ReaderWriterLockSlim — Interlocked-based ───────────────────────────
+//
+// Design:
+//   Fixed array g_rwlocks[1024] — handle = index, O(1) lookup.
+//   State atomic: >=0 = reader count, -1 = writer active.
+//   Read lock: InterlockedIncrement on state (zero syscall uncontended).
+//   Write lock: CAS state 0 → -1 (zero syscall uncontended).
+//   Spin 64 iterations before falling back to mutex+cv.
+
+constexpr uint32_t kMaxRWLockCount = 1024;
+
+struct RWLockEntryFixed {
+    std::atomic<int32_t> state{0};  // >=0: readers, -1: writer
+    uint32_t id{0};
+    bool active{false};
     CHAOS_IL2CPP_MUTEX mutex;
     CHAOS_IL2CPP_CONDITION_VARIABLE cv;
-    int32_t readers;       // Number of active readers (-1 = writer active).
-    int32_t waiting_readers;
-    int32_t waiting_writers;
+    int32_t waiting_readers{0};
+    int32_t waiting_writers{0};
 };
 
 struct BarrierEntry {
@@ -56,8 +72,9 @@ CHAOS_IL2CPP_MUTEX s_sem_table_mutex;
 std::list<SemaphoreEntry> s_semaphores;
 uint32_t s_next_sem_id = 1;
 
-CHAOS_IL2CPP_MUTEX s_rw_table_mutex;
-std::list<RWLockEntry> s_rwlocks;
+// RWLock: fixed array for O(1) lookup. Entries are never freed (only marked
+// active=false), so pointer stability is guaranteed.
+RWLockEntryFixed g_rwlocks[kMaxRWLockCount];
 uint32_t s_next_rw_id = 1;
 
 CHAOS_IL2CPP_MUTEX s_barrier_table_mutex;
@@ -75,11 +92,11 @@ SemaphoreEntry* FindSemaphore(uint32_t id) noexcept {
     return nullptr;
 }
 
-RWLockEntry* FindRWLock(uint32_t id) noexcept {
-    for (auto& rw : s_rwlocks) {
-        if (rw.id == id && rw.active) return &rw;
-    }
-    return nullptr;
+/// O(1) RWLock lookup: handle is the array index.
+RWLockEntryFixed* FindRWLockFixed(uint32_t handle) noexcept {
+    if (handle == 0 || handle >= kMaxRWLockCount) return nullptr;
+    auto* entry = &g_rwlocks[handle];
+    return entry->active ? entry : nullptr;
 }
 
 BarrierEntry* FindBarrier(uint32_t id) noexcept {
@@ -192,154 +209,182 @@ int32_t SemaphoreSlimRelease(uint32_t sem_id, int32_t count) noexcept {
     return 0;
 }
 
-// ── ReaderWriterLockSlim ────────────────────────────────────────────────
+// ── ReaderWriterLockSlim — Interlocked-based ────────────────────────────
+//
+// Fast paths (no contention, zero syscalls):
+//   Read lock:  atomic increment of state (InterlockedIncrement)
+//   Write lock: CAS state 0 → -1
+//   Exit read:  atomic decrement + check waiting_writers
+//   Exit write: store 0 + notify
+//
+// Slow paths (contention): fall back to mutex + condition_variable.
+// Spin 64 iterations before blocking.
 
 uint32_t ReaderWriterLockSlimCreate() noexcept {
-    std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(s_rw_table_mutex);
-
-    uint32_t id = s_next_rw_id++;
-    if (id == 0) id = s_next_rw_id++;
-
-    auto& rw_entry = s_rwlocks.emplace_back();
-    rw_entry.id = id;
-    rw_entry.active = true;
-    rw_entry.readers = 0;
-    rw_entry.waiting_readers = 0;
-    rw_entry.waiting_writers = 0;
-
-    return id;
+    // Find a free slot in the fixed array.
+    for (uint32_t i = 1; i < kMaxRWLockCount; i++) {
+        auto& entry = g_rwlocks[i];
+        uint32_t expected_id = 0;
+        if (entry.id == 0) {
+            // Unused slot — claim it.
+            entry.id = s_next_rw_id++;
+            if (entry.id == 0) entry.id = s_next_rw_id++;
+            entry.active = true;
+            entry.state.store(0, std::memory_order_relaxed);
+            entry.waiting_readers = 0;
+            entry.waiting_writers = 0;
+            return i;  // handle = index
+        }
+    }
+    return 0;  // table full
 }
 
-bool ReaderWriterLockSlimDestroy(uint32_t rw_id) noexcept {
-    std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(s_rw_table_mutex);
-    auto* entry = FindRWLock(rw_id);
+bool ReaderWriterLockSlimDestroy(uint32_t rw_handle) noexcept {
+    auto* entry = FindRWLockFixed(rw_handle);
     if (entry == nullptr) return false;
     entry->active = false;
     entry->cv.notify_all();
     return true;
 }
 
-int32_t ReaderWriterLockSlimEnterRead(uint32_t rw_id, int32_t timeout_ms) noexcept {
-    RWLockEntry* entry;
-    {
-        std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(s_rw_table_mutex);
-        entry = FindRWLock(rw_id);
-    }
+int32_t ReaderWriterLockSlimEnterRead(uint32_t rw_handle, int32_t timeout_ms) noexcept {
+    auto* entry = FindRWLockFixed(rw_handle);
     if (entry == nullptr) return -1;
 
+    // ── Fast path: Interlocked CAS on state ──────────────────────────
+    // If state >= 0 (no writer), try to increment.
+    int32_t expected = entry->state.load(std::memory_order_acquire);
+    if (expected >= 0) {
+        if (entry->state.compare_exchange_weak(expected, expected + 1,
+                std::memory_order_acquire, std::memory_order_relaxed)) {
+            return 1;  // Acquired without any syscall.
+        }
+    }
+
+    // ── Spin 64 iterations (contention is likely brief) ──────────────
+    if (expected < 0) {  // Writer active — spin waiting for it to finish.
+        for (int i = 0; i < 64; i++) {
+            CHAOS_IL2CPP_PAUSE_HINT();
+            expected = entry->state.load(std::memory_order_acquire);
+            if (expected >= 0) {
+                if (entry->state.compare_exchange_weak(expected, expected + 1,
+                        std::memory_order_acquire, std::memory_order_relaxed)) {
+                    return 1;
+                }
+            }
+        }
+    }
+
+    if (timeout_ms == 0) return 0;
+
+    // ── Slow path: block on mutex + cv ───────────────────────────────
     GC_TRANSITION_TO_PREEMPTIVE();
-    std::unique_lock<CHAOS_IL2CPP_MUTEX> lock(entry->mutex);
+    {
+        std::unique_lock<CHAOS_IL2CPP_MUTEX> lock(entry->mutex);
+        entry->waiting_readers++;
 
-    // Fast path: no writer active or waiting.
-    if (entry->readers >= 0 && entry->waiting_writers == 0) {
-        entry->readers++;
+        int32_t result;
+        if (timeout_ms < 0) {
+            entry->cv.wait(lock, [entry] {
+                int32_t s = entry->state.load(std::memory_order_acquire);
+                return s >= 0 && entry->waiting_writers == 0;
+            });
+            result = 1;
+        } else {
+            bool acquired = entry->cv.wait_for(lock, std::chrono::milliseconds(timeout_ms),
+                [entry] {
+                    int32_t s = entry->state.load(std::memory_order_acquire);
+                    return s >= 0 && entry->waiting_writers == 0;
+                });
+            result = acquired ? 1 : 0;
+        }
+        entry->waiting_readers--;
+
+        if (result == 1) {
+            entry->state.fetch_add(1, std::memory_order_release);
+        }
         GC_TRANSITION_TO_COOPERATIVE();
-        return 1;
+        return result;
     }
-
-    if (timeout_ms == 0) {
-        GC_TRANSITION_TO_COOPERATIVE();
-        return 0;
-    }
-
-    entry->waiting_readers++;
-    int32_t result;
-    if (timeout_ms < 0) {
-        entry->cv.wait(lock, [entry] {
-            return entry->readers >= 0 && entry->waiting_writers == 0;
-        });
-        result = 1;
-    } else {
-        bool acquired = entry->cv.wait_for(lock, std::chrono::milliseconds(timeout_ms),
-            [entry] { return entry->readers >= 0 && entry->waiting_writers == 0; });
-        result = acquired ? 1 : 0;
-    }
-    entry->waiting_readers--;
-
-    if (result == 1) {
-        entry->readers++;
-    }
-
-    GC_TRANSITION_TO_COOPERATIVE();
-    return result;
 }
 
-bool ReaderWriterLockSlimExitRead(uint32_t rw_id) noexcept {
-    RWLockEntry* entry;
-    {
-        std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(s_rw_table_mutex);
-        entry = FindRWLock(rw_id);
-    }
+bool ReaderWriterLockSlimExitRead(uint32_t rw_handle) noexcept {
+    auto* entry = FindRWLockFixed(rw_handle);
     if (entry == nullptr) return false;
 
-    {
-        std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(entry->mutex);
-        if (entry->readers <= 0) return false;
-        entry->readers--;
-    }
+    int32_t prev = entry->state.fetch_sub(1, std::memory_order_release);
+    if (prev <= 0) return false;  // Not a reader.
 
-    entry->cv.notify_all();
+    // If there are waiting writers and this was the last reader, wake them.
+    if (prev == 1 && entry->waiting_writers > 0) {
+        entry->cv.notify_all();
+    }
     return true;
 }
 
-int32_t ReaderWriterLockSlimEnterWrite(uint32_t rw_id, int32_t timeout_ms) noexcept {
-    RWLockEntry* entry;
-    {
-        std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(s_rw_table_mutex);
-        entry = FindRWLock(rw_id);
-    }
+int32_t ReaderWriterLockSlimEnterWrite(uint32_t rw_handle, int32_t timeout_ms) noexcept {
+    auto* entry = FindRWLockFixed(rw_handle);
     if (entry == nullptr) return -1;
 
+    // ── Fast path: CAS state 0 → -1 ──────────────────────────────────
+    int32_t expected = 0;
+    if (entry->state.compare_exchange_strong(expected, -1,
+            std::memory_order_acquire, std::memory_order_relaxed)) {
+        return 1;  // Acquired without any syscall.
+    }
+
+    // ── Spin 64 iterations ───────────────────────────────────────────
+    for (int i = 0; i < 64; i++) {
+        CHAOS_IL2CPP_PAUSE_HINT();
+        expected = 0;
+        if (entry->state.compare_exchange_strong(expected, -1,
+                std::memory_order_acquire, std::memory_order_relaxed)) {
+            return 1;
+        }
+    }
+
+    if (timeout_ms == 0) return 0;
+
+    // ── Slow path: block on mutex + cv ───────────────────────────────
     GC_TRANSITION_TO_PREEMPTIVE();
-    std::unique_lock<CHAOS_IL2CPP_MUTEX> lock(entry->mutex);
+    {
+        std::unique_lock<CHAOS_IL2CPP_MUTEX> lock(entry->mutex);
+        entry->waiting_writers++;
 
-    // Fast path: no readers, no writer.
-    if (entry->readers == 0) {
-        entry->readers = -1;  // Mark writer active.
+        int32_t result;
+        if (timeout_ms < 0) {
+            entry->cv.wait(lock, [entry] {
+                return entry->state.load(std::memory_order_acquire) == 0;
+            });
+            result = 1;
+        } else {
+            bool acquired = entry->cv.wait_for(lock, std::chrono::milliseconds(timeout_ms),
+                [entry] {
+                    return entry->state.load(std::memory_order_acquire) == 0;
+                });
+            result = acquired ? 1 : 0;
+        }
+        entry->waiting_writers--;
+
+        if (result == 1) {
+            entry->state.store(-1, std::memory_order_release);
+        }
         GC_TRANSITION_TO_COOPERATIVE();
-        return 1;
+        return result;
     }
-
-    if (timeout_ms == 0) {
-        GC_TRANSITION_TO_COOPERATIVE();
-        return 0;
-    }
-
-    entry->waiting_writers++;
-    int32_t result;
-    if (timeout_ms < 0) {
-        entry->cv.wait(lock, [entry] { return entry->readers == 0; });
-        result = 1;
-    } else {
-        bool acquired = entry->cv.wait_for(lock, std::chrono::milliseconds(timeout_ms),
-            [entry] { return entry->readers == 0; });
-        result = acquired ? 1 : 0;
-    }
-    entry->waiting_writers--;
-
-    if (result == 1) {
-        entry->readers = -1;  // Mark writer active.
-    }
-
-    GC_TRANSITION_TO_COOPERATIVE();
-    return result;
 }
 
-bool ReaderWriterLockSlimExitWrite(uint32_t rw_id) noexcept {
-    RWLockEntry* entry;
-    {
-        std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(s_rw_table_mutex);
-        entry = FindRWLock(rw_id);
-    }
+bool ReaderWriterLockSlimExitWrite(uint32_t rw_handle) noexcept {
+    auto* entry = FindRWLockFixed(rw_handle);
     if (entry == nullptr) return false;
 
-    {
-        std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(entry->mutex);
-        if (entry->readers != -1) return false;
-        entry->readers = 0;
-    }
+    int32_t prev = entry->state.exchange(0, std::memory_order_release);
+    if (prev != -1) return false;  // Not the writer.
 
-    entry->cv.notify_all();
+    // Wake waiters (both readers and writers).
+    if (entry->waiting_readers > 0 || entry->waiting_writers > 0) {
+        entry->cv.notify_all();
+    }
     return true;
 }
 

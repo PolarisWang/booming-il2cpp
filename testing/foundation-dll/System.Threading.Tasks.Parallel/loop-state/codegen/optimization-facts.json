@@ -52,18 +52,6 @@
       "devirtualized": false
     },
     {
-      "methodSubjectId": "LoopStateSubjects/LoopStateSubjects::Subject_1:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_IsExceptional:System.Boolean()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "LoopStateSubjects/LoopStateSubjects::Subject_2:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_IsStopped:System.Boolean()",
-      "devirtualized": false
-    },
-    {
       "methodSubjectId": "LoopStateSubjects/LoopStateSubjects::Subject_2:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_IsStopped:System.Boolean()",
@@ -73,30 +61,6 @@
       "methodSubjectId": "LoopStateSubjects/LoopStateSubjects::Subject_3:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_LowestBreakIteration:System.Nullable\u003CSystem.Int64\u003E()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "LoopStateSubjects/LoopStateSubjects::Subject_3:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "LoopStateSubjects/LoopStateSubjects::Subject_3:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_LowestBreakIteration:System.Nullable\u003CSystem.Int64\u003E()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "LoopStateSubjects/LoopStateSubjects::Subject_3:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "LoopStateSubjects/LoopStateSubjects::Subject_4:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_ShouldExitCurrentIteration:System.Boolean()",
       "devirtualized": false
     },
     {
