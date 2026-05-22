@@ -2,6 +2,7 @@
 
 #include "generic_context.h"
 #include "memory_domain.h"
+#include "metadata_interface.h"
 #include "string_table.h"
 
 #include <atomic>
@@ -142,7 +143,9 @@ void RegisterHotUpdateModuleGenerics(
     //   - registration_data->source_image (for token→handle resolution)
     // If source_image is nullptr, tokens are stored as opaque handles
     // (MakeOpaqueHandle-style) and will be resolved lazily.
-    chaos::il2cpp::generic_context::RegisterModuleGenerics(registration_data);
+    using chaos::il2cpp::runtime_core::ModuleLifecycleManager;
+    ModuleLifecycleManager::Get()->RegisterHotUpdateGenerics(
+        registration_data->module_id, registration_data);
 }
 
 bool LoadAssemblyImageFromPath(const char* assembly_path_utf8, HotUpdateAssemblyImage* out_image) {
@@ -223,7 +226,8 @@ void UnloadHotUpdatePackage(HotUpdatePackageHandle* handle) {
 
     // Unregister generic instantiations before releasing memory resources.
     if (handle->module_id != 0u) {
-        chaos::il2cpp::generic_context::UnregisterModuleGenerics(handle->module_id);
+        using chaos::il2cpp::runtime_core::ModuleLifecycleManager;
+        ModuleLifecycleManager::Get()->UnregisterHotUpdateGenerics(handle->module_id);
         handle->module_id = 0u;
     }
 

@@ -6,6 +6,7 @@
 
 #include "generic_context.h"
 #include "memory_domain.h"
+#include "metadata_interface.h"
 #include "method_replacement.h"
 #include "reflection_query_model.h"
 #include "module_registry.h"
@@ -311,7 +312,11 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL BootstrapRuntime(void) {
             g_bootstrap_state.metadata_registration->method_aot_entry_args);
         aot_reg.method_aot_entry_arg_count = g_bootstrap_state.metadata_registration->method_aot_entry_arg_count;
 
-        chaos::il2cpp::generic_context::RegisterModuleGenerics(&aot_reg);
+        // Route both hotpatch dispatch table and generic data through
+        // ModuleLifecycleManager for unified registration.
+        chaos::il2cpp::runtime_core::ModuleLifecycleManager::Get()->RegisterAotModuleData(
+            chaos_il2cpp_aot_hotpatch_module,
+            &aot_reg);
 
         // Register AOT method entries for runtime QueryAotMethod.
         if (aot_reg.method_aot_entry_count > 0u) {
@@ -346,17 +351,6 @@ BridgeStatus CHAOS_RUNTIME_ABI_CALL BootstrapRuntime(void) {
         if (aot_domain != nullptr) {
             memory_domain::PushDomain(aot_domain);
         }
-    }
-
-    // Register the codegen-emitted hotpatch module (if present).
-    // The symbol is defined in native-aot.generated.cpp — may be nullptr
-    // when the module has no reachable methods with metadata tokens.
-    // Registration is done here (explicit, during single-threaded bootstrap)
-    // instead of via a static IIFE in the generated code, to avoid undefined
-    // static-initialization ordering across 200+ DLLs.
-    if (chaos_il2cpp_aot_hotpatch_module != nullptr) {
-        ::chaos::il2cpp::runtime_core::RegisterHotpatchModule(
-            chaos_il2cpp_aot_hotpatch_module);
     }
 
     // Resolve the external runtime dispatch table (kChaosExternalRuntimeFnTable).
