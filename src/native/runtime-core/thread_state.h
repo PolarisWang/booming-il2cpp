@@ -4,6 +4,7 @@
 #include <chaos/native_types.h>
 #include <chaos/type_info.h>
 #include <atomic>
+#include <cstdint>
 
 namespace chaos::il2cpp::runtime_core::threading {
 
@@ -116,6 +117,33 @@ struct ManagedThread {
     /// POSIX thread ID for pthread_kill-based preemptive suspend.
     pthread_t os_thread_id{};
 #endif
+
+    // ── BGC concurrent root change buffer (G-25) ─────────────────
+    /// Ring buffer tracking root slot modifications during BGC concurrent mark.
+    /// When a root slot (static, GCHandle, etc.) is overwritten during BGC
+    /// concurrent mark, the old value may have been the only reference keeping
+    /// an object alive.  This buffer records those changes so the STW re-mark
+    /// phase can re-scan them and mark any newly-unreachable objects.
+    static constexpr uint32_t kRootChangeBufferSize = 64;
+
+    /// One entry: a root slot whose old value may have been lost.
+    struct RootChangeEntry {
+        void*     old_value;  ///< The object reference that was in the slot before overwrite
+        void**    slot;       ///< The root slot that was overwritten
+    };
+
+    /// Ring buffer of root change entries.  Producers (mutators) write at
+    /// head, consumer (BGC re-mark) reads from tail to head.
+    RootChangeEntry root_change_buffer_[kRootChangeBufferSize];
+
+    /// Atomic head index for the ring buffer (producer write position).
+    /// Wrapped at kRootChangeBufferSize.  Monotonically increasing (modulo
+    /// the buffer size) — use head % kRootChangeBufferSize to get the slot.
+    std::atomic<uint32_t> root_change_head_{0};
+
+    /// Atomic tail index for the ring buffer (consumer read position).
+    /// Same wrap convention as head.
+    std::atomic<uint32_t> root_change_tail_{0};
 };
 
 // ── TLS identity (O(1), no lock) ─────────────────────────────────────

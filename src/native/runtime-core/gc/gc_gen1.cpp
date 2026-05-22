@@ -17,6 +17,7 @@
 #include "gc_old_gen.h"
 #include "gc_scheduler.h"
 #include "gc_young_gen.h"
+#include "gc_heap.h"
 #include "thread_state.h"
 
 namespace chaos::il2cpp::runtime_core {
@@ -64,7 +65,7 @@ void* TryAllocateInGen1(CHAOS_IL2CPP_SIZE size) {
     } while (!g_young_gen.gen1_bump.compare_exchange_weak(
         current, next, std::memory_order_release, std::memory_order_acquire));
     std::memset(current, 0, size);
-    g_gc_scheduler.RecordGen1Allocation(size);
+    G_Scheduler().RecordGen1Allocation(size);
     return current;
 }
 
@@ -124,7 +125,7 @@ bool GcGen1ShouldCollect() {
     // When survival rate is low (<30%), most objects in Gen1 are dead —
     // promote eagerly at a lower occupancy threshold (50% instead of 80%).
     // When survival is high, use the default 80% threshold.
-    float survival = g_gc_scheduler.Gen1SurvivalRate();
+    float survival = G_Scheduler().Gen1SurvivalRate();
     float adaptive_threshold = kGen1OccupancyThreshold;
     if (survival < kGen1LowSurvivalThreshold) {
         // Linear interpolation: survival=0% -> 40%, survival=30% -> 80%

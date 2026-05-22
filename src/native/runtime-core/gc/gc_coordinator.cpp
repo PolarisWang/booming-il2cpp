@@ -1,13 +1,20 @@
 /// @file gc_coordinator.cpp
 /// GcCoordinator implementation — multi-heap GC orchestration.
+///
+/// Design: Young generation and Gen1 are SHARED across all heaps (single
+/// nursery + single survivor space).  Only old gen, LOH, and scheduler are
+/// per-heap.  This avoids the complexity of per-heap root scanning and
+/// card-table partitioning while still enabling parallel old-gen GC.
 
 #include "gc_coordinator.h"
 
 #include <chaos/log.h>
 
+#include "gc_gen1.h"
 #include "gc_old_gen.h"
 #include "gc_region.h"
 #include "gc_young_collector.h"
+#include "gc_young_gen.h"
 #include "gc_helpers.h"
 #include "thread_state.h"
 
@@ -42,25 +49,22 @@ void GcCoordinator::ExecuteMultiHeapGc() noexcept {
     // Acquire global safepoint to freeze all managed threads.
     uint32_t gen = threading::RequestGlobalSafepoint();
 
-    // ── Phase 1: Young GC on each heap ─────────────────────────────
-    // Each worker thread binds to its assigned heap and runs the
-    // standard young collector (which uses G_YoungGen() accessor).
-    if (n_heaps <= 1) {
-        mgr.ForEachHeap([](int /*id*/, GcHeapContext& ctx) {
-            tls_current_heap = &ctx;
-            GcYoungCollection();
-        });
-    } else {
-        GcWorkerPool::Instance().RunWorkers(n_heaps, [&](int worker_idx) {
-            if (worker_idx < n_heaps) {
-                tls_current_heap = &mgr.GetHeap(worker_idx);
-                GcYoungCollection();
-            }
-        });
+    // ── Phase 1: Young GC + Gen1 (shared, run once) ────────────────
+    // Young generation and Gen1 are shared across all heaps.
+    Region* young_region = g_young_gen.region.load(std::memory_order_acquire);
+    void* bump = g_young_gen.bump.load(std::memory_order_acquire);
+    if (young_region != nullptr && bump > young_region->begin) {
+        GcYoungCollection();
+    }
+    Region* gen1_region = g_young_gen.gen1_region.load(std::memory_order_acquire);
+    if (gen1_region != nullptr) {
+        char* s_bump = g_young_gen.gen1_bump.load(std::memory_order_acquire);
+        if (s_bump > gen1_region->begin) {
+            GcGen1Collection();
+        }
     }
 
-    // ── Phase 2: Old-gen full GC on each heap ──────────────────────
-    // Full mark-sweep on each heap's old generation.
+    // ── Phase 2: Old-gen full GC per heap (parallel) ──────────────
     if (n_heaps <= 1) {
         mgr.ForEachHeap([](int /*id*/, GcHeapContext& ctx) {
             tls_current_heap = &ctx;

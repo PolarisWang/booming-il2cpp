@@ -3,6 +3,7 @@
 #include <chaos/log.h>
 
 #include "gc_card_table.h"
+#include "gc_heap.h"
 
 #include <cstdlib>
 #include <new>
@@ -137,7 +138,7 @@ void* LargeObjectHeap::Allocate(CHAOS_IL2CPP_SIZE size) {
             seg->next = segment_list_;
             segment_list_ = seg;
             seg->in_use.store(true, std::memory_order_release);
-            // Pre-mark the segment so BgcSweep Phase 5 (g_loh.Sweep())
+            // Pre-mark the segment so BgcSweep Phase 5 (G_Loh().Sweep())
             // does not free this freshly-reused segment between the
             // mutex release below and the caller's first write to the
             // payload.  False-positive survival for one BGC cycle is
@@ -157,7 +158,7 @@ void* LargeObjectHeap::Allocate(CHAOS_IL2CPP_SIZE size) {
     if (seg == nullptr) return nullptr;
 
     // Pre-mark the segment before linking it into segment_list_ so
-    // BgcSweep Phase 5 (g_loh.Sweep()) never sees a freshly-allocated
+    // BgcSweep Phase 5 (G_Loh().Sweep()) never sees a freshly-allocated
     // segment with marked=false.  Without this mark, the BGC sweep
     // can free the segment immediately after this thread releases the
     // LOH mutex — before the caller writes to the returned payload.

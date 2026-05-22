@@ -14,6 +14,7 @@
 #ifndef CHAOS_IL2CPP_GC_ETW_H_
 #define CHAOS_IL2CPP_GC_ETW_H_
 
+#include <chaos/native_types.h>
 #include <cstdint>
 
 namespace chaos::il2cpp::runtime_core {
@@ -76,6 +77,17 @@ void GcEtwFireGcGen1Collect(
     uint64_t pause_ns,
     uint64_t objects_promoted,
     uint64_t bytes_reclaimed) noexcept;
+
+/// GCAllocationTick: fires approximately every 100KB of allocation.
+/// PerfView-compatible: AllocationAmount, AllocationKind (0=small, 1=large).
+/// @param bytes           Number of bytes since last tick (nominally ~100KB).
+/// @param is_large_object Non-zero if the tick was triggered by a LOH allocation.
+void GcEtwFireAllocationTick(uint32_t bytes, uint32_t is_large_object) noexcept;
+
+/// Record an allocation for GCAllocationTick tracking.
+/// Called from GcRecordAlloc on every managed allocation.  Accumulates a
+/// per-thread counter and fires GCAllocationTick at ~100 KB intervals.
+void GcEtwRecordAlloc(CHAOS_IL2CPP_SIZE bytes) noexcept;
 
 }  // namespace chaos::il2cpp::runtime_core
 

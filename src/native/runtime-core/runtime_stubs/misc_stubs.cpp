@@ -10,6 +10,7 @@
 #include "runtime_stubs/stub_common.h"
 #include "runtime_stubs/string_stubs.h"
 #include "gc_helpers.h"
+#include "gc_heap.h"
 #include "gc/gc_old_gen.h"
 #include "gc/gc_region.h"
 #include "gc/gc_scheduler.h"
@@ -164,7 +165,7 @@ void ChaosGcCollect(CHAOS_IL2CPP_INT32 generation) noexcept
     // 3. Run pending finalizers.
 
     // Step 1: Young collection on the shared young generation (if any).
-    Region* young_region = g_young_gen.region.load(std::memory_order_acquire);
+    Region* young_region = G_YoungGen().region.load(std::memory_order_acquire);
     if (young_region != nullptr && young_region->current > young_region->begin) {
         uint32_t gen = chaos::il2cpp::runtime_core::threading::RequestGlobalSafepoint();
         GcYoungCollection();
@@ -174,12 +175,12 @@ void ChaosGcCollect(CHAOS_IL2CPP_INT32 generation) noexcept
     // Step 2: Full collection when gen >= 1 or default (-1).
     if (generation < 0 || generation >= 1) {
         uint32_t gen = chaos::il2cpp::runtime_core::threading::RequestGlobalSafepoint();
-        g_old_gen.Collect(nullptr, nullptr);
+        G_OldGen().Collect(nullptr, nullptr);
         chaos::il2cpp::runtime_core::threading::ReleaseGlobalSafepoint(gen);
     }
 
     // Step 3: Run pending finalizers.
-    g_old_gen.RunFinalizers();
+    G_OldGen().RunFinalizers();
 }
 
 extern "C" {
@@ -188,8 +189,8 @@ CHAOS_IL2CPP_INT32 ChaosGcGetGeneration(CHAOS_IL2CPP_INTPTR obj) noexcept {
     if (obj == 0) return 0;
     void* ptr = reinterpret_cast<void*>(obj);
     if (RegionManager::Instance().IsNurseryPointer(ptr)) return 0;
-    if (g_old_gen.IsInOldGen(ptr)) return 2;
-    if (g_loh.IsInLOH(ptr)) return 2;
+    if (G_OldGen().IsInOldGen(ptr)) return 2;
+    if (G_Loh().IsInLOH(ptr)) return 2;
     return 0;
 }
 
@@ -226,12 +227,12 @@ CHAOS_IL2CPP_INTPTR ChaosDelegateGetTarget(CHAOS_IL2CPP_INTPTR delegate_obj) noe
 
 void chaos_gc_suppress_finalize(CHAOS_IL2CPP_INTPTR obj) noexcept {
     if (obj == 0) return;
-    chaos::il2cpp::runtime_core::g_old_gen.SuppressFinalizer(reinterpret_cast<void*>(obj));
+    chaos::il2cpp::runtime_core::G_OldGen().SuppressFinalizer(reinterpret_cast<void*>(obj));
 }
 
 void chaos_gc_reregister_finalize(CHAOS_IL2CPP_INTPTR obj) noexcept {
     if (obj == 0) return;
-    chaos::il2cpp::runtime_core::g_old_gen.ReRegisterFinalizer(reinterpret_cast<void*>(obj));
+    chaos::il2cpp::runtime_core::G_OldGen().ReRegisterFinalizer(reinterpret_cast<void*>(obj));
 }
 
 }  // extern "C"

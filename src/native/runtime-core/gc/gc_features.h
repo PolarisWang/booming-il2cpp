@@ -36,7 +36,16 @@
 /// CHAOS_IL2CPP_GC_LARGE_PAGES (=1)
 ///   Large page (2MB) support for GC heap allocations.  Requires
 ///   SeLockMemoryPrivilege on Windows.  Reduces TLB miss rates for
-///   large heaps.  See gc_loh.cpp for usage.
-///   Default: OFF (disabled).
+///   large heaps.  Falls back to 4KB pages when large pages are
+///   unavailable or privilege is lacking.
+///   Default: ON (enabled) with automatic fallback to 4KB.
+///
+/// CHAOS_IL2CPP_GC_SERVER (=0)
+///   Server GC mode with per-NUMA-node heaps.  When enabled, each NUMA
+///   node gets its own heap context (old gen, LOH, scheduler).  Threads
+///   bind to a heap based on NUMA affinity.  GC runs across all heaps in
+///   parallel via GcCoordinator.
+///   When disabled (default): single-heap WKS mode with global state.
+///   Default: OFF (disabled) — WKS workstation GC compatible with Unity.
 
 #endif  // CHAOS_IL2CPP_GC_FEATURES_H_

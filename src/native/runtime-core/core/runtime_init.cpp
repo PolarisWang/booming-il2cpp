@@ -1,5 +1,7 @@
 #include "gc_old_gen.h"
 #include "gc_bgc.h"
+#include "gc_heap.h"
+#include "../gc/gc_etw.h"
 
 // T4 VEH handler for SEH dispatch in native-generated code.
 #include "../codegen/t4_seh_handler.h"
@@ -70,6 +72,7 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL RuntimeInit(
 void CHAOS_RUNTIME_ABI_CALL RuntimeShutdown(RuntimeState* runtime_state) {
     if (runtime_state == nullptr) return;
 
+    GcEtwShutdown();
     SetRuntimeMode(RuntimeMode::Aot);
     if (runtime_state->internal_state != nullptr) {
         runtime_state->internal_state->~RuntimeInternalState();
@@ -105,7 +108,7 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL ThreadAttach(
     // Use address of a local as near-CFP reference (stack grows downward).
     void* stack_near_cfp = &thread_state;
     void* stack_limit = static_cast<char*>(stack_near_cfp) - (1024 * 1024);
-    g_old_gen.RegisterThreadStack(stack_near_cfp, stack_limit);
+    G_OldGen().RegisterThreadStack(stack_near_cfp, stack_limit);
 
     *out_thread_state = thread_state;
     SetCurrentThreadState(thread_state);
@@ -126,7 +129,7 @@ void CHAOS_RUNTIME_ABI_CALL ThreadDetach(
     ThreadState* thread_state) {
     if (runtime_state == nullptr || thread_state == nullptr) return;
 
-    g_old_gen.UnregisterThreadStack();
+    G_OldGen().UnregisterThreadStack();
 
     if (thread_state->internal_state != nullptr) {
         thread_state->internal_state->~ThreadInternalState();

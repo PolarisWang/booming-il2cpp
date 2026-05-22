@@ -1,3 +1,4 @@
+#include "gc_heap.h"
 namespace chaos::il2cpp::runtime_core {
 namespace {
 
@@ -44,7 +45,7 @@ bool EnqueueFinalizer(
             FinalizerWorkItem{ object_instance, finalizer });
     }
 
-    g_old_gen.RegisterFinalizer(object_instance, finalizer);
+    G_OldGen().RegisterFinalizer(object_instance, finalizer);
     return true;
 }
 
@@ -53,7 +54,7 @@ CHAOS_IL2CPP_SIZE DrainFinalizerQueue(RuntimeState* runtime_state) {
     if (runtime_internal_state == nullptr) return 0u;
 
     // Run CRAG finalizers for unreachable objects.
-    g_old_gen.RunFinalizers();
+    G_OldGen().RunFinalizers();
 
     CHAOS_IL2CPP_VECTOR(FinalizerWorkItem) pending_finalizers = {};
     {

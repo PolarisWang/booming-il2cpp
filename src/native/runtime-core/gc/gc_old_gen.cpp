@@ -21,6 +21,7 @@
 #include "gc_scheduler.h"
 #include "gc_stats.h"
 #include "gc_worker_pool.h"
+#include "gc_heap.h"
 #include "thread_pool.h"
 #include "memory_domain.h"
 #include "thread_state.h"
@@ -110,12 +111,14 @@ MarkSweepOldGen::~MarkSweepOldGen() {
 
     auto* old_array = page_array_.load(std::memory_order_relaxed);
     if (old_array != nullptr) {
-        std::free(old_array->pages);
+        GcNumaVirtualFree(old_array->pages,
+            static_cast<CHAOS_IL2CPP_SIZE>(old_array->count) * sizeof(OldGenPage*));
         delete old_array;
     }
     for (auto* retired : retired_arrays_) {
         if (retired != nullptr) {
-            std::free(retired->pages);
+            GcNumaVirtualFree(retired->pages,
+                static_cast<CHAOS_IL2CPP_SIZE>(retired->count) * sizeof(OldGenPage*));
             delete retired;
         }
     }
@@ -194,7 +197,7 @@ bool MarkSweepOldGen::Init(uintptr_t heap_hint, int initial_pages) {
     // not count toward the page-growth threshold in DecideCollection().
     // Without this reset, a large Init (e.g. 64 pages) immediately triggers
     // a Full GC when DecideCollection() checks page_count_growth >= 16.
-    g_gc_scheduler.ResetPageCountGrowth();
+    G_Scheduler().ResetPageCountGrowth();
 
     // Allocate the emergency reserve for finalizer OOM protection.
     if (!InitEmergencyReserve()) {
@@ -262,11 +265,24 @@ OldGenPage* MarkSweepOldGen::AllocatePage(CHAOS_IL2CPP_SIZE size, bool scanning,
     };
 
     // Try to recycle a pooled page first (avoids VirtualAlloc syscall).
+    // Prefer a page from the same NUMA node as the current thread.
     {
         std::lock_guard<std::mutex> lock(mutex_);
         if (!page_pool_.empty()) {
-            auto entry = page_pool_.back();
-            page_pool_.pop_back();
+            int current_node = GcNumaNodeCount() > 1 ? GcNumaCurrentNode() : 0;
+            CHAOS_IL2CPP_SIZE pool_idx = page_pool_.size() - 1;  // fallback: back
+
+            // Scan for a page matching the current NUMA node.
+            for (CHAOS_IL2CPP_SIZE i = 0; i < page_pool_.size(); i++) {
+                if (page_pool_[i].numa_node == current_node ||
+                    page_pool_[i].numa_node < 0) {
+                    pool_idx = i;
+                    break;
+                }
+            }
+
+            auto entry = page_pool_[pool_idx];
+            page_pool_.erase(page_pool_.begin() + static_cast<ptrdiff_t>(pool_idx));
 
 #if defined(_WIN32) || defined(_WIN64)
             // Recommit the decommitted page.  MEM_DECOMMIT in FreeRegion
@@ -298,7 +314,7 @@ OldGenPage* MarkSweepOldGen::AllocatePage(CHAOS_IL2CPP_SIZE size, bool scanning,
             recycled->next = page_list_;
             page_list_ = recycled;
             page_count_++;
-            g_gc_scheduler.RecordPageCountGrowth(1);
+            G_Scheduler().RecordPageCountGrowth(1);
             RebuildPageArray();
 
             return recycled;
@@ -363,7 +379,7 @@ OldGenPage* MarkSweepOldGen::AllocatePage(CHAOS_IL2CPP_SIZE size, bool scanning,
         mem->next = page_list_;
         page_list_ = mem;
         page_count_++;
-        g_gc_scheduler.RecordPageCountGrowth(1);
+        G_Scheduler().RecordPageCountGrowth(1);
 
         if (heap_base_ == 0) {
             heap_base_ = reinterpret_cast<uintptr_t>(mem);
@@ -396,8 +412,11 @@ void MarkSweepOldGen::RebuildPageArray() {
         if (p->in_use.load(std::memory_order_acquire)) count++;
     }
 
+    if (count == 0) return;
+
+    int numa_node = GcNumaNodeCount() > 1 ? GcNumaCurrentNode() : 0;
     auto* new_pages = static_cast<OldGenPage**>(
-        std::malloc(static_cast<size_t>(count) * sizeof(OldGenPage*)));
+        GcNumaVirtualAlloc(static_cast<CHAOS_IL2CPP_SIZE>(count) * sizeof(OldGenPage*), numa_node));
     if (new_pages == nullptr) return;
 
     int idx = 0;
@@ -718,8 +737,8 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
     // (young collector, Gen1, BGC).  s_old_gen_gc_active guards against recursive
     // chaos_gc_collect() invocations — the promotion alloc must proceed without
     // triggering another GC cycle.
-    if (!GcIsInNoGcRegion() && !s_old_gen_gc_active && g_gc_scheduler.TryClaimGcSlot()) {
-        if (g_gc_scheduler.DecideCollection() == GcCollectionKind::FULL) {
+    if (!GcIsInNoGcRegion() && !s_old_gen_gc_active && G_Scheduler().TryClaimGcSlot()) {
+        if (G_Scheduler().DecideCollection() == GcCollectionKind::FULL) {
             s_old_gen_gc_active = true;
             uint32_t gen = threading::RequestGlobalSafepoint();
             chaos_gc_collect();
@@ -733,7 +752,7 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
     if (size > kOldGenMaxInline) {
         // Route objects > 85 KB to the Large Object Heap (no compaction).
         if (size > kLohThreshold) {
-            void* loh_ptr = g_loh.Allocate(size);
+            void* loh_ptr = G_Loh().Allocate(size);
             if (loh_ptr != nullptr) {
                 GcRecordAlloc(size, true);
                 memory_domain::GcTrackDomainAlloc(size);
@@ -746,7 +765,7 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
         // Defer full GC to next safepoint instead of blocking synchronously.
         // The page pool can absorb allocation bursts without GC; blocking here
         // penalizes transient oversized allocations with unnecessary STW pauses.
-        g_gc_scheduler.RequestFullGc();
+        G_Scheduler().RequestFullGc();
 
         auto* page = AllocatePage(size, scanning_required);
         if (page == nullptr) return nullptr;
@@ -1225,12 +1244,12 @@ void MarkSweepOldGen::HandleReMarkPass() {
     // Re-mark LOH objects reachable from GCHandles.  Finalizers can
     // resurrect LOH objects (e.g., by storing 'this' into a static field
     // or registering a new GCHandle).  Without this re-mark, resurrected
-    // LOH objects would be swept by g_loh.Sweep() later in Phase 4.
-    if (g_loh.SegmentCount() > 0) {
+    // LOH objects would be swept by G_Loh().Sweep() later in Phase 4.
+    if (G_Loh().SegmentCount() > 0) {
         GcIterateHandleTable([](void* object, void* user_data) {
             (void)user_data;
             if (object != nullptr) {
-                g_loh.MarkObject(object);
+                G_Loh().MarkObject(object);
             }
         }, nullptr);
     }
@@ -1243,7 +1262,7 @@ void MarkSweepOldGen::HandleReMarkPass() {
         // New objects were marked �� drain the mark stack.
         DrainMarkStack();
         // Re-mark LOH objects reachable from dependent handles.
-        if (g_loh.SegmentCount() > 0 && g_loh.Sweep() > 0) {
+        if (G_Loh().SegmentCount() > 0 && G_Loh().Sweep() > 0) {
             // LOH objects were kept alive; no need to subtract from reclaimed.
         }
     }
@@ -2371,7 +2390,7 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     CHAOS_IL2CPP_PROFILE_SCOPE("OldGen::Collect");
 
     // Signal full GC approach for registered notification waiters.
-    g_gc_scheduler.SignalFullGcApproach();
+    G_Scheduler().SignalFullGcApproach();
 
     auto pause_start = std::chrono::steady_clock::now();
 
@@ -2446,12 +2465,12 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
             [](threading::ManagedThread* thread) -> bool {
                 // Scan the shared young generation region directly.
                 // All threads share one young region; scan [begin, bump).
-                // Uses g_young_gen.bump (the true allocation frontier
+                // Uses G_YoungGen().bump (the true allocation frontier
                 // advanced by TLAB claims) rather than region->current
                 // (which is frozen at begin after each young GC reset).
-                Region* young_region = g_young_gen.region.load(std::memory_order_acquire);
+                Region* young_region = G_YoungGen().region.load(std::memory_order_acquire);
                 if (young_region == nullptr) return true;
-                void* cur = g_young_gen.bump.load(std::memory_order_acquire);
+                void* cur = G_YoungGen().bump.load(std::memory_order_acquire);
                 if (cur > young_region->begin) {
                     g_old_gen.ScanRangeForRoots(
                         young_region->begin, cur);
@@ -2460,9 +2479,9 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
                 // Scan the Gen1 area as roots.  Gen1 objects were
                 // promoted from the young half in a previous GC and may hold
                 // references to old-gen objects that must be retained.
-                Region* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+                Region* gen1 = G_YoungGen().gen1_region.load(std::memory_order_acquire);
                 if (gen1 != nullptr) {
-                    char* s_end = g_young_gen.gen1_bump.load(std::memory_order_acquire);
+                    char* s_end = G_YoungGen().gen1_bump.load(std::memory_order_acquire);
                     if (s_end > gen1->begin) {
                         g_old_gen.ScanRangeForRoots(gen1->begin, s_end);
                     }
@@ -2489,12 +2508,12 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
                 // LOH objects are never on old-gen pages, so TryMarkRoot
                 // (which uses FindPage) will miss them.  Without this check,
                 // thread-stack references to LOH objects are invisible to
-                // the full GC; g_loh.Sweep() will free the segment, causing
+                // the full GC; G_Loh().Sweep() will free the segment, causing
                 // use-after-free when the worker thread accesses it.
                 auto val = static_cast<void*>(
                     chaos::il2cpp::common::AsanReadPtrNoCheck(root_addr));
-                if (val != nullptr && g_loh.IsInLOH(val)) {
-                    g_loh.MarkObject(val);
+                if (val != nullptr && G_Loh().IsInLOH(val)) {
+                    G_Loh().MarkObject(val);
                 }
             },
             this);
@@ -2530,11 +2549,11 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     // objects found in roots get their LOH mark bit set.  LOH objects are not
     // transitively scanned (LOH objects are large and rarely point to other
     // LOH objects �� memcpy of 85 KB+ is not worth the fragmentation savings).
-    if (g_loh.SegmentCount() > 0) {
+    if (G_Loh().SegmentCount() > 0) {
         // Mark LOH objects found in pinned roots.
         for (auto& pr : pinned_snapshot) {
-            if (g_loh.IsInLOH(pr.addr)) {
-                g_loh.MarkObject(pr.addr);
+            if (G_Loh().IsInLOH(pr.addr)) {
+                G_Loh().MarkObject(pr.addr);
             }
         }
 
@@ -2672,8 +2691,8 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
 
     // Sweep the Large Object Heap.
     CHAOS_IL2CPP_SIZE loh_reclaimed = 0;
-    if (g_loh.SegmentCount() > 0) {
-        loh_reclaimed = g_loh.Sweep();
+    if (G_Loh().SegmentCount() > 0) {
+        loh_reclaimed = G_Loh().Sweep();
         if (loh_reclaimed > 0) {
         }
     }
@@ -2683,7 +2702,7 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     // Relocates live LOH segments to reduce fragmentation.
     {
         std::vector<std::pair<void*, void*>> loh_relocs;
-        if (g_loh.Compact(loh_relocs) > 0) {
+        if (G_Loh().Compact(loh_relocs) > 0) {
             CHAOS_IL2CPP_LOG_INFO_M("OldGen", "loh_compact relocations={0}",
                 static_cast<unsigned long>(loh_relocs.size()));
 
@@ -2768,7 +2787,7 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
         0);  // concurrent: blocking GC
 
     // Record into scheduler with actual heap size for full GC trigger decisions.
-    g_gc_scheduler.RecordFullCollection(total_heap_bytes, pause_ns);
+    G_Scheduler().RecordFullCollection(total_heap_bytes, pause_ns);
 
     CHAOS_IL2CPP_LOG_INFO_M("OldGen", "collect_done reclaimed={0} pause_ns={1}",
         static_cast<unsigned long long>(total_reclaimed), pause_ns);
@@ -2780,7 +2799,7 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     GcFireEvent(GcEvent::GC_FULL_DONE);
 
     // Signal full GC complete for registered notification waiters.
-    g_gc_scheduler.SignalFullGcComplete();
+    G_Scheduler().SignalFullGcComplete();
 
     // Replenish the emergency reserve after a full GC frees memory.
     ReplenishEmergencyReserve();
@@ -2923,11 +2942,11 @@ CHAOS_IL2CPP_SIZE MarkSweepOldGen::RunFinalizers() {
                     unreachable = false;
                 }
             }
-        } else if (g_loh.IsInLOH(entry.obj)) {
+        } else if (G_Loh().IsInLOH(entry.obj)) {
             // LOH object: check its segment-level mark bit.
             // LOH segments have a single atomic<bool> marked field; if it's
             // still set, the object is reachable and the finalizer is skipped.
-            if (g_loh.IsMarked(entry.obj)) {
+            if (G_Loh().IsMarked(entry.obj)) {
                 unreachable = false;
             }
         }
@@ -2973,8 +2992,8 @@ std::vector<FinalizerEntry> MarkSweepOldGen::CollectDeadFinalizables() {
                         unreachable = false;
                     }
                 }
-            } else if (g_loh.IsInLOH(entry.obj)) {
-                if (g_loh.IsMarked(entry.obj)) {
+            } else if (G_Loh().IsInLOH(entry.obj)) {
+                if (G_Loh().IsMarked(entry.obj)) {
                     unreachable = false;
                 }
             }
@@ -3107,7 +3126,8 @@ void MarkSweepOldGen::BgcSweep() {
                     VirtualFree(p, pool_page_size, MEM_DECOMMIT);
 #endif
                     page_pool_.push_back(PoolEntry{
-                        p, pool_page_size, pool_payload_size, pool_bitmap_bytes });
+                        p, pool_page_size, pool_payload_size, pool_bitmap_bytes,
+                        static_cast<int8_t>(p->numa_node) });
                 } else {
                     // Defer VirtualFree to BgcCompact (STW safepoint).
                     deferred_free_pages_.push_back(p);
@@ -3149,7 +3169,7 @@ void MarkSweepOldGen::BgcSweep() {
 
     // Phase 5: Sweep the Large Object Heap.
     // LOH segments that were not marked during concurrent mark are freed.
-    g_loh.Sweep();
+    G_Loh().Sweep();
 
     // Clear young_tenured flags after sweep.  Pages whose objects survived
     // have been swept and their free lists rebuilt; remaining live objects
