@@ -17,7 +17,7 @@
 - 每任务后更新 `STATUS.md`、`ACTIVE.md`、索引与进度文档
 - 对长期知识调�?`project-wiki-maintenance`
 - completion 前与顺序执行主线使用同一�?formal verification gate
-- 需要新的验证通过记录 / 新的数据时，�?formal object 与项目测试通过后继续执�?`run test inventory --json`，刷�?`verification-v1` 正式产物
+- 需要新的验证通过记录 / 新的数据时，在 formal object 与项目测试通过后继续执行 `run test inventory --json`，刷新 unified test framework 正式产物
 
 ## 项目规则
 
@@ -31,4 +31,4 @@
 - 带有 `parent_task_id` �?`source_relation: roadmap-child*` �?child task 完成后，必须先归�?child task，再回写父任务摘要与 child mapping
 
 ## 最近变�?
-- `2026-04-18`：与顺序执行主线对齐，统一接入 obligation-driven formal verification gate�?- `2026-04-22`：补齐与 `executing-plans` 等价�?`ACTIVE.md` 守卫�?roadmap-child 归档规则�?- `2026-04-23`：与顺序执行主线保持一致，新增 verification-v1 数据刷新要求�?
+- `2026-04-18`：与顺序执行主线对齐，统一接入 obligation-driven formal verification gate�?- `2026-04-22`：补齐与 `executing-plans` 等价�?`ACTIVE.md` 守卫�?roadmap-child 归档规则�?- `2026-04-23`：与顺序执行主线保持一致，新增 unified test framework 数据刷新要求。

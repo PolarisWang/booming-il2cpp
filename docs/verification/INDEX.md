@@ -19,4 +19,4 @@
 
 ## 数据刷新
 
-- 正式刷新命令：`python build/toolchains/run/run.py verify verification-v1 --json`
+- 正式刷新命令：`python build/toolchains/run/run.py test inventory --json`

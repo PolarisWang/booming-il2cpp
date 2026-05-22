@@ -31,7 +31,7 @@
 | [`mobile-host-subject-routing-v1.md`](./mobile-host-subject-routing-v1.md) | mobile host subject routing | 说明 `MobileHelloWorldProof` 的 subject-scoped Android / iOS host root 与 route fallback 规则。 |
 | [`native-perf-and-convert-baselines-v1.md`](./native-perf-and-convert-baselines-v1.md) | native perf and convert baseline | 固化 `native-runtime-perf` payload、`tests/perf/*` 约束与 convert perf baseline。 |
 | [`engine-binding-stub-baseline-v1.md`](./engine-binding-stub-baseline-v1.md) | engine binding stub baseline | 固化 `Chaos.IL2CPP.EngineBinding`、`[EngineExport]` / `[EngineCallback]` 标注入口与 smoke / compile-only baseline。 |
-| [`统一测试框架.md`](./统一测试框架.md) | 统一测试框架 `run test` | 更新 shared runtime host 约束：managed proof / benchmark 禁止 per-subject host，现存 `Program.cs` / `ProofEntry` 仅可作为 native 过渡契约。 |
+| [`统一测试框架.md`](./统一测试框架.md) | 统一测试框架 `run test` | 测试框架全貌：`Chaos.TestFramework.Sdk/Runtime` 分层、collection/manifest 规则、CLI 命令树（`run test`）、Foundation-DLL 独立管线、Native GoogleTest 注册方式、formal refresh 入口 `run test inventory --json`。 |
 | [`统一追踪体系.md`](./统一追踪体系.md) | 统一追踪体系 | 跨语言 JSONL trace 系统，覆盖 Python/C#/C++ 三层，span 层级，`trace-analyze` 性能分析，**错误排查工作流（日常开发查错首选）**。 |
 | [`il2cpp-core-structure-and-scriban-governance.md`](./il2cpp-core-structure-and-scriban-governance.md) | IL2CPP core structure and Scriban governance | 固化 `IL2CPP` 核心代码层的 planner / emitter / template 结构治理，以及 ObjectModel / ExternalRuntimeHelpers / Loader / Linker / Contracts 的长期拆分边界。 |
 | [`il2cpp-generator-project-structure.md`](./il2cpp-generator-project-structure.md) | Generator project structure | 固化 `Chaos.IL2CPP.Generator` 项目结构、命名空间边界、Planner/Emitter/Template 三层分离约束，以及 `CodeGen → Generator` 重命名记录。 |

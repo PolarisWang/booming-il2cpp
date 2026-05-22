@@ -55,8 +55,7 @@ class TestTuiUnifiedRoutingProgress(TuiUnifiedMenuTestSupport):
         )
         self.assertEqual(["test", "watch"], tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: "watch"))
         self.assertEqual(["test", "summary"], tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: "summary"))
-        self.assertEqual(
-            ["verify", "verification-v1"],
+        self.assertIsNone(
             tui_module.resolve_entry_argv(test_entry, prompt_value_provider=lambda prompt: "verify"),
         )
 
