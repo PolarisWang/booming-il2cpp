@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.Text.Json",
+  "familyId": "family/System.Text.Json/metadata/typeinfo",
+  "passedMethods": 39,
+  "failedMethods": 0,
+  "totalMethods": 39,
+  "stubMethods": 10,
+  "realMethods": 29,
+  "allMethodsRevertVerified": false,
+  "allMethodsSemanticVerified": false,
+  "d3PatchApplied": false,
+  "d3PatchedCount": 0,
+  "verificationKind": "hotupdate-proof",
+  "summary": {
+    "totalMethods": 39,
+    "passedMethods": 39,
+    "failedMethods": 0,
+    "unmatchedMethods": 0
+  },
+  "methodResults": []
+}

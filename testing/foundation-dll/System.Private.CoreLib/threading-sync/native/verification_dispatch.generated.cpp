@@ -1,5 +1,5 @@
 // verification_dispatch.generated.cpp — auto-generated
-// Assembly: ThreadingSyncSubjects, Methods: 19
+// Assembly: ThreadingSyncSubjects, Methods: 17
 #include <cstdint>
 #include <chrono>
 #include <chaos/native_types.h>

@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "ImmutableDictionarySubjects",
   "entrySubjectId": "ImmutableDictionarySubjects/ImmutableDictionarySubjects::CustomEntrySubject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Collections.Immutable/immutable-dictionary/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.Collections.Immutable/immutable-dictionary/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

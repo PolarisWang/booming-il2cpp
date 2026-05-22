@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "GroupingLookupSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Linq/grouping-lookup/managed/subjects/build-output/GroupingLookupSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Linq/grouping-lookup/managed/subjects/build-output/GroupingLookupSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "GroupingLookupSubjects",
-      "path": "verification/foundation-dll/System.Linq/grouping-lookup/managed/subjects/build-output/GroupingLookupSubjects.dll"
+      "path": "testing/foundation-dll/System.Linq/grouping-lookup/managed/subjects/build-output/GroupingLookupSubjects.dll"
     },
     {
       "assemblyName": "System.Collections",
@@ -24,7 +24,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "3502a173-db46-427d-94e3-9b0c6754f648",
+  "inputModuleVersionId": "6d2dcba3-f448-4186-b6f2-9678d03d9eac",
   "artifacts": [
     {
       "kind": "typedIlIr",

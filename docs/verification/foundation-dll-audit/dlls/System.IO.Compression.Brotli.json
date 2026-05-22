@@ -1,0 +1,2432 @@
+{
+  "assemblyName": "System.IO.Compression.Brotli",
+  "orderIndex": 4,
+  "phase": "roadmap-closed",
+  "roadmapTaskId": "TASK-20260427-04",
+  "dllState": "not-started",
+  "currentProject": "audit-input-and-ledger",
+  "blockingReason": "",
+  "riskTags": [],
+  "projects": [
+    {
+      "projectCode": "audit-input-and-ledger",
+      "displayName": "Audit Input And Ledger",
+      "policyState": "required",
+      "executionState": "pending",
+      "verificationMethod": "Formal verification for Audit Input And Ledger",
+      "verificationTarget": "System.IO.Compression.Brotli",
+      "completionRule": "",
+      "artifacts": [],
+      "supportRefs": [
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
+      ],
+      "blockers": [],
+      "updatedAt": ""
+    },
+    {
+      "projectCode": "managed-proof",
+      "displayName": "Managed Proof",
+      "policyState": "required",
+      "executionState": "pending",
+      "verificationMethod": "Formal verification for Managed Proof",
+      "verificationTarget": "System.IO.Compression.Brotli",
+      "completionRule": "",
+      "artifacts": [],
+      "supportRefs": [
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
+      ],
+      "blockers": [],
+      "updatedAt": ""
+    },
+    {
+      "projectCode": "native-proof",
+      "displayName": "Native Proof",
+      "policyState": "required",
+      "executionState": "pending",
+      "verificationMethod": "Formal verification for Native Proof",
+      "verificationTarget": "System.IO.Compression.Brotli",
+      "completionRule": "",
+      "artifacts": [],
+      "supportRefs": [
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
+      ],
+      "blockers": [],
+      "updatedAt": ""
+    },
+    {
+      "projectCode": "hotupdate-proof",
+      "displayName": "Hotupdate Proof",
+      "policyState": "required",
+      "executionState": "pending",
+      "verificationMethod": "Formal verification for Hotupdate Proof",
+      "verificationTarget": "System.IO.Compression.Brotli",
+      "completionRule": "",
+      "artifacts": [],
+      "supportRefs": [
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
+      ],
+      "blockers": [],
+      "updatedAt": ""
+    },
+    {
+      "projectCode": "benchmark",
+      "displayName": "Benchmark",
+      "policyState": "required",
+      "executionState": "pending",
+      "verificationMethod": "Formal verification for Benchmark",
+      "verificationTarget": "System.IO.Compression.Brotli",
+      "completionRule": "",
+      "artifacts": [],
+      "supportRefs": [
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
+      ],
+      "blockers": [],
+      "updatedAt": ""
+    },
+    {
+      "projectCode": "codegen-review",
+      "displayName": "Codegen Review",
+      "policyState": "required",
+      "executionState": "pending",
+      "verificationMethod": "Formal verification for Codegen Review",
+      "verificationTarget": "System.IO.Compression.Brotli",
+      "completionRule": "",
+      "artifacts": [],
+      "supportRefs": [
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
+      ],
+      "blockers": [],
+      "updatedAt": ""
+    },
+    {
+      "projectCode": "completion-certification",
+      "displayName": "Completion Certification",
+      "policyState": "required",
+      "executionState": "pending",
+      "verificationMethod": "Formal verification for Completion Certification",
+      "verificationTarget": "System.IO.Compression.Brotli",
+      "completionRule": "",
+      "artifacts": [],
+      "supportRefs": [
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/roadmap-v1-01.md",
+        "docs/dev/completed/14-foundation-dll-runtime/20260427-04-dll-capability-verification-closure-roadmap/STATUS.md"
+      ],
+      "blockers": [],
+      "updatedAt": ""
+    }
+  ],
+  "capabilityClosure": {
+    "totalFamilies": 4,
+    "closedFamilies": 0,
+    "waivedFamilies": 0,
+    "excludedFamilies": 0,
+    "platformBlockedFamilies": 0,
+    "inProgressFamilies": 4,
+    "closurePercent": 0.0
+  },
+  "workflowProgress": {
+    "totalRequiredGates": 0,
+    "passedGates": 0,
+    "progressPercent": 0.0
+  },
+  "capabilityFamilies": [
+    {
+      "familyId": "family/System.IO.Compression.Brotli/decoder",
+      "methodSubjectIds": [
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Decompress:System.Buffers.OperationStatus(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32&,System.Int32&)",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Dispose:System.Void()",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::TryDecompress:System.Boolean(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32&)"
+      ],
+      "methodCount": 3,
+      "implementationFamilies": [],
+      "closureStatus": "in-progress",
+      "denominatorStatus": "audit-confirmed",
+      "description": "",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 3,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 3,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate",
+        "d3PatchApplied": false,
+        "d3PatchedCount": 0,
+        "d3SchemaVersion": 0,
+        "d3MethodResults": [],
+        "passedMethodCount": 0,
+        "failedMethodCount": 0,
+        "unmatchedMethodCount": 0,
+        "verificationMethodResults": []
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 3,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "",
+        "denominator": 3,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "",
+        "denominator": 3,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "nativeCorrect": {
+        "status": "pending",
+        "passed": 0,
+        "total": 0,
+        "reason": "未接入批量验证管线"
+      },
+      "reviewBundle": {}
+    },
+    {
+      "familyId": "family/System.IO.Compression.Brotli/encoder",
+      "methodSubjectIds": [
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::Compress:System.Buffers.OperationStatus(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32&,System.Int32&,System.Boolean)",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::Dispose:System.Void()",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::Flush:System.Buffers.OperationStatus(System.Span{System.Byte},System.Int32&)",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::GetMaxCompressedLength:System.Int32(System.Int32)",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::TryCompress:System.Boolean(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32&)",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::TryCompress:System.Boolean(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32&,System.Int32,System.Int32)",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::.ctor:System.Void(System.Int32,System.Int32)"
+      ],
+      "methodCount": 7,
+      "implementationFamilies": [],
+      "closureStatus": "in-progress",
+      "denominatorStatus": "audit-confirmed",
+      "description": "",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 7,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 7,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate",
+        "d3PatchApplied": false,
+        "d3PatchedCount": 0,
+        "d3SchemaVersion": 0,
+        "d3MethodResults": [],
+        "passedMethodCount": 0,
+        "failedMethodCount": 0,
+        "unmatchedMethodCount": 0,
+        "verificationMethodResults": []
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 7,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "",
+        "denominator": 7,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "",
+        "denominator": 7,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "nativeCorrect": {
+        "status": "pending",
+        "passed": 0,
+        "total": 0,
+        "reason": "未接入批量验证管线"
+      },
+      "reviewBundle": {}
+    },
+    {
+      "familyId": "family/System.IO.Compression.Brotli/options",
+      "methodSubjectIds": [
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliCompressionOptions::get_Quality:System.Int32()",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliCompressionOptions::set_Quality:System.Void(System.Int32)",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliCompressionOptions::.ctor:System.Void()"
+      ],
+      "methodCount": 3,
+      "implementationFamilies": [],
+      "closureStatus": "in-progress",
+      "denominatorStatus": "audit-confirmed",
+      "description": "",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 3,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 3,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate",
+        "d3PatchApplied": false,
+        "d3PatchedCount": 0,
+        "d3SchemaVersion": 0,
+        "d3MethodResults": [],
+        "passedMethodCount": 0,
+        "failedMethodCount": 0,
+        "unmatchedMethodCount": 0,
+        "verificationMethodResults": []
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 3,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "",
+        "denominator": 3,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "",
+        "denominator": 3,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "nativeCorrect": {
+        "status": "pending",
+        "passed": 0,
+        "total": 0,
+        "reason": "未接入批量验证管线"
+      },
+      "reviewBundle": {}
+    },
+    {
+      "familyId": "family/System.IO.Compression.Brotli/stream",
+      "methodSubjectIds": [
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::BeginRead:System.IAsyncResult(System.Byte{},System.Int32,System.Int32,System.AsyncCallback,System.Object)",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::BeginWrite:System.IAsyncResult(System.Byte{},System.Int32,System.Int32,System.AsyncCallback,System.Object)",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::DisposeAsync:System.Threading.Tasks.ValueTask()",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::EndRead:System.Int32(System.IAsyncResult)",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::EndWrite:System.Void(System.IAsyncResult)",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Flush:System.Void()",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::FlushAsync:System.Threading.Tasks.Task(System.Threading.CancellationToken)",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::get_BaseStream:System.IO.Stream()",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::get_CanRead:System.Boolean()",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::get_CanSeek:System.Boolean()",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::get_CanWrite:System.Boolean()",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::get_Length:System.Int64()",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::get_Position:System.Int64()",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Read:System.Int32(System.Byte{},System.Int32,System.Int32)",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Read:System.Int32(System.Span{System.Byte})",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::ReadAsync:System.Threading.Tasks.Task{System.Int32}(System.Byte{},System.Int32,System.Int32,System.Threading.CancellationToken)",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::ReadAsync:System.Threading.Tasks.ValueTask{System.Int32}(System.Memory{System.Byte},System.Threading.CancellationToken)",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::ReadByte:System.Int32()",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::set_Position:System.Void(System.Int64)",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::SetLength:System.Void(System.Int64)",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Write:System.Void(System.Byte{},System.Int32,System.Int32)",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Write:System.Void(System.ReadOnlySpan{System.Byte})",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::WriteAsync:System.Threading.Tasks.Task(System.Byte{},System.Int32,System.Int32,System.Threading.CancellationToken)",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::WriteAsync:System.Threading.Tasks.ValueTask(System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::WriteByte:System.Void(System.Byte)",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::.ctor:System.Void(System.IO.Stream,System.IO.Compression.CompressionLevel)",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::.ctor:System.Void(System.IO.Stream,System.IO.Compression.CompressionLevel,System.Boolean)",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::.ctor:System.Void(System.IO.Stream,System.IO.Compression.BrotliCompressionOptions,System.Boolean)",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::.ctor:System.Void(System.IO.Stream,System.IO.Compression.CompressionMode)",
+        "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::.ctor:System.Void(System.IO.Stream,System.IO.Compression.CompressionMode,System.Boolean)"
+      ],
+      "methodCount": 31,
+      "implementationFamilies": [],
+      "closureStatus": "in-progress",
+      "denominatorStatus": "audit-confirmed",
+      "description": "",
+      "nativeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 31,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "testCases": [],
+        "benchmarkCases": [],
+        "hotupdateCases": []
+      },
+      "managedProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 31,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Tests"
+      },
+      "hotupdateProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "HotUpdate",
+        "d3PatchApplied": false,
+        "d3PatchedCount": 0,
+        "d3SchemaVersion": 0,
+        "d3MethodResults": [],
+        "passedMethodCount": 0,
+        "failedMethodCount": 0,
+        "unmatchedMethodCount": 0,
+        "verificationMethodResults": []
+      },
+      "benchmarkProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 0,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": [],
+        "caseItems": [],
+        "caseSectionLabel": "Benchmarks"
+      },
+      "testCodeProof": {
+        "status": "pending",
+        "numerator": 0,
+        "denominator": 31,
+        "progressPercent": 0.0,
+        "reason": "",
+        "evidence": [],
+        "runs": [],
+        "methodDetails": []
+      },
+      "auditInputProof": {
+        "status": "",
+        "denominator": 31,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "codegenReviewProof": {
+        "status": "",
+        "denominator": 31,
+        "numerator": 0,
+        "progressPercent": 0.0,
+        "evidence": [],
+        "caseItems": [],
+        "caseSectionLabel": ""
+      },
+      "nativeCorrect": {
+        "status": "pending",
+        "passed": 0,
+        "total": 0,
+        "reason": "未接入批量验证管线"
+      },
+      "reviewBundle": {}
+    }
+  ],
+  "familyVerificationClaims": {
+    "schemaVersion": 1,
+    "assemblyName": "System.IO.Compression.Brotli",
+    "ownerSubjectId": "SolutionCorePack",
+    "methodUniverseArtifactPaths": [],
+    "claims": [
+      {
+        "claimId": "family/System.IO.Compression.Brotli/decoder::native-proof",
+        "familyId": "family/System.IO.Compression.Brotli/decoder",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 3,
+        "methodSubjectIds": [
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Decompress:System.Buffers.OperationStatus(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32&,System.Int32&)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Dispose:System.Void()",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::TryDecompress:System.Boolean(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32&)"
+        ],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "inline-family:methodSubjectIds",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Compression.Brotli/decoder::managed-proof",
+        "familyId": "family/System.IO.Compression.Brotli/decoder",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Compression.Brotli/decoder::hotupdate-proof",
+        "familyId": "family/System.IO.Compression.Brotli/decoder",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Compression.Brotli/decoder::benchmark",
+        "familyId": "family/System.IO.Compression.Brotli/decoder",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Compression.Brotli/decoder::test-code",
+        "familyId": "family/System.IO.Compression.Brotli/decoder",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 3,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Compression.Brotli/encoder::native-proof",
+        "familyId": "family/System.IO.Compression.Brotli/encoder",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 7,
+        "methodSubjectIds": [
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::Compress:System.Buffers.OperationStatus(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32&,System.Int32&,System.Boolean)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::Dispose:System.Void()",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::Flush:System.Buffers.OperationStatus(System.Span{System.Byte},System.Int32&)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::GetMaxCompressedLength:System.Int32(System.Int32)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::TryCompress:System.Boolean(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32&)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::TryCompress:System.Boolean(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32&,System.Int32,System.Int32)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::.ctor:System.Void(System.Int32,System.Int32)"
+        ],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "inline-family:methodSubjectIds",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Compression.Brotli/encoder::managed-proof",
+        "familyId": "family/System.IO.Compression.Brotli/encoder",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Compression.Brotli/encoder::hotupdate-proof",
+        "familyId": "family/System.IO.Compression.Brotli/encoder",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Compression.Brotli/encoder::benchmark",
+        "familyId": "family/System.IO.Compression.Brotli/encoder",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Compression.Brotli/encoder::test-code",
+        "familyId": "family/System.IO.Compression.Brotli/encoder",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 7,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Compression.Brotli/options::native-proof",
+        "familyId": "family/System.IO.Compression.Brotli/options",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 3,
+        "methodSubjectIds": [
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliCompressionOptions::get_Quality:System.Int32()",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliCompressionOptions::set_Quality:System.Void(System.Int32)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliCompressionOptions::.ctor:System.Void()"
+        ],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "inline-family:methodSubjectIds",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Compression.Brotli/options::managed-proof",
+        "familyId": "family/System.IO.Compression.Brotli/options",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Compression.Brotli/options::hotupdate-proof",
+        "familyId": "family/System.IO.Compression.Brotli/options",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Compression.Brotli/options::benchmark",
+        "familyId": "family/System.IO.Compression.Brotli/options",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Compression.Brotli/options::test-code",
+        "familyId": "family/System.IO.Compression.Brotli/options",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 3,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Compression.Brotli/stream::native-proof",
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "gateCode": "native-proof",
+        "required": true,
+        "denominator": 31,
+        "methodSubjectIds": [
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::BeginRead:System.IAsyncResult(System.Byte{},System.Int32,System.Int32,System.AsyncCallback,System.Object)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::BeginWrite:System.IAsyncResult(System.Byte{},System.Int32,System.Int32,System.AsyncCallback,System.Object)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::DisposeAsync:System.Threading.Tasks.ValueTask()",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::EndRead:System.Int32(System.IAsyncResult)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::EndWrite:System.Void(System.IAsyncResult)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Flush:System.Void()",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::FlushAsync:System.Threading.Tasks.Task(System.Threading.CancellationToken)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::get_BaseStream:System.IO.Stream()",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::get_CanRead:System.Boolean()",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::get_CanSeek:System.Boolean()",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::get_CanWrite:System.Boolean()",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::get_Length:System.Int64()",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::get_Position:System.Int64()",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Read:System.Int32(System.Byte{},System.Int32,System.Int32)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Read:System.Int32(System.Span{System.Byte})",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::ReadAsync:System.Threading.Tasks.Task{System.Int32}(System.Byte{},System.Int32,System.Int32,System.Threading.CancellationToken)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::ReadAsync:System.Threading.Tasks.ValueTask{System.Int32}(System.Memory{System.Byte},System.Threading.CancellationToken)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::ReadByte:System.Int32()",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::set_Position:System.Void(System.Int64)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::SetLength:System.Void(System.Int64)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Write:System.Void(System.Byte{},System.Int32,System.Int32)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Write:System.Void(System.ReadOnlySpan{System.Byte})",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::WriteAsync:System.Threading.Tasks.Task(System.Byte{},System.Int32,System.Int32,System.Threading.CancellationToken)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::WriteAsync:System.Threading.Tasks.ValueTask(System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::WriteByte:System.Void(System.Byte)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::.ctor:System.Void(System.IO.Stream,System.IO.Compression.CompressionLevel)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::.ctor:System.Void(System.IO.Stream,System.IO.Compression.CompressionLevel,System.Boolean)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::.ctor:System.Void(System.IO.Stream,System.IO.Compression.BrotliCompressionOptions,System.Boolean)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::.ctor:System.Void(System.IO.Stream,System.IO.Compression.CompressionMode)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::.ctor:System.Void(System.IO.Stream,System.IO.Compression.CompressionMode,System.Boolean)"
+        ],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "inline-family:methodSubjectIds",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Compression.Brotli/stream::managed-proof",
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "gateCode": "managed-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:managed-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Compression.Brotli/stream::hotupdate-proof",
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "gateCode": "hotupdate-proof",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:hotupdate-proof",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Compression.Brotli/stream::benchmark",
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "gateCode": "benchmark",
+        "required": true,
+        "denominator": 1,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "gate-presence:benchmark",
+        "authorityRefs": []
+      },
+      {
+        "claimId": "family/System.IO.Compression.Brotli/stream::test-code",
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "gateCode": "test-code",
+        "required": true,
+        "denominator": 31,
+        "methodSubjectIds": [],
+        "ownerSubjectId": "SolutionCorePack",
+        "scope": "",
+        "derivationRule": "ledger:testCode",
+        "authorityRefs": []
+      }
+    ]
+  },
+  "familyVerificationSnapshot": {
+    "schemaVersion": 1,
+    "assemblyName": "System.IO.Compression.Brotli",
+    "ownerSubjectId": "SolutionCorePack",
+    "families": [
+      {
+        "familyId": "family/System.IO.Compression.Brotli/decoder",
+        "methodSubjectIds": [
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Decompress:System.Buffers.OperationStatus(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32&,System.Int32&)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Dispose:System.Void()",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::TryDecompress:System.Boolean(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32&)"
+        ],
+        "methodCount": 3,
+        "implementationFamilies": [],
+        "closureStatus": "in-progress",
+        "denominatorStatus": "audit-confirmed",
+        "description": "",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 3,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 3,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate",
+          "d3PatchApplied": false,
+          "d3PatchedCount": 0,
+          "d3SchemaVersion": 0,
+          "d3MethodResults": [],
+          "passedMethodCount": 0,
+          "failedMethodCount": 0,
+          "unmatchedMethodCount": 0,
+          "verificationMethodResults": []
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 3,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "",
+          "denominator": 3,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "",
+          "denominator": 3,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "nativeCorrect": {
+          "status": "pending",
+          "passed": 0,
+          "total": 0,
+          "reason": "未接入批量验证管线"
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.IO.Compression.Brotli/encoder",
+        "methodSubjectIds": [
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::Compress:System.Buffers.OperationStatus(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32&,System.Int32&,System.Boolean)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::Dispose:System.Void()",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::Flush:System.Buffers.OperationStatus(System.Span{System.Byte},System.Int32&)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::GetMaxCompressedLength:System.Int32(System.Int32)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::TryCompress:System.Boolean(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32&)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::TryCompress:System.Boolean(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32&,System.Int32,System.Int32)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::.ctor:System.Void(System.Int32,System.Int32)"
+        ],
+        "methodCount": 7,
+        "implementationFamilies": [],
+        "closureStatus": "in-progress",
+        "denominatorStatus": "audit-confirmed",
+        "description": "",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 7,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 7,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate",
+          "d3PatchApplied": false,
+          "d3PatchedCount": 0,
+          "d3SchemaVersion": 0,
+          "d3MethodResults": [],
+          "passedMethodCount": 0,
+          "failedMethodCount": 0,
+          "unmatchedMethodCount": 0,
+          "verificationMethodResults": []
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 7,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "",
+          "denominator": 7,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "",
+          "denominator": 7,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "nativeCorrect": {
+          "status": "pending",
+          "passed": 0,
+          "total": 0,
+          "reason": "未接入批量验证管线"
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.IO.Compression.Brotli/options",
+        "methodSubjectIds": [
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliCompressionOptions::get_Quality:System.Int32()",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliCompressionOptions::set_Quality:System.Void(System.Int32)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliCompressionOptions::.ctor:System.Void()"
+        ],
+        "methodCount": 3,
+        "implementationFamilies": [],
+        "closureStatus": "in-progress",
+        "denominatorStatus": "audit-confirmed",
+        "description": "",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 3,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 3,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate",
+          "d3PatchApplied": false,
+          "d3PatchedCount": 0,
+          "d3SchemaVersion": 0,
+          "d3MethodResults": [],
+          "passedMethodCount": 0,
+          "failedMethodCount": 0,
+          "unmatchedMethodCount": 0,
+          "verificationMethodResults": []
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 3,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "",
+          "denominator": 3,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "",
+          "denominator": 3,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "nativeCorrect": {
+          "status": "pending",
+          "passed": 0,
+          "total": 0,
+          "reason": "未接入批量验证管线"
+        },
+        "reviewBundle": {}
+      },
+      {
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "methodSubjectIds": [
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::BeginRead:System.IAsyncResult(System.Byte{},System.Int32,System.Int32,System.AsyncCallback,System.Object)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::BeginWrite:System.IAsyncResult(System.Byte{},System.Int32,System.Int32,System.AsyncCallback,System.Object)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::DisposeAsync:System.Threading.Tasks.ValueTask()",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::EndRead:System.Int32(System.IAsyncResult)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::EndWrite:System.Void(System.IAsyncResult)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Flush:System.Void()",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::FlushAsync:System.Threading.Tasks.Task(System.Threading.CancellationToken)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::get_BaseStream:System.IO.Stream()",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::get_CanRead:System.Boolean()",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::get_CanSeek:System.Boolean()",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::get_CanWrite:System.Boolean()",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::get_Length:System.Int64()",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::get_Position:System.Int64()",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Read:System.Int32(System.Byte{},System.Int32,System.Int32)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Read:System.Int32(System.Span{System.Byte})",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::ReadAsync:System.Threading.Tasks.Task{System.Int32}(System.Byte{},System.Int32,System.Int32,System.Threading.CancellationToken)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::ReadAsync:System.Threading.Tasks.ValueTask{System.Int32}(System.Memory{System.Byte},System.Threading.CancellationToken)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::ReadByte:System.Int32()",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::set_Position:System.Void(System.Int64)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::SetLength:System.Void(System.Int64)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Write:System.Void(System.Byte{},System.Int32,System.Int32)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Write:System.Void(System.ReadOnlySpan{System.Byte})",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::WriteAsync:System.Threading.Tasks.Task(System.Byte{},System.Int32,System.Int32,System.Threading.CancellationToken)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::WriteAsync:System.Threading.Tasks.ValueTask(System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::WriteByte:System.Void(System.Byte)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::.ctor:System.Void(System.IO.Stream,System.IO.Compression.CompressionLevel)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::.ctor:System.Void(System.IO.Stream,System.IO.Compression.CompressionLevel,System.Boolean)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::.ctor:System.Void(System.IO.Stream,System.IO.Compression.BrotliCompressionOptions,System.Boolean)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::.ctor:System.Void(System.IO.Stream,System.IO.Compression.CompressionMode)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::.ctor:System.Void(System.IO.Stream,System.IO.Compression.CompressionMode,System.Boolean)"
+        ],
+        "methodCount": 31,
+        "implementationFamilies": [],
+        "closureStatus": "in-progress",
+        "denominatorStatus": "audit-confirmed",
+        "description": "",
+        "nativeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 31,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "testCases": [],
+          "benchmarkCases": [],
+          "hotupdateCases": []
+        },
+        "managedProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 31,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Tests"
+        },
+        "hotupdateProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "HotUpdate",
+          "d3PatchApplied": false,
+          "d3PatchedCount": 0,
+          "d3SchemaVersion": 0,
+          "d3MethodResults": [],
+          "passedMethodCount": 0,
+          "failedMethodCount": 0,
+          "unmatchedMethodCount": 0,
+          "verificationMethodResults": []
+        },
+        "benchmarkProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 0,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": [],
+          "caseItems": [],
+          "caseSectionLabel": "Benchmarks"
+        },
+        "testCodeProof": {
+          "status": "pending",
+          "numerator": 0,
+          "denominator": 31,
+          "progressPercent": 0.0,
+          "reason": "",
+          "evidence": [],
+          "runs": [],
+          "methodDetails": []
+        },
+        "auditInputProof": {
+          "status": "",
+          "denominator": 31,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "codegenReviewProof": {
+          "status": "",
+          "denominator": 31,
+          "numerator": 0,
+          "progressPercent": 0.0,
+          "evidence": [],
+          "caseItems": [],
+          "caseSectionLabel": ""
+        },
+        "nativeCorrect": {
+          "status": "pending",
+          "passed": 0,
+          "total": 0,
+          "reason": "未接入批量验证管线"
+        },
+        "reviewBundle": {}
+      }
+    ]
+  },
+  "truthContracts": {
+    "schemaVersion": 1,
+    "dllCapabilityManifest": {
+      "assemblyName": "System.IO.Compression.Brotli",
+      "ownerSubjectId": "SolutionCorePack",
+      "capabilityFamilies": [
+        "family/System.IO.Compression.Brotli/decoder",
+        "family/System.IO.Compression.Brotli/encoder",
+        "family/System.IO.Compression.Brotli/options",
+        "family/System.IO.Compression.Brotli/stream"
+      ],
+      "capabilityFamilyCount": 4,
+      "methodUniverseCount": 44
+    },
+    "capabilityFamilyVerificationContracts": [
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/decoder",
+        "displayName": "",
+        "methodSubjectIds": [
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Decompress:System.Buffers.OperationStatus(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32&,System.Int32&)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Dispose:System.Void()",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::TryDecompress:System.Boolean(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32&)"
+        ],
+        "methodSubjectCount": 3,
+        "functionalObligation": {
+          "required": true
+        },
+        "performanceObligation": {
+          "required": true
+        },
+        "hotupdateFunctionalObligation": {
+          "required": true
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/encoder",
+        "displayName": "",
+        "methodSubjectIds": [
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::Compress:System.Buffers.OperationStatus(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32&,System.Int32&,System.Boolean)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::Dispose:System.Void()",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::Flush:System.Buffers.OperationStatus(System.Span{System.Byte},System.Int32&)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::GetMaxCompressedLength:System.Int32(System.Int32)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::TryCompress:System.Boolean(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32&)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::TryCompress:System.Boolean(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32&,System.Int32,System.Int32)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::.ctor:System.Void(System.Int32,System.Int32)"
+        ],
+        "methodSubjectCount": 7,
+        "functionalObligation": {
+          "required": true
+        },
+        "performanceObligation": {
+          "required": true
+        },
+        "hotupdateFunctionalObligation": {
+          "required": true
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/options",
+        "displayName": "",
+        "methodSubjectIds": [
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliCompressionOptions::get_Quality:System.Int32()",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliCompressionOptions::set_Quality:System.Void(System.Int32)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliCompressionOptions::.ctor:System.Void()"
+        ],
+        "methodSubjectCount": 3,
+        "functionalObligation": {
+          "required": true
+        },
+        "performanceObligation": {
+          "required": true
+        },
+        "hotupdateFunctionalObligation": {
+          "required": true
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "displayName": "",
+        "methodSubjectIds": [
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::BeginRead:System.IAsyncResult(System.Byte{},System.Int32,System.Int32,System.AsyncCallback,System.Object)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::BeginWrite:System.IAsyncResult(System.Byte{},System.Int32,System.Int32,System.AsyncCallback,System.Object)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::DisposeAsync:System.Threading.Tasks.ValueTask()",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::EndRead:System.Int32(System.IAsyncResult)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::EndWrite:System.Void(System.IAsyncResult)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Flush:System.Void()",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::FlushAsync:System.Threading.Tasks.Task(System.Threading.CancellationToken)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::get_BaseStream:System.IO.Stream()",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::get_CanRead:System.Boolean()",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::get_CanSeek:System.Boolean()",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::get_CanWrite:System.Boolean()",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::get_Length:System.Int64()",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::get_Position:System.Int64()",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Read:System.Int32(System.Byte{},System.Int32,System.Int32)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Read:System.Int32(System.Span{System.Byte})",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::ReadAsync:System.Threading.Tasks.Task{System.Int32}(System.Byte{},System.Int32,System.Int32,System.Threading.CancellationToken)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::ReadAsync:System.Threading.Tasks.ValueTask{System.Int32}(System.Memory{System.Byte},System.Threading.CancellationToken)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::ReadByte:System.Int32()",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::set_Position:System.Void(System.Int64)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::SetLength:System.Void(System.Int64)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Write:System.Void(System.Byte{},System.Int32,System.Int32)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Write:System.Void(System.ReadOnlySpan{System.Byte})",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::WriteAsync:System.Threading.Tasks.Task(System.Byte{},System.Int32,System.Int32,System.Threading.CancellationToken)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::WriteAsync:System.Threading.Tasks.ValueTask(System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::WriteByte:System.Void(System.Byte)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::.ctor:System.Void(System.IO.Stream,System.IO.Compression.CompressionLevel)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::.ctor:System.Void(System.IO.Stream,System.IO.Compression.CompressionLevel,System.Boolean)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::.ctor:System.Void(System.IO.Stream,System.IO.Compression.BrotliCompressionOptions,System.Boolean)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::.ctor:System.Void(System.IO.Stream,System.IO.Compression.CompressionMode)",
+          "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::.ctor:System.Void(System.IO.Stream,System.IO.Compression.CompressionMode,System.Boolean)"
+        ],
+        "methodSubjectCount": 31,
+        "functionalObligation": {
+          "required": true
+        },
+        "performanceObligation": {
+          "required": true
+        },
+        "hotupdateFunctionalObligation": {
+          "required": true
+        },
+        "hotupdatePerformanceObligation": {
+          "required": false
+        },
+        "reviewBundleRequired": true
+      }
+    ],
+    "methodCapabilityContracts": [
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/decoder",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Decompress:System.Buffers.OperationStatus(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32&,System.Int32&)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/decoder",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Dispose:System.Void()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/decoder",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::TryDecompress:System.Boolean(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32&)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/encoder",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::Compress:System.Buffers.OperationStatus(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32&,System.Int32&,System.Boolean)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/encoder",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::Dispose:System.Void()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/encoder",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::Flush:System.Buffers.OperationStatus(System.Span{System.Byte},System.Int32&)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/encoder",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::GetMaxCompressedLength:System.Int32(System.Int32)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/encoder",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::TryCompress:System.Boolean(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32&)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/encoder",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::TryCompress:System.Boolean(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32&,System.Int32,System.Int32)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/encoder",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliEncoder::.ctor:System.Void(System.Int32,System.Int32)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/options",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliCompressionOptions::get_Quality:System.Int32()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/options",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliCompressionOptions::set_Quality:System.Void(System.Int32)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/options",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliCompressionOptions::.ctor:System.Void()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::BeginRead:System.IAsyncResult(System.Byte{},System.Int32,System.Int32,System.AsyncCallback,System.Object)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::BeginWrite:System.IAsyncResult(System.Byte{},System.Int32,System.Int32,System.AsyncCallback,System.Object)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::DisposeAsync:System.Threading.Tasks.ValueTask()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::EndRead:System.Int32(System.IAsyncResult)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::EndWrite:System.Void(System.IAsyncResult)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Flush:System.Void()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::FlushAsync:System.Threading.Tasks.Task(System.Threading.CancellationToken)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::get_BaseStream:System.IO.Stream()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::get_CanRead:System.Boolean()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::get_CanSeek:System.Boolean()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::get_CanWrite:System.Boolean()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::get_Length:System.Int64()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::get_Position:System.Int64()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Read:System.Int32(System.Byte{},System.Int32,System.Int32)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Read:System.Int32(System.Span{System.Byte})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::ReadAsync:System.Threading.Tasks.Task{System.Int32}(System.Byte{},System.Int32,System.Int32,System.Threading.CancellationToken)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::ReadAsync:System.Threading.Tasks.ValueTask{System.Int32}(System.Memory{System.Byte},System.Threading.CancellationToken)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::ReadByte:System.Int32()",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::set_Position:System.Void(System.Int64)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::SetLength:System.Void(System.Int64)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Write:System.Void(System.Byte{},System.Int32,System.Int32)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::Write:System.Void(System.ReadOnlySpan{System.Byte})",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::WriteAsync:System.Threading.Tasks.Task(System.Byte{},System.Int32,System.Int32,System.Threading.CancellationToken)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::WriteAsync:System.Threading.Tasks.ValueTask(System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::WriteByte:System.Void(System.Byte)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::.ctor:System.Void(System.IO.Stream,System.IO.Compression.CompressionLevel)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::.ctor:System.Void(System.IO.Stream,System.IO.Compression.CompressionLevel,System.Boolean)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::.ctor:System.Void(System.IO.Stream,System.IO.Compression.BrotliCompressionOptions,System.Boolean)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::.ctor:System.Void(System.IO.Stream,System.IO.Compression.CompressionMode)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      },
+      {
+        "assemblyName": "System.IO.Compression.Brotli",
+        "ownerSubjectId": "SolutionCorePack",
+        "familyId": "family/System.IO.Compression.Brotli/stream",
+        "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliStream::.ctor:System.Void(System.IO.Stream,System.IO.Compression.CompressionMode,System.Boolean)",
+        "functionalRequired": true,
+        "benchmarkRequired": true,
+        "hotupdateFunctionalRequired": true,
+        "hotupdateBenchmarkRequired": false,
+        "routeCodes": [
+          "managed",
+          "native"
+        ],
+        "benchmarkProfiles": [
+          "default"
+        ],
+        "hotupdateProfiles": [
+          "host-to-patch"
+        ],
+        "reviewRequired": true
+      }
+    ]
+  },
+  "sourceLinks": {},
+  "waiverSummary": {
+    "totalWaivers": 0,
+    "activeWaivers": 0,
+    "expiredWaivers": 0,
+    "totalExclusions": 0,
+    "totalPlatformBlocked": 0
+  },
+  "denominatorStatus": "audit-confirmed",
+  "schemaVersion": 2
+}

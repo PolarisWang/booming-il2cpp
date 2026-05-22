@@ -391,7 +391,37 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/JsonNamingPolicy::ConvertName:System.String(System.String)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_2:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
@@ -409,7 +439,25 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_4:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_4:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_5:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
@@ -427,9 +475,27 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_7:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_AllowDuplicateProperties:System.Boolean()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_8:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_AllowOutOfOrderMetadataProperties:System.Boolean()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_8:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_AllowOutOfOrderMetadataProperties:System.Boolean()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_9:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_AllowTrailingCommas:System.Boolean()",
       "devirtualized": false
     },
     {
@@ -445,6 +511,30 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_10:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_10:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_Converters:System.Collections.Generic.IList\u003CSystem.Text.Json.Serialization.JsonConverter\u003E()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_10:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_12:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_DefaultBufferSize:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_12:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_DefaultBufferSize:System.Int32()",
@@ -457,15 +547,75 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_13:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_13:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_DefaultIgnoreCondition:System.Text.Json.Serialization.JsonIgnoreCondition()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_13:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_14:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_DictionaryKeyPolicy:JsonNamingPolicy()",
       "devirtualized": false
     },
     {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_14:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_14:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_DictionaryKeyPolicy:JsonNamingPolicy()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_14:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_15:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_Encoder:JavaScriptEncoder()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_15:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_15:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_Encoder:JavaScriptEncoder()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_15:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_16:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_IgnoreNullValues:System.Boolean()",
       "devirtualized": false
     },
     {
@@ -481,9 +631,27 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_17:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_IgnoreReadOnlyFields:System.Boolean()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_18:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_IgnoreReadOnlyProperties:System.Boolean()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_18:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_IgnoreReadOnlyProperties:System.Boolean()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_19:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_IncludeFields:System.Boolean()",
       "devirtualized": false
     },
     {
@@ -499,9 +667,27 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_20:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_IndentCharacter:System.Char()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_21:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_IndentSize:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_21:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_IndentSize:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_22:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_IsReadOnly:System.Boolean()",
       "devirtualized": false
     },
     {
@@ -517,9 +703,33 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_23:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_MaxDepth:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_24:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_NewLine:System.String()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_24:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_24:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_NewLine:System.String()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_24:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
       "devirtualized": false
     },
     {
@@ -529,9 +739,51 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_25:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_25:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_NumberHandling:System.Text.Json.Serialization.JsonNumberHandling()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_25:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_26:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_PreferredObjectCreationHandling:System.Text.Json.Serialization.JsonObjectCreationHandling()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_26:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_26:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_PreferredObjectCreationHandling:System.Text.Json.Serialization.JsonObjectCreationHandling()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_26:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_27:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_PropertyNameCaseInsensitive:System.Boolean()",
       "devirtualized": false
     },
     {
@@ -547,15 +799,75 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_28:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_28:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_PropertyNamingPolicy:JsonNamingPolicy()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_28:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_29:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_ReadCommentHandling:JsonCommentHandling()",
       "devirtualized": false
     },
     {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_29:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_29:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_ReadCommentHandling:JsonCommentHandling()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_29:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_30:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_ReferenceHandler:System.Text.Json.Serialization.ReferenceHandler()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_30:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_30:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_ReferenceHandler:System.Text.Json.Serialization.ReferenceHandler()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_30:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_31:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_RespectNullableAnnotations:System.Boolean()",
       "devirtualized": false
     },
     {
@@ -571,6 +883,18 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_32:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_RespectRequiredConstructorParameters:System.Boolean()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_33:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_33:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
@@ -583,9 +907,45 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_34:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_34:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_TypeInfoResolver:System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_34:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_35:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_TypeInfoResolverChain:System.Collections.Generic.IList\u003CSystem.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver\u003E()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_35:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_35:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_TypeInfoResolverChain:System.Collections.Generic.IList\u003CSystem.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver\u003E()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_35:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
     },
     {
@@ -595,9 +955,51 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_36:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_36:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_UnknownTypeHandling:System.Text.Json.Serialization.JsonUnknownTypeHandling()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_36:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_37:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_UnmappedMemberHandling:System.Text.Json.Serialization.JsonUnmappedMemberHandling()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_37:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_37:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_UnmappedMemberHandling:System.Text.Json.Serialization.JsonUnmappedMemberHandling()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_37:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_38:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
     },
     {
@@ -613,15 +1015,57 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_39:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/JsonSerializerOptions::get_WriteIndented:System.Boolean()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_40:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Text.Json/JsonSerializerOptions::GetConverter:System.Text.Json.Serialization.JsonConverter(System.Type)",
       "devirtualized": false
     },
     {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_40:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_40:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/JsonSerializerOptions::GetConverter:System.Text.Json.Serialization.JsonConverter(System.Type)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_40:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_41:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Text.Json/JsonSerializerOptions::GetTypeInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo(System.Type)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_41:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_41:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/JsonSerializerOptions::GetTypeInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo(System.Type)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_41:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
     },
     {
@@ -803,6 +1247,12 @@
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Text.Json/JsonSerializerOptions::TryGetTypeInfo:System.Boolean(System.Type,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u0026)",
       "devirtualized": false
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_71:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Text.Json/JsonSerializerOptions::TryGetTypeInfo:System.Boolean(System.Type,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u0026)",
+      "devirtualized": false
     }
   ],
   "layoutFacts": [
@@ -817,317 +1267,367 @@
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_0:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_1:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_2:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_3:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_4:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_5:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_7:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_8:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_9:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_10:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_12:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_13:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_14:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_15:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_16:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_17:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_18:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_19:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_20:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_21:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_22:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_23:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_24:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_25:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_26:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_27:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_28:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_29:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_30:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_31:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_32:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_33:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_34:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_35:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_36:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_37:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_38:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_39:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_40:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_41:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_42:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_43:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_44:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_45:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_46:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_47:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_48:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_49:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_50:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_51:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_52:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_53:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_54:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_55:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_56:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_57:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_58:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_59:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_60:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_61:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_62:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_63:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_64:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_65:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_66:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_67:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_68:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_69:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_70:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_71:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_72:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_73:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_74:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     }
   ]
 }

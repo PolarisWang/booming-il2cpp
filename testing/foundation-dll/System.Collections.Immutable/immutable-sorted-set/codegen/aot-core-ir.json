@@ -74,7 +74,7 @@
                 "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E();type=[];method=[System.Byte]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:methodSpec"
             },
             "genericDiagnostic": {
@@ -153,7 +153,7 @@
                 "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32();type=[System.Byte];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -406,7 +406,7 @@
                 "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E(!!0);type=[];method=[System.Byte]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:methodSpec"
             },
             "genericDiagnostic": {
@@ -485,7 +485,7 @@
                 "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32();type=[System.Byte];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -840,7 +840,7 @@
                 "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E(!!0[]);type=[];method=[System.Byte]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:methodSpec"
             },
             "genericDiagnostic": {
@@ -919,7 +919,7 @@
                 "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32();type=[System.Byte];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -1179,7 +1179,7 @@
                 "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E();type=[];method=[System.Int32]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:methodSpec"
             },
             "genericDiagnostic": {
@@ -1258,7 +1258,7 @@
                 "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32();type=[System.Int32];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -1511,7 +1511,7 @@
                 "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet::Create:ImmutableSortedSet\u003C!!0\u003E(!!0);type=[];method=[System.Int32]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:methodSpec"
             },
             "genericDiagnostic": {
@@ -1590,7 +1590,7 @@
                 "value": "stub:definition=System.Collections.Immutable/ImmutableSortedSet\u00601::get_Count:System.Int32();type=[System.Int32];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {

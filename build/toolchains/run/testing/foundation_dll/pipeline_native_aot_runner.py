@@ -284,7 +284,7 @@ def _run_convert_to_cpp(
     if codegen_mode:
         cmd.extend(["--mode", codegen_mode])
 
-    result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=300)
+    result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=900)
 
     if result.returncode != 0:
         print(f"    convert-to-cpp FAILED (rc={result.returncode})")

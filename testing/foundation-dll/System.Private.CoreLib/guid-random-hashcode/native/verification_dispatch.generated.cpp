@@ -1,5 +1,5 @@
 // verification_dispatch.generated.cpp — auto-generated
-// Assembly: GuidRandomHashcodeSubjects, Methods: 16
+// Assembly: GuidRandomHashcodeSubjects, Methods: 14
 #include <cstdint>
 #include <chrono>
 #include <chaos/native_types.h>

@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ImmutableHashSetSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Collections.Immutable/immutable-hash-set/managed/subjects/build-output/ImmutableHashSetSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Collections.Immutable/immutable-hash-set/managed/subjects/build-output/ImmutableHashSetSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "ImmutableHashSetSubjects",
-      "path": "verification/foundation-dll/System.Collections.Immutable/immutable-hash-set/managed/subjects/build-output/ImmutableHashSetSubjects.dll"
+      "path": "testing/foundation-dll/System.Collections.Immutable/immutable-hash-set/managed/subjects/build-output/ImmutableHashSetSubjects.dll"
     },
     {
       "assemblyName": "System.Collections.Immutable",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "cf0cca74-a536-4006-b7aa-5d2b436d5c9f",
+  "inputModuleVersionId": "dd1266eb-9cb4-4f0c-a667-61caab24049a",
   "artifacts": [
     {
       "kind": "typedIlIr",

@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/garbage/collection",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/System.GC::Collect:System.Void()",
+      "elapsedMilliseconds": 6421.451,
+      "calibratedMs": 6421.451,
+      "opsPerSecond": 15572.8,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/System.GC::WaitForPendingFinalizers:System.Void()",
+      "elapsedMilliseconds": 420.017,
+      "calibratedMs": 420.017,
+      "opsPerSecond": 238085.8,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/System.GC::KeepAlive:System.Void(System.Object)",
+      "elapsedMilliseconds": 8.014,
+      "calibratedMs": 8.014,
+      "opsPerSecond": 12478941.8,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Private.CoreLib/System.GC::GetGeneration:System.Int32(System.Object)",
+      "elapsedMilliseconds": 8.459,
+      "calibratedMs": 8.459,
+      "opsPerSecond": 11822287.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)",
+      "elapsedMilliseconds": 9.038,
+      "calibratedMs": 9.038,
+      "opsPerSecond": 11063905.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Private.CoreLib/System.GC::GetTotalMemory:System.Int64(System.Boolean)",
+      "elapsedMilliseconds": 3770.327,
+      "calibratedMs": 3770.327,
+      "opsPerSecond": 26522.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Private.CoreLib/System.GC::GetGCMemoryInfo: System.GCMemoryInfo()",
+      "elapsedMilliseconds": 0.302,
+      "calibratedMs": 0.302,
+      "opsPerSecond": 330578512.4,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}

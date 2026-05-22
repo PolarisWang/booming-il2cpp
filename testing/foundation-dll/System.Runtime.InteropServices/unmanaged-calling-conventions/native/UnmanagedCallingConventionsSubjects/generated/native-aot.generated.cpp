@@ -34,6 +34,8 @@ using namespace chaos::il2cpp::runtime_core;
 // Runtime prelude dependencies included at translation unit level
 
 
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Object = {{nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_INTPTR>(15228727185366376748ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {{nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
@@ -48,6 +50,8 @@ inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Runtime_InteropServices
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Runtime_InteropServices_SuppressGCTransitionAttribute = static_cast<CHAOS_IL2CPP_INTPTR>(252707300291981306ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_String = {{nullptr, nullptr, 1782325859292956794ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);
+inline TypeInfoV0 chaos_mt_UnmanagedCallingConventionsSubjects_UnmanagedCallingConventionsSubjects = {{nullptr, nullptr, 13895619284010940020ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_UnmanagedCallingConventionsSubjects_UnmanagedCallingConventionsSubjects = static_cast<CHAOS_IL2CPP_INTPTR>(13895619284010940020ULL);
 
 // ── Virtual method table arrays ──
 bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept
@@ -82,6 +86,11 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 
 	return false;
 }
+
+struct chaos_type_System_Private_CoreLib_System_Object
+{
+	ThinLockableHeader header{};
+};
 
 struct chaos_type_System_Private_CoreLib_System_Reflection_Assembly
 {
@@ -137,6 +146,13 @@ struct chaos_type_System_Private_CoreLib_System_String
 	const char* utf8_data = nullptr;
 	CHAOS_IL2CPP_UINT64 string_id = 0u;  // stable StringId, 0 = not yet materialized
 };
+
+struct chaos_type_UnmanagedCallingConventionsSubjects_UnmanagedCallingConventionsSubjects
+{
+	ThinLockableHeader header{};
+};
+
+CHAOS_IL2CPP_INT32 chaos_static_UnmanagedCallingConventionsSubjects_UnmanagedCallingConventionsSubjects___exitCode = 0;
 
 static constexpr CHAOS_IL2CPP_UINT32 kGenericTypeArgTokens[1] = { 0 };
 
@@ -212,7 +228,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 
 	static const TypeInfoHot* const s_type_info_ptrs[2] = {
 		nullptr,
-		nullptr,
+		&chaos_mt_UnmanagedCallingConventionsSubjects_UnmanagedCallingConventionsSubjects.hot,
 	};
 
 	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_offset[3] = {
@@ -291,15 +307,17 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // ── External Runtime Dispatch Table ──────────────────────────
 // Startup-time-resolved function pointers for cross-assembly calls.
 
-extern "C" const char* kChaosExternalRuntimeSubjects[1] = {
+extern "C" const char* kChaosExternalRuntimeSubjects[2] = {
 	"System.Private.CoreLib/System.Runtime.InteropServices.SuppressGCTransitionAttribute::.ctor:System.Void()",
+	"UnmanagedCallingConventionsSubjects/UnmanagedCallingConventionsSubjects::_exitCode",
 };
 
-extern "C" void* kChaosExternalRuntimeFnTable[1] = {
+extern "C" void* kChaosExternalRuntimeFnTable[2] = {
+	nullptr,
 	nullptr,
 };
 
-extern "C" int32_t kChaosExternalRuntimeCount = 1;
+extern "C" int32_t kChaosExternalRuntimeCount = 2;
 // (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
@@ -557,13 +575,31 @@ extern "C" void UnmanagedCallingConventionsSubjects_UnmanagedCallingConventionsS
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
 
 
-	{
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Runtime_InteropServices_SuppressGCTransitionAttribute, {});
-		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Runtime_InteropServices_SuppressGCTransitionAttribute.hot;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
+	CHAOS_EH_TRY
+			{
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Runtime_InteropServices_SuppressGCTransitionAttribute, {});
+				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Runtime_InteropServices_SuppressGCTransitionAttribute.hot;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_UnmanagedCallingConventionsSubjects_UnmanagedCallingConventionsSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_END
 	return;
 }
 

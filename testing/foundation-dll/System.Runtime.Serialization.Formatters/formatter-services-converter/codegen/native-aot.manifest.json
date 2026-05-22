@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "FormatterServicesConverterSubjects",
   "entrySubjectId": "FormatterServicesConverterSubjects/FormatterServicesConverterSubjects::Subject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Runtime.Serialization.Formatters/formatter-services-converter/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.Runtime.Serialization.Formatters/formatter-services-converter/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

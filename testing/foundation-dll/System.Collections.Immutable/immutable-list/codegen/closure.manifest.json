@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ImmutableListSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Collections.Immutable/immutable-list/managed/subjects/build-output/ImmutableListSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Collections.Immutable/immutable-list/managed/subjects/build-output/ImmutableListSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "ImmutableListSubjects",
-      "path": "verification/foundation-dll/System.Collections.Immutable/immutable-list/managed/subjects/build-output/ImmutableListSubjects.dll"
+      "path": "testing/foundation-dll/System.Collections.Immutable/immutable-list/managed/subjects/build-output/ImmutableListSubjects.dll"
     },
     {
       "assemblyName": "System.Collections.Immutable",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "7a876ac7-06a0-46c0-881a-2e255c88807f",
+  "inputModuleVersionId": "41ff931b-5c6d-4dd8-9bb8-a0ea2e756c21",
   "artifacts": [
     {
       "kind": "typedIlIr",

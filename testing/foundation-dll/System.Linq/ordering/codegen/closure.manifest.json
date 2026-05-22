@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "OrderingSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Linq/ordering/managed/subjects/build-output/OrderingSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Linq/ordering/managed/subjects/build-output/OrderingSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "OrderingSubjects",
-      "path": "verification/foundation-dll/System.Linq/ordering/managed/subjects/build-output/OrderingSubjects.dll"
+      "path": "testing/foundation-dll/System.Linq/ordering/managed/subjects/build-output/OrderingSubjects.dll"
     },
     {
       "assemblyName": "System.Collections",
@@ -24,7 +24,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "8619cf77-eb09-40d4-840d-f22b1d3a1c83",
+  "inputModuleVersionId": "eab73f4f-fe26-4358-b32e-52c0cba0e0c8",
   "artifacts": [
     {
       "kind": "typedIlIr",

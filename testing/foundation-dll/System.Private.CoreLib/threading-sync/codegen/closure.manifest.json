@@ -3,7 +3,7 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ThreadingSyncSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/threading-sync/codegen/_subjects_input/ThreadingSyncSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/threading-sync/managed/subjects/build-output/ThreadingSyncSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
@@ -16,11 +16,11 @@
     },
     {
       "assemblyName": "ThreadingSyncSubjects",
-      "path": "testing/foundation-dll/System.Private.CoreLib/threading-sync/codegen/_subjects_input/ThreadingSyncSubjects.dll"
+      "path": "testing/foundation-dll/System.Private.CoreLib/threading-sync/managed/subjects/build-output/ThreadingSyncSubjects.dll"
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "bde0d5ea-c00d-4c77-98f0-425eb4d2d031",
+  "inputModuleVersionId": "10e2771d-9f4b-4a79-8d4c-e0cce5b2af9c",
   "artifacts": [
     {
       "kind": "typedIlIr",

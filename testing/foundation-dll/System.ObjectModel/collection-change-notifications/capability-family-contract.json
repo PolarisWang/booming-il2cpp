@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.ObjectModel",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.ObjectModel/collection-change-notifications",
+  "displayName": "Collection Change Notifications",
+  "methodSubjectIds": [
+    "System.ObjectModel/System.Collections.Specialized.INotifyCollectionChanged::add_CollectionChanged:System.Void(System.Collections.Specialized.NotifyCollectionChangedEventHandler)",
+    "System.ObjectModel/System.Collections.Specialized.INotifyCollectionChanged::remove_CollectionChanged:System.Void(System.Collections.Specialized.NotifyCollectionChangedEventHandler)"
+  ],
+  "methodSubjectCount": 2,
+  "customEntryIndices": [],
+  "functionalObligation": {
+    "required": true
+  },
+  "performanceObligation": {
+    "required": false
+  },
+  "hotupdateFunctionalObligation": {
+    "required": false
+  },
+  "hotupdatePerformanceObligation": {
+    "required": false
+  },
+  "reviewBundleRequired": true
+}

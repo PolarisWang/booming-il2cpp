@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "JoinsSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Linq/joins/managed/subjects/build-output/JoinsSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Linq/joins/managed/subjects/build-output/JoinsSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "JoinsSubjects",
-      "path": "verification/foundation-dll/System.Linq/joins/managed/subjects/build-output/JoinsSubjects.dll"
+      "path": "testing/foundation-dll/System.Linq/joins/managed/subjects/build-output/JoinsSubjects.dll"
     },
     {
       "assemblyName": "System.Collections",
@@ -24,7 +24,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "94836e82-badb-4ab7-8c77-ca052a657275",
+  "inputModuleVersionId": "272aab91-e215-4a5b-b463-210d9aa8627e",
   "artifacts": [
     {
       "kind": "typedIlIr",

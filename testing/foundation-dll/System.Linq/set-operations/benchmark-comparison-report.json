@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.Linq",
+  "familyId": "family/System.Linq/set/operations",
+  "summary": {
+    "totalMethods": 18,
+    "matchedCount": 0,
+    "unmatchedCount": 0,
+    "invalidCount": 18,
+    "nativeAotFasterCount": 0,
+    "nativeJitFasterCount": 0,
+    "managedFasterCount": 0,
+    "equalCount": 0,
+    "averageSpeedupPercent": 0.0,
+    "averageNativeAotSpeedupPercent": 0.0,
+    "averageNativeJitSpeedupPercent": null,
+    "nativeJitSlowdownFactor": null
+  },
+  "methodResults": [
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Contains{TSource}:System.Boolean(System.Collections.Generic.IEnumerable{TSource},TSource)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Contains{TSource}:System.Boolean(System.Collections.Generic.IEnumerable{TSource},TSource,System.Collections.Generic.IEqualityComparer{TSource})",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Distinct{TSource}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource})",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Distinct{TSource}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEqualityComparer{TSource})",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Except{TSource}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEnumerable{TSource})",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Except{TSource}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEqualityComparer{TSource})",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::ExceptBy{TSource,TKey}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEnumerable{TKey},System.Func{TSource,TKey})",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::ExceptBy{TSource,TKey}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEnumerable{TKey},System.Func{TSource,TKey},System.Collections.Generic.IEqualityComparer{TKey})",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Intersect{TSource}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEnumerable{TSource})",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Intersect{TSource}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEqualityComparer{TSource})",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::IntersectBy{TSource,TKey}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEnumerable{TKey},System.Func{TSource,TKey})",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::IntersectBy{TSource,TKey}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEnumerable{TKey},System.Func{TSource,TKey},System.Collections.Generic.IEqualityComparer{TKey})",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::SequenceEqual{TSource}:System.Boolean(System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEnumerable{TSource})",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::SequenceEqual{TSource}:System.Boolean(System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEqualityComparer{TSource})",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Union{TSource}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEnumerable{TSource})",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Union{TSource}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEqualityComparer{TSource})",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::UnionBy{TSource,TKey}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey})",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::UnionBy{TSource,TKey}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey},System.Collections.Generic.IEqualityComparer{TKey})",
+      "status": "managed_harness_unavailable"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Formats.Asn1",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.Formats.Asn1/encoding-rules",
+  "displayName": "ASN.1 Encoding Rules",
+  "methodSubjectIds": [],
+  "methodSubjectCount": 0,
+  "customEntryIndices": [],
+  "functionalObligation": {
+    "required": true
+  },
+  "performanceObligation": {
+    "required": false
+  },
+  "hotupdateFunctionalObligation": {
+    "required": false
+  },
+  "hotupdatePerformanceObligation": {
+    "required": false
+  },
+  "reviewBundleRequired": true
+}

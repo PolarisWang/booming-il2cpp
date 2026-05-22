@@ -36,22 +36,12 @@ using namespace chaos::il2cpp::runtime_core;
 
 inline TypeInfoV0 chaos_mt_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects = {{nullptr, nullptr, 16729351636441173064ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects = static_cast<CHAOS_IL2CPP_INTPTR>(16729351636441173064ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_AccessViolationException = {{nullptr, nullptr, 14152109496180881073ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_AccessViolationException = static_cast<CHAOS_IL2CPP_INTPTR>(14152109496180881073ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_ArgumentException = {{nullptr, nullptr, 4429271818216920541ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_ArgumentException = static_cast<CHAOS_IL2CPP_INTPTR>(4429271818216920541ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_ArgumentNullException = {{nullptr, nullptr, 12400915656331929738ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_ArgumentNullException = static_cast<CHAOS_IL2CPP_INTPTR>(12400915656331929738ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Decimal = {{nullptr, nullptr, 1126810584598443822ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Decimal = static_cast<CHAOS_IL2CPP_INTPTR>(1126810584598443822ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Guid = {{nullptr, nullptr, 17983019571512764410ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Guid = static_cast<CHAOS_IL2CPP_INTPTR>(17983019571512764410ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_IntPtr = {{nullptr, nullptr, 15622295425673451578ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_IntPtr = static_cast<CHAOS_IL2CPP_INTPTR>(15622295425673451578ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_InvalidCastException = {{nullptr, nullptr, 16198579075556443950ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_InvalidCastException = static_cast<CHAOS_IL2CPP_INTPTR>(16198579075556443950ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_NullReferenceException = {{nullptr, nullptr, 5314911908653589872ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_NullReferenceException = static_cast<CHAOS_IL2CPP_INTPTR>(5314911908653589872ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Object = {{nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_INTPTR>(15228727185366376748ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
@@ -68,8 +58,6 @@ inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_String = {{nullptr, nul
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Type = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, nullptr, 3222174513575444759ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Type = static_cast<CHAOS_IL2CPP_INTPTR>(3222174513575444759ULL);
-inline TypeInfoV0 chaos_mt_System_Runtime_InteropServices_COMException = {{nullptr, nullptr, 10539085869878965696ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Runtime_InteropServices_COMException = static_cast<CHAOS_IL2CPP_INTPTR>(10539085869878965696ULL);
 inline TypeInfoV0 chaos_mt_System_Runtime_InteropServices_System_IO_UnmanagedMemoryAccessor = {{nullptr, nullptr, 13170727875684058665ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Runtime_InteropServices_System_IO_UnmanagedMemoryAccessor = static_cast<CHAOS_IL2CPP_INTPTR>(13170727875684058665ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Int32 = {{nullptr, nullptr, 11009693519287992193ULL, 0u, 32, 2, 0}, {nullptr, nullptr, 0, 0, 0, 0}};
@@ -114,33 +102,6 @@ struct chaos_type_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects
 	ThinLockableHeader header{};
 };
 
-struct chaos_type_System_Private_CoreLib_System_AccessViolationException
-{
-	ThinLockableHeader header{};
-	CHAOS_IL2CPP_INTPTR _message = 0;
-	CHAOS_IL2CPP_INTPTR _innerException = 0;
-	CHAOS_IL2CPP_INTPTR _stackTrace = 0;
-	CHAOS_IL2CPP_INT32 _HResult = 0;
-};
-
-struct chaos_type_System_Private_CoreLib_System_ArgumentException
-{
-	ThinLockableHeader header{};
-	CHAOS_IL2CPP_INTPTR _message = 0;
-	CHAOS_IL2CPP_INTPTR _innerException = 0;
-	CHAOS_IL2CPP_INTPTR _stackTrace = 0;
-	CHAOS_IL2CPP_INT32 _HResult = 0;
-};
-
-struct chaos_type_System_Private_CoreLib_System_ArgumentNullException
-{
-	ThinLockableHeader header{};
-	CHAOS_IL2CPP_INTPTR _message = 0;
-	CHAOS_IL2CPP_INTPTR _innerException = 0;
-	CHAOS_IL2CPP_INTPTR _stackTrace = 0;
-	CHAOS_IL2CPP_INT32 _HResult = 0;
-};
-
 struct chaos_type_System_Private_CoreLib_System_Decimal
 {
 	PureTypeHeader header{};
@@ -154,24 +115,6 @@ struct chaos_type_System_Private_CoreLib_System_Guid
 struct chaos_type_System_Private_CoreLib_System_IntPtr
 {
 	ThinLockableHeader header{};
-};
-
-struct chaos_type_System_Private_CoreLib_System_InvalidCastException
-{
-	ThinLockableHeader header{};
-	CHAOS_IL2CPP_INTPTR _message = 0;
-	CHAOS_IL2CPP_INTPTR _innerException = 0;
-	CHAOS_IL2CPP_INTPTR _stackTrace = 0;
-	CHAOS_IL2CPP_INT32 _HResult = 0;
-};
-
-struct chaos_type_System_Private_CoreLib_System_NullReferenceException
-{
-	ThinLockableHeader header{};
-	CHAOS_IL2CPP_INTPTR _message = 0;
-	CHAOS_IL2CPP_INTPTR _innerException = 0;
-	CHAOS_IL2CPP_INTPTR _stackTrace = 0;
-	CHAOS_IL2CPP_INT32 _HResult = 0;
 };
 
 struct chaos_type_System_Private_CoreLib_System_Object
@@ -234,15 +177,6 @@ struct chaos_type_System_Private_CoreLib_System_Type : public chaos_type_System_
 	CHAOS_IL2CPP_INTPTR runtime_type_handle = 0;
 	CHAOS_IL2CPP_INTPTR runtime_name_value = 0;
 	CHAOS_IL2CPP_INT32 runtime_metadata_token_value = 0;
-};
-
-struct chaos_type_System_Runtime_InteropServices_COMException
-{
-	ThinLockableHeader header{};
-	CHAOS_IL2CPP_INTPTR _message = 0;
-	CHAOS_IL2CPP_INTPTR _innerException = 0;
-	CHAOS_IL2CPP_INTPTR _stackTrace = 0;
-	CHAOS_IL2CPP_INT32 _HResult = 0;
 };
 
 struct chaos_type_System_Runtime_InteropServices_System_IO_UnmanagedMemoryAccessor
@@ -480,6 +414,106 @@ CHAOS_IL2CPP_INTPTR chaos_reflection_resolve_method_handle(CHAOS_IL2CPP_INTPTR c
 	switch (chaos_type_handle)
 	{
 		case static_cast<CHAOS_IL2CPP_INTPTR>(50075720u):
+			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "CustomEntrySubject_121") == 0)
+			{
+				return static_cast<CHAOS_IL2CPP_INTPTR>(110911588u);
+			}
+
+			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "CustomEntrySubject_123") == 0)
+			{
+				return static_cast<CHAOS_IL2CPP_INTPTR>(117426662u);
+			}
+
+			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "CustomEntrySubject_133") == 0)
+			{
+				return static_cast<CHAOS_IL2CPP_INTPTR>(117136323u);
+			}
+
+			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "CustomEntrySubject_138") == 0)
+			{
+				return static_cast<CHAOS_IL2CPP_INTPTR>(113219086u);
+			}
+
+			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "CustomEntrySubject_167") == 0)
+			{
+				return static_cast<CHAOS_IL2CPP_INTPTR>(102906062u);
+			}
+
+			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "CustomEntrySubject_168") == 0)
+			{
+				return static_cast<CHAOS_IL2CPP_INTPTR>(114913487u);
+			}
+
+			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "CustomEntrySubject_195") == 0)
+			{
+				return static_cast<CHAOS_IL2CPP_INTPTR>(102609235u);
+			}
+
+			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "CustomEntrySubject_196") == 0)
+			{
+				return static_cast<CHAOS_IL2CPP_INTPTR>(110158054u);
+			}
+
+			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "CustomEntrySubject_25") == 0)
+			{
+				return static_cast<CHAOS_IL2CPP_INTPTR>(113511603u);
+			}
+
+			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "CustomEntrySubject_27") == 0)
+			{
+				return static_cast<CHAOS_IL2CPP_INTPTR>(112674653u);
+			}
+
+			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "CustomEntrySubject_29") == 0)
+			{
+				return static_cast<CHAOS_IL2CPP_INTPTR>(102902967u);
+			}
+
+			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "CustomEntrySubject_37") == 0)
+			{
+				return static_cast<CHAOS_IL2CPP_INTPTR>(113972608u);
+			}
+
+			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "CustomEntrySubject_41") == 0)
+			{
+				return static_cast<CHAOS_IL2CPP_INTPTR>(107029865u);
+			}
+
+			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "CustomEntrySubject_49") == 0)
+			{
+				return static_cast<CHAOS_IL2CPP_INTPTR>(101074529u);
+			}
+
+			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "CustomEntrySubject_60") == 0)
+			{
+				return static_cast<CHAOS_IL2CPP_INTPTR>(106634612u);
+			}
+
+			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "CustomEntrySubject_63") == 0)
+			{
+				return static_cast<CHAOS_IL2CPP_INTPTR>(104185293u);
+			}
+
+			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "CustomEntrySubject_65") == 0)
+			{
+				return static_cast<CHAOS_IL2CPP_INTPTR>(111700015u);
+			}
+
+			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "CustomEntrySubject_76") == 0)
+			{
+				return static_cast<CHAOS_IL2CPP_INTPTR>(112291115u);
+			}
+
+			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "CustomEntrySubject_90") == 0)
+			{
+				return static_cast<CHAOS_IL2CPP_INTPTR>(104002995u);
+			}
+
+			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "CustomEntrySubject_91") == 0)
+			{
+				return static_cast<CHAOS_IL2CPP_INTPTR>(110462404u);
+			}
+
 			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "Subject_0") == 0)
 			{
 				return static_cast<CHAOS_IL2CPP_INTPTR>(113169025u);
@@ -1511,6 +1545,11 @@ static void chaos_external_runtime_System_Private_CoreLib_System_Decimal___ctor_
 	chaos_decimal_ctor_int32(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
+static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_Decimal__op_Explicit_System_Int32_System_Decimal_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
+{
+	return ChaosDecimalToInt32(chaos_arg_0);
+}
+
 static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_Guid__GetHashCode_System_Int32__(CHAOS_IL2CPP_INTPTR chaos_arg_0)
 {
 	return ChaosGuidGetHashCode(chaos_arg_0);
@@ -1580,8 +1619,11 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_22(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_23(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_24(void);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_25(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_26(void);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_27(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_28(void);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_29(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_30(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_31(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_32(void);
@@ -1589,9 +1631,11 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_34(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_35(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_36(void);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_37(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_38(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_39(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_40(void);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_41(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_42(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_43(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_44(void);
@@ -1599,6 +1643,7 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_46(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_47(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_48(void);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_49(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_50(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_51(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_52(void);
@@ -1609,9 +1654,12 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_57(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_58(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_59(void);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_60(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_61(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_62(void);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_63(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_64(void);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_65(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_66(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_67(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_68(void);
@@ -1622,6 +1670,7 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_73(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_74(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_75(void);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_76(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_77(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_78(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_79(void);
@@ -1635,6 +1684,8 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_87(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_88(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_89(void);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_90(void);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_91(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_92(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_93(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_94(void);
@@ -1664,7 +1715,9 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_118(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_119(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_120(void);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_121(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_122(void);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_123(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_124(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_125(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_126(void);
@@ -1674,10 +1727,12 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_130(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_131(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_132(void);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_133(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_134(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_135(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_136(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_137(void);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_138(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_139(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_140(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_141(void);
@@ -1706,6 +1761,8 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_164(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_165(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_166(void);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_167(void);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_168(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_169(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_170(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_171(void);
@@ -1732,6 +1789,8 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_192(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_193(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_194(void);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_195(void);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_196(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_197(void);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_198(void);
 
@@ -1747,7 +1806,27 @@ extern "C" const int kAotMethodCount;
 // so CHAOS_ABI_MANIFEST_ENTRIES/CHAOS_ABI_MANIFEST_PARAMETERS find them by offset.
 
 // Param offset prefix-sum: [i] = cumulative parameter count before method i
-static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[180] = {
+static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[200] = {
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
+	0u,
 	0u,
 	0u,
 	0u,
@@ -1932,14 +2011,14 @@ static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[180] = {
 
 static constexpr struct {
 	::ChaosAbiManifestV0 header;
-	::ChaosAbiMethodEntryV0 entries[179];
+	::ChaosAbiMethodEntryV0 entries[199];
 	CHAOS_IL2CPP_UINT8 params[1];
 } s_abi_manifest_storage = {
 	{
 		CHAOS_ABI_MANIFEST_VERSION,
-		179u,
+		199u,
 		0u,
-		3934982941u,  // FNV-1a over entries+params
+		2016271421u,  // FNV-1a over entries+params
 		s_abi_manifest_prefix_sum  // O(1) prefix-sum
 	},
 	{
@@ -1968,8 +2047,11 @@ static constexpr struct {
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_22
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_23
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_24
+		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_25
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_26
+		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_27
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_28
+		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_29
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_30
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_31
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_32
@@ -1977,9 +2059,11 @@ static constexpr struct {
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_34
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_35
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_36
+		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_37
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_38
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_39
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_40
+		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_41
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_42
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_43
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_44
@@ -1987,6 +2071,7 @@ static constexpr struct {
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_46
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_47
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_48
+		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_49
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_50
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_51
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_52
@@ -1997,9 +2082,12 @@ static constexpr struct {
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_57
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_58
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_59
+		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_60
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_61
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_62
+		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_63
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_64
+		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_65
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_66
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_67
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_68
@@ -2010,6 +2098,7 @@ static constexpr struct {
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_73
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_74
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_75
+		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_76
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_77
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_78
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_79
@@ -2023,6 +2112,8 @@ static constexpr struct {
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_87
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_88
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_89
+		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_90
+		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_91
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_92
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_93
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_94
@@ -2052,7 +2143,9 @@ static constexpr struct {
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_118
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_119
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_120
+		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_121
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_122
+		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_123
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_124
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_125
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_126
@@ -2062,10 +2155,12 @@ static constexpr struct {
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_130
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_131
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_132
+		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_133
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_134
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_135
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_136
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_137
+		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_138
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_139
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_140
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_141
@@ -2094,6 +2189,8 @@ static constexpr struct {
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_164
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_165
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_166
+		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_167
+		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_168
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_169
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_170
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_171
@@ -2120,6 +2217,8 @@ static constexpr struct {
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_192
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_193
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_194
+		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_195
+		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_196
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_197
 		{ 0u, 0u },  // NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_198
 	},
@@ -2193,7 +2292,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		::chaos::il2cpp::runtime_core::RegisterModule("NativeMemoryPointersSubjects", &s_native_aot_module);
 // ── Hotpatch name index + dispatch table ────────────────────
 // Method name index entries
-static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[179] = {
+static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[199] = {
 	{ "Subject_0", 0x00000003u, 0u },  // NativeMemoryPointersSubjects
 	{ "Subject_1", 0x00000004u, 0u },  // NativeMemoryPointersSubjects
 	{ "Subject_2", 0x00000005u, 0u },  // NativeMemoryPointersSubjects
@@ -2219,169 +2318,189 @@ static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[179] = {
 	{ "Subject_22", 0x00000019u, 0u },  // NativeMemoryPointersSubjects
 	{ "Subject_23", 0x0000001Au, 0u },  // NativeMemoryPointersSubjects
 	{ "Subject_24", 0x0000001Bu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_26", 0x0000001Cu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_28", 0x0000001Du, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_30", 0x0000001Eu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_31", 0x0000001Fu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_32", 0x00000020u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_33", 0x00000021u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_34", 0x00000022u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_35", 0x00000023u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_36", 0x00000024u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_38", 0x00000025u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_39", 0x00000026u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_40", 0x00000027u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_42", 0x00000028u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_43", 0x00000029u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_44", 0x0000002Au, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_45", 0x0000002Bu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_46", 0x0000002Cu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_47", 0x0000002Du, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_48", 0x0000002Eu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_50", 0x0000002Fu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_51", 0x00000030u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_52", 0x00000031u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_53", 0x00000032u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_54", 0x00000033u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_55", 0x00000034u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_56", 0x00000035u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_57", 0x00000036u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_58", 0x00000037u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_59", 0x00000038u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_61", 0x00000039u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_62", 0x0000003Au, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_64", 0x0000003Bu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_66", 0x0000003Cu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_67", 0x0000003Du, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_68", 0x0000003Eu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_69", 0x0000003Fu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_70", 0x00000040u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_71", 0x00000041u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_72", 0x00000042u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_73", 0x00000043u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_74", 0x00000044u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_75", 0x00000045u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_77", 0x00000046u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_78", 0x00000047u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_79", 0x00000048u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_80", 0x00000049u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_81", 0x0000004Au, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_82", 0x0000004Bu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_83", 0x0000004Cu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_84", 0x0000004Du, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_85", 0x0000004Eu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_86", 0x0000004Fu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_87", 0x00000050u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_88", 0x00000051u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_89", 0x00000052u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_92", 0x00000053u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_93", 0x00000054u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_94", 0x00000055u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_95", 0x00000056u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_96", 0x00000057u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_97", 0x00000058u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_98", 0x00000059u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_99", 0x0000005Au, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_100", 0x0000005Bu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_101", 0x0000005Cu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_102", 0x0000005Du, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_103", 0x0000005Eu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_104", 0x0000005Fu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_105", 0x00000060u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_106", 0x00000061u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_107", 0x00000062u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_108", 0x00000063u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_109", 0x00000064u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_110", 0x00000065u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_111", 0x00000066u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_112", 0x00000067u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_113", 0x00000068u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_114", 0x00000069u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_115", 0x0000006Au, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_116", 0x0000006Bu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_117", 0x0000006Cu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_118", 0x0000006Du, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_119", 0x0000006Eu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_120", 0x0000006Fu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_122", 0x00000070u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_124", 0x00000071u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_125", 0x00000072u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_126", 0x00000073u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_127", 0x00000074u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_128", 0x00000075u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_129", 0x00000076u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_130", 0x00000077u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_131", 0x00000078u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_132", 0x00000079u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_134", 0x0000007Au, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_135", 0x0000007Bu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_136", 0x0000007Cu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_137", 0x0000007Du, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_139", 0x0000007Eu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_140", 0x0000007Fu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_141", 0x00000080u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_142", 0x00000081u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_143", 0x00000082u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_144", 0x00000083u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_145", 0x00000084u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_146", 0x00000085u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_147", 0x00000086u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_148", 0x00000087u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_149", 0x00000088u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_150", 0x00000089u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_151", 0x0000008Au, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_152", 0x0000008Bu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_153", 0x0000008Cu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_154", 0x0000008Du, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_155", 0x0000008Eu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_156", 0x0000008Fu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_157", 0x00000090u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_158", 0x00000091u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_159", 0x00000092u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_160", 0x00000093u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_161", 0x00000094u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_162", 0x00000095u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_163", 0x00000096u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_164", 0x00000097u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_165", 0x00000098u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_166", 0x00000099u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_169", 0x0000009Au, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_170", 0x0000009Bu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_171", 0x0000009Cu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_172", 0x0000009Du, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_173", 0x0000009Eu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_174", 0x0000009Fu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_175", 0x000000A0u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_176", 0x000000A1u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_177", 0x000000A2u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_178", 0x000000A3u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_179", 0x000000A4u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_180", 0x000000A5u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_181", 0x000000A6u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_182", 0x000000A7u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_183", 0x000000A8u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_184", 0x000000A9u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_185", 0x000000AAu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_186", 0x000000ABu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_187", 0x000000ACu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_188", 0x000000ADu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_189", 0x000000AEu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_190", 0x000000AFu, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_191", 0x000000B0u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_192", 0x000000B1u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_193", 0x000000B2u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_194", 0x000000B3u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_197", 0x000000B4u, 0u },  // NativeMemoryPointersSubjects
-	{ "Subject_198", 0x000000B5u, 0u },  // NativeMemoryPointersSubjects
+	{ "CustomEntrySubject_25", 0x0000001Cu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_26", 0x0000001Du, 0u },  // NativeMemoryPointersSubjects
+	{ "CustomEntrySubject_27", 0x0000001Eu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_28", 0x0000001Fu, 0u },  // NativeMemoryPointersSubjects
+	{ "CustomEntrySubject_29", 0x00000020u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_30", 0x00000021u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_31", 0x00000022u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_32", 0x00000023u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_33", 0x00000024u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_34", 0x00000025u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_35", 0x00000026u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_36", 0x00000027u, 0u },  // NativeMemoryPointersSubjects
+	{ "CustomEntrySubject_37", 0x00000028u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_38", 0x00000029u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_39", 0x0000002Au, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_40", 0x0000002Bu, 0u },  // NativeMemoryPointersSubjects
+	{ "CustomEntrySubject_41", 0x0000002Cu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_42", 0x0000002Du, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_43", 0x0000002Eu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_44", 0x0000002Fu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_45", 0x00000030u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_46", 0x00000031u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_47", 0x00000032u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_48", 0x00000033u, 0u },  // NativeMemoryPointersSubjects
+	{ "CustomEntrySubject_49", 0x00000034u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_50", 0x00000035u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_51", 0x00000036u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_52", 0x00000037u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_53", 0x00000038u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_54", 0x00000039u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_55", 0x0000003Au, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_56", 0x0000003Bu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_57", 0x0000003Cu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_58", 0x0000003Du, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_59", 0x0000003Eu, 0u },  // NativeMemoryPointersSubjects
+	{ "CustomEntrySubject_60", 0x0000003Fu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_61", 0x00000040u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_62", 0x00000041u, 0u },  // NativeMemoryPointersSubjects
+	{ "CustomEntrySubject_63", 0x00000042u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_64", 0x00000043u, 0u },  // NativeMemoryPointersSubjects
+	{ "CustomEntrySubject_65", 0x00000044u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_66", 0x00000045u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_67", 0x00000046u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_68", 0x00000047u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_69", 0x00000048u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_70", 0x00000049u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_71", 0x0000004Au, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_72", 0x0000004Bu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_73", 0x0000004Cu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_74", 0x0000004Du, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_75", 0x0000004Eu, 0u },  // NativeMemoryPointersSubjects
+	{ "CustomEntrySubject_76", 0x0000004Fu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_77", 0x00000050u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_78", 0x00000051u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_79", 0x00000052u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_80", 0x00000053u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_81", 0x00000054u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_82", 0x00000055u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_83", 0x00000056u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_84", 0x00000057u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_85", 0x00000058u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_86", 0x00000059u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_87", 0x0000005Au, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_88", 0x0000005Bu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_89", 0x0000005Cu, 0u },  // NativeMemoryPointersSubjects
+	{ "CustomEntrySubject_90", 0x0000005Du, 0u },  // NativeMemoryPointersSubjects
+	{ "CustomEntrySubject_91", 0x0000005Eu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_92", 0x0000005Fu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_93", 0x00000060u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_94", 0x00000061u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_95", 0x00000062u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_96", 0x00000063u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_97", 0x00000064u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_98", 0x00000065u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_99", 0x00000066u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_100", 0x00000067u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_101", 0x00000068u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_102", 0x00000069u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_103", 0x0000006Au, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_104", 0x0000006Bu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_105", 0x0000006Cu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_106", 0x0000006Du, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_107", 0x0000006Eu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_108", 0x0000006Fu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_109", 0x00000070u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_110", 0x00000071u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_111", 0x00000072u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_112", 0x00000073u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_113", 0x00000074u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_114", 0x00000075u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_115", 0x00000076u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_116", 0x00000077u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_117", 0x00000078u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_118", 0x00000079u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_119", 0x0000007Au, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_120", 0x0000007Bu, 0u },  // NativeMemoryPointersSubjects
+	{ "CustomEntrySubject_121", 0x0000007Cu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_122", 0x0000007Du, 0u },  // NativeMemoryPointersSubjects
+	{ "CustomEntrySubject_123", 0x0000007Eu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_124", 0x0000007Fu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_125", 0x00000080u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_126", 0x00000081u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_127", 0x00000082u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_128", 0x00000083u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_129", 0x00000084u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_130", 0x00000085u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_131", 0x00000086u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_132", 0x00000087u, 0u },  // NativeMemoryPointersSubjects
+	{ "CustomEntrySubject_133", 0x00000088u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_134", 0x00000089u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_135", 0x0000008Au, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_136", 0x0000008Bu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_137", 0x0000008Cu, 0u },  // NativeMemoryPointersSubjects
+	{ "CustomEntrySubject_138", 0x0000008Du, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_139", 0x0000008Eu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_140", 0x0000008Fu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_141", 0x00000090u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_142", 0x00000091u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_143", 0x00000092u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_144", 0x00000093u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_145", 0x00000094u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_146", 0x00000095u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_147", 0x00000096u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_148", 0x00000097u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_149", 0x00000098u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_150", 0x00000099u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_151", 0x0000009Au, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_152", 0x0000009Bu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_153", 0x0000009Cu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_154", 0x0000009Du, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_155", 0x0000009Eu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_156", 0x0000009Fu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_157", 0x000000A0u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_158", 0x000000A1u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_159", 0x000000A2u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_160", 0x000000A3u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_161", 0x000000A4u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_162", 0x000000A5u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_163", 0x000000A6u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_164", 0x000000A7u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_165", 0x000000A8u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_166", 0x000000A9u, 0u },  // NativeMemoryPointersSubjects
+	{ "CustomEntrySubject_167", 0x000000AAu, 0u },  // NativeMemoryPointersSubjects
+	{ "CustomEntrySubject_168", 0x000000ABu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_169", 0x000000ACu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_170", 0x000000ADu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_171", 0x000000AEu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_172", 0x000000AFu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_173", 0x000000B0u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_174", 0x000000B1u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_175", 0x000000B2u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_176", 0x000000B3u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_177", 0x000000B4u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_178", 0x000000B5u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_179", 0x000000B6u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_180", 0x000000B7u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_181", 0x000000B8u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_182", 0x000000B9u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_183", 0x000000BAu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_184", 0x000000BBu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_185", 0x000000BCu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_186", 0x000000BDu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_187", 0x000000BEu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_188", 0x000000BFu, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_189", 0x000000C0u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_190", 0x000000C1u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_191", 0x000000C2u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_192", 0x000000C3u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_193", 0x000000C4u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_194", 0x000000C5u, 0u },  // NativeMemoryPointersSubjects
+	{ "CustomEntrySubject_195", 0x000000C6u, 0u },  // NativeMemoryPointersSubjects
+	{ "CustomEntrySubject_196", 0x000000C7u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_197", 0x000000C8u, 0u },  // NativeMemoryPointersSubjects
+	{ "Subject_198", 0x000000C9u, 0u },  // NativeMemoryPointersSubjects
 };
 
 // Type name index entries (namespace, short_name)
 static constexpr HotpatchTypeEntryV0 s_hotpatch_types[1] = {
-	{ "NativeMemoryPointersSubjects", "", 0u, 179u },
+	{ "NativeMemoryPointersSubjects", "", 0u, 199u },
 };
 
 // Token→Slot mapping (sorted by token for binary search)
-static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[179] = {
+static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[199] = {
 	{ 0x00000003u, 0u },
 	{ 0x00000004u, 1u },
 	{ 0x00000005u, 2u },
@@ -2561,10 +2680,30 @@ static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[179] = {
 	{ 0x000000B3u, 176u },
 	{ 0x000000B4u, 177u },
 	{ 0x000000B5u, 178u },
+	{ 0x000000B6u, 179u },
+	{ 0x000000B7u, 180u },
+	{ 0x000000B8u, 181u },
+	{ 0x000000B9u, 182u },
+	{ 0x000000BAu, 183u },
+	{ 0x000000BBu, 184u },
+	{ 0x000000BCu, 185u },
+	{ 0x000000BDu, 186u },
+	{ 0x000000BEu, 187u },
+	{ 0x000000BFu, 188u },
+	{ 0x000000C0u, 189u },
+	{ 0x000000C1u, 190u },
+	{ 0x000000C2u, 191u },
+	{ 0x000000C3u, 192u },
+	{ 0x000000C4u, 193u },
+	{ 0x000000C5u, 194u },
+	{ 0x000000C6u, 195u },
+	{ 0x000000C7u, 196u },
+	{ 0x000000C8u, 197u },
+	{ 0x000000C9u, 198u },
 };
 
 // Dispatch table (function pointers)
-static HotpatchEntryV0 s_hotpatch_entries[179] = {
+static HotpatchEntryV0 s_hotpatch_entries[199] = {
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_0
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_1
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_2
@@ -2590,8 +2729,11 @@ static HotpatchEntryV0 s_hotpatch_entries[179] = {
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_22), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // NativeMemoryPointersSubjects::Subject_22
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_23), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // NativeMemoryPointersSubjects::Subject_23
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_24), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_24
+	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_25), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // NativeMemoryPointersSubjects::CustomEntrySubject_25
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_26), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_26
+	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_27), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // NativeMemoryPointersSubjects::CustomEntrySubject_27
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_28), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_28
+	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_29), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // NativeMemoryPointersSubjects::CustomEntrySubject_29
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_30), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_30
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_31), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_31
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_32
@@ -2599,9 +2741,11 @@ static HotpatchEntryV0 s_hotpatch_entries[179] = {
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_34), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_34
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_35), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_35
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_36), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_36
+	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_37), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // NativeMemoryPointersSubjects::CustomEntrySubject_37
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_38), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_38
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_39), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_39
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_40), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_40
+	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_41), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // NativeMemoryPointersSubjects::CustomEntrySubject_41
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_42), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_42
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_43), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_43
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_44), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_44
@@ -2609,6 +2753,7 @@ static HotpatchEntryV0 s_hotpatch_entries[179] = {
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_46), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_46
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_47), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_47
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_48), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_48
+	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_49), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // NativeMemoryPointersSubjects::CustomEntrySubject_49
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_50), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_50
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_51), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_51
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_52), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_52
@@ -2619,9 +2764,12 @@ static HotpatchEntryV0 s_hotpatch_entries[179] = {
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_57), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_57
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_58), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_58
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_59), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_59
+	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_60), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // NativeMemoryPointersSubjects::CustomEntrySubject_60
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_61), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_61
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_62), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_62
+	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_63), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // NativeMemoryPointersSubjects::CustomEntrySubject_63
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_64), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_64
+	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_65), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // NativeMemoryPointersSubjects::CustomEntrySubject_65
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_66), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_66
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_67), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_67
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_68), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_68
@@ -2632,6 +2780,7 @@ static HotpatchEntryV0 s_hotpatch_entries[179] = {
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_73), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_73
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_74), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_74
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_75), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_75
+	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_76), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // NativeMemoryPointersSubjects::CustomEntrySubject_76
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_77), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_77
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_78), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_78
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_79), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_79
@@ -2645,6 +2794,8 @@ static HotpatchEntryV0 s_hotpatch_entries[179] = {
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_87), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_87
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_88), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_88
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_89), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_89
+	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_90), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // NativeMemoryPointersSubjects::CustomEntrySubject_90
+	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_91), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // NativeMemoryPointersSubjects::CustomEntrySubject_91
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_92), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // NativeMemoryPointersSubjects::Subject_92
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_93), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_93
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_94), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_94
@@ -2674,7 +2825,9 @@ static HotpatchEntryV0 s_hotpatch_entries[179] = {
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_118), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_118
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_119), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_119
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_120), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_120
+	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_121), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // NativeMemoryPointersSubjects::CustomEntrySubject_121
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_122), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_122
+	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_123), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // NativeMemoryPointersSubjects::CustomEntrySubject_123
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_124), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_124
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_125), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_125
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_126), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_126
@@ -2684,10 +2837,12 @@ static HotpatchEntryV0 s_hotpatch_entries[179] = {
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_130), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_130
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_131), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_131
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_132), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_132
+	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_133), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // NativeMemoryPointersSubjects::CustomEntrySubject_133
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_134), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_134
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_135), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_135
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_136), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // NativeMemoryPointersSubjects::Subject_136
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_137), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_137
+	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_138), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // NativeMemoryPointersSubjects::CustomEntrySubject_138
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_139), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_139
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_140), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_140
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_141), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_141
@@ -2716,6 +2871,8 @@ static HotpatchEntryV0 s_hotpatch_entries[179] = {
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_164), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_164
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_165), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_165
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_166), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_166
+	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_167), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // NativeMemoryPointersSubjects::CustomEntrySubject_167
+	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_168), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // NativeMemoryPointersSubjects::CustomEntrySubject_168
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_169), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_169
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_170), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_170
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_171), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_171
@@ -2742,6 +2899,8 @@ static HotpatchEntryV0 s_hotpatch_entries[179] = {
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_192), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_192
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_193), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_193
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_194), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_194
+	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_195), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // NativeMemoryPointersSubjects::CustomEntrySubject_195
+	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_196), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // NativeMemoryPointersSubjects::CustomEntrySubject_196
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_197), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_197
 	{ reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_198), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // NativeMemoryPointersSubjects::Subject_198
 };
@@ -2752,11 +2911,11 @@ static constexpr HotpatchModuleV0 s_hotpatch_module = {
 	s_hotpatch_types,
 	1u,
 	s_hotpatch_methods,
-	179u,
+	199u,
 	s_hotpatch_slots,
-	179u,
+	199u,
 	s_hotpatch_entries,
-	179u,
+	199u,
 };
 
 // Expose hotpatch module to BootstrapRuntime
@@ -2765,7 +2924,7 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // ── External Runtime Dispatch Table ──────────────────────────
 // Startup-time-resolved function pointers for cross-assembly calls.
 
-extern "C" const char* kChaosExternalRuntimeSubjects[162] = {
+extern "C" const char* kChaosExternalRuntimeSubjects[163] = {
 	"System.Private.CoreLib/System.IntPtr::Zero",
 	"System.Runtime.InteropServices/Marshal::AddRef:System.Int32(System.IntPtr)",
 	"NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::_exitCode",
@@ -2774,6 +2933,7 @@ extern "C" const char* kChaosExternalRuntimeSubjects[162] = {
 	"System.Runtime.InteropServices/Marshal::AllocHGlobal:System.IntPtr(System.IntPtr)",
 	"System.Runtime.InteropServices/Marshal::AreComObjectsAvailableForCleanup:System.Boolean()",
 	"System.Runtime.InteropServices/Marshal::BindToMoniker:System.Object(System.String)",
+	"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
 	"System.Private.CoreLib/System.Int32",
 	"System.Runtime.InteropServices/Marshal::ChangeWrapperHandleStrength:System.Void(System.Object,System.Boolean)",
 	"System.Runtime.InteropServices/Marshal::CleanupUnusedObjectsInCurrentContext:System.Void()",
@@ -2820,7 +2980,6 @@ extern "C" const char* kChaosExternalRuntimeSubjects[162] = {
 	"System.Runtime.InteropServices/Marshal::GetTypedObjectForIUnknown:System.Object(System.IntPtr,System.Type)",
 	"System.Private.CoreLib/System.Guid::Empty",
 	"System.Runtime.InteropServices/Marshal::GetTypeFromCLSID:System.Type(System.Guid)",
-	"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
 	"System.Runtime.InteropServices/Marshal::GetTypeInfoName:System.String(System.Runtime.InteropServices.ComTypes.ITypeInfo)",
 	"System.Runtime.InteropServices/Marshal::GetUniqueObjectForIUnknown:System.Object(System.IntPtr)",
 	"System.Runtime.InteropServices/Marshal::InitHandle:System.Void(System.Runtime.InteropServices.SafeHandle,System.IntPtr)",
@@ -2903,6 +3062,7 @@ extern "C" const char* kChaosExternalRuntimeSubjects[162] = {
 	"System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadByte:System.Byte(System.Int64)",
 	"System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadChar:System.Char(System.Int64)",
 	"System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadDecimal:System.Decimal(System.Int64)",
+	"System.Private.CoreLib/System.Decimal::op_Explicit:System.Int32(System.Decimal)",
 	"System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadDouble:System.Double(System.Int64)",
 	"System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadInt16:System.Int16(System.Int64)",
 	"System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadInt32:System.Int32(System.Int64)",
@@ -2930,7 +3090,7 @@ extern "C" const char* kChaosExternalRuntimeSubjects[162] = {
 	"System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::.ctor:System.Void(System.Runtime.InteropServices.SafeBuffer,System.Int64,System.Int64,System.IO.FileAccess)",
 };
 
-extern "C" void* kChaosExternalRuntimeFnTable[162] = {
+extern "C" void* kChaosExternalRuntimeFnTable[163] = {
 	nullptr,
 	nullptr,
 	nullptr,
@@ -2939,6 +3099,7 @@ extern "C" void* kChaosExternalRuntimeFnTable[162] = {
 	nullptr,
 	nullptr,
 	nullptr,
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__),
 	nullptr,
 	nullptr,
 	nullptr,
@@ -2985,7 +3146,6 @@ extern "C" void* kChaosExternalRuntimeFnTable[162] = {
 	nullptr,
 	nullptr,
 	nullptr,
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__),
 	nullptr,
 	nullptr,
 	nullptr,
@@ -3068,6 +3228,7 @@ extern "C" void* kChaosExternalRuntimeFnTable[162] = {
 	nullptr,
 	nullptr,
 	nullptr,
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Decimal__op_Explicit_System_Int32_System_Decimal_),
 	nullptr,
 	nullptr,
 	nullptr,
@@ -3095,11 +3256,11 @@ extern "C" void* kChaosExternalRuntimeFnTable[162] = {
 	nullptr,
 };
 
-extern "C" int32_t kChaosExternalRuntimeCount = 162;
+extern "C" int32_t kChaosExternalRuntimeCount = 163;
 // (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
-static void (*kAotMethods[179])() = {
+static void (*kAotMethods[199])() = {
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_0),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_1),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_2),
@@ -3125,8 +3286,11 @@ static void (*kAotMethods[179])() = {
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_22),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_23),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_24),
+	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_25),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_26),
+	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_27),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_28),
+	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_29),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_30),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_31),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_32),
@@ -3134,9 +3298,11 @@ static void (*kAotMethods[179])() = {
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_34),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_35),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_36),
+	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_37),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_38),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_39),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_40),
+	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_41),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_42),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_43),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_44),
@@ -3144,6 +3310,7 @@ static void (*kAotMethods[179])() = {
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_46),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_47),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_48),
+	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_49),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_50),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_51),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_52),
@@ -3154,9 +3321,12 @@ static void (*kAotMethods[179])() = {
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_57),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_58),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_59),
+	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_60),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_61),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_62),
+	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_63),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_64),
+	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_65),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_66),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_67),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_68),
@@ -3167,6 +3337,7 @@ static void (*kAotMethods[179])() = {
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_73),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_74),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_75),
+	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_76),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_77),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_78),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_79),
@@ -3180,6 +3351,8 @@ static void (*kAotMethods[179])() = {
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_87),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_88),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_89),
+	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_90),
+	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_91),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_92),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_93),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_94),
@@ -3209,7 +3382,9 @@ static void (*kAotMethods[179])() = {
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_118),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_119),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_120),
+	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_121),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_122),
+	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_123),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_124),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_125),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_126),
@@ -3219,10 +3394,12 @@ static void (*kAotMethods[179])() = {
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_130),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_131),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_132),
+	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_133),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_134),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_135),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_136),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_137),
+	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_138),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_139),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_140),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_141),
@@ -3251,6 +3428,8 @@ static void (*kAotMethods[179])() = {
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_164),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_165),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_166),
+	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_167),
+	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_168),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_169),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_170),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_171),
@@ -3277,6 +3456,8 @@ static void (*kAotMethods[179])() = {
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_192),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_193),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_194),
+	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_195),
+	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_196),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_197),
 	reinterpret_cast<void(*)()>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_198),
 };
@@ -3286,7 +3467,7 @@ static void (*kAotMethods[179])() = {
 // String params receive a valid StringId; all others receive 0.
 // Instance methods receive a sentinel this-pointer so they don't crash on null.
 static CHAOS_IL2CPP_UINT8 __g_benchmark_this_sentinel = 0;
-extern "C" void (*kBenchmarkWrappers[179])() = {
+extern "C" void (*kBenchmarkWrappers[199])() = {
 	[]() {kAotMethods[0]();},
 	[]() {kAotMethods[1]();},
 	[]() {kAotMethods[2]();},
@@ -3466,6 +3647,26 @@ extern "C" void (*kBenchmarkWrappers[179])() = {
 	[]() {kAotMethods[176]();},
 	[]() {kAotMethods[177]();},
 	[]() {kAotMethods[178]();},
+	[]() {kAotMethods[179]();},
+	[]() {kAotMethods[180]();},
+	[]() {kAotMethods[181]();},
+	[]() {kAotMethods[182]();},
+	[]() {kAotMethods[183]();},
+	[]() {kAotMethods[184]();},
+	[]() {kAotMethods[185]();},
+	[]() {kAotMethods[186]();},
+	[]() {kAotMethods[187]();},
+	[]() {kAotMethods[188]();},
+	[]() {kAotMethods[189]();},
+	[]() {kAotMethods[190]();},
+	[]() {kAotMethods[191]();},
+	[]() {kAotMethods[192]();},
+	[]() {kAotMethods[193]();},
+	[]() {kAotMethods[194]();},
+	[]() {kAotMethods[195]();},
+	[]() {kAotMethods[196]();},
+	[]() {kAotMethods[197]();},
+	[]() {kAotMethods[198]();},
 };
 
 // ── Subject entry index mapping ─────────────────────────────────
@@ -3473,8 +3674,8 @@ extern "C" void (*kBenchmarkWrappers[179])() = {
 // Used by runtime-entry.cpp to route --benchmark N to the correct
 // AOT method slot, since kAotMethods[] includes lambdas/closures
 // that shift subject methods to non-contiguous indices.
-extern "C" const int kSubjectEntryCount = 179;
-extern "C" const int kSubjectEntryIndices[179] = {
+extern "C" const int kSubjectEntryCount = 199;
+extern "C" const int kSubjectEntryIndices[199] = {
 	0,
 	1,
 	2,
@@ -3654,6 +3855,26 @@ extern "C" const int kSubjectEntryIndices[179] = {
 	176,
 	177,
 	178,
+	179,
+	180,
+	181,
+	182,
+	183,
+	184,
+	185,
+	186,
+	187,
+	188,
+	189,
+	190,
+	191,
+	192,
+	193,
+	194,
+	195,
+	196,
+	197,
+	198,
 };
 
 // Single-method dispatch via hotpatch dispatch table.
@@ -3748,7 +3969,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry0;
 	/* ── Entry 1: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_1 ── */
 	struct {
@@ -3756,7 +3977,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry1;
 	/* ── Entry 2: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_2 ── */
 	struct {
@@ -3764,7 +3985,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry2;
 	/* ── Entry 3: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_3 ── */
 	struct {
@@ -3772,7 +3993,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry3;
 	/* ── Entry 4: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_4 ── */
 	struct {
@@ -3788,7 +4009,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry5;
 	/* ── Entry 6: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_6 ── */
 	struct {
@@ -3798,31 +4019,31 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry6;
-	/* ── Entry 7: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_24 ── */
+	/* ── Entry 7: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_7 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[1];
 	} entry7;
-	/* ── Entry 8: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_26 ── */
+	/* ── Entry 8: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_24 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry8;
-	/* ── Entry 9: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_28 ── */
+	/* ── Entry 9: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_26 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[6];
 	} entry9;
-	/* ── Entry 10: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_30 ── */
+	/* ── Entry 10: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_28 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -3830,15 +4051,15 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry10;
-	/* ── Entry 11: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_31 ── */
+	/* ── Entry 11: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_30 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry11;
-	/* ── Entry 12: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_32 ── */
+	/* ── Entry 12: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_31 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -3846,7 +4067,7 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[1];
 	} entry12;
-	/* ── Entry 13: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_33 ── */
+	/* ── Entry 13: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_32 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -3854,23 +4075,23 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[1];
 	} entry13;
-	/* ── Entry 14: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_34 ── */
+	/* ── Entry 14: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_33 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry14;
+	/* ── Entry 15: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_34 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry14;
-	/* ── Entry 15: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_35 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry15;
-	/* ── Entry 16: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_36 ── */
+	/* ── Entry 16: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_35 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -3878,39 +4099,39 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry16;
-	/* ── Entry 17: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_38 ── */
+	/* ── Entry 17: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_36 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[7];
 	} entry17;
-	/* ── Entry 18: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_39 ── */
+	/* ── Entry 18: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_38 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry18;
+	/* ── Entry 19: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_39 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry19;
+	/* ── Entry 20: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_40 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry18;
-	/* ── Entry 19: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_40 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry19;
-	/* ── Entry 20: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_42 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
 	} entry20;
-	/* ── Entry 21: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_43 ── */
+	/* ── Entry 21: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_42 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -3918,23 +4139,23 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry21;
-	/* ── Entry 22: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_44 ── */
+	/* ── Entry 22: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_43 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry22;
-	/* ── Entry 23: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_45 ── */
+	/* ── Entry 23: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_44 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry23;
-	/* ── Entry 24: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_46 ── */
+	/* ── Entry 24: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_45 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -3942,39 +4163,39 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry24;
-	/* ── Entry 25: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_47 ── */
+	/* ── Entry 25: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_46 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[7];
 	} entry25;
-	/* ── Entry 26: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_48 ── */
+	/* ── Entry 26: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_47 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry26;
-	/* ── Entry 27: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_50 ── */
+	/* ── Entry 27: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_48 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry27;
-	/* ── Entry 28: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_51 ── */
+	/* ── Entry 28: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_50 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry28;
-	/* ── Entry 29: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_52 ── */
+	/* ── Entry 29: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_51 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -3982,31 +4203,31 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry29;
-	/* ── Entry 30: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_53 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry30;
-	/* ── Entry 31: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_54 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[5];
-	} entry31;
-	/* ── Entry 32: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_55 ── */
+	/* ── Entry 30: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_52 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry30;
+	/* ── Entry 31: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_53 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[7];
+	} entry31;
+	/* ── Entry 32: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_54 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[7];
 	} entry32;
-	/* ── Entry 33: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_56 ── */
+	/* ── Entry 33: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_55 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -4014,7 +4235,7 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry33;
-	/* ── Entry 34: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_57 ── */
+	/* ── Entry 34: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_56 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -4022,7 +4243,7 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry34;
-	/* ── Entry 35: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_58 ── */
+	/* ── Entry 35: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_57 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -4030,127 +4251,127 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry35;
-	/* ── Entry 36: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_59 ── */
+	/* ── Entry 36: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_58 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry36;
-	/* ── Entry 37: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_61 ── */
+	/* ── Entry 37: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_59 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry37;
-	/* ── Entry 38: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_62 ── */
+	/* ── Entry 38: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_61 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry38;
-	/* ── Entry 39: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_64 ── */
+	/* ── Entry 39: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_62 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry39;
-	/* ── Entry 40: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_66 ── */
+	/* ── Entry 40: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_64 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
+		CHAOS_IL2CPP_UINT32 slots[7];
 	} entry40;
-	/* ── Entry 41: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_67 ── */
+	/* ── Entry 41: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_66 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry41;
-	/* ── Entry 42: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_68 ── */
+	/* ── Entry 42: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_67 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry42;
-	/* ── Entry 43: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_69 ── */
+	/* ── Entry 43: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_68 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry43;
-	/* ── Entry 44: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_70 ── */
+	/* ── Entry 44: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_69 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry44;
-	/* ── Entry 45: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_71 ── */
+	/* ── Entry 45: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_70 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry45;
-	/* ── Entry 46: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_72 ── */
+	/* ── Entry 46: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_71 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry46;
-	/* ── Entry 47: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_73 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry47;
-	/* ── Entry 48: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_74 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry48;
-	/* ── Entry 49: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_75 ── */
+	/* ── Entry 47: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_72 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry49;
-	/* ── Entry 50: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_77 ── */
+	} entry47;
+	/* ── Entry 48: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_73 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry48;
+	/* ── Entry 49: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_74 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry49;
+	/* ── Entry 50: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_75 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry50;
-	/* ── Entry 51: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_78 ── */
+	/* ── Entry 51: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_77 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -4158,7 +4379,7 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[1];
 	} entry51;
-	/* ── Entry 52: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_79 ── */
+	/* ── Entry 52: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_78 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -4166,111 +4387,111 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[1];
 	} entry52;
-	/* ── Entry 53: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_80 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry53;
-	/* ── Entry 54: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_81 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry54;
-	/* ── Entry 55: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_82 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
-	} entry55;
-	/* ── Entry 56: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_83 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
-	} entry56;
-	/* ── Entry 57: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_84 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
-	} entry57;
-	/* ── Entry 58: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_85 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry58;
-	/* ── Entry 59: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_86 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
-	} entry59;
-	/* ── Entry 60: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_87 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry60;
-	/* ── Entry 61: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_88 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry61;
-	/* ── Entry 62: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_89 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry62;
-	/* ── Entry 63: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_93 ── */
+	/* ── Entry 53: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_79 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry63;
-	/* ── Entry 64: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_94 ── */
+	} entry53;
+	/* ── Entry 54: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_80 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry54;
+	/* ── Entry 55: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_81 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry55;
+	/* ── Entry 56: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_82 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry56;
+	/* ── Entry 57: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_83 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry57;
+	/* ── Entry 58: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_84 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry58;
+	/* ── Entry 59: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_85 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry59;
+	/* ── Entry 60: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_86 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry60;
+	/* ── Entry 61: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_87 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry61;
+	/* ── Entry 62: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_88 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry62;
+	/* ── Entry 63: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_89 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry64;
-	/* ── Entry 65: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_95 ── */
+	} entry63;
+	/* ── Entry 64: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_93 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[6];
+	} entry64;
+	/* ── Entry 65: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_94 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry65;
-	/* ── Entry 66: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_96 ── */
+	/* ── Entry 66: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_95 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -4278,23 +4499,23 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry66;
-	/* ── Entry 67: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_97 ── */
+	/* ── Entry 67: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_96 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[6];
 	} entry67;
-	/* ── Entry 68: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_98 ── */
+	/* ── Entry 68: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_97 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry68;
-	/* ── Entry 69: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_99 ── */
+	/* ── Entry 69: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_98 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -4302,23 +4523,23 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry69;
-	/* ── Entry 70: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_100 ── */
+	/* ── Entry 70: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_99 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[6];
 	} entry70;
-	/* ── Entry 71: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_101 ── */
+	/* ── Entry 71: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_100 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry71;
-	/* ── Entry 72: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_102 ── */
+	/* ── Entry 72: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_101 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -4326,135 +4547,135 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry72;
-	/* ── Entry 73: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_103 ── */
+	/* ── Entry 73: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_102 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[7];
 	} entry73;
-	/* ── Entry 74: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_104 ── */
+	/* ── Entry 74: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_103 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry74;
-	/* ── Entry 75: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_105 ── */
+	/* ── Entry 75: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_104 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry75;
+	/* ── Entry 76: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_105 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[7];
+	} entry76;
+	/* ── Entry 77: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_106 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry77;
+	/* ── Entry 78: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_107 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry78;
+	/* ── Entry 79: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_108 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry79;
+	/* ── Entry 80: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_109 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry80;
+	/* ── Entry 81: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_110 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry75;
-	/* ── Entry 76: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_106 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry76;
-	/* ── Entry 77: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_107 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
-	} entry77;
-	/* ── Entry 78: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_108 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry78;
-	/* ── Entry 79: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_109 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry79;
-	/* ── Entry 80: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_110 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
-	} entry80;
-	/* ── Entry 81: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_111 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry81;
-	/* ── Entry 82: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_112 ── */
+	/* ── Entry 82: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_111 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry82;
-	/* ── Entry 83: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_113 ── */
+	/* ── Entry 83: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_112 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry83;
-	/* ── Entry 84: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_114 ── */
+	/* ── Entry 84: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_113 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry84;
-	/* ── Entry 85: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_115 ── */
+	/* ── Entry 85: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_114 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry85;
-	/* ── Entry 86: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_116 ── */
+	/* ── Entry 86: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_115 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry86;
-	/* ── Entry 87: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_117 ── */
+	/* ── Entry 87: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_116 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry87;
-	/* ── Entry 88: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_118 ── */
+	/* ── Entry 88: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_117 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry88;
-	/* ── Entry 89: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_119 ── */
+	/* ── Entry 89: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_118 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -4462,15 +4683,15 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[1];
 	} entry89;
-	/* ── Entry 90: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_120 ── */
+	/* ── Entry 90: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_119 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
+		CHAOS_IL2CPP_UINT32 slots[1];
 	} entry90;
-	/* ── Entry 91: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_122 ── */
+	/* ── Entry 91: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_120 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -4478,223 +4699,223 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry91;
-	/* ── Entry 92: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_124 ── */
+	/* ── Entry 92: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_122 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry92;
-	/* ── Entry 93: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_125 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry93;
-	/* ── Entry 94: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_126 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry94;
-	/* ── Entry 95: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_127 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry95;
-	/* ── Entry 96: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_128 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry96;
-	/* ── Entry 97: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_129 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry97;
-	/* ── Entry 98: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_130 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry98;
-	/* ── Entry 99: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_131 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry99;
-	/* ── Entry 100: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_132 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry100;
-	/* ── Entry 101: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_134 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
-	} entry101;
-	/* ── Entry 102: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_135 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry102;
-	/* ── Entry 103: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_137 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry103;
-	/* ── Entry 104: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_139 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry104;
-	/* ── Entry 105: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_140 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry105;
-	/* ── Entry 106: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_141 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry106;
-	/* ── Entry 107: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_142 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry107;
-	/* ── Entry 108: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_143 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry108;
-	/* ── Entry 109: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_144 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry109;
-	/* ── Entry 110: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_145 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry110;
-	/* ── Entry 111: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_146 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry111;
-	/* ── Entry 112: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_147 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry112;
-	/* ── Entry 113: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_148 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry113;
-	/* ── Entry 114: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_149 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry114;
-	/* ── Entry 115: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_150 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry115;
-	/* ── Entry 116: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_151 ── */
+	/* ── Entry 93: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_124 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[5];
-	} entry116;
-	/* ── Entry 117: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_152 ── */
+	} entry93;
+	/* ── Entry 94: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_125 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry117;
-	/* ── Entry 118: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_153 ── */
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry94;
+	/* ── Entry 95: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_126 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry95;
+	/* ── Entry 96: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_127 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry96;
+	/* ── Entry 97: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_128 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry97;
+	/* ── Entry 98: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_129 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry98;
+	/* ── Entry 99: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_130 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry99;
+	/* ── Entry 100: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_131 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry100;
+	/* ── Entry 101: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_132 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry101;
+	/* ── Entry 102: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_134 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry102;
+	/* ── Entry 103: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_135 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry103;
+	/* ── Entry 104: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_137 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry104;
+	/* ── Entry 105: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_139 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry105;
+	/* ── Entry 106: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_140 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry106;
+	/* ── Entry 107: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_141 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry107;
+	/* ── Entry 108: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_142 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry108;
+	/* ── Entry 109: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_143 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry109;
+	/* ── Entry 110: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_144 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry110;
+	/* ── Entry 111: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_145 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry111;
+	/* ── Entry 112: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_146 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry112;
+	/* ── Entry 113: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_147 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry113;
+	/* ── Entry 114: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_148 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry114;
+	/* ── Entry 115: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_149 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry115;
+	/* ── Entry 116: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_150 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry116;
+	/* ── Entry 117: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_151 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry117;
+	/* ── Entry 118: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_152 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry118;
-	/* ── Entry 119: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_154 ── */
+	/* ── Entry 119: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_153 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -4702,31 +4923,31 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry119;
-	/* ── Entry 120: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_155 ── */
+	/* ── Entry 120: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_154 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry120;
+	/* ── Entry 121: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_155 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[4];
-	} entry120;
-	/* ── Entry 121: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_156 ── */
+	} entry121;
+	/* ── Entry 122: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_156 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry121;
-	/* ── Entry 122: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_157 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
 	} entry122;
-	/* ── Entry 123: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_158 ── */
+	/* ── Entry 123: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_157 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -4734,7 +4955,7 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[1];
 	} entry123;
-	/* ── Entry 124: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_159 ── */
+	/* ── Entry 124: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_158 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -4742,7 +4963,7 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[1];
 	} entry124;
-	/* ── Entry 125: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_160 ── */
+	/* ── Entry 125: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_159 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -4750,7 +4971,7 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[1];
 	} entry125;
-	/* ── Entry 126: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_161 ── */
+	/* ── Entry 126: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_160 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -4758,7 +4979,7 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[1];
 	} entry126;
-	/* ── Entry 127: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_162 ── */
+	/* ── Entry 127: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_161 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -4766,151 +4987,151 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[1];
 	} entry127;
-	/* ── Entry 128: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_163 ── */
+	/* ── Entry 128: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_162 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[1];
 	} entry128;
-	/* ── Entry 129: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_164 ── */
+	/* ── Entry 129: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_163 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[1];
 	} entry129;
-	/* ── Entry 130: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_165 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry130;
-	/* ── Entry 131: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_166 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry131;
-	/* ── Entry 132: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_169 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry132;
-	/* ── Entry 133: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_170 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry133;
-	/* ── Entry 134: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_171 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry134;
-	/* ── Entry 135: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_172 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry135;
-	/* ── Entry 136: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_173 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry136;
-	/* ── Entry 137: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_174 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry137;
-	/* ── Entry 138: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_175 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry138;
-	/* ── Entry 139: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_176 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry139;
-	/* ── Entry 140: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_177 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry140;
-	/* ── Entry 141: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_178 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry141;
-	/* ── Entry 142: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_179 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry142;
-	/* ── Entry 143: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_180 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry143;
-	/* ── Entry 144: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_181 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry144;
-	/* ── Entry 145: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_182 ── */
+	/* ── Entry 130: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_164 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry130;
+	/* ── Entry 131: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_165 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry131;
+	/* ── Entry 132: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_166 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[7];
+	} entry132;
+	/* ── Entry 133: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_169 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry133;
+	/* ── Entry 134: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_170 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[7];
+	} entry134;
+	/* ── Entry 135: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_171 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[7];
+	} entry135;
+	/* ── Entry 136: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_172 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[7];
+	} entry136;
+	/* ── Entry 137: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_173 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[9];
+	} entry137;
+	/* ── Entry 138: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_174 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[7];
+	} entry138;
+	/* ── Entry 139: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_175 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[7];
+	} entry139;
+	/* ── Entry 140: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_176 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[9];
+	} entry140;
+	/* ── Entry 141: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_177 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[7];
+	} entry141;
+	/* ── Entry 142: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_178 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[9];
+	} entry142;
+	/* ── Entry 143: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_179 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[7];
+	} entry143;
+	/* ── Entry 144: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_180 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[7];
+	} entry144;
+	/* ── Entry 145: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_181 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[9];
 	} entry145;
-	/* ── Entry 146: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_183 ── */
+	/* ── Entry 146: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_182 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -4918,7 +5139,7 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry146;
-	/* ── Entry 147: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_184 ── */
+	/* ── Entry 147: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_183 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -4926,7 +5147,7 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry147;
-	/* ── Entry 148: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_185 ── */
+	/* ── Entry 148: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_184 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -4934,7 +5155,7 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry148;
-	/* ── Entry 149: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_186 ── */
+	/* ── Entry 149: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_185 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -4942,23 +5163,23 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry149;
-	/* ── Entry 150: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_187 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[5];
-	} entry150;
-	/* ── Entry 151: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_188 ── */
+	/* ── Entry 150: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_186 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry150;
+	/* ── Entry 151: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_187 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry151;
-	/* ── Entry 152: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_189 ── */
+	/* ── Entry 152: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_188 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -4966,7 +5187,7 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry152;
-	/* ── Entry 153: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_190 ── */
+	/* ── Entry 153: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_189 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -4974,7 +5195,7 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry153;
-	/* ── Entry 154: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_191 ── */
+	/* ── Entry 154: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_190 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -4982,7 +5203,7 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry154;
-	/* ── Entry 155: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_192 ── */
+	/* ── Entry 155: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_191 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -4990,7 +5211,7 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry155;
-	/* ── Entry 156: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_193 ── */
+	/* ── Entry 156: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_192 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -4998,15 +5219,15 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry156;
-	/* ── Entry 157: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_194 ── */
+	/* ── Entry 157: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_193 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[5];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry157;
-	/* ── Entry 158: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_197 ── */
+	/* ── Entry 158: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_194 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
@@ -5014,46 +5235,54 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry158;
-	/* ── Entry 159: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_198 ── */
+	/* ── Entry 159: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_197 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry159;
+	/* ── Entry 160: NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_198 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[6];
-	} entry159;
+	} entry160;
 } kChaosGcSlotMapsSection = {
 	/* entry0 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_0 */
 	.entry0 = {
-		/* entry_total_size = 24 */ 24u,
+		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_0),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
 	},
 	/* entry1 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_1 */
 	.entry1 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_1),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
 	/* entry2 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_2 */
 	.entry2 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_2),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
 	/* entry3 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_3 */
 	.entry3 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_3),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
 	/* entry4 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_4 */
 	.entry4 = {
@@ -5065,11 +5294,11 @@ static const struct {
 	},
 	/* entry5 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_5 */
 	.entry5 = {
-		/* entry_total_size = 24 */ 24u,
+		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_5),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
 	},
 	/* entry6 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_6 */
 	.entry6 = {
@@ -5079,1224 +5308,1232 @@ static const struct {
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry7 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_24 */
+	/* entry7 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_7 */
 	.entry7 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_24),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_7),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
 	},
-	/* entry8 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_26 */
+	/* entry8 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_24 */
 	.entry8 = {
-		/* entry_total_size = 32 */ 32u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_26),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_24),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
-	/* entry9 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_28 */
+	/* entry9 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_26 */
 	.entry9 = {
+		/* entry_total_size = 44 */ 44u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_26),
+		/* frame_size = 48 */ 48u,
+		/* num_gc_slots = 6 */ 6u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
+	},
+	/* entry10 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_28 */
+	.entry10 = {
 		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_28),
 		/* frame_size = 16 */ 16u,
 		/* num_gc_slots = 2 */ 2u,
 		/* slots */ { 0u, 8u }
 	},
-	/* entry10 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_30 */
-	.entry10 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_30),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
-	},
-	/* entry11 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_31 */
+	/* entry11 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_30 */
 	.entry11 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_30),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry12 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_31 */
+	.entry12 = {
 		/* entry_total_size = 24 */ 24u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_31),
 		/* frame_size = 8 */ 8u,
 		/* num_gc_slots = 1 */ 1u,
 		/* slots */ { 0u }
 	},
-	/* entry12 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_32 */
-	.entry12 = {
+	/* entry13 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_32 */
+	.entry13 = {
 		/* entry_total_size = 24 */ 24u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_32),
 		/* frame_size = 8 */ 8u,
 		/* num_gc_slots = 1 */ 1u,
 		/* slots */ { 0u }
 	},
-	/* entry13 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_33 */
-	.entry13 = {
+	/* entry14 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_33 */
+	.entry14 = {
 		/* entry_total_size = 24 */ 24u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_33),
 		/* frame_size = 8 */ 8u,
 		/* num_gc_slots = 1 */ 1u,
 		/* slots */ { 0u }
 	},
-	/* entry14 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_34 */
-	.entry14 = {
+	/* entry15 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_34 */
+	.entry15 = {
 		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_34),
 		/* frame_size = 32 */ 32u,
 		/* num_gc_slots = 4 */ 4u,
 		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry15 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_35 */
-	.entry15 = {
+	/* entry16 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_35 */
+	.entry16 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_35),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry16 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_36 */
-	.entry16 = {
-		/* entry_total_size = 32 */ 32u,
+	/* entry17 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_36 */
+	.entry17 = {
+		/* entry_total_size = 48 */ 48u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_36),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
+	},
+	/* entry18 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_38 */
+	.entry18 = {
+		/* entry_total_size = 52 */ 52u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_38),
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
+	},
+	/* entry19 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_39 */
+	.entry19 = {
+		/* entry_total_size = 52 */ 52u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_39),
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
+	},
+	/* entry20 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_40 */
+	.entry20 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_40),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry21 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_42 */
+	.entry21 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_42),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry17 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_38 */
-	.entry17 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_38),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
-	},
-	/* entry18 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_39 */
-	.entry18 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_39),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
-	},
-	/* entry19 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_40 */
-	.entry19 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_40),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
-	},
-	/* entry20 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_42 */
-	.entry20 = {
-		/* entry_total_size = 24 */ 24u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_42),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
-	},
-	/* entry21 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_43 */
-	.entry21 = {
+	/* entry22 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_43 */
+	.entry22 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_43),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry22 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_44 */
-	.entry22 = {
-		/* entry_total_size = 24 */ 24u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_44),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
-	},
-	/* entry23 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_45 */
+	/* entry23 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_44 */
 	.entry23 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_45),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_44),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry24 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_46 */
+	/* entry24 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_45 */
 	.entry24 = {
 		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_46),
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_45),
 		/* frame_size = 32 */ 32u,
 		/* num_gc_slots = 4 */ 4u,
 		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry25 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_47 */
+	/* entry25 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_46 */
 	.entry25 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_47),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* entry_total_size = 48 */ 48u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_46),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
 	},
-	/* entry26 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_48 */
+	/* entry26 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_47 */
 	.entry26 = {
-		/* entry_total_size = 24 */ 24u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_48),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_47),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
-	/* entry27 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_50 */
+	/* entry27 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_48 */
 	.entry27 = {
-		/* entry_total_size = 24 */ 24u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_50),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_48),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
-	/* entry28 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_51 */
+	/* entry28 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_50 */
 	.entry28 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_50),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry29 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_51 */
+	.entry29 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_51),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry29 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_52 */
-	.entry29 = {
+	/* entry30 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_52 */
+	.entry30 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_52),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry30 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_53 */
-	.entry30 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_53),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
-	},
-	/* entry31 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_54 */
+	/* entry31 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_53 */
 	.entry31 = {
-		/* entry_total_size = 40 */ 40u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_54),
-		/* frame_size = 40 */ 40u,
-		/* num_gc_slots = 5 */ 5u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+		/* entry_total_size = 48 */ 48u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_53),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
 	},
-	/* entry32 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_55 */
+	/* entry32 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_54 */
 	.entry32 = {
+		/* entry_total_size = 48 */ 48u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_54),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
+	},
+	/* entry33 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_55 */
+	.entry33 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_55),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry33 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_56 */
-	.entry33 = {
+	/* entry34 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_56 */
+	.entry34 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_56),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry34 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_57 */
-	.entry34 = {
+	/* entry35 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_57 */
+	.entry35 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_57),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry35 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_58 */
-	.entry35 = {
+	/* entry36 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_58 */
+	.entry36 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_58),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry36 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_59 */
-	.entry36 = {
+	/* entry37 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_59 */
+	.entry37 = {
 		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_59),
 		/* frame_size = 16 */ 16u,
 		/* num_gc_slots = 2 */ 2u,
 		/* slots */ { 0u, 8u }
 	},
-	/* entry37 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_61 */
-	.entry37 = {
-		/* entry_total_size = 24 */ 24u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_61),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
-	},
-	/* entry38 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_62 */
+	/* entry38 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_61 */
 	.entry38 = {
-		/* entry_total_size = 24 */ 24u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_62),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_61),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry39 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_64 */
+	/* entry39 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_62 */
 	.entry39 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_64),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_62),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry40 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_66 */
+	/* entry40 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_64 */
 	.entry40 = {
+		/* entry_total_size = 48 */ 48u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_64),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
+	},
+	/* entry41 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_66 */
+	.entry41 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_66),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry41 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_67 */
-	.entry41 = {
-		/* entry_total_size = 24 */ 24u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_67),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
-	},
-	/* entry42 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_68 */
+	/* entry42 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_67 */
 	.entry42 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_68),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_67),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry43 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_69 */
+	/* entry43 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_68 */
 	.entry43 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_68),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry44 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_69 */
+	.entry44 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_69),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry44 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_70 */
-	.entry44 = {
-		/* entry_total_size = 24 */ 24u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_70),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
-	},
-	/* entry45 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_71 */
+	/* entry45 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_70 */
 	.entry45 = {
-		/* entry_total_size = 24 */ 24u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_71),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_70),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry46 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_72 */
+	/* entry46 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_71 */
 	.entry46 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_71),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry47 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_72 */
+	.entry47 = {
 		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_72),
 		/* frame_size = 16 */ 16u,
 		/* num_gc_slots = 2 */ 2u,
 		/* slots */ { 0u, 8u }
 	},
-	/* entry47 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_73 */
-	.entry47 = {
-		/* entry_total_size = 32 */ 32u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_73),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
-	},
-	/* entry48 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_74 */
+	/* entry48 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_73 */
 	.entry48 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_73),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry49 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_74 */
+	.entry49 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_74),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry49 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_75 */
-	.entry49 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_75),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
-	},
-	/* entry50 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_77 */
+	/* entry50 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_75 */
 	.entry50 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_75),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry51 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_77 */
+	.entry51 = {
 		/* entry_total_size = 24 */ 24u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_77),
 		/* frame_size = 8 */ 8u,
 		/* num_gc_slots = 1 */ 1u,
 		/* slots */ { 0u }
 	},
-	/* entry51 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_78 */
-	.entry51 = {
+	/* entry52 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_78 */
+	.entry52 = {
 		/* entry_total_size = 24 */ 24u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_78),
 		/* frame_size = 8 */ 8u,
 		/* num_gc_slots = 1 */ 1u,
 		/* slots */ { 0u }
 	},
-	/* entry52 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_79 */
-	.entry52 = {
-		/* entry_total_size = 24 */ 24u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_79),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
-	},
-	/* entry53 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_80 */
+	/* entry53 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_79 */
 	.entry53 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_80),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_79),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry54 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_81 */
+	/* entry54 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_80 */
 	.entry54 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_81),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_80),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry55 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_82 */
+	/* entry55 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_81 */
 	.entry55 = {
-		/* entry_total_size = 24 */ 24u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_82),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_81),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry56 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_83 */
+	/* entry56 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_82 */
 	.entry56 = {
-		/* entry_total_size = 24 */ 24u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_83),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_82),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry57 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_84 */
+	/* entry57 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_83 */
 	.entry57 = {
-		/* entry_total_size = 24 */ 24u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_84),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_83),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry58 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_85 */
+	/* entry58 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_84 */
 	.entry58 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_85),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_84),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry59 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_86 */
+	/* entry59 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_85 */
 	.entry59 = {
-		/* entry_total_size = 24 */ 24u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_86),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_85),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry60 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_87 */
+	/* entry60 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_86 */
 	.entry60 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_87),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_86),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry61 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_88 */
+	/* entry61 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_87 */
 	.entry61 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_88),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_87),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry62 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_89 */
+	/* entry62 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_88 */
 	.entry62 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_88),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry63 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_89 */
+	.entry63 = {
 		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_89),
 		/* frame_size = 16 */ 16u,
 		/* num_gc_slots = 2 */ 2u,
 		/* slots */ { 0u, 8u }
 	},
-	/* entry63 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_93 */
-	.entry63 = {
-		/* entry_total_size = 32 */ 32u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_93),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
-	},
-	/* entry64 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_94 */
+	/* entry64 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_93 */
 	.entry64 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_94),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
-	},
-	/* entry65 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_95 */
-	.entry65 = {
-		/* entry_total_size = 24 */ 24u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_95),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
-	},
-	/* entry66 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_96 */
-	.entry66 = {
-		/* entry_total_size = 32 */ 32u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_96),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
-	},
-	/* entry67 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_97 */
-	.entry67 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_97),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
-	},
-	/* entry68 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_98 */
-	.entry68 = {
-		/* entry_total_size = 24 */ 24u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_98),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
-	},
-	/* entry69 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_99 */
-	.entry69 = {
-		/* entry_total_size = 32 */ 32u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_99),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
-	},
-	/* entry70 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_100 */
-	.entry70 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_100),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
-	},
-	/* entry71 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_101 */
-	.entry71 = {
-		/* entry_total_size = 24 */ 24u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_101),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
-	},
-	/* entry72 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_102 */
-	.entry72 = {
-		/* entry_total_size = 32 */ 32u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_102),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
-	},
-	/* entry73 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_103 */
-	.entry73 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_103),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
-	},
-	/* entry74 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_104 */
-	.entry74 = {
-		/* entry_total_size = 24 */ 24u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_104),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
-	},
-	/* entry75 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_105 */
-	.entry75 = {
-		/* entry_total_size = 32 */ 32u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_105),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
-	},
-	/* entry76 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_106 */
-	.entry76 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_106),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
-	},
-	/* entry77 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_107 */
-	.entry77 = {
-		/* entry_total_size = 24 */ 24u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_107),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
-	},
-	/* entry78 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_108 */
-	.entry78 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_108),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
-	},
-	/* entry79 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_109 */
-	.entry79 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_109),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
-	},
-	/* entry80 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_110 */
-	.entry80 = {
-		/* entry_total_size = 24 */ 24u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_110),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
-	},
-	/* entry81 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_111 */
-	.entry81 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_111),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
-	},
-	/* entry82 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_112 */
-	.entry82 = {
-		/* entry_total_size = 24 */ 24u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_112),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
-	},
-	/* entry83 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_113 */
-	.entry83 = {
-		/* entry_total_size = 24 */ 24u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_113),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
-	},
-	/* entry84 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_114 */
-	.entry84 = {
-		/* entry_total_size = 24 */ 24u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_114),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
-	},
-	/* entry85 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_115 */
-	.entry85 = {
-		/* entry_total_size = 24 */ 24u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_115),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
-	},
-	/* entry86 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_116 */
-	.entry86 = {
-		/* entry_total_size = 24 */ 24u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_116),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
-	},
-	/* entry87 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_117 */
-	.entry87 = {
 		/* entry_total_size = 44 */ 44u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_117),
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_93),
 		/* frame_size = 48 */ 48u,
 		/* num_gc_slots = 6 */ 6u,
 		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
 	},
-	/* entry88 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_118 */
+	/* entry65 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_94 */
+	.entry65 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_94),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry66 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_95 */
+	.entry66 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_95),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry67 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_96 */
+	.entry67 = {
+		/* entry_total_size = 44 */ 44u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_96),
+		/* frame_size = 48 */ 48u,
+		/* num_gc_slots = 6 */ 6u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
+	},
+	/* entry68 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_97 */
+	.entry68 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_97),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry69 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_98 */
+	.entry69 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_98),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry70 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_99 */
+	.entry70 = {
+		/* entry_total_size = 44 */ 44u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_99),
+		/* frame_size = 48 */ 48u,
+		/* num_gc_slots = 6 */ 6u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
+	},
+	/* entry71 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_100 */
+	.entry71 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_100),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry72 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_101 */
+	.entry72 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_101),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry73 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_102 */
+	.entry73 = {
+		/* entry_total_size = 48 */ 48u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_102),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
+	},
+	/* entry74 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_103 */
+	.entry74 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_103),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry75 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_104 */
+	.entry75 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_104),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry76 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_105 */
+	.entry76 = {
+		/* entry_total_size = 48 */ 48u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_105),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
+	},
+	/* entry77 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_106 */
+	.entry77 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_106),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry78 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_107 */
+	.entry78 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_107),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry79 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_108 */
+	.entry79 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_108),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry80 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_109 */
+	.entry80 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_109),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry81 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_110 */
+	.entry81 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_110),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry82 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_111 */
+	.entry82 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_111),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry83 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_112 */
+	.entry83 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_112),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry84 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_113 */
+	.entry84 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_113),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry85 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_114 */
+	.entry85 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_114),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry86 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_115 */
+	.entry86 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_115),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry87 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_116 */
+	.entry87 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_116),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry88 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_117 */
 	.entry88 = {
+		/* entry_total_size = 52 */ 52u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_117),
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
+	},
+	/* entry89 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_118 */
+	.entry89 = {
 		/* entry_total_size = 24 */ 24u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_118),
 		/* frame_size = 8 */ 8u,
 		/* num_gc_slots = 1 */ 1u,
 		/* slots */ { 0u }
 	},
-	/* entry89 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_119 */
-	.entry89 = {
+	/* entry90 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_119 */
+	.entry90 = {
 		/* entry_total_size = 24 */ 24u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_119),
 		/* frame_size = 8 */ 8u,
 		/* num_gc_slots = 1 */ 1u,
 		/* slots */ { 0u }
 	},
-	/* entry90 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_120 */
-	.entry90 = {
+	/* entry91 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_120 */
+	.entry91 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_120),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry91 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_122 */
-	.entry91 = {
+	/* entry92 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_122 */
+	.entry92 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_122),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry92 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_124 */
-	.entry92 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_124),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
-	},
-	/* entry93 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_125 */
+	/* entry93 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_124 */
 	.entry93 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_125),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_124),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
-	/* entry94 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_126 */
+	/* entry94 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_125 */
 	.entry94 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_126),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_125),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
-	/* entry95 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_127 */
+	/* entry95 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_126 */
 	.entry95 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_127),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_126),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
-	/* entry96 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_128 */
+	/* entry96 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_127 */
 	.entry96 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_128),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_127),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
-	/* entry97 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_129 */
+	/* entry97 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_128 */
 	.entry97 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_129),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_128),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
-	/* entry98 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_130 */
+	/* entry98 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_129 */
 	.entry98 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_130),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_129),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
-	/* entry99 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_131 */
+	/* entry99 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_130 */
 	.entry99 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_131),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_130),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
-	/* entry100 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_132 */
+	/* entry100 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_131 */
 	.entry100 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_131),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry101 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_132 */
+	.entry101 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_132),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry101 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_134 */
-	.entry101 = {
+	/* entry102 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_134 */
+	.entry102 = {
 		/* entry_total_size = 24 */ 24u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_134),
 		/* frame_size = 8 */ 8u,
 		/* num_gc_slots = 1 */ 1u,
 		/* slots */ { 0u }
 	},
-	/* entry102 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_135 */
-	.entry102 = {
+	/* entry103 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_135 */
+	.entry103 = {
 		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_135),
 		/* frame_size = 16 */ 16u,
 		/* num_gc_slots = 2 */ 2u,
 		/* slots */ { 0u, 8u }
 	},
-	/* entry103 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_137 */
-	.entry103 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_137),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
-	},
-	/* entry104 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_139 */
+	/* entry104 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_137 */
 	.entry104 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_137),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry105 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_139 */
+	.entry105 = {
 		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_139),
 		/* frame_size = 32 */ 32u,
 		/* num_gc_slots = 4 */ 4u,
 		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry105 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_140 */
-	.entry105 = {
+	/* entry106 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_140 */
+	.entry106 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_140),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry106 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_141 */
-	.entry106 = {
+	/* entry107 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_141 */
+	.entry107 = {
 		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_141),
 		/* frame_size = 16 */ 16u,
 		/* num_gc_slots = 2 */ 2u,
 		/* slots */ { 0u, 8u }
 	},
-	/* entry107 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_142 */
-	.entry107 = {
+	/* entry108 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_142 */
+	.entry108 = {
 		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_142),
 		/* frame_size = 32 */ 32u,
 		/* num_gc_slots = 4 */ 4u,
 		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry108 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_143 */
-	.entry108 = {
+	/* entry109 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_143 */
+	.entry109 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_143),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry109 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_144 */
-	.entry109 = {
+	/* entry110 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_144 */
+	.entry110 = {
 		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_144),
 		/* frame_size = 16 */ 16u,
 		/* num_gc_slots = 2 */ 2u,
 		/* slots */ { 0u, 8u }
 	},
-	/* entry110 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_145 */
-	.entry110 = {
+	/* entry111 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_145 */
+	.entry111 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_145),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry111 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_146 */
-	.entry111 = {
+	/* entry112 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_146 */
+	.entry112 = {
 		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_146),
 		/* frame_size = 32 */ 32u,
 		/* num_gc_slots = 4 */ 4u,
 		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry112 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_147 */
-	.entry112 = {
+	/* entry113 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_147 */
+	.entry113 = {
 		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_147),
 		/* frame_size = 16 */ 16u,
 		/* num_gc_slots = 2 */ 2u,
 		/* slots */ { 0u, 8u }
 	},
-	/* entry113 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_148 */
-	.entry113 = {
+	/* entry114 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_148 */
+	.entry114 = {
 		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_148),
 		/* frame_size = 32 */ 32u,
 		/* num_gc_slots = 4 */ 4u,
 		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry114 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_149 */
-	.entry114 = {
+	/* entry115 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_149 */
+	.entry115 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_149),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry115 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_150 */
-	.entry115 = {
+	/* entry116 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_150 */
+	.entry116 = {
 		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_150),
 		/* frame_size = 16 */ 16u,
 		/* num_gc_slots = 2 */ 2u,
 		/* slots */ { 0u, 8u }
 	},
-	/* entry116 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_151 */
-	.entry116 = {
+	/* entry117 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_151 */
+	.entry117 = {
 		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_151),
 		/* frame_size = 40 */ 40u,
 		/* num_gc_slots = 5 */ 5u,
 		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
-	/* entry117 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_152 */
-	.entry117 = {
+	/* entry118 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_152 */
+	.entry118 = {
 		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_152),
 		/* frame_size = 32 */ 32u,
 		/* num_gc_slots = 4 */ 4u,
 		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry118 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_153 */
-	.entry118 = {
+	/* entry119 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_153 */
+	.entry119 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_153),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry119 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_154 */
-	.entry119 = {
+	/* entry120 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_154 */
+	.entry120 = {
 		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_154),
 		/* frame_size = 24 */ 24u,
 		/* num_gc_slots = 3 */ 3u,
 		/* slots */ { 0u, 8u, 16u }
 	},
-	/* entry120 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_155 */
-	.entry120 = {
+	/* entry121 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_155 */
+	.entry121 = {
 		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_155),
 		/* frame_size = 32 */ 32u,
 		/* num_gc_slots = 4 */ 4u,
 		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry121 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_156 */
-	.entry121 = {
+	/* entry122 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_156 */
+	.entry122 = {
 		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_156),
 		/* frame_size = 16 */ 16u,
 		/* num_gc_slots = 2 */ 2u,
 		/* slots */ { 0u, 8u }
 	},
-	/* entry122 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_157 */
-	.entry122 = {
+	/* entry123 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_157 */
+	.entry123 = {
 		/* entry_total_size = 24 */ 24u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_157),
 		/* frame_size = 8 */ 8u,
 		/* num_gc_slots = 1 */ 1u,
 		/* slots */ { 0u }
 	},
-	/* entry123 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_158 */
-	.entry123 = {
+	/* entry124 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_158 */
+	.entry124 = {
 		/* entry_total_size = 24 */ 24u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_158),
 		/* frame_size = 8 */ 8u,
 		/* num_gc_slots = 1 */ 1u,
 		/* slots */ { 0u }
 	},
-	/* entry124 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_159 */
-	.entry124 = {
+	/* entry125 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_159 */
+	.entry125 = {
 		/* entry_total_size = 24 */ 24u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_159),
 		/* frame_size = 8 */ 8u,
 		/* num_gc_slots = 1 */ 1u,
 		/* slots */ { 0u }
 	},
-	/* entry125 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_160 */
-	.entry125 = {
+	/* entry126 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_160 */
+	.entry126 = {
 		/* entry_total_size = 24 */ 24u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_160),
 		/* frame_size = 8 */ 8u,
 		/* num_gc_slots = 1 */ 1u,
 		/* slots */ { 0u }
 	},
-	/* entry126 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_161 */
-	.entry126 = {
+	/* entry127 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_161 */
+	.entry127 = {
 		/* entry_total_size = 24 */ 24u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_161),
 		/* frame_size = 8 */ 8u,
 		/* num_gc_slots = 1 */ 1u,
 		/* slots */ { 0u }
 	},
-	/* entry127 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_162 */
-	.entry127 = {
+	/* entry128 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_162 */
+	.entry128 = {
 		/* entry_total_size = 24 */ 24u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_162),
 		/* frame_size = 8 */ 8u,
 		/* num_gc_slots = 1 */ 1u,
 		/* slots */ { 0u }
 	},
-	/* entry128 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_163 */
-	.entry128 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_163),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
-	},
-	/* entry129 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_164 */
+	/* entry129 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_163 */
 	.entry129 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_164),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_163),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
 	},
-	/* entry130 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_165 */
+	/* entry130 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_164 */
 	.entry130 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_165),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_164),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry131 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_166 */
+	/* entry131 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_165 */
 	.entry131 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_166),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_165),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry132 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_169 */
+	/* entry132 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_166 */
 	.entry132 = {
-		/* entry_total_size = 32 */ 32u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_169),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* entry_total_size = 48 */ 48u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_166),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
 	},
-	/* entry133 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_170 */
+	/* entry133 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_169 */
 	.entry133 = {
-		/* entry_total_size = 32 */ 32u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_170),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_169),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
-	/* entry134 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_171 */
+	/* entry134 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_170 */
 	.entry134 = {
-		/* entry_total_size = 32 */ 32u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_171),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* entry_total_size = 48 */ 48u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_170),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
 	},
-	/* entry135 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_172 */
+	/* entry135 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_171 */
 	.entry135 = {
-		/* entry_total_size = 32 */ 32u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_172),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* entry_total_size = 48 */ 48u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_171),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
 	},
-	/* entry136 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_173 */
+	/* entry136 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_172 */
 	.entry136 = {
-		/* entry_total_size = 32 */ 32u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_173),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* entry_total_size = 48 */ 48u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_172),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
 	},
-	/* entry137 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_174 */
+	/* entry137 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_173 */
 	.entry137 = {
-		/* entry_total_size = 32 */ 32u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_174),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* entry_total_size = 56 */ 56u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_173),
+		/* frame_size = 72 */ 72u,
+		/* num_gc_slots = 9 */ 9u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u }
 	},
-	/* entry138 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_175 */
+	/* entry138 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_174 */
 	.entry138 = {
-		/* entry_total_size = 32 */ 32u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_175),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* entry_total_size = 48 */ 48u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_174),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
 	},
-	/* entry139 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_176 */
+	/* entry139 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_175 */
 	.entry139 = {
-		/* entry_total_size = 32 */ 32u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_176),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* entry_total_size = 48 */ 48u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_175),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
 	},
-	/* entry140 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_177 */
+	/* entry140 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_176 */
 	.entry140 = {
-		/* entry_total_size = 32 */ 32u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_177),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* entry_total_size = 56 */ 56u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_176),
+		/* frame_size = 72 */ 72u,
+		/* num_gc_slots = 9 */ 9u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u }
 	},
-	/* entry141 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_178 */
+	/* entry141 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_177 */
 	.entry141 = {
-		/* entry_total_size = 32 */ 32u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_178),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* entry_total_size = 48 */ 48u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_177),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
 	},
-	/* entry142 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_179 */
+	/* entry142 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_178 */
 	.entry142 = {
-		/* entry_total_size = 32 */ 32u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_179),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* entry_total_size = 56 */ 56u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_178),
+		/* frame_size = 72 */ 72u,
+		/* num_gc_slots = 9 */ 9u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u }
 	},
-	/* entry143 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_180 */
+	/* entry143 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_179 */
 	.entry143 = {
-		/* entry_total_size = 32 */ 32u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_180),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* entry_total_size = 48 */ 48u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_179),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
 	},
-	/* entry144 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_181 */
+	/* entry144 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_180 */
 	.entry144 = {
-		/* entry_total_size = 32 */ 32u,
-		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_181),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* entry_total_size = 48 */ 48u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_180),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
 	},
-	/* entry145 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_182 */
+	/* entry145 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_181 */
 	.entry145 = {
+		/* entry_total_size = 56 */ 56u,
+		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_181),
+		/* frame_size = 72 */ 72u,
+		/* num_gc_slots = 9 */ 9u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u }
+	},
+	/* entry146 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_182 */
+	.entry146 = {
 		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_182),
 		/* frame_size = 32 */ 32u,
 		/* num_gc_slots = 4 */ 4u,
 		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry146 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_183 */
-	.entry146 = {
+	/* entry147 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_183 */
+	.entry147 = {
 		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_183),
 		/* frame_size = 32 */ 32u,
 		/* num_gc_slots = 4 */ 4u,
 		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry147 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_184 */
-	.entry147 = {
+	/* entry148 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_184 */
+	.entry148 = {
 		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_184),
 		/* frame_size = 32 */ 32u,
 		/* num_gc_slots = 4 */ 4u,
 		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry148 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_185 */
-	.entry148 = {
+	/* entry149 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_185 */
+	.entry149 = {
 		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_185),
 		/* frame_size = 32 */ 32u,
 		/* num_gc_slots = 4 */ 4u,
 		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry149 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_186 */
-	.entry149 = {
+	/* entry150 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_186 */
+	.entry150 = {
 		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_186),
 		/* frame_size = 32 */ 32u,
 		/* num_gc_slots = 4 */ 4u,
 		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry150 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_187 */
-	.entry150 = {
+	/* entry151 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_187 */
+	.entry151 = {
 		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_187),
 		/* frame_size = 40 */ 40u,
 		/* num_gc_slots = 5 */ 5u,
 		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
-	/* entry151 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_188 */
-	.entry151 = {
+	/* entry152 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_188 */
+	.entry152 = {
 		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_188),
 		/* frame_size = 32 */ 32u,
 		/* num_gc_slots = 4 */ 4u,
 		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry152 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_189 */
-	.entry152 = {
+	/* entry153 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_189 */
+	.entry153 = {
 		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_189),
 		/* frame_size = 32 */ 32u,
 		/* num_gc_slots = 4 */ 4u,
 		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry153 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_190 */
-	.entry153 = {
+	/* entry154 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_190 */
+	.entry154 = {
 		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_190),
 		/* frame_size = 32 */ 32u,
 		/* num_gc_slots = 4 */ 4u,
 		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry154 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_191 */
-	.entry154 = {
+	/* entry155 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_191 */
+	.entry155 = {
 		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_191),
 		/* frame_size = 32 */ 32u,
 		/* num_gc_slots = 4 */ 4u,
 		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry155 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_192 */
-	.entry155 = {
+	/* entry156 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_192 */
+	.entry156 = {
 		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_192),
 		/* frame_size = 32 */ 32u,
 		/* num_gc_slots = 4 */ 4u,
 		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry156 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_193 */
-	.entry156 = {
+	/* entry157 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_193 */
+	.entry157 = {
 		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_193),
 		/* frame_size = 32 */ 32u,
 		/* num_gc_slots = 4 */ 4u,
 		/* slots */ { 0u, 8u, 16u, 24u }
 	},
-	/* entry157 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_194 */
-	.entry157 = {
+	/* entry158 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_194 */
+	.entry158 = {
 		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_194),
 		/* frame_size = 40 */ 40u,
 		/* num_gc_slots = 5 */ 5u,
 		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
-	/* entry158 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_197 */
-	.entry158 = {
+	/* entry159 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_197 */
+	.entry159 = {
 		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_197),
 		/* frame_size = 40 */ 40u,
 		/* num_gc_slots = 5 */ 5u,
 		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
-	/* entry159 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_198 */
-	.entry159 = {
+	/* entry160 = NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_198 */
+	.entry160 = {
 		/* entry_total_size = 44 */ 44u,
 		/* code_address */ reinterpret_cast<const void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_198),
 		/* frame_size = 48 */ 48u,
@@ -6308,11 +6545,11 @@ static const struct {
 #pragma pack(pop)
 #endif
 
-static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 4868u;
+static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 5864u;
 
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
-static void* const kMethodPointers[179] = {
+static void* const kMethodPointers[199] = {
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_0),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_1),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_2),
@@ -6338,8 +6575,11 @@ static void* const kMethodPointers[179] = {
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_22),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_23),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_24),
+	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_25),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_26),
+	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_27),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_28),
+	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_29),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_30),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_31),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_32),
@@ -6347,9 +6587,11 @@ static void* const kMethodPointers[179] = {
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_34),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_35),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_36),
+	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_37),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_38),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_39),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_40),
+	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_41),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_42),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_43),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_44),
@@ -6357,6 +6599,7 @@ static void* const kMethodPointers[179] = {
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_46),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_47),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_48),
+	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_49),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_50),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_51),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_52),
@@ -6367,9 +6610,12 @@ static void* const kMethodPointers[179] = {
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_57),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_58),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_59),
+	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_60),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_61),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_62),
+	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_63),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_64),
+	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_65),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_66),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_67),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_68),
@@ -6380,6 +6626,7 @@ static void* const kMethodPointers[179] = {
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_73),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_74),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_75),
+	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_76),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_77),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_78),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_79),
@@ -6393,6 +6640,8 @@ static void* const kMethodPointers[179] = {
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_87),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_88),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_89),
+	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_90),
+	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_91),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_92),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_93),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_94),
@@ -6422,7 +6671,9 @@ static void* const kMethodPointers[179] = {
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_118),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_119),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_120),
+	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_121),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_122),
+	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_123),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_124),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_125),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_126),
@@ -6432,10 +6683,12 @@ static void* const kMethodPointers[179] = {
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_130),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_131),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_132),
+	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_133),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_134),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_135),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_136),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_137),
+	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_138),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_139),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_140),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_141),
@@ -6464,6 +6717,8 @@ static void* const kMethodPointers[179] = {
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_164),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_165),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_166),
+	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_167),
+	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_168),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_169),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_170),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_171),
@@ -6490,6 +6745,8 @@ static void* const kMethodPointers[179] = {
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_192),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_193),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_194),
+	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_195),
+	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_196),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_197),
 	reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_198),
 };
@@ -6499,7 +6756,7 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	= {
 	.struct_size               = sizeof(CodeRegistrationV0),
 	.method_pointers           = kMethodPointers,
-	.method_pointer_count      = 179u,
+	.method_pointer_count      = 199u,
 	.reverse_pinvoke_wrappers  = nullptr,
 	.reverse_pinvoke_wrapper_count = 0u,
 	.invoker_pointers          = nullptr,
@@ -6551,7 +6808,7 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 static constexpr ReflectionQueryFieldDescriptor kReflFields_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects[1] = {
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
 };
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects[179] = {
+static constexpr ReflectionQueryMethodDescriptor kReflMethods_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects[199] = {
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u },
@@ -6577,8 +6834,11 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_NativeMemoryPointe
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_22:System.Void()", "Subject_22", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_23:System.Void()", "Subject_23", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_24:System.Void()", "Subject_24", "System.Void", 0, nullptr, 0u },
+	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_25:System.Void()", "CustomEntrySubject_25", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_26:System.Void()", "Subject_26", "System.Void", 0, nullptr, 0u },
+	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_27:System.Void()", "CustomEntrySubject_27", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_28:System.Void()", "Subject_28", "System.Void", 0, nullptr, 0u },
+	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_29:System.Void()", "CustomEntrySubject_29", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_30:System.Void()", "Subject_30", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_31:System.Void()", "Subject_31", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_32:System.Void()", "Subject_32", "System.Void", 0, nullptr, 0u },
@@ -6586,9 +6846,11 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_NativeMemoryPointe
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_34:System.Void()", "Subject_34", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_35:System.Void()", "Subject_35", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_36:System.Void()", "Subject_36", "System.Void", 0, nullptr, 0u },
+	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_37:System.Void()", "CustomEntrySubject_37", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_38:System.Void()", "Subject_38", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_39:System.Void()", "Subject_39", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_40:System.Void()", "Subject_40", "System.Void", 0, nullptr, 0u },
+	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_41:System.Void()", "CustomEntrySubject_41", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_42:System.Void()", "Subject_42", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_43:System.Void()", "Subject_43", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_44:System.Void()", "Subject_44", "System.Void", 0, nullptr, 0u },
@@ -6596,6 +6858,7 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_NativeMemoryPointe
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_46:System.Void()", "Subject_46", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_47:System.Void()", "Subject_47", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_48:System.Void()", "Subject_48", "System.Void", 0, nullptr, 0u },
+	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_49:System.Void()", "CustomEntrySubject_49", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_50:System.Void()", "Subject_50", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_51:System.Void()", "Subject_51", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_52:System.Void()", "Subject_52", "System.Void", 0, nullptr, 0u },
@@ -6606,9 +6869,12 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_NativeMemoryPointe
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_57:System.Void()", "Subject_57", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_58:System.Void()", "Subject_58", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_59:System.Void()", "Subject_59", "System.Void", 0, nullptr, 0u },
+	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_60:System.Void()", "CustomEntrySubject_60", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_61:System.Void()", "Subject_61", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_62:System.Void()", "Subject_62", "System.Void", 0, nullptr, 0u },
+	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_63:System.Void()", "CustomEntrySubject_63", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_64:System.Void()", "Subject_64", "System.Void", 0, nullptr, 0u },
+	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_65:System.Void()", "CustomEntrySubject_65", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_66:System.Void()", "Subject_66", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_67:System.Void()", "Subject_67", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_68:System.Void()", "Subject_68", "System.Void", 0, nullptr, 0u },
@@ -6619,6 +6885,7 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_NativeMemoryPointe
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_73:System.Void()", "Subject_73", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_74:System.Void()", "Subject_74", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_75:System.Void()", "Subject_75", "System.Void", 0, nullptr, 0u },
+	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_76:System.Void()", "CustomEntrySubject_76", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_77:System.Void()", "Subject_77", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_78:System.Void()", "Subject_78", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_79:System.Void()", "Subject_79", "System.Void", 0, nullptr, 0u },
@@ -6632,6 +6899,8 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_NativeMemoryPointe
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_87:System.Void()", "Subject_87", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_88:System.Void()", "Subject_88", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_89:System.Void()", "Subject_89", "System.Void", 0, nullptr, 0u },
+	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_90:System.Void()", "CustomEntrySubject_90", "System.Void", 0, nullptr, 0u },
+	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_91:System.Void()", "CustomEntrySubject_91", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_92:System.Void()", "Subject_92", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_93:System.Void()", "Subject_93", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_94:System.Void()", "Subject_94", "System.Void", 0, nullptr, 0u },
@@ -6661,7 +6930,9 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_NativeMemoryPointe
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_118:System.Void()", "Subject_118", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_119:System.Void()", "Subject_119", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_120:System.Void()", "Subject_120", "System.Void", 0, nullptr, 0u },
+	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_121:System.Void()", "CustomEntrySubject_121", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_122:System.Void()", "Subject_122", "System.Void", 0, nullptr, 0u },
+	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_123:System.Void()", "CustomEntrySubject_123", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_124:System.Void()", "Subject_124", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_125:System.Void()", "Subject_125", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_126:System.Void()", "Subject_126", "System.Void", 0, nullptr, 0u },
@@ -6671,10 +6942,12 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_NativeMemoryPointe
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_130:System.Void()", "Subject_130", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_131:System.Void()", "Subject_131", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_132:System.Void()", "Subject_132", "System.Void", 0, nullptr, 0u },
+	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_133:System.Void()", "CustomEntrySubject_133", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_134:System.Void()", "Subject_134", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_135:System.Void()", "Subject_135", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_136:System.Void()", "Subject_136", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_137:System.Void()", "Subject_137", "System.Void", 0, nullptr, 0u },
+	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_138:System.Void()", "CustomEntrySubject_138", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_139:System.Void()", "Subject_139", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_140:System.Void()", "Subject_140", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_141:System.Void()", "Subject_141", "System.Void", 0, nullptr, 0u },
@@ -6703,6 +6976,8 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_NativeMemoryPointe
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_164:System.Void()", "Subject_164", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_165:System.Void()", "Subject_165", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_166:System.Void()", "Subject_166", "System.Void", 0, nullptr, 0u },
+	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_167:System.Void()", "CustomEntrySubject_167", "System.Void", 0, nullptr, 0u },
+	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_168:System.Void()", "CustomEntrySubject_168", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_169:System.Void()", "Subject_169", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_170:System.Void()", "Subject_170", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_171:System.Void()", "Subject_171", "System.Void", 0, nullptr, 0u },
@@ -6729,13 +7004,15 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_NativeMemoryPointe
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_192:System.Void()", "Subject_192", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_193:System.Void()", "Subject_193", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_194:System.Void()", "Subject_194", "System.Void", 0, nullptr, 0u },
+	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_195:System.Void()", "CustomEntrySubject_195", "System.Void", 0, nullptr, 0u },
+	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_196:System.Void()", "CustomEntrySubject_196", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_197:System.Void()", "Subject_197", "System.Void", 0, nullptr, 0u },
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_198:System.Void()", "Subject_198", "System.Void", 0, nullptr, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
 	{ 0u, "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects", "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects", "", "NativeMemoryPointersSubjects", "NativeMemoryPointersSubjects", nullptr, kReflFields_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects, 1u, nullptr, 0u,
-	kReflMethods_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects, 179u },
+	kReflMethods_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects, 199u },
 };
 
 static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
@@ -6790,6 +7067,13 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
 
 
 	CHAOS_EH_TRY
@@ -6799,9 +7083,21 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[1])(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[1])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -6809,10 +7105,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentNullException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -6832,30 +7133,55 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s7{};
 	CHAOS_IL2CPP_INTPTR _s8{};
 	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[3])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-1642479856);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
+	CHAOS_EH_TRY
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[3])(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[3])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
 		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
-		}
-		return;
-	}
+	CHAOS_EH_END
+	return;
 }
 
 // Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_2()
@@ -6873,30 +7199,55 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s7{};
 	CHAOS_IL2CPP_INTPTR _s8{};
 	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[4])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-2134461472);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
+	CHAOS_EH_TRY
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[4])(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[4])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
 		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
-		}
-		return;
-	}
+	CHAOS_EH_END
+	return;
 }
 
 // Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_3()
@@ -6914,30 +7265,55 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s7{};
 	CHAOS_IL2CPP_INTPTR _s8{};
 	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
-	_s0 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[5])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-1641522016);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
+	CHAOS_EH_TRY
+			_s0 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[5])(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+			_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[5])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
 		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
-		}
-		return;
-	}
+	CHAOS_EH_END
+	return;
 }
 
 // Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_4()
@@ -6952,35 +7328,58 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
 
 
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[6])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		if (_s0 != 0)
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-		}
-		else
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-		}
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s0) > static_cast<CHAOS_IL2CPP_UINTPTR>(_s1) ? 1 : 0);
-		{
-			if (_s0 != 0)
+	CHAOS_EH_TRY
 			{
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-				{
-					auto chaos_value = _s0;
-					chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
-				}
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[6])();
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			return;
+			// brtrue (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[6])();
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			// brtrue (structured EH branch)
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			chaos_locals[0] = _s4;
+			_s4 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s5;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
 		}
-	}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_END
+	return;
 }
 
 // Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_5()
@@ -6992,6 +7391,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	CHAOS_EH_TRY
@@ -7003,9 +7411,33 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[7])(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{{
+				_s1 = CHAOS_IL2CPP_STRING_ID("hello");
+			}}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[7])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -7013,10 +7445,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Runtime_InteropServices_COMException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -7030,22 +7467,40 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
 
 
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	{
-		const auto chaos_value = _s0;
-		auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-		chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-		chaos_boxed->value = chaos_value;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[9])(chaos_arg_0, chaos_arg_1);
-	}
+	CHAOS_EH_TRY
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_value = _s0;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				const auto chaos_arg_1 = _s1;
+				const auto chaos_arg_0 = _s0;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[10])(chaos_arg_0, chaos_arg_1);
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_END
 	return;
 }
 
@@ -7054,11 +7509,29 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
 
 
-	{
-		reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[10])();
-	}
+	CHAOS_EH_TRY
+			{
+				reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[11])();
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_END
 	return;
 }
 
@@ -7232,6 +7705,18 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
 
 
 	CHAOS_EH_TRY
@@ -7240,12 +7725,28 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 			{
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[11])(chaos_arg_0, chaos_arg_1);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[12])(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+			_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[12])(chaos_arg_0, chaos_arg_1);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -7253,11 +7754,26 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentNullException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
+	return;
+}
+
+// Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_25()
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_25(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+
 	return;
 }
 
@@ -7274,6 +7790,19 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
+	CHAOS_IL2CPP_INTPTR _s17{};
+	CHAOS_IL2CPP_INTPTR _s18{};
+	CHAOS_IL2CPP_INTPTR _s19{};
+	CHAOS_IL2CPP_INTPTR _s20{};
 
 
 	CHAOS_EH_TRY
@@ -7294,12 +7823,48 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 			{
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[14])(chaos_arg_0, chaos_arg_1);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[15])(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_value = _s1;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+			{
+				const auto chaos_arg_0 = _s2;
+				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[15])(chaos_arg_0, chaos_arg_1);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -7307,11 +7872,26 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
+	return;
+}
+
+// Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_27()
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_27(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+
 	return;
 }
 
@@ -7338,23 +7918,33 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 			{
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[15])(chaos_arg_0, chaos_arg_1);
-			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[16])(chaos_arg_0, chaos_arg_1);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentNullException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
+	return;
+}
+
+// Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_29()
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_29(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+
 	return;
 }
 
@@ -7369,6 +7959,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
@@ -7382,12 +7981,31 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 			}
 			{
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[16])(chaos_arg_0);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_value = _s1;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -7395,10 +8013,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -7409,13 +8032,31 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
 
 
-	_s0 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
-	{
-		const auto chaos_arg_0 = _s0;
-		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-	}
+	CHAOS_EH_TRY
+			_s0 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			{
+				const auto chaos_arg_0 = _s0;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[18])(chaos_arg_0);
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_END
 	return;
 }
 
@@ -7425,13 +8066,31 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
 
 
-	_s0 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
-	{
-		const auto chaos_arg_0 = _s0;
-		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[18])(chaos_arg_0);
-	}
+	CHAOS_EH_TRY
+			_s0 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			{
+				const auto chaos_arg_0 = _s0;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[19])(chaos_arg_0);
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_END
 	return;
 }
 
@@ -7441,13 +8100,31 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
 
 
-	_s0 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
-	{
-		const auto chaos_arg_0 = _s0;
-		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[19])(chaos_arg_0);
-	}
+	CHAOS_EH_TRY
+			_s0 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			{
+				const auto chaos_arg_0 = _s0;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_END
 	return;
 }
 
@@ -7467,41 +8144,78 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s8{};
 	CHAOS_IL2CPP_INTPTR _s9{};
 	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
 
 
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	chaos_locals[1] = _s0;
-	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = ChaosGuidGetHashCode(ChaosLoadInt64(chaos_arg_0));
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-863221168);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
+	CHAOS_EH_TRY
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[21])(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			chaos_locals[1] = _s0;
+			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosGuidGetHashCode(ChaosLoadInt64(chaos_arg_0));
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[21])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			chaos_locals[1] = _s1;
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosGuidGetHashCode(ChaosLoadInt64(chaos_arg_0));
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
 		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
-		}
-		return;
-	}
+	CHAOS_EH_END
+	return;
 }
 
 // Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_35()
@@ -7519,43 +8233,81 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s7{};
 	CHAOS_IL2CPP_INTPTR _s8{};
 	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s0;
-		if (chaos_arg_0 == 0)
+	CHAOS_EH_TRY
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[23])(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s0;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[23])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
 		{
-			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
 		}
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(11);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
-		{
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
-		}
-		return;
-	}
+	CHAOS_EH_END
+	return;
 }
 
 // Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_36()
@@ -7571,6 +8323,21 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
+	CHAOS_IL2CPP_INTPTR _s17{};
+	CHAOS_IL2CPP_INTPTR _s18{};
+	CHAOS_IL2CPP_INTPTR _s19{};
+	CHAOS_IL2CPP_INTPTR _s20{};
+	CHAOS_IL2CPP_INTPTR _s21{};
+	CHAOS_IL2CPP_INTPTR _s22{};
 
 
 	CHAOS_EH_TRY
@@ -7591,12 +8358,40 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 			{
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[24])(chaos_arg_0, chaos_arg_1);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[25])(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_value = _s1;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+			{
+				const auto chaos_arg_0 = _s2;
+				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[25])(chaos_arg_0, chaos_arg_1);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -7604,11 +8399,26 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
+	return;
+}
+
+// Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_37()
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_37(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+
 	return;
 }
 
@@ -7626,6 +8436,22 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
 	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
+	CHAOS_IL2CPP_INTPTR _s17{};
+	CHAOS_IL2CPP_INTPTR _s18{};
+	CHAOS_IL2CPP_INTPTR _s19{};
+	CHAOS_IL2CPP_INTPTR _s20{};
+	CHAOS_IL2CPP_INTPTR _s21{};
+	CHAOS_IL2CPP_INTPTR _s22{};
+	CHAOS_IL2CPP_INTPTR _s23{};
+	CHAOS_IL2CPP_INTPTR _s24{};
 
 
 	CHAOS_EH_TRY
@@ -7648,12 +8474,42 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_arg_2 = _s2;
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[25])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[26])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_value = _s1;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+			{
+				const auto chaos_arg_0 = _s2;
+				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			{
+				const auto chaos_arg_2 = _s3;
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[26])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -7661,10 +8517,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -7683,6 +8544,20 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
 	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
+	CHAOS_IL2CPP_INTPTR _s17{};
+	CHAOS_IL2CPP_INTPTR _s18{};
+	CHAOS_IL2CPP_INTPTR _s19{};
+	CHAOS_IL2CPP_INTPTR _s20{};
+	CHAOS_IL2CPP_INTPTR _s21{};
+	CHAOS_IL2CPP_INTPTR _s22{};
 
 
 	CHAOS_EH_TRY
@@ -7705,12 +8580,50 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 			{
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[26])(chaos_arg_0, chaos_arg_1);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[27])(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_value = _s1;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_value = _s2;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+			}
+			{
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[27])(chaos_arg_0, chaos_arg_1);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -7718,10 +8631,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -7737,6 +8655,17 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
 
 
 	CHAOS_EH_TRY
@@ -7750,12 +8679,41 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 			{
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[27])(chaos_arg_0, chaos_arg_1);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[28])(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+			{
+				const auto chaos_arg_0 = _s2;
+				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[28])(chaos_arg_0, chaos_arg_1);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -7763,11 +8721,26 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentNullException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
+	return;
+}
+
+// Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_41()
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_41(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+
 	return;
 }
 
@@ -7781,6 +8754,14 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	CHAOS_EH_TRY
@@ -7792,12 +8773,29 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 			}
 			{
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[28])(chaos_arg_0);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[29])(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[29])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -7805,10 +8803,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -7823,25 +8826,48 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
 
 
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[29])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s0) > static_cast<CHAOS_IL2CPP_UINTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
+	CHAOS_EH_TRY
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[30])();
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
 		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
-		}
-		return;
-	}
+	CHAOS_EH_END
+	return;
 }
 
 // Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_44()
@@ -7853,18 +8879,49 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	CHAOS_EH_TRY
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[30])(chaos_arg_0);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[31])(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[31])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -7872,10 +8929,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -7890,6 +8952,16 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
@@ -7898,12 +8970,36 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 			{
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[31])(chaos_arg_0, chaos_arg_1);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[32])(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			_s2 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			{
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[32])(chaos_arg_0, chaos_arg_1);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -7911,10 +9007,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -7923,7 +9024,7 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_46(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
@@ -7931,11 +9032,23 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
+	CHAOS_IL2CPP_INTPTR _s17{};
+	CHAOS_IL2CPP_INTPTR _s18{};
 
 
 	CHAOS_EH_TRY
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
 			_s2 = _s1;
 			{
 				const auto chaos_address = _s2;
@@ -7954,12 +9067,51 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_arg_2 = _s2;
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[33])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[34])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[2]);
+			_s3 = _s2;
+			{
+				const auto chaos_address = _s3;
+				if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+				{
+					auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+					*chaos_slot = 0;
+				}
+				else
+				{
+					*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
+				}
+			}
+			_s3 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			{
+				const auto chaos_arg_2 = _s3;
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[34])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -7967,10 +9119,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -7987,26 +9144,52 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
 
 
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[34])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s0) > static_cast<CHAOS_IL2CPP_UINTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
+	CHAOS_EH_TRY
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[35])();
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[35])();
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
 		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
-		}
-		return;
-	}
+	CHAOS_EH_END
+	return;
 }
 
 // Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_48()
@@ -8018,18 +9201,43 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[35])(chaos_arg_0);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[36])(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+			_s1 = 0;
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[36])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -8037,11 +9245,26 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentNullException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
+	return;
+}
+
+// Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_49()
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_49(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+
 	return;
 }
 
@@ -8054,18 +9277,43 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[36])(chaos_arg_0);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[37])(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+			_s1 = 0;
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[37])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -8073,10 +9321,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentNullException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -8092,27 +9345,53 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
 
 
-	_s0 = 0;
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[37])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s0) > static_cast<CHAOS_IL2CPP_UINTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
+	CHAOS_EH_TRY
+			_s0 = 0;
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[38])(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = 0;
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[38])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
 		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
-		}
-		return;
-	}
+	CHAOS_EH_END
+	return;
 }
 
 // Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_52()
@@ -8127,27 +9406,46 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
 
 
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[38])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-2147024693);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
+	CHAOS_EH_TRY
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[39])();
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[39])();
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
 		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
-		}
-		return;
-	}
+	CHAOS_EH_END
+	return;
 }
 
 // Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_53()
@@ -8161,6 +9459,19 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
+	CHAOS_IL2CPP_INTPTR _s17{};
+	CHAOS_IL2CPP_INTPTR _s18{};
 
 
 	CHAOS_EH_TRY
@@ -8174,12 +9485,33 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 			}
 			{
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[39])(chaos_arg_0);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[40])(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_value = _s1;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[40])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -8187,10 +9519,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_InvalidCastException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -8212,37 +9549,71 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s9{};
 	CHAOS_IL2CPP_INTPTR _s10{};
 	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
+	CHAOS_IL2CPP_INTPTR _s17{};
+	CHAOS_IL2CPP_INTPTR _s18{};
 
 
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	{
-		const auto chaos_value = _s0;
-		auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-		chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-		chaos_boxed->value = chaos_value;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-	}
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[40])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-2095449832);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
+	CHAOS_EH_TRY
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_value = _s0;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+			}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[41])(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_value = _s1;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[41])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
 		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
-		}
-		return;
-	}
+	CHAOS_EH_END
+	return;
 }
 
 // Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_55()
@@ -8257,27 +9628,46 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
 
 
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[41])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(203);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
+	CHAOS_EH_TRY
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[42])();
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[42])();
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
 		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
-		}
-		return;
-	}
+	CHAOS_EH_END
+	return;
 }
 
 // Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_56()
@@ -8293,36 +9683,65 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
 
 
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[42])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s0;
-		if (chaos_arg_0 == 0)
+	CHAOS_EH_TRY
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[43])();
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s0;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[43])();
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
 		{
-			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
 		}
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(66);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
-		{
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
-		}
-		return;
-	}
+	CHAOS_EH_END
+	return;
 }
 
 // Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_57()
@@ -8335,25 +9754,48 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
 
 
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[43])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s0) > static_cast<CHAOS_IL2CPP_UINTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
+	CHAOS_EH_TRY
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[44])();
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[44])();
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
 		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
-		}
-		return;
-	}
+	CHAOS_EH_END
+	return;
 }
 
 // Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_58()
@@ -8366,25 +9808,48 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
 
 
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[44])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s0) > static_cast<CHAOS_IL2CPP_UINTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
+	CHAOS_EH_TRY
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[45])();
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[45])();
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
 		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
-		}
-		return;
-	}
+	CHAOS_EH_END
+	return;
 }
 
 // Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_59()
@@ -8404,23 +9869,33 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 			{
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[45])(chaos_arg_0, chaos_arg_1);
-			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[46])(chaos_arg_0, chaos_arg_1);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentNullException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
+	return;
+}
+
+// Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_60()
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_60(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+
 	return;
 }
 
@@ -8433,18 +9908,49 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	CHAOS_EH_TRY
 			_s0 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
 			{
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[46])(chaos_arg_0);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[47])(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[47])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -8452,10 +9958,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentNullException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -8469,18 +9980,49 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	CHAOS_EH_TRY
 			_s0 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
 			{
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[47])(chaos_arg_0);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[48])(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[48])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -8488,11 +10030,26 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentNullException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
+	return;
+}
+
+// Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_63()
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_63(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+
 	return;
 }
 
@@ -8506,6 +10063,22 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
+	CHAOS_IL2CPP_INTPTR _s17{};
+	CHAOS_IL2CPP_INTPTR _s18{};
+	CHAOS_IL2CPP_INTPTR _s19{};
+	CHAOS_IL2CPP_INTPTR _s20{};
 
 
 	CHAOS_EH_TRY
@@ -8514,12 +10087,30 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 			{
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[48])(chaos_arg_0, chaos_arg_1);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[49])(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s0 = [&](){ auto* _c_arr = reinterpret_cast<chaos_managed_array*>(_s0); return _c_arr ? static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_c_arr->length)) : CHAOS_IL2CPP_INTPTR{}; }();
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+			_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[49])(chaos_arg_0, chaos_arg_1);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = [&](){ auto* _c_arr = reinterpret_cast<chaos_managed_array*>(_s1); return _c_arr ? static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_c_arr->length)) : CHAOS_IL2CPP_INTPTR{}; }();
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -8527,11 +10118,26 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentNullException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
+	return;
+}
+
+// Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_65()
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_65(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+
 	return;
 }
 
@@ -8549,38 +10155,70 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
 	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
 
 
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[49])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s0;
-		if (chaos_arg_0 == 0)
+	CHAOS_EH_TRY
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[50])(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s0;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[50])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
 		{
-			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
 		}
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(20);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
-		{
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
-		}
-		return;
-	}
+	CHAOS_EH_END
+	return;
 }
 
 // Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_67()
@@ -8593,6 +10231,14 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	CHAOS_EH_TRY
@@ -8604,12 +10250,29 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 			}
 			{
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[50])(chaos_arg_0);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[51])(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[51])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -8617,10 +10280,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -8636,6 +10304,17 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
 
 
 	CHAOS_EH_TRY
@@ -8649,12 +10328,41 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 			{
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[51])(chaos_arg_0, chaos_arg_1);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[52])(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+			{
+				const auto chaos_arg_0 = _s2;
+				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[52])(chaos_arg_0, chaos_arg_1);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -8662,10 +10370,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentNullException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -8684,34 +10397,62 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
 	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
 
 
-	_s0 = chaos_static_System_Private_CoreLib_System_Guid__Empty;
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[53])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(20054852);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
+	CHAOS_EH_TRY
+			_s0 = chaos_static_System_Private_CoreLib_System_Guid__Empty;
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[54])(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = chaos_static_System_Private_CoreLib_System_Guid__Empty;
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[54])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
 		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
-		}
-		return;
-	}
+	CHAOS_EH_END
+	return;
 }
 
 // Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_70()
@@ -8723,6 +10464,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	CHAOS_EH_TRY
@@ -8732,9 +10482,39 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[55])(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s0;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = 0;
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[55])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -8742,10 +10522,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentNullException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -8759,6 +10544,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	CHAOS_EH_TRY
@@ -8768,9 +10562,31 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[56])(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[56])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -8778,10 +10594,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentNullException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -8805,20 +10626,20 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_arg_0 = _s0;
 				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[57])(chaos_arg_0, chaos_arg_1);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
-			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -8838,44 +10659,79 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s7{};
 	CHAOS_IL2CPP_INTPTR _s8{};
 	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
+	CHAOS_IL2CPP_INTPTR _s17{};
+	CHAOS_IL2CPP_INTPTR _s18{};
 
 
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	{
-		const auto chaos_value = _s0;
-		auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-		chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-		chaos_boxed->value = chaos_value;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-	}
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[58])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		if (_s0 != 0)
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-		}
-		else
-		{
-			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-		}
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s0) > static_cast<CHAOS_IL2CPP_UINTPTR>(_s1) ? 1 : 0);
-		{
-			if (_s0 != 0)
+	CHAOS_EH_TRY
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-				{
-					auto chaos_value = _s0;
-					chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
-				}
+				const auto chaos_value = _s0;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 			}
-			return;
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[58])(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			// brtrue (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_value = _s3;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+			}
+			{
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[58])(chaos_arg_0);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			// brtrue (structured EH branch)
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			chaos_locals[0] = _s4;
+			_s4 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s5;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
 		}
-	}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_END
+	return;
 }
 
 // Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_74()
@@ -8892,42 +10748,74 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
 	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
 
 
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[59])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		if (_s0 != 0)
-		{
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-		}
-		else
-		{
-			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-		}
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(_s0) > static_cast<CHAOS_IL2CPP_UINTPTR>(_s1) ? 1 : 0);
-		{
-			if (_s0 != 0)
+	CHAOS_EH_TRY
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
 			{
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-				{
-					auto chaos_value = _s0;
-					chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
-				}
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			return;
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[59])(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			// brtrue (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+			{
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[59])(chaos_arg_0);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			// brtrue (structured EH branch)
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			chaos_locals[0] = _s4;
+			_s4 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s5;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
 		}
-	}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_END
+	return;
 }
 
 // Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_75()
@@ -8941,6 +10829,19 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
+	CHAOS_IL2CPP_INTPTR _s17{};
+	CHAOS_IL2CPP_INTPTR _s18{};
 
 
 	CHAOS_EH_TRY
@@ -8959,9 +10860,32 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[60])(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{{
+				_s2 = CHAOS_IL2CPP_STRING_ID("hello");
+			}}
+			{
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[60])(chaos_arg_0, chaos_arg_1);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -8969,11 +10893,26 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
+	return;
+}
+
+// Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_76()
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_76(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+
 	return;
 }
 
@@ -8993,20 +10932,20 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_arg_0 = _s0;
 				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[61])(chaos_arg_0);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
-			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentNullException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -9018,18 +10957,36 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
 
 
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s0;
-		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[62])(chaos_arg_0);
-	}
+	CHAOS_EH_TRY
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s0;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[62])(chaos_arg_0);
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_END
 	return;
 }
 
@@ -9042,6 +10999,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	CHAOS_EH_TRY
@@ -9051,9 +11017,39 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[63])(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s0;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[63])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -9061,10 +11057,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -9079,6 +11080,16 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
@@ -9090,9 +11101,41 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[64])(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s0;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[64])(chaos_arg_0, chaos_arg_1);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -9100,10 +11143,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentNullException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -9118,6 +11166,16 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
@@ -9129,9 +11187,41 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[65])(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s0;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[65])(chaos_arg_0, chaos_arg_1);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -9139,10 +11229,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentNullException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -9156,6 +11251,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	CHAOS_EH_TRY
@@ -9165,9 +11269,39 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[66])(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s0;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[66])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -9175,10 +11309,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -9192,6 +11331,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	CHAOS_EH_TRY
@@ -9201,9 +11349,39 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[67])(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s0;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[67])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -9211,10 +11389,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentNullException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -9228,6 +11411,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	CHAOS_EH_TRY
@@ -9237,9 +11429,39 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[68])(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s0;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[68])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -9247,10 +11469,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -9265,6 +11492,16 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
@@ -9276,9 +11513,41 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[69])(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s0;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[69])(chaos_arg_0, chaos_arg_1);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -9286,10 +11555,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentNullException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -9303,6 +11577,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	CHAOS_EH_TRY
@@ -9312,9 +11595,39 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[70])(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s0;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[70])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -9322,10 +11635,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -9340,6 +11658,16 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
@@ -9351,9 +11679,41 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[71])(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s0;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[71])(chaos_arg_0, chaos_arg_1);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				if (chaos_arg_0 == 0)
+				{
+					::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+				}
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -9361,10 +11721,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentNullException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -9380,6 +11745,17 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
 
 
 	CHAOS_EH_TRY
@@ -9396,9 +11772,38 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[72])(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+			{
+				const auto chaos_arg_0 = _s2;
+				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[72])(chaos_arg_0, chaos_arg_1);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -9406,10 +11811,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -9433,21 +11843,41 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_arg_0 = _s0;
 				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[73])(chaos_arg_0, chaos_arg_1);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
-			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentNullException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
+	return;
+}
+
+// Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_90()
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_90(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+
+	return;
+}
+
+// Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_91()
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_91(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+
 	return;
 }
 
@@ -9472,6 +11902,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
@@ -9484,9 +11923,24 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_UINT8(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[74])(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_UINT8(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[74])(chaos_arg_0, chaos_arg_1);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -9494,10 +11948,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_AccessViolationException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -9512,6 +11971,14 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	CHAOS_EH_TRY
@@ -9523,9 +11990,23 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_UINT8(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[74])(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_UINT8(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[74])(chaos_arg_0, chaos_arg_1);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -9533,10 +12014,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_AccessViolationException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -9550,6 +12036,13 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
 
 
 	CHAOS_EH_TRY
@@ -9559,9 +12052,21 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_UINT8(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[75])(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_UINT8(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[75])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -9569,10 +12074,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_AccessViolationException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -9588,6 +12098,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
@@ -9600,9 +12119,24 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT16(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[76])(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT16(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[76])(chaos_arg_0, chaos_arg_1);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -9610,10 +12144,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_AccessViolationException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -9628,6 +12167,14 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	CHAOS_EH_TRY
@@ -9639,9 +12186,23 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT16(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[76])(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT16(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[76])(chaos_arg_0, chaos_arg_1);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -9649,10 +12210,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_AccessViolationException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -9666,6 +12232,13 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
 
 
 	CHAOS_EH_TRY
@@ -9675,9 +12248,21 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT16(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[77])(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT16(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[77])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -9685,10 +12270,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_AccessViolationException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -9704,6 +12294,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
@@ -9716,9 +12315,24 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[78])(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[78])(chaos_arg_0, chaos_arg_1);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -9726,10 +12340,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_AccessViolationException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -9744,6 +12363,14 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	CHAOS_EH_TRY
@@ -9755,9 +12382,23 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[78])(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[78])(chaos_arg_0, chaos_arg_1);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -9765,10 +12406,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_AccessViolationException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -9782,6 +12428,13 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
 
 
 	CHAOS_EH_TRY
@@ -9791,9 +12444,21 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[79])(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[79])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -9801,10 +12466,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_AccessViolationException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -9820,6 +12490,19 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
+	CHAOS_IL2CPP_INTPTR _s17{};
+	CHAOS_IL2CPP_INTPTR _s18{};
 
 
 	CHAOS_EH_TRY
@@ -9832,9 +12515,26 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT64(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[80])(chaos_arg_0, chaos_arg_1);
 				_s0 = ChaosStoreInt64(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT64(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[80])(chaos_arg_0, chaos_arg_1);
+				_s1 = ChaosStoreInt64(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -9842,10 +12542,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_AccessViolationException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -9860,6 +12565,18 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
 
 
 	CHAOS_EH_TRY
@@ -9871,9 +12588,25 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT64(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[80])(chaos_arg_0, chaos_arg_1);
 				_s0 = ChaosStoreInt64(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+			_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT64(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[80])(chaos_arg_0, chaos_arg_1);
+				_s1 = ChaosStoreInt64(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -9881,10 +12614,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_AccessViolationException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -9898,6 +12636,17 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
@@ -9907,9 +12656,23 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT64(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[81])(chaos_arg_0);
 				_s0 = ChaosStoreInt64(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+			_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT64(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[81])(chaos_arg_0);
+				_s1 = ChaosStoreInt64(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -9917,10 +12680,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_AccessViolationException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -9936,6 +12704,19 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
+	CHAOS_IL2CPP_INTPTR _s17{};
+	CHAOS_IL2CPP_INTPTR _s18{};
 
 
 	CHAOS_EH_TRY
@@ -9948,9 +12729,26 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[82])(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[82])(chaos_arg_0, chaos_arg_1);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -9958,10 +12756,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_AccessViolationException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -9976,6 +12779,18 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
 
 
 	CHAOS_EH_TRY
@@ -9987,9 +12802,25 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[82])(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+			_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[82])(chaos_arg_0, chaos_arg_1);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -9997,10 +12828,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_AccessViolationException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -10014,6 +12850,17 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
@@ -10023,9 +12870,23 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[83])(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+			_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[83])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -10033,10 +12894,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_AccessViolationException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -10057,32 +12923,60 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s8{};
 	CHAOS_IL2CPP_INTPTR _s9{};
 	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
 
 
-	_s0 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[84])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-2134462240);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
+	CHAOS_EH_TRY
+			_s0 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_arg_1 = _s1;
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[84])(chaos_arg_0, chaos_arg_1);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+			_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[84])(chaos_arg_0, chaos_arg_1);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
 		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
-		}
-		return;
-	}
+	CHAOS_EH_END
+	return;
 }
 
 // Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_109()
@@ -10101,32 +12995,60 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s8{};
 	CHAOS_IL2CPP_INTPTR _s9{};
 	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
 
 
-	_s0 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
-	_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[85])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-1641521456);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
+	CHAOS_EH_TRY
+			_s0 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			{
+				const auto chaos_arg_1 = _s1;
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[85])(chaos_arg_0, chaos_arg_1);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+			_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			_s2 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			{
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[85])(chaos_arg_0, chaos_arg_1);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
 		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
-		}
-		return;
-	}
+	CHAOS_EH_END
+	return;
 }
 
 // Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_110()
@@ -10138,6 +13060,13 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
 
 
 	CHAOS_EH_TRY
@@ -10147,9 +13076,21 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[86])(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[86])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -10157,10 +13098,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentNullException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -10176,6 +13122,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
@@ -10192,9 +13147,28 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[87])(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_value = _s1;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[87])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -10202,10 +13176,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -10219,6 +13198,17 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
@@ -10228,9 +13218,23 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[88])(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+			_s1 = 0;
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[88])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -10238,10 +13242,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentNullException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -10255,6 +13264,17 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
@@ -10264,9 +13284,23 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[89])(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+			_s1 = 0;
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[89])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -10274,10 +13308,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentNullException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -10291,6 +13330,17 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
@@ -10300,9 +13350,23 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[90])(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+			_s1 = 0;
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[90])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -10310,10 +13374,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentNullException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -10327,6 +13396,17 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
@@ -10336,9 +13416,23 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[91])(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+			_s1 = 0;
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[91])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -10346,10 +13440,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentNullException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -10363,6 +13462,17 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
@@ -10372,9 +13482,23 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[92])(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+			_s1 = 0;
 			{
-				auto chaos_value = _s0;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[92])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -10382,10 +13506,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentNullException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -10407,6 +13536,25 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s9{};
 	CHAOS_IL2CPP_INTPTR _s10{};
 	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
+	CHAOS_IL2CPP_INTPTR _s17{};
+	CHAOS_IL2CPP_INTPTR _s18{};
+	CHAOS_IL2CPP_INTPTR _s19{};
+	CHAOS_IL2CPP_INTPTR _s20{};
+	CHAOS_IL2CPP_INTPTR _s21{};
+	CHAOS_IL2CPP_INTPTR _s22{};
+	CHAOS_IL2CPP_INTPTR _s23{};
+	CHAOS_IL2CPP_INTPTR _s24{};
+	CHAOS_IL2CPP_INTPTR _s25{};
+	CHAOS_IL2CPP_INTPTR _s26{};
+	CHAOS_IL2CPP_INTPTR _s27{};
+	CHAOS_IL2CPP_INTPTR _s28{};
+	CHAOS_IL2CPP_INTPTR _s29{};
+	CHAOS_IL2CPP_INTPTR _s30{};
 
 
 	CHAOS_EH_TRY
@@ -10441,9 +13589,54 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[93])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			// brtrue (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
-				auto chaos_value = _s0;
+				const auto chaos_value = _s3;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+			}
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_value = _s4;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+			}
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_value = _s5;
+				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
+				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_boxed->value = chaos_value;
+				_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
+			}
+			{
+				const auto chaos_arg_2 = _s5;
+				const auto chaos_arg_1 = _s4;
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[93])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			// brtrue (structured EH branch)
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			chaos_locals[0] = _s4;
+			_s4 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s5;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -10451,10 +13644,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -10465,13 +13663,31 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
 
 
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	{
-		const auto chaos_arg_0 = _s0;
-		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[94])(chaos_arg_0);
-	}
+	CHAOS_EH_TRY
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_arg_0 = _s0;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[94])(chaos_arg_0);
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_END
 	return;
 }
 
@@ -10481,13 +13697,31 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
 
 
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	{
-		const auto chaos_arg_0 = _s0;
-		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[95])(chaos_arg_0);
-	}
+	CHAOS_EH_TRY
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_arg_0 = _s0;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[95])(chaos_arg_0);
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_END
 	return;
 }
 
@@ -10504,29 +13738,61 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
 
 
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[96])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(4);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
+	CHAOS_EH_TRY
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[96])(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[96])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
 		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
-		}
-		return;
-	}
+	CHAOS_EH_END
+	return;
+}
+
+// Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_121()
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_121(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+
+	return;
 }
 
 // Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_122()
@@ -10543,34 +13809,72 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
 	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
 
 
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[97])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
+	CHAOS_EH_TRY
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[97])(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[97])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
 		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
-		}
-		return;
-	}
+	CHAOS_EH_END
+	return;
+}
+
+// Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_123()
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_123(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+
+	return;
 }
 
 // Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_124()
@@ -10588,32 +13892,59 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s7{};
 	CHAOS_IL2CPP_INTPTR _s8{};
 	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
-	{{
-		_s0 = CHAOS_IL2CPP_STRING_ID("hello");
-	}}
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[98])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-2134492536);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
+	CHAOS_EH_TRY
+			{{
+				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
+			}}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[98])(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+			{{
+				_s1 = CHAOS_IL2CPP_STRING_ID("hello");
+			}}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[98])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
 		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
-		}
-		return;
-	}
+	CHAOS_EH_END
+	return;
 }
 
 // Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_125()
@@ -10631,32 +13962,59 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s7{};
 	CHAOS_IL2CPP_INTPTR _s8{};
 	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
-	{{
-		_s0 = CHAOS_IL2CPP_STRING_ID("hello");
-	}}
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[99])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-2136817152);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
+	CHAOS_EH_TRY
+			{{
+				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
+			}}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[99])(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+			{{
+				_s1 = CHAOS_IL2CPP_STRING_ID("hello");
+			}}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[99])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
 		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
-		}
-		return;
-	}
+	CHAOS_EH_END
+	return;
 }
 
 // Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_126()
@@ -10674,32 +14032,59 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s7{};
 	CHAOS_IL2CPP_INTPTR _s8{};
 	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
-	{{
-		_s0 = CHAOS_IL2CPP_STRING_ID("hello");
-	}}
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[100])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-2136817120);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
+	CHAOS_EH_TRY
+			{{
+				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
+			}}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[100])(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+			{{
+				_s1 = CHAOS_IL2CPP_STRING_ID("hello");
+			}}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[100])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
 		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
-		}
-		return;
-	}
+	CHAOS_EH_END
+	return;
 }
 
 // Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_127()
@@ -10717,32 +14102,59 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s7{};
 	CHAOS_IL2CPP_INTPTR _s8{};
 	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
-	{{
-		_s0 = CHAOS_IL2CPP_STRING_ID("hello");
-	}}
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[101])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-2136817088);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
+	CHAOS_EH_TRY
+			{{
+				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
+			}}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[101])(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+			{{
+				_s1 = CHAOS_IL2CPP_STRING_ID("hello");
+			}}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[101])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
 		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
-		}
-		return;
-	}
+	CHAOS_EH_END
+	return;
 }
 
 // Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_128()
@@ -10760,32 +14172,59 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s7{};
 	CHAOS_IL2CPP_INTPTR _s8{};
 	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
-	{{
-		_s0 = CHAOS_IL2CPP_STRING_ID("hello");
-	}}
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[102])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-2136814272);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
+	CHAOS_EH_TRY
+			{{
+				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
+			}}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[102])(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+			{{
+				_s1 = CHAOS_IL2CPP_STRING_ID("hello");
+			}}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[102])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
 		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
-		}
-		return;
-	}
+	CHAOS_EH_END
+	return;
 }
 
 // Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_129()
@@ -10803,32 +14242,59 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s7{};
 	CHAOS_IL2CPP_INTPTR _s8{};
 	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
-	{{
-		_s0 = CHAOS_IL2CPP_STRING_ID("hello");
-	}}
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[103])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-2136815008);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
+	CHAOS_EH_TRY
+			{{
+				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
+			}}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[103])(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+			{{
+				_s1 = CHAOS_IL2CPP_STRING_ID("hello");
+			}}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[103])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
 		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
-		}
-		return;
-	}
+	CHAOS_EH_END
+	return;
 }
 
 // Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_130()
@@ -10846,32 +14312,59 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s7{};
 	CHAOS_IL2CPP_INTPTR _s8{};
 	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
-	{{
-		_s0 = CHAOS_IL2CPP_STRING_ID("hello");
-	}}
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[104])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-2136814720);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
+	CHAOS_EH_TRY
+			{{
+				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
+			}}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[104])(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+			{{
+				_s1 = CHAOS_IL2CPP_STRING_ID("hello");
+			}}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[104])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
 		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
-		}
-		return;
-	}
+	CHAOS_EH_END
+	return;
 }
 
 // Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_131()
@@ -10889,32 +14382,59 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s7{};
 	CHAOS_IL2CPP_INTPTR _s8{};
 	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
-	{{
-		_s0 = CHAOS_IL2CPP_STRING_ID("hello");
-	}}
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[105])(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-2136814656);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
+	CHAOS_EH_TRY
+			{{
+				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
+			}}
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[105])(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+			{{
+				_s1 = CHAOS_IL2CPP_STRING_ID("hello");
+			}}
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[105])(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
 		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
-		}
-		return;
-	}
+	CHAOS_EH_END
+	return;
 }
 
 // Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_132()
@@ -10939,21 +14459,31 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_arg_0 = _s0;
 				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[106])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
-			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentNullException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
+	return;
+}
+
+// Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_133()
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_133(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+
 	return;
 }
 
@@ -10963,13 +14493,31 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
 
 
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	{
-		const auto chaos_arg_0 = _s0;
-		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[107])(chaos_arg_0);
-	}
+	CHAOS_EH_TRY
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_arg_0 = _s0;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[107])(chaos_arg_0);
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_END
 	return;
 }
 
@@ -10980,15 +14528,33 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
 
 
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[108])(chaos_arg_0, chaos_arg_1);
-	}
+	CHAOS_EH_TRY
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			{
+				const auto chaos_arg_1 = _s1;
+				const auto chaos_arg_0 = _s0;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[108])(chaos_arg_0, chaos_arg_1);
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_END
 	return;
 }
 
@@ -11018,35 +14584,76 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s8{};
 	CHAOS_IL2CPP_INTPTR _s9{};
 	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
 
 
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[109])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[110])(chaos_arg_0, chaos_arg_1);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-2147445390);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	{
-		if (_s0 != 0)
+	CHAOS_EH_TRY
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[109])();
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_arg_1 = _s1;
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[110])(chaos_arg_0, chaos_arg_1);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[109])();
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[110])(chaos_arg_0, chaos_arg_1);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
 		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
 				auto chaos_value = _s0;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
-		}
-		return;
-	}
+	CHAOS_EH_END
+	return;
+}
+
+// Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_138()
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_138(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+
+	return;
 }
 
 // Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_139()
@@ -11073,20 +14680,20 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_arg_0 = _s0;
 				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[111])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
-			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_AccessViolationException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -11113,20 +14720,20 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_arg_0 = _s0;
 				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[111])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
-			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_AccessViolationException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -11150,20 +14757,20 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_arg_0 = _s0;
 				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[112])(chaos_arg_0, chaos_arg_1);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
-			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_AccessViolationException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -11192,20 +14799,20 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_arg_0 = _s0;
 				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[113])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
-			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_AccessViolationException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -11232,20 +14839,20 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_arg_0 = _s0;
 				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[113])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
-			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_AccessViolationException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -11269,20 +14876,20 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_arg_0 = _s0;
 				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[114])(chaos_arg_0, chaos_arg_1);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
-			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_AccessViolationException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -11309,20 +14916,20 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_arg_0 = _s0;
 				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[115])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
-			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_AccessViolationException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -11351,20 +14958,20 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_arg_0 = _s0;
 				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[115])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
-			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_AccessViolationException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -11388,20 +14995,20 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_arg_0 = _s0;
 				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[116])(chaos_arg_0, chaos_arg_1);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
-			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_AccessViolationException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -11430,20 +15037,20 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_arg_0 = _s0;
 				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[117])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
-			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_AccessViolationException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -11470,20 +15077,20 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_arg_0 = _s0;
 				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[117])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
-			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_AccessViolationException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -11507,20 +15114,20 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_arg_0 = _s0;
 				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[118])(chaos_arg_0, chaos_arg_1);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
-			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_AccessViolationException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -11552,20 +15159,20 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_arg_0 = _s0;
 				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[119])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
-			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_AccessViolationException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -11595,20 +15202,20 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_arg_0 = _s0;
 				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[119])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
-			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_AccessViolationException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -11635,20 +15242,20 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_arg_0 = _s0;
 				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[120])(chaos_arg_0, chaos_arg_1);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
-			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_AccessViolationException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -11675,20 +15282,20 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_arg_0 = _s0;
 				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[121])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
-			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_AccessViolationException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -11717,20 +15324,20 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_arg_0 = _s0;
 				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[121])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
-			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_AccessViolationException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -11754,20 +15361,20 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_arg_0 = _s0;
 				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[122])(chaos_arg_0, chaos_arg_1);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
-			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_AccessViolationException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -11778,13 +15385,31 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
 
 
-	_s0 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
-	{
-		const auto chaos_arg_0 = _s0;
-		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[123])(chaos_arg_0);
-	}
+	CHAOS_EH_TRY
+			_s0 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			{
+				const auto chaos_arg_0 = _s0;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[123])(chaos_arg_0);
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_END
 	return;
 }
 
@@ -11794,13 +15419,31 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
 
 
-	_s0 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
-	{
-		const auto chaos_arg_0 = _s0;
-		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[124])(chaos_arg_0);
-	}
+	CHAOS_EH_TRY
+			_s0 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			{
+				const auto chaos_arg_0 = _s0;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[124])(chaos_arg_0);
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_END
 	return;
 }
 
@@ -11810,13 +15453,31 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
 
 
-	_s0 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
-	{
-		const auto chaos_arg_0 = _s0;
-		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[125])(chaos_arg_0);
-	}
+	CHAOS_EH_TRY
+			_s0 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			{
+				const auto chaos_arg_0 = _s0;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[125])(chaos_arg_0);
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_END
 	return;
 }
 
@@ -11826,13 +15487,31 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
 
 
-	_s0 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
-	{
-		const auto chaos_arg_0 = _s0;
-		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[126])(chaos_arg_0);
-	}
+	CHAOS_EH_TRY
+			_s0 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			{
+				const auto chaos_arg_0 = _s0;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[126])(chaos_arg_0);
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_END
 	return;
 }
 
@@ -11842,13 +15521,31 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
 
 
-	_s0 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
-	{
-		const auto chaos_arg_0 = _s0;
-		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[127])(chaos_arg_0);
-	}
+	CHAOS_EH_TRY
+			_s0 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			{
+				const auto chaos_arg_0 = _s0;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[127])(chaos_arg_0);
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_END
 	return;
 }
 
@@ -11858,13 +15555,31 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
 
 
-	_s0 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
-	{
-		const auto chaos_arg_0 = _s0;
-		reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[128])(chaos_arg_0);
-	}
+	CHAOS_EH_TRY
+			_s0 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
+			{
+				const auto chaos_arg_0 = _s0;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[128])(chaos_arg_0);
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_END
 	return;
 }
 
@@ -11883,20 +15598,20 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 			{
 				reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[129])();
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
-			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -11910,6 +15625,17 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
@@ -11918,9 +15644,28 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[130])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			// brtrue (structured EH branch)
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s4 = 0;
 			{
-				auto chaos_value = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[130])();
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			// brtrue (structured EH branch)
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			chaos_locals[0] = _s6;
+			_s6 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s7;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -11928,10 +15673,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -11945,6 +15695,17 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
@@ -11953,9 +15714,28 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[131])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			// brtrue (structured EH branch)
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s4 = 0;
 			{
-				auto chaos_value = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[131])();
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			// brtrue (structured EH branch)
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			chaos_locals[0] = _s6;
+			_s6 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s7;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -11963,10 +15743,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -11980,6 +15765,17 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
@@ -11988,9 +15784,22 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT64(*)(void)>(kChaosExternalRuntimeFnTable[132])();
 				_s1 = ChaosStoreInt64(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s2 = 0;
 			{
-				auto chaos_value = _s1;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT64(*)(void)>(kChaosExternalRuntimeFnTable[132])();
+				_s3 = ChaosStoreInt64(chaos_result);
+			}
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s3));
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -11998,11 +15807,36 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
+	return;
+}
+
+// Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_167()
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_167(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+
+	return;
+}
+
+// Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_168()
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_168(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+
 	return;
 }
 
@@ -12018,6 +15852,20 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
+	CHAOS_IL2CPP_INTPTR _s17{};
+	CHAOS_IL2CPP_INTPTR _s18{};
+	CHAOS_IL2CPP_INTPTR _s19{};
+	CHAOS_IL2CPP_INTPTR _s20{};
 
 
 	CHAOS_EH_TRY
@@ -12029,9 +15877,31 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[133])(chaos_arg_0);
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			// brtrue (structured EH branch)
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s4 = 0;
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			_s5 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s5));
 			{
-				auto chaos_value = _s1;
+				const auto chaos_arg_0 = _s5;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[133])(chaos_arg_0);
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			// brtrue (structured EH branch)
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			chaos_locals[0] = _s6;
+			_s6 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s7;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -12039,10 +15909,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -12059,6 +15934,16 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
 
 
 	CHAOS_EH_TRY
@@ -12070,9 +15955,23 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_UINT8(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[134])(chaos_arg_0);
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s2 = 0;
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			_s3 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s3));
 			{
-				auto chaos_value = _s1;
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_UINT8(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[134])(chaos_arg_0);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -12080,10 +15979,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -12100,6 +16004,16 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
 
 
 	CHAOS_EH_TRY
@@ -12111,9 +16025,23 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[135])(chaos_arg_0);
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s2 = 0;
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			_s3 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s3));
 			{
-				auto chaos_value = _s1;
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[135])(chaos_arg_0);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -12121,10 +16049,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -12141,6 +16074,18 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
+	CHAOS_IL2CPP_INTPTR _s17{};
+	CHAOS_IL2CPP_INTPTR _s18{};
 
 
 	CHAOS_EH_TRY
@@ -12152,9 +16097,33 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[136])(chaos_arg_0);
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s1;
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Decimal__op_Explicit_System_Int32_System_Decimal_(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = 0;
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			_s3 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s3));
+			{
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[136])(chaos_arg_0);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Decimal__op_Explicit_System_Int32_System_Decimal_(chaos_arg_0);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -12162,10 +16131,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -12182,6 +16156,20 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
+	CHAOS_IL2CPP_INTPTR _s17{};
+	CHAOS_IL2CPP_INTPTR _s18{};
+	CHAOS_IL2CPP_INTPTR _s19{};
+	CHAOS_IL2CPP_INTPTR _s20{};
 
 
 	CHAOS_EH_TRY
@@ -12190,12 +16178,28 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 			_s1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
 			{
 				const auto chaos_arg_0 = _s1;
-				const auto chaos_result = reinterpret_cast<double(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[137])(chaos_arg_0);
+				const auto chaos_result = reinterpret_cast<double(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[138])(chaos_arg_0);
 				_s1 = ChaosStoreFloat64(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(ChaosLoadFloat64(_s1)));
+			_s2 = 0;
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			_s3 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s3));
 			{
-				auto chaos_value = _s1;
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = reinterpret_cast<double(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[138])(chaos_arg_0);
+				_s3 = ChaosStoreFloat64(chaos_result);
+			}
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(ChaosLoadFloat64(_s3)));
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -12203,10 +16207,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -12223,6 +16232,16 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
 
 
 	CHAOS_EH_TRY
@@ -12231,12 +16250,26 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 			_s1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
 			{
 				const auto chaos_arg_0 = _s1;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT16(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[138])(chaos_arg_0);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT16(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[139])(chaos_arg_0);
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s2 = 0;
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			_s3 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s3));
 			{
-				auto chaos_value = _s1;
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT16(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[139])(chaos_arg_0);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -12244,10 +16277,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -12264,6 +16302,16 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
 
 
 	CHAOS_EH_TRY
@@ -12272,12 +16320,26 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 			_s1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
 			{
 				const auto chaos_arg_0 = _s1;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[139])(chaos_arg_0);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[140])(chaos_arg_0);
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s2 = 0;
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			_s3 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s3));
 			{
-				auto chaos_value = _s1;
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[140])(chaos_arg_0);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -12285,10 +16347,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -12305,6 +16372,20 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
+	CHAOS_IL2CPP_INTPTR _s17{};
+	CHAOS_IL2CPP_INTPTR _s18{};
+	CHAOS_IL2CPP_INTPTR _s19{};
+	CHAOS_IL2CPP_INTPTR _s20{};
 
 
 	CHAOS_EH_TRY
@@ -12313,12 +16394,28 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 			_s1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
 			{
 				const auto chaos_arg_0 = _s1;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT64(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[140])(chaos_arg_0);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT64(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[141])(chaos_arg_0);
 				_s1 = ChaosStoreInt64(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s2 = 0;
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			_s3 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s3));
 			{
-				auto chaos_value = _s1;
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT64(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[141])(chaos_arg_0);
+				_s3 = ChaosStoreInt64(chaos_result);
+			}
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s3));
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -12326,10 +16423,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -12346,6 +16448,16 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
 
 
 	CHAOS_EH_TRY
@@ -12354,12 +16466,26 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 			_s1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
 			{
 				const auto chaos_arg_0 = _s1;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT8(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[141])(chaos_arg_0);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT8(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[142])(chaos_arg_0);
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s2 = 0;
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			_s3 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s3));
 			{
-				auto chaos_value = _s1;
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT8(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[142])(chaos_arg_0);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -12367,10 +16493,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -12387,6 +16518,20 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
+	CHAOS_IL2CPP_INTPTR _s17{};
+	CHAOS_IL2CPP_INTPTR _s18{};
+	CHAOS_IL2CPP_INTPTR _s19{};
+	CHAOS_IL2CPP_INTPTR _s20{};
 
 
 	CHAOS_EH_TRY
@@ -12395,12 +16540,28 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 			_s1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
 			{
 				const auto chaos_arg_0 = _s1;
-				const auto chaos_result = reinterpret_cast<float(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[142])(chaos_arg_0);
+				const auto chaos_result = reinterpret_cast<float(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[143])(chaos_arg_0);
 				_s1 = ChaosStoreFloat32(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(chaos_load_float32(_s1)));
+			_s2 = 0;
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			_s3 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s3));
 			{
-				auto chaos_value = _s1;
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = reinterpret_cast<float(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[143])(chaos_arg_0);
+				_s3 = ChaosStoreFloat32(chaos_result);
+			}
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(chaos_load_float32(_s3)));
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -12408,10 +16569,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -12428,6 +16594,16 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
 
 
 	CHAOS_EH_TRY
@@ -12436,12 +16612,26 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 			_s1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
 			{
 				const auto chaos_arg_0 = _s1;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_UINT16(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[143])(chaos_arg_0);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_UINT16(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[144])(chaos_arg_0);
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s2 = 0;
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			_s3 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s3));
 			{
-				auto chaos_value = _s1;
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_UINT16(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[144])(chaos_arg_0);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -12449,10 +16639,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -12469,6 +16664,16 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
 
 
 	CHAOS_EH_TRY
@@ -12477,12 +16682,26 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 			_s1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
 			{
 				const auto chaos_arg_0 = _s1;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[144])(chaos_arg_0);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[145])(chaos_arg_0);
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s2 = 0;
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			_s3 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s3));
 			{
-				auto chaos_value = _s1;
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[145])(chaos_arg_0);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -12490,10 +16709,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -12510,6 +16734,20 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
+	CHAOS_IL2CPP_INTPTR _s17{};
+	CHAOS_IL2CPP_INTPTR _s18{};
+	CHAOS_IL2CPP_INTPTR _s19{};
+	CHAOS_IL2CPP_INTPTR _s20{};
 
 
 	CHAOS_EH_TRY
@@ -12518,12 +16756,28 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 			_s1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
 			{
 				const auto chaos_arg_0 = _s1;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_UINT64(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[145])(chaos_arg_0);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_UINT64(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[146])(chaos_arg_0);
 				_s1 = chaos_store_uint64(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
+			_s2 = 0;
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			_s3 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s3));
 			{
-				auto chaos_value = _s1;
+				const auto chaos_arg_0 = _s3;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_UINT64(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[146])(chaos_arg_0);
+				_s3 = chaos_store_uint64(chaos_result);
+			}
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s3));
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
 				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -12531,10 +16785,15 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -12561,22 +16820,22 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 			{
 				const auto chaos_arg_1 = _s2;
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[146])(chaos_arg_0, chaos_arg_1);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[147])(chaos_arg_0, chaos_arg_1);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -12603,22 +16862,22 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 			{
 				const auto chaos_arg_1 = _s2;
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[147])(chaos_arg_0, chaos_arg_1);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[148])(chaos_arg_0, chaos_arg_1);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -12645,22 +16904,22 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 			{
 				const auto chaos_arg_1 = _s2;
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[148])(chaos_arg_0, chaos_arg_1);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[149])(chaos_arg_0, chaos_arg_1);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -12687,22 +16946,22 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 			{
 				const auto chaos_arg_1 = _s2;
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[149])(chaos_arg_0, chaos_arg_1);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[150])(chaos_arg_0, chaos_arg_1);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -12729,22 +16988,22 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 			{
 				const auto chaos_arg_1 = _s2;
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[150])(chaos_arg_0, chaos_arg_1);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[151])(chaos_arg_0, chaos_arg_1);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -12774,22 +17033,22 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 			{
 				const auto chaos_arg_1 = _s2;
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[151])(chaos_arg_0, chaos_arg_1);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[152])(chaos_arg_0, chaos_arg_1);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -12824,22 +17083,22 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 			{
 				const auto chaos_arg_1 = _s2;
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[153])(chaos_arg_0, chaos_arg_1);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[154])(chaos_arg_0, chaos_arg_1);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -12866,22 +17125,22 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 			{
 				const auto chaos_arg_1 = _s2;
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[154])(chaos_arg_0, chaos_arg_1);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[155])(chaos_arg_0, chaos_arg_1);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -12908,22 +17167,22 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 			{
 				const auto chaos_arg_1 = _s2;
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[155])(chaos_arg_0, chaos_arg_1);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[156])(chaos_arg_0, chaos_arg_1);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -12950,22 +17209,22 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 			{
 				const auto chaos_arg_1 = _s2;
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[156])(chaos_arg_0, chaos_arg_1);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[157])(chaos_arg_0, chaos_arg_1);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -12992,22 +17251,22 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 			{
 				const auto chaos_arg_1 = _s2;
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[157])(chaos_arg_0, chaos_arg_1);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[158])(chaos_arg_0, chaos_arg_1);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -13034,22 +17293,22 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 			{
 				const auto chaos_arg_1 = _s2;
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[158])(chaos_arg_0, chaos_arg_1);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[159])(chaos_arg_0, chaos_arg_1);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -13079,23 +17338,43 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 			{
 				const auto chaos_arg_1 = _s2;
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[159])(chaos_arg_0, chaos_arg_1);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[160])(chaos_arg_0, chaos_arg_1);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_NullReferenceException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
+	return;
+}
+
+// Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_195()
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_195(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+
+	return;
+}
+
+// Managed method: NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_196()
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_196(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
+
 	return;
 }
 
@@ -13127,20 +17406,20 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				chaos_object->header.type_info = &chaos_mt_System_Runtime_InteropServices_System_IO_UnmanagedMemoryAccessor.hot;
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
-			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentNullException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -13175,20 +17454,20 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 				chaos_object->header.type_info = &chaos_mt_System_Runtime_InteropServices_System_IO_UnmanagedMemoryAccessor.hot;
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
-			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_ArgumentNullException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_NativeMemoryPointersSubjects_NativeMemoryPointersSubjects___exitCode = chaos_value;
+			}
 	CHAOS_EH_END
 	return;
 }
@@ -13199,6 +17478,6 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 #pragma warning(pop)
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
-extern "C" const int kAotMethodCount = 179;
+extern "C" const int kAotMethodCount = 199;
 
 extern "C" void ChaosJitRegisterAll() {}

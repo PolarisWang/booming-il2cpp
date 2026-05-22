@@ -99,6 +99,12 @@
       "reason": "external-call"
     },
     {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
       "assemblyName": "System.Runtime.InteropServices",
       "subjectKind": "method",
       "subjectId": "System.Runtime.InteropServices/ComWrappers::GetOrCreateObjectForComInstance:System.Object(System.IntPtr,CreateObjectFlags,System.Object)",

@@ -30,7 +30,7 @@
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 3,
+          "operand": 5,
           "ilOffset": 1,
           "resultType": "System.Int32",
           "isPreserveSig": false
@@ -69,18 +69,18 @@
         {
           "op": "ldtoken",
           "opCode": 70,
-          "operand": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::4636993D3E1DA4E9D6B8F87B79E8F7C6D018580D52661950EABC3845C5897A4D",
+          "operand": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::D8D4F55129E2966F2C74F35D6AC1769A713230A8B8371D030F18C6DEA1AAFD77",
           "ilOffset": 8,
           "resultType": "System.RuntimeFieldHandle",
           "reference": {
             "assemblyName": "JoinsSubjects",
             "subjectKind": "field",
-            "subjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::4636993D3E1DA4E9D6B8F87B79E8F7C6D018580D52661950EABC3845C5897A4D"
+            "subjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::D8D4F55129E2966F2C74F35D6AC1769A713230A8B8371D030F18C6DEA1AAFD77"
           },
           "targetReference": {
             "kind": 2,
             "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::4636993D3E1DA4E9D6B8F87B79E8F7C6D018580D52661950EABC3845C5897A4D",
+            "subjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::D8D4F55129E2966F2C74F35D6AC1769A713230A8B8371D030F18C6DEA1AAFD77",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
@@ -88,7 +88,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeSubjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E",
             "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=12"
+            "fieldTypeSubjectId": "\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=20"
           },
           "isPreserveSig": false
         },
@@ -118,100 +118,10 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 3,
-          "ilOffset": 18,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "newarr",
-          "opCode": 43,
-          "operand": "System.Private.CoreLib/System.Int32",
-          "ilOffset": 19,
-          "resultType": "System.Int32[]",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "type",
-            "subjectId": "System.Private.CoreLib/System.Int32"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Int32",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 6,
-          "isPreserveSig": false
-        },
-        {
-          "op": "dup",
-          "opCode": 54,
-          "ilOffset": 24,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldtoken",
-          "opCode": 70,
-          "operand": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::4636993D3E1DA4E9D6B8F87B79E8F7C6D018580D52661950EABC3845C5897A4D",
-          "ilOffset": 25,
-          "resultType": "System.RuntimeFieldHandle",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "field",
-            "subjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::4636993D3E1DA4E9D6B8F87B79E8F7C6D018580D52661950EABC3845C5897A4D"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::4636993D3E1DA4E9D6B8F87B79E8F7C6D018580D52661950EABC3845C5897A4D",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=12"
-          },
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 30,
-          "resultType": "System.Void",
-          "callee": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
           "op": "ldsfld",
           "opCode": 12,
           "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_0",
-          "ilOffset": 35,
+          "ilOffset": 18,
           "resultType": "System.Func\u003CSystem.Int32,System.Int32\u003E",
           "reference": {
             "assemblyName": "JoinsSubjects",
@@ -237,28 +147,28 @@
         {
           "op": "dup",
           "opCode": 54,
-          "ilOffset": 40,
+          "ilOffset": 23,
           "isPreserveSig": false
         },
         {
           "op": "brtrue",
           "opCode": 18,
-          "operand": 66,
-          "ilOffset": 41,
+          "operand": 49,
+          "ilOffset": 24,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 43,
+          "ilOffset": 26,
           "isPreserveSig": false
         },
         {
           "op": "ldsfld",
           "opCode": 12,
           "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
-          "ilOffset": 44,
+          "ilOffset": 27,
           "resultType": "JoinsSubjects\u002B\u003C\u003Ec",
           "reference": {
             "assemblyName": "JoinsSubjects",
@@ -285,7 +195,7 @@
           "op": "ldftn",
           "opCode": 73,
           "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_0:System.Int32(System.Int32)",
-          "ilOffset": 49,
+          "ilOffset": 32,
           "resultType": "System.IntPtr",
           "callee": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_0:System.Int32(System.Int32)",
           "reference": {
@@ -309,7 +219,7 @@
         {
           "op": "newobj",
           "opCode": 34,
-          "ilOffset": 55,
+          "ilOffset": 38,
           "resultType": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32\u003E",
           "callee": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
           "reference": {
@@ -334,14 +244,14 @@
         {
           "op": "dup",
           "opCode": 54,
-          "ilOffset": 60,
+          "ilOffset": 43,
           "isPreserveSig": false
         },
         {
           "op": "stsfld",
           "opCode": 13,
           "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_0",
-          "ilOffset": 61,
+          "ilOffset": 44,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "JoinsSubjects",
@@ -365,374 +275,56 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldsfld",
-          "opCode": 12,
-          "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_1",
-          "ilOffset": 66,
-          "resultType": "System.Func\u003CSystem.Int32,System.Int32\u003E",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "field",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_1"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_1",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Func\u003CSystem.Int32,System.Int32\u003E"
-          },
-          "runtimeServiceKind": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "dup",
-          "opCode": 54,
-          "ilOffset": 71,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brtrue",
-          "opCode": 18,
-          "operand": 97,
-          "ilOffset": 72,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 74,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldsfld",
-          "opCode": 12,
-          "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
-          "ilOffset": 75,
-          "resultType": "JoinsSubjects\u002B\u003C\u003Ec",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "field",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "JoinsSubjects\u002B\u003C\u003Ec"
-          },
-          "runtimeServiceKind": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldftn",
-          "opCode": 73,
-          "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_1:System.Int32(System.Int32)",
-          "ilOffset": 80,
-          "resultType": "System.IntPtr",
-          "callee": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_1:System.Int32(System.Int32)",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "method",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_1:System.Int32(System.Int32)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_1:System.Int32(System.Int32)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "isPreserveSig": false
-        },
-        {
-          "op": "newobj",
-          "opCode": 34,
-          "ilOffset": 86,
-          "resultType": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32\u003E",
-          "callee": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32\u003E",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "dup",
-          "opCode": 54,
-          "ilOffset": 91,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_1",
-          "ilOffset": 92,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "field",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_1"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_1",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Func\u003CSystem.Int32,System.Int32\u003E"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldsfld",
-          "opCode": 12,
-          "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_2",
-          "ilOffset": 97,
-          "resultType": "System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "field",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_2"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_2",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E"
-          },
-          "runtimeServiceKind": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "dup",
-          "opCode": 54,
-          "ilOffset": 102,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brtrue",
-          "opCode": 18,
-          "operand": 128,
-          "ilOffset": 103,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 105,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldsfld",
-          "opCode": 12,
-          "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
-          "ilOffset": 106,
-          "resultType": "JoinsSubjects\u002B\u003C\u003Ec",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "field",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "JoinsSubjects\u002B\u003C\u003Ec"
-          },
-          "runtimeServiceKind": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldftn",
-          "opCode": 73,
-          "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-          "ilOffset": 111,
-          "resultType": "System.IntPtr",
-          "callee": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "method",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "isPreserveSig": false
-        },
-        {
-          "op": "newobj",
-          "opCode": 34,
-          "ilOffset": 117,
-          "resultType": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E",
-          "callee": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "dup",
-          "opCode": 54,
-          "ilOffset": 122,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_2",
-          "ilOffset": 123,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "field",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_2"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__1_2",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 128,
-          "resultType": "System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E",
-          "callee": "System.Linq/Enumerable::GroupJoin\u003CSystem.Int32,System.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E)",
+          "ilOffset": 49,
+          "resultType": "System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E",
+          "callee": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
           "reference": {
             "assemblyName": "System.Linq",
             "subjectKind": "method",
-            "subjectId": "System.Linq/Enumerable::GroupJoin\u003CSystem.Int32,System.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E)"
+            "subjectId": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)"
           },
           "targetReference": {
             "kind": 3,
             "assemblyName": "System.Linq",
-            "subjectId": "System.Linq/Enumerable::GroupJoin\u003CSystem.Int32,System.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E)",
-            "openDefinitionSubjectId": "System.Linq/Enumerable::GroupJoin:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IEnumerable\u003C!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,!!2\u003E,System.Func\u003C!!0,System.Collections.Generic.IEnumerable\u003C!!1\u003E,!!3\u003E)",
+            "subjectId": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+            "openDefinitionSubjectId": "System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CIGrouping\u003C!!1,!!0\u003E\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E)",
             "sharedGenericBodyId": {
-              "value": "body:definition=System.Linq/Enumerable::GroupJoin:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IEnumerable\u003C!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,!!2\u003E,System.Func\u003C!!0,System.Collections.Generic.IEnumerable\u003C!!1\u003E,!!3\u003E);type=[];method=[System.Int32,System.Int32,System.Int32,System.Int32]"
+              "value": "body:definition=System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CIGrouping\u003C!!1,!!0\u003E\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E);type=[];method=[System.Int32,System.Int32]"
             },
             "instantiationStubId": {
-              "value": "stub:definition=System.Linq/Enumerable::GroupJoin:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IEnumerable\u003C!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,!!2\u003E,System.Func\u003C!!0,System.Collections.Generic.IEnumerable\u003C!!1\u003E,!!3\u003E);type=[];method=[System.Int32,System.Int32,System.Int32,System.Int32]"
+              "value": "stub:definition=System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CIGrouping\u003C!!1,!!0\u003E\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E);type=[];method=[System.Int32,System.Int32]"
             },
             "runtimeGenericContext": {
               "instantiationKey": {
                 "contextKind": 2,
-                "definitionSubjectId": "System.Linq/Enumerable::GroupJoin:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IEnumerable\u003C!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,!!2\u003E,System.Func\u003C!!0,System.Collections.Generic.IEnumerable\u003C!!1\u003E,!!3\u003E)",
+                "definitionSubjectId": "System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CIGrouping\u003C!!1,!!0\u003E\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E)",
                 "typeArguments": [],
                 "methodArguments": [
-                  "System.Int32",
-                  "System.Int32",
                   "System.Int32",
                   "System.Int32"
                 ]
               },
               "sharedGenericBodyId": {
-                "value": "body:definition=System.Linq/Enumerable::GroupJoin:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IEnumerable\u003C!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,!!2\u003E,System.Func\u003C!!0,System.Collections.Generic.IEnumerable\u003C!!1\u003E,!!3\u003E);type=[];method=[System.Int32,System.Int32,System.Int32,System.Int32]"
+                "value": "body:definition=System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CIGrouping\u003C!!1,!!0\u003E\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E);type=[];method=[System.Int32,System.Int32]"
               },
               "instantiationStubId": {
-                "value": "stub:definition=System.Linq/Enumerable::GroupJoin:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IEnumerable\u003C!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,!!2\u003E,System.Func\u003C!!0,System.Collections.Generic.IEnumerable\u003C!!1\u003E,!!3\u003E);type=[];method=[System.Int32,System.Int32,System.Int32,System.Int32]"
+                "value": "stub:definition=System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CIGrouping\u003C!!1,!!0\u003E\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E);type=[];method=[System.Int32,System.Int32]"
               },
               "supportKindCode": 3,
               "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:methodSpec"
             },
             "genericDiagnostic": {
-              "subjectId": "System.Linq/Enumerable::GroupJoin\u003CSystem.Int32,System.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E)",
-              "definitionSubjectId": "System.Linq/Enumerable::GroupJoin:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IEnumerable\u003C!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,!!2\u003E,System.Func\u003C!!0,System.Collections.Generic.IEnumerable\u003C!!1\u003E,!!3\u003E)",
-              "displaySubjectId": "System.Linq/Enumerable::GroupJoin\u003CSystem.Int32,System.Int32,System.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E)",
+              "subjectId": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+              "definitionSubjectId": "System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CIGrouping\u003C!!1,!!0\u003E\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E)",
+              "displaySubjectId": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
               "instantiationKey": {
                 "contextKind": 2,
-                "definitionSubjectId": "System.Linq/Enumerable::GroupJoin:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IEnumerable\u003C!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,!!2\u003E,System.Func\u003C!!0,System.Collections.Generic.IEnumerable\u003C!!1\u003E,!!3\u003E)",
+                "definitionSubjectId": "System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CIGrouping\u003C!!1,!!0\u003E\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E)",
                 "typeArguments": [],
                 "methodArguments": [
-                  "System.Int32",
-                  "System.Int32",
                   "System.Int32",
                   "System.Int32"
                 ]
@@ -751,53 +343,53 @@
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 133,
-          "resultType": "System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E",
-          "callee": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E()",
+          "ilOffset": 54,
+          "resultType": "System.Collections.Generic.IEnumerator\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E",
+          "callee": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E()",
           "reference": {
             "assemblyName": "System.Private.CoreLib",
             "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E()"
+            "subjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E()"
           },
           "targetReference": {
             "kind": 3,
             "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E()",
+            "subjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E()",
             "openDefinitionSubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E()",
             "sharedGenericBodyId": {
-              "value": "body:definition=System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E();type=[System.Int32];method=[]"
+              "value": "body:definition=System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E();type=[IGrouping\u003CSystem.Int32,System.Int32\u003E];method=[]"
             },
             "instantiationStubId": {
-              "value": "stub:definition=System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E();type=[System.Int32];method=[]"
+              "value": "stub:definition=System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E();type=[IGrouping\u003CSystem.Int32,System.Int32\u003E];method=[]"
             },
             "runtimeGenericContext": {
               "instantiationKey": {
                 "contextKind": 1,
                 "definitionSubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E()",
                 "typeArguments": [
-                  "System.Int32"
+                  "IGrouping\u003CSystem.Int32,System.Int32\u003E"
                 ],
                 "methodArguments": []
               },
               "sharedGenericBodyId": {
-                "value": "body:definition=System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E();type=[System.Int32];method=[]"
+                "value": "body:definition=System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E();type=[IGrouping\u003CSystem.Int32,System.Int32\u003E];method=[]"
               },
               "instantiationStubId": {
-                "value": "stub:definition=System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E();type=[System.Int32];method=[]"
+                "value": "stub:definition=System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E();type=[IGrouping\u003CSystem.Int32,System.Int32\u003E];method=[]"
               },
               "supportKindCode": 3,
               "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
-              "subjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E()",
+              "subjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E()",
               "definitionSubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E()",
-              "displaySubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E::GetEnumerator()",
+              "displaySubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E::GetEnumerator()",
               "instantiationKey": {
                 "contextKind": 1,
                 "definitionSubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E()",
                 "typeArguments": [
-                  "System.Int32"
+                  "IGrouping\u003CSystem.Int32,System.Int32\u003E"
                 ],
                 "methodArguments": []
               }
@@ -815,7 +407,7 @@
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 138,
+          "ilOffset": 59,
           "resultType": "System.Boolean",
           "callee": "System.Private.CoreLib/System.Collections.IEnumerator::MoveNext:System.Boolean()",
           "reference": {
@@ -840,13 +432,13 @@
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 143,
+          "ilOffset": 64,
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 144,
+          "ilOffset": 65,
           "isPreserveSig": false
         }
       ],
@@ -888,7 +480,7 @@
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 3,
+          "operand": 5,
           "ilOffset": 1,
           "resultType": "System.Int32",
           "isPreserveSig": false
@@ -927,18 +519,18 @@
         {
           "op": "ldtoken",
           "opCode": 70,
-          "operand": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::4636993D3E1DA4E9D6B8F87B79E8F7C6D018580D52661950EABC3845C5897A4D",
+          "operand": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::D8D4F55129E2966F2C74F35D6AC1769A713230A8B8371D030F18C6DEA1AAFD77",
           "ilOffset": 8,
           "resultType": "System.RuntimeFieldHandle",
           "reference": {
             "assemblyName": "JoinsSubjects",
             "subjectKind": "field",
-            "subjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::4636993D3E1DA4E9D6B8F87B79E8F7C6D018580D52661950EABC3845C5897A4D"
+            "subjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::D8D4F55129E2966F2C74F35D6AC1769A713230A8B8371D030F18C6DEA1AAFD77"
           },
           "targetReference": {
             "kind": 2,
             "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::4636993D3E1DA4E9D6B8F87B79E8F7C6D018580D52661950EABC3845C5897A4D",
+            "subjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::D8D4F55129E2966F2C74F35D6AC1769A713230A8B8371D030F18C6DEA1AAFD77",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
@@ -946,7 +538,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeSubjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E",
             "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=12"
+            "fieldTypeSubjectId": "\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=20"
           },
           "isPreserveSig": false
         },
@@ -976,100 +568,10 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 3,
-          "ilOffset": 18,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "newarr",
-          "opCode": 43,
-          "operand": "System.Private.CoreLib/System.Int32",
-          "ilOffset": 19,
-          "resultType": "System.Int32[]",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "type",
-            "subjectId": "System.Private.CoreLib/System.Int32"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Int32",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 6,
-          "isPreserveSig": false
-        },
-        {
-          "op": "dup",
-          "opCode": 54,
-          "ilOffset": 24,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldtoken",
-          "opCode": 70,
-          "operand": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::4636993D3E1DA4E9D6B8F87B79E8F7C6D018580D52661950EABC3845C5897A4D",
-          "ilOffset": 25,
-          "resultType": "System.RuntimeFieldHandle",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "field",
-            "subjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::4636993D3E1DA4E9D6B8F87B79E8F7C6D018580D52661950EABC3845C5897A4D"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::4636993D3E1DA4E9D6B8F87B79E8F7C6D018580D52661950EABC3845C5897A4D",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=12"
-          },
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 30,
-          "resultType": "System.Void",
-          "callee": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
           "op": "ldsfld",
           "opCode": 12,
           "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_0",
-          "ilOffset": 35,
+          "ilOffset": 18,
           "resultType": "System.Func\u003CSystem.Int32,System.Int32\u003E",
           "reference": {
             "assemblyName": "JoinsSubjects",
@@ -1095,28 +597,28 @@
         {
           "op": "dup",
           "opCode": 54,
-          "ilOffset": 40,
+          "ilOffset": 23,
           "isPreserveSig": false
         },
         {
           "op": "brtrue",
           "opCode": 18,
-          "operand": 66,
-          "ilOffset": 41,
+          "operand": 49,
+          "ilOffset": 24,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 43,
+          "ilOffset": 26,
           "isPreserveSig": false
         },
         {
           "op": "ldsfld",
           "opCode": 12,
           "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
-          "ilOffset": 44,
+          "ilOffset": 27,
           "resultType": "JoinsSubjects\u002B\u003C\u003Ec",
           "reference": {
             "assemblyName": "JoinsSubjects",
@@ -1143,7 +645,7 @@
           "op": "ldftn",
           "opCode": 73,
           "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_0:System.Int32(System.Int32)",
-          "ilOffset": 49,
+          "ilOffset": 32,
           "resultType": "System.IntPtr",
           "callee": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_0:System.Int32(System.Int32)",
           "reference": {
@@ -1167,7 +669,7 @@
         {
           "op": "newobj",
           "opCode": 34,
-          "ilOffset": 55,
+          "ilOffset": 38,
           "resultType": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32\u003E",
           "callee": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
           "reference": {
@@ -1192,14 +694,14 @@
         {
           "op": "dup",
           "opCode": 54,
-          "ilOffset": 60,
+          "ilOffset": 43,
           "isPreserveSig": false
         },
         {
           "op": "stsfld",
           "opCode": 13,
           "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_0",
-          "ilOffset": 61,
+          "ilOffset": 44,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "JoinsSubjects",
@@ -1223,323 +725,9 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldsfld",
-          "opCode": 12,
-          "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_1",
-          "ilOffset": 66,
-          "resultType": "System.Func\u003CSystem.Int32,System.Int32\u003E",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "field",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_1"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_1",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Func\u003CSystem.Int32,System.Int32\u003E"
-          },
-          "runtimeServiceKind": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "dup",
-          "opCode": 54,
-          "ilOffset": 71,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brtrue",
-          "opCode": 18,
-          "operand": 97,
-          "ilOffset": 72,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 74,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldsfld",
-          "opCode": 12,
-          "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
-          "ilOffset": 75,
-          "resultType": "JoinsSubjects\u002B\u003C\u003Ec",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "field",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "JoinsSubjects\u002B\u003C\u003Ec"
-          },
-          "runtimeServiceKind": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldftn",
-          "opCode": 73,
-          "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_1:System.Int32(System.Int32)",
-          "ilOffset": 80,
-          "resultType": "System.IntPtr",
-          "callee": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_1:System.Int32(System.Int32)",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "method",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_1:System.Int32(System.Int32)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_1:System.Int32(System.Int32)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "isPreserveSig": false
-        },
-        {
-          "op": "newobj",
-          "opCode": 34,
-          "ilOffset": 86,
-          "resultType": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32\u003E",
-          "callee": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32\u003E",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "dup",
-          "opCode": 54,
-          "ilOffset": 91,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_1",
-          "ilOffset": 92,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "field",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_1"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_1",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Func\u003CSystem.Int32,System.Int32\u003E"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldsfld",
-          "opCode": 12,
-          "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_2",
-          "ilOffset": 97,
-          "resultType": "System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "field",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_2"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_2",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E"
-          },
-          "runtimeServiceKind": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "dup",
-          "opCode": 54,
-          "ilOffset": 102,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brtrue",
-          "opCode": 18,
-          "operand": 128,
-          "ilOffset": 103,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 105,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldsfld",
-          "opCode": 12,
-          "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
-          "ilOffset": 106,
-          "resultType": "JoinsSubjects\u002B\u003C\u003Ec",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "field",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "JoinsSubjects\u002B\u003C\u003Ec"
-          },
-          "runtimeServiceKind": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldftn",
-          "opCode": 73,
-          "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-          "ilOffset": 111,
-          "resultType": "System.IntPtr",
-          "callee": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "method",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "isPreserveSig": false
-        },
-        {
-          "op": "newobj",
-          "opCode": 34,
-          "ilOffset": 117,
-          "resultType": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E",
-          "callee": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "dup",
-          "opCode": 54,
-          "ilOffset": 122,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_2",
-          "ilOffset": 123,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "field",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_2"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__2_2",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 128,
+          "ilOffset": 49,
           "resultType": "System.Collections.Generic.EqualityComparer\u003CSystem.Int32\u003E",
           "callee": "System.Collections/System.Collections.Generic.EqualityComparer\u003CSystem.Int32\u003E::get_Default:System.Collections.Generic.EqualityComparer\u003CSystem.Int32\u003E()",
           "reference": {
@@ -1603,58 +791,54 @@
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 133,
-          "resultType": "System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E",
-          "callee": "System.Linq/Enumerable::GroupJoin\u003CSystem.Int32,System.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+          "ilOffset": 54,
+          "resultType": "System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E",
+          "callee": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
           "reference": {
             "assemblyName": "System.Linq",
             "subjectKind": "method",
-            "subjectId": "System.Linq/Enumerable::GroupJoin\u003CSystem.Int32,System.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)"
+            "subjectId": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)"
           },
           "targetReference": {
             "kind": 3,
             "assemblyName": "System.Linq",
-            "subjectId": "System.Linq/Enumerable::GroupJoin\u003CSystem.Int32,System.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
-            "openDefinitionSubjectId": "System.Linq/Enumerable::GroupJoin:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IEnumerable\u003C!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,!!2\u003E,System.Func\u003C!!0,System.Collections.Generic.IEnumerable\u003C!!1\u003E,!!3\u003E,System.Collections.Generic.IEqualityComparer\u003C!!2\u003E)",
+            "subjectId": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+            "openDefinitionSubjectId": "System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CIGrouping\u003C!!1,!!0\u003E\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Collections.Generic.IEqualityComparer\u003C!!1\u003E)",
             "sharedGenericBodyId": {
-              "value": "body:definition=System.Linq/Enumerable::GroupJoin:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IEnumerable\u003C!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,!!2\u003E,System.Func\u003C!!0,System.Collections.Generic.IEnumerable\u003C!!1\u003E,!!3\u003E,System.Collections.Generic.IEqualityComparer\u003C!!2\u003E);type=[];method=[System.Int32,System.Int32,System.Int32,System.Int32]"
+              "value": "body:definition=System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CIGrouping\u003C!!1,!!0\u003E\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Collections.Generic.IEqualityComparer\u003C!!1\u003E);type=[];method=[System.Int32,System.Int32]"
             },
             "instantiationStubId": {
-              "value": "stub:definition=System.Linq/Enumerable::GroupJoin:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IEnumerable\u003C!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,!!2\u003E,System.Func\u003C!!0,System.Collections.Generic.IEnumerable\u003C!!1\u003E,!!3\u003E,System.Collections.Generic.IEqualityComparer\u003C!!2\u003E);type=[];method=[System.Int32,System.Int32,System.Int32,System.Int32]"
+              "value": "stub:definition=System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CIGrouping\u003C!!1,!!0\u003E\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Collections.Generic.IEqualityComparer\u003C!!1\u003E);type=[];method=[System.Int32,System.Int32]"
             },
             "runtimeGenericContext": {
               "instantiationKey": {
                 "contextKind": 2,
-                "definitionSubjectId": "System.Linq/Enumerable::GroupJoin:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IEnumerable\u003C!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,!!2\u003E,System.Func\u003C!!0,System.Collections.Generic.IEnumerable\u003C!!1\u003E,!!3\u003E,System.Collections.Generic.IEqualityComparer\u003C!!2\u003E)",
+                "definitionSubjectId": "System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CIGrouping\u003C!!1,!!0\u003E\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Collections.Generic.IEqualityComparer\u003C!!1\u003E)",
                 "typeArguments": [],
                 "methodArguments": [
-                  "System.Int32",
-                  "System.Int32",
                   "System.Int32",
                   "System.Int32"
                 ]
               },
               "sharedGenericBodyId": {
-                "value": "body:definition=System.Linq/Enumerable::GroupJoin:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IEnumerable\u003C!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,!!2\u003E,System.Func\u003C!!0,System.Collections.Generic.IEnumerable\u003C!!1\u003E,!!3\u003E,System.Collections.Generic.IEqualityComparer\u003C!!2\u003E);type=[];method=[System.Int32,System.Int32,System.Int32,System.Int32]"
+                "value": "body:definition=System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CIGrouping\u003C!!1,!!0\u003E\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Collections.Generic.IEqualityComparer\u003C!!1\u003E);type=[];method=[System.Int32,System.Int32]"
               },
               "instantiationStubId": {
-                "value": "stub:definition=System.Linq/Enumerable::GroupJoin:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IEnumerable\u003C!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,!!2\u003E,System.Func\u003C!!0,System.Collections.Generic.IEnumerable\u003C!!1\u003E,!!3\u003E,System.Collections.Generic.IEqualityComparer\u003C!!2\u003E);type=[];method=[System.Int32,System.Int32,System.Int32,System.Int32]"
+                "value": "stub:definition=System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CIGrouping\u003C!!1,!!0\u003E\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Collections.Generic.IEqualityComparer\u003C!!1\u003E);type=[];method=[System.Int32,System.Int32]"
               },
               "supportKindCode": 3,
               "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:methodSpec"
             },
             "genericDiagnostic": {
-              "subjectId": "System.Linq/Enumerable::GroupJoin\u003CSystem.Int32,System.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
-              "definitionSubjectId": "System.Linq/Enumerable::GroupJoin:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IEnumerable\u003C!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,!!2\u003E,System.Func\u003C!!0,System.Collections.Generic.IEnumerable\u003C!!1\u003E,!!3\u003E,System.Collections.Generic.IEqualityComparer\u003C!!2\u003E)",
-              "displaySubjectId": "System.Linq/Enumerable::GroupJoin\u003CSystem.Int32,System.Int32,System.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+              "subjectId": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+              "definitionSubjectId": "System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CIGrouping\u003C!!1,!!0\u003E\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Collections.Generic.IEqualityComparer\u003C!!1\u003E)",
+              "displaySubjectId": "System.Linq/Enumerable::GroupBy\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
               "instantiationKey": {
                 "contextKind": 2,
-                "definitionSubjectId": "System.Linq/Enumerable::GroupJoin:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IEnumerable\u003C!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,!!2\u003E,System.Func\u003C!!0,System.Collections.Generic.IEnumerable\u003C!!1\u003E,!!3\u003E,System.Collections.Generic.IEqualityComparer\u003C!!2\u003E)",
+                "definitionSubjectId": "System.Linq/Enumerable::GroupBy:System.Collections.Generic.IEnumerable\u003CIGrouping\u003C!!1,!!0\u003E\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E,System.Collections.Generic.IEqualityComparer\u003C!!1\u003E)",
                 "typeArguments": [],
                 "methodArguments": [
-                  "System.Int32",
-                  "System.Int32",
                   "System.Int32",
                   "System.Int32"
                 ]
@@ -1673,53 +857,53 @@
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 138,
-          "resultType": "System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E",
-          "callee": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E()",
+          "ilOffset": 59,
+          "resultType": "System.Collections.Generic.IEnumerator\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E",
+          "callee": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E()",
           "reference": {
             "assemblyName": "System.Private.CoreLib",
             "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E()"
+            "subjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E()"
           },
           "targetReference": {
             "kind": 3,
             "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E()",
+            "subjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E()",
             "openDefinitionSubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E()",
             "sharedGenericBodyId": {
-              "value": "body:definition=System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E();type=[System.Int32];method=[]"
+              "value": "body:definition=System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E();type=[IGrouping\u003CSystem.Int32,System.Int32\u003E];method=[]"
             },
             "instantiationStubId": {
-              "value": "stub:definition=System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E();type=[System.Int32];method=[]"
+              "value": "stub:definition=System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E();type=[IGrouping\u003CSystem.Int32,System.Int32\u003E];method=[]"
             },
             "runtimeGenericContext": {
               "instantiationKey": {
                 "contextKind": 1,
                 "definitionSubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E()",
                 "typeArguments": [
-                  "System.Int32"
+                  "IGrouping\u003CSystem.Int32,System.Int32\u003E"
                 ],
                 "methodArguments": []
               },
               "sharedGenericBodyId": {
-                "value": "body:definition=System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E();type=[System.Int32];method=[]"
+                "value": "body:definition=System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E();type=[IGrouping\u003CSystem.Int32,System.Int32\u003E];method=[]"
               },
               "instantiationStubId": {
-                "value": "stub:definition=System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E();type=[System.Int32];method=[]"
+                "value": "stub:definition=System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E();type=[IGrouping\u003CSystem.Int32,System.Int32\u003E];method=[]"
               },
               "supportKindCode": 3,
               "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
-              "subjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E()",
+              "subjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E()",
               "definitionSubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E()",
-              "displaySubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E::GetEnumerator()",
+              "displaySubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CIGrouping\u003CSystem.Int32,System.Int32\u003E\u003E::GetEnumerator()",
               "instantiationKey": {
                 "contextKind": 1,
                 "definitionSubjectId": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u00601::GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E()",
                 "typeArguments": [
-                  "System.Int32"
+                  "IGrouping\u003CSystem.Int32,System.Int32\u003E"
                 ],
                 "methodArguments": []
               }
@@ -1737,7 +921,7 @@
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 143,
+          "ilOffset": 64,
           "resultType": "System.Boolean",
           "callee": "System.Private.CoreLib/System.Collections.IEnumerator::MoveNext:System.Boolean()",
           "reference": {
@@ -1762,13 +946,13 @@
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 148,
+          "ilOffset": 69,
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 149,
+          "ilOffset": 70,
           "isPreserveSig": false
         }
       ],
@@ -1810,7 +994,7 @@
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 3,
+          "operand": 6,
           "ilOffset": 1,
           "resultType": "System.Int32",
           "isPreserveSig": false
@@ -1849,18 +1033,18 @@
         {
           "op": "ldtoken",
           "opCode": 70,
-          "operand": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::4636993D3E1DA4E9D6B8F87B79E8F7C6D018580D52661950EABC3845C5897A4D",
+          "operand": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::CBF03EFCA28AF3C84560CE82FEAE66B8AE0A9321EC14BE8F40D06EB0AD7BFE73",
           "ilOffset": 8,
           "resultType": "System.RuntimeFieldHandle",
           "reference": {
             "assemblyName": "JoinsSubjects",
             "subjectKind": "field",
-            "subjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::4636993D3E1DA4E9D6B8F87B79E8F7C6D018580D52661950EABC3845C5897A4D"
+            "subjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::CBF03EFCA28AF3C84560CE82FEAE66B8AE0A9321EC14BE8F40D06EB0AD7BFE73"
           },
           "targetReference": {
             "kind": 2,
             "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::4636993D3E1DA4E9D6B8F87B79E8F7C6D018580D52661950EABC3845C5897A4D",
+            "subjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::CBF03EFCA28AF3C84560CE82FEAE66B8AE0A9321EC14BE8F40D06EB0AD7BFE73",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
@@ -1868,7 +1052,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeSubjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E",
             "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=12"
+            "fieldTypeSubjectId": "\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=24"
           },
           "isPreserveSig": false
         },
@@ -1898,622 +1082,55 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 3,
+          "op": "call",
+          "opCode": 14,
           "ilOffset": 18,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "newarr",
-          "opCode": 43,
-          "operand": "System.Private.CoreLib/System.Int32",
-          "ilOffset": 19,
-          "resultType": "System.Int32[]",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "type",
-            "subjectId": "System.Private.CoreLib/System.Int32"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Int32",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 6,
-          "isPreserveSig": false
-        },
-        {
-          "op": "dup",
-          "opCode": 54,
-          "ilOffset": 24,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldtoken",
-          "opCode": 70,
-          "operand": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::A10494D90314704E24CA5786F6376A6097558F10BB7880B539C8B80312DCA080",
-          "ilOffset": 25,
-          "resultType": "System.RuntimeFieldHandle",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "field",
-            "subjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::A10494D90314704E24CA5786F6376A6097558F10BB7880B539C8B80312DCA080"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::A10494D90314704E24CA5786F6376A6097558F10BB7880B539C8B80312DCA080",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=12"
-          },
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 30,
-          "resultType": "System.Void",
-          "callee": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldsfld",
-          "opCode": 12,
-          "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_0",
-          "ilOffset": 35,
-          "resultType": "System.Func\u003CSystem.Int32,System.Int32\u003E",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "field",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_0"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_0",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Func\u003CSystem.Int32,System.Int32\u003E"
-          },
-          "runtimeServiceKind": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "dup",
-          "opCode": 54,
-          "ilOffset": 40,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brtrue",
-          "opCode": 18,
-          "operand": 66,
-          "ilOffset": 41,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 43,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldsfld",
-          "opCode": 12,
-          "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
-          "ilOffset": 44,
-          "resultType": "JoinsSubjects\u002B\u003C\u003Ec",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "field",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "JoinsSubjects\u002B\u003C\u003Ec"
-          },
-          "runtimeServiceKind": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldftn",
-          "opCode": 73,
-          "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_0:System.Int32(System.Int32)",
-          "ilOffset": 49,
-          "resultType": "System.IntPtr",
-          "callee": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_0:System.Int32(System.Int32)",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "method",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_0:System.Int32(System.Int32)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_0:System.Int32(System.Int32)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "isPreserveSig": false
-        },
-        {
-          "op": "newobj",
-          "opCode": 34,
-          "ilOffset": 55,
-          "resultType": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32\u003E",
-          "callee": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32\u003E",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "dup",
-          "opCode": 54,
-          "ilOffset": 60,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_0",
-          "ilOffset": 61,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "field",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_0"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_0",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Func\u003CSystem.Int32,System.Int32\u003E"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldsfld",
-          "opCode": 12,
-          "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_1",
-          "ilOffset": 66,
-          "resultType": "System.Func\u003CSystem.Int32,System.Int32\u003E",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "field",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_1"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_1",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Func\u003CSystem.Int32,System.Int32\u003E"
-          },
-          "runtimeServiceKind": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "dup",
-          "opCode": 54,
-          "ilOffset": 71,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brtrue",
-          "opCode": 18,
-          "operand": 97,
-          "ilOffset": 72,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 74,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldsfld",
-          "opCode": 12,
-          "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
-          "ilOffset": 75,
-          "resultType": "JoinsSubjects\u002B\u003C\u003Ec",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "field",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "JoinsSubjects\u002B\u003C\u003Ec"
-          },
-          "runtimeServiceKind": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldftn",
-          "opCode": 73,
-          "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_1:System.Int32(System.Int32)",
-          "ilOffset": 80,
-          "resultType": "System.IntPtr",
-          "callee": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_1:System.Int32(System.Int32)",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "method",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_1:System.Int32(System.Int32)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_1:System.Int32(System.Int32)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "isPreserveSig": false
-        },
-        {
-          "op": "newobj",
-          "opCode": 34,
-          "ilOffset": 86,
-          "resultType": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32\u003E",
-          "callee": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32\u003E",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "dup",
-          "opCode": 54,
-          "ilOffset": 91,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_1",
-          "ilOffset": 92,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "field",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_1"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_1",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Func\u003CSystem.Int32,System.Int32\u003E"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldsfld",
-          "opCode": 12,
-          "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_2",
-          "ilOffset": 97,
-          "resultType": "System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "field",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_2"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_2",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E"
-          },
-          "runtimeServiceKind": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "dup",
-          "opCode": 54,
-          "ilOffset": 102,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brtrue",
-          "opCode": 18,
-          "operand": 128,
-          "ilOffset": 103,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 105,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldsfld",
-          "opCode": 12,
-          "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
-          "ilOffset": 106,
-          "resultType": "JoinsSubjects\u002B\u003C\u003Ec",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "field",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "JoinsSubjects\u002B\u003C\u003Ec"
-          },
-          "runtimeServiceKind": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldftn",
-          "opCode": 73,
-          "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_2:System.Int32(System.Int32,System.Int32)",
-          "ilOffset": 111,
-          "resultType": "System.IntPtr",
-          "callee": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_2:System.Int32(System.Int32,System.Int32)",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "method",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_2:System.Int32(System.Int32,System.Int32)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_2:System.Int32(System.Int32,System.Int32)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "isPreserveSig": false
-        },
-        {
-          "op": "newobj",
-          "opCode": 34,
-          "ilOffset": 117,
-          "resultType": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E",
-          "callee": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "dup",
-          "opCode": 54,
-          "ilOffset": 122,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_2",
-          "ilOffset": 123,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "field",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_2"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_2",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 128,
           "resultType": "System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E",
-          "callee": "System.Linq/Enumerable::Join\u003CSystem.Int32,System.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E)",
+          "callee": "System.Linq/Enumerable::Distinct\u003CSystem.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
           "reference": {
             "assemblyName": "System.Linq",
             "subjectKind": "method",
-            "subjectId": "System.Linq/Enumerable::Join\u003CSystem.Int32,System.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E)"
+            "subjectId": "System.Linq/Enumerable::Distinct\u003CSystem.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)"
           },
           "targetReference": {
             "kind": 3,
             "assemblyName": "System.Linq",
-            "subjectId": "System.Linq/Enumerable::Join\u003CSystem.Int32,System.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E)",
-            "openDefinitionSubjectId": "System.Linq/Enumerable::Join:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IEnumerable\u003C!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,!!2\u003E,System.Func\u003C!!0,!!1,!!3\u003E)",
+            "subjectId": "System.Linq/Enumerable::Distinct\u003CSystem.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+            "openDefinitionSubjectId": "System.Linq/Enumerable::Distinct:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E)",
             "sharedGenericBodyId": {
-              "value": "body:definition=System.Linq/Enumerable::Join:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IEnumerable\u003C!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,!!2\u003E,System.Func\u003C!!0,!!1,!!3\u003E);type=[];method=[System.Int32,System.Int32,System.Int32,System.Int32]"
+              "value": "body:definition=System.Linq/Enumerable::Distinct:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E);type=[];method=[System.Int32]"
             },
             "instantiationStubId": {
-              "value": "stub:definition=System.Linq/Enumerable::Join:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IEnumerable\u003C!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,!!2\u003E,System.Func\u003C!!0,!!1,!!3\u003E);type=[];method=[System.Int32,System.Int32,System.Int32,System.Int32]"
+              "value": "stub:definition=System.Linq/Enumerable::Distinct:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E);type=[];method=[System.Int32]"
             },
             "runtimeGenericContext": {
               "instantiationKey": {
                 "contextKind": 2,
-                "definitionSubjectId": "System.Linq/Enumerable::Join:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IEnumerable\u003C!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,!!2\u003E,System.Func\u003C!!0,!!1,!!3\u003E)",
+                "definitionSubjectId": "System.Linq/Enumerable::Distinct:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E)",
                 "typeArguments": [],
                 "methodArguments": [
-                  "System.Int32",
-                  "System.Int32",
-                  "System.Int32",
                   "System.Int32"
                 ]
               },
               "sharedGenericBodyId": {
-                "value": "body:definition=System.Linq/Enumerable::Join:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IEnumerable\u003C!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,!!2\u003E,System.Func\u003C!!0,!!1,!!3\u003E);type=[];method=[System.Int32,System.Int32,System.Int32,System.Int32]"
+                "value": "body:definition=System.Linq/Enumerable::Distinct:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E);type=[];method=[System.Int32]"
               },
               "instantiationStubId": {
-                "value": "stub:definition=System.Linq/Enumerable::Join:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IEnumerable\u003C!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,!!2\u003E,System.Func\u003C!!0,!!1,!!3\u003E);type=[];method=[System.Int32,System.Int32,System.Int32,System.Int32]"
+                "value": "stub:definition=System.Linq/Enumerable::Distinct:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E);type=[];method=[System.Int32]"
               },
               "supportKindCode": 3,
               "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:methodSpec"
             },
             "genericDiagnostic": {
-              "subjectId": "System.Linq/Enumerable::Join\u003CSystem.Int32,System.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E)",
-              "definitionSubjectId": "System.Linq/Enumerable::Join:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IEnumerable\u003C!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,!!2\u003E,System.Func\u003C!!0,!!1,!!3\u003E)",
-              "displaySubjectId": "System.Linq/Enumerable::Join\u003CSystem.Int32,System.Int32,System.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E)",
+              "subjectId": "System.Linq/Enumerable::Distinct\u003CSystem.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
+              "definitionSubjectId": "System.Linq/Enumerable::Distinct:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E)",
+              "displaySubjectId": "System.Linq/Enumerable::Distinct\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
               "instantiationKey": {
                 "contextKind": 2,
-                "definitionSubjectId": "System.Linq/Enumerable::Join:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IEnumerable\u003C!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,!!2\u003E,System.Func\u003C!!0,!!1,!!3\u003E)",
+                "definitionSubjectId": "System.Linq/Enumerable::Distinct:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E)",
                 "typeArguments": [],
                 "methodArguments": [
-                  "System.Int32",
-                  "System.Int32",
-                  "System.Int32",
                   "System.Int32"
                 ]
               }
@@ -2531,7 +1148,7 @@
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 133,
+          "ilOffset": 23,
           "resultType": "System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E",
           "callee": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E()",
           "reference": {
@@ -2595,7 +1212,7 @@
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 138,
+          "ilOffset": 28,
           "resultType": "System.Boolean",
           "callee": "System.Private.CoreLib/System.Collections.IEnumerator::MoveNext:System.Boolean()",
           "reference": {
@@ -2620,13 +1237,13 @@
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 143,
+          "ilOffset": 33,
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 144,
+          "ilOffset": 34,
           "isPreserveSig": false
         }
       ],
@@ -2668,7 +1285,7 @@
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 3,
+          "operand": 5,
           "ilOffset": 1,
           "resultType": "System.Int32",
           "isPreserveSig": false
@@ -2707,18 +1324,18 @@
         {
           "op": "ldtoken",
           "opCode": 70,
-          "operand": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::4636993D3E1DA4E9D6B8F87B79E8F7C6D018580D52661950EABC3845C5897A4D",
+          "operand": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::A0FEBE8D859AC7FE1E225E18F8632CFA942D34C2F58386AE0B982B55FD4EB116",
           "ilOffset": 8,
           "resultType": "System.RuntimeFieldHandle",
           "reference": {
             "assemblyName": "JoinsSubjects",
             "subjectKind": "field",
-            "subjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::4636993D3E1DA4E9D6B8F87B79E8F7C6D018580D52661950EABC3845C5897A4D"
+            "subjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::A0FEBE8D859AC7FE1E225E18F8632CFA942D34C2F58386AE0B982B55FD4EB116"
           },
           "targetReference": {
             "kind": 2,
             "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::4636993D3E1DA4E9D6B8F87B79E8F7C6D018580D52661950EABC3845C5897A4D",
+            "subjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::A0FEBE8D859AC7FE1E225E18F8632CFA942D34C2F58386AE0B982B55FD4EB116",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
@@ -2726,7 +1343,7 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeSubjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E",
             "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=12"
+            "fieldTypeSubjectId": "\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=20"
           },
           "isPreserveSig": false
         },
@@ -2756,100 +1373,10 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 3,
-          "ilOffset": 18,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "newarr",
-          "opCode": 43,
-          "operand": "System.Private.CoreLib/System.Int32",
-          "ilOffset": 19,
-          "resultType": "System.Int32[]",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "type",
-            "subjectId": "System.Private.CoreLib/System.Int32"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Int32",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 6,
-          "isPreserveSig": false
-        },
-        {
-          "op": "dup",
-          "opCode": 54,
-          "ilOffset": 24,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldtoken",
-          "opCode": 70,
-          "operand": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::A10494D90314704E24CA5786F6376A6097558F10BB7880B539C8B80312DCA080",
-          "ilOffset": 25,
-          "resultType": "System.RuntimeFieldHandle",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "field",
-            "subjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::A10494D90314704E24CA5786F6376A6097558F10BB7880B539C8B80312DCA080"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E::A10494D90314704E24CA5786F6376A6097558F10BB7880B539C8B80312DCA080",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=12"
-          },
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 30,
-          "resultType": "System.Void",
-          "callee": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
           "op": "ldsfld",
           "opCode": 12,
           "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_0",
-          "ilOffset": 35,
+          "ilOffset": 18,
           "resultType": "System.Func\u003CSystem.Int32,System.Int32\u003E",
           "reference": {
             "assemblyName": "JoinsSubjects",
@@ -2875,28 +1402,28 @@
         {
           "op": "dup",
           "opCode": 54,
-          "ilOffset": 40,
+          "ilOffset": 23,
           "isPreserveSig": false
         },
         {
           "op": "brtrue",
           "opCode": 18,
-          "operand": 66,
-          "ilOffset": 41,
+          "operand": 49,
+          "ilOffset": 24,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 43,
+          "ilOffset": 26,
           "isPreserveSig": false
         },
         {
           "op": "ldsfld",
           "opCode": 12,
           "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
-          "ilOffset": 44,
+          "ilOffset": 27,
           "resultType": "JoinsSubjects\u002B\u003C\u003Ec",
           "reference": {
             "assemblyName": "JoinsSubjects",
@@ -2923,7 +1450,7 @@
           "op": "ldftn",
           "opCode": 73,
           "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_0:System.Int32(System.Int32)",
-          "ilOffset": 49,
+          "ilOffset": 32,
           "resultType": "System.IntPtr",
           "callee": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_0:System.Int32(System.Int32)",
           "reference": {
@@ -2947,7 +1474,7 @@
         {
           "op": "newobj",
           "opCode": 34,
-          "ilOffset": 55,
+          "ilOffset": 38,
           "resultType": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32\u003E",
           "callee": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
           "reference": {
@@ -2972,14 +1499,14 @@
         {
           "op": "dup",
           "opCode": 54,
-          "ilOffset": 60,
+          "ilOffset": 43,
           "isPreserveSig": false
         },
         {
           "op": "stsfld",
           "opCode": 13,
           "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_0",
-          "ilOffset": 61,
+          "ilOffset": 44,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "JoinsSubjects",
@@ -3003,438 +1530,56 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldsfld",
-          "opCode": 12,
-          "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_1",
-          "ilOffset": 66,
-          "resultType": "System.Func\u003CSystem.Int32,System.Int32\u003E",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "field",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_1"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_1",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Func\u003CSystem.Int32,System.Int32\u003E"
-          },
-          "runtimeServiceKind": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "dup",
-          "opCode": 54,
-          "ilOffset": 71,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brtrue",
-          "opCode": 18,
-          "operand": 97,
-          "ilOffset": 72,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 74,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldsfld",
-          "opCode": 12,
-          "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
-          "ilOffset": 75,
-          "resultType": "JoinsSubjects\u002B\u003C\u003Ec",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "field",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "JoinsSubjects\u002B\u003C\u003Ec"
-          },
-          "runtimeServiceKind": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldftn",
-          "opCode": 73,
-          "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_1:System.Int32(System.Int32)",
-          "ilOffset": 80,
-          "resultType": "System.IntPtr",
-          "callee": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_1:System.Int32(System.Int32)",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "method",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_1:System.Int32(System.Int32)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_1:System.Int32(System.Int32)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "isPreserveSig": false
-        },
-        {
-          "op": "newobj",
-          "opCode": 34,
-          "ilOffset": 86,
-          "resultType": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32\u003E",
-          "callee": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32\u003E",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "dup",
-          "opCode": 54,
-          "ilOffset": 91,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_1",
-          "ilOffset": 92,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "field",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_1"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_1",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Func\u003CSystem.Int32,System.Int32\u003E"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldsfld",
-          "opCode": 12,
-          "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_2",
-          "ilOffset": 97,
-          "resultType": "System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "field",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_2"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_2",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E"
-          },
-          "runtimeServiceKind": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "dup",
-          "opCode": 54,
-          "ilOffset": 102,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brtrue",
-          "opCode": 18,
-          "operand": 128,
-          "ilOffset": 103,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 105,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldsfld",
-          "opCode": 12,
-          "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
-          "ilOffset": 106,
-          "resultType": "JoinsSubjects\u002B\u003C\u003Ec",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "field",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "JoinsSubjects\u002B\u003C\u003Ec"
-          },
-          "runtimeServiceKind": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldftn",
-          "opCode": 73,
-          "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_2:System.Int32(System.Int32,System.Int32)",
-          "ilOffset": 111,
-          "resultType": "System.IntPtr",
-          "callee": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_2:System.Int32(System.Int32,System.Int32)",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "method",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_2:System.Int32(System.Int32,System.Int32)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_2:System.Int32(System.Int32,System.Int32)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "isPreserveSig": false
-        },
-        {
-          "op": "newobj",
-          "opCode": 34,
-          "ilOffset": 117,
-          "resultType": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E",
-          "callee": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E::.ctor:System.Void(System.Object,System.IntPtr)"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 1,
-          "isPreserveSig": false
-        },
-        {
-          "op": "dup",
-          "opCode": 54,
-          "ilOffset": 122,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_2",
-          "ilOffset": 123,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "JoinsSubjects",
-            "subjectKind": "field",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_2"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "JoinsSubjects",
-            "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_2",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E"
-          },
-          "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 128,
-          "resultType": "System.Collections.Generic.EqualityComparer\u003CSystem.Int32\u003E",
-          "callee": "System.Collections/System.Collections.Generic.EqualityComparer\u003CSystem.Int32\u003E::get_Default:System.Collections.Generic.EqualityComparer\u003CSystem.Int32\u003E()",
-          "reference": {
-            "assemblyName": "System.Collections",
-            "subjectKind": "method",
-            "subjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u003CSystem.Int32\u003E::get_Default:System.Collections.Generic.EqualityComparer\u003CSystem.Int32\u003E()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Collections",
-            "subjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u003CSystem.Int32\u003E::get_Default:System.Collections.Generic.EqualityComparer\u003CSystem.Int32\u003E()",
-            "openDefinitionSubjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u00601::get_Default:System.Collections.Generic.EqualityComparer\u003C!0\u003E()",
-            "sharedGenericBodyId": {
-              "value": "body:definition=System.Collections/System.Collections.Generic.EqualityComparer\u00601::get_Default:System.Collections.Generic.EqualityComparer\u003C!0\u003E();type=[System.Int32];method=[]"
-            },
-            "instantiationStubId": {
-              "value": "stub:definition=System.Collections/System.Collections.Generic.EqualityComparer\u00601::get_Default:System.Collections.Generic.EqualityComparer\u003C!0\u003E();type=[System.Int32];method=[]"
-            },
-            "runtimeGenericContext": {
-              "instantiationKey": {
-                "contextKind": 1,
-                "definitionSubjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u00601::get_Default:System.Collections.Generic.EqualityComparer\u003C!0\u003E()",
-                "typeArguments": [
-                  "System.Int32"
-                ],
-                "methodArguments": []
-              },
-              "sharedGenericBodyId": {
-                "value": "body:definition=System.Collections/System.Collections.Generic.EqualityComparer\u00601::get_Default:System.Collections.Generic.EqualityComparer\u003C!0\u003E();type=[System.Int32];method=[]"
-              },
-              "instantiationStubId": {
-                "value": "stub:definition=System.Collections/System.Collections.Generic.EqualityComparer\u00601::get_Default:System.Collections.Generic.EqualityComparer\u003C!0\u003E();type=[System.Int32];method=[]"
-              },
-              "supportKindCode": 3,
-              "specializationKindCode": 1,
-              "statusReasonCode": "loader-demand:memberReference"
-            },
-            "genericDiagnostic": {
-              "subjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u003CSystem.Int32\u003E::get_Default:System.Collections.Generic.EqualityComparer\u003CSystem.Int32\u003E()",
-              "definitionSubjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u00601::get_Default:System.Collections.Generic.EqualityComparer\u003C!0\u003E()",
-              "displaySubjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u003CSystem.Int32\u003E::get_Default()",
-              "instantiationKey": {
-                "contextKind": 1,
-                "definitionSubjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u00601::get_Default:System.Collections.Generic.EqualityComparer\u003C!0\u003E()",
-                "typeArguments": [
-                  "System.Int32"
-                ],
-                "methodArguments": []
-              }
-            },
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 133,
-          "resultType": "System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E",
-          "callee": "System.Linq/Enumerable::Join\u003CSystem.Int32,System.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+          "ilOffset": 49,
+          "resultType": "IOrderedEnumerable\u003CSystem.Int32\u003E",
+          "callee": "System.Linq/Enumerable::OrderBy\u003CSystem.Int32,System.Int32\u003E:IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
           "reference": {
             "assemblyName": "System.Linq",
             "subjectKind": "method",
-            "subjectId": "System.Linq/Enumerable::Join\u003CSystem.Int32,System.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)"
+            "subjectId": "System.Linq/Enumerable::OrderBy\u003CSystem.Int32,System.Int32\u003E:IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)"
           },
           "targetReference": {
             "kind": 3,
             "assemblyName": "System.Linq",
-            "subjectId": "System.Linq/Enumerable::Join\u003CSystem.Int32,System.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
-            "openDefinitionSubjectId": "System.Linq/Enumerable::Join:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IEnumerable\u003C!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,!!2\u003E,System.Func\u003C!!0,!!1,!!3\u003E,System.Collections.Generic.IEqualityComparer\u003C!!2\u003E)",
+            "subjectId": "System.Linq/Enumerable::OrderBy\u003CSystem.Int32,System.Int32\u003E:IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+            "openDefinitionSubjectId": "System.Linq/Enumerable::OrderBy:IOrderedEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E)",
             "sharedGenericBodyId": {
-              "value": "body:definition=System.Linq/Enumerable::Join:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IEnumerable\u003C!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,!!2\u003E,System.Func\u003C!!0,!!1,!!3\u003E,System.Collections.Generic.IEqualityComparer\u003C!!2\u003E);type=[];method=[System.Int32,System.Int32,System.Int32,System.Int32]"
+              "value": "body:definition=System.Linq/Enumerable::OrderBy:IOrderedEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E);type=[];method=[System.Int32,System.Int32]"
             },
             "instantiationStubId": {
-              "value": "stub:definition=System.Linq/Enumerable::Join:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IEnumerable\u003C!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,!!2\u003E,System.Func\u003C!!0,!!1,!!3\u003E,System.Collections.Generic.IEqualityComparer\u003C!!2\u003E);type=[];method=[System.Int32,System.Int32,System.Int32,System.Int32]"
+              "value": "stub:definition=System.Linq/Enumerable::OrderBy:IOrderedEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E);type=[];method=[System.Int32,System.Int32]"
             },
             "runtimeGenericContext": {
               "instantiationKey": {
                 "contextKind": 2,
-                "definitionSubjectId": "System.Linq/Enumerable::Join:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IEnumerable\u003C!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,!!2\u003E,System.Func\u003C!!0,!!1,!!3\u003E,System.Collections.Generic.IEqualityComparer\u003C!!2\u003E)",
+                "definitionSubjectId": "System.Linq/Enumerable::OrderBy:IOrderedEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E)",
                 "typeArguments": [],
                 "methodArguments": [
-                  "System.Int32",
-                  "System.Int32",
                   "System.Int32",
                   "System.Int32"
                 ]
               },
               "sharedGenericBodyId": {
-                "value": "body:definition=System.Linq/Enumerable::Join:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IEnumerable\u003C!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,!!2\u003E,System.Func\u003C!!0,!!1,!!3\u003E,System.Collections.Generic.IEqualityComparer\u003C!!2\u003E);type=[];method=[System.Int32,System.Int32,System.Int32,System.Int32]"
+                "value": "body:definition=System.Linq/Enumerable::OrderBy:IOrderedEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E);type=[];method=[System.Int32,System.Int32]"
               },
               "instantiationStubId": {
-                "value": "stub:definition=System.Linq/Enumerable::Join:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IEnumerable\u003C!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,!!2\u003E,System.Func\u003C!!0,!!1,!!3\u003E,System.Collections.Generic.IEqualityComparer\u003C!!2\u003E);type=[];method=[System.Int32,System.Int32,System.Int32,System.Int32]"
+                "value": "stub:definition=System.Linq/Enumerable::OrderBy:IOrderedEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E);type=[];method=[System.Int32,System.Int32]"
               },
               "supportKindCode": 3,
               "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:methodSpec"
             },
             "genericDiagnostic": {
-              "subjectId": "System.Linq/Enumerable::Join\u003CSystem.Int32,System.Int32,System.Int32,System.Int32\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
-              "definitionSubjectId": "System.Linq/Enumerable::Join:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IEnumerable\u003C!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,!!2\u003E,System.Func\u003C!!0,!!1,!!3\u003E,System.Collections.Generic.IEqualityComparer\u003C!!2\u003E)",
-              "displaySubjectId": "System.Linq/Enumerable::Join\u003CSystem.Int32,System.Int32,System.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32,System.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+              "subjectId": "System.Linq/Enumerable::OrderBy\u003CSystem.Int32,System.Int32\u003E:IOrderedEnumerable\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
+              "definitionSubjectId": "System.Linq/Enumerable::OrderBy:IOrderedEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E)",
+              "displaySubjectId": "System.Linq/Enumerable::OrderBy\u003CSystem.Int32,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Func\u003CSystem.Int32,System.Int32\u003E)",
               "instantiationKey": {
                 "contextKind": 2,
-                "definitionSubjectId": "System.Linq/Enumerable::Join:System.Collections.Generic.IEnumerable\u003C!!3\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IEnumerable\u003C!!1\u003E,System.Func\u003C!!0,!!2\u003E,System.Func\u003C!!1,!!2\u003E,System.Func\u003C!!0,!!1,!!3\u003E,System.Collections.Generic.IEqualityComparer\u003C!!2\u003E)",
+                "definitionSubjectId": "System.Linq/Enumerable::OrderBy:IOrderedEnumerable\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Func\u003C!!0,!!1\u003E)",
                 "typeArguments": [],
                 "methodArguments": [
-                  "System.Int32",
-                  "System.Int32",
                   "System.Int32",
                   "System.Int32"
                 ]
@@ -3453,7 +1598,7 @@
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 138,
+          "ilOffset": 54,
           "resultType": "System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E",
           "callee": "System.Private.CoreLib/System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E::GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.Int32\u003E()",
           "reference": {
@@ -3517,7 +1662,7 @@
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 143,
+          "ilOffset": 59,
           "resultType": "System.Boolean",
           "callee": "System.Private.CoreLib/System.Collections.IEnumerator::MoveNext:System.Boolean()",
           "reference": {
@@ -3542,13 +1687,13 @@
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 148,
+          "ilOffset": 64,
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 149,
+          "ilOffset": 65,
           "isPreserveSig": false
         }
       ],
@@ -5572,123 +3717,24 @@
           "isPreserveSig": false
         },
         {
-          "op": "ret",
-          "opCode": 53,
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 3,
           "ilOffset": 1,
+          "resultType": "System.Int32",
           "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "JoinsSubjects"
-    },
-    {
-      "methodId": "joins-subjects.joins-subjects-c.custom-entry-subject-0-b-1-1",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_1:System.Int32(System.Int32)",
-      "signature": "System.Int32 JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_1(System.Int32)",
-      "identity": {
-        "assemblyName": "JoinsSubjects",
-        "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-        "definitionSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_1:System.Int32(System.Int32)",
-        "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_1:System.Int32(System.Int32)",
-        "methodId": "joins-subjects.joins-subjects-c.custom-entry-subject-0-b-1-1",
-        "signature": "System.Int32 JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_1(System.Int32)"
-      },
-      "nativeSymbol": "JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_1_System_Int32",
-      "isStatic": false,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 1,
-      "parameterAbis": [
+        },
         {
-          "carrierKindCode": 1,
-          "typeShape": 2
-        }
-      ],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldarg",
-          "opCode": 6,
-          "operand": 1,
-          "ilOffset": 0,
+          "op": "rem",
+          "opCode": 29,
+          "ilOffset": 2,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 1,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "JoinsSubjects"
-    },
-    {
-      "methodId": "joins-subjects.joins-subjects-c.custom-entry-subject-0-b-1-2",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-      "signature": "System.Int32 JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_2(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-      "identity": {
-        "assemblyName": "JoinsSubjects",
-        "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-        "definitionSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-        "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-        "methodId": "joins-subjects.joins-subjects-c.custom-entry-subject-0-b-1-2",
-        "signature": "System.Int32 JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_2(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)"
-      },
-      "nativeSymbol": "JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32",
-      "isStatic": false,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 2,
-      "parameterAbis": [
-        {
-          "carrierKindCode": 1,
-          "typeShape": 2
-        },
-        {
-          "carrierKindCode": 2,
-          "typeShape": 1
-        }
-      ],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldarg",
-          "opCode": 6,
-          "operand": 1,
-          "ilOffset": 0,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 1,
+          "ilOffset": 3,
           "isPreserveSig": false
         }
       ],
@@ -5741,299 +3787,16 @@
           "isPreserveSig": false
         },
         {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 1,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "JoinsSubjects"
-    },
-    {
-      "methodId": "joins-subjects.joins-subjects-c.custom-entry-subject-1-b-2-1",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_1:System.Int32(System.Int32)",
-      "signature": "System.Int32 JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_1(System.Int32)",
-      "identity": {
-        "assemblyName": "JoinsSubjects",
-        "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-        "definitionSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_1:System.Int32(System.Int32)",
-        "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_1:System.Int32(System.Int32)",
-        "methodId": "joins-subjects.joins-subjects-c.custom-entry-subject-1-b-2-1",
-        "signature": "System.Int32 JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_1(System.Int32)"
-      },
-      "nativeSymbol": "JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_1_System_Int32",
-      "isStatic": false,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 1,
-      "parameterAbis": [
-        {
-          "carrierKindCode": 1,
-          "typeShape": 2
-        }
-      ],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldarg",
-          "opCode": 6,
-          "operand": 1,
-          "ilOffset": 0,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 1,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "JoinsSubjects"
-    },
-    {
-      "methodId": "joins-subjects.joins-subjects-c.custom-entry-subject-1-b-2-2",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-      "signature": "System.Int32 JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_2(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-      "identity": {
-        "assemblyName": "JoinsSubjects",
-        "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-        "definitionSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-        "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-        "methodId": "joins-subjects.joins-subjects-c.custom-entry-subject-1-b-2-2",
-        "signature": "System.Int32 JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_2(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)"
-      },
-      "nativeSymbol": "JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32",
-      "isStatic": false,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 2,
-      "parameterAbis": [
-        {
-          "carrierKindCode": 1,
-          "typeShape": 2
-        },
-        {
-          "carrierKindCode": 2,
-          "typeShape": 1
-        }
-      ],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldarg",
-          "opCode": 6,
-          "operand": 1,
-          "ilOffset": 0,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 1,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "JoinsSubjects"
-    },
-    {
-      "methodId": "joins-subjects.joins-subjects-c.custom-entry-subject-2-b-3-0",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_0:System.Int32(System.Int32)",
-      "signature": "System.Int32 JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_0(System.Int32)",
-      "identity": {
-        "assemblyName": "JoinsSubjects",
-        "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-        "definitionSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_0:System.Int32(System.Int32)",
-        "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_0:System.Int32(System.Int32)",
-        "methodId": "joins-subjects.joins-subjects-c.custom-entry-subject-2-b-3-0",
-        "signature": "System.Int32 JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_0(System.Int32)"
-      },
-      "nativeSymbol": "JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_0_System_Int32",
-      "isStatic": false,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 1,
-      "parameterAbis": [
-        {
-          "carrierKindCode": 1,
-          "typeShape": 2
-        }
-      ],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldarg",
-          "opCode": 6,
-          "operand": 1,
-          "ilOffset": 0,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 1,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "JoinsSubjects"
-    },
-    {
-      "methodId": "joins-subjects.joins-subjects-c.custom-entry-subject-2-b-3-1",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_1:System.Int32(System.Int32)",
-      "signature": "System.Int32 JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_1(System.Int32)",
-      "identity": {
-        "assemblyName": "JoinsSubjects",
-        "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-        "definitionSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_1:System.Int32(System.Int32)",
-        "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_1:System.Int32(System.Int32)",
-        "methodId": "joins-subjects.joins-subjects-c.custom-entry-subject-2-b-3-1",
-        "signature": "System.Int32 JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_1(System.Int32)"
-      },
-      "nativeSymbol": "JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_1_System_Int32",
-      "isStatic": false,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 1,
-      "parameterAbis": [
-        {
-          "carrierKindCode": 1,
-          "typeShape": 2
-        }
-      ],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldarg",
-          "opCode": 6,
-          "operand": 1,
-          "ilOffset": 0,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 1,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "JoinsSubjects"
-    },
-    {
-      "methodId": "joins-subjects.joins-subjects-c.custom-entry-subject-2-b-3-2",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_2:System.Int32(System.Int32,System.Int32)",
-      "signature": "System.Int32 JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_2(System.Int32,System.Int32)",
-      "identity": {
-        "assemblyName": "JoinsSubjects",
-        "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-        "definitionSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_2:System.Int32(System.Int32,System.Int32)",
-        "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_2:System.Int32(System.Int32,System.Int32)",
-        "methodId": "joins-subjects.joins-subjects-c.custom-entry-subject-2-b-3-2",
-        "signature": "System.Int32 JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_2(System.Int32,System.Int32)"
-      },
-      "nativeSymbol": "JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_2_System_Int32_System_Int32",
-      "isStatic": false,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 2,
-      "parameterAbis": [
-        {
-          "carrierKindCode": 1,
-          "typeShape": 2
-        },
-        {
-          "carrierKindCode": 1,
-          "typeShape": 2
-        }
-      ],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldarg",
-          "opCode": 6,
-          "operand": 1,
-          "ilOffset": 0,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldarg",
-          "opCode": 6,
-          "operand": 2,
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 3,
           "ilOffset": 1,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
-          "op": "add",
-          "opCode": 25,
+          "op": "rem",
+          "opCode": 29,
           "ilOffset": 2,
           "resultType": "System.Int32",
           "isPreserveSig": false
@@ -6097,135 +3860,6 @@
           "op": "ret",
           "opCode": 53,
           "ilOffset": 1,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "JoinsSubjects"
-    },
-    {
-      "methodId": "joins-subjects.joins-subjects-c.custom-entry-subject-3-b-4-1",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_1:System.Int32(System.Int32)",
-      "signature": "System.Int32 JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_1(System.Int32)",
-      "identity": {
-        "assemblyName": "JoinsSubjects",
-        "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-        "definitionSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_1:System.Int32(System.Int32)",
-        "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_1:System.Int32(System.Int32)",
-        "methodId": "joins-subjects.joins-subjects-c.custom-entry-subject-3-b-4-1",
-        "signature": "System.Int32 JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_1(System.Int32)"
-      },
-      "nativeSymbol": "JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_1_System_Int32",
-      "isStatic": false,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 1,
-      "parameterAbis": [
-        {
-          "carrierKindCode": 1,
-          "typeShape": 2
-        }
-      ],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldarg",
-          "opCode": 6,
-          "operand": 1,
-          "ilOffset": 0,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 1,
-          "isPreserveSig": false
-        }
-      ],
-      "isPInvoke": false,
-      "isUnmanagedCallersOnly": false,
-      "importCallingConvention": 0,
-      "importCharSet": 0,
-      "importSetLastError": false,
-      "isInternalLink": false,
-      "isSuppressGCTransition": false,
-      "hasBlittableStructReturn": false,
-      "declaringAssemblyName": "JoinsSubjects"
-    },
-    {
-      "methodId": "joins-subjects.joins-subjects-c.custom-entry-subject-3-b-4-2",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_2:System.Int32(System.Int32,System.Int32)",
-      "signature": "System.Int32 JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_2(System.Int32,System.Int32)",
-      "identity": {
-        "assemblyName": "JoinsSubjects",
-        "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-        "definitionSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_2:System.Int32(System.Int32,System.Int32)",
-        "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_2:System.Int32(System.Int32,System.Int32)",
-        "methodId": "joins-subjects.joins-subjects-c.custom-entry-subject-3-b-4-2",
-        "signature": "System.Int32 JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_2(System.Int32,System.Int32)"
-      },
-      "nativeSymbol": "JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_2_System_Int32_System_Int32",
-      "isStatic": false,
-      "returnType": "System.Int32",
-      "returnAbi": {
-        "carrierKindCode": 1,
-        "typeShape": 2
-      },
-      "parameterCount": 2,
-      "parameterAbis": [
-        {
-          "carrierKindCode": 1,
-          "typeShape": 2
-        },
-        {
-          "carrierKindCode": 1,
-          "typeShape": 2
-        }
-      ],
-      "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
-      "instructions": [
-        {
-          "op": "ldarg",
-          "opCode": 6,
-          "operand": 1,
-          "ilOffset": 0,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldarg",
-          "opCode": 6,
-          "operand": 2,
-          "ilOffset": 1,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "add",
-          "opCode": 25,
-          "ilOffset": 2,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ret",
-          "opCode": 53,
-          "ilOffset": 3,
           "isPreserveSig": false
         }
       ],

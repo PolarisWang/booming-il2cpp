@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "PolymorphismReferenceSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Text.Json/polymorphism-reference/managed/subjects/build-output/PolymorphismReferenceSubjects.dll",
+  "inputAssemblyPath": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/polymorphism-reference/managed/subjects/build-output/PolymorphismReferenceSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "PolymorphismReferenceSubjects",
-      "path": "verification/foundation-dll/System.Text.Json/polymorphism-reference/managed/subjects/build-output/PolymorphismReferenceSubjects.dll"
+      "path": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/polymorphism-reference/managed/subjects/build-output/PolymorphismReferenceSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "0b5eaca0-04b9-4516-bb91-b7dfbf624674",
+  "inputModuleVersionId": "87e741a6-7c7b-4a6e-a299-85b567938e01",
   "artifacts": [
     {
       "kind": "typedIlIr",

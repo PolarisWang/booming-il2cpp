@@ -1,0 +1,267 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "SetOperationsSubjects",
+  "methodCount": 26,
+  "defaultStringId": 0,
+  "methods": [
+    {
+      "index": 0,
+      "nativeSymbol": "SetOperationsSubjects_SetOperationsSubjects_CustomEntrySubject_0",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 0
+    },
+    {
+      "index": 1,
+      "nativeSymbol": "SetOperationsSubjects_SetOperationsSubjects_CustomEntrySubject_1",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 1
+    },
+    {
+      "index": 2,
+      "nativeSymbol": "SetOperationsSubjects_SetOperationsSubjects_CustomEntrySubject_2",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 2
+    },
+    {
+      "index": 3,
+      "nativeSymbol": "SetOperationsSubjects_SetOperationsSubjects_CustomEntrySubject_3",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 3
+    },
+    {
+      "index": 4,
+      "nativeSymbol": "SetOperationsSubjects_SetOperationsSubjects_CustomEntrySubject_4",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 4
+    },
+    {
+      "index": 5,
+      "nativeSymbol": "SetOperationsSubjects_SetOperationsSubjects_CustomEntrySubject_5",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 5
+    },
+    {
+      "index": 6,
+      "nativeSymbol": "SetOperationsSubjects_SetOperationsSubjects_CustomEntrySubject_6",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 6
+    },
+    {
+      "index": 7,
+      "nativeSymbol": "SetOperationsSubjects_SetOperationsSubjects___c_CustomEntrySubject_6_b__7_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 8,
+      "nativeSymbol": "SetOperationsSubjects_SetOperationsSubjects_CustomEntrySubject_7",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 7
+    },
+    {
+      "index": 9,
+      "nativeSymbol": "SetOperationsSubjects_SetOperationsSubjects___c_CustomEntrySubject_7_b__8_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 10,
+      "nativeSymbol": "SetOperationsSubjects_SetOperationsSubjects_CustomEntrySubject_8",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 8
+    },
+    {
+      "index": 11,
+      "nativeSymbol": "SetOperationsSubjects_SetOperationsSubjects_CustomEntrySubject_9",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 9
+    },
+    {
+      "index": 12,
+      "nativeSymbol": "SetOperationsSubjects_SetOperationsSubjects_CustomEntrySubject_10",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 10
+    },
+    {
+      "index": 13,
+      "nativeSymbol": "SetOperationsSubjects_SetOperationsSubjects___c_CustomEntrySubject_10_b__11_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 14,
+      "nativeSymbol": "SetOperationsSubjects_SetOperationsSubjects_CustomEntrySubject_11",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 11
+    },
+    {
+      "index": 15,
+      "nativeSymbol": "SetOperationsSubjects_SetOperationsSubjects___c_CustomEntrySubject_11_b__12_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 16,
+      "nativeSymbol": "SetOperationsSubjects_SetOperationsSubjects_CustomEntrySubject_12",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 12
+    },
+    {
+      "index": 17,
+      "nativeSymbol": "SetOperationsSubjects_SetOperationsSubjects_CustomEntrySubject_13",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 13
+    },
+    {
+      "index": 18,
+      "nativeSymbol": "SetOperationsSubjects_SetOperationsSubjects_CustomEntrySubject_14",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 14
+    },
+    {
+      "index": 19,
+      "nativeSymbol": "SetOperationsSubjects_SetOperationsSubjects_CustomEntrySubject_15",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 15
+    },
+    {
+      "index": 20,
+      "nativeSymbol": "SetOperationsSubjects_SetOperationsSubjects_CustomEntrySubject_16",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 16
+    },
+    {
+      "index": 21,
+      "nativeSymbol": "SetOperationsSubjects_SetOperationsSubjects___c_CustomEntrySubject_16_b__17_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 22,
+      "nativeSymbol": "SetOperationsSubjects_SetOperationsSubjects_CustomEntrySubject_17",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 17
+    },
+    {
+      "index": 23,
+      "nativeSymbol": "SetOperationsSubjects_SetOperationsSubjects___c_CustomEntrySubject_17_b__18_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 24,
+      "nativeSymbol": "SetOperationsSubjects_SetOperationsSubjects___c_cctor",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 25,
+      "nativeSymbol": "SetOperationsSubjects_SetOperationsSubjects___c__ctor",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    }
+  ]
+}

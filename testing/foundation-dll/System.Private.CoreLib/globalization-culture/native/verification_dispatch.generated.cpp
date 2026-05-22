@@ -1,5 +1,5 @@
 // verification_dispatch.generated.cpp — auto-generated
-// Assembly: GlobalizationCultureSubjects, Methods: 15
+// Assembly: GlobalizationCultureSubjects, Methods: 13
 #include <cstdint>
 #include <chrono>
 #include <chaos/native_types.h>

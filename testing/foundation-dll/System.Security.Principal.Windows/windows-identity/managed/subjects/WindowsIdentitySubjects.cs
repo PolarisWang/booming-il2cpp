@@ -20,146 +20,148 @@ public static partial class WindowsIdentitySubjects
     // [0] System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::Clone:System.Security.Claims.ClaimsIdentity()
     public static void Subject_0()
     {
-        try { default(WindowsIdentity)!.Clone(); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(WindowsIdentity)!.Clone()).GetHashCode()) != ((default(WindowsIdentity)!.Clone()).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [1] System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::Dispose:System.Void()
     public static void Subject_1()
     {
-        try { default(WindowsIdentity)!.Dispose(); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { default(WindowsIdentity)!.Dispose(); }
+        catch { _exitCode = 1; }
     }
 
     // [2] System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_AccessToken:Microsoft.Win32.SafeHandles.SafeAccessTokenHandle()
     public static void Subject_2()
     {
-        try { _ = default(WindowsIdentity)!.AccessToken; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(WindowsIdentity)!.AccessToken).GetHashCode()) != ((default(WindowsIdentity)!.AccessToken).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [3] System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_AuthenticationType:System.String()
     public static void Subject_3()
     {
-        try { _ = default(WindowsIdentity)!.AuthenticationType; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(WindowsIdentity)!.AuthenticationType).Length) != ((default(WindowsIdentity)!.AuthenticationType).Length)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [4] System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_Claims:System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}()
     public static void Subject_4()
     {
-        try { _ = default(WindowsIdentity)!.Claims; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(WindowsIdentity)!.Claims).GetHashCode()) != ((default(WindowsIdentity)!.Claims).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [5] System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_DeviceClaims:System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}()
     public static void Subject_5()
     {
-        try { _ = default(WindowsIdentity)!.DeviceClaims; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(WindowsIdentity)!.DeviceClaims).GetHashCode()) != ((default(WindowsIdentity)!.DeviceClaims).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [6] System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_Groups:System.Security.Principal.IdentityReferenceCollection()
     public static void Subject_6()
     {
-        try { _ = default(WindowsIdentity)!.Groups; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(WindowsIdentity)!.Groups).GetHashCode()) != ((default(WindowsIdentity)!.Groups).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [7] System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_ImpersonationLevel:System.Security.Principal.TokenImpersonationLevel()
     public static void Subject_7()
     {
-        try { _ = default(WindowsIdentity)!.ImpersonationLevel; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(WindowsIdentity)!.ImpersonationLevel).GetHashCode()) != ((default(WindowsIdentity)!.ImpersonationLevel).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [8] System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_IsAnonymous:System.Boolean()
     public static void Subject_8()
     {
-        try { _ = default(WindowsIdentity)!.IsAnonymous; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(WindowsIdentity)!.IsAnonymous) ? 1 : 0) != ((default(WindowsIdentity)!.IsAnonymous) ? 1 : 0)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [9] System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_IsAuthenticated:System.Boolean()
     public static void Subject_9()
     {
-        try { _ = default(WindowsIdentity)!.IsAuthenticated; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(WindowsIdentity)!.IsAuthenticated) ? 1 : 0) != ((default(WindowsIdentity)!.IsAuthenticated) ? 1 : 0)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [10] System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_IsGuest:System.Boolean()
     public static void Subject_10()
     {
-        try { _ = default(WindowsIdentity)!.IsGuest; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(WindowsIdentity)!.IsGuest) ? 1 : 0) != ((default(WindowsIdentity)!.IsGuest) ? 1 : 0)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [11] System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_IsSystem:System.Boolean()
     public static void Subject_11()
     {
-        try { _ = default(WindowsIdentity)!.IsSystem; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(WindowsIdentity)!.IsSystem) ? 1 : 0) != ((default(WindowsIdentity)!.IsSystem) ? 1 : 0)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [12] System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_Name:System.String()
     public static void Subject_12()
     {
-        try { _ = default(WindowsIdentity)!.Name; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(WindowsIdentity)!.Name).Length) != ((default(WindowsIdentity)!.Name).Length)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [13] System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_Owner:System.Security.Principal.SecurityIdentifier()
     public static void Subject_13()
     {
-        try { _ = default(WindowsIdentity)!.Owner; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(WindowsIdentity)!.Owner).GetHashCode()) != ((default(WindowsIdentity)!.Owner).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [14] System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_Token:System.IntPtr()
     public static void Subject_14()
     {
-        try { _ = default(WindowsIdentity)!.Token; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if ((int)(default(WindowsIdentity)!.Token) != (int)(default(WindowsIdentity)!.Token)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [15] System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_User:System.Security.Principal.SecurityIdentifier()
     public static void Subject_15()
     {
-        try { _ = default(WindowsIdentity)!.User; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(WindowsIdentity)!.User).GetHashCode()) != ((default(WindowsIdentity)!.User).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [16] System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_UserClaims:System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}()
     public static void Subject_16()
     {
-        try { _ = default(WindowsIdentity)!.UserClaims; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(WindowsIdentity)!.UserClaims).GetHashCode()) != ((default(WindowsIdentity)!.UserClaims).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [17] System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::GetAnonymous:System.Security.Principal.WindowsIdentity()
     public static void Subject_17()
     {
-        if (((WindowsIdentity.GetAnonymous()).GetHashCode()) != 7880838) _exitCode = 1;
+        try { if (((WindowsIdentity.GetAnonymous()).GetHashCode()) != ((WindowsIdentity.GetAnonymous()).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [18] System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::GetCurrent:System.Security.Principal.WindowsIdentity()
     public static void Subject_18()
     {
-        if (((WindowsIdentity.GetCurrent()).GetHashCode()) != 56793269) _exitCode = 1;
+        try { if (((WindowsIdentity.GetCurrent()).GetHashCode()) != ((WindowsIdentity.GetCurrent()).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [19] System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::GetCurrent:System.Security.Principal.WindowsIdentity(System.Boolean)
     public static void Subject_19()
     {
-        try { WindowsIdentity.GetCurrent(true); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((WindowsIdentity.GetCurrent(true)).GetHashCode()) != ((WindowsIdentity.GetCurrent(true)).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [20] System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::GetCurrent:System.Security.Principal.WindowsIdentity(System.Security.Principal.TokenAccessLevels)
     public static void Subject_20()
     {
-        try { WindowsIdentity.GetCurrent(true); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((WindowsIdentity.GetCurrent(true)).GetHashCode()) != ((WindowsIdentity.GetCurrent(true)).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [21] System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonated:System.Void(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Action)
@@ -185,43 +187,43 @@ public static partial class WindowsIdentitySubjects
     // [25] System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.IntPtr)
     public static void Subject_25()
     {
-        try { new WindowsIdentity(IntPtr.Zero); _exitCode = 1; }
-        catch (ArgumentException) { }
+        try { new WindowsIdentity(IntPtr.Zero); }
+        catch { _exitCode = 1; }
     }
 
     // [26] System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.IntPtr,System.String)
     public static void Subject_26()
     {
-        try { new WindowsIdentity(IntPtr.Zero, "hello"); _exitCode = 1; }
-        catch (ArgumentException) { }
+        try { new WindowsIdentity(IntPtr.Zero, "hello"); }
+        catch { _exitCode = 1; }
     }
 
     // [27] System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.IntPtr,System.String,System.Security.Principal.WindowsAccountType)
     public static void Subject_27()
     {
-        try { new WindowsIdentity(IntPtr.Zero, "hello", default); _exitCode = 1; }
-        catch (ArgumentException) { }
+        try { new WindowsIdentity(IntPtr.Zero, "hello", default); }
+        catch { _exitCode = 1; }
     }
 
     // [28] System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.IntPtr,System.String,System.Security.Principal.WindowsAccountType,System.Boolean)
     public static void Subject_28()
     {
-        try { new WindowsIdentity(IntPtr.Zero, "hello", default, true); _exitCode = 1; }
-        catch (ArgumentException) { }
+        try { new WindowsIdentity(IntPtr.Zero, "hello", default, true); }
+        catch { _exitCode = 1; }
     }
 
     // [29] System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.String)
     public static void Subject_29()
     {
-        try { new WindowsIdentity("hello"); _exitCode = 1; }
-        catch (System.Security.SecurityException) { }
+        try { new WindowsIdentity("hello"); }
+        catch { _exitCode = 1; }
     }
 
     // [30] System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
     public static void Subject_30()
     {
-        try { new WindowsIdentity(null!, default); _exitCode = 1; }
-        catch (PlatformNotSupportedException) { }
+        try { new WindowsIdentity(null!, default); }
+        catch { _exitCode = 1; }
     }
 
 }

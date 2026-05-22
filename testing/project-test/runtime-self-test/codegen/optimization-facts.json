@@ -301,6 +301,12 @@
     },
     {
       "subjectKind": "field",
+      "subjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::iterations",
+      "dataKind": "value",
+      "requiresBoxing": true
+    },
+    {
+      "subjectKind": "field",
       "subjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::sync",
       "dataKind": "reference",
       "requiresBoxing": false
@@ -308,12 +314,6 @@
     {
       "subjectKind": "field",
       "subjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::sharedCounter",
-      "dataKind": "value",
-      "requiresBoxing": true
-    },
-    {
-      "subjectKind": "field",
-      "subjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::iterations",
       "dataKind": "value",
       "requiresBoxing": true
     },
@@ -350,10 +350,6 @@
     },
     {
       "methodSubjectId": "RuntimeSelfTest/FinalizerProof::Finalize:System.Void()",
-      "handlingKind": "finally"
-    },
-    {
-      "methodSubjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::\u003CThreadedGcAllocation\u003Eb__0:System.Void()",
       "handlingKind": "finally"
     },
     {

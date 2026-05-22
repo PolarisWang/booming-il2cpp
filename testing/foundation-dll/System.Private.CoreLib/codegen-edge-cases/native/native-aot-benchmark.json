@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/codegen/edge/cases",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_0:System.Void()",
+      "elapsedMilliseconds": 0.21,
+      "calibratedMs": 0.21,
+      "opsPerSecond": 475737393.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_1:System.Void(System.Int32)",
+      "elapsedMilliseconds": 0.326,
+      "calibratedMs": 0.326,
+      "opsPerSecond": 306372549.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_2:System.Void()",
+      "elapsedMilliseconds": 0.211,
+      "calibratedMs": 0.211,
+      "opsPerSecond": 472813238.8,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_3:System.Int32(System.Int32)",
+      "elapsedMilliseconds": 0.212,
+      "calibratedMs": 0.212,
+      "opsPerSecond": 471253534.4,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}

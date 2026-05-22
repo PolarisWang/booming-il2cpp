@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Linq",
+  "familyId": "family/System.Linq/projection",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Select{TSource,TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TResult})",
+      "elapsedMilliseconds": 9549.31,
+      "calibratedMs": 9549.31,
+      "opsPerSecond": 10472.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Select{TSource,TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Int32,TResult})",
+      "elapsedMilliseconds": 958.159,
+      "calibratedMs": 958.159,
+      "opsPerSecond": 104366.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::SelectMany{TSource,TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Collections.Generic.IEnumerable{TResult}})",
+      "elapsedMilliseconds": 11296.156,
+      "calibratedMs": 11296.156,
+      "opsPerSecond": 8852.6,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::SelectMany{TSource,TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Int32,System.Collections.Generic.IEnumerable{TResult}})",
+      "elapsedMilliseconds": 1412.495,
+      "calibratedMs": 1412.495,
+      "opsPerSecond": 70796.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::SelectMany{TSource,TCollection,TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Int32,System.Collections.Generic.IEnumerable{TCollection}},System.Func{TSource,TCollection,TResult})",
+      "elapsedMilliseconds": 12473.891,
+      "calibratedMs": 12473.891,
+      "opsPerSecond": 8016.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::SelectMany{TSource,TCollection,TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Collections.Generic.IEnumerable{TCollection}},System.Func{TSource,TCollection,TResult})",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Zip{TFirst,TSecond,TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.Generic.IEnumerable{TFirst},System.Collections.Generic.IEnumerable{TSecond},System.Func{TFirst,TSecond,TResult})",
+      "elapsedMilliseconds": 12016.599,
+      "calibratedMs": 12016.599,
+      "opsPerSecond": 8321.8,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Zip{TFirst,TSecond}:System.Collections.Generic.IEnumerable{System.ValueTuple{TFirst,TSecond}}(System.Collections.Generic.IEnumerable{TFirst},System.Collections.Generic.IEnumerable{TSecond})",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Zip{TFirst,TSecond,TThird}:System.Collections.Generic.IEnumerable{System.ValueTuple{TFirst,TSecond,TThird}}(System.Collections.Generic.IEnumerable{TFirst},System.Collections.Generic.IEnumerable{TSecond},System.Collections.Generic.IEnumerable{TThird})",
+      "elapsedMilliseconds": 12272.112,
+      "calibratedMs": 12272.112,
+      "opsPerSecond": 8148.6,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}

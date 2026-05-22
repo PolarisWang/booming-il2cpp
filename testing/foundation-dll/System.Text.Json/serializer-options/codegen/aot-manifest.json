@@ -465,6 +465,12 @@
       "reason": "external-call"
     },
     {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "reason": "external-call"
+    },
+    {
       "assemblyName": "System.Text.Json",
       "subjectKind": "method",
       "subjectId": "System.Text.Json/JsonNamingPolicy::get_CamelCase:JsonNamingPolicy()",

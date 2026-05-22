@@ -56,9 +56,33 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "ParserSubjects/ParserSubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "ParserSubjects/ParserSubjects::Subject_2:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Net.ServerSentEvents/SseParser\u003CSystem.Byte\u003E::Enumerate:System.Collections.Generic.IEnumerable\u003CSseItem\u003CSystem.Byte\u003E\u003E()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ParserSubjects/ParserSubjects::Subject_2:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ParserSubjects/ParserSubjects::Subject_2:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Net.ServerSentEvents/SseParser\u003CSystem.Byte\u003E::Enumerate:System.Collections.Generic.IEnumerable\u003CSseItem\u003CSystem.Byte\u003E\u003E()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ParserSubjects/ParserSubjects::Subject_2:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
     },
     {
@@ -68,15 +92,69 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "ParserSubjects/ParserSubjects::Subject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ParserSubjects/ParserSubjects::Subject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Net.ServerSentEvents/SseParser\u003CSystem.Byte\u003E::EnumerateAsync:System.Collections.Generic.IAsyncEnumerable\u003CSseItem\u003CSystem.Byte\u003E\u003E(System.Threading.CancellationToken)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ParserSubjects/ParserSubjects::Subject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "ParserSubjects/ParserSubjects::Subject_4:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Net.ServerSentEvents/SseParser\u003CSystem.Byte\u003E::get_LastEventId:System.String()",
       "devirtualized": false
     },
     {
+      "methodSubjectId": "ParserSubjects/ParserSubjects::Subject_4:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ParserSubjects/ParserSubjects::Subject_4:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Net.ServerSentEvents/SseParser\u003CSystem.Byte\u003E::get_LastEventId:System.String()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ParserSubjects/ParserSubjects::Subject_4:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "ParserSubjects/ParserSubjects::Subject_5:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Net.ServerSentEvents/SseParser\u003CSystem.Byte\u003E::get_ReconnectionInterval:System.TimeSpan()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ParserSubjects/ParserSubjects::Subject_5:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ParserSubjects/ParserSubjects::Subject_5:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Net.ServerSentEvents/SseParser\u003CSystem.Byte\u003E::get_ReconnectionInterval:System.TimeSpan()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "ParserSubjects/ParserSubjects::Subject_5:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
     }
   ],
@@ -90,24 +168,29 @@
   ],
   "exceptionFacts": [
     {
+      "methodSubjectId": "ParserSubjects/ParserSubjects::Subject_0:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
       "methodSubjectId": "ParserSubjects/ParserSubjects::Subject_2:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "ParserSubjects/ParserSubjects::Subject_3:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "ParserSubjects/ParserSubjects::Subject_4:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "ParserSubjects/ParserSubjects::Subject_5:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     }
   ]
 }

@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "MetadataTypeinfoSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Text.Json/metadata-typeinfo/managed/subjects/build-output/MetadataTypeinfoSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Text.Json/metadata-typeinfo/managed/subjects/build-output/MetadataTypeinfoSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "MetadataTypeinfoSubjects",
-      "path": "verification/foundation-dll/System.Text.Json/metadata-typeinfo/managed/subjects/build-output/MetadataTypeinfoSubjects.dll"
+      "path": "testing/foundation-dll/System.Text.Json/metadata-typeinfo/managed/subjects/build-output/MetadataTypeinfoSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "af48bc4b-f95d-42d5-95b7-bc97fa7ac8ac",
+  "inputModuleVersionId": "c97789e4-1674-4530-ac51-1f3b7cf1c287",
   "artifacts": [
     {
       "kind": "typedIlIr",

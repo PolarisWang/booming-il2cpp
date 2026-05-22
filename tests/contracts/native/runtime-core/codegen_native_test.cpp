@@ -64,6 +64,8 @@ using chaos::il2cpp::codegen::EmitUnwindInfo;
 using chaos::il2cpp::codegen::AllocRuntimeFunction;
 using chaos::il2cpp::codegen::RuntimeFunction;
 using chaos::il2cpp::codegen::kPersonalityThunkSize;
+using chaos::il2cpp::codegen::DemoteT4ByToken;
+using chaos::il2cpp::codegen::ReclaimDemotedCode;
 using chaos::il2cpp::interpreter::RegisterFrame;
 using chaos::il2cpp::interpreter::RegisterFile;
 using chaos::il2cpp::interpreter::RegisterExecute;
@@ -301,6 +303,13 @@ static RegisterInstruction InstrLdLoc(uint8_t dst, uint32_t local_idx) noexcept 
     ri.header = MakeHeader(IROpCode::LdLoc, dst, static_cast<uint8_t>(8 + local_idx), 0,
                            kRegHasDst | kRegHasSrc1 | kRegHasImm);
     ri.imm.operand_index = local_idx;
+    return ri;
+}
+
+static RegisterInstruction InstrLeave(uint32_t target) noexcept {
+    RegisterInstruction ri;
+    ri.header = MakeHeader(IROpCode::Leave, 0, 0, 0, kRegIsBranch | kRegHasImm);
+    ri.imm.branch_target = target;
     return ri;
 }
 
@@ -3154,6 +3163,222 @@ static bool Test_RtlAddFunctionTable() {
 #endif // _WIN64
 
 // ═══════════════════════════════════════════════════════════════════════
+// SEH V3: Finally/fault unwinding verification tests (D6)
+// ═══════════════════════════════════════════════════════════════════════
+
+// Test: SehV3_ClauseTable — verify SEH clause table emission with
+// Exception/Finally/Fault flags and byte offset ranges.
+static bool Test_SehV3_ClauseTable() {
+    std::printf("  Test_SehV3_ClauseTable...\n");
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 10, 0),           // idx 0
+        InstrI4(IROpCode::LdcI4, 20, 1),           // idx 1
+        InstrLeave(5),                               // idx 2: leave -> idx 5
+        InstrI4(IROpCode::LdcI4, 30, 0),           // idx 3: catch handler
+        InstrI4(IROpCode::LdcI4, 40, 1),           // idx 4: finally handler
+        InstrBinary(IROpCode::Add, 2, 0, 1),       // idx 5: r2 = r0 + r1
+        InstrRet(2),                                 // idx 6: ret r2
+    };
+    rm.max_regs = 3;
+    rm.seh_clauses = {
+        SEHClause{ SEHFlags::Exception, 0, 3, 3, 0 },  // catch
+        SEHClause{ SEHFlags::Finally,  0, 3, 4, 0 },   // finally
+    };
+
+    if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL: CanGenerateNativeCode false\n"); return false; }
+    auto* nm = GenerateNativeCode(rm);
+    if (nm == nullptr) { std::printf("    FAIL: GenerateNativeCode null\n"); return false; }
+    if (nm->seh_table_offset == 0) { std::printf("    FAIL: no SEH table\n"); return false; }
+
+    // Read SEH table to verify byte offsets
+    const uint8_t* table = static_cast<const uint8_t*>(nm->code) + nm->seh_table_offset;
+    uint32_t count;
+    std::memcpy(&count, table, sizeof(count));
+    std::printf("    SEH clause count=%u\n", count);
+    if (count != 2) { std::printf("    FAIL: expected 2 clauses\n"); return false; }
+
+    // Read clause 0 (Exception)
+    uint32_t f0, ts0, te0, hs0;
+    std::memcpy(&f0, table + 4 + 0*20 + 0, sizeof(f0));
+    std::memcpy(&ts0, table + 4 + 0*20 + 4, sizeof(ts0));
+    std::memcpy(&te0, table + 4 + 0*20 + 8, sizeof(te0));
+    std::memcpy(&hs0, table + 4 + 0*20 + 12, sizeof(hs0));
+    std::printf("    clause 0: flags=%u try=[%u,%u) handler=%u\n", f0, ts0, te0, hs0);
+    if (f0 != 0) { std::printf("    FAIL: clause 0 flags expected 0\n"); return false; }
+    if (hs0 < ts0) { std::printf("    FAIL: clause 0 handler before try\n"); return false; }
+
+    // Read clause 1 (Finally)
+    uint32_t f1, ts1, te1, hs1;
+    std::memcpy(&f1, table + 4 + 1*20 + 0, sizeof(f1));
+    std::memcpy(&ts1, table + 4 + 1*20 + 4, sizeof(ts1));
+    std::memcpy(&te1, table + 4 + 1*20 + 8, sizeof(te1));
+    std::memcpy(&hs1, table + 4 + 1*20 + 12, sizeof(hs1));
+    std::printf("    clause 1: flags=%u try=[%u,%u) handler=%u\n", f1, ts1, te1, hs1);
+    if (f1 != 2) { std::printf("    FAIL: clause 1 flags expected 2 (Finally)\n"); return false; }
+    if (hs1 <= hs0) { std::printf("    FAIL: clause 1 handler should be after clause 0 handler\n"); return false; }
+
+    // Verify try ranges match (should be same try block)
+    if (ts1 != ts0 || te1 != te0) { std::printf("    FAIL: try ranges should match\n"); return false; }
+
+    void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
+    RegisterT4Code(nm->code, nm->code_size, nm);
+    uint64_t result = ExecuteNative(entry);
+    // Normal execution with Leave: should trigger finally (r1=40), skip catch
+    // r0=10 + r1=40 = 50
+    if (result != 50) { std::printf("    FAIL: result=%llu expected 50\n", (unsigned long long)result); return false; }
+    std::printf("    SEH clause table OK (result=%llu) ✓\n", (unsigned long long)result);
+    return true;
+}
+
+// Test: SehV3_LeaveFinally — simple try-finally with normal leave
+static bool Test_SehV3_LeaveFinally() {
+    std::printf("  Test_SehV3_LeaveFinally...\n");
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 100, 0),          // idx 0: r0 = 100
+        InstrLeave(2),                               // idx 1: leave -> idx 2
+        InstrI4(IROpCode::LdcI4, 200, 0),          // idx 2: finally handler (r0 = 200)
+        InstrRet(0),                                 // idx 3: ret r0 (after finally)
+    };
+    rm.max_regs = 1;
+    rm.seh_clauses = {
+        SEHClause{ SEHFlags::Finally, 0, 2, 2, 0 },
+    };
+
+    if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL: CanGenerateNativeCode false\n"); return false; }
+    auto* nm = GenerateNativeCode(rm);
+    if (nm == nullptr) { std::printf("    FAIL: GenerateNativeCode null\n"); return false; }
+
+    void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
+    RegisterT4Code(nm->code, nm->code_size, nm);
+    uint64_t result = ExecuteNative(entry);
+    // Leave from idx 1 -> finally handler (r0=200) -> fall through to ret -> 200
+    if (result != 200) { std::printf("    FAIL: result=%llu expected 200\n", (unsigned long long)result); return false; }
+    std::printf("    LeaveFinally OK (result=%llu) ✓\n", (unsigned long long)result);
+    return true;
+}
+
+// Test: SehV3_TryCatchFinally — try-catch-finally nested
+static bool Test_SehV3_TryCatchFinally() {
+    std::printf("  Test_SehV3_TryCatchFinally...\n");
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 10, 0),           // idx 0: r0 = 10
+        InstrI4(IROpCode::LdcI4, 20, 1),           // idx 1: r1 = 20
+        InstrLeave(5),                               // idx 2: leave -> idx 5
+        InstrI4(IROpCode::LdcI4, 30, 0),           // idx 3: catch handler r0=30
+        InstrI4(IROpCode::LdcI4, 40, 1),           // idx 4: finally handler r1=40
+        InstrBinary(IROpCode::Add, 2, 0, 1),       // idx 5: r2 = r0 + r1
+        InstrRet(2),                                 // idx 6: ret r2
+    };
+    rm.max_regs = 3;
+    rm.seh_clauses = {
+        SEHClause{ SEHFlags::Exception, 0, 3, 3, 0 },  // catch r0=30
+        SEHClause{ SEHFlags::Finally,  0, 3, 4, 0 },   // finally r1=40
+    };
+
+    if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL: CanGenerateNativeCode false\n"); return false; }
+    auto* nm = GenerateNativeCode(rm);
+    if (nm == nullptr) { std::printf("    FAIL: GenerateNativeCode null\n"); return false; }
+
+    std::printf("    TryCatchFinally code_size=%u seh_offset=%u\n", nm->code_size, nm->seh_table_offset);
+    DumpCode(static_cast<const uint8_t*>(nm->code), nm->code_size < 200 ? nm->code_size : 200);
+    if (nm->seh_table_offset > 0) {
+        const uint8_t* table = static_cast<const uint8_t*>(nm->code) + nm->seh_table_offset;
+        uint32_t count;
+        std::memcpy(&count, table, sizeof(count));
+        for (uint32_t ci = 0; ci < count; ci++) {
+            uint32_t f, ts, te, hs, ct;
+            std::memcpy(&f, table + 4 + ci*20 + 0, sizeof(f));
+            std::memcpy(&ts, table + 4 + ci*20 + 4, sizeof(ts));
+            std::memcpy(&te, table + 4 + ci*20 + 8, sizeof(te));
+            std::memcpy(&hs, table + 4 + ci*20 + 12, sizeof(hs));
+            std::memcpy(&ct, table + 4 + ci*20 + 16, sizeof(ct));
+            std::printf("    clause %u: flags=%u try=[%u,%u) handler=%u class_token=%u\n",
+                ci, f, ts, te, hs, ct);
+        }
+    }
+
+    void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
+    RegisterT4Code(nm->code, nm->code_size, nm);
+    uint64_t result = ExecuteNative(entry);
+    // Leave -> T4LeaveHelper finds finally (idx 4: r1=40) -> EndFinally -> pending_leave -> idx 5
+    // r0=10, r1=40, r2=50
+    if (result != 50) { std::printf("    FAIL: result=%llu expected 50\n", (unsigned long long)result); return false; }
+    std::printf("    TryCatchFinally OK (result=%llu) ✓\n", (unsigned long long)result);
+    return true;
+}
+
+// Test: SehV3_FaultClause — fault should NOT execute on normal leave
+static bool Test_SehV3_FaultClause() {
+    std::printf("  Test_SehV3_FaultClause...\n");
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 33, 0),           // idx 0: r0 = 33
+        InstrI4(IROpCode::LdcI4, 66, 1),           // idx 1: r1 = 66
+        InstrLeave(4),                               // idx 2: leave -> idx 4
+        InstrI4(IROpCode::LdcI4, 0, 2),            // idx 3: fault handler (r2 = 0, wrong!)
+        InstrBinary(IROpCode::Add, 2, 0, 1),       // idx 4: r2 = r0 + r1 = 99 (correct)
+        InstrRet(2),                                 // idx 5: ret r2
+    };
+    rm.max_regs = 3;
+    rm.seh_clauses = {
+        SEHClause{ SEHFlags::Fault, 0, 3, 3, 0 },   // fault covering idx 0-2
+    };
+
+    if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL: CanGenerateNativeCode false\n"); return false; }
+    auto* nm = GenerateNativeCode(rm);
+    if (nm == nullptr) { std::printf("    FAIL: GenerateNativeCode null\n"); return false; }
+
+    void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
+    RegisterT4Code(nm->code, nm->code_size, nm);
+    uint64_t result = ExecuteNative(entry);
+    // Normal leave -> T4LeaveHelper should skip Fault -> nullptr -> normal JMP to idx 4
+    // r2 = 33+66 = 99
+    if (result != 99) { std::printf("    FAIL: result=%llu expected 99\n", (unsigned long long)result); return false; }
+    std::printf("    FaultClause OK (result=%llu) ✓\n", (unsigned long long)result);
+    return true;
+}
+
+// Test: SehV3_ReclaimDemotedCode — verify demoted code is reclaimed
+static bool Test_SehV3_ReclaimDemotedCode() {
+    std::printf("  Test_SehV3_ReclaimDemotedCode...\n");
+    RegisterMethod rm;
+    rm.instructions = {
+        InstrI4(IROpCode::LdcI4, 42, 0),
+        InstrRet(0),
+    };
+    rm.max_regs = 1;
+
+    if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL: CanGenerateNativeCode false\n"); return false; }
+    auto* nm = GenerateNativeCode(rm);
+    if (nm == nullptr) { std::printf("    FAIL: GenerateNativeCode null\n"); return false; }
+
+    void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
+    RegisterT4Code(nm->code, nm->code_size, nm);
+
+    // Execute once to verify
+    uint64_t result = ExecuteNative(entry);
+    if (result != 42) { std::printf("    FAIL: result=%llu expected 42\n", (unsigned long long)result); return false; }
+    std::printf("    Execution OK ✓\n");
+
+    // Demote by token (use a made-up token since we didn't register one)
+    RegisterT4Code(nm->code, nm->code_size, nm, /*patch_method_token=*/999);
+    uint32_t demoted = DemoteT4ByToken(999);
+    std::printf("    Demoted %u entries\n", demoted);
+    if (demoted == 0) { std::printf("    FAIL: no entries demoted\n"); return false; }
+
+    // Reclaim
+    ReclaimDemotedCode();
+    std::printf("    Reclaimed ✓\n");
+
+    // Clean up
+    UnregisterT4Code(nm->code);
+    return true;
+}
+
+// ═══════════════════════════════════════════════════════════════════════
 int main() {
     std::setvbuf(stdout, nullptr, _IONBF, 0);
     std::printf("Starting codegen test...\n");
@@ -3194,6 +3419,13 @@ int main() {
     TEST(UnwindInfoInGenerate); TEST(UnwindInfoSehMethods);
     TEST(RtlAddFunctionTable);
 #endif
+
+    // WS9b: SEH V3 — finally/fault unwinding semantics (early to avoid OSR crash)
+    TEST(SehV3_ClauseTable);
+    TEST(SehV3_LeaveFinally);
+    TEST(SehV3_TryCatchFinally);
+    TEST(SehV3_FaultClause);
+    TEST(SehV3_ReclaimDemotedCode);
 
     // Phase 3d: Branch-to-switch conversion (before OSR tests due to OsrPromote hang)
     TEST(BrToSwitch);

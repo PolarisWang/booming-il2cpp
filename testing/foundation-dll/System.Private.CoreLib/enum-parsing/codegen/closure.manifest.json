@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "EnumParsingSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/enum-parsing/codegen/_subjects_input/EnumParsingSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/enum-parsing/managed/subjects/build-output/EnumParsingSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "EnumParsingSubjects",
-      "path": "testing/foundation-dll/System.Private.CoreLib/enum-parsing/codegen/_subjects_input/EnumParsingSubjects.dll"
+      "path": "testing/foundation-dll/System.Private.CoreLib/enum-parsing/managed/subjects/build-output/EnumParsingSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "9a4d726f-6d5a-482b-8fc4-cf4317cce30e",
+  "inputModuleVersionId": "75589ebc-7132-4dac-8fa9-16686116f0f5",
   "artifacts": [
     {
       "kind": "typedIlIr",

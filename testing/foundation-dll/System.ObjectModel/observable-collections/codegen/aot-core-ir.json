@@ -71,10 +71,10 @@
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 21,
-          "handlerOffset": 22,
-          "handlerLength": 5,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+          "tryLength": 15,
+          "handlerOffset": 16,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
@@ -166,10 +166,24 @@
           "isPreserveSig": false
         },
         {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 27,
+          "ilOffset": 14,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 16,
+          "isPreserveSig": false
+        },
+        {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 13,
+          "ilOffset": 18,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -177,7 +191,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "ObservableCollectionsSubjects/ObservableCollectionsSubjects::_exitCode",
-          "ilOffset": 14,
+          "ilOffset": 19,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "ObservableCollectionsSubjects",
@@ -198,20 +212,6 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 27,
-          "ilOffset": 20,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 22,
           "isPreserveSig": false
         },
         {
@@ -303,13 +303,22 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 0,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 10,
+          "handlerOffset": 11,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
       "instructions": [
         {
           "op": "newobj",
           "opCode": 34,
-          "ilOffset": 1,
+          "ilOffset": 2,
           "resultType": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection\u003CSystem.Byte\u003E",
           "callee": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection\u003CSystem.Byte\u003E::.ctor:System.Void()",
           "reference": {
@@ -334,13 +343,70 @@
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 6,
+          "ilOffset": 7,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 22,
+          "ilOffset": 9,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 11,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 13,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ObservableCollectionsSubjects/ObservableCollectionsSubjects::_exitCode",
+          "ilOffset": 14,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ObservableCollectionsSubjects",
+            "subjectKind": "field",
+            "subjectId": "ObservableCollectionsSubjects/ObservableCollectionsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ObservableCollectionsSubjects",
+            "subjectId": "ObservableCollectionsSubjects/ObservableCollectionsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ObservableCollectionsSubjects/ObservableCollectionsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 22,
+          "ilOffset": 20,
+          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 7,
+          "ilOffset": 22,
           "isPreserveSig": false
         }
       ],
@@ -381,10 +447,10 @@
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 17,
-          "handlerOffset": 18,
-          "handlerLength": 5,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.ArgumentNullException"
+          "tryLength": 11,
+          "handlerOffset": 12,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
@@ -427,10 +493,24 @@
           "isPreserveSig": false
         },
         {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 12,
+          "isPreserveSig": false
+        },
+        {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 9,
+          "ilOffset": 14,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -438,7 +518,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "ObservableCollectionsSubjects/ObservableCollectionsSubjects::_exitCode",
-          "ilOffset": 10,
+          "ilOffset": 15,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "ObservableCollectionsSubjects",
@@ -459,20 +539,6 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 23,
-          "ilOffset": 16,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 18,
           "isPreserveSig": false
         },
         {
@@ -527,10 +593,10 @@
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 17,
-          "handlerOffset": 18,
-          "handlerLength": 5,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.ArgumentNullException"
+          "tryLength": 11,
+          "handlerOffset": 12,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
@@ -573,10 +639,24 @@
           "isPreserveSig": false
         },
         {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 12,
+          "isPreserveSig": false
+        },
+        {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 9,
+          "ilOffset": 14,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -584,7 +664,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "ObservableCollectionsSubjects/ObservableCollectionsSubjects::_exitCode",
-          "ilOffset": 10,
+          "ilOffset": 15,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "ObservableCollectionsSubjects",
@@ -605,20 +685,6 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 23,
-          "ilOffset": 16,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 18,
           "isPreserveSig": false
         },
         {
@@ -668,13 +734,22 @@
       "parameterCount": 0,
       "parameterAbis": [],
       "localCount": 1,
-      "exceptionRegionCount": 0,
-      "exceptionRegions": [],
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 39,
+          "handlerOffset": 40,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
       "instructions": [
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 1,
+          "ilOffset": 2,
           "resultType": "System.Collections.ObjectModel.ReadOnlyObservableCollection\u003CSystem.Byte\u003E",
           "callee": "System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection\u003CSystem.Byte\u003E::get_Empty:System.Collections.ObjectModel.ReadOnlyObservableCollection\u003CSystem.Byte\u003E()",
           "reference": {
@@ -738,7 +813,7 @@
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 6,
+          "ilOffset": 7,
           "resultType": "System.Int32",
           "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
           "reference": {
@@ -761,17 +836,98 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 35342034,
-          "ilOffset": 11,
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 12,
+          "resultType": "System.Collections.ObjectModel.ReadOnlyObservableCollection\u003CSystem.Byte\u003E",
+          "callee": "System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection\u003CSystem.Byte\u003E::get_Empty:System.Collections.ObjectModel.ReadOnlyObservableCollection\u003CSystem.Byte\u003E()",
+          "reference": {
+            "assemblyName": "System.ObjectModel",
+            "subjectKind": "method",
+            "subjectId": "System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection\u003CSystem.Byte\u003E::get_Empty:System.Collections.ObjectModel.ReadOnlyObservableCollection\u003CSystem.Byte\u003E()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.ObjectModel",
+            "subjectId": "System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection\u003CSystem.Byte\u003E::get_Empty:System.Collections.ObjectModel.ReadOnlyObservableCollection\u003CSystem.Byte\u003E()",
+            "openDefinitionSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection\u00601::get_Empty:System.Collections.ObjectModel.ReadOnlyObservableCollection\u003C!0\u003E()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection\u00601::get_Empty:System.Collections.ObjectModel.ReadOnlyObservableCollection\u003C!0\u003E();type=[System.Byte];method=[]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection\u00601::get_Empty:System.Collections.ObjectModel.ReadOnlyObservableCollection\u003C!0\u003E();type=[System.Byte];method=[]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection\u00601::get_Empty:System.Collections.ObjectModel.ReadOnlyObservableCollection\u003C!0\u003E()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection\u00601::get_Empty:System.Collections.ObjectModel.ReadOnlyObservableCollection\u003C!0\u003E();type=[System.Byte];method=[]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection\u00601::get_Empty:System.Collections.ObjectModel.ReadOnlyObservableCollection\u003C!0\u003E();type=[System.Byte];method=[]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 1,
+              "statusReasonCode": "loader-demand:memberReference"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection\u003CSystem.Byte\u003E::get_Empty:System.Collections.ObjectModel.ReadOnlyObservableCollection\u003CSystem.Byte\u003E()",
+              "definitionSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection\u00601::get_Empty:System.Collections.ObjectModel.ReadOnlyObservableCollection\u003C!0\u003E()",
+              "displaySubjectId": "System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection\u003CSystem.Byte\u003E::get_Empty()",
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection\u00601::get_Empty:System.Collections.ObjectModel.ReadOnlyObservableCollection\u003C!0\u003E()",
+                "typeArguments": [
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 17,
           "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 16,
+          "ilOffset": 22,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -779,14 +935,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 18,
+          "ilOffset": 24,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 19,
+          "ilOffset": 25,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -794,7 +950,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 21,
+          "ilOffset": 27,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -802,14 +958,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 22,
+          "ilOffset": 28,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 31,
-          "ilOffset": 23,
+          "operand": 37,
+          "ilOffset": 29,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -817,7 +973,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 25,
+          "ilOffset": 31,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -825,7 +981,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "ObservableCollectionsSubjects/ObservableCollectionsSubjects::_exitCode",
-          "ilOffset": 26,
+          "ilOffset": 32,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "ObservableCollectionsSubjects",
@@ -849,9 +1005,66 @@
           "isPreserveSig": false
         },
         {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 51,
+          "ilOffset": 38,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 40,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 42,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ObservableCollectionsSubjects/ObservableCollectionsSubjects::_exitCode",
+          "ilOffset": 43,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ObservableCollectionsSubjects",
+            "subjectKind": "field",
+            "subjectId": "ObservableCollectionsSubjects/ObservableCollectionsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ObservableCollectionsSubjects",
+            "subjectId": "ObservableCollectionsSubjects/ObservableCollectionsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ObservableCollectionsSubjects/ObservableCollectionsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 51,
+          "ilOffset": 49,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 31,
+          "ilOffset": 51,
           "isPreserveSig": false
         }
       ],
@@ -892,10 +1105,10 @@
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 17,
-          "handlerOffset": 18,
-          "handlerLength": 5,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.ArgumentNullException"
+          "tryLength": 11,
+          "handlerOffset": 12,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
@@ -938,10 +1151,24 @@
           "isPreserveSig": false
         },
         {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 23,
+          "ilOffset": 10,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 12,
+          "isPreserveSig": false
+        },
+        {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 9,
+          "ilOffset": 14,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -949,7 +1176,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "ObservableCollectionsSubjects/ObservableCollectionsSubjects::_exitCode",
-          "ilOffset": 10,
+          "ilOffset": 15,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "ObservableCollectionsSubjects",
@@ -970,20 +1197,6 @@
             "fieldTypeSubjectId": "System.Int32"
           },
           "runtimeServiceKind": 5,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 23,
-          "ilOffset": 16,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "pop",
-          "opCode": 47,
-          "ilOffset": 18,
           "isPreserveSig": false
         },
         {

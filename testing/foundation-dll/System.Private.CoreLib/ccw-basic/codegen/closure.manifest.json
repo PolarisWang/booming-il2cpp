@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "CcwBasicSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/ccw-basic/codegen/_subjects_input/CcwBasicSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/ccw-basic/managed/subjects/build-output/CcwBasicSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "CcwBasicSubjects",
-      "path": "testing/foundation-dll/System.Private.CoreLib/ccw-basic/codegen/_subjects_input/CcwBasicSubjects.dll"
+      "path": "testing/foundation-dll/System.Private.CoreLib/ccw-basic/managed/subjects/build-output/CcwBasicSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "0bfaf7a6-6552-4b97-80a1-c7d75f0471c6",
+  "inputModuleVersionId": "584ab270-a8d6-471d-a171-925e94dfe40d",
   "artifacts": [
     {
       "kind": "typedIlIr",

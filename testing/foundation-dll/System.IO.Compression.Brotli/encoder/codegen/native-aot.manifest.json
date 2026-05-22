@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "EncoderSubjects",
   "entrySubjectId": "EncoderSubjects/EncoderSubjects::Subject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.IO.Compression.Brotli/encoder/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.IO.Compression.Brotli/encoder/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

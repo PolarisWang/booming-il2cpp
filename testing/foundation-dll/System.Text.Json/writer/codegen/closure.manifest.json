@@ -3,7 +3,7 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "WriterSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Text.Json/writer/managed/subjects/build-output/WriterSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Text.Json/writer/managed/subjects/build-output/WriterSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
@@ -12,11 +12,11 @@
     },
     {
       "assemblyName": "WriterSubjects",
-      "path": "verification/foundation-dll/System.Text.Json/writer/managed/subjects/build-output/WriterSubjects.dll"
+      "path": "testing/foundation-dll/System.Text.Json/writer/managed/subjects/build-output/WriterSubjects.dll"
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "5fade2fa-321e-40fb-9538-dade96568355",
+  "inputModuleVersionId": "35995474-74bd-48e5-afdf-341fad3b8798",
   "artifacts": [
     {
       "kind": "typedIlIr",

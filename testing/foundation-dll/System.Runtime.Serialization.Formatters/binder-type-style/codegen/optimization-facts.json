@@ -30,6 +30,24 @@
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationBinder::BindToType:System.Type(System.String,System.String)",
       "devirtualized": false
+    },
+    {
+      "methodSubjectId": "BinderTypeStyleSubjects/BinderTypeStyleSubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "BinderTypeStyleSubjects/BinderTypeStyleSubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationBinder::BindToType:System.Type(System.String,System.String)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "BinderTypeStyleSubjects/BinderTypeStyleSubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
     }
   ],
   "layoutFacts": [
@@ -44,12 +62,12 @@
     {
       "methodSubjectId": "BinderTypeStyleSubjects/BinderTypeStyleSubjects::Subject_0:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "BinderTypeStyleSubjects/BinderTypeStyleSubjects::Subject_1:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     }
   ]
 }

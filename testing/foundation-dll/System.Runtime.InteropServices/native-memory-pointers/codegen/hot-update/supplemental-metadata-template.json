@@ -212,10 +212,26 @@
     },
     {
       "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_25:System.Void()",
+      "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_25:System.Void()",
+      "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
+      "metadataToken": 100663322,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_26:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_26:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663322,
+      "metadataToken": 100663323,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_27:System.Void()",
+      "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_27:System.Void()",
+      "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
+      "metadataToken": 100663324,
       "parameterCount": 0
     },
     {
@@ -223,7 +239,15 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_28:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_28:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663323,
+      "metadataToken": 100663325,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_29:System.Void()",
+      "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_29:System.Void()",
+      "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
+      "metadataToken": 100663326,
       "parameterCount": 0
     },
     {
@@ -231,7 +255,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_30:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_30:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663324,
+      "metadataToken": 100663327,
       "parameterCount": 0
     },
     {
@@ -239,7 +263,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_31:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_31:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663325,
+      "metadataToken": 100663328,
       "parameterCount": 0
     },
     {
@@ -247,7 +271,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_32:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_32:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663326,
+      "metadataToken": 100663329,
       "parameterCount": 0
     },
     {
@@ -255,7 +279,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_33:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_33:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663327,
+      "metadataToken": 100663330,
       "parameterCount": 0
     },
     {
@@ -263,7 +287,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_34:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_34:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663328,
+      "metadataToken": 100663331,
       "parameterCount": 0
     },
     {
@@ -271,7 +295,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_35:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_35:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663329,
+      "metadataToken": 100663332,
       "parameterCount": 0
     },
     {
@@ -279,7 +303,15 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_36:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_36:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663330,
+      "metadataToken": 100663333,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_37:System.Void()",
+      "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_37:System.Void()",
+      "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
+      "metadataToken": 100663334,
       "parameterCount": 0
     },
     {
@@ -287,7 +319,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_38:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_38:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663331,
+      "metadataToken": 100663335,
       "parameterCount": 0
     },
     {
@@ -295,7 +327,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_39:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_39:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663332,
+      "metadataToken": 100663336,
       "parameterCount": 0
     },
     {
@@ -303,7 +335,15 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_40:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_40:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663333,
+      "metadataToken": 100663337,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_41:System.Void()",
+      "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_41:System.Void()",
+      "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
+      "metadataToken": 100663338,
       "parameterCount": 0
     },
     {
@@ -311,7 +351,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_42:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_42:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663334,
+      "metadataToken": 100663339,
       "parameterCount": 0
     },
     {
@@ -319,7 +359,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_43:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_43:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663335,
+      "metadataToken": 100663340,
       "parameterCount": 0
     },
     {
@@ -327,7 +367,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_44:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_44:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663336,
+      "metadataToken": 100663341,
       "parameterCount": 0
     },
     {
@@ -335,7 +375,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_45:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_45:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663337,
+      "metadataToken": 100663342,
       "parameterCount": 0
     },
     {
@@ -343,7 +383,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_46:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_46:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663338,
+      "metadataToken": 100663343,
       "parameterCount": 0
     },
     {
@@ -351,7 +391,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_47:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_47:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663339,
+      "metadataToken": 100663344,
       "parameterCount": 0
     },
     {
@@ -359,7 +399,15 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_48:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_48:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663340,
+      "metadataToken": 100663345,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_49:System.Void()",
+      "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_49:System.Void()",
+      "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
+      "metadataToken": 100663346,
       "parameterCount": 0
     },
     {
@@ -367,7 +415,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_50:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_50:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663341,
+      "metadataToken": 100663347,
       "parameterCount": 0
     },
     {
@@ -375,7 +423,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_51:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_51:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663342,
+      "metadataToken": 100663348,
       "parameterCount": 0
     },
     {
@@ -383,7 +431,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_52:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_52:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663343,
+      "metadataToken": 100663349,
       "parameterCount": 0
     },
     {
@@ -391,7 +439,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_53:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_53:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663344,
+      "metadataToken": 100663350,
       "parameterCount": 0
     },
     {
@@ -399,7 +447,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_54:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_54:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663345,
+      "metadataToken": 100663351,
       "parameterCount": 0
     },
     {
@@ -407,7 +455,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_55:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_55:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663346,
+      "metadataToken": 100663352,
       "parameterCount": 0
     },
     {
@@ -415,7 +463,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_56:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_56:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663347,
+      "metadataToken": 100663353,
       "parameterCount": 0
     },
     {
@@ -423,7 +471,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_57:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_57:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663348,
+      "metadataToken": 100663354,
       "parameterCount": 0
     },
     {
@@ -431,7 +479,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_58:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_58:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663349,
+      "metadataToken": 100663355,
       "parameterCount": 0
     },
     {
@@ -439,7 +487,15 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_59:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_59:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663350,
+      "metadataToken": 100663356,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_60:System.Void()",
+      "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_60:System.Void()",
+      "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
+      "metadataToken": 100663357,
       "parameterCount": 0
     },
     {
@@ -447,7 +503,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_61:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_61:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663351,
+      "metadataToken": 100663358,
       "parameterCount": 0
     },
     {
@@ -455,7 +511,15 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_62:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_62:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663352,
+      "metadataToken": 100663359,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_63:System.Void()",
+      "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_63:System.Void()",
+      "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
+      "metadataToken": 100663360,
       "parameterCount": 0
     },
     {
@@ -463,7 +527,15 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_64:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_64:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663353,
+      "metadataToken": 100663361,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_65:System.Void()",
+      "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_65:System.Void()",
+      "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
+      "metadataToken": 100663362,
       "parameterCount": 0
     },
     {
@@ -471,7 +543,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_66:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_66:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663354,
+      "metadataToken": 100663363,
       "parameterCount": 0
     },
     {
@@ -479,7 +551,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_67:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_67:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663355,
+      "metadataToken": 100663364,
       "parameterCount": 0
     },
     {
@@ -487,7 +559,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_68:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_68:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663356,
+      "metadataToken": 100663365,
       "parameterCount": 0
     },
     {
@@ -495,7 +567,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_69:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_69:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663357,
+      "metadataToken": 100663366,
       "parameterCount": 0
     },
     {
@@ -503,7 +575,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_70:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_70:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663358,
+      "metadataToken": 100663367,
       "parameterCount": 0
     },
     {
@@ -511,7 +583,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_71:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_71:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663359,
+      "metadataToken": 100663368,
       "parameterCount": 0
     },
     {
@@ -519,7 +591,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_72:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_72:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663360,
+      "metadataToken": 100663369,
       "parameterCount": 0
     },
     {
@@ -527,7 +599,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_73:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_73:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663361,
+      "metadataToken": 100663370,
       "parameterCount": 0
     },
     {
@@ -535,7 +607,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_74:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_74:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663362,
+      "metadataToken": 100663371,
       "parameterCount": 0
     },
     {
@@ -543,7 +615,15 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_75:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_75:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663363,
+      "metadataToken": 100663372,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_76:System.Void()",
+      "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_76:System.Void()",
+      "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
+      "metadataToken": 100663373,
       "parameterCount": 0
     },
     {
@@ -551,7 +631,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_77:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_77:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663364,
+      "metadataToken": 100663374,
       "parameterCount": 0
     },
     {
@@ -559,7 +639,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_78:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_78:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663365,
+      "metadataToken": 100663375,
       "parameterCount": 0
     },
     {
@@ -567,7 +647,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_79:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_79:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663366,
+      "metadataToken": 100663376,
       "parameterCount": 0
     },
     {
@@ -575,7 +655,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_80:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_80:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663367,
+      "metadataToken": 100663377,
       "parameterCount": 0
     },
     {
@@ -583,7 +663,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_81:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_81:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663368,
+      "metadataToken": 100663378,
       "parameterCount": 0
     },
     {
@@ -591,7 +671,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_82:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_82:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663369,
+      "metadataToken": 100663379,
       "parameterCount": 0
     },
     {
@@ -599,7 +679,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_83:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_83:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663370,
+      "metadataToken": 100663380,
       "parameterCount": 0
     },
     {
@@ -607,7 +687,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_84:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_84:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663371,
+      "metadataToken": 100663381,
       "parameterCount": 0
     },
     {
@@ -615,7 +695,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_85:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_85:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663372,
+      "metadataToken": 100663382,
       "parameterCount": 0
     },
     {
@@ -623,7 +703,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_86:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_86:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663373,
+      "metadataToken": 100663383,
       "parameterCount": 0
     },
     {
@@ -631,7 +711,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_87:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_87:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663374,
+      "metadataToken": 100663384,
       "parameterCount": 0
     },
     {
@@ -639,7 +719,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_88:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_88:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663375,
+      "metadataToken": 100663385,
       "parameterCount": 0
     },
     {
@@ -647,7 +727,23 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_89:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_89:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663376,
+      "metadataToken": 100663386,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_90:System.Void()",
+      "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_90:System.Void()",
+      "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
+      "metadataToken": 100663387,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_91:System.Void()",
+      "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_91:System.Void()",
+      "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
+      "metadataToken": 100663388,
       "parameterCount": 0
     },
     {
@@ -655,7 +751,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_92:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_92:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663377,
+      "metadataToken": 100663389,
       "parameterCount": 0
     },
     {
@@ -663,7 +759,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_93:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_93:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663378,
+      "metadataToken": 100663390,
       "parameterCount": 0
     },
     {
@@ -671,7 +767,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_94:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_94:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663379,
+      "metadataToken": 100663391,
       "parameterCount": 0
     },
     {
@@ -679,7 +775,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_95:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_95:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663380,
+      "metadataToken": 100663392,
       "parameterCount": 0
     },
     {
@@ -687,7 +783,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_96:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_96:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663381,
+      "metadataToken": 100663393,
       "parameterCount": 0
     },
     {
@@ -695,7 +791,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_97:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_97:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663382,
+      "metadataToken": 100663394,
       "parameterCount": 0
     },
     {
@@ -703,7 +799,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_98:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_98:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663383,
+      "metadataToken": 100663395,
       "parameterCount": 0
     },
     {
@@ -711,7 +807,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_99:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_99:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663384,
+      "metadataToken": 100663396,
       "parameterCount": 0
     },
     {
@@ -719,7 +815,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_100:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_100:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663385,
+      "metadataToken": 100663397,
       "parameterCount": 0
     },
     {
@@ -727,7 +823,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_101:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_101:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663386,
+      "metadataToken": 100663398,
       "parameterCount": 0
     },
     {
@@ -735,7 +831,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_102:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_102:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663387,
+      "metadataToken": 100663399,
       "parameterCount": 0
     },
     {
@@ -743,7 +839,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_103:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_103:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663388,
+      "metadataToken": 100663400,
       "parameterCount": 0
     },
     {
@@ -751,7 +847,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_104:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_104:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663389,
+      "metadataToken": 100663401,
       "parameterCount": 0
     },
     {
@@ -759,7 +855,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_105:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_105:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663390,
+      "metadataToken": 100663402,
       "parameterCount": 0
     },
     {
@@ -767,7 +863,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_106:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_106:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663391,
+      "metadataToken": 100663403,
       "parameterCount": 0
     },
     {
@@ -775,7 +871,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_107:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_107:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663392,
+      "metadataToken": 100663404,
       "parameterCount": 0
     },
     {
@@ -783,7 +879,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_108:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_108:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663393,
+      "metadataToken": 100663405,
       "parameterCount": 0
     },
     {
@@ -791,7 +887,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_109:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_109:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663394,
+      "metadataToken": 100663406,
       "parameterCount": 0
     },
     {
@@ -799,7 +895,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_110:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_110:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663395,
+      "metadataToken": 100663407,
       "parameterCount": 0
     },
     {
@@ -807,7 +903,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_111:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_111:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663396,
+      "metadataToken": 100663408,
       "parameterCount": 0
     },
     {
@@ -815,7 +911,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_112:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_112:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663397,
+      "metadataToken": 100663409,
       "parameterCount": 0
     },
     {
@@ -823,7 +919,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_113:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_113:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663398,
+      "metadataToken": 100663410,
       "parameterCount": 0
     },
     {
@@ -831,7 +927,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_114:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_114:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663399,
+      "metadataToken": 100663411,
       "parameterCount": 0
     },
     {
@@ -839,7 +935,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_115:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_115:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663400,
+      "metadataToken": 100663412,
       "parameterCount": 0
     },
     {
@@ -847,7 +943,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_116:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_116:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663401,
+      "metadataToken": 100663413,
       "parameterCount": 0
     },
     {
@@ -855,7 +951,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_117:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_117:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663402,
+      "metadataToken": 100663414,
       "parameterCount": 0
     },
     {
@@ -863,7 +959,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_118:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_118:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663403,
+      "metadataToken": 100663415,
       "parameterCount": 0
     },
     {
@@ -871,7 +967,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_119:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_119:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663404,
+      "metadataToken": 100663416,
       "parameterCount": 0
     },
     {
@@ -879,7 +975,15 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_120:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_120:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663405,
+      "metadataToken": 100663417,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_121:System.Void()",
+      "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_121:System.Void()",
+      "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
+      "metadataToken": 100663418,
       "parameterCount": 0
     },
     {
@@ -887,7 +991,15 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_122:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_122:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663406,
+      "metadataToken": 100663419,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_123:System.Void()",
+      "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_123:System.Void()",
+      "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
+      "metadataToken": 100663420,
       "parameterCount": 0
     },
     {
@@ -895,7 +1007,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_124:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_124:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663407,
+      "metadataToken": 100663421,
       "parameterCount": 0
     },
     {
@@ -903,7 +1015,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_125:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_125:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663408,
+      "metadataToken": 100663422,
       "parameterCount": 0
     },
     {
@@ -911,7 +1023,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_126:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_126:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663409,
+      "metadataToken": 100663423,
       "parameterCount": 0
     },
     {
@@ -919,7 +1031,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_127:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_127:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663410,
+      "metadataToken": 100663424,
       "parameterCount": 0
     },
     {
@@ -927,7 +1039,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_128:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_128:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663411,
+      "metadataToken": 100663425,
       "parameterCount": 0
     },
     {
@@ -935,7 +1047,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_129:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_129:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663412,
+      "metadataToken": 100663426,
       "parameterCount": 0
     },
     {
@@ -943,7 +1055,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_130:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_130:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663413,
+      "metadataToken": 100663427,
       "parameterCount": 0
     },
     {
@@ -951,7 +1063,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_131:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_131:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663414,
+      "metadataToken": 100663428,
       "parameterCount": 0
     },
     {
@@ -959,7 +1071,15 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_132:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_132:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663415,
+      "metadataToken": 100663429,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_133:System.Void()",
+      "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_133:System.Void()",
+      "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
+      "metadataToken": 100663430,
       "parameterCount": 0
     },
     {
@@ -967,7 +1087,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_134:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_134:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663416,
+      "metadataToken": 100663431,
       "parameterCount": 0
     },
     {
@@ -975,7 +1095,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_135:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_135:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663417,
+      "metadataToken": 100663432,
       "parameterCount": 0
     },
     {
@@ -983,7 +1103,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_136:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_136:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663418,
+      "metadataToken": 100663433,
       "parameterCount": 0
     },
     {
@@ -991,7 +1111,15 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_137:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_137:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663419,
+      "metadataToken": 100663434,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_138:System.Void()",
+      "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_138:System.Void()",
+      "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
+      "metadataToken": 100663435,
       "parameterCount": 0
     },
     {
@@ -999,7 +1127,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_139:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_139:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663420,
+      "metadataToken": 100663436,
       "parameterCount": 0
     },
     {
@@ -1007,7 +1135,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_140:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_140:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663421,
+      "metadataToken": 100663437,
       "parameterCount": 0
     },
     {
@@ -1015,7 +1143,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_141:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_141:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663422,
+      "metadataToken": 100663438,
       "parameterCount": 0
     },
     {
@@ -1023,7 +1151,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_142:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_142:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663423,
+      "metadataToken": 100663439,
       "parameterCount": 0
     },
     {
@@ -1031,7 +1159,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_143:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_143:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663424,
+      "metadataToken": 100663440,
       "parameterCount": 0
     },
     {
@@ -1039,7 +1167,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_144:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_144:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663425,
+      "metadataToken": 100663441,
       "parameterCount": 0
     },
     {
@@ -1047,7 +1175,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_145:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_145:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663426,
+      "metadataToken": 100663442,
       "parameterCount": 0
     },
     {
@@ -1055,7 +1183,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_146:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_146:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663427,
+      "metadataToken": 100663443,
       "parameterCount": 0
     },
     {
@@ -1063,7 +1191,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_147:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_147:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663428,
+      "metadataToken": 100663444,
       "parameterCount": 0
     },
     {
@@ -1071,7 +1199,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_148:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_148:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663429,
+      "metadataToken": 100663445,
       "parameterCount": 0
     },
     {
@@ -1079,7 +1207,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_149:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_149:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663430,
+      "metadataToken": 100663446,
       "parameterCount": 0
     },
     {
@@ -1087,7 +1215,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_150:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_150:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663431,
+      "metadataToken": 100663447,
       "parameterCount": 0
     },
     {
@@ -1095,7 +1223,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_151:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_151:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663432,
+      "metadataToken": 100663448,
       "parameterCount": 0
     },
     {
@@ -1103,7 +1231,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_152:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_152:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663433,
+      "metadataToken": 100663449,
       "parameterCount": 0
     },
     {
@@ -1111,7 +1239,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_153:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_153:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663434,
+      "metadataToken": 100663450,
       "parameterCount": 0
     },
     {
@@ -1119,7 +1247,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_154:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_154:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663435,
+      "metadataToken": 100663451,
       "parameterCount": 0
     },
     {
@@ -1127,7 +1255,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_155:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_155:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663436,
+      "metadataToken": 100663452,
       "parameterCount": 0
     },
     {
@@ -1135,7 +1263,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_156:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_156:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663437,
+      "metadataToken": 100663453,
       "parameterCount": 0
     },
     {
@@ -1143,7 +1271,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_157:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_157:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663438,
+      "metadataToken": 100663454,
       "parameterCount": 0
     },
     {
@@ -1151,7 +1279,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_158:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_158:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663439,
+      "metadataToken": 100663455,
       "parameterCount": 0
     },
     {
@@ -1159,7 +1287,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_159:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_159:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663440,
+      "metadataToken": 100663456,
       "parameterCount": 0
     },
     {
@@ -1167,7 +1295,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_160:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_160:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663441,
+      "metadataToken": 100663457,
       "parameterCount": 0
     },
     {
@@ -1175,7 +1303,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_161:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_161:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663442,
+      "metadataToken": 100663458,
       "parameterCount": 0
     },
     {
@@ -1183,7 +1311,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_162:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_162:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663443,
+      "metadataToken": 100663459,
       "parameterCount": 0
     },
     {
@@ -1191,7 +1319,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_163:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_163:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663444,
+      "metadataToken": 100663460,
       "parameterCount": 0
     },
     {
@@ -1199,7 +1327,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_164:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_164:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663445,
+      "metadataToken": 100663461,
       "parameterCount": 0
     },
     {
@@ -1207,7 +1335,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_165:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_165:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663446,
+      "metadataToken": 100663462,
       "parameterCount": 0
     },
     {
@@ -1215,7 +1343,23 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_166:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_166:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663447,
+      "metadataToken": 100663463,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_167:System.Void()",
+      "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_167:System.Void()",
+      "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
+      "metadataToken": 100663464,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_168:System.Void()",
+      "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_168:System.Void()",
+      "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
+      "metadataToken": 100663465,
       "parameterCount": 0
     },
     {
@@ -1223,7 +1367,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_169:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_169:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663448,
+      "metadataToken": 100663466,
       "parameterCount": 0
     },
     {
@@ -1231,7 +1375,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_170:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_170:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663449,
+      "metadataToken": 100663467,
       "parameterCount": 0
     },
     {
@@ -1239,7 +1383,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_171:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_171:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663450,
+      "metadataToken": 100663468,
       "parameterCount": 0
     },
     {
@@ -1247,7 +1391,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_172:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_172:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663451,
+      "metadataToken": 100663469,
       "parameterCount": 0
     },
     {
@@ -1255,7 +1399,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_173:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_173:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663452,
+      "metadataToken": 100663470,
       "parameterCount": 0
     },
     {
@@ -1263,7 +1407,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_174:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_174:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663453,
+      "metadataToken": 100663471,
       "parameterCount": 0
     },
     {
@@ -1271,7 +1415,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_175:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_175:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663454,
+      "metadataToken": 100663472,
       "parameterCount": 0
     },
     {
@@ -1279,7 +1423,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_176:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_176:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663455,
+      "metadataToken": 100663473,
       "parameterCount": 0
     },
     {
@@ -1287,7 +1431,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_177:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_177:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663456,
+      "metadataToken": 100663474,
       "parameterCount": 0
     },
     {
@@ -1295,7 +1439,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_178:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_178:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663457,
+      "metadataToken": 100663475,
       "parameterCount": 0
     },
     {
@@ -1303,7 +1447,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_179:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_179:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663458,
+      "metadataToken": 100663476,
       "parameterCount": 0
     },
     {
@@ -1311,7 +1455,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_180:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_180:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663459,
+      "metadataToken": 100663477,
       "parameterCount": 0
     },
     {
@@ -1319,7 +1463,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_181:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_181:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663460,
+      "metadataToken": 100663478,
       "parameterCount": 0
     },
     {
@@ -1327,7 +1471,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_182:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_182:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663461,
+      "metadataToken": 100663479,
       "parameterCount": 0
     },
     {
@@ -1335,7 +1479,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_183:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_183:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663462,
+      "metadataToken": 100663480,
       "parameterCount": 0
     },
     {
@@ -1343,7 +1487,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_184:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_184:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663463,
+      "metadataToken": 100663481,
       "parameterCount": 0
     },
     {
@@ -1351,7 +1495,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_185:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_185:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663464,
+      "metadataToken": 100663482,
       "parameterCount": 0
     },
     {
@@ -1359,7 +1503,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_186:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_186:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663465,
+      "metadataToken": 100663483,
       "parameterCount": 0
     },
     {
@@ -1367,7 +1511,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_187:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_187:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663466,
+      "metadataToken": 100663484,
       "parameterCount": 0
     },
     {
@@ -1375,7 +1519,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_188:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_188:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663467,
+      "metadataToken": 100663485,
       "parameterCount": 0
     },
     {
@@ -1383,7 +1527,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_189:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_189:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663468,
+      "metadataToken": 100663486,
       "parameterCount": 0
     },
     {
@@ -1391,7 +1535,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_190:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_190:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663469,
+      "metadataToken": 100663487,
       "parameterCount": 0
     },
     {
@@ -1399,7 +1543,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_191:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_191:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663470,
+      "metadataToken": 100663488,
       "parameterCount": 0
     },
     {
@@ -1407,7 +1551,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_192:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_192:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663471,
+      "metadataToken": 100663489,
       "parameterCount": 0
     },
     {
@@ -1415,7 +1559,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_193:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_193:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663472,
+      "metadataToken": 100663490,
       "parameterCount": 0
     },
     {
@@ -1423,7 +1567,23 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_194:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_194:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663473,
+      "metadataToken": 100663491,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_195:System.Void()",
+      "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_195:System.Void()",
+      "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
+      "metadataToken": 100663492,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "NativeMemoryPointersSubjects",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_196:System.Void()",
+      "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_196:System.Void()",
+      "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
+      "metadataToken": 100663493,
       "parameterCount": 0
     },
     {
@@ -1431,7 +1591,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_197:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_197:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663474,
+      "metadataToken": 100663494,
       "parameterCount": 0
     },
     {
@@ -1439,7 +1599,7 @@
       "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_198:System.Void()",
       "definitionSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_198:System.Void()",
       "declaringTypeSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
-      "metadataToken": 100663475,
+      "metadataToken": 100663495,
       "parameterCount": 0
     }
   ],

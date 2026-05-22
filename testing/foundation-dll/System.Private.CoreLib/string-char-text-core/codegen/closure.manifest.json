@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "StringCharTextCoreSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/string-char-text-core/codegen/_subjects_input/StringCharTextCoreSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/string-char-text-core/managed/subjects/build-output/StringCharTextCoreSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "StringCharTextCoreSubjects",
-      "path": "testing/foundation-dll/System.Private.CoreLib/string-char-text-core/codegen/_subjects_input/StringCharTextCoreSubjects.dll"
+      "path": "testing/foundation-dll/System.Private.CoreLib/string-char-text-core/managed/subjects/build-output/StringCharTextCoreSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "5400606e-7228-4f5e-9c6f-55d92b21591f",
+  "inputModuleVersionId": "333f9c73-fa40-42c0-8f8d-15f846205122",
   "artifacts": [
     {
       "kind": "typedIlIr",

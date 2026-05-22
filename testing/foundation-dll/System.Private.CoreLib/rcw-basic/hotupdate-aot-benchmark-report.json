@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/rcw/basic",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "RcwBasicNativeEntry/RcwBasicNativeEntry::Run:System.Int32(System.Int32)",
+      "status": "passed",
+      "prePatchNsPerOp": 2.31,
+      "postPatchNsPerOp": 2.8,
+      "slowdownPercent": 21.21
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwRoundTripIdentity:System.Int32()",
+      "status": "passed",
+      "prePatchNsPerOp": 2.68,
+      "postPatchNsPerOp": 2.3,
+      "slowdownPercent": -14.18
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwRoundTripQi:System.Int32()",
+      "status": "passed",
+      "prePatchNsPerOp": 2.15,
+      "postPatchNsPerOp": 2.7,
+      "slowdownPercent": 25.58
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwMultipleWrappers:System.Int32()",
+      "status": "passed",
+      "prePatchNsPerOp": 2.16,
+      "postPatchNsPerOp": 2.7,
+      "slowdownPercent": 25.0
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwQiUnknownInterface:System.Int32()",
+      "status": "passed",
+      "prePatchNsPerOp": 2.18,
+      "postPatchNsPerOp": 2.4,
+      "slowdownPercent": 10.09
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwVtableMethodCall:System.Int32()",
+      "status": "passed",
+      "prePatchNsPerOp": 2.21,
+      "postPatchNsPerOp": 2.4,
+      "slowdownPercent": 8.6
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwDirectVtable:System.Int32()",
+      "status": "passed",
+      "prePatchNsPerOp": 2.12,
+      "postPatchNsPerOp": 2.4,
+      "slowdownPercent": 13.21
+    }
+  ],
+  "summary": {
+    "totalMethods": 7,
+    "nonStubMethods": 7,
+    "averageSlowdownPercent": 12.79,
+    "slowdownFactor": 1.1279,
+    "slowdownThresholdX": 50.0
+  }
+}

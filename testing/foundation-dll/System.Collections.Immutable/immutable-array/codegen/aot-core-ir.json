@@ -74,7 +74,7 @@
                 "value": "stub:definition=System.Collections.Immutable/ImmutableArray::Create:ImmutableArray\u003C!!0\u003E();type=[];method=[System.Byte]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:methodSpec"
             },
             "genericDiagnostic": {
@@ -154,7 +154,7 @@
                 "value": "stub:definition=System.Collections.Immutable/ImmutableArray\u00601::get_Length:System.Int32();type=[System.Byte];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -407,7 +407,7 @@
                 "value": "stub:definition=System.Collections.Immutable/ImmutableArray::Create:ImmutableArray\u003C!!0\u003E(!!0);type=[];method=[System.Byte]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:methodSpec"
             },
             "genericDiagnostic": {
@@ -487,7 +487,7 @@
                 "value": "stub:definition=System.Collections.Immutable/ImmutableArray\u00601::get_Length:System.Int32();type=[System.Byte];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -763,7 +763,7 @@
                 "value": "stub:definition=System.Collections.Immutable/ImmutableArray::Create:ImmutableArray\u003C!!0\u003E(!!0,!!0);type=[];method=[System.Byte]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:methodSpec"
             },
             "genericDiagnostic": {
@@ -843,7 +843,7 @@
                 "value": "stub:definition=System.Collections.Immutable/ImmutableArray\u00601::get_Length:System.Int32();type=[System.Byte];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -1103,7 +1103,7 @@
                 "value": "stub:definition=System.Collections.Immutable/ImmutableArray::Create:ImmutableArray\u003C!!0\u003E();type=[];method=[System.Int32]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:methodSpec"
             },
             "genericDiagnostic": {
@@ -1183,7 +1183,7 @@
                 "value": "stub:definition=System.Collections.Immutable/ImmutableArray\u00601::get_Length:System.Int32();type=[System.Int32];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -1436,7 +1436,7 @@
                 "value": "stub:definition=System.Collections.Immutable/ImmutableArray::Create:ImmutableArray\u003C!!0\u003E(!!0);type=[];method=[System.Int32]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:methodSpec"
             },
             "genericDiagnostic": {
@@ -1516,7 +1516,7 @@
                 "value": "stub:definition=System.Collections.Immutable/ImmutableArray\u00601::get_Length:System.Int32();type=[System.Int32];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {
@@ -1784,7 +1784,7 @@
                 "value": "stub:definition=System.Collections.Immutable/ImmutableArray::Create:ImmutableArray\u003C!!0\u003E(!!0);type=[];method=[System.String]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:methodSpec"
             },
             "genericDiagnostic": {
@@ -1864,7 +1864,7 @@
                 "value": "stub:definition=System.Collections.Immutable/ImmutableArray\u00601::get_Length:System.Int32();type=[System.String];method=[]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:memberReference"
             },
             "genericDiagnostic": {

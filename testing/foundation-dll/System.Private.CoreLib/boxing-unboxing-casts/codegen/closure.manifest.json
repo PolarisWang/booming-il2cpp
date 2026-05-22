@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "BoxingUnboxingCastsSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/boxing-unboxing-casts/codegen/_subjects_input/BoxingUnboxingCastsSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/boxing-unboxing-casts/managed/subjects/build-output/BoxingUnboxingCastsSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "BoxingUnboxingCastsSubjects",
-      "path": "testing/foundation-dll/System.Private.CoreLib/boxing-unboxing-casts/codegen/_subjects_input/BoxingUnboxingCastsSubjects.dll"
+      "path": "testing/foundation-dll/System.Private.CoreLib/boxing-unboxing-casts/managed/subjects/build-output/BoxingUnboxingCastsSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "e82211d2-1b2c-4217-9a7d-2066868cca7a",
+  "inputModuleVersionId": "6354aeba-5718-4f2d-800c-7c38cf27f6ce",
   "artifacts": [
     {
       "kind": "typedIlIr",

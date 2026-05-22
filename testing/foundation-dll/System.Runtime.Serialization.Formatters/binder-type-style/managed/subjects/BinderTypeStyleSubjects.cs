@@ -16,15 +16,15 @@ public static partial class BinderTypeStyleSubjects
     // [0] System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationBinder::BindToName:System.Void(System.Type,System.String&,System.String&)
     public static void Subject_0()
     {
-        try { default(SerializationBinder)!.BindToName(typeof(byte), out _, out _); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { default(SerializationBinder)!.BindToName(typeof(byte), out _, out _); }
+        catch { _exitCode = 1; }
     }
 
     // [1] System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationBinder::BindToType:System.Type(System.String,System.String)
     public static void Subject_1()
     {
-        try { default(SerializationBinder)!.BindToType("hello", "hello"); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(SerializationBinder)!.BindToType("hello", "hello")).GetHashCode()) != ((default(SerializationBinder)!.BindToType("hello", "hello")).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
 }

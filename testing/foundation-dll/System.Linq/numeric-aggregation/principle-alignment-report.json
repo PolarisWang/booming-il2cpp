@@ -1,0 +1,1597 @@
+{
+  "family": "numeric-aggregation",
+  "assembly": "System.Linq",
+  "generated_at": "2026-05-22T07:26:44.059499",
+  "checks": {
+    "p1_benchmark": {
+      "check_id": "p1_benchmark",
+      "status": "NOT_APPLICABLE",
+      "summary": "No benchmark data available — benchmarks not run for this family",
+      "details": [],
+      "evidence": {}
+    },
+    "p1_lowering": {
+      "check_id": "p1_lowering",
+      "status": "ALIGNED",
+      "summary": "All methods have lowering [OK]",
+      "details": [],
+      "evidence": {
+        "has_lowering": true,
+        "stub_count": 0,
+        "simple_forward_count": 0,
+        "methods_with_lowering": 320,
+        "methods_total": 320
+      },
+      "per_method": [
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_10_b__11_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_11_b__12_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_12_b__13_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_13_b__14_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_14_b__15_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_15_b__16_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_16_b__17_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_17_b__18_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_18_b__19_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_19_b__20_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_32_b__33_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_33_b__34_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_34_b__35_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_35_b__36_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_36_b__37_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_37_b__38_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_38_b__39_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_39_b__40_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_40_b__41_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_41_b__42_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_42_b__43_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_43_b__44_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_44_b__45_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_57_b__58_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_58_b__59_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_59_b__60_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_60_b__61_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_61_b__62_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_62_b__63_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_63_b__64_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_64_b__65_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_65_b__66_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_66_b__67_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_67_b__68_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_68_b__69_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_69_b__70_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_80_b__81_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_81_b__82_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_82_b__83_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_83_b__84_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_84_b__85_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_85_b__86_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_86_b__87_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_87_b__88_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_88_b__89_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_89_b__90_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_0",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_1",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_2",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_3",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_4",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_5",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_6",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_7",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_8",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_9",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_10",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_10_b__11_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_11",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_11_b__12_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_12",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_12_b__13_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_13",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_13_b__14_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_14",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_14_b__15_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_15",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_15_b__16_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_16",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_16_b__17_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_17",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_17_b__18_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_18",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_18_b__19_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_19",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_19_b__20_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_20",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_21",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_22",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_23",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_24",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_25",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_26",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_27",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_28",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_29",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_30",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_31",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_32_b__33_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_33",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_33_b__34_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_34",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_34_b__35_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_35",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_35_b__36_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_36",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_36_b__37_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_37",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_37_b__38_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_38",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_38_b__39_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_39",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_39_b__40_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_40",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_40_b__41_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_41",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_41_b__42_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_42",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_42_b__43_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_43",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_43_b__44_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_44",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_44_b__45_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_45",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_46",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_47",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_48",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_49",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_50",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_51",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_52",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_53",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_54",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_55",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_56",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_57",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_57_b__58_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_58",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_58_b__59_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_59",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_59_b__60_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_60",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_60_b__61_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_61",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_61_b__62_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_62",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_62_b__63_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_63",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_63_b__64_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_64",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_64_b__65_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_65",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_65_b__66_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_66",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_66_b__67_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_67",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_67_b__68_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_68",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_68_b__69_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_69",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_69_b__70_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_70",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_71",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_72",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_73",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_74",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_75",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_76",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_77",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_78",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_79",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_80",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_80_b__81_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_81",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_81_b__82_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_82",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_82_b__83_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_83",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_83_b__84_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_84",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_84_b__85_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_85",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_85_b__86_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_86",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_86_b__87_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_87",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_87_b__88_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_88",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_88_b__89_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_89",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_89_b__90_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_cctor",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_0",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_1",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_2",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_3",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_4",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_5",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_6",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_7",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_8",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_9",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_10",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_10_b__11_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_11",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_11_b__12_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_12",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_12_b__13_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_13",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_13_b__14_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_14",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_14_b__15_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_15",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_15_b__16_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_16",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_16_b__17_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_17",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_17_b__18_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_18",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_18_b__19_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_19",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_19_b__20_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_20",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_21",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_22",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_23",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_24",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_25",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_26",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_27",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_28",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_29",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_30",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_31",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_32_b__33_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_33",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_33_b__34_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_34",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_34_b__35_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_35",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_35_b__36_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_36",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_36_b__37_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_37",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_37_b__38_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_38",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_38_b__39_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_39",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_39_b__40_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_40",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_40_b__41_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_41",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_41_b__42_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_42",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_42_b__43_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_43",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_43_b__44_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_44",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_44_b__45_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_45",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_46",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_47",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_48",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_49",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_50",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_51",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_52",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_53",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_54",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_55",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_56",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_57",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_57_b__58_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_58",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_58_b__59_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_59",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_59_b__60_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_60",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_60_b__61_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_61",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_61_b__62_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_62",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_62_b__63_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_63",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_63_b__64_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_64",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_64_b__65_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_65",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_65_b__66_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_66",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_66_b__67_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_67",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_67_b__68_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_68",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_68_b__69_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_69",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_69_b__70_0_System_String",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_70",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_71",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_72",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_73",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_74",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_75",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_76",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_77",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_78",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_79",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_80",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_80_b__81_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_81",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_81_b__82_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_82",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_82_b__83_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_83",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_83_b__84_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_84",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_84_b__85_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_85",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_85_b__86_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_86",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_86_b__87_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_87",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_87_b__88_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_88",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_88_b__89_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_89",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_89_b__90_0_System_Int32",
+          "has_lowering": true
+        },
+        {
+          "name": "NumericAggregationSubjects_NumericAggregationSubjects___c_cctor",
+          "has_lowering": true
+        }
+      ]
+    },
+    "p1_no_redundant_branch": {
+      "check_id": "p1_no_redundant_branch",
+      "status": "ALIGNED",
+      "summary": "No runtime dispatch branches in generated code",
+      "details": [],
+      "evidence": {
+        "checked_patterns": [
+          "if\\s*\\(\\s*family\\s*[=!]=",
+          "switch\\s*\\(\\s*methodIndex\\b",
+          "if\\s*\\(\\s*methodIndex\\b",
+          "CHAOS_FAMILY_SPECIFIC",
+          "if\\s*\\(\\s*__family\\b"
+        ]
+      }
+    },
+    "p1_no_unnecessary_indirection": {
+      "check_id": "p1_no_unnecessary_indirection",
+      "status": "ALIGNED",
+      "summary": "No unnecessary runtime_stub calls in generated code",
+      "details": [],
+      "evidence": {}
+    },
+    "p2_abstraction_balance": {
+      "check_id": "p2_abstraction_balance",
+      "status": "NOT_APPLICABLE",
+      "summary": "Cross-family check — run with CrossFamilyContext",
+      "details": [],
+      "evidence": {}
+    },
+    "p2_layer_correctness": {
+      "check_id": "p2_layer_correctness",
+      "status": "CONCERN",
+      "summary": "22 of 53 changed source files are outside expected architecture layers",
+      "details": [
+        {
+          "file": "build/vs2022/testing/Temporary/LastTest.log",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/AotCoreIrLowering.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ExceptionEmission.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.StructuredControlFlow.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Planning/NativeAotLoweringPlanner.StaticInitializationPlanning.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Properties/AssemblyInfo.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.MetadataWriter/MetadataWriterStage.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "testing/project-test/_core/python/project_pipeline_adapter.py",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "testing/project-test/runtime-self-test/codegen/RuntimeSelfTest/native-aot.methods.json",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "testing/project-test/runtime-self-test/codegen/_input/RuntimeSelfTest.dll",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "testing/project-test/runtime-self-test/codegen/aot-core-ir.json",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "testing/project-test/runtime-self-test/codegen/aot-manifest.json",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "testing/project-test/runtime-self-test/codegen/metadata-registration.json",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "testing/project-test/runtime-self-test/codegen/optimization-facts.json",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "testing/project-test/runtime-self-test/codegen/preserve-descriptor.json",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "testing/project-test/runtime-self-test/codegen/runtime-entry.cpp",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "testing/project-test/runtime-self-test/managed/src/IntegrationProof.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "testing/project-test/runtime-self-test/native/entry-aot.exe",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "testing/project-test/runtime-self-test/native/entry-jit.exe",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "testing/project-test/runtime-self-test/native/entry.exe",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "testing/project-test/runtime-self-test/native/runtime-entry.cpp",
+          "reason": "outside expected architecture layers"
+        }
+      ],
+      "evidence": {
+        "changed_source_count": 53,
+        "layer_distribution": {
+          "TestInfra": 3,
+          "Codegen": 4,
+          "HotUpdate": 1,
+          "Interpreter": 5,
+          "RuntimeCore": 10,
+          "BuildConfig": 1,
+          "Contracts": 1,
+          "Tests": 6
+        },
+        "violations": [
+          {
+            "file": "build/vs2022/testing/Temporary/LastTest.log",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/AotCoreIrLowering.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ExceptionEmission.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.StructuredControlFlow.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Planning/NativeAotLoweringPlanner.StaticInitializationPlanning.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Properties/AssemblyInfo.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.MetadataWriter/MetadataWriterStage.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "testing/project-test/_core/python/project_pipeline_adapter.py",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "testing/project-test/runtime-self-test/codegen/RuntimeSelfTest/native-aot.methods.json",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "testing/project-test/runtime-self-test/codegen/_input/RuntimeSelfTest.dll",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "testing/project-test/runtime-self-test/codegen/aot-core-ir.json",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "testing/project-test/runtime-self-test/codegen/aot-manifest.json",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "testing/project-test/runtime-self-test/codegen/metadata-registration.json",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "testing/project-test/runtime-self-test/codegen/optimization-facts.json",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "testing/project-test/runtime-self-test/codegen/preserve-descriptor.json",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "testing/project-test/runtime-self-test/codegen/runtime-entry.cpp",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "testing/project-test/runtime-self-test/managed/src/IntegrationProof.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "testing/project-test/runtime-self-test/native/entry-aot.exe",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "testing/project-test/runtime-self-test/native/entry-jit.exe",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "testing/project-test/runtime-self-test/native/entry.exe",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "testing/project-test/runtime-self-test/native/runtime-entry.cpp",
+            "reason": "outside expected architecture layers"
+          }
+        ]
+      }
+    },
+    "p2_no_bare_new": {
+      "check_id": "p2_no_bare_new",
+      "status": "ALIGNED",
+      "summary": "All managed allocations use CHAOS_IL2CPP_NEW_GC or equivalent",
+      "details": [],
+      "evidence": {}
+    },
+    "p2_no_code_duplication": {
+      "check_id": "p2_no_code_duplication",
+      "status": "NOT_APPLICABLE",
+      "summary": "Cross-family check — run with CrossFamilyContext",
+      "details": [],
+      "evidence": {}
+    },
+    "p2_template_hygiene": {
+      "check_id": "p2_template_hygiene",
+      "status": "ALIGNED",
+      "summary": "All Scriban templates clean — no semantic decision logic",
+      "details": [],
+      "evidence": {}
+    },
+    "p3_no_hardcoded_state": {
+      "check_id": "p3_no_hardcoded_state",
+      "status": "ALIGNED",
+      "summary": "No hardcoded static state in generated code",
+      "details": [],
+      "evidence": {}
+    },
+    "p3_patch_entry": {
+      "check_id": "p3_patch_entry",
+      "status": "ALIGNED",
+      "summary": "Dispatch table: 138 entries, all with interrupt_ptr [OK]",
+      "details": [],
+      "evidence": {
+        "table_size": 138,
+        "entries_with_interrupt_ptr": 138,
+        "has_hotpatch_module": true
+      }
+    },
+    "p3_patchdata": {
+      "check_id": "p3_patchdata",
+      "status": "ALIGNED",
+      "summary": "1/1 valid .patchdata files",
+      "details": [],
+      "evidence": {
+        "patchdata_count": 1,
+        "valid_count": 1,
+        "stub_patchdata_count": 0,
+        "files": [
+          "System.Linq\\numeric-aggregation\\managed\\patch\\patchdata\\numeric-aggregation.patchdata"
+        ]
+      }
+    }
+  },
+  "summary": {
+    "total": 12,
+    "aligned": 8,
+    "concern": 1,
+    "violation": 0,
+    "not_applicable": 3,
+    "overall": "ALIGNED"
+  }
+}

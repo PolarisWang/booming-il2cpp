@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "GarbageCollectionSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/garbage-collection/codegen/_subjects_input/GarbageCollectionSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/garbage-collection/managed/subjects/build-output/GarbageCollectionSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "GarbageCollectionSubjects",
-      "path": "testing/foundation-dll/System.Private.CoreLib/garbage-collection/codegen/_subjects_input/GarbageCollectionSubjects.dll"
+      "path": "testing/foundation-dll/System.Private.CoreLib/garbage-collection/managed/subjects/build-output/GarbageCollectionSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "1750095f-4058-4cb6-becc-a61cdf09e021",
+  "inputModuleVersionId": "3686d8d9-87c9-4fcb-98d5-bad19dfd6018",
   "artifacts": [
     {
       "kind": "typedIlIr",

@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Collections.Immutable",
+  "familyId": "family/System.Collections.Immutable/immutable/sorted/dictionary",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableSortedDictionary::Create<string,int>:System.Collections.Immutable.ImmutableSortedDictionary<System.String,System.Int32>()",
+      "status": "passed",
+      "prePatchNsPerOp": 77906.72,
+      "postPatchNsPerOp": 339659.0,
+      "slowdownPercent": 335.98
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableSortedDictionary::Create<Byte,Byte>:System.Collections.Immutable.ImmutableSortedDictionary<System.Byte,System.Byte>()",
+      "status": "passed",
+      "prePatchNsPerOp": 101023.24,
+      "postPatchNsPerOp": 61717.2,
+      "slowdownPercent": -38.91
+    }
+  ],
+  "summary": {
+    "totalMethods": 2,
+    "nonStubMethods": 2,
+    "averageSlowdownPercent": 148.54,
+    "slowdownFactor": 2.4854,
+    "slowdownThresholdX": 50.0
+  }
+}

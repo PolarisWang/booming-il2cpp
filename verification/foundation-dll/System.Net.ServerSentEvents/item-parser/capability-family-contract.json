@@ -1,0 +1,15 @@
+{
+  "familyId": "family/System.Net.ServerSentEvents/item-parser",
+  "assemblyName": "System.Net.ServerSentEvents",
+  "methodSubjectIds": [
+    "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseItemParser`1::BeginInvoke:System.IAsyncResult(System.String,System.ReadOnlySpan{System.Byte},System.AsyncCallback,System.Object)",
+    "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseItemParser`1::EndInvoke:T(System.IAsyncResult)",
+    "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseItemParser`1::Invoke:T(System.String,System.ReadOnlySpan{System.Byte})",
+    "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseItemParser`1::.ctor:System.Void(System.Object,System.IntPtr)"
+  ],
+  "displayName": "item-parser",
+  "description": "",
+  "closureStatus": "in-progress",
+  "methodCount": 4,
+  "customEntryIndices": []
+}

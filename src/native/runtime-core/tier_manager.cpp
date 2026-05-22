@@ -104,6 +104,32 @@ ModuleTierData* TierManager::FindModuleData(uint32_t module_id) noexcept {
     return (it != modules_.end()) ? it->second : nullptr;
 }
 
+void TierManager::ResetMethodCallCount(uint32_t method_token) noexcept {
+    // Iterate all registered modules to find the PatchMethod with the
+    // matching method_token.  This is O(total_methods) in the worst case,
+    // but hotpatch registration is a rare operation so linear scan is fine.
+    std::lock_guard<std::mutex> lock(mutex_);
+    for (auto& [id, data] : modules_) {
+        (void)id;
+        for (uint32_t i = 0; i < data->method_count; ++i) {
+            if (data->methods[i] != nullptr &&
+                data->methods[i]->token == method_token) {
+                data->methods[i]->call_count.store(0, std::memory_order_release);
+
+                // Also reset the tier state so re-promotion can restart
+                // from T1Cold instead of being stuck at the current tier.
+                // Only reset if currently at T3Ready or T4Skip — don't
+                // interfere with in-progress promotion.
+                uint32_t tier = data->methods[i]->tier_state.load(std::memory_order_acquire);
+                if (tier >= PatchMethod::kT3Ready) {
+                    data->methods[i]->tier_state.store(PatchMethod::kT1Cold, std::memory_order_release);
+                }
+                return;
+            }
+        }
+    }
+}
+
 // ── Background optimization queue ─────────────────────────────────────────
 
 bool TierManager::EnqueueOptimization(PatchMethod* method) noexcept {

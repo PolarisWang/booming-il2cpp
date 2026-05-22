@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "NtAccountSubjects",
   "entrySubjectId": "NtAccountSubjects/NtAccountSubjects::Subject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Security.Principal.Windows/nt-account/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.Security.Principal.Windows/nt-account/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

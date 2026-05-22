@@ -125,6 +125,9 @@ RawDispatchResult InterpreterDispatchRaw(
 
     CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterDispatchRaw");
 
+    std::fprintf(stderr, "[diag:IDR_ENTER] ct=%p ac=%u inst=%d\n", call_target, arg_count, is_instance_call);
+    std::fflush(stderr);
+
     RawDispatchResult result = {};
     auto* ctx = static_cast<InterpreterDispatchContext*>(dispatch_context);
     if (ctx == nullptr || ctx->runtime_state == nullptr) {
@@ -226,14 +229,73 @@ RawDispatchResult InterpreterDispatchRaw(
         }
     }
 
+    // ── MIC: Direct AOT thunk call ───────────────────────────────────────────
+    // When cache_info has a valid direct_ptr (pre-resolved dispatch entry with
+    // native AOT function), call the AOT thunk directly using the managed calling
+    // convention fn(a0...a7).  This completely bypasses MethodInvoke, which
+    // cannot handle encoded reflection handles (returns NOT_FOUND for token=0).
+    //
+    // This is used by the RegisterExecute path which has no direct_fn field in
+    // RegisterInstruction and must go through InterpreterDispatchRaw.
+    // Handle_Call/DoMIC in fast_dispatch.cpp already uses this same pattern.
+    //
+    // The AOT thunk expects all managed args (including 'this' for instance
+    // calls) as raw uint64_t values via the uniform 8-arg signature.  Struct
+    // returns and >8 arg cases fall through to MethodInvoke.
+    using DirectFn = uint64_t (*)(uint64_t, uint64_t, uint64_t, uint64_t,
+                                  uint64_t, uint64_t, uint64_t, uint64_t);
+    if (use_cache && cache_info->direct_ptr != nullptr && !cache_info->is_patched &&
+        ret_tag != ValueTag::Struct && arg_count <= 8) {
+        // Skip MIC for instance methods where 'this' is a value type.
+        // AOT thunks expect value type 'this' as a managed pointer (e.g.
+        // Int32::ToString calls chaos_resolve_native_int_slot(ptr) which
+        // dereferences the pointer).  Passing the raw value crashes.
+        bool value_type_this = is_instance_call && arg_count > 0 &&
+            static_cast<ValueTag>(arg_tags[0]) != ValueTag::ObjectRef &&
+            static_cast<ValueTag>(arg_tags[0]) != ValueTag::Null &&
+            static_cast<ValueTag>(arg_tags[0]) != ValueTag::ManagedPtr;
+        std::fprintf(stderr, "[diag:MIC_CHECK] vt=%d inst=%d ac=%u tag0=%d dp=%p\n",
+            value_type_this, is_instance_call, arg_count,
+            arg_count > 0 ? static_cast<int>(arg_tags[0]) : -1,
+            cache_info->direct_ptr);
+        if (!value_type_this) {
+            auto fn = reinterpret_cast<DirectFn>(cache_info->direct_ptr);
+            uint64_t a0 = (arg_count > 0) ? raw_args[0] : 0;
+            uint64_t a1 = (arg_count > 1) ? raw_args[1] : 0;
+            uint64_t a2 = (arg_count > 2) ? raw_args[2] : 0;
+            uint64_t a3 = (arg_count > 3) ? raw_args[3] : 0;
+            uint64_t a4 = (arg_count > 4) ? raw_args[4] : 0;
+            uint64_t a5 = (arg_count > 5) ? raw_args[5] : 0;
+            uint64_t a6 = (arg_count > 6) ? raw_args[6] : 0;
+            uint64_t a7 = (arg_count > 7) ? raw_args[7] : 0;
+            uint64_t ret_scalar = fn(a0, a1, a2, a3, a4, a5, a6, a7);
+
+            if (ret_tag != ValueTag::Void) {
+                result.has_value = true;
+                result.tag = static_cast<uint8_t>(ret_tag);
+                result.value = ret_scalar;
+            }
+            --ctx->recursion_depth;
+            return result;
+        }
+        // value_type_this: fall through to MethodInvoke
+    }
+
+    // ── Call MethodInvoke ──
+    std::fprintf(stderr, "[diag:IDR_MI] use_cache=%d direct_ptr=%p is_patched=%d value_type_this=%d ac=%u pc=%u\n",
+        use_cache, cache_info ? cache_info->direct_ptr : nullptr,
+        cache_info ? cache_info->is_patched : 0,
+        (is_instance_call && arg_count > 0 &&
+         static_cast<ValueTag>(arg_tags[0]) != ValueTag::ObjectRef &&
+         static_cast<ValueTag>(arg_tags[0]) != ValueTag::Null &&
+         static_cast<ValueTag>(arg_tags[0]) != ValueTag::ManagedPtr),
+        arg_count,
+        ctx->recursion_depth);
     uint64_t ret_scalar = 0;
     void*    ret_buf = &ret_scalar;
     size_t   ret_size = sizeof(ret_scalar);
 
     if (is_struct_ret && struct_size > 0u) {
-        // Allocate destination buffer directly — eliminates double allocation
-        // (was: vector<uint8_t> + malloc + memcpy).  The caller takes ownership
-        // of result.struct_data, so this single alloc is both input and output.
         result.struct_data = CHAOS_IL2CPP_MALLOC(struct_size);
         if (result.struct_data != nullptr) {
             void* buf_ptr = result.struct_data;
@@ -244,7 +306,6 @@ RawDispatchResult InterpreterDispatchRaw(
         }
     }
 
-    // ── Call MethodInvoke ──
     const auto* abi = runtime_core::GetRuntimeAbiV0();
     if (abi == nullptr || abi->method_invoke == nullptr) {
         --ctx->recursion_depth;
@@ -257,7 +318,6 @@ RawDispatchResult InterpreterDispatchRaw(
         argv, param_count,
         ret_buf, ret_size, &ex);
 
-    // ── Handle exception ──
     if (status == CHAOS_RUNTIME_STATUS_MANAGED_EXCEPTION) {
         result.threw_exception = true;
         result.exception_obj = ex;
@@ -301,7 +361,6 @@ RawDispatchResult InterpreterDispatchRaw(
                 break;
         }
     } else if (!use_cache) {
-        // V0 fallback: treat as int32 (only when no cache; with cache, Void = no return).
         result.has_value = true;
         result.tag = static_cast<uint8_t>(ValueTag::Int32);
         result.value = ret_scalar;

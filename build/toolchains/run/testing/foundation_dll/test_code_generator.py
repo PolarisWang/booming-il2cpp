@@ -433,6 +433,17 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     ("Array", "GetValue", 1): "new int[1].GetValue(0)",
     ("Array", "Copy", 3): "Array.Copy(new byte[4], new byte[4], 4)",
     ("Array", "Copy", 5): "Array.Copy(new byte[4], 0, new byte[4], 0, 4)",
+    # Enum.ToString instance methods on value types: the codegen drops `this` pointer
+    # for value-type instance methods through external runtime dispatch, causing nullptr
+    # dereference in native AOT.  Use Enum.Format (static) as a workaround.
+    # Use byte type (not DayOfWeek) to avoid enum boxing codegen issues in native AOT.
+    ("Enum", "ToString", 0): 'Enum.Format(typeof(byte), (byte)42, "G")',
+    ("Enum", "ToString", 1): 'Enum.Format(typeof(byte), (byte)42, "X")',
+    # Enum.Parse with invalid input (e.g. "hello") causes ChaosEnumParse to raise
+    # a managed exception via longjmp, which bypasses C++ catch blocks and always
+    # fails fact verification.  Use valid enum names to exercise the real path.
+    ("Enum", "Parse", 2): 'Enum.Parse(typeof(DayOfWeek), "Monday")',
+    ("Enum", "Parse", 3): 'Enum.Parse(typeof(DayOfWeek), "Monday", true)',
     ("Array", "Clear", 3): "Array.Clear(new byte[4], 0, 4)",
     ("Array", "BinarySearch", 2): "Array.BinarySearch(new byte[4], (byte)42)",
     ("Array", "BinarySearch", 4): "Array.BinarySearch(new byte[4], 0, 4, (byte)42)",
@@ -478,10 +489,7 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     # Note: For benchmark variant, these have explicit patterns in family_verification_orchestrator.py
     # Override: GetName with UInt64 param triggers boxed_type codegen bug for System.UInt64
     ("Enum", "GetName", 2): "Enum.GetName(typeof(DayOfWeek), (object)1)",
-    # Override: ToString with format param triggers boxed_type codegen bug for DayOfWeek
-    # Use primitive int to avoid enum boxing in il2cpp codegen
-    ("Enum", "ToString", 1): "42.ToString(\"X\")",
-    # Enum.TryParse has 'out' parameters — provide override with out var _
+    # Override: TryParse has 'out' parameters — provide override with out var _
     ("Enum", "TryParse", 3): "Enum.TryParse(typeof(DayOfWeek), \"Monday\", out object _)",
     ("Enum", "TryParse", 4): "Enum.TryParse(typeof(DayOfWeek), \"Monday\", true, out object _)",
     # Type.GetType with valid type name — subject must handle null return gracefully

@@ -30,6 +30,8 @@ void chaos_thread_ctor(
     CHAOS_IL2CPP_INTPTR thread_obj,
     CHAOS_IL2CPP_INTPTR thread_start_delegate) noexcept
 {
+    fprintf(stderr, "[TRACE] chaos_thread_ctor: thread_obj=0x%llx delegate=0x%llx\n",
+            (unsigned long long)thread_obj, (unsigned long long)thread_start_delegate);
     auto& entry = chaos::il2cpp::common::require_thread_runtime_entry(thread_obj);
     entry.thread_start_delegate = thread_start_delegate;
     entry.managed_thread_id = chaos::il2cpp::common::allocate_managed_thread_id();
@@ -37,11 +39,21 @@ void chaos_thread_ctor(
 
 void chaos_thread_start(CHAOS_IL2CPP_INTPTR thread_obj) noexcept
 {
+    fprintf(stderr, "[TRACE] chaos_thread_start: thread_obj=0x%llx\n",
+            (unsigned long long)thread_obj);
     auto* entry = chaos::il2cpp::common::try_get_thread_runtime_entry(thread_obj);
-    if (entry == nullptr) return;
+    if (entry == nullptr) {
+        fprintf(stderr, "[TRACE] chaos_thread_start: entry NOT FOUND!\n");
+        return;
+    }
+    fprintf(stderr, "[TRACE] chaos_thread_start: entry FOUND, delegate=0x%llx\n",
+            (unsigned long long)entry->thread_start_delegate);
 
     auto* runtime_state = GetCurrentRuntimeState();
-    if (runtime_state == nullptr) return;
+    if (runtime_state == nullptr) {
+        fprintf(stderr, "[TRACE] chaos_thread_start: GetCurrentRuntimeState() returned null!\n");
+        return;
+    }
 
     const CHAOS_IL2CPP_INTPTR delegate = entry->thread_start_delegate;
 
@@ -49,25 +61,26 @@ void chaos_thread_start(CHAOS_IL2CPP_INTPTR thread_obj) noexcept
     auto* captured_ctx = chaos_execution_context_capture();
 
     entry->worker = std::make_unique<std::thread>([runtime_state, delegate, captured_ctx]() {
+        fprintf(stderr, "[TRACE] worker thread started, delegate=0x%llx\n",
+                (unsigned long long)delegate);
         // Attach this thread to the runtime.
         ThreadState* thread_state = nullptr;
         if (ThreadAttach(runtime_state, &thread_state) != CHAOS_RUNTIME_STATUS_OK) {
+            fprintf(stderr, "[TRACE] worker thread: ThreadAttach FAILED\n");
             chaos_execution_context_free(captured_ctx);
             return;
         }
+        fprintf(stderr, "[TRACE] worker thread: ThreadAttach OK\n");
 
         // Invoke the delegate under the captured ExecutionContext.
         chaos_execution_context_run(captured_ctx, [](void* d) {
-            auto* bridge = chaos::il2cpp::bootstrap::GetCodegenBridgeV0();
             auto del = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(d);
-            if (bridge != nullptr && bridge->delegate_invoke != nullptr && del != 0) {
-                void* return_value = nullptr;
-                bridge->delegate_invoke(
-                    nullptr, nullptr,
-                    reinterpret_cast<void*>(del),
-                    nullptr, 0,
-                    &return_value, sizeof(void*),
-                    nullptr);
+            fprintf(stderr, "[TRACE] EC run callback: delegate=0x%llx\n",
+                    (unsigned long long)del);
+            if (del != 0) {
+                fprintf(stderr, "[TRACE] about to call chaos_delegate_object_invoke\n");
+                chaos_delegate_object_invoke(del, nullptr, nullptr, 0);
+                fprintf(stderr, "[TRACE] chaos_delegate_object_invoke returned\n");
             }
         }, reinterpret_cast<void*>(delegate));
         chaos_execution_context_free(captured_ctx);

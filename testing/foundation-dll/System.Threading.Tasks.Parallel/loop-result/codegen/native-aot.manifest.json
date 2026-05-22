@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "LoopResultSubjects",
   "entrySubjectId": "LoopResultSubjects/LoopResultSubjects::Subject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Threading.Tasks.Parallel/loop-result/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.Threading.Tasks.Parallel/loop-result/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

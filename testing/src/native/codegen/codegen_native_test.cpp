@@ -57,6 +57,7 @@ using chaos::il2cpp::codegen::CodeGenConfig;
 using chaos::il2cpp::codegen::kDeoptMagic;
 using chaos::il2cpp::codegen::t_deopt_state;
 using chaos::il2cpp::codegen::RegisterT4Code;
+using chaos::il2cpp::codegen::UnregisterT4Code;
 using chaos::il2cpp::codegen::FindT4CodeByAddress;
 using chaos::il2cpp::interpreter::RegisterFrame;
 using chaos::il2cpp::interpreter::RegisterFile;
@@ -281,6 +282,51 @@ static RegisterInstruction InstrLdLoc(uint8_t dst, uint32_t local_idx) noexcept 
     ri.header = MakeHeader(IROpCode::LdLoc, dst, static_cast<uint8_t>(8 + local_idx), 0,
                            kRegHasDst | kRegHasSrc1 | kRegHasImm);
     ri.imm.operand_index = local_idx;
+    return ri;
+}
+
+// ── Static field helpers ───────────────────────────────────────────────
+static RegisterInstruction InstrLdSFld(uint8_t dst, uint32_t field_offset) noexcept {
+    RegisterInstruction ri;
+    ri.header = MakeHeader(IROpCode::LdSFld, dst, 0, 0, kRegHasDst | kRegHasImm);
+    ri.imm.field_offset = field_offset;
+    return ri;
+}
+
+static RegisterInstruction InstrStSFld(uint32_t field_offset, uint8_t src) noexcept {
+    RegisterInstruction ri;
+    ri.header = MakeHeader(IROpCode::StSFld, 0, src, 0, kRegHasSrc1 | kRegHasImm);
+    ri.imm.field_offset = field_offset;
+    return ri;
+}
+
+// ── Type check helpers ─────────────────────────────────────────────────
+static RegisterInstruction InstrCastClass(uint8_t dst, uint8_t src, uint32_t type_token) noexcept {
+    RegisterInstruction ri;
+    ri.header = MakeHeader(IROpCode::CastClass, dst, src, 0, kRegHasDst | kRegHasSrc1 | kRegHasImm);
+    ri.imm.field_offset = type_token;
+    return ri;
+}
+
+static RegisterInstruction InstrIsInst(uint8_t dst, uint8_t src, uint32_t type_token) noexcept {
+    RegisterInstruction ri;
+    ri.header = MakeHeader(IROpCode::IsInst, dst, src, 0, kRegHasDst | kRegHasSrc1 | kRegHasImm);
+    ri.imm.field_offset = type_token;
+    return ri;
+}
+
+// ── Indir helpers (LdInd / StInd) ──────────────────────────────────────
+static RegisterInstruction InstrStInd(uint8_t addr, uint8_t src) noexcept {
+    RegisterInstruction ri;
+    ri.header = MakeHeader(IROpCode::StInd, 0, addr, src, kRegHasSrc1 | kRegHasSrc2);
+    ri.imm.i4 = 0;
+    return ri;
+}
+
+static RegisterInstruction InstrLdInd(uint8_t dst, uint8_t addr) noexcept {
+    RegisterInstruction ri;
+    ri.header = MakeHeader(IROpCode::LdInd, dst, addr, 0, kRegHasDst | kRegHasSrc1);
+    ri.imm.i4 = 0;
     return ri;
 }
 
@@ -1035,6 +1081,10 @@ static bool Test_OsrEntry() {
     if (nm->osr_entry_offset == 0) { std::printf("    FAIL: osr_entry_offset is 0 (expected != 0)\n"); return false; }
     std::printf("    osr_entry_offset=%u code_size=%u\n", nm->osr_entry_offset, nm->code_size);
 
+    // Register T4 code for VEH/OSR lookup.  OSR entry stub calls
+    // OsrResolveLoopHeader() which needs FindT4CodeByAddress to succeed.
+    RegisterT4Code(nm->code, nm->code_size, nm);
+
     // Verify non-loop method has no OSR entry.
     RegisterMethod rm_simple;
     rm_simple.instructions = { InstrI4(IROpCode::LdcI4, 42, 0), InstrRet(0) };
@@ -1063,6 +1113,8 @@ static bool Test_OsrEntry() {
     if (ret_buf[0] != 0) { std::printf("    FAIL: wrong return value\n"); return false; }
 
     // Clean up.
+    UnregisterT4Code(nm->code);
+    CHAOS_IL2CPP_FREE(nm);
     CHAOS_IL2CPP_FREE(nm_simple);
 
     return true;
@@ -2846,6 +2898,345 @@ static bool Test_SubSelfIntrinsic() {
 
 
 // ═══════════════════════════════════════════════════════════════════════
+// Test: CastClass — matching type_token returns object, non-matching nullptr
+// ═══════════════════════════════════════════════════════════════════════
+static bool Test_CastClass() {
+    std::printf("  Test_CastClass...\n");
+    // NewObj(type=42), CastClass(obj, token=42) → non-null
+    // NewObj(type=42), CastClass(obj, token=99) → null
+    constexpr uint32_t kToken = 42;
+    // Case 1: matching token
+    {
+        RegisterMethod rm;
+        rm.instructions = {
+            InstrNewObj(0, kToken),               // r0 = NewObj(type_token=42)
+            InstrCastClass(1, 0, kToken),          // r1 = CastClass(r0, 42) → r0
+            InstrRet(1),
+        };
+        rm.max_regs = 2;
+        if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL case1: CanGenerateNativeCode false\n"); return false; }
+        auto* nm = GenerateNativeCode(rm);
+        if (nm == nullptr) { std::printf("    FAIL case1: GenerateNativeCode null\n"); return false; }
+        void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
+        uint64_t result = ExecuteNative(entry);
+        if (result == 0) { std::printf("    FAIL case1: result=0 (expected non-null pointer)\n"); return false; }
+        std::printf("    case1 (match): result=%p (non-null ✓)\n", reinterpret_cast<void*>(result));
+        CHAOS_IL2CPP_FREE(nm);
+    }
+    // Case 2: non-matching token
+    {
+        RegisterMethod rm;
+        rm.instructions = {
+            InstrNewObj(0, kToken),               // r0 = NewObj(type_token=42)
+            InstrCastClass(1, 0, 99),              // r1 = CastClass(r0, 99) → nullptr
+            InstrRet(1),
+        };
+        rm.max_regs = 2;
+        if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL case2: CanGenerateNativeCode false\n"); return false; }
+        auto* nm = GenerateNativeCode(rm);
+        if (nm == nullptr) { std::printf("    FAIL case2: GenerateNativeCode null\n"); return false; }
+        void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
+        uint64_t result = ExecuteNative(entry);
+        if (result != 0) { std::printf("    FAIL case2: result=%llu (expected 0)\n", (unsigned long long)result); return false; }
+        std::printf("    case2 (no-match): result=0 ✓\n");
+        CHAOS_IL2CPP_FREE(nm);
+    }
+    // Case 3: null input returns null
+    {
+        RegisterMethod rm;
+        rm.instructions = {
+            InstrI4(IROpCode::LdcI4, 0, 0),       // r0 = 0 (null)
+            InstrCastClass(1, 0, kToken),          // r1 = CastClass(null, 42) → nullptr
+            InstrRet(1),
+        };
+        rm.max_regs = 2;
+        if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL case3: CanGenerateNativeCode false\n"); return false; }
+        auto* nm = GenerateNativeCode(rm);
+        if (nm == nullptr) { std::printf("    FAIL case3: GenerateNativeCode null\n"); return false; }
+        void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
+        uint64_t result = ExecuteNative(entry);
+        if (result != 0) { std::printf("    FAIL case3: result=%llu (expected 0)\n", (unsigned long long)result); return false; }
+        std::printf("    case3 (null input): result=0 ✓\n");
+        CHAOS_IL2CPP_FREE(nm);
+    }
+    std::printf("  Test_CastClass OK (3 cases) ✓\n");
+    return true;
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// Test: IsInst — matching token returns object, non-matching returns null
+// ═══════════════════════════════════════════════════════════════════════
+static bool Test_IsInst() {
+    std::printf("  Test_IsInst...\n");
+    constexpr uint32_t kToken = 77;
+    // Case 1: matching token
+    {
+        RegisterMethod rm;
+        rm.instructions = {
+            InstrNewObj(0, kToken),              // r0 = NewObj(type_token=77)
+            InstrIsInst(1, 0, kToken),            // r1 = IsInst(r0, 77) → r0
+            InstrRet(1),
+        };
+        rm.max_regs = 2;
+        if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL case1: CanGenerateNativeCode false\n"); return false; }
+        auto* nm = GenerateNativeCode(rm);
+        if (nm == nullptr) { std::printf("    FAIL case1: GenerateNativeCode null\n"); return false; }
+        void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
+        uint64_t result = ExecuteNative(entry);
+        if (result == 0) { std::printf("    FAIL case1: result=0 (expected non-null)\n"); return false; }
+        std::printf("    case1 (match): result=%p ✓\n", reinterpret_cast<void*>(result));
+        CHAOS_IL2CPP_FREE(nm);
+    }
+    // Case 2: non-matching token
+    {
+        RegisterMethod rm;
+        rm.instructions = {
+            InstrNewObj(0, kToken),              // r0 = NewObj(type_token=77)
+            InstrIsInst(1, 0, 99),                // r1 = IsInst(r0, 99) → nullptr
+            InstrRet(1),
+        };
+        rm.max_regs = 2;
+        if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL case2: CanGenerateNativeCode false\n"); return false; }
+        auto* nm = GenerateNativeCode(rm);
+        if (nm == nullptr) { std::printf("    FAIL case2: GenerateNativeCode null\n"); return false; }
+        void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
+        uint64_t result = ExecuteNative(entry);
+        if (result != 0) { std::printf("    FAIL case2: result=%llu (expected 0)\n", (unsigned long long)result); return false; }
+        std::printf("    case2 (no-match): result=0 ✓\n");
+        CHAOS_IL2CPP_FREE(nm);
+    }
+    // Case 3: null input returns null
+    {
+        RegisterMethod rm;
+        rm.instructions = {
+            InstrI4(IROpCode::LdcI4, 0, 0),       // r0 = 0 (null)
+            InstrIsInst(1, 0, kToken),             // r1 = IsInst(null, 77) → nullptr
+            InstrRet(1),
+        };
+        rm.max_regs = 2;
+        if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL case3: CanGenerateNativeCode false\n"); return false; }
+        auto* nm = GenerateNativeCode(rm);
+        if (nm == nullptr) { std::printf("    FAIL case3: GenerateNativeCode null\n"); return false; }
+        void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
+        uint64_t result = ExecuteNative(entry);
+        if (result != 0) { std::printf("    FAIL case3: result=%llu (expected 0)\n", (unsigned long long)result); return false; }
+        std::printf("    case3 (null input): result=0 ✓\n");
+        CHAOS_IL2CPP_FREE(nm);
+    }
+    std::printf("  Test_IsInst OK (3 cases) ✓\n");
+    return true;
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// Test: LdSFld_StSFld — static field round-trip via T4 code
+// ═══════════════════════════════════════════════════════════════════════
+static bool Test_LdSFld_StSFld() {
+    std::printf("  Test_LdSFld_StSFld...\n");
+    // Use a unique field offset to avoid cross-test pollution.
+    constexpr uint32_t kFieldOff = 12345;
+    // Case 1: StSFld(42), LdSFld → expect 42
+    {
+        RegisterMethod rm;
+        rm.instructions = {
+            InstrI4(IROpCode::LdcI4, 42, 0),       // r0 = 42
+            InstrStSFld(kFieldOff, 0),              // g_static_fields[kFieldOff] = (uint64_t)42
+            InstrLdSFld(1, kFieldOff),              // r1 = g_static_fields[kFieldOff]
+            InstrRet(1),
+        };
+        rm.max_regs = 2;
+        if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL case1: CanGenerateNativeCode false\n"); return false; }
+        auto* nm = GenerateNativeCode(rm);
+        if (nm == nullptr) { std::printf("    FAIL case1: GenerateNativeCode null\n"); return false; }
+        void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
+        uint64_t result = ExecuteNative(entry);
+        if (result != 42) { std::printf("    FAIL case1: result=%llu (expected 42)\n", (unsigned long long)result); return false; }
+        std::printf("    case1 (store/load): result=42 ✓\n");
+        CHAOS_IL2CPP_FREE(nm);
+    }
+    // Case 2: LdSFld (no prior StSFld) → expect 0 (default-initialized)
+    {
+        RegisterMethod rm;
+        rm.instructions = {
+            InstrLdSFld(0, kFieldOff + 1),          // r0 = g_static_fields[kFieldOff+1] (unwritten)
+            InstrRet(0),
+        };
+        rm.max_regs = 1;
+        if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL case2: CanGenerateNativeCode false\n"); return false; }
+        auto* nm = GenerateNativeCode(rm);
+        if (nm == nullptr) { std::printf("    FAIL case2: GenerateNativeCode null\n"); return false; }
+        void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
+        uint64_t result = ExecuteNative(entry);
+        if (result != 0) { std::printf("    FAIL case2: result=%llu (expected 0)\n", (unsigned long long)result); return false; }
+        std::printf("    case2 (default read): result=0 ✓\n");
+        CHAOS_IL2CPP_FREE(nm);
+    }
+    std::printf("  Test_LdSFld_StSFld OK (2 cases) ✓\n");
+    return true;
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// Test: ConvRUn — uint32→double conversion
+// ═══════════════════════════════════════════════════════════════════════
+static bool Test_ConvRUn() {
+    std::printf("  Test_ConvRUn...\n");
+    // ConvRUn converts GPR uint32 to double → stores in FPR slot.
+    // Ret reads GPR (stale after ConvRUn), so we verify via RegisterExecute
+    // for correct float bits + T4 crash safety.
+    struct TestCase { int32_t val; uint64_t expected; };
+    TestCase cases[] = {
+        {0,     0x0000000000000000ULL},           // double(0)
+        {1,     0x3FF0000000000000ULL},           // double(1)
+        {100,   0x4059000000000000ULL},           // double(100)
+        {INT32_MAX, 0x41DFFFFFFFC00000ULL},       // double(INT32_MAX) — same as signed int32→double
+    };
+    for (auto& tc : cases) {
+        RegisterMethod rm;
+        rm.instructions = {
+            InstrI4(IROpCode::LdcI4, tc.val, 0),
+            InstrUnary(IROpCode::ConvRUn, 1, 0),
+            InstrRet(1),
+        };
+        rm.max_regs = 2;
+
+        // Verify RegisterExecute computes correct double bits
+        RegisterFrame rf; std::memset(&rf, 0, sizeof(rf));
+        bool re_ok = RegisterExecute(rf, rm.instructions.data(), static_cast<uint32_t>(rm.instructions.size()));
+        if (!re_ok || !rf.has_ret) { std::printf("    FAIL: val=%d RegisterExecute failed\n", tc.val); return false; }
+        if (rf.ret_val != tc.expected) {
+            std::printf("    FAIL: val=%d expected 0x%016llX got 0x%016llX\n", tc.val,
+                        (unsigned long long)tc.expected, (unsigned long long)rf.ret_val);
+            return false;
+        }
+
+        // Verify T4 codegen doesn't crash
+        if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL: val=%d CanGenerateNativeCode false\n", tc.val); return false; }
+        auto* nm = GenerateNativeCode(rm);
+        if (nm == nullptr) { std::printf("    FAIL: val=%d GenerateNativeCode null\n", tc.val); return false; }
+        void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
+        bool crashed = false;
+        ExecuteNativeSafe(entry, crashed);
+        if (crashed) { std::printf("    FAIL: val=%d T4 crashed\n", tc.val); return false; }
+        CHAOS_IL2CPP_FREE(nm);
+        std::printf("    val=%d: re=0x%016llX ✓\n", tc.val, (unsigned long long)rf.ret_val);
+    }
+    std::printf("  Test_ConvRUn OK (4 cases) ✓\n");
+    return true;
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// Test: Blt — signed less-than branch
+// ═══════════════════════════════════════════════════════════════════════
+static bool Test_Blt() {
+    std::printf("  Test_Blt...\n");
+    // if (1 < 200) → ret 42; else ret 0
+    // Blt condition: signed less-than, src1 < src2
+    {
+        RegisterMethod rm;
+        rm.instructions = {
+            InstrI4(IROpCode::LdcI4, 1, 0),          // r0 = 1
+            InstrI4(IROpCode::LdcI4, 200, 1),         // r1 = 200
+            InstrCondBranch(IROpCode::Blt, 5, 0, 1),  // if r0 < r1 → jump to instr 5
+            InstrI4(IROpCode::LdcI4, 0, 2),           // r2 = 0 (not taken)
+            InstrRet(2),
+            InstrI4(IROpCode::LdcI4, 42, 2),           // r2 = 42 (taken)
+            InstrRet(2),
+        };
+        rm.max_regs = 3;
+        if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL case1: CanGenerateNativeCode false\n"); return false; }
+        auto* nm = GenerateNativeCode(rm);
+        if (nm == nullptr) { std::printf("    FAIL case1: GenerateNativeCode null\n"); return false; }
+        void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
+        uint64_t result = ExecuteNative(entry);
+        if (result != 42) { std::printf("    FAIL case1 (1 < 200): result=%llu (expected 42)\n", (unsigned long long)result); return false; }
+        std::printf("    case1 (1 < 200 → taken): result=42 ✓\n");
+        CHAOS_IL2CPP_FREE(nm);
+    }
+    // 200 < 1 → false, should NOT take branch
+    {
+        RegisterMethod rm;
+        rm.instructions = {
+            InstrI4(IROpCode::LdcI4, 200, 0),         // r0 = 200
+            InstrI4(IROpCode::LdcI4, 1, 1),           // r1 = 1
+            InstrCondBranch(IROpCode::Blt, 5, 0, 1),  // if r0 < r1 → jump to instr 5 (200 < 1 is false)
+            InstrI4(IROpCode::LdcI4, 99, 2),           // r2 = 99 (not taken)
+            InstrRet(2),
+            InstrI4(IROpCode::LdcI4, 42, 2),           // r2 = 42 (taken — should NOT reach)
+            InstrRet(2),
+        };
+        rm.max_regs = 3;
+        if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL case2: CanGenerateNativeCode false\n"); return false; }
+        auto* nm = GenerateNativeCode(rm);
+        if (nm == nullptr) { std::printf("    FAIL case2: GenerateNativeCode null\n"); return false; }
+        void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
+        uint64_t result = ExecuteNative(entry);
+        if (result != 99) { std::printf("    FAIL case2 (200 < 1): result=%llu (expected 99)\n", (unsigned long long)result); return false; }
+        std::printf("    case2 (200 < 1 → not taken): result=99 ✓\n");
+        CHAOS_IL2CPP_FREE(nm);
+    }
+    // Negative: -5 < 0 → true
+    {
+        RegisterMethod rm;
+        rm.instructions = {
+            InstrI4(IROpCode::LdcI4, -5, 0),          // r0 = -5
+            InstrI4(IROpCode::LdcI4, 0, 1),           // r1 = 0
+            InstrCondBranch(IROpCode::Blt, 5, 0, 1),  // if r0 < r1 → jump to instr 5
+            InstrI4(IROpCode::LdcI4, 0, 2),           // r2 = 0 (not taken)
+            InstrRet(2),
+            InstrI4(IROpCode::LdcI4, 77, 2),           // r2 = 77 (taken)
+            InstrRet(2),
+        };
+        rm.max_regs = 3;
+        if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL case3: CanGenerateNativeCode false\n"); return false; }
+        auto* nm = GenerateNativeCode(rm);
+        if (nm == nullptr) { std::printf("    FAIL case3: GenerateNativeCode null\n"); return false; }
+        void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
+        uint64_t result = ExecuteNative(entry);
+        if (result != 77) { std::printf("    FAIL case3 (-5 < 0): result=%llu (expected 77)\n", (unsigned long long)result); return false; }
+        std::printf("    case3 (-5 < 0 → taken): result=77 ✓\n");
+        CHAOS_IL2CPP_FREE(nm);
+    }
+    std::printf("  Test_Blt OK (3 cases) ✓\n");
+    return true;
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// Test: LdInd_StInd — indirect load/store through a pointer
+// ═══════════════════════════════════════════════════════════════════════
+static bool Test_LdInd_StInd() {
+    std::printf("  Test_LdInd_StInd...\n");
+    // Allocate a local uint64_t, StInd to write 42, LdInd to read back.
+    // Note: T4 methods use their own RegisterFile frame, not the caller's
+    // stack.  We use the ret_buf address as scratch memory (ret_buf is
+    // passed as arg[1]/RSI to the native entry).
+    //
+    // We cannot easily stack-allocate from T4 code, so instead:
+    // NewObj returns a heap pointer.  StInd writes 42 to that address
+    // (treating it as raw memory, overwriting the type_token field),
+    // then LdInd reads it back.
+    {
+        RegisterMethod rm;
+        rm.instructions = {
+            InstrNewObj(0, 1),                         // r0 = NewObj → heap pointer
+            InstrI4(IROpCode::LdcI4, 42, 1),          // r1 = 42
+            InstrStInd(0, 1),                          // *r0 = r1 (write 42 to object start)
+            InstrLdInd(2, 0),                          // r2 = *r0 (read back)
+            InstrRet(2),
+        };
+        rm.max_regs = 3;
+        if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL: CanGenerateNativeCode false\n"); return false; }
+        auto* nm = GenerateNativeCode(rm);
+        if (nm == nullptr) { std::printf("    FAIL: GenerateNativeCode null\n"); return false; }
+        void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
+        uint64_t result = ExecuteNative(entry);
+        if (result != 42) { std::printf("    FAIL: result=%llu (expected 42)\n", (unsigned long long)result); return false; }
+        std::printf("    result=%llu (expected 42) ✓\n", (unsigned long long)result);
+        CHAOS_IL2CPP_FREE(nm);
+    }
+    std::printf("  Test_LdInd_StInd OK ✓\n");
+    return true;
+}
+
+// ═══════════════════════════════════════════════════════════════════════
 // GTest entries (converted from old TEST macro)
 // ═══════════════════════════════════════════════════════════════════════
 
@@ -2972,4 +3363,16 @@ TEST_F(CodegenNativeTest, ConvR4) { EXPECT_TRUE(Test_ConvR4()); }
 TEST_F(CodegenNativeTest, ConvR8) { EXPECT_TRUE(Test_ConvR8()); }
 
 TEST_F(CodegenNativeTest, Fuzz) { EXPECT_TRUE(Test_Fuzz()); }
+
+TEST_F(CodegenNativeTest, CastClass) { EXPECT_TRUE(Test_CastClass()); }
+
+TEST_F(CodegenNativeTest, IsInst) { EXPECT_TRUE(Test_IsInst()); }
+
+TEST_F(CodegenNativeTest, LdSFld_StSFld) { EXPECT_TRUE(Test_LdSFld_StSFld()); }
+
+TEST_F(CodegenNativeTest, ConvRUn) { EXPECT_TRUE(Test_ConvRUn()); }
+
+TEST_F(CodegenNativeTest, Blt) { EXPECT_TRUE(Test_Blt()); }
+
+TEST_F(CodegenNativeTest, LdInd_StInd) { EXPECT_TRUE(Test_LdInd_StInd()); }
 

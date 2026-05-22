@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "SerializerSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Text.Json/serializer/managed/subjects/build-output/SerializerSubjects.dll",
+  "inputAssemblyPath": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/serializer/managed/subjects/build-output/SerializerSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "SerializerSubjects",
-      "path": "verification/foundation-dll/System.Text.Json/serializer/managed/subjects/build-output/SerializerSubjects.dll"
+      "path": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/serializer/managed/subjects/build-output/SerializerSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "6e9dde94-0b0a-41cf-8c98-8274138161a7",
+  "inputModuleVersionId": "8636f4cf-99ab-428b-a943-3d2f7257f233",
   "artifacts": [
     {
       "kind": "typedIlIr",

@@ -3,12 +3,16 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "FrozenCollectionsSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Collections.Immutable/frozen-collections/managed/subjects/build-output/FrozenCollectionsSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Collections.Immutable/frozen-collections/managed/subjects/build-output/FrozenCollectionsSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "FrozenCollectionsSubjects",
-      "path": "verification/foundation-dll/System.Collections.Immutable/frozen-collections/managed/subjects/build-output/FrozenCollectionsSubjects.dll"
+      "path": "testing/foundation-dll/System.Collections.Immutable/frozen-collections/managed/subjects/build-output/FrozenCollectionsSubjects.dll"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Collections.dll"
     },
     {
       "assemblyName": "System.Collections.Immutable",
@@ -20,7 +24,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "a3c6662a-6281-40f1-b7fd-6c81a7aef3fa",
+  "inputModuleVersionId": "657f3529-279f-4fc6-b07e-d6788c09afcb",
   "artifacts": [
     {
       "kind": "typedIlIr",

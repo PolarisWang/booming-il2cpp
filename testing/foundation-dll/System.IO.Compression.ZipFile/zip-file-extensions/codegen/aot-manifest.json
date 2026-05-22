@@ -87,6 +87,12 @@
       "reason": "external-call"
     },
     {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
       "assemblyName": "System.IO.Compression.ZipFile",
       "subjectKind": "method",
       "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::CreateEntryFromFile:ZipArchiveEntry(ZipArchive,System.String,System.String,CompressionLevel)",
@@ -102,12 +108,6 @@
       "assemblyName": "System.IO.Compression.ZipFile",
       "subjectKind": "method",
       "subjectId": "System.IO.Compression.ZipFile/System.IO.Compression.ZipFileExtensions::CreateEntryFromFileAsync:System.Threading.Tasks.Task\u003CZipArchiveEntry\u003E(ZipArchive,System.String,System.String,System.Threading.CancellationToken)",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "reason": "external-call"
     },
     {

@@ -185,6 +185,12 @@
     {
       "assemblyName": "RuntimeSelfTest",
       "subjectKind": "field",
+      "subjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::iterations",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "RuntimeSelfTest",
+      "subjectKind": "field",
       "subjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::sync",
       "reason": "instance-field-state"
     },
@@ -192,12 +198,6 @@
       "assemblyName": "RuntimeSelfTest",
       "subjectKind": "field",
       "subjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::sharedCounter",
-      "reason": "instance-field-state"
-    },
-    {
-      "assemblyName": "RuntimeSelfTest",
-      "subjectKind": "field",
-      "subjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::iterations",
       "reason": "instance-field-state"
     },
     {

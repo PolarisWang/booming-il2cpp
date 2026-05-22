@@ -177,7 +177,15 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*<Subject_0>b__1_1)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32
+        );
         void (*<Subject_1>b__2_0)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32
+        );
+        void (*<Subject_1>b__2_1)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
@@ -185,7 +193,15 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*<Subject_2>b__3_1)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32
+        );
         void (*<Subject_3>b__4_0)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32
+        );
+        void (*<Subject_3>b__4_1)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
@@ -196,7 +212,15 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
+        void (*<Subject_4>b__5_1)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32
+        );
         void (*<Subject_5>b__6_0)(
+                    CHAOS_IL2CPP_INTPTR, 
+                    CHAOS_IL2CPP_INT32
+        );
+        void (*<Subject_5>b__6_1)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
@@ -461,11 +485,29 @@ struct ParallelApisSubjects___c {
                     arg_1
         );
     }
+    static inline void <Subject_0>b__1_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1
+    ) {
+        return kFunctions.parallelApisSubjects___c.<Subject_0>b__1_1(
+                    arg_0, 
+                    arg_1
+        );
+    }
     static inline void <Subject_1>b__2_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
     ) {
         return kFunctions.parallelApisSubjects___c.<Subject_1>b__2_0(
+                    arg_0, 
+                    arg_1
+        );
+    }
+    static inline void <Subject_1>b__2_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1
+    ) {
+        return kFunctions.parallelApisSubjects___c.<Subject_1>b__2_1(
                     arg_0, 
                     arg_1
         );
@@ -479,11 +521,29 @@ struct ParallelApisSubjects___c {
                     arg_1
         );
     }
+    static inline void <Subject_2>b__3_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1
+    ) {
+        return kFunctions.parallelApisSubjects___c.<Subject_2>b__3_1(
+                    arg_0, 
+                    arg_1
+        );
+    }
     static inline void <Subject_3>b__4_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
     ) {
         return kFunctions.parallelApisSubjects___c.<Subject_3>b__4_0(
+                    arg_0, 
+                    arg_1
+        );
+    }
+    static inline void <Subject_3>b__4_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1
+    ) {
+        return kFunctions.parallelApisSubjects___c.<Subject_3>b__4_1(
                     arg_0, 
                     arg_1
         );
@@ -504,6 +564,15 @@ struct ParallelApisSubjects___c {
                     arg_1
         );
     }
+    static inline void <Subject_4>b__5_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1
+    ) {
+        return kFunctions.parallelApisSubjects___c.<Subject_4>b__5_1(
+                    arg_0, 
+                    arg_1
+        );
+    }
     static inline void <Subject_5>b__6_0(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
@@ -513,8 +582,17 @@ struct ParallelApisSubjects___c {
                     arg_1
         );
     }
+    static inline void <Subject_5>b__6_1(
+                CHAOS_IL2CPP_INTPTR arg_0, 
+                CHAOS_IL2CPP_INT32 arg_1
+    ) {
+        return kFunctions.parallelApisSubjects___c.<Subject_5>b__6_1(
+                    arg_0, 
+                    arg_1
+        );
+    }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 9;
+    static constexpr int32_t MethodCount = 15;
 };
 
 

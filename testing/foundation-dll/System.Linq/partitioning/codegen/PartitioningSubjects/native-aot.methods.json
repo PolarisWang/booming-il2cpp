@@ -1,0 +1,179 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "PartitioningSubjects",
+  "methodCount": 16,
+  "defaultStringId": 0,
+  "methods": [
+    {
+      "index": 0,
+      "nativeSymbol": "PartitioningSubjects_PartitioningSubjects_CustomEntrySubject_0",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 0
+    },
+    {
+      "index": 1,
+      "nativeSymbol": "PartitioningSubjects_PartitioningSubjects_CustomEntrySubject_1",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 1
+    },
+    {
+      "index": 2,
+      "nativeSymbol": "PartitioningSubjects_PartitioningSubjects_CustomEntrySubject_2",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 2
+    },
+    {
+      "index": 3,
+      "nativeSymbol": "PartitioningSubjects_PartitioningSubjects_CustomEntrySubject_3",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 3
+    },
+    {
+      "index": 4,
+      "nativeSymbol": "PartitioningSubjects_PartitioningSubjects___c_CustomEntrySubject_3_b__4_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 5,
+      "nativeSymbol": "PartitioningSubjects_PartitioningSubjects_CustomEntrySubject_4",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 4
+    },
+    {
+      "index": 6,
+      "nativeSymbol": "PartitioningSubjects_PartitioningSubjects___c_CustomEntrySubject_4_b__5_0_System_Int32_System_Int32",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 7,
+      "nativeSymbol": "PartitioningSubjects_PartitioningSubjects_CustomEntrySubject_5",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 5
+    },
+    {
+      "index": 8,
+      "nativeSymbol": "PartitioningSubjects_PartitioningSubjects_CustomEntrySubject_6",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 6
+    },
+    {
+      "index": 9,
+      "nativeSymbol": "PartitioningSubjects_PartitioningSubjects_CustomEntrySubject_7",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 7
+    },
+    {
+      "index": 10,
+      "nativeSymbol": "PartitioningSubjects_PartitioningSubjects_CustomEntrySubject_8",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 8
+    },
+    {
+      "index": 11,
+      "nativeSymbol": "PartitioningSubjects_PartitioningSubjects___c_CustomEntrySubject_8_b__9_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 12,
+      "nativeSymbol": "PartitioningSubjects_PartitioningSubjects_CustomEntrySubject_9",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 9
+    },
+    {
+      "index": 13,
+      "nativeSymbol": "PartitioningSubjects_PartitioningSubjects___c_CustomEntrySubject_9_b__10_0_System_Int32_System_Int32",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 14,
+      "nativeSymbol": "PartitioningSubjects_PartitioningSubjects___c_cctor",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 15,
+      "nativeSymbol": "PartitioningSubjects_PartitioningSubjects___c__ctor",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    }
+  ]
+}

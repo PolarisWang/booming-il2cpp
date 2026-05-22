@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "BinderTypeStyleSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Runtime.Serialization.Formatters/binder-type-style/managed/subjects/build-output/BinderTypeStyleSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Runtime.Serialization.Formatters/binder-type-style/managed/subjects/build-output/BinderTypeStyleSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "BinderTypeStyleSubjects",
-      "path": "verification/foundation-dll/System.Runtime.Serialization.Formatters/binder-type-style/managed/subjects/build-output/BinderTypeStyleSubjects.dll"
+      "path": "testing/foundation-dll/System.Runtime.Serialization.Formatters/binder-type-style/managed/subjects/build-output/BinderTypeStyleSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "7bc56b5f-72ed-464a-bb38-5bc56326b39d",
+  "inputModuleVersionId": "235b4bc1-86a0-4018-af13-4c27d4ecb01d",
   "artifacts": [
     {
       "kind": "typedIlIr",

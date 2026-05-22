@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "FormatterServicesConverterSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Runtime.Serialization.Formatters/formatter-services-converter/managed/subjects/build-output/FormatterServicesConverterSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Runtime.Serialization.Formatters/formatter-services-converter/managed/subjects/build-output/FormatterServicesConverterSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "FormatterServicesConverterSubjects",
-      "path": "verification/foundation-dll/System.Runtime.Serialization.Formatters/formatter-services-converter/managed/subjects/build-output/FormatterServicesConverterSubjects.dll"
+      "path": "testing/foundation-dll/System.Runtime.Serialization.Formatters/formatter-services-converter/managed/subjects/build-output/FormatterServicesConverterSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "e3238e1f-ce95-49d7-9b58-21e9a6a80ed5",
+  "inputModuleVersionId": "0de9a0bf-634b-49a3-97b5-6f1f3345a735",
   "artifacts": [
     {
       "kind": "typedIlIr",

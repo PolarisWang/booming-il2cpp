@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Collections.Immutable",
+  "familyId": "family/System.Collections.Immutable/immutable/array",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::Create<Byte>:System.Collections.Immutable.ImmutableArray<System.Byte>()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.4,
+      "postPatchNsPerOp": 3.8,
+      "slowdownPercent": 11.76
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::Create<Byte>:System.Collections.Immutable.ImmutableArray<System.Byte>(System.Byte)",
+      "status": "passed",
+      "prePatchNsPerOp": 7.04,
+      "postPatchNsPerOp": 3.8,
+      "slowdownPercent": -46.02
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::Create<Byte>:System.Collections.Immutable.ImmutableArray<System.Byte>(System.Byte,System.Byte)",
+      "status": "passed",
+      "prePatchNsPerOp": 3.74,
+      "postPatchNsPerOp": 4.0,
+      "slowdownPercent": 6.95
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::Create<Int32>:System.Collections.Immutable.ImmutableArray<System.Int32>()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.52,
+      "postPatchNsPerOp": 3.8,
+      "slowdownPercent": 7.95
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::Create<Int32>:System.Collections.Immutable.ImmutableArray<System.Int32>(System.Int32)",
+      "status": "passed",
+      "prePatchNsPerOp": 3.54,
+      "postPatchNsPerOp": 3.8,
+      "slowdownPercent": 7.34
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::Create<String>:System.Collections.Immutable.ImmutableArray<System.String>(System.String)",
+      "status": "passed",
+      "prePatchNsPerOp": 4.66,
+      "postPatchNsPerOp": 8.4,
+      "slowdownPercent": 80.26
+    }
+  ],
+  "summary": {
+    "totalMethods": 6,
+    "nonStubMethods": 6,
+    "averageSlowdownPercent": 11.37,
+    "slowdownFactor": 1.1137000000000001,
+    "slowdownThresholdX": 50.0
+  }
+}

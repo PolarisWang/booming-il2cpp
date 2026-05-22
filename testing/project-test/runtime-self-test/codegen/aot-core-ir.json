@@ -6269,22 +6269,15 @@
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 6,
-      "exceptionRegionCount": 2,
+      "localCount": 5,
+      "exceptionRegionCount": 1,
       "exceptionRegions": [
         {
           "handlingKindCode": 2,
-          "tryOffset": 26,
-          "tryLength": 29,
-          "handlerOffset": 55,
-          "handlerLength": 10
-        },
-        {
-          "handlingKindCode": 2,
-          "tryOffset": 89,
-          "tryLength": 18,
-          "handlerOffset": 107,
-          "handlerLength": 12
+          "tryOffset": 51,
+          "tryLength": 31,
+          "handlerOffset": 82,
+          "handlerLength": 11
         }
       ],
       "instructions": [
@@ -6305,17 +6298,33 @@
           "isPreserveSig": false
         },
         {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 3,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
           "op": "br",
           "opCode": 17,
-          "operand": 69,
-          "ilOffset": 2,
+          "operand": 32,
+          "ilOffset": 4,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "newobj",
           "opCode": 34,
-          "ilOffset": 4,
+          "ilOffset": 6,
           "resultType": "RuntimeSelfTest/GcAllocationProof",
           "callee": "RuntimeSelfTest/GcAllocationProof::.ctor:System.Void()",
           "reference": {
@@ -6342,29 +6351,29 @@
         {
           "op": "stloc",
           "opCode": 8,
-          "operand": 1,
-          "ilOffset": 9,
+          "operand": 2,
+          "ilOffset": 11,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
-          "operand": 1,
-          "ilOffset": 10,
+          "operand": 2,
+          "ilOffset": 12,
           "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
-          "operand": 0,
-          "ilOffset": 11,
+          "operand": 1,
+          "ilOffset": 13,
           "isPreserveSig": false
         },
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 12,
+          "ilOffset": 14,
           "resultType": "System.Void",
           "callee": "RuntimeSelfTest/GcAllocationProof::set_Value:System.Void(System.Int32)",
           "reference": {
@@ -6390,158 +6399,23 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldarg",
-          "opCode": 6,
+          "op": "ldloc",
+          "opCode": 7,
           "operand": 0,
-          "ilOffset": 17,
-          "resultType": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldfld",
-          "opCode": 10,
-          "operand": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::sync",
-          "ilOffset": 18,
-          "resultType": "System.Object",
-          "reference": {
-            "assemblyName": "RuntimeSelfTest",
-            "subjectKind": "field",
-            "subjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::sync"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "RuntimeSelfTest",
-            "subjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::sync",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Object"
-          },
-          "runtimeServiceKind": 2,
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 2,
-          "ilOffset": 23,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 24,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 3,
-          "ilOffset": 25,
-          "resultType": "System.Void",
+          "ilOffset": 19,
           "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
           "operand": 2,
-          "ilOffset": 26,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloca",
-          "opCode": 76,
-          "operand": 3,
-          "ilOffset": 27,
-          "resultType": "System.IntPtr",
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 29,
-          "resultType": "System.Void",
-          "callee": "System.Threading/Monitor::Enter:System.Void(System.Object,System.Boolean\u0026)",
-          "reference": {
-            "assemblyName": "System.Threading",
-            "subjectKind": "method",
-            "subjectId": "System.Threading/Monitor::Enter:System.Void(System.Object,System.Boolean\u0026)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Threading",
-            "subjectId": "System.Threading/Monitor::Enter:System.Void(System.Object,System.Boolean\u0026)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldarg",
-          "opCode": 6,
-          "operand": 0,
-          "ilOffset": 34,
-          "resultType": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldarg",
-          "opCode": 6,
-          "operand": 0,
-          "ilOffset": 35,
-          "resultType": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldfld",
-          "opCode": 10,
-          "operand": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::sharedCounter",
-          "ilOffset": 36,
-          "resultType": "System.Int32",
-          "reference": {
-            "assemblyName": "RuntimeSelfTest",
-            "subjectKind": "field",
-            "subjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::sharedCounter"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "RuntimeSelfTest",
-            "subjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::sharedCounter",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 2,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 1,
-          "ilOffset": 41,
+          "ilOffset": 20,
           "isPreserveSig": false
         },
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 42,
+          "ilOffset": 21,
           "resultType": "System.Int32",
           "callee": "RuntimeSelfTest/GcAllocationProof::get_Value:System.Int32()",
           "reference": {
@@ -6569,118 +6443,7 @@
         {
           "op": "add",
           "opCode": 25,
-          "ilOffset": 47,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stfld",
-          "opCode": 11,
-          "operand": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::sharedCounter",
-          "ilOffset": 48,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "RuntimeSelfTest",
-            "subjectKind": "field",
-            "subjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::sharedCounter"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "RuntimeSelfTest",
-            "subjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::sharedCounter",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 3,
-          "isPreserveSig": false
-        },
-        {
-          "op": "leave",
-          "opCode": 50,
-          "operand": 65,
-          "ilOffset": 53,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 3,
-          "ilOffset": 55,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 64,
-          "ilOffset": 56,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 2,
-          "ilOffset": 58,
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 59,
-          "resultType": "System.Void",
-          "callee": "System.Threading/Monitor::Exit:System.Void(System.Object)",
-          "reference": {
-            "assemblyName": "System.Threading",
-            "subjectKind": "method",
-            "subjectId": "System.Threading/Monitor::Exit:System.Void(System.Object)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Threading",
-            "subjectId": "System.Threading/Monitor::Exit:System.Void(System.Object)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "endfinally",
-          "opCode": 51,
-          "ilOffset": 64,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 65,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 66,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "add",
-          "opCode": 25,
-          "ilOffset": 67,
+          "ilOffset": 26,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -6688,22 +6451,52 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 68,
+          "ilOffset": 27,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
-          "operand": 0,
-          "ilOffset": 69,
+          "operand": 1,
+          "ilOffset": 28,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 29,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "add",
+          "opCode": 25,
+          "ilOffset": 30,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 31,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 32,
           "isPreserveSig": false
         },
         {
           "op": "ldarg",
           "opCode": 6,
           "operand": 0,
-          "ilOffset": 70,
+          "ilOffset": 33,
           "resultType": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0",
           "isPreserveSig": false
         },
@@ -6711,7 +6504,7 @@
           "op": "ldfld",
           "opCode": 10,
           "operand": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::iterations",
-          "ilOffset": 71,
+          "ilOffset": 34,
           "resultType": "System.Int32",
           "reference": {
             "assemblyName": "RuntimeSelfTest",
@@ -6737,8 +6530,8 @@
         {
           "op": "blt",
           "opCode": 21,
-          "operand": 4,
-          "ilOffset": 76,
+          "operand": 6,
+          "ilOffset": 39,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -6746,7 +6539,7 @@
           "op": "ldarg",
           "opCode": 6,
           "operand": 0,
-          "ilOffset": 78,
+          "ilOffset": 41,
           "resultType": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0",
           "isPreserveSig": false
         },
@@ -6754,7 +6547,7 @@
           "op": "ldfld",
           "opCode": 10,
           "operand": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::sync",
-          "ilOffset": 79,
+          "ilOffset": 42,
           "resultType": "System.Object",
           "reference": {
             "assemblyName": "RuntimeSelfTest",
@@ -6780,8 +6573,8 @@
         {
           "op": "stloc",
           "opCode": 8,
-          "operand": 4,
-          "ilOffset": 84,
+          "operand": 3,
+          "ilOffset": 47,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -6789,37 +6582,37 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 86,
+          "ilOffset": 48,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "stloc",
           "opCode": 8,
-          "operand": 5,
-          "ilOffset": 87,
+          "operand": 4,
+          "ilOffset": 49,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
-          "operand": 4,
-          "ilOffset": 89,
+          "operand": 3,
+          "ilOffset": 51,
           "isPreserveSig": false
         },
         {
           "op": "ldloca",
           "opCode": 76,
-          "operand": 5,
-          "ilOffset": 91,
+          "operand": 4,
+          "ilOffset": 52,
           "resultType": "System.IntPtr",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 93,
+          "ilOffset": 54,
           "resultType": "System.Void",
           "callee": "System.Threading/Monitor::Enter:System.Void(System.Object,System.Boolean\u0026)",
           "reference": {
@@ -6845,7 +6638,91 @@
           "op": "ldarg",
           "opCode": 6,
           "operand": 0,
-          "ilOffset": 98,
+          "ilOffset": 59,
+          "resultType": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 60,
+          "resultType": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldfld",
+          "opCode": 10,
+          "operand": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::sharedCounter",
+          "ilOffset": 61,
+          "resultType": "System.Int32",
+          "reference": {
+            "assemblyName": "RuntimeSelfTest",
+            "subjectKind": "field",
+            "subjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::sharedCounter"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "RuntimeSelfTest",
+            "subjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::sharedCounter",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 2,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 66,
+          "isPreserveSig": false
+        },
+        {
+          "op": "add",
+          "opCode": 25,
+          "ilOffset": 67,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stfld",
+          "opCode": 11,
+          "operand": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::sharedCounter",
+          "ilOffset": 68,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "RuntimeSelfTest",
+            "subjectKind": "field",
+            "subjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::sharedCounter"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "RuntimeSelfTest",
+            "subjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::sharedCounter",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 3,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 73,
           "resultType": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0",
           "isPreserveSig": false
         },
@@ -6853,7 +6730,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 99,
+          "ilOffset": 74,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -6861,7 +6738,7 @@
           "op": "stfld",
           "opCode": 11,
           "operand": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::workerDone",
-          "ilOffset": 100,
+          "ilOffset": 75,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "RuntimeSelfTest",
@@ -6887,23 +6764,8 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 119,
-          "ilOffset": 105,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 5,
-          "ilOffset": 107,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 118,
-          "ilOffset": 109,
+          "operand": 93,
+          "ilOffset": 80,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -6911,13 +6773,28 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 4,
-          "ilOffset": 111,
+          "ilOffset": 82,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 92,
+          "ilOffset": 84,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 3,
+          "ilOffset": 86,
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 113,
+          "ilOffset": 87,
           "resultType": "System.Void",
           "callee": "System.Threading/Monitor::Exit:System.Void(System.Object)",
           "reference": {
@@ -6942,14 +6819,14 @@
         {
           "op": "endfinally",
           "opCode": 51,
-          "ilOffset": 118,
+          "ilOffset": 92,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 119,
+          "ilOffset": 93,
           "isPreserveSig": false
         }
       ],

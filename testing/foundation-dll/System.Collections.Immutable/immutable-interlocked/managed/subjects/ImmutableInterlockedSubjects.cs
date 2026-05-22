@@ -14,5 +14,4 @@ public static partial class ImmutableInterlockedSubjects
     public static int _exitCode;
 
     // [0] System.Collections.Immutable/System.Collections.Immutable.ImmutableInterlocked::Update<string>(System.String&,System.Func{System.String,System.String})
-
 }

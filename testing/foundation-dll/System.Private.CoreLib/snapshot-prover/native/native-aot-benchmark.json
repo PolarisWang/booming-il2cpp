@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/snapshot/prover",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "SnapshotTestFixtures/ArithmeticOps::RunAdd:System.Int32()",
+      "elapsedMilliseconds": 0.365,
+      "calibratedMs": 0.365,
+      "opsPerSecond": 274047684.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()",
+      "elapsedMilliseconds": 0.376,
+      "calibratedMs": 0.376,
+      "opsPerSecond": 266028199.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "SnapshotTestFixtures/MathHelper::RunSquare:System.Int32()",
+      "elapsedMilliseconds": 0.377,
+      "calibratedMs": 0.377,
+      "opsPerSecond": 265251989.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "SnapshotTestFixtures/FlowControl::IsPositive:System.Int32()",
+      "elapsedMilliseconds": 0.379,
+      "calibratedMs": 0.379,
+      "opsPerSecond": 264131009.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "SnapshotTestFixtures/CallVirtHelper::CreateAndUse:System.Int32()",
+      "elapsedMilliseconds": 0.376,
+      "calibratedMs": 0.376,
+      "opsPerSecond": 265816055.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "SnapshotTestFixtures/BoxingHelper::BoxAndUnbox:System.Int32()",
+      "elapsedMilliseconds": 0.372,
+      "calibratedMs": 0.372,
+      "opsPerSecond": 268744961.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "SnapshotTestFixtures/ConversionHelper::ConvertToInt:System.Int32()",
+      "elapsedMilliseconds": 0.365,
+      "calibratedMs": 0.365,
+      "opsPerSecond": 274197970.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "SnapshotTestFixtures/LoopHelper::SumToFive:System.Int32()",
+      "elapsedMilliseconds": 0.364,
+      "calibratedMs": 0.364,
+      "opsPerSecond": 274725274.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "SnapshotTestFixtures/LdftnHelper::GetFnPtr:System.Int32()",
+      "elapsedMilliseconds": -1.0,
+      "status": "stub"
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()",
+      "elapsedMilliseconds": 0.35,
+      "calibratedMs": 0.35,
+      "opsPerSecond": 285551113.6,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}

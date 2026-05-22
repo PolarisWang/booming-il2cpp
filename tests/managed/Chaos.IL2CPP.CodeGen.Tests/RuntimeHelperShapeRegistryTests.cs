@@ -242,6 +242,120 @@ public sealed class RuntimeHelperShapeRegistryTests
         Assert.False(registry.TryMatchGenericShape("", out _, out _));
     }
 
+    // ── TryMatchGenericShape: [[...]] method-level generic args ────────
+
+    [Fact]
+    public void TryMatchGenericShape_DoubleBracketSyntax_ExtractsTypeArgs()
+    {
+        var registry = CreateRegistry();
+        registry.RegisterGeneric(
+            new NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.GenericShapeDescriptor(
+                "System.Collections.Generic.EqualityComparer",
+                "Equals",
+                (planner, callee, typeArgs) =>
+                    new NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.GenericShapeResolution(
+                        "// generic call", "EqualityComparer_Equals",
+                        Array.Empty<AotCoreIrAbiSlotArtifact>(), Int32Abi,
+                        new HashSet<int>())));
+
+        Assert.True(
+            registry.TryMatchGenericShape(
+                "System.Private.CoreLib/System.Collections.Generic.EqualityComparer::Equals[[System.Int32]]:System.Boolean(System.Int32,System.Int32)",
+                out var descriptor, out var typeArgs));
+        Assert.NotNull(descriptor);
+        Assert.Contains("System.Int32", typeArgs);
+    }
+
+    // ── TryMatchGenericShape: <...> angle-bracket syntax ───────────────
+
+    [Fact]
+    public void TryMatchGenericShape_AngleBracketSyntax_ExtractsTypeArgs()
+    {
+        var registry = CreateRegistry();
+        registry.RegisterGeneric(
+            new NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.GenericShapeDescriptor(
+                "System.Collections.Generic.List",
+                "Sort",
+                (planner, callee, typeArgs) =>
+                    new NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.GenericShapeResolution(
+                        "// generic call", "List_Sort",
+                        Array.Empty<AotCoreIrAbiSlotArtifact>(), Int32Abi,
+                        new HashSet<int>())));
+
+        Assert.True(
+            registry.TryMatchGenericShape(
+                "System.Private.CoreLib/System.Collections.Generic.List::Sort<System.Int32>:System.Void()",
+                out var descriptor, out var typeArgs));
+        Assert.NotNull(descriptor);
+        Assert.Contains("System.Int32", typeArgs);
+    }
+
+    [Fact]
+    public void TryMatchGenericShape_AngleBracket_WrongTypePrefix_ReturnsFalse()
+    {
+        var registry = CreateRegistry();
+        registry.RegisterGeneric(
+            new NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.GenericShapeDescriptor(
+                "System.Collections.Generic.List",
+                "Sort",
+                (planner, callee, typeArgs) =>
+                    new NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.GenericShapeResolution(
+                        "// generic call", "List_Sort",
+                        Array.Empty<AotCoreIrAbiSlotArtifact>(), Int32Abi,
+                        new HashSet<int>())));
+
+        // Array::Sort<...> should not match List<T>::Sort descriptor
+        Assert.False(
+            registry.TryMatchGenericShape(
+                "System.Private.CoreLib/System.Array::Sort<System.Int32>:System.Void()",
+                out _, out _));
+    }
+
+    // ── TryMatchGenericShape: backtick type name matching ──────────────
+
+    [Fact]
+    public void TryMatchGenericShape_BacktickTypeName_ExtractsTypeArgs()
+    {
+        var registry = CreateRegistry();
+        registry.RegisterGeneric(
+            new NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.GenericShapeDescriptor(
+                "System.Nullable`1",
+                "get_HasValue",
+                (planner, callee, typeArgs) =>
+                    new NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.GenericShapeResolution(
+                        "// generic call", "Nullable_get_HasValue",
+                        Array.Empty<AotCoreIrAbiSlotArtifact>(), Int32Abi,
+                        new HashSet<int>())));
+
+        Assert.True(
+            registry.TryMatchGenericShape(
+                "System.Private.CoreLib/System.Nullable<System.Int32>::get_HasValue:()",
+                out var descriptor, out var typeArgs));
+        Assert.NotNull(descriptor);
+        Assert.Contains("System.Int32", typeArgs);
+    }
+
+    [Fact]
+    public void TryMatchGenericShape_BacktickTypeName_WrongBase_ReturnsFalse()
+    {
+        var registry = CreateRegistry();
+        registry.RegisterGeneric(
+            new NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.GenericShapeDescriptor(
+                "System.Nullable`1",
+                "get_HasValue",
+                (planner, callee, typeArgs) =>
+                    new NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.GenericShapeResolution(
+                        "// generic call", "Nullable_get_HasValue",
+                        Array.Empty<AotCoreIrAbiSlotArtifact>(), Int32Abi,
+                        new HashSet<int>())));
+
+        // Span<System.Byte> should not match Nullable`1 descriptor
+        Assert.False(
+            registry.TryMatchGenericShape(
+                "System.Private.CoreLib/System.Span<System.Byte>::get_Item(System.Int32)",
+                out _, out _));
+    }
+
     // ── RegisterInline / TryMatchInlineShape ────────────────
 
     [Fact]
@@ -276,7 +390,164 @@ public sealed class RuntimeHelperShapeRegistryTests
         Assert.False(registry.TryMatchInlineShape("", out _, out _));
     }
 
-    // ── Entries enumeration ─────────────────────────────────
+    // ── BuildDefault: TryMatchShape for registered shapes ──────────────
+
+    [Fact]
+    public void BuildDefault_TryMatchShape_StringOpEquality_ReturnsEntry()
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        Assert.True(
+            registry.TryMatchShape(
+                "System.Private.CoreLib/System.String::op_Equality:System.Boolean(System.String,System.String)",
+                out var entry));
+        Assert.NotNull(entry);
+        Assert.Equal("chaos_object_equals", entry.NativeFnSymbol);
+    }
+
+    [Fact]
+    public void BuildDefault_TryMatchShape_StringStartsWith_ReturnsEntry()
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        Assert.True(
+            registry.TryMatchShape(
+                "System.Private.CoreLib/System.String::StartsWith:System.Boolean(System.String,System.StringComparison)",
+                out var entry));
+        Assert.NotNull(entry);
+    }
+
+    [Fact]
+    public void BuildDefault_TryMatchShape_GcCollect_ReturnsInlineBody()
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        Assert.True(
+            registry.TryMatchShape(
+                "System.Private.CoreLib/System.GC::Collect:System.Void()",
+                out var entry));
+        Assert.NotNull(entry);
+        Assert.Equal(NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.ShapeKind.InlineBody, entry.Kind);
+    }
+
+    [Fact]
+    public void BuildDefault_TryMatchShape_GcCollectWithMode_ReturnsEntry()
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        Assert.True(
+            registry.TryMatchShape(
+                "System.Private.CoreLib/System.GC::Collect:System.Void(System.Int32,System.GCCollectionMode)",
+                out var entry));
+        Assert.NotNull(entry);
+    }
+
+    [Fact]
+    public void BuildDefault_TryMatchShape_GcGetTotalMemory_ReturnsEntry()
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        Assert.True(
+            registry.TryMatchShape(
+                "System.Private.CoreLib/System.GC::GetTotalMemory:System.Int64(System.Boolean)",
+                out var entry));
+        Assert.NotNull(entry);
+    }
+
+    [Fact]
+    public void BuildDefault_TryMatchShape_DelegateCombine_ReturnsEntry()
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        Assert.True(
+            registry.TryMatchShape(
+                "System.Private.CoreLib/System.Delegate::Combine:System.Delegate(System.Delegate,System.Delegate)",
+                out var entry));
+        Assert.NotNull(entry);
+    }
+
+    [Fact]
+    public void BuildDefault_TryMatchShape_ObjectGetType_ReturnsEntry()
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        Assert.True(
+            registry.TryMatchShape(
+                "System.Private.CoreLib/System.Object::GetType:System.Type(System.Object)",
+                out var entry));
+        Assert.NotNull(entry);
+    }
+
+    [Fact]
+    public void BuildDefault_TryMatchShape_StringContains_ReturnsEntry()
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        Assert.True(
+            registry.TryMatchShape(
+                "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String,System.StringComparison)",
+                out var entry));
+        Assert.NotNull(entry);
+    }
+
+    [Fact]
+    public void BuildDefault_TryMatchShape_ExceptionCtor_ReturnsEntry()
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        Assert.True(
+            registry.TryMatchShape(
+                "System.Private.CoreLib/System.Exception::.ctor:System.Void(System.String)",
+                out var entry));
+        Assert.NotNull(entry);
+    }
+
+    [Fact]
+    public void BuildDefault_TryMatchShape_GcAddMemoryPressure_ReturnsEntry()
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        Assert.True(
+            registry.TryMatchShape(
+                "System.Private.CoreLib/System.GC::AddMemoryPressure:System.Void(System.Int64)",
+                out var entry));
+        Assert.NotNull(entry);
+    }
+
+    [Fact]
+    public void BuildDefault_TryMatchShape_GcGetTotalPauseDuration_ReturnsEntry()
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        Assert.True(
+            registry.TryMatchShape(
+                "System.Private.CoreLib/System.GC::GetTotalPauseDuration:System.Int64()",
+                out var entry));
+        Assert.NotNull(entry);
+    }
+
+    // ── BuildDefault: TryMatchGenericShape for generic descriptors ─────
+
+    [Fact]
+    public void BuildDefault_TryMatchGenericShape_StringConcat3_ReturnsDescriptor()
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        Assert.True(
+            registry.TryMatchGenericShape(
+                "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String,System.String)",
+                out var descriptor, out var typeArgs));
+        Assert.NotNull(descriptor);
+    }
+
+    [Fact]
+    public void BuildDefault_TryMatchGenericShape_StringOpEquality_ReturnsDescriptor()
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        Assert.True(
+            registry.TryMatchGenericShape(
+                "System.Private.CoreLib/System.String::op_Equality:System.Boolean(System.String,System.String)",
+                out var descriptor, out var typeArgs));
+        Assert.NotNull(descriptor);
+    }
+
+    [Fact]
+    public void BuildDefault_TryMatchShape_Unregistered_ReturnsFalse()
+    {
+        var registry = NativeAotLoweringPlanner.RuntimeHelperShapeRegistry.BuildDefault();
+        Assert.False(
+            registry.TryMatchShape(
+                "System.Private.CoreLib/System.Nonexistent::Foo:System.Void()",
+                out _));
+    }
 
     [Fact]
     public void Entries_EmptyRegistry_ReturnsEmpty()

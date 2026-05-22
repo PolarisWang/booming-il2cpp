@@ -1,0 +1,250 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Security.Principal.Windows",
+  "familyId": "family/System.Security.Principal.Windows/windows/identity",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::Clone:System.Security.Claims.ClaimsIdentity()",
+      "status": "passed",
+      "prePatchNsPerOp": 106186.2,
+      "postPatchNsPerOp": 82373.6,
+      "slowdownPercent": -22.43
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::Dispose:System.Void()",
+      "status": "passed",
+      "prePatchNsPerOp": 67037.3,
+      "postPatchNsPerOp": 43920.2,
+      "slowdownPercent": -34.48
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_AccessToken:Microsoft.Win32.SafeHandles.SafeAccessTokenHandle()",
+      "status": "passed",
+      "prePatchNsPerOp": 105622.71,
+      "postPatchNsPerOp": 82608.1,
+      "slowdownPercent": -21.79
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_AuthenticationType:System.String()",
+      "status": "passed",
+      "prePatchNsPerOp": 101572.76,
+      "postPatchNsPerOp": 84348.8,
+      "slowdownPercent": -16.96
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_Claims:System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}()",
+      "status": "passed",
+      "prePatchNsPerOp": 112903.78,
+      "postPatchNsPerOp": 82346.6,
+      "slowdownPercent": -27.06
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_DeviceClaims:System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}()",
+      "status": "passed",
+      "prePatchNsPerOp": 115746.89,
+      "postPatchNsPerOp": 94896.1,
+      "slowdownPercent": -18.01
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_Groups:System.Security.Principal.IdentityReferenceCollection()",
+      "status": "passed",
+      "prePatchNsPerOp": 119110.74,
+      "postPatchNsPerOp": 89981.5,
+      "slowdownPercent": -24.46
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_ImpersonationLevel:System.Security.Principal.TokenImpersonationLevel()",
+      "status": "passed",
+      "prePatchNsPerOp": 140788.82,
+      "postPatchNsPerOp": 91019.7,
+      "slowdownPercent": -35.35
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_IsAnonymous:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 150153.09,
+      "postPatchNsPerOp": 84213.4,
+      "slowdownPercent": -43.91
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_IsAuthenticated:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 130034.07,
+      "postPatchNsPerOp": 82272.9,
+      "slowdownPercent": -36.73
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_IsGuest:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 105618.5,
+      "postPatchNsPerOp": 74901.6,
+      "slowdownPercent": -29.08
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_IsSystem:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 100695.16,
+      "postPatchNsPerOp": 84368.6,
+      "slowdownPercent": -16.21
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_Name:System.String()",
+      "status": "passed",
+      "prePatchNsPerOp": 95206.19,
+      "postPatchNsPerOp": 84633.3,
+      "slowdownPercent": -11.11
+    },
+    {
+      "methodIndex": 13,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_Owner:System.Security.Principal.SecurityIdentifier()",
+      "status": "passed",
+      "prePatchNsPerOp": 91640.3,
+      "postPatchNsPerOp": 79211.6,
+      "slowdownPercent": -13.56
+    },
+    {
+      "methodIndex": 14,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_Token:System.IntPtr()",
+      "status": "passed",
+      "prePatchNsPerOp": 83041.24,
+      "postPatchNsPerOp": 78676.1,
+      "slowdownPercent": -5.26
+    },
+    {
+      "methodIndex": 15,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_User:System.Security.Principal.SecurityIdentifier()",
+      "status": "passed",
+      "prePatchNsPerOp": 91441.49,
+      "postPatchNsPerOp": 87032.5,
+      "slowdownPercent": -4.82
+    },
+    {
+      "methodIndex": 16,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::get_UserClaims:System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}()",
+      "status": "passed",
+      "prePatchNsPerOp": 93217.61,
+      "postPatchNsPerOp": 92098.0,
+      "slowdownPercent": -1.2
+    },
+    {
+      "methodIndex": 17,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::GetAnonymous:System.Security.Principal.WindowsIdentity()",
+      "status": "passed",
+      "prePatchNsPerOp": 94129.48,
+      "postPatchNsPerOp": 78809.6,
+      "slowdownPercent": -16.28
+    },
+    {
+      "methodIndex": 18,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::GetCurrent:System.Security.Principal.WindowsIdentity()",
+      "status": "passed",
+      "prePatchNsPerOp": 99024.83,
+      "postPatchNsPerOp": 80019.4,
+      "slowdownPercent": -19.19
+    },
+    {
+      "methodIndex": 19,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::GetCurrent:System.Security.Principal.WindowsIdentity(System.Boolean)",
+      "status": "passed",
+      "prePatchNsPerOp": 99929.76,
+      "postPatchNsPerOp": 85028.5,
+      "slowdownPercent": -14.91
+    },
+    {
+      "methodIndex": 20,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::GetCurrent:System.Security.Principal.WindowsIdentity(System.Security.Principal.TokenAccessLevels)",
+      "status": "passed",
+      "prePatchNsPerOp": 100528.88,
+      "postPatchNsPerOp": 77166.1,
+      "slowdownPercent": -23.24
+    },
+    {
+      "methodIndex": 21,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonated:System.Void(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Action)",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 22,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonated{T}:T(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Func{T})",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 23,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonatedAsync:System.Threading.Tasks.Task(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Func{System.Threading.Tasks.Task})",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 24,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::RunImpersonatedAsync{T}:System.Threading.Tasks.Task{T}(Microsoft.Win32.SafeHandles.SafeAccessTokenHandle,System.Func{System.Threading.Tasks.Task{T}})",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 25,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.IntPtr)",
+      "status": "passed",
+      "prePatchNsPerOp": 16062.56,
+      "postPatchNsPerOp": 14676.9,
+      "slowdownPercent": -8.63
+    },
+    {
+      "methodIndex": 26,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.IntPtr,System.String)",
+      "status": "passed",
+      "prePatchNsPerOp": 14526.13,
+      "postPatchNsPerOp": 15687.0,
+      "slowdownPercent": 7.99
+    },
+    {
+      "methodIndex": 27,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.IntPtr,System.String,System.Security.Principal.WindowsAccountType)",
+      "status": "passed",
+      "prePatchNsPerOp": 14737.61,
+      "postPatchNsPerOp": 16386.5,
+      "slowdownPercent": 11.19
+    },
+    {
+      "methodIndex": 28,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.IntPtr,System.String,System.Security.Principal.WindowsAccountType,System.Boolean)",
+      "status": "passed",
+      "prePatchNsPerOp": 13770.33,
+      "postPatchNsPerOp": 20139.3,
+      "slowdownPercent": 46.25
+    },
+    {
+      "methodIndex": 29,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.String)",
+      "status": "passed",
+      "prePatchNsPerOp": 10219.53,
+      "postPatchNsPerOp": 15515.2,
+      "slowdownPercent": 51.82
+    },
+    {
+      "methodIndex": 30,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)",
+      "status": "passed",
+      "prePatchNsPerOp": 13979.64,
+      "postPatchNsPerOp": 16516.7,
+      "slowdownPercent": 18.15
+    }
+  ],
+  "summary": {
+    "totalMethods": 31,
+    "nonStubMethods": 27,
+    "averageSlowdownPercent": -11.45,
+    "slowdownFactor": 0.8855,
+    "slowdownThresholdX": 50.0
+  }
+}

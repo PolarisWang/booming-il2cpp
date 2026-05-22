@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "ImmutableInterlockedSubjects",
   "entrySubjectId": "ImmutableInterlockedSubjects/ImmutableInterlockedSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Collections.Immutable/immutable-interlocked/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.Collections.Immutable/immutable-interlocked/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

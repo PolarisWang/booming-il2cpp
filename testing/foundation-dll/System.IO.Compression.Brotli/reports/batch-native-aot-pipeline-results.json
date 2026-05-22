@@ -1,0 +1,62 @@
+{
+  "assembly": "System.IO.Compression.Brotli",
+  "mode": "family-entrypoint",
+  "total": 4,
+  "passed": 4,
+  "failed": 0,
+  "results": [
+    {
+      "family": "decoder",
+      "config_tier": "CHECK",
+      "steps": {
+        "build_subjects": "OK",
+        "convert_to_cpp": "OK",
+        "build_entry_exe": "OK"
+      },
+      "success": true,
+      "methodCount": 3,
+      "entryPointSubjectId": "",
+      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.IO.Compression.Brotli\\decoder\\managed\\subjects\\build-output\\DecoderSubjects.dll"
+    },
+    {
+      "family": "encoder",
+      "config_tier": "CHECK",
+      "steps": {
+        "build_subjects": "OK",
+        "convert_to_cpp": "OK",
+        "build_entry_exe": "OK"
+      },
+      "success": true,
+      "methodCount": 7,
+      "entryPointSubjectId": "",
+      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.IO.Compression.Brotli\\encoder\\managed\\subjects\\build-output\\EncoderSubjects.dll"
+    },
+    {
+      "family": "options",
+      "config_tier": "CHECK",
+      "steps": {
+        "build_subjects": "OK",
+        "convert_to_cpp": "OK",
+        "build_entry_exe": "OK"
+      },
+      "success": true,
+      "methodCount": 3,
+      "entryPointSubjectId": "",
+      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.IO.Compression.Brotli\\options\\managed\\subjects\\build-output\\OptionsSubjects.dll"
+    },
+    {
+      "family": "stream",
+      "config_tier": "CHECK",
+      "steps": {
+        "build_subjects": "OK",
+        "convert_to_cpp": "OK",
+        "build_entry_exe": "OK"
+      },
+      "success": true,
+      "methodCount": 31,
+      "entryPointSubjectId": "",
+      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.IO.Compression.Brotli\\stream\\managed\\subjects\\build-output\\StreamSubjects.dll"
+    }
+  ],
+  "timestamp": "2026-05-22T05:45:33"
+}

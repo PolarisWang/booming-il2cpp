@@ -16,7 +16,7 @@
         ]
       },
       "supportKindCode": 3,
-      "specializationKindCode": 2,
+      "specializationKindCode": 1,
       "familyKindCode": 3,
       "isCrossAssembly": true
     },
@@ -36,7 +36,7 @@
         ]
       },
       "supportKindCode": 3,
-      "specializationKindCode": 2,
+      "specializationKindCode": 1,
       "familyKindCode": 3,
       "isCrossAssembly": true
     },
@@ -56,7 +56,7 @@
         ]
       },
       "supportKindCode": 3,
-      "specializationKindCode": 2,
+      "specializationKindCode": 1,
       "familyKindCode": 3,
       "isCrossAssembly": true
     },
@@ -76,7 +76,7 @@
         ]
       },
       "supportKindCode": 3,
-      "specializationKindCode": 2,
+      "specializationKindCode": 1,
       "familyKindCode": 3,
       "isCrossAssembly": true
     },
@@ -96,7 +96,7 @@
         ]
       },
       "supportKindCode": 3,
-      "specializationKindCode": 2,
+      "specializationKindCode": 1,
       "familyKindCode": 3,
       "isCrossAssembly": true
     },
@@ -116,7 +116,7 @@
         ]
       },
       "supportKindCode": 3,
-      "specializationKindCode": 2,
+      "specializationKindCode": 1,
       "familyKindCode": 3,
       "isCrossAssembly": true
     },
@@ -136,7 +136,7 @@
         "methodArguments": []
       },
       "supportKindCode": 3,
-      "specializationKindCode": 2,
+      "specializationKindCode": 1,
       "familyKindCode": 2,
       "isCrossAssembly": true
     },
@@ -156,7 +156,7 @@
         "methodArguments": []
       },
       "supportKindCode": 3,
-      "specializationKindCode": 2,
+      "specializationKindCode": 1,
       "familyKindCode": 2,
       "isCrossAssembly": true
     },
@@ -176,7 +176,7 @@
         "methodArguments": []
       },
       "supportKindCode": 3,
-      "specializationKindCode": 2,
+      "specializationKindCode": 1,
       "familyKindCode": 2,
       "isCrossAssembly": true
     }

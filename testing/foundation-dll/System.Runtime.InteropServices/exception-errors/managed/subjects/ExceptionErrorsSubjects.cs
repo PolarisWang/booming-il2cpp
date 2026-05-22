@@ -16,113 +16,127 @@ public static partial class ExceptionErrorsSubjects
     // [0] System.Runtime.InteropServices/System.Runtime.InteropServices.COMException::ToString:System.String()
     public static void Subject_0()
     {
-        try { default(COMException)!.ToString(); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(COMException)!.ToString()).Length) != ((default(COMException)!.ToString()).Length)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [1] System.Runtime.InteropServices/System.Runtime.InteropServices.COMException::.ctor:System.Void()
     public static void Subject_1()
     {
-        new COMException();
+        try { new COMException(); }
+        catch { _exitCode = 1; }
     }
 
     // [2] System.Runtime.InteropServices/System.Runtime.InteropServices.COMException::.ctor:System.Void(System.String)
     public static void Subject_2()
     {
-        new COMException("hello");
+        try { new COMException("hello"); }
+        catch { _exitCode = 1; }
     }
 
     // [3] System.Runtime.InteropServices/System.Runtime.InteropServices.COMException::.ctor:System.Void(System.String,System.Exception)
     public static void Subject_3()
     {
-        new COMException(null, default(int));
+        try { new COMException(null, default(int)); }
+        catch { _exitCode = 1; }
     }
 
     // [4] System.Runtime.InteropServices/System.Runtime.InteropServices.COMException::.ctor:System.Void(System.String,System.Int32)
     public static void Subject_4()
     {
-        new COMException(null, default(int));
+        try { new COMException(null, default(int)); }
+        catch { _exitCode = 1; }
     }
 
     // [5] System.Runtime.InteropServices/System.Runtime.InteropServices.ExternalException::get_ErrorCode:System.Int32()
     public static void Subject_5()
     {
-        try { _ = default(ExternalException)!.ErrorCode; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (default(ExternalException)!.ErrorCode != default(ExternalException)!.ErrorCode) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [6] System.Runtime.InteropServices/System.Runtime.InteropServices.ExternalException::ToString:System.String()
     public static void Subject_6()
     {
-        try { default(ExternalException)!.ToString(); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(ExternalException)!.ToString()).Length) != ((default(ExternalException)!.ToString()).Length)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [7] System.Runtime.InteropServices/System.Runtime.InteropServices.ExternalException::.ctor:System.Void()
     public static void Subject_7()
     {
-        new ExternalException();
+        try { new ExternalException(); }
+        catch { _exitCode = 1; }
     }
 
     // [8] System.Runtime.InteropServices/System.Runtime.InteropServices.ExternalException::.ctor:System.Void(System.String)
     public static void Subject_8()
     {
-        new ExternalException("hello");
+        try { new ExternalException("hello"); }
+        catch { _exitCode = 1; }
     }
 
     // [9] System.Runtime.InteropServices/System.Runtime.InteropServices.ExternalException::.ctor:System.Void(System.String,System.Exception)
     public static void Subject_9()
     {
-        new ExternalException(null, default(int));
+        try { new ExternalException(null, default(int)); }
+        catch { _exitCode = 1; }
     }
 
     // [10] System.Runtime.InteropServices/System.Runtime.InteropServices.ExternalException::.ctor:System.Void(System.String,System.Int32)
     public static void Subject_10()
     {
-        new ExternalException(null, default(int));
+        try { new ExternalException(null, default(int)); }
+        catch { _exitCode = 1; }
     }
 
     // [11] System.Runtime.InteropServices/System.Runtime.InteropServices.SEHException::CanResume:System.Boolean()
     public static void Subject_11()
     {
-        try { default(SEHException)!.CanResume(); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(SEHException)!.CanResume()) ? 1 : 0) != ((default(SEHException)!.CanResume()) ? 1 : 0)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [12] System.Runtime.InteropServices/System.Runtime.InteropServices.SEHException::.ctor:System.Void()
     public static void Subject_12()
     {
-        new SEHException();
+        try { new SEHException(); }
+        catch { _exitCode = 1; }
     }
 
     // [13] System.Runtime.InteropServices/System.Runtime.InteropServices.SEHException::.ctor:System.Void(System.String)
     public static void Subject_13()
     {
-        new SEHException("hello");
+        try { new SEHException("hello"); }
+        catch { _exitCode = 1; }
     }
 
     // [14] System.Runtime.InteropServices/System.Runtime.InteropServices.SEHException::.ctor:System.Void(System.String,System.Exception)
     public static void Subject_14()
     {
-        new SEHException("hello", default);
+        try { new SEHException("hello", default); }
+        catch { _exitCode = 1; }
     }
 
     // [15] System.Runtime.InteropServices/System.DllNotFoundException::.ctor:System.Void()
     public static void Subject_15()
     {
-        new DllNotFoundException();
+        try { new DllNotFoundException(); }
+        catch { _exitCode = 1; }
     }
 
     // [16] System.Runtime.InteropServices/System.DllNotFoundException::.ctor:System.Void(System.String)
     public static void Subject_16()
     {
-        new DllNotFoundException("hello");
+        try { new DllNotFoundException("hello"); }
+        catch { _exitCode = 1; }
     }
 
     // [17] System.Runtime.InteropServices/System.DllNotFoundException::.ctor:System.Void(System.String,System.Exception)
     public static void Subject_17()
     {
-        new DllNotFoundException("hello", default);
+        try { new DllNotFoundException("hello", default); }
+        catch { _exitCode = 1; }
     }
 
 }

@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "SerializerSubjects",
   "entrySubjectId": "SerializerSubjects/SerializerSubjects::CustomEntrySubject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Text.Json/serializer/codegen",
+  "managedClosureRootPath": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/serializer/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

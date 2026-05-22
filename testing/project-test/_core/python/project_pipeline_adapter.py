@@ -70,6 +70,29 @@ def _project_base(ctx) -> Path:
     return ctx.root_dir.parent  # testing/project-test/
 
 
+def _run_fix_loops_script(project_base: Path, slug: str) -> None:
+    """Run project-specific loop fixation script if present.
+
+    Some methods generate br/blt as NO-OP comments when structured IR recovery
+    fails (e.g. loops crossing EH region boundaries). The fix_loops.py script
+    post-processes the generated .cpp to add goto-based loop control flow.
+    """
+    script = project_base / slug / "fix_loops.py"
+    if script.exists():
+        print(f"  [postprocess] Running {script.name}...")
+        r = subprocess.run(
+            [sys.executable, str(script)],
+            capture_output=True, text=True, timeout=120,
+        )
+        if r.returncode != 0:
+            print(f"  [postprocess] {script.name} failed:\n{r.stderr}")
+        else:
+            for line in r.stdout.strip().splitlines():
+                print(f"    {line}")
+    else:
+        pass  # no project-specific loop fixation needed
+
+
 def _build_managed_project(ctx) -> Path | None:
     """Build the managed project DLL, return path to the DLL."""
     managed_dir = ctx.managed_dir
@@ -365,7 +388,19 @@ int main(int argc, char* argv[]) {{
     }} else {{
         // Fact mode: call entry point directly.
         chaos::il2cpp::common::g_chaos_fail_hook = []() {{ chaos::il2cpp::runtime_core::chaos_raise_exception(0); }};
+#ifdef _MSC_VER
+        static EXCEPTION_POINTERS* _chaos_ep = nullptr;
+        __try {{
+            RunNativeAot(kProjectEntryIndex);
+        }} __except (_chaos_ep = GetExceptionInformation(), EXCEPTION_EXECUTE_HANDLER) {{
+            std::fprintf(stderr, "FATAL: SEH code=0x%08X addr=0x%p\\n",
+                static_cast<unsigned>(_chaos_ep->ExceptionRecord->ExceptionCode),
+                _chaos_ep->ExceptionRecord->ExceptionAddress);
+            _Exit(1);
+        }}
+#else
         RunNativeAot(kProjectEntryIndex);
+#endif
         chaos::il2cpp::common::g_chaos_fail_hook = nullptr;
         std::fflush(stdout);
         _Exit(0);  // avoid GC background threads during CRT cleanup
@@ -839,10 +874,13 @@ def run_project_codegen(ctx, stages) -> StageResult:
     # Step 4: Patch undefined branch target labels
     _codegen_patch_undefined_labels(ctx.slug, verification=project_base)
 
-    # Step 4: Find entry method index from manifest
+    # Step 4b: Post-process loop br/blt patterns (project-specific fix_loops.py)
+    _run_fix_loops_script(project_base, ctx.slug)
+
+    # Step 5: Find entry method index from manifest
     entry_index = _find_entry_method_index(ctx, project_base)
 
-    # Step 5: Generate verification dispatch code
+    # Step 6: Generate verification dispatch code
     print(f"  [codegen] Generating dispatch code...")
     _generate_project_dispatch_code(project_base, ctx.slug)
 
@@ -930,6 +968,9 @@ def run_project_jit_codegen(ctx, stages) -> StageResult:
 
     # Step 4: Patch undefined branch target labels
     _codegen_patch_undefined_labels(ctx.slug, verification=project_base)
+
+    # Step 4b: Post-process loop br/blt patterns (project-specific fix_loops.py)
+    _run_fix_loops_script(project_base, ctx.slug)
 
     # Step 5: Find entry method index from manifest
     entry_index = _find_entry_method_index(ctx, project_base)

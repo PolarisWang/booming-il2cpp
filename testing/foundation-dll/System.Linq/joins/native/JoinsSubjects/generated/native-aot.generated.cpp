@@ -1,6 +1,7 @@
 #include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
+#include <chaos/eh.h>
 #include "com_ccw.h"
 #include "codegen_bridge.h"
 #include "module_registry.h"
@@ -42,15 +43,15 @@ inline TypeInfoV0 chaos_mt_JoinsSubjects__PrivateImplementationDetails_ = {{null
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_JoinsSubjects__PrivateImplementationDetails_ = static_cast<CHAOS_IL2CPP_INTPTR>(11669710270508038053ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Object = {{nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_INTPTR>(15228727185366376748ULL);
-inline TypeInfoV0 chaos_mt_JoinsSubjects_JoinsSubjects___c = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_JoinsSubjects_JoinsSubjects___c, 5474710593607388636ULL, 17u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline TypeInfoV0 chaos_mt_JoinsSubjects_JoinsSubjects___c = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_JoinsSubjects_JoinsSubjects___c, 5474710593607388636ULL, 8u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_JoinsSubjects_JoinsSubjects___c = static_cast<CHAOS_IL2CPP_INTPTR>(5474710593607388636ULL);
-inline TypeInfoV0 chaos_mt_JoinsSubjects_JoinsSubjects___c__DisplayClass5_0 = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_JoinsSubjects_JoinsSubjects___c__DisplayClass5_0, 5735147315386674384ULL, 19u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline TypeInfoV0 chaos_mt_JoinsSubjects_JoinsSubjects___c__DisplayClass5_0 = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_JoinsSubjects_JoinsSubjects___c__DisplayClass5_0, 5735147315386674384ULL, 10u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_JoinsSubjects_JoinsSubjects___c__DisplayClass5_0 = static_cast<CHAOS_IL2CPP_INTPTR>(5735147315386674384ULL);
-inline TypeInfoV0 chaos_mt_JoinsSubjects_JoinsSubjects___c__DisplayClass6_0 = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_JoinsSubjects_JoinsSubjects___c__DisplayClass6_0, 6261706732526482117ULL, 21u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline TypeInfoV0 chaos_mt_JoinsSubjects_JoinsSubjects___c__DisplayClass6_0 = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_JoinsSubjects_JoinsSubjects___c__DisplayClass6_0, 6261706732526482117ULL, 12u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_JoinsSubjects_JoinsSubjects___c__DisplayClass6_0 = static_cast<CHAOS_IL2CPP_INTPTR>(6261706732526482117ULL);
-inline TypeInfoV0 chaos_mt_JoinsSubjects_JoinsSubjects___c__DisplayClass7_0 = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_JoinsSubjects_JoinsSubjects___c__DisplayClass7_0, 7033149379453002170ULL, 23u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline TypeInfoV0 chaos_mt_JoinsSubjects_JoinsSubjects___c__DisplayClass7_0 = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_JoinsSubjects_JoinsSubjects___c__DisplayClass7_0, 7033149379453002170ULL, 14u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_JoinsSubjects_JoinsSubjects___c__DisplayClass7_0 = static_cast<CHAOS_IL2CPP_INTPTR>(7033149379453002170ULL);
-inline TypeInfoV0 chaos_mt_JoinsSubjects_JoinsSubjects___c__DisplayClass8_0 = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_JoinsSubjects_JoinsSubjects___c__DisplayClass8_0, 7621035157155796239ULL, 25u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline TypeInfoV0 chaos_mt_JoinsSubjects_JoinsSubjects___c__DisplayClass8_0 = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_JoinsSubjects_JoinsSubjects___c__DisplayClass8_0, 7621035157155796239ULL, 16u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_JoinsSubjects_JoinsSubjects___c__DisplayClass8_0 = static_cast<CHAOS_IL2CPP_INTPTR>(7621035157155796239ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Delegate = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, nullptr, 7451128447593600616ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Delegate = static_cast<CHAOS_IL2CPP_INTPTR>(7451128447593600616ULL);
@@ -58,12 +59,8 @@ inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_MulticastDelegate = {{&
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_MulticastDelegate = static_cast<CHAOS_IL2CPP_INTPTR>(6681393039041505440ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Boolean_ = {{&chaos_mt_System_Private_CoreLib_System_MulticastDelegate.hot, nullptr, 6749479132849532215ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Func_System_Int32_System_Boolean_ = static_cast<CHAOS_IL2CPP_INTPTR>(6749479132849532215ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Int32_ = {{&chaos_mt_System_Private_CoreLib_System_MulticastDelegate.hot, nullptr, 9797653871395232966ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Func_System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Int32_ = static_cast<CHAOS_IL2CPP_INTPTR>(9797653871395232966ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Collections_Generic_IEnumerable_System_Int32__ = {{&chaos_mt_System_Private_CoreLib_System_MulticastDelegate.hot, nullptr, 13589737125985385701ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Func_System_Int32_System_Collections_Generic_IEnumerable_System_Int32__ = static_cast<CHAOS_IL2CPP_INTPTR>(13589737125985385701ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Int32_System_Int32_ = {{&chaos_mt_System_Private_CoreLib_System_MulticastDelegate.hot, nullptr, 2159441345668172316ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Func_System_Int32_System_Int32_System_Int32_ = static_cast<CHAOS_IL2CPP_INTPTR>(2159441345668172316ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Int32_ = {{&chaos_mt_System_Private_CoreLib_System_MulticastDelegate.hot, nullptr, 143744549824129343ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Func_System_Int32_System_Int32_ = static_cast<CHAOS_IL2CPP_INTPTR>(143744549824129343ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Int32 = {{nullptr, nullptr, 11009693519287992193ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
@@ -84,17 +81,8 @@ inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System
 // ── Virtual method table arrays ──
 extern "C" void JoinsSubjects_JoinsSubjects___c__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_0_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
-extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_1_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
-extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
 extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_0_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
-extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_1_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
-extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
-extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_0_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
-extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_1_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
-extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_2_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
 extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_0_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
-extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_1_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
-extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_2_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
 extern "C" CHAOS_IL2CPP_INTPTR JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_4_b__5_0_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
 extern "C" CHAOS_IL2CPP_INTPTR JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_5_b__6_0_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
 extern "C" CHAOS_IL2CPP_INTPTR JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_6_b__7_0_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
@@ -103,17 +91,8 @@ const void* chaos_vtable_JoinsSubjects_JoinsSubjects___c[] =
 {
 	reinterpret_cast<void*>(JoinsSubjects_JoinsSubjects___c__ctor),
 	reinterpret_cast<void*>(JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_0_System_Int32),
-	reinterpret_cast<void*>(JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_1_System_Int32),
-	reinterpret_cast<void*>(JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32),
 	reinterpret_cast<void*>(JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_0_System_Int32),
-	reinterpret_cast<void*>(JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_1_System_Int32),
-	reinterpret_cast<void*>(JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32),
-	reinterpret_cast<void*>(JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_0_System_Int32),
-	reinterpret_cast<void*>(JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_1_System_Int32),
-	reinterpret_cast<void*>(JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_2_System_Int32_System_Int32),
 	reinterpret_cast<void*>(JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_0_System_Int32),
-	reinterpret_cast<void*>(JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_1_System_Int32),
-	reinterpret_cast<void*>(JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_2_System_Int32_System_Int32),
 	reinterpret_cast<void*>(JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_4_b__5_0_System_Int32),
 	reinterpret_cast<void*>(JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_5_b__6_0_System_Int32),
 	reinterpret_cast<void*>(JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_6_b__7_0_System_Int32),
@@ -125,15 +104,6 @@ extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c__DisplayClass5_0_C
 const void* chaos_vtable_JoinsSubjects_JoinsSubjects___c__DisplayClass5_0[] =
 {
 	reinterpret_cast<void*>(JoinsSubjects_JoinsSubjects___c__DisplayClass5_0__ctor),
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
 	nullptr,
 	nullptr,
 	nullptr,
@@ -159,15 +129,6 @@ const void* chaos_vtable_JoinsSubjects_JoinsSubjects___c__DisplayClass6_0[] =
 	nullptr,
 	nullptr,
 	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
 	reinterpret_cast<void*>(JoinsSubjects_JoinsSubjects___c__DisplayClass6_0_CustomEntrySubject_5_b__1_System_Int32),
 	reinterpret_cast<void*>(JoinsSubjects_JoinsSubjects___c__DisplayClass6_0_CustomEntrySubject_5_b__2_System_Int32),
 };
@@ -177,15 +138,6 @@ extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c__DisplayClass7_0_C
 const void* chaos_vtable_JoinsSubjects_JoinsSubjects___c__DisplayClass7_0[] =
 {
 	reinterpret_cast<void*>(JoinsSubjects_JoinsSubjects___c__DisplayClass7_0__ctor),
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
 	nullptr,
 	nullptr,
 	nullptr,
@@ -219,42 +171,24 @@ const void* chaos_vtable_JoinsSubjects_JoinsSubjects___c__DisplayClass8_0[] =
 	nullptr,
 	nullptr,
 	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
 	reinterpret_cast<void*>(JoinsSubjects_JoinsSubjects___c__DisplayClass8_0_CustomEntrySubject_7_b__1_System_Int32),
 	reinterpret_cast<void*>(JoinsSubjects_JoinsSubjects___c__DisplayClass8_0_CustomEntrySubject_7_b__2_System_Int32),
 };
 static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_JoinsSubjects_JoinsSubjects___c[] =
 {
-	{ 0x0000002Au, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c__ctor) },
-	{ 0x0000002Bu, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_0_System_Int32) },
-	{ 0x0000002Cu, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_1_System_Int32) },
-	{ 0x0000002Du, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32) },
-	{ 0x0000002Eu, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_0_System_Int32) },
-	{ 0x0000002Fu, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_1_System_Int32) },
-	{ 0x00000030u, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32) },
-	{ 0x00000031u, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_0_System_Int32) },
-	{ 0x00000032u, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_1_System_Int32) },
-	{ 0x00000033u, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_2_System_Int32_System_Int32) },
-	{ 0x00000034u, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_0_System_Int32) },
-	{ 0x00000035u, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_1_System_Int32) },
-	{ 0x00000036u, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_2_System_Int32_System_Int32) },
-	{ 0x00000037u, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_4_b__5_0_System_Int32) },
-	{ 0x00000038u, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_5_b__6_0_System_Int32) },
-	{ 0x00000039u, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_6_b__7_0_System_Int32) },
-	{ 0x0000003Au, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_7_b__8_0_System_Int32) },
+	{ 0x00000026u, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c__ctor) },
+	{ 0x00000027u, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_0_System_Int32) },
+	{ 0x00000028u, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_0_System_Int32) },
+	{ 0x00000029u, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_0_System_Int32) },
+	{ 0x0000002Au, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_4_b__5_0_System_Int32) },
+	{ 0x0000002Bu, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_5_b__6_0_System_Int32) },
+	{ 0x0000002Cu, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_6_b__7_0_System_Int32) },
+	{ 0x0000002Du, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_7_b__8_0_System_Int32) },
 };
 
 static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_JoinsSubjects_JoinsSubjects___c__DisplayClass5_0[] =
 {
-	{ 0x0000003Bu, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass5_0__ctor) },
+	{ 0x0000002Eu, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass5_0__ctor) },
 	{ 0u, nullptr },
 	{ 0u, nullptr },
 	{ 0u, nullptr },
@@ -262,22 +196,13 @@ static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_JoinsSubjects_J
 	{ 0u, nullptr },
 	{ 0u, nullptr },
 	{ 0u, nullptr },
-	{ 0u, nullptr },
-	{ 0u, nullptr },
-	{ 0u, nullptr },
-	{ 0u, nullptr },
-	{ 0u, nullptr },
-	{ 0u, nullptr },
-	{ 0u, nullptr },
-	{ 0u, nullptr },
-	{ 0u, nullptr },
-	{ 0x0000003Cu, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass5_0_CustomEntrySubject_4_b__1_System_Int32) },
-	{ 0x0000003Du, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass5_0_CustomEntrySubject_4_b__2_System_Int32) },
+	{ 0x0000002Fu, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass5_0_CustomEntrySubject_4_b__1_System_Int32) },
+	{ 0x00000030u, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass5_0_CustomEntrySubject_4_b__2_System_Int32) },
 };
 
 static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_JoinsSubjects_JoinsSubjects___c__DisplayClass6_0[] =
 {
-	{ 0x0000003Eu, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass6_0__ctor) },
+	{ 0x00000031u, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass6_0__ctor) },
 	{ 0u, nullptr },
 	{ 0u, nullptr },
 	{ 0u, nullptr },
@@ -287,22 +212,13 @@ static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_JoinsSubjects_J
 	{ 0u, nullptr },
 	{ 0u, nullptr },
 	{ 0u, nullptr },
-	{ 0u, nullptr },
-	{ 0u, nullptr },
-	{ 0u, nullptr },
-	{ 0u, nullptr },
-	{ 0u, nullptr },
-	{ 0u, nullptr },
-	{ 0u, nullptr },
-	{ 0u, nullptr },
-	{ 0u, nullptr },
-	{ 0x0000003Fu, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass6_0_CustomEntrySubject_5_b__1_System_Int32) },
-	{ 0x00000040u, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass6_0_CustomEntrySubject_5_b__2_System_Int32) },
+	{ 0x00000032u, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass6_0_CustomEntrySubject_5_b__1_System_Int32) },
+	{ 0x00000033u, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass6_0_CustomEntrySubject_5_b__2_System_Int32) },
 };
 
 static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_JoinsSubjects_JoinsSubjects___c__DisplayClass7_0[] =
 {
-	{ 0x00000041u, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass7_0__ctor) },
+	{ 0x00000034u, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass7_0__ctor) },
 	{ 0u, nullptr },
 	{ 0u, nullptr },
 	{ 0u, nullptr },
@@ -314,22 +230,13 @@ static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_JoinsSubjects_J
 	{ 0u, nullptr },
 	{ 0u, nullptr },
 	{ 0u, nullptr },
-	{ 0u, nullptr },
-	{ 0u, nullptr },
-	{ 0u, nullptr },
-	{ 0u, nullptr },
-	{ 0u, nullptr },
-	{ 0u, nullptr },
-	{ 0u, nullptr },
-	{ 0u, nullptr },
-	{ 0u, nullptr },
-	{ 0x00000042u, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass7_0_CustomEntrySubject_6_b__1_System_Int32) },
-	{ 0x00000043u, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass7_0_CustomEntrySubject_6_b__2_System_Int32) },
+	{ 0x00000035u, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass7_0_CustomEntrySubject_6_b__1_System_Int32) },
+	{ 0x00000036u, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass7_0_CustomEntrySubject_6_b__2_System_Int32) },
 };
 
 static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_JoinsSubjects_JoinsSubjects___c__DisplayClass8_0[] =
 {
-	{ 0x00000044u, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass8_0__ctor) },
+	{ 0x00000037u, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass8_0__ctor) },
 	{ 0u, nullptr },
 	{ 0u, nullptr },
 	{ 0u, nullptr },
@@ -343,17 +250,8 @@ static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_JoinsSubjects_J
 	{ 0u, nullptr },
 	{ 0u, nullptr },
 	{ 0u, nullptr },
-	{ 0u, nullptr },
-	{ 0u, nullptr },
-	{ 0u, nullptr },
-	{ 0u, nullptr },
-	{ 0u, nullptr },
-	{ 0u, nullptr },
-	{ 0u, nullptr },
-	{ 0u, nullptr },
-	{ 0u, nullptr },
-	{ 0x00000045u, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass8_0_CustomEntrySubject_7_b__1_System_Int32) },
-	{ 0x00000046u, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass8_0_CustomEntrySubject_7_b__2_System_Int32) },
+	{ 0x00000038u, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass8_0_CustomEntrySubject_7_b__1_System_Int32) },
+	{ 0x00000039u, reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass8_0_CustomEntrySubject_7_b__2_System_Int32) },
 };
 
 bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept
@@ -393,7 +291,10 @@ struct chaos_type_JoinsSubjects__PrivateImplementationDetails_
 {
 	ThinLockableHeader header{};
 	CHAOS_IL2CPP_INTPTR field_JoinsSubjects__PrivateImplementationDetails___4636993D3E1DA4E9D6B8F87B79E8F7C6D018580D52661950EABC3845C5897A4D = 0;
+	CHAOS_IL2CPP_INTPTR field_JoinsSubjects__PrivateImplementationDetails___A0FEBE8D859AC7FE1E225E18F8632CFA942D34C2F58386AE0B982B55FD4EB116 = 0;
 	CHAOS_IL2CPP_INTPTR field_JoinsSubjects__PrivateImplementationDetails___A10494D90314704E24CA5786F6376A6097558F10BB7880B539C8B80312DCA080 = 0;
+	CHAOS_IL2CPP_INTPTR field_JoinsSubjects__PrivateImplementationDetails___CBF03EFCA28AF3C84560CE82FEAE66B8AE0A9321EC14BE8F40D06EB0AD7BFE73 = 0;
+	CHAOS_IL2CPP_INTPTR field_JoinsSubjects__PrivateImplementationDetails___D8D4F55129E2966F2C74F35D6AC1769A713230A8B8371D030F18C6DEA1AAFD77 = 0;
 };
 
 struct chaos_type_System_Private_CoreLib_System_Object
@@ -443,15 +344,7 @@ struct chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Boolean
 {
 };
 
-struct chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Collections_Generic_IEnumerable_System_Int32__System_Int32_ : public chaos_type_System_Private_CoreLib_System_MulticastDelegate
-{
-};
-
 struct chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Collections_Generic_IEnumerable_System_Int32__ : public chaos_type_System_Private_CoreLib_System_MulticastDelegate
-{
-};
-
-struct chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Int32_System_Int32_ : public chaos_type_System_Private_CoreLib_System_MulticastDelegate
 {
 };
 
@@ -516,17 +409,8 @@ struct chaos_type_System_Private_CoreLib_System_String
 
 CHAOS_IL2CPP_INTPTR chaos_static_JoinsSubjects_JoinsSubjects___c____9 = 0;
 CHAOS_IL2CPP_INTPTR chaos_static_JoinsSubjects_JoinsSubjects___c____9__1_0 = 0;
-CHAOS_IL2CPP_INTPTR chaos_static_JoinsSubjects_JoinsSubjects___c____9__1_1 = 0;
-CHAOS_IL2CPP_INTPTR chaos_static_JoinsSubjects_JoinsSubjects___c____9__1_2 = 0;
 CHAOS_IL2CPP_INTPTR chaos_static_JoinsSubjects_JoinsSubjects___c____9__2_0 = 0;
-CHAOS_IL2CPP_INTPTR chaos_static_JoinsSubjects_JoinsSubjects___c____9__2_1 = 0;
-CHAOS_IL2CPP_INTPTR chaos_static_JoinsSubjects_JoinsSubjects___c____9__2_2 = 0;
-CHAOS_IL2CPP_INTPTR chaos_static_JoinsSubjects_JoinsSubjects___c____9__3_0 = 0;
-CHAOS_IL2CPP_INTPTR chaos_static_JoinsSubjects_JoinsSubjects___c____9__3_1 = 0;
-CHAOS_IL2CPP_INTPTR chaos_static_JoinsSubjects_JoinsSubjects___c____9__3_2 = 0;
 CHAOS_IL2CPP_INTPTR chaos_static_JoinsSubjects_JoinsSubjects___c____9__4_0 = 0;
-CHAOS_IL2CPP_INTPTR chaos_static_JoinsSubjects_JoinsSubjects___c____9__4_1 = 0;
-CHAOS_IL2CPP_INTPTR chaos_static_JoinsSubjects_JoinsSubjects___c____9__4_2 = 0;
 CHAOS_IL2CPP_INTPTR chaos_static_JoinsSubjects_JoinsSubjects___c____9__5_0 = 0;
 CHAOS_IL2CPP_INTPTR chaos_static_JoinsSubjects_JoinsSubjects___c____9__6_0 = 0;
 CHAOS_IL2CPP_INTPTR chaos_static_JoinsSubjects_JoinsSubjects___c____9__7_0 = 0;
@@ -537,9 +421,27 @@ const CHAOS_IL2CPP_UINT8 chaos_static_field_data_JoinsSubjects__PrivateImplement
 	0x01, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00,
 };
 
+const CHAOS_IL2CPP_UINT8 chaos_static_field_data_JoinsSubjects__PrivateImplementationDetails___A0FEBE8D859AC7FE1E225E18F8632CFA942D34C2F58386AE0B982B55FD4EB116[] =
+{
+	0x03, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00,
+	0x05, 0x00, 0x00, 0x00,
+};
+
 const CHAOS_IL2CPP_UINT8 chaos_static_field_data_JoinsSubjects__PrivateImplementationDetails___A10494D90314704E24CA5786F6376A6097558F10BB7880B539C8B80312DCA080[] =
 {
 	0x02, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00,
+};
+
+const CHAOS_IL2CPP_UINT8 chaos_static_field_data_JoinsSubjects__PrivateImplementationDetails___CBF03EFCA28AF3C84560CE82FEAE66B8AE0A9321EC14BE8F40D06EB0AD7BFE73[] =
+{
+	0x01, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00,
+	0x03, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00,
+};
+
+const CHAOS_IL2CPP_UINT8 chaos_static_field_data_JoinsSubjects__PrivateImplementationDetails___D8D4F55129E2966F2C74F35D6AC1769A713230A8B8371D030F18C6DEA1AAFD77[] =
+{
+	0x01, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00,
+	0x02, 0x00, 0x00, 0x00,
 };
 
 bool chaos_try_get_static_field_data(
@@ -553,10 +455,28 @@ bool chaos_try_get_static_field_data(
 		chaos_size = sizeof(chaos_static_field_data_JoinsSubjects__PrivateImplementationDetails___4636993D3E1DA4E9D6B8F87B79E8F7C6D018580D52661950EABC3845C5897A4D);
 		return true;
 	}
+	if (chaos_field_handle == static_cast<CHAOS_IL2CPP_INTPTR>(67360599u))
+	{
+		chaos_data = chaos_static_field_data_JoinsSubjects__PrivateImplementationDetails___A0FEBE8D859AC7FE1E225E18F8632CFA942D34C2F58386AE0B982B55FD4EB116;
+		chaos_size = sizeof(chaos_static_field_data_JoinsSubjects__PrivateImplementationDetails___A0FEBE8D859AC7FE1E225E18F8632CFA942D34C2F58386AE0B982B55FD4EB116);
+		return true;
+	}
 	if (chaos_field_handle == static_cast<CHAOS_IL2CPP_INTPTR>(83683924u))
 	{
 		chaos_data = chaos_static_field_data_JoinsSubjects__PrivateImplementationDetails___A10494D90314704E24CA5786F6376A6097558F10BB7880B539C8B80312DCA080;
 		chaos_size = sizeof(chaos_static_field_data_JoinsSubjects__PrivateImplementationDetails___A10494D90314704E24CA5786F6376A6097558F10BB7880B539C8B80312DCA080);
+		return true;
+	}
+	if (chaos_field_handle == static_cast<CHAOS_IL2CPP_INTPTR>(77833573u))
+	{
+		chaos_data = chaos_static_field_data_JoinsSubjects__PrivateImplementationDetails___CBF03EFCA28AF3C84560CE82FEAE66B8AE0A9321EC14BE8F40D06EB0AD7BFE73;
+		chaos_size = sizeof(chaos_static_field_data_JoinsSubjects__PrivateImplementationDetails___CBF03EFCA28AF3C84560CE82FEAE66B8AE0A9321EC14BE8F40D06EB0AD7BFE73);
+		return true;
+	}
+	if (chaos_field_handle == static_cast<CHAOS_IL2CPP_INTPTR>(78109589u))
+	{
+		chaos_data = chaos_static_field_data_JoinsSubjects__PrivateImplementationDetails___D8D4F55129E2966F2C74F35D6AC1769A713230A8B8371D030F18C6DEA1AAFD77;
+		chaos_size = sizeof(chaos_static_field_data_JoinsSubjects__PrivateImplementationDetails___D8D4F55129E2966F2C74F35D6AC1769A713230A8B8371D030F18C6DEA1AAFD77);
 		return true;
 	}
 	chaos_data = nullptr;
@@ -640,20 +560,11 @@ static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
 
 extern "C" void JoinsSubjects_JoinsSubjects_CustomEntrySubject_0(void);
 extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_0_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
-extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_1_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
-extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
 extern "C" void JoinsSubjects_JoinsSubjects_CustomEntrySubject_1(void);
 extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_0_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
-extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_1_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
-extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
 extern "C" void JoinsSubjects_JoinsSubjects_CustomEntrySubject_2(void);
-extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_0_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
-extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_1_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
-extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_2_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
 extern "C" void JoinsSubjects_JoinsSubjects_CustomEntrySubject_3(void);
 extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_0_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
-extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_1_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
-extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_2_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
 extern "C" void JoinsSubjects_JoinsSubjects_CustomEntrySubject_4(void);
 extern "C" CHAOS_IL2CPP_INTPTR JoinsSubjects_JoinsSubjects___c__DisplayClass5_0_CustomEntrySubject_4_b__1_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
 extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c__DisplayClass5_0_CustomEntrySubject_4_b__2_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
@@ -689,77 +600,59 @@ extern "C" const int kAotMethodCount;
 // so CHAOS_ABI_MANIFEST_ENTRIES/CHAOS_ABI_MANIFEST_PARAMETERS find them by offset.
 
 // Param offset prefix-sum: [i] = cumulative parameter count before method i
-static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[39] = {
+static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[30] = {
 	0u,
 	0u,
 	1u,
+	1u,
 	2u,
-	4u,
+	2u,
+	2u,
+	3u,
+	3u,
 	4u,
 	5u,
 	6u,
-	8u,
+	6u,
+	7u,
 	8u,
 	9u,
+	9u,
 	10u,
+	11u,
 	12u,
 	12u,
 	13u,
 	14u,
-	16u,
-	16u,
-	17u,
-	18u,
-	19u,
-	19u,
-	20u,
-	21u,
-	22u,
-	22u,
-	23u,
-	24u,
-	25u,
-	25u,
-	26u,
-	27u,
-	28u,
-	28u,
-	28u,
-	28u,
-	28u,
-	28u,
-	28u,
+	15u,
+	15u,
+	15u,
+	15u,
+	15u,
+	15u,
+	15u,
 };
 
 static constexpr struct {
 	::ChaosAbiManifestV0 header;
-	::ChaosAbiMethodEntryV0 entries[38];
-	CHAOS_IL2CPP_UINT8 params[28];
+	::ChaosAbiMethodEntryV0 entries[29];
+	CHAOS_IL2CPP_UINT8 params[15];
 } s_abi_manifest_storage = {
 	{
 		CHAOS_ABI_MANIFEST_VERSION,
-		38u,
-		28u,
-		3021649337u,  // FNV-1a over entries+params
+		29u,
+		15u,
+		3825157024u,  // FNV-1a over entries+params
 		s_abi_manifest_prefix_sum  // O(1) prefix-sum
 	},
 	{
 		{ 0u, 0u },  // JoinsSubjects_JoinsSubjects_CustomEntrySubject_0
 		{ 1u, 1u },  // JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_0_System_Int32
-		{ 1u, 1u },  // JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_1_System_Int32
-		{ 1u, 2u },  // JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32
 		{ 0u, 0u },  // JoinsSubjects_JoinsSubjects_CustomEntrySubject_1
 		{ 1u, 1u },  // JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_0_System_Int32
-		{ 1u, 1u },  // JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_1_System_Int32
-		{ 1u, 2u },  // JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32
 		{ 0u, 0u },  // JoinsSubjects_JoinsSubjects_CustomEntrySubject_2
-		{ 1u, 1u },  // JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_0_System_Int32
-		{ 1u, 1u },  // JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_1_System_Int32
-		{ 1u, 2u },  // JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_2_System_Int32_System_Int32
 		{ 0u, 0u },  // JoinsSubjects_JoinsSubjects_CustomEntrySubject_3
 		{ 1u, 1u },  // JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_0_System_Int32
-		{ 1u, 1u },  // JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_1_System_Int32
-		{ 1u, 2u },  // JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_2_System_Int32_System_Int32
 		{ 0u, 0u },  // JoinsSubjects_JoinsSubjects_CustomEntrySubject_4
 		{ 2u, 1u },  // JoinsSubjects_JoinsSubjects___c__DisplayClass5_0_CustomEntrySubject_4_b__1_System_Int32
 		{ 1u, 1u },  // JoinsSubjects_JoinsSubjects___c__DisplayClass5_0_CustomEntrySubject_4_b__2_System_Int32
@@ -787,19 +680,6 @@ static constexpr struct {
 		1u,
 		1u,
 		1u,
-		2u,
-		1u,
-		1u,
-		1u,
-		2u,
-		1u,
-		1u,
-		1u,
-		1u,
-		1u,
-		1u,
-		1u,
-		1u,
 		1u,
 		1u,
 		1u,
@@ -818,7 +698,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 	reinterpret_cast<const ::ChaosAbiManifestV0*>(&s_abi_manifest_storage);
 // ── Module registration ──
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_type_flags[9] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_type_flags[11] = {
 		0u,
 		1548u,
 		8u,
@@ -828,9 +708,11 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		1544u,
 		1544u,
 		1545u,
+		1545u,
+		1545u,
 	};
 
-	static constexpr const char* s_type_names[9] = {
+	static constexpr const char* s_type_names[11] = {
 		"<Module>",
 		"JoinsSubjects",
 		"<PrivateImplementationDetails>",
@@ -840,9 +722,13 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		"<>c__DisplayClass7_0",
 		"<>c__DisplayClass8_0",
 		"__StaticArrayInitTypeSize=12",
+		"__StaticArrayInitTypeSize=20",
+		"__StaticArrayInitTypeSize=24",
 	};
 
-	static constexpr const char* s_type_namespaces[9] = {
+	static constexpr const char* s_type_namespaces[11] = {
+		"",
+		"",
 		"",
 		"",
 		"",
@@ -854,7 +740,9 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		"",
 	};
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_type_parent_tokens[9] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_type_parent_tokens[11] = {
+		0u,
+		0u,
 		0u,
 		0u,
 		0u,
@@ -866,7 +754,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		0u,
 	};
 
-	static const TypeInfoHot* const s_type_info_ptrs[9] = {
+	static const TypeInfoHot* const s_type_info_ptrs[11] = {
 		nullptr,
 		nullptr,
 		&chaos_mt_JoinsSubjects__PrivateImplementationDetails_.hot,
@@ -876,31 +764,39 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		&chaos_mt_JoinsSubjects_JoinsSubjects___c__DisplayClass7_0.hot,
 		&chaos_mt_JoinsSubjects_JoinsSubjects___c__DisplayClass8_0.hot,
 		nullptr,
+		nullptr,
+		nullptr,
 	};
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_children[6] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_children[8] = {
 		33554436u,
 		33554437u,
 		33554438u,
 		33554439u,
 		33554440u,
 		33554441u,
+		33554442u,
+		33554443u,
 	};
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_offset[10] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_offset[12] = {
 		0u,
 		0u,
 		5u,
-		6u,
-		6u,
-		6u,
-		6u,
-		6u,
-		6u,
-		6u,
+		8u,
+		8u,
+		8u,
+		8u,
+		8u,
+		8u,
+		8u,
+		8u,
+		8u,
 	};
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_generic_param_constraint_offset[10] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_generic_param_constraint_offset[12] = {
+		0u,
+		0u,
 		0u,
 		0u,
 		0u,
@@ -927,7 +823,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		/* .nested_type_offset = */ s_nested_type_offset,
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
-		/* .type_count        = */ 9u,
+		/* .type_count        = */ 11u,
 	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
@@ -939,117 +835,90 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		::chaos::il2cpp::runtime_core::RegisterModule("JoinsSubjects", &s_native_aot_module);
 // ── Hotpatch name index + dispatch table ────────────────────
 // Method name index entries
-static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[38] = {
-	{ "CustomEntrySubject_0", 0x00000021u, 0u },  // JoinsSubjects
-	{ "CustomEntrySubject_1", 0x00000022u, 0u },  // JoinsSubjects
-	{ "CustomEntrySubject_2", 0x00000023u, 0u },  // JoinsSubjects
-	{ "CustomEntrySubject_3", 0x00000024u, 0u },  // JoinsSubjects
-	{ "CustomEntrySubject_4", 0x00000025u, 0u },  // JoinsSubjects
-	{ "CustomEntrySubject_5", 0x00000026u, 0u },  // JoinsSubjects
-	{ "CustomEntrySubject_6", 0x00000027u, 0u },  // JoinsSubjects
-	{ "CustomEntrySubject_7", 0x00000028u, 0u },  // JoinsSubjects
-	{ "<CustomEntrySubject_0>b__1_0", 0x0000002Bu, 1u },  // JoinsSubjects+<>c
-	{ "<CustomEntrySubject_0>b__1_1", 0x0000002Cu, 1u },  // JoinsSubjects+<>c
-	{ "<CustomEntrySubject_0>b__1_2", 0x0000002Du, 2u },  // JoinsSubjects+<>c
-	{ "<CustomEntrySubject_1>b__2_0", 0x0000002Eu, 1u },  // JoinsSubjects+<>c
-	{ "<CustomEntrySubject_1>b__2_1", 0x0000002Fu, 1u },  // JoinsSubjects+<>c
-	{ "<CustomEntrySubject_1>b__2_2", 0x00000030u, 2u },  // JoinsSubjects+<>c
-	{ "<CustomEntrySubject_2>b__3_0", 0x00000031u, 1u },  // JoinsSubjects+<>c
-	{ "<CustomEntrySubject_2>b__3_1", 0x00000032u, 1u },  // JoinsSubjects+<>c
-	{ "<CustomEntrySubject_2>b__3_2", 0x00000033u, 2u },  // JoinsSubjects+<>c
-	{ "<CustomEntrySubject_3>b__4_0", 0x00000034u, 1u },  // JoinsSubjects+<>c
-	{ "<CustomEntrySubject_3>b__4_1", 0x00000035u, 1u },  // JoinsSubjects+<>c
-	{ "<CustomEntrySubject_3>b__4_2", 0x00000036u, 2u },  // JoinsSubjects+<>c
-	{ "<CustomEntrySubject_4>b__5_0", 0x00000037u, 1u },  // JoinsSubjects+<>c
-	{ "<CustomEntrySubject_5>b__6_0", 0x00000038u, 1u },  // JoinsSubjects+<>c
-	{ "<CustomEntrySubject_6>b__7_0", 0x00000039u, 1u },  // JoinsSubjects+<>c
-	{ "<CustomEntrySubject_7>b__8_0", 0x0000003Au, 1u },  // JoinsSubjects+<>c
-	{ ".cctor", 0x00000029u, 0u },  // JoinsSubjects+<>c
-	{ ".ctor", 0x0000002Au, 0u },  // JoinsSubjects+<>c
-	{ "<CustomEntrySubject_4>b__1", 0x0000003Cu, 1u },  // JoinsSubjects+<>c__DisplayClass5_0
-	{ "<CustomEntrySubject_4>b__2", 0x0000003Du, 1u },  // JoinsSubjects+<>c__DisplayClass5_0
-	{ ".ctor", 0x0000003Bu, 0u },  // JoinsSubjects+<>c__DisplayClass5_0
-	{ "<CustomEntrySubject_5>b__1", 0x0000003Fu, 1u },  // JoinsSubjects+<>c__DisplayClass6_0
-	{ "<CustomEntrySubject_5>b__2", 0x00000040u, 1u },  // JoinsSubjects+<>c__DisplayClass6_0
-	{ ".ctor", 0x0000003Eu, 0u },  // JoinsSubjects+<>c__DisplayClass6_0
-	{ "<CustomEntrySubject_6>b__1", 0x00000042u, 1u },  // JoinsSubjects+<>c__DisplayClass7_0
-	{ "<CustomEntrySubject_6>b__2", 0x00000043u, 1u },  // JoinsSubjects+<>c__DisplayClass7_0
-	{ ".ctor", 0x00000041u, 0u },  // JoinsSubjects+<>c__DisplayClass7_0
-	{ "<CustomEntrySubject_7>b__1", 0x00000045u, 1u },  // JoinsSubjects+<>c__DisplayClass8_0
-	{ "<CustomEntrySubject_7>b__2", 0x00000046u, 1u },  // JoinsSubjects+<>c__DisplayClass8_0
-	{ ".ctor", 0x00000044u, 0u },  // JoinsSubjects+<>c__DisplayClass8_0
+static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[29] = {
+	{ "CustomEntrySubject_0", 0x0000001Du, 0u },  // JoinsSubjects
+	{ "CustomEntrySubject_1", 0x0000001Eu, 0u },  // JoinsSubjects
+	{ "CustomEntrySubject_2", 0x0000001Fu, 0u },  // JoinsSubjects
+	{ "CustomEntrySubject_3", 0x00000020u, 0u },  // JoinsSubjects
+	{ "CustomEntrySubject_4", 0x00000021u, 0u },  // JoinsSubjects
+	{ "CustomEntrySubject_5", 0x00000022u, 0u },  // JoinsSubjects
+	{ "CustomEntrySubject_6", 0x00000023u, 0u },  // JoinsSubjects
+	{ "CustomEntrySubject_7", 0x00000024u, 0u },  // JoinsSubjects
+	{ "<CustomEntrySubject_0>b__1_0", 0x00000027u, 1u },  // JoinsSubjects+<>c
+	{ "<CustomEntrySubject_1>b__2_0", 0x00000028u, 1u },  // JoinsSubjects+<>c
+	{ "<CustomEntrySubject_3>b__4_0", 0x00000029u, 1u },  // JoinsSubjects+<>c
+	{ "<CustomEntrySubject_4>b__5_0", 0x0000002Au, 1u },  // JoinsSubjects+<>c
+	{ "<CustomEntrySubject_5>b__6_0", 0x0000002Bu, 1u },  // JoinsSubjects+<>c
+	{ "<CustomEntrySubject_6>b__7_0", 0x0000002Cu, 1u },  // JoinsSubjects+<>c
+	{ "<CustomEntrySubject_7>b__8_0", 0x0000002Du, 1u },  // JoinsSubjects+<>c
+	{ ".cctor", 0x00000025u, 0u },  // JoinsSubjects+<>c
+	{ ".ctor", 0x00000026u, 0u },  // JoinsSubjects+<>c
+	{ "<CustomEntrySubject_4>b__1", 0x0000002Fu, 1u },  // JoinsSubjects+<>c__DisplayClass5_0
+	{ "<CustomEntrySubject_4>b__2", 0x00000030u, 1u },  // JoinsSubjects+<>c__DisplayClass5_0
+	{ ".ctor", 0x0000002Eu, 0u },  // JoinsSubjects+<>c__DisplayClass5_0
+	{ "<CustomEntrySubject_5>b__1", 0x00000032u, 1u },  // JoinsSubjects+<>c__DisplayClass6_0
+	{ "<CustomEntrySubject_5>b__2", 0x00000033u, 1u },  // JoinsSubjects+<>c__DisplayClass6_0
+	{ ".ctor", 0x00000031u, 0u },  // JoinsSubjects+<>c__DisplayClass6_0
+	{ "<CustomEntrySubject_6>b__1", 0x00000035u, 1u },  // JoinsSubjects+<>c__DisplayClass7_0
+	{ "<CustomEntrySubject_6>b__2", 0x00000036u, 1u },  // JoinsSubjects+<>c__DisplayClass7_0
+	{ ".ctor", 0x00000034u, 0u },  // JoinsSubjects+<>c__DisplayClass7_0
+	{ "<CustomEntrySubject_7>b__1", 0x00000038u, 1u },  // JoinsSubjects+<>c__DisplayClass8_0
+	{ "<CustomEntrySubject_7>b__2", 0x00000039u, 1u },  // JoinsSubjects+<>c__DisplayClass8_0
+	{ ".ctor", 0x00000037u, 0u },  // JoinsSubjects+<>c__DisplayClass8_0
 };
 
 // Type name index entries (namespace, short_name)
 static constexpr HotpatchTypeEntryV0 s_hotpatch_types[6] = {
 	{ "JoinsSubjects", "", 0u, 8u },
-	{ "JoinsSubjects+<>c", "", 8u, 18u },
-	{ "JoinsSubjects+<>c__DisplayClass5_0", "", 26u, 3u },
-	{ "JoinsSubjects+<>c__DisplayClass6_0", "", 29u, 3u },
-	{ "JoinsSubjects+<>c__DisplayClass7_0", "", 32u, 3u },
-	{ "JoinsSubjects+<>c__DisplayClass8_0", "", 35u, 3u },
+	{ "JoinsSubjects+<>c", "", 8u, 9u },
+	{ "JoinsSubjects+<>c__DisplayClass5_0", "", 17u, 3u },
+	{ "JoinsSubjects+<>c__DisplayClass6_0", "", 20u, 3u },
+	{ "JoinsSubjects+<>c__DisplayClass7_0", "", 23u, 3u },
+	{ "JoinsSubjects+<>c__DisplayClass8_0", "", 26u, 3u },
 };
 
 // Token→Slot mapping (sorted by token for binary search)
-static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[38] = {
-	{ 0x00000021u, 0u },
-	{ 0x00000022u, 4u },
-	{ 0x00000023u, 8u },
-	{ 0x00000024u, 12u },
-	{ 0x00000025u, 16u },
-	{ 0x00000026u, 20u },
-	{ 0x00000027u, 24u },
-	{ 0x00000028u, 28u },
-	{ 0x00000029u, 36u },
-	{ 0x0000002Au, 37u },
-	{ 0x0000002Bu, 1u },
-	{ 0x0000002Cu, 2u },
-	{ 0x0000002Du, 3u },
-	{ 0x0000002Eu, 5u },
-	{ 0x0000002Fu, 6u },
-	{ 0x00000030u, 7u },
-	{ 0x00000031u, 9u },
-	{ 0x00000032u, 10u },
-	{ 0x00000033u, 11u },
-	{ 0x00000034u, 13u },
-	{ 0x00000035u, 14u },
-	{ 0x00000036u, 15u },
-	{ 0x00000037u, 19u },
-	{ 0x00000038u, 23u },
-	{ 0x00000039u, 27u },
-	{ 0x0000003Au, 31u },
-	{ 0x0000003Bu, 32u },
-	{ 0x0000003Cu, 17u },
-	{ 0x0000003Du, 18u },
-	{ 0x0000003Eu, 33u },
-	{ 0x0000003Fu, 21u },
-	{ 0x00000040u, 22u },
-	{ 0x00000041u, 34u },
-	{ 0x00000042u, 25u },
-	{ 0x00000043u, 26u },
-	{ 0x00000044u, 35u },
-	{ 0x00000045u, 29u },
-	{ 0x00000046u, 30u },
+static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[29] = {
+	{ 0x0000001Du, 0u },
+	{ 0x0000001Eu, 2u },
+	{ 0x0000001Fu, 4u },
+	{ 0x00000020u, 5u },
+	{ 0x00000021u, 7u },
+	{ 0x00000022u, 11u },
+	{ 0x00000023u, 15u },
+	{ 0x00000024u, 19u },
+	{ 0x00000025u, 27u },
+	{ 0x00000026u, 28u },
+	{ 0x00000027u, 1u },
+	{ 0x00000028u, 3u },
+	{ 0x00000029u, 6u },
+	{ 0x0000002Au, 10u },
+	{ 0x0000002Bu, 14u },
+	{ 0x0000002Cu, 18u },
+	{ 0x0000002Du, 22u },
+	{ 0x0000002Eu, 23u },
+	{ 0x0000002Fu, 8u },
+	{ 0x00000030u, 9u },
+	{ 0x00000031u, 24u },
+	{ 0x00000032u, 12u },
+	{ 0x00000033u, 13u },
+	{ 0x00000034u, 25u },
+	{ 0x00000035u, 16u },
+	{ 0x00000036u, 17u },
+	{ 0x00000037u, 26u },
+	{ 0x00000038u, 20u },
+	{ 0x00000039u, 21u },
 };
 
 // Dispatch table (function pointers)
-static HotpatchEntryV0 s_hotpatch_entries[38] = {
+static HotpatchEntryV0 s_hotpatch_entries[29] = {
 	{ reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects_CustomEntrySubject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // JoinsSubjects::CustomEntrySubject_0
 	{ reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_0_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // JoinsSubjects+<>c::<CustomEntrySubject_0>b__1_0
-	{ reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_1_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // JoinsSubjects+<>c::<CustomEntrySubject_0>b__1_1
-	{ reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // JoinsSubjects+<>c::<CustomEntrySubject_0>b__1_2
 	{ reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects_CustomEntrySubject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // JoinsSubjects::CustomEntrySubject_1
 	{ reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_0_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // JoinsSubjects+<>c::<CustomEntrySubject_1>b__2_0
-	{ reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_1_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // JoinsSubjects+<>c::<CustomEntrySubject_1>b__2_1
-	{ reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // JoinsSubjects+<>c::<CustomEntrySubject_1>b__2_2
 	{ reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects_CustomEntrySubject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // JoinsSubjects::CustomEntrySubject_2
-	{ reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_0_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // JoinsSubjects+<>c::<CustomEntrySubject_2>b__3_0
-	{ reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_1_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // JoinsSubjects+<>c::<CustomEntrySubject_2>b__3_1
-	{ reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_2_System_Int32_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // JoinsSubjects+<>c::<CustomEntrySubject_2>b__3_2
 	{ reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects_CustomEntrySubject_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // JoinsSubjects::CustomEntrySubject_3
 	{ reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_0_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // JoinsSubjects+<>c::<CustomEntrySubject_3>b__4_0
-	{ reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_1_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // JoinsSubjects+<>c::<CustomEntrySubject_3>b__4_1
-	{ reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_2_System_Int32_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // JoinsSubjects+<>c::<CustomEntrySubject_3>b__4_2
 	{ reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects_CustomEntrySubject_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // JoinsSubjects::CustomEntrySubject_4
 	{ reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass5_0_CustomEntrySubject_4_b__1_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // JoinsSubjects+<>c__DisplayClass5_0::<CustomEntrySubject_4>b__1
 	{ reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass5_0_CustomEntrySubject_4_b__2_System_Int32), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // JoinsSubjects+<>c__DisplayClass5_0::<CustomEntrySubject_4>b__2
@@ -1080,11 +949,11 @@ static constexpr HotpatchModuleV0 s_hotpatch_module = {
 	s_hotpatch_types,
 	6u,
 	s_hotpatch_methods,
-	38u,
+	29u,
 	s_hotpatch_slots,
-	38u,
+	29u,
 	s_hotpatch_entries,
-	38u,
+	29u,
 };
 
 // Expose hotpatch module to BootstrapRuntime
@@ -1093,38 +962,31 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // ── External Runtime Dispatch Table ──────────────────────────
 // Startup-time-resolved function pointers for cross-assembly calls.
 
-extern "C" const char* kChaosExternalRuntimeSubjects[42] = {
+extern "C" const char* kChaosExternalRuntimeSubjects[35] = {
 	"System.Private.CoreLib/System.Int32",
-	"JoinsSubjects/<PrivateImplementationDetails>::4636993D3E1DA4E9D6B8F87B79E8F7C6D018580D52661950EABC3845C5897A4D",
+	"JoinsSubjects/<PrivateImplementationDetails>::D8D4F55129E2966F2C74F35D6AC1769A713230A8B8371D030F18C6DEA1AAFD77",
 	"System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)",
-	"JoinsSubjects/<PrivateImplementationDetails>::A10494D90314704E24CA5786F6376A6097558F10BB7880B539C8B80312DCA080",
 	"JoinsSubjects/JoinsSubjects+<>c::<>9__1_0",
 	"JoinsSubjects/JoinsSubjects+<>c::<>9",
 	"System.Private.CoreLib/System.Func<System.Int32,System.Int32>::.ctor:System.Void(System.Object,System.IntPtr)",
-	"JoinsSubjects/JoinsSubjects+<>c::<>9__1_1",
-	"JoinsSubjects/JoinsSubjects+<>c::<>9__1_2",
-	"System.Private.CoreLib/System.Func<System.Int32,System.Collections.Generic.IEnumerable<System.Int32>,System.Int32>::.ctor:System.Void(System.Object,System.IntPtr)",
-	"System.Linq/Enumerable::GroupJoin<System.Int32,System.Int32,System.Int32,System.Int32>:System.Collections.Generic.IEnumerable<System.Int32>(System.Collections.Generic.IEnumerable<System.Int32>,System.Collections.Generic.IEnumerable<System.Int32>,System.Func<System.Int32,System.Int32>,System.Func<System.Int32,System.Int32>,System.Func<System.Int32,System.Collections.Generic.IEnumerable<System.Int32>,System.Int32>)",
-	"System.Private.CoreLib/System.Collections.Generic.IEnumerable<System.Int32>::GetEnumerator:System.Collections.Generic.IEnumerator<System.Int32>()",
+	"System.Linq/Enumerable::GroupBy<System.Int32,System.Int32>:System.Collections.Generic.IEnumerable<IGrouping<System.Int32,System.Int32>>(System.Collections.Generic.IEnumerable<System.Int32>,System.Func<System.Int32,System.Int32>)",
+	"System.Private.CoreLib/System.Collections.Generic.IEnumerable<IGrouping<System.Int32,System.Int32>>::GetEnumerator:System.Collections.Generic.IEnumerator<IGrouping<System.Int32,System.Int32>>()",
 	"System.Private.CoreLib/System.Collections.IEnumerator::MoveNext:System.Boolean()",
 	"JoinsSubjects/JoinsSubjects+<>c::<>9__2_0",
-	"JoinsSubjects/JoinsSubjects+<>c::<>9__2_1",
-	"JoinsSubjects/JoinsSubjects+<>c::<>9__2_2",
 	"System.Collections/System.Collections.Generic.EqualityComparer<System.Int32>::get_Default:System.Collections.Generic.EqualityComparer<System.Int32>()",
-	"System.Linq/Enumerable::GroupJoin<System.Int32,System.Int32,System.Int32,System.Int32>:System.Collections.Generic.IEnumerable<System.Int32>(System.Collections.Generic.IEnumerable<System.Int32>,System.Collections.Generic.IEnumerable<System.Int32>,System.Func<System.Int32,System.Int32>,System.Func<System.Int32,System.Int32>,System.Func<System.Int32,System.Collections.Generic.IEnumerable<System.Int32>,System.Int32>,System.Collections.Generic.IEqualityComparer<System.Int32>)",
-	"JoinsSubjects/JoinsSubjects+<>c::<>9__3_0",
-	"JoinsSubjects/JoinsSubjects+<>c::<>9__3_1",
-	"JoinsSubjects/JoinsSubjects+<>c::<>9__3_2",
-	"System.Private.CoreLib/System.Func<System.Int32,System.Int32,System.Int32>::.ctor:System.Void(System.Object,System.IntPtr)",
-	"System.Linq/Enumerable::Join<System.Int32,System.Int32,System.Int32,System.Int32>:System.Collections.Generic.IEnumerable<System.Int32>(System.Collections.Generic.IEnumerable<System.Int32>,System.Collections.Generic.IEnumerable<System.Int32>,System.Func<System.Int32,System.Int32>,System.Func<System.Int32,System.Int32>,System.Func<System.Int32,System.Int32,System.Int32>)",
+	"System.Linq/Enumerable::GroupBy<System.Int32,System.Int32>:System.Collections.Generic.IEnumerable<IGrouping<System.Int32,System.Int32>>(System.Collections.Generic.IEnumerable<System.Int32>,System.Func<System.Int32,System.Int32>,System.Collections.Generic.IEqualityComparer<System.Int32>)",
+	"JoinsSubjects/<PrivateImplementationDetails>::CBF03EFCA28AF3C84560CE82FEAE66B8AE0A9321EC14BE8F40D06EB0AD7BFE73",
+	"System.Linq/Enumerable::Distinct<System.Int32>:System.Collections.Generic.IEnumerable<System.Int32>(System.Collections.Generic.IEnumerable<System.Int32>)",
+	"System.Private.CoreLib/System.Collections.Generic.IEnumerable<System.Int32>::GetEnumerator:System.Collections.Generic.IEnumerator<System.Int32>()",
+	"JoinsSubjects/<PrivateImplementationDetails>::A0FEBE8D859AC7FE1E225E18F8632CFA942D34C2F58386AE0B982B55FD4EB116",
 	"JoinsSubjects/JoinsSubjects+<>c::<>9__4_0",
-	"JoinsSubjects/JoinsSubjects+<>c::<>9__4_1",
-	"JoinsSubjects/JoinsSubjects+<>c::<>9__4_2",
-	"System.Linq/Enumerable::Join<System.Int32,System.Int32,System.Int32,System.Int32>:System.Collections.Generic.IEnumerable<System.Int32>(System.Collections.Generic.IEnumerable<System.Int32>,System.Collections.Generic.IEnumerable<System.Int32>,System.Func<System.Int32,System.Int32>,System.Func<System.Int32,System.Int32>,System.Func<System.Int32,System.Int32,System.Int32>,System.Collections.Generic.IEqualityComparer<System.Int32>)",
+	"System.Linq/Enumerable::OrderBy<System.Int32,System.Int32>:IOrderedEnumerable<System.Int32>(System.Collections.Generic.IEnumerable<System.Int32>,System.Func<System.Int32,System.Int32>)",
+	"JoinsSubjects/<PrivateImplementationDetails>::4636993D3E1DA4E9D6B8F87B79E8F7C6D018580D52661950EABC3845C5897A4D",
 	"JoinsSubjects/JoinsSubjects+<>c::<>9__5_0",
 	"System.Private.CoreLib/System.Func<System.Int32,System.Collections.Generic.IEnumerable<System.Int32>>::.ctor:System.Void(System.Object,System.IntPtr)",
 	"System.Linq/Enumerable::SelectMany<System.Int32,System.Int32>:System.Collections.Generic.IEnumerable<System.Int32>(System.Collections.Generic.IEnumerable<System.Int32>,System.Func<System.Int32,System.Collections.Generic.IEnumerable<System.Int32>>)",
 	"JoinsSubjects/JoinsSubjects+<>c__DisplayClass5_0::o",
+	"JoinsSubjects/<PrivateImplementationDetails>::A10494D90314704E24CA5786F6376A6097558F10BB7880B539C8B80312DCA080",
 	"System.Private.CoreLib/System.Func<System.Int32,System.Boolean>::.ctor:System.Void(System.Object,System.IntPtr)",
 	"System.Linq/Enumerable::Where<System.Int32>:System.Collections.Generic.IEnumerable<System.Int32>(System.Collections.Generic.IEnumerable<System.Int32>,System.Func<System.Int32,System.Boolean>)",
 	"System.Linq/Enumerable::DefaultIfEmpty<System.Int32>:System.Collections.Generic.IEnumerable<System.Int32>(System.Collections.Generic.IEnumerable<System.Int32>,System.Int32)",
@@ -1138,7 +1000,7 @@ extern "C" const char* kChaosExternalRuntimeSubjects[42] = {
 	"System.Private.CoreLib/System.Object::.ctor:System.Void()",
 };
 
-extern "C" void* kChaosExternalRuntimeFnTable[42] = {
+extern "C" void* kChaosExternalRuntimeFnTable[35] = {
 	nullptr,
 	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_),
@@ -1173,37 +1035,21 @@ extern "C" void* kChaosExternalRuntimeFnTable[42] = {
 	nullptr,
 	nullptr,
 	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__),
 };
 
-extern "C" int32_t kChaosExternalRuntimeCount = 42;
+extern "C" int32_t kChaosExternalRuntimeCount = 35;
 // (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
-static void (*kAotMethods[38])() = {
+static void (*kAotMethods[29])() = {
 	reinterpret_cast<void(*)()>(&JoinsSubjects_JoinsSubjects_CustomEntrySubject_0),
 	reinterpret_cast<void(*)()>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_0_System_Int32),
-	reinterpret_cast<void(*)()>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_1_System_Int32),
-	reinterpret_cast<void(*)()>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32),
 	reinterpret_cast<void(*)()>(&JoinsSubjects_JoinsSubjects_CustomEntrySubject_1),
 	reinterpret_cast<void(*)()>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_0_System_Int32),
-	reinterpret_cast<void(*)()>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_1_System_Int32),
-	reinterpret_cast<void(*)()>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32),
 	reinterpret_cast<void(*)()>(&JoinsSubjects_JoinsSubjects_CustomEntrySubject_2),
-	reinterpret_cast<void(*)()>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_0_System_Int32),
-	reinterpret_cast<void(*)()>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_1_System_Int32),
-	reinterpret_cast<void(*)()>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_2_System_Int32_System_Int32),
 	reinterpret_cast<void(*)()>(&JoinsSubjects_JoinsSubjects_CustomEntrySubject_3),
 	reinterpret_cast<void(*)()>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_0_System_Int32),
-	reinterpret_cast<void(*)()>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_1_System_Int32),
-	reinterpret_cast<void(*)()>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_2_System_Int32_System_Int32),
 	reinterpret_cast<void(*)()>(&JoinsSubjects_JoinsSubjects_CustomEntrySubject_4),
 	reinterpret_cast<void(*)()>(&JoinsSubjects_JoinsSubjects___c__DisplayClass5_0_CustomEntrySubject_4_b__1_System_Int32),
 	reinterpret_cast<void(*)()>(&JoinsSubjects_JoinsSubjects___c__DisplayClass5_0_CustomEntrySubject_4_b__2_System_Int32),
@@ -1233,48 +1079,58 @@ static void (*kAotMethods[38])() = {
 // String params receive a valid StringId; all others receive 0.
 // Instance methods receive a sentinel this-pointer so they don't crash on null.
 static CHAOS_IL2CPP_UINT8 __g_benchmark_this_sentinel = 0;
-extern "C" void (*kBenchmarkWrappers[38])() = {
+extern "C" void (*kBenchmarkWrappers[29])() = {
 	[]() {kAotMethods[0]();},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[1])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[2])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[3])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0,0);},
+	[]() {kAotMethods[2]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[3])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
 	[]() {kAotMethods[4]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[5])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
+	[]() {kAotMethods[5]();},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[6])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[7])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0,0);},
-	[]() {kAotMethods[8]();},
+	[]() {kAotMethods[7]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[8])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[9])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[10])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[11])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0,0);},
-	[]() {kAotMethods[12]();},
+	[]() {kAotMethods[11]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[12])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[13])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[14])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[15])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0,0);},
-	[]() {kAotMethods[16]();},
+	[]() {kAotMethods[15]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[16])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[17])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[18])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[19])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
-	[]() {kAotMethods[20]();},
+	[]() {kAotMethods[19]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[20])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[21])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[22])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[23])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
-	[]() {kAotMethods[24]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[25])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[26])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[27])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
-	[]() {kAotMethods[28]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[29])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[30])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[31])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[32])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[33])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[34])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[35])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
-	[]() {kAotMethods[36]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[37])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[23])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[24])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[25])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[26])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
+	[]() {kAotMethods[27]();},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[28])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
+};
+
+// ── Subject entry index mapping ─────────────────────────────────
+// Maps subject index (0-based sequential) to kAotMethod index.
+// Used by runtime-entry.cpp to route --benchmark N to the correct
+// AOT method slot, since kAotMethods[] includes lambdas/closures
+// that shift subject methods to non-contiguous indices.
+extern "C" const int kSubjectEntryCount = 8;
+extern "C" const int kSubjectEntryIndices[8] = {
+	0,
+	2,
+	4,
+	5,
+	7,
+	11,
+	15,
+	19,
 };
 
 // Single-method dispatch via hotpatch dispatch table.
+// NOTE: Uses kBenchmarkWrappers (not raw kAotMethods) to ensure instance
+// methods receive a valid this-pointer sentinel and default argument values.
 extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(
 	CHAOS_IL2CPP_INT32 chaos_entry_index)
 {
@@ -1331,7 +1187,7 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAotBench(
 	return 0;
 }
 
-// Pure AOT benchmark: calls kAotMethods[i] directly, no hotpatch overhead.
+// Pure AOT benchmark: calls kBenchmarkWrappers[i] directly, no hotpatch overhead.
 extern "C" double BenchmarkMethod(
 	int chaos_entry_index, int iterations) {
 	if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)
@@ -1344,25 +1200,502 @@ extern "C" double BenchmarkMethod(
 	return std::chrono::duration<double, std::milli>(
 		end - start).count();
 }
+// ── GC Slot Map Section ───────────────────────────────────────────
+// Auto-generated by chaos-il2cpp codegen for precise stack root scanning.
+// One nested struct entry per method with GC-referencing stack slots.
+// Iterated by GcRegisterSlotMapsFromSection() which advances by
+// entry_total_size bytes per entry.
+#if defined(_MSC_VER)
+#pragma pack(push, 1)
+#endif
+#if defined(__GNUC__) || defined(__clang__)
+static const struct __attribute__((packed)) {
+#else
+static const struct {
+#endif
+
+	/* ── Entry 0: JoinsSubjects_JoinsSubjects_CustomEntrySubject_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry0;
+	/* ── Entry 1: JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry1;
+	/* ── Entry 2: JoinsSubjects_JoinsSubjects_CustomEntrySubject_1 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry2;
+	/* ── Entry 3: JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry3;
+	/* ── Entry 4: JoinsSubjects_JoinsSubjects_CustomEntrySubject_2 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry4;
+	/* ── Entry 5: JoinsSubjects_JoinsSubjects_CustomEntrySubject_3 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry5;
+	/* ── Entry 6: JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry6;
+	/* ── Entry 7: JoinsSubjects_JoinsSubjects_CustomEntrySubject_4 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry7;
+	/* ── Entry 8: JoinsSubjects_JoinsSubjects___c__DisplayClass5_0_CustomEntrySubject_4_b__1_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry8;
+	/* ── Entry 9: JoinsSubjects_JoinsSubjects___c__DisplayClass5_0_CustomEntrySubject_4_b__2_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry9;
+	/* ── Entry 10: JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_4_b__5_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[6];
+	} entry10;
+	/* ── Entry 11: JoinsSubjects_JoinsSubjects_CustomEntrySubject_5 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry11;
+	/* ── Entry 12: JoinsSubjects_JoinsSubjects___c__DisplayClass6_0_CustomEntrySubject_5_b__1_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry12;
+	/* ── Entry 13: JoinsSubjects_JoinsSubjects___c__DisplayClass6_0_CustomEntrySubject_5_b__2_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry13;
+	/* ── Entry 14: JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_5_b__6_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[6];
+	} entry14;
+	/* ── Entry 15: JoinsSubjects_JoinsSubjects_CustomEntrySubject_6 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry15;
+	/* ── Entry 16: JoinsSubjects_JoinsSubjects___c__DisplayClass7_0_CustomEntrySubject_6_b__1_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry16;
+	/* ── Entry 17: JoinsSubjects_JoinsSubjects___c__DisplayClass7_0_CustomEntrySubject_6_b__2_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry17;
+	/* ── Entry 18: JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_6_b__7_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[6];
+	} entry18;
+	/* ── Entry 19: JoinsSubjects_JoinsSubjects_CustomEntrySubject_7 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry19;
+	/* ── Entry 20: JoinsSubjects_JoinsSubjects___c__DisplayClass8_0_CustomEntrySubject_7_b__1_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry20;
+	/* ── Entry 21: JoinsSubjects_JoinsSubjects___c__DisplayClass8_0_CustomEntrySubject_7_b__2_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry21;
+	/* ── Entry 22: JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_7_b__8_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[6];
+	} entry22;
+	/* ── Entry 23: JoinsSubjects_JoinsSubjects___c__DisplayClass5_0__ctor ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry23;
+	/* ── Entry 24: JoinsSubjects_JoinsSubjects___c__DisplayClass6_0__ctor ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry24;
+	/* ── Entry 25: JoinsSubjects_JoinsSubjects___c__DisplayClass7_0__ctor ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry25;
+	/* ── Entry 26: JoinsSubjects_JoinsSubjects___c__DisplayClass8_0__ctor ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry26;
+	/* ── Entry 27: JoinsSubjects_JoinsSubjects___c_cctor ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry27;
+	/* ── Entry 28: JoinsSubjects_JoinsSubjects___c__ctor ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry28;
+} kChaosGcSlotMapsSection = {
+	/* entry0 = JoinsSubjects_JoinsSubjects_CustomEntrySubject_0 */
+	.entry0 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&JoinsSubjects_JoinsSubjects_CustomEntrySubject_0),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry1 = JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_0_System_Int32 */
+	.entry1 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_0_System_Int32),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 16u, 24u }
+	},
+	/* entry2 = JoinsSubjects_JoinsSubjects_CustomEntrySubject_1 */
+	.entry2 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&JoinsSubjects_JoinsSubjects_CustomEntrySubject_1),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry3 = JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_0_System_Int32 */
+	.entry3 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_0_System_Int32),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 16u, 24u }
+	},
+	/* entry4 = JoinsSubjects_JoinsSubjects_CustomEntrySubject_2 */
+	.entry4 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&JoinsSubjects_JoinsSubjects_CustomEntrySubject_2),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry5 = JoinsSubjects_JoinsSubjects_CustomEntrySubject_3 */
+	.entry5 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&JoinsSubjects_JoinsSubjects_CustomEntrySubject_3),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry6 = JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_0_System_Int32 */
+	.entry6 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_0_System_Int32),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 16u }
+	},
+	/* entry7 = JoinsSubjects_JoinsSubjects_CustomEntrySubject_4 */
+	.entry7 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&JoinsSubjects_JoinsSubjects_CustomEntrySubject_4),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry8 = JoinsSubjects_JoinsSubjects___c__DisplayClass5_0_CustomEntrySubject_4_b__1_System_Int32 */
+	.entry8 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass5_0_CustomEntrySubject_4_b__1_System_Int32),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 16u, 24u, 32u }
+	},
+	/* entry9 = JoinsSubjects_JoinsSubjects___c__DisplayClass5_0_CustomEntrySubject_4_b__2_System_Int32 */
+	.entry9 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass5_0_CustomEntrySubject_4_b__2_System_Int32),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 16u, 24u, 32u }
+	},
+	/* entry10 = JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_4_b__5_0_System_Int32 */
+	.entry10 = {
+		/* entry_total_size = 44 */ 44u,
+		/* code_address */ reinterpret_cast<const void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_4_b__5_0_System_Int32),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 6 */ 6u,
+		/* slots */ { 0u, 16u, 24u, 32u, 40u, 48u }
+	},
+	/* entry11 = JoinsSubjects_JoinsSubjects_CustomEntrySubject_5 */
+	.entry11 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&JoinsSubjects_JoinsSubjects_CustomEntrySubject_5),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry12 = JoinsSubjects_JoinsSubjects___c__DisplayClass6_0_CustomEntrySubject_5_b__1_System_Int32 */
+	.entry12 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass6_0_CustomEntrySubject_5_b__1_System_Int32),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 16u, 24u, 32u }
+	},
+	/* entry13 = JoinsSubjects_JoinsSubjects___c__DisplayClass6_0_CustomEntrySubject_5_b__2_System_Int32 */
+	.entry13 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass6_0_CustomEntrySubject_5_b__2_System_Int32),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 16u, 24u, 32u }
+	},
+	/* entry14 = JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_5_b__6_0_System_Int32 */
+	.entry14 = {
+		/* entry_total_size = 44 */ 44u,
+		/* code_address */ reinterpret_cast<const void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_5_b__6_0_System_Int32),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 6 */ 6u,
+		/* slots */ { 0u, 16u, 24u, 32u, 40u, 48u }
+	},
+	/* entry15 = JoinsSubjects_JoinsSubjects_CustomEntrySubject_6 */
+	.entry15 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&JoinsSubjects_JoinsSubjects_CustomEntrySubject_6),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry16 = JoinsSubjects_JoinsSubjects___c__DisplayClass7_0_CustomEntrySubject_6_b__1_System_Int32 */
+	.entry16 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass7_0_CustomEntrySubject_6_b__1_System_Int32),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 16u, 24u, 32u }
+	},
+	/* entry17 = JoinsSubjects_JoinsSubjects___c__DisplayClass7_0_CustomEntrySubject_6_b__2_System_Int32 */
+	.entry17 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass7_0_CustomEntrySubject_6_b__2_System_Int32),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 16u, 24u, 32u }
+	},
+	/* entry18 = JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_6_b__7_0_System_Int32 */
+	.entry18 = {
+		/* entry_total_size = 44 */ 44u,
+		/* code_address */ reinterpret_cast<const void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_6_b__7_0_System_Int32),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 6 */ 6u,
+		/* slots */ { 0u, 16u, 24u, 32u, 40u, 48u }
+	},
+	/* entry19 = JoinsSubjects_JoinsSubjects_CustomEntrySubject_7 */
+	.entry19 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&JoinsSubjects_JoinsSubjects_CustomEntrySubject_7),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry20 = JoinsSubjects_JoinsSubjects___c__DisplayClass8_0_CustomEntrySubject_7_b__1_System_Int32 */
+	.entry20 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass8_0_CustomEntrySubject_7_b__1_System_Int32),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 16u, 24u, 32u }
+	},
+	/* entry21 = JoinsSubjects_JoinsSubjects___c__DisplayClass8_0_CustomEntrySubject_7_b__2_System_Int32 */
+	.entry21 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass8_0_CustomEntrySubject_7_b__2_System_Int32),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 16u, 24u, 32u }
+	},
+	/* entry22 = JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_7_b__8_0_System_Int32 */
+	.entry22 = {
+		/* entry_total_size = 44 */ 44u,
+		/* code_address */ reinterpret_cast<const void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_7_b__8_0_System_Int32),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 6 */ 6u,
+		/* slots */ { 0u, 16u, 24u, 32u, 40u, 48u }
+	},
+	/* entry23 = JoinsSubjects_JoinsSubjects___c__DisplayClass5_0__ctor */
+	.entry23 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass5_0__ctor),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry24 = JoinsSubjects_JoinsSubjects___c__DisplayClass6_0__ctor */
+	.entry24 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass6_0__ctor),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry25 = JoinsSubjects_JoinsSubjects___c__DisplayClass7_0__ctor */
+	.entry25 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass7_0__ctor),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry26 = JoinsSubjects_JoinsSubjects___c__DisplayClass8_0__ctor */
+	.entry26 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass8_0__ctor),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry27 = JoinsSubjects_JoinsSubjects___c_cctor */
+	.entry27 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&JoinsSubjects_JoinsSubjects___c_cctor),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry28 = JoinsSubjects_JoinsSubjects___c__ctor */
+	.entry28 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&JoinsSubjects_JoinsSubjects___c__ctor),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	}
+};
+#if defined(_MSC_VER)
+#pragma pack(pop)
+#endif
+
+static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 1008u;
+
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
-static void* const kMethodPointers[38] = {
+static void* const kMethodPointers[29] = {
 	reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects_CustomEntrySubject_0),
 	reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_0_System_Int32),
-	reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_1_System_Int32),
-	reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32),
 	reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects_CustomEntrySubject_1),
 	reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_0_System_Int32),
-	reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_1_System_Int32),
-	reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32),
 	reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects_CustomEntrySubject_2),
-	reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_0_System_Int32),
-	reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_1_System_Int32),
-	reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_2_System_Int32_System_Int32),
 	reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects_CustomEntrySubject_3),
 	reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_0_System_Int32),
-	reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_1_System_Int32),
-	reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_2_System_Int32_System_Int32),
 	reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects_CustomEntrySubject_4),
 	reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass5_0_CustomEntrySubject_4_b__1_System_Int32),
 	reinterpret_cast<void*>(&JoinsSubjects_JoinsSubjects___c__DisplayClass5_0_CustomEntrySubject_4_b__2_System_Int32),
@@ -1394,10 +1727,10 @@ static const VTableDescriptorV0 kChaosVTableDescriptors[] = {
 		CHAOS_IL2CPP_UINT64_C(0x4BFA144754094DDC),
 		0x00000002u,
 		0u,
-		17u,
+		8u,
 		reinterpret_cast<const void*>(kSlots_JoinsSubjects_JoinsSubjects___c),
 		reinterpret_cast<const void**>(chaos_vtable_JoinsSubjects_JoinsSubjects___c),
-		17u,
+		8u,
 		1,
 		{0, 0, 0},
 		nullptr,
@@ -1407,10 +1740,10 @@ static const VTableDescriptorV0 kChaosVTableDescriptors[] = {
 		CHAOS_IL2CPP_UINT64_C(0x4F975618E4286CD0),
 		0x00000003u,
 		0u,
-		19u,
+		10u,
 		reinterpret_cast<const void*>(kSlots_JoinsSubjects_JoinsSubjects___c__DisplayClass5_0),
 		reinterpret_cast<const void**>(chaos_vtable_JoinsSubjects_JoinsSubjects___c__DisplayClass5_0),
-		19u,
+		10u,
 		1,
 		{0, 0, 0},
 		nullptr,
@@ -1420,10 +1753,10 @@ static const VTableDescriptorV0 kChaosVTableDescriptors[] = {
 		CHAOS_IL2CPP_UINT64_C(0x56E60D18E7E9B2C5),
 		0x00000004u,
 		0u,
-		21u,
+		12u,
 		reinterpret_cast<const void*>(kSlots_JoinsSubjects_JoinsSubjects___c__DisplayClass6_0),
 		reinterpret_cast<const void**>(chaos_vtable_JoinsSubjects_JoinsSubjects___c__DisplayClass6_0),
-		21u,
+		12u,
 		1,
 		{0, 0, 0},
 		nullptr,
@@ -1433,10 +1766,10 @@ static const VTableDescriptorV0 kChaosVTableDescriptors[] = {
 		CHAOS_IL2CPP_UINT64_C(0x619AC418EE8E21BA),
 		0x00000005u,
 		0u,
-		23u,
+		14u,
 		reinterpret_cast<const void*>(kSlots_JoinsSubjects_JoinsSubjects___c__DisplayClass7_0),
 		reinterpret_cast<const void**>(chaos_vtable_JoinsSubjects_JoinsSubjects___c__DisplayClass7_0),
-		23u,
+		14u,
 		1,
 		{0, 0, 0},
 		nullptr,
@@ -1446,10 +1779,10 @@ static const VTableDescriptorV0 kChaosVTableDescriptors[] = {
 		CHAOS_IL2CPP_UINT64_C(0x69C35B18F308D50F),
 		0x00000006u,
 		0u,
-		25u,
+		16u,
 		reinterpret_cast<const void*>(kSlots_JoinsSubjects_JoinsSubjects___c__DisplayClass8_0),
 		reinterpret_cast<const void**>(chaos_vtable_JoinsSubjects_JoinsSubjects___c__DisplayClass8_0),
-		25u,
+		16u,
 		1,
 		{0, 0, 0},
 		nullptr,
@@ -1460,7 +1793,7 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	= {
 	.struct_size               = sizeof(CodeRegistrationV0),
 	.method_pointers           = kMethodPointers,
-	.method_pointer_count      = 38u,
+	.method_pointer_count      = 29u,
 	.reverse_pinvoke_wrappers  = nullptr,
 	.reverse_pinvoke_wrapper_count = 0u,
 	.invoker_pointers          = nullptr,
@@ -1471,6 +1804,9 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	.type_capability_count   = 0u,
 	.vtable_descriptors = kChaosVTableDescriptors,
 	.vtable_descriptor_count = 5u,
+	.slot_map_section_begin = reinterpret_cast<const void*>(&kChaosGcSlotMapsSection),
+	.slot_map_section_end   = reinterpret_cast<const void*>(
+		reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&kChaosGcSlotMapsSection) + kChaosGcSlotMapsSize),
 };
 
 // MetadataRegistrationV0
@@ -1520,19 +1856,10 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_JoinsSubjects_Join
 	{ 0u, "JoinsSubjects/JoinsSubjects::CustomEntrySubject_7:System.Void()", "CustomEntrySubject_7", "System.Void", 0, nullptr, 0u },
 };
 
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_JoinsSubjects_JoinsSubjects___c[18] = {
+static constexpr ReflectionQueryMethodDescriptor kReflMethods_JoinsSubjects_JoinsSubjects___c[9] = {
 	{ 0u, "JoinsSubjects/JoinsSubjects+<>c::<CustomEntrySubject_0>b__1_0:System.Int32(System.Int32)", "<CustomEntrySubject_0>b__1_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "JoinsSubjects/JoinsSubjects+<>c::<CustomEntrySubject_0>b__1_1:System.Int32(System.Int32)", "<CustomEntrySubject_0>b__1_1", "System.Void", 0, nullptr, 0u },
-	{ 0u, "JoinsSubjects/JoinsSubjects+<>c::<CustomEntrySubject_0>b__1_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable<System.Int32>)", "<CustomEntrySubject_0>b__1_2", "System.Void", 0, nullptr, 0u },
 	{ 0u, "JoinsSubjects/JoinsSubjects+<>c::<CustomEntrySubject_1>b__2_0:System.Int32(System.Int32)", "<CustomEntrySubject_1>b__2_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "JoinsSubjects/JoinsSubjects+<>c::<CustomEntrySubject_1>b__2_1:System.Int32(System.Int32)", "<CustomEntrySubject_1>b__2_1", "System.Void", 0, nullptr, 0u },
-	{ 0u, "JoinsSubjects/JoinsSubjects+<>c::<CustomEntrySubject_1>b__2_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable<System.Int32>)", "<CustomEntrySubject_1>b__2_2", "System.Void", 0, nullptr, 0u },
-	{ 0u, "JoinsSubjects/JoinsSubjects+<>c::<CustomEntrySubject_2>b__3_0:System.Int32(System.Int32)", "<CustomEntrySubject_2>b__3_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "JoinsSubjects/JoinsSubjects+<>c::<CustomEntrySubject_2>b__3_1:System.Int32(System.Int32)", "<CustomEntrySubject_2>b__3_1", "System.Void", 0, nullptr, 0u },
-	{ 0u, "JoinsSubjects/JoinsSubjects+<>c::<CustomEntrySubject_2>b__3_2:System.Int32(System.Int32,System.Int32)", "<CustomEntrySubject_2>b__3_2", "System.Void", 0, nullptr, 0u },
 	{ 0u, "JoinsSubjects/JoinsSubjects+<>c::<CustomEntrySubject_3>b__4_0:System.Int32(System.Int32)", "<CustomEntrySubject_3>b__4_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "JoinsSubjects/JoinsSubjects+<>c::<CustomEntrySubject_3>b__4_1:System.Int32(System.Int32)", "<CustomEntrySubject_3>b__4_1", "System.Void", 0, nullptr, 0u },
-	{ 0u, "JoinsSubjects/JoinsSubjects+<>c::<CustomEntrySubject_3>b__4_2:System.Int32(System.Int32,System.Int32)", "<CustomEntrySubject_3>b__4_2", "System.Void", 0, nullptr, 0u },
 	{ 0u, "JoinsSubjects/JoinsSubjects+<>c::<CustomEntrySubject_4>b__5_0:System.Collections.Generic.IEnumerable<System.Int32>(System.Int32)", "<CustomEntrySubject_4>b__5_0", "System.Void", 0, nullptr, 0u },
 	{ 0u, "JoinsSubjects/JoinsSubjects+<>c::<CustomEntrySubject_5>b__6_0:System.Collections.Generic.IEnumerable<System.Int32>(System.Int32)", "<CustomEntrySubject_5>b__6_0", "System.Void", 0, nullptr, 0u },
 	{ 0u, "JoinsSubjects/JoinsSubjects+<>c::<CustomEntrySubject_6>b__7_0:System.Collections.Generic.IEnumerable<System.Int32>(System.Int32)", "<CustomEntrySubject_6>b__7_0", "System.Void", 0, nullptr, 0u },
@@ -1569,7 +1896,7 @@ static const ReflectionQueryTypeDescriptor kReflTypes[6] = {
 	{ 0u, "JoinsSubjects/JoinsSubjects", "JoinsSubjects/JoinsSubjects", "", "JoinsSubjects", "JoinsSubjects", nullptr, kReflFields_JoinsSubjects_JoinsSubjects, 1u, nullptr, 0u,
 	kReflMethods_JoinsSubjects_JoinsSubjects, 8u },
 	{ 0u, "JoinsSubjects/JoinsSubjects+<>c", "JoinsSubjects/JoinsSubjects+<>c", "", "JoinsSubjects+<>c", "JoinsSubjects+<>c", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_JoinsSubjects_JoinsSubjects___c, 18u },
+	kReflMethods_JoinsSubjects_JoinsSubjects___c, 9u },
 	{ 0u, "JoinsSubjects/JoinsSubjects+<>c__DisplayClass5_0", "JoinsSubjects/JoinsSubjects+<>c__DisplayClass5_0", "", "JoinsSubjects+<>c__DisplayClass5_0", "JoinsSubjects+<>c__DisplayClass5_0", nullptr, nullptr, 0u, nullptr, 0u,
 	kReflMethods_JoinsSubjects_JoinsSubjects___c__DisplayClass5_0, 3u },
 	{ 0u, "JoinsSubjects/JoinsSubjects+<>c__DisplayClass6_0", "JoinsSubjects/JoinsSubjects+<>c__DisplayClass6_0", "", "JoinsSubjects+<>c__DisplayClass6_0", "JoinsSubjects+<>c__DisplayClass6_0", nullptr, nullptr, 0u, nullptr, 0u,
@@ -1628,9 +1955,109 @@ struct ChaosGenericRegistrationInit {
 	}
 } g_chaos_reg_init;
 }
-// AOT-unreachable stub: JoinsSubjects/JoinsSubjects::CustomEntrySubject_0:System.Void()
+// Managed method: JoinsSubjects/JoinsSubjects::CustomEntrySubject_0()
 extern "C" void JoinsSubjects_JoinsSubjects_CustomEntrySubject_0(void)
 {
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(5);
+	{
+		const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(_s0);
+		if (chaos_length < 0)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
+		chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
+		chaos_array->element_type_shape = 1;
+		chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+		chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
+		chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
+	}
+	_s1 = _s0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(78109589u);
+	{
+		const auto chaos_arg_1 = _s2;
+		const auto chaos_raw_arg_0 = _s1;
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
+	}
+	chaos_ensure_type_initialized_JoinsSubjects_JoinsSubjects___c();
+	_s1 = chaos_static_JoinsSubjects_JoinsSubjects___c____9__1_0;
+	_s2 = _s1;
+	{
+		if (_s2 == 0)
+		{
+			chaos_ensure_type_initialized_JoinsSubjects_JoinsSubjects___c();
+			_s1 = chaos_static_JoinsSubjects_JoinsSubjects___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 1)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
+					auto& _d_entry = s_hotpatch_entries[1];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[12];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+						CHAOS_IL2CPP_INT32 _d_ret{};
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, &_d_ret);
+						return _d_ret;
+					}
+					return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
+				};
+			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s2;
+				const auto chaos_target = _s1;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Int32_, {});
+				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Int32_.hot;
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s2 = _s1;
+			{
+				auto chaos_value = _s2;
+			chaos_ensure_type_initialized_JoinsSubjects_JoinsSubjects___c();
+				chaos_static_JoinsSubjects_JoinsSubjects___c____9__1_0 = chaos_value;
+			}
+		}
+		{
+			const auto chaos_arg_1 = _s5;
+			const auto chaos_arg_0 = _s4;
+			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[6])(chaos_arg_0, chaos_arg_1);
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		}
+		{
+			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[7])();
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		}
+		{
+			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		}
+		return;
+	}
 }
 
 // Managed method: JoinsSubjects/JoinsSubjects+<>c::<CustomEntrySubject_0>b__1_0(System.Int32)
@@ -1639,43 +2066,126 @@ extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
 
 	_s0 = chaos_args[1];
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(3);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosRem(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
-// Managed method: JoinsSubjects/JoinsSubjects+<>c::<CustomEntrySubject_0>b__1_1(System.Int32)
-extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_1_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[1];
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-}
-
-// Managed method: JoinsSubjects/JoinsSubjects+<>c::<CustomEntrySubject_0>b__1_2(System.Int32,System.Collections.Generic.IEnumerable<System.Int32>)
-extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-
-	_s0 = chaos_args[1];
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-}
-
-// AOT-unreachable stub: JoinsSubjects/JoinsSubjects::CustomEntrySubject_1:System.Void()
+// Managed method: JoinsSubjects/JoinsSubjects::CustomEntrySubject_1()
 extern "C" void JoinsSubjects_JoinsSubjects_CustomEntrySubject_1(void)
 {
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(5);
+	{
+		const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(_s0);
+		if (chaos_length < 0)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
+		chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
+		chaos_array->element_type_shape = 1;
+		chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+		chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
+		chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
+	}
+	_s1 = _s0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(78109589u);
+	{
+		const auto chaos_arg_1 = _s2;
+		const auto chaos_raw_arg_0 = _s1;
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
+	}
+	chaos_ensure_type_initialized_JoinsSubjects_JoinsSubjects___c();
+	_s1 = chaos_static_JoinsSubjects_JoinsSubjects___c____9__2_0;
+	_s2 = _s1;
+	{
+		if (_s2 == 0)
+		{
+			chaos_ensure_type_initialized_JoinsSubjects_JoinsSubjects___c();
+			_s1 = chaos_static_JoinsSubjects_JoinsSubjects___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 3)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
+					auto& _d_entry = s_hotpatch_entries[3];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[12];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+						CHAOS_IL2CPP_INT32 _d_ret{};
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, &_d_ret);
+						return _d_ret;
+					}
+					return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
+				};
+			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s2;
+				const auto chaos_target = _s1;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Int32_, {});
+				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Int32_.hot;
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s2 = _s1;
+			{
+				auto chaos_value = _s2;
+			chaos_ensure_type_initialized_JoinsSubjects_JoinsSubjects___c();
+				chaos_static_JoinsSubjects_JoinsSubjects___c____9__2_0 = chaos_value;
+			}
+		}
+		{
+			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[10])();
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		}
+		{
+			const auto chaos_arg_2 = _s6;
+			const auto chaos_arg_1 = _s5;
+			const auto chaos_arg_0 = _s4;
+			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[11])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		}
+		{
+			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[7])();
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		}
+		{
+			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		}
+		return;
+	}
 }
 
 // Managed method: JoinsSubjects/JoinsSubjects+<>c::<CustomEntrySubject_1>b__2_0(System.Int32)
@@ -1684,92 +2194,173 @@ extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[1];
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-}
-
-// Managed method: JoinsSubjects/JoinsSubjects+<>c::<CustomEntrySubject_1>b__2_1(System.Int32)
-extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_1_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[1];
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-}
-
-// Managed method: JoinsSubjects/JoinsSubjects+<>c::<CustomEntrySubject_1>b__2_2(System.Int32,System.Collections.Generic.IEnumerable<System.Int32>)
-extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-
-	_s0 = chaos_args[1];
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-}
-
-// AOT-unreachable stub: JoinsSubjects/JoinsSubjects::CustomEntrySubject_2:System.Void()
-extern "C" void JoinsSubjects_JoinsSubjects_CustomEntrySubject_2(void)
-{
-}
-
-// Managed method: JoinsSubjects/JoinsSubjects+<>c::<CustomEntrySubject_2>b__3_0(System.Int32)
-extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_0_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[1];
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-}
-
-// Managed method: JoinsSubjects/JoinsSubjects+<>c::<CustomEntrySubject_2>b__3_1(System.Int32)
-extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_1_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[1];
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-}
-
-// Managed method: JoinsSubjects/JoinsSubjects+<>c::<CustomEntrySubject_2>b__3_2(System.Int32,System.Int32)
-extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_2_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
 
 	_s0 = chaos_args[1];
-	_s1 = chaos_args[2];
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(3);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosRem(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
-// AOT-unreachable stub: JoinsSubjects/JoinsSubjects::CustomEntrySubject_3:System.Void()
+// Managed method: JoinsSubjects/JoinsSubjects::CustomEntrySubject_2()
+extern "C" void JoinsSubjects_JoinsSubjects_CustomEntrySubject_2(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(6);
+	{
+		const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(_s0);
+		if (chaos_length < 0)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
+		chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
+		chaos_array->element_type_shape = 1;
+		chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+		chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
+		chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
+	}
+	_s1 = _s0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(77833573u);
+	{
+		const auto chaos_arg_1 = _s2;
+		const auto chaos_raw_arg_0 = _s1;
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
+	}
+	{
+		const auto chaos_arg_0 = _s0;
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[13])(chaos_arg_0);
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[14])();
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	return;
+}
+
+// Managed method: JoinsSubjects/JoinsSubjects::CustomEntrySubject_3()
 extern "C" void JoinsSubjects_JoinsSubjects_CustomEntrySubject_3(void)
 {
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+
+
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(5);
+	{
+		const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(_s0);
+		if (chaos_length < 0)
+		{
+			CHAOS_IL2CPP_FAIL();
+		}
+		auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
+		chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
+		chaos_array->element_type_shape = 1;
+		chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+		chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
+		chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
+	}
+	_s1 = _s0;
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(67360599u);
+	{
+		const auto chaos_arg_1 = _s2;
+		const auto chaos_raw_arg_0 = _s1;
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
+	}
+	chaos_ensure_type_initialized_JoinsSubjects_JoinsSubjects___c();
+	_s1 = chaos_static_JoinsSubjects_JoinsSubjects___c____9__4_0;
+	_s2 = _s1;
+	{
+		if (_s2 == 0)
+		{
+			chaos_ensure_type_initialized_JoinsSubjects_JoinsSubjects___c();
+			_s1 = chaos_static_JoinsSubjects_JoinsSubjects___c____9;
+			{
+				// Hotpatch-aware ldftn wrapper (slot 6)
+				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
+					auto& _d_entry = s_hotpatch_entries[6];
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+					{
+						alignas(16) uint8_t _d_ab[12];
+						ArgBuffer _d_bw(_d_ab);
+						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+						_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_fn_arg_1));
+						CHAOS_IL2CPP_INT32 _d_ret{};
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d_entry.method_key, _d_ab, &_d_ret);
+						return _d_ret;
+					}
+					return reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INT32)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
+				};
+			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+			}
+			{
+				const auto chaos_method_ptr = _s2;
+				const auto chaos_target = _s1;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_System_Int32_, {});
+				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Func_System_Int32_System_Int32_.hot;
+				chaos_object->chaos_delegate_target = chaos_target;
+				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			_s2 = _s1;
+			{
+				auto chaos_value = _s2;
+			chaos_ensure_type_initialized_JoinsSubjects_JoinsSubjects___c();
+				chaos_static_JoinsSubjects_JoinsSubjects___c____9__4_0 = chaos_value;
+			}
+		}
+		{
+			const auto chaos_arg_1 = _s5;
+			const auto chaos_arg_0 = _s4;
+			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0, chaos_arg_1);
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		}
+		{
+			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[14])();
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		}
+		{
+			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+		}
+		return;
+	}
 }
 
 // Managed method: JoinsSubjects/JoinsSubjects+<>c::<CustomEntrySubject_3>b__4_0(System.Int32)
@@ -1782,37 +2373,6 @@ extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject
 	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
 
 	_s0 = chaos_args[1];
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-}
-
-// Managed method: JoinsSubjects/JoinsSubjects+<>c::<CustomEntrySubject_3>b__4_1(System.Int32)
-extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_1_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[1];
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-}
-
-// Managed method: JoinsSubjects/JoinsSubjects+<>c::<CustomEntrySubject_3>b__4_2(System.Int32,System.Int32)
-extern "C" CHAOS_IL2CPP_INT32 JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_2_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-
-	_s0 = chaos_args[1];
-	_s1 = chaos_args[2];
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
@@ -1856,8 +2416,8 @@ extern "C" void JoinsSubjects_JoinsSubjects_CustomEntrySubject_4(void)
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	chaos_ensure_type_initialized_JoinsSubjects_JoinsSubjects___c();
 	_s1 = chaos_static_JoinsSubjects_JoinsSubjects___c____9__5_0;
@@ -1868,9 +2428,9 @@ extern "C" void JoinsSubjects_JoinsSubjects_CustomEntrySubject_4(void)
 			chaos_ensure_type_initialized_JoinsSubjects_JoinsSubjects___c();
 			_s1 = chaos_static_JoinsSubjects_JoinsSubjects___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 19)
+				// Hotpatch-aware ldftn wrapper (slot 10)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INTPTR {
-					auto& _d_entry = s_hotpatch_entries[19];
+					auto& _d_entry = s_hotpatch_entries[10];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
@@ -1906,15 +2466,15 @@ extern "C" void JoinsSubjects_JoinsSubjects_CustomEntrySubject_4(void)
 		{
 			const auto chaos_arg_1 = _s5;
 			const auto chaos_arg_0 = _s4;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[29])(chaos_arg_0, chaos_arg_1);
+			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[21])(chaos_arg_0, chaos_arg_1);
 			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		{
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[11])();
+			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[14])();
 			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		{
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[12])();
+			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
 			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		return;
@@ -2028,14 +2588,14 @@ extern "C" CHAOS_IL2CPP_INTPTR JoinsSubjects_JoinsSubjects___c_CustomEntrySubjec
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	_s1 = chaos_locals[0];
 	{
-		// Hotpatch-aware ldftn wrapper (slot 17)
+		// Hotpatch-aware ldftn wrapper (slot 8)
 		static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INTPTR {
-			auto& _d_entry = s_hotpatch_entries[17];
+			auto& _d_entry = s_hotpatch_entries[8];
 			if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 				&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 			{
@@ -2064,21 +2624,21 @@ extern "C" CHAOS_IL2CPP_INTPTR JoinsSubjects_JoinsSubjects___c_CustomEntrySubjec
 	{
 		const auto chaos_arg_1 = _s1;
 		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[32])(chaos_arg_0, chaos_arg_1);
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[25])(chaos_arg_0, chaos_arg_1);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_arg_1 = _s1;
 		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[33])(chaos_arg_0, chaos_arg_1);
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[26])(chaos_arg_0, chaos_arg_1);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = chaos_locals[0];
 	{
-		// Hotpatch-aware ldftn wrapper (slot 18)
+		// Hotpatch-aware ldftn wrapper (slot 9)
 		static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
-			auto& _d_entry = s_hotpatch_entries[18];
+			auto& _d_entry = s_hotpatch_entries[9];
 			if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 				&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 			{
@@ -2107,7 +2667,7 @@ extern "C" CHAOS_IL2CPP_INTPTR JoinsSubjects_JoinsSubjects___c_CustomEntrySubjec
 	{
 		const auto chaos_arg_1 = _s1;
 		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[34])(chaos_arg_0, chaos_arg_1);
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[27])(chaos_arg_0, chaos_arg_1);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return _s0;
@@ -2153,8 +2713,8 @@ extern "C" void JoinsSubjects_JoinsSubjects_CustomEntrySubject_5(void)
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	chaos_ensure_type_initialized_JoinsSubjects_JoinsSubjects___c();
 	_s1 = chaos_static_JoinsSubjects_JoinsSubjects___c____9__6_0;
@@ -2165,9 +2725,9 @@ extern "C" void JoinsSubjects_JoinsSubjects_CustomEntrySubject_5(void)
 			chaos_ensure_type_initialized_JoinsSubjects_JoinsSubjects___c();
 			_s1 = chaos_static_JoinsSubjects_JoinsSubjects___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 23)
+				// Hotpatch-aware ldftn wrapper (slot 14)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INTPTR {
-					auto& _d_entry = s_hotpatch_entries[23];
+					auto& _d_entry = s_hotpatch_entries[14];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
@@ -2203,15 +2763,15 @@ extern "C" void JoinsSubjects_JoinsSubjects_CustomEntrySubject_5(void)
 		{
 			const auto chaos_arg_1 = _s5;
 			const auto chaos_arg_0 = _s4;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[29])(chaos_arg_0, chaos_arg_1);
+			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[21])(chaos_arg_0, chaos_arg_1);
 			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		{
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[11])();
+			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[14])();
 			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		{
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[12])();
+			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
 			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		return;
@@ -2325,14 +2885,14 @@ extern "C" CHAOS_IL2CPP_INTPTR JoinsSubjects_JoinsSubjects___c_CustomEntrySubjec
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	_s1 = chaos_locals[0];
 	{
-		// Hotpatch-aware ldftn wrapper (slot 21)
+		// Hotpatch-aware ldftn wrapper (slot 12)
 		static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INTPTR {
-			auto& _d_entry = s_hotpatch_entries[21];
+			auto& _d_entry = s_hotpatch_entries[12];
 			if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 				&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 			{
@@ -2361,21 +2921,21 @@ extern "C" CHAOS_IL2CPP_INTPTR JoinsSubjects_JoinsSubjects___c_CustomEntrySubjec
 	{
 		const auto chaos_arg_1 = _s1;
 		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[32])(chaos_arg_0, chaos_arg_1);
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[25])(chaos_arg_0, chaos_arg_1);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_arg_1 = _s1;
 		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[33])(chaos_arg_0, chaos_arg_1);
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[26])(chaos_arg_0, chaos_arg_1);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = chaos_locals[0];
 	{
-		// Hotpatch-aware ldftn wrapper (slot 22)
+		// Hotpatch-aware ldftn wrapper (slot 13)
 		static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
-			auto& _d_entry = s_hotpatch_entries[22];
+			auto& _d_entry = s_hotpatch_entries[13];
 			if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 				&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 			{
@@ -2404,7 +2964,7 @@ extern "C" CHAOS_IL2CPP_INTPTR JoinsSubjects_JoinsSubjects___c_CustomEntrySubjec
 	{
 		const auto chaos_arg_1 = _s1;
 		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[34])(chaos_arg_0, chaos_arg_1);
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[27])(chaos_arg_0, chaos_arg_1);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return _s0;
@@ -2450,8 +3010,8 @@ extern "C" void JoinsSubjects_JoinsSubjects_CustomEntrySubject_6(void)
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	chaos_ensure_type_initialized_JoinsSubjects_JoinsSubjects___c();
 	_s1 = chaos_static_JoinsSubjects_JoinsSubjects___c____9__7_0;
@@ -2462,9 +3022,9 @@ extern "C" void JoinsSubjects_JoinsSubjects_CustomEntrySubject_6(void)
 			chaos_ensure_type_initialized_JoinsSubjects_JoinsSubjects___c();
 			_s1 = chaos_static_JoinsSubjects_JoinsSubjects___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 27)
+				// Hotpatch-aware ldftn wrapper (slot 18)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INTPTR {
-					auto& _d_entry = s_hotpatch_entries[27];
+					auto& _d_entry = s_hotpatch_entries[18];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
@@ -2500,15 +3060,15 @@ extern "C" void JoinsSubjects_JoinsSubjects_CustomEntrySubject_6(void)
 		{
 			const auto chaos_arg_1 = _s5;
 			const auto chaos_arg_0 = _s4;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[29])(chaos_arg_0, chaos_arg_1);
+			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[21])(chaos_arg_0, chaos_arg_1);
 			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		{
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[11])();
+			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[14])();
 			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		{
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[12])();
+			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
 			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		return;
@@ -2622,14 +3182,14 @@ extern "C" CHAOS_IL2CPP_INTPTR JoinsSubjects_JoinsSubjects___c_CustomEntrySubjec
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	_s1 = chaos_locals[0];
 	{
-		// Hotpatch-aware ldftn wrapper (slot 25)
+		// Hotpatch-aware ldftn wrapper (slot 16)
 		static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INTPTR {
-			auto& _d_entry = s_hotpatch_entries[25];
+			auto& _d_entry = s_hotpatch_entries[16];
 			if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 				&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 			{
@@ -2658,21 +3218,21 @@ extern "C" CHAOS_IL2CPP_INTPTR JoinsSubjects_JoinsSubjects___c_CustomEntrySubjec
 	{
 		const auto chaos_arg_1 = _s1;
 		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[32])(chaos_arg_0, chaos_arg_1);
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[25])(chaos_arg_0, chaos_arg_1);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_arg_1 = _s1;
 		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[33])(chaos_arg_0, chaos_arg_1);
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[26])(chaos_arg_0, chaos_arg_1);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = chaos_locals[0];
 	{
-		// Hotpatch-aware ldftn wrapper (slot 26)
+		// Hotpatch-aware ldftn wrapper (slot 17)
 		static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
-			auto& _d_entry = s_hotpatch_entries[26];
+			auto& _d_entry = s_hotpatch_entries[17];
 			if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 				&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 			{
@@ -2701,7 +3261,7 @@ extern "C" CHAOS_IL2CPP_INTPTR JoinsSubjects_JoinsSubjects___c_CustomEntrySubjec
 	{
 		const auto chaos_arg_1 = _s1;
 		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[34])(chaos_arg_0, chaos_arg_1);
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[27])(chaos_arg_0, chaos_arg_1);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return _s0;
@@ -2747,8 +3307,8 @@ extern "C" void JoinsSubjects_JoinsSubjects_CustomEntrySubject_7(void)
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	chaos_ensure_type_initialized_JoinsSubjects_JoinsSubjects___c();
 	_s1 = chaos_static_JoinsSubjects_JoinsSubjects___c____9__8_0;
@@ -2759,9 +3319,9 @@ extern "C" void JoinsSubjects_JoinsSubjects_CustomEntrySubject_7(void)
 			chaos_ensure_type_initialized_JoinsSubjects_JoinsSubjects___c();
 			_s1 = chaos_static_JoinsSubjects_JoinsSubjects___c____9;
 			{
-				// Hotpatch-aware ldftn wrapper (slot 31)
+				// Hotpatch-aware ldftn wrapper (slot 22)
 				static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INTPTR {
-					auto& _d_entry = s_hotpatch_entries[31];
+					auto& _d_entry = s_hotpatch_entries[22];
 					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 					{
@@ -2797,15 +3357,15 @@ extern "C" void JoinsSubjects_JoinsSubjects_CustomEntrySubject_7(void)
 		{
 			const auto chaos_arg_1 = _s5;
 			const auto chaos_arg_0 = _s4;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[29])(chaos_arg_0, chaos_arg_1);
+			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[21])(chaos_arg_0, chaos_arg_1);
 			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		{
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[11])();
+			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[14])();
 			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		{
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[12])();
+			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
 			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 		}
 		return;
@@ -2919,14 +3479,14 @@ extern "C" CHAOS_IL2CPP_INTPTR JoinsSubjects_JoinsSubjects___c_CustomEntrySubjec
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	_s1 = chaos_locals[0];
 	{
-		// Hotpatch-aware ldftn wrapper (slot 29)
+		// Hotpatch-aware ldftn wrapper (slot 20)
 		static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INTPTR {
-			auto& _d_entry = s_hotpatch_entries[29];
+			auto& _d_entry = s_hotpatch_entries[20];
 			if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 				&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 			{
@@ -2955,21 +3515,21 @@ extern "C" CHAOS_IL2CPP_INTPTR JoinsSubjects_JoinsSubjects___c_CustomEntrySubjec
 	{
 		const auto chaos_arg_1 = _s1;
 		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[32])(chaos_arg_0, chaos_arg_1);
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[25])(chaos_arg_0, chaos_arg_1);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_arg_1 = _s1;
 		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[33])(chaos_arg_0, chaos_arg_1);
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[26])(chaos_arg_0, chaos_arg_1);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s1 = chaos_locals[0];
 	{
-		// Hotpatch-aware ldftn wrapper (slot 30)
+		// Hotpatch-aware ldftn wrapper (slot 21)
 		static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1) -> CHAOS_IL2CPP_INT32 {
-			auto& _d_entry = s_hotpatch_entries[30];
+			auto& _d_entry = s_hotpatch_entries[21];
 			if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
 				&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
 			{
@@ -2998,7 +3558,7 @@ extern "C" CHAOS_IL2CPP_INTPTR JoinsSubjects_JoinsSubjects___c_CustomEntrySubjec
 	{
 		const auto chaos_arg_1 = _s1;
 		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[34])(chaos_arg_0, chaos_arg_1);
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[27])(chaos_arg_0, chaos_arg_1);
 		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	return _s0;
@@ -3015,7 +3575,7 @@ extern "C" void JoinsSubjects_JoinsSubjects___c__DisplayClass5_0__ctor(CHAOS_IL2
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
+		ChaosObjectCtor(chaos_arg_0);
 	}
 	return;
 }
@@ -3031,7 +3591,7 @@ extern "C" void JoinsSubjects_JoinsSubjects___c__DisplayClass6_0__ctor(CHAOS_IL2
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
+		ChaosObjectCtor(chaos_arg_0);
 	}
 	return;
 }
@@ -3047,7 +3607,7 @@ extern "C" void JoinsSubjects_JoinsSubjects___c__DisplayClass7_0__ctor(CHAOS_IL2
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
+		ChaosObjectCtor(chaos_arg_0);
 	}
 	return;
 }
@@ -3063,7 +3623,7 @@ extern "C" void JoinsSubjects_JoinsSubjects___c__DisplayClass8_0__ctor(CHAOS_IL2
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
+		ChaosObjectCtor(chaos_arg_0);
 	}
 	return;
 }
@@ -3102,7 +3662,7 @@ extern "C" void JoinsSubjects_JoinsSubjects___c__ctor(CHAOS_IL2CPP_INTPTR chaos_
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
+		ChaosObjectCtor(chaos_arg_0);
 	}
 	return;
 }
@@ -3113,6 +3673,6 @@ extern "C" void JoinsSubjects_JoinsSubjects___c__ctor(CHAOS_IL2CPP_INTPTR chaos_
 #pragma warning(pop)
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
-extern "C" const int kAotMethodCount = 38;
+extern "C" const int kAotMethodCount = 29;
 
 extern "C" void ChaosJitRegisterAll() {}

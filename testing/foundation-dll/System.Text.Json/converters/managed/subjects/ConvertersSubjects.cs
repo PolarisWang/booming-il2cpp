@@ -17,36 +17,36 @@ public static partial class ConvertersSubjects
     // [0] System.Text.Json/System.Text.Json.Serialization.JsonConverter::CanConvert:System.Boolean(System.Type)
     public static void Subject_0()
     {
-        try { default(JsonConverter)!.CanConvert(typeof(byte)); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(JsonConverter)!.CanConvert(typeof(byte))) ? 1 : 0) != ((default(JsonConverter)!.CanConvert(typeof(byte))) ? 1 : 0)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [1] System.Text.Json/System.Text.Json.Serialization.JsonConverter::get_Type:System.Type()
     public static void Subject_1()
     {
-        try { _ = default(JsonConverter)!.Type; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(JsonConverter)!.Type).GetHashCode()) != ((default(JsonConverter)!.Type).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [2] System.Text.Json/System.Text.Json.Serialization.JsonConverter`1::CanConvert:System.Boolean(System.Type)
     public static void Subject_2()
     {
-        try { default(JsonConverter)!.CanConvert(typeof(byte)); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(JsonConverter)!.CanConvert(typeof(byte))) ? 1 : 0) != ((default(JsonConverter)!.CanConvert(typeof(byte))) ? 1 : 0)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [3] System.Text.Json/System.Text.Json.Serialization.JsonConverter`1::get_HandleNull:System.Boolean()
     public static void Subject_3()
     {
-        try { _ = default(JsonConverter<byte>)!.HandleNull; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(JsonConverter<byte>)!.HandleNull) ? 1 : 0) != ((default(JsonConverter<byte>)!.HandleNull) ? 1 : 0)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [4] System.Text.Json/System.Text.Json.Serialization.JsonConverter`1::get_Type:System.Type()
     public static void Subject_4()
     {
-        try { _ = default(JsonConverter)!.Type; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(JsonConverter)!.Type).GetHashCode()) != ((default(JsonConverter)!.Type).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [5] System.Text.Json/System.Text.Json.Serialization.JsonConverter`1::Read:T(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)

@@ -1,0 +1,13 @@
+{
+  "familyId": "family/System.Collections.Immutable/immutable/sorted/dictionary",
+  "assemblyName": "System.Collections.Immutable",
+  "methodSubjectIds": [
+    "System.Collections.Immutable/System.Collections.Immutable.ImmutableSortedDictionary::Create<string,int>:System.Collections.Immutable.ImmutableSortedDictionary<System.String,System.Int32>()",
+    "System.Collections.Immutable/System.Collections.Immutable.ImmutableSortedDictionary::Create<Byte,Byte>:System.Collections.Immutable.ImmutableSortedDictionary<System.Byte,System.Byte>()"
+  ],
+  "displayName": "immutable/sorted/dictionary",
+  "description": "",
+  "closureStatus": "in-progress",
+  "methodCount": 2,
+  "customEntryIndices": []
+}

@@ -1,0 +1,17 @@
+{
+  "familyId": "family/System.Threading.Tasks.Parallel/loop-state",
+  "assemblyName": "System.Threading.Tasks.Parallel",
+  "methodSubjectIds": [
+    "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Break:System.Void()",
+    "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_IsExceptional:System.Boolean()",
+    "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_IsStopped:System.Boolean()",
+    "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_LowestBreakIteration:System.Nullable{System.Int64}()",
+    "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_ShouldExitCurrentIteration:System.Boolean()",
+    "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Stop:System.Void()"
+  ],
+  "displayName": "loop-state",
+  "description": "",
+  "closureStatus": "in-progress",
+  "methodCount": 6,
+  "customEntryIndices": []
+}

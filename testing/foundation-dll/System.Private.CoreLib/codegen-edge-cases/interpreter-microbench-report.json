@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/codegen/edge/cases",
+  "capturedAt": "2026-05-22T07:01:32",
+  "metrics": {
+    "framePool": {
+      "acquireReleaseNsPerOp": 3.0,
+      "batchCount": 1000,
+      "framesPerBatch": 32
+    },
+    "fastExecute": {
+      "runCount": 100000,
+      "nsPerCall": 2.1
+    },
+    "callVirt": {
+      "handlerDispatchNs": 2.1,
+      "emptyStackNs": 2.3
+    },
+    "poolSize": 32
+  },
+  "rawOutput": "[2026-05-22T07:01:32][DEBUG][codegen] T4 VEH handler registered\n[2026-05-22T07:01:32][DEBUG][GcEvents] registered callback 0x7ff6523a3d30 at slot 0\n[2026-05-22T07:01:32][WARN][CRAG] young_collection_no_region\n[2026-05-22T07:01:32][INFO][NUMA] numa_init count=%d\n[2026-05-22T07:01:32][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-22T07:01:32][INFO][OldGen] init done base=0x2885195792384 pages=8\n[2026-05-22T07:01:32][DEBUG][codegen] T4 VEH handler registered\n[2026-05-22T07:01:32][DEBUG][GcEvents] registered callback 0x7ff6523a3d30 at slot 1\nBenchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 3.0 ns/op (1000 batches x 32 frames)\n[2026-05-22T07:01:32][DEBUG][BGC] thread_started\n[2026-05-22T07:01:32][DEBUG][Finalizer] thread_started id={0}\nBenchmark 2: FastExecute (Subject_0): 100000 runs: 2.1 ns/op\nHandler dispatch overhead (LdcI4): 2.1 ns/call\nCallVirt empty-stack: 2.3 ns/call\n"
+}

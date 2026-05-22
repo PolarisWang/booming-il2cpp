@@ -1,0 +1,29 @@
+{
+  "familyId": "family/System.Runtime.InteropServices/exception-errors",
+  "assemblyName": "System.Runtime.InteropServices",
+  "methodSubjectIds": [
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.COMException::ToString:System.String()",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.COMException::.ctor:System.Void()",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.COMException::.ctor:System.Void(System.String)",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.COMException::.ctor:System.Void(System.String,System.Exception)",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.COMException::.ctor:System.Void(System.String,System.Int32)",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.ExternalException::get_ErrorCode:System.Int32()",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.ExternalException::ToString:System.String()",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.ExternalException::.ctor:System.Void()",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.ExternalException::.ctor:System.Void(System.String)",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.ExternalException::.ctor:System.Void(System.String,System.Exception)",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.ExternalException::.ctor:System.Void(System.String,System.Int32)",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.SEHException::CanResume:System.Boolean()",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.SEHException::.ctor:System.Void()",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.SEHException::.ctor:System.Void(System.String)",
+    "System.Runtime.InteropServices/System.Runtime.InteropServices.SEHException::.ctor:System.Void(System.String,System.Exception)",
+    "System.Runtime.InteropServices/System.DllNotFoundException::.ctor:System.Void()",
+    "System.Runtime.InteropServices/System.DllNotFoundException::.ctor:System.Void(System.String)",
+    "System.Runtime.InteropServices/System.DllNotFoundException::.ctor:System.Void(System.String,System.Exception)"
+  ],
+  "displayName": "exception-errors",
+  "description": "",
+  "closureStatus": "in-progress",
+  "methodCount": 18,
+  "customEntryIndices": []
+}

@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "MathNumericsSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/math-numerics/codegen/_subjects_input/MathNumericsSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/math-numerics/managed/subjects/build-output/MathNumericsSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "MathNumericsSubjects",
-      "path": "testing/foundation-dll/System.Private.CoreLib/math-numerics/codegen/_subjects_input/MathNumericsSubjects.dll"
+      "path": "testing/foundation-dll/System.Private.CoreLib/math-numerics/managed/subjects/build-output/MathNumericsSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "c0e08f86-1774-4e29-8fb7-fc37f5233164",
+  "inputModuleVersionId": "7ddccac6-cb5d-4f74-9538-277717136436",
   "artifacts": [
     {
       "kind": "typedIlIr",

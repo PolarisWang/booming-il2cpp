@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "DecoderSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.IO.Compression.Brotli/decoder/managed/subjects/build-output/DecoderSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.IO.Compression.Brotli/decoder/managed/subjects/build-output/DecoderSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "DecoderSubjects",
-      "path": "verification/foundation-dll/System.IO.Compression.Brotli/decoder/managed/subjects/build-output/DecoderSubjects.dll"
+      "path": "testing/foundation-dll/System.IO.Compression.Brotli/decoder/managed/subjects/build-output/DecoderSubjects.dll"
     },
     {
       "assemblyName": "System.IO.Compression.Brotli",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "608ead72-d60d-4663-9c7e-252a1061e871",
+  "inputModuleVersionId": "761977f4-6dee-4711-9a4e-cfdaf8034679",
   "artifacts": [
     {
       "kind": "typedIlIr",

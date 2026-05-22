@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "BufferMemorySubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/buffer-memory/codegen/_subjects_input/BufferMemorySubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/buffer-memory/managed/subjects/build-output/BufferMemorySubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "BufferMemorySubjects",
-      "path": "testing/foundation-dll/System.Private.CoreLib/buffer-memory/codegen/_subjects_input/BufferMemorySubjects.dll"
+      "path": "testing/foundation-dll/System.Private.CoreLib/buffer-memory/managed/subjects/build-output/BufferMemorySubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "89735cc3-3908-4737-93f2-7dbf398123d8",
+  "inputModuleVersionId": "665c1dfc-216e-4069-8893-041d247261b9",
   "artifacts": [
     {
       "kind": "typedIlIr",

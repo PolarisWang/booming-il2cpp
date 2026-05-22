@@ -16,13 +16,15 @@ public static partial class LoopResultSubjects
     // [0] System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::get_IsCompleted:System.Boolean()
     public static void Subject_0()
     {
-        if (((default(ParallelLoopResult).IsCompleted) ? 1 : 0) != 0) _exitCode = 1;
+        try { if (((default(ParallelLoopResult).IsCompleted) ? 1 : 0) != ((default(ParallelLoopResult).IsCompleted) ? 1 : 0)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [1] System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopResult::get_LowestBreakIteration:System.Nullable{System.Int64}()
     public static void Subject_1()
     {
-        if (((default(ParallelLoopResult).LowestBreakIteration).GetHashCode()) != 0) _exitCode = 1;
+        try { if (((default(ParallelLoopResult).LowestBreakIteration).GetHashCode()) != ((default(ParallelLoopResult).LowestBreakIteration).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
 }

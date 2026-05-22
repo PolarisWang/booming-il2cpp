@@ -1,0 +1,19 @@
+{
+  "familyId": "family/System.ObjectModel/observable-collections",
+  "assemblyName": "System.ObjectModel",
+  "methodSubjectIds": [
+    "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::add_CollectionChanged:System.Void(System.Collections.Specialized.NotifyCollectionChangedEventHandler)",
+    "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::Move:System.Void(System.Int32,System.Int32)",
+    "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::remove_CollectionChanged:System.Void(System.Collections.Specialized.NotifyCollectionChangedEventHandler)",
+    "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::.ctor:System.Void()",
+    "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::.ctor:System.Void(System.Collections.Generic.IEnumerable{T})",
+    "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::.ctor:System.Void(System.Collections.Generic.List{T})",
+    "System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection`1::get_Empty:System.Collections.ObjectModel.ReadOnlyObservableCollection{T}()",
+    "System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection`1::.ctor:System.Void(System.Collections.ObjectModel.ObservableCollection{T})"
+  ],
+  "displayName": "observable-collections",
+  "description": "",
+  "closureStatus": "in-progress",
+  "methodCount": 8,
+  "customEntryIndices": []
+}

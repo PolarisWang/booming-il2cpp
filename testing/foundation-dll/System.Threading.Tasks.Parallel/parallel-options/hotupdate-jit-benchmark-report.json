@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Threading.Tasks.Parallel",
+  "familyId": "family/System.Threading.Tasks.Parallel/parallel/options",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::get_CancellationToken:System.Threading.CancellationToken()",
+      "status": "passed",
+      "prePatchNsPerOp": 103014.07,
+      "postPatchNsPerOp": 60147.4,
+      "slowdownPercent": -41.61
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::get_MaxDegreeOfParallelism:System.Int32()",
+      "status": "passed",
+      "prePatchNsPerOp": 81259.27,
+      "postPatchNsPerOp": 60074.8,
+      "slowdownPercent": -26.07
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::get_TaskScheduler:System.Threading.Tasks.TaskScheduler()",
+      "status": "passed",
+      "prePatchNsPerOp": 95498.64,
+      "postPatchNsPerOp": 78445.6,
+      "slowdownPercent": -17.86
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::set_CancellationToken:System.Void(System.Threading.CancellationToken)",
+      "status": "passed",
+      "prePatchNsPerOp": 63081.06,
+      "postPatchNsPerOp": 55296.4,
+      "slowdownPercent": -12.34
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::set_MaxDegreeOfParallelism:System.Void(System.Int32)",
+      "status": "passed",
+      "prePatchNsPerOp": 55848.46,
+      "postPatchNsPerOp": 57266.3,
+      "slowdownPercent": 2.54
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::set_TaskScheduler:System.Void(System.Threading.Tasks.TaskScheduler)",
+      "status": "passed",
+      "prePatchNsPerOp": 52367.67,
+      "postPatchNsPerOp": 59258.3,
+      "slowdownPercent": 13.16
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::.ctor:System.Void()",
+      "status": "passed",
+      "prePatchNsPerOp": 10643.28,
+      "postPatchNsPerOp": 21443.5,
+      "slowdownPercent": 101.47
+    }
+  ],
+  "summary": {
+    "totalMethods": 7,
+    "nonStubMethods": 7,
+    "averageSlowdownPercent": 2.76,
+    "slowdownFactor": 1.0276,
+    "slowdownThresholdX": 50.0
+  }
+}

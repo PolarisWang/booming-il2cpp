@@ -70,6 +70,12 @@
     },
     {
       "subjectKind": "field",
+      "subjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::iterations",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
       "subjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::sync",
       "preserve": "members",
       "reason": "full-assembly-closure"
@@ -77,12 +83,6 @@
     {
       "subjectKind": "field",
       "subjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::sharedCounter",
-      "preserve": "members",
-      "reason": "full-assembly-closure"
-    },
-    {
-      "subjectKind": "field",
-      "subjectId": "RuntimeSelfTest/IntegrationProof\u002B\u003C\u003Ec__DisplayClass4_0::iterations",
       "preserve": "members",
       "reason": "full-assembly-closure"
     },

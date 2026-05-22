@@ -137,18 +137,16 @@ public static class IntegrationProof
         // Background worker: allocates and signals
         System.Threading.Thread worker = new System.Threading.Thread(() =>
         {
+            int localSum = 0;
             for (int i = 0; i < iterations; i++)
             {
                 var obj = new GcAllocationProof();
                 obj.Value = i;
-
-                lock (sync)
-                {
-                    sharedCounter += obj.Value;
-                }
+                localSum += obj.Value;
             }
             lock (sync)
             {
+                sharedCounter += localSum;
                 workerDone = true;
             }
         });

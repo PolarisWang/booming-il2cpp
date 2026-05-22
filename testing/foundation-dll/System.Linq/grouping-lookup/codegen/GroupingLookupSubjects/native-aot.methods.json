@@ -1,0 +1,323 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "GroupingLookupSubjects",
+  "methodCount": 24,
+  "defaultStringId": 0,
+  "methods": [
+    {
+      "index": 0,
+      "nativeSymbol": "GroupingLookupSubjects_GroupingLookupSubjects_CustomEntrySubject_0",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 0
+    },
+    {
+      "index": 1,
+      "nativeSymbol": "GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_0_b__1_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 2,
+      "nativeSymbol": "GroupingLookupSubjects_GroupingLookupSubjects_CustomEntrySubject_1",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 1
+    },
+    {
+      "index": 3,
+      "nativeSymbol": "GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_1_b__2_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 4,
+      "nativeSymbol": "GroupingLookupSubjects_GroupingLookupSubjects_CustomEntrySubject_2",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 2
+    },
+    {
+      "index": 5,
+      "nativeSymbol": "GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_2_b__3_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 6,
+      "nativeSymbol": "GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_2_b__3_1_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 7,
+      "nativeSymbol": "GroupingLookupSubjects_GroupingLookupSubjects_CustomEntrySubject_3",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 3
+    },
+    {
+      "index": 8,
+      "nativeSymbol": "GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_3_b__4_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 9,
+      "nativeSymbol": "GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_3_b__4_1_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 10,
+      "nativeSymbol": "GroupingLookupSubjects_GroupingLookupSubjects_CustomEntrySubject_4",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 4
+    },
+    {
+      "index": 11,
+      "nativeSymbol": "GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_4_b__5_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 12,
+      "nativeSymbol": "GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_4_b__5_1_System_Int32_System_Collections_Generic_IEnumerable_System_Int32",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 13,
+      "nativeSymbol": "GroupingLookupSubjects_GroupingLookupSubjects_CustomEntrySubject_5",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 5
+    },
+    {
+      "index": 14,
+      "nativeSymbol": "GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_5_b__6_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 15,
+      "nativeSymbol": "GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_5_b__6_1_System_Int32_System_Collections_Generic_IEnumerable_System_Int32",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 16,
+      "nativeSymbol": "GroupingLookupSubjects_GroupingLookupSubjects_CustomEntrySubject_6",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 6
+    },
+    {
+      "index": 17,
+      "nativeSymbol": "GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_6_b__7_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 18,
+      "nativeSymbol": "GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_6_b__7_1_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 19,
+      "nativeSymbol": "GroupingLookupSubjects_GroupingLookupSubjects_CustomEntrySubject_7",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 7
+    },
+    {
+      "index": 20,
+      "nativeSymbol": "GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_7_b__8_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 21,
+      "nativeSymbol": "GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_7_b__8_1_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 22,
+      "nativeSymbol": "GroupingLookupSubjects_GroupingLookupSubjects___c_cctor",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 23,
+      "nativeSymbol": "GroupingLookupSubjects_GroupingLookupSubjects___c__ctor",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    }
+  ]
+}

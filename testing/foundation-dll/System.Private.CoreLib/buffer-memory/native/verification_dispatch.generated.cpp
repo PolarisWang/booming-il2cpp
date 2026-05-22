@@ -1,5 +1,5 @@
 // verification_dispatch.generated.cpp — auto-generated
-// Assembly: BufferMemorySubjects, Methods: 15
+// Assembly: BufferMemorySubjects, Methods: 13
 #include <cstdint>
 #include <chrono>
 #include <chaos/native_types.h>

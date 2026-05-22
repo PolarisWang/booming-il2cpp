@@ -1,0 +1,251 @@
+{
+  "family": "grouping-lookup",
+  "assembly": "System.Linq",
+  "mode": "standard",
+  "timestamp": "2026-05-22T07:22:16",
+  "duration_ms": 103974,
+  "overall_status": "passed",
+  "stages": {
+    "preflight": {
+      "stage": "preflight",
+      "status": "passed",
+      "summary": "8 methods, 8 custom entries",
+      "details": {
+        "methodCount": 8,
+        "customMethodCount": 8,
+        "hasCustomEntryFile": true,
+        "customMethods": [
+          "System.Linq/System.Linq.Enumerable::GroupBy{TSource,TKey}:System.Collections.Generic.IEnumerable{System.Linq.IGrouping{TKey,TSource}}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey})",
+          "System.Linq/System.Linq.Enumerable::GroupBy{TSource,TKey}:System.Collections.Generic.IEnumerable{System.Linq.IGrouping{TKey,TSource}}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey},System.Collections.Generic.IEqualityComparer{TKey})",
+          "System.Linq/System.Linq.Enumerable::GroupBy{TSource,TKey,TElement}:System.Collections.Generic.IEnumerable{System.Linq.IGrouping{TKey,TElement}}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey},System.Func{TSource,TElement})",
+          "System.Linq/System.Linq.Enumerable::GroupBy{TSource,TKey,TElement}:System.Collections.Generic.IEnumerable{System.Linq.IGrouping{TKey,TElement}}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey},System.Func{TSource,TElement},System.Collections.Generic.IEqualityComparer{TKey})",
+          "System.Linq/System.Linq.Enumerable::GroupBy{TSource,TKey,TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey},System.Func{TKey,System.Collections.Generic.IEnumerable{TSource},TResult})",
+          "System.Linq/System.Linq.Enumerable::GroupBy{TSource,TKey,TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey},System.Func{TKey,System.Collections.Generic.IEnumerable{TSource},TResult},System.Collections.Generic.IEqualityComparer{TKey})",
+          "System.Linq/System.Linq.Enumerable::GroupBy{TSource,TKey,TElement,TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey},System.Func{TSource,TElement},System.Func{TKey,System.Collections.Generic.IEnumerable{TElement},TResult})",
+          "System.Linq/System.Linq.Enumerable::GroupBy{TSource,TKey,TElement,TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey},System.Func{TSource,TElement},System.Func{TKey,System.Collections.Generic.IEnumerable{TElement},TResult},System.Collections.Generic.IEqualityComparer{TKey})"
+        ]
+      },
+      "errors": [],
+      "duration_ms": 0
+    },
+    "codegen": {
+      "stage": "codegen",
+      "status": "passed",
+      "summary": "Entrypoint built and IL2CPP compile OK",
+      "details": {
+        "methodCount": 8,
+        "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Linq\\grouping-lookup\\managed\\subjects\\build-output\\GroupingLookupSubjects.dll"
+      },
+      "errors": [],
+      "duration_ms": 36088
+    },
+    "jit_codegen": {
+      "stage": "jit_codegen",
+      "status": "passed",
+      "summary": "entry-jit.exe already exists, skipping rebuild",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "fact": {
+      "stage": "fact",
+      "status": "passed",
+      "summary": "Fact verify=passed (24/24)",
+      "details": {
+        "fact": {
+          "status": "passed",
+          "passed": 24,
+          "total": 24
+        }
+      },
+      "errors": [],
+      "duration_ms": 399
+    },
+    "fact_jit": {
+      "stage": "fact_jit",
+      "status": "passed",
+      "summary": "Fact JIT verify=passed (24/24)",
+      "details": {
+        "fact_jit": {
+          "status": "passed",
+          "passed": 24,
+          "total": 24,
+          "exit_code": 0
+        }
+      },
+      "errors": [],
+      "duration_ms": 40
+    },
+    "audit": {
+      "stage": "audit",
+      "status": "passed",
+      "summary": "false_passing=0, principle=ALIGNED",
+      "details": {
+        "falsePassing": 0,
+        "stubsFound": 0,
+        "skipsFound": 0,
+        "principleStatus": "ALIGNED",
+        "methodsWithoutLowering": 0
+      },
+      "errors": [],
+      "duration_ms": 1708
+    },
+    "asm_compare": {
+      "stage": "asm_compare",
+      "status": "skipped",
+      "summary": "Subjects DLL not found — run codegen stage first",
+      "details": {},
+      "errors": [],
+      "duration_ms": 28
+    },
+    "microbench": {
+      "stage": "microbench",
+      "status": "passed",
+      "summary": "FramePool=2.8ns/op | FastExecute=214.0ns/op | CallVirt dispatch=216.9ns",
+      "details": {
+        "framePool": {
+          "acquireReleaseNsPerOp": 2.8,
+          "batchCount": 1000,
+          "framesPerBatch": 32
+        },
+        "fastExecute": {
+          "runCount": 100000,
+          "nsPerCall": 214.0
+        },
+        "callVirt": {
+          "handlerDispatchNs": 216.9,
+          "emptyStackNs": 238.6
+        },
+        "poolSize": 32
+      },
+      "errors": [],
+      "duration_ms": 74
+    },
+    "benchmark": {
+      "stage": "benchmark",
+      "status": "skipped",
+      "summary": "All 8 non-stub methods are invalid (no managed harness)",
+      "details": {},
+      "errors": [],
+      "duration_ms": 60276
+    },
+    "hotupdate": {
+      "stage": "hotupdate",
+      "status": "passed",
+      "summary": "24/24 passed, 0 failed (stub=0)",
+      "details": {
+        "passedMethods": 24,
+        "failedMethods": 0,
+        "totalMethods": 24,
+        "realMethods": 24,
+        "stubMethods": 0
+      },
+      "errors": [],
+      "duration_ms": 36
+    },
+    "hotupdate_aot_benchmark": {
+      "stage": "hotupdate_aot_benchmark",
+      "status": "passed",
+      "summary": "avg_slowdown=-0.39% (1.0x) over 8 methods (AOT patched path)",
+      "details": {
+        "averageSlowdownPercent": -0.39,
+        "slowdownFactor": 0.9961,
+        "threshold": 50.0,
+        "nonStubMethods": 8
+      },
+      "errors": [],
+      "duration_ms": 235
+    },
+    "hotupdate_jit_fact": {
+      "stage": "hotupdate_jit_fact",
+      "status": "passed",
+      "summary": "24/24 passed, 0 failed",
+      "details": {
+        "passed": 24,
+        "failed": 0,
+        "total": 24
+      },
+      "errors": [],
+      "duration_ms": 34
+    },
+    "hotupdate_jit_benchmark": {
+      "stage": "hotupdate_jit_benchmark",
+      "status": "passed",
+      "summary": "avg_slowdown=37.7% (1.4x) over 8 methods (JIT patched path)",
+      "details": {
+        "averageSlowdownPercent": 37.7,
+        "slowdownFactor": 1.3769999999999998,
+        "threshold": 50.0,
+        "nonStubMethods": 8
+      },
+      "errors": [],
+      "duration_ms": 5047
+    }
+  },
+  "coverage": {
+    "methodCoverage": 100.0,
+    "testedRate": 100.0,
+    "overall": 100.0
+  },
+  "dashboard": {
+    "interpreter": {
+      "fastFramePoolNsPerOp": 2.8,
+      "fastExecuteNsPerInstr": 0,
+      "callVirtHandlerDispatchNs": 216.9,
+      "callVirtMicHitNs": 0,
+      "callVirtRawFallbackNs": 0,
+      "poolSize": 32
+    },
+    "irTranslation": {},
+    "performance": {},
+    "hotupdate": {
+      "aotFunctional": {
+        "passedMethods": 24,
+        "failedMethods": 0,
+        "totalMethods": 24
+      },
+      "aotOverhead": {
+        "averageSlowdownPercent": -0.39,
+        "slowdownFactor": 0.9961,
+        "nonStubMethods": 8
+      },
+      "jitFunctional": {
+        "passedMethods": 24,
+        "failedMethods": 0,
+        "totalMethods": 24
+      },
+      "jitOverhead": {
+        "averageSlowdownPercent": 37.7,
+        "slowdownFactor": 1.3769999999999998,
+        "nonStubMethods": 8
+      }
+    },
+    "keyRatios": {
+      "nativeFasterRatio": 0,
+      "irExpansionRatio": 0,
+      "interpreterSlowdownFactor": 0.9961,
+      "asmPassRate": 0.0
+    }
+  },
+  "regression": {
+    "benchmark": {
+      "status": "matched",
+      "baselineMetrics": {
+        "totalMethods": 8,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      },
+      "currentMetrics": {
+        "totalMethods": 8,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      }
+    },
+    "hasRegression": false,
+    "regressions": []
+  }
+}

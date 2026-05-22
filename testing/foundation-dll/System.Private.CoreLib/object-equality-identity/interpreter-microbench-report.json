@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/object/equality/identity",
+  "capturedAt": "2026-05-22T08:39:44",
+  "metrics": {
+    "framePool": {
+      "acquireReleaseNsPerOp": 5.2,
+      "batchCount": 1000,
+      "framesPerBatch": 32
+    },
+    "fastExecute": {
+      "runCount": 100000,
+      "nsPerCall": 942.7
+    },
+    "callVirt": {
+      "handlerDispatchNs": 690.9,
+      "emptyStackNs": 760.0
+    },
+    "poolSize": 32
+  },
+  "rawOutput": "[2026-05-22T08:39:44][DEBUG][codegen] T4 VEH handler registered\n[2026-05-22T08:39:44][DEBUG][GcEvents] registered callback 0x7ff73b1c54a0 at slot 0\n[2026-05-22T08:39:44][WARN][CRAG] young_collection_no_region\n[2026-05-22T08:39:44][INFO][NUMA] numa_init count=%d\n[2026-05-22T08:39:44][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-22T08:39:44][INFO][OldGen] init done base=0x2878437457920 pages=8\n[2026-05-22T08:39:44][DEBUG][codegen] T4 VEH handler registered\n[2026-05-22T08:39:44][DEBUG][GcEvents] registered callback 0x7ff73b1c54a0 at slot 1\nBenchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 5.2 ns/op (1000 batches x 32 frames)\n[2026-05-22T08:39:44][DEBUG][BGC] thread_started\n[2026-05-22T08:39:44][DEBUG][Finalizer] thread_started id={0}\n[2026-05-22T08:39:44][WARN][CRAG] young_collection_no_region\n[2026-05-22T08:39:44][DEBUG][BGC] start_cycle\n[2026-05-22T08:39:44][DEBUG][BGC] root_scan heap=875 oldgen=8 valid=0 marked=0\n[2026-05-22T08:39:44][DEBUG][BGC] root_set_populated\n[2026-05-22T08:39:44][DEBUG][BGC] concurrent_mark_started\n[2026-05-22T08:39:44][DEBUG][BGC] concurrent_mark_begin\n[2026-05-22T08:39:44][DEBUG][BGC] parallel_workers spawned=8\nBenchmark 2: FastExecute (Subject_0): 100000 runs: 942.7 ns/op\n[2026-05-22T08:39:44][DEBUG][BGC] concurrent_mark_complete\n[2026-05-22T08:39:44][WARN][CRAG] young_collection_no_region\n[2026-05-22T08:39:44][DEBUG][BGC] stw_remark_start\n[2026-05-22T08:39:44][DEBUG][BGC] stw_remark_done marked=0 cards=0\n[2026-05-22T08:39:44][DEBUG][BGC] concurrent_sweep_started\n[2026-05-22T08:39:44][INFO][BGC] remark_done pause_us=92\n[2026-05-22T08:39:44][DEBUG][BGC] concurrent_sweep_begin\n[2026-05-22T08:39:44][DEBUG][BGC] concurrent_sweep_complete\n[2026-05-22T08:39:44][DEBUG][BGC] compact_needed_waiting\n[2026-05-22T08:39:44][WARN][CRAG] young_collection_no_region\n[2026-05-22T08:39:44][DEBUG][BGC] stw_compact_start\n[2026-05-22T08:39:44][DEBUG][BGC] cycle_finished\n[2026-05-22T08:39:44][DEBUG][BGC] stw_compact_done\n[2026-05-22T08:39:44][INFO][BGC] compact_done pause_us=60\nHandler dispatch overhead (LdcI4): 690.9 ns/call\nCallVirt empty-stack: 760.0 ns/call\n"
+}

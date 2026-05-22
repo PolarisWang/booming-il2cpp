@@ -123,6 +123,12 @@
       "reason": "external-call"
     },
     {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "reason": "external-call"
+    },
+    {
       "assemblyName": "System.Runtime.InteropServices",
       "subjectKind": "method",
       "subjectId": "System.Runtime.InteropServices/COMException::.ctor:System.Void()",

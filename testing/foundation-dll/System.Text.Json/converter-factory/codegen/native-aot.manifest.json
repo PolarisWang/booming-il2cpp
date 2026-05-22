@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "ConverterFactorySubjects",
   "entrySubjectId": "ConverterFactorySubjects/ConverterFactorySubjects::Subject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Text.Json/converter-factory/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.Text.Json/converter-factory/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

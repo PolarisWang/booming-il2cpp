@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Collections.Immutable",
+  "familyId": "family/System.Collections.Immutable/immutable/interlocked",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableInterlocked::Update<string>(System.String&,System.Func{System.String,System.String})",
+      "elapsedMilliseconds": 11.684,
+      "calibratedMs": 11.684,
+      "opsPerSecond": 8558419.8,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}

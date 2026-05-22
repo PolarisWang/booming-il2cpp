@@ -3,7 +3,7 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "TimeDateTimeTimespanSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/time-date-time-timespan/codegen/_subjects_input/TimeDateTimeTimespanSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/time-date-time-timespan/managed/subjects/build-output/TimeDateTimeTimespanSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
@@ -12,11 +12,11 @@
     },
     {
       "assemblyName": "TimeDateTimeTimespanSubjects",
-      "path": "testing/foundation-dll/System.Private.CoreLib/time-date-time-timespan/codegen/_subjects_input/TimeDateTimeTimespanSubjects.dll"
+      "path": "testing/foundation-dll/System.Private.CoreLib/time-date-time-timespan/managed/subjects/build-output/TimeDateTimeTimespanSubjects.dll"
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "03a3baec-233e-443b-b5cf-416afdbec495",
+  "inputModuleVersionId": "e88a9129-2073-4088-b2d2-f7f533aa796f",
   "artifacts": [
     {
       "kind": "typedIlIr",

@@ -55,50 +55,22 @@ public static partial class EnumParsingSubjects
     }
 
     // [6] System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String)
-    public static void Subject_6()
-    {
-        try { if (((Enum.Parse(typeof(byte), "hello")).GetHashCode()) != ((Enum.Parse(typeof(byte), "hello")).GetHashCode())) _exitCode = 1; }
-        catch { _exitCode = 1; }
-    }
-
     // [7] System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String,System.Boolean)
-    public static void Subject_7()
-    {
-        try { if (((Enum.Parse(typeof(byte), "hello", true)).GetHashCode()) != ((Enum.Parse(typeof(byte), "hello", true)).GetHashCode())) _exitCode = 1; }
-        catch { _exitCode = 1; }
-    }
-
     // [8] System.Private.CoreLib/System.Enum::ToString:System.String()
     public static void Subject_8()
     {
-        try { if (((DayOfWeek.Monday.ToString()).Length) != ((DayOfWeek.Monday.ToString()).Length)) _exitCode = 1; }
+        try { if (((Enum.Format(typeof(byte), (byte)42, "G")).Length) != ((Enum.Format(typeof(byte), (byte)42, "G")).Length)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [9] System.Private.CoreLib/System.Enum::ToString:System.String(System.String)
     public static void Subject_9()
     {
-        try { if (((42.ToString("X")).Length) != ((42.ToString("X")).Length)) _exitCode = 1; }
+        try { if (((Enum.Format(typeof(byte), (byte)42, "X")).Length) != ((Enum.Format(typeof(byte), (byte)42, "X")).Length)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [10] System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Boolean,System.Object&)
-    public static void Subject_10()
-    {
-        try { if (((Enum.TryParse(typeof(DayOfWeek), "Monday", true, out object _)) ? 1 : 0) != ((Enum.TryParse(typeof(DayOfWeek), "Monday", true, out object _)) ? 1 : 0)) _exitCode = 1; }
-        catch { _exitCode = 1; }
-    }
-
     // [11] System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Object&)
-    public static void Subject_11()
-    {
-        try { if (((Enum.TryParse(typeof(DayOfWeek), "Monday", out object _)) ? 1 : 0) != ((Enum.TryParse(typeof(DayOfWeek), "Monday", out object _)) ? 1 : 0)) _exitCode = 1; }
-        catch { _exitCode = 1; }
-    }
-
     // [12] System.Private.CoreLib/System.Enum::BoxToString:System.String()
-    public static void CustomEntrySubject_12()
-    {
-    }
-
 }

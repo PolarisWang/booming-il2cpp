@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "JoinsSubjects",
   "entrySubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Linq/joins/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.Linq/joins/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

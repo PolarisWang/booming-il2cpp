@@ -16,26 +16,29 @@ public static partial class SseItemSubjects
     // [0] System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseItem`1::get_Data:T()
     public static void Subject_0()
     {
-        if (((default(SseItem<byte>).Data).GetHashCode()) != 0) _exitCode = 1;
+        try { if (((default(SseItem<byte>).Data).GetHashCode()) != ((default(SseItem<byte>).Data).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [1] System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseItem`1::get_EventId:System.String()
     public static void Subject_1()
     {
-        try { _ = default(SseItem<byte>).EventId; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(SseItem<byte>).EventId).Length) != ((default(SseItem<byte>).EventId).Length)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [2] System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseItem`1::get_EventType:System.String()
     public static void Subject_2()
     {
-        if (((default(SseItem<byte>).EventType).Length) != 7) _exitCode = 1;
+        try { if (((default(SseItem<byte>).EventType).Length) != ((default(SseItem<byte>).EventType).Length)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [3] System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseItem`1::get_ReconnectionInterval:System.Nullable{System.TimeSpan}()
     public static void Subject_3()
     {
-        if (((default(SseItem<byte>).ReconnectionInterval).GetHashCode()) != 0) _exitCode = 1;
+        try { if (((default(SseItem<byte>).ReconnectionInterval).GetHashCode()) != ((default(SseItem<byte>).ReconnectionInterval).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [4] System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseItem`1::set_EventId:System.Void(System.String)

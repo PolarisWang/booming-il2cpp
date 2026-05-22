@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "ExtensionsMarshalSubjects",
   "entrySubjectId": "ExtensionsMarshalSubjects/ExtensionsMarshalSubjects::CustomEntrySubject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Collections.Immutable/extensions-marshal/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.Collections.Immutable/extensions-marshal/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

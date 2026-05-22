@@ -3,7 +3,7 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "WindowsPrincipalRolesSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Security.Principal.Windows/windows-principal-roles/managed/subjects/build-output/WindowsPrincipalRolesSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Security.Principal.Windows/windows-principal-roles/managed/subjects/build-output/WindowsPrincipalRolesSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
@@ -20,11 +20,11 @@
     },
     {
       "assemblyName": "WindowsPrincipalRolesSubjects",
-      "path": "verification/foundation-dll/System.Security.Principal.Windows/windows-principal-roles/managed/subjects/build-output/WindowsPrincipalRolesSubjects.dll"
+      "path": "testing/foundation-dll/System.Security.Principal.Windows/windows-principal-roles/managed/subjects/build-output/WindowsPrincipalRolesSubjects.dll"
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "05d70ce6-fad1-42e8-b90c-fec57343f8ff",
+  "inputModuleVersionId": "8e9302d4-5705-4aa9-9a78-0adb1c795b64",
   "artifacts": [
     {
       "kind": "typedIlIr",

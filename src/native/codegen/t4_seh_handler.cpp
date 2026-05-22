@@ -7,10 +7,15 @@
 // can demote T4 entries without creating a circular dependency.
 #include <t4_demotion.h>
 
+// GC event callbacks for deferred T4 code memory reclamation.
+#include <gc_events.h>
+
 #if defined(_WIN32) || defined(_WIN64)
   #define NOMINMAX
   #include <windows.h>
   #include <intrin.h>   // _ReturnAddress(), _AddressOfReturnAddress()
+#elif defined(__linux__)
+  #include <sys/mman.h> // munmap
 #endif
 
 namespace chaos::il2cpp::codegen {
@@ -19,6 +24,8 @@ namespace chaos::il2cpp::codegen {
 // Maps code address ranges back to NativeMethod for VEH lookup.
 // Fixed-size array (no heap allocation in exception context).
 // Thread-safe: entries are append-only, never removed.
+// A per-thread lookup cache exploits temporal locality (repeated VEH
+// lookups within the same code page are O(1)).
 
 static constexpr uint32_t kMaxT4CodeEntries = 2048;
 
@@ -32,6 +39,101 @@ struct T4CodeEntry {
 static T4CodeEntry    g_t4_code_entries[kMaxT4CodeEntries];
 static uint32_t       g_t4_code_count = 0;
 static long           g_t4_code_lock  = 0;    // 0=free, 1=locked (spinlock)
+
+// Thread-local lookup cache: stores the NativeMethod for the most recently
+// accessed code page.  VEH handler / personality routine / EndFinallyHelper
+// call FindT4CodeByAddress frequently, and consecutive calls often fall
+// within the same method's code range, making this cache highly effective.
+static thread_local struct {
+    uintptr_t         page_base = 0;  // address >> 12 (page-aligned)
+    const NativeMethod* nm      = nullptr;
+} g_t4_lookup_cache;
+
+// Invalidate the TLS lookup cache for all threads by bumping a generation
+// counter.  Currently uses a brute-force approach: when an entry is demoted,
+// all threads re-linear-scan on their next lookup.  A generation check would
+// be more precise but adds overhead to the fast path.
+static void InvalidateLookupCache() noexcept {
+    g_t4_lookup_cache.page_base = 0;
+    g_t4_lookup_cache.nm = nullptr;
+}
+
+// ── Demoted Code Reclamation (C1) ──────────────────────────────────────────
+// When T4 code is demoted, we can't immediately free the RX memory because
+// other threads may still be executing it.  Instead we record the code range
+// and defer VirtualFree to the next GC safepoint, which guarantees no thread
+// is executing managed code (including T4 generated code).
+
+static constexpr uint32_t kMaxPendingFreeRegions = 64;
+
+struct PendingFreeRegion {
+    void*    code_start = nullptr;
+    uint32_t code_size  = 0;
+    bool     active     = false;
+};
+
+static PendingFreeRegion g_pending_free[kMaxPendingFreeRegions];
+static uint32_t          g_pending_free_count = 0;
+
+static void EnqueueDemotedCode(void* code_start, uint32_t code_size) noexcept {
+    if (code_start == nullptr || code_size == 0) return;
+
+    // Deduplicate: if this exact address is already tracked, skip.
+    for (uint32_t i = 0; i < kMaxPendingFreeRegions; i++) {
+        if (g_pending_free[i].active && g_pending_free[i].code_start == code_start) {
+            return;
+        }
+    }
+
+    for (uint32_t i = 0; i < kMaxPendingFreeRegions; i++) {
+        if (!g_pending_free[i].active) {
+            g_pending_free[i].code_start = code_start;
+            g_pending_free[i].code_size  = code_size;
+            g_pending_free[i].active     = true;
+            g_pending_free_count++;
+            return;
+        }
+    }
+
+    CHAOS_IL2CPP_LOG_WARN_M("codegen",
+        "pending-free table full ({} entries)", kMaxPendingFreeRegions);
+}
+
+/// Free all demoted T4 code regions.  Called from the GC safepoint via
+/// the GC event callback system (registered in RegisterT4SehHandler).
+void ReclaimDemotedCode() noexcept {
+    for (uint32_t i = 0; i < kMaxPendingFreeRegions; i++) {
+        if (!g_pending_free[i].active) continue;
+
+#if defined(_WIN64)
+        BOOL ok = VirtualFree(g_pending_free[i].code_start, 0, MEM_RELEASE);
+        if (!ok) {
+            CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
+                "ReclaimDemotedCode: VirtualFree({}, {}) failed (already freed?)",
+                g_pending_free[i].code_start, g_pending_free[i].code_size);
+        }
+#elif defined(__linux__)
+        int ret = munmap(g_pending_free[i].code_start, g_pending_free[i].code_size);
+        if (ret != 0) {
+            CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
+                "ReclaimDemotedCode: munmap({}, {}) failed",
+                g_pending_free[i].code_start, g_pending_free[i].code_size);
+        }
+#endif
+
+        g_pending_free[i].active = false;
+        g_pending_free[i].code_start = nullptr;
+        g_pending_free[i].code_size = 0;
+    }
+    g_pending_free_count = 0;
+}
+
+/// GC event callback: fires at safepoint after GC completes.  Safe to
+/// call VirtualFree/munmap because no thread is executing managed code.
+static void OnGcSafepoint(chaos::il2cpp::runtime_core::GcEvent /*event*/,
+                           void* /*user_data*/) noexcept {
+    ReclaimDemotedCode();
+}
 
 static void LockT4Registry() noexcept {
     while (InterlockedExchange(&g_t4_code_lock, 1) != 0) {
@@ -92,7 +194,12 @@ void UnregisterT4Code(void* code_start) noexcept {
     LockT4Registry();
     for (uint32_t i = 0; i < g_t4_code_count; i++) {
         if (g_t4_code_entries[i].code_start == code_start) {
+            // Enqueue for deferred free before clearing nm reference.
+            EnqueueDemotedCode(
+                const_cast<void*>(g_t4_code_entries[i].code_start),
+                g_t4_code_entries[i].code_size);
             g_t4_code_entries[i].nm = nullptr;
+            InvalidateLookupCache();
             break;
         }
     }
@@ -104,13 +211,19 @@ uint32_t DemoteT4ByToken(uint32_t method_token) noexcept {
     uint32_t count = 0;
     LockT4Registry();
     for (uint32_t i = 0; i < g_t4_code_count; i++) {
-        if (g_t4_code_entries[i].patch_method_token == method_token) {
+        if (g_t4_code_entries[i].patch_method_token == method_token &&
+            g_t4_code_entries[i].nm != nullptr) {
+            // Enqueue for deferred free before clearing nm reference.
+            EnqueueDemotedCode(
+                const_cast<void*>(g_t4_code_entries[i].code_start),
+                g_t4_code_entries[i].code_size);
             g_t4_code_entries[i].nm = nullptr;
             count++;
         }
     }
     UnlockT4Registry();
     if (count > 0) {
+        InvalidateLookupCache();
         CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
             "DemoteT4ByToken: token={} demoted {} entries", method_token, count);
     }
@@ -127,6 +240,10 @@ uint32_t DemoteT4ByCallSiteToken(uint32_t method_token) noexcept {
         // Scan call sites for matching method_token
         for (uint32_t j = 0; j < nm->call_site_count; j++) {
             if (nm->call_sites[j].method_token == method_token) {
+                // Enqueue for deferred free before clearing nm reference.
+                EnqueueDemotedCode(
+                    const_cast<void*>(g_t4_code_entries[i].code_start),
+                    g_t4_code_entries[i].code_size);
                 g_t4_code_entries[i].nm = nullptr;
                 count++;
                 break;
@@ -135,6 +252,7 @@ uint32_t DemoteT4ByCallSiteToken(uint32_t method_token) noexcept {
     }
     UnlockT4Registry();
     if (count > 0) {
+        InvalidateLookupCache();
         CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
             "DemoteT4ByCallSiteToken: token={} demoted {} caller entries", method_token, count);
     }
@@ -143,7 +261,19 @@ uint32_t DemoteT4ByCallSiteToken(uint32_t method_token) noexcept {
 
 /// Find the NativeMethod covering a given code address.
 /// Returns nullptr if not found.
+/// Uses a thread-local page-aligned cache (O(1) on repeated lookups within
+/// the same method's code range), falling back to linear scan on cold miss.
 const NativeMethod* FindT4CodeByAddress(const void* address) noexcept {
+    uintptr_t addr_val = reinterpret_cast<uintptr_t>(address);
+    uintptr_t page = addr_val >> 12;
+
+    // Fast path: check the thread-local page-aligned cache.
+    if (g_t4_lookup_cache.nm != nullptr &&
+        g_t4_lookup_cache.page_base == page) {
+        return g_t4_lookup_cache.nm;
+    }
+
+    // Slow path: linear scan the registry.
     for (uint32_t i = 0; i < g_t4_code_count; i++) {
         const auto& entry = g_t4_code_entries[i];
         const uint8_t* start = static_cast<const uint8_t*>(entry.code_start);
@@ -151,6 +281,9 @@ const NativeMethod* FindT4CodeByAddress(const void* address) noexcept {
         const uint8_t* end = start + entry.code_size;
         const uint8_t* addr = static_cast<const uint8_t*>(address);
         if (addr >= start && addr < end) {
+            // Populate cache for future lookups within the same page.
+            g_t4_lookup_cache.page_base = page;
+            g_t4_lookup_cache.nm = entry.nm;
             return entry.nm;
         }
     }
@@ -218,6 +351,150 @@ static uint32_t FindSehHandlerForOffset(const NativeMethod* nm,
     return 0xFFFFFFFFu;
 }
 
+// ── SEH V3: Two-Phase Finally/Fault Unwind Functions ─────────────────────
+//
+// Phase 1: FindSehCatchHandler — reverse-iterates SEH clause table to find
+//   the innermost catch/filter clause covering code_offset.
+// Phase 1b: BuildUnwindList — forward-iterates, collecting finally/fault
+//   (flags 0x2/0x4) nested within the catch's try range.
+// Phase 2: Executed by T4EndFinallyHelper — advances unwind_index, returns
+//   next handler offset or 0 when done.
+
+/// Find the innermost catch/filter clause covering code_offset.
+/// Returns true if found, with handler_offset and clause_idx set.
+static bool FindSehCatchHandler(const NativeMethod* nm,
+                                 uint32_t code_offset,
+                                 uint32_t* out_handler_offset,
+                                 uint32_t* out_clause_idx) noexcept {
+    if (nm->seh_table_offset == 0) return false;
+
+    const uint8_t* code = static_cast<const uint8_t*>(nm->code);
+    const uint8_t* table = code + nm->seh_table_offset;
+    uint32_t count;
+    std::memcpy(&count, table, sizeof(count));
+    const uint8_t* clauses = table + sizeof(uint32_t);
+
+    // Reverse search: find innermost matching catch/filter (flag 0x0 or 0x1).
+    for (uint32_t i = count; i > 0; --i) {
+        uint32_t idx = i - 1;
+        const uint8_t* entry = clauses + idx * kSehClauseEntrySize;
+        uint32_t cflags, ctry_start, ctry_end;
+        std::memcpy(&cflags,    entry + 0, sizeof(cflags));
+        std::memcpy(&ctry_start, entry + 4, sizeof(ctry_start));
+        std::memcpy(&ctry_end,  entry + 8, sizeof(ctry_end));
+
+        // Catch (0x0) or Filter (0x1)
+        if ((cflags == 0 || cflags == 1) &&
+            code_offset >= ctry_start && code_offset < ctry_end) {
+            uint32_t handler_st;
+            std::memcpy(&handler_st, entry + 12, sizeof(handler_st));
+            if (out_handler_offset) *out_handler_offset = handler_st;
+            if (out_clause_idx) *out_clause_idx = idx;
+            return true;
+        }
+    }
+    return false;
+}
+
+/// Collect finally/fault clauses (flags 0x2/0x4) nested within the catch
+/// clause's try range, between try_start and throw_offset.
+/// Entries are stored innermost-first (LIFO unwind order).
+static void BuildUnwindList(const NativeMethod* nm,
+                             uint32_t catch_clause_idx,
+                             uint32_t throw_offset) noexcept {
+    if (nm->seh_table_offset == 0) return;
+
+    const uint8_t* code = static_cast<const uint8_t*>(nm->code);
+    const uint8_t* table = code + nm->seh_table_offset;
+    uint32_t count;
+    std::memcpy(&count, table, sizeof(count));
+    const uint8_t* clauses = table + sizeof(uint32_t);
+
+    // Get catch clause try range
+    const uint8_t* catch_entry = clauses + catch_clause_idx * kSehClauseEntrySize;
+    uint32_t catch_try_start, catch_try_end;
+    std::memcpy(&catch_try_start, catch_entry + 4, sizeof(catch_try_start));
+    std::memcpy(&catch_try_end,   catch_entry + 8, sizeof(catch_try_end));
+
+    // Forward scan for finally/fault nested within catch's try range,
+    // whose try_start is between catch_try_start and throw_offset.
+    for (uint32_t i = 0; i < count; i++) {
+        const uint8_t* entry = clauses + i * kSehClauseEntrySize;
+        uint32_t cflags, ctry_start, ctry_end;
+        std::memcpy(&cflags,    entry + 0, sizeof(cflags));
+        std::memcpy(&ctry_start, entry + 4, sizeof(ctry_start));
+        std::memcpy(&ctry_end,  entry + 8, sizeof(ctry_end));
+
+        // Finally (0x2) or Fault (0x4)
+        if ((cflags != 2 && cflags != 4)) continue;
+        if (ctry_start < catch_try_start) continue;   // outside catch's try range
+        if (ctry_start >= catch_try_end) continue;     // outside catch's try range
+        if (ctry_start > throw_offset) continue;       // after throw point
+
+        // Insert innermost-first: clauses appearing later (innermost) are
+        // added earlier in the unwind_list so they execute first (LIFO).
+        if (g_t4_unwind.unwind_count < kMaxUnwindDepth) {
+            // Shift existing entries right and insert at front
+            for (uint32_t j = g_t4_unwind.unwind_count; j > 0; --j) {
+                g_t4_unwind.unwind_list[j] = g_t4_unwind.unwind_list[j - 1];
+            }
+            g_t4_unwind.unwind_list[0] = i;
+            g_t4_unwind.unwind_count++;
+        }
+    }
+}
+
+/// Reverse-search for the innermost finally/fault covering code_offset.
+/// Returns the clause index, or UINT32_MAX if not found.
+static uint32_t FindInnermostFinally(const NativeMethod* nm,
+                                      uint32_t code_offset) noexcept {
+    if (nm->seh_table_offset == 0) return UINT32_MAX;
+
+    const uint8_t* code = static_cast<const uint8_t*>(nm->code);
+    const uint8_t* table = code + nm->seh_table_offset;
+    uint32_t count;
+    std::memcpy(&count, table, sizeof(count));
+    const uint8_t* clauses = table + sizeof(uint32_t);
+
+    for (uint32_t i = count; i > 0; --i) {
+        uint32_t idx = i - 1;
+        const uint8_t* entry = clauses + idx * kSehClauseEntrySize;
+        uint32_t cflags, ctry_start, ctry_end;
+        std::memcpy(&cflags,    entry + 0, sizeof(cflags));
+        std::memcpy(&ctry_start, entry + 4, sizeof(ctry_start));
+        std::memcpy(&ctry_end,  entry + 8, sizeof(ctry_end));
+
+        if (cflags == 2 &&
+            code_offset >= ctry_start && code_offset < ctry_end) {
+            return idx;
+        }
+    }
+    return UINT32_MAX;
+}
+
+/// Read handler start byte offset for a clause index.
+static uint32_t GetClauseHandlerOffset(const NativeMethod* nm,
+                                        uint32_t clause_idx) noexcept {
+    const uint8_t* code = static_cast<const uint8_t*>(nm->code);
+    const uint8_t* entry = code + nm->seh_table_offset + sizeof(uint32_t)
+                           + clause_idx * kSehClauseEntrySize + 12;
+    uint32_t val;
+    std::memcpy(&val, entry, sizeof(val));
+    return val;
+}
+
+/// Read try range for a clause index.
+static void GetClauseTryRange(const NativeMethod* nm,
+                               uint32_t clause_idx,
+                               uint32_t* out_start,
+                               uint32_t* out_end) noexcept {
+    const uint8_t* code = static_cast<const uint8_t*>(nm->code);
+    const uint8_t* entry = code + nm->seh_table_offset + sizeof(uint32_t)
+                           + clause_idx * kSehClauseEntrySize;
+    std::memcpy(out_start, entry + 4, sizeof(uint32_t));
+    std::memcpy(out_end,   entry + 8, sizeof(uint32_t));
+}
+
 #if defined(_WIN32) || defined(_WIN64)
 
 /// Managed exception code used by CodegenThrow/CodegenRethrow.
@@ -237,6 +514,20 @@ thread_local void* g_t4_throw_ret_addr = nullptr;
 /// T4 frame RSP at the throw point (set by ChaosT4RaiseException, read by
 /// VEH handler to locate the register file for exception object placement).
 thread_local void* g_t4_frame_rsp = nullptr;
+
+/// SEH V3: Thread-local finally/fault unwind state.
+thread_local T4UnwindState g_t4_unwind = {};
+
+/// Reset SEH V3 unwind state to defaults.
+static void ResetUnwindState() noexcept {
+    g_t4_unwind.unwind_count = 0;
+    g_t4_unwind.unwind_index = 0;
+    g_t4_unwind.exception_in_flight = false;
+    g_t4_unwind.pending_leave = false;
+    g_t4_unwind.leave_target_offset = 0;
+    g_t4_unwind.has_catch = false;
+    g_t4_unwind.catch_handler_offset = 0;
+}
 
 // ── ChaosT4RaiseException ───────────────────────────────────────────────
 // Called from T4-generated code for Throw/Rethrow instructions.  Stores the
@@ -313,21 +604,51 @@ static LONG WINAPI T4VectoredExceptionHandler(EXCEPTION_POINTERS* ep) noexcept {
         uint32_t code_offset = static_cast<uint32_t>(
             static_cast<const uint8_t*>(g_t4_throw_ret_addr) - code_base);
 
-        // Find matching SEH handler
-        uint32_t handler_offset = FindSehHandlerForOffset(nm, code_offset);
-        if (handler_offset == 0xFFFFFFFFu) {
-            // No matching handler in this method — let exception propagate.
-            // Clear throw state for next potential catch in caller frame.
+        // ── SEH V3: Two-phase exception dispatch ───────────────────────
+        // Phase 1a: Find matching catch/filter handler (innermost first).
+        uint32_t catch_handler_offset_val = 0;
+        uint32_t catch_clause_idx = 0;
+        bool has_catch = FindSehCatchHandler(nm, code_offset,
+                                             &catch_handler_offset_val,
+                                             &catch_clause_idx);
+        // Phase 1b: Build finally/fault unwind list.
+        ResetUnwindState();
+        if (has_catch) {
+            g_t4_unwind.has_catch = true;
+            g_t4_unwind.catch_handler_offset = catch_handler_offset_val;
+            BuildUnwindList(nm, catch_clause_idx, code_offset);
+        } else {
+            // No catch — scan for finally/fault covering the throw offset.
+            const uint8_t* table_start = code_base + nm->seh_table_offset;
+            uint32_t count;
+            std::memcpy(&count, table_start, sizeof(count));
+            const uint8_t* clauses = table_start + sizeof(uint32_t);
+            for (uint32_t i = 0; i < count; i++) {
+                const uint8_t* entry = clauses + i * kSehClauseEntrySize;
+                uint32_t cflags, ctry_start, ctry_end;
+                std::memcpy(&cflags,    entry + 0, sizeof(cflags));
+                std::memcpy(&ctry_start, entry + 4, sizeof(ctry_start));
+                std::memcpy(&ctry_end,  entry + 8, sizeof(ctry_end));
+                if ((cflags == 2 || cflags == 4) &&
+                    code_offset >= ctry_start && code_offset < ctry_end &&
+                    g_t4_unwind.unwind_count < kMaxUnwindDepth) {
+                    g_t4_unwind.unwind_list[g_t4_unwind.unwind_count++] = i;
+                }
+            }
+        }
+        g_t4_unwind.exception_in_flight = has_catch || g_t4_unwind.unwind_count > 0;
+
+        if (!g_t4_unwind.has_catch && g_t4_unwind.unwind_count == 0) {
+            // No handler found in this method — let exception propagate.
             g_t4_throw_ret_addr = nullptr;
             g_t4_frame_rsp = nullptr;
+            ResetUnwindState();
             return EXCEPTION_CONTINUE_SEARCH;
         }
 
         // Write the exception object into ALL GPR register file slots in the
-        // T4 frame so the catch handler code finds it regardless of which vreg
-        // the register allocator assigned.  This is safe because:
-        //   1. The only live value at handler entry is the exception object
-        //   2. Handler code loads other values from args/locals stack slots
+        // T4 frame so the handler code finds it regardless of which vreg
+        // the register allocator assigned.
         if (g_t4_frame_rsp != nullptr) {
             uint64_t* regfile = reinterpret_cast<uint64_t*>(
                 reinterpret_cast<uint8_t*>(g_t4_frame_rsp) + kT4GprFileOff);
@@ -337,26 +658,30 @@ static LONG WINAPI T4VectoredExceptionHandler(EXCEPTION_POINTERS* ep) noexcept {
             }
         }
 
-        // Place exception object pointer in RCX (Win64 first-arg register)
-        // so catch handlers that need to access the exception can read it.
+        // Phase 2: Redirect to first handler.
         ep->ContextRecord->Rcx = reinterpret_cast<ULONG_PTR>(g_t4_exception_obj);
-
-        // Restore RSP to the T4 frame's RSP (before ChaotT4RaiseException was
-        // called).  The CONTEXT record's RSP points into RaiseException's
-        // internal stack; the handler code expects the T4 frame's RSP so it
-        // can access the register file, args_buf, and ret_buf correctly.
         ep->ContextRecord->Rsp = reinterpret_cast<ULONG_PTR>(g_t4_frame_rsp);
 
-        // Redirect RIP to the handler code in the T4 generated method
-        void* handler_addr = static_cast<uint8_t*>(nm->code) + handler_offset;
+        uint32_t target_handler_offset;
+        if (g_t4_unwind.unwind_count > 0) {
+            // Redirect to innermost finally/fault first.
+            g_t4_unwind.unwind_index = 0;
+            uint32_t fi = g_t4_unwind.unwind_list[0];
+            target_handler_offset = GetClauseHandlerOffset(nm, fi);
+        } else {
+            // No finally/fault — go directly to catch.
+            target_handler_offset = catch_handler_offset_val;
+        }
+        void* handler_addr = static_cast<uint8_t*>(nm->code) + target_handler_offset;
         ep->ContextRecord->Rip = reinterpret_cast<ULONG_PTR>(handler_addr);
 
         CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
-            "T4 VEH (managed throw): ret_addr={} (offset={}) -> handler at {} (offset={}), ex_obj={}",
-            g_t4_throw_ret_addr, code_offset, handler_addr, handler_offset,
-            reinterpret_cast<void*>(g_t4_exception_obj));
+            "T4 VEH (managed throw V3): ret_addr={} (offset={}) -> handler at {} (offset={}), "
+            "ex_obj={}, has_catch={}, unwind_count={}",
+            g_t4_throw_ret_addr, code_offset, handler_addr, target_handler_offset,
+            reinterpret_cast<void*>(g_t4_exception_obj),
+            g_t4_unwind.has_catch, g_t4_unwind.unwind_count);
 
-        // Clear throw state for next throw
         g_t4_throw_ret_addr = nullptr;
         g_t4_frame_rsp = nullptr;
 
@@ -385,25 +710,58 @@ static LONG WINAPI T4VectoredExceptionHandler(EXCEPTION_POINTERS* ep) noexcept {
     uint32_t code_offset = static_cast<uint32_t>(
         static_cast<const uint8_t*>(exception_addr) - code_base);
 
-    // Find matching SEH handler
-    uint32_t handler_offset = FindSehHandlerForOffset(nm, code_offset);
-    if (handler_offset == 0xFFFFFFFFu) {
+    // ── SEH V3: Two-phase dispatch for hardware exceptions ─────────
+    ResetUnwindState();
+    {
+        uint32_t catch_handler_offset_val = 0;
+        uint32_t catch_clause_idx = 0;
+        bool has_catch = FindSehCatchHandler(nm, code_offset,
+                                             &catch_handler_offset_val,
+                                             &catch_clause_idx);
+        if (has_catch) {
+            g_t4_unwind.has_catch = true;
+            g_t4_unwind.catch_handler_offset = catch_handler_offset_val;
+            BuildUnwindList(nm, catch_clause_idx, code_offset);
+        } else {
+            const uint8_t* tbl = code_base + nm->seh_table_offset;
+            uint32_t clause_count;
+            std::memcpy(&clause_count, tbl, sizeof(clause_count));
+            const uint8_t* cls = tbl + sizeof(uint32_t);
+            for (uint32_t i = 0; i < clause_count; i++) {
+                const uint8_t* ent = cls + i * kSehClauseEntrySize;
+                uint32_t cf, ts, te;
+                std::memcpy(&cf, ent + 0, sizeof(cf));
+                std::memcpy(&ts, ent + 4, sizeof(ts));
+                std::memcpy(&te, ent + 8, sizeof(te));
+                if ((cf == 2 || cf == 4) &&
+                    code_offset >= ts && code_offset < te &&
+                    g_t4_unwind.unwind_count < kMaxUnwindDepth) {
+                    g_t4_unwind.unwind_list[g_t4_unwind.unwind_count++] = i;
+                }
+            }
+        }
+        g_t4_unwind.exception_in_flight = g_t4_unwind.has_catch || g_t4_unwind.unwind_count > 0;
+    }
+    if (!g_t4_unwind.has_catch && g_t4_unwind.unwind_count == 0) {
         return EXCEPTION_CONTINUE_SEARCH;
     }
 
-    // Store exception object pointer in RCX so the catch handler can
-    // access it (Win64 first-arg register convention).
-    ULONG_PTR ex_obj = reinterpret_cast<ULONG_PTR>(g_t4_exception_obj);
-    ep->ContextRecord->Rcx = ex_obj;
-
-    // Redirect RIP to the handler code in the T4 generated method
-    void* handler_addr = static_cast<uint8_t*>(nm->code) + handler_offset;
+    uint32_t target_handler_offset;
+    if (g_t4_unwind.unwind_count > 0) {
+        g_t4_unwind.unwind_index = 0;
+        target_handler_offset = GetClauseHandlerOffset(nm, g_t4_unwind.unwind_list[0]);
+    } else {
+        target_handler_offset = g_t4_unwind.catch_handler_offset;
+    }
+    void* handler_addr = static_cast<uint8_t*>(nm->code) + target_handler_offset;
+    ep->ContextRecord->Rcx = reinterpret_cast<ULONG_PTR>(g_t4_exception_obj);
     ep->ContextRecord->Rip = reinterpret_cast<ULONG_PTR>(handler_addr);
 
     CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
-        "T4 VEH (hardware exception): exception at {} (offset={}) -> handler at {} (offset={}), ex_obj={}",
-        exception_addr, code_offset, handler_addr, handler_offset,
-        reinterpret_cast<void*>(ex_obj));
+        "T4 VEH (hardware V3): exception at {} (offset={}) -> handler at {} (offset={}), "
+        "has_catch={}, unwind_count={}",
+        exception_addr, code_offset, handler_addr, target_handler_offset,
+        g_t4_unwind.has_catch, g_t4_unwind.unwind_count);
 
     return EXCEPTION_CONTINUE_EXECUTION;
 }
@@ -411,18 +769,6 @@ static LONG WINAPI T4VectoredExceptionHandler(EXCEPTION_POINTERS* ep) noexcept {
 // ── Win64 Personality Routine (V2) ──────────────────────────────────────
 // Called by the OS unwinder during exception dispatch.  This is the second
 // line of defense after the VEH handler:
-//
-//   VEH (first chance): catches managed exceptions, dispatches within the
-//     current method via FindSehHandlerForOffset.  If no handler found in
-//     the current method, returns CONTINUE_SEARCH.
-//
-//   Personality routine (second chance): when VEH returns CONTINUE_SEARCH,
-//     the OS unwinder walks the call stack and calls the personality routine
-//     for each frame.  If a T4 frame has a matching handler, the personality
-//     routine redirects RIP and returns ExceptionCollidedUnwind.
-//
-// This function is invoked via a JMP thunk embedded in the code buffer
-// after the UNWIND_INFO (see EmitUnwindInfo in unwind_info.cpp).
 
 extern "C" EXCEPTION_DISPOSITION T4PersonalityRoutine(
     PEXCEPTION_RECORD ExceptionRecord,
@@ -436,17 +782,11 @@ extern "C" EXCEPTION_DISPOSITION T4PersonalityRoutine(
     }
 
     // Only handle managed exceptions (0xE0000001).
-    // For hardware exceptions or native C++ exceptions, let the OS
-    // continue searching — the VEH handler handles hardware exceptions
-    // within the same method, and native C++ exceptions go through the
-    // standard C++ runtime.
     if (ExceptionRecord->ExceptionCode != kManagedSehExceptionCode) {
         return ExceptionContinueSearch;
     }
 
-    // Find NativeMethod covering the ControlPc (the return address that
-    // triggered the unwind).  This is the instruction after the
-    // `call ChaosT4RaiseException` in the T4 code.
+    // Find NativeMethod covering the ControlPc
     const NativeMethod* nm = FindT4CodeByAddress(
         reinterpret_cast<const void*>(DispatcherContext->ControlPc));
     if (nm == nullptr) {
@@ -463,54 +803,172 @@ extern "C" EXCEPTION_DISPOSITION T4PersonalityRoutine(
     uint32_t code_offset = static_cast<uint32_t>(
         reinterpret_cast<const uint8_t*>(DispatcherContext->ControlPc) - code_base);
 
-    // Walk SEH clause table to find matching handler
-    const uint8_t* table = code_base + nm->seh_table_offset;
-    uint32_t count;
-    std::memcpy(&count, table, sizeof(count));
-    const uint8_t* clauses = table + sizeof(uint32_t);
-
-    for (uint32_t i = 0; i < count; i++) {
-        const uint8_t* entry = clauses + i * (5 * sizeof(uint32_t));
-        uint32_t clause_flags, try_start, try_end;
-        std::memcpy(&clause_flags, entry + 0, sizeof(clause_flags));
-        std::memcpy(&try_start,    entry + 4, sizeof(try_start));
-        std::memcpy(&try_end,      entry + 8, sizeof(try_end));
-
-        if (code_offset >= try_start && code_offset < try_end) {
-            uint32_t handler_st;
-            std::memcpy(&handler_st, entry + 12, sizeof(handler_st));
-
-            // Redirect RIP to the handler code
-            void* handler_addr = static_cast<uint8_t*>(nm->code) + handler_st;
-            ContextRecord->Rip = reinterpret_cast<ULONG_PTR>(handler_addr);
-
-            // RSP stays at the establisher frame (the T4 frame's RSP after
-            // prologue).  The handler code expects the T4 frame layout.
-            // EstablisherFrame is the T4 frame's RSP, set by RtlVirtualUnwind.
-
-            // Place the exception object pointer in RCX (Win64 first arg).
-            // DispatcherContext doesn't give us direct access to TLS, but we
-            // can read g_t4_exception_obj which was set by ChaosT4RaiseException.
-            ContextRecord->Rcx = reinterpret_cast<ULONG_PTR>(g_t4_exception_obj);
-
-            CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
-                "T4 personality: clause {} matches offset={} (ControlPc={}) "
-                "-> handler at {} (offset={}), ex_obj={}",
-                i, code_offset,
-                reinterpret_cast<const void*>(DispatcherContext->ControlPc),
-                handler_addr, handler_st,
-                reinterpret_cast<void*>(g_t4_exception_obj));
-
-            return ExceptionCollidedUnwind;
+    // ── SEH V3: Two-phase dispatch for personality routine ────────
+    ResetUnwindState();
+    {
+        uint32_t catch_handler_offset_val = 0;
+        uint32_t catch_clause_idx = 0;
+        bool has_catch = FindSehCatchHandler(nm, code_offset,
+                                             &catch_handler_offset_val,
+                                             &catch_clause_idx);
+        if (has_catch) {
+            g_t4_unwind.has_catch = true;
+            g_t4_unwind.catch_handler_offset = catch_handler_offset_val;
+            BuildUnwindList(nm, catch_clause_idx, code_offset);
+        } else {
+            const uint8_t* tbl = code_base + nm->seh_table_offset;
+            uint32_t clause_count;
+            std::memcpy(&clause_count, tbl, sizeof(clause_count));
+            const uint8_t* cls = tbl + sizeof(uint32_t);
+            for (uint32_t i = 0; i < clause_count; i++) {
+                const uint8_t* ent = cls + i * kSehClauseEntrySize;
+                uint32_t cf, ts, te;
+                std::memcpy(&cf, ent + 0, sizeof(cf));
+                std::memcpy(&ts, ent + 4, sizeof(ts));
+                std::memcpy(&te, ent + 8, sizeof(te));
+                if ((cf == 2 || cf == 4) &&
+                    code_offset >= ts && code_offset < te &&
+                    g_t4_unwind.unwind_count < kMaxUnwindDepth) {
+                    g_t4_unwind.unwind_list[g_t4_unwind.unwind_count++] = i;
+                }
+            }
         }
+        g_t4_unwind.exception_in_flight = g_t4_unwind.has_catch || g_t4_unwind.unwind_count > 0;
+    }
+    if (!g_t4_unwind.has_catch && g_t4_unwind.unwind_count == 0) {
+        return ExceptionContinueSearch;
     }
 
-    CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
-        "T4 personality: no handler for offset={} (ControlPc={})",
-        code_offset,
-        reinterpret_cast<const void*>(DispatcherContext->ControlPc));
+    uint32_t target_handler_offset;
+    if (g_t4_unwind.unwind_count > 0) {
+        g_t4_unwind.unwind_index = 0;
+        target_handler_offset = GetClauseHandlerOffset(nm, g_t4_unwind.unwind_list[0]);
+    } else {
+        target_handler_offset = g_t4_unwind.catch_handler_offset;
+    }
+    void* handler_addr = static_cast<uint8_t*>(nm->code) + target_handler_offset;
+    ContextRecord->Rip = reinterpret_cast<ULONG_PTR>(handler_addr);
+    ContextRecord->Rcx = reinterpret_cast<ULONG_PTR>(g_t4_exception_obj);
 
-    return ExceptionContinueSearch;
+    CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
+        "T4 personality (V3): clause matches offset={} (ControlPc={}) "
+        "-> handler at {}, has_catch={}, unwind_count={}",
+        code_offset,
+        reinterpret_cast<const void*>(DispatcherContext->ControlPc),
+        handler_addr,
+        g_t4_unwind.has_catch, g_t4_unwind.unwind_count);
+
+    return ExceptionCollidedUnwind;
+}
+
+// ── T4EndFinallyHelper ───────────────────────────────────────────────────
+// Called from T4-generated EndFinally/EndFilter instructions at runtime.
+// Uses _ReturnAddress() to find the NativeMethod and the current code offset.
+//
+// Returns the native byte offset of the next handler to execute, or 0 if
+// unwinding is complete (EndFinally falls through to normal execution).
+extern "C" void* T4EndFinallyHelper() noexcept {
+    // If no exception in flight and no pending leave, this is a normal
+    // fall-through (shouldn't happen since EndFinally shouldn't be reached
+    // without exception/leave, but safe to handle).
+    if (!g_t4_unwind.exception_in_flight && !g_t4_unwind.pending_leave) {
+    // T4EndFinallyHelper: no state (unexpected EndFinally)
+    CHAOS_IL2CPP_LOG_DEBUG_M("codegen", "T4EndFinallyHelper: no unwind state");
+        return nullptr;
+    }
+
+    if (g_t4_unwind.exception_in_flight) {
+        // Advance to next finally/fault in unwind list.
+        g_t4_unwind.unwind_index++;
+
+        if (g_t4_unwind.unwind_index < g_t4_unwind.unwind_count) {
+            // More finally/fault to execute — return next handler offset.
+            uint32_t fi = g_t4_unwind.unwind_list[g_t4_unwind.unwind_index];
+
+            void* ret_addr = _ReturnAddress();
+            const NativeMethod* nm = FindT4CodeByAddress(ret_addr);
+            if (nm != nullptr) {
+                return static_cast<uint8_t*>(nm->code) + GetClauseHandlerOffset(nm, fi);
+            }
+            return nullptr;
+        }
+
+        // All finally/fault executed.
+        if (g_t4_unwind.has_catch) {
+            // Transfer to catch handler.
+            uint32_t catch_off = g_t4_unwind.catch_handler_offset;
+            void* ret_addr = _ReturnAddress();
+            const NativeMethod* nm = FindT4CodeByAddress(ret_addr);
+            ResetUnwindState();
+            if (nm != nullptr) {
+                return static_cast<uint8_t*>(nm->code) + catch_off;
+            }
+            return nullptr;
+        }
+
+        // No catch — re-raise the exception to propagate to caller.
+        ResetUnwindState();
+        void* ex_obj = g_t4_exception_obj;
+        ChaosT4RaiseException(ex_obj);
+        return nullptr;
+    }
+
+    if (g_t4_unwind.pending_leave) {
+        uint32_t leave_target = g_t4_unwind.leave_target_offset;
+        ResetUnwindState();
+        void* ret_addr = _ReturnAddress();
+        const NativeMethod* nm = FindT4CodeByAddress(ret_addr);
+        if (nm != nullptr) {
+            void* target = static_cast<uint8_t*>(nm->code) + leave_target;
+            return target;
+        }
+        return nullptr;
+    }
+
+    return nullptr;
+}
+
+// ── T4LeaveHelper ────────────────────────────────────────────────────────
+// Called from T4-generated Leave instructions when a finally/fault clause
+// covers the current try block.
+//
+// Resolution: uses _ReturnAddress() to find the NativeMethod, then reads
+// instr_offsets[] to resolve target_instr_idx and current_instr_idx to
+// native byte offsets.
+//
+// Returns the native byte offset of the innermost finally handler, or 0 if
+// no finally/fault covers the current offset (caller falls through to
+// normal JMP).
+extern "C" void* T4LeaveHelper(uint32_t target_instr_idx,
+                                uint32_t current_instr_idx) noexcept {
+    void* ret_addr = _ReturnAddress();
+    const NativeMethod* nm = FindT4CodeByAddress(ret_addr);
+    if (nm == nullptr || nm->instr_offsets == nullptr) {
+        CHAOS_IL2CPP_LOG_DEBUG_M("codegen", "T4LeaveHelper: FAILED to find NativeMethod");
+        return nullptr;
+    }
+
+    // Resolve current byte offset
+    uint32_t current_offset = (current_instr_idx < nm->instr_offset_count)
+        ? nm->instr_offsets[current_instr_idx] : 0;
+
+    // Find innermost finally covering current offset
+    uint32_t finally_idx = FindInnermostFinally(nm, current_offset);
+    if (finally_idx == UINT32_MAX) {
+        return nullptr;  // No finally — normal JMP
+    }
+
+    // Resolve leave target byte offset
+    uint32_t target_offset = (target_instr_idx < nm->instr_offset_count)
+        ? nm->instr_offsets[target_instr_idx] : 0;
+
+    // Set up pending_leave state
+    ResetUnwindState();
+    g_t4_unwind.pending_leave = true;
+    g_t4_unwind.leave_target_offset = target_offset;
+
+    void* handler = static_cast<uint8_t*>(nm->code) + GetClauseHandlerOffset(nm, finally_idx);
+    return handler;
 }
 
 void RegisterT4SehHandler() noexcept {
@@ -526,6 +984,10 @@ void RegisterT4SehHandler() noexcept {
         CHAOS_IL2CPP_LOG_ERROR_M("codegen", "T4 VEH handler registration FAILED");
     }
 
+    // Register GC event callback for deferred T4 code memory reclamation.
+    // Fires at GC safepoint (STW), guaranteeing no thread is executing T4 code.
+    chaos::il2cpp::runtime_core::GcRegisterEventCallback(OnGcSafepoint, nullptr);
+
     // Register T4 demotion callbacks so method_replacement can demote T4
     // entries through runtime_core without a circular build dependency.
     chaos::il2cpp::runtime_core::RegisterT4DemotionCallbacks(
@@ -537,6 +999,9 @@ void RegisterT4SehHandler() noexcept {
 void RegisterT4SehHandler() noexcept {
     // VEH is Windows-specific. On POSIX, signal handlers would be used instead.
     CHAOS_IL2CPP_LOG_DEBUG_M("codegen", "T4 SEH handler: not implemented for this platform");
+
+    // Register GC event callback for deferred T4 code memory reclamation.
+    chaos::il2cpp::runtime_core::GcRegisterEventCallback(OnGcSafepoint, nullptr);
 
     // Register T4 demotion callbacks (platform-independent).
     chaos::il2cpp::runtime_core::RegisterT4DemotionCallbacks(

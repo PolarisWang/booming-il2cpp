@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "ParserSubjects",
   "entrySubjectId": "ParserSubjects/ParserSubjects::CustomEntrySubject_1:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Net.ServerSentEvents/parser/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.Net.ServerSentEvents/parser/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

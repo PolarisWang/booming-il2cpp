@@ -1,5 +1,5 @@
 // verification_dispatch.generated.cpp — auto-generated
-// Assembly: ReflectionGenericsSubjects, Methods: 14
+// Assembly: ReflectionGenericsSubjects, Methods: 12
 #include <cstdint>
 #include <chrono>
 #include <chaos/native_types.h>

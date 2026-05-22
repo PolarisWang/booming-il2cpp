@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Threading.Tasks.Parallel",
+  "familyId": "family/System.Threading.Tasks.Parallel/parallel/options",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::get_CancellationToken:System.Threading.CancellationToken()",
+      "elapsedMilliseconds": 10301.407,
+      "calibratedMs": 10301.407,
+      "opsPerSecond": 9707.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::get_MaxDegreeOfParallelism:System.Int32()",
+      "elapsedMilliseconds": 8125.927,
+      "calibratedMs": 8125.927,
+      "opsPerSecond": 12306.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::get_TaskScheduler:System.Threading.Tasks.TaskScheduler()",
+      "elapsedMilliseconds": 9549.864,
+      "calibratedMs": 9549.864,
+      "opsPerSecond": 10471.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::set_CancellationToken:System.Void(System.Threading.CancellationToken)",
+      "elapsedMilliseconds": 6308.106,
+      "calibratedMs": 6308.106,
+      "opsPerSecond": 15852.6,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::set_MaxDegreeOfParallelism:System.Void(System.Int32)",
+      "elapsedMilliseconds": 5584.846,
+      "calibratedMs": 5584.846,
+      "opsPerSecond": 17905.6,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::set_TaskScheduler:System.Void(System.Threading.Tasks.TaskScheduler)",
+      "elapsedMilliseconds": 5236.767,
+      "calibratedMs": 5236.767,
+      "opsPerSecond": 19095.8,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelOptions::.ctor:System.Void()",
+      "elapsedMilliseconds": 1064.328,
+      "calibratedMs": 1064.328,
+      "opsPerSecond": 93956.0,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}

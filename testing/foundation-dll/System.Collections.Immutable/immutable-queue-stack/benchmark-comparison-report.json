@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.Collections.Immutable",
+  "familyId": "family/System.Collections.Immutable/immutable/queue/stack",
+  "summary": {
+    "totalMethods": 10,
+    "matchedCount": 0,
+    "unmatchedCount": 0,
+    "invalidCount": 10,
+    "nativeAotFasterCount": 0,
+    "nativeJitFasterCount": 0,
+    "managedFasterCount": 0,
+    "equalCount": 0,
+    "averageSpeedupPercent": 0.0,
+    "averageNativeAotSpeedupPercent": 0.0,
+    "averageNativeJitSpeedupPercent": null,
+    "nativeJitSlowdownFactor": null
+  },
+  "methodResults": [
+    {
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableQueue::Create<Byte>:System.Collections.Immutable.ImmutableQueue<System.Byte>()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableQueue::Create<Byte>:System.Collections.Immutable.ImmutableQueue<System.Byte>(System.Byte)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableQueue::Create<Byte>:System.Collections.Immutable.ImmutableQueue<System.Byte>(System.Byte,System.Byte)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableQueue::Create<Int32>:System.Collections.Immutable.ImmutableQueue<System.Int32>()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableQueue::Create<Int32>:System.Collections.Immutable.ImmutableQueue<System.Int32>(System.Int32)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableStack::Create<Byte>:System.Collections.Immutable.ImmutableStack<System.Byte>()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableStack::Create<Byte>:System.Collections.Immutable.ImmutableStack<System.Byte>(System.Byte)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableStack::Create<Byte>:System.Collections.Immutable.ImmutableStack<System.Byte>(System.Byte,System.Byte)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableStack::Create<Int32>:System.Collections.Immutable.ImmutableStack<System.Int32>()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableStack::Create<Int32>:System.Collections.Immutable.ImmutableStack<System.Int32>(System.Int32)",
+      "status": "managed_harness_unavailable"
+    }
+  ]
+}

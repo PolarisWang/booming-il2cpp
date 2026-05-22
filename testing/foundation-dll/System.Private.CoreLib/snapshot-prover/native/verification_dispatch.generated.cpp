@@ -1,5 +1,5 @@
 // verification_dispatch.generated.cpp — auto-generated
-// Assembly: SnapshotProverSubjects, Methods: 12
+// Assembly: SnapshotProverSubjects, Methods: 157
 #include <cstdint>
 #include <chrono>
 #include <chaos/native_types.h>

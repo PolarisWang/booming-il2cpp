@@ -1,5 +1,5 @@
 // verification_dispatch.generated.cpp — auto-generated
-// Assembly: DelegateCoreInvocationSubjects, Methods: 22
+// Assembly: DelegateCoreInvocationSubjects, Methods: 20
 #include <cstdint>
 #include <chrono>
 #include <chaos/native_types.h>

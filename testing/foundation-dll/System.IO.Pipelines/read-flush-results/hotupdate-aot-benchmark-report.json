@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.IO.Pipelines",
+  "familyId": "family/System.IO.Pipelines/read/flush/results",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.FlushResult::get_IsCanceled:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 4.05,
+      "postPatchNsPerOp": 4.2,
+      "slowdownPercent": 3.7
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.FlushResult::get_IsCompleted:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.82,
+      "postPatchNsPerOp": 3.8,
+      "slowdownPercent": -0.52
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.FlushResult::.ctor:System.Void(System.Boolean,System.Boolean)",
+      "status": "passed",
+      "prePatchNsPerOp": 90.18,
+      "postPatchNsPerOp": 119.3,
+      "slowdownPercent": 32.29
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.ReadResult::get_Buffer:System.Buffers.ReadOnlySequence{System.Byte}()",
+      "status": "passed",
+      "prePatchNsPerOp": 5.45,
+      "postPatchNsPerOp": 5.2,
+      "slowdownPercent": -4.59
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.ReadResult::get_IsCanceled:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 6.85,
+      "postPatchNsPerOp": 3.6,
+      "slowdownPercent": -47.45
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.ReadResult::get_IsCompleted:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.8,
+      "postPatchNsPerOp": 3.6,
+      "slowdownPercent": -5.26
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.ReadResult::.ctor:System.Void(System.Buffers.ReadOnlySequence{System.Byte},System.Boolean,System.Boolean)",
+      "status": "passed",
+      "prePatchNsPerOp": 91.47,
+      "postPatchNsPerOp": 92.5,
+      "slowdownPercent": 1.13
+    }
+  ],
+  "summary": {
+    "totalMethods": 7,
+    "nonStubMethods": 7,
+    "averageSlowdownPercent": -2.96,
+    "slowdownFactor": 0.9704,
+    "slowdownThresholdX": 50.0
+  }
+}

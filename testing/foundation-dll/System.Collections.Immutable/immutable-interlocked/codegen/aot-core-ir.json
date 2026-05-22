@@ -255,7 +255,7 @@
                 "value": "stub:definition=System.Collections.Immutable/ImmutableInterlocked::Update:System.Boolean(!!0\u0026,System.Func\u003C!!0,!!0\u003E);type=[];method=[System.String]"
               },
               "supportKindCode": 3,
-              "specializationKindCode": 2,
+              "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:methodSpec"
             },
             "genericDiagnostic": {

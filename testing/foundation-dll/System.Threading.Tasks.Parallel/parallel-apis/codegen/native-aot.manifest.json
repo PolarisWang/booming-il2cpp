@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "ParallelApisSubjects",
   "entrySubjectId": "ParallelApisSubjects/ParallelApisSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Threading.Tasks.Parallel/parallel-apis/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.Threading.Tasks.Parallel/parallel-apis/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

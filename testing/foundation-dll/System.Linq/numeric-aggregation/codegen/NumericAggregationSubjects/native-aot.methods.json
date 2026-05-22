@@ -1,0 +1,1483 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "NumericAggregationSubjects",
+  "methodCount": 138,
+  "defaultStringId": 8492632318578411777,
+  "methods": [
+    {
+      "index": 0,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_0",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 0
+    },
+    {
+      "index": 1,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_1",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 1
+    },
+    {
+      "index": 2,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_2",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 2
+    },
+    {
+      "index": 3,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_3",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 3
+    },
+    {
+      "index": 4,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_4",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 4
+    },
+    {
+      "index": 5,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_5",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 5
+    },
+    {
+      "index": 6,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_6",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 6
+    },
+    {
+      "index": 7,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_7",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 7
+    },
+    {
+      "index": 8,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_8",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 8
+    },
+    {
+      "index": 9,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_9",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 9
+    },
+    {
+      "index": 10,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_10",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 10
+    },
+    {
+      "index": 11,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_10_b__11_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 12,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_11",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 11
+    },
+    {
+      "index": 13,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_11_b__12_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 14,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_12",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 12
+    },
+    {
+      "index": 15,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_12_b__13_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 16,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_13",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 13
+    },
+    {
+      "index": 17,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_13_b__14_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 18,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_14",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 14
+    },
+    {
+      "index": 19,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_14_b__15_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 20,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_15",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 15
+    },
+    {
+      "index": 21,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_15_b__16_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 22,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_16",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 16
+    },
+    {
+      "index": 23,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_16_b__17_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 24,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_17",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 17
+    },
+    {
+      "index": 25,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_17_b__18_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 26,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_18",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 18
+    },
+    {
+      "index": 27,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_18_b__19_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 28,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_19",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 19
+    },
+    {
+      "index": 29,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_19_b__20_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 30,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_20",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 20
+    },
+    {
+      "index": 31,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_21",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 21
+    },
+    {
+      "index": 32,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_22",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 22
+    },
+    {
+      "index": 33,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_23",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 23
+    },
+    {
+      "index": 34,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_24",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 24
+    },
+    {
+      "index": 35,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_25",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 25
+    },
+    {
+      "index": 36,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_26",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 26
+    },
+    {
+      "index": 37,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_27",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 27
+    },
+    {
+      "index": 38,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_28",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 28
+    },
+    {
+      "index": 39,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_29",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 29
+    },
+    {
+      "index": 40,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_30",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 30
+    },
+    {
+      "index": 41,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_31",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 31
+    },
+    {
+      "index": 42,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_32",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 32
+    },
+    {
+      "index": 43,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_32_b__33_0_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 44,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_33",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 33
+    },
+    {
+      "index": 45,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_33_b__34_0_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 46,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_34",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 34
+    },
+    {
+      "index": 47,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_34_b__35_0_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 48,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_35",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 35
+    },
+    {
+      "index": 49,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_35_b__36_0_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 50,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_36",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 36
+    },
+    {
+      "index": 51,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_36_b__37_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 52,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_37",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 37
+    },
+    {
+      "index": 53,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_37_b__38_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 54,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_38",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 38
+    },
+    {
+      "index": 55,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_38_b__39_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 56,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_39",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 39
+    },
+    {
+      "index": 57,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_39_b__40_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 58,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_40",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 40
+    },
+    {
+      "index": 59,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_40_b__41_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 60,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_41",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 41
+    },
+    {
+      "index": 61,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_41_b__42_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 62,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_42",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 42
+    },
+    {
+      "index": 63,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_42_b__43_0_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 64,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_43",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 43
+    },
+    {
+      "index": 65,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_43_b__44_0_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 66,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_44",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 44
+    },
+    {
+      "index": 67,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_44_b__45_0_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 68,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_45",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 45
+    },
+    {
+      "index": 69,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_46",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 46
+    },
+    {
+      "index": 70,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_47",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 47
+    },
+    {
+      "index": 71,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_48",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 48
+    },
+    {
+      "index": 72,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_49",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 49
+    },
+    {
+      "index": 73,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_50",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 50
+    },
+    {
+      "index": 74,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_51",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 51
+    },
+    {
+      "index": 75,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_52",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 52
+    },
+    {
+      "index": 76,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_53",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 53
+    },
+    {
+      "index": 77,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_54",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 54
+    },
+    {
+      "index": 78,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_55",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 55
+    },
+    {
+      "index": 79,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_56",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 56
+    },
+    {
+      "index": 80,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_57",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 57
+    },
+    {
+      "index": 81,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_57_b__58_0_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 82,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_58",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 58
+    },
+    {
+      "index": 83,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_58_b__59_0_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 84,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_59",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 59
+    },
+    {
+      "index": 85,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_59_b__60_0_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 86,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_60",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 60
+    },
+    {
+      "index": 87,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_60_b__61_0_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 88,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_61",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 61
+    },
+    {
+      "index": 89,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_61_b__62_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 90,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_62",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 62
+    },
+    {
+      "index": 91,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_62_b__63_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 92,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_63",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 63
+    },
+    {
+      "index": 93,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_63_b__64_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 94,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_64",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 64
+    },
+    {
+      "index": 95,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_64_b__65_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 96,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_65",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 65
+    },
+    {
+      "index": 97,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_65_b__66_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 98,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_66",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 66
+    },
+    {
+      "index": 99,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_66_b__67_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 100,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_67",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 67
+    },
+    {
+      "index": 101,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_67_b__68_0_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 102,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_68",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 68
+    },
+    {
+      "index": 103,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_68_b__69_0_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 104,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_69",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 69
+    },
+    {
+      "index": 105,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_69_b__70_0_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 106,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_70",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 70
+    },
+    {
+      "index": 107,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_71",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 71
+    },
+    {
+      "index": 108,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_72",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 72
+    },
+    {
+      "index": 109,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_73",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 73
+    },
+    {
+      "index": 110,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_74",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 74
+    },
+    {
+      "index": 111,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_75",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 75
+    },
+    {
+      "index": 112,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_76",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 76
+    },
+    {
+      "index": 113,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_77",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 77
+    },
+    {
+      "index": 114,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_78",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 78
+    },
+    {
+      "index": 115,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_79",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 79
+    },
+    {
+      "index": 116,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_80",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 80
+    },
+    {
+      "index": 117,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_80_b__81_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 118,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_81",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 81
+    },
+    {
+      "index": 119,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_81_b__82_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 120,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_82",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 82
+    },
+    {
+      "index": 121,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_82_b__83_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 122,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_83",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 83
+    },
+    {
+      "index": 123,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_83_b__84_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 124,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_84",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 84
+    },
+    {
+      "index": 125,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_84_b__85_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 126,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_85",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 85
+    },
+    {
+      "index": 127,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_85_b__86_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 128,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_86",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 86
+    },
+    {
+      "index": 129,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_86_b__87_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 130,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_87",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 87
+    },
+    {
+      "index": 131,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_87_b__88_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 132,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_88",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 88
+    },
+    {
+      "index": 133,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_88_b__89_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 134,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_89",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 89
+    },
+    {
+      "index": 135,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_89_b__90_0_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 136,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c_cctor",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 137,
+      "nativeSymbol": "NumericAggregationSubjects_NumericAggregationSubjects___c__ctor",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    }
+  ]
+}

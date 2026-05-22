@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Collections.Immutable",
+  "familyId": "family/System.Collections.Immutable/immutable/hash/set",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableHashSet::Create<Byte>:System.Collections.Immutable.ImmutableHashSet<System.Byte>()",
+      "elapsedMilliseconds": 0.346,
+      "calibratedMs": 0.346,
+      "opsPerSecond": 288766965.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableHashSet::Create<Byte>:System.Collections.Immutable.ImmutableHashSet<System.Byte>(System.Byte)",
+      "elapsedMilliseconds": 0.344,
+      "calibratedMs": 0.344,
+      "opsPerSecond": 290613193.8,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableHashSet::Create<Byte>:System.Collections.Immutable.ImmutableHashSet<System.Byte>(System.Byte,System.Byte)",
+      "elapsedMilliseconds": 19.02,
+      "calibratedMs": 19.02,
+      "opsPerSecond": 5257651.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableHashSet::Create<Int32>:System.Collections.Immutable.ImmutableHashSet<System.Int32>()",
+      "elapsedMilliseconds": 0.354,
+      "calibratedMs": 0.354,
+      "opsPerSecond": 282167042.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableHashSet::Create<Int32>:System.Collections.Immutable.ImmutableHashSet<System.Int32>(System.Int32)",
+      "elapsedMilliseconds": 0.35,
+      "calibratedMs": 0.35,
+      "opsPerSecond": 285632676.4,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}

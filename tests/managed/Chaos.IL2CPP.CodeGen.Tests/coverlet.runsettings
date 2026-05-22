@@ -5,9 +5,7 @@
       <DataCollector friendlyName="XPlat code coverage">
         <Configuration>
           <Format>cobertura,opencover</Format>
-          <ExcludeByAttribute>GeneratedCodeAttribute,CompilerGeneratedAttribute</ExcludeByAttribute>
           <ExcludeByFile>**/obj/**/*.cs,**/ReferenceProof/**/*.cs,**/PatchData*.cs,**/NativeReferenceProofEmitter*.cs,**/RuntimeSkeleton*.cs,**/NativeReferenceLoweringPlanner.PlanBuilders*.cs,**/NativeReferenceLoweringPlanner.GeneratedPluginExports*.cs</ExcludeByFile>
-          <Include>[Chaos.IL2CPP.Generator]*</Include>
           <SkipAutoProps>true</SkipAutoProps>
         </Configuration>
       </DataCollector>

@@ -15,6 +15,66 @@ extern "C" const int kAotMethodCount;
 
 
 // extern "C" function declarations for all AOT-compiled methods
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_121(
+        void
+);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_123(
+        void
+);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_133(
+        void
+);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_138(
+        void
+);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_167(
+        void
+);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_168(
+        void
+);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_195(
+        void
+);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_196(
+        void
+);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_25(
+        void
+);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_27(
+        void
+);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_29(
+        void
+);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_37(
+        void
+);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_41(
+        void
+);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_49(
+        void
+);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_60(
+        void
+);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_63(
+        void
+);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_65(
+        void
+);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_76(
+        void
+);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_90(
+        void
+);
+extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_91(
+        void
+);
 extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_0(
         void
 );
@@ -559,6 +619,26 @@ extern "C" void NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subjec
 
 static const Functions s_functions = {
     {
+        &NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_121,
+        &NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_123,
+        &NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_133,
+        &NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_138,
+        &NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_167,
+        &NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_168,
+        &NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_195,
+        &NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_196,
+        &NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_25,
+        &NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_27,
+        &NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_29,
+        &NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_37,
+        &NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_41,
+        &NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_49,
+        &NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_60,
+        &NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_63,
+        &NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_65,
+        &NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_76,
+        &NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_90,
+        &NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_91,
         &NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_0,
         &NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_100,
         &NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_101,
@@ -739,7 +819,7 @@ static const Functions s_functions = {
         &NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_99,
         &NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_9,
     },
-    179,
+    199,
 };
 
 const Functions kFunctions = s_functions;
@@ -747,8 +827,28 @@ const Functions kFunctions = s_functions;
 // Flat function pointer array for indexed dispatch (benchmarking).
 // Avoids fragile reinterpret_cast<void* const*>(&kFunctions) which depends on
 // struct layout uniformity across sub-struct members.
-extern "C" void* kFunctionsFlat[179];
-void* kFunctionsFlat[179] = {
+extern "C" void* kFunctionsFlat[199];
+void* kFunctionsFlat[199] = {
+    reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_121),
+    reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_123),
+    reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_133),
+    reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_138),
+    reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_167),
+    reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_168),
+    reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_195),
+    reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_196),
+    reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_25),
+    reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_27),
+    reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_29),
+    reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_37),
+    reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_41),
+    reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_49),
+    reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_60),
+    reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_63),
+    reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_65),
+    reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_76),
+    reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_90),
+    reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_91),
     reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_0),
     reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_100),
     reinterpret_cast<void*>(&NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_Subject_101),

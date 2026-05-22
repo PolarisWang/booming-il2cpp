@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "ImmutableSortedSetSubjects",
   "entrySubjectId": "ImmutableSortedSetSubjects/ImmutableSortedSetSubjects::CustomEntrySubject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Collections.Immutable/immutable-sorted-set/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.Collections.Immutable/immutable-sorted-set/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

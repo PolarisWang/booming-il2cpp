@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "SpanMemoryBuffersSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/span-memory-buffers/codegen/_subjects_input/SpanMemoryBuffersSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/span-memory-buffers/managed/subjects/build-output/SpanMemoryBuffersSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "SpanMemoryBuffersSubjects",
-      "path": "testing/foundation-dll/System.Private.CoreLib/span-memory-buffers/codegen/_subjects_input/SpanMemoryBuffersSubjects.dll"
+      "path": "testing/foundation-dll/System.Private.CoreLib/span-memory-buffers/managed/subjects/build-output/SpanMemoryBuffersSubjects.dll"
     },
     {
       "assemblyName": "System.Memory",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "c92f03d2-9f61-49d3-81f3-ddb41a42fdc3",
+  "inputModuleVersionId": "0502ab50-5338-4c55-b4b6-ae5a7ce90b20",
   "artifacts": [
     {
       "kind": "typedIlIr",

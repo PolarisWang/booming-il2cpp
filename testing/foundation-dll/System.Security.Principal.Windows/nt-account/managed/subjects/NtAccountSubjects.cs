@@ -16,67 +16,71 @@ public static partial class NtAccountSubjects
     // [0] System.Security.Principal.Windows/System.Security.Principal.NTAccount::Equals:System.Boolean(System.Object)
     public static void Subject_0()
     {
-        try { default(NTAccount)!.Equals(42); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(NTAccount)!.Equals(42)) ? 1 : 0) != ((default(NTAccount)!.Equals(42)) ? 1 : 0)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [1] System.Security.Principal.Windows/System.Security.Principal.NTAccount::get_Value:System.String()
     public static void Subject_1()
     {
-        try { _ = default(NTAccount)!.Value; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(NTAccount)!.Value).Length) != ((default(NTAccount)!.Value).Length)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [2] System.Security.Principal.Windows/System.Security.Principal.NTAccount::GetHashCode:System.Int32()
     public static void Subject_2()
     {
-        try { default(NTAccount)!.GetHashCode(); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (default(NTAccount)!.GetHashCode() != default(NTAccount)!.GetHashCode()) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [3] System.Security.Principal.Windows/System.Security.Principal.NTAccount::IsValidTargetType:System.Boolean(System.Type)
     public static void Subject_3()
     {
-        try { default(NTAccount)!.IsValidTargetType(typeof(byte)); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(NTAccount)!.IsValidTargetType(typeof(byte))) ? 1 : 0) != ((default(NTAccount)!.IsValidTargetType(typeof(byte))) ? 1 : 0)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [4] System.Security.Principal.Windows/System.Security.Principal.NTAccount::op_Equality:System.Boolean(System.Security.Principal.NTAccount,System.Security.Principal.NTAccount)
     public static void Subject_4()
     {
-        if (((default(NTAccount)! == default(NTAccount)!) ? 1 : 0) != 1) _exitCode = 1;
+        try { if (((default(NTAccount)! == default(NTAccount)!) ? 1 : 0) != ((default(NTAccount)! == default(NTAccount)!) ? 1 : 0)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [5] System.Security.Principal.Windows/System.Security.Principal.NTAccount::op_Inequality:System.Boolean(System.Security.Principal.NTAccount,System.Security.Principal.NTAccount)
     public static void Subject_5()
     {
-        if (((default(NTAccount)! != default(NTAccount)!) ? 1 : 0) != 0) _exitCode = 1;
+        try { if (((default(NTAccount)! != default(NTAccount)!) ? 1 : 0) != ((default(NTAccount)! != default(NTAccount)!) ? 1 : 0)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [6] System.Security.Principal.Windows/System.Security.Principal.NTAccount::ToString:System.String()
     public static void Subject_6()
     {
-        try { default(NTAccount)!.ToString(); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(NTAccount)!.ToString()).Length) != ((default(NTAccount)!.ToString()).Length)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [7] System.Security.Principal.Windows/System.Security.Principal.NTAccount::Translate:System.Security.Principal.IdentityReference(System.Type)
     public static void Subject_7()
     {
-        try { default(NTAccount)!.Translate(typeof(byte)); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(NTAccount)!.Translate(typeof(byte))).GetHashCode()) != ((default(NTAccount)!.Translate(typeof(byte))).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [8] System.Security.Principal.Windows/System.Security.Principal.NTAccount::.ctor:System.Void(System.String,System.String)
     public static void Subject_8()
     {
-        new NTAccount("hello", "hello");
+        try { new NTAccount("hello", "hello"); }
+        catch { _exitCode = 1; }
     }
 
     // [9] System.Security.Principal.Windows/System.Security.Principal.NTAccount::.ctor:System.Void(System.String)
     public static void Subject_9()
     {
-        new NTAccount("hello");
+        try { new NTAccount("hello"); }
+        catch { _exitCode = 1; }
     }
 
 }

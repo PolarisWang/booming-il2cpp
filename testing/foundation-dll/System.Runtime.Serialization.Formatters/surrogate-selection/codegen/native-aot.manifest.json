@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "SurrogateSelectionSubjects",
   "entrySubjectId": "SurrogateSelectionSubjects/SurrogateSelectionSubjects::Subject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Runtime.Serialization.Formatters/surrogate-selection/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.Runtime.Serialization.Formatters/surrogate-selection/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

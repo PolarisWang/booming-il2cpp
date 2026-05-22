@@ -612,6 +612,15 @@ def _generate_csproj(
         if extra_refs:
             items = "\n".join(f'    <ProjectReference Include="{r}" />' for r in extra_refs)
             extra_refs_xml = f"  </ItemGroup>\n  <ItemGroup>\n{items}\n  </ItemGroup>\n"
+        # Remove test framework packages inherited from testing/Directory.Build.props
+        remove_test_refs = (
+            '  <ItemGroup>\n'
+            '    <PackageReference Remove="Microsoft.NET.Test.Sdk" />\n'
+            '    <PackageReference Remove="xunit" />\n'
+            '    <PackageReference Remove="xunit.runner.visualstudio" />\n'
+            '    <PackageReference Remove="FsCheck.Xunit" />\n'
+            '  </ItemGroup>\n'
+        )
         return (
             '<Project Sdk="Microsoft.NET.Sdk">\n'
             "  <PropertyGroup>\n"
@@ -619,6 +628,7 @@ def _generate_csproj(
             f"    <TargetFramework>{tfm}</TargetFramework>\n"
             "    <Nullable>enable</Nullable>\n"
             "    <ImplicitUsings>disable</ImplicitUsings>\n"
+            "    <IsTestProject>false</IsTestProject>\n"
             f"    <AssemblyName>{class_name}</AssemblyName>\n"
             f"    {namespace_part}\n"
             "    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>\n"
@@ -630,6 +640,7 @@ def _generate_csproj(
             f"{extra_cs}"
             f"{custom_cs}"
             f"{extra_refs_xml}"
+            f"{remove_test_refs}"
             "</Project>\n"
         )
 

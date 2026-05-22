@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.ObjectModel",
+  "familyId": "family/System.ObjectModel/observable/collections",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::add_CollectionChanged:System.Void(System.Collections.Specialized.NotifyCollectionChangedEventHandler)",
+      "elapsedMilliseconds": -1.0,
+      "status": "stub"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::Move:System.Void(System.Int32,System.Int32)",
+      "elapsedMilliseconds": 0.292,
+      "calibratedMs": 0.292,
+      "opsPerSecond": 341880341.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::remove_CollectionChanged:System.Void(System.Collections.Specialized.NotifyCollectionChangedEventHandler)",
+      "elapsedMilliseconds": -1.0,
+      "status": "stub"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::.ctor:System.Void()",
+      "elapsedMilliseconds": 9.156,
+      "calibratedMs": 9.156,
+      "opsPerSecond": 10922277.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::.ctor:System.Void(System.Collections.Generic.IEnumerable{T})",
+      "elapsedMilliseconds": 9.035,
+      "calibratedMs": 9.035,
+      "opsPerSecond": 11068068.6,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::.ctor:System.Void(System.Collections.Generic.List{T})",
+      "elapsedMilliseconds": 9.105,
+      "calibratedMs": 9.105,
+      "opsPerSecond": 10983458.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection`1::get_Empty:System.Collections.ObjectModel.ReadOnlyObservableCollection{T}()",
+      "elapsedMilliseconds": 0.577,
+      "calibratedMs": 0.577,
+      "opsPerSecond": 173430454.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection`1::.ctor:System.Void(System.Collections.ObjectModel.ObservableCollection{T})",
+      "elapsedMilliseconds": 9.111,
+      "calibratedMs": 9.111,
+      "opsPerSecond": 10975261.8,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}

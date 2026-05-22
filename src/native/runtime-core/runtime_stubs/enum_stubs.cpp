@@ -12,6 +12,7 @@
 #include "reflection_query_model.h"
 #include "reflection_api.h"
 #include "reflection_metadata_impl.h"
+#include "exception_helpers.h"
 
 namespace chaos::il2cpp::runtime_core {
 extern "C" {
@@ -714,20 +715,26 @@ CHAOS_IL2CPP_INTPTR ChaosEnumParse(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR
                 }
                 if (match) return enum_alloc_boxed_int64(meta->fields[i].value);
             }
-            return 0;
+            RaiseArgumentException((std::string("Requested value '") + std::string(name_data, name_len) + "' was not found.").c_str());
         }
     }
 
     // Fallback: reflection API
     const auto* desc = resolve_type_arg(type);
-    if (desc == nullptr) return 0;
-    if (check_enum_type(desc) == nullptr) return 0;
+    if (desc == nullptr) {
+        RaiseArgumentException((std::string("Requested value '") + std::string(name_data, name_len) + "' was not found.").c_str());
+    }
+    if (check_enum_type(desc) == nullptr) {
+        RaiseArgumentException((std::string("Requested value '") + std::string(name_data, name_len) + "' was not found.").c_str());
+    }
 
     const auto* field = find_field_by_name(desc, name_data, name_len);
     if (field == nullptr) {
         field = find_field_by_name_icase(desc, name_data, name_len);
     }
-    if (field == nullptr) return 0;
+    if (field == nullptr) {
+        RaiseArgumentException((std::string("Requested value '") + std::string(name_data, name_len) + "' was not found.").c_str());
+    }
     return enum_alloc_boxed_int64(field->constant_value);
 }
 
@@ -764,20 +771,26 @@ CHAOS_IL2CPP_INTPTR ChaosEnumParseWithIgnoreCase(CHAOS_IL2CPP_INTPTR type, CHAOS
                     if (match) return enum_alloc_boxed_int64(meta->fields[i].value);
                 }
             }
-            return 0;
+            RaiseArgumentException((std::string("Requested value '") + std::string(name_data, name_len) + "' was not found.").c_str());
         }
     }
 
     // Fallback: reflection API
     const auto* desc = resolve_type_arg(type);
-    if (desc == nullptr) return 0;
-    if (check_enum_type(desc) == nullptr) return 0;
+    if (desc == nullptr) {
+        RaiseArgumentException((std::string("Requested value '") + std::string(name_data, name_len) + "' was not found.").c_str());
+    }
+    if (check_enum_type(desc) == nullptr) {
+        RaiseArgumentException((std::string("Requested value '") + std::string(name_data, name_len) + "' was not found.").c_str());
+    }
 
     const auto* field = find_field_by_name(desc, name_data, name_len);
     if (field == nullptr && ignoreCase) {
         field = find_field_by_name_icase(desc, name_data, name_len);
     }
-    if (field == nullptr) return 0;
+    if (field == nullptr) {
+        RaiseArgumentException((std::string("Requested value '") + std::string(name_data, name_len) + "' was not found.").c_str());
+    }
     return enum_alloc_boxed_int64(field->constant_value);
 }
 

@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "ImmutableQueueStackSubjects",
   "entrySubjectId": "ImmutableQueueStackSubjects/ImmutableQueueStackSubjects::CustomEntrySubject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Collections.Immutable/immutable-queue-stack/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.Collections.Immutable/immutable-queue-stack/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

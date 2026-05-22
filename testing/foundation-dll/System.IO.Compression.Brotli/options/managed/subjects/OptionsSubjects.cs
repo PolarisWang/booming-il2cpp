@@ -16,21 +16,22 @@ public static partial class OptionsSubjects
     // [0] System.IO.Compression.Brotli/System.IO.Compression.BrotliCompressionOptions::get_Quality:System.Int32()
     public static void Subject_0()
     {
-        try { _ = default(BrotliCompressionOptions)!.Quality; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (default(BrotliCompressionOptions)!.Quality != default(BrotliCompressionOptions)!.Quality) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [1] System.IO.Compression.Brotli/System.IO.Compression.BrotliCompressionOptions::set_Quality:System.Void(System.Int32)
     public static void Subject_1()
     {
-        try { _ = default(BrotliCompressionOptions)!.Quality = 42; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { default(BrotliCompressionOptions)!.Quality = 42; }
+        catch { _exitCode = 1; }
     }
 
     // [2] System.IO.Compression.Brotli/System.IO.Compression.BrotliCompressionOptions::.ctor:System.Void()
     public static void Subject_2()
     {
-        new BrotliCompressionOptions();
+        try { new BrotliCompressionOptions(); }
+        catch { _exitCode = 1; }
     }
 
 }

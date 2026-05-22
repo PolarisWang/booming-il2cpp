@@ -13,17 +13,8 @@
     "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
     "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
     "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_0:System.Int32(System.Int32)",
-    "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_1:System.Int32(System.Int32)",
-    "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
     "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_0:System.Int32(System.Int32)",
-    "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_1:System.Int32(System.Int32)",
-    "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-    "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_0:System.Int32(System.Int32)",
-    "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_1:System.Int32(System.Int32)",
-    "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_2:System.Int32(System.Int32,System.Int32)",
     "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_0:System.Int32(System.Int32)",
-    "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_1:System.Int32(System.Int32)",
-    "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_2:System.Int32(System.Int32,System.Int32)",
     "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_0:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32)",
     "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_5\u003Eb__6_0:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32)",
     "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_0:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32)",
@@ -49,13 +40,13 @@
     "JoinsSubjects/JoinsSubjects::CustomEntrySubject_6:System.Void()",
     "JoinsSubjects/JoinsSubjects::CustomEntrySubject_7:System.Void()"
   ],
-  "translationUnitMethodCount": 38,
+  "translationUnitMethodCount": 29,
   "translationUnitPageSize": 1024,
   "translationUnitPageCount": 1,
   "translationUnitPages": [
     {
       "pageNumber": 1,
-      "methodCount": 38,
+      "methodCount": 29,
       "path": "generated/runtime/native-reference.runtime-skeleton.page-0001.cpp",
       "firstMethodSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
       "lastMethodSubjectId": "JoinsSubjects/JoinsSubjects::CustomEntrySubject_7:System.Void()"

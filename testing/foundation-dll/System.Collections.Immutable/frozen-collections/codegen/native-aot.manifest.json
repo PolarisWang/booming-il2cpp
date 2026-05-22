@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "FrozenCollectionsSubjects",
   "entrySubjectId": "FrozenCollectionsSubjects/FrozenCollectionsSubjects::CustomEntrySubject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Collections.Immutable/frozen-collections/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.Collections.Immutable/frozen-collections/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

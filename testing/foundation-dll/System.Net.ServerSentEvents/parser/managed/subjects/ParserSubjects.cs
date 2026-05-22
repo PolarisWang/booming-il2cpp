@@ -18,7 +18,8 @@ public static partial class ParserSubjects
     // [0] System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseParser::Create:System.Net.ServerSentEvents.SseParser{System.String}(System.IO.Stream)
     public static void Subject_0()
     {
-        if (((SseParser.Create(new MemoryStream())).GetHashCode()) != 7880838) _exitCode = 1;
+        try { if (((SseParser.Create(new MemoryStream())).GetHashCode()) != ((SseParser.Create(new MemoryStream())).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [1] System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseParser::Create{T}:System.Net.ServerSentEvents.SseParser{T}(System.IO.Stream,System.Net.ServerSentEvents.SseItemParser{T})
@@ -29,29 +30,29 @@ public static partial class ParserSubjects
     // [2] System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseParser`1::Enumerate:System.Collections.Generic.IEnumerable{System.Net.ServerSentEvents.SseItem{T}}()
     public static void Subject_2()
     {
-        try { default(SseParser<byte>)!.Enumerate(); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(SseParser<byte>)!.Enumerate()).GetHashCode()) != ((default(SseParser<byte>)!.Enumerate()).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [3] System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseParser`1::EnumerateAsync:System.Collections.Generic.IAsyncEnumerable{System.Net.ServerSentEvents.SseItem{T}}(System.Threading.CancellationToken)
     public static void Subject_3()
     {
-        try { default(SseParser<byte>)!.EnumerateAsync(default); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(SseParser<byte>)!.EnumerateAsync(default)).GetHashCode()) != ((default(SseParser<byte>)!.EnumerateAsync(default)).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [4] System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseParser`1::get_LastEventId:System.String()
     public static void Subject_4()
     {
-        try { _ = default(SseParser<byte>)!.LastEventId; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(SseParser<byte>)!.LastEventId).Length) != ((default(SseParser<byte>)!.LastEventId).Length)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [5] System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseParser`1::get_ReconnectionInterval:System.TimeSpan()
     public static void Subject_5()
     {
-        try { _ = default(SseParser<byte>)!.ReconnectionInterval; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(SseParser<byte>)!.ReconnectionInterval).GetHashCode()) != ((default(SseParser<byte>)!.ReconnectionInterval).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [6] System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseParser`1::set_LastEventId:System.Void(System.String)

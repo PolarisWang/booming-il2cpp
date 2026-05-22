@@ -75,15 +75,15 @@
       "reason": "external-call"
     },
     {
-      "assemblyName": "System.Net.ServerSentEvents",
-      "subjectKind": "method",
-      "subjectId": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E::get_EventType:System.String()",
-      "reason": "external-call"
-    },
-    {
       "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Net.ServerSentEvents",
+      "subjectKind": "method",
+      "subjectId": "System.Net.ServerSentEvents/SseItem\u003CSystem.Byte\u003E::get_EventType:System.String()",
       "reason": "external-call"
     },
     {

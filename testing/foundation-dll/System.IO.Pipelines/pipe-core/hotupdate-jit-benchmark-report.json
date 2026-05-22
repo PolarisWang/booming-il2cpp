@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.IO.Pipelines",
+  "familyId": "family/System.IO.Pipelines/pipe/core",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.IDuplexPipe::get_Input:System.IO.Pipelines.PipeReader()",
+      "status": "passed",
+      "prePatchNsPerOp": 90587.91,
+      "postPatchNsPerOp": 75797.2,
+      "slowdownPercent": -16.33
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.IDuplexPipe::get_Output:System.IO.Pipelines.PipeWriter()",
+      "status": "passed",
+      "prePatchNsPerOp": 86893.22,
+      "postPatchNsPerOp": 77148.0,
+      "slowdownPercent": -11.22
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe::get_Reader:System.IO.Pipelines.PipeReader()",
+      "status": "passed",
+      "prePatchNsPerOp": 77563.03,
+      "postPatchNsPerOp": 75937.2,
+      "slowdownPercent": -2.1
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe::get_Writer:System.IO.Pipelines.PipeWriter()",
+      "status": "passed",
+      "prePatchNsPerOp": 74648.39,
+      "postPatchNsPerOp": 73771.7,
+      "slowdownPercent": -1.17
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe::Reset:System.Void()",
+      "status": "passed",
+      "prePatchNsPerOp": 43519.26,
+      "postPatchNsPerOp": 41946.3,
+      "slowdownPercent": -3.61
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe::.ctor:System.Void()",
+      "status": "passed",
+      "prePatchNsPerOp": 11110.98,
+      "postPatchNsPerOp": 15183.4,
+      "slowdownPercent": 36.65
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.IO.Pipelines/System.IO.Pipelines.Pipe::.ctor:System.Void(System.IO.Pipelines.PipeOptions)",
+      "status": "passed",
+      "prePatchNsPerOp": 11855.28,
+      "postPatchNsPerOp": 16642.1,
+      "slowdownPercent": 40.38
+    }
+  ],
+  "summary": {
+    "totalMethods": 7,
+    "nonStubMethods": 7,
+    "averageSlowdownPercent": 6.09,
+    "slowdownFactor": 1.0609,
+    "slowdownThresholdX": 50.0
+  }
+}

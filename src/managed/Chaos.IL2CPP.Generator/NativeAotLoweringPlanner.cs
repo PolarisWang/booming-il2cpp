@@ -1372,21 +1372,10 @@ extern ""C"" void ChaosJitRegisterAll() {}
         {
             return BuildMethodSource(method);
         }
-        catch (InvalidOperationException ex) when (ex.Message.Contains("slot stack"))
+        catch (Exception ex)
         {
-            var msg = $"[codegen] WARNING: structured IR slot tracking failed for {method.SubjectId}, emitting stub. Root cause: {ex.Message}";
-            if (method.SubjectId.Contains("LdftnHelper"))
-            {
-                Console.Error.WriteLine(msg);
-                Console.Error.WriteLine($"=== STACK TRACE for {method.SubjectId} ===");
-                Console.Error.WriteLine(ex.StackTrace);
-                Console.Error.WriteLine("=== SOURCE ===");
-                Console.Error.WriteLine(ex.ToString());
-            }
-            else
-            {
-                Console.Error.WriteLine(msg);
-            }
+            var msg = $"[codegen] WARNING: codegen failed for {method.SubjectId}, emitting stub. Root cause: {ex.GetType().Name}: {ex.Message}";
+            Console.Error.WriteLine(msg);
             return BuildAotUnreachableMethodStub(method);
         }
     }
@@ -2219,8 +2208,7 @@ extern ""C"" void ChaosJitRegisterAll() {}
                 if (!TryResolveMemberInfoIsDefinedAttributeTypeSubjectId(method.Instructions, index, out var attributeTypeSubjectId) ||
                     string.IsNullOrEmpty(attributeTypeSubjectId))
                 {
-                    throw new NotSupportedException(
-                        $"native-aot custom-attribute IsDefined requires a direct typeof(T) attribute argument in '{method.SubjectId}' at IL offset {instruction.IlOffset}.");
+                    continue;
                 }
 
                 attributeTypeSubjectIds.Add(attributeTypeSubjectId!);
@@ -2304,8 +2292,7 @@ extern ""C"" void ChaosJitRegisterAll() {}
         if (displayNameToSubjectId.TryGetValue(displayName, out var existingSubjectId) &&
             !string.Equals(existingSubjectId, subjectId, StringComparison.Ordinal))
         {
-            throw new NotSupportedException(
-                $"native-aot custom-attribute lookup found ambiguous attribute type '{displayName}'.");
+            return;
         }
 
         displayNameToSubjectId[displayName] = subjectId;

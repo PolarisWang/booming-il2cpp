@@ -78,7 +78,12 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
     TLAB tlab = TlabClaimFromYoungGen();
     if (tlab.current != nullptr) {
         tls_tlab = tlab;
-        return NurseryAllocate(size);
+        // Objects larger than kMaxTlabAlloc cannot use TLAB — NurseryAllocate
+        // would redirect back to NurseryAllocateSlow, creating infinite recursion.
+        // Fall through; the TLAB is set up for future small allocations.
+        if (size <= kMaxTlabAlloc) {
+            return NurseryAllocate(size);
+        }
     }
 
     // Phase 2: Young region is exhausted — consult the GC scheduler.
@@ -203,7 +208,9 @@ void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
     TLAB tlab = TlabClaimFromYoungGen();
     if (tlab.current != nullptr) {
         tls_tlab = tlab;
-        return NurseryAllocateAtomic(size);
+        if (size <= kMaxTlabAlloc) {
+            return NurseryAllocateAtomic(size);
+        }
     }
 
     // Phase 2: Young region is exhausted — consult the GC scheduler.

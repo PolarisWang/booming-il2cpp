@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ReaderSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Formats.Asn1/reader/managed/subjects/build-output/ReaderSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Formats.Asn1/reader/managed/subjects/build-output/ReaderSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "ReaderSubjects",
-      "path": "verification/foundation-dll/System.Formats.Asn1/reader/managed/subjects/build-output/ReaderSubjects.dll"
+      "path": "testing/foundation-dll/System.Formats.Asn1/reader/managed/subjects/build-output/ReaderSubjects.dll"
     },
     {
       "assemblyName": "System.Formats.Asn1",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "b0c1087e-4b18-4c07-8da6-bd48831cf6d9",
+  "inputModuleVersionId": "ea550be7-9c98-47c9-a4d1-4226fe59d53c",
   "artifacts": [
     {
       "kind": "typedIlIr",

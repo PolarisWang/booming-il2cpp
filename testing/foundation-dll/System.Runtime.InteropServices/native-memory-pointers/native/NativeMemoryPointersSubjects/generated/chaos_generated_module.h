@@ -36,6 +36,66 @@ class ChaosRuntimeHost;
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
     struct NativeMemoryPointersSubjects_t {
+        void (*CustomEntrySubject_121)(
+                void
+        );
+        void (*CustomEntrySubject_123)(
+                void
+        );
+        void (*CustomEntrySubject_133)(
+                void
+        );
+        void (*CustomEntrySubject_138)(
+                void
+        );
+        void (*CustomEntrySubject_167)(
+                void
+        );
+        void (*CustomEntrySubject_168)(
+                void
+        );
+        void (*CustomEntrySubject_195)(
+                void
+        );
+        void (*CustomEntrySubject_196)(
+                void
+        );
+        void (*CustomEntrySubject_25)(
+                void
+        );
+        void (*CustomEntrySubject_27)(
+                void
+        );
+        void (*CustomEntrySubject_29)(
+                void
+        );
+        void (*CustomEntrySubject_37)(
+                void
+        );
+        void (*CustomEntrySubject_41)(
+                void
+        );
+        void (*CustomEntrySubject_49)(
+                void
+        );
+        void (*CustomEntrySubject_60)(
+                void
+        );
+        void (*CustomEntrySubject_63)(
+                void
+        );
+        void (*CustomEntrySubject_65)(
+                void
+        );
+        void (*CustomEntrySubject_76)(
+                void
+        );
+        void (*CustomEntrySubject_90)(
+                void
+        );
+        void (*CustomEntrySubject_91)(
+                void
+        );
         void (*Subject_0)(
                 void
         );
@@ -593,6 +653,106 @@ extern "C" void* kFunctionsFlat[];
 // ═══════════════════════════════════════════════════════════════════════════
 
 struct NativeMemoryPointersSubjects {
+    static inline void CustomEntrySubject_121(
+    ) {
+        return kFunctions.nativeMemoryPointersSubjects.CustomEntrySubject_121(
+        );
+    }
+    static inline void CustomEntrySubject_123(
+    ) {
+        return kFunctions.nativeMemoryPointersSubjects.CustomEntrySubject_123(
+        );
+    }
+    static inline void CustomEntrySubject_133(
+    ) {
+        return kFunctions.nativeMemoryPointersSubjects.CustomEntrySubject_133(
+        );
+    }
+    static inline void CustomEntrySubject_138(
+    ) {
+        return kFunctions.nativeMemoryPointersSubjects.CustomEntrySubject_138(
+        );
+    }
+    static inline void CustomEntrySubject_167(
+    ) {
+        return kFunctions.nativeMemoryPointersSubjects.CustomEntrySubject_167(
+        );
+    }
+    static inline void CustomEntrySubject_168(
+    ) {
+        return kFunctions.nativeMemoryPointersSubjects.CustomEntrySubject_168(
+        );
+    }
+    static inline void CustomEntrySubject_195(
+    ) {
+        return kFunctions.nativeMemoryPointersSubjects.CustomEntrySubject_195(
+        );
+    }
+    static inline void CustomEntrySubject_196(
+    ) {
+        return kFunctions.nativeMemoryPointersSubjects.CustomEntrySubject_196(
+        );
+    }
+    static inline void CustomEntrySubject_25(
+    ) {
+        return kFunctions.nativeMemoryPointersSubjects.CustomEntrySubject_25(
+        );
+    }
+    static inline void CustomEntrySubject_27(
+    ) {
+        return kFunctions.nativeMemoryPointersSubjects.CustomEntrySubject_27(
+        );
+    }
+    static inline void CustomEntrySubject_29(
+    ) {
+        return kFunctions.nativeMemoryPointersSubjects.CustomEntrySubject_29(
+        );
+    }
+    static inline void CustomEntrySubject_37(
+    ) {
+        return kFunctions.nativeMemoryPointersSubjects.CustomEntrySubject_37(
+        );
+    }
+    static inline void CustomEntrySubject_41(
+    ) {
+        return kFunctions.nativeMemoryPointersSubjects.CustomEntrySubject_41(
+        );
+    }
+    static inline void CustomEntrySubject_49(
+    ) {
+        return kFunctions.nativeMemoryPointersSubjects.CustomEntrySubject_49(
+        );
+    }
+    static inline void CustomEntrySubject_60(
+    ) {
+        return kFunctions.nativeMemoryPointersSubjects.CustomEntrySubject_60(
+        );
+    }
+    static inline void CustomEntrySubject_63(
+    ) {
+        return kFunctions.nativeMemoryPointersSubjects.CustomEntrySubject_63(
+        );
+    }
+    static inline void CustomEntrySubject_65(
+    ) {
+        return kFunctions.nativeMemoryPointersSubjects.CustomEntrySubject_65(
+        );
+    }
+    static inline void CustomEntrySubject_76(
+    ) {
+        return kFunctions.nativeMemoryPointersSubjects.CustomEntrySubject_76(
+        );
+    }
+    static inline void CustomEntrySubject_90(
+    ) {
+        return kFunctions.nativeMemoryPointersSubjects.CustomEntrySubject_90(
+        );
+    }
+    static inline void CustomEntrySubject_91(
+    ) {
+        return kFunctions.nativeMemoryPointersSubjects.CustomEntrySubject_91(
+        );
+    }
     static inline void Subject_0(
     ) {
         return kFunctions.nativeMemoryPointersSubjects.Subject_0(
@@ -1489,7 +1649,7 @@ struct NativeMemoryPointersSubjects {
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 179;
+    static constexpr int32_t MethodCount = 199;
 };
 
 

@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ReaderSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Text.Json/reader/managed/subjects/build-output/ReaderSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Text.Json/reader/managed/subjects/build-output/ReaderSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "ReaderSubjects",
-      "path": "verification/foundation-dll/System.Text.Json/reader/managed/subjects/build-output/ReaderSubjects.dll"
+      "path": "testing/foundation-dll/System.Text.Json/reader/managed/subjects/build-output/ReaderSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "d3eebe3b-5b40-4864-869e-c9e4b9637487",
+  "inputModuleVersionId": "03ed384f-9850-4b88-ad41-991bf9ce7099",
   "artifacts": [
     {
       "kind": "typedIlIr",

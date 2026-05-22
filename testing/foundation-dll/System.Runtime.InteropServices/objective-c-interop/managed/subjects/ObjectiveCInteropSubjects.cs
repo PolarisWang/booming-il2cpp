@@ -17,8 +17,8 @@ public static partial class ObjectiveCInteropSubjects
     // [0] System.Runtime.InteropServices/System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal::CreateReferenceTrackingHandle:System.Runtime.InteropServices.GCHandle(System.Object,System.Span{System.IntPtr}&)
     public static void Subject_0()
     {
-        try { ObjectiveCMarshal.CreateReferenceTrackingHandle(42, out _); _exitCode = 1; }
-        catch (PlatformNotSupportedException) { }
+        try { if (((ObjectiveCMarshal.CreateReferenceTrackingHandle(42, out _)).GetHashCode()) != ((ObjectiveCMarshal.CreateReferenceTrackingHandle(42, out _)).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [1] System.Runtime.InteropServices/System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal::Initialize:System.Void(System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal+UnhandledExceptionPropagationHandler)
@@ -30,15 +30,15 @@ public static partial class ObjectiveCInteropSubjects
     // [2] System.Runtime.InteropServices/System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal::SetMessageSendCallback:System.Void(System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal+MessageSendFunction,System.IntPtr)
     public static void Subject_2()
     {
-        try { ObjectiveCMarshal.SetMessageSendCallback(default, IntPtr.Zero); _exitCode = 1; }
-        catch (PlatformNotSupportedException) { }
+        try { ObjectiveCMarshal.SetMessageSendCallback(default, IntPtr.Zero); }
+        catch { _exitCode = 1; }
     }
 
     // [3] System.Runtime.InteropServices/System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal::SetMessageSendPendingException:System.Void(System.Exception)
     public static void Subject_3()
     {
-        try { ObjectiveCMarshal.SetMessageSendPendingException(default); _exitCode = 1; }
-        catch (PlatformNotSupportedException) { }
+        try { ObjectiveCMarshal.SetMessageSendPendingException(default); }
+        catch { _exitCode = 1; }
     }
 
 }

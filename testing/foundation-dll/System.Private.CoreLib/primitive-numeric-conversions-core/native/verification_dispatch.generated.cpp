@@ -1,5 +1,5 @@
 // verification_dispatch.generated.cpp — auto-generated
-// Assembly: PrimitiveNumericConversionsCoreSubjects, Methods: 22
+// Assembly: PrimitiveNumericConversionsCoreSubjects, Methods: 20
 #include <cstdint>
 #include <chrono>
 #include <chaos/native_types.h>

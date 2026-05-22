@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "IdentityReferenceSubjects",
   "entrySubjectId": "IdentityReferenceSubjects/IdentityReferenceSubjects::Subject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Security.Principal.Windows/identity-reference/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.Security.Principal.Windows/identity-reference/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

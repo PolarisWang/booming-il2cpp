@@ -16,57 +16,57 @@ public static partial class WindowsPrincipalRolesSubjects
     // [0] System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::get_DeviceClaims:System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}()
     public static void Subject_0()
     {
-        try { _ = default(WindowsPrincipal)!.DeviceClaims; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(WindowsPrincipal)!.DeviceClaims).GetHashCode()) != ((default(WindowsPrincipal)!.DeviceClaims).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [1] System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::get_Identity:System.Security.Principal.IIdentity()
     public static void Subject_1()
     {
-        try { _ = default(WindowsPrincipal)!.Identity; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(WindowsPrincipal)!.Identity).GetHashCode()) != ((default(WindowsPrincipal)!.Identity).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [2] System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::get_UserClaims:System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}()
     public static void Subject_2()
     {
-        try { _ = default(WindowsPrincipal)!.UserClaims; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(WindowsPrincipal)!.UserClaims).GetHashCode()) != ((default(WindowsPrincipal)!.UserClaims).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [3] System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::IsInRole:System.Boolean(System.String)
     public static void Subject_3()
     {
-        try { default(WindowsPrincipal)!.IsInRole("hello"); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(WindowsPrincipal)!.IsInRole("hello")) ? 1 : 0) != ((default(WindowsPrincipal)!.IsInRole("hello")) ? 1 : 0)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [4] System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::IsInRole:System.Boolean(System.Security.Principal.WindowsBuiltInRole)
     public static void Subject_4()
     {
-        try { default(WindowsPrincipal)!.IsInRole(default(System.Security.Principal.SecurityIdentifier)); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(WindowsPrincipal)!.IsInRole(default(System.Security.Principal.SecurityIdentifier))) ? 1 : 0) != ((default(WindowsPrincipal)!.IsInRole(default(System.Security.Principal.SecurityIdentifier))) ? 1 : 0)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [5] System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::IsInRole:System.Boolean(System.Int32)
     public static void Subject_5()
     {
-        try { default(WindowsPrincipal)!.IsInRole(42); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(WindowsPrincipal)!.IsInRole(42)) ? 1 : 0) != ((default(WindowsPrincipal)!.IsInRole(42)) ? 1 : 0)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [6] System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::IsInRole:System.Boolean(System.Security.Principal.SecurityIdentifier)
     public static void Subject_6()
     {
-        try { default(WindowsPrincipal)!.IsInRole(default(System.Security.Principal.SecurityIdentifier)); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(WindowsPrincipal)!.IsInRole(default(System.Security.Principal.SecurityIdentifier))) ? 1 : 0) != ((default(WindowsPrincipal)!.IsInRole(default(System.Security.Principal.SecurityIdentifier))) ? 1 : 0)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [7] System.Security.Principal.Windows/System.Security.Principal.WindowsPrincipal::.ctor:System.Void(System.Security.Principal.WindowsIdentity)
     public static void Subject_7()
     {
-        try { new WindowsPrincipal(null!); _exitCode = 1; }
-        catch (ArgumentNullException) { }
+        try { new WindowsPrincipal(null!); }
+        catch { _exitCode = 1; }
     }
 
 }

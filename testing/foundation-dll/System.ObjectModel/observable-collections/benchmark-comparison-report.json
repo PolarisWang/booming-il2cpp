@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.ObjectModel",
+  "familyId": "family/System.ObjectModel/observable/collections",
+  "summary": {
+    "totalMethods": 8,
+    "matchedCount": 0,
+    "unmatchedCount": 0,
+    "invalidCount": 8,
+    "nativeAotFasterCount": 0,
+    "nativeJitFasterCount": 0,
+    "managedFasterCount": 0,
+    "equalCount": 0,
+    "averageSpeedupPercent": 0.0,
+    "averageNativeAotSpeedupPercent": 0.0,
+    "averageNativeJitSpeedupPercent": null,
+    "nativeJitSlowdownFactor": null
+  },
+  "methodResults": [
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::add_CollectionChanged:System.Void(System.Collections.Specialized.NotifyCollectionChangedEventHandler)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::Move:System.Void(System.Int32,System.Int32)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::remove_CollectionChanged:System.Void(System.Collections.Specialized.NotifyCollectionChangedEventHandler)",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::.ctor:System.Void()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::.ctor:System.Void(System.Collections.Generic.IEnumerable{T})",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ObservableCollection`1::.ctor:System.Void(System.Collections.Generic.List{T})",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection`1::get_Empty:System.Collections.ObjectModel.ReadOnlyObservableCollection{T}()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection`1::.ctor:System.Void(System.Collections.ObjectModel.ObservableCollection{T})",
+      "status": "managed_harness_unavailable"
+    }
+  ]
+}

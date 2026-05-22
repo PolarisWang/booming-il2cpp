@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ObjectModelCollectionsSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.ObjectModel/object-model-collections/managed/subjects/build-output/ObjectModelCollectionsSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.ObjectModel/object-model-collections/managed/subjects/build-output/ObjectModelCollectionsSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "ObjectModelCollectionsSubjects",
-      "path": "verification/foundation-dll/System.ObjectModel/object-model-collections/managed/subjects/build-output/ObjectModelCollectionsSubjects.dll"
+      "path": "testing/foundation-dll/System.ObjectModel/object-model-collections/managed/subjects/build-output/ObjectModelCollectionsSubjects.dll"
     },
     {
       "assemblyName": "System.ObjectModel",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "accc02a6-28d5-418f-8e20-ee5d6b0aa8f8",
+  "inputModuleVersionId": "a7fb04cf-78f8-4e8a-9d70-5b0e532d18a9",
   "artifacts": [
     {
       "kind": "typedIlIr",

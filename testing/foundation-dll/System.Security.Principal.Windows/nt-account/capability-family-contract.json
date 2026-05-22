@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Security.Principal.Windows",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.Security.Principal.Windows/nt-account",
+  "displayName": "NT Account",
+  "methodSubjectIds": [
+    "System.Security.Principal.Windows/System.Security.Principal.NTAccount::Equals:System.Boolean(System.Object)",
+    "System.Security.Principal.Windows/System.Security.Principal.NTAccount::get_Value:System.String()",
+    "System.Security.Principal.Windows/System.Security.Principal.NTAccount::GetHashCode:System.Int32()",
+    "System.Security.Principal.Windows/System.Security.Principal.NTAccount::IsValidTargetType:System.Boolean(System.Type)",
+    "System.Security.Principal.Windows/System.Security.Principal.NTAccount::op_Equality:System.Boolean(System.Security.Principal.NTAccount,System.Security.Principal.NTAccount)",
+    "System.Security.Principal.Windows/System.Security.Principal.NTAccount::op_Inequality:System.Boolean(System.Security.Principal.NTAccount,System.Security.Principal.NTAccount)",
+    "System.Security.Principal.Windows/System.Security.Principal.NTAccount::ToString:System.String()",
+    "System.Security.Principal.Windows/System.Security.Principal.NTAccount::Translate:System.Security.Principal.IdentityReference(System.Type)",
+    "System.Security.Principal.Windows/System.Security.Principal.NTAccount::.ctor:System.Void(System.String,System.String)",
+    "System.Security.Principal.Windows/System.Security.Principal.NTAccount::.ctor:System.Void(System.String)"
+  ],
+  "methodSubjectCount": 10,
+  "customEntryIndices": [],
+  "functionalObligation": {
+    "required": true
+  },
+  "performanceObligation": {
+    "required": false
+  },
+  "hotupdateFunctionalObligation": {
+    "required": false
+  },
+  "hotupdatePerformanceObligation": {
+    "required": false
+  },
+  "reviewBundleRequired": true
+}

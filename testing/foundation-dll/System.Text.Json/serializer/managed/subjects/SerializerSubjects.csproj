@@ -1,16 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
-    <ImplicitUsings>disable</ImplicitUsings>
+    <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyName>SerializerSubjects</AssemblyName>
     <RootNamespace>SerializerSubjects</RootNamespace>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <NoWarn>$(NoWarn);SYSLIB0011;SYSLIB0050</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="D:\agent\booming-il2cpp\src\reference\Chaos.TestFramework.Sdk\Chaos.TestFramework.Sdk.csproj" />
+    <ProjectReference Include="D:\agent\booming-il2cpp\src\reference\Chaos.TestFramework.Runner\Chaos.TestFramework.Runner.csproj" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="SerializerSubjects.cs" />
+    <Compile Include="Program.cs" />
   </ItemGroup>
 </Project>

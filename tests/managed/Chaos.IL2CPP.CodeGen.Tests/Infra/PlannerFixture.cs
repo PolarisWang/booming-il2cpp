@@ -28,7 +28,7 @@ internal sealed class PlannerFixture
 
         return Path.GetFullPath(Path.Combine(
             repoRoot,
-            "tests", "managed", "Chaos.IL2CPP.Generator.Tests",
+            "tests", "managed", "Chaos.IL2CPP.CodeGen.Tests",
             "StubAssembly", "bin", "Debug", "net8.0",
             "StubAssembly.dll"));
     }

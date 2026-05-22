@@ -1144,6 +1144,11 @@ public sealed partial class NativeAotLoweringPlanner
             }
         }
 
+        if (caseMap.Count == 0)
+        {
+            return new IRBlock(new List<AotCoreIrInstructionArtifact>(), null);
+        }
+
         int maxTargetIdx = caseMap.Keys.Max();
         int mergeIdx = maxTargetIdx + 1;
         int endIdx = cfg.Blocks.Count - 1;

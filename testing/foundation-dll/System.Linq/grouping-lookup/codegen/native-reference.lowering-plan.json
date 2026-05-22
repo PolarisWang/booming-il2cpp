@@ -24,10 +24,8 @@
     "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_5\u003Eb__6_1:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
     "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_0:System.Int32(System.Int32)",
     "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_1:System.Int32(System.Int32)",
-    "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
     "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_0:System.Int32(System.Int32)",
     "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_1:System.Int32(System.Int32)",
-    "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
     "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_0:System.Void()",
     "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_1:System.Void()",
     "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_2:System.Void()",
@@ -37,13 +35,13 @@
     "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_6:System.Void()",
     "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_7:System.Void()"
   ],
-  "translationUnitMethodCount": 26,
+  "translationUnitMethodCount": 24,
   "translationUnitPageSize": 1024,
   "translationUnitPageCount": 1,
   "translationUnitPages": [
     {
       "pageNumber": 1,
-      "methodCount": 26,
+      "methodCount": 24,
       "path": "generated/runtime/native-reference.runtime-skeleton.page-0001.cpp",
       "firstMethodSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
       "lastMethodSubjectId": "GroupingLookupSubjects/GroupingLookupSubjects::CustomEntrySubject_7:System.Void()"

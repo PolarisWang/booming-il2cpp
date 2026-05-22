@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ShuffleIndexSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Linq/shuffle-index/managed/subjects/build-output/ShuffleIndexSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Linq/shuffle-index/managed/subjects/build-output/ShuffleIndexSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "ShuffleIndexSubjects",
-      "path": "verification/foundation-dll/System.Linq/shuffle-index/managed/subjects/build-output/ShuffleIndexSubjects.dll"
+      "path": "testing/foundation-dll/System.Linq/shuffle-index/managed/subjects/build-output/ShuffleIndexSubjects.dll"
     },
     {
       "assemblyName": "System.Linq",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "1b295c8c-b731-4285-a1f4-d116ee4702f5",
+  "inputModuleVersionId": "7c545f9c-805a-4925-b5b7-fb9d650d4f2d",
   "artifacts": [
     {
       "kind": "typedIlIr",

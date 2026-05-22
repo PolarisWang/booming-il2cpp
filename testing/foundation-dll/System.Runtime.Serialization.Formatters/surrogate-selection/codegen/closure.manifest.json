@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "SurrogateSelectionSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Runtime.Serialization.Formatters/surrogate-selection/managed/subjects/build-output/SurrogateSelectionSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Runtime.Serialization.Formatters/surrogate-selection/managed/subjects/build-output/SurrogateSelectionSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "SurrogateSelectionSubjects",
-      "path": "verification/foundation-dll/System.Runtime.Serialization.Formatters/surrogate-selection/managed/subjects/build-output/SurrogateSelectionSubjects.dll"
+      "path": "testing/foundation-dll/System.Runtime.Serialization.Formatters/surrogate-selection/managed/subjects/build-output/SurrogateSelectionSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "b22046ac-fdff-4be0-8257-ca72ae3b1462",
+  "inputModuleVersionId": "0a731f38-19f4-4c78-bd24-31fab2fad7c3",
   "artifacts": [
     {
       "kind": "typedIlIr",

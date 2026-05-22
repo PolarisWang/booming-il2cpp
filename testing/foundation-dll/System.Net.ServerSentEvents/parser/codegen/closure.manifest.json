@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ParserSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Net.ServerSentEvents/parser/managed/subjects/build-output/ParserSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Net.ServerSentEvents/parser/managed/subjects/build-output/ParserSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "ParserSubjects",
-      "path": "verification/foundation-dll/System.Net.ServerSentEvents/parser/managed/subjects/build-output/ParserSubjects.dll"
+      "path": "testing/foundation-dll/System.Net.ServerSentEvents/parser/managed/subjects/build-output/ParserSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "8ad8a044-3cd5-433d-a5fd-54de31ab47cd",
+  "inputModuleVersionId": "7d6d4d4a-ede0-46fd-9d55-b47e267da72c",
   "artifacts": [
     {
       "kind": "typedIlIr",

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Text.Json",
+  "familyId": "family/System.Text.Json/reader",
+  "capturedAt": "2026-05-22T07:18:28",
+  "metrics": {
+    "framePool": {
+      "acquireReleaseNsPerOp": 2.9,
+      "batchCount": 1000,
+      "framesPerBatch": 32
+    },
+    "fastExecute": {
+      "runCount": 100000,
+      "nsPerCall": 1.9
+    },
+    "callVirt": {
+      "handlerDispatchNs": 2.0,
+      "emptyStackNs": 2.2
+    },
+    "poolSize": 32
+  },
+  "rawOutput": "[2026-05-22T07:18:28][DEBUG][codegen] T4 VEH handler registered\n[2026-05-22T07:18:28][DEBUG][GcEvents] registered callback 0x7ff6fce44050 at slot 0\n[2026-05-22T07:18:28][WARN][CRAG] young_collection_no_region\n[2026-05-22T07:18:28][INFO][NUMA] numa_init count=%d\n[2026-05-22T07:18:28][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-22T07:18:28][INFO][OldGen] init done base=0x2139423703040 pages=8\n[2026-05-22T07:18:28][DEBUG][codegen] T4 VEH handler registered\n[2026-05-22T07:18:28][DEBUG][GcEvents] registered callback 0x7ff6fce44050 at slot 1\nBenchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 2.9 ns/op (1000 batches x 32 frames)\nBenchmark 2: FastExecute (Subject_0): 100000 runs: 1.9 ns/op\n[2026-05-22T07:18:28][DEBUG][BGC] thread_started\n[2026-05-22T07:18:28][DEBUG][Finalizer] thread_started id={0}\nHandler dispatch overhead (LdcI4): 2.0 ns/call\nCallVirt empty-stack: 2.2 ns/call\n"
+}

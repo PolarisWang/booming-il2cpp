@@ -546,12 +546,16 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
             header |= (static_cast<uint64_t>(ir.switch_target_count & 0x7FFF) << 48);
             ri.header = header;
         } else if (ir.op_code == IROpCode::Calli) {
-            ri.imm.ptr          = ir.call_target;
             ri.imm.operand_index = static_cast<uint32_t>(calli_func_ptr_vreg);
+            ri.imm.ptr          = ir.call_target;     // must be LAST write — overwrites all 8 union bytes
         } else if (ir.op_code == IROpCode::Call || ir.op_code == IROpCode::CallVirt ||
                    ir.op_code == IROpCode::CallBridge || ir.op_code == IROpCode::CallVirtConstrained) {
-            ri.imm.ptr           = ir.call_target;
             ri.imm.operand_index  = static_cast<uint32_t>(ir.operand_index);
+            // Use call_target if available; fall back to direct_fn for Tier 3
+            // cross-assembly calls (e.g. String::Concat, Console::WriteLine).
+            // direct_fn uses the same managed calling convention fn(a0...a7),
+            // compatible with the MIC path in InterpreterDispatchRaw.
+            ri.imm.ptr           = ir.call_target ? ir.call_target : ir.direct_fn;
         }
 
         // operand_index for non-call opcodes that need it (arg/local index, field count).
@@ -952,9 +956,21 @@ static void Reg_Dup(RegisterFrame& frame, const RegisterInstruction& instr) noex
 static void Reg_Ret(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Ret");
     if (instr.has_src1()) {
+        uint8_t src = instr.src1_reg();
+        std::fprintf(stderr, "[diag:Ret] has_src1 src=%u\n", src);
+        uint64_t rv = 0; uint8_t rt = 0;
+        if (src < 64) {
+            rv = frame.regs.gpr[src];
+            rt = frame.regs.gpr_tags[src];
+        } else if (src < 96) {
+            rv = frame.regs.fpr[src - 64];
+            rt = frame.regs.fpr_tags[src - 64];
+        } else {
+            std::fprintf(stderr, "[diag:Ret] OUT OF BOUNDS src=%u\n", src);
+        }
         frame.has_ret = true;
-        frame.ret_val = frame.regs.reg(instr.src1_reg());
-        frame.ret_tag = frame.regs.reg_tag(instr.src1_reg());
+        frame.ret_val = rv;
+        frame.ret_tag = rt;
     }
     frame.pc = 0xFFffFFffu;
 }
@@ -1148,10 +1164,11 @@ static void Reg_RemUn(RegisterFrame& frame, const RegisterInstruction& instr) no
 // ── Conversion handlers (unsigned/alternative forms) ────────────────────
 static void Reg_ConvRUn(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_ConvRUn");
+    // IL conv.r.un: uint32 → float64.  Match T4 codegen (cvtsi2sd → double).
     uint32_t v = static_cast<uint32_t>(frame.regs.reg(instr.src1_reg()));
-    float fv = static_cast<float>(v);
-    uint64_t val; std::memcpy(&val, &fv, sizeof(float));
-    frame.regs.set_reg(instr.dst_reg(), val, static_cast<uint8_t>(ValueTag::Float32));
+    double dv = static_cast<double>(v);
+    uint64_t val; std::memcpy(&val, &dv, sizeof(double));
+    frame.regs.set_reg(instr.dst_reg(), val, static_cast<uint8_t>(ValueTag::Float64));
     ++frame.pc;
 }
 
@@ -1524,6 +1541,7 @@ static void Reg_Call(RegisterFrame& frame, const RegisterInstruction& instr) noe
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Call");
     uint32_t ac = instr.call_arg_count();
     void* call_target = instr.imm.ptr;
+    std::fprintf(stderr, "[diag:RC] pc=%u target=%p\n", frame.pc, call_target);
     if (call_target == nullptr) { ++frame.pc; return; }
 
     // Build raw_args/raw_tags from consecutive registers starting at src1_reg
@@ -1555,6 +1573,8 @@ static void Reg_Call(RegisterFrame& frame, const RegisterInstruction& instr) noe
             cache_info = &cc[frame.pc];
         }
     }
+    std::fprintf(stderr, "[diag:REG_CALL] pc=%u ac=%u inst=%d ci=%p\n", frame.pc, ac, instr.is_instance_call(), (void*)cache_info);
+    std::fflush(stderr);
 
     auto dret = ri::InterpreterDispatchRaw(
         call_target, raw_args, raw_tags, ac,
@@ -2011,6 +2031,7 @@ bool RegisterExecute(RegisterFrame& frame,
         }
 
         uint32_t prev_pc = frame.pc;
+        std::fprintf(stderr, "[diag:RE] pc=%u op=%u\n", frame.pc, op_val);
         kRegHandlers[op_val](frame, instrs[frame.pc]);
 
         // OSR: Detect hot loop backward branch — if the handler took a branch

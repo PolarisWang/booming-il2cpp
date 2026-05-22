@@ -1,6 +1,7 @@
 #include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
+#include <chaos/eh.h>
 #include "com_ccw.h"
 #include "codegen_bridge.h"
 #include "module_registry.h"
@@ -2474,13 +2475,13 @@ extern "C" void (*kBenchmarkWrappers[138])() = {
 	[]() {kAotMethods[40]();},
 	[]() {kAotMethods[41]();},
 	[]() {kAotMethods[42]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[43])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),chaos_make_string_id_value(643252818266422135ULL));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[43])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),chaos_make_string_id_value(8492632318578411777ULL));},
 	[]() {kAotMethods[44]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[45])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),chaos_make_string_id_value(643252818266422135ULL));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[45])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),chaos_make_string_id_value(8492632318578411777ULL));},
 	[]() {kAotMethods[46]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[47])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),chaos_make_string_id_value(643252818266422135ULL));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[47])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),chaos_make_string_id_value(8492632318578411777ULL));},
 	[]() {kAotMethods[48]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[49])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),chaos_make_string_id_value(643252818266422135ULL));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[49])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),chaos_make_string_id_value(8492632318578411777ULL));},
 	[]() {kAotMethods[50]();},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[51])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
 	[]() {kAotMethods[52]();},
@@ -2494,11 +2495,11 @@ extern "C" void (*kBenchmarkWrappers[138])() = {
 	[]() {kAotMethods[60]();},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[61])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
 	[]() {kAotMethods[62]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[63])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),chaos_make_string_id_value(643252818266422135ULL));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[63])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),chaos_make_string_id_value(8492632318578411777ULL));},
 	[]() {kAotMethods[64]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[65])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),chaos_make_string_id_value(643252818266422135ULL));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[65])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),chaos_make_string_id_value(8492632318578411777ULL));},
 	[]() {kAotMethods[66]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[67])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),chaos_make_string_id_value(643252818266422135ULL));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[67])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),chaos_make_string_id_value(8492632318578411777ULL));},
 	[]() {kAotMethods[68]();},
 	[]() {kAotMethods[69]();},
 	[]() {kAotMethods[70]();},
@@ -2512,13 +2513,13 @@ extern "C" void (*kBenchmarkWrappers[138])() = {
 	[]() {kAotMethods[78]();},
 	[]() {kAotMethods[79]();},
 	[]() {kAotMethods[80]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[81])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),chaos_make_string_id_value(643252818266422135ULL));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[81])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),chaos_make_string_id_value(8492632318578411777ULL));},
 	[]() {kAotMethods[82]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[83])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),chaos_make_string_id_value(643252818266422135ULL));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[83])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),chaos_make_string_id_value(8492632318578411777ULL));},
 	[]() {kAotMethods[84]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[85])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),chaos_make_string_id_value(643252818266422135ULL));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[85])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),chaos_make_string_id_value(8492632318578411777ULL));},
 	[]() {kAotMethods[86]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[87])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),chaos_make_string_id_value(643252818266422135ULL));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[87])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),chaos_make_string_id_value(8492632318578411777ULL));},
 	[]() {kAotMethods[88]();},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[89])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
 	[]() {kAotMethods[90]();},
@@ -2532,11 +2533,11 @@ extern "C" void (*kBenchmarkWrappers[138])() = {
 	[]() {kAotMethods[98]();},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[99])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
 	[]() {kAotMethods[100]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[101])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),chaos_make_string_id_value(643252818266422135ULL));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[101])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),chaos_make_string_id_value(8492632318578411777ULL));},
 	[]() {kAotMethods[102]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[103])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),chaos_make_string_id_value(643252818266422135ULL));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[103])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),chaos_make_string_id_value(8492632318578411777ULL));},
 	[]() {kAotMethods[104]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[105])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),chaos_make_string_id_value(643252818266422135ULL));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[105])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),chaos_make_string_id_value(8492632318578411777ULL));},
 	[]() {kAotMethods[106]();},
 	[]() {kAotMethods[107]();},
 	[]() {kAotMethods[108]();},
@@ -2571,7 +2572,108 @@ extern "C" void (*kBenchmarkWrappers[138])() = {
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[137])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
 };
 
+// ── Subject entry index mapping ─────────────────────────────────
+// Maps subject index (0-based sequential) to kAotMethod index.
+// Used by runtime-entry.cpp to route --benchmark N to the correct
+// AOT method slot, since kAotMethods[] includes lambdas/closures
+// that shift subject methods to non-contiguous indices.
+extern "C" const int kSubjectEntryCount = 90;
+extern "C" const int kSubjectEntryIndices[90] = {
+	0,
+	1,
+	2,
+	3,
+	4,
+	5,
+	6,
+	7,
+	8,
+	9,
+	10,
+	12,
+	14,
+	16,
+	18,
+	20,
+	22,
+	24,
+	26,
+	28,
+	30,
+	31,
+	32,
+	33,
+	34,
+	35,
+	36,
+	37,
+	38,
+	39,
+	40,
+	41,
+	42,
+	44,
+	46,
+	48,
+	50,
+	52,
+	54,
+	56,
+	58,
+	60,
+	62,
+	64,
+	66,
+	68,
+	69,
+	70,
+	71,
+	72,
+	73,
+	74,
+	75,
+	76,
+	77,
+	78,
+	79,
+	80,
+	82,
+	84,
+	86,
+	88,
+	90,
+	92,
+	94,
+	96,
+	98,
+	100,
+	102,
+	104,
+	106,
+	107,
+	108,
+	109,
+	110,
+	111,
+	112,
+	113,
+	114,
+	115,
+	116,
+	118,
+	120,
+	122,
+	124,
+	126,
+	128,
+	130,
+	132,
+	134,
+};
+
 // Single-method dispatch via hotpatch dispatch table.
+// NOTE: Uses kBenchmarkWrappers (not raw kAotMethods) to ensure instance
+// methods receive a valid this-pointer sentinel and default argument values.
 extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(
 	CHAOS_IL2CPP_INT32 chaos_entry_index)
 {
@@ -2628,7 +2730,7 @@ extern "C" CHAOS_IL2CPP_INT32 RunNativeAotBench(
 	return 0;
 }
 
-// Pure AOT benchmark: calls kAotMethods[i] directly, no hotpatch overhead.
+// Pure AOT benchmark: calls kBenchmarkWrappers[i] directly, no hotpatch overhead.
 extern "C" double BenchmarkMethod(
 	int chaos_entry_index, int iterations) {
 	if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)
@@ -2641,6 +2743,2236 @@ extern "C" double BenchmarkMethod(
 	return std::chrono::duration<double, std::milli>(
 		end - start).count();
 }
+// ── GC Slot Map Section ───────────────────────────────────────────
+// Auto-generated by chaos-il2cpp codegen for precise stack root scanning.
+// One nested struct entry per method with GC-referencing stack slots.
+// Iterated by GcRegisterSlotMapsFromSection() which advances by
+// entry_total_size bytes per entry.
+#if defined(_MSC_VER)
+#pragma pack(push, 1)
+#endif
+#if defined(__GNUC__) || defined(__clang__)
+static const struct __attribute__((packed)) {
+#else
+static const struct {
+#endif
+
+	/* ── Entry 0: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_0 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry0;
+	/* ── Entry 1: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_1 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry1;
+	/* ── Entry 2: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_2 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry2;
+	/* ── Entry 3: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_3 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry3;
+	/* ── Entry 4: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_4 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[9];
+	} entry4;
+	/* ── Entry 5: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_5 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry5;
+	/* ── Entry 6: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_6 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[7];
+	} entry6;
+	/* ── Entry 7: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_7 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry7;
+	/* ── Entry 8: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_8 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry8;
+	/* ── Entry 9: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_9 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[9];
+	} entry9;
+	/* ── Entry 10: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_10 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry10;
+	/* ── Entry 11: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_10_b__11_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry11;
+	/* ── Entry 12: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_11 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry12;
+	/* ── Entry 13: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_11_b__12_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry13;
+	/* ── Entry 14: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_12 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry14;
+	/* ── Entry 15: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_12_b__13_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry15;
+	/* ── Entry 16: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_13 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry16;
+	/* ── Entry 17: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_13_b__14_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry17;
+	/* ── Entry 18: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_14 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry18;
+	/* ── Entry 19: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_14_b__15_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry19;
+	/* ── Entry 20: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_15 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry20;
+	/* ── Entry 21: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_15_b__16_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry21;
+	/* ── Entry 22: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_16 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry22;
+	/* ── Entry 23: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_16_b__17_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry23;
+	/* ── Entry 24: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_17 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry24;
+	/* ── Entry 25: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_17_b__18_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry25;
+	/* ── Entry 26: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_18 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry26;
+	/* ── Entry 27: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_18_b__19_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry27;
+	/* ── Entry 28: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_19 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry28;
+	/* ── Entry 29: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_19_b__20_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry29;
+	/* ── Entry 30: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_20 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry30;
+	/* ── Entry 31: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_21 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry31;
+	/* ── Entry 32: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_22 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry32;
+	/* ── Entry 33: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_23 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[7];
+	} entry33;
+	/* ── Entry 34: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_24 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry34;
+	/* ── Entry 35: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_25 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry35;
+	/* ── Entry 36: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_26 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry36;
+	/* ── Entry 37: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_27 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry37;
+	/* ── Entry 38: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_28 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[9];
+	} entry38;
+	/* ── Entry 39: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_29 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[9];
+	} entry39;
+	/* ── Entry 40: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_30 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry40;
+	/* ── Entry 41: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_31 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry41;
+	/* ── Entry 42: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry42;
+	/* ── Entry 43: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_32_b__33_0_System_String ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry43;
+	/* ── Entry 44: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_33 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry44;
+	/* ── Entry 45: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_33_b__34_0_System_String ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry45;
+	/* ── Entry 46: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_34 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry46;
+	/* ── Entry 47: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_34_b__35_0_System_String ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry47;
+	/* ── Entry 48: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_35 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry48;
+	/* ── Entry 49: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_35_b__36_0_System_String ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry49;
+	/* ── Entry 50: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_36 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry50;
+	/* ── Entry 51: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_36_b__37_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry51;
+	/* ── Entry 52: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_37 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry52;
+	/* ── Entry 53: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_37_b__38_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry53;
+	/* ── Entry 54: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_38 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry54;
+	/* ── Entry 55: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_38_b__39_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry55;
+	/* ── Entry 56: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_39 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry56;
+	/* ── Entry 57: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_39_b__40_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry57;
+	/* ── Entry 58: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_40 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry58;
+	/* ── Entry 59: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_40_b__41_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry59;
+	/* ── Entry 60: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_41 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry60;
+	/* ── Entry 61: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_41_b__42_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry61;
+	/* ── Entry 62: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_42 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry62;
+	/* ── Entry 63: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_42_b__43_0_System_String ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry63;
+	/* ── Entry 64: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_43 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry64;
+	/* ── Entry 65: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_43_b__44_0_System_String ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry65;
+	/* ── Entry 66: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_44 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry66;
+	/* ── Entry 67: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_44_b__45_0_System_String ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry67;
+	/* ── Entry 68: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_45 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry68;
+	/* ── Entry 69: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_46 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry69;
+	/* ── Entry 70: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_47 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry70;
+	/* ── Entry 71: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_48 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[7];
+	} entry71;
+	/* ── Entry 72: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_49 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry72;
+	/* ── Entry 73: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_50 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry73;
+	/* ── Entry 74: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_51 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry74;
+	/* ── Entry 75: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_52 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry75;
+	/* ── Entry 76: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_53 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[9];
+	} entry76;
+	/* ── Entry 77: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_54 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[9];
+	} entry77;
+	/* ── Entry 78: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_55 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry78;
+	/* ── Entry 79: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_56 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry79;
+	/* ── Entry 80: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_57 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry80;
+	/* ── Entry 81: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_57_b__58_0_System_String ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry81;
+	/* ── Entry 82: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_58 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry82;
+	/* ── Entry 83: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_58_b__59_0_System_String ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry83;
+	/* ── Entry 84: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_59 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry84;
+	/* ── Entry 85: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_59_b__60_0_System_String ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry85;
+	/* ── Entry 86: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_60 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry86;
+	/* ── Entry 87: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_60_b__61_0_System_String ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry87;
+	/* ── Entry 88: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_61 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry88;
+	/* ── Entry 89: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_61_b__62_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry89;
+	/* ── Entry 90: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_62 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry90;
+	/* ── Entry 91: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_62_b__63_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry91;
+	/* ── Entry 92: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_63 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry92;
+	/* ── Entry 93: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_63_b__64_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry93;
+	/* ── Entry 94: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_64 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry94;
+	/* ── Entry 95: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_64_b__65_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry95;
+	/* ── Entry 96: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_65 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry96;
+	/* ── Entry 97: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_65_b__66_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry97;
+	/* ── Entry 98: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_66 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry98;
+	/* ── Entry 99: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_66_b__67_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry99;
+	/* ── Entry 100: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_67 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry100;
+	/* ── Entry 101: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_67_b__68_0_System_String ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry101;
+	/* ── Entry 102: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_68 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry102;
+	/* ── Entry 103: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_68_b__69_0_System_String ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry103;
+	/* ── Entry 104: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_69 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry104;
+	/* ── Entry 105: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_69_b__70_0_System_String ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry105;
+	/* ── Entry 106: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_70 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry106;
+	/* ── Entry 107: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_71 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry107;
+	/* ── Entry 108: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_72 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry108;
+	/* ── Entry 109: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_73 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry109;
+	/* ── Entry 110: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_74 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[9];
+	} entry110;
+	/* ── Entry 111: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_75 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry111;
+	/* ── Entry 112: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_76 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[7];
+	} entry112;
+	/* ── Entry 113: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_77 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry113;
+	/* ── Entry 114: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_78 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[5];
+	} entry114;
+	/* ── Entry 115: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_79 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[9];
+	} entry115;
+	/* ── Entry 116: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_80 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry116;
+	/* ── Entry 117: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_80_b__81_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry117;
+	/* ── Entry 118: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_81 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry118;
+	/* ── Entry 119: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_81_b__82_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry119;
+	/* ── Entry 120: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_82 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry120;
+	/* ── Entry 121: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_82_b__83_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry121;
+	/* ── Entry 122: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_83 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry122;
+	/* ── Entry 123: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_83_b__84_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry123;
+	/* ── Entry 124: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_84 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry124;
+	/* ── Entry 125: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_84_b__85_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry125;
+	/* ── Entry 126: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_85 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry126;
+	/* ── Entry 127: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_85_b__86_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry127;
+	/* ── Entry 128: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_86 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry128;
+	/* ── Entry 129: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_86_b__87_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry129;
+	/* ── Entry 130: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_87 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry130;
+	/* ── Entry 131: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_87_b__88_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry131;
+	/* ── Entry 132: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_88 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry132;
+	/* ── Entry 133: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_88_b__89_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry133;
+	/* ── Entry 134: NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_89 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry134;
+	/* ── Entry 135: NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_89_b__90_0_System_Int32 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[4];
+	} entry135;
+	/* ── Entry 136: NumericAggregationSubjects_NumericAggregationSubjects___c_cctor ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[1];
+	} entry136;
+	/* ── Entry 137: NumericAggregationSubjects_NumericAggregationSubjects___c__ctor ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry137;
+} kChaosGcSlotMapsSection = {
+	/* entry0 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_0 */
+	.entry0 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_0),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry1 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_1 */
+	.entry1 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_1),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry2 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_2 */
+	.entry2 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_2),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry3 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_3 */
+	.entry3 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_3),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry4 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_4 */
+	.entry4 = {
+		/* entry_total_size = 56 */ 56u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_4),
+		/* frame_size = 72 */ 72u,
+		/* num_gc_slots = 9 */ 9u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u }
+	},
+	/* entry5 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_5 */
+	.entry5 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_5),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry6 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_6 */
+	.entry6 = {
+		/* entry_total_size = 48 */ 48u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_6),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
+	},
+	/* entry7 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_7 */
+	.entry7 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_7),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry8 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_8 */
+	.entry8 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_8),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry9 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_9 */
+	.entry9 = {
+		/* entry_total_size = 56 */ 56u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_9),
+		/* frame_size = 72 */ 72u,
+		/* num_gc_slots = 9 */ 9u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u }
+	},
+	/* entry10 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_10 */
+	.entry10 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_10),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry11 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_10_b__11_0_System_Int32 */
+	.entry11 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_10_b__11_0_System_Int32),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 16u }
+	},
+	/* entry12 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_11 */
+	.entry12 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_11),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry13 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_11_b__12_0_System_Int32 */
+	.entry13 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_11_b__12_0_System_Int32),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 16u, 24u }
+	},
+	/* entry14 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_12 */
+	.entry14 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_12),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry15 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_12_b__13_0_System_Int32 */
+	.entry15 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_12_b__13_0_System_Int32),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 16u, 24u }
+	},
+	/* entry16 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_13 */
+	.entry16 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_13),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry17 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_13_b__14_0_System_Int32 */
+	.entry17 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_13_b__14_0_System_Int32),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 16u, 24u }
+	},
+	/* entry18 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_14 */
+	.entry18 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_14),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry19 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_14_b__15_0_System_Int32 */
+	.entry19 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_14_b__15_0_System_Int32),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 16u }
+	},
+	/* entry20 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_15 */
+	.entry20 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_15),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry21 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_15_b__16_0_System_Int32 */
+	.entry21 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_15_b__16_0_System_Int32),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 16u, 24u, 32u }
+	},
+	/* entry22 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_16 */
+	.entry22 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_16),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry23 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_16_b__17_0_System_Int32 */
+	.entry23 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_16_b__17_0_System_Int32),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 16u, 24u, 32u }
+	},
+	/* entry24 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_17 */
+	.entry24 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_17),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry25 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_17_b__18_0_System_Int32 */
+	.entry25 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_17_b__18_0_System_Int32),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 16u, 24u, 32u }
+	},
+	/* entry26 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_18 */
+	.entry26 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_18),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry27 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_18_b__19_0_System_Int32 */
+	.entry27 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_18_b__19_0_System_Int32),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 16u, 24u, 32u }
+	},
+	/* entry28 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_19 */
+	.entry28 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_19),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry29 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_19_b__20_0_System_Int32 */
+	.entry29 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_19_b__20_0_System_Int32),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 16u, 24u, 32u }
+	},
+	/* entry30 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_20 */
+	.entry30 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_20),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry31 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_21 */
+	.entry31 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_21),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry32 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_22 */
+	.entry32 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_22),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry33 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_23 */
+	.entry33 = {
+		/* entry_total_size = 48 */ 48u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_23),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
+	},
+	/* entry34 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_24 */
+	.entry34 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_24),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry35 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_25 */
+	.entry35 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_25),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry36 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_26 */
+	.entry36 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_26),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry37 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_27 */
+	.entry37 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_27),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry38 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_28 */
+	.entry38 = {
+		/* entry_total_size = 56 */ 56u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_28),
+		/* frame_size = 72 */ 72u,
+		/* num_gc_slots = 9 */ 9u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u }
+	},
+	/* entry39 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_29 */
+	.entry39 = {
+		/* entry_total_size = 56 */ 56u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_29),
+		/* frame_size = 72 */ 72u,
+		/* num_gc_slots = 9 */ 9u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u }
+	},
+	/* entry40 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_30 */
+	.entry40 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_30),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry41 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_31 */
+	.entry41 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_31),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry42 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_32 */
+	.entry42 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_32),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry43 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_32_b__33_0_System_String */
+	.entry43 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_32_b__33_0_System_String),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry44 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_33 */
+	.entry44 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_33),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry45 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_33_b__34_0_System_String */
+	.entry45 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_33_b__34_0_System_String),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry46 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_34 */
+	.entry46 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_34),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry47 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_34_b__35_0_System_String */
+	.entry47 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_34_b__35_0_System_String),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry48 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_35 */
+	.entry48 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_35),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry49 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_35_b__36_0_System_String */
+	.entry49 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_35_b__36_0_System_String),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry50 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_36 */
+	.entry50 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_36),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry51 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_36_b__37_0_System_Int32 */
+	.entry51 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_36_b__37_0_System_Int32),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 16u, 24u }
+	},
+	/* entry52 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_37 */
+	.entry52 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_37),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry53 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_37_b__38_0_System_Int32 */
+	.entry53 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_37_b__38_0_System_Int32),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 16u, 24u, 32u }
+	},
+	/* entry54 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_38 */
+	.entry54 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_38),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry55 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_38_b__39_0_System_Int32 */
+	.entry55 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_38_b__39_0_System_Int32),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 16u, 24u }
+	},
+	/* entry56 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_39 */
+	.entry56 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_39),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry57 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_39_b__40_0_System_Int32 */
+	.entry57 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_39_b__40_0_System_Int32),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 16u, 24u, 32u }
+	},
+	/* entry58 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_40 */
+	.entry58 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_40),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry59 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_40_b__41_0_System_Int32 */
+	.entry59 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_40_b__41_0_System_Int32),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 16u }
+	},
+	/* entry60 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_41 */
+	.entry60 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_41),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry61 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_41_b__42_0_System_Int32 */
+	.entry61 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_41_b__42_0_System_Int32),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 16u, 24u, 32u }
+	},
+	/* entry62 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_42 */
+	.entry62 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_42),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry63 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_42_b__43_0_System_String */
+	.entry63 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_42_b__43_0_System_String),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry64 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_43 */
+	.entry64 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_43),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry65 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_43_b__44_0_System_String */
+	.entry65 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_43_b__44_0_System_String),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry66 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_44 */
+	.entry66 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_44),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry67 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_44_b__45_0_System_String */
+	.entry67 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_44_b__45_0_System_String),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry68 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_45 */
+	.entry68 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_45),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry69 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_46 */
+	.entry69 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_46),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry70 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_47 */
+	.entry70 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_47),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry71 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_48 */
+	.entry71 = {
+		/* entry_total_size = 48 */ 48u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_48),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
+	},
+	/* entry72 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_49 */
+	.entry72 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_49),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry73 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_50 */
+	.entry73 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_50),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry74 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_51 */
+	.entry74 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_51),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry75 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_52 */
+	.entry75 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_52),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry76 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_53 */
+	.entry76 = {
+		/* entry_total_size = 56 */ 56u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_53),
+		/* frame_size = 72 */ 72u,
+		/* num_gc_slots = 9 */ 9u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u }
+	},
+	/* entry77 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_54 */
+	.entry77 = {
+		/* entry_total_size = 56 */ 56u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_54),
+		/* frame_size = 72 */ 72u,
+		/* num_gc_slots = 9 */ 9u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u }
+	},
+	/* entry78 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_55 */
+	.entry78 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_55),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry79 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_56 */
+	.entry79 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_56),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry80 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_57 */
+	.entry80 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_57),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry81 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_57_b__58_0_System_String */
+	.entry81 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_57_b__58_0_System_String),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry82 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_58 */
+	.entry82 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_58),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry83 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_58_b__59_0_System_String */
+	.entry83 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_58_b__59_0_System_String),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry84 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_59 */
+	.entry84 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_59),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry85 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_59_b__60_0_System_String */
+	.entry85 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_59_b__60_0_System_String),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry86 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_60 */
+	.entry86 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_60),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry87 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_60_b__61_0_System_String */
+	.entry87 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_60_b__61_0_System_String),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry88 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_61 */
+	.entry88 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_61),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry89 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_61_b__62_0_System_Int32 */
+	.entry89 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_61_b__62_0_System_Int32),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 16u, 24u }
+	},
+	/* entry90 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_62 */
+	.entry90 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_62),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry91 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_62_b__63_0_System_Int32 */
+	.entry91 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_62_b__63_0_System_Int32),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 16u, 24u, 32u }
+	},
+	/* entry92 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_63 */
+	.entry92 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_63),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry93 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_63_b__64_0_System_Int32 */
+	.entry93 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_63_b__64_0_System_Int32),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 16u, 24u }
+	},
+	/* entry94 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_64 */
+	.entry94 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_64),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry95 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_64_b__65_0_System_Int32 */
+	.entry95 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_64_b__65_0_System_Int32),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 16u, 24u, 32u }
+	},
+	/* entry96 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_65 */
+	.entry96 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_65),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry97 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_65_b__66_0_System_Int32 */
+	.entry97 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_65_b__66_0_System_Int32),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 16u }
+	},
+	/* entry98 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_66 */
+	.entry98 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_66),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry99 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_66_b__67_0_System_Int32 */
+	.entry99 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_66_b__67_0_System_Int32),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 16u, 24u, 32u }
+	},
+	/* entry100 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_67 */
+	.entry100 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_67),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry101 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_67_b__68_0_System_String */
+	.entry101 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_67_b__68_0_System_String),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry102 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_68 */
+	.entry102 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_68),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry103 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_68_b__69_0_System_String */
+	.entry103 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_68_b__69_0_System_String),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry104 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_69 */
+	.entry104 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_69),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry105 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_69_b__70_0_System_String */
+	.entry105 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_69_b__70_0_System_String),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry106 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_70 */
+	.entry106 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_70),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry107 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_71 */
+	.entry107 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_71),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry108 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_72 */
+	.entry108 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_72),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry109 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_73 */
+	.entry109 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_73),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry110 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_74 */
+	.entry110 = {
+		/* entry_total_size = 56 */ 56u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_74),
+		/* frame_size = 72 */ 72u,
+		/* num_gc_slots = 9 */ 9u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u }
+	},
+	/* entry111 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_75 */
+	.entry111 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_75),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry112 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_76 */
+	.entry112 = {
+		/* entry_total_size = 48 */ 48u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_76),
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
+	},
+	/* entry113 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_77 */
+	.entry113 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_77),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry114 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_78 */
+	.entry114 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_78),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+	},
+	/* entry115 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_79 */
+	.entry115 = {
+		/* entry_total_size = 56 */ 56u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_79),
+		/* frame_size = 72 */ 72u,
+		/* num_gc_slots = 9 */ 9u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u }
+	},
+	/* entry116 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_80 */
+	.entry116 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_80),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry117 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_80_b__81_0_System_Int32 */
+	.entry117 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_80_b__81_0_System_Int32),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 16u }
+	},
+	/* entry118 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_81 */
+	.entry118 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_81),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry119 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_81_b__82_0_System_Int32 */
+	.entry119 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_81_b__82_0_System_Int32),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 16u, 24u }
+	},
+	/* entry120 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_82 */
+	.entry120 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_82),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry121 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_82_b__83_0_System_Int32 */
+	.entry121 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_82_b__83_0_System_Int32),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 16u, 24u }
+	},
+	/* entry122 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_83 */
+	.entry122 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_83),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry123 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_83_b__84_0_System_Int32 */
+	.entry123 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_83_b__84_0_System_Int32),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 16u, 24u }
+	},
+	/* entry124 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_84 */
+	.entry124 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_84),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry125 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_84_b__85_0_System_Int32 */
+	.entry125 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_84_b__85_0_System_Int32),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 16u }
+	},
+	/* entry126 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_85 */
+	.entry126 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_85),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry127 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_85_b__86_0_System_Int32 */
+	.entry127 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_85_b__86_0_System_Int32),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 16u, 24u, 32u }
+	},
+	/* entry128 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_86 */
+	.entry128 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_86),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry129 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_86_b__87_0_System_Int32 */
+	.entry129 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_86_b__87_0_System_Int32),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 16u, 24u, 32u }
+	},
+	/* entry130 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_87 */
+	.entry130 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_87),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry131 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_87_b__88_0_System_Int32 */
+	.entry131 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_87_b__88_0_System_Int32),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 16u, 24u, 32u }
+	},
+	/* entry132 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_88 */
+	.entry132 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_88),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry133 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_88_b__89_0_System_Int32 */
+	.entry133 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_88_b__89_0_System_Int32),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 16u, 24u, 32u }
+	},
+	/* entry134 = NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_89 */
+	.entry134 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects_CustomEntrySubject_89),
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
+	},
+	/* entry135 = NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_89_b__90_0_System_Int32 */
+	.entry135 = {
+		/* entry_total_size = 36 */ 36u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_CustomEntrySubject_89_b__90_0_System_Int32),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 16u, 24u, 32u }
+	},
+	/* entry136 = NumericAggregationSubjects_NumericAggregationSubjects___c_cctor */
+	.entry136 = {
+		/* entry_total_size = 24 */ 24u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c_cctor),
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
+	},
+	/* entry137 = NumericAggregationSubjects_NumericAggregationSubjects___c__ctor */
+	.entry137 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&NumericAggregationSubjects_NumericAggregationSubjects___c__ctor),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	}
+};
+#if defined(_MSC_VER)
+#pragma pack(pop)
+#endif
+
+static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 5172u;
+
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
 static void* const kMethodPointers[138] = {
@@ -2816,6 +5148,9 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	.type_capability_count   = 0u,
 	.vtable_descriptors = kChaosVTableDescriptors,
 	.vtable_descriptor_count = 1u,
+	.slot_map_section_begin = reinterpret_cast<const void*>(&kChaosGcSlotMapsSection),
+	.slot_map_section_end   = reinterpret_cast<const void*>(
+		reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&kChaosGcSlotMapsSection) + kChaosGcSlotMapsSize),
 };
 
 // MetadataRegistrationV0
@@ -3081,8 +5416,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
@@ -3124,8 +5459,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
@@ -3167,8 +5502,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
@@ -3210,8 +5545,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
@@ -3891,8 +6226,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	chaos_ensure_type_initialized_NumericAggregationSubjects_NumericAggregationSubjects___c();
 	_s1 = chaos_static_NumericAggregationSubjects_NumericAggregationSubjects___c____9__11_0;
@@ -3999,8 +6334,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	chaos_ensure_type_initialized_NumericAggregationSubjects_NumericAggregationSubjects___c();
 	_s1 = chaos_static_NumericAggregationSubjects_NumericAggregationSubjects___c____9__12_0;
@@ -4110,8 +6445,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	chaos_ensure_type_initialized_NumericAggregationSubjects_NumericAggregationSubjects___c();
 	_s1 = chaos_static_NumericAggregationSubjects_NumericAggregationSubjects___c____9__13_0;
@@ -4221,8 +6556,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	chaos_ensure_type_initialized_NumericAggregationSubjects_NumericAggregationSubjects___c();
 	_s1 = chaos_static_NumericAggregationSubjects_NumericAggregationSubjects___c____9__14_0;
@@ -4332,8 +6667,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	chaos_ensure_type_initialized_NumericAggregationSubjects_NumericAggregationSubjects___c();
 	_s1 = chaos_static_NumericAggregationSubjects_NumericAggregationSubjects___c____9__15_0;
@@ -4446,8 +6781,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	chaos_ensure_type_initialized_NumericAggregationSubjects_NumericAggregationSubjects___c();
 	_s1 = chaos_static_NumericAggregationSubjects_NumericAggregationSubjects___c____9__16_0;
@@ -4590,8 +6925,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	chaos_ensure_type_initialized_NumericAggregationSubjects_NumericAggregationSubjects___c();
 	_s1 = chaos_static_NumericAggregationSubjects_NumericAggregationSubjects___c____9__17_0;
@@ -4737,8 +7072,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	chaos_ensure_type_initialized_NumericAggregationSubjects_NumericAggregationSubjects___c();
 	_s1 = chaos_static_NumericAggregationSubjects_NumericAggregationSubjects___c____9__18_0;
@@ -4884,8 +7219,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	chaos_ensure_type_initialized_NumericAggregationSubjects_NumericAggregationSubjects___c();
 	_s1 = chaos_static_NumericAggregationSubjects_NumericAggregationSubjects___c____9__19_0;
@@ -5031,8 +7366,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	chaos_ensure_type_initialized_NumericAggregationSubjects_NumericAggregationSubjects___c();
 	_s1 = chaos_static_NumericAggregationSubjects_NumericAggregationSubjects___c____9__20_0;
@@ -5175,8 +7510,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
@@ -5218,8 +7553,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
@@ -5475,8 +7810,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
@@ -5603,8 +7938,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
@@ -6995,8 +9330,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	chaos_ensure_type_initialized_NumericAggregationSubjects_NumericAggregationSubjects___c();
 	_s1 = chaos_static_NumericAggregationSubjects_NumericAggregationSubjects___c____9__37_0;
@@ -7106,8 +9441,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	chaos_ensure_type_initialized_NumericAggregationSubjects_NumericAggregationSubjects___c();
 	_s1 = chaos_static_NumericAggregationSubjects_NumericAggregationSubjects___c____9__38_0;
@@ -7253,8 +9588,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	chaos_ensure_type_initialized_NumericAggregationSubjects_NumericAggregationSubjects___c();
 	_s1 = chaos_static_NumericAggregationSubjects_NumericAggregationSubjects___c____9__39_0;
@@ -7364,8 +9699,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	chaos_ensure_type_initialized_NumericAggregationSubjects_NumericAggregationSubjects___c();
 	_s1 = chaos_static_NumericAggregationSubjects_NumericAggregationSubjects___c____9__40_0;
@@ -7511,8 +9846,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	chaos_ensure_type_initialized_NumericAggregationSubjects_NumericAggregationSubjects___c();
 	_s1 = chaos_static_NumericAggregationSubjects_NumericAggregationSubjects___c____9__41_0;
@@ -7625,8 +9960,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	chaos_ensure_type_initialized_NumericAggregationSubjects_NumericAggregationSubjects___c();
 	_s1 = chaos_static_NumericAggregationSubjects_NumericAggregationSubjects___c____9__42_0;
@@ -8289,8 +10624,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
@@ -8332,8 +10667,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
@@ -8577,8 +10912,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
@@ -8705,8 +11040,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
@@ -10097,8 +12432,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	chaos_ensure_type_initialized_NumericAggregationSubjects_NumericAggregationSubjects___c();
 	_s1 = chaos_static_NumericAggregationSubjects_NumericAggregationSubjects___c____9__62_0;
@@ -10208,8 +12543,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	chaos_ensure_type_initialized_NumericAggregationSubjects_NumericAggregationSubjects___c();
 	_s1 = chaos_static_NumericAggregationSubjects_NumericAggregationSubjects___c____9__63_0;
@@ -10355,8 +12690,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	chaos_ensure_type_initialized_NumericAggregationSubjects_NumericAggregationSubjects___c();
 	_s1 = chaos_static_NumericAggregationSubjects_NumericAggregationSubjects___c____9__64_0;
@@ -10466,8 +12801,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	chaos_ensure_type_initialized_NumericAggregationSubjects_NumericAggregationSubjects___c();
 	_s1 = chaos_static_NumericAggregationSubjects_NumericAggregationSubjects___c____9__65_0;
@@ -10613,8 +12948,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	chaos_ensure_type_initialized_NumericAggregationSubjects_NumericAggregationSubjects___c();
 	_s1 = chaos_static_NumericAggregationSubjects_NumericAggregationSubjects___c____9__66_0;
@@ -10727,8 +13062,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	chaos_ensure_type_initialized_NumericAggregationSubjects_NumericAggregationSubjects___c();
 	_s1 = chaos_static_NumericAggregationSubjects_NumericAggregationSubjects___c____9__67_0;
@@ -11391,8 +13726,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
@@ -11434,8 +13769,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
@@ -11477,8 +13812,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
@@ -11520,8 +13855,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	{
 		const auto chaos_arg_0 = _s0;
@@ -12189,8 +14524,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	chaos_ensure_type_initialized_NumericAggregationSubjects_NumericAggregationSubjects___c();
 	_s1 = chaos_static_NumericAggregationSubjects_NumericAggregationSubjects___c____9__81_0;
@@ -12297,8 +14632,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	chaos_ensure_type_initialized_NumericAggregationSubjects_NumericAggregationSubjects___c();
 	_s1 = chaos_static_NumericAggregationSubjects_NumericAggregationSubjects___c____9__82_0;
@@ -12408,8 +14743,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	chaos_ensure_type_initialized_NumericAggregationSubjects_NumericAggregationSubjects___c();
 	_s1 = chaos_static_NumericAggregationSubjects_NumericAggregationSubjects___c____9__83_0;
@@ -12519,8 +14854,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	chaos_ensure_type_initialized_NumericAggregationSubjects_NumericAggregationSubjects___c();
 	_s1 = chaos_static_NumericAggregationSubjects_NumericAggregationSubjects___c____9__84_0;
@@ -12630,8 +14965,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	chaos_ensure_type_initialized_NumericAggregationSubjects_NumericAggregationSubjects___c();
 	_s1 = chaos_static_NumericAggregationSubjects_NumericAggregationSubjects___c____9__85_0;
@@ -12744,8 +15079,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	chaos_ensure_type_initialized_NumericAggregationSubjects_NumericAggregationSubjects___c();
 	_s1 = chaos_static_NumericAggregationSubjects_NumericAggregationSubjects___c____9__86_0;
@@ -12888,8 +15223,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	chaos_ensure_type_initialized_NumericAggregationSubjects_NumericAggregationSubjects___c();
 	_s1 = chaos_static_NumericAggregationSubjects_NumericAggregationSubjects___c____9__87_0;
@@ -13035,8 +15370,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	chaos_ensure_type_initialized_NumericAggregationSubjects_NumericAggregationSubjects___c();
 	_s1 = chaos_static_NumericAggregationSubjects_NumericAggregationSubjects___c____9__88_0;
@@ -13182,8 +15517,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	chaos_ensure_type_initialized_NumericAggregationSubjects_NumericAggregationSubjects___c();
 	_s1 = chaos_static_NumericAggregationSubjects_NumericAggregationSubjects___c____9__89_0;
@@ -13329,8 +15664,8 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects_CustomEntr
 	{
 		const auto chaos_arg_1 = _s2;
 		const auto chaos_raw_arg_0 = _s1;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s1);
-		chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(chaos_arg_0, chaos_arg_1);
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+		chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
 	}
 	chaos_ensure_type_initialized_NumericAggregationSubjects_NumericAggregationSubjects___c();
 	_s1 = chaos_static_NumericAggregationSubjects_NumericAggregationSubjects___c____9__90_0;
@@ -13475,7 +15810,7 @@ extern "C" void NumericAggregationSubjects_NumericAggregationSubjects___c__ctor(
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
-		chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(chaos_arg_0);
+		ChaosObjectCtor(chaos_arg_0);
 	}
 	return;
 }

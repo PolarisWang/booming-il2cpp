@@ -11,8 +11,8 @@ add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
 
 # Paths
 set(CHAOS_PROJECT_ROOT "D:/agent/booming-il2cpp")
-set(CHAOS_CODEGEN_DIR "D:/agent/booming-il2cpp/verification/foundation-dll/System.Collections.Immutable/immutable-interlocked/codegen")
-set(CHAOS_NATIVE_BUILD "D:/agent/booming-il2cpp/build/native-profile")
+set(CHAOS_CODEGEN_DIR "D:/agent/booming-il2cpp/testing/foundation-dll/System.Collections.Immutable/immutable-interlocked/codegen")
+set(CHAOS_NATIVE_BUILD "D:/agent/booming-il2cpp/artifacts/presets/windows-x64-reference")
 
 # Source files — codegen outputs to codegen/<AssemblyName>/generated/
 file(GLOB CHAOS_CODEGEN_CPP "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.generated.cpp")
@@ -20,11 +20,12 @@ file(GLOB CHAOS_NATIVE_STUBS "*.cpp")
 list(REMOVE_ITEM CHAOS_NATIVE_STUBS
     "${CMAKE_CURRENT_SOURCE_DIR}/runtime-entry.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/runtime-patchdata.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/verification_dispatch.generated.cpp"
 )
 set(CHAOS_ENTRY_SOURCES
     "runtime-entry.cpp"
     "runtime-patchdata.cpp"
-    "verification_dispatch.generated.cpp"  # verification dispatch (sources)
+    "verification_dispatch.generated.cpp"
     ${CHAOS_NATIVE_STUBS}
     ${CHAOS_CODEGEN_CPP}
 )
@@ -45,18 +46,19 @@ set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_PROJECT_ROOT}/third_party/fmt/include"
     "${CHAOS_PROJECT_ROOT}/third_party/fmt/include"
     "${CHAOS_PROJECT_ROOT}/third_party/unordered_dense/include"
+    "${CHAOS_CODEGEN_DIR}/NumericAggregationSubjects/generated"
 )
 
 # Library link directories
 set(CHAOS_LIB_DIRS
-    "${CHAOS_NATIVE_BUILD}/src/native/runtime-core/RelWithDebInfo"
-    "${CHAOS_NATIVE_BUILD}/src/native/bootstrap/RelWithDebInfo"
-    "${CHAOS_NATIVE_BUILD}/src/native/common/RelWithDebInfo"
-    "${CHAOS_NATIVE_BUILD}/src/native/interpreter/RelWithDebInfo"
-    "${CHAOS_NATIVE_BUILD}/src/native/codegen/RelWithDebInfo"
-    "${CHAOS_NATIVE_BUILD}/src/native/support/RelWithDebInfo"
-    "${CHAOS_NATIVE_BUILD}/src/native/hot-update/RelWithDebInfo"
-    "${CHAOS_NATIVE_BUILD}/fmt_build/RelWithDebInfo"
+    "${CHAOS_NATIVE_BUILD}/src/native/runtime-core"
+    "${CHAOS_NATIVE_BUILD}/src/native/bootstrap"
+    "${CHAOS_NATIVE_BUILD}/src/native/common"
+    "${CHAOS_NATIVE_BUILD}/src/native/interpreter"
+    "${CHAOS_NATIVE_BUILD}/src/native/codegen"
+    "${CHAOS_NATIVE_BUILD}/src/native/support"
+    "${CHAOS_NATIVE_BUILD}/src/native/hot-update"
+    "${CHAOS_NATIVE_BUILD}/fmt_build"
 )
 
 # Runtime libs to link

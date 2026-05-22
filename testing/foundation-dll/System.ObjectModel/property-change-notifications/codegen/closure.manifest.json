@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "PropertyChangeNotificationsSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.ObjectModel/property-change-notifications/managed/subjects/build-output/PropertyChangeNotificationsSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.ObjectModel/property-change-notifications/managed/subjects/build-output/PropertyChangeNotificationsSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "PropertyChangeNotificationsSubjects",
-      "path": "verification/foundation-dll/System.ObjectModel/property-change-notifications/managed/subjects/build-output/PropertyChangeNotificationsSubjects.dll"
+      "path": "testing/foundation-dll/System.ObjectModel/property-change-notifications/managed/subjects/build-output/PropertyChangeNotificationsSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "490da23c-5ec7-4393-a004-0062d49b1083",
+  "inputModuleVersionId": "0329064f-902b-4db9-a7e9-bd77b6d4d97f",
   "artifacts": [
     {
       "kind": "typedIlIr",

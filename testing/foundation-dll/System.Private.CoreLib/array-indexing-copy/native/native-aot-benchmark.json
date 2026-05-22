@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/array/indexing/copy",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Array,System.Int32)",
+      "elapsedMilliseconds": 30.93,
+      "calibratedMs": 30.93,
+      "opsPerSecond": 3233086.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)",
+      "elapsedMilliseconds": 32.105,
+      "calibratedMs": 32.105,
+      "opsPerSecond": 3114731.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/System.Array::Clear:System.Void(System.Array,System.Int32,System.Int32)",
+      "elapsedMilliseconds": 15.569,
+      "calibratedMs": 15.569,
+      "opsPerSecond": 6423020.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Private.CoreLib/System.Array::Resize:System.Void(T[]&,System.Int32)",
+      "elapsedMilliseconds": 16.07,
+      "calibratedMs": 16.07,
+      "opsPerSecond": 6222581.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Private.CoreLib/System.Array::Sort:System.Void(System.Array)",
+      "elapsedMilliseconds": 15.957,
+      "calibratedMs": 15.957,
+      "opsPerSecond": 6266763.6,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Private.CoreLib/System.Array::Sort:System.Void(System.Array,System.Collections.IComparer)",
+      "elapsedMilliseconds": 0.301,
+      "calibratedMs": 0.301,
+      "opsPerSecond": 332336324.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Private.CoreLib/System.Array::BinarySearch:System.Int32(System.Array,System.Object)",
+      "elapsedMilliseconds": 15.238,
+      "calibratedMs": 15.238,
+      "opsPerSecond": 6562627.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Private.CoreLib/System.Array::BinarySearch:System.Int32(System.Array,System.Int32,System.Int32,System.Object)",
+      "elapsedMilliseconds": 15.981,
+      "calibratedMs": 15.981,
+      "opsPerSecond": 6257430.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Private.CoreLib/System.Array::IndexOf:System.Int32(System.Array,System.Object)",
+      "elapsedMilliseconds": 15.251,
+      "calibratedMs": 15.251,
+      "opsPerSecond": 6556818.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Private.CoreLib/System.Array::LastIndexOf:System.Int32(System.Array,System.Object)",
+      "elapsedMilliseconds": 15.408,
+      "calibratedMs": 15.408,
+      "opsPerSecond": 6490092.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Private.CoreLib/System.Array::Reverse:System.Void(System.Array)",
+      "elapsedMilliseconds": 15.668,
+      "calibratedMs": 15.668,
+      "opsPerSecond": 6382313.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Private.CoreLib/System.Array::GetLength:System.Int32(System.Int32)",
+      "elapsedMilliseconds": 0.323,
+      "calibratedMs": 0.323,
+      "opsPerSecond": 309885342.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "System.Private.CoreLib/System.Array::GetValue:System.Object(System.Int32)",
+      "elapsedMilliseconds": 15.416,
+      "calibratedMs": 15.416,
+      "opsPerSecond": 6486767.0,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}

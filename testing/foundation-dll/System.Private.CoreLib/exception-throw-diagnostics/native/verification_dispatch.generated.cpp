@@ -1,5 +1,5 @@
 // verification_dispatch.generated.cpp — auto-generated
-// Assembly: ExceptionThrowDiagnosticsSubjects, Methods: 16
+// Assembly: ExceptionThrowDiagnosticsSubjects, Methods: 14
 #include <cstdint>
 #include <chrono>
 #include <chaos/native_types.h>

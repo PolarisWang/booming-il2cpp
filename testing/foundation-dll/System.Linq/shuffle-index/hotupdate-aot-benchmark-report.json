@@ -1,0 +1,206 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Linq",
+  "familyId": "family/System.Linq/shuffle/index",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::ElementAt{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource},System.Int32)",
+      "status": "passed",
+      "prePatchNsPerOp": 205.01,
+      "postPatchNsPerOp": 211.9,
+      "slowdownPercent": 3.36
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::ElementAt{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource},System.Index)",
+      "status": "passed",
+      "prePatchNsPerOp": 295.07,
+      "postPatchNsPerOp": 288.7,
+      "slowdownPercent": -2.16
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::ElementAtOrDefault{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource},System.Int32)",
+      "status": "passed",
+      "prePatchNsPerOp": 192.45,
+      "postPatchNsPerOp": 194.2,
+      "slowdownPercent": 0.91
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::ElementAtOrDefault{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource},System.Index)",
+      "status": "passed",
+      "prePatchNsPerOp": 305.98,
+      "postPatchNsPerOp": 278.4,
+      "slowdownPercent": -9.01
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::First{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource})",
+      "status": "passed",
+      "prePatchNsPerOp": 218.01,
+      "postPatchNsPerOp": 206.5,
+      "slowdownPercent": -5.28
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::First{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Boolean})",
+      "status": "passed",
+      "prePatchNsPerOp": 217.26,
+      "postPatchNsPerOp": 204.2,
+      "slowdownPercent": -6.01
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::FirstOrDefault{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource})",
+      "status": "passed",
+      "prePatchNsPerOp": 1.98,
+      "postPatchNsPerOp": 2.1,
+      "slowdownPercent": 6.06
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::FirstOrDefault{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource},TSource)",
+      "status": "passed",
+      "prePatchNsPerOp": 200.44,
+      "postPatchNsPerOp": 198.1,
+      "slowdownPercent": -1.17
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::FirstOrDefault{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Boolean})",
+      "status": "passed",
+      "prePatchNsPerOp": 101.57,
+      "postPatchNsPerOp": 104.7,
+      "slowdownPercent": 3.08
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::FirstOrDefault{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Boolean},TSource)",
+      "status": "passed",
+      "prePatchNsPerOp": 206.57,
+      "postPatchNsPerOp": 202.4,
+      "slowdownPercent": -2.02
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Index{TSource}:System.Collections.Generic.IEnumerable{System.ValueTuple{System.Int32,TSource}}(System.Collections.Generic.IEnumerable{TSource})",
+      "status": "passed",
+      "prePatchNsPerOp": 1.93,
+      "postPatchNsPerOp": 3.5,
+      "slowdownPercent": 81.35
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Last{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource})",
+      "status": "passed",
+      "prePatchNsPerOp": 227.94,
+      "postPatchNsPerOp": 205.5,
+      "slowdownPercent": -9.84
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Last{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Boolean})",
+      "status": "passed",
+      "prePatchNsPerOp": 1.91,
+      "postPatchNsPerOp": 2.1,
+      "slowdownPercent": 9.95
+    },
+    {
+      "methodIndex": 13,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::LastOrDefault{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource})",
+      "status": "passed",
+      "prePatchNsPerOp": 198.92,
+      "postPatchNsPerOp": 206.0,
+      "slowdownPercent": 3.56
+    },
+    {
+      "methodIndex": 14,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::LastOrDefault{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource},TSource)",
+      "status": "passed",
+      "prePatchNsPerOp": 89.93,
+      "postPatchNsPerOp": 90.3,
+      "slowdownPercent": 0.41
+    },
+    {
+      "methodIndex": 15,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::LastOrDefault{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Boolean})",
+      "status": "passed",
+      "prePatchNsPerOp": 201.18,
+      "postPatchNsPerOp": 194.9,
+      "slowdownPercent": -3.12
+    },
+    {
+      "methodIndex": 16,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::LastOrDefault{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Boolean},TSource)",
+      "status": "passed",
+      "prePatchNsPerOp": 217.05,
+      "postPatchNsPerOp": 210.4,
+      "slowdownPercent": -3.06
+    },
+    {
+      "methodIndex": 17,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Shuffle{TSource}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource})",
+      "status": "passed",
+      "prePatchNsPerOp": 3.38,
+      "postPatchNsPerOp": 2.1,
+      "slowdownPercent": -37.87
+    },
+    {
+      "methodIndex": 18,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Single{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource})",
+      "status": "passed",
+      "prePatchNsPerOp": 199.4,
+      "postPatchNsPerOp": 193.2,
+      "slowdownPercent": -3.11
+    },
+    {
+      "methodIndex": 19,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::Single{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Boolean})",
+      "status": "passed",
+      "prePatchNsPerOp": 102.54,
+      "postPatchNsPerOp": 101.0,
+      "slowdownPercent": -1.5
+    },
+    {
+      "methodIndex": 20,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::SingleOrDefault{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource})",
+      "status": "passed",
+      "prePatchNsPerOp": 211.7,
+      "postPatchNsPerOp": 200.3,
+      "slowdownPercent": -5.38
+    },
+    {
+      "methodIndex": 21,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::SingleOrDefault{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource},TSource)",
+      "status": "passed",
+      "prePatchNsPerOp": 1.93,
+      "postPatchNsPerOp": 2.1,
+      "slowdownPercent": 8.81
+    },
+    {
+      "methodIndex": 22,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::SingleOrDefault{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Boolean})",
+      "status": "passed",
+      "prePatchNsPerOp": 251.83,
+      "postPatchNsPerOp": 207.4,
+      "slowdownPercent": -17.64
+    },
+    {
+      "methodIndex": 23,
+      "methodSubjectId": "System.Linq/System.Linq.Enumerable::SingleOrDefault{TSource}:TSource(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Boolean},TSource)",
+      "status": "passed",
+      "prePatchNsPerOp": 1.98,
+      "postPatchNsPerOp": 2.1,
+      "slowdownPercent": 6.06
+    }
+  ],
+  "summary": {
+    "totalMethods": 24,
+    "nonStubMethods": 24,
+    "averageSlowdownPercent": 0.68,
+    "slowdownFactor": 1.0068000000000001,
+    "slowdownThresholdX": 50.0
+  }
+}

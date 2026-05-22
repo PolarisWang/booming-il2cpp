@@ -65,16 +65,16 @@
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 0,
+      "localCount": 1,
       "exceptionRegionCount": 1,
       "exceptionRegions": [
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 17,
-          "handlerOffset": 18,
-          "handlerLength": 5,
-          "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+          "tryLength": 41,
+          "handlerOffset": 42,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
@@ -152,16 +152,178 @@
           "isPreserveSig": false
         },
         {
-          "op": "pop",
-          "opCode": 47,
+          "op": "callvirt",
+          "opCode": 15,
           "ilOffset": 8,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 13,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 14,
+          "resultType": "System.Collections.Generic.IEqualityComparer\u003CSystem.Byte\u003E",
+          "callee": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\u003CSystem.Byte,System.Byte\u003E::get_Comparer:System.Collections.Generic.IEqualityComparer\u003CSystem.Byte\u003E()",
+          "reference": {
+            "assemblyName": "System.ObjectModel",
+            "subjectKind": "method",
+            "subjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\u003CSystem.Byte,System.Byte\u003E::get_Comparer:System.Collections.Generic.IEqualityComparer\u003CSystem.Byte\u003E()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.ObjectModel",
+            "subjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\u003CSystem.Byte,System.Byte\u003E::get_Comparer:System.Collections.Generic.IEqualityComparer\u003CSystem.Byte\u003E()",
+            "openDefinitionSubjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\u00602::get_Comparer:System.Collections.Generic.IEqualityComparer\u003C!0\u003E()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\u00602::get_Comparer:System.Collections.Generic.IEqualityComparer\u003C!0\u003E();type=[System.Byte,System.Byte];method=[]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\u00602::get_Comparer:System.Collections.Generic.IEqualityComparer\u003C!0\u003E();type=[System.Byte,System.Byte];method=[]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\u00602::get_Comparer:System.Collections.Generic.IEqualityComparer\u003C!0\u003E()",
+                "typeArguments": [
+                  "System.Byte",
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\u00602::get_Comparer:System.Collections.Generic.IEqualityComparer\u003C!0\u003E();type=[System.Byte,System.Byte];method=[]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\u00602::get_Comparer:System.Collections.Generic.IEqualityComparer\u003C!0\u003E();type=[System.Byte,System.Byte];method=[]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 1,
+              "statusReasonCode": "loader-demand:memberReference"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\u003CSystem.Byte,System.Byte\u003E::get_Comparer:System.Collections.Generic.IEqualityComparer\u003CSystem.Byte\u003E()",
+              "definitionSubjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\u00602::get_Comparer:System.Collections.Generic.IEqualityComparer\u003C!0\u003E()",
+              "displaySubjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\u003CSystem.Byte,System.Byte\u003E::get_Comparer()",
+              "instantiationKey": {
+                "contextKind": 1,
+                "definitionSubjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\u00602::get_Comparer:System.Collections.Generic.IEqualityComparer\u003C!0\u003E()",
+                "typeArguments": [
+                  "System.Byte",
+                  "System.Byte"
+                ],
+                "methodArguments": []
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 19,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 24,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 26,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 27,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 29,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 30,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 39,
+          "ilOffset": 31,
+          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 9,
+          "ilOffset": 33,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -169,7 +331,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::_exitCode",
-          "ilOffset": 10,
+          "ilOffset": 34,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "ObjectModelCollectionsSubjects",
@@ -195,29 +357,64 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 23,
-          "ilOffset": 16,
+          "operand": 53,
+          "ilOffset": 40,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 18,
+          "ilOffset": 42,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 44,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::_exitCode",
+          "ilOffset": 45,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ObjectModelCollectionsSubjects",
+            "subjectKind": "field",
+            "subjectId": "ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ObjectModelCollectionsSubjects",
+            "subjectId": "ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ObjectModelCollectionsSubjects/ObjectModelCollectionsSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
           "isPreserveSig": false
         },
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 23,
-          "ilOffset": 21,
+          "operand": 53,
+          "ilOffset": 51,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 23,
+          "ilOffset": 53,
           "isPreserveSig": false
         }
       ],

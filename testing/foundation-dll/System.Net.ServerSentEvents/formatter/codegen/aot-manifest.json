@@ -37,6 +37,12 @@
       "subjectKind": "method",
       "subjectId": "System.Net.ServerSentEvents/SseFormatter::WriteAsync:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable\u003CSseItem\u003CSystem.String\u003E\u003E,System.IO.Stream,System.Threading.CancellationToken)",
       "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "reason": "external-call"
     }
   ]
 }

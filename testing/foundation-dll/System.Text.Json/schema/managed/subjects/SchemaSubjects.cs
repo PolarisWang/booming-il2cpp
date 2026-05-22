@@ -19,15 +19,15 @@ public static partial class SchemaSubjects
     // [0] System.Text.Json/System.Text.Json.Schema.JsonSchemaExporter::GetJsonSchemaAsNode:System.Text.Json.Nodes.JsonNode(System.Text.Json.JsonSerializerOptions,System.Type,System.Text.Json.Schema.JsonSchemaExporterOptions)
     public static void Subject_0()
     {
-        try { JsonSchemaExporter.GetJsonSchemaAsNode(null!, typeof(byte), default); _exitCode = 1; }
-        catch (ArgumentNullException) { }
+        try { if (((JsonSchemaExporter.GetJsonSchemaAsNode(null!, typeof(byte), default)).GetHashCode()) != ((JsonSchemaExporter.GetJsonSchemaAsNode(null!, typeof(byte), default)).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [1] System.Text.Json/System.Text.Json.Schema.JsonSchemaExporter::GetJsonSchemaAsNode:System.Text.Json.Nodes.JsonNode(System.Text.Json.Serialization.Metadata.JsonTypeInfo,System.Text.Json.Schema.JsonSchemaExporterOptions)
     public static void Subject_1()
     {
-        try { JsonSchemaExporter.GetJsonSchemaAsNode(null!, default); _exitCode = 1; }
-        catch (ArgumentNullException) { }
+        try { if (((JsonSchemaExporter.GetJsonSchemaAsNode(null!, default)).GetHashCode()) != ((JsonSchemaExporter.GetJsonSchemaAsNode(null!, default)).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
 }

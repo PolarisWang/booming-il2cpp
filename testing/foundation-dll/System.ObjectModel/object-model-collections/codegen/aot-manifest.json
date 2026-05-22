@@ -49,6 +49,12 @@
       "subjectKind": "method",
       "subjectId": "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection\u003CSystem.Byte,System.Byte\u003E::get_Comparer:System.Collections.Generic.IEqualityComparer\u003CSystem.Byte\u003E()",
       "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "reason": "external-call"
     }
   ]
 }

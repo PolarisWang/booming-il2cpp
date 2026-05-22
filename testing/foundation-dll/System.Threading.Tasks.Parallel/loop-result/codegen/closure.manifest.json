@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "LoopResultSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Threading.Tasks.Parallel/loop-result/managed/subjects/build-output/LoopResultSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Threading.Tasks.Parallel/loop-result/managed/subjects/build-output/LoopResultSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "LoopResultSubjects",
-      "path": "verification/foundation-dll/System.Threading.Tasks.Parallel/loop-result/managed/subjects/build-output/LoopResultSubjects.dll"
+      "path": "testing/foundation-dll/System.Threading.Tasks.Parallel/loop-result/managed/subjects/build-output/LoopResultSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "8fdf5ffe-ad1a-4afa-9bf6-9fb3f7d7d3c2",
+  "inputModuleVersionId": "536139f4-b934-4867-bbdc-eceaaf56e152",
   "artifacts": [
     {
       "kind": "typedIlIr",

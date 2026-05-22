@@ -46,6 +46,12 @@
     },
     {
       "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
       "subjectKind": "field",
       "subjectId": "System.Private.CoreLib/System.IntPtr::Zero",
       "reason": "external-call"

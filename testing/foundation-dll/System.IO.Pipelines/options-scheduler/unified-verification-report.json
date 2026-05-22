@@ -1,0 +1,231 @@
+{
+  "family": "options-scheduler",
+  "assembly": "System.IO.Pipelines",
+  "mode": "standard",
+  "timestamp": "2026-05-22T06:46:13",
+  "duration_ms": 86650,
+  "overall_status": "passed",
+  "stages": {
+    "preflight": {
+      "stage": "preflight",
+      "status": "passed",
+      "summary": "23 methods, 1 custom entries",
+      "details": {
+        "methodCount": 23,
+        "customMethodCount": 1,
+        "hasCustomEntryFile": false,
+        "customMethods": [
+          "System.IO.Pipelines/System.IO.Pipelines.StreamPipeWriterOptions::get_LeaveOpen:System.Boolean()"
+        ]
+      },
+      "errors": [],
+      "duration_ms": 1
+    },
+    "codegen": {
+      "stage": "codegen",
+      "status": "passed",
+      "summary": "Entrypoint built and IL2CPP compile OK",
+      "details": {
+        "methodCount": 23,
+        "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.IO.Pipelines\\options-scheduler\\managed\\subjects\\build-output\\OptionsSchedulerSubjects.dll"
+      },
+      "errors": [],
+      "duration_ms": 33658
+    },
+    "jit_codegen": {
+      "stage": "jit_codegen",
+      "status": "passed",
+      "summary": "JIT entry-jit.exe built and AOT entry.exe restored",
+      "details": {},
+      "errors": [],
+      "duration_ms": 33640
+    },
+    "fact": {
+      "stage": "fact",
+      "status": "passed",
+      "summary": "Fact verify=passed (23/23)",
+      "details": {
+        "fact": {
+          "status": "passed",
+          "passed": 23,
+          "total": 23
+        }
+      },
+      "errors": [],
+      "duration_ms": 343
+    },
+    "fact_jit": {
+      "stage": "fact_jit",
+      "status": "passed",
+      "summary": "Fact JIT verify=passed (23/23)",
+      "details": {
+        "fact_jit": {
+          "status": "passed",
+          "passed": 23,
+          "total": 23,
+          "exit_code": 0
+        }
+      },
+      "errors": [],
+      "duration_ms": 436
+    },
+    "audit": {
+      "stage": "audit",
+      "status": "passed",
+      "summary": "false_passing=0, principle=CONCERN",
+      "details": {
+        "falsePassing": 0,
+        "stubsFound": 0,
+        "skipsFound": 0,
+        "principleStatus": "CONCERN",
+        "methodsWithoutLowering": 0
+      },
+      "errors": [],
+      "duration_ms": 1655
+    },
+    "asm_compare": {
+      "stage": "asm_compare",
+      "status": "skipped",
+      "summary": "Subjects DLL not found — run codegen stage first",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "microbench": {
+      "stage": "microbench",
+      "status": "passed",
+      "summary": "FramePool=2.7ns/op | FastExecute=5.5ns/op | CallVirt dispatch=5.3ns",
+      "details": {
+        "framePool": {
+          "acquireReleaseNsPerOp": 2.7,
+          "batchCount": 1000,
+          "framesPerBatch": 32
+        },
+        "fastExecute": {
+          "runCount": 100000,
+          "nsPerCall": 5.5
+        },
+        "callVirt": {
+          "handlerDispatchNs": 5.3,
+          "emptyStackNs": 5.9
+        },
+        "poolSize": 32
+      },
+      "errors": [],
+      "duration_ms": 41
+    },
+    "benchmark": {
+      "stage": "benchmark",
+      "status": "failed",
+      "summary": "Benchmark stage crashed: [Errno 22] Invalid argument",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "hotupdate": {
+      "stage": "hotupdate",
+      "status": "passed",
+      "summary": "23/23 passed, 0 failed (stub=1)",
+      "details": {
+        "passedMethods": 23,
+        "failedMethods": 0,
+        "totalMethods": 23,
+        "realMethods": 23,
+        "stubMethods": 1
+      },
+      "errors": [],
+      "duration_ms": 29
+    },
+    "hotupdate_aot_benchmark": {
+      "stage": "hotupdate_aot_benchmark",
+      "status": "passed",
+      "summary": "avg_slowdown=0.0% (1.0x) over 0 methods (AOT patched path)",
+      "details": {
+        "averageSlowdownPercent": 0.0,
+        "slowdownFactor": 1.0,
+        "threshold": 50.0,
+        "nonStubMethods": 0
+      },
+      "errors": [],
+      "duration_ms": 679
+    },
+    "hotupdate_jit_fact": {
+      "stage": "hotupdate_jit_fact",
+      "status": "passed",
+      "summary": "23/23 passed, 0 failed",
+      "details": {
+        "passed": 23,
+        "failed": 0,
+        "total": 23
+      },
+      "errors": [],
+      "duration_ms": 36
+    },
+    "hotupdate_jit_benchmark": {
+      "stage": "hotupdate_jit_benchmark",
+      "status": "passed",
+      "summary": "avg_slowdown=0.0% (1.0x) over 0 methods (JIT patched path)",
+      "details": {
+        "averageSlowdownPercent": 0.0,
+        "slowdownFactor": 1.0,
+        "threshold": 50.0,
+        "nonStubMethods": 0
+      },
+      "errors": [],
+      "duration_ms": 14365
+    }
+  },
+  "coverage": {
+    "methodCoverage": 100.0,
+    "testedRate": 100.0,
+    "overall": 100.0
+  },
+  "dashboard": {
+    "interpreter": {
+      "fastFramePoolNsPerOp": 2.7,
+      "fastExecuteNsPerInstr": 0,
+      "callVirtHandlerDispatchNs": 5.3,
+      "callVirtMicHitNs": 0,
+      "callVirtRawFallbackNs": 0,
+      "poolSize": 32
+    },
+    "irTranslation": {},
+    "performance": {},
+    "hotupdate": {
+      "aotFunctional": {
+        "passedMethods": 23,
+        "failedMethods": 0,
+        "totalMethods": 23
+      },
+      "aotOverhead": {
+        "averageSlowdownPercent": 0.0,
+        "slowdownFactor": 1.0,
+        "nonStubMethods": 0
+      },
+      "jitFunctional": {
+        "passedMethods": 23,
+        "failedMethods": 0,
+        "totalMethods": 23
+      },
+      "jitOverhead": {
+        "averageSlowdownPercent": 0.0,
+        "slowdownFactor": 1.0,
+        "nonStubMethods": 0
+      }
+    },
+    "keyRatios": {
+      "nativeFasterRatio": 0,
+      "irExpansionRatio": 0,
+      "interpreterSlowdownFactor": 1.0,
+      "asmPassRate": 0.0
+    }
+  },
+  "regression": {
+    "benchmark": {
+      "status": "skipped",
+      "message": "No benchmark report found"
+    },
+    "hasRegression": false,
+    "regressions": []
+  }
+}

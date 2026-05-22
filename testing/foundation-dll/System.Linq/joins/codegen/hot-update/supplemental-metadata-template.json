@@ -49,6 +49,18 @@
       "subjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=12",
       "definitionSubjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=12",
       "metadataToken": 33554441
+    },
+    {
+      "assemblyName": "JoinsSubjects",
+      "subjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=20",
+      "definitionSubjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=20",
+      "metadataToken": 33554442
+    },
+    {
+      "assemblyName": "JoinsSubjects",
+      "subjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=24",
+      "definitionSubjectId": "JoinsSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=24",
+      "metadataToken": 33554443
     }
   ],
   "registeredMethods": [
@@ -142,98 +154,26 @@
     },
     {
       "assemblyName": "JoinsSubjects",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_1:System.Int32(System.Int32)",
-      "definitionSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_1:System.Int32(System.Int32)",
+      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_0:System.Int32(System.Int32)",
+      "definitionSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_0:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
       "metadataToken": 100663308,
       "parameterCount": 1
     },
     {
       "assemblyName": "JoinsSubjects",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-      "definitionSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-      "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-      "metadataToken": 100663309,
-      "parameterCount": 2
-    },
-    {
-      "assemblyName": "JoinsSubjects",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_0:System.Int32(System.Int32)",
-      "definitionSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_0:System.Int32(System.Int32)",
-      "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-      "metadataToken": 100663310,
-      "parameterCount": 1
-    },
-    {
-      "assemblyName": "JoinsSubjects",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_1:System.Int32(System.Int32)",
-      "definitionSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_1:System.Int32(System.Int32)",
-      "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-      "metadataToken": 100663311,
-      "parameterCount": 1
-    },
-    {
-      "assemblyName": "JoinsSubjects",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-      "definitionSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)",
-      "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-      "metadataToken": 100663312,
-      "parameterCount": 2
-    },
-    {
-      "assemblyName": "JoinsSubjects",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_0:System.Int32(System.Int32)",
-      "definitionSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_0:System.Int32(System.Int32)",
-      "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-      "metadataToken": 100663313,
-      "parameterCount": 1
-    },
-    {
-      "assemblyName": "JoinsSubjects",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_1:System.Int32(System.Int32)",
-      "definitionSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_1:System.Int32(System.Int32)",
-      "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-      "metadataToken": 100663314,
-      "parameterCount": 1
-    },
-    {
-      "assemblyName": "JoinsSubjects",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_2:System.Int32(System.Int32,System.Int32)",
-      "definitionSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_2:System.Int32(System.Int32,System.Int32)",
-      "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-      "metadataToken": 100663315,
-      "parameterCount": 2
-    },
-    {
-      "assemblyName": "JoinsSubjects",
       "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_0:System.Int32(System.Int32)",
       "definitionSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_0:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-      "metadataToken": 100663316,
+      "metadataToken": 100663309,
       "parameterCount": 1
-    },
-    {
-      "assemblyName": "JoinsSubjects",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_1:System.Int32(System.Int32)",
-      "definitionSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_1:System.Int32(System.Int32)",
-      "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-      "metadataToken": 100663317,
-      "parameterCount": 1
-    },
-    {
-      "assemblyName": "JoinsSubjects",
-      "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_2:System.Int32(System.Int32,System.Int32)",
-      "definitionSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_2:System.Int32(System.Int32,System.Int32)",
-      "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-      "metadataToken": 100663318,
-      "parameterCount": 2
     },
     {
       "assemblyName": "JoinsSubjects",
       "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_0:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32)",
       "definitionSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_0:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32)",
       "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-      "metadataToken": 100663319,
+      "metadataToken": 100663310,
       "parameterCount": 1
     },
     {
@@ -241,7 +181,7 @@
       "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_5\u003Eb__6_0:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32)",
       "definitionSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_5\u003Eb__6_0:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32)",
       "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-      "metadataToken": 100663320,
+      "metadataToken": 100663311,
       "parameterCount": 1
     },
     {
@@ -249,7 +189,7 @@
       "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_0:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32)",
       "definitionSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_0:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32)",
       "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-      "metadataToken": 100663321,
+      "metadataToken": 100663312,
       "parameterCount": 1
     },
     {
@@ -257,7 +197,7 @@
       "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_0:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32)",
       "definitionSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_0:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32)",
       "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec",
-      "metadataToken": 100663322,
+      "metadataToken": 100663313,
       "parameterCount": 1
     },
     {
@@ -265,7 +205,7 @@
       "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass5_0::.ctor:System.Void()",
       "definitionSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass5_0::.ctor:System.Void()",
       "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass5_0",
-      "metadataToken": 100663323,
+      "metadataToken": 100663314,
       "parameterCount": 0
     },
     {
@@ -273,7 +213,7 @@
       "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass5_0::\u003CCustomEntrySubject_4\u003Eb__1:System.Boolean(System.Int32)",
       "definitionSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass5_0::\u003CCustomEntrySubject_4\u003Eb__1:System.Boolean(System.Int32)",
       "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass5_0",
-      "metadataToken": 100663324,
+      "metadataToken": 100663315,
       "parameterCount": 1
     },
     {
@@ -281,7 +221,7 @@
       "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass5_0::\u003CCustomEntrySubject_4\u003Eb__2:System.Int32(System.Int32)",
       "definitionSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass5_0::\u003CCustomEntrySubject_4\u003Eb__2:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass5_0",
-      "metadataToken": 100663325,
+      "metadataToken": 100663316,
       "parameterCount": 1
     },
     {
@@ -289,7 +229,7 @@
       "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass6_0::.ctor:System.Void()",
       "definitionSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass6_0::.ctor:System.Void()",
       "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass6_0",
-      "metadataToken": 100663326,
+      "metadataToken": 100663317,
       "parameterCount": 0
     },
     {
@@ -297,7 +237,7 @@
       "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass6_0::\u003CCustomEntrySubject_5\u003Eb__1:System.Boolean(System.Int32)",
       "definitionSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass6_0::\u003CCustomEntrySubject_5\u003Eb__1:System.Boolean(System.Int32)",
       "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass6_0",
-      "metadataToken": 100663327,
+      "metadataToken": 100663318,
       "parameterCount": 1
     },
     {
@@ -305,7 +245,7 @@
       "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass6_0::\u003CCustomEntrySubject_5\u003Eb__2:System.Int32(System.Int32)",
       "definitionSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass6_0::\u003CCustomEntrySubject_5\u003Eb__2:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass6_0",
-      "metadataToken": 100663328,
+      "metadataToken": 100663319,
       "parameterCount": 1
     },
     {
@@ -313,7 +253,7 @@
       "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass7_0::.ctor:System.Void()",
       "definitionSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass7_0::.ctor:System.Void()",
       "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass7_0",
-      "metadataToken": 100663329,
+      "metadataToken": 100663320,
       "parameterCount": 0
     },
     {
@@ -321,7 +261,7 @@
       "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass7_0::\u003CCustomEntrySubject_6\u003Eb__1:System.Boolean(System.Int32)",
       "definitionSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass7_0::\u003CCustomEntrySubject_6\u003Eb__1:System.Boolean(System.Int32)",
       "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass7_0",
-      "metadataToken": 100663330,
+      "metadataToken": 100663321,
       "parameterCount": 1
     },
     {
@@ -329,7 +269,7 @@
       "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass7_0::\u003CCustomEntrySubject_6\u003Eb__2:System.Int32(System.Int32)",
       "definitionSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass7_0::\u003CCustomEntrySubject_6\u003Eb__2:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass7_0",
-      "metadataToken": 100663331,
+      "metadataToken": 100663322,
       "parameterCount": 1
     },
     {
@@ -337,7 +277,7 @@
       "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass8_0::.ctor:System.Void()",
       "definitionSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass8_0::.ctor:System.Void()",
       "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass8_0",
-      "metadataToken": 100663332,
+      "metadataToken": 100663323,
       "parameterCount": 0
     },
     {
@@ -345,7 +285,7 @@
       "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass8_0::\u003CCustomEntrySubject_7\u003Eb__1:System.Boolean(System.Int32)",
       "definitionSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass8_0::\u003CCustomEntrySubject_7\u003Eb__1:System.Boolean(System.Int32)",
       "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass8_0",
-      "metadataToken": 100663333,
+      "metadataToken": 100663324,
       "parameterCount": 1
     },
     {
@@ -353,7 +293,7 @@
       "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass8_0::\u003CCustomEntrySubject_7\u003Eb__2:System.Int32(System.Int32)",
       "definitionSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass8_0::\u003CCustomEntrySubject_7\u003Eb__2:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass8_0",
-      "metadataToken": 100663334,
+      "metadataToken": 100663325,
       "parameterCount": 1
     }
   ],

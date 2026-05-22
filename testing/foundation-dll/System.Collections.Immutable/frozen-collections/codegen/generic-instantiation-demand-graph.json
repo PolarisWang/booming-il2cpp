@@ -2,14 +2,117 @@
   "demands": [
     {
       "requestingAssemblyName": "FrozenCollectionsSubjects",
+      "owningAssemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.Byte,System.Byte\u003E::.ctor:System.Void()",
+      "definitionSubjectId": "System.Collections/System.Collections.Generic.Dictionary\u00602::.ctor:System.Void()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Collections/System.Collections.Generic.Dictionary\u00602::.ctor:System.Void()",
+        "typeArguments": [
+          "System.Byte",
+          "System.Byte"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "FrozenCollectionsSubjects",
+      "owningAssemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.String,System.Int32\u003E::.ctor:System.Void()",
+      "definitionSubjectId": "System.Collections/System.Collections.Generic.Dictionary\u00602::.ctor:System.Void()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Collections/System.Collections.Generic.Dictionary\u00602::.ctor:System.Void()",
+        "typeArguments": [
+          "System.String",
+          "System.Int32"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "FrozenCollectionsSubjects",
+      "owningAssemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.String,System.String\u003E::.ctor:System.Void()",
+      "definitionSubjectId": "System.Collections/System.Collections.Generic.Dictionary\u00602::.ctor:System.Void()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Collections/System.Collections.Generic.Dictionary\u00602::.ctor:System.Void()",
+        "typeArguments": [
+          "System.String",
+          "System.String"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "FrozenCollectionsSubjects",
+      "owningAssemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.HashSet\u003CSystem.Byte\u003E::.ctor:System.Void()",
+      "definitionSubjectId": "System.Collections/System.Collections.Generic.HashSet\u00601::.ctor:System.Void()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Collections/System.Collections.Generic.HashSet\u00601::.ctor:System.Void()",
+        "typeArguments": [
+          "System.Byte"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "FrozenCollectionsSubjects",
+      "owningAssemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.HashSet\u003CSystem.Int32\u003E::.ctor:System.Void()",
+      "definitionSubjectId": "System.Collections/System.Collections.Generic.HashSet\u00601::.ctor:System.Void()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Collections/System.Collections.Generic.HashSet\u00601::.ctor:System.Void()",
+        "typeArguments": [
+          "System.Int32"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "FrozenCollectionsSubjects",
       "owningAssemblyName": "System.Collections.Immutable",
       "subjectKind": "method",
-      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create\u003CSystem.Byte,System.Byte\u003E:System.Collections.Frozen.FrozenDictionary\u003CSystem.Byte,System.Byte\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.Byte,System.Byte\u003E\u003E)",
-      "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create:System.Collections.Frozen.FrozenDictionary\u003C!!0,!!1\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003C!!0,!!1\u003E\u003E)",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary\u003CSystem.Byte,System.Byte\u003E:System.Collections.Frozen.FrozenDictionary\u003CSystem.Byte,System.Byte\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.Byte,System.Byte\u003E\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Byte\u003E)",
+      "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary:System.Collections.Frozen.FrozenDictionary\u003C!!0,!!1\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003C!!0,!!1\u003E\u003E,System.Collections.Generic.IEqualityComparer\u003C!!0\u003E)",
       "demandSourceKind": "methodSpec",
       "instantiationKey": {
         "contextKind": 2,
-        "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create:System.Collections.Frozen.FrozenDictionary\u003C!!0,!!1\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003C!!0,!!1\u003E\u003E)",
+        "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary:System.Collections.Frozen.FrozenDictionary\u003C!!0,!!1\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003C!!0,!!1\u003E\u003E,System.Collections.Generic.IEqualityComparer\u003C!!0\u003E)",
         "typeArguments": [],
         "methodArguments": [
           "System.Byte",
@@ -17,7 +120,7 @@
         ]
       },
       "supportKindCode": 3,
-      "specializationKindCode": 2,
+      "specializationKindCode": 1,
       "familyKindCode": 3,
       "isCrossAssembly": true
     },
@@ -25,12 +128,12 @@
       "requestingAssemblyName": "FrozenCollectionsSubjects",
       "owningAssemblyName": "System.Collections.Immutable",
       "subjectKind": "method",
-      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create\u003CSystem.String,System.Int32\u003E:System.Collections.Frozen.FrozenDictionary\u003CSystem.String,System.Int32\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Int32\u003E\u003E)",
-      "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create:System.Collections.Frozen.FrozenDictionary\u003C!!0,!!1\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003C!!0,!!1\u003E\u003E)",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary\u003CSystem.String,System.Int32\u003E:System.Collections.Frozen.FrozenDictionary\u003CSystem.String,System.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.Int32\u003E\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.String\u003E)",
+      "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary:System.Collections.Frozen.FrozenDictionary\u003C!!0,!!1\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003C!!0,!!1\u003E\u003E,System.Collections.Generic.IEqualityComparer\u003C!!0\u003E)",
       "demandSourceKind": "methodSpec",
       "instantiationKey": {
         "contextKind": 2,
-        "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create:System.Collections.Frozen.FrozenDictionary\u003C!!0,!!1\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003C!!0,!!1\u003E\u003E)",
+        "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary:System.Collections.Frozen.FrozenDictionary\u003C!!0,!!1\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003C!!0,!!1\u003E\u003E,System.Collections.Generic.IEqualityComparer\u003C!!0\u003E)",
         "typeArguments": [],
         "methodArguments": [
           "System.String",
@@ -38,7 +141,7 @@
         ]
       },
       "supportKindCode": 3,
-      "specializationKindCode": 2,
+      "specializationKindCode": 1,
       "familyKindCode": 3,
       "isCrossAssembly": true
     },
@@ -46,12 +149,12 @@
       "requestingAssemblyName": "FrozenCollectionsSubjects",
       "owningAssemblyName": "System.Collections.Immutable",
       "subjectKind": "method",
-      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create\u003CSystem.String,System.String\u003E:System.Collections.Frozen.FrozenDictionary\u003CSystem.String,System.String\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.String\u003E\u003E)",
-      "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create:System.Collections.Frozen.FrozenDictionary\u003C!!0,!!1\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003C!!0,!!1\u003E\u003E)",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary\u003CSystem.String,System.String\u003E:System.Collections.Frozen.FrozenDictionary\u003CSystem.String,System.String\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003CSystem.String,System.String\u003E\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.String\u003E)",
+      "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary:System.Collections.Frozen.FrozenDictionary\u003C!!0,!!1\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003C!!0,!!1\u003E\u003E,System.Collections.Generic.IEqualityComparer\u003C!!0\u003E)",
       "demandSourceKind": "methodSpec",
       "instantiationKey": {
         "contextKind": 2,
-        "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create:System.Collections.Frozen.FrozenDictionary\u003C!!0,!!1\u003E(System.ReadOnlySpan\u003CSystem.Collections.Generic.KeyValuePair\u003C!!0,!!1\u003E\u003E)",
+        "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary:System.Collections.Frozen.FrozenDictionary\u003C!!0,!!1\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Collections.Generic.KeyValuePair\u003C!!0,!!1\u003E\u003E,System.Collections.Generic.IEqualityComparer\u003C!!0\u003E)",
         "typeArguments": [],
         "methodArguments": [
           "System.String",
@@ -59,7 +162,7 @@
         ]
       },
       "supportKindCode": 3,
-      "specializationKindCode": 2,
+      "specializationKindCode": 1,
       "familyKindCode": 3,
       "isCrossAssembly": true
     },
@@ -80,7 +183,7 @@
         "methodArguments": []
       },
       "supportKindCode": 3,
-      "specializationKindCode": 2,
+      "specializationKindCode": 1,
       "familyKindCode": 2,
       "isCrossAssembly": true
     },
@@ -101,7 +204,7 @@
         "methodArguments": []
       },
       "supportKindCode": 3,
-      "specializationKindCode": 2,
+      "specializationKindCode": 1,
       "familyKindCode": 2,
       "isCrossAssembly": true
     },
@@ -122,7 +225,7 @@
         "methodArguments": []
       },
       "supportKindCode": 3,
-      "specializationKindCode": 2,
+      "specializationKindCode": 1,
       "familyKindCode": 2,
       "isCrossAssembly": true
     },
@@ -130,19 +233,19 @@
       "requestingAssemblyName": "FrozenCollectionsSubjects",
       "owningAssemblyName": "System.Collections.Immutable",
       "subjectKind": "method",
-      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create\u003CSystem.Byte\u003E:System.Collections.Frozen.FrozenSet\u003CSystem.Byte\u003E(System.ReadOnlySpan\u003CSystem.Byte\u003E)",
-      "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E)",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::ToFrozenSet\u003CSystem.Byte\u003E:System.Collections.Frozen.FrozenSet\u003CSystem.Byte\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Byte\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Byte\u003E)",
+      "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::ToFrozenSet:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IEqualityComparer\u003C!!0\u003E)",
       "demandSourceKind": "methodSpec",
       "instantiationKey": {
         "contextKind": 2,
-        "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E)",
+        "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::ToFrozenSet:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IEqualityComparer\u003C!!0\u003E)",
         "typeArguments": [],
         "methodArguments": [
           "System.Byte"
         ]
       },
       "supportKindCode": 3,
-      "specializationKindCode": 2,
+      "specializationKindCode": 1,
       "familyKindCode": 3,
       "isCrossAssembly": true
     },
@@ -150,19 +253,19 @@
       "requestingAssemblyName": "FrozenCollectionsSubjects",
       "owningAssemblyName": "System.Collections.Immutable",
       "subjectKind": "method",
-      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create\u003CSystem.Int32\u003E:System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E(System.ReadOnlySpan\u003CSystem.Int32\u003E)",
-      "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E)",
+      "subjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::ToFrozenSet\u003CSystem.Int32\u003E:System.Collections.Frozen.FrozenSet\u003CSystem.Int32\u003E(System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E,System.Collections.Generic.IEqualityComparer\u003CSystem.Int32\u003E)",
+      "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::ToFrozenSet:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IEqualityComparer\u003C!!0\u003E)",
       "demandSourceKind": "methodSpec",
       "instantiationKey": {
         "contextKind": 2,
-        "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.ReadOnlySpan\u003C!!0\u003E)",
+        "definitionSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::ToFrozenSet:System.Collections.Frozen.FrozenSet\u003C!!0\u003E(System.Collections.Generic.IEnumerable\u003C!!0\u003E,System.Collections.Generic.IEqualityComparer\u003C!!0\u003E)",
         "typeArguments": [],
         "methodArguments": [
           "System.Int32"
         ]
       },
       "supportKindCode": 3,
-      "specializationKindCode": 2,
+      "specializationKindCode": 1,
       "familyKindCode": 3,
       "isCrossAssembly": true
     },
@@ -182,7 +285,7 @@
         "methodArguments": []
       },
       "supportKindCode": 3,
-      "specializationKindCode": 2,
+      "specializationKindCode": 1,
       "familyKindCode": 2,
       "isCrossAssembly": true
     },
@@ -202,48 +305,8 @@
         "methodArguments": []
       },
       "supportKindCode": 3,
-      "specializationKindCode": 2,
+      "specializationKindCode": 1,
       "familyKindCode": 2,
-      "isCrossAssembly": true
-    },
-    {
-      "requestingAssemblyName": "FrozenCollectionsSubjects",
-      "owningAssemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.ReadOnlySpan\u003CSystem.Byte\u003E::.ctor:System.Void(System.Void*,System.Int32)",
-      "definitionSubjectId": "System.Private.CoreLib/System.ReadOnlySpan\u00601::.ctor:System.Void(System.Void*,System.Int32)",
-      "demandSourceKind": "memberReference",
-      "instantiationKey": {
-        "contextKind": 1,
-        "definitionSubjectId": "System.Private.CoreLib/System.ReadOnlySpan\u00601::.ctor:System.Void(System.Void*,System.Int32)",
-        "typeArguments": [
-          "System.Byte"
-        ],
-        "methodArguments": []
-      },
-      "supportKindCode": 3,
-      "specializationKindCode": 2,
-      "familyKindCode": 2,
-      "isCrossAssembly": true
-    },
-    {
-      "requestingAssemblyName": "FrozenCollectionsSubjects",
-      "owningAssemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::CreateSpan\u003CSystem.Int32\u003E:System.ReadOnlySpan\u003CSystem.Int32\u003E(System.RuntimeFieldHandle)",
-      "definitionSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::CreateSpan:System.ReadOnlySpan\u003C!!0\u003E(System.RuntimeFieldHandle)",
-      "demandSourceKind": "methodSpec",
-      "instantiationKey": {
-        "contextKind": 2,
-        "definitionSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::CreateSpan:System.ReadOnlySpan\u003C!!0\u003E(System.RuntimeFieldHandle)",
-        "typeArguments": [],
-        "methodArguments": [
-          "System.Int32"
-        ]
-      },
-      "supportKindCode": 3,
-      "specializationKindCode": 2,
-      "familyKindCode": 3,
       "isCrossAssembly": true
     }
   ]

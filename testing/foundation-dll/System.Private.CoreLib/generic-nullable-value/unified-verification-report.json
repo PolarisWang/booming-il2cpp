@@ -1,0 +1,251 @@
+{
+  "family": "generic-nullable-value",
+  "assembly": "System.Private.CoreLib",
+  "mode": "standard",
+  "timestamp": "2026-05-22T08:39:56",
+  "duration_ms": 101701,
+  "overall_status": "passed",
+  "stages": {
+    "preflight": {
+      "stage": "preflight",
+      "status": "passed",
+      "summary": "10 methods, 0 custom entries",
+      "details": {
+        "methodCount": 10,
+        "customMethodCount": 0,
+        "hasCustomEntryFile": false,
+        "customMethods": []
+      },
+      "errors": [],
+      "duration_ms": 3
+    },
+    "codegen": {
+      "stage": "codegen",
+      "status": "passed",
+      "summary": "Entrypoint built and IL2CPP compile OK",
+      "details": {
+        "methodCount": 10,
+        "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\generic-nullable-value\\managed\\subjects\\build-output\\GenericNullableValueSubjects.dll"
+      },
+      "errors": [],
+      "duration_ms": 88538
+    },
+    "jit_codegen": {
+      "stage": "jit_codegen",
+      "status": "passed",
+      "summary": "entry-jit.exe already exists, skipping rebuild",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "fact": {
+      "stage": "fact",
+      "status": "passed",
+      "summary": "Fact verify=passed (10/10)",
+      "details": {
+        "fact": {
+          "status": "passed",
+          "passed": 10,
+          "total": 10
+        }
+      },
+      "errors": [],
+      "duration_ms": 694
+    },
+    "fact_jit": {
+      "stage": "fact_jit",
+      "status": "passed",
+      "summary": "Fact JIT verify=passed (10/10)",
+      "details": {
+        "fact_jit": {
+          "status": "passed",
+          "passed": 10,
+          "total": 10,
+          "exit_code": 0
+        }
+      },
+      "errors": [],
+      "duration_ms": 172
+    },
+    "audit": {
+      "stage": "audit",
+      "status": "passed",
+      "summary": "false_passing=0, principle=CONCERN",
+      "details": {
+        "falsePassing": 0,
+        "stubsFound": 0,
+        "skipsFound": 0,
+        "principleStatus": "CONCERN",
+        "methodsWithoutLowering": 0
+      },
+      "errors": [],
+      "duration_ms": 2661
+    },
+    "asm_compare": {
+      "stage": "asm_compare",
+      "status": "skipped",
+      "summary": "Subjects DLL not found — run codegen stage first",
+      "details": {},
+      "errors": [],
+      "duration_ms": 63
+    },
+    "microbench": {
+      "stage": "microbench",
+      "status": "passed",
+      "summary": "FramePool=4.9ns/op | FastExecute=5.1ns/op | CallVirt dispatch=5.3ns",
+      "details": {
+        "framePool": {
+          "acquireReleaseNsPerOp": 4.9,
+          "batchCount": 1000,
+          "framesPerBatch": 32
+        },
+        "fastExecute": {
+          "runCount": 100000,
+          "nsPerCall": 5.1
+        },
+        "callVirt": {
+          "handlerDispatchNs": 5.3,
+          "emptyStackNs": 5.8
+        },
+        "poolSize": 32
+      },
+      "errors": [],
+      "duration_ms": 67
+    },
+    "benchmark": {
+      "stage": "benchmark",
+      "status": "skipped",
+      "summary": "All 10 non-stub methods are invalid (no managed harness)",
+      "details": {},
+      "errors": [],
+      "duration_ms": 5015
+    },
+    "hotupdate": {
+      "stage": "hotupdate",
+      "status": "passed",
+      "summary": "10/10 passed, 0 failed (stub=1)",
+      "details": {
+        "passedMethods": 10,
+        "failedMethods": 0,
+        "totalMethods": 10,
+        "realMethods": 10,
+        "stubMethods": 1
+      },
+      "errors": [],
+      "duration_ms": 54
+    },
+    "hotupdate_aot_benchmark": {
+      "stage": "hotupdate_aot_benchmark",
+      "status": "passed",
+      "summary": "avg_slowdown=-2.99% (1.0x) over 9 methods (AOT patched path)",
+      "details": {
+        "averageSlowdownPercent": -2.99,
+        "slowdownFactor": 0.9701000000000001,
+        "threshold": 50.0,
+        "nonStubMethods": 9
+      },
+      "errors": [],
+      "duration_ms": 738
+    },
+    "hotupdate_jit_fact": {
+      "stage": "hotupdate_jit_fact",
+      "status": "passed",
+      "summary": "10/10 passed, 0 failed",
+      "details": {
+        "passed": 10,
+        "failed": 0,
+        "total": 10
+      },
+      "errors": [],
+      "duration_ms": 68
+    },
+    "hotupdate_jit_benchmark": {
+      "stage": "hotupdate_jit_benchmark",
+      "status": "passed",
+      "summary": "avg_slowdown=0.0% (1.0x) over 0 methods (JIT patched path)",
+      "details": {
+        "averageSlowdownPercent": 0.0,
+        "slowdownFactor": 1.0,
+        "threshold": 50.0,
+        "nonStubMethods": 0
+      },
+      "errors": [],
+      "duration_ms": 3614
+    }
+  },
+  "coverage": {
+    "methodCoverage": 100.0,
+    "testedRate": 100.0,
+    "overall": 100.0
+  },
+  "dashboard": {
+    "interpreter": {
+      "fastFramePoolNsPerOp": 4.9,
+      "fastExecuteNsPerInstr": 0,
+      "callVirtHandlerDispatchNs": 5.3,
+      "callVirtMicHitNs": 0,
+      "callVirtRawFallbackNs": 0,
+      "poolSize": 32
+    },
+    "irTranslation": {
+      "totalMethods": 10,
+      "okCount": 10,
+      "failedCount": 0,
+      "overallIrExpansionRatio": 0.55,
+      "averageExpansionRatio": 0.55,
+      "maxExpansionRatio": 0.77,
+      "jitInstructionAvg": 44.0,
+      "aotInstructionAvg": 24.3,
+      "totalExternalRuntimeCalls": 0,
+      "totalVirtualDispatches": 0,
+      "totalBoxingOps": 0,
+      "topInstructionCategories": {
+        "external_runtime_call": 20
+      }
+    },
+    "performance": {},
+    "hotupdate": {
+      "aotFunctional": {
+        "passedMethods": 10,
+        "failedMethods": 0,
+        "totalMethods": 10
+      },
+      "aotOverhead": {
+        "averageSlowdownPercent": -2.99,
+        "slowdownFactor": 0.9701000000000001,
+        "nonStubMethods": 9
+      },
+      "jitFunctional": {
+        "passedMethods": 10,
+        "failedMethods": 0,
+        "totalMethods": 10
+      },
+      "jitOverhead": {
+        "averageSlowdownPercent": 0.0,
+        "slowdownFactor": 1.0,
+        "nonStubMethods": 0
+      }
+    },
+    "keyRatios": {
+      "nativeFasterRatio": 0,
+      "irExpansionRatio": 0.55,
+      "interpreterSlowdownFactor": 0.9701000000000001,
+      "asmPassRate": 100.0
+    }
+  },
+  "regression": {
+    "benchmark": {
+      "status": "no_baseline",
+      "message": "Baseline auto-created from this run",
+      "currentMetrics": {
+        "totalMethods": 10,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      }
+    },
+    "hasRegression": false,
+    "regressions": []
+  }
+}

@@ -74,162 +74,108 @@
         {
           "registrationKind": "methodPointer",
           "slot": 11,
-          "symbol": "JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_1_System_Int32",
-          "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_1:System.Int32(System.Int32)"
-        },
-        {
-          "registrationKind": "methodPointer",
-          "slot": 12,
-          "symbol": "JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_0_b__1_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32",
-          "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_0\u003Eb__1_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)"
-        },
-        {
-          "registrationKind": "methodPointer",
-          "slot": 13,
           "symbol": "JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_0_System_Int32",
           "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_0:System.Int32(System.Int32)"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 14,
-          "symbol": "JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_1_System_Int32",
-          "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_1:System.Int32(System.Int32)"
-        },
-        {
-          "registrationKind": "methodPointer",
-          "slot": 15,
-          "symbol": "JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_1_b__2_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32",
-          "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_1\u003Eb__2_2:System.Int32(System.Int32,System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E)"
-        },
-        {
-          "registrationKind": "methodPointer",
-          "slot": 16,
-          "symbol": "JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_0_System_Int32",
-          "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_0:System.Int32(System.Int32)"
-        },
-        {
-          "registrationKind": "methodPointer",
-          "slot": 17,
-          "symbol": "JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_1_System_Int32",
-          "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_1:System.Int32(System.Int32)"
-        },
-        {
-          "registrationKind": "methodPointer",
-          "slot": 18,
-          "symbol": "JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_2_b__3_2_System_Int32_System_Int32",
-          "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_2\u003Eb__3_2:System.Int32(System.Int32,System.Int32)"
-        },
-        {
-          "registrationKind": "methodPointer",
-          "slot": 19,
+          "slot": 12,
           "symbol": "JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_0_System_Int32",
           "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_0:System.Int32(System.Int32)"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 20,
-          "symbol": "JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_1_System_Int32",
-          "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_1:System.Int32(System.Int32)"
-        },
-        {
-          "registrationKind": "methodPointer",
-          "slot": 21,
-          "symbol": "JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_3_b__4_2_System_Int32_System_Int32",
-          "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_3\u003Eb__4_2:System.Int32(System.Int32,System.Int32)"
-        },
-        {
-          "registrationKind": "methodPointer",
-          "slot": 22,
+          "slot": 13,
           "symbol": "JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_4_b__5_0_System_Int32",
           "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_4\u003Eb__5_0:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32)"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 23,
+          "slot": 14,
           "symbol": "JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_5_b__6_0_System_Int32",
           "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_5\u003Eb__6_0:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32)"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 24,
+          "slot": 15,
           "symbol": "JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_6_b__7_0_System_Int32",
           "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_6\u003Eb__7_0:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32)"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 25,
+          "slot": 16,
           "symbol": "JoinsSubjects_JoinsSubjects___c_CustomEntrySubject_7_b__8_0_System_Int32",
           "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec::\u003CCustomEntrySubject_7\u003Eb__8_0:System.Collections.Generic.IEnumerable\u003CSystem.Int32\u003E(System.Int32)"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 26,
+          "slot": 17,
           "symbol": "JoinsSubjects_JoinsSubjects___c__DisplayClass5_0__ctor",
           "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass5_0::.ctor:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 27,
+          "slot": 18,
           "symbol": "JoinsSubjects_JoinsSubjects___c__DisplayClass5_0_CustomEntrySubject_4_b__1_System_Int32",
           "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass5_0::\u003CCustomEntrySubject_4\u003Eb__1:System.Boolean(System.Int32)"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 28,
+          "slot": 19,
           "symbol": "JoinsSubjects_JoinsSubjects___c__DisplayClass5_0_CustomEntrySubject_4_b__2_System_Int32",
           "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass5_0::\u003CCustomEntrySubject_4\u003Eb__2:System.Int32(System.Int32)"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 29,
+          "slot": 20,
           "symbol": "JoinsSubjects_JoinsSubjects___c__DisplayClass6_0__ctor",
           "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass6_0::.ctor:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 30,
+          "slot": 21,
           "symbol": "JoinsSubjects_JoinsSubjects___c__DisplayClass6_0_CustomEntrySubject_5_b__1_System_Int32",
           "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass6_0::\u003CCustomEntrySubject_5\u003Eb__1:System.Boolean(System.Int32)"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 31,
+          "slot": 22,
           "symbol": "JoinsSubjects_JoinsSubjects___c__DisplayClass6_0_CustomEntrySubject_5_b__2_System_Int32",
           "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass6_0::\u003CCustomEntrySubject_5\u003Eb__2:System.Int32(System.Int32)"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 32,
+          "slot": 23,
           "symbol": "JoinsSubjects_JoinsSubjects___c__DisplayClass7_0__ctor",
           "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass7_0::.ctor:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 33,
+          "slot": 24,
           "symbol": "JoinsSubjects_JoinsSubjects___c__DisplayClass7_0_CustomEntrySubject_6_b__1_System_Int32",
           "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass7_0::\u003CCustomEntrySubject_6\u003Eb__1:System.Boolean(System.Int32)"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 34,
+          "slot": 25,
           "symbol": "JoinsSubjects_JoinsSubjects___c__DisplayClass7_0_CustomEntrySubject_6_b__2_System_Int32",
           "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass7_0::\u003CCustomEntrySubject_6\u003Eb__2:System.Int32(System.Int32)"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 35,
+          "slot": 26,
           "symbol": "JoinsSubjects_JoinsSubjects___c__DisplayClass8_0__ctor",
           "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass8_0::.ctor:System.Void()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 36,
+          "slot": 27,
           "symbol": "JoinsSubjects_JoinsSubjects___c__DisplayClass8_0_CustomEntrySubject_7_b__1_System_Int32",
           "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass8_0::\u003CCustomEntrySubject_7\u003Eb__1:System.Boolean(System.Int32)"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 37,
+          "slot": 28,
           "symbol": "JoinsSubjects_JoinsSubjects___c__DisplayClass8_0_CustomEntrySubject_7_b__2_System_Int32",
           "subjectId": "JoinsSubjects/JoinsSubjects\u002B\u003C\u003Ec__DisplayClass8_0::\u003CCustomEntrySubject_7\u003Eb__2:System.Int32(System.Int32)"
         }

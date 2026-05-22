@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/snapshot/prover",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "SnapshotTestFixtures/ArithmeticOps::RunAdd:System.Int32()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.65,
+      "postPatchNsPerOp": 4.1,
+      "slowdownPercent": 12.33
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.76,
+      "postPatchNsPerOp": 4.0,
+      "slowdownPercent": 6.38
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "SnapshotTestFixtures/MathHelper::RunSquare:System.Int32()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.77,
+      "postPatchNsPerOp": 4.1,
+      "slowdownPercent": 8.75
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "SnapshotTestFixtures/FlowControl::IsPositive:System.Int32()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.79,
+      "postPatchNsPerOp": 4.1,
+      "slowdownPercent": 8.18
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "SnapshotTestFixtures/CallVirtHelper::CreateAndUse:System.Int32()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.76,
+      "postPatchNsPerOp": 4.0,
+      "slowdownPercent": 6.38
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "SnapshotTestFixtures/BoxingHelper::BoxAndUnbox:System.Int32()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.72,
+      "postPatchNsPerOp": 3.9,
+      "slowdownPercent": 4.84
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "SnapshotTestFixtures/ConversionHelper::ConvertToInt:System.Int32()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.65,
+      "postPatchNsPerOp": 4.1,
+      "slowdownPercent": 12.33
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "SnapshotTestFixtures/LoopHelper::SumToFive:System.Int32()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.64,
+      "postPatchNsPerOp": 5.7,
+      "slowdownPercent": 56.59
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "SnapshotTestFixtures/LdftnHelper::GetFnPtr:System.Int32()",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.5,
+      "postPatchNsPerOp": 3.8,
+      "slowdownPercent": 8.57
+    }
+  ],
+  "summary": {
+    "totalMethods": 10,
+    "nonStubMethods": 9,
+    "averageSlowdownPercent": 13.82,
+    "slowdownFactor": 1.1381999999999999,
+    "slowdownThresholdX": 50.0
+  }
+}

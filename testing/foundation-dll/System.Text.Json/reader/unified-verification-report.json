@@ -1,0 +1,260 @@
+{
+  "family": "reader",
+  "assembly": "System.Text.Json",
+  "mode": "standard",
+  "timestamp": "2026-05-22T07:18:28",
+  "duration_ms": 69254,
+  "overall_status": "failed",
+  "stages": {
+    "preflight": {
+      "stage": "preflight",
+      "status": "passed",
+      "summary": "61 methods, 61 custom entries",
+      "details": {
+        "methodCount": 61,
+        "customMethodCount": 61,
+        "hasCustomEntryFile": false,
+        "customMethods": [
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::CopyString:System.Int32(System.Span{System.Byte})",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::CopyString:System.Int32(System.Span{System.Char})",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::get_BytesConsumed:System.Int64()",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::get_CurrentDepth:System.Int32()",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::get_CurrentState:System.Text.Json.JsonReaderState()",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::get_HasValueSequence:System.Boolean()",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::get_IsFinalBlock:System.Boolean()",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::get_Position:System.SequencePosition()",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::get_TokenStartIndex:System.Int64()",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::get_TokenType:System.Text.Json.JsonTokenType()",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::get_ValueIsEscaped:System.Boolean()",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::get_ValueSequence:System.Buffers.ReadOnlySequence{System.Byte}()",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::get_ValueSpan:System.ReadOnlySpan{System.Byte}()",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::GetBoolean:System.Boolean()",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::GetByte:System.Byte()",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::GetBytesFromBase64:System.Byte{}()",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::GetComment:System.String()",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::GetDateTime:System.DateTime()",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::GetDateTimeOffset:System.DateTimeOffset()",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::GetDecimal:System.Decimal()",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::GetDouble:System.Double()",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::GetGuid:System.Guid()",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::GetInt16:System.Int16()",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::GetInt32:System.Int32()",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::GetInt64:System.Int64()",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::GetSByte:System.SByte()",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::GetSingle:System.Single()",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::GetString:System.String()",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::GetUInt16:System.UInt16()",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::GetUInt32:System.UInt32()",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::GetUInt64:System.UInt64()",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::Read:System.Boolean()",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::Skip:System.Void()",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetByte:System.Boolean(System.Byte&)",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetBytesFromBase64:System.Boolean(System.Byte{}&)",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetDateTime:System.Boolean(System.DateTime&)",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetDateTimeOffset:System.Boolean(System.DateTimeOffset&)",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetDecimal:System.Boolean(System.Decimal&)",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetDouble:System.Boolean(System.Double&)",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetGuid:System.Boolean(System.Guid&)",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetInt16:System.Boolean(System.Int16&)",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetInt32:System.Boolean(System.Int32&)",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetInt64:System.Boolean(System.Int64&)",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetSByte:System.Boolean(System.SByte&)",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetSingle:System.Boolean(System.Single&)",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetUInt16:System.Boolean(System.UInt16&)",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetUInt32:System.Boolean(System.UInt32&)",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::TryGetUInt64:System.Boolean(System.UInt64&)",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::TrySkip:System.Boolean()",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::ValueTextEquals:System.Boolean(System.ReadOnlySpan{System.Byte})",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::ValueTextEquals:System.Boolean(System.String)",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::ValueTextEquals:System.Boolean(System.ReadOnlySpan{System.Char})",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::.ctor:System.Void(System.ReadOnlySpan{System.Byte},System.Boolean,System.Text.Json.JsonReaderState)",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::.ctor:System.Void(System.ReadOnlySpan{System.Byte},System.Text.Json.JsonReaderOptions)",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::.ctor:System.Void(System.Buffers.ReadOnlySequence{System.Byte},System.Boolean,System.Text.Json.JsonReaderState)",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::.ctor:System.Void(System.Buffers.ReadOnlySequence{System.Byte},System.Text.Json.JsonReaderOptions)",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::set_ValueSpan:System.Void(System.ReadOnlySpan{System.Byte})",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::set_TokenStartIndex:System.Void(System.Int64)",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::set_HasValueSequence:System.Void(System.Boolean)",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::set_ValueIsEscaped:System.Void(System.Boolean)",
+          "System.Text.Json/System.Text.Json.Utf8JsonReader::set_ValueSequence:System.Void(System.Buffers.ReadOnlySequence{System.Byte})"
+        ]
+      },
+      "errors": [],
+      "duration_ms": 0
+    },
+    "codegen": {
+      "stage": "codegen",
+      "status": "passed",
+      "summary": "Entrypoint built and IL2CPP compile OK",
+      "details": {
+        "methodCount": 61,
+        "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Text.Json\\reader\\managed\\subjects\\build-output\\ReaderSubjects.dll"
+      },
+      "errors": [],
+      "duration_ms": 33545
+    },
+    "jit_codegen": {
+      "stage": "jit_codegen",
+      "status": "passed",
+      "summary": "JIT entry-jit.exe built and AOT entry.exe restored",
+      "details": {},
+      "errors": [],
+      "duration_ms": 32887
+    },
+    "fact": {
+      "stage": "fact",
+      "status": "passed",
+      "summary": "Fact verify=passed (61/61)",
+      "details": {
+        "fact": {
+          "status": "passed",
+          "passed": 61,
+          "total": 61
+        }
+      },
+      "errors": [],
+      "duration_ms": 356
+    },
+    "fact_jit": {
+      "stage": "fact_jit",
+      "status": "passed",
+      "summary": "Fact JIT verify=passed (61/61)",
+      "details": {
+        "fact_jit": {
+          "status": "passed",
+          "passed": 61,
+          "total": 61,
+          "exit_code": 0
+        }
+      },
+      "errors": [],
+      "duration_ms": 393
+    },
+    "audit": {
+      "stage": "audit",
+      "status": "failed",
+      "summary": "false_passing=0, principle=VIOLATION",
+      "details": {
+        "falsePassing": 0,
+        "stubsFound": 0,
+        "skipsFound": 6,
+        "principleStatus": "VIOLATION",
+        "methodsWithoutLowering": 0
+      },
+      "errors": [],
+      "duration_ms": 2010
+    },
+    "asm_compare": {
+      "stage": "asm_compare",
+      "status": "skipped",
+      "summary": "Subjects DLL not found — run codegen stage first",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "microbench": {
+      "stage": "microbench",
+      "status": "passed",
+      "summary": "FramePool=2.9ns/op | FastExecute=1.9ns/op | CallVirt dispatch=2.0ns",
+      "details": {
+        "framePool": {
+          "acquireReleaseNsPerOp": 2.9,
+          "batchCount": 1000,
+          "framesPerBatch": 32
+        },
+        "fastExecute": {
+          "runCount": 100000,
+          "nsPerCall": 1.9
+        },
+        "callVirt": {
+          "handlerDispatchNs": 2.0,
+          "emptyStackNs": 2.2
+        },
+        "poolSize": 32
+      },
+      "errors": [],
+      "duration_ms": 28
+    },
+    "benchmark": {
+      "stage": "benchmark",
+      "status": "skipped",
+      "summary": "All methods are stubs — no benchmark possible",
+      "details": {},
+      "errors": [],
+      "duration_ms": 1
+    },
+    "hotupdate": {
+      "stage": "hotupdate",
+      "status": "skipped",
+      "summary": "All methods are stubs — no hotupdate possible",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "hotupdate_aot_benchmark": {
+      "stage": "hotupdate_aot_benchmark",
+      "status": "skipped",
+      "summary": "All methods are stubs — no benchmark possible",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "hotupdate_jit_fact": {
+      "stage": "hotupdate_jit_fact",
+      "status": "passed",
+      "summary": "61/61 passed, 0 failed",
+      "details": {
+        "passed": 61,
+        "failed": 0,
+        "total": 61
+      },
+      "errors": [],
+      "duration_ms": 26
+    },
+    "hotupdate_jit_benchmark": {
+      "stage": "hotupdate_jit_benchmark",
+      "status": "skipped",
+      "summary": "All methods are stubs — no benchmark possible",
+      "details": {},
+      "errors": [],
+      "duration_ms": 1
+    }
+  },
+  "coverage": {
+    "methodCoverage": 100.0,
+    "testedRate": 90.16,
+    "overall": 95.08
+  },
+  "dashboard": {
+    "interpreter": {
+      "fastFramePoolNsPerOp": 2.9,
+      "fastExecuteNsPerInstr": 0,
+      "callVirtHandlerDispatchNs": 2.0,
+      "callVirtMicHitNs": 0,
+      "callVirtRawFallbackNs": 0,
+      "poolSize": 32
+    },
+    "irTranslation": {},
+    "performance": {},
+    "hotupdate": {
+      "jitFunctional": {
+        "passedMethods": 61,
+        "failedMethods": 0,
+        "totalMethods": 61
+      }
+    },
+    "keyRatios": {
+      "nativeFasterRatio": 0,
+      "irExpansionRatio": 0,
+      "interpreterSlowdownFactor": 0,
+      "asmPassRate": 0.0
+    }
+  },
+  "regression": {
+    "benchmark": {
+      "status": "skipped",
+      "message": "No benchmark report found"
+    },
+    "hasRegression": false,
+    "regressions": []
+  }
+}

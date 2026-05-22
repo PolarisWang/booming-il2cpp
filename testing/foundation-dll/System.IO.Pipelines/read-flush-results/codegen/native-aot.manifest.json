@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "ReadFlushResultsSubjects",
   "entrySubjectId": "ReadFlushResultsSubjects/ReadFlushResultsSubjects::Subject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.IO.Pipelines/read-flush-results/codegen",
+  "managedClosureRootPath": "testing/foundation-dll/System.IO.Pipelines/read-flush-results/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

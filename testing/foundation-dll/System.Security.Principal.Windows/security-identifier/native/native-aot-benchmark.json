@@ -1,0 +1,189 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Security.Principal.Windows",
+  "familyId": "family/System.Security.Principal.Windows/security/identifier",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::CompareTo:System.Int32(System.Security.Principal.SecurityIdentifier)",
+      "elapsedMilliseconds": 0.348,
+      "calibratedMs": 0.348,
+      "opsPerSecond": 287604256.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::Equals:System.Boolean(System.Object)",
+      "elapsedMilliseconds": 17.813,
+      "calibratedMs": 17.813,
+      "opsPerSecond": 5613814.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::Equals:System.Boolean(System.Security.Principal.SecurityIdentifier)",
+      "elapsedMilliseconds": 0.355,
+      "calibratedMs": 0.355,
+      "opsPerSecond": 281610813.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::get_AccountDomainSid:System.Security.Principal.SecurityIdentifier()",
+      "elapsedMilliseconds": 0.557,
+      "calibratedMs": 0.557,
+      "opsPerSecond": 179372197.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::get_BinaryLength:System.Int32()",
+      "elapsedMilliseconds": 0.493,
+      "calibratedMs": 0.493,
+      "opsPerSecond": 202839756.6,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::get_Value:System.String()",
+      "elapsedMilliseconds": 0.558,
+      "calibratedMs": 0.558,
+      "opsPerSecond": 179211469.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::GetBinaryForm:System.Void(System.Byte{},System.Int32)",
+      "elapsedMilliseconds": 0.293,
+      "calibratedMs": 0.293,
+      "opsPerSecond": 341530054.6,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::GetHashCode:System.Int32()",
+      "elapsedMilliseconds": 0.376,
+      "calibratedMs": 0.376,
+      "opsPerSecond": 265957446.8,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::IsAccountSid:System.Boolean()",
+      "elapsedMilliseconds": 0.354,
+      "calibratedMs": 0.354,
+      "opsPerSecond": 282565696.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::IsEqualDomainSid:System.Boolean(System.Security.Principal.SecurityIdentifier)",
+      "elapsedMilliseconds": 0.623,
+      "calibratedMs": 0.623,
+      "opsPerSecond": 160565189.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::IsValidTargetType:System.Boolean(System.Type)",
+      "elapsedMilliseconds": 21.363,
+      "calibratedMs": 21.363,
+      "opsPerSecond": 4681056.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::IsWellKnown:System.Boolean(System.Security.Principal.WellKnownSidType)",
+      "elapsedMilliseconds": 0.352,
+      "calibratedMs": 0.352,
+      "opsPerSecond": 283687943.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::op_Equality:System.Boolean(System.Security.Principal.SecurityIdentifier,System.Security.Principal.SecurityIdentifier)",
+      "elapsedMilliseconds": 0.47,
+      "calibratedMs": 0.47,
+      "opsPerSecond": 212675457.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 13,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::op_Inequality:System.Boolean(System.Security.Principal.SecurityIdentifier,System.Security.Principal.SecurityIdentifier)",
+      "elapsedMilliseconds": 0.409,
+      "calibratedMs": 0.409,
+      "opsPerSecond": 244259892.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 14,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::ToString:System.String()",
+      "elapsedMilliseconds": 0.63,
+      "calibratedMs": 0.63,
+      "opsPerSecond": 158679784.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 15,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::Translate:System.Security.Principal.IdentityReference(System.Type)",
+      "elapsedMilliseconds": 20.328,
+      "calibratedMs": 20.328,
+      "opsPerSecond": 4919395.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 16,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::.ctor:System.Void(System.String)",
+      "elapsedMilliseconds": 9.487,
+      "calibratedMs": 9.487,
+      "opsPerSecond": 10541184.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 17,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::.ctor:System.Void(System.Byte{},System.Int32)",
+      "elapsedMilliseconds": 8.972,
+      "calibratedMs": 8.972,
+      "opsPerSecond": 11146408.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 18,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::.ctor:System.Void(System.IntPtr)",
+      "elapsedMilliseconds": 9.523,
+      "calibratedMs": 9.523,
+      "opsPerSecond": 10500451.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 19,
+      "methodSubjectId": "System.Security.Principal.Windows/System.Security.Principal.SecurityIdentifier::.ctor:System.Void(System.Security.Principal.WellKnownSidType,System.Security.Principal.SecurityIdentifier)",
+      "elapsedMilliseconds": 8.975,
+      "calibratedMs": 8.975,
+      "opsPerSecond": 11142061.3,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}

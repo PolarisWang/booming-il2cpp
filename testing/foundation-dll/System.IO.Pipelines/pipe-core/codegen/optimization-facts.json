@@ -51,9 +51,45 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.IO.Pipelines/IDuplexPipe::get_Input:PipeReader()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_0:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_1:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.IO.Pipelines/IDuplexPipe::get_Output:PipeWriter()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.IO.Pipelines/IDuplexPipe::get_Output:PipeWriter()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_1:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
     },
     {
@@ -63,9 +99,45 @@
       "devirtualized": false
     },
     {
+      "methodSubjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_2:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_2:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.IO.Pipelines/Pipe::get_Reader:PipeReader()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_2:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
       "methodSubjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_3:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.IO.Pipelines/Pipe::get_Writer:PipeWriter()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.IO.Pipelines/Pipe::get_Writer:PipeWriter()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_3:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "devirtualized": false
     },
     {
@@ -87,32 +159,37 @@
     {
       "methodSubjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_0:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_1:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_2:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_3:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_4:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.NullReferenceException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_5:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },
     {
       "methodSubjectId": "PipeCoreSubjects/PipeCoreSubjects::Subject_6:System.Void()",
       "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.ArgumentNullException"
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     }
   ]
 }

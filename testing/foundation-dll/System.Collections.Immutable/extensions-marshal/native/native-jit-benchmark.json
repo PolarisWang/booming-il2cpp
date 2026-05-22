@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Collections.Immutable",
+  "familyId": "family/System.Collections.Immutable/extensions/marshal",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::Create<Byte>:System.Collections.Immutable.ImmutableArray<System.Byte>()",
+      "elapsedMilliseconds": 5266.965,
+      "calibratedMs": 5266.965,
+      "opsPerSecond": 18986.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::Create<Byte>:System.Collections.Immutable.ImmutableArray<System.Byte>(System.Byte)",
+      "elapsedMilliseconds": 5629.295,
+      "calibratedMs": 5629.295,
+      "opsPerSecond": 17764.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::Create<Int32>:System.Collections.Immutable.ImmutableArray<System.Int32>()",
+      "elapsedMilliseconds": 4657.323,
+      "calibratedMs": 4657.323,
+      "opsPerSecond": 21471.6,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::Create<Int32>:System.Collections.Immutable.ImmutableArray<System.Int32>(System.Int32)",
+      "elapsedMilliseconds": 5444.227,
+      "calibratedMs": 5444.227,
+      "opsPerSecond": 18368.1,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}

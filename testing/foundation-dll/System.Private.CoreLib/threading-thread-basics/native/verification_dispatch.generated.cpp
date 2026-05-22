@@ -1,5 +1,5 @@
 // verification_dispatch.generated.cpp — auto-generated
-// Assembly: ThreadingThreadBasicsSubjects, Methods: 24
+// Assembly: ThreadingThreadBasicsSubjects, Methods: 22
 #include <cstdint>
 #include <chrono>
 #include <chaos/native_types.h>

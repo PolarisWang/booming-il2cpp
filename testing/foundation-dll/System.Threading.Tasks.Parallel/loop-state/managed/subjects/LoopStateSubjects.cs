@@ -16,43 +16,43 @@ public static partial class LoopStateSubjects
     // [0] System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Break:System.Void()
     public static void Subject_0()
     {
-        try { default(ParallelLoopState)!.Break(); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { default(ParallelLoopState)!.Break(); }
+        catch { _exitCode = 1; }
     }
 
     // [1] System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_IsExceptional:System.Boolean()
     public static void Subject_1()
     {
-        try { _ = default(ParallelLoopState)!.IsExceptional; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(ParallelLoopState)!.IsExceptional) ? 1 : 0) != ((default(ParallelLoopState)!.IsExceptional) ? 1 : 0)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [2] System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_IsStopped:System.Boolean()
     public static void Subject_2()
     {
-        try { _ = default(ParallelLoopState)!.IsStopped; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(ParallelLoopState)!.IsStopped) ? 1 : 0) != ((default(ParallelLoopState)!.IsStopped) ? 1 : 0)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [3] System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_LowestBreakIteration:System.Nullable{System.Int64}()
     public static void Subject_3()
     {
-        try { _ = default(ParallelLoopState)!.LowestBreakIteration; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(ParallelLoopState)!.LowestBreakIteration).GetHashCode()) != ((default(ParallelLoopState)!.LowestBreakIteration).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [4] System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_ShouldExitCurrentIteration:System.Boolean()
     public static void Subject_4()
     {
-        try { _ = default(ParallelLoopState)!.ShouldExitCurrentIteration; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(ParallelLoopState)!.ShouldExitCurrentIteration) ? 1 : 0) != ((default(ParallelLoopState)!.ShouldExitCurrentIteration) ? 1 : 0)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [5] System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Stop:System.Void()
     public static void Subject_5()
     {
-        try { default(ParallelLoopState)!.Stop(); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { default(ParallelLoopState)!.Stop(); }
+        catch { _exitCode = 1; }
     }
 
 }

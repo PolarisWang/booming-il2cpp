@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "OptionsSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.IO.Compression.Brotli/options/managed/subjects/build-output/OptionsSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.IO.Compression.Brotli/options/managed/subjects/build-output/OptionsSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "OptionsSubjects",
-      "path": "verification/foundation-dll/System.IO.Compression.Brotli/options/managed/subjects/build-output/OptionsSubjects.dll"
+      "path": "testing/foundation-dll/System.IO.Compression.Brotli/options/managed/subjects/build-output/OptionsSubjects.dll"
     },
     {
       "assemblyName": "System.IO.Compression.Brotli",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "896ce997-dc89-4c1b-a9e2-0c587cd2ad44",
+  "inputModuleVersionId": "236b2eb8-60e8-4293-9824-fcc7f3267355",
   "artifacts": [
     {
       "kind": "typedIlIr",

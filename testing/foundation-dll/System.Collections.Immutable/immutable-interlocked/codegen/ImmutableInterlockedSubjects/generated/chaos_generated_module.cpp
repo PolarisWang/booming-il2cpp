@@ -47,6 +47,17 @@ static const Functions s_functions = {
 
 const Functions kFunctions = s_functions;
 
+// Flat function pointer array for indexed dispatch (benchmarking).
+// Avoids fragile reinterpret_cast<void* const*>(&kFunctions) which depends on
+// struct layout uniformity across sub-struct members.
+extern "C" void* kFunctionsFlat[4];
+void* kFunctionsFlat[4] = {
+    reinterpret_cast<void*>(&ImmutableInterlockedSubjects_ImmutableInterlockedSubjects_CustomEntrySubject_0),
+    reinterpret_cast<void*>(&ImmutableInterlockedSubjects_ImmutableInterlockedSubjects___c_cctor),
+    reinterpret_cast<void*>(&ImmutableInterlockedSubjects_ImmutableInterlockedSubjects___c__ctor),
+    reinterpret_cast<void*>(&ImmutableInterlockedSubjects_ImmutableInterlockedSubjects___c_CustomEntrySubject_0_b__1_0_System_String),
+};
+
 
 bool ChaosGeneratedModuleActivate(ChaosRuntimeHost* host) {
     if (!host) return false;

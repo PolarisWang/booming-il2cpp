@@ -95,11 +95,6 @@ extern "C" CHAOS_IL2CPP_INT32 GroupingLookupSubjects_GroupingLookupSubjects___c_
             CHAOS_IL2CPP_INTPTR, 
             CHAOS_IL2CPP_INT32
 );
-extern "C" CHAOS_IL2CPP_INT32 GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_6_b__7_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INT32, 
-            CHAOS_IL2CPP_INTPTR
-);
 extern "C" CHAOS_IL2CPP_INT32 GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_7_b__8_0_System_Int32(
             CHAOS_IL2CPP_INTPTR, 
             CHAOS_IL2CPP_INT32
@@ -107,11 +102,6 @@ extern "C" CHAOS_IL2CPP_INT32 GroupingLookupSubjects_GroupingLookupSubjects___c_
 extern "C" CHAOS_IL2CPP_INT32 GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_7_b__8_1_System_Int32(
             CHAOS_IL2CPP_INTPTR, 
             CHAOS_IL2CPP_INT32
-);
-extern "C" CHAOS_IL2CPP_INT32 GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_7_b__8_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32(
-            CHAOS_IL2CPP_INTPTR, 
-            CHAOS_IL2CPP_INT32, 
-            CHAOS_IL2CPP_INTPTR
 );
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -144,12 +134,10 @@ static const Functions s_functions = {
         &GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_5_b__6_1_System_Int32_System_Collections_Generic_IEnumerable_System_Int32,
         &GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_6_b__7_0_System_Int32,
         &GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_6_b__7_1_System_Int32,
-        &GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_6_b__7_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32,
         &GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_7_b__8_0_System_Int32,
         &GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_7_b__8_1_System_Int32,
-        &GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_7_b__8_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32,
     },
-    26,
+    24,
 };
 
 const Functions kFunctions = s_functions;
@@ -157,8 +145,8 @@ const Functions kFunctions = s_functions;
 // Flat function pointer array for indexed dispatch (benchmarking).
 // Avoids fragile reinterpret_cast<void* const*>(&kFunctions) which depends on
 // struct layout uniformity across sub-struct members.
-extern "C" void* kFunctionsFlat[26];
-void* kFunctionsFlat[26] = {
+extern "C" void* kFunctionsFlat[24];
+void* kFunctionsFlat[24] = {
     reinterpret_cast<void*>(&GroupingLookupSubjects_GroupingLookupSubjects_CustomEntrySubject_0),
     reinterpret_cast<void*>(&GroupingLookupSubjects_GroupingLookupSubjects_CustomEntrySubject_1),
     reinterpret_cast<void*>(&GroupingLookupSubjects_GroupingLookupSubjects_CustomEntrySubject_2),
@@ -181,10 +169,8 @@ void* kFunctionsFlat[26] = {
     reinterpret_cast<void*>(&GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_5_b__6_1_System_Int32_System_Collections_Generic_IEnumerable_System_Int32),
     reinterpret_cast<void*>(&GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_6_b__7_0_System_Int32),
     reinterpret_cast<void*>(&GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_6_b__7_1_System_Int32),
-    reinterpret_cast<void*>(&GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_6_b__7_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32),
     reinterpret_cast<void*>(&GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_7_b__8_0_System_Int32),
     reinterpret_cast<void*>(&GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_7_b__8_1_System_Int32),
-    reinterpret_cast<void*>(&GroupingLookupSubjects_GroupingLookupSubjects___c_CustomEntrySubject_7_b__8_2_System_Int32_System_Collections_Generic_IEnumerable_System_Int32),
 };
 
 

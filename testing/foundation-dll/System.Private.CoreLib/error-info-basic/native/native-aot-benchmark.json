@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/error/info/basic",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "ErrorInfoBasicNativeEntry/ErrorInfoBasicNativeEntry::Run:System.Int32(System.Int32)",
+      "elapsedMilliseconds": 0.39,
+      "calibratedMs": 0.39,
+      "opsPerSecond": 256213169.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "ErrorInfoBasicNativeEntry/ErrorInfoBasicNativeEntry::TestGetExceptionForHR:System.Int32()",
+      "elapsedMilliseconds": 0.371,
+      "calibratedMs": 0.371,
+      "opsPerSecond": 269179004.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "ErrorInfoBasicNativeEntry/ErrorInfoBasicNativeEntry::TestGetHRForException:System.Int32()",
+      "elapsedMilliseconds": 0.377,
+      "calibratedMs": 0.377,
+      "opsPerSecond": 265463233.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "ErrorInfoBasicNativeEntry/ErrorInfoBasicNativeEntry::TestThrowExceptionForHR_S_OK:System.Int32()",
+      "elapsedMilliseconds": 0.395,
+      "calibratedMs": 0.395,
+      "opsPerSecond": 253485424.6,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "ErrorInfoBasicNativeEntry/ErrorInfoBasicNativeEntry::TestGetExceptionForHR_Zero:System.Int32()",
+      "elapsedMilliseconds": 0.419,
+      "calibratedMs": 0.419,
+      "opsPerSecond": 238435860.8,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}

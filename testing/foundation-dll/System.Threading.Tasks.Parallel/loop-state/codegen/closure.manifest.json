@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "LoopStateSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Threading.Tasks.Parallel/loop-state/managed/subjects/build-output/LoopStateSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Threading.Tasks.Parallel/loop-state/managed/subjects/build-output/LoopStateSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "LoopStateSubjects",
-      "path": "verification/foundation-dll/System.Threading.Tasks.Parallel/loop-state/managed/subjects/build-output/LoopStateSubjects.dll"
+      "path": "testing/foundation-dll/System.Threading.Tasks.Parallel/loop-state/managed/subjects/build-output/LoopStateSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "7a866b4a-1a1f-4276-9a13-c4a601cd0d91",
+  "inputModuleVersionId": "850f56dc-1ed8-456e-b1a6-f10e6f71f286",
   "artifacts": [
     {
       "kind": "typedIlIr",

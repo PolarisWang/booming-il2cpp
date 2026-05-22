@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "PinvokeDllimportSubjects",
   "entrySubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Runtime.InteropServices/pinvoke-dllimport/codegen",
+  "managedClosureRootPath": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Runtime.InteropServices/pinvoke-dllimport/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

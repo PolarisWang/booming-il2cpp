@@ -3,7 +3,7 @@
   "artifactKind": "nativeAotManifest",
   "assemblyName": "HandlesSafehandleGchandleSubjects",
   "entrySubjectId": "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_0:System.Void()",
-  "managedClosureRootPath": "verification/foundation-dll/System.Runtime.InteropServices/handles-safehandle-gchandle/codegen",
+  "managedClosureRootPath": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Runtime.InteropServices/handles-safehandle-gchandle/codegen",
   "planArtifactPath": "native-aot.plan.json",
   "generatedArtifacts": [
     {

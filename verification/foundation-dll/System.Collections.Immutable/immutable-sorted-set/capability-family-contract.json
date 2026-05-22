@@ -1,0 +1,16 @@
+{
+  "familyId": "family/System.Collections.Immutable/immutable/sorted/set",
+  "assemblyName": "System.Collections.Immutable",
+  "methodSubjectIds": [
+    "System.Collections.Immutable/System.Collections.Immutable.ImmutableSortedSet::Create<Byte>:System.Collections.Immutable.ImmutableSortedSet<System.Byte>()",
+    "System.Collections.Immutable/System.Collections.Immutable.ImmutableSortedSet::Create<Byte>:System.Collections.Immutable.ImmutableSortedSet<System.Byte>(System.Byte)",
+    "System.Collections.Immutable/System.Collections.Immutable.ImmutableSortedSet::Create<Byte>:System.Collections.Immutable.ImmutableSortedSet<System.Byte>(System.Byte,System.Byte)",
+    "System.Collections.Immutable/System.Collections.Immutable.ImmutableSortedSet::Create<Int32>:System.Collections.Immutable.ImmutableSortedSet<System.Int32>()",
+    "System.Collections.Immutable/System.Collections.Immutable.ImmutableSortedSet::Create<Int32>:System.Collections.Immutable.ImmutableSortedSet<System.Int32>(System.Int32)"
+  ],
+  "displayName": "immutable/sorted/set",
+  "description": "",
+  "closureStatus": "in-progress",
+  "methodCount": 5,
+  "customEntryIndices": []
+}

@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.Collections.Immutable",
+  "familyId": "family/System.Collections.Immutable/immutable/dictionary",
+  "summary": {
+    "totalMethods": 3,
+    "matchedCount": 0,
+    "unmatchedCount": 0,
+    "invalidCount": 3,
+    "nativeAotFasterCount": 0,
+    "nativeJitFasterCount": 0,
+    "managedFasterCount": 0,
+    "equalCount": 0,
+    "averageSpeedupPercent": 0.0,
+    "averageNativeAotSpeedupPercent": 0.0,
+    "averageNativeJitSpeedupPercent": null,
+    "nativeJitSlowdownFactor": null
+  },
+  "methodResults": [
+    {
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableDictionary::Create<string,int>:System.Collections.Immutable.ImmutableDictionary<System.String,System.Int32>()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableDictionary::Create<Byte,Byte>:System.Collections.Immutable.ImmutableDictionary<System.Byte,System.Byte>()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableDictionary::Create<string,string>:System.Collections.Immutable.ImmutableDictionary<System.String,System.String>()",
+      "status": "managed_harness_unavailable"
+    }
+  ]
+}

@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "DispatchBasicSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/dispatch-basic/codegen/_subjects_input/DispatchBasicSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/dispatch-basic/managed/subjects/build-output/DispatchBasicSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "DispatchBasicSubjects",
-      "path": "testing/foundation-dll/System.Private.CoreLib/dispatch-basic/codegen/_subjects_input/DispatchBasicSubjects.dll"
+      "path": "testing/foundation-dll/System.Private.CoreLib/dispatch-basic/managed/subjects/build-output/DispatchBasicSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "8e831d21-dcbe-4ba3-abfb-f8ab602e0c80",
+  "inputModuleVersionId": "57e73ab8-f709-42d2-8b12-fa45020050e6",
   "artifacts": [
     {
       "kind": "typedIlIr",

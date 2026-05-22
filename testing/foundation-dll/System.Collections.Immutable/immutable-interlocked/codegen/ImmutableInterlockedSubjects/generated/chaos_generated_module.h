@@ -41,10 +41,10 @@ struct Functions {
         );
     } immutableInterlockedSubjects;
     struct ImmutableInterlockedSubjects___c_t {
-        void (*.cctor)(
+        void (*cctor)(
                 void
         );
-        void (*.ctor)(
+        void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INTPTR (*<CustomEntrySubject_0>b__1_0)(
@@ -56,6 +56,10 @@ struct Functions {
 };
 
 extern const Functions kFunctions;
+
+// Flat function pointer array for indexed dispatch (benchmarking).
+// Index by slot index to call any AOT method without struct-layout dependencies.
+extern "C" void* kFunctionsFlat[];
 
 // ═══════════════════════════════════════════════════════════════════════════
 // A2: Proxy Wrappers
@@ -77,15 +81,15 @@ struct ImmutableInterlockedSubjects {
 };
 
 struct ImmutableInterlockedSubjects___c {
-    static inline void .cctor(
+    static inline void cctor(
     ) {
-        return kFunctions.immutableInterlockedSubjects___c..cctor(
+        return kFunctions.immutableInterlockedSubjects___c.cctor(
         );
     }
-    static inline void .ctor(
+    static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.immutableInterlockedSubjects___c..ctor(
+        return kFunctions.immutableInterlockedSubjects___c.ctor(
                     arg_0
         );
     }

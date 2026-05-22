@@ -3,7 +3,7 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "UnmanagedCallingConventionsSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Runtime.InteropServices/unmanaged-calling-conventions/managed/subjects/build-output/UnmanagedCallingConventionsSubjects.dll",
+  "inputAssemblyPath": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Runtime.InteropServices/unmanaged-calling-conventions/managed/subjects/build-output/UnmanagedCallingConventionsSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
@@ -12,11 +12,11 @@
     },
     {
       "assemblyName": "UnmanagedCallingConventionsSubjects",
-      "path": "verification/foundation-dll/System.Runtime.InteropServices/unmanaged-calling-conventions/managed/subjects/build-output/UnmanagedCallingConventionsSubjects.dll"
+      "path": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Runtime.InteropServices/unmanaged-calling-conventions/managed/subjects/build-output/UnmanagedCallingConventionsSubjects.dll"
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "b38db0fc-3098-4259-81e7-3e0ca08ea3f3",
+  "inputModuleVersionId": "76e6b13d-4986-4be7-8a96-903f07478fa2",
   "artifacts": [
     {
       "kind": "typedIlIr",

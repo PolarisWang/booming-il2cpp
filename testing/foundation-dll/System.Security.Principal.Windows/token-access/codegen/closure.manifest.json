@@ -3,7 +3,7 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "TokenAccessSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "verification/foundation-dll/System.Security.Principal.Windows/token-access/managed/subjects/build-output/TokenAccessSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Security.Principal.Windows/token-access/managed/subjects/build-output/TokenAccessSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
@@ -16,11 +16,11 @@
     },
     {
       "assemblyName": "TokenAccessSubjects",
-      "path": "verification/foundation-dll/System.Security.Principal.Windows/token-access/managed/subjects/build-output/TokenAccessSubjects.dll"
+      "path": "testing/foundation-dll/System.Security.Principal.Windows/token-access/managed/subjects/build-output/TokenAccessSubjects.dll"
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "25f4de1a-a9dd-4470-82e2-e9b812b486ff",
+  "inputModuleVersionId": "2de9cd0e-4473-4a20-8de8-998af7275412",
   "artifacts": [
     {
       "kind": "typedIlIr",

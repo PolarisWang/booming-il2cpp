@@ -85,6 +85,10 @@ public:
     // Find module data (returns nullptr if not registered).
     ModuleTierData* FindModuleData(uint32_t module_id) noexcept;
 
+    /// Find a PatchMethod by method_token and reset its call_count to 0.
+    /// This allows tiering to re-trigger T4 compilation after a hotpatch.
+    void ResetMethodCallCount(uint32_t method_token) noexcept;
+
     // ── Background optimization queue ──────────────────────────────────────
     // Enqueue a method for T2→T3 background promotion.
     // Returns true if enqueued, false if queue is full.

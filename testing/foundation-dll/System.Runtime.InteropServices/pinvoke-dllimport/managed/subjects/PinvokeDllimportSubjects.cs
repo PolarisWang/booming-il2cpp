@@ -16,83 +16,85 @@ public static partial class PinvokeDllimportSubjects
     // [0] System.Runtime.InteropServices/System.Runtime.InteropServices.DllImportAttribute::get_Value:System.String()
     public static void Subject_0()
     {
-        try { _ = default(DllImportAttribute)!.Value; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(DllImportAttribute)!.Value).Length) != ((default(DllImportAttribute)!.Value).Length)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [1] System.Runtime.InteropServices/System.Runtime.InteropServices.DllImportAttribute::.ctor:System.Void(System.String)
     public static void Subject_1()
     {
-        new DllImportAttribute("hello");
+        try { new DllImportAttribute("hello"); }
+        catch { _exitCode = 1; }
     }
 
     // [2] System.Runtime.InteropServices/System.Runtime.InteropServices.LibraryImportAttribute::get_EntryPoint:System.String()
     public static void Subject_2()
     {
-        try { _ = default(LibraryImportAttribute)!.EntryPoint; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(LibraryImportAttribute)!.EntryPoint).Length) != ((default(LibraryImportAttribute)!.EntryPoint).Length)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [3] System.Runtime.InteropServices/System.Runtime.InteropServices.LibraryImportAttribute::get_LibraryName:System.String()
     public static void Subject_3()
     {
-        try { _ = default(LibraryImportAttribute)!.LibraryName; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(LibraryImportAttribute)!.LibraryName).Length) != ((default(LibraryImportAttribute)!.LibraryName).Length)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [4] System.Runtime.InteropServices/System.Runtime.InteropServices.LibraryImportAttribute::get_SetLastError:System.Boolean()
     public static void Subject_4()
     {
-        try { _ = default(LibraryImportAttribute)!.SetLastError; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(LibraryImportAttribute)!.SetLastError) ? 1 : 0) != ((default(LibraryImportAttribute)!.SetLastError) ? 1 : 0)) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [5] System.Runtime.InteropServices/System.Runtime.InteropServices.LibraryImportAttribute::get_StringMarshalling:System.Runtime.InteropServices.StringMarshalling()
     public static void Subject_5()
     {
-        try { _ = default(LibraryImportAttribute)!.StringMarshalling; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(LibraryImportAttribute)!.StringMarshalling).GetHashCode()) != ((default(LibraryImportAttribute)!.StringMarshalling).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [6] System.Runtime.InteropServices/System.Runtime.InteropServices.LibraryImportAttribute::get_StringMarshallingCustomType:System.Type()
     public static void Subject_6()
     {
-        try { _ = default(LibraryImportAttribute)!.StringMarshallingCustomType; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { if (((default(LibraryImportAttribute)!.StringMarshallingCustomType).GetHashCode()) != ((default(LibraryImportAttribute)!.StringMarshallingCustomType).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [7] System.Runtime.InteropServices/System.Runtime.InteropServices.LibraryImportAttribute::set_EntryPoint:System.Void(System.String)
     public static void Subject_7()
     {
-        try { _ = default(LibraryImportAttribute)!.EntryPoint = "hello"; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { default(LibraryImportAttribute)!.EntryPoint = "hello"; }
+        catch { _exitCode = 1; }
     }
 
     // [8] System.Runtime.InteropServices/System.Runtime.InteropServices.LibraryImportAttribute::set_SetLastError:System.Void(System.Boolean)
     public static void Subject_8()
     {
-        try { _ = default(LibraryImportAttribute)!.SetLastError = true; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { default(LibraryImportAttribute)!.SetLastError = true; }
+        catch { _exitCode = 1; }
     }
 
     // [9] System.Runtime.InteropServices/System.Runtime.InteropServices.LibraryImportAttribute::set_StringMarshalling:System.Void(System.Runtime.InteropServices.StringMarshalling)
     public static void Subject_9()
     {
-        try { _ = default(LibraryImportAttribute)!.StringMarshalling = default; _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { default(LibraryImportAttribute)!.StringMarshalling = default; }
+        catch { _exitCode = 1; }
     }
 
     // [10] System.Runtime.InteropServices/System.Runtime.InteropServices.LibraryImportAttribute::set_StringMarshallingCustomType:System.Void(System.Type)
     public static void Subject_10()
     {
-        try { default(LibraryImportAttribute)!.StringMarshallingCustomType = typeof(byte); _exitCode = 1; }
-        catch (NullReferenceException) { }
+        try { default(LibraryImportAttribute)!.StringMarshallingCustomType = typeof(byte); }
+        catch { _exitCode = 1; }
     }
 
     // [11] System.Runtime.InteropServices/System.Runtime.InteropServices.LibraryImportAttribute::.ctor:System.Void(System.String)
     public static void Subject_11()
     {
-        new LibraryImportAttribute("hello");
+        try { new LibraryImportAttribute("hello"); }
+        catch { _exitCode = 1; }
     }
 
 }

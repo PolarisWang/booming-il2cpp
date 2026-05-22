@@ -1,0 +1,315 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/reflection/field/property",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_MemberType:System.Reflection.MemberTypes()",
+      "elapsedMilliseconds": 0.483,
+      "calibratedMs": 0.483,
+      "opsPerSecond": 207039337.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_Attributes:System.Reflection.FieldAttributes()",
+      "elapsedMilliseconds": 0.473,
+      "calibratedMs": 0.473,
+      "opsPerSecond": 211505922.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_IsNotSerialized:System.Boolean()",
+      "elapsedMilliseconds": 0.494,
+      "calibratedMs": 0.494,
+      "opsPerSecond": 202265372.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_IsPinvokeImpl:System.Boolean()",
+      "elapsedMilliseconds": 0.49,
+      "calibratedMs": 0.49,
+      "opsPerSecond": 204123290.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_IsSpecialName:System.Boolean()",
+      "elapsedMilliseconds": 0.48,
+      "calibratedMs": 0.48,
+      "opsPerSecond": 208203206.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_IsAssembly:System.Boolean()",
+      "elapsedMilliseconds": 0.43,
+      "calibratedMs": 0.43,
+      "opsPerSecond": 232666356.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_IsFamily:System.Boolean()",
+      "elapsedMilliseconds": 0.466,
+      "calibratedMs": 0.466,
+      "opsPerSecond": 214730513.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_IsFamilyAndAssembly:System.Boolean()",
+      "elapsedMilliseconds": 0.456,
+      "calibratedMs": 0.456,
+      "opsPerSecond": 219346347.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_IsFamilyOrAssembly:System.Boolean()",
+      "elapsedMilliseconds": 0.473,
+      "calibratedMs": 0.473,
+      "opsPerSecond": 211193241.8,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_IsPrivate:System.Boolean()",
+      "elapsedMilliseconds": 0.482,
+      "calibratedMs": 0.482,
+      "opsPerSecond": 207339830.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_IsPublic:System.Boolean()",
+      "elapsedMilliseconds": 0.459,
+      "calibratedMs": 0.459,
+      "opsPerSecond": 217770034.8,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_IsSecurityCritical:System.Boolean()",
+      "elapsedMilliseconds": 0.463,
+      "calibratedMs": 0.463,
+      "opsPerSecond": 215936082.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_IsSecuritySafeCritical:System.Boolean()",
+      "elapsedMilliseconds": 0.466,
+      "calibratedMs": 0.466,
+      "opsPerSecond": 214730513.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 13,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_IsSecurityTransparent:System.Boolean()",
+      "elapsedMilliseconds": 0.451,
+      "calibratedMs": 0.451,
+      "opsPerSecond": 221778664.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 14,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::SetValue:System.Void(System.Object,System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Globalization.CultureInfo)",
+      "elapsedMilliseconds": 19.453,
+      "calibratedMs": 19.453,
+      "opsPerSecond": 5140674.6,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 15,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::GetRawConstantValue:System.Object()",
+      "elapsedMilliseconds": 0.454,
+      "calibratedMs": 0.454,
+      "opsPerSecond": 220070422.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 16,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::GetOptionalCustomModifiers:System.Type[]()",
+      "elapsedMilliseconds": 0.461,
+      "calibratedMs": 0.461,
+      "opsPerSecond": 217060994.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 17,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::GetRequiredCustomModifiers:System.Type[]()",
+      "elapsedMilliseconds": 0.441,
+      "calibratedMs": 0.441,
+      "opsPerSecond": 226963232.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 18,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::get_Attributes:System.Reflection.PropertyAttributes()",
+      "elapsedMilliseconds": 0.448,
+      "calibratedMs": 0.448,
+      "opsPerSecond": 223363859.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 19,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::get_IsSpecialName:System.Boolean()",
+      "elapsedMilliseconds": 0.444,
+      "calibratedMs": 0.444,
+      "opsPerSecond": 225174510.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 20,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::GetAccessors:System.Reflection.MethodInfo[]()",
+      "elapsedMilliseconds": 0.47,
+      "calibratedMs": 0.47,
+      "opsPerSecond": 212947189.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 21,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::GetAccessors:System.Reflection.MethodInfo[](System.Boolean)",
+      "elapsedMilliseconds": 0.425,
+      "calibratedMs": 0.425,
+      "opsPerSecond": 235460324.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 22,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::get_GetMethod:System.Reflection.MethodInfo()",
+      "elapsedMilliseconds": 0.466,
+      "calibratedMs": 0.466,
+      "opsPerSecond": 214822771.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 23,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::GetGetMethod:System.Reflection.MethodInfo()",
+      "elapsedMilliseconds": 0.464,
+      "calibratedMs": 0.464,
+      "opsPerSecond": 215331610.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 24,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::GetGetMethod:System.Reflection.MethodInfo(System.Boolean)",
+      "elapsedMilliseconds": 0.511,
+      "calibratedMs": 0.511,
+      "opsPerSecond": 195809673.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 25,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::get_SetMethod:System.Reflection.MethodInfo()",
+      "elapsedMilliseconds": 0.479,
+      "calibratedMs": 0.479,
+      "opsPerSecond": 208637596.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 26,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::GetSetMethod:System.Reflection.MethodInfo()",
+      "elapsedMilliseconds": 0.429,
+      "calibratedMs": 0.429,
+      "opsPerSecond": 233208955.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 27,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::GetSetMethod:System.Reflection.MethodInfo(System.Boolean)",
+      "elapsedMilliseconds": 0.454,
+      "calibratedMs": 0.454,
+      "opsPerSecond": 220458553.8,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 28,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::GetValue:System.Object(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)",
+      "elapsedMilliseconds": 9.596,
+      "calibratedMs": 9.596,
+      "opsPerSecond": 10420900.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 29,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::GetConstantValue:System.Object()",
+      "elapsedMilliseconds": 0.468,
+      "calibratedMs": 0.468,
+      "opsPerSecond": 213903743.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 30,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::GetRawConstantValue:System.Object()",
+      "elapsedMilliseconds": 0.473,
+      "calibratedMs": 0.473,
+      "opsPerSecond": 211193241.8,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 31,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::SetValue:System.Void(System.Object,System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)",
+      "elapsedMilliseconds": 18.746,
+      "calibratedMs": 18.746,
+      "opsPerSecond": 5334357.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 32,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::GetOptionalCustomModifiers:System.Type[]()",
+      "elapsedMilliseconds": 0.452,
+      "calibratedMs": 0.452,
+      "opsPerSecond": 221238938.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 33,
+      "methodSubjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::GetRequiredCustomModifiers:System.Type[]()",
+      "elapsedMilliseconds": 0.461,
+      "calibratedMs": 0.461,
+      "opsPerSecond": 216731686.2,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}

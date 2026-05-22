@@ -107,9 +107,12 @@ void PatchMethodLowerIR(uintptr_t method_key) noexcept {
                         instr.call_target);
                 } else if (instr.direct_fn != nullptr && instr.direct_ret_tag != 0xFF) {
                     // direct_fn with pre-computed return tag — fill CachedCallInfo
-                    // so Handle_Call can read the correct ValueTag without runtime
-                    // reflection or string parsing.
+                    // so Handle_Call/InterpreterDispatchRaw can call the AOT thunk
+                    // directly (MIC path) with the correct calling convention.
+                    // direct_ptr is set to direct_fn so the MIC path bypasses
+                    // MethodInvoke for Tier 3 cross-assembly calls.
                     call_cache[i].ret_tag = instr.direct_ret_tag;
+                    call_cache[i].direct_ptr = instr.direct_fn;
                     call_cache[i].is_struct_ret = false;
                     call_cache[i].struct_size = 0;
                 } else {

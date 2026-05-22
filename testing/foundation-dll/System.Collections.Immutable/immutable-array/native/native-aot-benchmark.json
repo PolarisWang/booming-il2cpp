@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Collections.Immutable",
+  "familyId": "family/System.Collections.Immutable/immutable/array",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::Create<Byte>:System.Collections.Immutable.ImmutableArray<System.Byte>()",
+      "elapsedMilliseconds": 0.34,
+      "calibratedMs": 0.34,
+      "opsPerSecond": 294464075.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::Create<Byte>:System.Collections.Immutable.ImmutableArray<System.Byte>(System.Byte)",
+      "elapsedMilliseconds": 0.704,
+      "calibratedMs": 0.704,
+      "opsPerSecond": 142146410.8,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::Create<Byte>:System.Collections.Immutable.ImmutableArray<System.Byte>(System.Byte,System.Byte)",
+      "elapsedMilliseconds": 0.374,
+      "calibratedMs": 0.374,
+      "opsPerSecond": 267165375.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::Create<Int32>:System.Collections.Immutable.ImmutableArray<System.Int32>()",
+      "elapsedMilliseconds": 0.352,
+      "calibratedMs": 0.352,
+      "opsPerSecond": 284252416.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::Create<Int32>:System.Collections.Immutable.ImmutableArray<System.Int32>(System.Int32)",
+      "elapsedMilliseconds": 0.354,
+      "calibratedMs": 0.354,
+      "opsPerSecond": 282326369.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::Create<String>:System.Collections.Immutable.ImmutableArray<System.String>(System.String)",
+      "elapsedMilliseconds": 0.466,
+      "calibratedMs": 0.466,
+      "opsPerSecond": 214500214.5,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}

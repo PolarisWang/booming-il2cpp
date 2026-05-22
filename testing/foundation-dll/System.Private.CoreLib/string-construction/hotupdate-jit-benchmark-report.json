@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/string/construction",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/System.String::.ctor:System.Void(System.Char[])",
+      "status": "passed",
+      "prePatchNsPerOp": 24223.93,
+      "postPatchNsPerOp": 29700.3,
+      "slowdownPercent": 22.61
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/System.String::.ctor:System.Void(System.Char,System.Int32)",
+      "status": "passed",
+      "prePatchNsPerOp": 19354.38,
+      "postPatchNsPerOp": 20149.0,
+      "slowdownPercent": 4.11
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/System.String::.ctor:System.Void(System.Char[],System.Int32,System.Int32)",
+      "status": "passed",
+      "prePatchNsPerOp": 66016.32,
+      "postPatchNsPerOp": 34162.2,
+      "slowdownPercent": -48.25
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Private.CoreLib/System.String::IsNullOrEmpty:System.Boolean(System.String)",
+      "status": "passed",
+      "prePatchNsPerOp": 19985.69,
+      "postPatchNsPerOp": 83107.9,
+      "slowdownPercent": 315.84
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Private.CoreLib/System.String::IsNullOrWhiteSpace:System.Boolean(System.String)",
+      "status": "passed",
+      "prePatchNsPerOp": 83219.77,
+      "postPatchNsPerOp": 47121.3,
+      "slowdownPercent": -43.38
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Private.CoreLib/System.String::Copy:System.String(System.String)",
+      "status": "passed",
+      "prePatchNsPerOp": 19459.0,
+      "postPatchNsPerOp": 28980.8,
+      "slowdownPercent": 48.93
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Private.CoreLib/System.String::Intern:System.String(System.String)",
+      "status": "passed",
+      "prePatchNsPerOp": 39767.76,
+      "postPatchNsPerOp": 18261.1,
+      "slowdownPercent": -54.08
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Private.CoreLib/System.String::IsInterned:System.String(System.String)",
+      "status": "passed",
+      "prePatchNsPerOp": 20446.82,
+      "postPatchNsPerOp": 18780.5,
+      "slowdownPercent": -8.15
+    }
+  ],
+  "summary": {
+    "totalMethods": 8,
+    "nonStubMethods": 8,
+    "averageSlowdownPercent": 29.7,
+    "slowdownFactor": 1.297,
+    "slowdownThresholdX": 50.0
+  }
+}
