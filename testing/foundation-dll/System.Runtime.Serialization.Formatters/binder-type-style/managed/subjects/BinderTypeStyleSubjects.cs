@@ -23,7 +23,7 @@ public static partial class BinderTypeStyleSubjects
     // [1] System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationBinder::BindToType:System.Type(System.String,System.String)
     public static void Subject_1()
     {
-        try { if (((default(SerializationBinder)!.BindToType("hello", "hello")).GetHashCode()) != ((default(SerializationBinder)!.BindToType("hello", "hello")).GetHashCode())) _exitCode = 1; }
+        try { _ = default(SerializationBinder)!.BindToType("hello", "hello"); }
         catch { _exitCode = 1; }
     }
 

@@ -88,9 +88,6 @@ float Gen1Fragmentation() {
 // GcGen1ShouldCollect — decision helper for independent Gen1 collection
 // ======================================================================
 
-/// Maximum young GCs between Gen1 collections (interval-based trigger).
-static constexpr int kGen1MaxInterval = 8;
-
 /// Base Gen1 occupancy threshold (fraction of Gen1 used) to trigger collection.
 /// Adjusted downward when survival rate is low (most objects die quickly).
 static constexpr float kGen1OccupancyThreshold = 0.80f;
@@ -101,11 +98,7 @@ static constexpr float kGen1MinOccupancyThreshold = 0.40f;
 /// Gen1 fragmentation threshold to trigger collection.
 static constexpr float kGen1FragThreshold = 0.50f;
 
-/// Budget multiplier: trigger when total allocation into Gen1 since last
-/// collection exceeds this × Gen1 capacity (catch high-throughput phases).
-static constexpr float kGen1BudgetMultiplier = 3.0f;
-
-/// Survival rate below which we consider Gen1 objects "mostly dead" and
+/// Fragmentation threshold: trigger collection when Gen1 fragmentation exceeds this.
 /// trigger collection more eagerly (lower occupancy threshold).
 static constexpr float kGen1LowSurvivalThreshold = 0.30f;
 
@@ -126,16 +119,7 @@ bool GcGen1ShouldCollect() {
 
     float occupancy = static_cast<float>(used) / static_cast<float>(capacity);
 
-    // 3a. Budget-based check: if total allocation since last collection
-    // exceeds budget × capacity, trigger early.  This catches high-throughput
-    // phases where Gen1 fills and drains rapidly despite low instantaneous
-    // occupancy (objects promoted then quickly die).
-    if (g_gc_scheduler.Gen1AllocSinceLastGc() >
-        static_cast<CHAOS_IL2CPP_SIZE>(kGen1BudgetMultiplier * capacity)) {
-        return true;
-    }
-
-    // 3b. Survival-rate adaptive occupancy threshold.
+    // 3a. Survival-rate adaptive occupancy threshold.
     // When survival rate is low (<30%), most objects in Gen1 are dead —
     // promote eagerly at a lower occupancy threshold (50% instead of 80%).
     // When survival is high, use the default 80% threshold.
@@ -149,17 +133,12 @@ bool GcGen1ShouldCollect() {
     }
     if (occupancy > adaptive_threshold) return true;
 
-    // 3c. Check fragmentation (only when Gen1 has meaningful data).
+    // 3b. Check fragmentation (only when Gen1 has meaningful data).
     // High fragmentation with <25% occupancy just means "barely used" —
     // not a real fragmentation problem.
     constexpr float kMinFragUsageFraction = 0.25f;
     float frag = Gen1Fragmentation();
     if (occupancy >= kMinFragUsageFraction && frag > kGen1FragThreshold) return true;
-
-    // 3d. Check interval (young GCs since last Gen1 collection).
-    int young_since = g_gen1_state.young_gc_since_last_gen1.load(
-        std::memory_order_relaxed);
-    if (young_since >= kGen1MaxInterval) return true;
 
     return false;
 }

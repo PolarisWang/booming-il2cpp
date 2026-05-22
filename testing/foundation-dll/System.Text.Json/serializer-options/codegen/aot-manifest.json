@@ -899,12 +899,6 @@
     {
       "assemblyName": "System.Text.Json",
       "subjectKind": "method",
-      "subjectId": "System.Text.Json/JsonSerializerOptions::TryGetTypeInfo:System.Boolean(System.Type,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u0026)",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Text.Json",
-      "subjectKind": "method",
       "subjectId": "System.Text.Json/JsonSerializerOptions::.ctor:System.Void()",
       "reason": "external-call"
     },

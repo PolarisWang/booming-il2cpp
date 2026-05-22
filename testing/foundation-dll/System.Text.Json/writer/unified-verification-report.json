@@ -2,9 +2,9 @@
   "family": "writer",
   "assembly": "System.Text.Json",
   "mode": "standard",
-  "timestamp": "2026-05-22T07:20:28",
-  "duration_ms": 72934,
-  "overall_status": "failed",
+  "timestamp": "2026-05-22T15:54:15",
+  "duration_ms": 51938,
+  "overall_status": "passed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -144,7 +144,7 @@
         ]
       },
       "errors": [],
-      "duration_ms": 1
+      "duration_ms": 0
     },
     "codegen": {
       "stage": "codegen",
@@ -155,15 +155,15 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Text.Json\\writer\\managed\\subjects\\build-output\\WriterSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 34755
+      "duration_ms": 47711
     },
     "jit_codegen": {
       "stage": "jit_codegen",
       "status": "passed",
-      "summary": "JIT entry-jit.exe built and AOT entry.exe restored",
+      "summary": "entry-jit.exe already exists, skipping rebuild",
       "details": {},
       "errors": [],
-      "duration_ms": 33331
+      "duration_ms": 0
     },
     "fact": {
       "stage": "fact",
@@ -177,7 +177,15 @@
         }
       },
       "errors": [],
-      "duration_ms": 343
+      "duration_ms": 492
+    },
+    "dual_run": {
+      "stage": "dual_run",
+      "status": "failed",
+      "summary": "Dual-run stage crashed: cannot import name 'verify_dual_run' from 'fact_verifier' (D:\\agent\\booming-il2cpp\\build\\toolchains\\run\\testing\\foundation_dll\\fact_verifier.py)",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
     },
     "fact_jit": {
       "stage": "fact_jit",
@@ -192,21 +200,21 @@
         }
       },
       "errors": [],
-      "duration_ms": 391
+      "duration_ms": 436
     },
     "audit": {
       "stage": "audit",
-      "status": "failed",
-      "summary": "false_passing=0, principle=VIOLATION",
+      "status": "passed",
+      "summary": "false_passing=0, principle=CONCERN",
       "details": {
         "falsePassing": 0,
         "stubsFound": 0,
         "skipsFound": 2,
-        "principleStatus": "VIOLATION",
+        "principleStatus": "CONCERN",
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 4045
+      "duration_ms": 2419
     },
     "asm_compare": {
       "stage": "asm_compare",
@@ -214,30 +222,30 @@
       "summary": "Subjects DLL not found — run codegen stage first",
       "details": {},
       "errors": [],
-      "duration_ms": 0
+      "duration_ms": 48
     },
     "microbench": {
       "stage": "microbench",
       "status": "passed",
-      "summary": "FramePool=5.2ns/op | FastExecute=2.2ns/op | CallVirt dispatch=1.9ns",
+      "summary": "FramePool=3.0ns/op | FastExecute=3578.1ns/op | CallVirt dispatch=3008.5ns",
       "details": {
         "framePool": {
-          "acquireReleaseNsPerOp": 5.2,
+          "acquireReleaseNsPerOp": 3.0,
           "batchCount": 1000,
           "framesPerBatch": 32
         },
         "fastExecute": {
           "runCount": 100000,
-          "nsPerCall": 2.2
+          "nsPerCall": 3578.1
         },
         "callVirt": {
-          "handlerDispatchNs": 1.9,
-          "emptyStackNs": 2.1
+          "handlerDispatchNs": 3008.5,
+          "emptyStackNs": 3309.3
         },
         "poolSize": 32
       },
       "errors": [],
-      "duration_ms": 28
+      "duration_ms": 787
     },
     "benchmark": {
       "stage": "benchmark",
@@ -245,7 +253,7 @@
       "summary": "All methods are stubs — no benchmark possible",
       "details": {},
       "errors": [],
-      "duration_ms": 1
+      "duration_ms": 3
     },
     "hotupdate": {
       "stage": "hotupdate",
@@ -253,7 +261,7 @@
       "summary": "All methods are stubs — no hotupdate possible",
       "details": {},
       "errors": [],
-      "duration_ms": 0
+      "duration_ms": 1
     },
     "hotupdate_aot_benchmark": {
       "stage": "hotupdate_aot_benchmark",
@@ -261,7 +269,7 @@
       "summary": "All methods are stubs — no benchmark possible",
       "details": {},
       "errors": [],
-      "duration_ms": 0
+      "duration_ms": 1
     },
     "hotupdate_jit_fact": {
       "stage": "hotupdate_jit_fact",
@@ -273,15 +281,15 @@
         "total": 126
       },
       "errors": [],
-      "duration_ms": 31
+      "duration_ms": 29
     },
     "hotupdate_jit_benchmark": {
       "stage": "hotupdate_jit_benchmark",
-      "status": "failed",
-      "summary": "HotUpdate JIT benchmark stage crashed: [Errno 22] Invalid argument",
+      "status": "skipped",
+      "summary": "All methods are stubs — no benchmark possible",
       "details": {},
       "errors": [],
-      "duration_ms": 0
+      "duration_ms": 1
     }
   },
   "coverage": {
@@ -291,9 +299,9 @@
   },
   "dashboard": {
     "interpreter": {
-      "fastFramePoolNsPerOp": 5.2,
+      "fastFramePoolNsPerOp": 3.0,
       "fastExecuteNsPerInstr": 0,
-      "callVirtHandlerDispatchNs": 1.9,
+      "callVirtHandlerDispatchNs": 3008.5,
       "callVirtMicHitNs": 0,
       "callVirtRawFallbackNs": 0,
       "poolSize": 32

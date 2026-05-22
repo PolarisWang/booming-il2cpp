@@ -23,28 +23,28 @@ public static partial class LoopStateSubjects
     // [1] System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_IsExceptional:System.Boolean()
     public static void Subject_1()
     {
-        try { if (((default(ParallelLoopState)!.IsExceptional) ? 1 : 0) != ((default(ParallelLoopState)!.IsExceptional) ? 1 : 0)) _exitCode = 1; }
+        try { _ = default(ParallelLoopState)!.IsExceptional; }
         catch { _exitCode = 1; }
     }
 
     // [2] System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_IsStopped:System.Boolean()
     public static void Subject_2()
     {
-        try { if (((default(ParallelLoopState)!.IsStopped) ? 1 : 0) != ((default(ParallelLoopState)!.IsStopped) ? 1 : 0)) _exitCode = 1; }
+        try { _ = default(ParallelLoopState)!.IsStopped; }
         catch { _exitCode = 1; }
     }
 
     // [3] System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_LowestBreakIteration:System.Nullable{System.Int64}()
     public static void Subject_3()
     {
-        try { if (((default(ParallelLoopState)!.LowestBreakIteration).GetHashCode()) != ((default(ParallelLoopState)!.LowestBreakIteration).GetHashCode())) _exitCode = 1; }
+        try { _ = default(ParallelLoopState)!.LowestBreakIteration; }
         catch { _exitCode = 1; }
     }
 
     // [4] System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_ShouldExitCurrentIteration:System.Boolean()
     public static void Subject_4()
     {
-        try { if (((default(ParallelLoopState)!.ShouldExitCurrentIteration) ? 1 : 0) != ((default(ParallelLoopState)!.ShouldExitCurrentIteration) ? 1 : 0)) _exitCode = 1; }
+        try { _ = default(ParallelLoopState)!.ShouldExitCurrentIteration; }
         catch { _exitCode = 1; }
     }
 

@@ -32,17 +32,46 @@ constexpr uint32_t kInlineValueCount = 4;
 constexpr uint32_t kMaxValues = 64;  // Sanity cap
 
 struct AsyncLocalMap {
-    AsyncLocalValue values[kInlineValueCount]{};
+    AsyncLocalValue inline_values[kInlineValueCount]{};
+    AsyncLocalValue* heap_values{nullptr};
+    uint32_t heap_capacity{0};
     uint32_t count{0};
+
+    ~AsyncLocalMap() noexcept {
+        delete[] heap_values;
+        heap_values = nullptr;
+    }
+
+    AsyncLocalValue& ValueAt(uint32_t idx) noexcept {
+        return idx < kInlineValueCount ? inline_values[idx] : heap_values[idx - kInlineValueCount];
+    }
+
+    bool EnsureHeapCapacity(uint32_t needed) noexcept {
+        if (needed <= kInlineValueCount) return true;
+        uint32_t cap = needed + 4;  // small slop
+        if (cap > kMaxValues) cap = kMaxValues;
+        if (heap_values != nullptr && heap_capacity >= cap) return true;
+        auto* new_heap = new (std::nothrow) AsyncLocalValue[cap];
+        if (new_heap == nullptr) return false;
+        // Copy existing heap values.
+        uint32_t existing_heap = count > kInlineValueCount ? count - kInlineValueCount : 0;
+        for (uint32_t i = 0; i < existing_heap && i < cap; i++) {
+            new_heap[i] = heap_values[i];
+        }
+        delete[] heap_values;
+        heap_values = new_heap;
+        heap_capacity = cap;
+        return true;
+    }
 };
 
 thread_local AsyncLocalMap tls_async_locals;
+thread_local int32_t tls_suppress_flow_depth = 0;
 
-/// Find an AsyncLocal value by key in the thread-local map.
 AsyncLocalValue* FindValue(uint64_t key) noexcept {
     for (uint32_t i = 0; i < tls_async_locals.count; i++) {
-        if (tls_async_locals.values[i].key == key) {
-            return &tls_async_locals.values[i];
+        if (tls_async_locals.ValueAt(i).key == key) {
+            return &tls_async_locals.ValueAt(i);
         }
     }
     return nullptr;
@@ -59,19 +88,20 @@ void AsyncLocalSetValue(uint64_t key, CHAOS_IL2CPP_INTPTR value) noexcept {
         return;
     }
 
-    // Add new entry.
     if (tls_async_locals.count >= kMaxValues) {
         CHAOS_IL2CPP_LOG_WARN("AsyncLocal", "exceeded max values");
         return;
     }
 
-    if (tls_async_locals.count < kInlineValueCount) {
-        tls_async_locals.values[tls_async_locals.count].key = key;
-        tls_async_locals.values[tls_async_locals.count].value = value;
-        tls_async_locals.count++;
-    } else {
-        CHAOS_IL2CPP_LOG_WARN("AsyncLocal", "inline storage full, value not stored");
+    uint32_t idx = tls_async_locals.count;
+    if (!tls_async_locals.EnsureHeapCapacity(idx + 1)) {
+        CHAOS_IL2CPP_LOG_WARN("AsyncLocal", "failed to allocate heap storage");
+        return;
     }
+
+    tls_async_locals.ValueAt(idx).key = key;
+    tls_async_locals.ValueAt(idx).value = value;
+    tls_async_locals.count++;
 }
 
 CHAOS_IL2CPP_INTPTR AsyncLocalGetValue(uint64_t key) noexcept {
@@ -85,6 +115,10 @@ CHAOS_IL2CPP_INTPTR AsyncLocalGetValue(uint64_t key) noexcept {
 // ── ExecutionContextCapture ───────────────────────────────────────────
 
 ExecutionContext* ExecutionContextCapture() noexcept {
+    if (tls_suppress_flow_depth > 0) {
+        return nullptr;  // Flow suppressed — don't capture.
+    }
+
     if (tls_async_locals.count == 0) {
         return nullptr;  // No values to capture — optimization
     }
@@ -111,7 +145,7 @@ ExecutionContext* ExecutionContextCapture() noexcept {
 
     // Copy values.
     for (uint32_t i = 0; i < tls_async_locals.count; i++) {
-        ctx->values[i] = tls_async_locals.values[i];
+        ctx->values[i] = tls_async_locals.ValueAt(i);
     }
 
     return ctx;
@@ -126,17 +160,40 @@ void ExecutionContextRun(ExecutionContext* ctx, void (*callback)(void*), void* s
         return;
     }
 
-    // Save current AsyncLocal values.
-    AsyncLocalValue saved_values[kInlineValueCount];
+    // Save current AsyncLocal values (heap-allocated if needed).
     uint32_t saved_count = tls_async_locals.count;
-    for (uint32_t i = 0; i < saved_count && i < kInlineValueCount; i++) {
-        saved_values[i] = tls_async_locals.values[i];
+    AsyncLocalValue* saved_values = nullptr;
+    bool saved_on_heap = false;
+
+    if (saved_count > 0) {
+        if (saved_count <= kInlineValueCount) {
+            saved_values = new (std::nothrow) AsyncLocalValue[kInlineValueCount];
+            if (saved_values != nullptr) {
+                for (uint32_t i = 0; i < saved_count; i++) {
+                    saved_values[i] = tls_async_locals.ValueAt(i);
+                }
+            }
+            saved_on_heap = false;
+        } else {
+            saved_values = new (std::nothrow) AsyncLocalValue[saved_count];
+            if (saved_values != nullptr) {
+                for (uint32_t i = 0; i < saved_count; i++) {
+                    saved_values[i] = tls_async_locals.ValueAt(i);
+                }
+            }
+            saved_on_heap = true;
+        }
+    }
+
+    // Ensure TLS has enough capacity for context values.
+    if (ctx->value_count > 0) {
+        tls_async_locals.EnsureHeapCapacity(ctx->value_count);
     }
 
     // Install context values.
     tls_async_locals.count = ctx->value_count;
-    for (uint32_t i = 0; i < ctx->value_count && i < kInlineValueCount; i++) {
-        tls_async_locals.values[i] = ctx->values[i];
+    for (uint32_t i = 0; i < ctx->value_count; i++) {
+        tls_async_locals.ValueAt(i) = ctx->values[i];
     }
 
     // Run the callback.
@@ -144,8 +201,15 @@ void ExecutionContextRun(ExecutionContext* ctx, void (*callback)(void*), void* s
 
     // Restore saved values.
     tls_async_locals.count = saved_count;
-    for (uint32_t i = 0; i < saved_count && i < kInlineValueCount; i++) {
-        tls_async_locals.values[i] = saved_values[i];
+    if (saved_values != nullptr) {
+        for (uint32_t i = 0; i < saved_count; i++) {
+            tls_async_locals.ValueAt(i) = saved_values[i];
+        }
+        if (saved_on_heap) {
+            delete[] saved_values;
+        } else {
+            delete[] saved_values;
+        }
     }
 }
 
@@ -159,6 +223,22 @@ void ExecutionContextFree(ExecutionContext* ctx) noexcept {
     }
 
     delete ctx;
+}
+
+// ── SuppressFlow / RestoreFlow ────────────────────────────────────────
+
+int32_t ExecutionContextSuppressFlow() noexcept {
+    int32_t prev = tls_suppress_flow_depth;
+    tls_suppress_flow_depth++;
+    return prev;
+}
+
+void ExecutionContextRestoreFlow(int32_t cookie) noexcept {
+    tls_suppress_flow_depth = cookie;
+}
+
+bool ExecutionContextIsFlowSuppressed() noexcept {
+    return tls_suppress_flow_depth > 0;
 }
 
 }  // namespace chaos::il2cpp::runtime_core::threading
@@ -179,4 +259,16 @@ extern "C" void chaos_execution_context_free(
     chaos::il2cpp::runtime_core::threading::ExecutionContext* ctx) noexcept
 {
     chaos::il2cpp::runtime_core::threading::ExecutionContextFree(ctx);
+}
+
+extern "C" CHAOS_IL2CPP_INT32 chaos_execution_context_suppress_flow() noexcept {
+    return chaos::il2cpp::runtime_core::threading::ExecutionContextSuppressFlow();
+}
+
+extern "C" void chaos_execution_context_restore_flow(CHAOS_IL2CPP_INT32 cookie) noexcept {
+    chaos::il2cpp::runtime_core::threading::ExecutionContextRestoreFlow(cookie);
+}
+
+extern "C" bool chaos_execution_context_is_flow_suppressed() noexcept {
+    return chaos::il2cpp::runtime_core::threading::ExecutionContextIsFlowSuppressed() ? 1 : 0;
 }

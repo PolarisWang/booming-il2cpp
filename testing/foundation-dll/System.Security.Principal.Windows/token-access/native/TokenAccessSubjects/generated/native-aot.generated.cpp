@@ -162,11 +162,6 @@ struct chaos_type_TokenAccessSubjects_TokenAccessSubjects
 CHAOS_IL2CPP_INTPTR chaos_static_System_Private_CoreLib_System_IntPtr__Zero = 0;
 CHAOS_IL2CPP_INT32 chaos_static_TokenAccessSubjects_TokenAccessSubjects___exitCode = 0;
 
-static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	return ChaosObjectGetHashCode(chaos_fn_arg_0);
-}
-
 static constexpr CHAOS_IL2CPP_UINT32 kGenericTypeArgTokens[1] = { 0 };
 
 static constexpr GenericTypeRegistrationEntryV0 kGenericTypeEntries[1] = { { 0, 0, 0, 0 } };
@@ -313,10 +308,10 @@ static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[4] = {
 
 // Dispatch table (function pointers)
 static HotpatchEntryV0 s_hotpatch_entries[4] = {
-	{ reinterpret_cast<void*>(&TokenAccessSubjects_TokenAccessSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // TokenAccessSubjects::Subject_0
-	{ reinterpret_cast<void*>(&TokenAccessSubjects_TokenAccessSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // TokenAccessSubjects::Subject_1
-	{ reinterpret_cast<void*>(&TokenAccessSubjects_TokenAccessSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // TokenAccessSubjects::Subject_2
-	{ reinterpret_cast<void*>(&TokenAccessSubjects_TokenAccessSubjects_Subject_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // TokenAccessSubjects::Subject_3
+	{ reinterpret_cast<void*>(&TokenAccessSubjects_TokenAccessSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // TokenAccessSubjects::Subject_0
+	{ reinterpret_cast<void*>(&TokenAccessSubjects_TokenAccessSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // TokenAccessSubjects::Subject_1
+	{ reinterpret_cast<void*>(&TokenAccessSubjects_TokenAccessSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // TokenAccessSubjects::Subject_2
+	{ reinterpret_cast<void*>(&TokenAccessSubjects_TokenAccessSubjects_Subject_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // TokenAccessSubjects::Subject_3
 };
 
 // Module hotpatch bundle
@@ -338,9 +333,8 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // ── External Runtime Dispatch Table ──────────────────────────
 // Startup-time-resolved function pointers for cross-assembly calls.
 
-extern "C" const char* kChaosExternalRuntimeSubjects[7] = {
+extern "C" const char* kChaosExternalRuntimeSubjects[6] = {
 	"System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::get_InvalidHandle:Microsoft.Win32.SafeHandles.SafeAccessTokenHandle()",
-	"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
 	"TokenAccessSubjects/TokenAccessSubjects::_exitCode",
 	"System.Private.CoreLib/System.Runtime.InteropServices.SafeHandle::get_IsInvalid:System.Boolean()",
 	"System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::.ctor:System.Void()",
@@ -348,9 +342,8 @@ extern "C" const char* kChaosExternalRuntimeSubjects[7] = {
 	"System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::.ctor:System.Void(System.IntPtr)",
 };
 
-extern "C" void* kChaosExternalRuntimeFnTable[7] = {
+extern "C" void* kChaosExternalRuntimeFnTable[6] = {
 	nullptr,
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__),
 	nullptr,
 	nullptr,
 	nullptr,
@@ -358,7 +351,7 @@ extern "C" void* kChaosExternalRuntimeFnTable[7] = {
 	nullptr,
 };
 
-extern "C" int32_t kChaosExternalRuntimeCount = 7;
+extern "C" int32_t kChaosExternalRuntimeCount = 6;
 // (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
@@ -486,7 +479,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
+		CHAOS_IL2CPP_UINT32 slots[1];
 	} entry0;
 	/* ── Entry 1: TokenAccessSubjects_TokenAccessSubjects_Subject_1 ── */
 	struct {
@@ -494,7 +487,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry1;
 	/* ── Entry 2: TokenAccessSubjects_TokenAccessSubjects_Subject_2 ── */
 	struct {
@@ -515,19 +508,19 @@ static const struct {
 } kChaosGcSlotMapsSection = {
 	/* entry0 = TokenAccessSubjects_TokenAccessSubjects_Subject_0 */
 	.entry0 = {
-		/* entry_total_size = 32 */ 32u,
+		/* entry_total_size = 24 */ 24u,
 		/* code_address */ reinterpret_cast<const void*>(&TokenAccessSubjects_TokenAccessSubjects_Subject_0),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* frame_size = 8 */ 8u,
+		/* num_gc_slots = 1 */ 1u,
+		/* slots */ { 0u }
 	},
 	/* entry1 = TokenAccessSubjects_TokenAccessSubjects_Subject_1 */
 	.entry1 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&TokenAccessSubjects_TokenAccessSubjects_Subject_1),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
 	/* entry2 = TokenAccessSubjects_TokenAccessSubjects_Subject_2 */
 	.entry2 = {
@@ -550,7 +543,7 @@ static const struct {
 #pragma pack(pop)
 #endif
 
-static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 116u;
+static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 100u;
 
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
@@ -681,45 +674,12 @@ extern "C" void TokenAccessSubjects_TokenAccessSubjects_Subject_0(void)
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
 
 
 	CHAOS_EH_TRY
 			{
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[0])();
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			{
-				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[0])();
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			{
-				const auto chaos_arg_0 = _s1;
-				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-			chaos_locals[0] = _s0;
-			_s0 = chaos_locals[0];
-			// brfalse (structured EH branch)
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s1;
-				chaos_static_TokenAccessSubjects_TokenAccessSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
@@ -748,48 +708,13 @@ extern "C" void TokenAccessSubjects_TokenAccessSubjects_Subject_1(void)
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[3])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[2])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			// brtrue (structured EH branch)
-			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			// br (handled via structured EH branches)
-			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s4 = 0;
-			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[3])();
-				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			// brtrue (structured EH branch)
-			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			// br (handled via structured EH branches)
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
-			chaos_locals[0] = _s6;
-			_s6 = chaos_locals[0];
-			// brfalse (structured EH branch)
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s7;
-				chaos_static_TokenAccessSubjects_TokenAccessSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
@@ -887,4 +812,26 @@ extern "C" void TokenAccessSubjects_TokenAccessSubjects_Subject_3(void)
 // extern "C" definition for link-time visibility from runtime-entry.cpp
 extern "C" const int kAotMethodCount = 4;
 
-extern "C" void ChaosJitRegisterAll() {}
+// ── JIT Method Entry Table ───────────────────────────────────────────
+// Auto-generated by chaos-il2cpp codegen for --mode jit.
+#include <cstdint>
+#include "jit_registration.h"
+
+static const char kMethodJson_0[] = "{\"methodId\":\"token-access-subjects.token-access-subjects.subject-0\",\"subjectId\":\"TokenAccessSubjects/TokenAccessSubjects::Subject_0:System.Void()\",\"signature\":\"System.Void TokenAccessSubjects::Subject_0()\",\"identity\":{\"assemblyName\":\"TokenAccessSubjects\",\"declaringTypeSubjectId\":\"TokenAccessSubjects/TokenAccessSubjects\",\"definitionSubjectId\":\"TokenAccessSubjects/TokenAccessSubjects::Subject_0:System.Void()\",\"subjectId\":\"TokenAccessSubjects/TokenAccessSubjects::Subject_0:System.Void()\",\"methodId\":\"token-access-subjects.token-access-subjects.subject-0\",\"signature\":\"System.Void TokenAccessSubjects::Subject_0()\"},\"nativeSymbol\":\"TokenAccessSubjects_TokenAccessSubjects_Subject_0\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":10,\"handlerOffset\":11,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"call\",\"opCode\":14,\"ilOffset\":2,\"resultType\":\"Microsoft.Win32.SafeHandles.SafeAccessTokenHandle\",\"callee\":\"System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::get_InvalidHandle:Microsoft.Win32.SafeHandles.SafeAccessTokenHandle()\",\"reference\":{\"assemblyName\":\"System.Security.Principal.Windows\",\"subjectKind\":\"method\",\"subjectId\":\"System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::get_InvalidHandle:Microsoft.Win32.SafeHandles.SafeAccessTokenHandle()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Security.Principal.Windows\",\"subjectId\":\"System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::get_InvalidHandle:Microsoft.Win32.SafeHandles.SafeAccessTokenHandle()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":22,\"ilOffset\":9,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":11,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":13,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"TokenAccessSubjects/TokenAccessSubjects::_exitCode\",\"ilOffset\":14,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"TokenAccessSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"TokenAccessSubjects/TokenAccessSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"TokenAccessSubjects\",\"subjectId\":\"TokenAccessSubjects/TokenAccessSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"TokenAccessSubjects/TokenAccessSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":22,\"ilOffset\":20,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":22,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"TokenAccessSubjects\"}";
+static const char kMethodJson_1[] = "{\"methodId\":\"token-access-subjects.token-access-subjects.subject-1\",\"subjectId\":\"TokenAccessSubjects/TokenAccessSubjects::Subject_1:System.Void()\",\"signature\":\"System.Void TokenAccessSubjects::Subject_1()\",\"identity\":{\"assemblyName\":\"TokenAccessSubjects\",\"declaringTypeSubjectId\":\"TokenAccessSubjects/TokenAccessSubjects\",\"definitionSubjectId\":\"TokenAccessSubjects/TokenAccessSubjects::Subject_1:System.Void()\",\"subjectId\":\"TokenAccessSubjects/TokenAccessSubjects::Subject_1:System.Void()\",\"methodId\":\"token-access-subjects.token-access-subjects.subject-1\",\"signature\":\"System.Void TokenAccessSubjects::Subject_1()\"},\"nativeSymbol\":\"TokenAccessSubjects_TokenAccessSubjects_Subject_1\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":11,\"handlerOffset\":12,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Boolean\",\"callee\":\"System.Private.CoreLib/System.Runtime.InteropServices.SafeHandle::get_IsInvalid:System.Boolean()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Runtime.InteropServices.SafeHandle::get_IsInvalid:System.Boolean()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Runtime.InteropServices.SafeHandle::get_IsInvalid:System.Boolean()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":8,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":23,\"ilOffset\":10,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":12,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":14,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"TokenAccessSubjects/TokenAccessSubjects::_exitCode\",\"ilOffset\":15,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"TokenAccessSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"TokenAccessSubjects/TokenAccessSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"TokenAccessSubjects\",\"subjectId\":\"TokenAccessSubjects/TokenAccessSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"TokenAccessSubjects/TokenAccessSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":23,\"ilOffset\":21,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":23,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"TokenAccessSubjects\"}";
+static const char kMethodJson_2[] = "{\"methodId\":\"token-access-subjects.token-access-subjects.subject-2\",\"subjectId\":\"TokenAccessSubjects/TokenAccessSubjects::Subject_2:System.Void()\",\"signature\":\"System.Void TokenAccessSubjects::Subject_2()\",\"identity\":{\"assemblyName\":\"TokenAccessSubjects\",\"declaringTypeSubjectId\":\"TokenAccessSubjects/TokenAccessSubjects\",\"definitionSubjectId\":\"TokenAccessSubjects/TokenAccessSubjects::Subject_2:System.Void()\",\"subjectId\":\"TokenAccessSubjects/TokenAccessSubjects::Subject_2:System.Void()\",\"methodId\":\"token-access-subjects.token-access-subjects.subject-2\",\"signature\":\"System.Void TokenAccessSubjects::Subject_2()\"},\"nativeSymbol\":\"TokenAccessSubjects_TokenAccessSubjects_Subject_2\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":10,\"handlerOffset\":11,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":2,\"resultType\":\"System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle\",\"callee\":\"System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::.ctor:System.Void()\",\"reference\":{\"assemblyName\":\"System.Security.Principal.Windows\",\"subjectKind\":\"method\",\"subjectId\":\"System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::.ctor:System.Void()\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Security.Principal.Windows\",\"subjectId\":\"System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":7,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":22,\"ilOffset\":9,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":11,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":13,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"TokenAccessSubjects/TokenAccessSubjects::_exitCode\",\"ilOffset\":14,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"TokenAccessSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"TokenAccessSubjects/TokenAccessSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"TokenAccessSubjects\",\"subjectId\":\"TokenAccessSubjects/TokenAccessSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"TokenAccessSubjects/TokenAccessSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":22,\"ilOffset\":20,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":22,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"TokenAccessSubjects\"}";
+static const char kMethodJson_3[] = "{\"methodId\":\"token-access-subjects.token-access-subjects.subject-3\",\"subjectId\":\"TokenAccessSubjects/TokenAccessSubjects::Subject_3:System.Void()\",\"signature\":\"System.Void TokenAccessSubjects::Subject_3()\",\"identity\":{\"assemblyName\":\"TokenAccessSubjects\",\"declaringTypeSubjectId\":\"TokenAccessSubjects/TokenAccessSubjects\",\"definitionSubjectId\":\"TokenAccessSubjects/TokenAccessSubjects::Subject_3:System.Void()\",\"subjectId\":\"TokenAccessSubjects/TokenAccessSubjects::Subject_3:System.Void()\",\"methodId\":\"token-access-subjects.token-access-subjects.subject-3\",\"signature\":\"System.Void TokenAccessSubjects::Subject_3()\"},\"nativeSymbol\":\"TokenAccessSubjects_TokenAccessSubjects_Subject_3\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":15,\"handlerOffset\":16,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldsfld\",\"opCode\":12,\"operand\":\"System.Private.CoreLib/System.IntPtr::Zero\",\"ilOffset\":2,\"resultType\":\"System.IntPtr\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"field\",\"subjectId\":\"System.Private.CoreLib/System.IntPtr::Zero\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.IntPtr::Zero\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"System.Private.CoreLib/System.IntPtr\",\"declaringTypeShape\":1},\"runtimeServiceKind\":4,\"isPreserveSig\":false},{\"op\":\"newobj\",\"opCode\":34,\"ilOffset\":7,\"resultType\":\"System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle\",\"callee\":\"System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::.ctor:System.Void(System.IntPtr)\",\"reference\":{\"assemblyName\":\"System.Security.Principal.Windows\",\"subjectKind\":\"method\",\"subjectId\":\"System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::.ctor:System.Void(System.IntPtr)\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Security.Principal.Windows\",\"subjectId\":\"System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":1,\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":12,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":27,\"ilOffset\":14,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":16,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":18,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"TokenAccessSubjects/TokenAccessSubjects::_exitCode\",\"ilOffset\":19,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"TokenAccessSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"TokenAccessSubjects/TokenAccessSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"TokenAccessSubjects\",\"subjectId\":\"TokenAccessSubjects/TokenAccessSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"TokenAccessSubjects/TokenAccessSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":27,\"ilOffset\":25,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":27,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"TokenAccessSubjects\"}";
+
+extern "C" const JitMethodEntry kChaosJitMethodEntries[4] =
+{
+    { kMethodJson_0, 3404u, 0x00000003u, 0u },
+    { kMethodJson_1, 3269u, 0x00000004u, 0u },
+    { kMethodJson_2, 3271u, 0x00000005u, 0u },
+    { kMethodJson_3, 3917u, 0x00000006u, 0u }
+};
+
+extern "C" const uint32_t kChaosJitMethodEntryCount = 4u;
+
+extern "C" void ChaosJitRegisterAll() {
+    RegisterJitMethods(kChaosJitMethodEntries, kChaosJitMethodEntryCount);
+}

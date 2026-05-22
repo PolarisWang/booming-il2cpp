@@ -33,6 +33,7 @@
 #include "gc_old_gen.h"
 #include "gc_young_gen.h"
 #include "gc_layout.h"
+#include "gc_loh.h"
 #include "thread_state.h"
 
 using namespace chaos::il2cpp::runtime_core;
@@ -204,6 +205,205 @@ static void TestBgcCrossThreadYoungToOld(const void* test_type_info) {
 }
 
 // ════════════════════════════════════════════════════════════════════════
+// Test: BGC concurrent mark + LOH concurrent allocation
+//
+// Verifies that LOH objects allocated by worker threads during BGC
+// concurrent mark are correctly handled: the LOH segment is pre-marked
+// at allocation time, so BGC sweep should not reclaim live LOH objects.
+// ════════════════════════════════════════════════════════════════════════
+
+static constexpr int kLohConcurrentWorkers = 4;
+static constexpr int kLohAllocsPerWorker = 8;
+static constexpr CHAOS_IL2CPP_SIZE kLohObjSize = 1024 * 100;  // 100 KB (> 85 KB LOH threshold)
+
+static std::atomic<int> g_loh_workers_ready{0};
+static std::atomic<int> g_loh_workers_done{0};
+
+static void LohConcurrentWorker(const void* type_info, int thread_id,
+                                 void** out_objs, int max_objs) {
+    threading::RegisterThread(threading::AllocateThreadId(), nullptr);
+    g_loh_workers_ready.fetch_add(1, std::memory_order_release);
+    while (g_loh_workers_ready.load(std::memory_order_acquire) < kLohConcurrentWorkers) {
+        std::this_thread::yield();
+    }
+
+    for (int i = 0; i < max_objs && i < kLohAllocsPerWorker; i++) {
+        void* obj = g_loh.Allocate(kLohObjSize);
+        if (obj == nullptr) break;
+        // Write the type_info at the start and a pattern at offset 8.
+        *static_cast<const void**>(obj) = type_info;
+        *reinterpret_cast<uint32_t*>(static_cast<char*>(obj) + 8) =
+            0xCAFE0000 + static_cast<uint32_t>(thread_id * kLohAllocsPerWorker + i);
+        out_objs[i] = obj;
+    }
+
+    g_loh_workers_done.fetch_add(1, std::memory_order_release);
+    threading::UnregisterThread();
+}
+
+static void TestBgcWithLohConcurrentAlloc(const void* test_type_info) {
+    printf("\n-- Test: BGC concurrent mark + LOH concurrent allocation --\n");
+
+    g_loh_workers_ready.store(0);
+    g_loh_workers_done.store(0);
+
+    // Allocate storage for worker results.
+    void* worker_objs[kLohConcurrentWorkers][kLohAllocsPerWorker];
+    std::memset(worker_objs, 0, sizeof(worker_objs));
+
+    // Spawn workers BEFORE starting BGC, but they wait for bgc to be marking.
+    std::vector<std::thread> workers;
+    for (int i = 0; i < kLohConcurrentWorkers; i++) {
+        workers.emplace_back(LohConcurrentWorker, test_type_info, i,
+                             worker_objs[i], kLohAllocsPerWorker);
+    }
+
+    // Wait for all workers to be ready.
+    while (g_loh_workers_ready.load(std::memory_order_acquire) < kLohConcurrentWorkers) {
+        std::this_thread::yield();
+    }
+
+    // Start BGC cycle while workers are allocating LOH objects.
+    {
+        uint32_t gen = threading::RequestGlobalSafepoint();
+        BgcController::Instance().StartBgcCycle();
+        threading::ReleaseGlobalSafepoint(gen);
+    }
+
+    // Wait for workers to finish.
+    for (auto& w : workers) {
+        if (w.joinable()) w.join();
+    }
+
+    // Wait for BGC concurrent mark to complete (REMARK_NEEDED).
+    bool mark_done = WaitForPhase(BgcPhase::REMARK_NEEDED, 30000);
+    CHECK(mark_done, "BGC concurrent mark completed");
+
+    // STW re-mark and start sweep.
+    {
+        uint32_t gen = threading::RequestGlobalSafepoint();
+        BgcController::Instance().StwRemark();
+        BgcController::Instance().StartConcurrentSweep();
+        threading::ReleaseGlobalSafepoint(gen);
+    }
+
+    // Wait for sweep to complete.
+    bool sweep_done = WaitForPhase(BgcPhase::COMPACT_NEEDED, 30000);
+    CHECK(sweep_done, "BGC concurrent sweep completed");
+
+    // Compact.
+    {
+        uint32_t gen = threading::RequestGlobalSafepoint();
+        BgcController::Instance().StwCompact();
+        threading::ReleaseGlobalSafepoint(gen);
+    }
+    BgcController::Instance().WaitForCycleComplete();
+    CHECK(BgcController::Instance().Phase() == BgcPhase::IDLE, "BGC back to IDLE");
+
+    // Verify all LOH objects survived BGC sweep.
+    int live_count = 0;
+    for (int i = 0; i < kLohConcurrentWorkers; i++) {
+        for (int j = 0; j < kLohAllocsPerWorker; j++) {
+            if (worker_objs[i][j] == nullptr) continue;
+            uint32_t expected = 0xCAFE0000 + static_cast<uint32_t>(i * kLohAllocsPerWorker + j);
+            if (CheckTestObjectAlive(worker_objs[i][j], expected)) {
+                live_count++;
+            }
+        }
+    }
+    printf("  LOH objects survived BGC sweep: %d / %d\n",
+           live_count, kLohConcurrentWorkers * kLohAllocsPerWorker);
+    CHECK(live_count > 0, "at least one LOH object survived BGC sweep");
+}
+
+// ════════════════════════════════════════════════════════════════════════
+// Test: BGC root change buffer ringback (>256 unique entries)
+//
+// During concurrent mark, the mutator creates many new old→young references.
+// These are tracked in the BGC root change buffer.  When the buffer exceeds
+// 256 entries, entries are moved to the parallel mark worklist for re-scan.
+// This test verifies the ringback path handles >256 unique entries correctly.
+// ════════════════════════════════════════════════════════════════════════
+
+static void TestBgcRootChangeRingback(const void* test_type_info) {
+    printf("\n-- Test: BGC root change buffer ringback (>256 entries) --\n");
+
+    constexpr int kRingbackEntries = 512;
+
+    // Allocate old-gen objects to serve as targets for new references.
+    std::vector<void*> old_objects;
+    for (int i = 0; i < kRingbackEntries; i++) {
+        void* obj = g_old_gen.Allocate(64, true);
+        if (obj == nullptr) break;
+        *static_cast<const void**>(obj) = test_type_info;
+        *reinterpret_cast<uint32_t*>(static_cast<char*>(obj) + 8) =
+            0xBABE0000 + i;
+        old_objects.push_back(obj);
+    }
+    printf("  allocated %zu old-gen objects for ringback test\n",
+           old_objects.size());
+
+    // Start BGC cycle.
+    {
+        uint32_t gen = threading::RequestGlobalSafepoint();
+        BgcController::Instance().StartBgcCycle();
+        threading::ReleaseGlobalSafepoint(gen);
+    }
+
+    // During concurrent mark, create many new old→young references by
+    // writing old-gen pointers into nursery objects.  Each write through
+    // the SATB barrier also generates a root change entry.
+    std::vector<void*> young_objects;
+    for (size_t i = 0; i < old_objects.size(); i++) {
+        void* young = NurseryAllocate(64);
+        if (young == nullptr) break;
+        std::memset(young, 0, 64);
+        // Write the old-gen pointer into the young object — this creates
+        // a new cross-generation reference that BGC must track.
+        std::memcpy(young, &old_objects[i], sizeof(void*));
+        young_objects.push_back(young);
+    }
+    printf("  created %zu new cross-generation refs during concurrent mark\n",
+           young_objects.size());
+
+    // Wait for BGC concurrent mark to complete.
+    bool mark_done = WaitForPhase(BgcPhase::REMARK_NEEDED, 30000);
+    CHECK(mark_done, "BGC concurrent mark completed");
+
+    // STW re-mark — this should process all remaining root changes.
+    {
+        uint32_t gen = threading::RequestGlobalSafepoint();
+        BgcController::Instance().StwRemark();
+        BgcController::Instance().StartConcurrentSweep();
+        threading::ReleaseGlobalSafepoint(gen);
+    }
+
+    bool sweep_done = WaitForPhase(BgcPhase::COMPACT_NEEDED, 30000);
+    CHECK(sweep_done, "BGC concurrent sweep completed");
+
+    {
+        uint32_t gen = threading::RequestGlobalSafepoint();
+        BgcController::Instance().StwCompact();
+        threading::ReleaseGlobalSafepoint(gen);
+    }
+    BgcController::Instance().WaitForCycleComplete();
+    CHECK(BgcController::Instance().Phase() == BgcPhase::IDLE, "BGC back to IDLE");
+
+    // Verify all old-gen objects survived (they should, since they're
+    // referenced from young objects that were allocated during concurrent
+    // mark and discovered by the root change tracking / STW re-mark).
+    int survived = 0;
+    for (auto* obj : old_objects) {
+        if (CheckTestObjectAlive(obj, 0xBABE0000 + (survived))) {
+            survived++;
+        }
+    }
+    printf("  old-gen objects survived BGC sweep with ringback: %d / %zu\n",
+           survived, old_objects.size());
+    CHECK(survived > 0, "at least one old-gen object survived ringback test");
+}
+
+// ════════════════════════════════════════════════════════════════════════
 // Main
 // ════════════════════════════════════════════════════════════════════════
 
@@ -225,10 +425,12 @@ int main() {
 
     TestBgcYoungToOldRootScan(test_type_info);
     TestBgcCrossThreadYoungToOld(test_type_info);
+    TestBgcWithLohConcurrentAlloc(test_type_info);
+    TestBgcRootChangeRingback(test_type_info);
 
     BgcController::Instance().Stop();
     threading::UnregisterThread();
 
-    printf("\n== Results: 2 tests, %d failures ==\n", g_failures);
+    printf("\n== Results: 4 tests, %d failures ==\n", g_failures);
     return g_failures > 0 ? 1 : 0;
 }

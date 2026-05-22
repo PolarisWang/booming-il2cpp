@@ -6,11 +6,12 @@
 ///   3. GC.Collect during active Monitor contention
 ///   4. Verifies GC_TRANSITION correctness on all blocking paths
 ///
-/// NOTE: This test is also a regression probe.  The "unlock of unowned mutex"
-/// abort that fires under heavy stress (16+ threads) is a pre-existing race in
-/// the thin-lock→inflation transition path (MonitorExit line 100 in monitor.cpp
-/// calls sb->mutex.unlock() without ownership check).  Low-thread-count configs
-/// (≤8 threads) avoid this race and pass cleanly.
+/// NOTE: This test also validates the owner_tid ownership check in MonitorExit.
+/// The "unlock of unowned mutex" abort that previously fired under heavy stress
+/// (16+ threads) was caused by a thin-lock→inflation race where a thin-lock
+/// holder would call sb->mutex.unlock() on a SyncBlock it didn't own. The fix
+/// tracks owner_tid atomically in SyncBlock and skips the unlock in MonitorExit
+/// when the current thread doesn't own the mutex.
 
 #include <cstdio>
 #include <cstdlib>
@@ -53,8 +54,8 @@ struct FakeObjectHeader {
 static FakeTypeInfoHot  s_fake_type_info;
 static FakeObjectHeader s_monitors[4];
 
-static constexpr int kThreads = 8;
-static constexpr int kIterations = 200;
+static constexpr int kThreads = 16;
+static constexpr int kIterations = 500;
 static std::atomic<int> s_pass{0};
 static std::atomic<bool> s_running{true};
 

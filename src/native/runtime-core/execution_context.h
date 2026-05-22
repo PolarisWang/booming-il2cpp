@@ -47,6 +47,18 @@ void ExecutionContextRun(ExecutionContext* ctx, void (*callback)(void*), void* s
 /// Free an ExecutionContext previously returned by ExecutionContextCapture.
 void ExecutionContextFree(ExecutionContext* ctx) noexcept;
 
+/// Suppress ExecutionContext flow for the current thread.
+/// Returns the previous suppress depth (cookie for RestoreFlow).
+/// While suppressed, ExecutionContextCapture() returns nullptr.
+int32_t ExecutionContextSuppressFlow() noexcept;
+
+/// Restore a previously suppressed ExecutionContext flow.
+/// @param cookie  The return value from a prior ExecutionContextSuppressFlow() call.
+void ExecutionContextRestoreFlow(int32_t cookie) noexcept;
+
+/// Check if ExecutionContext flow is currently suppressed on this thread.
+bool ExecutionContextIsFlowSuppressed() noexcept;
+
 /// Set an AsyncLocal value for the current thread.
 /// @param key  Stable ID of the AsyncLocal<T> instance.
 /// @param value  Boxed value (0 to clear).
@@ -67,5 +79,8 @@ extern "C" void chaos_execution_context_run(
     void (*callback)(void*), void* state) noexcept;
 extern "C" void chaos_execution_context_free(
     chaos::il2cpp::runtime_core::threading::ExecutionContext* ctx) noexcept;
+extern "C" CHAOS_IL2CPP_INT32 chaos_execution_context_suppress_flow() noexcept;
+extern "C" void chaos_execution_context_restore_flow(CHAOS_IL2CPP_INT32 cookie) noexcept;
+extern "C" bool chaos_execution_context_is_flow_suppressed() noexcept;
 
 #endif  // CHAOS_IL2CPP_EXECUTION_CONTEXT_H_

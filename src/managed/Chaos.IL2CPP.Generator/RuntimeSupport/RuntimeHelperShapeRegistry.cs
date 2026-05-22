@@ -6600,6 +6600,59 @@ public sealed partial class NativeAotLoweringPlanner
                 }), CreateInt32AbiSlot(),
                 new HashSet<int> { 0, 1, 2, 3 });
 
+            // ── Enum InlineShapeDescriptor registrations ─────────────────────
+            // InlineShapeDescriptor takes priority over GenericShapeDescriptor
+            // and SimpleForward in the call-target resolution chain.  These
+            // replace extern "C" function calls with C++ lambdas that use the
+            // thread-local enum string cache (zero alloc on cache hit) or a
+            // direct bit-test (HasFlag, no function call at all).
+
+            // System.Enum.ToString() — instance method, 0 declared params
+            // Tries the thread-local enum string cache first; on cache hit,
+            // returns a previously-allocated string (zero GC allocation).
+            // On cache miss, falls back to ChaosEnumToString which populates
+            // the cache for subsequent calls.  Repeated ToString calls on the
+            // same enum type (common in benchmarks/loops) hit the cache after
+            // the first call — matching RyuJIT's cached-string behavior.
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Enum",
+                MethodName: "ToString",
+                Resolver: static (callee, paramTypes) =>
+                {
+                    if (paramTypes.Count != 0) return null;
+                    return """
+                        ([&]() -> CHAOS_IL2CPP_INTPTR {
+                            CHAOS_IL2CPP_INT64 _v = 0;
+                            std::memcpy(&_v, reinterpret_cast<const void*>({0} + 16), sizeof(_v));
+                            auto _cached = lookup_cached_enum_name(_v);
+                            return _cached != 0 ? _cached : ChaosEnumToString({0});
+                        })()
+                        """.Replace("\r\n", "\n").Trim();
+                })
+            { IsInstanceMethod = true });
+
+            // System.Enum.HasFlag(System.Enum) — instance method, 1 declared param
+            // Replaces function call with inline bit test: (this & flag) == flag.
+            // Zero function call overhead, zero GC allocation.  The existing
+            // runtime path goes through generic dispatch (no shape match at all),
+            // so this is a substantial improvement over the status quo.
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Enum",
+                MethodName: "HasFlag",
+                Resolver: static (callee, paramTypes) =>
+                {
+                    if (paramTypes.Count != 1) return null;
+                    return """
+                        ([&]() -> CHAOS_IL2CPP_INT32 {
+                            CHAOS_IL2CPP_INT64 _v = 0, _f = 0;
+                            std::memcpy(&_v, reinterpret_cast<const void*>({0} + 16), sizeof(_v));
+                            std::memcpy(&_f, reinterpret_cast<const void*>({1} + 16), sizeof(_f));
+                            return (_v & _f) == _f ? 1 : 0;
+                        })()
+                        """.Replace("\r\n", "\n").Trim();
+                })
+            { IsInstanceMethod = true });
+
             // ── Enum GenericShapeDescriptor registrations ──────────────────
             // DirectNativeSymbol eliminates kChaosExternalRuntimeFnTable
             // dispatch, emitting direct calls like ChaosEnumGetName(args)

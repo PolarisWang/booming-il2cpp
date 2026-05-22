@@ -27,7 +27,7 @@ _HERE = Path(__file__).resolve().parent
 _REPO_ROOT = _HERE.parents[4]
 sys.path.insert(0, str(_HERE))
 
-from test_code_generator import (_METHOD_OVERRIDES, _SKIP_AUDIT, _build_call_expr, _build_call_expr_with_refs,
+from test_code_generator import (_METHOD_OVERRIDES, _build_call_expr, _build_call_expr_with_refs,
                                  _build_call_expr_with_ref_locals, _cast_return_to_int,
                                  _default_expr, _get_skip_reason, _has_blocked_param, _has_ref_param,
                                  _is_auto_callable,
@@ -648,7 +648,7 @@ def _generate_csproj(
             f"    {namespace_part}\n"
             "    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>\n"
             "    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>\n"
-            "    <NoWarn>$(NoWarn);SYSLIB0011;SYSLIB0050</NoWarn>\n"
+            "    <NoWarn>$(NoWarn);SYSLIB0011;SYSLIB0020;SYSLIB0050;CS8602;CS8604</NoWarn>\n"
             "  </PropertyGroup>\n"
             "  <ItemGroup>\n"
             f'    <Compile Include="{cs_file_name}" />\n'

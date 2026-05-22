@@ -10,6 +10,8 @@
 #include "gc_card_table.h"
 #include "generated_code_compat.h"  // chaos_managed_exception for Thread.Abort throw
 
+#include "forbid_suspend.h"
+
 #if defined(_WIN32) || defined(_WIN64)
     #include <windows.h>
     #include <intrin.h>
@@ -48,6 +50,8 @@ static constexpr uint32_t kT4RbpToFramePtr = 16 + 32 + kT4FrameSize;  // 880
 
 thread_local ManagedThread* tls_this_thread  = nullptr;
 thread_local int32_t        tls_this_thread_id = kMainThreadId;
+
+thread_local int32_t        tls_forbid_suspend_depth = 0;
 
 namespace {
 
@@ -300,6 +304,11 @@ void SafepointPoll() noexcept {
             thread->pending_abort.store(false, std::memory_order_release);
             throw chaos_managed_exception{kManagedExceptionThreadAbort};
         }
+        // pending_interrupt check (lower priority than abort).
+        if (thread->pending_interrupt.load(std::memory_order_acquire)) {
+            thread->pending_interrupt.store(false, std::memory_order_release);
+            throw chaos_managed_exception{kManagedExceptionThreadInterrupt};
+        }
         return;
     }
 
@@ -311,6 +320,15 @@ void SafepointPoll() noexcept {
     // Preemptive mode: confirm and return immediately.
     // The thread is in native code and will not access managed heap.
     if (thread->gc_mode.load(std::memory_order_acquire) == kGcModePreemptive) {
+        return;
+    }
+
+    // ForbidSuspend is active: acknowledge but don't block.
+    // The critical section must complete without waiting. The GC proceeds
+    // thinking this thread is at a safe point; when the ForbidSuspendScope
+    // exits, the next SafepointPoll will properly wait if the safepoint
+    // is still active.
+    if (tls_forbid_suspend_depth > 0) [[unlikely]] {
         return;
     }
 
@@ -430,9 +448,17 @@ extern "C" uint32_t RequestGlobalSafepoint() noexcept {
             // Must call SafepointPoll() to acknowledge a pending safepoint
             // from the owner; otherwise this thread and the owner deadlock
             // (owner waits for our ack, we wait for the owner to release).
+            //
+            // ForbidSuspendScope prevents SafepointPoll from blocking if
+            // the owner requests a new safepoint while we're waiting for
+            // ownership. Without this, we'd wait on suspend_event and never
+            // acquire the safepoint to release it.
             for (;;) {
-                SafepointPoll();
-                _mm_pause();
+                {
+                    ForbidSuspendScope forbid;
+                    SafepointPoll();
+                    _mm_pause();
+                }
                 expected = nullptr;
                 if (s_safepoint_owner.compare_exchange_strong(expected, self,
                         std::memory_order_acq_rel, std::memory_order_acquire)) {

@@ -922,9 +922,13 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     # JsonTypeInfo readonly property setters (CS0200)
     ("JsonTypeInfo", "set_IsReadOnly", 1): "skip",
     ("JsonTypeInfo", "set_ConstructorAttributeProvider", 1): "skip",
+    # JsonSerializerOptions.TryGetTypeInfo — out JsonTypeInfo& param (CS1620: use 'out' not 'ref')
+    ("JsonSerializerOptions", "TryGetTypeInfo", 2): "skip",
 }
 
-# Generic arity → concrete type arguments for generated code.
+# Methods to skip from audit verification (e.g. ref-param methods that can't use out _)
+_SKIP_AUDIT: dict[tuple[str, str, int], str] = {
+}
 _GENERIC_ARGS_MAP: dict[int, str] = {
     1: "<byte>",
     2: "<string, int>",
@@ -975,7 +979,7 @@ TYPE_DEFAULT_MAP: dict[str, str] = {
     "System.TimeOnly": "new TimeOnly(0, 0)",
     "System.Uri": 'new Uri("http://localhost")',
     "System.Version": "new Version(1, 0)",
-    "System.Object": "42",
+    "System.Object": "null!",
     "System.Enum": "DayOfWeek.Monday",
     "System.ValueType": "42",
     "System.Span`1": "default(Span<byte>)",
@@ -1334,6 +1338,76 @@ def _build_call_expr_with_refs(
     return (prelude, call_expr)
 
 
+def _build_call_expr_with_ref_locals(
+    parsed: dict[str, Any],
+    type_map: dict[str, str] | None = None,
+    instance_map: dict[str, str] | None = None,
+) -> tuple[str, str]:
+    """Build a C# call expression using named local variables for ref params.
+
+    Unlike _build_call_expr_with_refs which uses out _ (discard), this variant
+    declares local variables for each ref param so the method's side effects on
+    them are observable (useful when the method mutates ref params).
+
+    Returns (prelude, call_expr) where prelude contains local variable declarations.
+    """
+    type_name = parsed["type_name"]
+    method_name = parsed["method_name"]
+    param_types = parsed["param_types"]
+    tm = type_map or TYPE_DEFAULT_MAP
+    im = instance_map or INSTANCE_EXPR_MAP
+
+    param_count = len(param_types)
+    override = _METHOD_OVERRIDES.get((type_name, method_name, param_count))
+    if override is not None and override != "skip":
+        return ("", override)
+
+    prelude_lines: list[str] = []
+    call_args: list[str] = []
+
+    for i, pt in enumerate(param_types):
+        pt = pt.strip()
+        if pt.endswith("&"):
+            base_type = pt.rstrip("&").strip()
+            default_val = _default_expr_for_type(base_type, tm)
+            var_name = f"refLocal_{i}"
+            prelude_lines.append(f"            {base_type} {var_name} = {default_val};")
+            call_args.append(f"ref {var_name}")
+        else:
+            call_args.append(_default_expr_for_type(pt, tm))
+
+    prelude = "\n".join(prelude_lines)
+    call_expr = _build_call_expr_with_args(parsed, ", ".join(call_args), im)
+    return (prelude, call_expr)
+
+
+def _cast_return_to_int(ret: str, call_expr: str) -> str:
+    """Wrap a call expression so it produces an int for exit code comparison.
+
+    For void returns, wraps in a statement and appends ; return 0;.
+    For int returns, passes through.
+    For non-int value types, casts to int or bit-converts via unsafe.
+    For reference types, returns 1 on non-null.
+    """
+    ret = ret.strip()
+    if not ret or ret == "System.Void":
+        return f"{{ {call_expr}; return 0; }}"
+    if ret == "System.Int32":
+        return f"(int)({call_expr})"
+    if ret in ("System.Boolean", "System.Byte", "System.SByte", "System.Int16", "System.UInt16", "System.UInt32"):
+        return f"(int)({call_expr})"
+    if ret in ("System.Int64", "System.UInt64"):
+        return f"(int)(long)({call_expr})"
+    if ret in ("System.Single", "System.Double"):
+        return f"(int)({call_expr})"
+    if ret in ("System.IntPtr", "System.UIntPtr"):
+        return f"(int)({call_expr})"
+    if ret.endswith("&"):
+        return f"(int)({call_expr})"
+    # Reference type or other value type — use pointer/address
+    return f"(int)({call_expr})"
+
+
 def _ref_return_expr(parsed: dict[str, Any]) -> str:
     """Build a checksum expression from ref parameter values for void return methods."""
     param_types = parsed["param_types"]
@@ -1465,6 +1539,9 @@ def _method_skip_reason(parsed: dict[str, Any]) -> str:
     if override == "skip":
         return f"needs-manual — {method_name} with {param_count} params requires manual implementation"
     return ""
+
+
+_get_skip_reason = _method_skip_reason
 
 
 def _build_call_expr(

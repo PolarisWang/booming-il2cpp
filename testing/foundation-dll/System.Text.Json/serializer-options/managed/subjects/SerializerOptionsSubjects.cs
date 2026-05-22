@@ -61,7 +61,7 @@ public static partial class SerializerOptionsSubjects
     // [6] System.Text.Json/System.Text.Json.JsonSerializerOptions::AddContext{TContext}:System.Void()
     public static void Subject_6()
     {
-        // TODO: System.Text.Json/System.Text.Json.JsonSerializerOptions::AddContext{TContext}:System.Void() could not be auto-generated
+        // needs-manual — AddContext{TContext} with 0 params requires manual implementation: System.Text.Json/System.Text.Json.JsonSerializerOptions::AddContext{TContext}:System.Void()
     }
 
     // [7] System.Text.Json/System.Text.Json.JsonSerializerOptions::get_AllowDuplicateProperties:System.Boolean()
@@ -513,8 +513,7 @@ public static partial class SerializerOptionsSubjects
     // [71] System.Text.Json/System.Text.Json.JsonSerializerOptions::TryGetTypeInfo:System.Boolean(System.Type,System.Text.Json.Serialization.Metadata.JsonTypeInfo&)
     public static void Subject_71()
     {
-        try { if (((default(JsonSerializerOptions)!.TryGetTypeInfo(typeof(byte), out _)) ? 1 : 0) != ((default(JsonSerializerOptions)!.TryGetTypeInfo(typeof(byte), out _)) ? 1 : 0)) _exitCode = 1; }
-        catch { _exitCode = 1; }
+        // needs-manual — TryGetTypeInfo with 2 params requires manual implementation: System.Text.Json/System.Text.Json.JsonSerializerOptions::TryGetTypeInfo:System.Boolean(System.Type,System.Text.Json.Serialization.Metadata.JsonTypeInfo&)
     }
 
     // [72] System.Text.Json/System.Text.Json.JsonSerializerOptions::.ctor:System.Void()

@@ -23,14 +23,14 @@
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 1,
+      "localCount": 0,
       "exceptionRegionCount": 1,
       "exceptionRegions": [
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 39,
-          "handlerOffset": 40,
+          "tryLength": 10,
+          "handlerOffset": 11,
           "handlerLength": 11,
           "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
@@ -62,179 +62,30 @@
           "isPreserveSig": false
         },
         {
-          "op": "callvirt",
-          "opCode": 15,
+          "op": "pop",
+          "opCode": 47,
           "ilOffset": 7,
-          "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 12,
-          "resultType": "Microsoft.Win32.SafeHandles.SafeAccessTokenHandle",
-          "callee": "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::get_InvalidHandle:Microsoft.Win32.SafeHandles.SafeAccessTokenHandle()",
-          "reference": {
-            "assemblyName": "System.Security.Principal.Windows",
-            "subjectKind": "method",
-            "subjectId": "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::get_InvalidHandle:Microsoft.Win32.SafeHandles.SafeAccessTokenHandle()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Security.Principal.Windows",
-            "subjectId": "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::get_InvalidHandle:Microsoft.Win32.SafeHandles.SafeAccessTokenHandle()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 17,
-          "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 22,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 24,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 25,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 27,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 28,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 37,
-          "ilOffset": 29,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 31,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "TokenAccessSubjects/TokenAccessSubjects::_exitCode",
-          "ilOffset": 32,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "TokenAccessSubjects",
-            "subjectKind": "field",
-            "subjectId": "TokenAccessSubjects/TokenAccessSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "TokenAccessSubjects",
-            "subjectId": "TokenAccessSubjects/TokenAccessSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "TokenAccessSubjects/TokenAccessSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
           "isPreserveSig": false
         },
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 51,
-          "ilOffset": 38,
+          "operand": 22,
+          "ilOffset": 9,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 40,
+          "ilOffset": 11,
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 42,
+          "ilOffset": 13,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -242,7 +93,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "TokenAccessSubjects/TokenAccessSubjects::_exitCode",
-          "ilOffset": 43,
+          "ilOffset": 14,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "TokenAccessSubjects",
@@ -268,15 +119,15 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 51,
-          "ilOffset": 49,
+          "operand": 22,
+          "ilOffset": 20,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 51,
+          "ilOffset": 22,
           "isPreserveSig": false
         }
       ],
@@ -311,14 +162,14 @@
       },
       "parameterCount": 0,
       "parameterAbis": [],
-      "localCount": 1,
+      "localCount": 0,
       "exceptionRegionCount": 1,
       "exceptionRegions": [
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 43,
-          "handlerOffset": 44,
+          "tryLength": 11,
+          "handlerOffset": 12,
           "handlerLength": 11,
           "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
@@ -357,200 +208,30 @@
           "isPreserveSig": false
         },
         {
-          "op": "brtrue",
-          "opCode": 18,
-          "operand": 13,
+          "op": "pop",
+          "opCode": 47,
           "ilOffset": 8,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 10,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 14,
-          "ilOffset": 11,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 13,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldnull",
-          "opCode": 5,
-          "ilOffset": 14,
-          "resultType": "System.Object",
-          "isPreserveSig": false
-        },
-        {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 15,
-          "resultType": "System.Boolean",
-          "callee": "System.Private.CoreLib/System.Runtime.InteropServices.SafeHandle::get_IsInvalid:System.Boolean()",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.SafeHandle::get_IsInvalid:System.Boolean()"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Runtime.InteropServices.SafeHandle::get_IsInvalid:System.Boolean()",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brtrue",
-          "opCode": 18,
-          "operand": 25,
-          "ilOffset": 20,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 22,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 26,
-          "ilOffset": 23,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 25,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 26,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 28,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ceq",
-          "opCode": 31,
-          "ilOffset": 29,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stloc",
-          "opCode": 8,
-          "operand": 0,
-          "ilOffset": 31,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldloc",
-          "opCode": 7,
-          "operand": 0,
-          "ilOffset": 32,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brfalse",
-          "opCode": 19,
-          "operand": 41,
-          "ilOffset": 33,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 35,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "stsfld",
-          "opCode": 13,
-          "operand": "TokenAccessSubjects/TokenAccessSubjects::_exitCode",
-          "ilOffset": 36,
-          "resultType": "System.Void",
-          "reference": {
-            "assemblyName": "TokenAccessSubjects",
-            "subjectKind": "field",
-            "subjectId": "TokenAccessSubjects/TokenAccessSubjects::_exitCode"
-          },
-          "targetReference": {
-            "kind": 2,
-            "assemblyName": "TokenAccessSubjects",
-            "subjectId": "TokenAccessSubjects/TokenAccessSubjects::_exitCode",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeSubjectId": "TokenAccessSubjects/TokenAccessSubjects",
-            "declaringTypeShape": 1,
-            "fieldTypeSubjectId": "System.Int32"
-          },
-          "runtimeServiceKind": 5,
           "isPreserveSig": false
         },
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 55,
-          "ilOffset": 42,
+          "operand": 23,
+          "ilOffset": 10,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 44,
+          "ilOffset": 12,
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 46,
+          "ilOffset": 14,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -558,7 +239,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "TokenAccessSubjects/TokenAccessSubjects::_exitCode",
-          "ilOffset": 47,
+          "ilOffset": 15,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "TokenAccessSubjects",
@@ -584,15 +265,15 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 55,
-          "ilOffset": 53,
+          "operand": 23,
+          "ilOffset": 21,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 55,
+          "ilOffset": 23,
           "isPreserveSig": false
         }
       ],

@@ -30,24 +30,6 @@
   ],
   "dispatchFacts": [
     {
-      "methodSubjectId": "TokenAccessSubjects/TokenAccessSubjects::Subject_0:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "TokenAccessSubjects/TokenAccessSubjects::Subject_0:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "TokenAccessSubjects/TokenAccessSubjects::Subject_1:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.SafeHandle::get_IsInvalid:System.Boolean()",
-      "devirtualized": false
-    },
-    {
       "methodSubjectId": "TokenAccessSubjects/TokenAccessSubjects::Subject_1:System.Void()",
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.SafeHandle::get_IsInvalid:System.Boolean()",

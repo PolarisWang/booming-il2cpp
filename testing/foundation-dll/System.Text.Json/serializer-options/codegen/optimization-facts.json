@@ -1241,18 +1241,6 @@
       "dispatchKind": "callvirt",
       "targetSubjectId": "System.Text.Json/JsonSerializerOptions::set_WriteIndented:System.Void(System.Boolean)",
       "devirtualized": false
-    },
-    {
-      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_71:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Text.Json/JsonSerializerOptions::TryGetTypeInfo:System.Boolean(System.Type,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u0026)",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_71:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Text.Json/JsonSerializerOptions::TryGetTypeInfo:System.Boolean(System.Type,System.Text.Json.Serialization.Metadata.JsonTypeInfo\u0026)",
-      "devirtualized": false
     }
   ],
   "layoutFacts": [
@@ -1606,11 +1594,6 @@
     },
     {
       "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_70:System.Void()",
-      "handlingKind": "catch",
-      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
-    },
-    {
-      "methodSubjectId": "SerializerOptionsSubjects/SerializerOptionsSubjects::Subject_71:System.Void()",
       "handlingKind": "catch",
       "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     },

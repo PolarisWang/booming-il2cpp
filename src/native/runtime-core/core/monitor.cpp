@@ -1,6 +1,7 @@
 // monitor.cpp — Monitor (lock) implementation
 #include "wait_handle.h"
 #include "thread_state.h"
+#include "generated_code_compat.h"
 #include <thread>
 
 namespace chaos::il2cpp::runtime_core {
@@ -19,7 +20,11 @@ bool MonitorEnter(void* monitor_target) {
     for (;;) {
         if ((sync & kSyncInflatedBit) != 0) {
             auto* sb = reinterpret_cast<SyncBlock*>(sync & ~3ull);
-            if (sb != nullptr) { sb->mutex.lock(); return true; }
+            if (sb != nullptr) {
+                sb->mutex.lock();
+                sb->owner_tid.store(threading::GetCurrentThreadId(), std::memory_order_relaxed);
+                return true;
+            }
             return false;
         }
 
@@ -57,7 +62,11 @@ bool MonitorEnter(void* monitor_target) {
             }
             if ((sync & kSyncInflatedBit) != 0) {
                 auto* sb = reinterpret_cast<SyncBlock*>(sync & ~3ull);
-                if (sb != nullptr) { sb->mutex.lock(); return true; }
+                if (sb != nullptr) {
+                    sb->mutex.lock();
+                    sb->owner_tid.store(threading::GetCurrentThreadId(), std::memory_order_relaxed);
+                    return true;
+                }
                 return false;
             }
         }
@@ -76,7 +85,11 @@ bool MonitorEnter(void* monitor_target) {
             }
             if ((sync & kSyncInflatedBit) != 0) {
                 auto* sb = reinterpret_cast<SyncBlock*>(sync & ~3ull);
-                if (sb != nullptr) { sb->mutex.lock(); return true; }
+                if (sb != nullptr) {
+                    sb->mutex.lock();
+                    sb->owner_tid.store(threading::GetCurrentThreadId(), std::memory_order_relaxed);
+                    return true;
+                }
                 return false;
             }
         }
@@ -97,7 +110,17 @@ bool MonitorExit(void* monitor_target) {
 
     if ((sync & kSyncInflatedBit) != 0) {
         auto* sb = reinterpret_cast<SyncBlock*>(sync & ~3ull);
-        if (sb != nullptr) { sb->mutex.unlock(); return true; }
+        if (sb != nullptr) {
+            // Ownership check: if this thread doesn't own sb->mutex, it was a
+            // thin-lock holder whose lock was absorbed by concurrent inflation.
+            // The inflater owns the mutex on our behalf — skip the unlock.
+            int32_t expected_tid = sb->owner_tid.load(std::memory_order_acquire);
+            if (expected_tid != 0 && expected_tid == threading::GetCurrentThreadId()) {
+                sb->owner_tid.store(0, std::memory_order_release);
+                sb->mutex.unlock();
+            }
+            return true;
+        }
         return false;
     }
 
@@ -128,7 +151,11 @@ bool MonitorTryEnter(void* monitor_target) {
     for (;;) {
         if ((sync & kSyncInflatedBit) != 0) {
             auto* sb = reinterpret_cast<SyncBlock*>(sync & ~3ull);
-            return sb != nullptr && sb->mutex.try_lock();
+            if (sb != nullptr && sb->mutex.try_lock()) {
+                sb->owner_tid.store(threading::GetCurrentThreadId(), std::memory_order_relaxed);
+                return true;
+            }
+            return false;
         }
         if ((sync & kSyncLockedBit) == 0) {
             const uint64_t desired = kSyncLockedBit | (static_cast<uint64_t>(tid) << kSyncThreadShift);
@@ -185,8 +212,20 @@ bool MonitorWait(void* monitor_target, int32_t timeout_ms) {
     }
     if (sb == nullptr) return false;
 
-    // Set WaitSleepJoin after confirming sb is valid.
+    // Check abort/interrupt before blocking.
     auto* thread = threading::GetCurrentThread();
+    if (thread != nullptr) {
+        if (thread->pending_abort.load(std::memory_order_acquire)) {
+            thread->pending_abort.store(false, std::memory_order_release);
+            throw chaos_managed_exception{kManagedExceptionThreadAbort};
+        }
+        if (thread->pending_interrupt.load(std::memory_order_acquire)) {
+            thread->pending_interrupt.store(false, std::memory_order_release);
+            throw chaos_managed_exception{kManagedExceptionThreadInterrupt};
+        }
+    }
+
+    // Set WaitSleepJoin after confirming sb is valid and no abort/interrupt pending.
     if (thread) thread->managed_state = threading::ManagedThreadState::WaitSleepJoin;
 
     // Release the monitor before wait (Monitor.Wait semantics).
@@ -243,8 +282,15 @@ bool MonitorPulseAll(void* monitor_target) {
 bool ThreadSleep(int32_t timeout_ms) {
     if (timeout_ms < 0) return false;
     auto* thread = threading::tls_this_thread;
-    if (thread != nullptr && thread->pending_abort.load(std::memory_order_acquire)) {
-        return false;
+    if (thread != nullptr) {
+        if (thread->pending_abort.load(std::memory_order_acquire)) {
+            thread->pending_abort.store(false, std::memory_order_release);
+            throw chaos_managed_exception{kManagedExceptionThreadAbort};
+        }
+        if (thread->pending_interrupt.load(std::memory_order_acquire)) {
+            thread->pending_interrupt.store(false, std::memory_order_release);
+            throw chaos_managed_exception{kManagedExceptionThreadInterrupt};
+        }
     }
     if (thread) thread->managed_state = threading::ManagedThreadState::WaitSleepJoin;
     GC_TRANSITION_TO_PREEMPTIVE();

@@ -336,6 +336,9 @@
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_bit_utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_features.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_helpers.h">
       <Filter>Header Files</Filter>
     </ClInclude>

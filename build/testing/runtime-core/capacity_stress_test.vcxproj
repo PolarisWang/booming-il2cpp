@@ -120,6 +120,7 @@
       <AdditionalDependencies>..\lib\Debug\gtest_main.lib;D:\agent\booming-il2cpp\testing\..\build\native\src\native\runtime-core\Debug\chaos_runtime_core.lib;D:\agent\booming-il2cpp\testing\..\build\native\src\native\bootstrap\Debug\chaos_bootstrap.lib;D:\agent\booming-il2cpp\testing\..\build\native\src\native\interpreter\Debug\chaos_interpreter.lib;D:\agent\booming-il2cpp\testing\..\build\native\src\native\codegen\Debug\chaos_codegen.lib;D:\agent\booming-il2cpp\testing\..\build\native\src\native\hot-update\Debug\chaos_hot_update.lib;D:\agent\booming-il2cpp\testing\..\build\native\src\native\common\Debug\chaos_common.lib;D:\agent\booming-il2cpp\testing\..\build\native\src\native\support\Debug\chaos_support.lib;D:\agent\booming-il2cpp\testing\..\build\native\fmt_build\Debug\chaos_fmt.lib;..\lib\Debug\gtest.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <ForceFileOutput>MultiplyDefinedSymbolOnly</ForceFileOutput>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImportLibrary>D:/agent/booming-il2cpp/build/testing/runtime-core/Debug/capacity_stress_test.lib</ImportLibrary>
@@ -166,6 +167,7 @@
       <AdditionalDependencies>..\lib\Release\gtest_main.lib;D:\agent\booming-il2cpp\testing\..\build\native\src\native\runtime-core\RelWithDebInfo\chaos_runtime_core.lib;D:\agent\booming-il2cpp\testing\..\build\native\src\native\bootstrap\RelWithDebInfo\chaos_bootstrap.lib;D:\agent\booming-il2cpp\testing\..\build\native\src\native\interpreter\RelWithDebInfo\chaos_interpreter.lib;D:\agent\booming-il2cpp\testing\..\build\native\src\native\codegen\RelWithDebInfo\chaos_codegen.lib;D:\agent\booming-il2cpp\testing\..\build\native\src\native\hot-update\RelWithDebInfo\chaos_hot_update.lib;D:\agent\booming-il2cpp\testing\..\build\native\src\native\common\RelWithDebInfo\chaos_common.lib;D:\agent\booming-il2cpp\testing\..\build\native\src\native\support\RelWithDebInfo\chaos_support.lib;D:\agent\booming-il2cpp\testing\..\build\native\fmt_build\RelWithDebInfo\chaos_fmt.lib;..\lib\Release\gtest.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <ForceFileOutput>MultiplyDefinedSymbolOnly</ForceFileOutput>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImportLibrary>D:/agent/booming-il2cpp/build/testing/runtime-core/Release/capacity_stress_test.lib</ImportLibrary>
@@ -212,6 +214,7 @@
       <AdditionalDependencies>..\lib\MinSizeRel\gtest_main.lib;D:\agent\booming-il2cpp\testing\..\build\native\src\native\runtime-core\RelWithDebInfo\chaos_runtime_core.lib;D:\agent\booming-il2cpp\testing\..\build\native\src\native\bootstrap\RelWithDebInfo\chaos_bootstrap.lib;D:\agent\booming-il2cpp\testing\..\build\native\src\native\interpreter\RelWithDebInfo\chaos_interpreter.lib;D:\agent\booming-il2cpp\testing\..\build\native\src\native\codegen\RelWithDebInfo\chaos_codegen.lib;D:\agent\booming-il2cpp\testing\..\build\native\src\native\hot-update\RelWithDebInfo\chaos_hot_update.lib;D:\agent\booming-il2cpp\testing\..\build\native\src\native\common\RelWithDebInfo\chaos_common.lib;D:\agent\booming-il2cpp\testing\..\build\native\src\native\support\RelWithDebInfo\chaos_support.lib;D:\agent\booming-il2cpp\testing\..\build\native\fmt_build\RelWithDebInfo\chaos_fmt.lib;..\lib\MinSizeRel\gtest.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <ForceFileOutput>MultiplyDefinedSymbolOnly</ForceFileOutput>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImportLibrary>D:/agent/booming-il2cpp/build/testing/runtime-core/MinSizeRel/capacity_stress_test.lib</ImportLibrary>
@@ -257,6 +260,7 @@
       <AdditionalDependencies>..\lib\RelWithDebInfo\gtest_main.lib;D:\agent\booming-il2cpp\testing\..\build\native\src\native\runtime-core\RelWithDebInfo\chaos_runtime_core.lib;D:\agent\booming-il2cpp\testing\..\build\native\src\native\bootstrap\RelWithDebInfo\chaos_bootstrap.lib;D:\agent\booming-il2cpp\testing\..\build\native\src\native\interpreter\RelWithDebInfo\chaos_interpreter.lib;D:\agent\booming-il2cpp\testing\..\build\native\src\native\codegen\RelWithDebInfo\chaos_codegen.lib;D:\agent\booming-il2cpp\testing\..\build\native\src\native\hot-update\RelWithDebInfo\chaos_hot_update.lib;D:\agent\booming-il2cpp\testing\..\build\native\src\native\common\RelWithDebInfo\chaos_common.lib;D:\agent\booming-il2cpp\testing\..\build\native\src\native\support\RelWithDebInfo\chaos_support.lib;D:\agent\booming-il2cpp\testing\..\build\native\fmt_build\RelWithDebInfo\chaos_fmt.lib;..\lib\RelWithDebInfo\gtest.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <ForceFileOutput>MultiplyDefinedSymbolOnly</ForceFileOutput>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImportLibrary>D:/agent/booming-il2cpp/build/testing/runtime-core/RelWithDebInfo/capacity_stress_test.lib</ImportLibrary>

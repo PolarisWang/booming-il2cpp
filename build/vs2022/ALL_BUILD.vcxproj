@@ -215,9 +215,17 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{F8ED9319-9B32-3328-AEF6-DFDF79004125}</Project>
       <Name>chaos_exception_sentinel_test</Name>
     </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_execution_context_smoke.vcxproj">
+      <Project>{990928AB-A956-3177-88EA-213462BC8802}</Project>
+      <Name>chaos_execution_context_smoke</Name>
+    </ProjectReference>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\fmt_build\chaos_fmt.vcxproj">
       <Project>{F792CCB2-420D-30D2-87DC-8524F6551F98}</Project>
       <Name>chaos_fmt</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_atomic_alloc_test.vcxproj">
+      <Project>{E2143D41-59E3-3087-A9C7-8A1A45BC7E3A}</Project>
+      <Name>chaos_gc_atomic_alloc_test</Name>
     </ProjectReference>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_bgc_root_scan_test.vcxproj">
       <Project>{3E0513A5-3029-32B9-A180-EEE41EF1F993}</Project>
@@ -246,6 +254,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_events_test.vcxproj">
       <Project>{62CE771E-C81B-3DCE-AA88-388E01904C1B}</Project>
       <Name>chaos_gc_events_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_finalizer_integration_test.vcxproj">
+      <Project>{0414AC9C-B196-3585-9435-009A519D0855}</Project>
+      <Name>chaos_gc_finalizer_integration_test</Name>
     </ProjectReference>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_gc_finalizer_stress_test.vcxproj">
       <Project>{580F3C7B-69DE-3CED-8DA6-8C3D3DDDDA8D}</Project>

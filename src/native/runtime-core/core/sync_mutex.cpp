@@ -2,6 +2,7 @@
 #include <chaos/log.h>
 
 #include "gc_region.h"
+#include "thread_state.h"
 
 namespace chaos::il2cpp::runtime_core {
 namespace {
@@ -70,6 +71,7 @@ struct SyncBlock {
     const TypeInfoHot*                     type_info = nullptr;
     CHAOS_IL2CPP_RECURSIVE_LOCK_MUTEX    mutex;
     std::condition_variable_any          cond;
+    std::atomic<int32_t>                 owner_tid{0};  // ThreadId that owns mutex, 0 = none
 };
 
 struct SyncBlockStripe {
@@ -111,6 +113,7 @@ static bool InflateAndEnter(void* obj) noexcept {
         auto it = stripe.entries.find(obj);
         if (it != stripe.entries.end() && it->second != nullptr) {
             it->second->mutex.lock();
+            it->second->owner_tid.store(threading::GetCurrentThreadId(), std::memory_order_relaxed);
             return true;
         }
         return false;
@@ -123,6 +126,7 @@ static bool InflateAndEnter(void* obj) noexcept {
     AtomicStoreRelease(sync_ptr, inflated_val);
 
     sb->mutex.lock();
+    sb->owner_tid.store(threading::GetCurrentThreadId(), std::memory_order_relaxed);
     return true;
 }
 

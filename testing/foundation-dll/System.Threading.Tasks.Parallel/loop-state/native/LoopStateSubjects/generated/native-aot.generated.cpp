@@ -303,12 +303,12 @@ static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[6] = {
 
 // Dispatch table (function pointers)
 static HotpatchEntryV0 s_hotpatch_entries[6] = {
-	{ reinterpret_cast<void*>(&LoopStateSubjects_LoopStateSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // LoopStateSubjects::Subject_0
-	{ reinterpret_cast<void*>(&LoopStateSubjects_LoopStateSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // LoopStateSubjects::Subject_1
-	{ reinterpret_cast<void*>(&LoopStateSubjects_LoopStateSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // LoopStateSubjects::Subject_2
-	{ reinterpret_cast<void*>(&LoopStateSubjects_LoopStateSubjects_Subject_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // LoopStateSubjects::Subject_3
-	{ reinterpret_cast<void*>(&LoopStateSubjects_LoopStateSubjects_Subject_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // LoopStateSubjects::Subject_4
-	{ reinterpret_cast<void*>(&LoopStateSubjects_LoopStateSubjects_Subject_5), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // LoopStateSubjects::Subject_5
+	{ reinterpret_cast<void*>(&LoopStateSubjects_LoopStateSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // LoopStateSubjects::Subject_0
+	{ reinterpret_cast<void*>(&LoopStateSubjects_LoopStateSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // LoopStateSubjects::Subject_1
+	{ reinterpret_cast<void*>(&LoopStateSubjects_LoopStateSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // LoopStateSubjects::Subject_2
+	{ reinterpret_cast<void*>(&LoopStateSubjects_LoopStateSubjects_Subject_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // LoopStateSubjects::Subject_3
+	{ reinterpret_cast<void*>(&LoopStateSubjects_LoopStateSubjects_Subject_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // LoopStateSubjects::Subject_4
+	{ reinterpret_cast<void*>(&LoopStateSubjects_LoopStateSubjects_Subject_5), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // LoopStateSubjects::Subject_5
 };
 
 // Module hotpatch bundle
@@ -330,19 +330,17 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // ── External Runtime Dispatch Table ──────────────────────────
 // Startup-time-resolved function pointers for cross-assembly calls.
 
-extern "C" const char* kChaosExternalRuntimeSubjects[8] = {
+extern "C" const char* kChaosExternalRuntimeSubjects[7] = {
 	"System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Break:System.Void()",
 	"LoopStateSubjects/LoopStateSubjects::_exitCode",
 	"System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_IsExceptional:System.Boolean()",
 	"System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_IsStopped:System.Boolean()",
 	"System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_LowestBreakIteration:System.Nullable<System.Int64>()",
-	"System.Private.CoreLib/System.Nullable<System.Int64>::GetHashCode:System.Int32()",
 	"System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_ShouldExitCurrentIteration:System.Boolean()",
 	"System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Stop:System.Void()",
 };
 
-extern "C" void* kChaosExternalRuntimeFnTable[8] = {
-	nullptr,
+extern "C" void* kChaosExternalRuntimeFnTable[7] = {
 	nullptr,
 	nullptr,
 	nullptr,
@@ -352,7 +350,7 @@ extern "C" void* kChaosExternalRuntimeFnTable[8] = {
 	nullptr,
 };
 
-extern "C" int32_t kChaosExternalRuntimeCount = 8;
+extern "C" int32_t kChaosExternalRuntimeCount = 7;
 // (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
@@ -494,7 +492,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry1;
 	/* ── Entry 2: LoopStateSubjects_LoopStateSubjects_Subject_2 ── */
 	struct {
@@ -502,7 +500,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry2;
 	/* ── Entry 3: LoopStateSubjects_LoopStateSubjects_Subject_3 ── */
 	struct {
@@ -510,7 +508,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[8];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry3;
 	/* ── Entry 4: LoopStateSubjects_LoopStateSubjects_Subject_4 ── */
 	struct {
@@ -518,7 +516,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[2];
 	} entry4;
 	/* ── Entry 5: LoopStateSubjects_LoopStateSubjects_Subject_5 ── */
 	struct {
@@ -539,35 +537,35 @@ static const struct {
 	},
 	/* entry1 = LoopStateSubjects_LoopStateSubjects_Subject_1 */
 	.entry1 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&LoopStateSubjects_LoopStateSubjects_Subject_1),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
 	/* entry2 = LoopStateSubjects_LoopStateSubjects_Subject_2 */
 	.entry2 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&LoopStateSubjects_LoopStateSubjects_Subject_2),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
 	/* entry3 = LoopStateSubjects_LoopStateSubjects_Subject_3 */
 	.entry3 = {
-		/* entry_total_size = 52 */ 52u,
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&LoopStateSubjects_LoopStateSubjects_Subject_3),
-		/* frame_size = 64 */ 64u,
-		/* num_gc_slots = 8 */ 8u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
 	/* entry4 = LoopStateSubjects_LoopStateSubjects_Subject_4 */
 	.entry4 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 28 */ 28u,
 		/* code_address */ reinterpret_cast<const void*>(&LoopStateSubjects_LoopStateSubjects_Subject_4),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
 	},
 	/* entry5 = LoopStateSubjects_LoopStateSubjects_Subject_5 */
 	.entry5 = {
@@ -582,7 +580,7 @@ static const struct {
 #pragma pack(pop)
 #endif
 
-static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 208u;
+static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 160u;
 
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
@@ -751,17 +749,6 @@ extern "C" void LoopStateSubjects_LoopStateSubjects_Subject_1(void)
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
@@ -769,30 +756,6 @@ extern "C" void LoopStateSubjects_LoopStateSubjects_Subject_1(void)
 			{
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[2])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			// brtrue (structured EH branch)
-			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			// br (handled via structured EH branches)
-			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s4 = 0;
-			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[2])();
-				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			// brtrue (structured EH branch)
-			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			// br (handled via structured EH branches)
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
-			chaos_locals[0] = _s6;
-			_s6 = chaos_locals[0];
-			// brfalse (structured EH branch)
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s7;
-				chaos_static_LoopStateSubjects_LoopStateSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
@@ -821,17 +784,6 @@ extern "C" void LoopStateSubjects_LoopStateSubjects_Subject_2(void)
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
@@ -839,30 +791,6 @@ extern "C" void LoopStateSubjects_LoopStateSubjects_Subject_2(void)
 			{
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[3])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			// brtrue (structured EH branch)
-			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			// br (handled via structured EH branches)
-			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s4 = 0;
-			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[3])();
-				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			// brtrue (structured EH branch)
-			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			// br (handled via structured EH branches)
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
-			chaos_locals[0] = _s6;
-			_s6 = chaos_locals[0];
-			// brfalse (structured EH branch)
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s7;
-				chaos_static_LoopStateSubjects_LoopStateSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
@@ -886,22 +814,11 @@ extern "C" void LoopStateSubjects_LoopStateSubjects_Subject_2(void)
 extern "C" void LoopStateSubjects_LoopStateSubjects_Subject_3(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
@@ -909,34 +826,6 @@ extern "C" void LoopStateSubjects_LoopStateSubjects_Subject_3(void)
 			{
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[4])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			chaos_locals[1] = _s1;
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
-			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[5])();
-				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			_s3 = 0;
-			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[4])();
-				_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			chaos_locals[1] = _s4;
-			_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
-			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[5])();
-				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
-			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
-			chaos_locals[0] = _s4;
-			_s4 = chaos_locals[0];
-			// brfalse (structured EH branch)
-			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s5;
-				chaos_static_LoopStateSubjects_LoopStateSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
@@ -965,48 +854,13 @@ extern "C" void LoopStateSubjects_LoopStateSubjects_Subject_4(void)
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[6])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[5])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			// brtrue (structured EH branch)
-			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			// br (handled via structured EH branches)
-			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s4 = 0;
-			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[6])();
-				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			// brtrue (structured EH branch)
-			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			// br (handled via structured EH branches)
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
-			chaos_locals[0] = _s6;
-			_s6 = chaos_locals[0];
-			// brfalse (structured EH branch)
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s7;
-				chaos_static_LoopStateSubjects_LoopStateSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
@@ -1039,7 +893,7 @@ extern "C" void LoopStateSubjects_LoopStateSubjects_Subject_5(void)
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
-				reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[7])();
+				reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[6])();
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
@@ -1067,4 +921,30 @@ extern "C" void LoopStateSubjects_LoopStateSubjects_Subject_5(void)
 // extern "C" definition for link-time visibility from runtime-entry.cpp
 extern "C" const int kAotMethodCount = 6;
 
-extern "C" void ChaosJitRegisterAll() {}
+// ── JIT Method Entry Table ───────────────────────────────────────────
+// Auto-generated by chaos-il2cpp codegen for --mode jit.
+#include <cstdint>
+#include "jit_registration.h"
+
+static const char kMethodJson_0[] = "{\"methodId\":\"loop-state-subjects.loop-state-subjects.subject-0\",\"subjectId\":\"LoopStateSubjects/LoopStateSubjects::Subject_0:System.Void()\",\"signature\":\"System.Void LoopStateSubjects::Subject_0()\",\"identity\":{\"assemblyName\":\"LoopStateSubjects\",\"declaringTypeSubjectId\":\"LoopStateSubjects/LoopStateSubjects\",\"definitionSubjectId\":\"LoopStateSubjects/LoopStateSubjects::Subject_0:System.Void()\",\"subjectId\":\"LoopStateSubjects/LoopStateSubjects::Subject_0:System.Void()\",\"methodId\":\"loop-state-subjects.loop-state-subjects.subject-0\",\"signature\":\"System.Void LoopStateSubjects::Subject_0()\"},\"nativeSymbol\":\"LoopStateSubjects_LoopStateSubjects_Subject_0\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":11,\"handlerOffset\":12,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Void\",\"callee\":\"System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Break:System.Void()\",\"reference\":{\"assemblyName\":\"System.Threading.Tasks.Parallel\",\"subjectKind\":\"method\",\"subjectId\":\"System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Break:System.Void()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Threading.Tasks.Parallel\",\"subjectId\":\"System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Break:System.Void()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":23,\"ilOffset\":10,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":12,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":14,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"LoopStateSubjects/LoopStateSubjects::_exitCode\",\"ilOffset\":15,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"LoopStateSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"LoopStateSubjects/LoopStateSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"LoopStateSubjects\",\"subjectId\":\"LoopStateSubjects/LoopStateSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"LoopStateSubjects/LoopStateSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":23,\"ilOffset\":21,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":23,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"LoopStateSubjects\"}";
+static const char kMethodJson_1[] = "{\"methodId\":\"loop-state-subjects.loop-state-subjects.subject-1\",\"subjectId\":\"LoopStateSubjects/LoopStateSubjects::Subject_1:System.Void()\",\"signature\":\"System.Void LoopStateSubjects::Subject_1()\",\"identity\":{\"assemblyName\":\"LoopStateSubjects\",\"declaringTypeSubjectId\":\"LoopStateSubjects/LoopStateSubjects\",\"definitionSubjectId\":\"LoopStateSubjects/LoopStateSubjects::Subject_1:System.Void()\",\"subjectId\":\"LoopStateSubjects/LoopStateSubjects::Subject_1:System.Void()\",\"methodId\":\"loop-state-subjects.loop-state-subjects.subject-1\",\"signature\":\"System.Void LoopStateSubjects::Subject_1()\"},\"nativeSymbol\":\"LoopStateSubjects_LoopStateSubjects_Subject_1\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":11,\"handlerOffset\":12,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Boolean\",\"callee\":\"System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_IsExceptional:System.Boolean()\",\"reference\":{\"assemblyName\":\"System.Threading.Tasks.Parallel\",\"subjectKind\":\"method\",\"subjectId\":\"System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_IsExceptional:System.Boolean()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Threading.Tasks.Parallel\",\"subjectId\":\"System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_IsExceptional:System.Boolean()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":8,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":23,\"ilOffset\":10,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":12,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":14,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"LoopStateSubjects/LoopStateSubjects::_exitCode\",\"ilOffset\":15,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"LoopStateSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"LoopStateSubjects/LoopStateSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"LoopStateSubjects\",\"subjectId\":\"LoopStateSubjects/LoopStateSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"LoopStateSubjects/LoopStateSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":23,\"ilOffset\":21,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":23,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"LoopStateSubjects\"}";
+static const char kMethodJson_2[] = "{\"methodId\":\"loop-state-subjects.loop-state-subjects.subject-2\",\"subjectId\":\"LoopStateSubjects/LoopStateSubjects::Subject_2:System.Void()\",\"signature\":\"System.Void LoopStateSubjects::Subject_2()\",\"identity\":{\"assemblyName\":\"LoopStateSubjects\",\"declaringTypeSubjectId\":\"LoopStateSubjects/LoopStateSubjects\",\"definitionSubjectId\":\"LoopStateSubjects/LoopStateSubjects::Subject_2:System.Void()\",\"subjectId\":\"LoopStateSubjects/LoopStateSubjects::Subject_2:System.Void()\",\"methodId\":\"loop-state-subjects.loop-state-subjects.subject-2\",\"signature\":\"System.Void LoopStateSubjects::Subject_2()\"},\"nativeSymbol\":\"LoopStateSubjects_LoopStateSubjects_Subject_2\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":11,\"handlerOffset\":12,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Boolean\",\"callee\":\"System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_IsStopped:System.Boolean()\",\"reference\":{\"assemblyName\":\"System.Threading.Tasks.Parallel\",\"subjectKind\":\"method\",\"subjectId\":\"System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_IsStopped:System.Boolean()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Threading.Tasks.Parallel\",\"subjectId\":\"System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_IsStopped:System.Boolean()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":8,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":23,\"ilOffset\":10,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":12,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":14,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"LoopStateSubjects/LoopStateSubjects::_exitCode\",\"ilOffset\":15,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"LoopStateSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"LoopStateSubjects/LoopStateSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"LoopStateSubjects\",\"subjectId\":\"LoopStateSubjects/LoopStateSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"LoopStateSubjects/LoopStateSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":23,\"ilOffset\":21,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":23,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"LoopStateSubjects\"}";
+static const char kMethodJson_3[] = "{\"methodId\":\"loop-state-subjects.loop-state-subjects.subject-3\",\"subjectId\":\"LoopStateSubjects/LoopStateSubjects::Subject_3:System.Void()\",\"signature\":\"System.Void LoopStateSubjects::Subject_3()\",\"identity\":{\"assemblyName\":\"LoopStateSubjects\",\"declaringTypeSubjectId\":\"LoopStateSubjects/LoopStateSubjects\",\"definitionSubjectId\":\"LoopStateSubjects/LoopStateSubjects::Subject_3:System.Void()\",\"subjectId\":\"LoopStateSubjects/LoopStateSubjects::Subject_3:System.Void()\",\"methodId\":\"loop-state-subjects.loop-state-subjects.subject-3\",\"signature\":\"System.Void LoopStateSubjects::Subject_3()\"},\"nativeSymbol\":\"LoopStateSubjects_LoopStateSubjects_Subject_3\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":11,\"handlerOffset\":12,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Nullable\\u003CSystem.Int64\\u003E\",\"callee\":\"System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_LowestBreakIteration:System.Nullable\\u003CSystem.Int64\\u003E()\",\"reference\":{\"assemblyName\":\"System.Threading.Tasks.Parallel\",\"subjectKind\":\"method\",\"subjectId\":\"System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_LowestBreakIteration:System.Nullable\\u003CSystem.Int64\\u003E()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Threading.Tasks.Parallel\",\"subjectId\":\"System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_LowestBreakIteration:System.Nullable\\u003CSystem.Int64\\u003E()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":8,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":23,\"ilOffset\":10,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":12,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":14,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"LoopStateSubjects/LoopStateSubjects::_exitCode\",\"ilOffset\":15,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"LoopStateSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"LoopStateSubjects/LoopStateSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"LoopStateSubjects\",\"subjectId\":\"LoopStateSubjects/LoopStateSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"LoopStateSubjects/LoopStateSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":23,\"ilOffset\":21,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":23,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"LoopStateSubjects\"}";
+static const char kMethodJson_4[] = "{\"methodId\":\"loop-state-subjects.loop-state-subjects.subject-4\",\"subjectId\":\"LoopStateSubjects/LoopStateSubjects::Subject_4:System.Void()\",\"signature\":\"System.Void LoopStateSubjects::Subject_4()\",\"identity\":{\"assemblyName\":\"LoopStateSubjects\",\"declaringTypeSubjectId\":\"LoopStateSubjects/LoopStateSubjects\",\"definitionSubjectId\":\"LoopStateSubjects/LoopStateSubjects::Subject_4:System.Void()\",\"subjectId\":\"LoopStateSubjects/LoopStateSubjects::Subject_4:System.Void()\",\"methodId\":\"loop-state-subjects.loop-state-subjects.subject-4\",\"signature\":\"System.Void LoopStateSubjects::Subject_4()\"},\"nativeSymbol\":\"LoopStateSubjects_LoopStateSubjects_Subject_4\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":11,\"handlerOffset\":12,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Boolean\",\"callee\":\"System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_ShouldExitCurrentIteration:System.Boolean()\",\"reference\":{\"assemblyName\":\"System.Threading.Tasks.Parallel\",\"subjectKind\":\"method\",\"subjectId\":\"System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_ShouldExitCurrentIteration:System.Boolean()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Threading.Tasks.Parallel\",\"subjectId\":\"System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_ShouldExitCurrentIteration:System.Boolean()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":8,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":23,\"ilOffset\":10,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":12,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":14,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"LoopStateSubjects/LoopStateSubjects::_exitCode\",\"ilOffset\":15,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"LoopStateSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"LoopStateSubjects/LoopStateSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"LoopStateSubjects\",\"subjectId\":\"LoopStateSubjects/LoopStateSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"LoopStateSubjects/LoopStateSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":23,\"ilOffset\":21,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":23,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"LoopStateSubjects\"}";
+static const char kMethodJson_5[] = "{\"methodId\":\"loop-state-subjects.loop-state-subjects.subject-5\",\"subjectId\":\"LoopStateSubjects/LoopStateSubjects::Subject_5:System.Void()\",\"signature\":\"System.Void LoopStateSubjects::Subject_5()\",\"identity\":{\"assemblyName\":\"LoopStateSubjects\",\"declaringTypeSubjectId\":\"LoopStateSubjects/LoopStateSubjects\",\"definitionSubjectId\":\"LoopStateSubjects/LoopStateSubjects::Subject_5:System.Void()\",\"subjectId\":\"LoopStateSubjects/LoopStateSubjects::Subject_5:System.Void()\",\"methodId\":\"loop-state-subjects.loop-state-subjects.subject-5\",\"signature\":\"System.Void LoopStateSubjects::Subject_5()\"},\"nativeSymbol\":\"LoopStateSubjects_LoopStateSubjects_Subject_5\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":0,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":11,\"handlerOffset\":12,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldnull\",\"opCode\":5,\"ilOffset\":2,\"resultType\":\"System.Object\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":3,\"resultType\":\"System.Void\",\"callee\":\"System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Stop:System.Void()\",\"reference\":{\"assemblyName\":\"System.Threading.Tasks.Parallel\",\"subjectKind\":\"method\",\"subjectId\":\"System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Stop:System.Void()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Threading.Tasks.Parallel\",\"subjectId\":\"System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Stop:System.Void()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":23,\"ilOffset\":10,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":12,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":14,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"LoopStateSubjects/LoopStateSubjects::_exitCode\",\"ilOffset\":15,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"LoopStateSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"LoopStateSubjects/LoopStateSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"LoopStateSubjects\",\"subjectId\":\"LoopStateSubjects/LoopStateSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"LoopStateSubjects/LoopStateSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":23,\"ilOffset\":21,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":23,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"LoopStateSubjects\"}";
+
+extern "C" const JitMethodEntry kChaosJitMethodEntries[6] =
+{
+    { kMethodJson_0, 3159u, 0x00000003u, 0u },
+    { kMethodJson_1, 3267u, 0x00000004u, 0u },
+    { kMethodJson_2, 3255u, 0x00000005u, 0u },
+    { kMethodJson_3, 3388u, 0x00000006u, 0u },
+    { kMethodJson_4, 3306u, 0x00000007u, 0u },
+    { kMethodJson_5, 3156u, 0x00000008u, 0u }
+};
+
+extern "C" const uint32_t kChaosJitMethodEntryCount = 6u;
+
+extern "C" void ChaosJitRegisterAll() {
+    RegisterJitMethods(kChaosJitMethodEntries, kChaosJitMethodEntryCount);
+}

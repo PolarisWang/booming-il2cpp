@@ -717,6 +717,10 @@ extern ""C"" void ChaosJitRegisterAll() {}
                 // Always included when the file exists on disk — the old header
                 // survives rebuilds even when the codegen extractor has no data.
                 "\"enum_metadata.generated.h\"",
+                // Enum runtime stubs: lookup_cached_enum_name and ChaosEnum*
+                // extern "C" declarations — required by InlineShapeDescriptor
+                // expansions for enum.ToString/HasFlag/Format.
+                "\"enum_stubs.h\"",
                 // Native bridge headers (e.g., "convert.h") from external runtime
                 // helpers that map to direct native function calls.
                 ..externalRuntimeHelpers
