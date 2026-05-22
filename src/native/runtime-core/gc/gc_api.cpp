@@ -34,18 +34,10 @@ void GetPlatformMemoryStatus(MemoryStatusData& out) noexcept {
 }
 
 // ── External memory pressure tracking ─────────────────────────────
+// Delegated to GcScheduler for unified GC triggering decisions.
+// See gc_scheduler.h/cpp for AddExternalMemoryPressure /
+// RemoveExternalMemoryPressure implementation.
 namespace {
-
-// Process-wide counter for external (unmanaged) memory pressure.
-// AddMemoryPressure increments, RemoveMemoryPressure decrements.
-// When this exceeds kExternalMemoryThreshold, a full GC is requested.
-std::atomic<CHAOS_IL2CPP_INT64> g_external_memory_pressure{0};
-
-// Threshold: trigger GC when external memory reaches 2x of last known
-// managed heap size.  This follows CoreCLR's heuristic of treating
-// external memory as if it were managed allocations.
-static constexpr CHAOS_IL2CPP_INT64 kExternalMemoryThreshold = 256 * 1024 * 1024;  // 256 MB
-
 }  // anonymous namespace
 
 // ======================================================================
@@ -83,18 +75,7 @@ void CHAOS_RUNTIME_ABI_CALL chaos_gc_add_memory_pressure(
         return;
     }
 
-    auto prev = g_external_memory_pressure.fetch_add(bytes,
-        std::memory_order_relaxed);
-    auto current = prev + bytes;
-
-    // If crosssing the threshold, request a full GC at the next safepoint.
-    // Use a compare-exchange to avoid requesting multiple GCs.
-    if (current >= kExternalMemoryThreshold && prev < kExternalMemoryThreshold) {
-        g_gc_scheduler.RequestFullGc();
-        CHAOS_IL2CPP_LOG_DEBUG("GC_API",
-            "external_memory_pressure_crossed_threshold: total=%lld",
-            static_cast<long long>(current));
-    }
+    g_gc_scheduler.AddExternalMemoryPressure(bytes);
 }
 
 // ======================================================================
@@ -109,7 +90,7 @@ void CHAOS_RUNTIME_ABI_CALL chaos_gc_remove_memory_pressure(
         return;
     }
 
-    g_external_memory_pressure.fetch_sub(bytes, std::memory_order_relaxed);
+    g_gc_scheduler.RemoveExternalMemoryPressure(bytes);
 }
 
 // ======================================================================

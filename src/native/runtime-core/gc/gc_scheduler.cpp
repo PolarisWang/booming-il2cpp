@@ -332,6 +332,35 @@ GcCollectionKind GcScheduler::DecideCollection() const noexcept {
     CHAOS_IL2CPP_SIZE alloc_full = alloc_since_last_full_gc_.load(std::memory_order_relaxed);
     CHAOS_IL2CPP_SIZE heap_est = estimated_heap_size_.load(std::memory_order_relaxed);
 
+    // 3a. External memory pressure contribution.
+    // Treat outstanding external (unmanaged) pressure as additional managed
+    // allocation for GC triggering.  This ensures that native allocations
+    // (textures, audio, etc.) drive GC proactively rather than waiting for
+    // managed allocation to cross the threshold on its own.
+    CHAOS_IL2CPP_INT64 ext_pressure = external_memory_pressure_.load(std::memory_order_relaxed);
+    if (ext_pressure > 0 && heap_est > 0) {
+        CHAOS_IL2CPP_INT64 adaptive_threshold = std::max(
+            kMinExternalPressureThreshold,
+            static_cast<CHAOS_IL2CPP_INT64>(
+                static_cast<float>(heap_est) * kExternalPressureRatio));
+        if (ext_pressure > adaptive_threshold) {
+            // Only count excess above the adaptive threshold to avoid
+            // double-triggering: the edge trigger in AddExternalMemoryPressure
+            // already requested a full GC when the threshold was first crossed.
+            // The scheduler will pick up the request via full_gc_requested_
+            // below.  Here we fold the excess into alloc_full for the
+            // continuous-feedback path, so that sustained high pressure
+            // keeps GC active even if the one-shot full_gc_requested_ flag
+            // was consumed by a previous GC cycle.
+            CHAOS_IL2CPP_INT64 excess = ext_pressure - adaptive_threshold;
+            // Cap at 2x heap to prevent extreme spikes from runaway GC.
+            CHAOS_IL2CPP_INT64 capped = std::min(
+                excess, static_cast<CHAOS_IL2CPP_INT64>(
+                    static_cast<float>(heap_est) * 2.0f));
+            alloc_full += static_cast<CHAOS_IL2CPP_SIZE>(capped);
+        }
+    }
+
     // Compute memory pressure ratio: how full the heap is relative to
     // the full-GC trigger.  >1.0 means we've exceeded the normal full GC
     // threshold but the BGC might be busy or deferred.
@@ -395,6 +424,44 @@ bool GcScheduler::IsFullGcRequested() const noexcept {
 
 void GcScheduler::RequestFullGc() noexcept {
     full_gc_requested_.store(true, std::memory_order_release);
+}
+
+void GcScheduler::AddExternalMemoryPressure(CHAOS_IL2CPP_INT64 bytes) noexcept {
+    if (bytes <= 0) return;
+
+    auto prev = external_memory_pressure_.fetch_add(bytes, std::memory_order_relaxed);
+    auto current = prev + bytes;
+
+    // Compute adaptive threshold: at least kMinExternalPressureThreshold,
+    // but also scale with the managed heap so small heaps aren't over-triggered.
+    CHAOS_IL2CPP_SIZE heap_est = estimated_heap_size_.load(std::memory_order_relaxed);
+    CHAOS_IL2CPP_INT64 adaptive_threshold = std::max(
+        kMinExternalPressureThreshold,
+        static_cast<CHAOS_IL2CPP_INT64>(static_cast<float>(heap_est) * kExternalPressureRatio));
+
+    // Edge trigger: crossed threshold upward → request a full GC.
+    if (prev < adaptive_threshold && current >= adaptive_threshold) {
+        RequestFullGc();
+        CHAOS_IL2CPP_LOG_DEBUG("GC_API",
+            "external_memory_pressure triggered GC: total=%lld threshold=%lld",
+            static_cast<long long>(current),
+            static_cast<long long>(adaptive_threshold));
+    }
+}
+
+void GcScheduler::RemoveExternalMemoryPressure(CHAOS_IL2CPP_INT64 bytes) noexcept {
+    if (bytes <= 0) return;
+
+    auto prev = external_memory_pressure_.fetch_sub(bytes, std::memory_order_relaxed);
+    // Saturate at 0 (can't have negative pressure).
+    if (prev < bytes) {
+        external_memory_pressure_.store(0, std::memory_order_relaxed);
+    }
+
+    CHAOS_IL2CPP_LOG_DEBUG("GC_API",
+        "external_memory_pressure removed: delta=%lld total=%lld",
+        static_cast<long long>(bytes),
+        static_cast<long long>(external_memory_pressure_.load(std::memory_order_relaxed)));
 }
 
 // ── Nursery sizing ───────────────────────────────────────────────
