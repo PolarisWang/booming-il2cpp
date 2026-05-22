@@ -81,6 +81,9 @@ TEST_F(YoungCollectorTest, ScavengeObject) {
     void* nursery_obj = NurseryAllocate(64);
     ASSERT_NE(nursery_obj, nullptr);
 
+    // Set a valid TypeInfo so PreciseObjectSize and layout scanning work.
+    // Then write a recognizable pattern at offset 8 (past the TypeInfo ptr).
+    *static_cast<const void**>(nursery_obj) = test_type_info_64();
     std::memset(nursery_obj, 0, 64);
     *static_cast<uint32_t*>(nursery_obj) = 0xBEEFCAFE;
     static_cast<uint8_t*>(nursery_obj)[60] = 0xAA;

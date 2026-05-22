@@ -92,6 +92,21 @@ public static partial class ExceptionThrowDiagnosticsPatchEntry
         return unchecked((int)(0xB0000000u + 13));
     }
 
+    // [14] System.Private.CoreLib/OSR::HotLoop:System.Void()
+    public static void CustomEntryMethod14()
+    {
+    }
+
+    // [15] System.Private.CoreLib/Memory::CopyBlock:System.Void()
+    public static void CustomEntryMethod15()
+    {
+    }
+
+    // [16] System.Private.CoreLib/Memory::InitBlock:System.Void()
+    public static void CustomEntryMethod16()
+    {
+    }
+
     public static void Run(int entryIndex)
     {
         try
@@ -112,6 +127,9 @@ public static partial class ExceptionThrowDiagnosticsPatchEntry
                 case 11: Subject_11(); break;
                 case 12: Subject_12(); break;
                 case 13: Subject_13(); break;
+                case 14: CustomEntryMethod14(); break;
+                case 15: CustomEntryMethod15(); break;
+                case 16: CustomEntryMethod16(); break;
             }
         }
         catch

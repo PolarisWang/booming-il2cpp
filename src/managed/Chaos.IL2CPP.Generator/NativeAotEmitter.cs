@@ -17,15 +17,35 @@ public sealed class NativeAotEmitter
         var managedClosureRoot = Path.GetFullPath(request.ManagedClosureRootPath);
         var loweringPlanPath = Path.Combine(managedClosureRoot, ManagedClosureArtifactNames.NativeAotLoweringPlan);
         var loweringPlan = LoadRequiredJson<NativeAotLoweringPlanArtifact>(loweringPlanPath);
-        NativeAotLoweringPlanner? planner = null;
 
         var (aotCoreIr, closureManifest, metadataRegistration, supplementalMetadataTemplate) =
             LoadClosureArtifacts(managedClosureRoot);
+
+        return GenerateFromArtifacts(
+            loweringPlan, aotCoreIr, closureManifest,
+            metadataRegistration, supplementalMetadataTemplate,
+            request.OutputRootPath, request.Mode);
+    }
+
+    /// <summary>
+    /// Generate NativeAot C++ output directly from in-memory artifacts (no JSON round-trip).
+    /// Used by FullAssemblyEmitter to avoid serialization overhead when artifacts are
+    /// already available from the pipeline.
+    /// </summary>
+    public NativeAotResult GenerateFromArtifacts(
+        NativeAotLoweringPlanArtifact loweringPlan,
+        AotCoreIrArtifact aotCoreIr,
+        ManagedClosureManifestArtifact closureManifest,
+        MetadataRegistrationArtifact metadataRegistration,
+        SupplementalMetadataTemplateArtifact supplementalMetadataTemplate,
+        string outputRootPath,
+        CodegenMode mode = CodegenMode.Aot)
+    {
         ValidateLoweringPlan(loweringPlan, closureManifest);
         var entryMethod = LoadEntryMethod(aotCoreIr, loweringPlan.EntrySubjectId);
 
         bool isFullAssembly = string.Equals(loweringPlan.PlanKind, "full-assembly-entry", StringComparison.Ordinal);
-        planner = new();
+        var planner = new NativeAotLoweringPlanner();
         var templateModel = planner.Create(
             loweringPlan,
             aotCoreIr,
@@ -34,7 +54,7 @@ public sealed class NativeAotEmitter
             metadataRegistration,
             supplementalMetadataTemplate,
             fullAssemblyMode: isFullAssembly,
-            mode: request.Mode);
+            mode: mode);
 
         var (generatedSources, generatedArtifacts) = BuildGeneratedSources(
             templateModel, loweringPlan);
@@ -83,7 +103,7 @@ public sealed class NativeAotEmitter
         {
             AssemblyName = loweringPlan.AssemblyName,
             EntrySubjectId = loweringPlan.EntrySubjectId,
-            ManagedClosureRootPath = ManagedNaming.NormalizePathForManifest(managedClosureRoot, Environment.CurrentDirectory),
+            ManagedClosureRootPath = ManagedNaming.NormalizePathForManifest(outputRootPath, Environment.CurrentDirectory),
             PlanArtifactPath = NativeAotArtifactNames.LoweringPlan,
             TranslationUnitPageSize = loweringPlan.TranslationUnitPageSize,
             TranslationUnitPageCount = loweringPlan.TranslationUnitPageCount,
@@ -93,7 +113,7 @@ public sealed class NativeAotEmitter
 
         return new NativeAotResult
         {
-            OutputRootPath = request.OutputRootPath,
+            OutputRootPath = outputRootPath,
             LoweringPlan = loweringPlan,
             Manifest = manifest,
             CodegenMetrics = codegenMetrics,

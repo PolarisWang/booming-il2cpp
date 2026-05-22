@@ -3,6 +3,7 @@
 #include "thread_state.h"
 #include "execution_context.h"
 #include "gc_transition.h"
+#include "forbid_suspend.h"
 #include "runtime_stubs/threadpool_events.h"
 
 #include <algorithm>
@@ -235,6 +236,7 @@ void WorkerLoop() noexcept {
 }
 
 void EnsureWorkerCount(int32_t desired) noexcept {
+    ForbidSuspendScope forbid;
     std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(s_mutex);
     while (static_cast<int32_t>(s_workers.size()) < desired) {
         s_workers.emplace_back(WorkerLoop);
@@ -652,18 +654,22 @@ void ThreadPoolShutdown() noexcept {
     }
 #endif
 
-    for (auto& t : s_workers) {
-        if (t.joinable()) t.join();
-    }
-    s_workers.clear();
+    {
+        ForbidSuspendScope forbid;
+        for (auto& t : s_workers) {
+            if (t.joinable()) t.join();
+        }
+        s_workers.clear();
 
-    // Clean up worker queues.
-    for (auto* q : s_worker_queues) DestroyWorkerQueue(q);
-    s_worker_queues.clear();
+        // Clean up worker queues.
+        for (auto* q : s_worker_queues) DestroyWorkerQueue(q);
+        s_worker_queues.clear();
+    }
 
     if (s_gate_thread.joinable()) s_gate_thread.join();
 
     {
+        ForbidSuspendScope forbid;
         std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(s_mutex);
         while (!s_global_queue.empty()) s_global_queue.pop();
         s_queue_depth.store(0, std::memory_order_relaxed);
@@ -711,7 +717,16 @@ void ThreadPoolGateTick() noexcept {
 #endif
 
     int32_t current = static_cast<int32_t>(s_workers.size());
-    int32_t target = s_hill_climbing.OnGateTick(completed, current);
+    int32_t target;
+
+    // Starving detection: if queue depth is more than 2× active workers,
+    // bypass hill-climbing analysis and force-add a thread.
+    int32_t depth = s_queue_depth.load(std::memory_order_relaxed);
+    if (depth > current * 2 && current < kThreadPoolMaxWorkerCount) {
+        target = current + 1;
+    } else {
+        target = s_hill_climbing.OnGateTick(completed, current);
+    }
 
     target = (std::max)(target, kThreadPoolMinWorkerCount);
     target = (std::min)(target, kThreadPoolMaxWorkerCount);

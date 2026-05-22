@@ -51,6 +51,9 @@ struct Functions {
         void (*Subject_13)(
                 void
         );
+        void (*Subject_14)(
+                void
+        );
         void (*Subject_1)(
                 void
         );
@@ -123,6 +126,11 @@ struct ExceptionThrowDiagnosticsSubjects {
         return kFunctions.exceptionThrowDiagnosticsSubjects.Subject_13(
         );
     }
+    static inline void Subject_14(
+    ) {
+        return kFunctions.exceptionThrowDiagnosticsSubjects.Subject_14(
+        );
+    }
     static inline void Subject_1(
     ) {
         return kFunctions.exceptionThrowDiagnosticsSubjects.Subject_1(
@@ -169,7 +177,7 @@ struct ExceptionThrowDiagnosticsSubjects {
         );
     }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 14;
+    static constexpr int32_t MethodCount = 15;
 };
 
 

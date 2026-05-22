@@ -79,6 +79,22 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
             }
         }
 
+        // ── Snapshot virtual stack state for RegStackMap ─────────────────
+        RegStackMapEntry map_entry;
+        map_entry.stack_depth = static_cast<uint8_t>(
+            virt_sp > RegStackMapEntry::kMaxSlots ? RegStackMapEntry::kMaxSlots : virt_sp);
+        for (uint32_t si = 0; si < map_entry.stack_depth; ++si) {
+            map_entry.slot_regs[si] = static_cast<int8_t>(virt_stack[si]);
+        }
+        for (uint32_t si = map_entry.stack_depth; si < RegStackMapEntry::kMaxSlots; ++si) {
+            map_entry.slot_regs[si] = -1;
+        }
+        // Dedicated local vregs: r8-r15 per allocator convention
+        for (uint32_t li = 0; li < RegStackMapEntry::kMaxLocals; ++li) {
+            map_entry.local_regs[li] = static_cast<int8_t>(8 + li);
+        }
+        result.stack_map.entries.push_back(map_entry);
+
         const auto& ir = instrs[i];
         RegisterInstruction ri = {};
         uint32_t op_val = static_cast<uint32_t>(ir.op_code);

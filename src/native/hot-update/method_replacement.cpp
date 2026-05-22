@@ -124,35 +124,54 @@ bool Revert(CHAOS_IL2CPP_UINT32 method_token) {
         }
     }
 
-    GetReplacements().erase(it);
+    // Erase by key, not by iterator: the iterator was obtained before the mutex
+    // was released (UpdateVTableSlotByMethodToken drops the lock), and another
+    // thread may have modified the map in the meantime, invalidating the iterator.
+    GetReplacements().erase(method_token);
     return true;
 }
 
 void RevertAll() {
-    CHAOS_IL2CPP_UNIQUE_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(GetMutex());
-    // Restore all original pointers before clearing.
-    for (auto& [method_token, entry] : GetReplacements()) {
-        if (entry.original_pointer != nullptr) {
-            lock.unlock();
-            chaos::il2cpp::vtable_registry::UpdateVTableSlotByMethodToken(
-                method_token, entry.original_pointer);
-            lock.lock();
-        }
-
-        // Deactivate hotpatch dispatch entry unconditionally.
-        {
-            auto& registry = chaos::il2cpp::runtime_core::GetHotpatchNameRegistry();
-            uint64_t composite = registry.FindToken(method_token);
-            if (composite != 0) {
-                uint32_t mod_id = chaos::il2cpp::runtime_core::ExtractModuleId(composite);
-                uint32_t slot = registry.TokenToSlot(mod_id, method_token);
-                if (slot != ~0u) {
-                    registry.SetPatchedBySlot(mod_id, slot, false, nullptr);
-                }
+    // Collect tokens and their original pointers under lock, then restore
+    // VTable slots outside the lock (UpdateVTableSlotByMethodToken has its own
+    // lock), so the range-for never holds checked iterators across unlock/lock.
+    std::vector<CHAOS_IL2CPP_UINT32> tokens;
+    std::vector<std::pair<CHAOS_IL2CPP_UINT32, void*>> to_restore;
+    {
+        CHAOS_IL2CPP_UNIQUE_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(GetMutex());
+        tokens.reserve(GetReplacements().size());
+        to_restore.reserve(GetReplacements().size());
+        for (const auto& [method_token, entry] : GetReplacements()) {
+            tokens.push_back(method_token);
+            if (entry.original_pointer != nullptr) {
+                to_restore.emplace_back(method_token, entry.original_pointer);
             }
         }
     }
-    GetReplacements().clear();
+
+    // Restore all VTable slots (no GetMutex held).
+    for (const auto& [token, original] : to_restore) {
+        chaos::il2cpp::vtable_registry::UpdateVTableSlotByMethodToken(token, original);
+    }
+
+    // Deactivate hotpatch dispatch entries.
+    for (auto method_token : tokens) {
+        auto& registry = chaos::il2cpp::runtime_core::GetHotpatchNameRegistry();
+        uint64_t composite = registry.FindToken(method_token);
+        if (composite != 0) {
+            uint32_t mod_id = chaos::il2cpp::runtime_core::ExtractModuleId(composite);
+            uint32_t slot = registry.TokenToSlot(mod_id, method_token);
+            if (slot != ~0u) {
+                registry.SetPatchedBySlot(mod_id, slot, false, nullptr);
+            }
+        }
+    }
+
+    // Clear replacements under lock.
+    {
+        CHAOS_IL2CPP_UNIQUE_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(GetMutex());
+        GetReplacements().clear();
+    }
 }
 
 void* Resolve(CHAOS_IL2CPP_UINT32 method_token) {

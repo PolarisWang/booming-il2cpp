@@ -82,34 +82,20 @@ internal static class ConvertToCppHandler
                 outputRoot,
                 EntryPointSubjectIdOverride: config.EntryPoint,
                 AdditionalAssemblyPaths: additionalPaths,
-                FullAssemblyClosure: true);
+                FullAssemblyClosure: config.FullClosure);
 
             var closureResult = pipeline.Execute(request);
             Console.WriteLine($" {closureResult.AotCoreIr.Methods.Count} methods lowered");
 
-            Console.Write("  [2/3] Writing closure artifacts...");
+            Console.Write("  [2/3] Emitting C++ (NativeAot, direct)...");
+            var emitter = new FullAssemblyEmitter();
+            var emitResult = emitter.Emit(closureResult, outputRoot, config.Mode);
+            Console.WriteLine($" done ({emitResult.GeneratedSources.Count} files)");
+
+            // Write closure artifacts for debugging/reproducibility
+            Console.Write("  [3/3] Writing closure artifacts...");
             WriteArtifacts(outputRoot, closureResult);
             Console.WriteLine(" done");
-
-            Console.Write("  [3/3] Emitting C++ (NativeAot)...");
-            var emitResult = EmitNativeAot(outputRoot, config.Mode);
-            // EmitNativeAot writes .cpp to outputRoot/generated/ but CmakeGenerator
-            // expects outputRoot/{AssemblyName}/generated/. Move files to match.
-            var asmName = emitResult.Manifest.AssemblyName;
-            if (!string.IsNullOrEmpty(asmName))
-            {
-                var asmOutputDir = Path.Combine(outputRoot, asmName);
-                foreach (var source in emitResult.GeneratedSources)
-                {
-                    var relativePath = source.RelativePath.Replace('/', Path.DirectorySeparatorChar);
-                    var srcPath = Path.Combine(outputRoot, relativePath);
-                    var dstPath = Path.Combine(asmOutputDir, relativePath);
-                    Directory.CreateDirectory(Path.GetDirectoryName(dstPath)!);
-                    if (File.Exists(srcPath))
-                        File.Move(srcPath, dstPath, overwrite: true);
-                }
-            }
-            Console.WriteLine($" {emitResult.GeneratedSources.Count} files");
 
             // Generate CMakeLists.txt
             var repoRoot = ResolveRepoRoot();
@@ -139,8 +125,22 @@ internal static class ConvertToCppHandler
             var results = pipeline.ExecuteMulti(multiRequest);
             Console.WriteLine($" {results.Sum(r => r.AotCoreIr?.Methods.Count ?? 0)} methods across {results.Count} assemblies");
 
-            // Write per-assembly artifacts and emit C++
-            Console.Write("  [2/3] Writing closure artifacts...");
+            // Emit C++ per assembly (direct, no JSON round-trip)
+            Console.Write("  [2/3] Emitting C++ (NativeAot, direct)...");
+            int totalFiles = 0;
+            var emitResults = new List<NativeAotResult>();
+            foreach (var result in results)
+            {
+                var asmOutput = result.OutputRootPath;
+                var asmEmitter = new FullAssemblyEmitter();
+                var asmEmitResult = asmEmitter.Emit(result, asmOutput, config.Mode);
+                totalFiles += asmEmitResult.GeneratedSources.Count;
+                emitResults.Add(asmEmitResult);
+            }
+            Console.WriteLine($" done ({totalFiles} files across {results.Count} assemblies)");
+
+            // Write closure artifacts for debugging/reproducibility
+            Console.Write("  [3/3] Writing closure artifacts...");
             foreach (var result in results)
             {
                 var assemblyOutput = result.OutputRootPath;
@@ -149,61 +149,21 @@ internal static class ConvertToCppHandler
             }
             Console.WriteLine(" done");
 
-            // Emit C++ per assembly
-            Console.Write("  [3/3] Emitting C++ (NativeAot)...");
-            int totalFiles = 0;
-            foreach (var result in results)
-            {
-                var emitResult = EmitNativeAot(result.OutputRootPath, config.Mode);
-                totalFiles += emitResult.GeneratedSources.Count;
-            }
-
             // Write combined report
             WriteCombinedReport(outputRoot, config, results);
 
-            // Generate CMakeLists.txt
+            // Generate CMakeLists.txt using real emit results
             var repoRoot = ResolveRepoRoot();
             var nativeLibDir = Path.Combine(repoRoot, "build", "native");
             var cmakeGen = new Chaos.IL2CPP.Generator.BuildSystem.CmakeGenerator(repoRoot);
-            var assemblyNames = results.Select(r => r.ClosureManifest?.AssemblyName ?? "unknown").ToList();
-            var assemblyInfo = assemblyNames.Select(name => new
-            {
-                Name = name,
-                Sources = new[] { $"{name}.cpp" },
-            }).ToList();
             var cmakeContent = cmakeGen.Generate(
-                results.Select(r => new NativeAotResult
+                emitResults.Select(r => new NativeAotResult
                 {
                     OutputRootPath = r.OutputRootPath,
-                    LoweringPlan = new NativeAotLoweringPlanArtifact
-                    {
-                        PlanKind = "generic-managed-entry",
-                        AssemblyName = r.ClosureManifest?.AssemblyName ?? "unknown",
-                        EntrySubjectId = r.ClosureManifest?.EntrySubjectId ?? "",
-                        EntrySymbol = "",
-                        EntryMethodToken = "0u",
-                        NativeEntryFunctionName = "RunNativeAot",
-                        WorkloadAbi = "int(int32)",
-                    },
-                    Manifest = new NativeAotManifestArtifact
-                    {
-                        AssemblyName = r.ClosureManifest?.AssemblyName ?? "unknown",
-                        EntrySubjectId = r.ClosureManifest?.EntrySubjectId ?? "",
-                        ManagedClosureRootPath = outputRoot,
-                        PlanArtifactPath = NativeAotArtifactNames.LoweringPlan,
-                        GeneratedArtifacts = [],
-                    },
-                    CodegenMetrics = new NativeCodegenMetricsArtifact
-                    {
-                        CodegenKind = "native-aot",
-                        PlanKind = "generic-managed-entry",
-                        GeneratedSourcePaths = [],
-                    },
-                    GeneratedSources = r.AotCoreIr?.Methods.Select(m => new NativeAotGeneratedSource
-                    {
-                        RelativePath = m.SubjectId,
-                        Contents = "",
-                    }).ToList() ?? [],
+                    LoweringPlan = r.LoweringPlan,
+                    Manifest = r.Manifest,
+                    CodegenMetrics = r.CodegenMetrics,
+                    GeneratedSources = r.GeneratedSources,
                 }).ToList(),
                 nativeLibDir: nativeLibDir,
                 extraSources: new List<string> { "runtime-entry.cpp" },
@@ -236,26 +196,6 @@ internal static class ConvertToCppHandler
         WriteJson(Path.Combine(root, ManagedClosureArtifactNames.NativeReferenceLoweringPlan), result.NativeReferenceLoweringPlan);
         WriteJson(Path.Combine(root, ManagedClosureArtifactNames.NativeAotLoweringPlan), result.NativeAotLoweringPlan);
         WriteJson(Path.Combine(root, ManagedClosureArtifactNames.ClosureManifest), result.ClosureManifest);
-    }
-
-    private static NativeAotResult EmitNativeAot(string outputRoot, CodegenMode mode = CodegenMode.Aot)
-    {
-        var request = new NativeAotRequest(outputRoot, outputRoot, mode);
-        var emitter = new NativeAotEmitter();
-        var emitResult = emitter.Generate(request);
-
-        foreach (var source in emitResult.GeneratedSources)
-        {
-            var targetPath = Path.Combine(outputRoot, source.RelativePath.Replace('/', Path.DirectorySeparatorChar));
-            Directory.CreateDirectory(Path.GetDirectoryName(targetPath)!);
-            File.WriteAllText(targetPath, source.Contents);
-        }
-
-        WriteJson(Path.Combine(outputRoot, NativeAotArtifactNames.LoweringPlan), emitResult.LoweringPlan);
-        WriteJson(Path.Combine(outputRoot, NativeAotArtifactNames.Manifest), emitResult.Manifest);
-        WriteJson(Path.Combine(outputRoot, NativeAotArtifactNames.CodegenMetrics), emitResult.CodegenMetrics);
-
-        return emitResult;
     }
 
     private static void WriteCombinedReport(string outputRoot, ConvertToCppConfig config, IReadOnlyList<ManagedClosureResult> results)

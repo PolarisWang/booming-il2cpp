@@ -58,6 +58,34 @@ int32_t ReaderWriterLockSlimEnterWrite(uint32_t rw_id, int32_t timeout_ms) noexc
 /// @return true if successful.
 bool ReaderWriterLockSlimExitWrite(uint32_t rw_id) noexcept;
 
+/// Enter upgradeable read mode (shared with readers, exclusive with other
+/// upgradeable readers and writers). At most one thread can hold the
+/// upgradeable read lock at a time. Regular readers can still enter.
+/// @param rw_id      Handle from ReaderWriterLockSlimCreate.
+/// @param timeout_ms -1 = infinite, 0 = poll, >0 = bounded.
+/// @return 1 = acquired, 0 = timeout, -1 = error.
+int32_t ReaderWriterLockSlimEnterUpgradeableRead(uint32_t rw_id, int32_t timeout_ms) noexcept;
+
+/// Exit upgradeable read mode.
+/// @param rw_id  Handle from ReaderWriterLockSlimCreate.
+/// @return true if successful.
+bool ReaderWriterLockSlimExitUpgradeableRead(uint32_t rw_id) noexcept;
+
+/// Upgrade from upgradeable-read to write mode. Caller must already hold
+/// the upgradeable read lock. Blocks until all readers drain.
+/// @param rw_id      Handle from ReaderWriterLockSlimCreate.
+/// @param timeout_ms -1 = infinite, 0 = poll, >0 = bounded.
+/// @return 1 = acquired write, 0 = timeout, -1 = error (not upgradeable reader).
+int32_t ReaderWriterLockSlimUpgradeToWrite(uint32_t rw_id, int32_t timeout_ms) noexcept;
+
+/// Downgrade from write back to upgradeable-read mode. Caller must hold
+/// both the write lock AND the upgradeable read lock (i.e. must have called
+/// UpgradeToWrite from upgradeable-read state first). After return, the
+/// write lock is released but the upgradeable read lock remains held.
+/// @param rw_id  Handle from ReaderWriterLockSlimCreate.
+/// @return true if successful.
+bool ReaderWriterLockSlimDowngradeFromWrite(uint32_t rw_id) noexcept;
+
 // ── Barrier ────────────────────────────────────────────────────────────
 
 /// Create a Barrier that synchronizes `participant_count` threads.

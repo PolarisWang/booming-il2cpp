@@ -121,4 +121,17 @@ public partial class ExceptionThrowDiagnosticsTests
         // Purpose: Smoke — Exception.GetBaseException with complex param(s)
             _ = new Exception().GetBaseException();
     }
+
+    // === OSR hot loop ===
+
+    [Fact]
+    public void _OSR_HotLoop()
+    {
+        // Purpose: Trigger OSR promotion via 150-iteration hot loop (exceeds kOsrLoopThreshold=100)
+        long sum = 0;
+        for (int i = 0; i < 150; i++) {
+            sum += i;
+        }
+        Xunit.Assert.Equal(11175, sum);
+    }
 }

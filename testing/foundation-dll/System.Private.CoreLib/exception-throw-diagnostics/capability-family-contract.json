@@ -18,9 +18,13 @@
     "System.Private.CoreLib/System.ArgumentOutOfRangeException::.ctor:System.Void(System.String)",
     "System.Private.CoreLib/System.InvalidOperationException::.ctor:System.Void(System.String)",
     "System.Private.CoreLib/System.NotSupportedException::.ctor:System.Void(System.String)",
-    "System.Private.CoreLib/System.NotImplementedException::.ctor:System.Void(System.String)"
+    "System.Private.CoreLib/System.NotImplementedException::.ctor:System.Void(System.String)",
+    "System.Private.CoreLib/OSR::HotLoop:System.Void()",
+    "System.Private.CoreLib/Memory::CopyBlock:System.Void()",
+    "System.Private.CoreLib/Memory::InitBlock:System.Void()"
   ],
-  "methodSubjectCount": 14,
+  "methodSubjectCount": 17,
+  "customEntryIndices": [14, 15, 16],
   "functionalObligation": {
     "required": true
   },

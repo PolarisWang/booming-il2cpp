@@ -32,7 +32,7 @@
 | 文件 | 职责 |
 |------|------|
 | `Emission/NativeAotLoweringPlanner.MethodEmission.cs` | 方法体发射入口、指令派发、结构化控制流发射、虚方法/接口方法 dispatch |
-| `Emission/NativeAotLoweringPlanner.ExceptionEmission.cs` | EH C++ 生成（5种 shape），InlineShapeDescriptor 调用折叠、enum.ToString 常量折叠 |
+| `Emission/NativeAotLoweringPlanner.ExceptionEmission.cs` | EH C++ 生成（5种 shape），InlineShapeDescriptor 调用折叠、enum.ToString 常量折叠、box+ToString fusion→ChaosEnumToStringRaw |
 | `Emission/NativeAotLoweringPlanner.StructuredControlFlow.cs` | CFG 构建、基本块分析、结构化恢复算法 |
 | `Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs` | 对象模型发射（TypeInfo、VTable 数组、iface_map、对象创建） |
 | `Emission/NativeAotLoweringPlanner.ObjectModelUtilities.cs` | SubjectId 工具函数、stable_id 计算、类型名解析 |
@@ -54,6 +54,7 @@
 | `RuntimeSupport/NativeAotLoweringPlanner.StaticInitializationEmission.cs` | 静态初始化代码发射 |
 | `RuntimeSupport/NativeAotLoweringPlanner.ExternalRuntimeHelpers.cs` | 外部运行时 helper 注册入口 |
 | `RuntimeSupport/NativeAotLoweringPlanner.ExternalRuntimeHelpers.TypeResolution.cs` | 类型解析 helper 注册 |
+| `RuntimeSupport/EnumMetadataExtractor.cs` | Enum metadata C++ 头生成：constexpr field arrays、FNV-24 dispatch table（排序数组+二分查找）、静态 registrar（ChaosEnumRegisterDispatchTable） |
 | `RuntimeSupport/NativeAotLoweringPlanner.ExternalRuntimeHelpers.Assertions.cs` | 断言 helper 注册 |
 | `RuntimeSupport/NativeAotLoweringPlanner.ExternalRuntimeHelpers.StringAndPlatform.cs` | 字符串与平台 helper 注册 |
 | `RuntimeSupport/NativeAotLoweringPlanner.ExternalRuntimeHelpers.InvocationAbi.cs` | 调用 ABI helper 注册 |

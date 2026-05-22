@@ -67,8 +67,6 @@ struct AsyncLocalMap {
 
 thread_local AsyncLocalMap tls_async_locals;
 thread_local int32_t tls_suppress_flow_depth = 0;
-thread_local void (*tls_async_local_value_changed)(uint64_t, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR) = nullptr;
-thread_local void* tls_security_context = nullptr;
 
 uint32_t FindValueIndex(uint64_t key) noexcept {
     for (uint32_t i = 0; i < tls_async_locals.count; i++) {
@@ -85,6 +83,10 @@ AsyncLocalValue* FindValue(uint64_t key) noexcept {
 }
 
 }  // anonymous namespace
+
+// TLS definitions for symbols declared in the header (outside anonymous namespace).
+thread_local void (*tls_async_local_value_changed)(uint64_t, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR) = nullptr;
+thread_local void* tls_security_context = nullptr;
 
 // ── AsyncLocalSetValue / AsyncLocalGetValue ───────────────────────────
 

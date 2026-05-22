@@ -40,8 +40,9 @@ struct GcHandleTest : GcUnitTestBase {
 // ── Test 1: Strong handle keeps object alive ──────────────────────
 
 TEST_F(GcHandleTest, StrongHandle) {
-    void* obj = NurseryAllocate(64);
+    void* obj = g_old_gen.Allocate(64, true);
     ASSERT_NE(obj, nullptr);
+    *static_cast<const void**>(obj) = test_type_info_64();
 
     CHAOS_IL2CPP_UINT64 h = GcCreateStrongHandle(obj);
     ASSERT_NE(h, 0u);
@@ -60,8 +61,9 @@ TEST_F(GcHandleTest, StrongHandle) {
 // ── Test 2: Weak handle is nulled after GC ────────────────────────
 
 TEST_F(GcHandleTest, WeakHandle) {
-    void* obj = NurseryAllocate(64);
+    void* obj = g_old_gen.Allocate(64, true);
     ASSERT_NE(obj, nullptr);
+    *static_cast<const void**>(obj) = test_type_info_64();
     std::memset(obj, 0xAB, 64);
 
     CHAOS_IL2CPP_UINT64 h = GcCreateWeakHandle(obj);
@@ -81,8 +83,9 @@ TEST_F(GcHandleTest, WeakHandle) {
 // ── Test 3: Pinned handle — address stability ────────────────────
 
 TEST_F(GcHandleTest, PinnedHandle) {
-    void* obj = NurseryAllocate(64);
+    void* obj = g_old_gen.Allocate(64, true);
     ASSERT_NE(obj, nullptr);
+    *static_cast<const void**>(obj) = test_type_info_64();
     std::memset(obj, 0xCD, 64);
 
     uintptr_t addr_before = reinterpret_cast<uintptr_t>(obj);

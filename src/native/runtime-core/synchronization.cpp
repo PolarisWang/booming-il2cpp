@@ -48,6 +48,7 @@ struct RWLockEntryFixed {
     CHAOS_IL2CPP_CONDITION_VARIABLE cv;
     int32_t waiting_readers{0};
     int32_t waiting_writers{0};
+    std::atomic<int32_t> upgradeable_reader_tid{0};  // TID of upgradeable reader, 0 = none
 };
 
 struct BarrierEntry {
@@ -252,9 +253,10 @@ int32_t ReaderWriterLockSlimEnterRead(uint32_t rw_handle, int32_t timeout_ms) no
     if (entry == nullptr) return -1;
 
     // ── Fast path: Interlocked CAS on state ──────────────────────────
-    // If state >= 0 (no writer), try to increment.
+    // If state >= 0 (no writer) AND no writers waiting, try to increment.
+    // The waiting_writers check prevents readers from starving writers.
     int32_t expected = entry->state.load(std::memory_order_acquire);
-    if (expected >= 0) {
+    if (expected >= 0 && entry->waiting_writers == 0) {
         if (entry->state.compare_exchange_weak(expected, expected + 1,
                 std::memory_order_acquire, std::memory_order_relaxed)) {
             return 1;  // Acquired without any syscall.
@@ -266,7 +268,7 @@ int32_t ReaderWriterLockSlimEnterRead(uint32_t rw_handle, int32_t timeout_ms) no
         for (int i = 0; i < 64; i++) {
             CHAOS_IL2CPP_PAUSE_HINT();
             expected = entry->state.load(std::memory_order_acquire);
-            if (expected >= 0) {
+            if (expected >= 0 && entry->waiting_writers == 0) {
                 if (entry->state.compare_exchange_weak(expected, expected + 1,
                         std::memory_order_acquire, std::memory_order_relaxed)) {
                     return 1;
@@ -315,9 +317,9 @@ bool ReaderWriterLockSlimExitRead(uint32_t rw_handle) noexcept {
     int32_t prev = entry->state.fetch_sub(1, std::memory_order_release);
     if (prev <= 0) return false;  // Not a reader.
 
-    // If there are waiting writers and this was the last reader, wake them.
+    // If there are waiting writers and this was the last reader, wake one.
     if (prev == 1 && entry->waiting_writers > 0) {
-        entry->cv.notify_all();
+        entry->cv.notify_one();
     }
     return true;
 }
@@ -327,19 +329,200 @@ int32_t ReaderWriterLockSlimEnterWrite(uint32_t rw_handle, int32_t timeout_ms) n
     if (entry == nullptr) return -1;
 
     // ── Fast path: CAS state 0 → -1 ──────────────────────────────────
+    // Must also check upgradeable_reader_tid: an upgradeable reader can
+    // hold the lock with state == 0, and writers must not bypass it.
     int32_t expected = 0;
     if (entry->state.compare_exchange_strong(expected, -1,
             std::memory_order_acquire, std::memory_order_relaxed)) {
-        return 1;  // Acquired without any syscall.
+        if (entry->upgradeable_reader_tid.load(std::memory_order_acquire) == 0) {
+            return 1;  // Acquired without any syscall.
+        }
+        // Upgradeable reader is active — undo CAS and fall through.
+        entry->state.store(0, std::memory_order_release);
     }
 
     // ── Spin 64 iterations ───────────────────────────────────────────
     for (int i = 0; i < 64; i++) {
         CHAOS_IL2CPP_PAUSE_HINT();
+        // Check both state and upgradeable before CAS to avoid
+        // the undo overhead in the fast path above.
+        if (entry->state.load(std::memory_order_acquire) != 0) continue;
+        if (entry->upgradeable_reader_tid.load(std::memory_order_acquire) != 0) continue;
         expected = 0;
         if (entry->state.compare_exchange_strong(expected, -1,
                 std::memory_order_acquire, std::memory_order_relaxed)) {
             return 1;
+        }
+    }
+
+    if (timeout_ms == 0) return 0;
+
+    // ── Slow path: block on mutex + cv ───────────────────────────────
+    GC_TRANSITION_TO_PREEMPTIVE();
+    {
+        std::unique_lock<CHAOS_IL2CPP_MUTEX> lock(entry->mutex);
+        entry->waiting_writers++;
+
+        int32_t result;
+        if (timeout_ms < 0) {
+            entry->cv.wait(lock, [entry] {
+                return entry->state.load(std::memory_order_acquire) == 0 &&
+                       entry->upgradeable_reader_tid.load(std::memory_order_acquire) == 0;
+            });
+            result = 1;
+        } else {
+            bool acquired = entry->cv.wait_for(lock, std::chrono::milliseconds(timeout_ms),
+                [entry] {
+                    return entry->state.load(std::memory_order_acquire) == 0 &&
+                           entry->upgradeable_reader_tid.load(std::memory_order_acquire) == 0;
+                });
+            result = acquired ? 1 : 0;
+        }
+        entry->waiting_writers--;
+
+        if (result == 1) {
+            entry->state.store(-1, std::memory_order_release);
+        }
+        GC_TRANSITION_TO_COOPERATIVE();
+        return result;
+    }
+}
+
+bool ReaderWriterLockSlimExitWrite(uint32_t rw_handle) noexcept {
+    auto* entry = FindRWLockFixed(rw_handle);
+    if (entry == nullptr) return false;
+
+    int32_t prev = entry->state.exchange(0, std::memory_order_release);
+    if (prev != -1) return false;  // Not the writer.
+
+    // Wake waiters (both readers and writers).
+    if (entry->waiting_readers > 0 || entry->waiting_writers > 0) {
+        entry->cv.notify_all();
+    }
+    return true;
+}
+
+// ── Upgradeable read ───────────────────────────────────────────────────
+//
+// State machine (upgradeable_reader_tid / state):
+//   (0, >=0)         — idle or readers only
+//   (TID, >=0)       — upgradeable read held by TID (readers may coexist)
+//   (TID, -1)        — upgradeable→write: write held by the upgradeable reader
+//   (0, -1)          — regular writer active (no upgradeable reader)
+//
+// EnterUpgradeableRead: CAS upgradeable_reader_tid 0→TID, check state >=0
+// ExitUpgradeableRead: clear upgradeable_reader_tid
+// UpgradeToWrite:     wait for state→0, then CAS 0→-1
+// DowngradeFromWrite: store state=0, keep upgradeable_reader_tid
+
+int32_t ReaderWriterLockSlimEnterUpgradeableRead(uint32_t rw_handle, int32_t timeout_ms) noexcept {
+    auto* entry = FindRWLockFixed(rw_handle);
+    if (entry == nullptr) return -1;
+
+    int32_t tid = threading::GetCurrentThreadId();
+
+    // ── Fast path: CAS upgradeable_reader_tid 0 → TID ────────────────
+    int32_t expected_tid = 0;
+    if (entry->upgradeable_reader_tid.compare_exchange_strong(expected_tid, tid,
+            std::memory_order_acquire, std::memory_order_relaxed)) {
+        if (entry->state.load(std::memory_order_acquire) >= 0) {
+            return 1;  // Acquired.
+        }
+        // Writer is active — undo and fall through.
+        entry->upgradeable_reader_tid.store(0, std::memory_order_release);
+    }
+
+    // ── Spin 64 iterations ───────────────────────────────────────────
+    for (int i = 0; i < 64; i++) {
+        CHAOS_IL2CPP_PAUSE_HINT();
+        if (entry->state.load(std::memory_order_acquire) < 0) continue;
+        expected_tid = 0;
+        if (entry->upgradeable_reader_tid.compare_exchange_strong(expected_tid, tid,
+                std::memory_order_acquire, std::memory_order_relaxed)) {
+            if (entry->state.load(std::memory_order_acquire) >= 0) {
+                return 1;
+            }
+            // Writer got in between — undo.
+            entry->upgradeable_reader_tid.store(0, std::memory_order_release);
+        }
+    }
+
+    if (timeout_ms == 0) return 0;
+
+    // ── Slow path: block on mutex + cv ───────────────────────────────
+    GC_TRANSITION_TO_PREEMPTIVE();
+    {
+        std::unique_lock<CHAOS_IL2CPP_MUTEX> lock(entry->mutex);
+        // Register as a writer waiter (upgradeable read has writer-like
+        // exclusivity against other upgradeable readers).
+        entry->waiting_writers++;
+
+        int32_t result;
+        auto predicate = [entry, tid] {
+            // Can acquire when no writer and no other upgradeable reader.
+            int32_t s = entry->state.load(std::memory_order_acquire);
+            if (s < 0) return false;
+            int32_t cur_tid = entry->upgradeable_reader_tid.load(std::memory_order_acquire);
+            return cur_tid == 0 || cur_tid == tid;
+        };
+
+        if (timeout_ms < 0) {
+            entry->cv.wait(lock, predicate);
+            result = 1;
+        } else {
+            bool acquired = entry->cv.wait_for(lock, std::chrono::milliseconds(timeout_ms), predicate);
+            result = acquired ? 1 : 0;
+        }
+        entry->waiting_writers--;
+
+        if (result == 1) {
+            // CAS upgradeable_reader_tid in case we woke spuriously and
+            // another thread grabbed it while we were racing.
+            expected_tid = 0;
+            entry->upgradeable_reader_tid.compare_exchange_strong(expected_tid, tid,
+                std::memory_order_release, std::memory_order_relaxed);
+        }
+        GC_TRANSITION_TO_COOPERATIVE();
+        return result;
+    }
+}
+
+bool ReaderWriterLockSlimExitUpgradeableRead(uint32_t rw_handle) noexcept {
+    auto* entry = FindRWLockFixed(rw_handle);
+    if (entry == nullptr) return false;
+
+    int32_t tid = threading::GetCurrentThreadId();
+    if (entry->upgradeable_reader_tid.load(std::memory_order_acquire) != tid) {
+        return false;  // Not the upgradeable reader.
+    }
+
+    entry->upgradeable_reader_tid.store(0, std::memory_order_release);
+
+    // Wake waiting writers (and other upgradeable readers).
+    if (entry->waiting_writers > 0) {
+        entry->cv.notify_all();
+    }
+    return true;
+}
+
+int32_t ReaderWriterLockSlimUpgradeToWrite(uint32_t rw_handle, int32_t timeout_ms) noexcept {
+    auto* entry = FindRWLockFixed(rw_handle);
+    if (entry == nullptr) return -1;
+
+    int32_t tid = threading::GetCurrentThreadId();
+    if (entry->upgradeable_reader_tid.load(std::memory_order_acquire) != tid) {
+        return -1;  // Not the upgradeable reader.
+    }
+
+    // ── Spin wait for readers to drain (state → 0) ───────────────────
+    for (int i = 0; i < 64; i++) {
+        CHAOS_IL2CPP_PAUSE_HINT();
+        int32_t s = entry->state.load(std::memory_order_acquire);
+        if (s == 0) {
+            if (entry->state.compare_exchange_strong(s, -1,
+                    std::memory_order_acquire, std::memory_order_relaxed)) {
+                return 1;  // Upgraded to write.
+            }
         }
     }
 
@@ -374,15 +557,26 @@ int32_t ReaderWriterLockSlimEnterWrite(uint32_t rw_handle, int32_t timeout_ms) n
     }
 }
 
-bool ReaderWriterLockSlimExitWrite(uint32_t rw_handle) noexcept {
+bool ReaderWriterLockSlimDowngradeFromWrite(uint32_t rw_handle) noexcept {
     auto* entry = FindRWLockFixed(rw_handle);
     if (entry == nullptr) return false;
 
-    int32_t prev = entry->state.exchange(0, std::memory_order_release);
-    if (prev != -1) return false;  // Not the writer.
+    int32_t tid = threading::GetCurrentThreadId();
+    if (entry->upgradeable_reader_tid.load(std::memory_order_acquire) != tid) {
+        return false;  // Not the upgradeable reader.
+    }
+    if (entry->state.load(std::memory_order_acquire) != -1) {
+        return false;  // Don't hold write.
+    }
 
-    // Wake waiters (both readers and writers).
-    if (entry->waiting_readers > 0 || entry->waiting_writers > 0) {
+    // Release write: state 0 → -1. upgradeable_reader_tid stays set, so
+    // the thread still holds upgradeable read. No notify needed since
+    // only regular readers can now enter (writers/upgradeable still see
+    // upgradeable_reader_tid != 0), and readers don't need notification.
+    entry->state.store(0, std::memory_order_release);
+
+    // Wake any readers that were waiting (common after upgrade→write).
+    if (entry->waiting_readers > 0) {
         entry->cv.notify_all();
     }
     return true;

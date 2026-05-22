@@ -3,6 +3,7 @@
 
 #include "gc_region.h"
 #include "thread_state.h"
+#include "forbid_suspend.h"
 
 namespace chaos::il2cpp::runtime_core {
 namespace {
@@ -100,6 +101,7 @@ SyncBlock g_sync_block_pool[kSyncBlockPoolSize];
 std::atomic<uint32_t> g_sync_block_pool_next{0};
 
 SyncBlock* AllocateSyncBlockFromPool() noexcept {
+    threading::ForbidSuspendScope forbid;
     uint32_t idx = g_sync_block_pool_next.fetch_add(1, std::memory_order_relaxed);
     if (idx < kSyncBlockPoolSize) {
         return &g_sync_block_pool[idx];
@@ -120,7 +122,7 @@ static bool InflateAndEnter(void* obj) noexcept {
     auto* sync_ptr = GetSyncStatePtr(obj);
     uint64_t sync = *sync_ptr;
     if ((sync & kSyncInflatedBit) != 0) {
-        // Another thread already inflated — find the existing SyncBlock.
+        // Another thread already inflated — contend on existing SyncBlock.
         auto it = stripe.entries.find(obj);
         if (it != stripe.entries.end() && it->second != nullptr) {
             it->second->mutex.lock();
@@ -133,11 +135,15 @@ static bool InflateAndEnter(void* obj) noexcept {
     auto* sb = AllocateSyncBlockFromPool();
     stripe.entries[obj] = sb;
 
-    const uint64_t inflated_val = kSyncInflatedBit | reinterpret_cast<uint64_t>(sb);
-    AtomicStoreRelease(sync_ptr, inflated_val);
-
+    // Lock sb->mutex BEFORE publishing the inflated bit. This ensures
+    // any thread that sees the inflated state finds sb->mutex already
+    // locked, preventing races between the inflater and the original
+    // thin-lock holder's MonitorExit/MonitorWait.
     sb->mutex.lock();
     sb->owner_tid.store(threading::GetCurrentThreadId(), std::memory_order_relaxed);
+
+    const uint64_t inflated_val = kSyncInflatedBit | reinterpret_cast<uint64_t>(sb);
+    AtomicStoreRelease(sync_ptr, inflated_val);
     return true;
 }
 

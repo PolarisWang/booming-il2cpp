@@ -1,0 +1,27 @@
+# GC Benchmark Baseline: baseline-v1
+# Date: 2026-05-22T21:27:06.032075
+# Executable: D:\agent\booming-il2cpp\testing\build\runtime-core\gc\RelWithDebInfo\test_gc_regression_benchmark.exe
+#
+BENCH|AllocationThroughput|throughput|4819199|KB/s
+BENCH|AllocationThroughput|avg_alloc_ns|12|ns
+BENCH|AllocationThroughput|total_elapsed_ms|1|ms
+BENCH|YoungGcPause|count|1|samples
+BENCH|YoungGcPause|avg_ns|1007900|ns
+BENCH|YoungGcPause|total_ns|1007900|ns
+BENCH|FullGcPause|count|5|samples
+BENCH|FullGcPause|avg_ns|1020020|ns
+BENCH|FullGcPause|median_ns|128500|ns
+BENCH|MixedAllocPattern|throughput_kb_s|3225959|KB/s
+BENCH|MixedAllocPattern|avg_alloc_ns|9|ns
+BENCH|MixedAllocPattern|survivor_count|1000|objects
+BENCH|Gen1Pause|count|0|samples
+BENCH|MultiThreadAlloc|throughput_mb_s|4773219|KB/s
+BENCH|MultiThreadAlloc|total_allocs|100000|allocs
+BENCH|MultiThreadAlloc|wall_elapsed_ms|1|ms
+BENCH|MultiThreadAlloc|avg_thread_ns|1096375|ns
+BENCH|MultiThreadAlloc|min_thread_ns|1008600|ns
+BENCH|MultiThreadAlloc|max_thread_ns|1167300|ns
+BENCH|MultiThreadAlloc|thread_count|4|threads
+BENCH|MultiThreadAlloc|fail_count|0|allocs
+BENCH|format: BENCH|<name>|<metric>|<value>|<unit>
+BENCH|tip: pipe two runs through bench-compare for regression

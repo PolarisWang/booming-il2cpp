@@ -110,4 +110,17 @@ public static partial class ExceptionThrowDiagnosticsSubjects
         catch { _exitCode = 1; }
     }
 
+    // [14] OSR hot loop — 150 iterations to trigger RegisterExecute → T4 promotion
+    public static void Subject_14()
+    {
+        try {
+            long sum = 0;
+            for (int i = 0; i < 150; i++) {
+                sum += i;
+            }
+            if (sum != 11175) _exitCode = 1;
+        }
+        catch { _exitCode = 1; }
+    }
+
 }

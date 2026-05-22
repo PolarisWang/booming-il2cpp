@@ -224,15 +224,6 @@ struct CatchHandlerEntry {
     uint32_t class_token;        // metadata token for typed catch (0 = untyped)
 };
 
-// ── Register method ─────────────────────────────────────────────────────
-// A method lowered to register-based IR.  Produced by the register allocator.
-struct RegisterMethod {
-    CHAOS_IL2CPP_VECTOR(RegisterInstruction) instructions = {};
-    CHAOS_IL2CPP_VECTOR(SEHClause)           seh_clauses  = {};
-    CHAOS_IL2CPP_VECTOR(CatchHandlerEntry)   catch_handler_entries = {};
-    uint32_t                                  max_regs     = 0;  // highest register used
-};
-
 // ── RegStackMapEntry ─────────────────────────────────────────────────────
 // Maps evaluation-stack slots and locals to virtual registers at a given pc.
 // Used by OSR converters (CaptureRegisterFrame, RestoreOsrToRegisterFrame,
@@ -250,6 +241,16 @@ struct RegStackMapEntry {
 
 struct RegStackMap {
     CHAOS_IL2CPP_VECTOR(RegStackMapEntry) entries;  // indexed by instruction pc
+};
+
+// ── Register method ─────────────────────────────────────────────────────
+// A method lowered to register-based IR.  Produced by the register allocator.
+struct RegisterMethod {
+    CHAOS_IL2CPP_VECTOR(RegisterInstruction) instructions = {};
+    CHAOS_IL2CPP_VECTOR(SEHClause)           seh_clauses  = {};
+    CHAOS_IL2CPP_VECTOR(CatchHandlerEntry)   catch_handler_entries = {};
+    RegStackMap                              stack_map     = {};
+    uint32_t                                  max_regs     = 0;  // highest register used
 };
 
 // ── Register allocator ──────────────────────────────────────────────────

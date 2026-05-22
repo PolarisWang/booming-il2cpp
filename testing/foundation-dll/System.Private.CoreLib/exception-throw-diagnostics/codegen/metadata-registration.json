@@ -16,8 +16,16 @@
       "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects"
     },
     {
-      "registrationKind": "field",
+      "registrationKind": "type",
       "slot": 2,
+      "subjectId": "ExceptionThrowDiagnosticsSubjects/\u003CPrivateImplementationDetails\u003E",
+      "name": "\u003CPrivateImplementationDetails\u003E",
+      "displayName": "\u003CPrivateImplementationDetails\u003E",
+      "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/\u003CPrivateImplementationDetails\u003E"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 3,
       "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::_exitCode",
       "name": "_exitCode",
       "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::_exitCode",
@@ -25,8 +33,17 @@
       "memberType": "System.Int32"
     },
     {
+      "registrationKind": "field",
+      "slot": 4,
+      "subjectId": "ExceptionThrowDiagnosticsSubjects/\u003CPrivateImplementationDetails\u003E::9F64A747E1B97F131FABB6B447296C9B6F0201E79FB3C5356E6C77E89B6A806A",
+      "name": "9F64A747E1B97F131FABB6B447296C9B6F0201E79FB3C5356E6C77E89B6A806A",
+      "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/\u003CPrivateImplementationDetails\u003E::9F64A747E1B97F131FABB6B447296C9B6F0201E79FB3C5356E6C77E89B6A806A",
+      "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/\u003CPrivateImplementationDetails\u003E",
+      "memberType": "System.Int32"
+    },
+    {
       "registrationKind": "method",
-      "slot": 3,
+      "slot": 5,
       "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_0:System.Void()",
       "name": "Subject_0",
       "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_0:System.Void()",
@@ -37,7 +54,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 4,
+      "slot": 6,
       "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_1:System.Void()",
       "name": "Subject_1",
       "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_1:System.Void()",
@@ -48,7 +65,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 5,
+      "slot": 7,
       "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_2:System.Void()",
       "name": "Subject_2",
       "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_2:System.Void()",
@@ -59,7 +76,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 6,
+      "slot": 8,
       "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_3:System.Void()",
       "name": "Subject_3",
       "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_3:System.Void()",
@@ -70,7 +87,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 7,
+      "slot": 9,
       "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_4:System.Void()",
       "name": "Subject_4",
       "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_4:System.Void()",
@@ -81,7 +98,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 8,
+      "slot": 10,
       "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_5:System.Void()",
       "name": "Subject_5",
       "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_5:System.Void()",
@@ -92,7 +109,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 9,
+      "slot": 11,
       "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_6:System.Void()",
       "name": "Subject_6",
       "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_6:System.Void()",
@@ -103,7 +120,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 10,
+      "slot": 12,
       "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_7:System.Void()",
       "name": "Subject_7",
       "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_7:System.Void()",
@@ -114,7 +131,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 11,
+      "slot": 13,
       "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_8:System.Void()",
       "name": "Subject_8",
       "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_8:System.Void()",
@@ -125,7 +142,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 12,
+      "slot": 14,
       "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_9:System.Void()",
       "name": "Subject_9",
       "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_9:System.Void()",
@@ -136,7 +153,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 13,
+      "slot": 15,
       "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_10:System.Void()",
       "name": "Subject_10",
       "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_10:System.Void()",
@@ -147,7 +164,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 14,
+      "slot": 16,
       "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_11:System.Void()",
       "name": "Subject_11",
       "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_11:System.Void()",
@@ -158,7 +175,7 @@
     },
     {
       "registrationKind": "method",
-      "slot": 15,
+      "slot": 17,
       "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_12:System.Void()",
       "name": "Subject_12",
       "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_12:System.Void()",
@@ -169,10 +186,43 @@
     },
     {
       "registrationKind": "method",
-      "slot": 16,
+      "slot": 18,
       "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_13:System.Void()",
       "name": "Subject_13",
       "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_13:System.Void()",
+      "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 19,
+      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_14:System.Void()",
+      "name": "Subject_14",
+      "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_14:System.Void()",
+      "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 20,
+      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_15:System.Void()",
+      "name": "Subject_15",
+      "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_15:System.Void()",
+      "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 21,
+      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_16:System.Void()",
+      "name": "Subject_16",
+      "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_16:System.Void()",
       "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,

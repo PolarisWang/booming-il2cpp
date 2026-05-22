@@ -225,6 +225,7 @@ int32_t AllocateThreadId() noexcept {
 }
 
 void EnumerateThreads(bool (*callback)(ManagedThread*)) noexcept {
+    ForbidSuspendScope forbid;
     for (auto* entry = s_thread_list.load(std::memory_order_acquire);
          entry != nullptr;
          entry = entry->next.load(std::memory_order_acquire)) {

@@ -176,11 +176,10 @@ bool MonitorIsEntered(void* monitor_target) {
     if (tid == 0) return false;
     uint64_t sync = *sync_ptr;
     if ((sync & kSyncInflatedBit) != 0) {
+        // Read owner_tid instead of try_lock — try_lock modifies lock state.
         auto* sb = reinterpret_cast<SyncBlock*>(sync & ~3ull);
         if (sb == nullptr) return false;
-        bool owned = sb->mutex.try_lock();
-        if (owned) sb->mutex.unlock();
-        return owned;
+        return sb->owner_tid.load(std::memory_order_acquire) == threading::GetCurrentThreadId();
     }
     if ((sync & kSyncLockedBit) != 0) {
         const uint64_t stored_tid = (sync >> kSyncThreadShift) & 0x3FFFFFFF;
@@ -230,8 +229,14 @@ bool MonitorWait(void* monitor_target, int32_t timeout_ms) {
 
     // Release the monitor before wait (Monitor.Wait semantics).
     if ((sync & kSyncInflatedBit) != 0) {
-        // Inflated path: thread holds sb->mutex from MonitorEnter. Release it.
-        sb->mutex.unlock();
+        // Only unlock if we actually hold sb->mutex. The original thin-lock
+        // holder whose lock was absorbed by inflation does NOT hold sb->mutex
+        // (the inflater does). Unlocking a mutex we don't own is UB.
+        int32_t owner = sb->owner_tid.load(std::memory_order_acquire);
+        if (owner == threading::GetCurrentThreadId()) {
+            sb->owner_tid.store(0, std::memory_order_release);
+            sb->mutex.unlock();
+        }
     }
     // Thin-lock path: sync was just inflated; no sb->mutex held.
 

@@ -110,4 +110,7 @@ public static partial class ExceptionThrowDiagnosticsSubjects
         catch { _exitCode = 1; }
     }
 
+    // [14] System.Private.CoreLib/OSR::HotLoop:System.Void()
+    // [15] System.Private.CoreLib/Memory::CopyBlock:System.Void()
+    // [16] System.Private.CoreLib/Memory::InitBlock:System.Void()
 }

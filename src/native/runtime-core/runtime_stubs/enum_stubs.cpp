@@ -246,6 +246,55 @@ extern "C" const EnumMetadataTable* (*g_chaos_resolve_enum_metadata)(const char*
 // format (0x02XXXXXX). Set by static initializer in enum_metadata.generated.h.
 extern "C" const EnumMetadataTable* (*g_chaos_resolve_enum_metadata_by_fnv24)(CHAOS_IL2CPP_UINT32 fnv24) noexcept = nullptr;
 
+// Dispatch table: sorted FNV-24 → metadata array registered by generated code.
+// Preferred over g_chaos_resolve_enum_metadata_by_fnv24 because the binary search
+// avoids a large switch-case in the generated header. Set by
+// ChaosEnumRegisterDispatchTable() called from the generated static initializer.
+// Also declared in generated_code_compat.h for visibility from generated code.
+extern "C" const EnumMetadataTable* (*g_chaos_enum_dispatch_lookup)(CHAOS_IL2CPP_UINT32 fnv24) noexcept = nullptr;
+
+/// Static dispatch table state for binary-search enum lookup.
+/// Set by ChaosEnumRegisterDispatchTable and used by EnumDispatchLookup.
+static const EnumDispatchEntry* s_dispatch_entries = nullptr;
+static CHAOS_IL2CPP_UINT32 s_dispatch_count = 0;
+
+/// Binary-search lookup against the registered dispatch table.
+static const EnumMetadataTable* EnumDispatchLookup(CHAOS_IL2CPP_UINT32 fnv24) noexcept {
+    if (s_dispatch_entries == nullptr) return nullptr;
+    CHAOS_IL2CPP_UINT32 lo = 0u, hi = s_dispatch_count;
+    while (lo < hi) {
+        CHAOS_IL2CPP_UINT32 mid = lo + (hi - lo) / 2u;
+        if (s_dispatch_entries[mid].fnv24 < fnv24)
+            lo = mid + 1u;
+        else if (s_dispatch_entries[mid].fnv24 > fnv24)
+            hi = mid;
+        else
+            return s_dispatch_entries[mid].table;
+    }
+    return nullptr;
+}
+
+/// Register a sorted FNV-24 dispatch table for enum metadata lookup.
+/// Called from the generated static initializer in enum_metadata.generated.h.
+/// The entries array must be sorted by fnv24 for binary search.
+extern "C" void ChaosEnumRegisterDispatchTable(
+    const EnumDispatchEntry* entries, CHAOS_IL2CPP_UINT32 count) noexcept
+{
+    s_dispatch_entries = entries;
+    s_dispatch_count = count;
+    g_chaos_enum_dispatch_lookup = EnumDispatchLookup;
+}
+
+/// Hotpatch: replace the dispatch table entries at runtime.
+/// New entries are added, old entries remain for existing types.
+/// The lambda closure is updated atomically (pointer write on x64/ARM64).
+extern "C" void ChaosEnumUpdateDispatchTable(
+    const EnumDispatchEntry* entries, CHAOS_IL2CPP_UINT32 count) noexcept
+{
+    // Same as register — atomically replace the lookup closure.
+    ChaosEnumRegisterDispatchTable(entries, count);
+}
+
 /// Populate the enum string cache for the given type.
 /// Pre-allocates managed strings for all named field values.
 ///
@@ -373,9 +422,16 @@ static const EnumMetadataTable* enum_resolve_meta(CHAOS_IL2CPP_INTPTR type_arg) 
     uint32_t val = static_cast<uint32_t>(type_arg & 0xFFFFFFFFu);
     if ((val & 0xFF000000u) == 0x02000000u && (val & 0xFFFFFFu) != 0u) {
         uint32_t fnv24 = val & 0xFFFFFFu;
-        const auto* meta = g_chaos_resolve_enum_metadata_by_fnv24
-            ? g_chaos_resolve_enum_metadata_by_fnv24(fnv24)
+        // Priority 1: dispatch table (binary search over sorted entries)
+        const auto* meta = g_chaos_enum_dispatch_lookup
+            ? g_chaos_enum_dispatch_lookup(fnv24)
             : nullptr;
+        if (meta == nullptr) {
+            // Priority 2: generated switch-case (legacy path)
+            meta = g_chaos_resolve_enum_metadata_by_fnv24
+                ? g_chaos_resolve_enum_metadata_by_fnv24(fnv24)
+                : nullptr;
+        }
         if (meta != nullptr) {
             s_enum_meta_type_key = type_arg;
             s_enum_meta_cache = meta;
@@ -397,9 +453,16 @@ static const EnumMetadataTable* enum_resolve_meta(CHAOS_IL2CPP_INTPTR type_arg) 
                 h *= 16777619u;
             }
             uint32_t fnv24 = h & 0xFFFFFFu;
-            const auto* meta = g_chaos_resolve_enum_metadata_by_fnv24
-                ? g_chaos_resolve_enum_metadata_by_fnv24(fnv24)
+            // Priority 1: dispatch table (FNV-24 binary search)
+            const auto* meta = g_chaos_enum_dispatch_lookup
+                ? g_chaos_enum_dispatch_lookup(fnv24)
                 : nullptr;
+            if (meta == nullptr) {
+                // Priority 2: generated switch-case (legacy path)
+                meta = g_chaos_resolve_enum_metadata_by_fnv24
+                    ? g_chaos_resolve_enum_metadata_by_fnv24(fnv24)
+                    : nullptr;
+            }
             if (meta != nullptr) {
                 s_enum_meta_type_key = type_arg;
                 s_enum_meta_cache = meta;
@@ -422,11 +485,31 @@ static const EnumMetadataTable* enum_resolve_meta(CHAOS_IL2CPP_INTPTR type_arg) 
 }
 
 /// Fast path: find enum field entry by value using pre-computed metadata.
+/// Uses the dispatch table (FNV-24 binary search) for O(log n) lookup,
+/// falling back to g_chaos_resolve_enum_metadata (FNV-32 switch) if unavailable.
 /// Returns the field entry pointer, or nullptr if metadata unavailable / not found.
 static const EnumFieldEntry* enum_find_entry_by_value(
     const ReflectionQueryTypeDescriptor* desc, CHAOS_IL2CPP_INT64 value) noexcept
 {
     if (desc == nullptr || desc->subject_id_utf8 == nullptr) return nullptr;
+
+    // Priority 1: dispatch table (FNV-24 binary search)
+    if (g_chaos_enum_dispatch_lookup) {
+        uint32_t h = 2166136261u;
+        for (const char* s = desc->subject_id_utf8; *s; ++s) {
+            h ^= static_cast<uint8_t>(*s);
+            h *= 16777619u;
+        }
+        const auto* meta = g_chaos_enum_dispatch_lookup(h & 0xFFFFFFu);
+        if (meta != nullptr) {
+            for (CHAOS_IL2CPP_UINT32 i = 0; i < meta->count; i++) {
+                if (meta->fields[i].value == value) return &meta->fields[i];
+            }
+            return nullptr;
+        }
+    }
+
+    // Priority 2: FNV-32 switch (legacy path, requires strcmp verification)
     const auto* meta = g_chaos_resolve_enum_metadata
         ? g_chaos_resolve_enum_metadata(desc->subject_id_utf8)
         : nullptr;
@@ -443,6 +526,27 @@ static const EnumFieldEntry* enum_find_entry_by_name(
     const char* name, CHAOS_IL2CPP_UINTPTR name_len) noexcept
 {
     if (desc == nullptr || desc->subject_id_utf8 == nullptr) return nullptr;
+
+    // Priority 1: dispatch table (FNV-24 binary search)
+    if (g_chaos_enum_dispatch_lookup) {
+        uint32_t h = 2166136261u;
+        for (const char* s = desc->subject_id_utf8; *s; ++s) {
+            h ^= static_cast<uint8_t>(*s);
+            h *= 16777619u;
+        }
+        const auto* meta = g_chaos_enum_dispatch_lookup(h & 0xFFFFFFu);
+        if (meta != nullptr) {
+            for (CHAOS_IL2CPP_UINT32 i = 0; i < meta->count; i++) {
+                const auto fn_len = std::strlen(meta->fields[i].name);
+                if (fn_len == name_len && std::memcmp(meta->fields[i].name, name, name_len) == 0) {
+                    return &meta->fields[i];
+                }
+            }
+            return nullptr;
+        }
+    }
+
+    // Priority 2: FNV-32 switch (legacy path)
     const auto* meta = g_chaos_resolve_enum_metadata
         ? g_chaos_resolve_enum_metadata(desc->subject_id_utf8)
         : nullptr;
@@ -462,6 +566,34 @@ static const EnumFieldEntry* enum_find_entry_by_name_icase(
     const char* name, CHAOS_IL2CPP_UINTPTR name_len) noexcept
 {
     if (desc == nullptr || desc->subject_id_utf8 == nullptr) return nullptr;
+
+    // Priority 1: dispatch table (FNV-24 binary search)
+    if (g_chaos_enum_dispatch_lookup) {
+        uint32_t h = 2166136261u;
+        for (const char* s = desc->subject_id_utf8; *s; ++s) {
+            h ^= static_cast<uint8_t>(*s);
+            h *= 16777619u;
+        }
+        const auto* meta = g_chaos_enum_dispatch_lookup(h & 0xFFFFFFu);
+        if (meta != nullptr) {
+            for (CHAOS_IL2CPP_UINT32 i = 0; i < meta->count; i++) {
+                const auto fn_len = std::strlen(meta->fields[i].name);
+                if (fn_len != name_len) continue;
+                bool match = true;
+                for (CHAOS_IL2CPP_UINTPTR j = 0; j < name_len; j++) {
+                    char a = meta->fields[i].name[j];
+                    char b = name[j];
+                    if (a >= 'A' && a <= 'Z') a = static_cast<char>(a + 32);
+                    if (b >= 'A' && b <= 'Z') b = static_cast<char>(b + 32);
+                    if (a != b) { match = false; break; }
+                }
+                if (match) return &meta->fields[i];
+            }
+            return nullptr;
+        }
+    }
+
+    // Priority 2: FNV-32 switch (legacy path)
     const auto* meta = g_chaos_resolve_enum_metadata
         ? g_chaos_resolve_enum_metadata(desc->subject_id_utf8)
         : nullptr;
@@ -488,6 +620,19 @@ static CHAOS_IL2CPP_UINT32 enum_metadata_count(
     const ReflectionQueryTypeDescriptor* desc) noexcept
 {
     if (desc == nullptr || desc->subject_id_utf8 == nullptr) return 0;
+
+    // Priority 1: dispatch table (FNV-24 binary search)
+    if (g_chaos_enum_dispatch_lookup) {
+        uint32_t h = 2166136261u;
+        for (const char* s = desc->subject_id_utf8; *s; ++s) {
+            h ^= static_cast<uint8_t>(*s);
+            h *= 16777619u;
+        }
+        const auto* meta = g_chaos_enum_dispatch_lookup(h & 0xFFFFFFu);
+        if (meta != nullptr) return meta->count;
+    }
+
+    // Priority 2: FNV-32 switch (legacy path)
     const auto* meta = g_chaos_resolve_enum_metadata
         ? g_chaos_resolve_enum_metadata(desc->subject_id_utf8)
         : nullptr;

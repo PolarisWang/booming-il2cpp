@@ -28,6 +28,7 @@
 #include "thread_state.h"
 
 #include <algorithm>
+#include <unordered_map>
 #include <atomic>
 #include <chrono>
 #include <cstdlib>
@@ -2431,6 +2432,19 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     GcEtwFireGcFullStart(static_cast<uint32_t>(page_count_));
     GcEtwFireGcStart(2);  // generation=2 (full GC)
 
+    // Fast-path: no pages to collect — nothing to mark or sweep.
+    // The collector must still walk the mark stack (empty), but skip all
+    // page-dependent phases (bitmap clear, drain, sweep).  Previously this
+    // early-exit was missing, and the first full GC could reclaim all pages,
+    // leaving page_list_=nullptr for the next call, which would then crash
+    // during root scanning (SEH 0xc0000005) trying to process freed pages.
+    if (page_count_ == 0) {
+        CHAOS_IL2CPP_LOG_INFO_M("OldGen", "collect_done page_count=0 (no-op)");
+        GcEtwFireGcFullEnd(0, 0, 0, 0);
+        GcEtwFireGcEnd(0, 0);
+        return;
+    }
+
     // Stop any in-progress BGC concurrent mark before we clear bitmaps
     // and re-mark from roots.  BGC runs in preemptive mode and would
     // otherwise continue modifying the mark bitmap concurrently while
@@ -3201,14 +3215,67 @@ void MarkSweepOldGen::BgcSweep() {
         // Pool pages are 100%-free normal pages unlinked from page_list_;
         // mutators cannot reference them via page_array_ (just rebuilt above).
         // On Windows, decommitted pages are released with MEM_RELEASE.
-        while (page_pool_.size() > kMaxPoolSize) {
-            auto excess = page_pool_.front();
-            page_pool_.erase(page_pool_.begin());
+        //
+        // NUMA-aware trim: keep at least kMinPagesPerPoolNode pages per NUMA
+        // node to avoid thrashing on recommit in multi-heap (Server GC) mode.
+        // Pages are removed round-robin, starting from the node with the most
+        // excess.
+        {
+            static constexpr int kMinPagesPerPoolNode = 4;
+            auto total = static_cast<int>(page_pool_.size());
+            if (total > kMaxPoolSize) {
+                // Count pages per NUMA node.
+                std::unordered_map<int, int> per_node;
+                for (auto& e : page_pool_) {
+                    per_node[e.numa_node]++;
+                }
+
+                // Calculate how many to remove per node: keep at least
+                // kMinPagesPerPoolNode per node, proportional to excess.
+                int total_keep = 0;
+                std::unordered_map<int, int> per_node_keep;
+                for (auto& [node, count] : per_node) {
+                    int keep = std::max(kMinPagesPerPoolNode, count);
+                    per_node_keep[node] = keep;
+                    total_keep += keep;
+                }
+                // If total_keep > kMaxPoolSize, cap proportionally.
+                if (total_keep > kMaxPoolSize) {
+                    float ratio = static_cast<float>(kMaxPoolSize) / total_keep;
+                    total_keep = 0;
+                    for (auto& [node, count] : per_node) {
+                        int keep = std::max(kMinPagesPerPoolNode,
+                            static_cast<int>(per_node_keep[node] * ratio));
+                        per_node_keep[node] = keep;
+                        total_keep += keep;
+                    }
+                }
+                int to_remove = total - kMaxPoolSize;
+                int removed = 0;
+
+                // Remove excess: iterate pool from back, skipping kept pages.
+                // Build a removal set, then erase in reverse to avoid O(n^2).
+                for (int i = total - 1; i >= 0 && removed < to_remove; i--) {
+                    int node = page_pool_[i].numa_node;
+                    auto it = per_node.find(node);
+                    int keep_for_node = (it != per_node.end())
+                        ? per_node_keep[node] : kMinPagesPerPoolNode;
+                    // Count how many entries for this node remain after index i.
+                    int remaining_for_node = 0;
+                    for (int j = 0; j <= i; j++) {
+                        if (page_pool_[j].numa_node == node) remaining_for_node++;
+                    }
+                    if (remaining_for_node > keep_for_node) {
 #if defined(_WIN32) || defined(_WIN64)
-            VirtualFree(excess.page, 0, MEM_RELEASE);
+                        VirtualFree(page_pool_[i].page, 0, MEM_RELEASE);
 #else
-            VirtualFreePage(excess.page, excess.page_size);
+                        VirtualFreePage(page_pool_[i].page, page_pool_[i].page_size);
 #endif
+                        page_pool_.erase(page_pool_.begin() + i);
+                        removed++;
+                    }
+                }
+            }
         }
     }
 

@@ -54,43 +54,47 @@ chaos-il2cpp convert-to-cpp \
 
 ---
 
-## 数据流
+## 数据流（实际实现）
 
 ```
-input.dll (System.Private.CoreLib)
+input.dll (EnumParsingSubjects.dll)
   │
   ▼
-LoaderStage.LoadMultiple()
-  │ 读取 PE → 所有 type / method / field / IL body
-  │ 加载所有依赖 assembly 的元数据（但不翻译）
+PipelinePlan.Execute() — 复用现有 5 阶段流水线
+  ├── LoaderStage.LoadMultiple()     — 读取 PE + 依赖 assembly
+  ├── SemanticWorldStage.Build()     — 语义模型
+  ├── LinkerStage.Link()             — reachability（FullAssemblyClosure 时不过滤）
+  ├── MetadataWriterStage.Write()    — metadata graph
+  └── CodeGenStage.Generate()        — AotCoreIr + NativeAotLoweringPlan
   │
   ▼
-SemanticWorldStage.Build()
-  │ 构建完整语义模型：类型层级、方法签名、泛型参数
+ManagedClosureResult (内存中工件集合)
   │
   ▼
-FullAssemblyLinker (新, 替代 LinkerStage.Reachability)
-  │ 不做 reachability 裁剪 — 保留 assembly 中所有方法
-  │ 只标记 InternalCall / PInvoke（需要 runtime bridge）
-  │
+FullAssemblyEmitter.Emit()           — 新实现，通过 NativeAotEmitter
+  │                                    .GenerateFromArtifacts() 直接发射
+  │                                    跳过 JSON 序列化/反序列化往返
   ▼
-MetadataWriterStage.Write()
-  │ 为所有 type 生成完整 metadata graph
-  │
+NativeAotLoweringPlanner.Create()
+  │ fullAssemblyMode=true
+  │ CollectAllMethods() — 收集所有方法
   ▼
-FullAssemblyEmitter (新, 替代 CodeGenStage)
-  │ 按 assembly 输出：
-  │   *.generated.cpp    ← 每个 method 的 IL→C++ lowering
-  │   *.types.h          ← TypeInfo + type_flags + type_names
-  │   *.metadata.cpp     ← GC stack maps + exception tables
-  │   *.module.cpp       ← ModuleDescriptor + dispatch table
-  │
-  ▼
-System.Private.CoreLib.cpp  (约 50K 行 C++)
-  + System.Private.CoreLib.types.h
-  + System.Private.CoreLib.metadata.cpp
-  + System.Private.CoreLib.module.cpp
+C++ 文件输出:
+  ├── generated/native-aot.generated.cpp    ← 主翻译单元
+  ├── generated/native-aot.generated.header.h  ← 类型声明（多分页时）
+  ├── generated/shape_dispatch.h             ← dispatch 表
+  ├── generated/enum_metadata.generated.h    ← enum metadata
+  ├── generated/chaos_generated_module.h     ← 类型化 dispatch table header
+  └── generated/chaos_generated_module.cpp   ← dispatch wiring source
 ```
+
+### 架构说明
+
+与初始 roadmap 的关键差异：
+1. **FullAssemblyEmitter** 不再自行遍历方法，改为委托给 NativeAotEmitter
+2. **FullAssemblyLinker** 未单独实现 — 通过 CodeGenStage 的 FullAssemblyClosure 模式处理
+3. **InternalCallHandler** 未实现 — InternalCall 通过 P/Invoke 路径处理
+4. **JSON 往返消除** — FullAssemblyEmitter 通过 GenerateFromArtifacts() 直接使用内存工件
 
 ### 跨程序集调用
 
@@ -238,19 +242,20 @@ dotnet run --project src/managed/Chaos.IL2CPP.Driver -- convert-to-cpp \
 
 ## 文件改动清单
 
-### Phase 1（核心）
+### Phase 1（核心 — 实际实现）
 
-| 文件 | 类型 | 改动 |
-|------|------|------|
-| `DriverEntry.cs` | 修改 | Main() 增加 `convert-to-cpp` 命令 |
-| `DriverEntry/ConvertToCppConfig.cs` | **新建** | --assembly / --output 参数模型 |
-| `DriverEntry/ConvertToCppHandler.cs` | **新建** | 命令主入口 |
-| `DriverEntry/FullAssemblyEmitter.cs` | **新建** | 遍历所有 method → lowering → 写 .cpp |
-| `DriverEntry/AssemblyCppWriter.cs` | **新建** | 组织多文件 C++ 输出 |
-| `DriverEntry/CrossModuleResolver.cs` | **新建** | extern "C" 跨模块符号 |
-| `DriverEntry/InternalCallHandler.cs` | **新建** | InternalCall → runtime bridge |
-| `SemanticWorldStage.cs` | 修改 | 增加 `BuildFull()` —— 无 entrypoint 模式 |
-| `NativeAotLoweringPlanner.*.cs` | 修改 | Planner 适配全量方法集（不限于 entry） |
+| 文件 | 类型 | 改动 | 状态 |
+|------|------|------|------|
+| `DriverEntry.cs` | 修改 | Main() 增加 `convert-to-cpp` 命令 | ✅ 已有（DriverEntry.cs:109） |
+| `ConvertToCpp/ConvertToCppConfig.cs` | **新建** | --assembly / --output 参数模型 | ✅ 已有 |
+| `ConvertToCpp/ConvertToCppHandler.cs` | 修改 | 重写为 FullAssemblyEmitter 直接发射路径 + 修复 `--full-closure` 标志 | ✅ 本轮完成 |
+| `ConvertToCpp/FullAssemblyEmitter.cs` | **新建** → 重写 | 原占位符 → 通过 NativeAotEmitter.GenerateFromArtifacts() 直接发射 | ✅ 本轮重写 |
+| `NativeAotEmitter.cs` | 修改 | 新增 `GenerateFromArtifacts()` 公共方法（跳过 JSON 往返） | ✅ 本轮完成 |
+| `AssemblyCppWriter.cs` | — | 未实现（由 NativeAotEmitter 内置的 BuildGeneratedSources 替代） | ❌ 不需要 |
+| `CrossModuleResolver.cs` | — | 未实现（Phase 3 多程序集联合时按需） | ❌ 推迟 |
+| `InternalCallHandler.cs` | — | 未实现（InternalCall 通过现有 P/Invoke 路径处理） | ❌ 推迟 |
+| `SemanticWorldStage.cs` | — | 未修改（无需单独 BuildFull()，FullAssemblyClosure 模式已处理） | ❌ 不需要 |
+| `NativeAotLoweringPlanner.*.cs` | — | 未修改（已有 fullAssemblyMode 支持） | ❌ 不需要
 
 ### Phase 2（验证集成）
 
@@ -266,7 +271,7 @@ dotnet run --project src/managed/Chaos.IL2CPP.Driver -- convert-to-cpp \
 ## 依赖关系
 
 ```
-Phase 1: il2cpp.exe 核心（~7 个新文件 + ~5 个修改）
+Phase 1: il2cpp.exe 核心（2 个文件修改 + 1 个文件重写）
     │
     ▼
 Phase 2: 验证接入（4 个文件修改）

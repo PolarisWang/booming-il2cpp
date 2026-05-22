@@ -281,6 +281,8 @@ def _run_convert_to_cpp(
     ]
     if entry_point_subject_id:
         cmd.extend(["--entry-point", entry_point_subject_id])
+    else:
+        cmd.append("--full-closure")
     if codegen_mode:
         cmd.extend(["--mode", codegen_mode])
 

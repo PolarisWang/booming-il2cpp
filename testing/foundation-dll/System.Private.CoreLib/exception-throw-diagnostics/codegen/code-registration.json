@@ -88,6 +88,24 @@
           "slot": 13,
           "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_13",
           "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_13:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_14",
+          "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_14:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_15",
+          "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_15:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_16",
+          "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_16:System.Void()"
         }
       ]
     }
