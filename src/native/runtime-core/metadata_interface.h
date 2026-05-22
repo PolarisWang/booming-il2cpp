@@ -20,6 +20,9 @@
 #include "generic_context.h"
 #include "reflection_query_model.h"
 
+#include <unified_metadata.h>
+
+#include <atomic>
 #include <cstdint>
 
 namespace chaos::il2cpp::runtime_core {
@@ -122,6 +125,23 @@ public:
     /// Unregister a hotpatch context.
     bool UnregisterHotpatchContext(PatchContext* ctx) noexcept;
 
+    /// Register AOT root module data (hotpatch dispatch table + generics).
+    /// The AOT root (module_id=0) is already registered in ModuleRegistry during
+    /// bootstrap; this method attaches the hotpatch dispatch table and generic
+    /// instantiation data to that existing module entry.
+    void RegisterAotModuleData(
+        const HotpatchModuleV0* hotpatch_module,
+        const struct ModuleGenericRegistrationV0* generics_reg) noexcept;
+
+    /// Register hot-update module generic instantiations.
+    /// Routes through the lifecycle manager to ensure unified tracking.
+    void RegisterHotUpdateGenerics(
+        uint32_t module_id,
+        const struct ModuleGenericRegistrationV0* generics_reg) noexcept;
+
+    /// Unregister hot-update module generic instantiations.
+    void UnregisterHotUpdateGenerics(uint32_t module_id) noexcept;
+
 private:
     ModuleLifecycleManager() = default;
     ~ModuleLifecycleManager() = default;
@@ -129,6 +149,53 @@ private:
     // Non-copyable, non-movable.
     ModuleLifecycleManager(const ModuleLifecycleManager&) = delete;
     ModuleLifecycleManager& operator=(const ModuleLifecycleManager&) = delete;
+};
+
+// ── MetadataRegistry ────────────────────────────────────────────────────
+// Unified read-path entry point.  Encapsulates ModuleAwareResolveXxx and
+// provides hash-based fast lookup cache + EnumerateMethods for debugger.
+//
+// Write path:  ModuleLifecycleManager (register/unregister modules)
+// Read path:   MetadataRegistry (resolve type/method/field/token)
+//
+// ModuleLifecycleManager writes → ModuleRegistry / HotpatchNameRegistry /
+// GenericContextRegistry.  MetadataRegistry reads from the same registries
+// through ModuleAwareResolveXxx, with an additional hot cache layer.
+
+class MetadataRegistry {
+public:
+    static MetadataRegistry& Get() noexcept;
+
+    // ── Read path — unified queries ──
+    const TypeInfoHot* ResolveType(uint32_t module_id, uint32_t type_token) noexcept;
+    const char* GetTypeName(uint64_t type_handle, const char** out_namespace) noexcept;
+    MethodInfoHandle ResolveMethod(uint32_t module_id, uint32_t method_token) noexcept;
+    const char* GetMethodName(uint64_t method_handle) noexcept;
+    FieldInfoHandle ResolveField(uint32_t module_id, uint32_t field_token) noexcept;
+
+    // ── Cross-module lookup ──
+    // Returns composite key (module_id<<32 | token) or 0 if not found.
+    uint64_t FindToken(uint32_t method_token) noexcept;
+
+    // ── Debugger support ──
+    uint32_t EnumerateMethods(uint32_t module_id, void** out_buf, uint32_t max) noexcept;
+
+    // ── Export the unified contract interface pointer ──
+    const UnifiedMetadataRegistryV0* GetUnifiedRegistry() noexcept;
+
+private:
+    MetadataRegistry() = default;
+    ~MetadataRegistry() = default;
+    MetadataRegistry(const MetadataRegistry&) = delete;
+    MetadataRegistry& operator=(const MetadataRegistry&) = delete;
+
+    // Fast lookup cache: composite key → resolved pointer.
+    // Populated on first query, then frozen.
+    CHAOS_IL2CPP_UNORDERED_DENSE_MAP_IDENTITY(uint64_t, void*) resolve_cache_;
+    std::atomic<bool> cache_built_{false};
+
+    void BuildCache() noexcept;
+    void PopulateModuleCache(uint32_t module_id) noexcept;
 };
 
 }  // namespace chaos::il2cpp::runtime_core
