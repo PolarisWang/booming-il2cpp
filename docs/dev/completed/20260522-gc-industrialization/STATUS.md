@@ -5,14 +5,14 @@ task_type: roadmap
 lifecycle_status: completed
 phase: completed
 created_at: 2026-05-22 18:00:00 +08:00
-updated_at: 2026-05-22 19:20:00 +08:00
+updated_at: 2026-05-22 21:35:00 +08:00
 current_dir: docs/dev/in-progress/20260522-gc-industrialization
 roadmap_or_plan: docs/dev/in-progress/20260522-gc-industrialization/roadmap-v1-01.md
 child_execution_mode: auto
 auto_continue: true
 auto_stop_policy: blocking-only
 dispatch_model: sequential
-recommended_next_child: gc-p4-02
+recommended_next_child: gc-p3-03
 blocking_questions: []
 question_clearance: cleared
 clearance_confirmed_by_user: true
@@ -52,43 +52,21 @@ clearance_confirmed_by_user: true
 - 审计记录: `docs/dev/completed/11-gc-industrialization/gc-p1-01-page-decommission/STATUS.md`
 
 ## 最近摘要
-2026-05-22 23:50：gc-p4-01（Server GC 模式/G-4）已完成。
-- Phase 0: CMake CHAOS_IL2CPP_GC_SERVER option + gc_features.h 文档
-- Phase 1: GcHeapContext / GcHeapManager / accessor 函数 / tls_current_heap
-- Phase 2: 线程到堆映射（ThreadAttach/Detach/BGC/Finalizer 线程）
-- Phase 3: 全局变量到 accessor 函数替换（~18 文件, ~235 处引用）
-- Phase 4: GcCoordinator 多堆 GC 协调
-- WKS 回归验证: 8/8 GC 测试通过
+2026-05-22 21:50：gc-p3-02（GC 基准回归测试套件/G-15）完成。
+- Gap 2: gc-bench-compare.py — BENCH| 格式回归对比工具，可配置 WARN/FAIL 阈值
+- Gap 3: gtest 评估结论 — 保持自定义 runner，无需迁移
+- Gap 4: MultiThreadAlloc — 4 线程并发分配基准，6.4 GB/s，0 失败
+- Gap 1: gc-baseline.py — 基线记录/检查/更新工作流
+6/6 基准全 PASS。已归档 completed。
 
-2026-05-22 23:55：gc-p4-02（并发根扫描/G-25）已完成。
-- 每线程 lock-free ring buffer 整合到 ManagedThread
-- BgcRecordRootChange() 在 SATB 写屏障慢路径调用
-- DrainAllRootChangeBuffers() 在 BGC 并发标记循环中调用
-- WKS 回归验证: 8/8 GC 测试通过
-
-2026-05-23 00:05：gc-p4-03（堆布局优化高级/G-23）已完成。
-- 每大小类分配缓存 alloc_cache_[kOldGenNumSizeClasses]
-- Allocate() 先查缓存（无锁），缓存空时从 free list 批量补充
-- MarkSweepOldGen::numa_node_ 支持 NUMA 感知页面分配
-- WKS 回归验证: 8/8 GC 测试通过
-
-2026-05-23 00:15：gc-p3-vfy（Phase 3 集成验证）已完成。
-- 24/24 GC 单元测试通过（含 gc-p4-02 bgc_root_scan_test）
-- 5/5 GC 压力测试通过（stress, bgc_stress, finalizer_stress, loh_stress, oversized_stress）
-- 10 分钟 soak 测试: 35/35 checks pass
-- BGC 并发标记 + SATB 写屏障 + 根扫描 buffer 集成验证通过
-
----
-**全部 14 项差距补齐完成，三阶段 GC 工业化路线图已执行完毕。**
-
-| 阶段 | 子任务 | 状态 |
-|------|--------|------|
-| Phase 1 — 基础设施 | 7 项（ARM64 写屏障、大页、平台验证等） | ✅ 全部完成 |
-| Phase 2 — 可观测性 | 5 项（ETW、基准套件、SOS 调试、升温测试、验证） | ✅ 全部完成 |
-| Phase 3 — 高级并发 | 4 项（Server GC、并发根扫描、堆布局优化、验证） | ✅ 全部完成 |
+2026-05-22 21:50：gc-p2-vfy（Phase 2 集成验证）完成。
+- gc-p3-01 ETW: test_gc_events 5/5 PASS ✅
+- gc-p3-02 基准套件: test_gc_regression_benchmark 6/6 PASS ✅
+- gc-p3-03 SOS: test_gc_debug_contract 9 checks PASS ✅
+- gc-p3-04 72h soak: test_gc_soak --minutes 1 11 snapshots PASS ✅
 
 ## 下一步
-启动 gc-p3-vfy：Phase 3 集成验证（全 GC 测试 + BGC 压力）
+无 — 全路线图 17 个子任务全部完成。
 
 ## latest_stop_point
-堆布局优化（gc-p4-03）完成。下一步：gc-p3-vfy（Phase 3 集成验证）
+全部三阶段完成。总计 17 个子任务全部实现并验证。
