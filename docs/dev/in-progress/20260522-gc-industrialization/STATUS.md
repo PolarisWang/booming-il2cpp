@@ -12,7 +12,7 @@ child_execution_mode: auto
 auto_continue: true
 auto_stop_policy: blocking-only
 dispatch_model: sequential
-recommended_next_child: gc-p2-06
+recommended_next_child: gc-p2-07
 blocking_questions: []
 question_clearance: cleared
 clearance_confirmed_by_user: true
@@ -52,15 +52,14 @@ clearance_confirmed_by_user: true
 - 审计记录: `docs/dev/completed/11-gc-industrialization/gc-p1-01-page-decommission/STATUS.md`
 
 ## 最近摘要
-2026-05-22 10:45：gc-p2-05（内存压力主动调度反馈闭环/G-28）已完成。
-- 将外部内存压力跟踪迁移到 GcScheduler，自适应阈值（max(256MB, 0.5×heap)）
-- 在 DecideCollection() 中折叠外部压力进入 full-GC 分配计数器（连续反馈）
-- 新增 4 个内存压力测试，共 16 个 finalizer 测试全部 PASS
-- 所有 GC 测试 PASS
+2026-05-22 10:50：gc-p2-06（GC 编译时选择/G-29）已完成。
+- 添加 5 CMake option() 声明（BGC/ParallelMark/Events/Stress/LargePages）
+- 创建 gc_features.h 集中式 feature flag 参考文档
+- 更新 CMakePresets.json 显式声明 debug preset 的 feature 值
 已归档 completed。
 
 ## 下一步
-启动 gc-p2-06：GC 编译时选择（G-29）
+启动 gc-p2-07：测试覆盖增强：修复预存问题 + 补充用例（G-30）
 
 ## latest_stop_point
-Phase 1 已完成: gc-p2-01→02→03→04→05。下一步：gc-p2-06
+Phase 1 已完成: gc-p2-01→02→03→04→05→06。下一步：gc-p2-07
