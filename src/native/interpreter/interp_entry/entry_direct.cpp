@@ -35,6 +35,42 @@ static TierCounters& GetTierCounters() {
     return counters;
 }
 
+// ── TypedCatchCheck: parent-chain walk for typed catch matching ───────────
+// Reads TypeInfoHot* from exc_obj at offset 0, resolves class_token to
+// TypeInfoHot* via module registry scan, walks parent chain.
+static bool TypedCatchCheck(void* exc_obj, uint32_t class_token) noexcept {
+    using namespace chaos::il2cpp::runtime_core;
+    if (exc_obj == nullptr) return false;
+    const TypeInfoHot* exc_type = *static_cast<const TypeInfoHot* const*>(exc_obj);
+    if (exc_type == nullptr) return false;
+
+    // Scan all registered modules for the target type by class_token.
+    const TypeInfoHot* target_type = nullptr;
+    uint32_t raw_index = (class_token & 0x00FFFFFFu);
+    uint32_t type_index = raw_index > 0 ? raw_index - 1 : 0;
+    uint32_t module_count = GetModuleCount();
+    for (uint32_t mi = 0; mi < module_count; ++mi) {
+        const auto* mod = GetModuleByIndex(mi);
+        if (mod == nullptr || mod->type_info_ptrs == nullptr || mod->image == nullptr) continue;
+        if (type_index < mod->type_count) {
+            const auto* desc = mod->image->types[type_index];
+            if (desc != nullptr && desc->metadata_token == class_token) {
+                target_type = mod->type_info_ptrs[type_index];
+                break;
+            }
+        }
+    }
+    if (target_type == nullptr) return false;
+
+    // Walk parent chain.
+    const TypeInfoHot* current = exc_type;
+    while (current != nullptr) {
+        if (current == target_type) return true;
+        current = current->parent;
+    }
+    return false;
+}
+
 // ── InterpreterEntryDirect ──────────────────────────────────────────────
 
 static void CacheSignature(PatchMethod* patch_method) noexcept;
@@ -445,6 +481,9 @@ void InterpreterEntryDirect(
         interpreter::RegisterFrame rf = {};
         rf.seh_clauses = ir->seh_clauses.data();
         rf.seh_clause_count = static_cast<uint32_t>(ir->seh_clauses.size());
+        rf.catch_handler_entries = reg_method->catch_handler_entries.data();
+        rf.catch_handler_count = static_cast<uint32_t>(reg_method->catch_handler_entries.size());
+        rf.typed_catch_check = TypedCatchCheck;
         auto* runtime_state = GetCurrentRuntimeState();
         auto* thread_state  = GetCurrentThreadState();
         rf.args = args_buf; rf.arg_count = patch_method->cached_sig_valid ? patch_method->cached_arg_count : 0;
