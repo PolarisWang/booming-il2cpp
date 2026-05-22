@@ -716,7 +716,12 @@ phase3:
     // Reset the shared young region bump pointer.
     nursery->current = nursery->begin;
     G_YoungGen().bump.store(nursery->begin, std::memory_order_release);
-    G_YoungGen().region_end.store(nursery->end, std::memory_order_release);
+
+    // SPB: restore region_end to emergency_start (re-carve emergency reserve)
+    // and reset emergency bump so the next safepoint-bypass reuses the pool.
+    char* emerg_start = G_YoungGen().emergency_start;
+    G_YoungGen().region_end.store(emerg_start, std::memory_order_release);
+    G_YoungGen().emergency_bump.store(emerg_start, std::memory_order_release);
 
     // ── Note: dynamic Gen1 resizing is deferred to Phase C. ──
     // The scheduler's RecommendedSurvivorSize() value will be used in a future

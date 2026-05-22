@@ -67,6 +67,9 @@ namespace chaos::il2cpp::runtime_core {
 YoungGeneration g_young_gen;
 thread_local TLAB tls_tlab;
 
+// ── Forward declarations ───────────────────────────────────────
+TLAB ClaimEmergencyTlab() noexcept;
+
 // Per-thread allocation counter (TLS-local, flushed to scheduler in slow path).
 thread_local CHAOS_IL2CPP_SIZE tls_alloc_since_last_gc = 0;
 
@@ -124,6 +127,20 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
         // Fall through; the TLAB is set up for future small allocations.
         if (size <= kMaxTlabAlloc) {
             return NurseryAllocate(size);
+        }
+    }
+
+    // SPB: If TLAB claim failed while a safepoint is active (e.g., BGC
+    // background cycle), try the emergency TLAB reserve before attempting
+    // GC or falling to old-gen.  This keeps allocation throughput at TLAB
+    // level even when the nursery is locked by a BGC background cycle.
+    if (tlab.current == nullptr && threading::SafepointRequested()) [[unlikely]] {
+        TLAB emerg = ClaimEmergencyTlab();
+        if (emerg.current != nullptr) {
+            tls_tlab = emerg;
+            if (size <= kMaxTlabAlloc) {
+                return NurseryAllocate(size);
+            }
         }
     }
 
@@ -226,6 +243,18 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
         // Oversized: TLAB is set up for future small allocs, fall through to old gen.
     }
 
+    // SPB: If the post-GC TLAB retry failed while a safepoint is still active,
+    // try the emergency TLAB reserve one more time before falling to old gen.
+    if (tlab.current == nullptr && threading::SafepointRequested()) [[unlikely]] {
+        TLAB emerg = ClaimEmergencyTlab();
+        if (emerg.current != nullptr) {
+            tls_tlab = emerg;
+            if (size <= kMaxTlabAlloc) {
+                return NurseryAllocate(size);
+            }
+        }
+    }
+
     // Phase 4: Young region full — fall back to old gen.
     // Switch to preemptive mode so old-gen allocation does not block
     // safepoint handshake (the old-gen allocator takes mutex_ internally,
@@ -293,6 +322,17 @@ void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
         }
     }
 
+    // SPB: If TLAB claim failed while a safepoint is active, try emergency.
+    if (tlab.current == nullptr && threading::SafepointRequested()) [[unlikely]] {
+        TLAB emerg = ClaimEmergencyTlab();
+        if (emerg.current != nullptr) {
+            tls_tlab = emerg;
+            if (size <= kMaxTlabAlloc) {
+                return NurseryAllocateAtomic(size);
+            }
+        }
+    }
+
     // Phase 2: Young region is exhausted — consult the GC scheduler.
     // When in NO_GC_REGION, skip collection and go straight to old-gen fallback.
     if (!GcIsInNoGcRegion() && G_Scheduler().TryClaimGcSlot()) {
@@ -343,6 +383,17 @@ void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
             return NurseryAllocateAtomic(size);
         }
         // Oversized: TLAB is set up for future small allocs, fall through to old gen.
+    }
+
+    // SPB: If post-GC retry fails while safepoint still active, try emergency.
+    if (tlab.current == nullptr && threading::SafepointRequested()) [[unlikely]] {
+        TLAB emerg = ClaimEmergencyTlab();
+        if (emerg.current != nullptr) {
+            tls_tlab = emerg;
+            if (size <= kMaxTlabAlloc) {
+                return NurseryAllocateAtomic(size);
+            }
+        }
     }
 
     // Phase 4: Fall back to old gen (no scanning needed).
@@ -481,8 +532,18 @@ void InitYoungGeneration() noexcept {
     g_young_gen.gen1_region.store(gen1, std::memory_order_release);
 
     if (nursery && gen1) {
+        // ── Initialize SPB emergency TLAB reserve ──
+        // Carve 256 KB from the nursery end as an emergency pool for threads
+        // during BGC safepoints, so they don't degenerate to old-gen
+        // (VirtualAlloc + mutex) while the nursery is locked by a BGC cycle.
+        char* emergency_start = nursery->end - YoungGeneration::kEmergencyTlabSize;
+        g_young_gen.emergency_start = emergency_start;
+        g_young_gen.emergency_bump.store(emergency_start, std::memory_order_release);
+
+        // Shrink region_end so TLAB claims stop before the emergency reserve,
+        // and young GC skips it during nursery scanning.
+        g_young_gen.region_end.store(emergency_start, std::memory_order_release);
         g_young_gen.bump.store(nursery->begin, std::memory_order_release);
-        g_young_gen.region_end.store(nursery->end, std::memory_order_release);
 
         // Initialize Gen1 bump pointer and end.
         g_young_gen.gen1_bump.store(gen1->begin, std::memory_order_release);
@@ -577,7 +638,29 @@ TLAB TlabClaimFromYoungGen() noexcept {
     return TLAB{};
 }
 
-
+TLAB ClaimEmergencyTlab() noexcept {
+    auto tlab_sz = (std::min)(static_cast<CHAOS_IL2CPP_SIZE>(kDefaultTlabSize),
+                               YoungGeneration::kEmergencyTlabSize / 2);
+    char* bump = g_young_gen.emergency_bump.load(std::memory_order_acquire);
+    while (bump != nullptr) {
+        char* next_bump = bump + tlab_sz;
+        char* region_end = g_young_gen.emergency_start + YoungGeneration::kEmergencyTlabSize;
+        if (next_bump > region_end) {
+            return TLAB{};
+        }
+        if (g_young_gen.emergency_bump.compare_exchange_weak(bump, next_bump,
+                std::memory_order_acq_rel, std::memory_order_acquire)) {
+            TLAB tlab;
+            tlab.start = bump;
+            tlab.current = bump;
+            tlab.end = next_bump;
+            tlab.start_scan = nullptr;
+            tlab.current_scan = nullptr;
+            return tlab;
+        }
+    }
+    return TLAB{};
+}
 
 Region* RegionManager::AllocateRegion(RegionKind kind, CHAOS_IL2CPP_SIZE min_size,
                                        CHAOS_IL2CPP_UINT32 domain_id) {

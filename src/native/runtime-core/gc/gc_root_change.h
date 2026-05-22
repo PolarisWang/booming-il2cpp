@@ -24,6 +24,7 @@
 #include <atomic>
 #include <cstdint>
 
+#include "gc_heap.h"
 #include "gc_old_gen.h"
 #include "thread_state.h"
 
