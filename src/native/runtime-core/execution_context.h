@@ -3,8 +3,8 @@
 
 #include <chaos/native_types.h>
 
-#include <cstdint>
 #include <cstddef>
+#include <cstdint>
 
 namespace chaos::il2cpp::runtime_core::threading {
 
@@ -15,10 +15,13 @@ struct AsyncLocalValue {
     CHAOS_IL2CPP_INTPTR value;  // Boxed value (or 0 if unset)
 };
 
+/// Callback invoked when an AsyncLocal value changes on the current thread.
+/// Managed code registers this to support AsyncLocal<T>.ThreadValueChanged.
+extern thread_local void (*tls_async_local_value_changed)(uint64_t key, CHAOS_IL2CPP_INTPTR old_value, CHAOS_IL2CPP_INTPTR new_value);
+
 // ── ExecutionContext ──────────────────────────────────────────────────
-// Captures AsyncLocal values for flow across thread/ThreadPool boundaries.
-// AOT types: small fixed-size array (no heap allocation for common case).
-// Dynamic types: heap-allocated list.
+// Captures AsyncLocal values + SecurityContext for flow across
+// thread/ThreadPool boundaries.
 struct ExecutionContext {
     /// Number of captured AsyncLocal values.
     uint32_t                value_count{0};
@@ -30,6 +33,10 @@ struct ExecutionContext {
     AsyncLocalValue         inline_storage[4]{};
     /// True if values points to heap-allocated memory.
     bool                    heap_allocated{false};
+    /// Opaque SecurityContext pointer (nullptr if no security context).
+    /// Managed code manages the lifetime; this is preserved/restored
+    /// during ExecutionContextRun but NOT owned/freed by the EC.
+    void*                   security_context{nullptr};
 };
 
 // ── Public API ────────────────────────────────────────────────────────

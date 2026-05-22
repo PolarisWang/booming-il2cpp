@@ -362,6 +362,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_scheduler.cpp" />
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_region.h" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_region.cpp" />
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_root_change.h" />
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_root_change.cpp" />
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_card_table.h" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_card_table.cpp" />
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_root_scanner.h" />
@@ -372,6 +374,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_young_collector.cpp" />
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_old_gen.h" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_old_gen.cpp" />
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_demotion.h" />
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_demotion.cpp" />
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_layout.h" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_layout.cpp" />
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_loh.h" />
@@ -396,6 +400,11 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_bgc_inline.h" />
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_api.h" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_api.cpp" />
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_coordinator.h" />
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_coordinator.cpp" />
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_heap.h" />
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_heap_manager.h" />
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_heap_manager.cpp" />
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\com_rcw.h" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\com_rcw.cpp" />
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\com_ccw.h" />

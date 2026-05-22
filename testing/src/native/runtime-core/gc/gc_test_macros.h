@@ -50,17 +50,39 @@
 #define GC_FAIL(msg)       do { ++g_failures; printf("FAIL: %s\n", msg); } while (0)
 
 // ════════════════════════════════════════════════════════════════════════════
-// B-family: simple CHECK(cond, msg)
+// B-family: simple CHECK(cond, fmt...)
 // ════════════════════════════════════════════════════════════════════════════
 
-#define GC_CHECK(cond, msg) do {                                           \
-    if (!(cond)) {                                                          \
-        printf("  FAIL [%s:%d]: %s\n", __FILE__, __LINE__, msg);           \
-        ++g_failures;                                                       \
-    } else {                                                                \
-        printf("  PASS: %s\n", msg);                                        \
-    }                                                                       \
+#define GC_CHECK(cond, ...) do {                                            \
+    if (!(cond)) {                                                           \
+        printf("  FAIL [%s:%d]: ", __FILE__, __LINE__);                     \
+        printf(__VA_ARGS__);                                                 \
+        printf("\n");                                                        \
+        ++g_failures;                                                        \
+    } else {                                                                 \
+        printf("  PASS: ");                                                  \
+        printf(__VA_ARGS__);                                                 \
+        printf("\n");                                                        \
+    }                                                                        \
 } while(0)
+
+// Backward-compatible aliases for tests migrated from the old contract system.
+// Note: gtest defines TEST/FAIL macros too. Since these standalone tests have
+// custom main() and don't use gtest's TEST() (which takes 2 args), we undefine
+// the gtest versions to avoid macro conflicts.
+#ifdef TEST
+#undef TEST
+#endif
+#define TEST GC_TEST
+
+#ifdef FAIL
+#undef FAIL
+#endif
+#define FAIL GC_FAIL
+
+#define CHECK GC_CHECK
+#define SUBTEST GC_SUBTEST
+#define PASS GC_PASS
 
 // ════════════════════════════════════════════════════════════════════════════
 // C-family: gtest-based parameterized test helpers

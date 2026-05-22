@@ -462,3 +462,68 @@ set_tests_properties(test_gc_delegate_stress PROPERTIES LABELS "stress;gc" TIMEO
 # ═══════════════════════════════════════════════════════════════════════════
 
 add_chaos_test(gc_test gc_smoke_test.cpp)
+
+# ═══════════════════════════════════════════════════════════════════════════
+# Batch K — Migrated from old contracts: remaining standalone tests
+# These use custom main() (not GoogleTest), so they are added as raw
+# add_executable targets rather than via add_chaos_test.
+# NOTE: gc_test_macros.h unconditionally includes <gtest/gtest.h>, so
+# these targets link gtest (for include paths only, not gtest_main) even
+# though they use the custom CHECK/FAIL macros with their own main().
+# ═══════════════════════════════════════════════════════════════════════════
+
+# gc_atomic_alloc_test — NurseryAllocateAtomic unit tests (5 scenarios)
+add_executable(test_gc_atomic_alloc
+    gc_atomic_alloc_test.cpp ${CHAOS_GC_STUBS})
+target_compile_features(test_gc_atomic_alloc PRIVATE cxx_std_17)
+target_compile_definitions(test_gc_atomic_alloc PRIVATE _CRT_SECURE_NO_WARNINGS)
+target_compile_options(test_gc_atomic_alloc PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+target_include_directories(test_gc_atomic_alloc PRIVATE ${CHAOS_INCLUDE_DIRS})
+target_link_libraries(test_gc_atomic_alloc PRIVATE gtest ${CHAOS_GC_LIBS})
+target_link_options(test_gc_atomic_alloc PRIVATE /FORCE:MULTIPLE)
+add_test(NAME test_gc_atomic_alloc COMMAND test_gc_atomic_alloc)
+set_tests_properties(test_gc_atomic_alloc PROPERTIES LABELS "unit;gc")
+
+# gc_debug_contract_test — GC debug contract symbol validation (4 tests)
+# NOTE: gc_debug_contract.cpp compiled directly to provide the debug contract
+# symbols (g_chaos_gc_stats_ptr, etc.) that are in the prebuilt
+# chaos_runtime_core.lib which uses GNU ar format that MSVC link.exe cannot
+# search for COMDAT resolution.
+add_executable(test_gc_debug_contract
+    gc_debug_contract_test.cpp
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_debug_contract.cpp)
+target_compile_features(test_gc_debug_contract PRIVATE cxx_std_17)
+target_compile_definitions(test_gc_debug_contract PRIVATE _CRT_SECURE_NO_WARNINGS)
+target_compile_options(test_gc_debug_contract PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+target_include_directories(test_gc_debug_contract PRIVATE ${CHAOS_INCLUDE_DIRS}
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc)
+target_link_libraries(test_gc_debug_contract PRIVATE gtest chaos_runtime_core chaos_common chaos_fmt)
+target_link_options(test_gc_debug_contract PRIVATE /FORCE:MULTIPLE)
+add_test(NAME test_gc_debug_contract COMMAND test_gc_debug_contract)
+set_tests_properties(test_gc_debug_contract PROPERTIES LABELS "unit;gc")
+
+# gc_satb_stress_test — Multithreaded SATB buffer overflow stress test
+add_executable(test_gc_satb_stress
+    gc_satb_stress_test.cpp ${CHAOS_GC_STUBS}
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_bgc.cpp)
+target_compile_features(test_gc_satb_stress PRIVATE cxx_std_17)
+target_compile_definitions(test_gc_satb_stress PRIVATE _CRT_SECURE_NO_WARNINGS)
+target_compile_options(test_gc_satb_stress PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+target_include_directories(test_gc_satb_stress PRIVATE ${CHAOS_INCLUDE_DIRS}
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc)
+target_link_libraries(test_gc_satb_stress PRIVATE gtest ${CHAOS_GC_LIBS})
+target_link_options(test_gc_satb_stress PRIVATE /FORCE:MULTIPLE)
+add_test(NAME test_gc_satb_stress COMMAND test_gc_satb_stress)
+set_tests_properties(test_gc_satb_stress PROPERTIES LABELS "stress;gc")
+
+# gc_soak_test — CRAG GC Arrhenius 72h soak test (G-17)
+add_executable(test_gc_soak
+    gc_soak_test.cpp ${CHAOS_GC_STUBS})
+target_compile_features(test_gc_soak PRIVATE cxx_std_17)
+target_compile_definitions(test_gc_soak PRIVATE _CRT_SECURE_NO_WARNINGS)
+target_compile_options(test_gc_soak PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+target_include_directories(test_gc_soak PRIVATE ${CHAOS_INCLUDE_DIRS})
+target_link_libraries(test_gc_soak PRIVATE gtest ${CHAOS_GC_LIBS})
+target_link_options(test_gc_soak PRIVATE /FORCE:MULTIPLE)
+add_test(NAME test_gc_soak COMMAND test_gc_soak)
+set_tests_properties(test_gc_soak PROPERTIES LABELS "stress;gc")

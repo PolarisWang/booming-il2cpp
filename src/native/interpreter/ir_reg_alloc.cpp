@@ -448,19 +448,24 @@ RegisterMethod AllocateRegisters(const IRMethod& ir_method) noexcept {
             break;
         }
 
-        // ── Cpblk/InitBlk: pop 3 operands ──
+        // ── Cpblk: pop size, pop src, pop dst ═══ (memcpy to memory) ──
         case IROpCode::Cpblk:
         {
-            for (int si = 0; si < 3 && !virt_sp == 0; ++si)
-                --virt_sp;
-            has_src1 = true;
+            // Stack (bottom→top): dst, src, size
+            if (virt_sp >= 1) { src1_reg = virt_stack[--virt_sp]; }  // size (top)
+            if (virt_sp >= 1) { src2_reg = virt_stack[--virt_sp]; }  // src
+            if (virt_sp >= 1) { src3_reg = virt_stack[--virt_sp]; }  // dst
+            has_src1 = true; has_src2 = true; has_src3 = true;
             break;
         }
+        // ── InitBlk: pop size, pop value, pop addr ═══ (memset to memory) ──
         case IROpCode::InitBlk:
         {
-            for (int si = 0; si < 3 && !virt_sp == 0; ++si)
-                --virt_sp;
-            has_src1 = true;
+            // Stack (bottom→top): addr, value, size
+            if (virt_sp >= 1) { src1_reg = virt_stack[--virt_sp]; }  // size (top)
+            if (virt_sp >= 1) { src2_reg = virt_stack[--virt_sp]; }  // value
+            if (virt_sp >= 1) { src3_reg = virt_stack[--virt_sp]; }  // addr
+            has_src1 = true; has_src2 = true; has_src3 = true;
             break;
         }
 
@@ -1908,11 +1913,25 @@ static void Reg_CallVirtConstrained(RegisterFrame& frame, const RegisterInstruct
 
 // ── Cpblk / InitBlk: memory block operations ────────────────────────────
 static void Reg_Cpblk(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
-    Reg_Unsupported(frame, instr);
+    // src1 = size (top of stack), src2 = src, src3 = dst
+    uint32_t size = static_cast<uint32_t>(frame.regs.reg_i32(instr.src1_reg()));
+    void* src = frame.regs.reg_ptr(instr.src2_reg());
+    void* dst = frame.regs.reg_ptr(instr.src3_reg());
+    if (dst != nullptr && src != nullptr) {
+        std::memcpy(dst, src, size);
+    }
+    ++frame.pc;
 }
 
 static void Reg_InitBlk(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
-    Reg_Unsupported(frame, instr);
+    // src1 = size (top of stack), src2 = fill_value, src3 = addr
+    uint32_t size = static_cast<uint32_t>(frame.regs.reg_i32(instr.src1_reg()));
+    int32_t value = frame.regs.reg_i32(instr.src2_reg());
+    void* ptr = frame.regs.reg_ptr(instr.src3_reg());
+    if (ptr != nullptr) {
+        std::memset(ptr, value, size);
+    }
+    ++frame.pc;
 }
 
 // ── Throw: SEH-aware catch dispatch with finally unwind + typed matching ──
@@ -2284,7 +2303,6 @@ bool RegisterExecute(RegisterFrame& frame,
         }
 
         uint32_t prev_pc = frame.pc;
-        std::fprintf(stderr, "[diag:RE] pc=%u op=%u\n", frame.pc, op_val);
         kRegHandlers[op_val](frame, instrs[frame.pc]);
 
         // OSR: Detect hot loop backward branch — if the handler took a branch

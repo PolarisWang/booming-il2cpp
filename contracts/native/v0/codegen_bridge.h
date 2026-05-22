@@ -468,6 +468,28 @@ constexpr chaos_string_id_t chaos_make_string_id(
 #define CHAOS_IL2CPP_STRING_ID(literal) \
     chaos_make_string_id((literal), sizeof((literal)) - 1)
 
+// ── Enum dispatch table helpers ─────────────────────────────────────
+// Linear scan macro for small enum metadata tables (typical <64 fields).
+// Expanded inline at the call site — zero function call overhead when
+// the metadata table is a constexpr local.
+//
+// meta_table: const EnumMetadataTable& (from generated enum_metadata.generated.h)
+// value:      integer value to look up (int32/int64)
+// fallback:   expression evaluated when no field matches
+//
+// Example:
+//   auto name = CHAOS_IL2CPP_ENUM_LOOKUP(kEnumTable_MyEnum, raw_val, nullptr);
+#define CHAOS_IL2CPP_ENUM_LOOKUP(meta_table, value, fallback) \
+    [&]() -> const char* { \
+        const auto& _meta_ = (meta_table); \
+        for (CHAOS_IL2CPP_UINT32 _i_ = 0; _i_ < _meta_.count; _i_++) { \
+            if (_meta_.fields[_i_].value == static_cast<CHAOS_IL2CPP_INT64>(value)) { \
+                return _meta_.fields[_i_].name; \
+            } \
+        } \
+        return (fallback); \
+    }()
+
 #endif  // __cplusplus
 
 #endif  // CHAOS_CODEGEN_BRIDGE_H_

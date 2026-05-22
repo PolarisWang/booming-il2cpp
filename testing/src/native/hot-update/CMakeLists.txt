@@ -35,3 +35,38 @@ add_chaos_test(test_hotupdate_verification
     LIBS ${CHAOS_HOTUPDATE_LIBS}
     LABELS "unit;hotupdate"
 )
+
+# hotupdate_package_e2e_test — E2E package loading with real directory structure
+add_chaos_test(test_hotupdate_package_e2e
+    hotupdate_package_e2e_test.cpp
+    LIBS ${CHAOS_HOTUPDATE_LIBS}
+    LABELS "unit;hotupdate"
+)
+
+# interpreter_mixed_execution_test — InterpreterEntryDirect + method_replacement integration
+add_chaos_test(test_interpreter_mixed_execution
+    interpreter_mixed_execution_test.cpp
+    LIBS ${CHAOS_HOTUPDATE_LIBS}
+    LABELS "unit;hotupdate;interpreter"
+)
+
+# hotupdate_vtable_sync_test — Cross-module VTable sync with method_replacement
+add_chaos_test(test_hotupdate_vtable_sync
+    hotupdate_vtable_sync_test.cpp
+    LIBS ${CHAOS_HOTUPDATE_LIBS}
+    LABELS "unit;hotupdate"
+)
+
+# hotupdate_generics_test — Generic context registration and dispatch
+add_chaos_test(test_hotupdate_generics
+    hotupdate_generics_test.cpp
+    LIBS ${CHAOS_HOTUPDATE_LIBS}
+    LABELS "unit;hotupdate"
+)
+
+# hotupdate_replacement_benchmark_test — Benchmark & stress for method_replacement
+add_chaos_test(test_hotupdate_replacement_benchmark
+    hotupdate_replacement_benchmark_test.cpp
+    LIBS ${CHAOS_HOTUPDATE_LIBS}
+    LABELS "unit;hotupdate;benchmark"
+)

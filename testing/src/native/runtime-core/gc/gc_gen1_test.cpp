@@ -7,6 +7,7 @@
 
 #include <chaos/native_types.h>
 #include "gc_gen1.h"
+#include "gc_heap.h"
 #include "gc_scheduler.h"
 #include "gc_stats.h"
 #include "gc_young_gen.h"
@@ -35,6 +36,11 @@ static void InitGen1Object(void* obj, uint32_t pattern) {
 }
 
 struct Gen1Test : GcUnitTestBase {
+    void TearDown() override {
+        tls_tlab.start = nullptr;
+        tls_tlab.end = nullptr;
+        GcUnitTestBase::TearDown();
+    }
 };
 
 TEST_F(Gen1Test, EmptyGen1) {
@@ -258,8 +264,6 @@ TEST_F(Gen1Test, Gen1IndependentCollection_FillsGen1) {
     // GcGen1ShouldCollect should return true (high occupancy >80%).
     EXPECT_TRUE(GcGen1ShouldCollect());
 
-    // Collect independently.
-    g_gen1_state.young_gc_since_last_gen1.store(0, std::memory_order_relaxed);
     Gen1CollectionResult r = GcGen1Collection();
     EXPECT_GT(r.objects_in_gen1, 0u);
     EXPECT_GT(r.objects_promoted, 0u);
@@ -288,13 +292,23 @@ TEST_F(Gen1Test, Gen1IndependentCollection_ThenNurseryAlloc) {
     std::memset(gen0_ref, 0, 64);
     std::memcpy(static_cast<char*>(gen0_ref) + 8, &gen1_obj, sizeof(void*));
 
-    // Force interval-based trigger: young_gc_since_last_gen1 >= 8.
-    g_gen1_state.young_gc_since_last_gen1.store(8, std::memory_order_relaxed);
+    // Fill Gen1 to high occupancy (>80%) to trigger collection.
+    auto* gen1_for_trigger = g_young_gen.gen1_region.load(std::memory_order_acquire);
+    ASSERT_NE(gen1_for_trigger, nullptr);
+    CHAOS_IL2CPP_SIZE gen1_capacity =
+        static_cast<CHAOS_IL2CPP_SIZE>(g_young_gen.gen1_end - gen1_for_trigger->begin);
+    CHAOS_IL2CPP_SIZE fill_count = static_cast<CHAOS_IL2CPP_SIZE>(
+        static_cast<float>(gen1_capacity) * 0.85f) / 4096;
+    for (CHAOS_IL2CPP_SIZE i = 0; i < fill_count; i++) {
+        void* filler = TryAllocateInGen1(4096);
+        ASSERT_NE(filler, nullptr) << "Failed at fill " << i;
+        InitGen1Object(filler, 0xBEEF0002 + i);
+    }
     EXPECT_TRUE(GcGen1ShouldCollect());
 
     Gen1CollectionResult r = GcGen1Collection();
-    EXPECT_EQ(r.objects_in_gen1, 1u);
-    EXPECT_EQ(r.objects_promoted, 1u);
+    EXPECT_GT(r.objects_in_gen1, 0u);
+    EXPECT_GT(r.objects_promoted, 0u);
     EXPECT_GE(r.bytes_promoted, 64u);
     EXPECT_FALSE(r.promotion_failed);
 
@@ -315,40 +329,188 @@ TEST_F(Gen1Test, Gen1IndependentCollection_ThenNurseryAlloc) {
     (void)keep3;
 }
 
-TEST_F(Gen1Test, Gen1ShouldCollect_AfterThreshold) {
+TEST_F(Gen1Test, Gen1ShouldCollect_OccupancyBased) {
     // Reset Gen1 state.
     GcGen1Collection();
-    g_gen1_state.young_gc_since_last_gen1.store(0, std::memory_order_relaxed);
 
-    // Gen1 needs data for the function to consider collection.
+    // Gen1 with minimal data → should NOT collect.
     void* gen1_obj = TryAllocateInGen1(64);
     ASSERT_NE(gen1_obj, nullptr);
     InitGen1Object(gen1_obj, 0xCAFE0001);
     volatile void* keep = gen1_obj;
     (void)keep;
 
-    // GcGen1ShouldCollect should return false with 0 young GCs since last Gen1.
+    // Low occupancy → GcGen1ShouldCollect returns false.
     EXPECT_FALSE(GcGen1ShouldCollect());
 
-    // Simulate N-1 young GCs — should still return false.
-    for (int i = 1; i < 8; i++) {
-        g_gen1_state.young_gc_since_last_gen1.store(i, std::memory_order_relaxed);
-        EXPECT_FALSE(GcGen1ShouldCollect())
-            << "Should not collect at count=" << i;
+    // Fill Gen1 to ~85% occupancy.
+    auto* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+    ASSERT_NE(gen1, nullptr);
+    CHAOS_IL2CPP_SIZE capacity =
+        static_cast<CHAOS_IL2CPP_SIZE>(g_young_gen.gen1_end - gen1->begin);
+    CHAOS_IL2CPP_SIZE fill_size = 4096;
+    CHAOS_IL2CPP_SIZE fill_count = static_cast<CHAOS_IL2CPP_SIZE>(
+        static_cast<float>(capacity) * 0.85f) / fill_size;
+    fill_count = (fill_count > 1) ? fill_count - 1 : 0;
+    for (CHAOS_IL2CPP_SIZE i = 0; i < fill_count; i++) {
+        void* obj = TryAllocateInGen1(fill_size);
+        ASSERT_NE(obj, nullptr) << "Failed at fill " << i;
+        InitGen1Object(obj, 0xCAFE1000 + i);
     }
 
-    // At threshold (8), should return true.
-    g_gen1_state.young_gc_since_last_gen1.store(8, std::memory_order_relaxed);
+    // High occupancy should trigger collection.
     EXPECT_TRUE(GcGen1ShouldCollect());
 
-    // Values above threshold should also return true.
-    g_gen1_state.young_gc_since_last_gen1.store(9, std::memory_order_relaxed);
-    EXPECT_TRUE(GcGen1ShouldCollect());
+    // Collect and verify bump resets.
+    Gen1CollectionResult r = GcGen1Collection();
+    EXPECT_GT(r.objects_in_gen1, 0u);
+    EXPECT_FALSE(r.promotion_failed);
+    EXPECT_EQ(g_young_gen.gen1_bump.load(std::memory_order_acquire), gen1->begin);
+}
 
-    // Reset counter.
-    g_gen1_state.young_gc_since_last_gen1.store(0, std::memory_order_relaxed);
+// ═══════════════════════════════════════════════════════════════════════════
+// Phase 2d: Gen1 fragmentation/compaction tests
+// ═══════════════════════════════════════════════════════════════════════════
 
-    // After reset, interval is reset — should return false again
-    // (occupancy is very low, well below 80%).
-    EXPECT_FALSE(GcGen1ShouldCollect());
+TEST_F(Gen1Test, Gen1HighFragmentationTrigger) {
+    GcGen1Collection();
+
+    auto* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+    ASSERT_NE(gen1, nullptr);
+    CHAOS_IL2CPP_SIZE capacity =
+        static_cast<CHAOS_IL2CPP_SIZE>(g_young_gen.gen1_end - gen1->begin);
+
+    CHAOS_IL2CPP_SIZE obj_size = 8192;
+    CHAOS_IL2CPP_SIZE pair_count = (capacity / obj_size) / 2;
+    if (pair_count > 50) pair_count = 50;
+
+    void* roots[50];
+    uint32_t kept = 0;
+    for (CHAOS_IL2CPP_SIZE i = 0; i < pair_count; i++) {
+        void* obj_a = TryAllocateInGen1(obj_size);
+        ASSERT_NE(obj_a, nullptr);
+        InitGen1Object(obj_a, 0xAA0000 + i);
+        roots[kept++] = obj_a;
+
+        void* obj_b = TryAllocateInGen1(obj_size);
+        ASSERT_NE(obj_b, nullptr);
+        InitGen1Object(obj_b, 0xBB0000 + i);
+    }
+
+    for (uint32_t i = 0; i < kept; i++) {
+        void* gen0_ref = NurseryAllocate(64);
+        ASSERT_NE(gen0_ref, nullptr);
+        std::memset(gen0_ref, 0, 64);
+        std::memcpy(static_cast<char*>(gen0_ref) + 8, &roots[i], sizeof(void*));
+    }
+
+    float frag = Gen1Fragmentation();
+    EXPECT_GT(frag, 0.20f);
+    SUCCEED();
+}
+
+TEST_F(Gen1Test, Gen1OomFallback) {
+    GcGen1Collection();
+
+    void* gen1_obj = TryAllocateInGen1(64);
+    ASSERT_NE(gen1_obj, nullptr);
+    InitGen1Object(gen1_obj, 0xDEAD0001);
+
+    void* gen0_ref = NurseryAllocate(64);
+    ASSERT_NE(gen0_ref, nullptr);
+    std::memset(gen0_ref, 0, 64);
+    std::memcpy(static_cast<char*>(gen0_ref) + 8, &gen1_obj, sizeof(void*));
+
+    G_Scheduler().SetHardLimit(1);
+
+    Gen1CollectionResult r = GcGen1Collection();
+    EXPECT_TRUE(r.promotion_failed);
+
+    ClearNursery();
+    G_Scheduler().SetHardLimit(0);
+
+    auto* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+    ASSERT_NE(gen1, nullptr);
+    char* bump = g_young_gen.gen1_bump.load(std::memory_order_acquire);
+    EXPECT_GT(bump, gen1->begin)
+        << "Gen1 bump should not reset when promotion fails";
+
+    tls_tlab.start = nullptr;
+    tls_tlab.end = nullptr;
+}
+
+TEST_F(Gen1Test, Gen1HighSurvivalRate) {
+    GcGen1Collection();
+
+    auto* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+    ASSERT_NE(gen1, nullptr);
+    CHAOS_IL2CPP_SIZE capacity =
+        static_cast<CHAOS_IL2CPP_SIZE>(g_young_gen.gen1_end - gen1->begin);
+
+    // Fill Gen1 to ~60% with small objects.
+    CHAOS_IL2CPP_SIZE obj_size = 128;
+    CHAOS_IL2CPP_SIZE count = static_cast<CHAOS_IL2CPP_SIZE>(
+        static_cast<float>(capacity) * 0.60f) / obj_size;
+    if (count > 200) count = 200;
+
+    // Keep all objects alive via Gen0 roots.
+    for (CHAOS_IL2CPP_SIZE i = 0; i < count; i++) {
+        void* obj = TryAllocateInGen1(obj_size);
+        ASSERT_NE(obj, nullptr) << "Failed at obj " << i;
+        InitGen1Object(obj, 0x50000000 + static_cast<uint32_t>(i));
+
+        void* gen0_ref = NurseryAllocate(64);
+        ASSERT_NE(gen0_ref, nullptr);
+        std::memset(gen0_ref, 0, 64);
+        std::memcpy(static_cast<char*>(gen0_ref) + 8, &obj, sizeof(void*));
+    }
+
+    // All objects have Gen0 roots — all should survive and promote.
+    Gen1CollectionResult r = GcGen1Collection();
+    EXPECT_GT(r.objects_in_gen1, 0u);
+    EXPECT_EQ(r.objects_promoted, r.objects_in_gen1)
+        << "All live Gen1 objects should promote under high survival";
+    EXPECT_GE(r.bytes_promoted, obj_size * count * 3 / 4);
+    EXPECT_FALSE(r.promotion_failed);
+
+    EXPECT_EQ(g_young_gen.gen1_bump.load(std::memory_order_acquire), gen1->begin);
+}
+
+TEST_F(Gen1Test, Gen1CompactionReusesSpace) {
+    GcGen1Collection();
+
+    auto* gen1 = g_young_gen.gen1_region.load(std::memory_order_acquire);
+    ASSERT_NE(gen1, nullptr);
+
+    // Fill Gen1 to ~80%.
+    CHAOS_IL2CPP_SIZE capacity =
+        static_cast<CHAOS_IL2CPP_SIZE>(g_young_gen.gen1_end - gen1->begin);
+    CHAOS_IL2CPP_SIZE obj_size = 4096;
+    CHAOS_IL2CPP_SIZE count = static_cast<CHAOS_IL2CPP_SIZE>(
+        static_cast<float>(capacity) * 0.80f) / obj_size;
+
+    for (CHAOS_IL2CPP_SIZE i = 0; i < count; i++) {
+        void* obj = TryAllocateInGen1(obj_size);
+        ASSERT_NE(obj, nullptr) << "Failed at fill " << i;
+        InitGen1Object(obj, 0x60000000 + static_cast<uint32_t>(i));
+    }
+
+    // No roots → all objects should be reclaimable. Conservative stack scanning
+    // may keep a few alive, but most should be reclaimed.
+    Gen1CollectionResult r = GcGen1Collection();
+    EXPECT_GT(r.objects_in_gen1, 0u);
+    EXPECT_GT(r.bytes_reclaimed, 0u)
+        << "Should reclaim bytes from dead Gen1 objects";
+    EXPECT_FALSE(r.promotion_failed);
+
+    // Gen1 should be reset.
+    EXPECT_EQ(g_young_gen.gen1_bump.load(std::memory_order_acquire), gen1->begin);
+
+    // Verify Gen1 space is reusable by allocating again.
+    void* reused = TryAllocateInGen1(64);
+    ASSERT_NE(reused, nullptr);
+    EXPECT_TRUE(IsInGen1(reused));
+
+    volatile void* keep = reused;
+    (void)keep;
 }

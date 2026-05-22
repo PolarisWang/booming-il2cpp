@@ -169,6 +169,9 @@
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_region.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_root_change.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_card_table.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -182,6 +185,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_old_gen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_demotion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_layout.cpp">
@@ -215,6 +221,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_api.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_coordinator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_heap_manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\com_rcw.cpp">
@@ -354,6 +366,9 @@
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_region.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_root_change.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_card_table.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -367,6 +382,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_old_gen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_demotion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_layout.h">
@@ -406,6 +424,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_coordinator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_heap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_heap_manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\com_rcw.h">
