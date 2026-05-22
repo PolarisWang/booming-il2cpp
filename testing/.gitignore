@@ -21,6 +21,15 @@ Testing/Temporary/
 # Test results
 results/
 
+# Shell redirect artifacts (e.g. D:test_out.txt from cmd > redirect)
+D:test_out.txt
+
+# CLI argument parsing artifacts (e.g. --assembly interpreted as path)
+--assembly/
+
+# Verification catalog (migrated to artifact/ — leftover from move)
+verification-catalog/
+
 # IDE
 .vs/
 *.suo
