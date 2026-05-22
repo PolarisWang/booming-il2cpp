@@ -29,8 +29,8 @@
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 83,
-          "handlerOffset": 84,
+          "tryLength": 71,
+          "handlerOffset": 72,
           "handlerLength": 11,
           "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
@@ -86,50 +86,24 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 42,
+          "op": "ldnull",
+          "opCode": 5,
           "ilOffset": 12,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "box",
-          "opCode": 35,
-          "operand": "System.Private.CoreLib/System.Int32",
-          "ilOffset": 14,
           "resultType": "System.Object",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "type",
-            "subjectId": "System.Private.CoreLib/System.Int32"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Int32",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 9,
           "isPreserveSig": false
         },
         {
           "op": "ldstr",
           "opCode": 4,
           "operand": "hello",
-          "ilOffset": 19,
+          "ilOffset": 13,
           "resultType": "System.String",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 24,
+          "ilOffset": 18,
           "resultType": "System.String",
           "callee": "System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)",
           "reference": {
@@ -154,7 +128,7 @@
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 29,
+          "ilOffset": 23,
           "resultType": "System.Int32",
           "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
           "reference": {
@@ -180,7 +154,7 @@
           "op": "ldtoken",
           "opCode": 70,
           "operand": "System.Private.CoreLib/System.Byte",
-          "ilOffset": 34,
+          "ilOffset": 28,
           "resultType": "System.RuntimeTypeHandle",
           "reference": {
             "assemblyName": "System.Private.CoreLib",
@@ -203,7 +177,7 @@
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 39,
+          "ilOffset": 33,
           "resultType": "System.Type",
           "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
           "reference": {
@@ -226,50 +200,24 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 42,
-          "ilOffset": 44,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "box",
-          "opCode": 35,
-          "operand": "System.Private.CoreLib/System.Int32",
-          "ilOffset": 46,
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 38,
           "resultType": "System.Object",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "type",
-            "subjectId": "System.Private.CoreLib/System.Int32"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Int32",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 9,
           "isPreserveSig": false
         },
         {
           "op": "ldstr",
           "opCode": 4,
           "operand": "hello",
-          "ilOffset": 51,
+          "ilOffset": 39,
           "resultType": "System.String",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 56,
+          "ilOffset": 44,
           "resultType": "System.String",
           "callee": "System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)",
           "reference": {
@@ -294,7 +242,7 @@
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 61,
+          "ilOffset": 49,
           "resultType": "System.Int32",
           "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
           "reference": {
@@ -319,7 +267,7 @@
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 66,
+          "ilOffset": 54,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -327,14 +275,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 68,
+          "ilOffset": 56,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 69,
+          "ilOffset": 57,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -342,7 +290,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 71,
+          "ilOffset": 59,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -350,14 +298,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 72,
+          "ilOffset": 60,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 81,
-          "ilOffset": 73,
+          "operand": 69,
+          "ilOffset": 61,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -365,7 +313,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 75,
+          "ilOffset": 63,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -373,7 +321,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "EnumParsingSubjects/EnumParsingSubjects::_exitCode",
-          "ilOffset": 76,
+          "ilOffset": 64,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "EnumParsingSubjects",
@@ -399,22 +347,22 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 95,
-          "ilOffset": 82,
+          "operand": 83,
+          "ilOffset": 70,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 84,
+          "ilOffset": 72,
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 86,
+          "ilOffset": 74,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -422,7 +370,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "EnumParsingSubjects/EnumParsingSubjects::_exitCode",
-          "ilOffset": 87,
+          "ilOffset": 75,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "EnumParsingSubjects",
@@ -448,15 +396,15 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 95,
-          "ilOffset": 93,
+          "operand": 83,
+          "ilOffset": 81,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 95,
+          "ilOffset": 83,
           "isPreserveSig": false
         }
       ],
@@ -2151,8 +2099,8 @@
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 75,
-          "handlerOffset": 76,
+          "tryLength": 63,
+          "handlerOffset": 64,
           "handlerLength": 11,
           "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
@@ -2208,42 +2156,16 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 42,
+          "op": "ldnull",
+          "opCode": 5,
           "ilOffset": 12,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "box",
-          "opCode": 35,
-          "operand": "System.Private.CoreLib/System.Int32",
-          "ilOffset": 14,
           "resultType": "System.Object",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "type",
-            "subjectId": "System.Private.CoreLib/System.Int32"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Int32",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 9,
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 19,
+          "ilOffset": 13,
           "resultType": "System.Boolean",
           "callee": "System.Private.CoreLib/System.Enum::IsDefined:System.Boolean(System.Type,System.Object)",
           "reference": {
@@ -2268,8 +2190,8 @@
         {
           "op": "brtrue",
           "opCode": 18,
-          "operand": 29,
-          "ilOffset": 24,
+          "operand": 23,
+          "ilOffset": 18,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -2277,15 +2199,15 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 26,
+          "ilOffset": 20,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
-          "operand": 30,
-          "ilOffset": 27,
+          "operand": 24,
+          "ilOffset": 21,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -2293,7 +2215,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 29,
+          "ilOffset": 23,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -2301,7 +2223,7 @@
           "op": "ldtoken",
           "opCode": 70,
           "operand": "System.Private.CoreLib/System.Byte",
-          "ilOffset": 30,
+          "ilOffset": 24,
           "resultType": "System.RuntimeTypeHandle",
           "reference": {
             "assemblyName": "System.Private.CoreLib",
@@ -2324,7 +2246,7 @@
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 35,
+          "ilOffset": 29,
           "resultType": "System.Type",
           "callee": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
           "reference": {
@@ -2347,42 +2269,16 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 42,
-          "ilOffset": 40,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "box",
-          "opCode": 35,
-          "operand": "System.Private.CoreLib/System.Int32",
-          "ilOffset": 42,
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 34,
           "resultType": "System.Object",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "type",
-            "subjectId": "System.Private.CoreLib/System.Int32"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Int32",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 9,
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 47,
+          "ilOffset": 35,
           "resultType": "System.Boolean",
           "callee": "System.Private.CoreLib/System.Enum::IsDefined:System.Boolean(System.Type,System.Object)",
           "reference": {
@@ -2407,8 +2303,8 @@
         {
           "op": "brtrue",
           "opCode": 18,
-          "operand": 57,
-          "ilOffset": 52,
+          "operand": 45,
+          "ilOffset": 40,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -2416,15 +2312,15 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 54,
+          "ilOffset": 42,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
-          "operand": 58,
-          "ilOffset": 55,
+          "operand": 46,
+          "ilOffset": 43,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -2432,14 +2328,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 57,
+          "ilOffset": 45,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 58,
+          "ilOffset": 46,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -2447,14 +2343,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 60,
+          "ilOffset": 48,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 61,
+          "ilOffset": 49,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -2462,7 +2358,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 63,
+          "ilOffset": 51,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -2470,14 +2366,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 64,
+          "ilOffset": 52,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 73,
-          "ilOffset": 65,
+          "operand": 61,
+          "ilOffset": 53,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -2485,7 +2381,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 67,
+          "ilOffset": 55,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -2493,7 +2389,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "EnumParsingSubjects/EnumParsingSubjects::_exitCode",
-          "ilOffset": 68,
+          "ilOffset": 56,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "EnumParsingSubjects",
@@ -2519,22 +2415,22 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 87,
-          "ilOffset": 74,
+          "operand": 75,
+          "ilOffset": 62,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 76,
+          "ilOffset": 64,
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 78,
+          "ilOffset": 66,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -2542,7 +2438,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "EnumParsingSubjects/EnumParsingSubjects::_exitCode",
-          "ilOffset": 79,
+          "ilOffset": 67,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "EnumParsingSubjects",
@@ -2568,15 +2464,15 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 87,
-          "ilOffset": 85,
+          "operand": 75,
+          "ilOffset": 73,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 87,
+          "ilOffset": 75,
           "isPreserveSig": false
         }
       ],

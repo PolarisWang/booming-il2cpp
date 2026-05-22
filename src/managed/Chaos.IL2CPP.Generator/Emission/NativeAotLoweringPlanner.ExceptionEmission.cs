@@ -1976,6 +1976,20 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 
 	private void EmitLinearCallTarget(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation, bool enforceInstanceNullCheck)
 	{
+		// A2.4: Constant-folded Enum::ToString — field name known at codegen time.
+		// Check BEFORE ResolveDirectInvocationTarget so we short-circuit the InlineShape.
+		if (_enumToStringFoldMap.Count > 0 &&
+			(instruction.OpCode is InstructionOpCode.Call or InstructionOpCode.CallVirt) &&
+			_enumToStringFoldMap.TryGetValue(instruction.IlOffset, out var foldedFieldName))
+		{
+			// Consume the `this` argument (boxed enum reference) from the eval stack
+			ConsumeEvalStackValueExpression();
+			builder.AppendLine($"{indentation}{{{{");
+			EmitEvalStackPush(builder, indentation + "    ", $"CHAOS_IL2CPP_STRING_ID({ToCppStringLiteral(foldedFieldName)})");
+			builder.AppendLine($"{indentation}}}}}");
+			return;
+		}
+
 		InvocationTarget invocationTarget = ResolveDirectInvocationTarget(instruction);
 
 		// Inline shape expansion: substitute args into expression template at call site.

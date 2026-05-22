@@ -768,7 +768,15 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
         G_Scheduler().RequestFullGc();
 
         auto* page = AllocatePage(size, scanning_required);
-        if (page == nullptr) return nullptr;
+        if (page == nullptr) {
+            // OOM: oversized page allocation failed.  Try full recovery chain.
+            struct Ctx { CHAOS_IL2CPP_SIZE s; bool scan; };
+            Ctx ctx{size, scanning_required};
+            return HandleOomCondition([](void* c) -> void* {
+                auto* p = static_cast<Ctx*>(c);
+                return g_old_gen.Allocate(p->s, p->scan);
+            }, &ctx, size);
+        }
 
         // Mark the allocated region in the page bitmap so that SweepPage
         // does not treat this freshly-allocated oversized page as empty
@@ -796,7 +804,15 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
     if (sc_idx < 0) {
         // Fallback: allocate a new page and carve from it.
         auto* page = AllocatePage(kOldGenPageSize, scanning_required);
-        if (page == nullptr) return nullptr;
+        if (page == nullptr) {
+            // OOM: fallback page allocation failed.  Try recovery chain.
+            struct Ctx { CHAOS_IL2CPP_SIZE s; bool scan; };
+            Ctx ctx{size, scanning_required};
+            return HandleOomCondition([](void* c) -> void* {
+                auto* p = static_cast<Ctx*>(c);
+                return g_old_gen.Allocate(p->s, p->scan);
+            }, &ctx, size);
+        }
         sc_idx = SizeClassIndex(size);
         if (sc_idx < 0) {
             // Still no match (shouldn't happen for aligned < 32KB).
@@ -823,7 +839,13 @@ void* MarkSweepOldGen::Allocate(CHAOS_IL2CPP_SIZE size, bool scanning_required) 
         CHAOS_IL2CPP_LOG_ERROR_M("OldGen", "page_list_ head={0} in_use={1}",
             static_cast<void*>(page_list_),
             page_list_ ? static_cast<int>(page_list_->in_use.load()) : -1);
-        return nullptr;
+        // OOM: main page allocation failed.  Try full recovery chain.
+        struct Ctx { CHAOS_IL2CPP_SIZE s; bool scan; };
+        Ctx ctx{size, scanning_required};
+        return HandleOomCondition([](void* c) -> void* {
+            auto* p = static_cast<Ctx*>(c);
+            return g_old_gen.Allocate(p->s, p->scan);
+        }, &ctx, size);
     }
 
     // Pop from the newly carved page's freelist directly, avoiding a full

@@ -158,6 +158,14 @@ struct RegisterFrame {
     // Program counter
     uint32_t      pc;
 
+    // ── SEH state (for Reg_Leave / Reg_EndFinally support) ──────────────
+    const SEHClause* seh_clauses            = nullptr;
+    uint32_t         seh_clause_count       = 0;
+    bool             in_handler             = false;
+    bool             pending_leave          = false;
+    uint32_t         pending_leave_target   = 0;
+    int32_t          active_handler_clause  = -1;
+
     // ── Tracked object cleanup ─────────────────────────────────────────
     static constexpr uint32_t kMaxTracked = 8;
     void*     tracked_objs[kMaxTracked]{};

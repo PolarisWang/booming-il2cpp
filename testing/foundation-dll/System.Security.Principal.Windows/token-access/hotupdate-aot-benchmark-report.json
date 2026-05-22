@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Security.Principal.Windows",
+  "familyId": "family/System.Security.Principal.Windows/token/access",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::get_InvalidHandle:Microsoft.Win32.SafeHandles.SafeAccessTokenHandle()",
+      "status": "passed",
+      "prePatchNsPerOp": 6.14,
+      "postPatchNsPerOp": 5.5,
+      "slowdownPercent": -10.42
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::get_IsInvalid:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.44,
+      "postPatchNsPerOp": 3.4,
+      "slowdownPercent": -1.16
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::.ctor:System.Void()",
+      "status": "passed",
+      "prePatchNsPerOp": 94.34,
+      "postPatchNsPerOp": 87.4,
+      "slowdownPercent": -7.36
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::.ctor:System.Void(System.IntPtr)",
+      "status": "passed",
+      "prePatchNsPerOp": 96.56,
+      "postPatchNsPerOp": 93.4,
+      "slowdownPercent": -3.27
+    }
+  ],
+  "summary": {
+    "totalMethods": 4,
+    "nonStubMethods": 4,
+    "averageSlowdownPercent": -5.55,
+    "slowdownFactor": 0.9445,
+    "slowdownThresholdX": 50.0
+  }
+}

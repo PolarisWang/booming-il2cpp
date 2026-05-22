@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.Threading.Tasks.Parallel",
+  "familyId": "family/System.Threading.Tasks.Parallel/loop/state",
+  "summary": {
+    "totalMethods": 6,
+    "matchedCount": 0,
+    "unmatchedCount": 0,
+    "invalidCount": 6,
+    "nativeAotFasterCount": 0,
+    "nativeJitFasterCount": 0,
+    "managedFasterCount": 0,
+    "equalCount": 0,
+    "averageSpeedupPercent": 0.0,
+    "averageNativeAotSpeedupPercent": 0.0,
+    "averageNativeJitSpeedupPercent": null,
+    "nativeJitSlowdownFactor": null
+  },
+  "methodResults": [
+    {
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Break:System.Void()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_IsExceptional:System.Boolean()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_IsStopped:System.Boolean()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_LowestBreakIteration:System.Nullable{System.Int64}()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_ShouldExitCurrentIteration:System.Boolean()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Stop:System.Void()",
+      "status": "managed_harness_unavailable"
+    }
+  ]
+}

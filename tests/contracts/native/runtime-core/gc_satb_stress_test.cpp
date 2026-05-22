@@ -284,14 +284,14 @@ static void TestSatbPoolExhaustion() {
     ctrl.ResetForTest();
     g_bgc_is_marking.store(true, std::memory_order_release);
 
-    // Exhaust the SATB buffer pool (kMaxSatbPool = 256 allocations).
+    // Exhaust the SATB buffer pool (BgcController::kMaxSatbPool = 256 allocations).
     int last_idx = -1;
-    for (int i = 0; i < kMaxSatbPool; i++) {
+    for (int i = 0; i < BgcController::kMaxSatbPool; i++) {
         int idx = ctrl.AllocateSatbBuffer();
         if (idx < 0) {
-            printf("  pool exhausted at allocation %d (kMaxSatbPool=%d)\n",
-                   i, kMaxSatbPool);
-            CHECK(i == kMaxSatbPool,
+            printf("  pool exhausted at allocation %d (BgcController::kMaxSatbPool=%d)\n",
+                   i, BgcController::kMaxSatbPool);
+            CHECK(i == BgcController::kMaxSatbPool,
                   "AllocateSatbBuffer returns -1 after pool exhaustion");
             break;
         }
@@ -347,10 +347,10 @@ static void TestSatbPoolContention() {
     int allocd = allocated_count.load(std::memory_order_relaxed);
     int failed = failed_count.load(std::memory_order_relaxed);
     printf("  allocated=%d (max=%d) failed=%d\n",
-           allocd, kMaxSatbPool, failed);
-    CHECK(allocd == kMaxSatbPool,
-          "exactly kMaxSatbPool buffers allocated under contention");
-    CHECK(failed == kContentionThreads - kMaxSatbPool,
+           allocd, BgcController::kMaxSatbPool, failed);
+    CHECK(allocd == BgcController::kMaxSatbPool,
+          "exactly BgcController::kMaxSatbPool buffers allocated under contention");
+    CHECK(failed == kContentionThreads - BgcController::kMaxSatbPool,
           "remaining threads see pool-full");
 
     g_bgc_is_marking.store(false, std::memory_order_release);

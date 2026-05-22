@@ -7,112 +7,112 @@
       "methodIndex": 0,
       "methodSubjectId": "System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)",
       "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 1442.9,
-      "slowdownPercent": 0.0
+      "prePatchNsPerOp": 1537.98,
+      "postPatchNsPerOp": 1488.6,
+      "slowdownPercent": -3.21
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "System.Private.CoreLib/System.Enum::GetName:System.String(System.RuntimeType,System.UInt64)",
       "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 2230.4,
-      "slowdownPercent": 0.0
+      "prePatchNsPerOp": 2387.13,
+      "postPatchNsPerOp": 2220.1,
+      "slowdownPercent": -7.0
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Private.CoreLib/System.Enum::GetName:System.String(System.Type,System.Object)",
       "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 2127.8,
-      "slowdownPercent": 0.0
+      "prePatchNsPerOp": 2404.21,
+      "postPatchNsPerOp": 2264.1,
+      "slowdownPercent": -5.83
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "System.Private.CoreLib/System.Enum::GetNames:System.String[](System.Type)",
       "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 562.1,
-      "slowdownPercent": 0.0
+      "prePatchNsPerOp": 659.25,
+      "postPatchNsPerOp": 572.1,
+      "slowdownPercent": -13.22
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "System.Private.CoreLib/System.Enum::GetValues:System.Array(System.Type)",
       "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 562.1,
-      "slowdownPercent": 0.0
+      "prePatchNsPerOp": 657.5100000000001,
+      "postPatchNsPerOp": 591.1,
+      "slowdownPercent": -10.1
     },
     {
       "methodIndex": 5,
       "methodSubjectId": "System.Private.CoreLib/System.Enum::IsDefined:System.Boolean(System.Type,System.Object)",
       "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 530.1,
-      "slowdownPercent": 0.0
+      "prePatchNsPerOp": 572.53,
+      "postPatchNsPerOp": 537.4,
+      "slowdownPercent": -6.14
     },
     {
       "methodIndex": 6,
       "methodSubjectId": "System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String)",
       "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 2613.2,
-      "slowdownPercent": 0.0
+      "prePatchNsPerOp": 97.32,
+      "postPatchNsPerOp": 124.8,
+      "slowdownPercent": 28.24
     },
     {
       "methodIndex": 7,
       "methodSubjectId": "System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String,System.Boolean)",
       "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 2619.9,
-      "slowdownPercent": 0.0
+      "prePatchNsPerOp": 397.1,
+      "postPatchNsPerOp": 389.2,
+      "slowdownPercent": -1.99
     },
     {
       "methodIndex": 8,
       "methodSubjectId": "System.Private.CoreLib/System.Enum::ToString:System.String()",
       "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 1338.4,
-      "slowdownPercent": 0.0
+      "prePatchNsPerOp": 1454.9,
+      "postPatchNsPerOp": 1360.7,
+      "slowdownPercent": -6.47
     },
     {
       "methodIndex": 9,
       "methodSubjectId": "System.Private.CoreLib/System.Enum::ToString:System.String(System.String)",
       "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 1333.0,
-      "slowdownPercent": 0.0
+      "prePatchNsPerOp": 1375.64,
+      "postPatchNsPerOp": 1326.2,
+      "slowdownPercent": -3.59
     },
     {
       "methodIndex": 10,
       "methodSubjectId": "System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Boolean,System.Object&)",
       "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 2240.1,
-      "slowdownPercent": 0.0
+      "prePatchNsPerOp": 405.84,
+      "postPatchNsPerOp": 379.1,
+      "slowdownPercent": -6.59
     },
     {
       "methodIndex": 11,
       "methodSubjectId": "System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Object&)",
       "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 2178.8,
-      "slowdownPercent": 0.0
+      "prePatchNsPerOp": 401.13,
+      "postPatchNsPerOp": 374.6,
+      "slowdownPercent": -6.61
     },
     {
       "methodIndex": 12,
       "methodSubjectId": "System.Private.CoreLib/System.Enum::BoxToString:System.String()",
       "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 104.0,
-      "slowdownPercent": 0.0
+      "prePatchNsPerOp": 106.58,
+      "postPatchNsPerOp": 103.0,
+      "slowdownPercent": -3.36
     }
   ],
   "summary": {
     "totalMethods": 13,
-    "nonStubMethods": 0,
-    "averageSlowdownPercent": 0.0,
-    "slowdownFactor": 1.0,
+    "nonStubMethods": 13,
+    "averageSlowdownPercent": -3.53,
+    "slowdownFactor": 0.9647,
     "slowdownThresholdX": 50.0
   }
 }

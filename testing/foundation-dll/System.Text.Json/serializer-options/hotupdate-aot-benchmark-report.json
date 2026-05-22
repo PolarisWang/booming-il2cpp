@@ -1,0 +1,608 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Text.Json",
+  "familyId": "family/System.Text.Json/serializer/options",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonNamingPolicy::ConvertName:System.String(System.String)",
+      "status": "passed",
+      "prePatchNsPerOp": 7.99,
+      "postPatchNsPerOp": 8.1,
+      "slowdownPercent": 1.38
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonNamingPolicy::get_CamelCase:System.Text.Json.JsonNamingPolicy()",
+      "status": "passed",
+      "prePatchNsPerOp": 5.16,
+      "postPatchNsPerOp": 5.5,
+      "slowdownPercent": 6.59
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonNamingPolicy::get_KebabCaseLower:System.Text.Json.JsonNamingPolicy()",
+      "status": "passed",
+      "prePatchNsPerOp": 5.2,
+      "postPatchNsPerOp": 5.5,
+      "slowdownPercent": 5.77
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonNamingPolicy::get_KebabCaseUpper:System.Text.Json.JsonNamingPolicy()",
+      "status": "passed",
+      "prePatchNsPerOp": 5.41,
+      "postPatchNsPerOp": 5.7,
+      "slowdownPercent": 5.36
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonNamingPolicy::get_SnakeCaseLower:System.Text.Json.JsonNamingPolicy()",
+      "status": "passed",
+      "prePatchNsPerOp": 5.53,
+      "postPatchNsPerOp": 8.2,
+      "slowdownPercent": 48.28
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonNamingPolicy::get_SnakeCaseUpper:System.Text.Json.JsonNamingPolicy()",
+      "status": "passed",
+      "prePatchNsPerOp": 5.27,
+      "postPatchNsPerOp": 5.4,
+      "slowdownPercent": 2.47
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::AddContext{TContext}:System.Void()",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_AllowDuplicateProperties:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.54,
+      "postPatchNsPerOp": 3.8,
+      "slowdownPercent": 7.34
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_AllowOutOfOrderMetadataProperties:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.52,
+      "postPatchNsPerOp": 3.8,
+      "slowdownPercent": 7.95
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_AllowTrailingCommas:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 4.94,
+      "postPatchNsPerOp": 3.7,
+      "slowdownPercent": -25.1
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_Converters:System.Collections.Generic.IList{System.Text.Json.Serialization.JsonConverter}()",
+      "status": "passed",
+      "prePatchNsPerOp": 5.5,
+      "postPatchNsPerOp": 5.7,
+      "slowdownPercent": 3.64
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_Default:System.Text.Json.JsonSerializerOptions()",
+      "status": "stub"
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_DefaultBufferSize:System.Int32()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.35,
+      "postPatchNsPerOp": 3.6,
+      "slowdownPercent": 7.46
+    },
+    {
+      "methodIndex": 13,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_DefaultIgnoreCondition:System.Text.Json.Serialization.JsonIgnoreCondition()",
+      "status": "passed",
+      "prePatchNsPerOp": 5.19,
+      "postPatchNsPerOp": 5.0,
+      "slowdownPercent": -3.66
+    },
+    {
+      "methodIndex": 14,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_DictionaryKeyPolicy:System.Text.Json.JsonNamingPolicy()",
+      "status": "passed",
+      "prePatchNsPerOp": 5.4,
+      "postPatchNsPerOp": 5.7,
+      "slowdownPercent": 5.56
+    },
+    {
+      "methodIndex": 15,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_Encoder:System.Text.Encodings.Web.JavaScriptEncoder()",
+      "status": "passed",
+      "prePatchNsPerOp": 5.72,
+      "postPatchNsPerOp": 5.5,
+      "slowdownPercent": -3.85
+    },
+    {
+      "methodIndex": 16,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_IgnoreNullValues:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.31,
+      "postPatchNsPerOp": 3.6,
+      "slowdownPercent": 8.76
+    },
+    {
+      "methodIndex": 17,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_IgnoreReadOnlyFields:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.32,
+      "postPatchNsPerOp": 3.6,
+      "slowdownPercent": 8.43
+    },
+    {
+      "methodIndex": 18,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_IgnoreReadOnlyProperties:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.36,
+      "postPatchNsPerOp": 3.6,
+      "slowdownPercent": 7.14
+    },
+    {
+      "methodIndex": 19,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_IncludeFields:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.28,
+      "postPatchNsPerOp": 3.6,
+      "slowdownPercent": 9.76
+    },
+    {
+      "methodIndex": 20,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_IndentCharacter:System.Char()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.33,
+      "postPatchNsPerOp": 3.6,
+      "slowdownPercent": 8.11
+    },
+    {
+      "methodIndex": 21,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_IndentSize:System.Int32()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.3,
+      "postPatchNsPerOp": 3.6,
+      "slowdownPercent": 9.09
+    },
+    {
+      "methodIndex": 22,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_IsReadOnly:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.33,
+      "postPatchNsPerOp": 3.6,
+      "slowdownPercent": 8.11
+    },
+    {
+      "methodIndex": 23,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_MaxDepth:System.Int32()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.38,
+      "postPatchNsPerOp": 5.8,
+      "slowdownPercent": 71.6
+    },
+    {
+      "methodIndex": 24,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_NewLine:System.String()",
+      "status": "passed",
+      "prePatchNsPerOp": 6.4,
+      "postPatchNsPerOp": 5.5,
+      "slowdownPercent": -14.06
+    },
+    {
+      "methodIndex": 25,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_NumberHandling:System.Text.Json.Serialization.JsonNumberHandling()",
+      "status": "passed",
+      "prePatchNsPerOp": 5.35,
+      "postPatchNsPerOp": 5.1,
+      "slowdownPercent": -4.67
+    },
+    {
+      "methodIndex": 26,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_PreferredObjectCreationHandling:System.Text.Json.Serialization.JsonObjectCreationHandling()",
+      "status": "passed",
+      "prePatchNsPerOp": 4.92,
+      "postPatchNsPerOp": 5.2,
+      "slowdownPercent": 5.69
+    },
+    {
+      "methodIndex": 27,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_PropertyNameCaseInsensitive:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.34,
+      "postPatchNsPerOp": 3.6,
+      "slowdownPercent": 7.78
+    },
+    {
+      "methodIndex": 28,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_PropertyNamingPolicy:System.Text.Json.JsonNamingPolicy()",
+      "status": "passed",
+      "prePatchNsPerOp": 5.26,
+      "postPatchNsPerOp": 5.5,
+      "slowdownPercent": 4.56
+    },
+    {
+      "methodIndex": 29,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_ReadCommentHandling:System.Text.Json.JsonCommentHandling()",
+      "status": "passed",
+      "prePatchNsPerOp": 4.84,
+      "postPatchNsPerOp": 5.1,
+      "slowdownPercent": 5.37
+    },
+    {
+      "methodIndex": 30,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_ReferenceHandler:System.Text.Json.Serialization.ReferenceHandler()",
+      "status": "passed",
+      "prePatchNsPerOp": 5.38,
+      "postPatchNsPerOp": 5.6,
+      "slowdownPercent": 4.09
+    },
+    {
+      "methodIndex": 31,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_RespectNullableAnnotations:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.3,
+      "postPatchNsPerOp": 3.6,
+      "slowdownPercent": 9.09
+    },
+    {
+      "methodIndex": 32,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_RespectRequiredConstructorParameters:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.45,
+      "postPatchNsPerOp": 3.6,
+      "slowdownPercent": 4.35
+    },
+    {
+      "methodIndex": 33,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_Strict:System.Text.Json.JsonSerializerOptions()",
+      "status": "passed",
+      "prePatchNsPerOp": 5.41,
+      "postPatchNsPerOp": 5.7,
+      "slowdownPercent": 5.36
+    },
+    {
+      "methodIndex": 34,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_TypeInfoResolver:System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver()",
+      "status": "passed",
+      "prePatchNsPerOp": 5.26,
+      "postPatchNsPerOp": 5.5,
+      "slowdownPercent": 4.56
+    },
+    {
+      "methodIndex": 35,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_TypeInfoResolverChain:System.Collections.Generic.IList{System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver}()",
+      "status": "passed",
+      "prePatchNsPerOp": 5.24,
+      "postPatchNsPerOp": 5.4,
+      "slowdownPercent": 3.05
+    },
+    {
+      "methodIndex": 36,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_UnknownTypeHandling:System.Text.Json.Serialization.JsonUnknownTypeHandling()",
+      "status": "passed",
+      "prePatchNsPerOp": 4.99,
+      "postPatchNsPerOp": 5.3,
+      "slowdownPercent": 6.21
+    },
+    {
+      "methodIndex": 37,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_UnmappedMemberHandling:System.Text.Json.Serialization.JsonUnmappedMemberHandling()",
+      "status": "passed",
+      "prePatchNsPerOp": 6.64,
+      "postPatchNsPerOp": 17.8,
+      "slowdownPercent": 168.07
+    },
+    {
+      "methodIndex": 38,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_Web:System.Text.Json.JsonSerializerOptions()",
+      "status": "passed",
+      "prePatchNsPerOp": 5.45,
+      "postPatchNsPerOp": 5.6,
+      "slowdownPercent": 2.75
+    },
+    {
+      "methodIndex": 39,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_WriteIndented:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.42,
+      "postPatchNsPerOp": 3.6,
+      "slowdownPercent": 5.26
+    },
+    {
+      "methodIndex": 40,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::GetConverter:System.Text.Json.Serialization.JsonConverter(System.Type)",
+      "status": "passed",
+      "prePatchNsPerOp": 198.23,
+      "postPatchNsPerOp": 203.3,
+      "slowdownPercent": 2.56
+    },
+    {
+      "methodIndex": 41,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::GetTypeInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo(System.Type)",
+      "status": "passed",
+      "prePatchNsPerOp": 206.0,
+      "postPatchNsPerOp": 190.8,
+      "slowdownPercent": -7.38
+    },
+    {
+      "methodIndex": 42,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::MakeReadOnly:System.Void()",
+      "status": "passed",
+      "prePatchNsPerOp": 4.36,
+      "postPatchNsPerOp": 2.8,
+      "slowdownPercent": -35.78
+    },
+    {
+      "methodIndex": 43,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::MakeReadOnly:System.Void(System.Boolean)",
+      "status": "passed",
+      "prePatchNsPerOp": 2.86,
+      "postPatchNsPerOp": 2.8,
+      "slowdownPercent": -2.1
+    },
+    {
+      "methodIndex": 44,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_AllowDuplicateProperties:System.Void(System.Boolean)",
+      "status": "passed",
+      "prePatchNsPerOp": 2.79,
+      "postPatchNsPerOp": 2.9,
+      "slowdownPercent": 3.94
+    },
+    {
+      "methodIndex": 45,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_AllowOutOfOrderMetadataProperties:System.Void(System.Boolean)",
+      "status": "passed",
+      "prePatchNsPerOp": 3.48,
+      "postPatchNsPerOp": 2.8,
+      "slowdownPercent": -19.54
+    },
+    {
+      "methodIndex": 46,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_AllowTrailingCommas:System.Void(System.Boolean)",
+      "status": "passed",
+      "prePatchNsPerOp": 3.04,
+      "postPatchNsPerOp": 2.8,
+      "slowdownPercent": -7.89
+    },
+    {
+      "methodIndex": 47,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_DefaultBufferSize:System.Void(System.Int32)",
+      "status": "passed",
+      "prePatchNsPerOp": 2.77,
+      "postPatchNsPerOp": 5.2,
+      "slowdownPercent": 87.73
+    },
+    {
+      "methodIndex": 48,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_DefaultIgnoreCondition:System.Void(System.Text.Json.Serialization.JsonIgnoreCondition)",
+      "status": "passed",
+      "prePatchNsPerOp": 2.78,
+      "postPatchNsPerOp": 4.5,
+      "slowdownPercent": 61.87
+    },
+    {
+      "methodIndex": 49,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_DictionaryKeyPolicy:System.Void(System.Text.Json.JsonNamingPolicy)",
+      "status": "passed",
+      "prePatchNsPerOp": 3.07,
+      "postPatchNsPerOp": 2.8,
+      "slowdownPercent": -8.79
+    },
+    {
+      "methodIndex": 50,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_Encoder:System.Void(System.Text.Encodings.Web.JavaScriptEncoder)",
+      "status": "passed",
+      "prePatchNsPerOp": 2.81,
+      "postPatchNsPerOp": 2.9,
+      "slowdownPercent": 3.2
+    },
+    {
+      "methodIndex": 51,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_IgnoreNullValues:System.Void(System.Boolean)",
+      "status": "passed",
+      "prePatchNsPerOp": 2.83,
+      "postPatchNsPerOp": 2.8,
+      "slowdownPercent": -1.06
+    },
+    {
+      "methodIndex": 52,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_IgnoreReadOnlyFields:System.Void(System.Boolean)",
+      "status": "passed",
+      "prePatchNsPerOp": 2.81,
+      "postPatchNsPerOp": 2.8,
+      "slowdownPercent": -0.36
+    },
+    {
+      "methodIndex": 53,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_IgnoreReadOnlyProperties:System.Void(System.Boolean)",
+      "status": "passed",
+      "prePatchNsPerOp": 2.77,
+      "postPatchNsPerOp": 2.8,
+      "slowdownPercent": 1.08
+    },
+    {
+      "methodIndex": 54,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_IncludeFields:System.Void(System.Boolean)",
+      "status": "passed",
+      "prePatchNsPerOp": 2.81,
+      "postPatchNsPerOp": 2.8,
+      "slowdownPercent": -0.36
+    },
+    {
+      "methodIndex": 55,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_IndentCharacter:System.Void(System.Char)",
+      "status": "passed",
+      "prePatchNsPerOp": 5.41,
+      "postPatchNsPerOp": 8.5,
+      "slowdownPercent": 57.12
+    },
+    {
+      "methodIndex": 56,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_IndentSize:System.Void(System.Int32)",
+      "status": "passed",
+      "prePatchNsPerOp": 2.81,
+      "postPatchNsPerOp": 3.4,
+      "slowdownPercent": 21.0
+    },
+    {
+      "methodIndex": 57,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_MaxDepth:System.Void(System.Int32)",
+      "status": "passed",
+      "prePatchNsPerOp": 2.82,
+      "postPatchNsPerOp": 2.8,
+      "slowdownPercent": -0.71
+    },
+    {
+      "methodIndex": 58,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_NewLine:System.Void(System.String)",
+      "status": "passed",
+      "prePatchNsPerOp": 3.73,
+      "postPatchNsPerOp": 4.0,
+      "slowdownPercent": 7.24
+    },
+    {
+      "methodIndex": 59,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_NumberHandling:System.Void(System.Text.Json.Serialization.JsonNumberHandling)",
+      "status": "passed",
+      "prePatchNsPerOp": 2.82,
+      "postPatchNsPerOp": 2.8,
+      "slowdownPercent": -0.71
+    },
+    {
+      "methodIndex": 60,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_PreferredObjectCreationHandling:System.Void(System.Text.Json.Serialization.JsonObjectCreationHandling)",
+      "status": "passed",
+      "prePatchNsPerOp": 2.8,
+      "postPatchNsPerOp": 5.1,
+      "slowdownPercent": 82.14
+    },
+    {
+      "methodIndex": 61,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_PropertyNameCaseInsensitive:System.Void(System.Boolean)",
+      "status": "passed",
+      "prePatchNsPerOp": 2.75,
+      "postPatchNsPerOp": 3.0,
+      "slowdownPercent": 9.09
+    },
+    {
+      "methodIndex": 62,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_PropertyNamingPolicy:System.Void(System.Text.Json.JsonNamingPolicy)",
+      "status": "passed",
+      "prePatchNsPerOp": 2.81,
+      "postPatchNsPerOp": 2.9,
+      "slowdownPercent": 3.2
+    },
+    {
+      "methodIndex": 63,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_ReadCommentHandling:System.Void(System.Text.Json.JsonCommentHandling)",
+      "status": "passed",
+      "prePatchNsPerOp": 2.77,
+      "postPatchNsPerOp": 2.9,
+      "slowdownPercent": 4.69
+    },
+    {
+      "methodIndex": 64,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_ReferenceHandler:System.Void(System.Text.Json.Serialization.ReferenceHandler)",
+      "status": "passed",
+      "prePatchNsPerOp": 2.79,
+      "postPatchNsPerOp": 2.9,
+      "slowdownPercent": 3.94
+    },
+    {
+      "methodIndex": 65,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_RespectNullableAnnotations:System.Void(System.Boolean)",
+      "status": "passed",
+      "prePatchNsPerOp": 2.79,
+      "postPatchNsPerOp": 3.0,
+      "slowdownPercent": 7.53
+    },
+    {
+      "methodIndex": 66,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_RespectRequiredConstructorParameters:System.Void(System.Boolean)",
+      "status": "passed",
+      "prePatchNsPerOp": 2.8,
+      "postPatchNsPerOp": 3.0,
+      "slowdownPercent": 7.14
+    },
+    {
+      "methodIndex": 67,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_TypeInfoResolver:System.Void(System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver)",
+      "status": "passed",
+      "prePatchNsPerOp": 2.77,
+      "postPatchNsPerOp": 2.8,
+      "slowdownPercent": 1.08
+    },
+    {
+      "methodIndex": 68,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_UnknownTypeHandling:System.Void(System.Text.Json.Serialization.JsonUnknownTypeHandling)",
+      "status": "passed",
+      "prePatchNsPerOp": 2.76,
+      "postPatchNsPerOp": 2.8,
+      "slowdownPercent": 1.45
+    },
+    {
+      "methodIndex": 69,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_UnmappedMemberHandling:System.Void(System.Text.Json.Serialization.JsonUnmappedMemberHandling)",
+      "status": "passed",
+      "prePatchNsPerOp": 2.8,
+      "postPatchNsPerOp": 2.8,
+      "slowdownPercent": 0.0
+    },
+    {
+      "methodIndex": 70,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_WriteIndented:System.Void(System.Boolean)",
+      "status": "passed",
+      "prePatchNsPerOp": 3.18,
+      "postPatchNsPerOp": 3.0,
+      "slowdownPercent": -5.66
+    },
+    {
+      "methodIndex": 71,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::TryGetTypeInfo:System.Boolean(System.Type,System.Text.Json.Serialization.Metadata.JsonTypeInfo&)",
+      "status": "passed",
+      "prePatchNsPerOp": 191.8,
+      "postPatchNsPerOp": 192.3,
+      "slowdownPercent": 0.26
+    },
+    {
+      "methodIndex": 72,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::.ctor:System.Void()",
+      "status": "passed",
+      "prePatchNsPerOp": 91.04,
+      "postPatchNsPerOp": 89.3,
+      "slowdownPercent": -1.91
+    },
+    {
+      "methodIndex": 73,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::.ctor:System.Void(System.Text.Json.JsonSerializerOptions)",
+      "status": "passed",
+      "prePatchNsPerOp": 85.46,
+      "postPatchNsPerOp": 90.0,
+      "slowdownPercent": 5.31
+    },
+    {
+      "methodIndex": 74,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::.ctor:System.Void(System.Text.Json.JsonSerializerDefaults)",
+      "status": "passed",
+      "prePatchNsPerOp": 88.23,
+      "postPatchNsPerOp": 100.6,
+      "slowdownPercent": 14.02
+    }
+  ],
+  "summary": {
+    "totalMethods": 75,
+    "nonStubMethods": 73,
+    "averageSlowdownPercent": 9.74,
+    "slowdownFactor": 1.0974,
+    "slowdownThresholdX": 50.0
+  }
+}

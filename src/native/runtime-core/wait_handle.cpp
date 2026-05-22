@@ -18,6 +18,19 @@
 
 namespace chaos::il2cpp::runtime_core::threading {
 
+// ── Per-handle waiter node (non-Windows signal-based dispatch) ──────────
+// Used by WaitHandleWaitAny to register on multiple handles' waiter lists.
+// A stack-allocated WaiterNode is created per WaitAny call and pushed onto
+// each handle's waiter_list.  WaitHandleSet walks the list and notifies
+// directly, eliminating the polling loop.
+struct WaiterNode {
+    std::condition_variable* cv;     // waiter's CV (stack-allocated in WaitAny)
+    std::mutex* mtx;                 // waiter's mutex (for CV predicate)
+    std::atomic<bool>* wake_flag;    // waiter's wake flag (set by Set)
+    uint32_t handle_index;           // index in the waiter's handle array
+    WaiterNode* next;
+};
+
 // ── Internal wait handle entry ──────────────────────────────────────────
 
 struct WaitHandleEntry {
@@ -30,6 +43,7 @@ struct WaitHandleEntry {
     void* os_event{nullptr};  // HANDLE (CreateEvent)
 #else
     bool signalled;
+    WaiterNode* waiter_list{nullptr};  // Treiber stack of WaitAny waiters
 #endif
 };
 
@@ -155,6 +169,20 @@ bool WaitHandleClose(uint32_t handle_id) noexcept {
         entry->os_event = nullptr;
     }
 #else
+    // Wake all registered WaitAny waiters on this handle.
+    {
+        std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(entry->mutex);
+        WaiterNode* w = entry->waiter_list;
+        while (w) {
+            {
+                std::lock_guard<std::mutex> wlock(*w->mtx);
+                w->wake_flag->store(true, std::memory_order_relaxed);
+            }
+            w->cv->notify_one();
+            w = w->next;
+        }
+        entry->waiter_list = nullptr;
+    }
     entry->cv.notify_all();
 #endif
     // Note: entry pointer remains valid in the map (unique_ptr not released).
@@ -175,8 +203,33 @@ bool WaitHandleSet(uint32_t handle_id) noexcept {
     {
         std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(entry->mutex);
         entry->signalled = true;
+
+        // Walk the waiter list and notify registered WaitAny waiters.
+        if (entry->type == WaitHandleType::AutoResetEvent) {
+            // AutoResetEvent: wake only the first waiter.
+            if (entry->waiter_list) {
+                WaiterNode* w = entry->waiter_list;
+                {
+                    std::lock_guard<std::mutex> wlock(*w->mtx);
+                    w->wake_flag->store(true, std::memory_order_relaxed);
+                }
+                w->cv->notify_one();
+            }
+        } else {
+            // ManualResetEvent: wake all registered waiters.
+            WaiterNode* w = entry->waiter_list;
+            while (w) {
+                {
+                    std::lock_guard<std::mutex> wlock(*w->mtx);
+                    w->wake_flag->store(true, std::memory_order_relaxed);
+                }
+                w->cv->notify_one();
+                w = w->next;
+            }
+        }
     }
 
+    // Also notify direct WaitOne waiters.
     if (entry->type == WaitHandleType::AutoResetEvent) {
         entry->cv.notify_one();
     } else {
@@ -243,11 +296,12 @@ int32_t WaitHandleWaitAny(const uint32_t* handle_ids, uint32_t count, int32_t ti
     }
     return -1;
 #else
-    auto deadline = (timeout_ms >= 0)
-        ? std::chrono::steady_clock::now() + std::chrono::milliseconds(timeout_ms)
-        : std::chrono::steady_clock::time_point::max();
+    // ── Non-Windows: signal-based dispatch ────────────────────────────
+    // Per-handle waiter registration eliminates the polling loop.
+    // WaitAny registers on each handle's Treiber stack; WaitHandleSet
+    // walks the list and notifies directly.
 
-    // O(count) O(1) lookups under shared lock.
+    // 1. Lookup handles under shared lock.
     std::vector<WaitHandleEntry*> entries(count, nullptr);
     {
         std::shared_lock<std::shared_mutex> lock(s_handle_table_mutex);
@@ -259,66 +313,128 @@ int32_t WaitHandleWaitAny(const uint32_t* handle_ids, uint32_t count, int32_t ti
         }
     }
 
-    // Poll once first.
+    // 2. Quick poll: check each handle once.
     for (uint32_t i = 0; i < count; i++) {
         if (entries[i] == nullptr) continue;
         std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(entries[i]->mutex);
         if (entries[i]->signalled) {
-            if (entries[i]->type == WaitHandleType::AutoResetEvent) {
+            if (entries[i]->type == WaitHandleType::AutoResetEvent)
                 entries[i]->signalled = false;
-            }
             return static_cast<int32_t>(i);
         }
     }
 
     if (timeout_ms == 0) return -1;
 
-    GC_TRANSITION_TO_PREEMPTIVE();
+    // 3. Per-waiter CV + mutex + flag (stack-allocated in this frame).
+    std::mutex waiter_mtx;
+    std::condition_variable waiter_cv;
+    std::atomic<bool> wake_flag{false};
 
-    int32_t result = -1;
-    while (std::chrono::steady_clock::now() < deadline) {
-        for (uint32_t i = 0; i < count; i++) {
-            if (entries[i] == nullptr) continue;
-            std::unique_lock<CHAOS_IL2CPP_MUTEX> lock(entries[i]->mutex);
-            if (entries[i]->signalled) {
-                if (entries[i]->type == WaitHandleType::AutoResetEvent) {
-                    entries[i]->signalled = false;
-                }
-                result = static_cast<int32_t>(i);
-                GC_TRANSITION_TO_COOPERATIVE();
-                return result;
-            }
-        }
+    // 4. Register a WaiterNode on each handle's waiter list.
+    auto nodes = std::make_unique<WaiterNode[]>(count);
+    int registered = 0;
+    for (uint32_t i = 0; i < count; i++) {
+        if (entries[i] == nullptr) continue;
+        WaiterNode* n = &nodes[registered];
+        n->cv = &waiter_cv;
+        n->mtx = &waiter_mtx;
+        n->wake_flag = &wake_flag;
+        n->handle_index = i;
 
-        auto remaining = std::chrono::duration_cast<std::chrono::milliseconds>(
-            deadline - std::chrono::steady_clock::now());
-        if (remaining.count() <= 0) break;
+        std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(entries[i]->mutex);
+        n->next = entries[i]->waiter_list;
+        entries[i]->waiter_list = n;
+        registered++;
+    }
 
-        for (uint32_t i = 0; i < count; i++) {
-            if (entries[i] == nullptr) continue;
-            std::unique_lock<CHAOS_IL2CPP_MUTEX> lock(entries[i]->mutex);
-            entries[i]->cv.wait_for(lock, remaining, [&entries, count]() {
-                for (uint32_t j = 0; j < count; j++) {
-                    if (entries[j] != nullptr && entries[j]->signalled) return true;
-                }
-                return false;
-            });
-            for (uint32_t j = 0; j < count; j++) {
-                if (entries[j] == nullptr) continue;
-                if (entries[j]->signalled) {
-                    if (entries[j]->type == WaitHandleType::AutoResetEvent) {
-                        entries[j]->signalled = false;
-                    }
-                    result = static_cast<int32_t>(j);
-                    GC_TRANSITION_TO_COOPERATIVE();
-                    return result;
-                }
-            }
+    // 5. Re-check all handles after registration (covers the race where
+    //    Set fired between our quick-poll and list registration).
+    int already_signalled_idx = -1;
+    for (int ri = 0; ri < registered; ri++) {
+        uint32_t i = nodes[ri].handle_index;
+        if (entries[i] == nullptr) continue;
+        std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(entries[i]->mutex);
+        if (entries[i]->signalled) {
+            already_signalled_idx = static_cast<int32_t>(i);
             break;
         }
     }
 
+    if (already_signalled_idx >= 0) {
+        // Unregister and return without waiting.
+        for (int ri = 0; ri < registered; ri++) {
+            uint32_t i = nodes[ri].handle_index;
+            if (entries[i] == nullptr) continue;
+            std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(entries[i]->mutex);
+            WaiterNode** pp = &entries[i]->waiter_list;
+            while (*pp) {
+                if (*pp == &nodes[ri]) {
+                    *pp = nodes[ri].next;
+                    break;
+                }
+                pp = &(*pp)->next;
+            }
+        }
+        if (entries[already_signalled_idx]->type == WaitHandleType::AutoResetEvent) {
+            std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(entries[already_signalled_idx]->mutex);
+            entries[already_signalled_idx]->signalled = false;
+        }
+        return already_signalled_idx;
+    }
+
+    // 6. If no valid handles, skip blocking and return timeout.
+    if (registered == 0) return -1;
+
+    // 7. Block on waiter CV.
+    GC_TRANSITION_TO_PREEMPTIVE();
+
+    bool woken = false;
+    {
+        std::unique_lock<std::mutex> lock(waiter_mtx);
+        if (timeout_ms < 0) {
+            waiter_cv.wait(lock, [&wake_flag]() noexcept {
+                return wake_flag.load(std::memory_order_relaxed);
+            });
+            woken = true;
+        } else {
+            woken = waiter_cv.wait_for(lock, std::chrono::milliseconds(timeout_ms),
+                [&wake_flag]() noexcept {
+                    return wake_flag.load(std::memory_order_relaxed);
+                });
+        }
+    }
+
+    // 8. Unregister from all handles.
+    for (int ri = 0; ri < registered; ri++) {
+        uint32_t i = nodes[ri].handle_index;
+        if (entries[i] == nullptr) continue;
+        std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(entries[i]->mutex);
+        WaiterNode** pp = &entries[i]->waiter_list;
+        while (*pp) {
+            if (*pp == &nodes[ri]) {
+                *pp = nodes[ri].next;
+                break;
+            }
+            pp = &(*pp)->next;
+        }
+    }
+
     GC_TRANSITION_TO_COOPERATIVE();
+
+    if (woken) {
+        // Find which handle signalled.
+        for (uint32_t i = 0; i < count; i++) {
+            if (entries[i] == nullptr) continue;
+            std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(entries[i]->mutex);
+            if (entries[i]->signalled) {
+                if (entries[i]->type == WaitHandleType::AutoResetEvent)
+                    entries[i]->signalled = false;
+                return static_cast<int32_t>(i);
+            }
+        }
+    }
+
     return -1;
 #endif
 }

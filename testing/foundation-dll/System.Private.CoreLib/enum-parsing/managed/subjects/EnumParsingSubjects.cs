@@ -15,7 +15,7 @@ public static partial class EnumParsingSubjects
     // [0] System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)
     public static void Subject_0()
     {
-        try { if (((Enum.Format(typeof(byte), 42, "hello")).Length) != ((Enum.Format(typeof(byte), 42, "hello")).Length)) _exitCode = 1; }
+        try { if (((Enum.Format(typeof(byte), null!, "hello")).Length) != ((Enum.Format(typeof(byte), null!, "hello")).Length)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
@@ -50,7 +50,7 @@ public static partial class EnumParsingSubjects
     // [5] System.Private.CoreLib/System.Enum::IsDefined:System.Boolean(System.Type,System.Object)
     public static void Subject_5()
     {
-        try { if (((Enum.IsDefined(typeof(byte), 42)) ? 1 : 0) != ((Enum.IsDefined(typeof(byte), 42)) ? 1 : 0)) _exitCode = 1; }
+        try { if (((Enum.IsDefined(typeof(byte), null!)) ? 1 : 0) != ((Enum.IsDefined(typeof(byte), null!)) ? 1 : 0)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 

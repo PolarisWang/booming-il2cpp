@@ -10,6 +10,7 @@
 #include <chaos/profile.h>
 
 #include <gc/gc_bgc_inline.h>
+#include <gc/gc_root_change.h>
 #include <gc/gc_api.h>
 #include <gc/gc_helpers.h>
 
@@ -324,6 +325,9 @@ extern "C" void CodegenStSFld(uint32_t field_offset, uint64_t value) noexcept {
     }
     using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
     BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&g_static_fields[field_offset].obj));
+    chaos::il2cpp::runtime_core::BgcRecordRootChange(
+        reinterpret_cast<void**>(&g_static_fields[field_offset].obj),
+        g_static_fields[field_offset].obj);
     g_static_fields[field_offset] = InterpreterValue::from_i64(static_cast<int64_t>(value));
 }
 

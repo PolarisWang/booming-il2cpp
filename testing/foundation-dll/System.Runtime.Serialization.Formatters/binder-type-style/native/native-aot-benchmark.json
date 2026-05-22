@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Runtime.Serialization.Formatters",
+  "familyId": "family/System.Runtime.Serialization.Formatters/binder/type/style",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationBinder::BindToName:System.Void(System.Type,System.String&,System.String&)",
+      "elapsedMilliseconds": 10.522,
+      "calibratedMs": 10.522,
+      "opsPerSecond": 9504167.6,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationBinder::BindToType:System.Type(System.String,System.String)",
+      "elapsedMilliseconds": 1.333,
+      "calibratedMs": 1.333,
+      "opsPerSecond": 75030012.0,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}

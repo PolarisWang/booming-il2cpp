@@ -104,6 +104,7 @@ add_library(chaos_runtime_core STATIC
     gc/gc_region.h
     gc/gc_region.cpp
     gc/gc_root_change.h
+    gc/gc_root_change.cpp
     gc/gc_card_table.h
     gc/gc_card_table.cpp
     gc/gc_root_scanner.h

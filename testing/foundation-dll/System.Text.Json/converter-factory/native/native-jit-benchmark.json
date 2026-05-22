@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Text.Json",
+  "familyId": "family/System.Text.Json/converter/factory",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverterFactory::CreateConverter:System.Text.Json.Serialization.JsonConverter(System.Type,System.Text.Json.JsonSerializerOptions)",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverterFactory::get_Type:System.Type()",
+      "elapsedMilliseconds": 5001.305,
+      "calibratedMs": 5001.305,
+      "opsPerSecond": 19994.8,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}

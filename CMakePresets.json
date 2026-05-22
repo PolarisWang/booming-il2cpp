@@ -18,7 +18,7 @@
         "CHAOS_IL2CPP_GC_PARALLEL_MARK": "ON",
         "CHAOS_IL2CPP_GC_EVENTS": "ON",
         "CHAOS_IL2CPP_GC_STRESS": "OFF",
-        "CHAOS_IL2CPP_GC_LARGE_PAGES": "OFF"
+        "CHAOS_IL2CPP_GC_LARGE_PAGES": "ON"
       }
     },
     {

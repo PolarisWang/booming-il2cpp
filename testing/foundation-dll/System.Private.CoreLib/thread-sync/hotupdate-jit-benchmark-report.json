@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/thread/sync",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Thread::Sleep:System.Void(System.Int32)",
+      "status": "passed",
+      "prePatchNsPerOp": 0.0,
+      "postPatchNsPerOp": 13396.1,
+      "slowdownPercent": 0.0
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Thread::Yield:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 0.0,
+      "postPatchNsPerOp": 33797.4,
+      "slowdownPercent": 0.0
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.CancellationTokenSource::Cancel:System.Void()",
+      "status": "passed",
+      "prePatchNsPerOp": 0.0,
+      "postPatchNsPerOp": 32990.3,
+      "slowdownPercent": 0.0
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.CancellationToken::get_IsCancellationRequested:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 0.0,
+      "postPatchNsPerOp": 36728.2,
+      "slowdownPercent": 0.0
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.CancellationToken::Register:System.Threading.CancellationTokenRegistration(System.Action)",
+      "status": "passed",
+      "prePatchNsPerOp": 0.0,
+      "postPatchNsPerOp": 13924.1,
+      "slowdownPercent": 0.0
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.ThreadPool::QueueUserWorkItem:System.Threading.WaitCallback(System.Threading.WaitCallback)",
+      "status": "passed",
+      "prePatchNsPerOp": 0.0,
+      "postPatchNsPerOp": 13820.9,
+      "slowdownPercent": 0.0
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.ThreadPool::QueueUserWorkItem:System.Threading.WaitCallback(System.Threading.WaitCallback,System.Object)",
+      "status": "passed",
+      "prePatchNsPerOp": 0.0,
+      "postPatchNsPerOp": 2699.8,
+      "slowdownPercent": 0.0
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.WaitCallback::.ctor:System.Void(System.Object,System.IntPtr)",
+      "status": "passed",
+      "prePatchNsPerOp": 0.0,
+      "postPatchNsPerOp": 14737.9,
+      "slowdownPercent": 0.0
+    }
+  ],
+  "summary": {
+    "totalMethods": 8,
+    "nonStubMethods": 0,
+    "averageSlowdownPercent": 0.0,
+    "slowdownFactor": 1.0,
+    "slowdownThresholdX": 50.0
+  }
+}

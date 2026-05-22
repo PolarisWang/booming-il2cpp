@@ -5,14 +5,14 @@ task_type: roadmap
 lifecycle_status: in-progress
 phase: roadmap
 created_at: 2026-05-22 18:00:00 +08:00
-updated_at: 2026-05-22 19:35:00 +08:00
+updated_at: 2026-05-22 21:35:00 +08:00
 current_dir: docs/dev/in-progress/20260522-gc-industrialization
 roadmap_or_plan: docs/dev/in-progress/20260522-gc-industrialization/roadmap-v1-01.md
 child_execution_mode: auto
 auto_continue: true
 auto_stop_policy: blocking-only
 dispatch_model: sequential
-recommended_next_child: gc-p2-07
+recommended_next_child: gc-p3-03
 blocking_questions: []
 question_clearance: cleared
 clearance_confirmed_by_user: true
@@ -58,8 +58,13 @@ clearance_confirmed_by_user: true
 - 更新 CMakePresets.json 显式声明 debug preset 的 feature 值
 已归档 completed。
 
+2026-05-22 后续完成：
+- gc-p2-07（测试覆盖增强/G-30）：修复 4 个预存问题，新建 gc_atomic_alloc_test（5 场景），18 GC 测试全 PASS
+- gc-p1-vfy（Phase 1 集成验证）：确认 18 GC 测试全 PASS，预存问题已文档记录
+- gc-p3-01（ETW 诊断事件/G-7）：审计确认已实现，关闭 2 个集成间隙（GcEtwShutdown + GcEtwFireGcOom）
+
 ## 下一步
-启动 gc-p2-07：测试覆盖增强：修复预存问题 + 补充用例（G-30）
+启动 gc-p3-02：GC 基准回归测试套件（G-15）
 
 ## latest_stop_point
-Phase 1 已完成: gc-p2-01→02→03→04→05→06。下一步：gc-p2-07
+Phase 1 已完成。Phase 2：gc-p3-01 已完成。下一步：gc-p3-02
