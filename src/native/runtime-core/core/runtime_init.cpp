@@ -2,6 +2,7 @@
 #include "gc_bgc.h"
 #include "gc_heap.h"
 #include "../gc/gc_etw.h"
+#include "../gc/gc_low_mem.h"
 
 // T4 VEH handler for SEH dispatch in native-generated code.
 #include "../codegen/t4_seh_handler.h"
@@ -57,6 +58,10 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL RuntimeInit(
     // Start the BGC background thread for concurrent mark/sweep.
     BgcController::Instance().Start();
 
+    // Start the OS low-memory notification monitor.
+    // Non-functional on non-Windows platforms (no-op).
+    g_low_memory_monitor.Start();
+
     // Register T4 VEH handler for SEH dispatch in native-generated code.
     ::chaos::il2cpp::codegen::RegisterT4SehHandler();
 
@@ -73,6 +78,7 @@ void CHAOS_RUNTIME_ABI_CALL RuntimeShutdown(RuntimeState* runtime_state) {
     if (runtime_state == nullptr) return;
 
     GcEtwShutdown();
+    g_low_memory_monitor.Stop();
     SetRuntimeMode(RuntimeMode::Aot);
     if (runtime_state->internal_state != nullptr) {
         runtime_state->internal_state->~RuntimeInternalState();

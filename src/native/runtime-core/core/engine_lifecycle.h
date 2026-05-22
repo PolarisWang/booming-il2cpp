@@ -24,6 +24,7 @@ struct GcHandleEntry {
     bool weak;
     bool track_resurrection;  // WeakTrackResurrection: defer nullification
                               // until after finalization can resurrect
+    bool async_pinned;        // AsyncPinned: strong + pinned for async ops
 };
 
 // ABI constants at runtime_core namespace scope (shared across core files).
@@ -59,6 +60,12 @@ CHAOS_IL2CPP_UINT64 GcCreateLongWeakHandle(void* object_instance) noexcept;
 /// Create a pinned handle (object will not be moved by young GC).
 /// Returns a nonzero handle ID on success, 0 on failure.
 CHAOS_IL2CPP_UINT64 GcCreatePinnedHandle(void* object_instance) noexcept;
+
+/// Create an async pinned handle (strong + pinned, for async operations).
+/// Semantically equivalent to GCHandleType::AsyncPinned: the referenced
+/// object is kept alive and will not be moved.  Returns a nonzero handle
+/// ID on success, 0 on failure.
+CHAOS_IL2CPP_UINT64 GcCreateAsyncPinnedHandle(void* object_instance) noexcept;
 
 /// Free a handle created by any of the above.
 void GcFreeHandle(CHAOS_IL2CPP_UINT64 handle_id) noexcept;

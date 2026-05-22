@@ -149,6 +149,12 @@ extern "C" CHAOS_IL2CPP_INT64 CHAOS_RUNTIME_ABI_CALL chaos_gc_get_total_pause_du
 /// This is a monotonically increasing per-thread counter that is never reset.
 extern "C" CHAOS_IL2CPP_INT64 CHAOS_RUNTIME_ABI_CALL chaos_gc_get_allocated_bytes_for_current_thread() noexcept;
 
+/// Create an AsyncPinned GC handle (strong + pinned, for async operations).
+/// Returns a nonzero handle ID on success, 0 on failure.
+/// The managed-side GCHandle type AsyncPinned maps to this function.
+extern "C" CHAOS_IL2CPP_UINT64 CHAOS_RUNTIME_ABI_CALL chaos_gc_create_async_pinned_handle(
+    void* object_instance) noexcept;
+
 // ── Full GC Notification API (GC.RegisterForFullGCNotification / WaitForFullGC*) ──
 
 /// Enable full GC notifications.  After calling this, the thread can use

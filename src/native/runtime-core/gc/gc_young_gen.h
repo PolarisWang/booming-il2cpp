@@ -79,6 +79,15 @@ struct YoungGeneration {
     /// Cached Gen1 end pointer (exclusive) for fast bounds check.
     char* gen1_end{nullptr};
 
+    /// End of the compacted survivor area from the last Gen1 collection.
+    /// Objects below this boundary have survived at least one Gen1 collection
+    /// and will be promoted to Gen2 on the next collection ("old" objects).
+    /// Objects at or above this boundary are freshly promoted from Gen0
+    /// ("new" objects) and will be compacted in Gen1 for another cycle.
+    /// Initially nullptr (no previous collection — all objects are "new").
+    /// Updated by GcGen1Collection after compaction.
+    char* gen1_prev_compact_end{nullptr};
+
     /// Promotion age threshold: number of young GCs an object survives
     /// in the survivor area before being promoted to old gen.
     /// Dynamic (set by scheduler based on EMA survival rate):
