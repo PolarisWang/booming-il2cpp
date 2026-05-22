@@ -404,9 +404,31 @@ CHAOS_IL2CPP_UINT32 UpdateVTableSlotByMethodToken(
 
     CHAOS_IL2CPP_UINT32 updated = 0u;
 
-    for (auto& [token, vtable_ref] : state.by_type_token) {
-        (void)token;
-        auto vtable_ptr = const_cast<TypeVTable*>(vtable_ref);
+    // Snapshot vtable pointers under lock using index-based access to the
+    // map's internal values vector, avoiding MSVC Debug checked iterator
+    // false positives (range-for creates checked iterators into the internal
+    // std::vector, which fire when the vector's version counter has changed
+    // since the last non-const operation, even across separate lock acquisitions).
+    auto& values = state.by_type_token.values();
+    CHAOS_IL2CPP_UINT32 const vtable_count = static_cast<CHAOS_IL2CPP_UINT32>(values.size());
+
+    // Small-buffer optimization: avoid heap allocation for the common case of
+    // <128 registered vtables (covering virtually all real-world scenarios).
+    TypeVTable* snapshot_buf[128];
+    std::vector<TypeVTable*> snapshot_heap;
+    TypeVTable** snapshot = snapshot_buf;
+
+    if (vtable_count > 128) {
+        snapshot_heap.resize(vtable_count);
+        snapshot = snapshot_heap.data();
+    }
+
+    for (CHAOS_IL2CPP_UINT32 vi = 0u; vi < vtable_count; ++vi) {
+        snapshot[vi] = const_cast<TypeVTable*>(values[vi].second);
+    }
+
+    for (CHAOS_IL2CPP_UINT32 vi = 0u; vi < vtable_count; ++vi) {
+        auto* vtable_ptr = snapshot[vi];
         if (vtable_ptr == nullptr || vtable_ptr->slots == nullptr) continue;
 
         auto* mutable_slots = const_cast<VTableSlot*>(vtable_ptr->slots);
@@ -442,8 +464,26 @@ void* FindMethodPointerByMethodToken(
     auto& state = GetState();
     CHAOS_IL2CPP_SHARED_LOCK(CHAOS_IL2CPP_SHARED_MUTEX) lock(state.mutex);
 
-    for (auto& [token, vtable] : state.by_type_token) {
-        (void)token;
+    // Snapshot vtable pointers using index-based access (see
+    // UpdateVTableSlotByMethodToken for rationale).
+    auto& values = state.by_type_token.values();
+    CHAOS_IL2CPP_UINT32 const vtable_count = static_cast<CHAOS_IL2CPP_UINT32>(values.size());
+
+    TypeVTable* snapshot_buf[128];
+    std::vector<TypeVTable*> snapshot_heap;
+    TypeVTable** snapshot = snapshot_buf;
+
+    if (vtable_count > 128) {
+        snapshot_heap.resize(vtable_count);
+        snapshot = snapshot_heap.data();
+    }
+
+    for (CHAOS_IL2CPP_UINT32 vi = 0u; vi < vtable_count; ++vi) {
+        snapshot[vi] = const_cast<TypeVTable*>(values[vi].second);
+    }
+
+    for (CHAOS_IL2CPP_UINT32 vi = 0u; vi < vtable_count; ++vi) {
+        auto* vtable = snapshot[vi];
         if (vtable == nullptr || vtable->slots == nullptr) continue;
 
         for (CHAOS_IL2CPP_UINT32 i = 0u; i < vtable->slot_count; ++i) {

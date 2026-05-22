@@ -51,6 +51,14 @@ if(ROADMAP0_PRESET_TARGET STREQUAL "windows-x64-reference")
     add_subdirectory(src/native/bootstrap)
     add_subdirectory(src/native/benchmark-host)
     add_subdirectory(src/native/proof-host)
+
+    # ── SOS Debugger Extension (Windows only, requires DbgEng SDK) ──
+    if(EXISTS "C:/Program Files (x86)/Windows Kits/10/Debuggers/inc/dbgeng.h")
+        add_subdirectory(src/native/diagnostics/sos)
+    else()
+        message(STATUS "SOS debugger extension skipped: DbgEng SDK not found")
+    endif()
+
     add_subdirectory(tests/contracts/native/abi)
     add_subdirectory(tests/contracts/native/engine-binding)
     add_subdirectory(tests/contracts/native/hot-update)

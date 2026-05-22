@@ -51,3 +51,13 @@ add_chaos_test(test_execution_context_smoke
     LIBS chaos_common chaos_fmt
     LABELS "unit;threading"
 )
+
+# rwlock_upgrade_test — ReaderWriterLockSlim upgradeable read / upgrade / downgrade
+# Compiles synchronization.cpp directly for new APIs, links chaos_runtime_core for
+# GC_TRANSITION, SafepointPoll, and thread state symbols.
+add_chaos_test(test_rwlock_upgrade
+    rwlock_upgrade_test.cpp
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/synchronization.cpp
+    LIBS ${CHAOS_THREADING_LIBS}
+    LABELS "unit;threading"
+)

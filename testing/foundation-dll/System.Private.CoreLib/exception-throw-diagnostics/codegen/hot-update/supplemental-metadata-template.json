@@ -7,6 +7,12 @@
       "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
       "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
       "metadataToken": 33554434
+    },
+    {
+      "assemblyName": "ExceptionThrowDiagnosticsSubjects",
+      "subjectId": "ExceptionThrowDiagnosticsSubjects/\u003CPrivateImplementationDetails\u003E",
+      "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/\u003CPrivateImplementationDetails\u003E",
+      "metadataToken": 33554435
     }
   ],
   "registeredMethods": [
@@ -120,6 +126,30 @@
       "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_13:System.Void()",
       "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
       "metadataToken": 100663310,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ExceptionThrowDiagnosticsSubjects",
+      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_14:System.Void()",
+      "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_14:System.Void()",
+      "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
+      "metadataToken": 100663311,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ExceptionThrowDiagnosticsSubjects",
+      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_15:System.Void()",
+      "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_15:System.Void()",
+      "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
+      "metadataToken": 100663312,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ExceptionThrowDiagnosticsSubjects",
+      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_16:System.Void()",
+      "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_16:System.Void()",
+      "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
+      "metadataToken": 100663313,
       "parameterCount": 0
     }
   ],

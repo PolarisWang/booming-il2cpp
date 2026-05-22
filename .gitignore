@@ -188,3 +188,72 @@ profiling_results/
 
 # ad-hoc build output directories
 build/snapshot-prover/
+
+# Root-level CMake build output directories (CMAKE_BINARY_DIR at repo root)
+/codegen/
+/fuzz/
+/engine-bridge/
+/common/
+/bootstrap/
+/abi/
+/hot-update/
+/runtime-core/
+/support/
+
+# Root-level CMake/VS project files
+/ALL_BUILD.vcxproj
+/ALL_BUILD.vcxproj.filters
+/INSTALL.vcxproj
+/INSTALL.vcxproj.filters
+/RUN_TESTS.vcxproj
+/RUN_TESTS.vcxproj.filters
+/ZERO_CHECK.vcxproj
+/ZERO_CHECK.vcxproj.filters
+/chaos_il2cpp_testing.sln
+/cmake_install.cmake
+
+# Root-level CMake dependency downloads
+/_deps/
+
+# Temporary batch test results
+/batch_results_tmp/
+/batch_verify_results.json
+
+# CTest temporary files
+/testing/Temporary/
+
+# Backup files (*.a2bak)
+*.a2bak
+
+# Root-level debug output
+/err.txt
+
+# Build output: testing/ subdirectory (CMake-generated)
+build/testing/Testing/Temporary/
+build/testing/_deps/
+build/testing/cdb_cmds.txt
+build/testing/cdb_cmds2.txt
+build/testing/fuzz/
+build/testing/*.vcxproj
+build/testing/*.vcxproj.filters
+
+# Build output: testing sub-project generated files
+build/testing/ALL_BUILD.vcxproj
+build/testing/chaos_il2cpp_testing.sln
+build/testing/runtime-core/gc/*.vcxproj
+build/testing/runtime-core/gc/*.vcxproj.filters
+build/testing/runtime-core/gc/CTestTestfile.cmake
+build/testing/runtime-core/threading/*.vcxproj
+build/testing/runtime-core/threading/*.vcxproj.filters
+build/testing/runtime-core/threading/CTestTestfile.cmake
+build/testing/hot-update/*.vcxproj
+build/testing/hot-update/*.vcxproj.filters
+
+# Build output: vs2022 sub-project generated files
+build/vs2022/src/native/diagnostics/
+build/vs2022/tests/contracts/native/runtime-core/*.vcxproj
+build/vs2022/tests/contracts/native/runtime-core/*.vcxproj.filters
+
+# Generated codegen output (testing)
+testing/foundation-dll/System.Private.CoreLib/exception-throw-diagnostics/codegen/generated/
+/testing/foundation-dll/System.Private.CoreLib/exception-throw-diagnostics/codegen/native-aot.methods.json

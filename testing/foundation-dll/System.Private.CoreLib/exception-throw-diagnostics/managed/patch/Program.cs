@@ -18,6 +18,9 @@ public class Program
         ExceptionThrowDiagnosticsPatchEntry._exitCode = 0; ExceptionThrowDiagnosticsPatchEntry.Method11(); failures += ExceptionThrowDiagnosticsPatchEntry._exitCode << 11;
         ExceptionThrowDiagnosticsPatchEntry._exitCode = 0; ExceptionThrowDiagnosticsPatchEntry.Method12(); failures += ExceptionThrowDiagnosticsPatchEntry._exitCode << 12;
         ExceptionThrowDiagnosticsPatchEntry._exitCode = 0; ExceptionThrowDiagnosticsPatchEntry.Method13(); failures += ExceptionThrowDiagnosticsPatchEntry._exitCode << 13;
+        ExceptionThrowDiagnosticsPatchEntry._exitCode = 0; ExceptionThrowDiagnosticsPatchEntry.CustomEntryMethod14(); failures += ExceptionThrowDiagnosticsPatchEntry._exitCode << 14;
+        ExceptionThrowDiagnosticsPatchEntry._exitCode = 0; ExceptionThrowDiagnosticsPatchEntry.CustomEntryMethod15(); failures += ExceptionThrowDiagnosticsPatchEntry._exitCode << 15;
+        ExceptionThrowDiagnosticsPatchEntry._exitCode = 0; ExceptionThrowDiagnosticsPatchEntry.CustomEntryMethod16(); failures += ExceptionThrowDiagnosticsPatchEntry._exitCode << 16;
         return failures;
     }
 }

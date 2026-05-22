@@ -1,4 +1,4 @@
-#include <chaos/common.h>
+﻿#include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
 #include <chaos/eh.h>
@@ -16,6 +16,7 @@
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 #include "enum_metadata.generated.h"
+#include "enum_stubs.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -34,6 +35,8 @@ using namespace chaos::il2cpp::runtime_core;
 // Runtime prelude dependencies included at translation unit level
 
 
+inline TypeInfoV0 chaos_mt_ExceptionThrowDiagnosticsSubjects__PrivateImplementationDetails_ = {{nullptr, nullptr, 7495683690410207557ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_ExceptionThrowDiagnosticsSubjects__PrivateImplementationDetails_ = static_cast<CHAOS_IL2CPP_INTPTR>(7495683690410207557ULL);
 inline TypeInfoV0 chaos_mt_ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects = {{nullptr, nullptr, 8016410208713659828ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects = static_cast<CHAOS_IL2CPP_INTPTR>(8016410208713659828ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_ArgumentException = {{nullptr, nullptr, 4429271818216920541ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
@@ -42,6 +45,8 @@ inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_ArgumentNullException =
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_ArgumentNullException = static_cast<CHAOS_IL2CPP_INTPTR>(12400915656331929738ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_ArgumentOutOfRangeException = {{nullptr, nullptr, 15763389239383405623ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_ArgumentOutOfRangeException = static_cast<CHAOS_IL2CPP_INTPTR>(15763389239383405623ULL);
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Byte = {{nullptr, nullptr, 3217969471912086765ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Byte = static_cast<CHAOS_IL2CPP_INTPTR>(3217969471912086765ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Exception = {{nullptr, nullptr, 10972282733316558392ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Exception = static_cast<CHAOS_IL2CPP_INTPTR>(10972282733316558392ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_InvalidOperationException = {{nullptr, nullptr, 5529823529457257812ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
@@ -99,6 +104,12 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 	return false;
 }
 
+struct chaos_type_ExceptionThrowDiagnosticsSubjects__PrivateImplementationDetails_
+{
+	ThinLockableHeader header{};
+	CHAOS_IL2CPP_INTPTR field_ExceptionThrowDiagnosticsSubjects__PrivateImplementationDetails___9F64A747E1B97F131FABB6B447296C9B6F0201E79FB3C5356E6C77E89B6A806A = 0;
+};
+
 struct chaos_type_ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects
 {
 	ThinLockableHeader header{};
@@ -129,6 +140,11 @@ struct chaos_type_System_Private_CoreLib_System_ArgumentOutOfRangeException
 	CHAOS_IL2CPP_INTPTR _innerException = 0;
 	CHAOS_IL2CPP_INTPTR _stackTrace = 0;
 	CHAOS_IL2CPP_INT32 _HResult = 0;
+};
+
+struct chaos_type_System_Private_CoreLib_System_Byte
+{
+	ThinLockableHeader header{};
 };
 
 struct chaos_type_System_Private_CoreLib_System_Exception
@@ -286,6 +302,52 @@ CHAOS_IL2CPP_INT32 chaos_static_ExceptionThrowDiagnosticsSubjects_ExceptionThrow
 		return 0u;
 	}();
 
+bool chaos_try_get_static_field_data(
+	CHAOS_IL2CPP_INTPTR chaos_field_handle,
+	const CHAOS_IL2CPP_UINT8*& chaos_data,
+	CHAOS_IL2CPP_SIZE& chaos_size)
+{
+	chaos_data = nullptr;
+	chaos_size = 0;
+	return false;
+}
+
+void chaos_initialize_array_from_field_data_int32(CHAOS_IL2CPP_INTPTR chaos_array_value, CHAOS_IL2CPP_INTPTR chaos_field_handle)
+{
+	auto* chaos_array = reinterpret_cast<chaos_managed_array*>(chaos_array_value);
+	if (chaos_array == nullptr || chaos_array->element_type_shape == 0)
+	{
+		CHAOS_IL2CPP_FAIL();
+	}
+	const CHAOS_IL2CPP_UINT8* chaos_bytes = nullptr;
+	CHAOS_IL2CPP_SIZE chaos_size = 0;
+	if (!chaos_try_get_static_field_data(chaos_field_handle, chaos_bytes, chaos_size))
+	{
+		CHAOS_IL2CPP_FAIL();
+	}
+	const auto copy_count = static_cast<CHAOS_IL2CPP_INT32>(
+		chaos_size < static_cast<CHAOS_IL2CPP_SIZE>(chaos_array->length)
+			? chaos_size
+			: static_cast<CHAOS_IL2CPP_SIZE>(chaos_array->length));
+	for (CHAOS_IL2CPP_INT32 chaos_index = 0; chaos_index < copy_count; chaos_index++)
+	{
+		chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] =
+			static_cast<CHAOS_IL2CPP_INTPTR>(chaos_bytes[chaos_index]);
+	}
+}
+
+CHAOS_IL2CPP_INTPTR chaos_create_field_data_span_int32(CHAOS_IL2CPP_INTPTR chaos_field_handle)
+{
+	const CHAOS_IL2CPP_UINT8* chaos_bytes = nullptr;
+	CHAOS_IL2CPP_SIZE chaos_size = 0;
+	if (!chaos_try_get_static_field_data(chaos_field_handle, chaos_bytes, chaos_size) ||
+		(chaos_size % sizeof(CHAOS_IL2CPP_INT32)) != 0)
+	{
+		CHAOS_IL2CPP_FAIL();
+	}
+	return ChaosIl2cpp::Common::create_raw_span_int32(const_cast<CHAOS_IL2CPP_UINT8*>(chaos_bytes), static_cast<CHAOS_IL2CPP_INT32>(chaos_size / sizeof(CHAOS_IL2CPP_INT32)), true);
+}
+
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Exception__GetBaseException_System_Exception__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	return ChaosExceptionGetBaseException(chaos_fn_arg_0);
@@ -331,6 +393,11 @@ static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_
 	return ChaosObjectToString(chaos_fn_arg_0);
 }
 
+static void chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	chaos_initialize_array_from_field_data_int32(chaos_fn_arg_0, chaos_fn_arg_1);
+}
+
 static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(CHAOS_IL2CPP_INTPTR chaos_arg_0)
 {
 	if (chaos_arg_0 == 0)
@@ -374,6 +441,9 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_11(void);
 extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_12(void);
 extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_13(void);
+extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_14(void);
+extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_15(void);
+extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_16(void);
 
 
 // Forward declaration for module.image (defined in Step 3 below)
@@ -387,7 +457,10 @@ extern "C" const int kAotMethodCount;
 // so CHAOS_ABI_MANIFEST_ENTRIES/CHAOS_ABI_MANIFEST_PARAMETERS find them by offset.
 
 // Param offset prefix-sum: [i] = cumulative parameter count before method i
-static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[15] = {
+static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[18] = {
+	0u,
+	0u,
+	0u,
 	0u,
 	0u,
 	0u,
@@ -407,14 +480,14 @@ static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[15] = {
 
 static constexpr struct {
 	::ChaosAbiManifestV0 header;
-	::ChaosAbiMethodEntryV0 entries[14];
+	::ChaosAbiMethodEntryV0 entries[17];
 	CHAOS_IL2CPP_UINT8 params[1];
 } s_abi_manifest_storage = {
 	{
 		CHAOS_ABI_MANIFEST_VERSION,
-		14u,
+		17u,
 		0u,
-		4123785717u,  // FNV-1a over entries+params
+		199918157u,  // FNV-1a over entries+params
 		s_abi_manifest_prefix_sum  // O(1) prefix-sum
 	},
 	{
@@ -432,6 +505,9 @@ static constexpr struct {
 		{ 0u, 0u },  // ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_11
 		{ 0u, 0u },  // ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_12
 		{ 0u, 0u },  // ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_13
+		{ 0u, 0u },  // ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_14
+		{ 0u, 0u },  // ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_15
+		{ 0u, 0u },  // ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_16
 	},
 	{
 	},
@@ -440,38 +516,45 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 	reinterpret_cast<const ::ChaosAbiManifestV0*>(&s_abi_manifest_storage);
 // ── Module registration ──
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_type_flags[2] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_type_flags[3] = {
 		0u,
 		1548u,
+		8u,
 	};
 
-	static constexpr const char* s_type_names[2] = {
+	static constexpr const char* s_type_names[3] = {
 		"<Module>",
 		"ExceptionThrowDiagnosticsSubjects",
+		"<PrivateImplementationDetails>",
 	};
 
-	static constexpr const char* s_type_namespaces[2] = {
+	static constexpr const char* s_type_namespaces[3] = {
 		"",
 		"",
+		"",
 	};
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_type_parent_tokens[2] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_type_parent_tokens[3] = {
+		0u,
 		0u,
 		0u,
 	};
 
-	static const TypeInfoHot* const s_type_info_ptrs[2] = {
+	static const TypeInfoHot* const s_type_info_ptrs[3] = {
 		nullptr,
 		&chaos_mt_ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects.hot,
+		&chaos_mt_ExceptionThrowDiagnosticsSubjects__PrivateImplementationDetails_.hot,
 	};
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_offset[3] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_offset[4] = {
+		0u,
 		0u,
 		0u,
 		0u,
 	};
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_generic_param_constraint_offset[3] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_generic_param_constraint_offset[4] = {
+		0u,
 		0u,
 		0u,
 		0u,
@@ -491,7 +574,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		/* .nested_type_offset = */ s_nested_type_offset,
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
-		/* .type_count        = */ 2u,
+		/* .type_count        = */ 3u,
 	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
@@ -503,48 +586,54 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		::chaos::il2cpp::runtime_core::RegisterModule("ExceptionThrowDiagnosticsSubjects", &s_native_aot_module);
 // ── Hotpatch name index + dispatch table ────────────────────
 // Method name index entries
-static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[14] = {
-	{ "Subject_0", 0x00000003u, 0u },  // ExceptionThrowDiagnosticsSubjects
-	{ "Subject_1", 0x00000004u, 0u },  // ExceptionThrowDiagnosticsSubjects
-	{ "Subject_2", 0x00000005u, 0u },  // ExceptionThrowDiagnosticsSubjects
-	{ "Subject_3", 0x00000006u, 0u },  // ExceptionThrowDiagnosticsSubjects
-	{ "Subject_4", 0x00000007u, 0u },  // ExceptionThrowDiagnosticsSubjects
-	{ "Subject_5", 0x00000008u, 0u },  // ExceptionThrowDiagnosticsSubjects
-	{ "Subject_6", 0x00000009u, 0u },  // ExceptionThrowDiagnosticsSubjects
-	{ "Subject_7", 0x0000000Au, 0u },  // ExceptionThrowDiagnosticsSubjects
-	{ "Subject_8", 0x0000000Bu, 0u },  // ExceptionThrowDiagnosticsSubjects
-	{ "Subject_9", 0x0000000Cu, 0u },  // ExceptionThrowDiagnosticsSubjects
-	{ "Subject_10", 0x0000000Du, 0u },  // ExceptionThrowDiagnosticsSubjects
-	{ "Subject_11", 0x0000000Eu, 0u },  // ExceptionThrowDiagnosticsSubjects
-	{ "Subject_12", 0x0000000Fu, 0u },  // ExceptionThrowDiagnosticsSubjects
-	{ "Subject_13", 0x00000010u, 0u },  // ExceptionThrowDiagnosticsSubjects
+static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[17] = {
+	{ "Subject_0", 0x00000005u, 0u },  // ExceptionThrowDiagnosticsSubjects
+	{ "Subject_1", 0x00000006u, 0u },  // ExceptionThrowDiagnosticsSubjects
+	{ "Subject_2", 0x00000007u, 0u },  // ExceptionThrowDiagnosticsSubjects
+	{ "Subject_3", 0x00000008u, 0u },  // ExceptionThrowDiagnosticsSubjects
+	{ "Subject_4", 0x00000009u, 0u },  // ExceptionThrowDiagnosticsSubjects
+	{ "Subject_5", 0x0000000Au, 0u },  // ExceptionThrowDiagnosticsSubjects
+	{ "Subject_6", 0x0000000Bu, 0u },  // ExceptionThrowDiagnosticsSubjects
+	{ "Subject_7", 0x0000000Cu, 0u },  // ExceptionThrowDiagnosticsSubjects
+	{ "Subject_8", 0x0000000Du, 0u },  // ExceptionThrowDiagnosticsSubjects
+	{ "Subject_9", 0x0000000Eu, 0u },  // ExceptionThrowDiagnosticsSubjects
+	{ "Subject_10", 0x0000000Fu, 0u },  // ExceptionThrowDiagnosticsSubjects
+	{ "Subject_11", 0x00000010u, 0u },  // ExceptionThrowDiagnosticsSubjects
+	{ "Subject_12", 0x00000011u, 0u },  // ExceptionThrowDiagnosticsSubjects
+	{ "Subject_13", 0x00000012u, 0u },  // ExceptionThrowDiagnosticsSubjects
+	{ "Subject_14", 0x00000013u, 0u },  // ExceptionThrowDiagnosticsSubjects
+	{ "Subject_15", 0x00000014u, 0u },  // ExceptionThrowDiagnosticsSubjects
+	{ "Subject_16", 0x00000015u, 0u },  // ExceptionThrowDiagnosticsSubjects
 };
 
 // Type name index entries (namespace, short_name)
 static constexpr HotpatchTypeEntryV0 s_hotpatch_types[1] = {
-	{ "ExceptionThrowDiagnosticsSubjects", "", 0u, 14u },
+	{ "ExceptionThrowDiagnosticsSubjects", "", 0u, 17u },
 };
 
 // Token→Slot mapping (sorted by token for binary search)
-static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[14] = {
-	{ 0x00000003u, 0u },
-	{ 0x00000004u, 1u },
-	{ 0x00000005u, 2u },
-	{ 0x00000006u, 3u },
-	{ 0x00000007u, 4u },
-	{ 0x00000008u, 5u },
-	{ 0x00000009u, 6u },
-	{ 0x0000000Au, 7u },
-	{ 0x0000000Bu, 8u },
-	{ 0x0000000Cu, 9u },
-	{ 0x0000000Du, 10u },
-	{ 0x0000000Eu, 11u },
-	{ 0x0000000Fu, 12u },
-	{ 0x00000010u, 13u },
+static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[17] = {
+	{ 0x00000005u, 0u },
+	{ 0x00000006u, 1u },
+	{ 0x00000007u, 2u },
+	{ 0x00000008u, 3u },
+	{ 0x00000009u, 4u },
+	{ 0x0000000Au, 5u },
+	{ 0x0000000Bu, 6u },
+	{ 0x0000000Cu, 7u },
+	{ 0x0000000Du, 8u },
+	{ 0x0000000Eu, 9u },
+	{ 0x0000000Fu, 10u },
+	{ 0x00000010u, 11u },
+	{ 0x00000011u, 12u },
+	{ 0x00000012u, 13u },
+	{ 0x00000013u, 14u },
+	{ 0x00000014u, 15u },
+	{ 0x00000015u, 16u },
 };
 
 // Dispatch table (function pointers)
-static HotpatchEntryV0 s_hotpatch_entries[14] = {
+static HotpatchEntryV0 s_hotpatch_entries[17] = {
 	{ reinterpret_cast<void*>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ExceptionThrowDiagnosticsSubjects::Subject_0
 	{ reinterpret_cast<void*>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ExceptionThrowDiagnosticsSubjects::Subject_1
 	{ reinterpret_cast<void*>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ExceptionThrowDiagnosticsSubjects::Subject_2
@@ -559,6 +648,9 @@ static HotpatchEntryV0 s_hotpatch_entries[14] = {
 	{ reinterpret_cast<void*>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_11), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ExceptionThrowDiagnosticsSubjects::Subject_11
 	{ reinterpret_cast<void*>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_12), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ExceptionThrowDiagnosticsSubjects::Subject_12
 	{ reinterpret_cast<void*>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_13), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ExceptionThrowDiagnosticsSubjects::Subject_13
+	{ reinterpret_cast<void*>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_14), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ExceptionThrowDiagnosticsSubjects::Subject_14
+	{ reinterpret_cast<void*>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_15), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ExceptionThrowDiagnosticsSubjects::Subject_15
+	{ reinterpret_cast<void*>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_16), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ExceptionThrowDiagnosticsSubjects::Subject_16
 };
 
 // Module hotpatch bundle
@@ -567,11 +659,11 @@ static constexpr HotpatchModuleV0 s_hotpatch_module = {
 	s_hotpatch_types,
 	1u,
 	s_hotpatch_methods,
-	14u,
+	17u,
 	s_hotpatch_slots,
-	14u,
+	17u,
 	s_hotpatch_entries,
-	14u,
+	17u,
 };
 
 // Expose hotpatch module to BootstrapRuntime
@@ -580,7 +672,7 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // ── External Runtime Dispatch Table ──────────────────────────
 // Startup-time-resolved function pointers for cross-assembly calls.
 
-extern "C" const char* kChaosExternalRuntimeSubjects[18] = {
+extern "C" const char* kChaosExternalRuntimeSubjects[23] = {
 	"System.Private.CoreLib/System.Exception::.ctor:System.Void(System.String)",
 	"ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::_exitCode",
 	"System.Private.CoreLib/System.Exception::.ctor:System.Void(System.String,System.Exception)",
@@ -599,9 +691,14 @@ extern "C" const char* kChaosExternalRuntimeSubjects[18] = {
 	"System.Private.CoreLib/System.InvalidOperationException::.ctor:System.Void(System.String)",
 	"System.Private.CoreLib/System.NotSupportedException::.ctor:System.Void(System.String)",
 	"System.Private.CoreLib/System.NotImplementedException::.ctor:System.Void(System.String)",
+	"System.Private.CoreLib/System.Byte",
+	"ExceptionThrowDiagnosticsSubjects/<PrivateImplementationDetails>::9F64A747E1B97F131FABB6B447296C9B6F0201E79FB3C5356E6C77E89B6A806A",
+	"System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)",
+	"System.Private.CoreLib/System.Runtime.CompilerServices.Unsafe::CopyBlock:System.Void(System.Byte&,System.Byte&,System.UInt32)",
+	"System.Private.CoreLib/System.Runtime.CompilerServices.Unsafe::InitBlock:System.Void(System.Byte&,System.Byte,System.UInt32)",
 };
 
-extern "C" void* kChaosExternalRuntimeFnTable[18] = {
+extern "C" void* kChaosExternalRuntimeFnTable[23] = {
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Exception___ctor_System_Void_System_String_),
 	nullptr,
 	nullptr,
@@ -620,13 +717,18 @@ extern "C" void* kChaosExternalRuntimeFnTable[18] = {
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_InvalidOperationException___ctor_System_Void_System_String_),
 	nullptr,
 	nullptr,
+	nullptr,
+	nullptr,
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__InitializeArray_System_Void_System_Array_System_RuntimeFieldHandle_),
+	nullptr,
+	nullptr,
 };
 
-extern "C" int32_t kChaosExternalRuntimeCount = 18;
+extern "C" int32_t kChaosExternalRuntimeCount = 23;
 // (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
-static void (*kAotMethods[14])() = {
+static void (*kAotMethods[17])() = {
 	reinterpret_cast<void(*)()>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_0),
 	reinterpret_cast<void(*)()>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_1),
 	reinterpret_cast<void(*)()>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_2),
@@ -641,6 +743,9 @@ static void (*kAotMethods[14])() = {
 	reinterpret_cast<void(*)()>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_11),
 	reinterpret_cast<void(*)()>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_12),
 	reinterpret_cast<void(*)()>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_13),
+	reinterpret_cast<void(*)()>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_14),
+	reinterpret_cast<void(*)()>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_15),
+	reinterpret_cast<void(*)()>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_16),
 };
 
 // ── Benchmark wrappers (kBenchmarkWrappers[]) ──────────────────────────
@@ -648,7 +753,7 @@ static void (*kAotMethods[14])() = {
 // String params receive a valid StringId; all others receive 0.
 // Instance methods receive a sentinel this-pointer so they don't crash on null.
 static CHAOS_IL2CPP_UINT8 __g_benchmark_this_sentinel = 0;
-extern "C" void (*kBenchmarkWrappers[14])() = {
+extern "C" void (*kBenchmarkWrappers[17])() = {
 	[]() {kAotMethods[0]();},
 	[]() {kAotMethods[1]();},
 	[]() {kAotMethods[2]();},
@@ -663,6 +768,9 @@ extern "C" void (*kBenchmarkWrappers[14])() = {
 	[]() {kAotMethods[11]();},
 	[]() {kAotMethods[12]();},
 	[]() {kAotMethods[13]();},
+	[]() {kAotMethods[14]();},
+	[]() {kAotMethods[15]();},
+	[]() {kAotMethods[16]();},
 };
 
 // ── Subject entry index mapping ─────────────────────────────────
@@ -670,8 +778,8 @@ extern "C" void (*kBenchmarkWrappers[14])() = {
 // Used by runtime-entry.cpp to route --benchmark N to the correct
 // AOT method slot, since kAotMethods[] includes lambdas/closures
 // that shift subject methods to non-contiguous indices.
-extern "C" const int kSubjectEntryCount = 14;
-extern "C" const int kSubjectEntryIndices[14] = {
+extern "C" const int kSubjectEntryCount = 17;
+extern "C" const int kSubjectEntryIndices[17] = {
 	0,
 	1,
 	2,
@@ -686,6 +794,9 @@ extern "C" const int kSubjectEntryIndices[14] = {
 	11,
 	12,
 	13,
+	14,
+	15,
+	16,
 };
 
 // Single-method dispatch via hotpatch dispatch table.
@@ -886,6 +997,30 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[1];
 	} entry13;
+	/* ── Entry 14: ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_14 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry14;
+	/* ── Entry 15: ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_15 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[8];
+	} entry15;
+	/* ── Entry 16: ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_16 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[6];
+	} entry16;
 } kChaosGcSlotMapsSection = {
 	/* entry0 = ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_0 */
 	.entry0 = {
@@ -998,17 +1133,41 @@ static const struct {
 		/* frame_size = 8 */ 8u,
 		/* num_gc_slots = 1 */ 1u,
 		/* slots */ { 0u }
+	},
+	/* entry14 = ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_14 */
+	.entry14 = {
+		/* entry_total_size = 52 */ 52u,
+		/* code_address */ reinterpret_cast<const void*>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_14),
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
+	},
+	/* entry15 = ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_15 */
+	.entry15 = {
+		/* entry_total_size = 52 */ 52u,
+		/* code_address */ reinterpret_cast<const void*>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_15),
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
+	},
+	/* entry16 = ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_16 */
+	.entry16 = {
+		/* entry_total_size = 44 */ 44u,
+		/* code_address */ reinterpret_cast<const void*>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_16),
+		/* frame_size = 48 */ 48u,
+		/* num_gc_slots = 6 */ 6u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
 	}
 };
 #if defined(_MSC_VER)
 #pragma pack(pop)
 #endif
 
-static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 404u;
+static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 552u;
 
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
-static void* const kMethodPointers[14] = {
+static void* const kMethodPointers[17] = {
 	reinterpret_cast<void*>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_0),
 	reinterpret_cast<void*>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_1),
 	reinterpret_cast<void*>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_2),
@@ -1023,6 +1182,9 @@ static void* const kMethodPointers[14] = {
 	reinterpret_cast<void*>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_11),
 	reinterpret_cast<void*>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_12),
 	reinterpret_cast<void*>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_13),
+	reinterpret_cast<void*>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_14),
+	reinterpret_cast<void*>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_15),
+	reinterpret_cast<void*>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_16),
 };
 
 // CodeRegistrationV0 struct (invoker_pointers = nullptr for native-aot path)
@@ -1030,7 +1192,7 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	= {
 	.struct_size               = sizeof(CodeRegistrationV0),
 	.method_pointers           = kMethodPointers,
-	.method_pointer_count      = 14u,
+	.method_pointer_count      = 17u,
 	.reverse_pinvoke_wrappers  = nullptr,
 	.reverse_pinvoke_wrapper_count = 0u,
 	.invoker_pointers          = nullptr,
@@ -1082,7 +1244,7 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 static constexpr ReflectionQueryFieldDescriptor kReflFields_ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects[1] = {
 	{ 0u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
 };
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects[14] = {
+static constexpr ReflectionQueryMethodDescriptor kReflMethods_ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects[17] = {
 	{ 0u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u },
 	{ 0u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u },
 	{ 0u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u },
@@ -1097,11 +1259,14 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_ExceptionThrowDiag
 	{ 0u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_11:System.Void()", "Subject_11", "System.Void", 0, nullptr, 0u },
 	{ 0u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_12:System.Void()", "Subject_12", "System.Void", 0, nullptr, 0u },
 	{ 0u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_13:System.Void()", "Subject_13", "System.Void", 0, nullptr, 0u },
+	{ 0u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_14:System.Void()", "Subject_14", "System.Void", 0, nullptr, 0u },
+	{ 0u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_15:System.Void()", "Subject_15", "System.Void", 0, nullptr, 0u },
+	{ 0u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_16:System.Void()", "Subject_16", "System.Void", 0, nullptr, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
 	{ 0u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects", "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects", "", "ExceptionThrowDiagnosticsSubjects", "ExceptionThrowDiagnosticsSubjects", nullptr, kReflFields_ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects, 1u, nullptr, 0u,
-	kReflMethods_ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects, 14u },
+	kReflMethods_ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects, 17u },
 };
 
 static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
@@ -1985,12 +2150,496 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 	return;
 }
 
+// Managed method: ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_14()
+extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_14(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
+	CHAOS_IL2CPP_INTPTR _s17{};
+	CHAOS_IL2CPP_INTPTR _s18{};
+	CHAOS_IL2CPP_INTPTR _s19{};
+	CHAOS_IL2CPP_INTPTR _s20{};
+	CHAOS_IL2CPP_INTPTR _s21{};
+	CHAOS_IL2CPP_INTPTR _s22{};
+	CHAOS_IL2CPP_INTPTR _s23{};
+	CHAOS_IL2CPP_INTPTR _s24{};
+	CHAOS_IL2CPP_INTPTR _s25{};
+	CHAOS_IL2CPP_INTPTR _s26{};
+
+
+	CHAOS_EH_TRY
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
+			chaos_locals[0] = _s0;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			chaos_locals[1] = _s0;
+			// br (handled via structured EH branches)
+			_s0 = chaos_locals[0];
+			_s1 = chaos_locals[1];
+			_s1 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s1));
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[1];
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
+			chaos_locals[1] = _s0;
+			_s0 = chaos_locals[1];
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(150);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0) < static_cast<CHAOS_IL2CPP_INT32>(_s1) ? 1 : 0);
+			chaos_locals[2] = _s0;
+			_s0 = chaos_locals[2];
+			// brtrue (structured EH branch)
+			_s1 = chaos_locals[0];
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(11175);
+			_s2 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s2));
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == static_cast<CHAOS_IL2CPP_INTPTR>(_s2) ? 1 : 0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s1) == static_cast<CHAOS_IL2CPP_INTPTR>(_s2) ? 1 : 0);
+			chaos_locals[3] = _s1;
+			_s1 = chaos_locals[3];
+			// brfalse (structured EH branch)
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s2;
+				chaos_static_ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_END
+	return;
+}
+
+// Managed method: ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_15()
+extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_15(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
+	CHAOS_IL2CPP_INTPTR _s17{};
+	CHAOS_IL2CPP_INTPTR _s18{};
+	CHAOS_IL2CPP_INTPTR _s19{};
+	CHAOS_IL2CPP_INTPTR _s20{};
+	CHAOS_IL2CPP_INTPTR _s21{};
+	CHAOS_IL2CPP_INTPTR _s22{};
+	CHAOS_IL2CPP_INTPTR _s23{};
+	CHAOS_IL2CPP_INTPTR _s24{};
+	CHAOS_IL2CPP_INTPTR _s25{};
+	CHAOS_IL2CPP_INTPTR _s26{};
+	CHAOS_IL2CPP_INTPTR _s27{};
+	CHAOS_IL2CPP_INTPTR _s28{};
+	CHAOS_IL2CPP_INTPTR _s29{};
+	CHAOS_IL2CPP_INTPTR _s30{};
+	CHAOS_IL2CPP_INTPTR _s31{};
+	CHAOS_IL2CPP_INTPTR _s32{};
+	CHAOS_IL2CPP_INTPTR _s33{};
+	CHAOS_IL2CPP_INTPTR _s34{};
+	CHAOS_IL2CPP_INTPTR _s35{};
+	CHAOS_IL2CPP_INTPTR _s36{};
+
+
+	CHAOS_EH_TRY
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(4);
+			{
+				const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(_s0);
+				if (chaos_length < 0)
+				{
+					CHAOS_IL2CPP_FAIL();
+				}
+				auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
+				chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
+				chaos_array->element_type_shape = 1;
+				chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+				chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
+				chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
+			}
+			_s1 = _s0;
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(68004094u);
+			{
+				const auto chaos_arg_1 = _s2;
+				const auto chaos_raw_arg_0 = _s1;
+				const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+				chaos_initialize_array_from_field_data_int32(chaos_arg_0, chaos_arg_1);
+			}
+			chaos_locals[0] = _s0;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(4);
+			{
+				const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(_s0);
+				if (chaos_length < 0)
+				{
+					CHAOS_IL2CPP_FAIL();
+				}
+				auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
+				chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
+				chaos_array->element_type_shape = 1;
+				chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+				chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
+				chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
+			}
+			chaos_locals[1] = _s0;
+			_s0 = chaos_locals[1];
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			{
+				const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s1);
+				auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s0);
+				if (chaos_array == nullptr)
+				{
+					CHAOS_IL2CPP_FAIL();
+				}
+				if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
+				{
+					CHAOS_IL2CPP_FAIL();
+				}
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)]);
+			}
+			_s1 = chaos_locals[0];
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			{
+				const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s2);
+				auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s1);
+				if (chaos_array == nullptr)
+				{
+					CHAOS_IL2CPP_FAIL();
+				}
+				if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
+				{
+					CHAOS_IL2CPP_FAIL();
+				}
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)]);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(4);
+			{
+				const auto chaos_arg_2 = _s2;
+				const auto chaos_arg_1 = _s1;
+				const auto chaos_arg_0 = _s0;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[21])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+			}
+			_s0 = chaos_locals[1];
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			{
+				const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s1);
+				auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s0);
+				if (chaos_array == nullptr)
+				{
+					CHAOS_IL2CPP_FAIL();
+				}
+				if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
+				{
+					CHAOS_IL2CPP_FAIL();
+				}
+				const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
+				_s0 = chaos_element;
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			// bne.un (structured EH branch)
+			_s2 = chaos_locals[1];
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s3);
+				auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s2);
+				if (chaos_array == nullptr)
+				{
+					CHAOS_IL2CPP_FAIL();
+				}
+				if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
+				{
+					CHAOS_IL2CPP_FAIL();
+				}
+				const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
+				_s2 = chaos_element;
+			}
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+			// bne.un (structured EH branch)
+			_s4 = chaos_locals[1];
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+			{
+				const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s5);
+				auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s4);
+				if (chaos_array == nullptr)
+				{
+					CHAOS_IL2CPP_FAIL();
+				}
+				if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
+				{
+					CHAOS_IL2CPP_FAIL();
+				}
+				const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
+				_s4 = chaos_element;
+			}
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(3);
+			// bne.un (structured EH branch)
+			_s6 = chaos_locals[1];
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(3);
+			{
+				const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s7);
+				auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s6);
+				if (chaos_array == nullptr)
+				{
+					CHAOS_IL2CPP_FAIL();
+				}
+				if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
+				{
+					CHAOS_IL2CPP_FAIL();
+				}
+				const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
+				_s6 = chaos_element;
+			}
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(4);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			// br (handled via structured EH branches)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			chaos_locals[2] = _s7;
+			_s7 = chaos_locals[2];
+			// brfalse (structured EH branch)
+			_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s8;
+				chaos_static_ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_END
+	return;
+}
+
+// Managed method: ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_16()
+extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_16(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
+	CHAOS_IL2CPP_INTPTR _s17{};
+	CHAOS_IL2CPP_INTPTR _s18{};
+	CHAOS_IL2CPP_INTPTR _s19{};
+	CHAOS_IL2CPP_INTPTR _s20{};
+	CHAOS_IL2CPP_INTPTR _s21{};
+	CHAOS_IL2CPP_INTPTR _s22{};
+	CHAOS_IL2CPP_INTPTR _s23{};
+	CHAOS_IL2CPP_INTPTR _s24{};
+	CHAOS_IL2CPP_INTPTR _s25{};
+	CHAOS_IL2CPP_INTPTR _s26{};
+	CHAOS_IL2CPP_INTPTR _s27{};
+	CHAOS_IL2CPP_INTPTR _s28{};
+	CHAOS_IL2CPP_INTPTR _s29{};
+	CHAOS_IL2CPP_INTPTR _s30{};
+
+
+	CHAOS_EH_TRY
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(4);
+			{
+				const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(_s0);
+				if (chaos_length < 0)
+				{
+					CHAOS_IL2CPP_FAIL();
+				}
+				auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
+				chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
+				chaos_array->element_type_shape = 1;
+				chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+				chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
+				chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
+			}
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			{
+				const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s1);
+				auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s0);
+				if (chaos_array == nullptr)
+				{
+					CHAOS_IL2CPP_FAIL();
+				}
+				if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
+				{
+					CHAOS_IL2CPP_FAIL();
+				}
+				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)]);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(171);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(4);
+			{
+				const auto chaos_arg_2 = _s2;
+				const auto chaos_arg_1 = _s1;
+				const auto chaos_arg_0 = _s0;
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+			}
+			_s0 = chaos_locals[0];
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			{
+				const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s1);
+				auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s0);
+				const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
+				_s0 = chaos_element;
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(171);
+			// bne.un (structured EH branch)
+			_s2 = chaos_locals[0];
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s3);
+				auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s2);
+				if (chaos_array == nullptr)
+				{
+					CHAOS_IL2CPP_FAIL();
+				}
+				if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
+				{
+					CHAOS_IL2CPP_FAIL();
+				}
+				const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
+				_s2 = chaos_element;
+			}
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(171);
+			// bne.un (structured EH branch)
+			_s4 = chaos_locals[0];
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(2);
+			{
+				const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s5);
+				auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s4);
+				if (chaos_array == nullptr)
+				{
+					CHAOS_IL2CPP_FAIL();
+				}
+				if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
+				{
+					CHAOS_IL2CPP_FAIL();
+				}
+				const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
+				_s4 = chaos_element;
+			}
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(171);
+			// bne.un (structured EH branch)
+			_s6 = chaos_locals[0];
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(3);
+			{
+				const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s7);
+				auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s6);
+				if (chaos_array == nullptr)
+				{
+					CHAOS_IL2CPP_FAIL();
+				}
+				if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
+				{
+					CHAOS_IL2CPP_FAIL();
+				}
+				const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
+				_s6 = chaos_element;
+			}
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(171);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			// br (handled via structured EH branches)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			chaos_locals[1] = _s7;
+			_s7 = chaos_locals[1];
+			// brfalse (structured EH branch)
+			_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s8;
+				chaos_static_ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_END
+	return;
+}
+
 
 
 }  // namespace chaos::il2cpp::codegen::ExceptionThrowDiagnosticsSubjects
 #pragma warning(pop)
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
-extern "C" const int kAotMethodCount = 14;
+extern "C" const int kAotMethodCount = 17;
 
 extern "C" void ChaosJitRegisterAll() {}

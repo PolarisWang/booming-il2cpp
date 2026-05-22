@@ -162,6 +162,7 @@ struct GcTestBase : ::testing::Test {
         if (auto* info = ::testing::UnitTest::GetInstance()->current_test_info()) {
             test_name = info->name();
         }
+        tls_tlab = TLAB{};
         snapshot_.ExpectNoLeaks(test_name);
         threading::UnregisterThread();
     }

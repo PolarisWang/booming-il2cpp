@@ -2,6 +2,10 @@
 #define CHAOS_IL2CPP_FORBID_SUSPEND_H_
 
 #include <chaos/native_types.h>
+#include <chaos/log.h>
+
+#include <chrono>
+#include <cstdint>
 
 namespace chaos::il2cpp::runtime_core::threading {
 
@@ -36,12 +40,26 @@ inline bool IsSuspendForbidden() noexcept {
 ///   }  // destructor restores depth; polls safepoint if now at depth 0
 class ForbidSuspendScope {
 public:
-    ForbidSuspendScope() noexcept {
+    ForbidSuspendScope() noexcept
+#ifdef CHAOS_IL2CPP_DEBUG
+        : enter_tick_(FastTickMs())
+#endif
+    {
         ++tls_forbid_suspend_depth;
     }
 
     ~ForbidSuspendScope() noexcept {
         --tls_forbid_suspend_depth;
+#ifdef CHAOS_IL2CPP_DEBUG
+        if (tls_forbid_suspend_depth == 0) {
+            uint64_t elapsed = FastTickMs() - enter_tick_;
+            if (elapsed > 10) {
+                CHAOS_IL2CPP_LOG_WARN("THREAD",
+                    "ForbidSuspendScope held %llu ms (possible long critical section)",
+                    static_cast<unsigned long long>(elapsed));
+            }
+        }
+#endif
     }
 
     // Non-copyable, non-movable.
@@ -49,6 +67,17 @@ public:
     ForbidSuspendScope& operator=(const ForbidSuspendScope&) = delete;
     ForbidSuspendScope(ForbidSuspendScope&&) = delete;
     ForbidSuspendScope& operator=(ForbidSuspendScope&&) = delete;
+
+private:
+#ifdef CHAOS_IL2CPP_DEBUG
+    uint64_t enter_tick_;
+#endif
+
+    static uint64_t FastTickMs() noexcept {
+        auto now = std::chrono::steady_clock::now();
+        return std::chrono::duration_cast<std::chrono::milliseconds>(
+            now.time_since_epoch()).count();
+    }
 };
 
 }  // namespace chaos::il2cpp::runtime_core::threading

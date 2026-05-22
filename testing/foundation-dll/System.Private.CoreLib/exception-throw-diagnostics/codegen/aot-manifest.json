@@ -88,8 +88,32 @@
     },
     {
       "assemblyName": "ExceptionThrowDiagnosticsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_14:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ExceptionThrowDiagnosticsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_15:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ExceptionThrowDiagnosticsSubjects",
+      "subjectKind": "method",
+      "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_16:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "ExceptionThrowDiagnosticsSubjects",
       "subjectKind": "field",
       "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "ExceptionThrowDiagnosticsSubjects",
+      "subjectKind": "field",
+      "subjectId": "ExceptionThrowDiagnosticsSubjects/\u003CPrivateImplementationDetails\u003E::9F64A747E1B97F131FABB6B447296C9B6F0201E79FB3C5356E6C77E89B6A806A",
       "reason": "instance-field-state"
     },
     {
@@ -192,6 +216,30 @@
       "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.NotImplementedException::.ctor:System.Void(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Byte",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.Unsafe::CopyBlock:System.Void(System.Byte\u0026,System.Byte\u0026,System.UInt32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.Unsafe::InitBlock:System.Void(System.Byte\u0026,System.Byte,System.UInt32)",
       "reason": "external-call"
     }
   ]

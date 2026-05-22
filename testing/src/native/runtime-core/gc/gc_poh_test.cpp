@@ -28,6 +28,19 @@ void* GcGetHandleTarget(CHAOS_IL2CPP_UINT64 handle_id) noexcept;
 }}}
 
 struct GcPohTest : GcUnitTestBase {
+    void TearDown() override {
+        // POH tests permanently allocate POH regions, so skip the region count
+        // leak check (it's expected, not a leak). Only check thread count + TLAB.
+        tls_tlab = TLAB{};
+        const char* test_name = "?";
+        if (auto* info = ::testing::UnitTest::GetInstance()->current_test_info()) {
+            test_name = info->name();
+        }
+        int32_t tc = threading::GetThreadCount();
+        EXPECT_EQ(tc, snapshot_.thread_count)
+            << "[" << test_name << "] Thread leak detected";
+        threading::UnregisterThread();
+    }
 };
 
 // ── Test 1: Basic POH allocation ─────────────────────────────────

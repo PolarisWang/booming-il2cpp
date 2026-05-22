@@ -1,6 +1,7 @@
 #include "timer_queue.h"
 #include "thread_state.h"
 #include "gc_transition.h"
+#include "thread_pool.h"
 
 #include <atomic>
 #include <chrono>
@@ -235,12 +236,11 @@ void TimerQueueOnTick() noexcept {
         }
     }
 
-    // Fire due timers (outside lock).
+    // Fire due timers via thread pool (outside lock) to avoid blocking
+    // the gate thread and delaying HillClimbing gate ticks.
     for (auto& d : due) {
         if (d.callback) {
-            GC_TRANSITION_TO_COOPERATIVE();
-            d.callback(d.state);
-            GC_TRANSITION_TO_PREEMPTIVE();
+            ThreadPoolQueueUserWorkItemUnsafe(d.callback, d.state);
         }
     }
 }

@@ -48,7 +48,7 @@ public sealed partial class NativeAotLoweringPlanner
     {
         "br" or "brtrue" or "brfalse"
         or "beq" or "bne.un" or "bge" or "bge.un"
-        or "bgt" or "ble" or "blt"
+        or "bgt" or "bgt.un" or "ble" or "ble.un" or "blt" or "blt.un"
         or "leave" or "switch"
         or "ret" or "throw" or "rethrow"
         or "endfilter" or "endfinally" => true,
@@ -62,7 +62,7 @@ public sealed partial class NativeAotLoweringPlanner
     {
         "brtrue" or "brfalse"
         or "beq" or "bne.un" or "bge" or "bge.un"
-        or "bgt" or "ble" or "blt" => true,
+        or "bgt" or "bgt.un" or "ble" or "ble.un" or "blt" or "blt.un" => true,
         _ => false,
     };
 
@@ -166,8 +166,11 @@ public sealed partial class NativeAotLoweringPlanner
                         case "bge":
                         case "bge.un":
                         case "bgt":
+                        case "bgt.un":
                         case "ble":
+                        case "ble.un":
                         case "blt":
+                        case "blt.un":
                             conditionalTarget = GetRequiredIntOperand(terminator);
                             branchTarget = null; // fall-through handled structurally
                             break;

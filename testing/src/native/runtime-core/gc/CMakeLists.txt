@@ -527,3 +527,37 @@ target_link_libraries(test_gc_soak PRIVATE gtest ${CHAOS_GC_LIBS})
 target_link_options(test_gc_soak PRIVATE /FORCE:MULTIPLE)
 add_test(NAME test_gc_soak COMMAND test_gc_soak)
 set_tests_properties(test_gc_soak PROPERTIES LABELS "stress;gc")
+
+# ═══════════════════════════════════════════════════════════════════════════
+# Batch L — Phase 3 tests (Server GC, heap manager, coordinator, root change)
+# ═══════════════════════════════════════════════════════════════════════════
+
+# gc_coordinator_test — GcCoordinator singleton + GC request lifecycle
+add_chaos_test(test_gc_coordinator
+    gc_coordinator_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
+    LIBS ${CHAOS_GC_LIBS}
+    LABELS "unit;gc"
+)
+target_link_options(test_gc_coordinator PRIVATE /FORCE:MULTIPLE)
+
+# gc_heap_manager_test — GcHeapManager initialization + heap iteration
+add_chaos_test(test_gc_heap_manager
+    gc_heap_manager_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
+    LIBS ${CHAOS_GC_LIBS}
+    LABELS "unit;gc"
+)
+target_link_options(test_gc_heap_manager PRIVATE /FORCE:MULTIPLE)
+
+# gc_root_change_test — BGC root change ring buffer recording + draining
+# NOTE: gc_root_change.cpp compiled directly (same pattern as gc_bgc for
+# test_gc_bgc_unit) because the prebuilt chaos_runtime_core.lib uses GNU ar
+# format that MSVC link.exe cannot search for COMDAT resolution.
+add_chaos_test(test_gc_root_change
+    gc_root_change_test.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc/gc_root_change.cpp
+    LIBS ${CHAOS_GC_LIBS}
+    LABELS "unit;gc"
+)
+target_include_directories(test_gc_root_change PRIVATE
+    ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc)
+target_link_options(test_gc_root_change PRIVATE /FORCE:MULTIPLE)

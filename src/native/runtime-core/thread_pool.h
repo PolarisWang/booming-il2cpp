@@ -25,7 +25,7 @@ constexpr int32_t kHillClimbingSampleWindow = 8;
 constexpr int32_t kHillClimbingMaxWorker    = 32767;
 constexpr int32_t kHillClimbingMinWorker    = 1;
 
-/// 9-state hill-climbing state machine (V2).
+/// 10-state hill-climbing state machine (V2 + Starving).
 enum class HillClimbState : uint8_t {
     Warmup,        // Initial ramp-up: +1/tick until min configured
     ClimbExplore,  // Probe throughput slope by injecting threads
@@ -36,6 +36,7 @@ enum class HillClimbState : uint8_t {
     SteadyFix,     // Steady with square-wave injection active
     Saturating,    // Near CPU capacity — conservative gain only
     Random,        // Noise-dominated signal → random perturbation
+    Starving,      // Queue depth exceeds 2× workers — forced growth
 };
 
 /// Single Goertzel filter for frequency-domain component detection.

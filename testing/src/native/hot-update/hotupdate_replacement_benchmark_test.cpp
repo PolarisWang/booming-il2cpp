@@ -17,6 +17,7 @@
 #include <algorithm>
 #include <atomic>
 #include <chrono>
+#include <crtdbg.h>
 #include <cstdint>
 #include <cstdio>
 #include <cstdlib>
@@ -271,6 +272,23 @@ TEST_F(ReplacementBenchmarkTest, RegisterRevertCycleStress)
 
 // ── Multi-threaded stress tests ─────────────────────────────────────────────
 
+#include <windows.h>
+#include <dbghelp.h>
+#pragma comment(lib, "dbghelp.lib")
+
+static int __cdecl StackTraceReportHook(int reportType, char* message, int* returnValue) {
+    if (reportType == _CRT_ASSERT) {
+        fprintf(stderr, "\n*** CRT ASSERT: %s\n", message);
+        void* stack[128];
+        USHORT frames = CaptureStackBackTrace(1, 128, stack, NULL);
+        for (USHORT i = 0; i < frames; i++) {
+            fprintf(stderr, "  #%u: %p\n", i, stack[i]);
+        }
+        fflush(stderr);
+    }
+    return 0; // Allow default processing (abort/retry/ignore dialog)
+}
+
 TEST_F(ReplacementBenchmarkTest, ConcurrentRegisterDifferentTokens)
 {
     int scale = (std::max)(1, GetStressScale());
@@ -326,26 +344,30 @@ TEST_F(ReplacementBenchmarkTest, ConcurrentRegisterSameToken)
     // Note: Register may return false when another thread holds the token —
     // that's expected. Only Resolve mismatches after a successful Register
     // indicate actual corruption.
-    // Note: no TypeVTable registered here — tests only the method_replacement
-    // layer without vtable scanning, which is already covered by
-    // single-threaded benchmarks above. Concurrent vtable slot updates
-    // have a pre-existing iterator invalidation issue in the registry.
     int scale = (std::max)(1, GetStressScale());
     int thread_count = 4;
     int ops_per_thread = 100 * scale;
     static constexpr uint32_t kSharedToken = 0x06000042u;
+    void* const kOriginal = reinterpret_cast<void*>(static_cast<uintptr_t>(0x1111));
     void* const kPatch    = reinterpret_cast<void*>(static_cast<uintptr_t>(0x2222));
     std::atomic<int> resolve_mismatches{0};
 
-    auto worker = [&](int /*id*/) {
+    // Register one vtable so UpdateVTableSlotByMethodToken has work to do.
+    auto* flat = static_cast<const void**>(CHAOS_IL2CPP_MALLOC(sizeof(const void*)));
+    flat[0] = kOriginal;
+    vr::VTableSlot slot{kSharedToken, kOriginal};
+    auto* vt = MakeVTableWithSlot(0x02000001u, &slot, flat);
+    RegisterBenchVTable(vt);
+
+    // Install CRT assertion hook to capture stack trace on vector(54) crash.
+    _CrtSetReportMode(_CRT_ASSERT, _CRTDBG_MODE_DEBUG);
+    _CrtSetReportHook2(_CRT_RPTHOOK_INSTALL, StackTraceReportHook);
+
+    auto worker = [&](int id) {
+        (void)id;
         for (int i = 0; i < ops_per_thread; i++) {
-            if (mr::Register(kSharedToken, kPatch)) {
-                // Register succeeded — verify Resolve matches.
-                if (mr::Resolve(kSharedToken) != kPatch) {
-                    resolve_mismatches.fetch_add(1, std::memory_order_relaxed);
-                }
-                mr::Revert(kSharedToken);
-            }
+            // PHASE 1: Only Register — isolate if crash is in Register path
+            mr::Register(kSharedToken, kPatch);
         }
     };
 

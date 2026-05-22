@@ -30,6 +30,9 @@ extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubje
 extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_13(
         void
 );
+extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_14(
+        void
+);
 extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_1(
         void
 );
@@ -69,6 +72,7 @@ static const Functions s_functions = {
         &ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_11,
         &ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_12,
         &ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_13,
+        &ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_14,
         &ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_1,
         &ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_2,
         &ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_3,
@@ -79,7 +83,7 @@ static const Functions s_functions = {
         &ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_8,
         &ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_9,
     },
-    14,
+    15,
 };
 
 const Functions kFunctions = s_functions;
@@ -87,13 +91,14 @@ const Functions kFunctions = s_functions;
 // Flat function pointer array for indexed dispatch (benchmarking).
 // Avoids fragile reinterpret_cast<void* const*>(&kFunctions) which depends on
 // struct layout uniformity across sub-struct members.
-extern "C" void* kFunctionsFlat[14];
-void* kFunctionsFlat[14] = {
+extern "C" void* kFunctionsFlat[15];
+void* kFunctionsFlat[15] = {
     reinterpret_cast<void*>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_0),
     reinterpret_cast<void*>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_10),
     reinterpret_cast<void*>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_11),
     reinterpret_cast<void*>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_12),
     reinterpret_cast<void*>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_13),
+    reinterpret_cast<void*>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_14),
     reinterpret_cast<void*>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_1),
     reinterpret_cast<void*>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_2),
     reinterpret_cast<void*>(&ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_3),

@@ -2,23 +2,22 @@
   "assembly": "System.Private.CoreLib",
   "mode": "family-entrypoint",
   "total": 1,
-  "passed": 0,
-  "failed": 1,
+  "passed": 1,
+  "failed": 0,
   "results": [
     {
-      "family": "enum-parsing",
+      "family": "exception-throw-diagnostics",
       "config_tier": "CHECK",
       "steps": {
         "build_subjects": "OK",
         "convert_to_cpp": "OK",
-        "build_entry_exe": "FAILED"
+        "build_entry_exe": "OK"
       },
-      "success": false,
-      "methodCount": 13,
+      "success": true,
+      "methodCount": 17,
       "entryPointSubjectId": "",
-      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\build-output\\EnumParsingSubjects.dll",
-      "error": "entry.exe build failed"
+      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\exception-throw-diagnostics\\managed\\subjects\\build-output\\ExceptionThrowDiagnosticsSubjects.dll"
     }
   ],
-  "timestamp": "2026-05-22T19:42:25"
+  "timestamp": "2026-05-22T21:53:41"
 }
