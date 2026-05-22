@@ -81,7 +81,7 @@ description: Use when changing subject/test workflow, Chaos.TestFramework, gener
 
 - 如果任务目标包含“打通新的测试流程 / 需要新的验证通过记录 / 需要新的 verification 数据”，或本轮改动触及 `subjects/test/runner/benchmark/codegen` 主线，则不能只停在 formal object 跑通
 - formal object 与受影响 regression 通过后，默认还要执行 `run test inventory --json`
-- 如果本轮改动触及 formal report / projection contract，例如 `Program / DLL / Verification Project / Artifact` 报告对象、`latest/master/reports` 字段、`testing-inventory` / `benchmark` 页面字段，或证据链接规则，也必须刷新 `verification-v1` 正式产物
+- 如果本轮改动触及 formal report / projection contract，例如 `Program / DLL / Verification Project / Artifact` 报告对象、`latest/master/reports` 字段、`testing-inventory` / `benchmark` 页面字段，或证据链接规则，也必须刷新 unified test framework 正式产物
 - `run test inventory` 只是内部命令，不是 public verification entry
 - `benchmark --record` 只写 raw benchmark records，不等于 formal refresh
 - 至少确认本轮更新：

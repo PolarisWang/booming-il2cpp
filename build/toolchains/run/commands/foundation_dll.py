@@ -175,7 +175,7 @@ def _handle_full(
     _emit_event(progress_callback, event_type="progress", completed=2, total=4, active_unit="foundation-dll refresh", step_status="running")
 
     refresh_payload = audit_generator_module.write_foundation_dll_audit_outputs(repo_root)
-    _emit_event(progress_callback, event_type="progress", completed=3, total=4, active_unit="verification-v1 formal refresh", step_status="running")
+    _emit_event(progress_callback, event_type="progress", completed=3, total=4, active_unit="formal refresh", step_status="running")
 
     output_root = inventory_generator_module.resolve_inventory_output_root(repo_root, None)
     verification_payload = inventory_generator_module.refresh_inventory_outputs(

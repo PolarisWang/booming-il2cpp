@@ -27,8 +27,8 @@
 - managed solution 是唯一测试�?- collection file �?managed/native/hotupdate 的唯一跨执行形态契�?- `subject.features.json` �?owner subject �?proof / benchmark obligation 的真�?- canonical proof / benchmark / host correctness 不允许依�?`Console.WriteLine` / `ChaosEvidenceKind.Stdout`
 - 测试阶段�?`dotnet` 编译崩溃必须先查根因并修�?- IL2CPP / Python file-level codegen 默认 Scriban，能力不足时先扩�?Scriban
 - cutover 完成后删除旧 alias、旧命名和旧双轨逻辑
-- 如果任务要求新的验证通过记录或新的 verification 数据，formal object 跑通后还必须刷新 `verification-v1` 正式产物；默认命令为 `run test inventory --json`
-- 如果本轮改动触及 formal report / projection contract，例如 `Program / DLL / Verification Project / Artifact` 报告对象、`latest/master/reports` 字段、`testing-inventory` / `benchmark` 页面字段或证据链接规则，也必须在实现后刷新 `verification-v1` 正式产物；不允许只改 schema、模板或页面读取逻辑而不刷新正式数据
+- 如果任务要求新的验证通过记录或新的 verification 数据，formal object 跑通后还必须刷新 unified test framework 正式产物；默认命令为 `run test inventory --json`
+- 如果本轮改动触及 formal report / projection contract，例如 `Program / DLL / Verification Project / Artifact` 报告对象、`latest/master/reports` 字段、`testing-inventory` / `benchmark` 页面字段或证据链接规则，也必须在实现后刷新 unified test framework 正式产物；不允许只改 schema、模板或页面读取逻辑而不刷新正式数据
 - 对于 DLL-first reporting 一类 evidence-driven projection，`artifacts/**` 下的真实产物才允许进入 primary evidence / artifact index；`docs/**`、`subjects/**`、`testing/**` 等引用只能作为 support refs，不能把项目状态置为通过，也不能混入 primary artifact table
 - foundation-dll-audit 的真实进度主轴是 `Capability Closure`，其分母 authority 是 `artifact/verification-catalog/projections/foundation-dll-audit/capability-family-ledger.json`；不允许再用 verification project 数量、workspace 数量或样例数量代替
 - `Workflow Progress` 只是辅助流程条，用来表示 family 级 required gates 推进到哪一步，不代表 capability 覆盖本身
@@ -53,9 +53,9 @@
 
 ## 最近变更
 - `2026-04-18`：把 skill 本身收缩为治理入口，不再重复承担全部 authority 叙述，并新增 obligation intake 字段冻结要求。
-- `2026-04-23`：补充“新验证记录 / 新数据”规则，要求命中测试治理主线的任务在 formal object 通过后刷新 `verification-v1` 正式产物。
+- `2026-04-23`：补充”新验证记录 / 新数据”规则，要求命中测试治理主线的任务在 formal object 通过后刷新 unified test framework 正式产物。
 - `2026-04-24`：补充 public command surface 口径，明确 `run test inventory` 已内部化，以及 `benchmark --record` 只写 raw records，不等于 formal refresh。
-- `2026-04-25`：补充 DLL-first reporting / projection contract 刷新要求；命中报告对象、页面字段或证据链接规则改动时，不能只改 schema 或页面，必须同步刷新 `verification-v1` 正式数据与对应 projection。
+- `2026-04-25`：补充 DLL-first reporting / projection contract 刷新要求；命中报告对象、页面字段或证据链接规则改动时，不能只改 schema 或页面，必须同步刷新 unified test framework 正式数据与对应 projection。
 - `2026-04-25`：补充 DLL-first reporting 证据分层口径；`artifacts/**` 只计 primary evidence，`docs/**` / `subjects/**` / `testing/**` 只作为 support refs。
 - `2026-04-26`：补充 foundation-dll-audit 双轴口径；`Capability Closure` 成为 DLL 真实进度主轴，`Workflow Progress` 退为辅助流程条，`workspace` 明确降级为 proof container，不再允许作为正式分母。
 
