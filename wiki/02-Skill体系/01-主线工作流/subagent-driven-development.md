@@ -1,4 +1,4 @@
-# subagent-driven-development
+﻿# subagent-driven-development
 
 > 项目中的�?agent 执行主线，负责在并行子上下文里完成任务，并同步维护任务目录状态�?
 
@@ -17,7 +17,7 @@
 - 每任务后更新 `STATUS.md`、`ACTIVE.md`、索引与进度文档
 - 对长期知识调�?`project-wiki-maintenance`
 - completion 前与顺序执行主线使用同一�?formal verification gate
-- 需要新的验证通过记录 / 新的数据时，�?formal object 与项目测试通过后继续执�?`run verify verification-v1 --json`，刷�?`verification-v1` 正式产物
+- 需要新的验证通过记录 / 新的数据时，�?formal object 与项目测试通过后继续执�?`run test inventory --json`，刷�?`verification-v1` 正式产物
 
 ## 项目规则
 

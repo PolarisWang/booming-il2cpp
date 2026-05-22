@@ -15,8 +15,7 @@
 ## 0. Authority 边界
 
 - 本文档拥有 AOT capability intake、owner subject、proof / benchmark / hotupdate obligation 与 formal verification 顺序的 authority。
-- [`../../docs/architecture/subject-test-framework-v1/INDEX.md`](../../docs/architecture/subject-test-framework-v1/INDEX.md) 只负责统一测试主线、collection / manifest / codegen 分层与宿主边界。
-- [`../../docs/architecture/verification-v1/spec.md`](../../docs/architecture/verification-v1/spec.md) 负责 formal verification、归并归档与 projection 口径。
+- [`../04-工具与集成/统一测试框架.md`](../04-%E5%B7%A5%E5%85%B7%E4%B8%8E%E9%9B%86%E6%88%90/%E7%BB%9F%E4%B8%80%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6.md) 负责统一测试主线、collection / manifest / codegen 分层与宿主边界。
 - [`INDEX.md`](./INDEX.md) 负责正式验证入口、对象导航与 completion 前对象优先级。
 - 命中本规范的计划，必须把 obligation 显式写入 `plan-v1-01.md`；不允许留到实现时临时决定。
 

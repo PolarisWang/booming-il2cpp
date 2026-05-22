@@ -46,9 +46,9 @@ def merge_master_payload(
     return {
         "schemaVersion": int(incoming.get("schemaVersion") or existing.get("schemaVersion") or 1),
         "generatedAtUtc": str(incoming.get("generatedAtUtc") or _utc_timestamp()),
-        "producerId": str(incoming.get("producerId") or existing.get("producerId") or "verification-v1"),
+        "producerId": str(incoming.get("producerId") or existing.get("producerId") or "unified-test-framework"),
         "sourceSpecVersion": str(
-            incoming.get("sourceSpecVersion") or existing.get("sourceSpecVersion") or "verification-v1"
+            incoming.get("sourceSpecVersion") or existing.get("sourceSpecVersion") or "unified-test-framework"
         ),
         "mergeKey": str(merge_key or incoming.get("mergeKey") or existing.get("mergeKey") or ""),
         "items": merge_items(

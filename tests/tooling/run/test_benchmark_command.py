@@ -96,7 +96,7 @@ class BenchmarkCommandTests(unittest.TestCase):
 
         self.assertEqual(0, exit_code)
         update_docs_mock.assert_not_called()
-        self.assertIn("run verify verification-v1 --json", output.getvalue())
+        self.assertIn("run test inventory --json", output.getvalue())
 
 
 if __name__ == "__main__":

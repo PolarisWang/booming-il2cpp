@@ -641,7 +641,6 @@ def build_test_menu_entries(manifest: dict[str, Any], host_platform: str) -> lis
         MenuEntry("Registry", {"id": "test-registry-check-consistency", "title": "Check registry/wiki consistency"}, "registry-check", ["test", "registry", "check-consistency"]),
         MenuEntry("Results", {"id": "test-watch", "title": "Show the latest test event timeline"}, "watch", ["test", "watch"]),
         MenuEntry("Results", {"id": "test-summary", "title": "Show the latest aggregated summary"}, "summary", ["test", "summary"]),
-        MenuEntry("Results", {"id": "verify-verification-v1", "title": "Refresh verification-v1 formal outputs"}, "verify", ["verify", "verification-v1"]),
         MenuEntry("Back", {**MENU_BACK_COMMAND, "title": "Back to previous menu"}, "back", []),
     ]
 
@@ -722,8 +721,6 @@ def resolve_entry_argv(
             return ["test", "watch"]
         if mode == "summary":
             return ["test", "summary"]
-        if mode == "verify":
-            return ["verify", "verification-v1"]
         return None
 
     if command_id == "test-suite":

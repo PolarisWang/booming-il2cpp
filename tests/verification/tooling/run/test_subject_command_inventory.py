@@ -175,12 +175,12 @@ class TestSubjectCommandInventory(SubjectCommandTestSupport):
             verification_manifest = json.loads(
                 (repo_root / "verification" / "verification.manifest.json").read_text(encoding="utf-8")
             )
-            self.assertIn("python build/toolchains/run/run.py verify verification-v1 --json", verification_index)
+            self.assertIn("python build/toolchains/run/run.py test inventory --json", verification_index)
             self.assertIn("python build/toolchains/run/run.py generate project all --json", verification_index)
-            self.assertNotIn("python build/toolchains/run/run.py test inventory --json", verification_index)
+            self.assertNotIn("python build/toolchains/run/run.py verify verification-v1 --json", verification_index)
             self.assertNotIn("python build/toolchains/run/run.py project all-workspaces --json", verification_index)
             self.assertEqual(
-                "python build/toolchains/run/run.py verify verification-v1 --json",
+                "python build/toolchains/run/run.py test inventory --json",
                 verification_manifest["commands"]["verify"],
             )
             self.assertEqual(

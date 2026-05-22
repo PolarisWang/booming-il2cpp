@@ -21,13 +21,12 @@ class TestTuiUnifiedTestMenu(TuiUnifiedMenuTestSupport):
                 "test-registry-check-consistency",
                 "test-watch",
                 "test-summary",
-                "verify-verification-v1",
                 "menu-back",
             ],
             [entry.command["id"] for entry in entries],
         )
         self.assertEqual(
-            ["Quick Start", "Selectors", "Selectors", "Selectors", "Selectors", "Registry", "Registry", "Registry", "Results", "Results", "Results", "Back"],
+            ["Quick Start", "Selectors", "Selectors", "Selectors", "Selectors", "Registry", "Registry", "Registry", "Results", "Results", "Back"],
             [entry.group_title for entry in entries],
         )
 

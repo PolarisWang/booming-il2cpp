@@ -1,5 +1,7 @@
 # Verification V1
 
+> **已废弃 (2026-05)** — Verification-V1 框架已整体退役。formal refresh 入口从 `run verify verification-v1 --json` 迁移为 `run test inventory --json`。原有 CLI 接线和 wiki 文档已清理。此目录保留为历史存档。
+
 ## 目标
 
 这一组文档定义新的 formal verification 架构。它不是旧测试管线的附注，而是新的 authority、schema、投影和切换规则集合。

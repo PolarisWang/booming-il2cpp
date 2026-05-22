@@ -5,8 +5,8 @@ from typing import Any
 
 
 SCHEMA_VERSION = 1
-SOURCE_SPEC_VERSION = "verification-v1"
-DEFAULT_PRODUCER_ID = "verification-v1"
+SOURCE_SPEC_VERSION = "unified-test-framework"
+DEFAULT_PRODUCER_ID = "unified-test-framework"
 
 
 def _utc_timestamp() -> str:

@@ -65,7 +65,7 @@ run foundation-dll onboard --scope <assembly> --promote-approved true --mode ful
 2. `promote`
 3. `refresh`
 4. `verify-consistency`
-5. `verify verification-v1`
+5. `test inventory`
 
 ## 常用命令
 
@@ -116,4 +116,4 @@ run foundation-dll full --scope all --promote-approved true --mode full
 - `Workflow Progress` 只是辅助流程条
 - `workspace` 只算 proof container，不是正式分母
 - `promote` 必须显式带 `--promote-approved true`
-- `run verify verification-v1 --json` 仍然是 formal refresh canonical 入口
+- `run test inventory --json` 是 formal refresh 入口，用于刷新 archive 和 projections

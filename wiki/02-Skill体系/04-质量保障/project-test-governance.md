@@ -13,7 +13,7 @@
 
 - [`../../../docs/architecture/subject-test-framework-v1/INDEX.md`](../../../docs/architecture/subject-test-framework-v1/INDEX.md)
   - 拥有统一测试主线、collection / manifest / codegen 分层�?subject test framework 边界
-- [`../../../docs/architecture/verification-v1/spec.md`](../../../docs/architecture/verification-v1/spec.md)
+- [`../../../docs/archive/architecture/verification-v1/spec.md`](../../../docs/archive/architecture/verification-v1/spec.md)
   - 拥有 formal verification、归并归档、projection 与权责图审核边界
 - [`../../06-测试验证/INDEX.md`](../../06-%E6%B5%8B%E8%AF%95%E9%AA%8C%E8%AF%81/INDEX.md)
   - 拥有正式验证入口、对象导航与 completion 前对象优先级
@@ -27,7 +27,7 @@
 - managed solution 是唯一测试�?- collection file �?managed/native/hotupdate 的唯一跨执行形态契�?- `subject.features.json` �?owner subject �?proof / benchmark obligation 的真�?- canonical proof / benchmark / host correctness 不允许依�?`Console.WriteLine` / `ChaosEvidenceKind.Stdout`
 - 测试阶段�?`dotnet` 编译崩溃必须先查根因并修�?- IL2CPP / Python file-level codegen 默认 Scriban，能力不足时先扩�?Scriban
 - cutover 完成后删除旧 alias、旧命名和旧双轨逻辑
-- 如果任务要求新的验证通过记录或新的 verification 数据，formal object 跑通后还必须刷新 `verification-v1` 正式产物；默认命令为 `run verify verification-v1 --json`
+- 如果任务要求新的验证通过记录或新的 verification 数据，formal object 跑通后还必须刷新 `verification-v1` 正式产物；默认命令为 `run test inventory --json`
 - 如果本轮改动触及 formal report / projection contract，例如 `Program / DLL / Verification Project / Artifact` 报告对象、`latest/master/reports` 字段、`testing-inventory` / `benchmark` 页面字段或证据链接规则，也必须在实现后刷新 `verification-v1` 正式产物；不允许只改 schema、模板或页面读取逻辑而不刷新正式数据
 - 对于 DLL-first reporting 一类 evidence-driven projection，`artifacts/**` 下的真实产物才允许进入 primary evidence / artifact index；`docs/**`、`subjects/**`、`testing/**` 等引用只能作为 support refs，不能把项目状态置为通过，也不能混入 primary artifact table
 - foundation-dll-audit 的真实进度主轴是 `Capability Closure`，其分母 authority 是 `artifact/verification-catalog/projections/foundation-dll-audit/capability-family-ledger.json`；不允许再用 verification project 数量、workspace 数量或样例数量代替
@@ -38,7 +38,7 @@
 - 新测试流程的数据以 `artifact/verification-catalog/archive/{latest,master,reports}` 与 `artifact/verification-catalog/evidence/owners/*/codegen-stubs/*` 为准；`artifacts/**` 运行日志只算过程证据
 - 命中 projection / report contract 时，还必须确认对应 `artifact/verification-catalog/projections/**` 派生产物已更新
 - `run test inventory` 只是内部命令，不作为对外 public entry。
-- `benchmark --record` 只写 raw benchmark records，不等于 formal refresh。需要新的 benchmark archive / projection / merged data 时，必须后续执行 `run verify verification-v1 --json`。
+- `benchmark --record` 只写 raw benchmark records，不等于 formal refresh。需要新的 benchmark archive / projection / merged data 时，必须后续执行 `run test inventory --json`。
 
 ## 命中 AOT / IL2CPP / test-flow 任务时必须先冻结
 

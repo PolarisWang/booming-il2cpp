@@ -68,8 +68,8 @@ def build_stub_index(
     managed_source_refs: list[dict[str, Any]] | None = None,
     stub_refs: list[dict[str, Any]] | None = None,
     generated_from_evidence_ids: list[str] | None = None,
-    producer_id: str = "verification-v1",
-    source_spec_version: str = "verification-v1",
+    producer_id: str = "unified-test-framework",
+    source_spec_version: str = "unified-test-framework",
 ) -> dict[str, Any]:
     merge_key_parts = [_string(owner_subject_id), _string(capability_id), _string(route_code)]
     if _string(profile_code):

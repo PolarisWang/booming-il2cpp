@@ -363,46 +363,6 @@ class UnifiedTestCommandTests(unittest.TestCase):
         self.assertEqual(["unknown command: verify roadmap-0"], result.errors)
         self.assertEqual("unknown command: verify roadmap-0\n", result.text)
 
-    def test_verify_verification_v1_dispatch_routes_to_verify_handler(self) -> None:
-        run_module = load_module(RUN_MODULE_PATH, "chaos_run_main_for_verify_verification_v1")
-        expected = run_module.CommandResult.success(
-            command="verify verification-v1",
-            host_platform="windows",
-            target="verification-v1",
-            payload={"artifacts": ["verification/archive/latest/result-snapshot.json"]},
-            text="verification-v1 ok\n",
-        )
-
-        with patch.object(run_module, "verify_commands") as verify_commands_mock:
-            verify_commands_mock.handle.return_value = expected
-            result = run_module.execute_command(
-                {
-                    "id": "verify-verification-v1",
-                    "handler": "verify.dispatch",
-                    "target": "verification-v1",
-                },
-                "verify verification-v1",
-                "verification-v1",
-                "windows",
-                {},
-                REPO_ROOT,
-                {"output": "verification/projections/testing-inventory"},
-            )
-
-        self.assertEqual("ok", result.status)
-        verify_commands_mock.handle.assert_called_once_with(
-            {
-                "id": "verify-verification-v1",
-                "handler": "verify.dispatch",
-                "target": "verification-v1",
-            },
-            REPO_ROOT,
-            "windows",
-            "verify verification-v1",
-            {"output": "verification/projections/testing-inventory"},
-            progress_callback=None,
-        )
-
 
 if __name__ == "__main__":
     unittest.main()
