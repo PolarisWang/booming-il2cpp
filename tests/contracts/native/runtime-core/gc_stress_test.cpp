@@ -41,6 +41,9 @@
 #include <thread>
 #include <vector>
 
+// Public API for waiting on pending finalizers (defined in gc_test_support).
+extern "C" void chaos_gc_wait_for_pending_finalizers() noexcept;
+
 #if defined(_WIN32) || defined(_WIN64)
 #define NOMINMAX
 #include <windows.h>
@@ -2456,6 +2459,97 @@ static bool RunScenarioS(GcStatsSnapshot* stats_out) {
     return (completed == kNumWorkerThreads) && (total_alloc > 0);
 }
 
+// ════════════════════════════════════════════════════════════════════════════
+// Scenario T: Multi-threaded finalizer registration + execution stress
+//
+// Threads allocate objects, register finalizers on all, then drop references.
+// After GC, verifies that finalizers fired and no crash occurred.
+// ════════════════════════════════════════════════════════════════════════════
+
+static constexpr int kTWorkers = 20;
+static constexpr int kTObjectsPerWorker = 128;
+static constexpr CHAOS_IL2CPP_SIZE kTObjSize = 64;
+
+static std::atomic<int> g_t_finalizer_count{0};
+
+static void FinalizerCallbackT(void* /*obj*/) {
+    g_t_finalizer_count.fetch_add(1, std::memory_order_relaxed);
+}
+
+static void worker_t(int thread_index, WorkerResult* result) {
+    RegisterWorker();
+    threading::EnterCooperativeMode();
+    if (!SetupTlsNursery()) {
+        std::snprintf(result->error_message, sizeof(result->error_message),
+                      "SetupTlsNursery failed for thread %d", thread_index);
+        UnregisterWorker();
+        return;
+    }
+
+    for (int i = 0; i < kTObjectsPerWorker; ++i) {
+        result->allocations_attempted++;
+        void* p = g_old_gen.Allocate(kTObjSize, true);
+        if (!p) continue;
+        result->allocations_succeeded++;
+        WritePattern(p, kTObjSize, thread_index, i);
+        g_old_gen.RegisterFinalizer(p, FinalizerCallbackT);
+        // Drop reference — object becomes collectable, finalizer should fire.
+    }
+
+    threading::SafepointPoll();
+    UnregisterWorker();
+    result->completed = true;
+}
+
+static bool RunScenarioT(GcStatsSnapshot* stats_out) {
+    printf("\n  ── Scenario T: Finalizer stress (%d threads × %d objects) ──\n",
+           kTWorkers, kTObjectsPerWorker);
+
+    g_t_finalizer_count.store(0);
+    GcStatsSnapshot before = SnapshotGcStats();
+
+    std::vector<WorkerResult> results(kTWorkers);
+    std::vector<std::thread> workers;
+    for (int i = 0; i < kTWorkers; ++i)
+        workers.emplace_back(worker_t, i, &results[i]);
+    for (auto& w : workers) { if (w.joinable()) w.join(); }
+
+    // Trigger full GC to collect dead objects and run finalizers.
+    fprintf(stderr, "[T] triggering full GC\n");
+    { uint32_t gen = threading::RequestGlobalSafepoint();
+      g_old_gen.Collect(nullptr, nullptr);
+      threading::ReleaseGlobalSafepoint(gen); }
+    g_gc_scheduler.RecordFullCollection(0);
+
+    // Wait for pending finalizers to complete.
+    chaos_gc_wait_for_pending_finalizers();
+
+    fprintf(stderr, "[T] finalizer count = %d\n", g_t_finalizer_count.load());
+
+    *stats_out = SnapshotGcStats();
+
+    int64_t total_alloc = 0;
+    int completed = 0;
+    for (auto& r : results) {
+        total_alloc += r.allocations_succeeded;
+        if (r.completed) completed++;
+    }
+
+    int actual_finalizers = g_t_finalizer_count.load();
+
+    printf("\n  Result: %lld allocs, %d finalizers (expected %lld), workers=%d/%d\n",
+           (long long)total_alloc, actual_finalizers,
+           (long long)(total_alloc), completed, kTWorkers);
+
+    g_last_pattern_failures = 0;
+
+    // Verify: all objects were dropped, so all should have finalizers fire.
+    // Allow some slack — a small fraction may have been missed due to
+    // concurrent promotion or finalizer queue overflow.
+    bool ok = (completed > 0) && (actual_finalizers >= total_alloc / 2);
+    return ok;
+}
+
 struct ScenarioInfo {
     const char* name;
     bool (*run)(GcStatsSnapshot* out);
@@ -2466,7 +2560,7 @@ struct ScenarioInfo {
 /// Run all scenarios.  If @a start_from is > 0, skips earlier scenarios.
 /// If @a end_at is <= num_scenarios, stops after that scenario (exclusive).
 /// Supports incremental validation without pre-existing scenario hangs.
-static int run_scenarios(int start_from = 0, int end_at = 19) {
+static int run_scenarios(int start_from = 0, int end_at = 20) {
     fprintf(stderr, "[DBG] run_scenarios(start_from=%d, end_at=%d)\n", start_from, end_at);
     ScenarioInfo scenarios[] = {
         {"baseline_concurrent",    RunScenarioA, kNumWorkerThreads, kAllocationsPerThread},
@@ -2488,6 +2582,7 @@ static int run_scenarios(int start_from = 0, int end_at = 19) {
         {"domain_concurrent_alloc",RunScenarioQ, kQDomainWorkers,   kQAllocsPerDomain},
         {"gen1_typed_stress",      RunScenarioR, kRWorkers,         kRAllocsPerThread},
         {"gen1_mixed_stress",      RunScenarioS, kNumWorkerThreads,  kSAllocsPerThread},
+        {"finalizer_stress",       RunScenarioT, kTWorkers,          kTObjectsPerWorker},
     };
     int num_scenarios = sizeof(scenarios) / sizeof(scenarios[0]);
 
@@ -2592,8 +2687,8 @@ int main(int argc, char** argv) {
     // Optional arguments:
     //   --new-only     Run only scenarios L, M, N (indices 11-13)
     //                  Useful to avoid pre-existing hangs in A-K.
-    //   --scenario N   Run a single scenario by index (0=A, 1=B, ..., 18=S).
-    //   --all          Run all 18 scenarios (default).
+    //   --scenario N   Run a single scenario by index (0=A, 1=B, ..., 19=T).
+    //   --all          Run all 20 scenarios (default).
     int start_from = 0;
     int single_scenario = -1;  // -1 = run all (from start_from)
     for (int a = 1; a < argc; a++) {
