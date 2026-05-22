@@ -1,0 +1,9 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    { "registrationKind": "assembly", "slot": 0, "subjectId": "SnapshotTestFixtures" },
+    { "registrationKind": "type", "slot": 1, "subjectId": "SnapshotTestFixtures/EhFaultFinallyHelper", "name": "EhFaultFinallyHelper", "displayName": "EhFaultFinallyHelper", "definitionSubjectId": "SnapshotTestFixtures/EhFaultFinallyHelper" },
+    { "registrationKind": "method", "slot": 2, "subjectId": "SnapshotTestFixtures/EhFaultFinallyHelper::FaultFinally:System.Int32(System.Int32)", "name": "FaultFinally", "definitionSubjectId": "SnapshotTestFixtures/EhFaultFinallyHelper::FaultFinally:System.Int32(System.Int32)", "declaringTypeSubjectId": "SnapshotTestFixtures/EhFaultFinallyHelper", "memberType": "System.Int32", "parameterCount": 1, "isImported": false }
+  ]
+}

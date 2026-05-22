@@ -2021,6 +2021,7 @@ static bool TryFastOsrPromotion(FastFrame& frame) noexcept {
                 if (rm != nullptr && rm->instructions.size() > 0) {
                     chaos::il2cpp::codegen::CodeGenConfig cfg;
                     cfg.enable_deopt = true;
+                    cfg.enable_liveness = true;
                     cfg.safepoint_fn = nullptr;
                     auto* nm = chaos::il2cpp::codegen::GenerateNativeCode(*rm, cfg);
                     if (nm != nullptr) {

@@ -259,6 +259,95 @@ public sealed partial class NativeAotLoweringPlanner
         return true;
     }
 
+    private static bool TryCreateMultipleCatchExceptionMethodShape(
+        AotCoreIrMethodArtifact method,
+        out MultipleCatchExceptionMethodShape? multiCatchShape)
+    {
+        multiCatchShape = null;
+
+        // Collect all catch-type exception regions
+        var catchRegions = method.ExceptionRegions
+            .Where(r => r.HandlingKindCode == AotCoreIrExceptionRegionKind.Catch)
+            .ToList();
+
+        // Must have at least 2 catch regions (1 is handled by CatchOnly)
+        if (catchRegions.Count < 2)
+            return false;
+
+        // No filter or finally regions in the method
+        if (method.ExceptionRegions.Any(r =>
+                r.HandlingKindCode != AotCoreIrExceptionRegionKind.Catch))
+            return false;
+
+        // Use the first catch region's try range as the shared try body range
+        var first = catchRegions[0];
+        int tryOffset = first.TryOffset;
+        int tryLength = first.TryLength;
+        int tryEnd = tryOffset + tryLength;
+
+        // Validate all catch regions share compatible try ranges
+        foreach (var r in catchRegions)
+        {
+            if (r.TryOffset != tryOffset || r.TryLength != tryLength)
+                return false;
+        }
+
+        // Partition: prefix (before try), try body, handler bodies, tail
+        var prefix = new List<AotCoreIrInstructionArtifact>();
+        var tryBody = new List<AotCoreIrInstructionArtifact>();
+        var handlerInstructionsList = new List<IReadOnlyList<AotCoreIrInstructionArtifact>>();
+        var tail = new List<AotCoreIrInstructionArtifact>();
+
+        int maxHandlerEnd = 0;
+        foreach (var r in catchRegions)
+        {
+            int handlerEnd = r.HandlerOffset + r.HandlerLength;
+            if (handlerEnd > maxHandlerEnd)
+                maxHandlerEnd = handlerEnd;
+        }
+
+        foreach (var instr in method.Instructions)
+        {
+            int off = instr.IlOffset;
+            if (off < tryOffset)
+                prefix.Add(instr);
+            else if (off < tryEnd)
+                tryBody.Add(instr);
+            else if (off >= maxHandlerEnd)
+                tail.Add(instr);
+        }
+
+        StripTrailingLeaveInstructions(tryBody);
+
+        // Extract each catch handler's instructions
+        foreach (var r in catchRegions)
+        {
+            var handlerInstructions = GetInstructionsInRange(
+                method.Instructions, r.HandlerOffset, r.HandlerLength);
+            var handlerList = new List<AotCoreIrInstructionArtifact>(handlerInstructions);
+            StripTrailingLeaveInstructions(handlerList);
+            handlerInstructionsList.Add(handlerList);
+        }
+
+        // Validate stack balance: try body starts at depth 0, each catch handler
+        // starts at depth 1 (runtime pushes the exception object), tail at depth 0.
+        if (!ValidatePartitionStackBalance(tryBody, initialDepth: 0))
+            return false;
+
+        foreach (var handler in handlerInstructionsList)
+        {
+            if (!ValidatePartitionStackBalance(handler, initialDepth: 1))
+                return false;
+        }
+
+        if (!ValidatePartitionStackBalance(tail, initialDepth: 0))
+            return false;
+
+        multiCatchShape = new MultipleCatchExceptionMethodShape(
+            catchRegions, prefix, tryBody, handlerInstructionsList, tail);
+        return true;
+    }
+
     // ── Instruction partitioning helpers ──
 
     /// <summary>

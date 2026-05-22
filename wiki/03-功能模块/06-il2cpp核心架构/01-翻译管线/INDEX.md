@@ -11,6 +11,7 @@
 | [`02-输入合约模型.md`](./02-%E8%BE%93%E5%85%A5%E5%90%88%E7%BA%A6%E6%A8%A1%E5%9E%8B.md) | AotCoreIrArtifact 结构树、引用与类型信息 |
 | [`03-求值栈与ABI调用模型.md`](./03-%E6%B1%82%E5%80%BC%E6%A0%88%E4%B8%8EABI%E8%B0%83%E7%94%A8%E6%A8%A1%E5%9E%8B.md) | 求值栈值表示、12种 ABI carrier 映射 |
 | [`04-NativeAotLoweringPlanner文件布局.md`](./04-NativeAotLoweringPlanner%E6%96%87%E4%BB%B6%E5%B8%83%E5%B1%80.md) | 20+ partial 文件分布（Planning / Emission / RuntimeSupport） |
+| [`04-NativeAotPlanner-API.md`](./04-NativeAotPlanner-API.md) | 公共 API 文档（NativeAotEmitter、LoweringPlanner、TemplateModel、模板目录） |
 | [`05-异常处理架构.md`](./05-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%9E%B6%E6%9E%84.md) | 5种 EH shape 的 C++ 模式 |
 | [`06-字符串ID系统.md`](./06-%E5%AD%97%E7%AC%A6%E4%B8%B2ID%E7%B3%BB%E7%BB%9F.md) | FNV-1a 64-bit hash、碰撞处理、AOT baked table |
 | [`07-对象模型与相等性.md`](./07-%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B%E4%B8%8E%E7%9B%B8%E7%AD%89%E6%80%A7.md) | C++ struct 定义、类型身份辅助函数、相等性 7 级优先级 |

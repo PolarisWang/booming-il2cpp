@@ -79,6 +79,19 @@ struct CodeGenConfig {
     // Indexed by `RegisterInstruction::imm::operand_index`.
     const uint8_t* arg_type_tags = nullptr;
     uint32_t       arg_type_count = 0;
+
+    // ── Precise GC: field type tags by field token (indexed by token value) ─
+    // When non-null, LdFld/LdSFld type inference uses the per-field tag
+    // instead of conservative ObjectRef, enabling precise GC slot maps.
+    const uint8_t* field_type_tags = nullptr;
+    uint32_t       field_type_count = 0;
+
+    // ── Precise GC: method return type tags by instruction index ──────────
+    // When non-null, Call/CallVirt/CallBridge/Calli type inference uses the
+    // per-instruction return tag as a fallback when call_cache ret_tag is
+    // unavailable.  Indexed by current_instr_index_.
+    const uint8_t* method_ret_tags = nullptr;
+    uint32_t       method_ret_tag_count = 0;
 };
 
 /// Generate native x64 code from a RegisterMethod.

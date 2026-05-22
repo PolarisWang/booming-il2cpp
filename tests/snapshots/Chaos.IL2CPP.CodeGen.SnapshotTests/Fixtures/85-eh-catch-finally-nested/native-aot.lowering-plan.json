@@ -1,0 +1,11 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeAotLoweringPlan",
+  "planKind": "generic-managed-entry",
+  "assemblyName": "SnapshotTestFixtures",
+  "entrySubjectId": "SnapshotTestFixtures/EhCatchFinallyNestedHelper::CatchFinallyNested:System.Int32(System.Int32)",
+  "nativeEntryFunctionName": "RunNativeAot",
+  "entrySymbol": "SnapshotTestFixtures_EhCatchFinallyNestedHelper_CatchFinallyNested",
+  "entryMethodToken": "SnapshotTestFixtures/EhCatchFinallyNestedHelper::CatchFinallyNested:System.Int32(System.Int32)",
+  "workloadAbi": "int(int32)"
+}
