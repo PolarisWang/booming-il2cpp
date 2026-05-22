@@ -306,6 +306,15 @@ add_chaos_test(test_gc_throughput_benchmark
 target_link_options(test_gc_throughput_benchmark PRIVATE /FORCE:MULTIPLE)
 set_tests_properties(test_gc_throughput_benchmark PROPERTIES LABELS "benchmark;gc")
 
+# gc_regression_benchmark — GC regression benchmark suite (G-15)
+# Measures allocation throughput, GC pause time, multi-threaded allocation.
+add_chaos_test(test_gc_regression_benchmark
+    gc_regression_benchmark.cpp ${CHAOS_GC_STUBS} ${CHAOS_GC_BASE}
+    LIBS ${CHAOS_GC_LIBS}
+)
+target_link_options(test_gc_regression_benchmark PRIVATE /FORCE:MULTIPLE)
+set_tests_properties(test_gc_regression_benchmark PROPERTIES LABELS "benchmark;gc")
+
 # ═══════════════════════════════════════════════════════════════════════════
 # Batch G — Migrated from old contracts: stress/smoke tests (G1)
 # ═══════════════════════════════════════════════════════════════════════════

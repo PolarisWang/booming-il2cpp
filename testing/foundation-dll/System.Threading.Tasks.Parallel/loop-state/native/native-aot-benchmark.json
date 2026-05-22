@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Threading.Tasks.Parallel",
+  "familyId": "family/System.Threading.Tasks.Parallel/loop/state",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Break:System.Void()",
+      "elapsedMilliseconds": 0.43,
+      "calibratedMs": 0.43,
+      "opsPerSecond": 232450023.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_IsExceptional:System.Boolean()",
+      "elapsedMilliseconds": 0.362,
+      "calibratedMs": 0.362,
+      "opsPerSecond": 276319425.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_IsStopped:System.Boolean()",
+      "elapsedMilliseconds": 0.414,
+      "calibratedMs": 0.414,
+      "opsPerSecond": 241604252.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_LowestBreakIteration:System.Nullable{System.Int64}()",
+      "elapsedMilliseconds": 0.707,
+      "calibratedMs": 0.707,
+      "opsPerSecond": 141542816.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_ShouldExitCurrentIteration:System.Boolean()",
+      "elapsedMilliseconds": 0.344,
+      "calibratedMs": 0.344,
+      "opsPerSecond": 291036088.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Stop:System.Void()",
+      "elapsedMilliseconds": 0.287,
+      "calibratedMs": 0.287,
+      "opsPerSecond": 348553503.0,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}

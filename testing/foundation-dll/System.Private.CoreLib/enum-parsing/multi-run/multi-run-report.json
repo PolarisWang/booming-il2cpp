@@ -1,0 +1,246 @@
+{
+  "family": "enum-parsing",
+  "assembly": "System.Private.CoreLib",
+  "timestamp": "2026-05-22T05:38:46Z",
+  "duration_ms": 5186,
+  "config": {
+    "requested_runtimes": [
+      "net8-jit",
+      "chaos-aot",
+      "net10-jit"
+    ],
+    "available_runtimes": [
+      "net8-jit",
+      "chaos-aot",
+      "net10-jit"
+    ],
+    "unavailable_runtimes": [],
+    "iterations": 100000
+  },
+  "methods": [
+    {
+      "subject_id": "System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)",
+      "method_index": 0,
+      "label": "Format:System.String(System.Type,System.Object,System.String)",
+      "samples": {
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 0.0,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        }
+      }
+    },
+    {
+      "subject_id": "System.Private.CoreLib/System.Enum::GetName:System.String(System.RuntimeType,System.UInt64)",
+      "method_index": 1,
+      "label": "GetName:System.String(System.RuntimeType,System.UInt64)",
+      "samples": {
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 0.0,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        }
+      }
+    },
+    {
+      "subject_id": "System.Private.CoreLib/System.Enum::GetName:System.String(System.Type,System.Object)",
+      "method_index": 2,
+      "label": "GetName:System.String(System.Type,System.Object)",
+      "samples": {
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 0.0,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        }
+      }
+    },
+    {
+      "subject_id": "System.Private.CoreLib/System.Enum::GetNames:System.String[](System.Type)",
+      "method_index": 3,
+      "label": "GetNames:System.String[](System.Type)",
+      "samples": {
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 0.0,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        }
+      }
+    },
+    {
+      "subject_id": "System.Private.CoreLib/System.Enum::GetValues:System.Array(System.Type)",
+      "method_index": 4,
+      "label": "GetValues:System.Array(System.Type)",
+      "samples": {
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 0.0,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        }
+      }
+    },
+    {
+      "subject_id": "System.Private.CoreLib/System.Enum::IsDefined:System.Boolean(System.Type,System.Object)",
+      "method_index": 5,
+      "label": "IsDefined:System.Boolean(System.Type,System.Object)",
+      "samples": {
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 0.0,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        }
+      }
+    },
+    {
+      "subject_id": "System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String)",
+      "method_index": 6,
+      "label": "Parse:System.Object(System.Type,System.String)",
+      "samples": {
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 0.0,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        }
+      }
+    },
+    {
+      "subject_id": "System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String,System.Boolean)",
+      "method_index": 7,
+      "label": "Parse:System.Object(System.Type,System.String,System.Boolean)",
+      "samples": {
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 0.0,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        }
+      }
+    },
+    {
+      "subject_id": "System.Private.CoreLib/System.Enum::ToString:System.String()",
+      "method_index": 8,
+      "label": "ToString:System.String()",
+      "samples": {
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 0.0,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        }
+      }
+    },
+    {
+      "subject_id": "System.Private.CoreLib/System.Enum::ToString:System.String(System.String)",
+      "method_index": 9,
+      "label": "ToString:System.String(System.String)",
+      "samples": {
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 0.0,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        }
+      }
+    },
+    {
+      "subject_id": "System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Boolean,System.Object&)",
+      "method_index": 10,
+      "label": "TryParse:System.Boolean(System.Type,System.String,System.Boolean,System.Object&)",
+      "samples": {
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 0.0,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        }
+      }
+    },
+    {
+      "subject_id": "System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Object&)",
+      "method_index": 11,
+      "label": "TryParse:System.Boolean(System.Type,System.String,System.Object&)",
+      "samples": {
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 0.0,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        }
+      }
+    },
+    {
+      "subject_id": "System.Private.CoreLib/System.Enum::BoxToString:System.String()",
+      "method_index": 12,
+      "label": "BoxToString:System.String()",
+      "samples": {
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 0.0,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        }
+      }
+    }
+  ],
+  "summaries": [
+    {
+      "runtime": "chaos-aot",
+      "geometric_mean_ns": 1.0,
+      "min_ns": 0.0,
+      "max_ns": 0.0,
+      "median_ns": 0.0,
+      "method_count": 13,
+      "ok_count": 13,
+      "stub_count": 0,
+      "throws_count": 0,
+      "unsupported_count": 0
+    }
+  ],
+  "ratios": [],
+  "regression_alerts": [],
+  "runtimes_available": [
+    "net8-jit",
+    "chaos-aot",
+    "net10-jit"
+  ],
+  "runtimes_unavailable": [],
+  "chaos_classification_breakdown": {
+    "chaos_faster_than_all": 0,
+    "chaos_faster_than_jit": 0,
+    "chaos_midfield": 0,
+    "chaos_slower_than_jit": 0,
+    "not_benchmarked": 13
+  }
+}

@@ -1363,9 +1363,30 @@ static void Reg_Unbox(RegisterFrame& frame, const RegisterInstruction& instr) no
     ++frame.pc;
 }
 
-// ── Branch: Leave (same as Br in SEH-free context) ──────────────────────
+// ── Branch: Leave (with SEH finally/fault detection) ────────────────────
 static void Reg_Leave(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Leave");
+    // Scan SEH clauses backward (innermost first) for enclosing finally/fault.
+    if (frame.seh_clause_count > 0) {
+        for (int32_t i = static_cast<int32_t>(frame.seh_clause_count) - 1; i >= 0; --i) {
+            const auto& clause = frame.seh_clauses[i];
+            uint32_t pc = frame.pc;
+            if (pc >= clause.try_start_idx && pc < clause.try_end_idx) {
+                auto flags = static_cast<uint32_t>(clause.flags);
+                if (flags == static_cast<uint32_t>(SEHFlags::Finally) ||
+                    flags == static_cast<uint32_t>(SEHFlags::Fault)) {
+                    // Found enclosing finally — set pending leave and jump to handler.
+                    frame.pending_leave = true;
+                    frame.pending_leave_target = instr.imm.branch_target;
+                    frame.in_handler = true;
+                    frame.active_handler_clause = i;
+                    frame.pc = static_cast<uint32_t>(clause.handler_start_idx);
+                    return;
+                }
+            }
+        }
+    }
+    // No enclosing finally — normal branch.
     frame.pc = instr.imm.branch_target;
 }
 
@@ -1871,8 +1892,18 @@ static void Reg_Rethrow(RegisterFrame& frame, const RegisterInstruction& instr) 
 }
 
 static void Reg_EndFinally(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
-    // SEH opcode — fall through to VM.
-    Reg_Unsupported(frame, instr);
+    // Check for pending leave (Leave → finally → EndFinally).
+    if (frame.pending_leave) {
+        frame.pc = frame.pending_leave_target;
+        frame.pending_leave = false;
+        frame.in_handler = false;
+        frame.active_handler_clause = -1;
+        return;
+    }
+    // Normal EndFinally — continue sequentially.
+    frame.in_handler = false;
+    frame.active_handler_clause = -1;
+    ++frame.pc;
 }
 
 static void Reg_EndFilter(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {

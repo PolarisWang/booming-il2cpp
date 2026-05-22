@@ -10,6 +10,7 @@
 #include "generated_code_compat.h"
 
 #include <gc/gc_bgc_inline.h>
+#include <gc/gc_root_change.h>
 #include <gc/gc_helpers.h>
 
 namespace chaos::il2cpp::interpreter {
@@ -497,8 +498,12 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 if (g_static_fields.size() <= instruction.field_offset) {
                     g_static_fields.resize(instruction.field_offset + 1u);
                 }
-
-                g_static_fields[instruction.field_offset] = Pop(&frame->stack);
+                auto& slot = g_static_fields[instruction.field_offset];
+                using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
+                BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&slot.obj));
+                chaos::il2cpp::runtime_core::BgcRecordRootChange(
+                    reinterpret_cast<void**>(&slot.obj), slot.obj);
+                slot = Pop(&frame->stack);
                 break;
             }
             case IROpCode::Beq: {

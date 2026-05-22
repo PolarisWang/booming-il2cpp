@@ -21,6 +21,24 @@ struct MemoryStatusData {
 /// Win32: calls GlobalMemoryStatusEx.  Other platforms: returns zero.
 void GetPlatformMemoryStatus(MemoryStatusData& out) noexcept;
 
+/// Handle an out-of-memory condition during allocation.
+///
+/// Tries, in order:
+///   1. A blocking full STW GC (unless already in a GC)
+///   2. Re-tries the allocation via @a retry_alloc (a callback that re-attempts
+///      the original Allocate call), passing @a retry_context
+///   3. Falls back to the OldGen emergency reserve
+///   4. Fires the GC OOM ETW event
+///
+/// @param retry_alloc    Callback that re-attempts the failed allocation.
+///                       Called after the full GC to see if memory was freed.
+///                       Pass nullptr to skip the retry step.
+/// @param retry_context  Opaque context passed to @a retry_alloc.
+/// @param size           The original requested allocation size (for logging).
+/// @returns  Non-null pointer on recovery, nullptr if all attempts fail.
+void* HandleOomCondition(void* (*retry_alloc)(void*), void* retry_context,
+                         CHAOS_IL2CPP_SIZE size) noexcept;
+
 // ── Managed GC API (System.GC) ─────────────────────────────────────
 
 /// Returns the total number of bytes currently thought to be allocated

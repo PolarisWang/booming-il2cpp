@@ -1,4 +1,6 @@
 #include "gc_heap.h"
+#include "gc_bgc_inline.h"
+#include "gc_root_change.h"
 namespace chaos::il2cpp::runtime_core {
 
 // MSVC 14.44 cannot see anonymous-namespace symbols from other unity files.
@@ -276,9 +278,13 @@ void GcSetHandleTarget(CHAOS_IL2CPP_UINT64 handle_id, void* new_target) noexcept
     std::lock_guard<std::mutex> lock(shard_mutex);
     auto it = shard_map.find(handle_id);
     if (it == shard_map.end()) return;
-    if (it->second.pinned && it->second.object_instance != nullptr) {
-        GcRemovePinnedObject(it->second.object_instance);
+
+    void* old_target = it->second.object_instance;
+    if (it->second.pinned && old_target != nullptr) {
+        GcRemovePinnedObject(old_target);
     }
+    BgcSatbPreWriteBarrier(&it->second.object_instance);
+    BgcRecordRootChange(&it->second.object_instance, old_target);
     it->second.object_instance = new_target;
     if (it->second.pinned && new_target != nullptr) {
         GcAddPinnedObject(new_target);
@@ -324,6 +330,8 @@ void GcSetDependentHandleSecondary(CHAOS_IL2CPP_UINT64 handle_id, void* secondar
     std::lock_guard<std::mutex> lock(s_dep_handle_mutex);
     auto it = s_dep_handle_table.find(handle_id);
     if (it != s_dep_handle_table.end()) {
+        BgcSatbPreWriteBarrier(&it->second.secondary);
+        BgcRecordRootChange(&it->second.secondary, it->second.secondary);
         it->second.secondary = secondary;
     }
 }

@@ -68,6 +68,18 @@ public sealed partial class NativeAotLoweringPlanner
     private Dictionary<string, DevirtualizationHint> _devirtualizationHints =
         new Dictionary<string, DevirtualizationHint>(StringComparer.Ordinal);
 
+    // Types that are instantiated in the compiled closure (via newobj or constrained prefix).
+    // Used for reachability-based devirtualization: if a virtual method has multiple
+    // implementations but only one is on an instantiated type, the call can be devirtualized.
+    private HashSet<string> _instantiatedTypeSubjectIds =
+        new HashSet<string>(StringComparer.Ordinal);
+
+    // A2.4: Pre-computed fold map for System.Enum::ToString() calls where the
+    // `this` argument is a ldsfld of a literal enum field. Maps call-site IlOffset
+    // to the enum field name string literal.
+    private Dictionary<int, string> _enumToStringFoldMap =
+        new Dictionary<int, string>();
+
     private CodegenMode _codegenMode = CodegenMode.Aot;
 
     // Verification dispatch manifest (populated by BuildDispatchEntryCode)
@@ -305,6 +317,23 @@ public sealed partial class NativeAotLoweringPlanner
         {
             if (!method.IsStatic && method.Identity.DeclaringTypeSubjectId is { } dt)
                 _typesWithInstanceMethods.Add(dt);
+
+            // Scan for instantiated types: newobj, box, constrained. prefixes
+            foreach (var instr in method.Instructions)
+            {
+                if (instr.Op == "newobj" || instr.Op == "box")
+                {
+                    var callee = instr.Callee ?? instr.TargetReference?.SubjectId;
+                    if (callee is { Length: > 0 })
+                    {
+                        var colonIdx = callee.IndexOf("::", StringComparison.Ordinal);
+                        if (colonIdx > 0)
+                            _instantiatedTypeSubjectIds.Add(callee.Substring(0, colonIdx));
+                    }
+                }
+                if (instr.Op == "callvirt" && instr.ConstrainedTypeSubjectId is { Length: > 0 } ct)
+                    _instantiatedTypeSubjectIds.Add(ct);
+            }
         }
         _assemblyName = loweringPlan.AssemblyName;
 
@@ -529,6 +558,9 @@ public sealed partial class NativeAotLoweringPlanner
         EmitExternalRuntimeHelperDefinitions(objectModelBuilder, externalRuntimeHelpers);
         EmitStaticInitializationDefinitions(objectModelBuilder);
         EmitGenericRegistration(objectModelBuilder, supplementalMetadataTemplate, metadataRegistration, out var genericRegistrationHelperCode, out var aotRegistrationCode);
+
+        // A2.4: Pre-scan for ldsfld→Enum::ToString() constant-folding patterns
+        BuildEnumToStringFoldTable(methodsForLowering);
 
         var methodDeclarations = BuildMethodDeclarations(methodsForLowering, _sharedContextSymbols);
         var methods = methodsForLowering

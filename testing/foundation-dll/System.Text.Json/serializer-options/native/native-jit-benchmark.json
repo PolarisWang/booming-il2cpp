@@ -1,0 +1,678 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Text.Json",
+  "familyId": "family/System.Text.Json/serializer/options",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonNamingPolicy::ConvertName:System.String(System.String)",
+      "elapsedMilliseconds": 5980.779,
+      "calibratedMs": 5980.779,
+      "opsPerSecond": 16720.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonNamingPolicy::get_CamelCase:System.Text.Json.JsonNamingPolicy()",
+      "elapsedMilliseconds": 5264.021,
+      "calibratedMs": 5264.021,
+      "opsPerSecond": 18996.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonNamingPolicy::get_KebabCaseLower:System.Text.Json.JsonNamingPolicy()",
+      "elapsedMilliseconds": 5414.154,
+      "calibratedMs": 5414.154,
+      "opsPerSecond": 18470.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonNamingPolicy::get_KebabCaseUpper:System.Text.Json.JsonNamingPolicy()",
+      "elapsedMilliseconds": 5401.186,
+      "calibratedMs": 5401.186,
+      "opsPerSecond": 18514.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonNamingPolicy::get_SnakeCaseLower:System.Text.Json.JsonNamingPolicy()",
+      "elapsedMilliseconds": 5276.213,
+      "calibratedMs": 5276.213,
+      "opsPerSecond": 18953.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonNamingPolicy::get_SnakeCaseUpper:System.Text.Json.JsonNamingPolicy()",
+      "elapsedMilliseconds": 5162.366,
+      "calibratedMs": 5162.366,
+      "opsPerSecond": 19371.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::AddContext{TContext}:System.Void()",
+      "elapsedMilliseconds": -1.0,
+      "status": "stub"
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_AllowDuplicateProperties:System.Boolean()",
+      "elapsedMilliseconds": 5615.396,
+      "calibratedMs": 5615.396,
+      "opsPerSecond": 17808.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_AllowOutOfOrderMetadataProperties:System.Boolean()",
+      "elapsedMilliseconds": 5809.538,
+      "calibratedMs": 5809.538,
+      "opsPerSecond": 17213.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_AllowTrailingCommas:System.Boolean()",
+      "elapsedMilliseconds": 5794.254,
+      "calibratedMs": 5794.254,
+      "opsPerSecond": 17258.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_Converters:System.Collections.Generic.IList{System.Text.Json.Serialization.JsonConverter}()",
+      "elapsedMilliseconds": 5920.451,
+      "calibratedMs": 5920.451,
+      "opsPerSecond": 16890.6,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_Default:System.Text.Json.JsonSerializerOptions()",
+      "elapsedMilliseconds": -1.0,
+      "status": "stub"
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_DefaultBufferSize:System.Int32()",
+      "elapsedMilliseconds": 5496.459,
+      "calibratedMs": 5496.459,
+      "opsPerSecond": 18193.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 13,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_DefaultIgnoreCondition:System.Text.Json.Serialization.JsonIgnoreCondition()",
+      "elapsedMilliseconds": 7134.972,
+      "calibratedMs": 7134.972,
+      "opsPerSecond": 14015.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 14,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_DictionaryKeyPolicy:System.Text.Json.JsonNamingPolicy()",
+      "elapsedMilliseconds": 6489.994,
+      "calibratedMs": 6489.994,
+      "opsPerSecond": 15408.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 15,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_Encoder:System.Text.Encodings.Web.JavaScriptEncoder()",
+      "elapsedMilliseconds": 5799.651,
+      "calibratedMs": 5799.651,
+      "opsPerSecond": 17242.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 16,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_IgnoreNullValues:System.Boolean()",
+      "elapsedMilliseconds": 6323.14,
+      "calibratedMs": 6323.14,
+      "opsPerSecond": 15814.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 17,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_IgnoreReadOnlyFields:System.Boolean()",
+      "elapsedMilliseconds": 6129.953,
+      "calibratedMs": 6129.953,
+      "opsPerSecond": 16313.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 18,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_IgnoreReadOnlyProperties:System.Boolean()",
+      "elapsedMilliseconds": 6068.194,
+      "calibratedMs": 6068.194,
+      "opsPerSecond": 16479.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 19,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_IncludeFields:System.Boolean()",
+      "elapsedMilliseconds": 5931.557,
+      "calibratedMs": 5931.557,
+      "opsPerSecond": 16859.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 20,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_IndentCharacter:System.Char()",
+      "elapsedMilliseconds": 4711.3,
+      "calibratedMs": 4711.3,
+      "opsPerSecond": 21225.6,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 21,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_IndentSize:System.Int32()",
+      "elapsedMilliseconds": 4889.352,
+      "calibratedMs": 4889.352,
+      "opsPerSecond": 20452.6,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 22,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_IsReadOnly:System.Boolean()",
+      "elapsedMilliseconds": 6279.783,
+      "calibratedMs": 6279.783,
+      "opsPerSecond": 15924.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 23,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_MaxDepth:System.Int32()",
+      "elapsedMilliseconds": 5049.044,
+      "calibratedMs": 5049.044,
+      "opsPerSecond": 19805.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 24,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_NewLine:System.String()",
+      "elapsedMilliseconds": 5951.237,
+      "calibratedMs": 5951.237,
+      "opsPerSecond": 16803.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 25,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_NumberHandling:System.Text.Json.Serialization.JsonNumberHandling()",
+      "elapsedMilliseconds": 6562.991,
+      "calibratedMs": 6562.991,
+      "opsPerSecond": 15237.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 26,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_PreferredObjectCreationHandling:System.Text.Json.Serialization.JsonObjectCreationHandling()",
+      "elapsedMilliseconds": 6567.676,
+      "calibratedMs": 6567.676,
+      "opsPerSecond": 15226.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 27,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_PropertyNameCaseInsensitive:System.Boolean()",
+      "elapsedMilliseconds": 6149.656,
+      "calibratedMs": 6149.656,
+      "opsPerSecond": 16261.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 28,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_PropertyNamingPolicy:System.Text.Json.JsonNamingPolicy()",
+      "elapsedMilliseconds": 6081.953,
+      "calibratedMs": 6081.953,
+      "opsPerSecond": 16442.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 29,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_ReadCommentHandling:System.Text.Json.JsonCommentHandling()",
+      "elapsedMilliseconds": 6238.19,
+      "calibratedMs": 6238.19,
+      "opsPerSecond": 16030.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 30,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_ReferenceHandler:System.Text.Json.Serialization.ReferenceHandler()",
+      "elapsedMilliseconds": 6851.019,
+      "calibratedMs": 6851.019,
+      "opsPerSecond": 14596.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 31,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_RespectNullableAnnotations:System.Boolean()",
+      "elapsedMilliseconds": 7500.603,
+      "calibratedMs": 7500.603,
+      "opsPerSecond": 13332.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 32,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_RespectRequiredConstructorParameters:System.Boolean()",
+      "elapsedMilliseconds": 6092.309,
+      "calibratedMs": 6092.309,
+      "opsPerSecond": 16414.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 33,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_Strict:System.Text.Json.JsonSerializerOptions()",
+      "elapsedMilliseconds": 5465.824,
+      "calibratedMs": 5465.824,
+      "opsPerSecond": 18295.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 34,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_TypeInfoResolver:System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver()",
+      "elapsedMilliseconds": 6848.364,
+      "calibratedMs": 6848.364,
+      "opsPerSecond": 14602.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 35,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_TypeInfoResolverChain:System.Collections.Generic.IList{System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver}()",
+      "elapsedMilliseconds": 7481.935,
+      "calibratedMs": 7481.935,
+      "opsPerSecond": 13365.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 36,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_UnknownTypeHandling:System.Text.Json.Serialization.JsonUnknownTypeHandling()",
+      "elapsedMilliseconds": 7248.578,
+      "calibratedMs": 7248.578,
+      "opsPerSecond": 13795.8,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 37,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_UnmappedMemberHandling:System.Text.Json.Serialization.JsonUnmappedMemberHandling()",
+      "elapsedMilliseconds": 7602.157,
+      "calibratedMs": 7602.157,
+      "opsPerSecond": 13154.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 38,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_Web:System.Text.Json.JsonSerializerOptions()",
+      "elapsedMilliseconds": 6164.751,
+      "calibratedMs": 6164.751,
+      "opsPerSecond": 16221.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 39,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::get_WriteIndented:System.Boolean()",
+      "elapsedMilliseconds": 6468.24,
+      "calibratedMs": 6468.24,
+      "opsPerSecond": 15460.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 40,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::GetConverter:System.Text.Json.Serialization.JsonConverter(System.Type)",
+      "elapsedMilliseconds": 7733.355,
+      "calibratedMs": 7733.355,
+      "opsPerSecond": 12931.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 41,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::GetTypeInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo(System.Type)",
+      "elapsedMilliseconds": 7796.567,
+      "calibratedMs": 7796.567,
+      "opsPerSecond": 12826.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 42,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::MakeReadOnly:System.Void()",
+      "elapsedMilliseconds": 3292.287,
+      "calibratedMs": 3292.287,
+      "opsPerSecond": 30374.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 43,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::MakeReadOnly:System.Void(System.Boolean)",
+      "elapsedMilliseconds": 3236.172,
+      "calibratedMs": 3236.172,
+      "opsPerSecond": 30900.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 44,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_AllowDuplicateProperties:System.Void(System.Boolean)",
+      "elapsedMilliseconds": 3215.764,
+      "calibratedMs": 3215.764,
+      "opsPerSecond": 31096.8,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 45,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_AllowOutOfOrderMetadataProperties:System.Void(System.Boolean)",
+      "elapsedMilliseconds": 3135.835,
+      "calibratedMs": 3135.835,
+      "opsPerSecond": 31889.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 46,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_AllowTrailingCommas:System.Void(System.Boolean)",
+      "elapsedMilliseconds": 3119.254,
+      "calibratedMs": 3119.254,
+      "opsPerSecond": 32059.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 47,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_DefaultBufferSize:System.Void(System.Int32)",
+      "elapsedMilliseconds": 3898.131,
+      "calibratedMs": 3898.131,
+      "opsPerSecond": 25653.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 48,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_DefaultIgnoreCondition:System.Void(System.Text.Json.Serialization.JsonIgnoreCondition)",
+      "elapsedMilliseconds": 3301.839,
+      "calibratedMs": 3301.839,
+      "opsPerSecond": 30286.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 49,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_DictionaryKeyPolicy:System.Void(System.Text.Json.JsonNamingPolicy)",
+      "elapsedMilliseconds": 3239.809,
+      "calibratedMs": 3239.809,
+      "opsPerSecond": 30866.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 50,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_Encoder:System.Void(System.Text.Encodings.Web.JavaScriptEncoder)",
+      "elapsedMilliseconds": 3163.442,
+      "calibratedMs": 3163.442,
+      "opsPerSecond": 31611.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 51,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_IgnoreNullValues:System.Void(System.Boolean)",
+      "elapsedMilliseconds": 3171.391,
+      "calibratedMs": 3171.391,
+      "opsPerSecond": 31531.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 52,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_IgnoreReadOnlyFields:System.Void(System.Boolean)",
+      "elapsedMilliseconds": 3246.229,
+      "calibratedMs": 3246.229,
+      "opsPerSecond": 30805.0,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 53,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_IgnoreReadOnlyProperties:System.Void(System.Boolean)",
+      "elapsedMilliseconds": 3179.323,
+      "calibratedMs": 3179.323,
+      "opsPerSecond": 31453.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 54,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_IncludeFields:System.Void(System.Boolean)",
+      "elapsedMilliseconds": 3231.39,
+      "calibratedMs": 3231.39,
+      "opsPerSecond": 30946.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 55,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_IndentCharacter:System.Void(System.Char)",
+      "elapsedMilliseconds": 3239.371,
+      "calibratedMs": 3239.371,
+      "opsPerSecond": 30870.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 56,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_IndentSize:System.Void(System.Int32)",
+      "elapsedMilliseconds": 3184.148,
+      "calibratedMs": 3184.148,
+      "opsPerSecond": 31405.6,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 57,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_MaxDepth:System.Void(System.Int32)",
+      "elapsedMilliseconds": 3171.957,
+      "calibratedMs": 3171.957,
+      "opsPerSecond": 31526.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 58,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_NewLine:System.Void(System.String)",
+      "elapsedMilliseconds": 3100.4,
+      "calibratedMs": 3100.4,
+      "opsPerSecond": 32253.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 59,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_NumberHandling:System.Void(System.Text.Json.Serialization.JsonNumberHandling)",
+      "elapsedMilliseconds": 3149.798,
+      "calibratedMs": 3149.798,
+      "opsPerSecond": 31748.1,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 60,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_PreferredObjectCreationHandling:System.Void(System.Text.Json.Serialization.JsonObjectCreationHandling)",
+      "elapsedMilliseconds": 3198.082,
+      "calibratedMs": 3198.082,
+      "opsPerSecond": 31268.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 61,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_PropertyNameCaseInsensitive:System.Void(System.Boolean)",
+      "elapsedMilliseconds": 3222.943,
+      "calibratedMs": 3222.943,
+      "opsPerSecond": 31027.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 62,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_PropertyNamingPolicy:System.Void(System.Text.Json.JsonNamingPolicy)",
+      "elapsedMilliseconds": 3310.504,
+      "calibratedMs": 3310.504,
+      "opsPerSecond": 30206.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 63,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_ReadCommentHandling:System.Void(System.Text.Json.JsonCommentHandling)",
+      "elapsedMilliseconds": 3149.439,
+      "calibratedMs": 3149.439,
+      "opsPerSecond": 31751.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 64,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_ReferenceHandler:System.Void(System.Text.Json.Serialization.ReferenceHandler)",
+      "elapsedMilliseconds": 3763.283,
+      "calibratedMs": 3763.283,
+      "opsPerSecond": 26572.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 65,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_RespectNullableAnnotations:System.Void(System.Boolean)",
+      "elapsedMilliseconds": 3351.029,
+      "calibratedMs": 3351.029,
+      "opsPerSecond": 29841.6,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 66,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_RespectRequiredConstructorParameters:System.Void(System.Boolean)",
+      "elapsedMilliseconds": 3125.347,
+      "calibratedMs": 3125.347,
+      "opsPerSecond": 31996.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 67,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_TypeInfoResolver:System.Void(System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver)",
+      "elapsedMilliseconds": 3271.537,
+      "calibratedMs": 3271.537,
+      "opsPerSecond": 30566.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 68,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_UnknownTypeHandling:System.Void(System.Text.Json.Serialization.JsonUnknownTypeHandling)",
+      "elapsedMilliseconds": 3216.939,
+      "calibratedMs": 3216.939,
+      "opsPerSecond": 31085.4,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 69,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_UnmappedMemberHandling:System.Void(System.Text.Json.Serialization.JsonUnmappedMemberHandling)",
+      "elapsedMilliseconds": 3067.361,
+      "calibratedMs": 3067.361,
+      "opsPerSecond": 32601.3,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 70,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::set_WriteIndented:System.Void(System.Boolean)",
+      "elapsedMilliseconds": 3236.713,
+      "calibratedMs": 3236.713,
+      "opsPerSecond": 30895.5,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 71,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::TryGetTypeInfo:System.Boolean(System.Type,System.Text.Json.Serialization.Metadata.JsonTypeInfo&)",
+      "elapsedMilliseconds": 7247.48,
+      "calibratedMs": 7247.48,
+      "opsPerSecond": 13797.9,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 72,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::.ctor:System.Void()",
+      "elapsedMilliseconds": 825.531,
+      "calibratedMs": 825.531,
+      "opsPerSecond": 121134.2,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 73,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::.ctor:System.Void(System.Text.Json.JsonSerializerOptions)",
+      "elapsedMilliseconds": 941.472,
+      "calibratedMs": 941.472,
+      "opsPerSecond": 106216.7,
+      "iterations": 100000,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 74,
+      "methodSubjectId": "System.Text.Json/System.Text.Json.JsonSerializerOptions::.ctor:System.Void(System.Text.Json.JsonSerializerDefaults)",
+      "elapsedMilliseconds": 934.819,
+      "calibratedMs": 934.819,
+      "opsPerSecond": 106972.6,
+      "iterations": 100000,
+      "status": "completed"
+    }
+  ]
+}

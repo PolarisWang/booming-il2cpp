@@ -2,32 +2,64 @@
 
 #include <chaos/log.h>
 
-#include <cstdint>
-
 namespace chaos::il2cpp::runtime_core {
 
 void GcWorkerPool::Initialize(int count) noexcept {
     if (count < 1) count = 1;
-    if (count > kMaxWorkers + 1) count = kMaxWorkers + 1;
+    int max_slots = GetMaxWorkers();
+    if (count > max_slots + 1) count = max_slots + 1;
 
-    int need = count - 1;  // caller is worker 0
-    if (need <= created_count_) return;  // already have enough
+    int need = count - 1;
+    if (need <= 0) return;
 
-    int start = created_count_;
-    int target_ready = ready_count_.load(std::memory_order_acquire) + (need - start);
-    for (int i = start; i < need; i++) {
-        int idx = i + 1;  // worker index 1..N
-        workers_[i] = std::thread([this, idx]() noexcept {
-            WorkerLoop(idx);
-        });
-        created_count_ = i + 1;
+    // Count currently active workers.
+    int active_count = 0;
+    for (int i = 0; i < created_count_; i++) {
+        if (active_[i].load(std::memory_order_acquire)) {
+            active_count++;
+        }
     }
 
-    // Spin until all newly created threads have parked in cv_.wait().
-    // This eliminates the race where a worker thread hasn't yet entered
-    // the wait loop and would therefore miss the round_ bump + notify_all.
-    while (ready_count_.load(std::memory_order_acquire) < target_ready) {
-        std::this_thread::yield();
+    int deficit = need - active_count;
+    if (deficit <= 0) return;
+
+    int spawned = 0;
+
+    // Phase 1: reuse exited worker slots (inactive, thread has returned).
+    for (int i = 0; i < created_count_ && deficit > 0; i++) {
+        if (!active_[i].load(std::memory_order_acquire)) {
+            if (workers_[i].joinable()) {
+                workers_[i].join();
+            }
+            int idx = i + 1;
+            active_[i].store(true, std::memory_order_relaxed);
+            workers_[i] = std::thread([this, idx]() noexcept { WorkerLoop(idx); });
+            deficit--;
+            spawned++;
+        }
+    }
+
+    // Phase 2: create new workers at the end.
+    while (deficit > 0 && created_count_ < max_slots) {
+        int i = created_count_++;
+        int idx = i + 1;
+        active_[i].store(true, std::memory_order_relaxed);
+        workers_[i] = std::thread([this, idx]() noexcept { WorkerLoop(idx); });
+        deficit--;
+        spawned++;
+    }
+
+    if (deficit > 0) {
+        CHAOS_IL2CPP_LOG_WARN_M("GcPool", "Initialize wanted={0} active={1} max={2} short={3}",
+                              need, active_count, max_slots, deficit);
+    }
+
+    // Spin until all newly spawned threads have parked in cv_.wait().
+    if (spawned > 0) {
+        int target = ready_count_.load(std::memory_order_acquire) + spawned;
+        while (ready_count_.load(std::memory_order_acquire) < target) {
+            std::this_thread::yield();
+        }
     }
 }
 
@@ -41,24 +73,24 @@ void GcWorkerPool::RunWorkers(int count, std::function<void(int)> fn) noexcept {
 
     work_fn_ = std::move(fn);
     completed_.store(0, std::memory_order_relaxed);
-    // Use actual worker count after cap — Initialize() may reduce count
-    // to kMaxWorkers+1.  Also cap to requested pool size so that calling
-    // RunWorkers(4) after RunWorkers(24) doesn't wait for created_count_=7
-    // completions when only 3 workers participate (infinite hang).
+
+    // Count active workers for the completion barrier.
     int requested_pool = count - 1;
-    expected_completed_ = (std::min)(requested_pool, created_count_);
+    int active_pool = 0;
+    for (int i = 0; i < created_count_; i++) {
+        if (active_[i].load(std::memory_order_relaxed)) active_pool++;
+    }
+    expected_completed_ = (std::min)(requested_pool, active_pool);
     if (requested_pool != expected_completed_) {
-        CHAOS_IL2CPP_LOG_WARN_M("GcPool", "RunWorkers requested={0} pool={1} expected={2}",
-                              requested_pool, created_count_, expected_completed_);
+        CHAOS_IL2CPP_LOG_WARN_M("GcPool", "RunWorkers requested={0} active_pool={1} expected={2}",
+                              requested_pool, active_pool, expected_completed_);
     }
 
-    // Bump round to signal workers to start.  acquire-release ensures
-    // workers see work_fn_ and completed_ store above.
+    // Bump round to signal workers to start.
     round_.fetch_add(1, std::memory_order_release);
     cv_.notify_all();
 
     // Main thread participates as worker 0.
-    // IMPORTANT: use work_fn_ not fn — fn was moved into work_fn_ above!
     work_fn_(0);
 
     // Wait for all pool workers to complete.
@@ -79,30 +111,53 @@ void GcWorkerPool::Shutdown() noexcept {
 }
 
 void GcWorkerPool::WorkerLoop(int worker_idx) noexcept {
+    int slot = worker_idx - 1;
     bool first_park = true;
     int observed = round_.load(std::memory_order_acquire);
 
     while (!shutdown_.load(std::memory_order_acquire)) {
-        // Wait for a new round or shutdown.
+        // Fast-path: if round_ already changed while we weren't holding the
+        // mutex (a tight-loop RunWorkers incremented it), skip the wait
+        // entirely and go straight to executing.
+        int current_round = round_.load(std::memory_order_acquire);
+        if (current_round != observed) {
+            if (shutdown_.load(std::memory_order_acquire)) break;
+            observed = current_round;
+            if (work_fn_) {
+                work_fn_(worker_idx);
+            }
+            completed_.fetch_add(1, std::memory_order_release);
+            continue;
+        }
+
         {
             std::unique_lock<std::mutex> lock(mtx_);
             if (first_park) {
-                // Signal the creating thread that we've parked.
-                // This must happen while holding mtx_ so that the
-                // subsequent cv_.wait() is guaranteed to observe any
-                // future round_ bump + notify_all().
                 ready_count_.fetch_add(1, std::memory_order_release);
                 first_park = false;
             }
-            cv_.wait(lock, [this, &observed]() noexcept {
-                int current = round_.load(std::memory_order_acquire);
-                return current != observed || shutdown_.load(std::memory_order_acquire);
-            });
+
+            // Double-check after acquiring the mutex: another thread may have
+            // bumped round_ between the fast-path check and the lock acquisition.
+            current_round = round_.load(std::memory_order_acquire);
+            if (current_round != observed) {
+                // Round changed — don't park, fall through to execute.
+            } else {
+                auto parked = cv_.wait_for(lock, kIdleTimeout, [this, &observed]() noexcept {
+                    int current = round_.load(std::memory_order_acquire);
+                    return current != observed || shutdown_.load(std::memory_order_acquire);
+                });
+
+                if (!parked) {
+                    // Idle timeout: no work for 60s.  Mark slot inactive and exit.
+                    active_[slot].store(false, std::memory_order_release);
+                    return;
+                }
+            }
         }
 
         if (shutdown_.load(std::memory_order_acquire)) break;
 
-        // Capture the current round before executing.
         observed = round_.load(std::memory_order_acquire);
 
         if (work_fn_) {

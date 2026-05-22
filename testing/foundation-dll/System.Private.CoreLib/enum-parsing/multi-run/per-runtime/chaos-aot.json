@@ -1,0 +1,106 @@
+{
+  "System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::GetName:System.String(System.RuntimeType,System.UInt64)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::GetName:System.String(System.Type,System.Object)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::GetNames:System.String[](System.Type)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::GetValues:System.Array(System.Type)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::IsDefined:System.Boolean(System.Type,System.Object)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String,System.Boolean)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::ToString:System.String()": {
+    "runtime": "chaos-aot",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::ToString:System.String(System.String)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Boolean,System.Object&)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Object&)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::BoxToString:System.String()": {
+    "runtime": "chaos-aot",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  }
+}

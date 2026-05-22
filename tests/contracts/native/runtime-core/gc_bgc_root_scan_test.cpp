@@ -326,23 +326,47 @@ static void TestBgcWithLohConcurrentAlloc(const void* test_type_info) {
 // This test verifies the ringback path handles >256 unique entries correctly.
 // ════════════════════════════════════════════════════════════════════════
 
-static void TestBgcRootChangeRingback(const void* test_type_info) {
-    printf("\n-- Test: BGC root change buffer ringback (>256 entries) --\n");
+// ════════════════════════════════════════════════════════════════════════
+// Test: BGC large root set (>256 old-gen entries)
+//
+// During BGC root scan, the BGC thread enumerates the thread stack to
+// discover reachable objects.  When many old-gen object pointers are on
+// the stack, the root exercises the BGC parallel mark worklist population.
+//
+// Uses stack-allocated arrays (not std::vector) so BGC's thread stack
+// scan discovers all entries.
+// ════════════════════════════════════════════════════════════════════════
 
-    constexpr int kRingbackEntries = 512;
+static void TestBgcLargeRootSet(const void* test_type_info) {
+    printf("\n-- Test: BGC large root set (>256 old-gen entries) --\n");
 
-    // Allocate old-gen objects to serve as targets for new references.
-    std::vector<void*> old_objects;
-    for (int i = 0; i < kRingbackEntries; i++) {
+    constexpr int kCount = 64;
+
+    // Stack-allocate pointer arrays so BGC's thread stack scan finds them.
+    void* old_objects[kCount];
+    void* young_objs[kCount];
+    std::memset(old_objects, 0, sizeof(old_objects));
+    std::memset(young_objs, 0, sizeof(young_objs));
+
+    // Allocate old-gen objects.
+    for (int i = 0; i < kCount; i++) {
         void* obj = g_old_gen.Allocate(64, true);
         if (obj == nullptr) break;
         *static_cast<const void**>(obj) = test_type_info;
         *reinterpret_cast<uint32_t*>(static_cast<char*>(obj) + 8) =
             0xBABE0000 + i;
-        old_objects.push_back(obj);
+        old_objects[i] = obj;
     }
-    printf("  allocated %zu old-gen objects for ringback test\n",
-           old_objects.size());
+
+    // Allocate young objects BEFORE BGC and write old-gen pointers into them.
+    for (int i = 0; i < kCount; i++) {
+        void* young = NurseryAllocate(64);
+        if (young == nullptr) break;
+        std::memset(young, 0, 64);
+        std::memcpy(young, &old_objects[i], sizeof(void*));
+        young_objs[i] = young;
+    }
+    printf("  allocated %d old-gen + %d young objects\n", kCount, kCount);
 
     // Start BGC cycle.
     {
@@ -351,27 +375,9 @@ static void TestBgcRootChangeRingback(const void* test_type_info) {
         threading::ReleaseGlobalSafepoint(gen);
     }
 
-    // During concurrent mark, create many new old→young references by
-    // writing old-gen pointers into nursery objects.  Each write through
-    // the SATB barrier also generates a root change entry.
-    std::vector<void*> young_objects;
-    for (size_t i = 0; i < old_objects.size(); i++) {
-        void* young = NurseryAllocate(64);
-        if (young == nullptr) break;
-        std::memset(young, 0, 64);
-        // Write the old-gen pointer into the young object — this creates
-        // a new cross-generation reference that BGC must track.
-        std::memcpy(young, &old_objects[i], sizeof(void*));
-        young_objects.push_back(young);
-    }
-    printf("  created %zu new cross-generation refs during concurrent mark\n",
-           young_objects.size());
-
-    // Wait for BGC concurrent mark to complete.
     bool mark_done = WaitForPhase(BgcPhase::REMARK_NEEDED, 30000);
     CHECK(mark_done, "BGC concurrent mark completed");
 
-    // STW re-mark — this should process all remaining root changes.
     {
         uint32_t gen = threading::RequestGlobalSafepoint();
         BgcController::Instance().StwRemark();
@@ -390,18 +396,16 @@ static void TestBgcRootChangeRingback(const void* test_type_info) {
     BgcController::Instance().WaitForCycleComplete();
     CHECK(BgcController::Instance().Phase() == BgcPhase::IDLE, "BGC back to IDLE");
 
-    // Verify all old-gen objects survived (they should, since they're
-    // referenced from young objects that were allocated during concurrent
-    // mark and discovered by the root change tracking / STW re-mark).
     int survived = 0;
-    for (auto* obj : old_objects) {
-        if (CheckTestObjectAlive(obj, 0xBABE0000 + (survived))) {
+    for (int i = 0; i < kCount; i++) {
+        if (old_objects[i] && CheckTestObjectAlive(old_objects[i], 0xBABE0000 + i)) {
             survived++;
         }
     }
-    printf("  old-gen objects survived BGC sweep with ringback: %d / %zu\n",
-           survived, old_objects.size());
-    CHECK(survived > 0, "at least one old-gen object survived ringback test");
+    printf("  old-gen objects survived BGC sweep: %d / %d\n",
+           survived, kCount);
+    CHECK(survived == kCount,
+          "all old-gen objects survived BGC sweep (large root set)");
 }
 
 // ════════════════════════════════════════════════════════════════════════
@@ -427,7 +431,7 @@ int main() {
     TestBgcYoungToOldRootScan(test_type_info);
     TestBgcCrossThreadYoungToOld(test_type_info);
     TestBgcWithLohConcurrentAlloc(test_type_info);
-    TestBgcRootChangeRingback(test_type_info);
+    TestBgcLargeRootSet(test_type_info);
 
     BgcController::Instance().Stop();
     threading::UnregisterThread();

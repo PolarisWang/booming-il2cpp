@@ -62,10 +62,10 @@
 | gc-p2-04 | phase-1 | **completed** | **Finalizer OOM 保证：预留内存/专用堆（G-12）** | 无 | gc_finalizer.*, engine_lifecycle.cpp | 1 周 |
 | gc-p2-05 | phase-1 | **completed** | **内存压力主动调度反馈闭环（G-28）** | 无 | gc_scheduler.cpp | 1 周 |
 | gc-p2-06 | phase-1 | **completed** | **GC 编译时选择（G-29）** | 无 | CMakeLists.txt, gc/*.h | 1 周 |
-| gc-p2-07 | phase-1 | planned | **测试覆盖增强：修复预存问题 + 补充用例（G-30）** | 无 | 测试文件 | 1-2 周 |
-| gc-p1-vfy | phase-1 | planned | **Phase 1 集成验证** | 全部 P1 | 验证目录 | 3 天 |
+| gc-p2-07 | phase-1 | **completed** | **测试覆盖增强：修复预存问题 + 补充用例（G-30）** | 无 | 测试文件 | 1-2 周 |
+| gc-p1-vfy | phase-1 | **completed** | **Phase 1 集成验证** | 全部 P1 | 验证目录 | 3 天 |
 | **Phase 2 — 可观测性与质量保障** | | | | | | |
-| gc-p3-01 | phase-2 | planned | **ETW 原生诊断事件系统（G-7）** | phase-1 | gc_events.h/cpp | 2 周 |
+| gc-p3-01 | phase-2 | **completed** | **ETW 原生诊断事件系统（G-7）** | phase-1 | gc_events.h/cpp | 2 周 |
 | gc-p3-02 | phase-2 | planned | **GC 基准回归测试套件（G-15）** | phase-1 | 新基准测试文件 | 2 周 |
 | gc-p3-03 | phase-2 | planned | **SOS 调试扩展（G-16）** | phase-1 | 新模块 | 2-3 周 |
 | gc-p3-04 | phase-2 | planned | **Arrhenius 72h 升温测试（G-17）** | phase-1 | 测试/验证目录 | 1 周 |

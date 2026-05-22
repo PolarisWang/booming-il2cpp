@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.Private.CoreLib/threading/thread-sync",
+  "displayName": "Thread Synchronization Primitives",
+  "methodSubjectIds": [
+    "System.Private.CoreLib/System.Threading.Thread::Sleep:System.Void(System.Int32)",
+    "System.Private.CoreLib/System.Threading.Thread::Yield:System.Boolean()",
+    "System.Private.CoreLib/System.Threading.CancellationTokenSource::Cancel:System.Void()",
+    "System.Private.CoreLib/System.Threading.CancellationToken::get_IsCancellationRequested:System.Boolean()",
+    "System.Private.CoreLib/System.Threading.CancellationToken::Register:System.Threading.CancellationTokenRegistration(System.Action)",
+    "System.Private.CoreLib/System.Threading.ThreadPool::QueueUserWorkItem:System.Threading.WaitCallback(System.Threading.WaitCallback)",
+    "System.Private.CoreLib/System.Threading.ThreadPool::QueueUserWorkItem:System.Threading.WaitCallback(System.Threading.WaitCallback,System.Object)",
+    "System.Private.CoreLib/System.Threading.WaitCallback::.ctor:System.Void(System.Object,System.IntPtr)"
+  ],
+  "methodSubjectCount": 8,
+  "functionalObligation": {
+    "required": true
+  },
+  "performanceObligation": {
+    "required": false
+  },
+  "hotupdateFunctionalObligation": {
+    "required": false
+  },
+  "hotupdatePerformanceObligation": {
+    "required": false
+  },
+  "reviewBundleRequired": true
+}

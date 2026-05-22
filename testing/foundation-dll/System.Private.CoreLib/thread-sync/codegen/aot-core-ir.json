@@ -1,0 +1,2040 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "thread-sync-subjects.thread-sync-subjects.subject-0",
+      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_0:System.Void()",
+      "signature": "System.Void ThreadSyncSubjects::Subject_0()",
+      "identity": {
+        "assemblyName": "ThreadSyncSubjects",
+        "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects",
+        "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_0:System.Void()",
+        "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_0:System.Void()",
+        "methodId": "thread-sync-subjects.thread-sync-subjects.subject-0",
+        "signature": "System.Void ThreadSyncSubjects::Subject_0()"
+      },
+      "nativeSymbol": "ThreadSyncSubjects_ThreadSyncSubjects_Subject_0",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 12,
+          "handlerOffset": 13,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 2,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 4,
+          "resultType": "System.Void",
+          "callee": "System.Threading.Thread/System.Threading.Thread::Sleep:System.Void(System.Int32)",
+          "reference": {
+            "assemblyName": "System.Threading.Thread",
+            "subjectKind": "method",
+            "subjectId": "System.Threading.Thread/System.Threading.Thread::Sleep:System.Void(System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Threading.Thread",
+            "subjectId": "System.Threading.Thread/System.Threading.Thread::Sleep:System.Void(System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 24,
+          "ilOffset": 11,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 13,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 15,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ThreadSyncSubjects/ThreadSyncSubjects::_exitCode",
+          "ilOffset": 16,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectKind": "field",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 24,
+          "ilOffset": 22,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 24,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadSyncSubjects"
+    },
+    {
+      "methodId": "thread-sync-subjects.thread-sync-subjects.subject-1",
+      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_1:System.Void()",
+      "signature": "System.Void ThreadSyncSubjects::Subject_1()",
+      "identity": {
+        "assemblyName": "ThreadSyncSubjects",
+        "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects",
+        "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_1:System.Void()",
+        "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_1:System.Void()",
+        "methodId": "thread-sync-subjects.thread-sync-subjects.subject-1",
+        "signature": "System.Void ThreadSyncSubjects::Subject_1()"
+      },
+      "nativeSymbol": "ThreadSyncSubjects_ThreadSyncSubjects_Subject_1",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 10,
+          "handlerOffset": 11,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 2,
+          "resultType": "System.Boolean",
+          "callee": "System.Threading.Thread/System.Threading.Thread::Yield:System.Boolean()",
+          "reference": {
+            "assemblyName": "System.Threading.Thread",
+            "subjectKind": "method",
+            "subjectId": "System.Threading.Thread/System.Threading.Thread::Yield:System.Boolean()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Threading.Thread",
+            "subjectId": "System.Threading.Thread/System.Threading.Thread::Yield:System.Boolean()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 7,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 22,
+          "ilOffset": 9,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 11,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 13,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ThreadSyncSubjects/ThreadSyncSubjects::_exitCode",
+          "ilOffset": 14,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectKind": "field",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 22,
+          "ilOffset": 20,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 22,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadSyncSubjects"
+    },
+    {
+      "methodId": "thread-sync-subjects.thread-sync-subjects.subject-2",
+      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_2:System.Void()",
+      "signature": "System.Void ThreadSyncSubjects::Subject_2()",
+      "identity": {
+        "assemblyName": "ThreadSyncSubjects",
+        "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects",
+        "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_2:System.Void()",
+        "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_2:System.Void()",
+        "methodId": "thread-sync-subjects.thread-sync-subjects.subject-2",
+        "signature": "System.Void ThreadSyncSubjects::Subject_2()"
+      },
+      "nativeSymbol": "ThreadSyncSubjects_ThreadSyncSubjects_Subject_2",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 15,
+          "handlerOffset": 16,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 2,
+          "resultType": "System.Private.CoreLib/System.Threading.CancellationTokenSource",
+          "callee": "System.Private.CoreLib/System.Threading.CancellationTokenSource::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Threading.CancellationTokenSource::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Threading.CancellationTokenSource",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 7,
+          "resultType": "System.Void",
+          "callee": "System.Private.CoreLib/System.Threading.CancellationTokenSource::Cancel:System.Void()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Threading.CancellationTokenSource::Cancel:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Threading.CancellationTokenSource::Cancel:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 27,
+          "ilOffset": 14,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 16,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 18,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ThreadSyncSubjects/ThreadSyncSubjects::_exitCode",
+          "ilOffset": 19,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectKind": "field",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 27,
+          "ilOffset": 25,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 27,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadSyncSubjects"
+    },
+    {
+      "methodId": "thread-sync-subjects.thread-sync-subjects.subject-3",
+      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_3:System.Void()",
+      "signature": "System.Void ThreadSyncSubjects::Subject_3()",
+      "identity": {
+        "assemblyName": "ThreadSyncSubjects",
+        "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects",
+        "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_3:System.Void()",
+        "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_3:System.Void()",
+        "methodId": "thread-sync-subjects.thread-sync-subjects.subject-3",
+        "signature": "System.Void ThreadSyncSubjects::Subject_3()"
+      },
+      "nativeSymbol": "ThreadSyncSubjects_ThreadSyncSubjects_Subject_3",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 19,
+          "handlerOffset": 20,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "initobj",
+          "opCode": 71,
+          "operand": "System.Private.CoreLib/System.Threading.CancellationToken",
+          "ilOffset": 5,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Threading.CancellationToken"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Threading.CancellationToken",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 14,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 11,
+          "resultType": "System.Boolean",
+          "callee": "System.Private.CoreLib/System.Threading.CancellationToken::get_IsCancellationRequested:System.Boolean()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Threading.CancellationToken::get_IsCancellationRequested:System.Boolean()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Threading.CancellationToken::get_IsCancellationRequested:System.Boolean()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 16,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 31,
+          "ilOffset": 18,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 20,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 22,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ThreadSyncSubjects/ThreadSyncSubjects::_exitCode",
+          "ilOffset": 23,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectKind": "field",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 31,
+          "ilOffset": 29,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 31,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadSyncSubjects"
+    },
+    {
+      "methodId": "thread-sync-subjects.thread-sync-subjects.subject-4",
+      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_4:System.Void()",
+      "signature": "System.Void ThreadSyncSubjects::Subject_4()",
+      "identity": {
+        "assemblyName": "ThreadSyncSubjects",
+        "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects",
+        "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_4:System.Void()",
+        "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_4:System.Void()",
+        "methodId": "thread-sync-subjects.thread-sync-subjects.subject-4",
+        "signature": "System.Void ThreadSyncSubjects::Subject_4()"
+      },
+      "nativeSymbol": "ThreadSyncSubjects_ThreadSyncSubjects_Subject_4",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 20,
+          "handlerOffset": 21,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "initobj",
+          "opCode": 71,
+          "operand": "System.Private.CoreLib/System.Threading.CancellationToken",
+          "ilOffset": 5,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Threading.CancellationToken"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Threading.CancellationToken",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 14,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 11,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 12,
+          "resultType": "System.Threading.CancellationTokenRegistration",
+          "callee": "System.Private.CoreLib/System.Threading.CancellationToken::Register:System.Threading.CancellationTokenRegistration(System.Action)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Threading.CancellationToken::Register:System.Threading.CancellationTokenRegistration(System.Action)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Threading.CancellationToken::Register:System.Threading.CancellationTokenRegistration(System.Action)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 17,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 32,
+          "ilOffset": 19,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 21,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 23,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ThreadSyncSubjects/ThreadSyncSubjects::_exitCode",
+          "ilOffset": 24,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectKind": "field",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 32,
+          "ilOffset": 30,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 32,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadSyncSubjects"
+    },
+    {
+      "methodId": "thread-sync-subjects.thread-sync-subjects.subject-5",
+      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_5:System.Void()",
+      "signature": "System.Void ThreadSyncSubjects::Subject_5()",
+      "identity": {
+        "assemblyName": "ThreadSyncSubjects",
+        "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects",
+        "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_5:System.Void()",
+        "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_5:System.Void()",
+        "methodId": "thread-sync-subjects.thread-sync-subjects.subject-5",
+        "signature": "System.Void ThreadSyncSubjects::Subject_5()"
+      },
+      "nativeSymbol": "ThreadSyncSubjects_ThreadSyncSubjects_Subject_5",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 41,
+          "handlerOffset": 42,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9__6_0",
+          "ilOffset": 2,
+          "resultType": "System.Threading.WaitCallback",
+          "reference": {
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectKind": "field",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9__6_0"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9__6_0",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Threading.WaitCallback"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 7,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 33,
+          "ilOffset": 8,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+          "ilOffset": 11,
+          "resultType": "ThreadSyncSubjects\u002B\u003C\u003Ec",
+          "reference": {
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectKind": "field",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "ThreadSyncSubjects\u002B\u003C\u003Ec"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldftn",
+          "opCode": 73,
+          "operand": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_0:System.Void(System.Object)",
+          "ilOffset": 16,
+          "resultType": "System.IntPtr",
+          "callee": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_0:System.Void(System.Object)",
+          "reference": {
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectKind": "method",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_0:System.Void(System.Object)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_0:System.Void(System.Object)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "isPreserveSig": false
+        },
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 22,
+          "resultType": "System.Threading.ThreadPool/System.Threading.WaitCallback",
+          "callee": "System.Threading.ThreadPool/System.Threading.WaitCallback::.ctor:System.Void(System.Object,System.IntPtr)",
+          "reference": {
+            "assemblyName": "System.Threading.ThreadPool",
+            "subjectKind": "method",
+            "subjectId": "System.Threading.ThreadPool/System.Threading.WaitCallback::.ctor:System.Void(System.Object,System.IntPtr)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Threading.ThreadPool",
+            "subjectId": "System.Threading.ThreadPool/System.Threading.WaitCallback",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 27,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9__6_0",
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectKind": "field",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9__6_0"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9__6_0",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Threading.WaitCallback"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 33,
+          "resultType": "System.Boolean",
+          "callee": "System.Threading.ThreadPool/System.Threading.ThreadPool::QueueUserWorkItem:System.Boolean(System.Threading.WaitCallback)",
+          "reference": {
+            "assemblyName": "System.Threading.ThreadPool",
+            "subjectKind": "method",
+            "subjectId": "System.Threading.ThreadPool/System.Threading.ThreadPool::QueueUserWorkItem:System.Boolean(System.Threading.WaitCallback)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Threading.ThreadPool",
+            "subjectId": "System.Threading.ThreadPool/System.Threading.ThreadPool::QueueUserWorkItem:System.Boolean(System.Threading.WaitCallback)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 38,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 53,
+          "ilOffset": 40,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 42,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 44,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ThreadSyncSubjects/ThreadSyncSubjects::_exitCode",
+          "ilOffset": 45,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectKind": "field",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 53,
+          "ilOffset": 51,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 53,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadSyncSubjects"
+    },
+    {
+      "methodId": "thread-sync-subjects.thread-sync-subjects.subject-6",
+      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_6:System.Void()",
+      "signature": "System.Void ThreadSyncSubjects::Subject_6()",
+      "identity": {
+        "assemblyName": "ThreadSyncSubjects",
+        "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects",
+        "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_6:System.Void()",
+        "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_6:System.Void()",
+        "methodId": "thread-sync-subjects.thread-sync-subjects.subject-6",
+        "signature": "System.Void ThreadSyncSubjects::Subject_6()"
+      },
+      "nativeSymbol": "ThreadSyncSubjects_ThreadSyncSubjects_Subject_6",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 48,
+          "handlerOffset": 49,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9__7_0",
+          "ilOffset": 2,
+          "resultType": "System.Threading.WaitCallback",
+          "reference": {
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectKind": "field",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9__7_0"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9__7_0",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Threading.WaitCallback"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 7,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 33,
+          "ilOffset": 8,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+          "ilOffset": 11,
+          "resultType": "ThreadSyncSubjects\u002B\u003C\u003Ec",
+          "reference": {
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectKind": "field",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "ThreadSyncSubjects\u002B\u003C\u003Ec"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldftn",
+          "opCode": 73,
+          "operand": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_6\u003Eb__7_0:System.Void(System.Object)",
+          "ilOffset": 16,
+          "resultType": "System.IntPtr",
+          "callee": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_6\u003Eb__7_0:System.Void(System.Object)",
+          "reference": {
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectKind": "method",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_6\u003Eb__7_0:System.Void(System.Object)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_6\u003Eb__7_0:System.Void(System.Object)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "isPreserveSig": false
+        },
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 22,
+          "resultType": "System.Threading.ThreadPool/System.Threading.WaitCallback",
+          "callee": "System.Threading.ThreadPool/System.Threading.WaitCallback::.ctor:System.Void(System.Object,System.IntPtr)",
+          "reference": {
+            "assemblyName": "System.Threading.ThreadPool",
+            "subjectKind": "method",
+            "subjectId": "System.Threading.ThreadPool/System.Threading.WaitCallback::.ctor:System.Void(System.Object,System.IntPtr)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Threading.ThreadPool",
+            "subjectId": "System.Threading.ThreadPool/System.Threading.WaitCallback",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 27,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9__7_0",
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectKind": "field",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9__7_0"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9__7_0",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Threading.WaitCallback"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 33,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "box",
+          "opCode": 35,
+          "operand": "System.Private.CoreLib/System.Int32",
+          "ilOffset": 35,
+          "resultType": "System.Object",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Int32"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 40,
+          "resultType": "System.Boolean",
+          "callee": "System.Threading.ThreadPool/System.Threading.ThreadPool::QueueUserWorkItem:System.Boolean(System.Threading.WaitCallback,System.Object)",
+          "reference": {
+            "assemblyName": "System.Threading.ThreadPool",
+            "subjectKind": "method",
+            "subjectId": "System.Threading.ThreadPool/System.Threading.ThreadPool::QueueUserWorkItem:System.Boolean(System.Threading.WaitCallback,System.Object)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Threading.ThreadPool",
+            "subjectId": "System.Threading.ThreadPool/System.Threading.ThreadPool::QueueUserWorkItem:System.Boolean(System.Threading.WaitCallback,System.Object)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 45,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 60,
+          "ilOffset": 47,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 49,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 51,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ThreadSyncSubjects/ThreadSyncSubjects::_exitCode",
+          "ilOffset": 52,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectKind": "field",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 60,
+          "ilOffset": 58,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 60,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadSyncSubjects"
+    },
+    {
+      "methodId": "thread-sync-subjects.thread-sync-subjects.subject-7",
+      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_7:System.Void()",
+      "signature": "System.Void ThreadSyncSubjects::Subject_7()",
+      "identity": {
+        "assemblyName": "ThreadSyncSubjects",
+        "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects",
+        "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_7:System.Void()",
+        "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_7:System.Void()",
+        "methodId": "thread-sync-subjects.thread-sync-subjects.subject-7",
+        "signature": "System.Void ThreadSyncSubjects::Subject_7()"
+      },
+      "nativeSymbol": "ThreadSyncSubjects_ThreadSyncSubjects_Subject_7",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 41,
+          "handlerOffset": 42,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_0",
+          "ilOffset": 2,
+          "resultType": "System.Threading.WaitCallback",
+          "reference": {
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectKind": "field",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_0"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_0",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Threading.WaitCallback"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 7,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 33,
+          "ilOffset": 8,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+          "ilOffset": 11,
+          "resultType": "ThreadSyncSubjects\u002B\u003C\u003Ec",
+          "reference": {
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectKind": "field",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "ThreadSyncSubjects\u002B\u003C\u003Ec"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldftn",
+          "opCode": 73,
+          "operand": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_0:System.Void(System.Object)",
+          "ilOffset": 16,
+          "resultType": "System.IntPtr",
+          "callee": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_0:System.Void(System.Object)",
+          "reference": {
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectKind": "method",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_0:System.Void(System.Object)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_0:System.Void(System.Object)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "isPreserveSig": false
+        },
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 22,
+          "resultType": "System.Threading.ThreadPool/System.Threading.WaitCallback",
+          "callee": "System.Threading.ThreadPool/System.Threading.WaitCallback::.ctor:System.Void(System.Object,System.IntPtr)",
+          "reference": {
+            "assemblyName": "System.Threading.ThreadPool",
+            "subjectKind": "method",
+            "subjectId": "System.Threading.ThreadPool/System.Threading.WaitCallback::.ctor:System.Void(System.Object,System.IntPtr)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Threading.ThreadPool",
+            "subjectId": "System.Threading.ThreadPool/System.Threading.WaitCallback",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 27,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_0",
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectKind": "field",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_0"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_0",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Threading.WaitCallback"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 33,
+          "resultType": "System.Delegate[]",
+          "callee": "System.Private.CoreLib/System.Delegate::GetInvocationList:System.Delegate[]()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Delegate::GetInvocationList:System.Delegate[]()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Delegate::GetInvocationList:System.Delegate[]()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 38,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 53,
+          "ilOffset": 40,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 42,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 44,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ThreadSyncSubjects/ThreadSyncSubjects::_exitCode",
+          "ilOffset": 45,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectKind": "field",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 53,
+          "ilOffset": 51,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 53,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadSyncSubjects"
+    },
+    {
+      "methodId": "thread-sync-subjects.thread-sync-subjects-c.cctor",
+      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+      "signature": "System.Void ThreadSyncSubjects\u002B\u003C\u003Ec::.cctor()",
+      "identity": {
+        "assemblyName": "ThreadSyncSubjects",
+        "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec",
+        "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+        "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+        "methodId": "thread-sync-subjects.thread-sync-subjects-c.cctor",
+        "signature": "System.Void ThreadSyncSubjects\u002B\u003C\u003Ec::.cctor()"
+      },
+      "nativeSymbol": "ThreadSyncSubjects_ThreadSyncSubjects___c_cctor",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 0,
+          "resultType": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec",
+          "callee": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectKind": "method",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": true,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "baseTypeSubjectId": "System.Private.CoreLib/System.Object",
+            "implementedInterfaceSubjectIds": [],
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+          "ilOffset": 5,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectKind": "field",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "ThreadSyncSubjects",
+            "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "ThreadSyncSubjects\u002B\u003C\u003Ec"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadSyncSubjects"
+    },
+    {
+      "methodId": "thread-sync-subjects.thread-sync-subjects-c.ctor",
+      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+      "signature": "System.Void ThreadSyncSubjects\u002B\u003C\u003Ec::.ctor()",
+      "identity": {
+        "assemblyName": "ThreadSyncSubjects",
+        "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec",
+        "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+        "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+        "methodId": "thread-sync-subjects.thread-sync-subjects-c.ctor",
+        "signature": "System.Void ThreadSyncSubjects\u002B\u003C\u003Ec::.ctor()"
+      },
+      "nativeSymbol": "ThreadSyncSubjects_ThreadSyncSubjects___c__ctor",
+      "isStatic": false,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 1,
+          "resultType": "System.Void",
+          "callee": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 7,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadSyncSubjects"
+    },
+    {
+      "methodId": "thread-sync-subjects.thread-sync-subjects-c.subject-5-b-6-0",
+      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_0:System.Void(System.Object)",
+      "signature": "System.Void ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_0(System.Object)",
+      "identity": {
+        "assemblyName": "ThreadSyncSubjects",
+        "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec",
+        "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_0:System.Void(System.Object)",
+        "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_0:System.Void(System.Object)",
+        "methodId": "thread-sync-subjects.thread-sync-subjects-c.subject-5-b-6-0",
+        "signature": "System.Void ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_0(System.Object)"
+      },
+      "nativeSymbol": "ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_5_b__6_0_System_Object",
+      "isStatic": false,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 2,
+          "typeShape": 1
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadSyncSubjects"
+    },
+    {
+      "methodId": "thread-sync-subjects.thread-sync-subjects-c.subject-6-b-7-0",
+      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_6\u003Eb__7_0:System.Void(System.Object)",
+      "signature": "System.Void ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_6\u003Eb__7_0(System.Object)",
+      "identity": {
+        "assemblyName": "ThreadSyncSubjects",
+        "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec",
+        "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_6\u003Eb__7_0:System.Void(System.Object)",
+        "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_6\u003Eb__7_0:System.Void(System.Object)",
+        "methodId": "thread-sync-subjects.thread-sync-subjects-c.subject-6-b-7-0",
+        "signature": "System.Void ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_6\u003Eb__7_0(System.Object)"
+      },
+      "nativeSymbol": "ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_6_b__7_0_System_Object",
+      "isStatic": false,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 2,
+          "typeShape": 1
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadSyncSubjects"
+    },
+    {
+      "methodId": "thread-sync-subjects.thread-sync-subjects-c.subject-7-b-8-0",
+      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_0:System.Void(System.Object)",
+      "signature": "System.Void ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_0(System.Object)",
+      "identity": {
+        "assemblyName": "ThreadSyncSubjects",
+        "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec",
+        "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_0:System.Void(System.Object)",
+        "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_0:System.Void(System.Object)",
+        "methodId": "thread-sync-subjects.thread-sync-subjects-c.subject-7-b-8-0",
+        "signature": "System.Void ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_0(System.Object)"
+      },
+      "nativeSymbol": "ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_7_b__8_0_System_Object",
+      "isStatic": false,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 2,
+          "typeShape": 1
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "ThreadSyncSubjects"
+    }
+  ]
+}

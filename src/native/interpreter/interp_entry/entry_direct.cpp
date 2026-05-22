@@ -443,6 +443,8 @@ void InterpreterEntryDirect(
         if (!patch_method->cached_sig_valid) CacheSignature(patch_method);
 
         interpreter::RegisterFrame rf = {};
+        rf.seh_clauses = ir->seh_clauses.data();
+        rf.seh_clause_count = static_cast<uint32_t>(ir->seh_clauses.size());
         auto* runtime_state = GetCurrentRuntimeState();
         auto* thread_state  = GetCurrentThreadState();
         rf.args = args_buf; rf.arg_count = patch_method->cached_sig_valid ? patch_method->cached_arg_count : 0;
@@ -649,6 +651,12 @@ void InterpreterEntryDirect(
     } catch (...) {
         CHAOS_IL2CPP_LOG_ERROR("interpreter", "InterpreterVM::Execute threw (unknown exception)");
         throw;
+    }
+    if (result.threw_exception) {
+        CHAOS_IL2CPP_INTPTR exc_val = 0;
+        if (result.exception_value.tag == interpreter::ValueTag::ObjectRef)
+            exc_val = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(result.exception_value.obj);
+        throw chaos_managed_exception{exc_val};
     }
     if (ret_buf != nullptr && result.has_return_value) {
         auto ret_tag = (type_aware_args && patch_method->cached_sig_valid)

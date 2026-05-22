@@ -2,6 +2,7 @@
 
 #include <chaos/log.h>
 
+#include "gc_api.h"
 #include "gc_card_table.h"
 #include "gc_heap.h"
 
@@ -126,48 +127,60 @@ void* LargeObjectHeap::Allocate(CHAOS_IL2CPP_SIZE size) {
         return nullptr;
     }
 
-    std::lock_guard<std::mutex> lock(mutex_);
+    LohSegment* seg = nullptr;
+    bool allocated = false;
 
-    // Try free segment list first.
-    LohSegment** pp = &free_segment_list_;
-    while (*pp != nullptr) {
-        LohSegment* seg = *pp;
-        if (seg->payload_size >= size) {
-            // Reuse this segment.
-            *pp = seg->next;
-            seg->next = segment_list_;
-            segment_list_ = seg;
-            seg->in_use.store(true, std::memory_order_release);
-            // Pre-mark the segment so BgcSweep Phase 5 (G_Loh().Sweep())
-            // does not free this freshly-reused segment between the
-            // mutex release below and the caller's first write to the
-            // payload.  False-positive survival for one BGC cycle is
-            // harmless — the next cycle properly marks or sweeps it.
-            seg->marked.store(true, std::memory_order_release);
-            segment_count_++;
-            total_allocated_.fetch_add(seg->payload_size, std::memory_order_relaxed);
-            void* payload = reinterpret_cast<char*>(seg) + sizeof(LohSegment);
-            std::memset(payload, 0, seg->payload_size);
-            return payload;
+    {
+        std::lock_guard<std::mutex> lock(mutex_);
+
+        // Try free segment list first.
+        LohSegment** pp = &free_segment_list_;
+        while (*pp != nullptr) {
+            LohSegment* candidate = *pp;
+            if (candidate->payload_size >= size) {
+                // Reuse this segment.
+                *pp = candidate->next;
+                candidate->next = segment_list_;
+                segment_list_ = candidate;
+                candidate->in_use.store(true, std::memory_order_release);
+                // Pre-mark so BgcSweep does not free this freshly-reused
+                // segment before the caller writes to the payload.
+                candidate->marked.store(true, std::memory_order_release);
+                segment_count_++;
+                total_allocated_.fetch_add(candidate->payload_size, std::memory_order_relaxed);
+                seg = candidate;
+                allocated = true;
+                break;
+            }
+            pp = &candidate->next;
         }
-        pp = &seg->next;
+
+        if (!allocated) {
+            // Allocate new segment.
+            seg = AllocateSegment(size);
+            if (seg != nullptr) {
+                // Pre-mark before linking (same rationale as reuse path).
+                seg->marked.store(true, std::memory_order_release);
+                seg->next = segment_list_;
+                segment_list_ = seg;
+                segment_count_++;
+                total_allocated_.fetch_add(seg->payload_size, std::memory_order_relaxed);
+                allocated = true;
+            }
+        }
+    }  // mutex_ released
+
+    if (!allocated) {
+        // AllocateSegment failed (OS-level OOM).  The mutex is already
+        // released, so HandleOomCondition can safely request a safepoint
+        // without risk of deadlock (a thread waiting on the LOH mutex
+        // could not otherwise respond to the safepoint request).
+        struct Ctx { CHAOS_IL2CPP_SIZE s; };
+        Ctx ctx{size};
+        return HandleOomCondition([](void* c) -> void* {
+            return G_Loh().Allocate(static_cast<Ctx*>(c)->s);
+        }, &ctx, size);
     }
-
-    // Allocate new segment.
-    auto* seg = AllocateSegment(size);
-    if (seg == nullptr) return nullptr;
-
-    // Pre-mark the segment before linking it into segment_list_ so
-    // BgcSweep Phase 5 (G_Loh().Sweep()) never sees a freshly-allocated
-    // segment with marked=false.  Without this mark, the BGC sweep
-    // can free the segment immediately after this thread releases the
-    // LOH mutex — before the caller writes to the returned payload.
-    seg->marked.store(true, std::memory_order_release);
-
-    seg->next = segment_list_;
-    segment_list_ = seg;
-    segment_count_++;
-    total_allocated_.fetch_add(seg->payload_size, std::memory_order_relaxed);
 
     void* payload = reinterpret_cast<char*>(seg) + sizeof(LohSegment);
     // Register the LOH segment payload with the card table so that

@@ -15,6 +15,7 @@ namespace vr = chaos::il2cpp::vtable_registry;
 #include <chaos/log.h>
 #include <chaos/profile.h>
 #include <gc/gc_bgc_inline.h>
+#include <gc/gc_root_change.h>
 #include <gc/gc_helpers.h>
 
 // Global static field storage from the full InterpreterVM.
@@ -676,6 +677,9 @@ static void Handle_StSFld(FastFrame& frame, const interpreter::IRInstruction& in
     }
     using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
     BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&sfields[instr.field_offset].obj));
+    chaos::il2cpp::runtime_core::BgcRecordRootChange(
+        reinterpret_cast<void**>(&sfields[instr.field_offset].obj),
+        sfields[instr.field_offset].obj);
     sfields[instr.field_offset] = frame.PopIV();
     ++frame.pc;
 }

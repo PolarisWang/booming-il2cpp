@@ -9,6 +9,7 @@
 #include "gc_etw.h"
 #include "gc_events.h"
 #include "gc_gen1.h"
+#include "gc_heap.h"
 #include "gc_layout.h"
 #include "gc_numa.h"
 #include "gc_old_gen.h"
@@ -223,7 +224,7 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
     // safepoint handshake (the old-gen allocator takes mutex_ internally,
     // which would deadlock against ScanDirtyCardsInPages).
     threading::EnterPreemptiveMode();
-    void* old_result = g_old_gen.Allocate(size, true);
+    void* old_result = G_OldGen().Allocate(size, true);
     threading::EnterCooperativeMode();  // SafepointPoll re-sync if pending
     if (old_result) {
         tls_total_allocated_bytes += static_cast<CHAOS_IL2CPP_INT64>(size);
@@ -233,14 +234,28 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
         // prevent finalizer deadlock.  The reserve is replenished after
         // the next GC cycle completes.
         threading::EnterPreemptiveMode();
-        old_result = g_old_gen.AllocateFromEmergencyReserve(size);
+        old_result = G_OldGen().AllocateFromEmergencyReserve(size);
         threading::EnterCooperativeMode();
         if (old_result) {
             tls_total_allocated_bytes += static_cast<CHAOS_IL2CPP_INT64>(size);
         }
     }
     if (old_result == nullptr) {
-        GcEtwFireGcOom();
+        // All recovery attempts failed — invoke the full OOM recovery chain:
+        // blocking full GC → retry → emergency reserve → OOM event.
+        struct OomRetryCtx { CHAOS_IL2CPP_SIZE size; bool scanning; };
+        OomRetryCtx ctx{size, true};
+        old_result = HandleOomCondition(
+            [](void* ctx) -> void* {
+                auto* c = static_cast<OomRetryCtx*>(ctx);
+                threading::EnterPreemptiveMode();
+                void* p = G_OldGen().Allocate(c->size, c->scanning);
+                threading::EnterCooperativeMode();
+                return p;
+            }, &ctx, size);
+        if (old_result) {
+            tls_total_allocated_bytes += static_cast<CHAOS_IL2CPP_INT64>(size);
+        }
     }
     return old_result;
 }
@@ -320,13 +335,26 @@ void* NurseryAllocateAtomicSlow(CHAOS_IL2CPP_SIZE size) {
 
     // Phase 4: Fall back to old gen (no scanning needed).
     threading::EnterPreemptiveMode();
-    void* old_result = g_old_gen.Allocate(size, false);
+    void* old_result = G_OldGen().Allocate(size, false);
     threading::EnterCooperativeMode();
     if (old_result) {
         tls_total_allocated_bytes += static_cast<CHAOS_IL2CPP_INT64>(size);
     }
     if (old_result == nullptr) {
-        GcEtwFireGcOom();
+        // Atomic variant OOM recovery: full GC → retry → emergency reserve.
+        struct OomRetryCtx { CHAOS_IL2CPP_SIZE size; bool scanning; };
+        OomRetryCtx ctx{size, false};
+        old_result = HandleOomCondition(
+            [](void* ctx) -> void* {
+                auto* c = static_cast<OomRetryCtx*>(ctx);
+                threading::EnterPreemptiveMode();
+                void* p = G_OldGen().Allocate(c->size, c->scanning);
+                threading::EnterCooperativeMode();
+                return p;
+            }, &ctx, size);
+        if (old_result) {
+            tls_total_allocated_bytes += static_cast<CHAOS_IL2CPP_INT64>(size);
+        }
     }
     return old_result;
 }
@@ -364,7 +392,7 @@ void* PohAllocate(CHAOS_IL2CPP_SIZE size) noexcept {
     if (size > kPohRegionSize - sizeof(Region)) {
         // Single object larger than a POH region — allocate oversized via old gen.
         CHAOS_IL2CPP_LOG_DEBUG("CRAG", "poh_oversized");
-        void* result = g_old_gen.Allocate(size, true);
+        void* result = G_OldGen().Allocate(size, true);
         if (result) {
             tls_total_allocated_bytes += static_cast<CHAOS_IL2CPP_INT64>(size);
         }
@@ -391,7 +419,7 @@ void* PohAllocate(CHAOS_IL2CPP_SIZE size) noexcept {
         RegionKind::REGION_POH, kPohRegionSize);
     if (new_poh == nullptr) {
         CHAOS_IL2CPP_LOG_WARN("CRAG", "poh_oom_fallback");
-        void* result = g_old_gen.Allocate(size, true);
+        void* result = G_OldGen().Allocate(size, true);
         if (result) {
             tls_total_allocated_bytes += static_cast<CHAOS_IL2CPP_INT64>(size);
         }
@@ -624,7 +652,7 @@ Region* RegionManager::AllocateRegion(RegionKind kind, CHAOS_IL2CPP_SIZE min_siz
     // Add to region table.
     int slot = AllocSlot();
     if (slot < 0) {
-        g_old_gen.Free(mem);
+        G_OldGen().Free(mem);
         return nullptr;
     }
     region_table_[slot] = *r;
@@ -1136,7 +1164,7 @@ Region* RegionManager::GetNextPohRegion(const Region* current) const {
 }
 
 // 🔔 P2-3: RegionAllocate removed (dead code — callers use NurseryAllocate,
-// g_old_gen.Allocate, or DomainAllocate directly).
+// G_OldGen().Allocate, or DomainAllocate directly).
 
 // ======================================================================
 // Extern "C" API — called from managed code via codegen inline body
@@ -1187,12 +1215,12 @@ extern "C" void chaos_gc_collect() noexcept {
     // Step 2: Full old-gen collection (mark-sweep, potentially parallel).
     {
         uint32_t gen = threading::RequestGlobalSafepoint();
-        g_old_gen.Collect(nullptr, nullptr);
+        G_OldGen().Collect(nullptr, nullptr);
         threading::ReleaseGlobalSafepoint(gen);
     }
 
     // Step 3: Run pending finalizers.
-    g_old_gen.RunFinalizers();
+    G_OldGen().RunFinalizers();
 
     CHAOS_IL2CPP_LOG_DEBUG("CRAG", "chaos_gc_collect completed");
 #endif  // CHAOS_IL2CPP_GC_SERVER
@@ -1201,7 +1229,7 @@ extern "C" void chaos_gc_collect() noexcept {
 /// Wait for pending finalizers (System.GC.WaitForPendingFinalizers()).
 extern "C" void chaos_gc_wait_for_pending_finalizers() noexcept {
     CHAOS_IL2CPP_LOG_DEBUG("CRAG", "chaos_gc_wait_for_pending_finalizers");
-    g_old_gen.RunFinalizers();
+    G_OldGen().RunFinalizers();
     // Also drain any BGC finalizer thread batches.
     BgcController::Instance().WaitForFinalizerDrain();
 }

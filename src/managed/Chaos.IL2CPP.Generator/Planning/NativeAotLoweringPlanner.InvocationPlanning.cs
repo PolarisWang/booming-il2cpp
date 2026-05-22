@@ -616,6 +616,42 @@ public sealed partial class NativeAotLoweringPlanner
             }
         }
 
+        // ── Phase 4: Reachability-based devirtualization ──
+        // If Phase 3 did not produce a hint (multiple implementations exist in metadata),
+        // check whether only ONE implementation's declaring type is actually instantiated
+        // in the compiled closure. If so, devirtualize to that implementation.
+        var p4Key = instruction.Callee ?? instruction.TargetReference?.SubjectId ?? "";
+        if (p4Key.Length > 0 && !_devirtualizationHints.ContainsKey(p4Key))
+        {
+            var instantiatedRoutes = routes
+                .Where(r => _instantiatedTypeSubjectIds.Contains(r.ReceiverTypeSubjectId))
+                .ToList();
+
+            if (instantiatedRoutes.Count == 1)
+            {
+                var impl = instantiatedRoutes[0].ImplementationMethod;
+                _devirtualizationHints[p4Key] = new DevirtualizationHint(
+                    true,
+                    impl.SubjectId,
+                    impl.Identity.DeclaringTypeSubjectId);
+            }
+            else if (instantiatedRoutes.Count > 1)
+            {
+                // Multiple instantiated implementations — guard against the slot's declaring type
+                var declaringImpl = instantiatedRoutes.FirstOrDefault(r =>
+                    string.Equals(r.ReceiverTypeSubjectId, slotDeclaringTypeSubjectId,
+                        StringComparison.Ordinal));
+                if (declaringImpl != null)
+                {
+                    _devirtualizationHints[p4Key] = new DevirtualizationHint(
+                        true,
+                        declaringImpl.ImplementationMethod.SubjectId,
+                        declaringImpl.ImplementationMethod.Identity.DeclaringTypeSubjectId,
+                        guardTypeSubjectId: slotDeclaringTypeSubjectId);
+                }
+            }
+        }
+
         return routes
             .OrderBy(route => route.ReceiverTypeSubjectId, StringComparer.Ordinal)
             .ToArray();
@@ -833,6 +869,26 @@ public sealed partial class NativeAotLoweringPlanner
                 InlineCppExpression: cppExpr);
         }
 
+        // Priority 1b: Devirtualization hint — unconditional direct call to concrete impl
+        if (_devirtualizationHints.TryGetValue(callee, out var devirtHint) &&
+            devirtHint.CanDevirtualize && devirtHint.GuardTypeSubjectId == null)
+        {
+            if (_methodsBySubjectId.TryGetValue(devirtHint.ImplementationMethodSubjectId, out var devirtMethod))
+            {
+                var devirtSymbol = ResolveCallTargetNativeSymbol(devirtMethod);
+                var paramCount = devirtMethod.ParameterCount + (devirtMethod.IsStatic ? 0 : 1);
+                var paramAbis = new AotCoreIrAbiSlotArtifact[paramCount];
+                for (int i = 0; i < paramCount; i++)
+                    paramAbis[i] = CreateNativeIntAbiSlot();
+                var retType = InferReturnTypeFromSubjectId(devirtMethod.SubjectId);
+                return new InvocationTarget(
+                    TargetSymbol: devirtSymbol,
+                    ParameterAbis: paramAbis,
+                    ReturnAbi: CreateLegacyReturnAbiSlot(retType),
+                    RawArgumentIndices: EmptyRawArgumentIndices);
+            }
+        }
+
         // Priority 2: External runtime helper (GenericShapeDescriptor or SimpleForward)
         if (TryCreateExternalRuntimeHelperDefinition(callee, out var helperDefinition))
         {
@@ -1009,6 +1065,179 @@ public sealed partial class NativeAotLoweringPlanner
         return !string.IsNullOrEmpty(candidateTypeSubjectId) &&
                (string.Equals(candidateTypeSubjectId, slotDeclaringTypeSubjectId, StringComparison.Ordinal) ||
                 string.Equals(candidateTypeSubjectId, slotDeclaringTypeDefinitionSubjectId, StringComparison.Ordinal));
+    }
+
+    /// <summary>
+    /// Pre-scan all methods' IR instructions to detect foldable
+    /// <c>ldsfld &lt;literal_enum_field&gt;</c> → <c>call Enum::ToString()</c> patterns.
+    /// Populates <see cref="_enumToStringFoldMap"/> with call-site IlOffset → field name.
+    /// </summary>
+    private void BuildEnumToStringFoldTable(IReadOnlyList<AotCoreIrMethodArtifact> methodsForLowering)
+    {
+        _enumToStringFoldMap.Clear();
+
+        if (_reflectionMemberSupport.FieldEntries.Count == 0)
+            return;
+
+        // Build per-type field name index for enum types
+        var enumFieldNamesByType = new Dictionary<string, HashSet<string>>(StringComparer.Ordinal);
+        foreach (var field in _reflectionMemberSupport.FieldEntries)
+        {
+            if (!_enumTypeSubjectIds.Contains(field.DeclaringTypeSubjectId))
+                continue;
+            if (!enumFieldNamesByType.TryGetValue(field.DeclaringTypeSubjectId, out var names))
+            {
+                names = new HashSet<string>(StringComparer.Ordinal);
+                enumFieldNamesByType[field.DeclaringTypeSubjectId] = names;
+            }
+            names.Add(field.FieldName);
+        }
+        if (enumFieldNamesByType.Count == 0)
+            return;
+
+        foreach (var method in methodsForLowering)
+        {
+            var instrs = method.Instructions;
+            if (instrs.Count == 0) continue;
+
+            // Simulated eval stack: track which instruction index produced each slot
+            var producers = new int[128];
+            int depth = 0;
+
+            for (int i = 0; i < instrs.Count; i++)
+            {
+                var instr = instrs[i];
+
+                switch (instr.Op)
+                {
+                    case "ldsfld":
+                        producers[depth++] = i;
+                        break;
+
+                    case "ldc.i4":
+                    case "ldc.i8":
+                    case "ldarg":
+                    case "ldloc":
+                    case "ldnull":
+                    case "ldstr":
+                    case "ldfld":
+                    case "ldtoken":
+                    case "ldelema":
+                    case "ldlen":
+                        depth++;
+                        break;
+
+                    case "stloc":
+                    case "pop":
+                    case "stsfld":
+                    case "stfld":
+                    case "stind.i":
+                    case "stind.i8":
+                    case "stind.i4":
+                    case "stind.ref":
+                        if (depth > 0) depth--;
+                        break;
+
+                    case "box":
+                        // box reinterprets the value type as a reference; the underlying
+                        // value (and therefore the producer instruction) is unchanged.
+                        break;
+
+                    case "dup":
+                        if (depth > 0)
+                        {
+                            producers[depth] = producers[depth - 1];
+                            depth++;
+                        }
+                        break;
+
+                    case "call":
+                    case "callvirt":
+                        TryFoldEnumToStringCall(instr, i, instrs, producers, depth, enumFieldNamesByType);
+                        // Conservative depth: pop 'this' (for instance) or 0, push result
+                        if (depth > 0) depth--;
+                        depth++;
+                        break;
+
+                    case "newobj":
+                        if (depth > 0) depth--;
+                        depth++;
+                        break;
+
+                    case "ret":
+                        depth = 0;
+                        break;
+
+                    default:
+                        if (instr.Op.StartsWith("br") || instr.Op == "switch")
+                        {
+                            if (instr.Op != "br" && depth > 0) depth--;
+                        }
+                        else if (instr.Op.StartsWith("st"))
+                        {
+                            if (depth > 0) depth--;
+                        }
+                        else if (instr.Op.StartsWith("ld"))
+                        {
+                            depth++;
+                        }
+                        else if (instr.Op is "add" or "sub" or "mul" or "div" or "rem"
+                            or "and" or "or" or "xor" or "shl" or "shr"
+                            or "ceq" or "cgt" or "clt")
+                        {
+                            if (depth > 1) depth--; // pop 2, push 1
+                        }
+                        break;
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// For a <c>call</c>/<c>callvirt</c> instruction, check if it targets
+    /// <c>System.Enum::ToString()</c> and the <c>this</c> argument was produced by
+    /// an <c>ldsfld</c> of a literal enum field. If so, record the fold in
+    /// <see cref="_enumToStringFoldMap"/>.
+    /// </summary>
+    private void TryFoldEnumToStringCall(
+        AotCoreIrInstructionArtifact callInstr,
+        int callIndex,
+        IReadOnlyList<AotCoreIrInstructionArtifact> instrs,
+        int[] producers,
+        int depth,
+        Dictionary<string, HashSet<string>> enumFieldNamesByType)
+    {
+        var callee = callInstr.Callee;
+        if (callee == null || !callee.Contains("::ToString:System.String()", StringComparison.Ordinal))
+            return;
+
+        int thisDepth = depth - 1;
+        if (thisDepth < 0) return;
+
+        int producerIdx = producers[thisDepth];
+        if (producerIdx < 0 || producerIdx >= callIndex) return;
+
+        var producer = instrs[producerIdx];
+        string? fieldSubjectId = producer.Op switch
+        {
+            "ldsfld" => producer.TargetReference?.SubjectId,
+            _ => null
+        };
+        if (fieldSubjectId == null) return;
+
+        // Parse "DeclaringType::FieldName"
+        var colonIdx = fieldSubjectId.LastIndexOf("::", StringComparison.Ordinal);
+        if (colonIdx <= 0) return;
+
+        var declaringType = fieldSubjectId.Substring(0, colonIdx);
+        var fieldName = fieldSubjectId.Substring(colonIdx + 2);
+
+        // Verify this is an enum literal field (not e.g. MyClass::someField)
+        if (!enumFieldNamesByType.TryGetValue(declaringType, out var validNames) ||
+            !validNames.Contains(fieldName))
+            return;
+
+        _enumToStringFoldMap[callInstr.IlOffset] = fieldName;
     }
 }
 

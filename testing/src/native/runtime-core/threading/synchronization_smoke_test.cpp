@@ -198,6 +198,98 @@ TEST(SynchronizationSmoke, WaitAny)
     threading::WaitHandleClose(wh2);
 }
 
+TEST(SynchronizationSmoke, WaitAnyMultiThread)
+{
+    // Multi-threaded WaitAny: one thread waits on two AutoResetEvents;
+    // a second thread signals one of them.  Verifies signal-based dispatch
+    // (waiter registration + Set → direct wakeup).
+    uint32_t ev1 = threading::WaitHandleCreate(
+        false, threading::WaitHandleType::AutoResetEvent);
+    uint32_t ev2 = threading::WaitHandleCreate(
+        false, threading::WaitHandleType::AutoResetEvent);
+    ASSERT_NE(ev1, threading::kInvalidWaitHandle);
+    ASSERT_NE(ev2, threading::kInvalidWaitHandle);
+
+    uint32_t handles[2] = { ev1, ev2 };
+    std::atomic<int> result_idx{-2};
+    std::atomic<bool> started{false};
+
+    std::thread waiter([&] {
+        started.store(true, std::memory_order_release);
+        int r = threading::WaitHandleWaitAny(handles, 2, 2000);
+        result_idx.store(r, std::memory_order_release);
+    });
+
+    // Wait for waiter to register, then signal ev2.
+    while (!started.load(std::memory_order_acquire)) {
+        std::this_thread::yield();
+    }
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    EXPECT_TRUE(threading::WaitHandleSet(ev2));
+
+    waiter.join();
+
+    // Waiter should have woken and found ev2 signalled (index 1).
+    EXPECT_EQ(result_idx.load(std::memory_order_acquire), 1);
+
+    // ev2 was consumed by AutoResetEvent — poll should timeout.
+    EXPECT_EQ(threading::WaitHandleWaitOne(ev2, 0), 0);
+
+    threading::WaitHandleClose(ev1);
+    threading::WaitHandleClose(ev2);
+}
+
+TEST(SynchronizationSmoke, WaitAnyTimeout)
+{
+    // WaitAny with timeout that expires — should return -1.
+    uint32_t ev1 = threading::WaitHandleCreate(
+        false, threading::WaitHandleType::AutoResetEvent);
+    uint32_t ev2 = threading::WaitHandleCreate(
+        false, threading::WaitHandleType::AutoResetEvent);
+    ASSERT_NE(ev1, threading::kInvalidWaitHandle);
+    ASSERT_NE(ev2, threading::kInvalidWaitHandle);
+
+    uint32_t handles[2] = { ev1, ev2 };
+    EXPECT_EQ(threading::WaitHandleWaitAny(handles, 2, 50), -1);
+
+    threading::WaitHandleClose(ev1);
+    threading::WaitHandleClose(ev2);
+}
+
+TEST(SynchronizationSmoke, WaitAnyAutoResetConsumed)
+{
+    // AutoResetEvent via WaitAny: signal wakes one waiter and consumes
+    // the signal; a second waiter should not see it.
+    uint32_t ev = threading::WaitHandleCreate(
+        false, threading::WaitHandleType::AutoResetEvent);
+    ASSERT_NE(ev, threading::kInvalidWaitHandle);
+
+    std::atomic<int> result1{-2};
+    std::atomic<int> result2{-2};
+
+    std::thread t1([&] {
+        uint32_t h[1] = { ev };
+        result1.store(threading::WaitHandleWaitAny(h, 1, 500), std::memory_order_release);
+    });
+    std::thread t2([&] {
+        uint32_t h[1] = { ev };
+        result2.store(threading::WaitHandleWaitAny(h, 1, 500), std::memory_order_release);
+    });
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    EXPECT_TRUE(threading::WaitHandleSet(ev));
+
+    t1.join();
+    t2.join();
+
+    // Exactly one waiter should have woken with index 0; the other timed out.
+    int r1 = result1.load(std::memory_order_acquire);
+    int r2 = result2.load(std::memory_order_acquire);
+    EXPECT_TRUE((r1 == 0 && r2 == -1) || (r1 == -1 && r2 == 0));
+
+    threading::WaitHandleClose(ev);
+}
+
 TEST(SynchronizationSmoke, WaitAll)
 {
     uint32_t wh1 = threading::WaitHandleCreate(

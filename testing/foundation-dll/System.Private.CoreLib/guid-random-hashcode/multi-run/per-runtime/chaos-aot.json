@@ -1,0 +1,114 @@
+{
+  "System.Private.CoreLib/System.Guid::.ctor:System.Void(System.String)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Guid::.ctor:System.Void(System.Byte[])": {
+    "runtime": "chaos-aot",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Guid::NewGuid:System.Guid()": {
+    "runtime": "chaos-aot",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Guid::Parse:System.Guid(System.String)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Guid::TryParse:System.Boolean(System.String,System.Guid&)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Guid::ToString:System.String()": {
+    "runtime": "chaos-aot",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Random::.ctor:System.Void()": {
+    "runtime": "chaos-aot",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Random::Next:System.Int32()": {
+    "runtime": "chaos-aot",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Random::Next:System.Int32(System.Int32)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Random::NextDouble:System.Double()": {
+    "runtime": "chaos-aot",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Random::NextBytes:System.Void(System.Byte[])": {
+    "runtime": "chaos-aot",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.HashCode::Add:System.Void(System.Object)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.HashCode::ToHashCode:System.Int32()": {
+    "runtime": "chaos-aot",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.HashCode::Combine:System.Int32(System.Int32,System.Int32)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  }
+}

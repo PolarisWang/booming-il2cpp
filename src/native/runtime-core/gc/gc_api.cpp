@@ -11,6 +11,7 @@
 #include "gc_scheduler.h"
 #include "gc_stats.h"
 #include "gc_young_collector.h"
+#include "gc_bgc.h"
 
 #if defined(_WIN32)
 #include <windows.h>
@@ -40,6 +41,64 @@ void GetPlatformMemoryStatus(MemoryStatusData& out) noexcept {
 // RemoveExternalMemoryPressure implementation.
 namespace {
 }  // anonymous namespace
+
+// ── OOM handling ──────────────────────────────────────────────────
+
+/// Re-entrancy guard: HandleOomCondition must not recurse when called
+/// from within a GC promotion path (OldGen::Allocate during GcYoungCollection).
+/// Set to true while HandleOomCondition is executing, checked on entry.
+thread_local bool tls_in_oom_handler = false;
+
+void* HandleOomCondition(void* (*retry_alloc)(void*), void* retry_context,
+                         CHAOS_IL2CPP_SIZE size) noexcept {
+    // Re-entrancy guard: if called from within a GC promotion path,
+    // return nullptr immediately.  The GC cycle will complete and the
+    // outer HandleOomCondition invocation will retry.
+    if (tls_in_oom_handler) {
+        CHAOS_IL2CPP_LOG_WARN("GC_API", "OOM: re-entrancy detected, skipping recursive handler");
+        return nullptr;
+    }
+    tls_in_oom_handler = true;
+
+    // Step 1: Try a blocking full STW GC (unless already in a GC or NoGcRegion).
+    bool gc_ran = false;
+    if (!GcIsInNoGcRegion() && G_Scheduler().TryClaimGcSlot()) {
+        CHAOS_IL2CPP_LOG_WARN("GC_API", "OOM: triggering blocking full GC for size={0}",
+            static_cast<unsigned long long>(size));
+        uint32_t gen = threading::RequestGlobalSafepoint();
+        chaos_gc_collect();
+        threading::ReleaseGlobalSafepoint(gen);
+        GcAdvanceBgcCycle();
+        gc_ran = true;
+    }
+
+    // Step 2: Retry allocation after GC.
+    if (retry_alloc) {
+        void* ptr = retry_alloc(retry_context);
+        if (ptr != nullptr) {
+            CHAOS_IL2CPP_LOG_INFO("GC_API", "OOM recovery: allocation succeeded after full GC");
+            tls_in_oom_handler = false;
+            return ptr;
+        }
+    }
+
+    // Step 3: Try the old-gen emergency reserve (protects finalizer thread).
+    if (gc_ran) {
+        void* reserve_ptr = G_OldGen().AllocateFromEmergencyReserve(size);
+        if (reserve_ptr != nullptr) {
+            CHAOS_IL2CPP_LOG_INFO("GC_API", "OOM recovery: allocated from emergency reserve");
+            tls_in_oom_handler = false;
+            return reserve_ptr;
+        }
+    }
+
+    // Step 4: All attempts failed — fire OOM event.
+    CHAOS_IL2CPP_LOG_ERROR("GC_API", "OOM: all recovery attempts failed for size={0}",
+        static_cast<unsigned long long>(size));
+    GcEtwFireGcOom();
+    tls_in_oom_handler = false;
+    return nullptr;
+}
 
 // ======================================================================
 // chaos_gc_get_total_memory
@@ -244,52 +303,92 @@ extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_get_memory_info(
 {
     // obj is a managed GCMemoryInfoData object reference (points to MethodTable*).
     // Compute interior pointer past the MethodTable* to reach the first data field.
-    (void)kind;  // unused (all GCKind values return the same snapshot)
     auto* info = reinterpret_cast<GcMemoryInfoNative*>(
         reinterpret_cast<char*>(static_cast<std::intptr_t>(obj)) + sizeof(void*));
     auto snap = GcGetSnapshot();
+
+    // ── Select per-kind data from the snapshot ────────────────────────
+    // Different GCKind values provide different views:
+    //   Any (0)       — latest overall snapshot (generation=last)
+    //   Gen1 (1)      — Gen1-specific view (generation=1)
+    //   Full (2)      — full STW marking GC view (generation=2)
+    //   Background (3) — BGC concurrent mark view (generation=2, concurrent=1)
+    int32_t generation = 2;
+    int64_t gc_index = 0;
+    int64_t promoted = 0;
+    int64_t pause_ns_total = 0;
+    int32_t compacted = 0;
+    int32_t concurrent = 0;
+
+    switch (kind) {
+    case 1:  // GCKind.Gen1
+        generation = 1;
+        gc_index = static_cast<int64_t>(snap.gen1_collections);
+        promoted = static_cast<int64_t>(snap.gen1_bytes_promoted);
+        pause_ns_total = static_cast<int64_t>(snap.gen1_pause_ns_total);
+        break;
+    case 2:  // GCKind.Full
+        generation = 2;
+        gc_index = static_cast<int64_t>(snap.full_collections);
+        promoted = static_cast<int64_t>(
+            snap.young_bytes_promoted + snap.gen1_bytes_promoted);
+        pause_ns_total = static_cast<int64_t>(snap.full_pause_ns_total);
+        compacted = g_gc_stats.last_compacted.load(std::memory_order_relaxed);
+        concurrent = g_gc_stats.last_concurrent.load(std::memory_order_relaxed);
+        break;
+    case 3:  // GCKind.Background
+        generation = 2;
+        gc_index = static_cast<int64_t>(snap.full_collections);
+        promoted = 0;  // BGC does not promote; it marks concurrent
+        pause_ns_total = static_cast<int64_t>(snap.full_pause_ns_total);
+        concurrent = 1;  // BGC is always concurrent
+        break;
+    default:  // GCKind.Any (0) — latest overall snapshot
+        generation = snap.last_gc_generation;
+        gc_index = static_cast<int64_t>(snap.gc_index);
+        promoted = static_cast<int64_t>(
+            snap.young_bytes_promoted + snap.gen1_bytes_promoted);
+        pause_ns_total = static_cast<int64_t>(
+            snap.young_pause_ns_total + snap.gen1_pause_ns_total + snap.full_pause_ns_total);
+        compacted = g_gc_stats.last_compacted.load(std::memory_order_relaxed);
+        concurrent = g_gc_stats.last_concurrent.load(std::memory_order_relaxed);
+        break;
+    }
+
     auto heap_size = static_cast<CHAOS_IL2CPP_INT64>(
         G_OldGen().TotalAllocated() + G_Loh().TotalAllocated());
-    auto promoted = static_cast<CHAOS_IL2CPP_INT64>(snap.young_bytes_promoted);
     auto fragmented = static_cast<CHAOS_IL2CPP_INT64>(
         snap.young_bytes_reclaimed + snap.full_bytes_reclaimed);
 
     MemoryStatusData mem;
     GetPlatformMemoryStatus(mem);
 
-    info->high_memory_load_threshold_bytes =
-        mem.total_phys / 2;
-    info->total_available_memory_bytes =
-        mem.total_phys;
-    info->memory_load_bytes =
-        mem.total_phys - mem.avail_phys;
+    info->high_memory_load_threshold_bytes = mem.total_phys / 2;
+    info->total_available_memory_bytes = mem.total_phys;
+    info->memory_load_bytes = mem.total_phys - mem.avail_phys;
     info->heap_size_bytes = heap_size;
     info->fragmented_bytes = fragmented;
     info->total_committed_bytes = heap_size;
     info->promoted_bytes = promoted;
     info->pinned_objects_count = 0;
     info->finalization_pending_count = static_cast<int64_t>(snap.finalization_pending_count);
-    info->index = static_cast<int64_t>(snap.gc_index);
-    info->generation = snap.last_gc_generation;
+    info->index = gc_index;
+    info->generation = generation;
     {
-        uint64_t total_pause_ns = snap.young_pause_ns_total
-            + snap.gen1_pause_ns_total
-            + snap.full_pause_ns_total;
         auto elapsed = std::chrono::steady_clock::now() - g_gc_start_time;
         uint64_t elapsed_ns = static_cast<uint64_t>(
             std::chrono::duration_cast<std::chrono::nanoseconds>(elapsed).count());
         info->pause_time_percentage = (elapsed_ns > 0)
-            ? static_cast<int32_t>((total_pause_ns * 100) / elapsed_ns)
+            ? static_cast<int32_t>((static_cast<uint64_t>(pause_ns_total) * 100) / elapsed_ns)
             : 0;
     }
-    info->compacted = static_cast<uint8_t>(
-        g_gc_stats.last_compacted.load(std::memory_order_relaxed));
-    info->concurrent = static_cast<uint8_t>(
-        g_gc_stats.last_concurrent.load(std::memory_order_relaxed));
+    info->compacted = static_cast<uint8_t>(compacted);
+    info->concurrent = static_cast<uint8_t>(concurrent);
 
     // ── GenerationInfo array (5 entries: gen0, gen1, gen2, gen3, LOH) ──
     // Each entry: SizeBeforeBytes, SizeAfterBytes, FragBeforeBytes, FragAfterBytes
     // CRAG has 2 effective generations; map to BCL's 5-generation model.
+    // This part is independent of GCKind — it reflects heap state at query time.
     CHAOS_IL2CPP_SIZE nursery_capacity = 0;
     {
         auto* nursery = g_young_gen.region.load(std::memory_order_acquire);
@@ -310,7 +409,7 @@ extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_get_memory_info(
 
     // Gen0 (young/nursery)
     info->gen0_size_before = static_cast<int64_t>(nursery_capacity);
-    info->gen0_size_after = 0;  // nursery is reset after GC
+    info->gen0_size_after = 0;
     info->gen0_frag_before = 0;
     info->gen0_frag_after = 0;
 

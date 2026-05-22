@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Threading.Tasks.Parallel",
+  "familyId": "family/System.Threading.Tasks.Parallel/loop/state",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Break:System.Void()",
+      "status": "passed",
+      "prePatchNsPerOp": 4.3,
+      "postPatchNsPerOp": 3.2,
+      "slowdownPercent": -25.58
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_IsExceptional:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.62,
+      "postPatchNsPerOp": 4.1,
+      "slowdownPercent": 13.26
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_IsStopped:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 4.14,
+      "postPatchNsPerOp": 5.9,
+      "slowdownPercent": 42.51
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_LowestBreakIteration:System.Nullable{System.Int64}()",
+      "status": "passed",
+      "prePatchNsPerOp": 7.07,
+      "postPatchNsPerOp": 5.6,
+      "slowdownPercent": -20.79
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::get_ShouldExitCurrentIteration:System.Boolean()",
+      "status": "passed",
+      "prePatchNsPerOp": 3.44,
+      "postPatchNsPerOp": 6.2,
+      "slowdownPercent": 80.23
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Stop:System.Void()",
+      "status": "passed",
+      "prePatchNsPerOp": 2.87,
+      "postPatchNsPerOp": 3.2,
+      "slowdownPercent": 11.5
+    }
+  ],
+  "summary": {
+    "totalMethods": 6,
+    "nonStubMethods": 6,
+    "averageSlowdownPercent": 16.86,
+    "slowdownFactor": 1.1686,
+    "slowdownThresholdX": 50.0
+  }
+}
