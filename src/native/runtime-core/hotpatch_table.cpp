@@ -210,9 +210,9 @@ void HotpatchNameRegistry::SetPatchedBySlot(uint32_t module_id, uint32_t slot, b
     if (patched) {
         entry->method_key = reinterpret_cast<uintptr_t>(method_key);
         // release: method_key visible before flags (reader uses acquire fence)
-        _InterlockedOr((volatile long*)&entry->flags, kHotpatchActive);
+        _InterlockedOr(reinterpret_cast<volatile long*>(&entry->flags), kHotpatchActive);
     } else {
-        _InterlockedAnd((volatile long*)&entry->flags, ~kHotpatchActive);
+        _InterlockedAnd(reinterpret_cast<volatile long*>(&entry->flags), ~kHotpatchActive);
         // release: method_key visible before flags (reader uses acquire fence)
         entry->method_key = 0;
     }

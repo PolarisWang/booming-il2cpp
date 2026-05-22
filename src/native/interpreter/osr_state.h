@@ -27,9 +27,9 @@ struct RegisterFrame;
 struct RegStackMapEntry;
 
 struct OsrState {
-    static constexpr uint32_t kMaxStack   = 16;
-    static constexpr uint32_t kMaxLocals  = 8;
-    static constexpr uint32_t kMaxTracked = 8;
+    static constexpr uint32_t kMaxStack   = 64;
+    static constexpr uint32_t kMaxLocals  = 32;
+    static constexpr uint32_t kMaxTracked = 32;
 
     uint32_t pc              = 0;
     uint32_t sp              = 0;

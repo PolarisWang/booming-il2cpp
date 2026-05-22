@@ -7,6 +7,7 @@
 #include <vector>
 
 #include <ir_opcodes.h>
+#include <osr_state.h>
 
 namespace chaos::il2cpp::interpreter {
 
@@ -275,6 +276,10 @@ struct ExecutionResult {
     // Exception propagation (cross-frame)
     bool threw_exception = false;
     InterpreterValue exception_value = {};  // exception object when threw_exception == true
+
+    // OSR state capture (VmInterpreter → RegisterExecute promotion)
+    bool wants_osr = false;
+    OsrState osr_state = {};
 };
 
 class InterpreterVM {

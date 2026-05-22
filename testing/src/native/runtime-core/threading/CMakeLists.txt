@@ -52,12 +52,40 @@ add_chaos_test(test_execution_context_smoke
     LABELS "unit;threading"
 )
 
+# queue_backpressure_test — Global queue backpressure verification (T2-QUEUE)
+add_chaos_test(test_queue_backpressure
+    queue_backpressure_test.cpp
+    LIBS ${CHAOS_THREADING_LIBS}
+    LABELS "unit;threading"
+)
+
+# threading_stress_test — Multi-threaded stress tests (T2-STRESS)
+add_chaos_test(test_threading_stress
+    threading_stress_test.cpp
+    LIBS ${CHAOS_THREADING_LIBS}
+    LABELS "unit;threading"
+)
+
+# hc_cpu_feedback_test — HC CPU utilization real measurement verification (T1-HC-CPU)
+add_chaos_test(test_hc_cpu_feedback
+    hc_cpu_feedback_test.cpp
+    LIBS ${CHAOS_THREADING_LIBS}
+    LABELS "unit;threading"
+)
+
 # rwlock_upgrade_test — ReaderWriterLockSlim upgradeable read / upgrade / downgrade
 # Compiles synchronization.cpp directly for new APIs, links chaos_runtime_core for
 # GC_TRANSITION, SafepointPoll, and thread state symbols.
 add_chaos_test(test_rwlock_upgrade
     rwlock_upgrade_test.cpp
     ${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/synchronization.cpp
+    LIBS ${CHAOS_THREADING_LIBS}
+    LABELS "unit;threading"
+)
+
+# phase3_industrialization_test — Phase 3 TDD: timer precision, shutdown race, injection rate
+add_chaos_test(test_phase3_industrialization
+    phase3_industrialization_test.cpp
     LIBS ${CHAOS_THREADING_LIBS}
     LABELS "unit;threading"
 )

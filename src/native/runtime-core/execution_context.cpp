@@ -216,18 +216,26 @@ void ExecutionContextRun(ExecutionContext* ctx, void (*callback)(void*), void* s
     }
 
     // Ensure TLS has enough capacity for context values.
+    bool install_ctx_values = true;
     if (ctx->value_count > 0) {
-        tls_async_locals.EnsureHeapCapacity(ctx->value_count);
+        if (!tls_async_locals.EnsureHeapCapacity(ctx->value_count)) {
+            CHAOS_IL2CPP_LOG_WARN_M("ExecutionContext",
+                "failed to allocate heap storage for {0} context values, "
+                "skipping context install", ctx->value_count);
+            install_ctx_values = false;
+        }
     }
 
     // Install SecurityContext.
     void* saved_sc = tls_security_context;
     tls_security_context = ctx->security_context;
 
-    // Install context values.
-    tls_async_locals.count = ctx->value_count;
-    for (uint32_t i = 0; i < ctx->value_count; i++) {
-        tls_async_locals.ValueAt(i) = ctx->values[i];
+    // Install context values (skipped if heap allocation failed above).
+    if (install_ctx_values) {
+        tls_async_locals.count = ctx->value_count;
+        for (uint32_t i = 0; i < ctx->value_count; i++) {
+            tls_async_locals.ValueAt(i) = ctx->values[i];
+        }
     }
 
     // Run the callback.

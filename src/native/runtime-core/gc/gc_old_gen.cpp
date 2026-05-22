@@ -3186,12 +3186,13 @@ void MarkSweepOldGen::BgcSweep() {
                     auto pool_page_size = p->page_size;
                     auto pool_payload_size = p->payload_size;
                     auto pool_bitmap_bytes = p->bitmap_bytes;
+                    auto pool_numa_node = static_cast<int8_t>(p->numa_node);
 #if defined(_WIN32) || defined(_WIN64)
                     VirtualFree(p, pool_page_size, MEM_DECOMMIT);
 #endif
                     page_pool_.push_back(PoolEntry{
                         p, pool_page_size, pool_payload_size, pool_bitmap_bytes,
-                        static_cast<int8_t>(p->numa_node) });
+                        pool_numa_node });
                 } else {
                     // Defer VirtualFree to BgcCompact (STW safepoint).
                     deferred_free_pages_.push_back(p);

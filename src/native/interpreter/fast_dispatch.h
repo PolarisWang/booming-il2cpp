@@ -28,8 +28,8 @@ namespace chaos::il2cpp::runtime_core {
 // Fixed-size value stack and local variables. All values stored as uint64_t
 // with a separate tag byte. No heap allocation during execution.
 struct FastFrame {
-    static constexpr uint32_t kMaxStack  = 16;
-    static constexpr uint32_t kMaxLocals = 8;
+    static constexpr uint32_t kMaxStack  = 64;
+    static constexpr uint32_t kMaxLocals = 32;
 
     uint64_t  stack[kMaxStack]        = {};
     uint8_t   stack_tags[kMaxStack]   = {};
@@ -66,16 +66,57 @@ struct FastFrame {
 
     uint32_t    pc                    = 0;
 
+    // ── OSR (On-Stack Replacement) state ─────────────────────────────
+    // Pointer to PatchMethod for tier state access during backedge OSR.
+    // Set by SetupFastFrame; nullptr when the method has no patch_method.
+    void*       patch_method          = nullptr;
+    uint32_t    loop_counter          = 0;      // backedge count for hot-loop detection
+    bool        osr_reenable          = false;  // set after T4 deopt: immediate OSR on first backedge
+
+    // ── SEH (Structured Exception Handling) state ──────────────────────
+    // Set by SetupFastFrame when the method has SEH clauses.
+    // FastExecute handles Throw/Leave/EndFinally in-place instead of
+    // falling back to InterpreterVM.
+    const interpreter::SEHClause* seh_clauses       = nullptr;
+    uint32_t                      seh_clause_count  = 0;
+
+    // Two-phase exception unwind state (mirrors InterpreterVM pattern).
+    bool        exception_in_flight       = false;
+    int32_t     unwind_catch_clause       = -1;
+    static constexpr int kMaxUnwindDepth  = 8;
+    int32_t     unwind_finally_list[kMaxUnwindDepth]{};
+    int32_t     unwind_finally_count      = 0;
+    int32_t     unwind_finally_current    = 0;
+
+    // Pending leave target (for Leave inside try with finally).
+    bool        pending_leave             = false;
+    uint32_t    pending_leave_target      = 0;
+
     // ── Tracked object cleanup for interpreter heap objects ──────────
     // Fast dispatch heap-allocates InterpreterObject/ArrayStorage via
     // CHAOS_IL2CPP_MALLOC+placement new.  We track pointers here so
     // FastExecute / callers can free everything on normal/fallback exit,
     // eliminating the R1 operator-new leak.
-    static constexpr uint32_t kMaxTracked = 8;
+    //
+    // When the inline array (kMaxTracked = 32) fills up, we allocate one
+    // heap-based overflow block of the same size.  Overflow is uncommon;
+    // a single overflow block handles all practical cases.  If both fill
+    // up (~64 objects in a single method), a warning is emitted and the
+    // excess object leaks — an extremely unlikely edge case.
+    static constexpr uint32_t kMaxTracked = 32;
     void*     tracked_objs[kMaxTracked]{};
     void (*tracked_dtors[kMaxTracked])(void*){};
     bool      tracked_is_pool[kMaxTracked]{};  // true = pool-allocated (skip free)
     uint32_t  tracked_cnt            = 0;
+
+    struct TrackedBlock {
+        static constexpr uint32_t kSize = 32;
+        uint32_t count = 0;
+        void*     objs[kSize]{};
+        void (*dtors[kSize])(void*){};
+        bool      is_pool[kSize]{};
+    };
+    TrackedBlock* tracked_overflow    = nullptr;
 
     template<typename T>
     static void Dtor(void* p) noexcept { static_cast<T*>(p)->~T(); }
@@ -86,8 +127,24 @@ struct FastFrame {
             tracked_dtors[tracked_cnt]   = dtor;
             tracked_is_pool[tracked_cnt] = false;
             ++tracked_cnt;
+        } else if (tracked_overflow != nullptr && tracked_overflow->count < TrackedBlock::kSize) {
+            auto& blk = *tracked_overflow;
+            blk.objs[blk.count]    = ptr;
+            blk.dtors[blk.count]   = dtor;
+            blk.is_pool[blk.count] = false;
+            ++blk.count;
+        } else if (tracked_overflow == nullptr) {
+            tracked_overflow = static_cast<TrackedBlock*>(
+                CHAOS_IL2CPP_MALLOC(sizeof(TrackedBlock)));
+            if (tracked_overflow != nullptr) {
+                tracked_overflow->count = 1;
+                tracked_overflow->objs[0]    = ptr;
+                tracked_overflow->dtors[0]   = dtor;
+                tracked_overflow->is_pool[0] = false;
+            }
         } else {
-            CHAOS_IL2CPP_LOG_WARN_M("FastFrame", "Track overflow, ptr={0}", reinterpret_cast<const void*>(ptr));
+            CHAOS_IL2CPP_LOG_WARN_M("FastFrame", "Track overflow (both inline + block full), ptr={0}",
+                                    reinterpret_cast<const void*>(ptr));
         }
     }
 
@@ -99,8 +156,24 @@ struct FastFrame {
             tracked_dtors[tracked_cnt]   = dtor;
             tracked_is_pool[tracked_cnt] = true;
             ++tracked_cnt;
+        } else if (tracked_overflow != nullptr && tracked_overflow->count < TrackedBlock::kSize) {
+            auto& blk = *tracked_overflow;
+            blk.objs[blk.count]    = ptr;
+            blk.dtors[blk.count]   = dtor;
+            blk.is_pool[blk.count] = true;
+            ++blk.count;
+        } else if (tracked_overflow == nullptr) {
+            tracked_overflow = static_cast<TrackedBlock*>(
+                CHAOS_IL2CPP_MALLOC(sizeof(TrackedBlock)));
+            if (tracked_overflow != nullptr) {
+                tracked_overflow->count = 1;
+                tracked_overflow->objs[0]    = ptr;
+                tracked_overflow->dtors[0]   = dtor;
+                tracked_overflow->is_pool[0] = true;
+            }
         } else {
-            CHAOS_IL2CPP_LOG_WARN_M("FastFrame", "TrackPool overflow, ptr={0}", reinterpret_cast<const void*>(ptr));
+            CHAOS_IL2CPP_LOG_WARN_M("FastFrame", "TrackPool overflow (both inline + block full), ptr={0}",
+                                    reinterpret_cast<const void*>(ptr));
         }
     }
 
@@ -112,6 +185,16 @@ struct FastFrame {
             }
         }
         tracked_cnt = 0;
+        if (tracked_overflow != nullptr) {
+            for (uint32_t i = 0; i < tracked_overflow->count; ++i) {
+                tracked_overflow->dtors[i](tracked_overflow->objs[i]);
+                if (!tracked_overflow->is_pool[i]) {
+                    CHAOS_IL2CPP_FREE(tracked_overflow->objs[i]);
+                }
+            }
+            CHAOS_IL2CPP_FREE(tracked_overflow);
+            tracked_overflow = nullptr;
+        }
     }
 
     // ── Push helpers ─────────────────────────────────────────────────
@@ -210,10 +293,13 @@ bool FastExecute(FastFrame& frame,
                  uint32_t instr_count) noexcept;
 
 // ── Fallback: check if FastExecute can handle this method ───────────────
-// FastExecute supports methods WITHOUT SEH.  The caller should pre-check
-// and only call FastExecute when seh_clauses is empty.
+// FastExecute now supports methods WITH SEH (handles Throw/Leave/EndFinally
+// in-place).  This check always returns true; SEH-unaware callers that
+// previously checked can_fast_execute = seh_clauses.empty() will now
+// correctly route SEH methods to FastExecute.
 inline bool CanFastExecute(const interpreter::IRMethod& ir) noexcept {
-    return ir.seh_clauses.empty();
+    (void)ir;
+    return true;  // All methods can now use FastExecute (SEH included).
 }
 
 }  // namespace chaos::il2cpp::runtime_core

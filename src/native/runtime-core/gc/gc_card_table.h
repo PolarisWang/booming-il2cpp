@@ -186,6 +186,13 @@ void GcUnregisterHeapRange(uintptr_t start, uintptr_t end) noexcept;
 /// Uses a tracked segment list to avoid walking all 64K L1 entries.
 void ClearAllCards() noexcept;
 
+/// Clear card table entries within address range [start, end).
+/// More precise than ClearAllCards: only clears card bytes for segments
+/// that overlap the given range.  Used by young GC to clear nursery
+/// (and Gen1) cards without destroying old-gen card data that concurrent
+/// BGC mark may still depend on for STW re-mark.
+void ClearCardRange(uintptr_t start, uintptr_t end) noexcept;
+
 /// Scan the card table for dirty cards within the range [@a start, @a end).
 /// Calls @a callback(card_index, card_start, card_end) for each dirty card.
 /// Two-level iteration: walks L1 segments, then dirty card bytes within.

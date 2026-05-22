@@ -193,16 +193,19 @@ private:
     // ── Prologue tracking (for .pdata/.xdata unwind info) ──────────────────
     // Byte offsets from function entry for each prologue instruction.
     // Set during prologue emission (lines ~2825-2833).
-    uint32_t prologue_push_offsets_[6]{};  // Offsets of push rbp/rbx/rsi up to 5 cached regs
+    uint32_t prologue_push_offsets_[8]{};  // Offsets of push rbp/rbx/rsi up to 5 cached regs
     uint32_t prologue_sub_rsp_offset_ = 0; // Offset of sub rsp, K
     uint32_t prologue_set_fpreg_offset_ = 0; // Offset of mov rbp, rsp
     uint32_t prologue_total_bytes_ = 0;    // Total prologue size in bytes
-    uint8_t push_reg_nums_[6]{};           // x64 register numbers in push order
+    uint8_t push_reg_nums_[8]{};           // x64 register numbers in push order
     uint32_t num_push_regs_ = 0;           // Number of push regs (3 + num_cache_regs_)
     uint32_t prologue_sub_rsp_size_ = 0;   // K value in sub rsp, K
 
     // .eh_frame DWARF CFI offset (Linux x64), 0 = not emitted.
     uint32_t eh_frame_offset_ = 0;
+
+    // Error tracking: set by early-exit helpers; causes Generate() to return nullptr.
+    bool failed_ = false;
 
     // Bitmask of vregs colored by allocator but filtered (caller-saved).
     // These vregs fall through to stack I/O, so the prologue zeros
@@ -236,6 +239,14 @@ private:
     void EmitDeoptSequence(uint32_t instr_pc, uint32_t osr_resume_pc = 0) noexcept;
     void DumpCode() noexcept;
     void RecordGcPoint(uint32_t native_offset) noexcept;
+
+    /// Returns true when an OOM or other unrecoverable error has occurred.
+    /// Emit helpers check buf_.failed() internally; this is a combined check
+    /// so Generate() can bail out early after any major emit section.
+    bool CheckFailed() noexcept {
+        if (buf_.failed()) failed_ = true;
+        return failed_;
+    }
 };
 
 void NativeCodeGenerator::LoadGpr(uint8_t x64_reg, uint32_t vreg) noexcept {
@@ -2964,6 +2975,9 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
             EmitXorRR(buf_, x64r, x64r);
     }
 
+    // Bail out early if any emit above hit an OOM
+    if (CheckFailed()) return nullptr;
+
     // ── Optimize instructions (constant folding + DCE) ───────────────────
     // Creates a mutable copy of rm_.instructions for the optimizer.
     auto opt_instrs = rm_.instructions;
@@ -2989,6 +3003,9 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
         }
         PropagateTypes(instr);
     }
+
+    // Bail out if any instruction emit failed (OOM).
+    if (CheckFailed()) return nullptr;
 
     // deopt_return: shared deoptimization return point + stack frame epilogue.
     // All deopt paths (unsupported opcode, throw/rethrow, CallVirt PIC miss)
@@ -3028,10 +3045,12 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
         buf_.Patch32(cp.patch_offset, static_cast<uint32_t>(disp));
     }
 
+    if (CheckFailed()) return nullptr;
     if (buf_.pos() == 0 || instr_offsets_.empty()) return nullptr;
 
     // Resolve branches (including deopt jump patches)
     ResolveBranches();
+    if (CheckFailed()) return nullptr;
 
     // ── Emit SEH clause table ──────────────────────────────────────────
     // Appended after code body; VEH handler reads from nm->code + seh_table_offset.
@@ -3039,14 +3058,30 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
     if (!rm_.seh_clauses.empty()) {
         seh_offset = buf_.pos();
         uint32_t count = static_cast<uint32_t>(rm_.seh_clauses.size());
+        uint32_t max_idx = n_instrs;  // instr_offsets_ has n_instrs + 1 entries (sentinel at end)
+        uint32_t emitted_count = 0;
         buf_.Emit32(count);
         for (const auto& clause : rm_.seh_clauses) {
+            uint32_t try_start = static_cast<uint32_t>(clause.try_start_idx);
+            uint32_t try_end = static_cast<uint32_t>(clause.try_end_idx);
+            uint32_t handler_start = static_cast<uint32_t>(clause.handler_start_idx);
+            // Validate indices: skip malformed clauses (defensive, not a crash).
+            if (try_start >= max_idx || try_end > max_idx || handler_start >= max_idx) {
+                CHAOS_IL2CPP_LOG_WARN_M("codegen",
+                    "GenerateNativeCode: SEH clause has out-of-range indices "
+                    "(try_start={} try_end={} handler_start={} max_idx={}), skipping",
+                    try_start, try_end, handler_start, max_idx);
+                continue;
+            }
             buf_.Emit32(static_cast<uint32_t>(clause.flags));
-            buf_.Emit32(instr_offsets_[static_cast<uint32_t>(clause.try_start_idx)]);
-            buf_.Emit32(instr_offsets_[static_cast<uint32_t>(clause.try_end_idx)]);
-            buf_.Emit32(instr_offsets_[static_cast<uint32_t>(clause.handler_start_idx)]);
+            buf_.Emit32(instr_offsets_[try_start]);
+            buf_.Emit32(instr_offsets_[try_end]);
+            buf_.Emit32(instr_offsets_[handler_start]);
             buf_.Emit32(clause.class_token);
+            ++emitted_count;
         }
+        // Overwrite count with actual emitted count (skipped malformed clauses)
+        buf_.Patch32(seh_offset, emitted_count);
     }
 
     // ── Emit .pdata/.xdata unwind info ──────────────────────────────────
@@ -3179,7 +3214,10 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
         }
     }
 
-    // Seal code buffer
+    if (CheckFailed()) return nullptr;
+
+    // Seal code buffer — returns nullptr on OOM or failure
+    if (CheckFailed()) return nullptr;
     uint32_t code_bytes = buf_.pos();
     void* code = buf_.Seal();
     if (code == nullptr) return nullptr;
@@ -3274,6 +3312,17 @@ NativeMethod* GenerateNativeCode(
 bool CanGenerateNativeCode(const interpreter::RegisterMethod& rm) noexcept {
     using namespace chaos::il2cpp::interpreter;
     if (rm.instructions.empty()) return false;
+    // Validate SEH clause indices — any out-of-range clause means the
+    // IR is malformed.  Generate() skips them, but early rejection here
+    // prevents partial codegen.
+    uint32_t n_instrs = static_cast<uint32_t>(rm.instructions.size());
+    for (const auto& clause : rm.seh_clauses) {
+        if (static_cast<uint32_t>(clause.try_start_idx) >= n_instrs ||
+            static_cast<uint32_t>(clause.try_end_idx) > n_instrs ||
+            static_cast<uint32_t>(clause.handler_start_idx) >= n_instrs) {
+            return false;
+        }
+    }
     return true;  // All opcodes accepted — unsupported ones deopt at runtime.
 }
 

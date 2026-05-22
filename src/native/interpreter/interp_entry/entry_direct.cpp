@@ -619,6 +619,87 @@ void InterpreterEntryDirect(
         CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterEntryDirect.FastExecute");
         if (!patch_method->cached_sig_valid) CacheSignature(patch_method);
 
+        // ── Tier upgrade checks (mirrors Step B pattern) ─────────────
+        { CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterEntryDirect.StepC.TierUpgrade");
+          auto call_count = patch_method->call_count.fetch_add(1, std::memory_order_relaxed) + 1;
+          auto tier = patch_method->tier_state.load(std::memory_order_acquire);
+
+          if (tier == PatchMethod::kT1Cold && call_count >= TierManager::Get().GetAdaptiveT1Threshold()) {
+              uint32_t expected = PatchMethod::kT1Cold;
+              if (patch_method->tier_state.compare_exchange_strong(expected, PatchMethod::kT2Lowering, std::memory_order_acq_rel)) {
+                  OptimizeToTier2(patch_method);
+                  patch_method->tier_state.store(PatchMethod::kT2Ready, std::memory_order_release);
+              }
+          }
+
+          tier = patch_method->tier_state.load(std::memory_order_acquire);
+          if (tier == PatchMethod::kT2Ready && call_count >= TierManager::Get().GetAdaptiveT2Threshold()) {
+              uint32_t expected = PatchMethod::kT2Ready;
+              if (patch_method->tier_state.compare_exchange_strong(expected, PatchMethod::kT3Lowering, std::memory_order_acq_rel)) {
+                  if (!TierManager::Get().EnqueueOptimization(patch_method)) {
+                      patch_method->tier_state.store(PatchMethod::kT2Ready, std::memory_order_release);
+                  }
+              }
+          }
+
+          {   auto t4_tier = patch_method->tier_state.load(std::memory_order_acquire);
+              if (t4_tier != PatchMethod::kT4Skip && t4_tier == PatchMethod::kT3Ready) {
+                  uint32_t backoff_base = PatchMethod::kT3NativeThreshold +
+                      patch_method->codegen_fail_count * 1000;
+                  if (call_count >= backoff_base) {
+                      uint32_t t4_expected = PatchMethod::kT3Ready;
+                      if (patch_method->tier_state.compare_exchange_strong(t4_expected, PatchMethod::kT4Ready, std::memory_order_acq_rel)) {
+                          auto* reg_m = static_cast<interpreter::RegisterMethod*>(patch_method->cached_optimized_reg_method);
+                          if (reg_m == nullptr) reg_m = static_cast<interpreter::RegisterMethod*>(patch_method->cached_reg_method);
+                          if (reg_m != nullptr && codegen::CanGenerateNativeCode(*reg_m)) {
+                              auto* runtime_state = GetCurrentRuntimeState();
+                              auto* thread_state  = GetCurrentThreadState();
+                              runtime_instantiation::InterpreterDispatchContext reg_dispatch_ctx;
+                              reg_dispatch_ctx.runtime_state = runtime_state;
+                              reg_dispatch_ctx.thread_state = thread_state;
+                              codegen::CodeGenConfig cfg;
+                              cfg.enable_safepoint_polls = true;
+                              cfg.safepoint_fn = reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::threading::SafepointPoll);
+                              cfg.pic_dispatch_data = patch_method->pic_dispatch_data;
+                              cfg.dispatch_ctx = &reg_dispatch_ctx;
+                              cfg.call_cache = patch_method->call_cache;
+                              cfg.call_cache_count = patch_method->reg_ir_instr_count;
+                              cfg.arg_type_tags = patch_method->cached_sig_valid ? patch_method->cached_arg_types : nullptr;
+                              cfg.arg_type_count = patch_method->cached_arg_count;
+                              cfg.method_token = patch_method->token;
+                              cfg.method_module_id = patch_method->module_id;
+                              auto* nm = codegen::GenerateNativeCode(*reg_m, cfg);
+                              patch_method->cached_native_method = nm;
+                              if (nm != nullptr) {
+                                  if (nm->slot_map_data != nullptr) {
+                                      chaos::il2cpp::runtime_core::GcRegisterSlotMap(
+                                          nm->code,
+                                          static_cast<const GcSlotMapV0*>(nm->slot_map_data));
+                                  }
+                                  chaos::il2cpp::codegen::RegisterT4Code(
+                                      nm->code, nm->code_size, nm, patch_method->token);
+                              } else {
+                                  ++patch_method->codegen_fail_count;
+                                  if (patch_method->codegen_fail_count >= PatchMethod::kMaxCodegenFailures) {
+                                      patch_method->tier_state.store(PatchMethod::kT4Skip, std::memory_order_release);
+                                  } else {
+                                      patch_method->tier_state.store(PatchMethod::kT3Ready, std::memory_order_release);
+                                  }
+                              }
+                          } else {
+                              ++patch_method->codegen_fail_count;
+                              if (patch_method->codegen_fail_count >= PatchMethod::kMaxCodegenFailures) {
+                                  patch_method->tier_state.store(PatchMethod::kT4Skip, std::memory_order_release);
+                              } else {
+                                  patch_method->tier_state.store(PatchMethod::kT3Ready, std::memory_order_release);
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+        }
+
         FastFrame* ff = tls_frame_pool.Acquire();
         FastFrame ff_fallback;
         bool using_pool = true;

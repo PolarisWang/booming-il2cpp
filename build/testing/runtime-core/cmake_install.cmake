@@ -47,3 +47,8 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("D:/agent/booming-il2cpp/build/testing/runtime-core/threading/cmake_install.cmake")
 endif()
 
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("D:/agent/booming-il2cpp/build/testing/runtime-core/metadata/cmake_install.cmake")
+endif()
+

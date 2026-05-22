@@ -137,6 +137,20 @@ TEST(ExecutionContext, SuppressFlowRestoresCapture) {
     threading::AsyncLocalSetValue(42, 0);
 }
 
+struct RunCtxCheck {
+    uint64_t* keys;
+    CHAOS_IL2CPP_INTPTR* expected;
+};
+
+static void run_callback_with_check(void* state) {
+    s_callback_invoked++;
+    auto* c = static_cast<RunCtxCheck*>(state);
+    for (int i = 0; i < 6; i++) {
+        auto v = threading::AsyncLocalGetValue(c->keys[i]);
+        EXPECT_EQ(v, c->expected[i]) << "key=" << c->keys[i];
+    }
+}
+
 TEST(ExecutionContext, RunContextWithValues) {
     threading::AsyncLocalSetValue(1, static_cast<CHAOS_IL2CPP_INTPTR>(10));
 
@@ -149,6 +163,57 @@ TEST(ExecutionContext, RunContextWithValues) {
 
     threading::ExecutionContextFree(ctx);
     threading::AsyncLocalSetValue(1, 0);
+}
+
+TEST(ExecutionContext, RunContextWithHeapValues) {
+    // Set 6 AsyncLocal values (> kInlineValueCount = 4) to exercise
+    // the heap-allocated path in ExecutionContextRun.
+    uint64_t keys[6] = {100, 101, 102, 103, 104, 105};
+    CHAOS_IL2CPP_INTPTR vals[6] = {
+        static_cast<CHAOS_IL2CPP_INTPTR>(10),
+        static_cast<CHAOS_IL2CPP_INTPTR>(20),
+        static_cast<CHAOS_IL2CPP_INTPTR>(30),
+        static_cast<CHAOS_IL2CPP_INTPTR>(40),
+        static_cast<CHAOS_IL2CPP_INTPTR>(50),
+        static_cast<CHAOS_IL2CPP_INTPTR>(60),
+    };
+
+    for (int i = 0; i < 6; i++) {
+        threading::AsyncLocalSetValue(keys[i], vals[i]);
+    }
+
+    // Capture context (should use heap allocation since > 4 values).
+    auto* ctx = threading::ExecutionContextCapture();
+    ASSERT_NE(ctx, nullptr);
+    EXPECT_EQ(ctx->value_count, 6u);
+    EXPECT_TRUE(ctx->heap_allocated);
+
+    // Verify captured values.
+    for (uint32_t i = 0; i < 6; i++) {
+        EXPECT_EQ(ctx->values[i].key, keys[i]);
+        EXPECT_EQ(ctx->values[i].value, vals[i]);
+    }
+
+    // Change current thread's values to verify restore works.
+    threading::AsyncLocalSetValue(keys[0], static_cast<CHAOS_IL2CPP_INTPTR>(99));
+    threading::AsyncLocalSetValue(keys[1], static_cast<CHAOS_IL2CPP_INTPTR>(0));  // remove
+
+    // Run context: inside callback, verify values are installed.
+    RunCtxCheck check{keys, vals};
+    s_callback_invoked = 0;
+    threading::ExecutionContextRun(ctx, run_callback_with_check, &check);
+    EXPECT_EQ(s_callback_invoked, 1);
+
+    // After Run, the thread's values should be restored (key[0] back to 99, key[1] removed).
+    EXPECT_EQ(threading::AsyncLocalGetValue(keys[0]), static_cast<CHAOS_IL2CPP_INTPTR>(99));
+    EXPECT_EQ(threading::AsyncLocalGetValue(keys[1]), static_cast<CHAOS_IL2CPP_INTPTR>(0));
+
+    threading::ExecutionContextFree(ctx);
+
+    // Cleanup.
+    for (int i = 0; i < 6; i++) {
+        threading::AsyncLocalSetValue(keys[i], 0);
+    }
 }
 
 TEST(ExecutionContext, RunContextNull) {

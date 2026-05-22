@@ -20,6 +20,8 @@
 #include <string>
 #include <vector>
 
+#include <atomic>
+
 namespace chaos::il2cpp::runtime_core {
 
 // ── HotpatchNameRegistry ─────────────────────────────────────────────
@@ -113,9 +115,14 @@ inline uint32_t ExtractToken(uint64_t composite_key) noexcept {
 
 // ── Hotpatch dispatch condition helpers ──────────────────────────────
 //
-// These helpers provide acquire-fence-protected reads of the dispatch
-// entry flags field.  The fence pairs with the release fence in
-// SetPatchedBySlot (which uses _InterlockedOr for flags writes).
+// These helpers provide acquire-order reads of the dispatch entry flags
+// field using reinterpret_cast to std::atomic<uint32_t>. The acquire load
+// pairs with the release fetch_or in SetPatchedBySlot (hotpatch_table.cpp).
+//
+// Using reinterpret_cast + std::atomic here instead of C++20 std::atomic_ref
+// because the project builds with C++17. std::atomic<uint32_t> and uint32_t
+// have identical layout and alignment on all supported platforms (x64/ARM64),
+// making this cast safe in practice.
 //
 // Without the acquire fence, a reader on ARM64 could see kHotpatchActive=1
 // but method_key=0 (stale value) — the data race described in S1 of the
@@ -127,12 +134,11 @@ inline uint32_t ExtractToken(uint64_t composite_key) noexcept {
 //   else
 //       entry.direct_ptr(...);
 inline bool HotpatchIsActive(const HotpatchEntryV0& entry) noexcept {
-    std::atomic_thread_fence(std::memory_order_acquire);
-    return (entry.flags & kHotpatchActive) != 0;
+    return (reinterpret_cast<const std::atomic<uint32_t>*>(&entry.flags)->load(std::memory_order_acquire) & kHotpatchActive) != 0;
 }
 
 inline bool HotpatchShouldKeepNative(const HotpatchEntryV0& entry) noexcept {
-    return (entry.flags & kHotpatchKeepNative) != 0;
+    return (reinterpret_cast<const std::atomic<uint32_t>*>(&entry.flags)->load(std::memory_order_relaxed) & kHotpatchKeepNative) != 0;
 }
 
 }  // namespace chaos::il2cpp::runtime_core

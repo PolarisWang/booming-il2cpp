@@ -1101,15 +1101,40 @@ def _parse_method_subject_id(method_subject_id: str) -> dict[str, Any]:
     if paren < 0:
         return {"type_path": type_path, "type_name": type_name, "method_name": sig, "return_type": "", "param_types": [], "type_arity": arity}
 
-    method_and_ret = sig[:paren]
-    params_part = sig[paren + 1:-1]  # strip parens
+    # Find matching close paren (track depth for correct nesting)
+    close_paren = paren
+    depth = 0
+    for i in range(paren, len(sig)):
+        if sig[i] == '(':
+            depth += 1
+        elif sig[i] == ')':
+            depth -= 1
+            if depth == 0:
+                close_paren = i
+                break
 
-    # Return type is after the last ':' before the paren
+    method_and_ret = sig[:paren]
+    params_part = sig[paren + 1:close_paren]  # between parens
+    ret_suffix = sig[close_paren + 1:]         # after closing paren (e.g. ":System.Void()")
+
+    # Return type can be in two positions:
+    #   Format A: "Method:ReturnType(Params)"  — in method_and_ret before the paren
+    #   Format B: "Method(Params):ReturnType"   — in ret_suffix after the paren
     colon = method_and_ret.rfind(":")
-    method_name = method_and_ret[:colon] if colon >= 0 else method_and_ret
-    # Strip trailing colons (e.g. "AsnDecoder:" from "AsnDecoder::Void(...)")
-    method_name = method_name.rstrip(":")
-    return_type = method_and_ret[colon + 1:] if colon >= 0 else ""
+    if colon >= 0:
+        # Format A
+        method_name = method_and_ret[:colon]
+        # Strip trailing colons (e.g. "AsnDecoder:" from "AsnDecoder::Void(...)")
+        method_name = method_name.rstrip(":")
+        return_type = method_and_ret[colon + 1:]
+    else:
+        # Format B
+        method_name = method_and_ret
+        ret_colon = ret_suffix.rfind(":")
+        if ret_colon >= 0:
+            return_type = ret_suffix[ret_colon + 1:]
+        else:
+            return_type = ""
 
     # CLR constructor subject IDs use the type name instead of ".ctor",
     # e.g. "AsnDecoder::Void(...)". Normalize to ".ctor" for downstream.
@@ -1125,6 +1150,9 @@ def _parse_method_subject_id(method_subject_id: str) -> dict[str, Any]:
     }
     if return_type in _CLR_TO_SYSTEM:
         return_type = _CLR_TO_SYSTEM[return_type]
+    # Strip CLR trailing () from return types (e.g. "System.Void()" -> "System.Void")
+    if return_type.endswith("()"):
+        return_type = return_type[:-2]
 
     # Parse parameter types (handle nested generics carefully)
     param_types = _split_param_types(params_part)

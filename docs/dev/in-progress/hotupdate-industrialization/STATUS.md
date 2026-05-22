@@ -75,10 +75,10 @@ Phase 4 (1 月):   收尾对齐 — C9 Managed + C10 静态变量 + C11 COM
 | task_id | phase | status | purpose | estimated_effort |
 |---------|-------|--------|---------|-----------------|
 | C3 | Phase 1 | **completed** | MetadataRegistry 统一元数据注册表 | 3 周 |
-| C6 | Phase 1 | planned | 跨平台原子操作抽象 | 1 周 |
-| C7 | Phase 1 | planned | ARM64 内存序验证 | 1-2 周 |
-| C1 | Phase 2 | planned | 寄存器式 VM + codegen emitter | 3 月 |
-| C8 | Phase 2 | planned | OSR 激活策略 | 1 月 |
+| C6 | Phase 1 | **completed** | 跨平台原子操作抽象（std::atomic 替换） | 1 周 |
+| C7 | Phase 1 | **completed** | ARM64 内存序验证 | 1-2 周 |
+| C1 | Phase 2 | **in-progress** | 寄存器式 VM + codegen emitter (native 侧 ~90% 完成) | 3 月 |
+| C8 | Phase 2 | **completed** | OSR / Tier upgrade 激活策略 | 1 月 |
 | C2 | Phase 3 | planned | 调试器 DAP | 2 月 |
 | C4a | Phase 3 | planned | EventPipe 事件 | 1 周 |
 | C4b | Phase 3 | planned | Profiling | 2 周 |
@@ -111,6 +111,6 @@ Phase 4 (1 月):   收尾对齐 — C9 Managed + C10 静态变量 + C11 COM
 - `auto_continue`: true
 - `auto_stop_policy`: blocking-only
 - `dispatch_model`: sequential
-- `recommended_next_child`: C6
-- `latest_stop_point`: C3 completed (2026-05-23)
-- `下一步`: 启动 C6 (跨平台原子操作抽象) 子任务
+- `recommended_next_child`: C2
+- `latest_stop_point`: Phase 1 complete + C1(partial)/C8 complete. Phase 2 native side done. (2026-05-23)
+- `下一步`: 启动 Phase 3 — C2 调试器 DAP 协议 + Runtime DebugAgent

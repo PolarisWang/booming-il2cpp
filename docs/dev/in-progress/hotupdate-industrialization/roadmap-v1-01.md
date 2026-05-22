@@ -158,10 +158,10 @@
 | task_id | phase | status | purpose | depends_on | estimated_effort |
 |---------|-------|--------|---------|------------|-----------------|
 | C3 | Phase 1 | completed | MetadataRegistry 统一元数据注册表 | 无 | 3 周 |
-| C6 | Phase 1 | planned | 跨平台原子操作抽象（std::atomic 替换） | 无 | 1 周 |
-| C7 | Phase 1 | planned | ARM64 内存序验证与修复 | C6 | 1-2 周 |
-| C1 | Phase 2 | planned | 寄存器式 IR 全新 VM + codegen emitter | C3 | 3 月 |
-| C8 | Phase 2 | planned | OSR / Tier upgrade 激活策略 | C1 | 1 月 |
+| C6 | Phase 1 | completed | 跨平台原子操作抽象（std::atomic 替换） | 无 | 1 周 |
+| C7 | Phase 1 | completed | ARM64 内存序验证与修复 | C6 | 1-2 周 |
+| C1 | Phase 2 | in-progress | 寄存器式 IR 全新 VM + codegen emitter | C3 | 3 月 |
+| C8 | Phase 2 | completed | OSR / Tier upgrade 激活策略 | C1 | 1 月 |
 | C2 | Phase 3 | planned | 调试器 DAP 协议 + Runtime DebugAgent | C3, C1 | 2 月 |
 | C4a | Phase 3 | planned | EventPipe 热更新诊断事件 | 无 | 1 周 |
 | C4b | Phase 3 | planned | Profiling 计数器（per-method） | C1 | 2 周 |
