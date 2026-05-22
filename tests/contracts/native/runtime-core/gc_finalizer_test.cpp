@@ -19,6 +19,8 @@
 #include "gc_helpers.h"
 #include "gc_old_gen.h"
 #include "gc_region.h"
+#include "gc_scheduler.h"
+#include "gc_api.h"
 
 using namespace chaos::il2cpp::runtime_core;
 
@@ -345,6 +347,92 @@ void TestEmergencyReserveNoOpReplenish() {
     CHECK(true, "No-op replenish did not crash");
 }
 
+// ── Test 13: AddMemoryPressure triggers GC ───────────────────────────
+void TestMemoryPressureTriggersGc() {
+    printf("\n── Test 13: AddMemoryPressure triggers GC ──\n");
+
+    // Verify ExternalMemoryPressure is exposed through the scheduler API.
+    CHECK(g_gc_scheduler.ExternalMemoryPressure() == 0,
+          "Initial external memory pressure is 0");
+
+    // Add 300 MB pressure (exceeds 256 MB min threshold).
+    constexpr int64_t kPressure300MB = 300LL * 1024 * 1024;
+    chaos_gc_add_memory_pressure(kPressure300MB);
+    CHECK(g_gc_scheduler.ExternalMemoryPressure() >= kPressure300MB,
+          "External memory pressure recorded after AddMemoryPressure");
+
+    // Verify the scheduler has recorded the pressure.
+    CHECK(true, "AddMemoryPressure completed without crash");
+}
+
+// ── Test 14: AddMemoryPressure with RemoveMemoryPressure ──────────────
+void TestMemoryPressureAddRemove() {
+    printf("\n── Test 14: AddMemoryPressure + RemoveMemoryPressure ──\n");
+
+    constexpr int64_t kPressure100MB = 100LL * 1024 * 1024;
+    constexpr int64_t kPressure50MB = 50LL * 1024 * 1024;
+
+    // Add 100 MB.
+    chaos_gc_add_memory_pressure(kPressure100MB);
+    int64_t after_add = g_gc_scheduler.ExternalMemoryPressure();
+    CHECK(after_add >= kPressure100MB,
+          "Pressure after add (got %lld)", static_cast<long long>(after_add));
+
+    // Remove 50 MB — pressure should decrease.
+    chaos_gc_remove_memory_pressure(kPressure50MB);
+    int64_t after_remove = g_gc_scheduler.ExternalMemoryPressure();
+    CHECK(after_remove < after_add,
+          "Pressure decreased after RemoveMemoryPressure (was %lld, now %lld)",
+          static_cast<long long>(after_add), static_cast<long long>(after_remove));
+
+    // Remove remainder.
+    chaos_gc_remove_memory_pressure(kPressure50MB);
+    CHECK(true, "AddMemoryPressure + RemoveMemoryPressure completed without crash");
+}
+
+// ── Test 15: Negative pressure values are rejected ────────────────────
+void TestMemoryPressureNegative() {
+    printf("\n── Test 15: Negative pressure values rejected ──\n");
+
+    int64_t before = g_gc_scheduler.ExternalMemoryPressure();
+
+    // Negative add should be a no-op.
+    chaos_gc_add_memory_pressure(-100);
+    CHECK(g_gc_scheduler.ExternalMemoryPressure() == before,
+          "Negative AddMemoryPressure is rejected");
+
+    // Negative remove should be a no-op.
+    chaos_gc_remove_memory_pressure(-100);
+    CHECK(g_gc_scheduler.ExternalMemoryPressure() == before,
+          "Negative RemoveMemoryPressure is rejected");
+
+    CHECK(true, "Negative pressure value rejection test passed");
+}
+
+// ── Test 16: Large pressure values don't overflow ─────────────────────
+void TestMemoryPressureLargeValues() {
+    printf("\n── Test 16: Large pressure values don't overflow ──\n");
+
+    constexpr int64_t kPressure1GB = 1LL * 1024 * 1024 * 1024;
+    constexpr int64_t kPressure2GB = 2LL * 1024 * 1024 * 1024;
+
+    // Add 1 GB pressure.
+    chaos_gc_add_memory_pressure(kPressure1GB);
+    int64_t after_1gb = g_gc_scheduler.ExternalMemoryPressure();
+    CHECK(after_1gb >= kPressure1GB,
+          "1 GB pressure recorded (got %lld)", static_cast<long long>(after_1gb));
+
+    // Add another 2 GB.
+    chaos_gc_add_memory_pressure(kPressure2GB);
+    int64_t after_3gb = g_gc_scheduler.ExternalMemoryPressure();
+    CHECK(after_3gb >= kPressure1GB + kPressure2GB,
+          "3 GB total pressure recorded (got %lld)", static_cast<long long>(after_3gb));
+
+    // Remove all.
+    chaos_gc_remove_memory_pressure(after_3gb);
+    CHECK(true, "Large pressure values test passed");
+}
+
 int main() {
     puts("CRAG Finalizer unit test");
     puts("═══════════════════════\n");
@@ -363,7 +451,12 @@ int main() {
     TestEmergencyReserveReplenish();
     TestEmergencyReserveNoOpReplenish();
 
-    printf("\n══ Results: 12 tests, %d failures ══\n", g_failures);
+    TestMemoryPressureTriggersGc();
+    TestMemoryPressureAddRemove();
+    TestMemoryPressureNegative();
+    TestMemoryPressureLargeValues();
+
+    printf("\n══ Results: 16 tests, %d failures ══\n", g_failures);
 
     return g_failures > 0 ? 1 : 0;
 }

@@ -295,6 +295,22 @@ public:
         bgc_scope_.store(static_cast<uint8_t>(scope), std::memory_order_release);
     }
 
+    // ── External memory pressure ──────────────────────────────
+
+    /// Notify scheduler of external (unmanaged) memory pressure.
+    /// Called from chaos_gc_add_memory_pressure.  Accumulates in a
+    /// process-wide counter that feeds into DecideCollection().
+    void AddExternalMemoryPressure(CHAOS_IL2CPP_INT64 bytes) noexcept;
+
+    /// Notify scheduler that external memory has been freed.
+    /// Called from chaos_gc_remove_memory_pressure.
+    void RemoveExternalMemoryPressure(CHAOS_IL2CPP_INT64 bytes) noexcept;
+
+    /// Current outstanding external memory pressure in bytes.
+    CHAOS_IL2CPP_INT64 ExternalMemoryPressure() const noexcept {
+        return external_memory_pressure_.load(std::memory_order_relaxed);
+    }
+
     // ── Full GC notification (GC.RegisterForFullGCNotification / WaitForFullGC*) ──
 
     /// Enable full GC notifications for the calling thread.
@@ -516,6 +532,22 @@ private:
     /// triggering a safepoint.  CoreCLR uses a similar cooldown to
     /// prevent cascading safepoint storms at high thread counts.
     static constexpr uint64_t kMinGcIntervalNs = 50 * 1000 * 1000;  // 50 ms
+
+    // ── External memory pressure state ─────────────────────────
+
+    /// Process-wide external memory pressure counter.
+    /// Accumulated by AddMemoryPressure, decremented by RemoveMemoryPressure.
+    std::atomic<CHAOS_IL2CPP_INT64> external_memory_pressure_{0};
+
+    /// Minimum absolute threshold for external memory pressure triggering.
+    /// Below this, external pressure alone won't trigger a full GC.
+    static constexpr CHAOS_IL2CPP_INT64 kMinExternalPressureThreshold = 256 * 1024 * 1024;  // 256 MB
+
+    /// External pressure ratio: when external pressure exceeds this fraction
+    /// of the estimated managed heap size, it contributes to the full-GC
+    /// trigger decision.  50% = external pressure equal to half the managed
+    /// heap is treated as significant enough to warrant a GC.
+    static constexpr float kExternalPressureRatio = 0.5f;
 
     // ── GCCollectionMode / GCLatencyMode state ───────────────────
 
