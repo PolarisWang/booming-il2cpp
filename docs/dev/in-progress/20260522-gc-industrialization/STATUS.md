@@ -52,19 +52,15 @@ clearance_confirmed_by_user: true
 - 审计记录: `docs/dev/completed/11-gc-industrialization/gc-p1-01-page-decommission/STATUS.md`
 
 ## 最近摘要
-2026-05-22 10:50：gc-p2-06（GC 编译时选择/G-29）已完成。
-- 添加 5 CMake option() 声明（BGC/ParallelMark/Events/Stress/LargePages）
-- 创建 gc_features.h 集中式 feature flag 参考文档
-- 更新 CMakePresets.json 显式声明 debug preset 的 feature 值
-已归档 completed。
-
-2026-05-22 后续完成：
-- gc-p2-07（测试覆盖增强/G-30）：修复 4 个预存问题，新建 gc_atomic_alloc_test（5 场景），18 GC 测试全 PASS
-- gc-p1-vfy（Phase 1 集成验证）：确认 18 GC 测试全 PASS，预存问题已文档记录
-- gc-p3-01（ETW 诊断事件/G-7）：审计确认已实现，关闭 2 个集成间隙（GcEtwShutdown + GcEtwFireGcOom）
+2026-05-22 21:50：gc-p3-02（GC 基准回归测试套件/G-15）完成。
+- Gap 2: gc-bench-compare.py — BENCH| 格式回归对比工具，可配置 WARN/FAIL 阈值
+- Gap 3: gtest 评估结论 — 保持自定义 runner，无需迁移
+- Gap 4: MultiThreadAlloc — 4 线程并发分配基准，6.4 GB/s，0 失败
+- Gap 1: gc-baseline.py — 基线记录/检查/更新工作流
+6/6 基准全 PASS。已归档 completed。
 
 ## 下一步
-启动 gc-p3-02：GC 基准回归测试套件（G-15）
+启动 gc-p3-03：SOS 调试扩展（G-16）
 
 ## latest_stop_point
-Phase 1 已完成。Phase 2：gc-p3-01 已完成。下一步：gc-p3-02
+Phase 1 已完成。Phase 2：gc-p3-01 已完成，gc-p3-02 已完成。下一步：gc-p3-03
