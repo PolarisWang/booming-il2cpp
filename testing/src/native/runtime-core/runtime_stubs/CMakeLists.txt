@@ -14,3 +14,15 @@ add_chaos_test(string_stubs_test
     LIBS ${CHAOS_COMMON_TEST_LIBS}
     LABELS "unit;core"
 )
+
+# T0-2: collection_stubs unit tests (all 14 public API functions)
+# NOTE: collection_stubs.cpp is compiled directly (same GNU ar issue as
+# string_stubs).  GC stubs from gc_stubs_for_string_tests.cpp are reused
+# since CollectionListToArray calls GcAllocateAtomic.
+add_chaos_test(collection_stubs_test
+    collection_stubs_test.cpp
+    gc_stubs_for_string_tests.cpp
+    "${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/runtime_stubs/collection_stubs.cpp"
+    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    LABELS "unit;core"
+)
