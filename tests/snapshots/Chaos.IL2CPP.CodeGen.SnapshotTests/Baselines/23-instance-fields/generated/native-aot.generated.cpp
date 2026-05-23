@@ -207,7 +207,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 	reinterpret_cast<const ::ChaosAbiManifestV0*>(&s_abi_manifest_storage);
 // ── Module registration ──
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_type_flags[100] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_type_flags[108] = {
 		0u,
 		1548u,
 		1548u,
@@ -308,9 +308,17 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		1536u,
 		1548u,
 		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
+		1548u,
 	};
 
-	static constexpr const char* s_type_names[100] = {
+	static constexpr const char* s_type_names[108] = {
 		"<Module>",
 		"ArithmeticOps",
 		"StringOps",
@@ -410,11 +418,27 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		"IMyInterface",
 		"ImplHelper",
 		"InterfaceDevirtHelper",
+		"EhFinallyHelper",
+		"EhFaultHelper",
+		"EhFilterHelper",
+		"EhMultipleCatchHelper",
+		"EhCatchFinallyNestedHelper",
+		"EhFilterFinallyHelper",
+		"EhNestedTryCatchHelper",
+		"EhFaultFinallyHelper",
 		"<>O",
 	};
 
-	static constexpr const char* s_type_namespaces[100] = {
+	static constexpr const char* s_type_namespaces[108] = {
 		"",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
+		"SnapshotTestFixtures",
 		"SnapshotTestFixtures",
 		"SnapshotTestFixtures",
 		"SnapshotTestFixtures",
@@ -516,7 +540,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		"",
 	};
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_type_parent_tokens[100] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_type_parent_tokens[108] = {
 		0u,
 		0u,
 		0u,
@@ -617,9 +641,25 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		0u,
 		0u,
 		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
 	};
 
-	static const TypeInfoHot* const s_type_info_ptrs[100] = {
+	static const TypeInfoHot* const s_type_info_ptrs[108] = {
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
 		nullptr,
 		nullptr,
 		nullptr,
@@ -723,10 +763,10 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 	};
 
 	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_children[1] = {
-		33554532u,
+		33554540u,
 	};
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_offset[101] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_offset[109] = {
 		0u,
 		0u,
 		0u,
@@ -742,6 +782,14 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		0u,
 		0u,
 		0u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
+		1u,
 		1u,
 		1u,
 		1u,
@@ -830,7 +878,15 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		1u,
 	};
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_generic_param_constraint_offset[101] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_generic_param_constraint_offset[109] = {
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
+		0u,
 		0u,
 		0u,
 		0u,
@@ -948,7 +1004,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		/* .nested_type_offset = */ s_nested_type_offset,
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
-		/* .type_count        = */ 100u,
+		/* .type_count        = */ 108u,
 	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
@@ -1234,18 +1290,18 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // matching during IR lowering of patched methods.
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_SnapshotTestFixtures_HasInstanceFields[1] = {
-	{ 0u, "SnapshotTestFixtures/HasInstanceFields::.ctor:System.Void(System.Int32)", ".ctor", "System.Void", 0, nullptr, 0u },
+	{ 0x00000004u, "SnapshotTestFixtures/HasInstanceFields::.ctor:System.Void(System.Int32)", ".ctor", "System.Void", 1, nullptr, 0u, nullptr },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_SnapshotTestFixtures_InstanceFieldHelper[1] = {
-	{ 0u, "SnapshotTestFixtures/InstanceFieldHelper::CreateAndUseFields:System.Int32()", "CreateAndUseFields", "System.Void", 0, nullptr, 0u },
+	{ 0x00000002u, "SnapshotTestFixtures/InstanceFieldHelper::CreateAndUseFields:System.Int32()", "CreateAndUseFields", "System.Int32", 0, nullptr, 0u, nullptr },
 };
 
 static const ReflectionQueryTypeDescriptor kReflTypes[2] = {
-	{ 0u, "SnapshotTestFixtures/HasInstanceFields", "SnapshotTestFixtures/HasInstanceFields", "", "HasInstanceFields", "HasInstanceFields", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_SnapshotTestFixtures_HasInstanceFields, 1u },
-	{ 0u, "SnapshotTestFixtures/InstanceFieldHelper", "SnapshotTestFixtures/InstanceFieldHelper", "", "InstanceFieldHelper", "InstanceFieldHelper", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_SnapshotTestFixtures_InstanceFieldHelper, 1u },
+	{ 0x00000003u, "SnapshotTestFixtures/HasInstanceFields", "SnapshotTestFixtures/HasInstanceFields", "", "HasInstanceFields", "HasInstanceFields", nullptr, nullptr, 0u, nullptr, 0u,
+	kReflMethods_SnapshotTestFixtures_HasInstanceFields, 1u, nullptr, 0u, 0u },
+	{ 0x00000001u, "SnapshotTestFixtures/InstanceFieldHelper", "SnapshotTestFixtures/InstanceFieldHelper", "", "InstanceFieldHelper", "InstanceFieldHelper", nullptr, nullptr, 0u, nullptr, 0u,
+	kReflMethods_SnapshotTestFixtures_InstanceFieldHelper, 1u, nullptr, 0u, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor* kReflTypePtrs[2] = {

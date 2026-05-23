@@ -1222,12 +1222,12 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // matching during IR lowering of patched methods.
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_SnapshotTestFixtures_EhFilterFinallyHelper[1] = {
-	{ 0u, "SnapshotTestFixtures/EhFilterFinallyHelper::FilterFinally:System.Int32(System.Int32)", "FilterFinally", "System.Void", 0, nullptr, 0u },
+	{ 0x00000002u, "SnapshotTestFixtures/EhFilterFinallyHelper::FilterFinally:System.Int32(System.Int32)", "FilterFinally", "System.Int32", 1, nullptr, 0u, nullptr },
 };
 
 static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
-	{ 0u, "SnapshotTestFixtures/EhFilterFinallyHelper", "SnapshotTestFixtures/EhFilterFinallyHelper", "", "EhFilterFinallyHelper", "EhFilterFinallyHelper", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_SnapshotTestFixtures_EhFilterFinallyHelper, 1u },
+	{ 0x00000001u, "SnapshotTestFixtures/EhFilterFinallyHelper", "SnapshotTestFixtures/EhFilterFinallyHelper", "", "EhFilterFinallyHelper", "EhFilterFinallyHelper", nullptr, nullptr, 0u, nullptr, 0u,
+	kReflMethods_SnapshotTestFixtures_EhFilterFinallyHelper, 1u, nullptr, 0u, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {

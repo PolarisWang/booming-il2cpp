@@ -1232,12 +1232,12 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // matching during IR lowering of patched methods.
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_SnapshotTestFixtures_EhHelper[1] = {
-	{ 0u, "SnapshotTestFixtures/EhHelper::SafeDivide:System.Int32()", "SafeDivide", "System.Void", 0, nullptr, 0u },
+	{ 0x00000002u, "SnapshotTestFixtures/EhHelper::SafeDivide:System.Int32()", "SafeDivide", "System.Int32", 0, nullptr, 0u, nullptr },
 };
 
 static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
-	{ 0u, "SnapshotTestFixtures/EhHelper", "SnapshotTestFixtures/EhHelper", "", "EhHelper", "EhHelper", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_SnapshotTestFixtures_EhHelper, 1u },
+	{ 0x00000001u, "SnapshotTestFixtures/EhHelper", "SnapshotTestFixtures/EhHelper", "", "EhHelper", "EhHelper", nullptr, nullptr, 0u, nullptr, 0u,
+	kReflMethods_SnapshotTestFixtures_EhHelper, 1u, nullptr, 0u, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {

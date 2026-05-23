@@ -1233,12 +1233,12 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // matching during IR lowering of patched methods.
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_SnapshotTestFixtures_EhNestedTryCatchHelper[1] = {
-	{ 0u, "SnapshotTestFixtures/EhNestedTryCatchHelper::NestedTryCatch:System.Int32(System.Int32)", "NestedTryCatch", "System.Void", 0, nullptr, 0u },
+	{ 0x00000002u, "SnapshotTestFixtures/EhNestedTryCatchHelper::NestedTryCatch:System.Int32(System.Int32)", "NestedTryCatch", "System.Int32", 1, nullptr, 0u, nullptr },
 };
 
 static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
-	{ 0u, "SnapshotTestFixtures/EhNestedTryCatchHelper", "SnapshotTestFixtures/EhNestedTryCatchHelper", "", "EhNestedTryCatchHelper", "EhNestedTryCatchHelper", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_SnapshotTestFixtures_EhNestedTryCatchHelper, 1u },
+	{ 0x00000001u, "SnapshotTestFixtures/EhNestedTryCatchHelper", "SnapshotTestFixtures/EhNestedTryCatchHelper", "", "EhNestedTryCatchHelper", "EhNestedTryCatchHelper", nullptr, nullptr, 0u, nullptr, 0u,
+	kReflMethods_SnapshotTestFixtures_EhNestedTryCatchHelper, 1u, nullptr, 0u, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {

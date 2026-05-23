@@ -648,7 +648,7 @@ public sealed partial class NativeAotLoweringPlanner
 
         // Step 3: Emit ReflectionQueryImageDescriptor for module.image,
         // enabling ResolveSubjectId to find call_target via reflection query model.
-        var reflectionQueryCode = EmitReflectionQueryImage(methodsForLowering);
+        var reflectionQueryCode = EmitReflectionQueryImage(methodsForLowering, metadataRegistration);
         if (!string.IsNullOrEmpty(reflectionQueryCode))
         {
             moduleRegSb.Append(Environment.NewLine);
@@ -3026,150 +3026,178 @@ public sealed partial class NativeAotLoweringPlanner
     // Emits ReflectionQueryMethodDescriptor[] and ReflectionQueryTypeDescriptor[]
     // arrays, and a ReflectionQueryImageDescriptor that module.image points to.
     // This enables ResolveSubjectId to find call_target via reflection query model.
-    private string EmitReflectionQueryImage(IReadOnlyList<AotCoreIrMethodArtifact> methods)
-{
-    if (methods.Count == 0 || _moduleTypeSubjectIds.Count == 0) return string.Empty;
-
-    // Build type → methods map grouped by declaring type.
-    var typeMethodMap = new Dictionary<string, List<(string SubjectId, string TypeNs, string TypeName, string MethodName)>>(StringComparer.Ordinal);
-    foreach (var method in methods)
+    private string EmitReflectionQueryImage(
+        IReadOnlyList<AotCoreIrMethodArtifact> methods,
+        MetadataRegistrationArtifact metadataRegistration)
     {
-        string declaringType;
-        try { declaringType = GetMethodDeclaringTypeSubjectId(method.SubjectId); }
-        catch { continue; }
+        if (methods.Count == 0 || _moduleTypeSubjectIds.Count == 0) return string.Empty;
 
-        if (!typeMethodMap.TryGetValue(declaringType, out var list))
+        var tokenLookup = new MetadataTokenLookup(metadataRegistration.Registrations);
+
+        // Build type -> methods map grouped by declaring type.
+        // Preserve the AotCoreIrMethodArtifact to extract ReturnType/ParameterCount.
+        var typeMethodMap = new Dictionary<string, List<(AotCoreIrMethodArtifact Artifact, string TypeNs, string TypeName)>>(StringComparer.Ordinal);
+        foreach (var method in methods)
         {
-            list = new List<(string, string, string, string)>();
-            typeMethodMap[declaringType] = list;
+            string declaringType;
+            try { declaringType = GetMethodDeclaringTypeSubjectId(method.SubjectId); }
+            catch { continue; }
+
+            if (!typeMethodMap.TryGetValue(declaringType, out var list))
+            {
+                list = new List<(AotCoreIrMethodArtifact, string, string)>();
+                typeMethodMap[declaringType] = list;
+            }
+
+            list.Add((method, GetTypeNamespace(declaringType), GetTypeDisplayName(declaringType)));
         }
 
-        list.Add((method.SubjectId, GetTypeNamespace(declaringType), GetTypeDisplayName(declaringType), GetMethodName(method.SubjectId)));
-    }
+        if (typeMethodMap.Count == 0) return string.Empty;
 
-    if (typeMethodMap.Count == 0) return string.Empty;
-
-    var typeIndexToMethods = new List<(string TypeSubjectId, int Count, string SafeName, string Ns, string Name)>();
-	// Pre-collect field data for all types in the type method map by assembly.
-	// This ensures field descriptor arrays can be emitted in the reflection query image.
-	var typeFieldMap = new Dictionary<string, List<(string SubjectId, string Name, string Type, long Value)>>(StringComparer.Ordinal);
-	var assemblyTypeQueue = new Dictionary<string, HashSet<string>>(StringComparer.Ordinal);
-	foreach (var typeSubjectId in typeMethodMap.Keys)
-	{
-		var slashIdx = typeSubjectId.IndexOf('/');
-		var assemblyName = slashIdx >= 0 ? typeSubjectId.Substring(0, slashIdx) : _assemblyName;
-		if (!assemblyTypeQueue.TryGetValue(assemblyName, out var typeSet))
-		{
-			typeSet = new HashSet<string>(StringComparer.Ordinal);
-			assemblyTypeQueue[assemblyName] = typeSet;
-		}
-		typeSet.Add(typeSubjectId);
-	}
-
-	foreach (var (assemblyName, typeIds) in assemblyTypeQueue)
-	{
-		if (!_closureAssemblyPathByName.TryGetValue(assemblyName, out var assemblyPath))
-			continue;
-
-		try
-		{
-			using var stream = new FileStream(assemblyPath, FileMode.Open, FileAccess.Read, FileShare.Read);
-			using var peReader = new PEReader(stream);
-			if (!peReader.HasMetadata) continue;
-			var metadataReader = peReader.GetMetadataReader();
-
-			foreach (var typeHandle in metadataReader.TypeDefinitions)
-			{
-				var typeDef = metadataReader.GetTypeDefinition(typeHandle);
-				var typeNs = metadataReader.GetString(typeDef.Namespace);
-				var typeName = metadataReader.GetString(typeDef.Name);
-				var nsTypeName = string.IsNullOrEmpty(typeNs) ? typeName : $"{typeNs}.{typeName}";
-				var candidateId = $"{assemblyName}/{nsTypeName}";
-
-				if (!typeIds.Contains(candidateId))
-					continue;
-
-				var fields = new List<(string SubjectId, string Name, string Type, long Value)>();
-				foreach (var fieldHandle in typeDef.GetFields())
-				{
-					var fieldDef = metadataReader.GetFieldDefinition(fieldHandle);
-					var fieldName = metadataReader.GetString(fieldDef.Name);
-
-					long fieldValue = 0;
-					var constHandle = fieldDef.GetDefaultValue();
-					if (!constHandle.IsNil)
-					{
-						try
-						{
-							var constant = metadataReader.GetConstant(constHandle);
-							var blobReader = metadataReader.GetBlobReader(constant.Value);
-							switch ((PrimitiveTypeCode)constant.TypeCode)
-							{
-								case PrimitiveTypeCode.Boolean: fieldValue = blobReader.ReadBoolean() ? 1L : 0L; break;
-								case PrimitiveTypeCode.Byte:    fieldValue = blobReader.ReadByte(); break;
-								case PrimitiveTypeCode.SByte:   fieldValue = blobReader.ReadSByte(); break;
-								case PrimitiveTypeCode.Int16:   fieldValue = blobReader.ReadInt16(); break;
-								case PrimitiveTypeCode.UInt16:  fieldValue = blobReader.ReadUInt16(); break;
-								case PrimitiveTypeCode.Char:    fieldValue = blobReader.ReadChar(); break;
-								case PrimitiveTypeCode.Int32:   fieldValue = blobReader.ReadInt32(); break;
-								case PrimitiveTypeCode.UInt32:  fieldValue = blobReader.ReadUInt32(); break;
-								case PrimitiveTypeCode.Int64:   fieldValue = blobReader.ReadInt64(); break;
-								case PrimitiveTypeCode.UInt64:  fieldValue = (long)blobReader.ReadUInt64(); break;
-							}
-						}
-						catch { }
-					}
-
-					var fieldSubjectId = $"{candidateId}::{fieldName}";
-					fields.Add((fieldSubjectId, fieldName, "System.Int32", fieldValue));
-				}
-
-				typeFieldMap[candidateId] = fields;
-			}
-		}
-		catch { }
-	}
-
-    var typeGroups = new List<object>();
-    foreach (var kvp in typeMethodMap)
-    {
-        var typeSubjectId = kvp.Key;
-        var methodsInType = kvp.Value;
-        var safeName = SanitizeCppIdentifier(typeSubjectId.Replace('/', '_').Replace(':', '_'));
-        typeIndexToMethods.Add((typeSubjectId, methodsInType.Count, safeName, methodsInType[0].TypeNs, methodsInType[0].TypeName));
-
-        var methodEntries = methodsInType.Select(m => new
+        var typeIndexToMethods = new List<(string TypeSubjectId, int Count, string SafeName, string Ns, string Name)>();
+        // Pre-collect field data for all types in the type method map by assembly.
+        // This ensures field descriptor arrays can be emitted in the reflection query image.
+        var typeFieldMap = new Dictionary<string, List<(string SubjectId, string Name, string Type, long Value, uint Token)>>(StringComparer.Ordinal);
+        var assemblyTypeQueue = new Dictionary<string, HashSet<string>>(StringComparer.Ordinal);
+        foreach (var typeSubjectId in typeMethodMap.Keys)
         {
-            subject_id_literal = EscapeCppStringLiteral(m.SubjectId),
-            method_name_literal = EscapeCppStringLiteral(m.MethodName),
-        }).ToArray();
-        var fieldEntries = typeFieldMap.TryGetValue(typeSubjectId, out var tFields) ? tFields.Select(f => new { subject_id_literal = EscapeCppStringLiteral(f.SubjectId), name_literal = EscapeCppStringLiteral(f.Name), type_literal = EscapeCppStringLiteral(f.Type), constant_value = f.Value }).ToArray() : System.Array.Empty<object>();
+            var slashIdx = typeSubjectId.IndexOf('/');
+            var assemblyName = slashIdx >= 0 ? typeSubjectId.Substring(0, slashIdx) : _assemblyName;
+            if (!assemblyTypeQueue.TryGetValue(assemblyName, out var typeSet))
+            {
+                typeSet = new HashSet<string>(StringComparer.Ordinal);
+                assemblyTypeQueue[assemblyName] = typeSet;
+            }
+            typeSet.Add(typeSubjectId);
+        }
 
-        typeGroups.Add(new
+        foreach (var (assemblyName, typeIds) in assemblyTypeQueue)
         {
-            safe_name = safeName,
-            method_count = methodsInType.Count,
-            subject_id_literal = EscapeCppStringLiteral(typeSubjectId),
-            namespace_literal = EscapeCppStringLiteral(methodsInType[0].TypeNs),
-            name_literal = EscapeCppStringLiteral(methodsInType[0].TypeName),
-            methods = methodEntries,
-            fields = fieldEntries,
-        });
+            if (!_closureAssemblyPathByName.TryGetValue(assemblyName, out var assemblyPath))
+                continue;
+
+            try
+            {
+                using var stream = new FileStream(assemblyPath, FileMode.Open, FileAccess.Read, FileShare.Read);
+                using var peReader = new PEReader(stream);
+                if (!peReader.HasMetadata) continue;
+                var metadataReader = peReader.GetMetadataReader();
+
+                foreach (var typeHandle in metadataReader.TypeDefinitions)
+                {
+                    var typeDef = metadataReader.GetTypeDefinition(typeHandle);
+                    var typeNs = metadataReader.GetString(typeDef.Namespace);
+                    var typeName = metadataReader.GetString(typeDef.Name);
+                    var nsTypeName = string.IsNullOrEmpty(typeNs) ? typeName : typeNs + "." + typeName;
+                    var candidateId = assemblyName + "/" + nsTypeName;
+
+                    if (!typeIds.Contains(candidateId))
+                        continue;
+
+                    var fields = new List<(string SubjectId, string Name, string Type, long Value, uint Token)>();
+                    foreach (var fieldHandle in typeDef.GetFields())
+                    {
+                        var fieldDef = metadataReader.GetFieldDefinition(fieldHandle);
+                        var fieldName = metadataReader.GetString(fieldDef.Name);
+                        uint fieldToken = (uint)MetadataTokens.GetToken(fieldHandle);
+
+                        long fieldValue = 0;
+                        var constHandle = fieldDef.GetDefaultValue();
+                        if (!constHandle.IsNil)
+                        {
+                            try
+                            {
+                                var constant = metadataReader.GetConstant(constHandle);
+                                var blobReader = metadataReader.GetBlobReader(constant.Value);
+                                switch ((PrimitiveTypeCode)constant.TypeCode)
+                                {
+                                    case PrimitiveTypeCode.Boolean: fieldValue = blobReader.ReadBoolean() ? 1L : 0L; break;
+                                    case PrimitiveTypeCode.Byte:    fieldValue = blobReader.ReadByte(); break;
+                                    case PrimitiveTypeCode.SByte:   fieldValue = blobReader.ReadSByte(); break;
+                                    case PrimitiveTypeCode.Int16:   fieldValue = blobReader.ReadInt16(); break;
+                                    case PrimitiveTypeCode.UInt16:  fieldValue = blobReader.ReadUInt16(); break;
+                                    case PrimitiveTypeCode.Char:    fieldValue = blobReader.ReadChar(); break;
+                                    case PrimitiveTypeCode.Int32:   fieldValue = blobReader.ReadInt32(); break;
+                                    case PrimitiveTypeCode.UInt32:  fieldValue = blobReader.ReadUInt32(); break;
+                                    case PrimitiveTypeCode.Int64:   fieldValue = blobReader.ReadInt64(); break;
+                                    case PrimitiveTypeCode.UInt64:  fieldValue = (long)blobReader.ReadUInt64(); break;
+                                }
+                            }
+                            catch { }
+                        }
+
+                        var fieldSubjectId = candidateId + "::" + fieldName;
+                        fields.Add((fieldSubjectId, fieldName, "System.Int32", fieldValue, fieldToken));
+                    }
+
+                    typeFieldMap[candidateId] = fields;
+                }
+            }
+            catch { }
+        }
+
+        var typeGroups = new List<object>();
+        foreach (var kvp in typeMethodMap)
+        {
+            var typeSubjectId = kvp.Key;
+            var methodsInType = kvp.Value;
+            var safeName = SanitizeCppIdentifier(typeSubjectId.Replace('/', '_').Replace(':', '_'));
+            typeIndexToMethods.Add((typeSubjectId, methodsInType.Count, safeName, methodsInType[0].TypeNs, methodsInType[0].TypeName));
+
+            uint typeToken = tokenLookup.TryGetTypeToken(typeSubjectId);
+
+            var methodEntries = methodsInType.Select(m =>
+            {
+                uint mToken = tokenLookup.TryGetMethodToken(m.Artifact.SubjectId);
+                string returnType = m.Artifact.ReturnType ?? "System.Void";
+                string methodName = GetMethodName(m.Artifact.SubjectId);
+                return new
+                {
+                    metadata_token_hex = mToken > 0 ? "0x" + mToken.ToString("X8") : "0u",
+                    subject_id_literal = EscapeCppStringLiteral(m.Artifact.SubjectId),
+                    method_name_literal = EscapeCppStringLiteral(methodName),
+                    return_type_literal = EscapeCppStringLiteral(returnType),
+                    parameter_count = m.Artifact.ParameterCount,
+                };
+            }).ToArray();
+
+            var fieldEntries = typeFieldMap.TryGetValue(typeSubjectId, out var tFields)
+                ? tFields.Select(f => new
+                {
+                    metadata_token_hex = f.Token > 0 ? "0x" + f.Token.ToString("X8") : "0u",
+                    subject_id_literal = EscapeCppStringLiteral(f.SubjectId),
+                    name_literal = EscapeCppStringLiteral(f.Name),
+                    type_literal = EscapeCppStringLiteral(f.Type),
+                    constant_value = f.Value,
+                }).ToArray()
+                : System.Array.Empty<object>();
+
+            typeGroups.Add(new
+            {
+                metadata_token_hex = typeToken > 0 ? "0x" + typeToken.ToString("X8") : "0u",
+                safe_name = safeName,
+                method_count = methodsInType.Count,
+                subject_id_literal = EscapeCppStringLiteral(typeSubjectId),
+                namespace_literal = EscapeCppStringLiteral(methodsInType[0].TypeNs),
+                name_literal = EscapeCppStringLiteral(methodsInType[0].TypeName),
+                methods = methodEntries,
+                fields = fieldEntries,
+            });
+        }
+
+        var typeGroupIndices = Enumerable.Range(0, typeIndexToMethods.Count).ToArray();
+
+        var model = new ScriptObject
+        {
+            ["type_groups"] = typeGroups,
+            ["type_group_count"] = typeIndexToMethods.Count,
+            ["type_group_indices"] = typeGroupIndices,
+            ["assembly_name_literal"] = EscapeCppStringLiteral(_assemblyName),
+        };
+
+        return ScribanTemplateRenderer.RenderTemplate(
+            NativeAotTemplateCatalog.GetReflectionQueryImageTemplate(), model);
     }
-
-    var typeGroupIndices = Enumerable.Range(0, typeIndexToMethods.Count).ToArray();
-
-    var model = new ScriptObject
-    {
-        ["type_groups"] = typeGroups,
-        ["type_group_count"] = typeIndexToMethods.Count,
-        ["type_group_indices"] = typeGroupIndices,
-        ["assembly_name_literal"] = EscapeCppStringLiteral(_assemblyName),
-    };
-
-    return ScribanTemplateRenderer.RenderTemplate(
-        NativeAotTemplateCatalog.GetReflectionQueryImageTemplate(), model);
-}
 
 /// <summary>
 /// Generate the C++ header for pre-computed enum metadata tables.

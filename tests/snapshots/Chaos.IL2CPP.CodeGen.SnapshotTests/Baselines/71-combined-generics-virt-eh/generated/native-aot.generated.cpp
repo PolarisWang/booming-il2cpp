@@ -1263,18 +1263,18 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // matching during IR lowering of patched methods.
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_SnapshotTestFixtures_DerivedClass[1] = {
-	{ 0u, "SnapshotTestFixtures/DerivedClass::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u },
+	{ 0x00000006u, "SnapshotTestFixtures/DerivedClass::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_SnapshotTestFixtures_GenericsVirtEhDemo[1] = {
-	{ 0u, "SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()", "DemoCombine", "System.Void", 0, nullptr, 0u },
+	{ 0x00000002u, "SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()", "DemoCombine", "System.Int32", 0, nullptr, 0u, nullptr },
 };
 
 static const ReflectionQueryTypeDescriptor kReflTypes[2] = {
-	{ 0u, "SnapshotTestFixtures/DerivedClass", "SnapshotTestFixtures/DerivedClass", "", "DerivedClass", "DerivedClass", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_SnapshotTestFixtures_DerivedClass, 1u },
-	{ 0u, "SnapshotTestFixtures/GenericsVirtEhDemo", "SnapshotTestFixtures/GenericsVirtEhDemo", "", "GenericsVirtEhDemo", "GenericsVirtEhDemo", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_SnapshotTestFixtures_GenericsVirtEhDemo, 1u },
+	{ 0x00000005u, "SnapshotTestFixtures/DerivedClass", "SnapshotTestFixtures/DerivedClass", "", "DerivedClass", "DerivedClass", nullptr, nullptr, 0u, nullptr, 0u,
+	kReflMethods_SnapshotTestFixtures_DerivedClass, 1u, nullptr, 0u, 0u },
+	{ 0x00000001u, "SnapshotTestFixtures/GenericsVirtEhDemo", "SnapshotTestFixtures/GenericsVirtEhDemo", "", "GenericsVirtEhDemo", "GenericsVirtEhDemo", nullptr, nullptr, 0u, nullptr, 0u,
+	kReflMethods_SnapshotTestFixtures_GenericsVirtEhDemo, 1u, nullptr, 0u, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor* kReflTypePtrs[2] = {
