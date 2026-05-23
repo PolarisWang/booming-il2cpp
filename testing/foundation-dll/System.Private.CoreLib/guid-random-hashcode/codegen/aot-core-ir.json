@@ -3052,8 +3052,8 @@
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 21,
-          "handlerOffset": 22,
+          "tryLength": 24,
+          "handlerOffset": 25,
           "handlerLength": 11,
           "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
@@ -3099,34 +3099,51 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 42,
+          "op": "newobj",
+          "opCode": 34,
           "ilOffset": 11,
-          "resultType": "System.Int32",
+          "resultType": "System.Private.CoreLib/System.Object",
+          "callee": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 13,
+          "ilOffset": 16,
           "resultType": "System.Void",
-          "callee": "System.Private.CoreLib/System.HashCode::Add\u003CSystem.Int32\u003E:System.Void(System.Int32)",
+          "callee": "System.Private.CoreLib/System.HashCode::Add\u003CSystem.Object\u003E:System.Void(System.Object)",
           "reference": {
             "assemblyName": "System.Private.CoreLib",
             "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.HashCode::Add\u003CSystem.Int32\u003E:System.Void(System.Int32)"
+            "subjectId": "System.Private.CoreLib/System.HashCode::Add\u003CSystem.Object\u003E:System.Void(System.Object)"
           },
           "targetReference": {
             "kind": 3,
             "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.HashCode::Add\u003CSystem.Int32\u003E:System.Void(System.Int32)",
+            "subjectId": "System.Private.CoreLib/System.HashCode::Add\u003CSystem.Object\u003E:System.Void(System.Object)",
             "openDefinitionSubjectId": "System.Private.CoreLib/System.HashCode::Add:System.Void(!!0)",
             "sharedGenericBodyId": {
-              "value": "body:definition=System.Private.CoreLib/System.HashCode::Add:System.Void(!!0);type=[];method=[System.Int32]"
+              "value": "body:definition=System.Private.CoreLib/System.HashCode::Add:System.Void(!!0);type=[];method=[System.Object]"
             },
             "instantiationStubId": {
-              "value": "stub:definition=System.Private.CoreLib/System.HashCode::Add:System.Void(!!0);type=[];method=[System.Int32]"
+              "value": "stub:definition=System.Private.CoreLib/System.HashCode::Add:System.Void(!!0);type=[];method=[System.Object]"
             },
             "runtimeGenericContext": {
               "instantiationKey": {
@@ -3134,29 +3151,29 @@
                 "definitionSubjectId": "System.Private.CoreLib/System.HashCode::Add:System.Void(!!0)",
                 "typeArguments": [],
                 "methodArguments": [
-                  "System.Int32"
+                  "System.Object"
                 ]
               },
               "sharedGenericBodyId": {
-                "value": "body:definition=System.Private.CoreLib/System.HashCode::Add:System.Void(!!0);type=[];method=[System.Int32]"
+                "value": "body:definition=System.Private.CoreLib/System.HashCode::Add:System.Void(!!0);type=[];method=[System.Object]"
               },
               "instantiationStubId": {
-                "value": "stub:definition=System.Private.CoreLib/System.HashCode::Add:System.Void(!!0);type=[];method=[System.Int32]"
+                "value": "stub:definition=System.Private.CoreLib/System.HashCode::Add:System.Void(!!0);type=[];method=[System.Object]"
               },
               "supportKindCode": 3,
               "specializationKindCode": 1,
               "statusReasonCode": "loader-demand:methodSpec"
             },
             "genericDiagnostic": {
-              "subjectId": "System.Private.CoreLib/System.HashCode::Add\u003CSystem.Int32\u003E:System.Void(System.Int32)",
+              "subjectId": "System.Private.CoreLib/System.HashCode::Add\u003CSystem.Object\u003E:System.Void(System.Object)",
               "definitionSubjectId": "System.Private.CoreLib/System.HashCode::Add:System.Void(!!0)",
-              "displaySubjectId": "System.Private.CoreLib/System.HashCode::Add\u003CSystem.Int32\u003E(System.Int32)",
+              "displaySubjectId": "System.Private.CoreLib/System.HashCode::Add\u003CSystem.Object\u003E(System.Object)",
               "instantiationKey": {
                 "contextKind": 2,
                 "definitionSubjectId": "System.Private.CoreLib/System.HashCode::Add:System.Void(!!0)",
                 "typeArguments": [],
                 "methodArguments": [
-                  "System.Int32"
+                  "System.Object"
                 ]
               }
             },
@@ -3173,22 +3190,22 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 33,
-          "ilOffset": 20,
+          "operand": 36,
+          "ilOffset": 23,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 22,
+          "ilOffset": 25,
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 24,
+          "ilOffset": 27,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -3196,7 +3213,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::_exitCode",
-          "ilOffset": 25,
+          "ilOffset": 28,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "GuidRandomHashcodeSubjects",
@@ -3222,15 +3239,15 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 33,
-          "ilOffset": 31,
+          "operand": 36,
+          "ilOffset": 34,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 33,
+          "ilOffset": 36,
           "isPreserveSig": false
         }
       ],

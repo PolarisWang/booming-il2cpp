@@ -24,35 +24,11 @@ ThinLockTable::ThinLockTable() noexcept {
     // Stripes are default-constructed (mutex + empty map).
 }
 
-// ── Lock helpers (file-local, same as sync_mutex.cpp) ──────────────────────
+// ── Key conversion ─────────────────────────────────────────────────────────
 
-#if defined(_MSC_VER)
-    #include <intrin.h>
-    #pragma intrinsic(_InterlockedCompareExchange64, _InterlockedExchange64)
-    inline uint64_t ThinAtomicLoadRelaxed(const uint64_t* p) noexcept {
-        return *const_cast<volatile uint64_t*>(p);
-    }
-    inline void ThinAtomicStoreRelease(uint64_t* p, uint64_t val) noexcept {
-        _InterlockedExchange64(reinterpret_cast<volatile LONG64*>(p), static_cast<LONG64>(val));
-    }
-    inline bool ThinAtomicCAS(uint64_t* p, uint64_t& expected, uint64_t desired) noexcept {
-        LONG64 prev = _InterlockedCompareExchange64(
-            reinterpret_cast<volatile LONG64*>(p), static_cast<LONG64>(desired), static_cast<LONG64>(expected));
-        if (prev == static_cast<LONG64>(expected)) return true;
-        expected = static_cast<uint64_t>(prev);
-        return false;
-    }
-#else
-    inline uint64_t ThinAtomicLoadRelaxed(const uint64_t* p) noexcept {
-        return __atomic_load_n(p, __ATOMIC_RELAXED);
-    }
-    inline void ThinAtomicStoreRelease(uint64_t* p, uint64_t val) noexcept {
-        __atomic_store_n(p, val, __ATOMIC_RELEASE);
-    }
-    inline bool ThinAtomicCAS(uint64_t* p, uint64_t& expected, uint64_t desired) noexcept {
-        return __atomic_compare_exchange_n(p, &expected, desired, false, __ATOMIC_ACQUIRE, __ATOMIC_RELAXED);
-    }
-#endif
+/// Convert void* object pointer to uint64_t map key.
+inline uint64_t ToKey(void* obj) noexcept { return reinterpret_cast<uint64_t>(obj); }
+inline uint64_t ToKey(const void* obj) noexcept { return reinterpret_cast<uint64_t>(obj); }
 
 // ── Core operations ────────────────────────────────────────────────────────
 
@@ -60,11 +36,12 @@ bool ThinLockTable::TryLock(void* obj, int32_t tid) noexcept {
     auto& stripe = stripes_[StripeIndex(obj)];
     CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) guard(stripe.mutex);
 
-    auto it = stripe.entries.find(obj);
+    const uint64_t k = ToKey(obj);
+    auto it = stripe.entries.find(k);
     if (it == stripe.entries.end()) {
         // First lock: insert new entry.
         const uint64_t tid_bits = static_cast<uint64_t>(tid) << kThinThreadShift;
-        stripe.entries[obj] = kThinLockedBit | tid_bits;
+        stripe.entries[k] = kThinLockedBit | tid_bits;
         return true;
     }
 
@@ -93,7 +70,8 @@ bool ThinLockTable::Unlock(void* obj, int32_t tid) noexcept {
     auto& stripe = stripes_[StripeIndex(obj)];
     CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) guard(stripe.mutex);
 
-    auto it = stripe.entries.find(obj);
+    const uint64_t k = ToKey(obj);
+    auto it = stripe.entries.find(k);
     if (it == stripe.entries.end()) {
         return false;  // Not in table — may be inflated or never locked.
     }
@@ -129,11 +107,12 @@ bool ThinLockTable::TryEnter(void* obj, int32_t tid) noexcept {
     auto& stripe = stripes_[StripeIndex(obj)];
     CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) guard(stripe.mutex);
 
-    auto it = stripe.entries.find(obj);
+    const uint64_t k = ToKey(obj);
+    auto it = stripe.entries.find(k);
     if (it == stripe.entries.end()) {
         // Not locked — acquire.
         const uint64_t tid_bits = static_cast<uint64_t>(tid) << kThinThreadShift;
-        stripe.entries[obj] = kThinLockedBit | tid_bits;
+        stripe.entries[k] = kThinLockedBit | tid_bits;
         return true;
     }
 
@@ -159,7 +138,8 @@ bool ThinLockTable::IsEntered(void* obj, int32_t tid) noexcept {
     auto& stripe = stripes_[StripeIndex(obj)];
     CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) guard(stripe.mutex);
 
-    auto it = stripe.entries.find(obj);
+    const uint64_t k = ToKey(obj);
+    auto it = stripe.entries.find(k);
     if (it == stripe.entries.end()) {
         return false;
     }
@@ -181,7 +161,8 @@ uint64_t ThinLockTable::ReadSyncValue(void* obj) noexcept {
     auto& stripe = stripes_[StripeIndex(obj)];
     CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) guard(stripe.mutex);
 
-    auto it = stripe.entries.find(obj);
+    const uint64_t k = ToKey(obj);
+    auto it = stripe.entries.find(k);
     if (it == stripe.entries.end()) {
         return 0;  // Not locked.
     }
@@ -194,37 +175,37 @@ SyncBlock* ThinLockTable::Inflate(void* obj, SyncBlock* sb) noexcept {
     auto& stripe = stripes_[StripeIndex(obj)];
     CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) guard(stripe.mutex);
 
-    auto it = stripe.entries.find(obj);
+    const uint64_t k = ToKey(obj);
+    auto it = stripe.entries.find(k);
     if (it == stripe.entries.end()) {
-        // Not in thin-lock table — another thread already inflated.
-        // Return sb so caller can contend on the existing SyncBlock.
+        // Not in table — insert new inflated entry.
+        stripe.entries[k] = kThinInflatedBit | reinterpret_cast<uint64_t>(sb);
         return sb;
     }
 
     uint64_t sync = it->second;
     if ((sync & kThinInflatedBit) != 0) {
-        // Already inflated (race) — return existing SyncBlock.
-        return sb;
+        // Already inflated — return existing SyncBlock.
+        auto* existing = reinterpret_cast<SyncBlock*>(sync & ~3ull);
+        return existing ? existing : sb;
     }
 
-    // Remove thin-lock entry.
-    stripe.entries.erase(it);
-
-    // Publish SyncBlock. The caller is responsible for locking sb->mutex
-    // and storing the inflated bit in the SyncBlock structure.
-    // Return the SyncBlock that was allocated by the caller.
+    // Upgrade thin-lock entry to inflated: store SyncBlock pointer.
+    // The original thread-id and recursion from the thin-lock entry are
+    // lost — the inflater becomes the new owner (same semantics as old code).
+    it->second = kThinInflatedBit | reinterpret_cast<uint64_t>(sb);
     return sb;
 }
 
 void ThinLockTable::RemoveEntry(void* obj) noexcept {
     auto& stripe = stripes_[StripeIndex(obj)];
     CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) guard(stripe.mutex);
-    stripe.entries.erase(obj);
+    stripe.entries.erase(ToKey(obj));
 }
 
 // ── GC interface ───────────────────────────────────────────────────────────
 
-uint32_t ThinLockTable::GetLockedCount() const noexcept {
+uint32_t ThinLockTable::GetLockedCount() noexcept {
     uint32_t count = 0;
     for (uint32_t i = 0; i < kThinLockStripes; i++) {
         // Lock-free read: approximate count, used for pinning budget estimation.
@@ -233,28 +214,29 @@ uint32_t ThinLockTable::GetLockedCount() const noexcept {
     return count;
 }
 
-uint32_t ThinLockTable::GetLockedObjects(void** out, uint32_t capacity) const noexcept {
+uint32_t ThinLockTable::GetLockedObjects(void** out, uint32_t capacity) noexcept {
     uint32_t written = 0;
     for (uint32_t i = 0; i < kThinLockStripes && written < capacity; i++) {
         auto& stripe = stripes_[i];
         CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) guard(stripe.mutex);
 
-        for (auto& [obj, sync] : stripe.entries) {
+        for (auto& [key, sync] : stripe.entries) {
             if (written >= capacity) break;
             // Only include thin-locked entries (not inflated).
             if ((sync & kThinInflatedBit) == 0) {
-                out[written++] = obj;
+                out[written++] = reinterpret_cast<void*>(key);
             }
         }
     }
     return written;
 }
 
-bool ThinLockTable::IsLocked(const void* obj) const noexcept {
-    auto& stripe = stripes_[const_cast<void*>(obj)];
+bool ThinLockTable::IsLocked(const void* obj) noexcept {
+    auto& stripe = stripes_[StripeIndex(const_cast<void*>(obj))];
     CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) guard(stripe.mutex);
 
-    auto it = stripe.entries.find(const_cast<void*>(obj));
+    const uint64_t k = ToKey(obj);
+    auto it = stripe.entries.find(k);
     if (it == stripe.entries.end()) return false;
 
     return (it->second & kThinLockedBit) != 0;
@@ -266,16 +248,17 @@ void ThinLockTable::RelocateEntry(void* old_addr, void* new_addr) noexcept {
     auto& stripe = stripes_[StripeIndex(old_addr)];
     CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) guard(stripe.mutex);
 
-    auto it = stripe.entries.find(old_addr);
+    const uint64_t old_key = ToKey(old_addr);
+    auto it = stripe.entries.find(old_key);
     if (it == stripe.entries.end()) return;
 
     // Re-key: insert under new address, remove old entry.
     uint64_t sync = it->second;
     stripe.entries.erase(it);
-    stripe.entries[new_addr] = sync;
+    stripe.entries[ToKey(new_addr)] = sync;
 }
 
-void ThinLockTable::DrainForDomain(uint32_t domain_id) noexcept {
+uint32_t ThinLockTable::DrainForDomain(uint32_t domain_id) noexcept {
     uint32_t removed = 0;
     RegionManager& mgr = RegionManager::Instance();
 
@@ -285,7 +268,8 @@ void ThinLockTable::DrainForDomain(uint32_t domain_id) noexcept {
 
         auto it = stripe.entries.begin();
         while (it != stripe.entries.end()) {
-            if (it->first != nullptr && mgr.IsInDomain(domain_id, it->first)) {
+            void* ptr = reinterpret_cast<void*>(it->first);
+            if (ptr != nullptr && mgr.IsInDomain(domain_id, ptr)) {
                 it = stripe.entries.erase(it);
                 removed++;
             } else {
@@ -298,6 +282,7 @@ void ThinLockTable::DrainForDomain(uint32_t domain_id) noexcept {
         CHAOS_IL2CPP_LOG_DEBUG_M("ThinLockTable", "drain_domain id={0} removed={1}",
             domain_id, removed);
     }
+    return removed;
 }
 
 }  // namespace chaos::il2cpp::runtime_core

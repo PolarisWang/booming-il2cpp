@@ -1,0 +1,966 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenericsSubjects",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenericsSubjects",
+      "metadataToken": 33554434
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601",
+      "metadataToken": 33554435
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u00602",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u00602",
+      "metadataToken": 33554436
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Util",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Util",
+      "metadataToken": 33554437
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u00601",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u00601",
+      "metadataToken": 33554438
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003CSystem.Int32\u003E",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601",
+      "runtimeGenericContext": {
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601",
+          "typeArguments": [
+            "System.Int32"
+          ],
+          "methodArguments": []
+        },
+        "sharedGenericBodyId": {
+          "value": "body:definition=CustomGenericsSubjects/CustomGenerics.Box\u00601;type=[System.Int32];method=[]"
+        },
+        "instantiationStubId": {
+          "value": "stub:definition=CustomGenericsSubjects/CustomGenerics.Box\u00601;type=[System.Int32];method=[]"
+        },
+        "supportKindCode": 3,
+        "specializationKindCode": 1,
+        "statusReasonCode": "loader-demand:typeSpec"
+      },
+      "genericDiagnostic": {
+        "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003CSystem.Int32\u003E",
+        "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601",
+        "displaySubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003CSystem.Int32\u003E",
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601",
+          "typeArguments": [
+            "System.Int32"
+          ],
+          "methodArguments": []
+        }
+      },
+      "metadataToken": 452984834
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u003CSystem.Int32,System.String\u003E",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u00602",
+      "runtimeGenericContext": {
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u00602",
+          "typeArguments": [
+            "System.Int32",
+            "System.String"
+          ],
+          "methodArguments": []
+        },
+        "sharedGenericBodyId": {
+          "value": "body:definition=CustomGenericsSubjects/CustomGenerics.Pair\u00602;type=[System.Int32,System.String];method=[]"
+        },
+        "instantiationStubId": {
+          "value": "stub:definition=CustomGenericsSubjects/CustomGenerics.Pair\u00602;type=[System.Int32,System.String];method=[]"
+        },
+        "supportKindCode": 3,
+        "specializationKindCode": 1,
+        "statusReasonCode": "loader-demand:typeSpec"
+      },
+      "genericDiagnostic": {
+        "subjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u003CSystem.Int32,System.String\u003E",
+        "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u00602",
+        "displaySubjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u003CSystem.Int32,System.String\u003E",
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u00602",
+          "typeArguments": [
+            "System.Int32",
+            "System.String"
+          ],
+          "methodArguments": []
+        }
+      },
+      "metadataToken": 452984835
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u003CSystem.String\u003E",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u00601",
+      "runtimeGenericContext": {
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u00601",
+          "typeArguments": [
+            "System.String"
+          ],
+          "methodArguments": []
+        },
+        "sharedGenericBodyId": {
+          "value": "body:definition=CustomGenericsSubjects/CustomGenerics.Wrapper\u00601;type=[System.String];method=[]"
+        },
+        "instantiationStubId": {
+          "value": "stub:definition=CustomGenericsSubjects/CustomGenerics.Wrapper\u00601;type=[System.String];method=[]"
+        },
+        "supportKindCode": 3,
+        "specializationKindCode": 1,
+        "statusReasonCode": "loader-demand:typeSpec"
+      },
+      "genericDiagnostic": {
+        "subjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u003CSystem.String\u003E",
+        "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u00601",
+        "displaySubjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u003CSystem.String\u003E",
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u00601",
+          "typeArguments": [
+            "System.String"
+          ],
+          "methodArguments": []
+        }
+      },
+      "metadataToken": 452984836
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003C!0\u003E",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601",
+      "runtimeGenericContext": {
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601",
+          "typeArguments": [
+            "!0"
+          ],
+          "methodArguments": []
+        },
+        "sharedGenericBodyId": {
+          "value": "body:definition=CustomGenericsSubjects/CustomGenerics.Box\u00601;type=[!0];method=[]"
+        },
+        "instantiationStubId": {
+          "value": "stub:definition=CustomGenericsSubjects/CustomGenerics.Box\u00601;type=[!0];method=[]"
+        },
+        "supportKindCode": 3,
+        "specializationKindCode": 2,
+        "statusReasonCode": "loader-demand:typeSpec"
+      },
+      "genericDiagnostic": {
+        "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003C!0\u003E",
+        "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601",
+        "displaySubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003C!0\u003E",
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601",
+          "typeArguments": [
+            "!0"
+          ],
+          "methodArguments": []
+        }
+      },
+      "metadataToken": 452984837
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u003C!0,!1\u003E",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u00602",
+      "runtimeGenericContext": {
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u00602",
+          "typeArguments": [
+            "!0",
+            "!1"
+          ],
+          "methodArguments": []
+        },
+        "sharedGenericBodyId": {
+          "value": "body:definition=CustomGenericsSubjects/CustomGenerics.Pair\u00602;type=[!0,!1];method=[]"
+        },
+        "instantiationStubId": {
+          "value": "stub:definition=CustomGenericsSubjects/CustomGenerics.Pair\u00602;type=[!0,!1];method=[]"
+        },
+        "supportKindCode": 3,
+        "specializationKindCode": 2,
+        "statusReasonCode": "loader-demand:typeSpec"
+      },
+      "genericDiagnostic": {
+        "subjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u003C!0,!1\u003E",
+        "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u00602",
+        "displaySubjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u003C!0,!1\u003E",
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u00602",
+          "typeArguments": [
+            "!0",
+            "!1"
+          ],
+          "methodArguments": []
+        }
+      },
+      "metadataToken": 452984839
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u003C!0\u003E",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u00601",
+      "runtimeGenericContext": {
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u00601",
+          "typeArguments": [
+            "!0"
+          ],
+          "methodArguments": []
+        },
+        "sharedGenericBodyId": {
+          "value": "body:definition=CustomGenericsSubjects/CustomGenerics.Wrapper\u00601;type=[!0];method=[]"
+        },
+        "instantiationStubId": {
+          "value": "stub:definition=CustomGenericsSubjects/CustomGenerics.Wrapper\u00601;type=[!0];method=[]"
+        },
+        "supportKindCode": 3,
+        "specializationKindCode": 2,
+        "statusReasonCode": "loader-demand:typeSpec"
+      },
+      "genericDiagnostic": {
+        "subjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u003C!0\u003E",
+        "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u00601",
+        "displaySubjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u003C!0\u003E",
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u00601",
+          "typeArguments": [
+            "!0"
+          ],
+          "methodArguments": []
+        }
+      },
+      "metadataToken": 452984842
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenericsSubjects::Subject_0:System.Void()",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenericsSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "CustomGenericsSubjects/CustomGenericsSubjects",
+      "metadataToken": 100663297,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenericsSubjects::Subject_1:System.Void()",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenericsSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "CustomGenericsSubjects/CustomGenericsSubjects",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenericsSubjects::Subject_2:System.Void()",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenericsSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "CustomGenericsSubjects/CustomGenericsSubjects",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenericsSubjects::Subject_3:System.Void()",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenericsSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "CustomGenericsSubjects/CustomGenericsSubjects",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenericsSubjects::Subject_4:System.Void()",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenericsSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "CustomGenericsSubjects/CustomGenericsSubjects",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenericsSubjects::Subject_5:System.Void()",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenericsSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "CustomGenericsSubjects/CustomGenericsSubjects",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::.ctor:System.Void(!0)",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::.ctor:System.Void(!0)",
+      "declaringTypeSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601",
+      "metadataToken": 100663303,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::Get:!0()",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::Get:!0()",
+      "declaringTypeSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::Set:System.Void(!0)",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::Set:System.Void(!0)",
+      "declaringTypeSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601",
+      "metadataToken": 100663305,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::IsDefault:System.Boolean()",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::IsDefault:System.Boolean()",
+      "declaringTypeSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u00602::.ctor:System.Void(!0,!1)",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u00602::.ctor:System.Void(!0,!1)",
+      "declaringTypeSubjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u00602",
+      "metadataToken": 100663307,
+      "parameterCount": 2
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u00602::Deconstruct:System.Void(!0\u0026,!1\u0026)",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u00602::Deconstruct:System.Void(!0\u0026,!1\u0026)",
+      "declaringTypeSubjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u00602",
+      "metadataToken": 100663308,
+      "parameterCount": 2
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Util::Echo\u00601:!!0(!!0)",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Util::Echo\u00601:!!0(!!0)",
+      "declaringTypeSubjectId": "CustomGenericsSubjects/CustomGenerics.Util",
+      "metadataToken": 100663309,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Util::Equal\u00601:System.Boolean(!!0,!!0)",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Util::Equal\u00601:System.Boolean(!!0,!!0)",
+      "declaringTypeSubjectId": "CustomGenericsSubjects/CustomGenerics.Util",
+      "metadataToken": 100663310,
+      "parameterCount": 2
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Util::.ctor:System.Void()",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Util::.ctor:System.Void()",
+      "declaringTypeSubjectId": "CustomGenericsSubjects/CustomGenerics.Util",
+      "metadataToken": 100663311,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u00601::.ctor:System.Void(!0)",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u00601::.ctor:System.Void(!0)",
+      "declaringTypeSubjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u00601",
+      "metadataToken": 100663312,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u00601::GetRefType:System.Type()",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u00601::GetRefType:System.Type()",
+      "declaringTypeSubjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u00601",
+      "metadataToken": 100663313,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Util::Echo\u003CSystem.Int32\u003E:System.Int32(System.Int32)",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Util::Echo\u00601:!!0(!!0)",
+      "runtimeGenericContext": {
+        "instantiationKey": {
+          "contextKind": 2,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Util::Echo\u00601:!!0(!!0)",
+          "typeArguments": [],
+          "methodArguments": [
+            "System.Int32"
+          ]
+        },
+        "sharedGenericBodyId": {
+          "value": "body:definition=CustomGenericsSubjects/CustomGenerics.Util::Echo\u00601:!!0(!!0);type=[];method=[System.Int32]"
+        },
+        "instantiationStubId": {
+          "value": "stub:definition=CustomGenericsSubjects/CustomGenerics.Util::Echo\u00601:!!0(!!0);type=[];method=[System.Int32]"
+        },
+        "supportKindCode": 3,
+        "specializationKindCode": 1,
+        "statusReasonCode": "loader-demand:methodSpec"
+      },
+      "genericDiagnostic": {
+        "subjectId": "CustomGenericsSubjects/CustomGenerics.Util::Echo\u003CSystem.Int32\u003E:System.Int32(System.Int32)",
+        "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Util::Echo\u00601:!!0(!!0)",
+        "displaySubjectId": "CustomGenericsSubjects/CustomGenerics.Util::Echo\u003CSystem.Int32\u003E(System.Int32)",
+        "instantiationKey": {
+          "contextKind": 2,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Util::Echo\u00601:!!0(!!0)",
+          "typeArguments": [],
+          "methodArguments": [
+            "System.Int32"
+          ]
+        }
+      },
+      "declaringTypeSubjectId": "CustomGenericsSubjects/CustomGenerics.Util",
+      "metadataToken": 721420289,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Util::Equal\u003CSystem.Int32\u003E:System.Boolean(System.Int32,System.Int32)",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Util::Equal\u00601:System.Boolean(!!0,!!0)",
+      "runtimeGenericContext": {
+        "instantiationKey": {
+          "contextKind": 2,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Util::Equal\u00601:System.Boolean(!!0,!!0)",
+          "typeArguments": [],
+          "methodArguments": [
+            "System.Int32"
+          ]
+        },
+        "sharedGenericBodyId": {
+          "value": "body:definition=CustomGenericsSubjects/CustomGenerics.Util::Equal\u00601:System.Boolean(!!0,!!0);type=[];method=[System.Int32]"
+        },
+        "instantiationStubId": {
+          "value": "stub:definition=CustomGenericsSubjects/CustomGenerics.Util::Equal\u00601:System.Boolean(!!0,!!0);type=[];method=[System.Int32]"
+        },
+        "supportKindCode": 3,
+        "specializationKindCode": 1,
+        "statusReasonCode": "loader-demand:methodSpec"
+      },
+      "genericDiagnostic": {
+        "subjectId": "CustomGenericsSubjects/CustomGenerics.Util::Equal\u003CSystem.Int32\u003E:System.Boolean(System.Int32,System.Int32)",
+        "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Util::Equal\u00601:System.Boolean(!!0,!!0)",
+        "displaySubjectId": "CustomGenericsSubjects/CustomGenerics.Util::Equal\u003CSystem.Int32\u003E(System.Int32,System.Int32)",
+        "instantiationKey": {
+          "contextKind": 2,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Util::Equal\u00601:System.Boolean(!!0,!!0)",
+          "typeArguments": [],
+          "methodArguments": [
+            "System.Int32"
+          ]
+        }
+      },
+      "declaringTypeSubjectId": "CustomGenericsSubjects/CustomGenerics.Util",
+      "metadataToken": 721420290,
+      "parameterCount": 2
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003CSystem.Int32\u003E::.ctor:System.Void(System.Int32)",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::.ctor:System.Void(!0)",
+      "runtimeGenericContext": {
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::.ctor:System.Void(!0)",
+          "typeArguments": [
+            "System.Int32"
+          ],
+          "methodArguments": []
+        },
+        "sharedGenericBodyId": {
+          "value": "body:definition=CustomGenericsSubjects/CustomGenerics.Box\u00601::.ctor:System.Void(!0);type=[System.Int32];method=[]"
+        },
+        "instantiationStubId": {
+          "value": "stub:definition=CustomGenericsSubjects/CustomGenerics.Box\u00601::.ctor:System.Void(!0);type=[System.Int32];method=[]"
+        },
+        "supportKindCode": 3,
+        "specializationKindCode": 1,
+        "statusReasonCode": "loader-demand:memberReference"
+      },
+      "genericDiagnostic": {
+        "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003CSystem.Int32\u003E::.ctor:System.Void(System.Int32)",
+        "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::.ctor:System.Void(!0)",
+        "displaySubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003CSystem.Int32\u003E::.ctor(System.Int32)",
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::.ctor:System.Void(!0)",
+          "typeArguments": [
+            "System.Int32"
+          ],
+          "methodArguments": []
+        }
+      },
+      "declaringTypeSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003CSystem.Int32\u003E",
+      "metadataToken": 1912602624,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003CSystem.Int32\u003E::Get:System.Int32()",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::Get:!0()",
+      "runtimeGenericContext": {
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::Get:!0()",
+          "typeArguments": [
+            "System.Int32"
+          ],
+          "methodArguments": []
+        },
+        "sharedGenericBodyId": {
+          "value": "body:definition=CustomGenericsSubjects/CustomGenerics.Box\u00601::Get:!0();type=[System.Int32];method=[]"
+        },
+        "instantiationStubId": {
+          "value": "stub:definition=CustomGenericsSubjects/CustomGenerics.Box\u00601::Get:!0();type=[System.Int32];method=[]"
+        },
+        "supportKindCode": 3,
+        "specializationKindCode": 1,
+        "statusReasonCode": "loader-demand:memberReference"
+      },
+      "genericDiagnostic": {
+        "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003CSystem.Int32\u003E::Get:System.Int32()",
+        "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::Get:!0()",
+        "displaySubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003CSystem.Int32\u003E::Get()",
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::Get:!0()",
+          "typeArguments": [
+            "System.Int32"
+          ],
+          "methodArguments": []
+        }
+      },
+      "declaringTypeSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003CSystem.Int32\u003E",
+      "metadataToken": 1912602625,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003CSystem.Int32\u003E::Set:System.Void(System.Int32)",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::Set:System.Void(!0)",
+      "runtimeGenericContext": {
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::Set:System.Void(!0)",
+          "typeArguments": [
+            "System.Int32"
+          ],
+          "methodArguments": []
+        },
+        "sharedGenericBodyId": {
+          "value": "body:definition=CustomGenericsSubjects/CustomGenerics.Box\u00601::Set:System.Void(!0);type=[System.Int32];method=[]"
+        },
+        "instantiationStubId": {
+          "value": "stub:definition=CustomGenericsSubjects/CustomGenerics.Box\u00601::Set:System.Void(!0);type=[System.Int32];method=[]"
+        },
+        "supportKindCode": 3,
+        "specializationKindCode": 1,
+        "statusReasonCode": "loader-demand:memberReference"
+      },
+      "genericDiagnostic": {
+        "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003CSystem.Int32\u003E::Set:System.Void(System.Int32)",
+        "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::Set:System.Void(!0)",
+        "displaySubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003CSystem.Int32\u003E::Set(System.Int32)",
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::Set:System.Void(!0)",
+          "typeArguments": [
+            "System.Int32"
+          ],
+          "methodArguments": []
+        }
+      },
+      "declaringTypeSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003CSystem.Int32\u003E",
+      "metadataToken": 1912602626,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003CSystem.Int32\u003E::IsDefault:System.Boolean()",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::IsDefault:System.Boolean()",
+      "genericDiagnostic": {
+        "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003CSystem.Int32\u003E::IsDefault:System.Boolean()",
+        "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::IsDefault:System.Boolean()",
+        "displaySubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003CSystem.Int32\u003E::IsDefault()",
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::IsDefault:System.Boolean()",
+          "typeArguments": [
+            "System.Int32"
+          ],
+          "methodArguments": []
+        }
+      },
+      "declaringTypeSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003CSystem.Int32\u003E",
+      "metadataToken": 1912602627,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u003CSystem.Int32,System.String\u003E::.ctor:System.Void(System.Int32,System.String)",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u00602::.ctor:System.Void(!0,!1)",
+      "runtimeGenericContext": {
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u00602::.ctor:System.Void(!0,!1)",
+          "typeArguments": [
+            "System.Int32",
+            "System.String"
+          ],
+          "methodArguments": []
+        },
+        "sharedGenericBodyId": {
+          "value": "body:definition=CustomGenericsSubjects/CustomGenerics.Pair\u00602::.ctor:System.Void(!0,!1);type=[System.Int32,System.String];method=[]"
+        },
+        "instantiationStubId": {
+          "value": "stub:definition=CustomGenericsSubjects/CustomGenerics.Pair\u00602::.ctor:System.Void(!0,!1);type=[System.Int32,System.String];method=[]"
+        },
+        "supportKindCode": 3,
+        "specializationKindCode": 1,
+        "statusReasonCode": "loader-demand:memberReference"
+      },
+      "genericDiagnostic": {
+        "subjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u003CSystem.Int32,System.String\u003E::.ctor:System.Void(System.Int32,System.String)",
+        "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u00602::.ctor:System.Void(!0,!1)",
+        "displaySubjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u003CSystem.Int32,System.String\u003E::.ctor(System.Int32,System.String)",
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u00602::.ctor:System.Void(!0,!1)",
+          "typeArguments": [
+            "System.Int32",
+            "System.String"
+          ],
+          "methodArguments": []
+        }
+      },
+      "declaringTypeSubjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u003CSystem.Int32,System.String\u003E",
+      "metadataToken": 1912602628,
+      "parameterCount": 2
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u003CSystem.Int32,System.String\u003E::Deconstruct:System.Void(System.Int32\u0026,System.String\u0026)",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u00602::Deconstruct:System.Void(!0\u0026,!1\u0026)",
+      "runtimeGenericContext": {
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u00602::Deconstruct:System.Void(!0\u0026,!1\u0026)",
+          "typeArguments": [
+            "System.Int32",
+            "System.String"
+          ],
+          "methodArguments": []
+        },
+        "sharedGenericBodyId": {
+          "value": "body:definition=CustomGenericsSubjects/CustomGenerics.Pair\u00602::Deconstruct:System.Void(!0\u0026,!1\u0026);type=[System.Int32,System.String];method=[]"
+        },
+        "instantiationStubId": {
+          "value": "stub:definition=CustomGenericsSubjects/CustomGenerics.Pair\u00602::Deconstruct:System.Void(!0\u0026,!1\u0026);type=[System.Int32,System.String];method=[]"
+        },
+        "supportKindCode": 3,
+        "specializationKindCode": 1,
+        "statusReasonCode": "loader-demand:memberReference"
+      },
+      "genericDiagnostic": {
+        "subjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u003CSystem.Int32,System.String\u003E::Deconstruct:System.Void(System.Int32\u0026,System.String\u0026)",
+        "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u00602::Deconstruct:System.Void(!0\u0026,!1\u0026)",
+        "displaySubjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u003CSystem.Int32,System.String\u003E::Deconstruct(System.Int32\u0026,System.String\u0026)",
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u00602::Deconstruct:System.Void(!0\u0026,!1\u0026)",
+          "typeArguments": [
+            "System.Int32",
+            "System.String"
+          ],
+          "methodArguments": []
+        }
+      },
+      "declaringTypeSubjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u003CSystem.Int32,System.String\u003E",
+      "metadataToken": 1912602629,
+      "parameterCount": 2
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u003CSystem.String\u003E::.ctor:System.Void(System.String)",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u00601::.ctor:System.Void(!0)",
+      "runtimeGenericContext": {
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u00601::.ctor:System.Void(!0)",
+          "typeArguments": [
+            "System.String"
+          ],
+          "methodArguments": []
+        },
+        "sharedGenericBodyId": {
+          "value": "body:definition=CustomGenericsSubjects/CustomGenerics.Wrapper\u00601::.ctor:System.Void(!0);type=[System.String];method=[]"
+        },
+        "instantiationStubId": {
+          "value": "stub:definition=CustomGenericsSubjects/CustomGenerics.Wrapper\u00601::.ctor:System.Void(!0);type=[System.String];method=[]"
+        },
+        "supportKindCode": 3,
+        "specializationKindCode": 1,
+        "statusReasonCode": "loader-demand:memberReference"
+      },
+      "genericDiagnostic": {
+        "subjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u003CSystem.String\u003E::.ctor:System.Void(System.String)",
+        "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u00601::.ctor:System.Void(!0)",
+        "displaySubjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u003CSystem.String\u003E::.ctor(System.String)",
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u00601::.ctor:System.Void(!0)",
+          "typeArguments": [
+            "System.String"
+          ],
+          "methodArguments": []
+        }
+      },
+      "declaringTypeSubjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u003CSystem.String\u003E",
+      "metadataToken": 1912602630,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u003CSystem.String\u003E::GetRefType:System.Type()",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u00601::GetRefType:System.Type()",
+      "runtimeGenericContext": {
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u00601::GetRefType:System.Type()",
+          "typeArguments": [
+            "System.String"
+          ],
+          "methodArguments": []
+        },
+        "sharedGenericBodyId": {
+          "value": "body:definition=CustomGenericsSubjects/CustomGenerics.Wrapper\u00601::GetRefType:System.Type();type=[System.String];method=[]"
+        },
+        "instantiationStubId": {
+          "value": "stub:definition=CustomGenericsSubjects/CustomGenerics.Wrapper\u00601::GetRefType:System.Type();type=[System.String];method=[]"
+        },
+        "supportKindCode": 3,
+        "specializationKindCode": 1,
+        "statusReasonCode": "loader-demand:memberReference"
+      },
+      "genericDiagnostic": {
+        "subjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u003CSystem.String\u003E::GetRefType:System.Type()",
+        "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u00601::GetRefType:System.Type()",
+        "displaySubjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u003CSystem.String\u003E::GetRefType()",
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u00601::GetRefType:System.Type()",
+          "typeArguments": [
+            "System.String"
+          ],
+          "methodArguments": []
+        }
+      },
+      "declaringTypeSubjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u003CSystem.String\u003E",
+      "metadataToken": 1912602631,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003C!0\u003E::.ctor:System.Void(!0)",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::.ctor:System.Void(!0)",
+      "genericDiagnostic": {
+        "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003C!0\u003E::.ctor:System.Void(!0)",
+        "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::.ctor:System.Void(!0)",
+        "displaySubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003C!0\u003E::.ctor(!0)",
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::.ctor:System.Void(!0)",
+          "typeArguments": [
+            "!0"
+          ],
+          "methodArguments": []
+        }
+      },
+      "declaringTypeSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003C!0\u003E",
+      "metadataToken": 1912602632,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003C!0\u003E::Get:!0()",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::Get:!0()",
+      "genericDiagnostic": {
+        "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003C!0\u003E::Get:!0()",
+        "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::Get:!0()",
+        "displaySubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003C!0\u003E::Get()",
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::Get:!0()",
+          "typeArguments": [
+            "!0"
+          ],
+          "methodArguments": []
+        }
+      },
+      "declaringTypeSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003C!0\u003E",
+      "metadataToken": 1912602633,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003C!0\u003E::Set:System.Void(!0)",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::Set:System.Void(!0)",
+      "genericDiagnostic": {
+        "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003C!0\u003E::Set:System.Void(!0)",
+        "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::Set:System.Void(!0)",
+        "displaySubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003C!0\u003E::Set(!0)",
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::Set:System.Void(!0)",
+          "typeArguments": [
+            "!0"
+          ],
+          "methodArguments": []
+        }
+      },
+      "declaringTypeSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003C!0\u003E",
+      "metadataToken": 1912602634,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003C!0\u003E::IsDefault:System.Boolean()",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::IsDefault:System.Boolean()",
+      "genericDiagnostic": {
+        "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003C!0\u003E::IsDefault:System.Boolean()",
+        "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::IsDefault:System.Boolean()",
+        "displaySubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003C!0\u003E::IsDefault()",
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::IsDefault:System.Boolean()",
+          "typeArguments": [
+            "!0"
+          ],
+          "methodArguments": []
+        }
+      },
+      "declaringTypeSubjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003C!0\u003E",
+      "metadataToken": 1912602635,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u003C!0,!1\u003E::.ctor:System.Void(!0,!1)",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u00602::.ctor:System.Void(!0,!1)",
+      "genericDiagnostic": {
+        "subjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u003C!0,!1\u003E::.ctor:System.Void(!0,!1)",
+        "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u00602::.ctor:System.Void(!0,!1)",
+        "displaySubjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u003C!0,!1\u003E::.ctor(!0,!1)",
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u00602::.ctor:System.Void(!0,!1)",
+          "typeArguments": [
+            "!0",
+            "!1"
+          ],
+          "methodArguments": []
+        }
+      },
+      "declaringTypeSubjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u003C!0,!1\u003E",
+      "metadataToken": 1912602636,
+      "parameterCount": 2
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u003C!0,!1\u003E::Deconstruct:System.Void(!0\u0026,!1\u0026)",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u00602::Deconstruct:System.Void(!0\u0026,!1\u0026)",
+      "genericDiagnostic": {
+        "subjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u003C!0,!1\u003E::Deconstruct:System.Void(!0\u0026,!1\u0026)",
+        "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u00602::Deconstruct:System.Void(!0\u0026,!1\u0026)",
+        "displaySubjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u003C!0,!1\u003E::Deconstruct(!0\u0026,!1\u0026)",
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u00602::Deconstruct:System.Void(!0\u0026,!1\u0026)",
+          "typeArguments": [
+            "!0",
+            "!1"
+          ],
+          "methodArguments": []
+        }
+      },
+      "declaringTypeSubjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u003C!0,!1\u003E",
+      "metadataToken": 1912602637,
+      "parameterCount": 2
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u003C!0\u003E::.ctor:System.Void(!0)",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u00601::.ctor:System.Void(!0)",
+      "genericDiagnostic": {
+        "subjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u003C!0\u003E::.ctor:System.Void(!0)",
+        "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u00601::.ctor:System.Void(!0)",
+        "displaySubjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u003C!0\u003E::.ctor(!0)",
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u00601::.ctor:System.Void(!0)",
+          "typeArguments": [
+            "!0"
+          ],
+          "methodArguments": []
+        }
+      },
+      "declaringTypeSubjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u003C!0\u003E",
+      "metadataToken": 1912602638,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u003C!0\u003E::GetRefType:System.Type()",
+      "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u00601::GetRefType:System.Type()",
+      "genericDiagnostic": {
+        "subjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u003C!0\u003E::GetRefType:System.Type()",
+        "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u00601::GetRefType:System.Type()",
+        "displaySubjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u003C!0\u003E::GetRefType()",
+        "instantiationKey": {
+          "contextKind": 1,
+          "definitionSubjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u00601::GetRefType:System.Type()",
+          "typeArguments": [
+            "!0"
+          ],
+          "methodArguments": []
+        }
+      },
+      "declaringTypeSubjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u003C!0\u003E",
+      "metadataToken": 1912602639,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

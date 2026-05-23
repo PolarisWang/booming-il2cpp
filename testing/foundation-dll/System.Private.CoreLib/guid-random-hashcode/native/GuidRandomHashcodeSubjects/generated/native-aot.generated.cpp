@@ -1,4 +1,4 @@
-#include <chaos/common.h>
+﻿#include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
 #include <chaos/eh.h>
@@ -16,6 +16,7 @@
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 #include "enum_metadata.generated.h"
+#include "enum_stubs.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -25,6 +26,22 @@ extern "C" void InterpreterEntryDirect(
 
 #pragma warning(push)
 #pragma warning(disable: 4065 4244)
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_0(void);
+extern "C" void GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_1(void);
+extern "C" void GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_10(void);
+extern "C" void GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_11(void);
+extern "C" void GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_12(void);
+extern "C" void GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_13(void);
+extern "C" void GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_2(void);
+extern "C" void GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_3(void);
+extern "C" void GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_4(void);
+extern "C" void GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_5(void);
+extern "C" void GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_6(void);
+extern "C" void GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_7(void);
+extern "C" void GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_8(void);
+extern "C" void GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_9(void);
 
 namespace chaos::il2cpp::codegen::GuidRandomHashcodeSubjects {
 
@@ -336,6 +353,11 @@ static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_H
 	return ChaosHashCodeToHashCode(chaos_arg_0);
 }
 
+static void chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	ChaosObjectCtor(chaos_fn_arg_0);
+}
+
 static void chaos_external_runtime_System_Private_CoreLib_System_Random__NextBytes_System_Void_System_Byte___(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
 	ChaosRandomNextBytes(chaos_fn_arg_0, chaos_fn_arg_1);
@@ -394,6 +416,47 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
+
+
+// ── Bridge/import thunks ──
+extern "C" void* kChaosExternalRuntimeFnTable[];
+
+// Bridge/import thunk for: GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::_exitCode
+extern "C" void chaos_bridge_thunk_0(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[1])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Byte
+extern "C" void chaos_bridge_thunk_1(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[2])();
+}
+
+// Bridge/import thunk for: GuidRandomHashcodeSubjects/<PrivateImplementationDetails>::039058C6F2C0CB492C533B0A4D14EF77CC0F78ABCCCED5287D84A1A2011CFB81
+extern "C" void chaos_bridge_thunk_2(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[3])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Guid::TryParse:System.Boolean(System.String,System.Guid&)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_3(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[9])(chaos_fn_arg_0, chaos_fn_arg_1);
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.HashCode
+extern "C" void chaos_bridge_thunk_4(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[17])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.HashCode::Add<System.Object>:System.Void(System.Object)
+extern "C" void chaos_bridge_thunk_5(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[19])(chaos_fn_arg_0);
+}
 
 extern "C" void GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_0(void);
 extern "C" void GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_1(void);
@@ -545,11 +608,18 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
 		/* .type_count        = */ 4u,
-	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
+	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 -- deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
 	/* .custom_attribute_materializer = */ nullptr,
-
+	/* .custom_attribute_method_offset   = */ nullptr,
+	/* .custom_attribute_field_offset    = */ nullptr,
+	/* .custom_attribute_property_offset = */ nullptr,
+	/* .custom_attribute_param_offset    = */ nullptr,
+	/* .custom_attribute_method_count    = */ 0u,
+	/* .custom_attribute_field_count     = */ 0u,
+	/* .custom_attribute_property_count  = */ 0u,
+	/* .custom_attribute_param_count   = */ 0u,
 		/* .abi_manifest      = */ s_abi_manifest,
 	};
 	static const CHAOS_IL2CPP_UINT32 s_native_aot_module_id =
@@ -633,7 +703,7 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // ── External Runtime Dispatch Table ──────────────────────────
 // Startup-time-resolved function pointers for cross-assembly calls.
 
-extern "C" const char* kChaosExternalRuntimeSubjects[21] = {
+extern "C" const char* kChaosExternalRuntimeSubjects[22] = {
 	"System.Private.CoreLib/System.Guid::.ctor:System.Void(System.String)",
 	"GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::_exitCode",
 	"System.Private.CoreLib/System.Byte",
@@ -652,12 +722,13 @@ extern "C" const char* kChaosExternalRuntimeSubjects[21] = {
 	"System.Private.CoreLib/System.Random::NextDouble:System.Double()",
 	"System.Private.CoreLib/System.Random::NextBytes:System.Void(System.Byte[])",
 	"System.Private.CoreLib/System.HashCode",
-	"System.Private.CoreLib/System.HashCode::Add<System.Int32>:System.Void(System.Int32)",
+	"System.Private.CoreLib/System.Object::.ctor:System.Void()",
+	"System.Private.CoreLib/System.HashCode::Add<System.Object>:System.Void(System.Object)",
 	"System.Private.CoreLib/System.HashCode::ToHashCode:System.Int32()",
 	"System.Private.CoreLib/System.HashCode::Combine<System.Int32,System.Int32>:System.Int32(System.Int32,System.Int32)",
 };
 
-extern "C" void* kChaosExternalRuntimeFnTable[21] = {
+extern "C" void* kChaosExternalRuntimeFnTable[22] = {
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Guid___ctor_System_Void_System_String_),
 	nullptr,
 	nullptr,
@@ -676,12 +747,13 @@ extern "C" void* kChaosExternalRuntimeFnTable[21] = {
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Random__NextDouble_System_Double__),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Random__NextBytes_System_Void_System_Byte___),
 	nullptr,
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__),
 	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_HashCode__ToHashCode_System_Int32__),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_HashCode__Combine_System_Int32_System_Int32__System_Int32_System_Int32_System_Int32_),
 };
 
-extern "C" int32_t kChaosExternalRuntimeCount = 21;
+extern "C" int32_t kChaosExternalRuntimeCount = 22;
 // (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
@@ -1139,35 +1211,35 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // matching during IR lowering of patched methods.
 
 static constexpr ReflectionQueryFieldDescriptor kReflFields_GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects[1] = {
-	{ 0u, "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
+	{ 0x04000001u, "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::_exitCode", "_exitCode", "System.Int32", 0LL, 3u },
 };
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects[14] = {
-	{ 0u, "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_10:System.Void()", "Subject_10", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_11:System.Void()", "Subject_11", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_12:System.Void()", "Subject_12", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_13:System.Void()", "Subject_13", "System.Void", 0, nullptr, 0u },
+	{ 0x00000006u, "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000007u, "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000008u, "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000009u, "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Au, "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Bu, "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Cu, "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Du, "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Eu, "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Fu, "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000010u, "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_10:System.Void()", "Subject_10", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000011u, "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_11:System.Void()", "Subject_11", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000012u, "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_12:System.Void()", "Subject_12", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000013u, "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects::Subject_13:System.Void()", "Subject_13", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
-	{ 0u, "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects", "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects", "", "GuidRandomHashcodeSubjects", "GuidRandomHashcodeSubjects", nullptr, kReflFields_GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects, 1u, nullptr, 0u,
-	kReflMethods_GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects, 14u },
+	{ 0x00000001u, "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects", "GuidRandomHashcodeSubjects/GuidRandomHashcodeSubjects", "", "GuidRandomHashcodeSubjects", "GuidRandomHashcodeSubjects", nullptr, kReflFields_GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects, 1u, nullptr, 0u,
+nullptr, 0u,    kReflMethods_GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects, 14u, nullptr, 0u, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static const ReflectionQueryImageDescriptor kReflImage = { "GuidRandomHashcodeSubjects", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "GuidRandomHashcodeSubjects", kReflTypePtrs, 1u, 1, 0, 0, 0 };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -1992,10 +2064,15 @@ extern "C" void GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_11
 					*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
 				}
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Object, {});
+				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Object.hot;
+				chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
 			{
 				const auto chaos_arg_0 = _s1;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[18])(chaos_arg_0);
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[19])(chaos_arg_0);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }

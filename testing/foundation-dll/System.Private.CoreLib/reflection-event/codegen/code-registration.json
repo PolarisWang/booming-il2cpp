@@ -1,0 +1,30 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ReflectionEventSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ReflectionEventSubjects_ReflectionEventSubjects_Subject_0",
+          "subjectId": "ReflectionEventSubjects/ReflectionEventSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ReflectionEventSubjects_ReflectionEventSubjects_Subject_1",
+          "subjectId": "ReflectionEventSubjects/ReflectionEventSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ReflectionEventSubjects_ReflectionEventSubjects_Subject_2",
+          "subjectId": "ReflectionEventSubjects/ReflectionEventSubjects::Subject_2:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

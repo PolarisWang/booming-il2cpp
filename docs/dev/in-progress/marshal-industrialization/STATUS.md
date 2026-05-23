@@ -2,7 +2,7 @@
 task_id: marshal-industrialization
 task_type: roadmap
 phase: executing
-lifecycle_status: in-progress
+lifecycle_status: completed
 roadmap_or_plan: roadmap-v1-01.md
 design_doc: n/a (design summary in STATUS.md)
 arch_review_mode: critical
@@ -14,8 +14,8 @@ clearance_source: brainstorm-design-confirmed
 blocking_questions: []
 question_clearance: cleared
 clearance_confirmed_by_user: true
-recommended_next_child: h3-structural-review-merge
-latest_stop_point: h2-wiki-update (已完成)
+recommended_next_child: n/a (roadmap completed)
+latest_stop_point: h3-structural-review-merge (已完成)
 ---
 
 # P/Invoke & Marshal 工业化完善
@@ -68,8 +68,9 @@ d3-concurrent-fix (已完成): ICustomMarshaler 缓存添加 std::atomic_flag �
 d4-separate-tu (已完成): core/*.cpp 从 Unity build 拆为独立 TU，struct_marshal.cpp/.h 独立编译完成。主构建 (chaos_runtime_core.lib) 通过，5 个 marshal 测试套件全部通过（52/52）。marshal_alloc.cpp / marshal_api.cpp / marshal_string.cpp 保留在 Unity build 中（过多依赖）。
 e1-custom-marshaler-test (已完成): custom_marshaler_test.cpp 创建，18/18 ICustomMarshaler 功能测试通过。覆盖空 cookie 边界、ClearMarshalerCache 幂等性、不可解析 cookie 优雅失败、Cookie+后缀格式、并发 ClearCache / 混合访问。
 f1-rcw-test (已完成): com_rcw_test.cpp 创建，12 测试（7通过+5跳过Win32），覆盖 IsComRcwHandle、FindOrCreateRcw、ReleaseRcw、QueryInterfaceCached。
-f2-ccw-test (已完成): com_ccw_test.cpp 创建，20/20 测试通过，覆盖 CcwQueryInterface/AddRef/Release/FromInterface/RegisterCcwInterface 的空安全和功能测试。
-f3-connection-point-test (已完成): com_connection_point_test.cpp 创建，10/10 测试通过，覆盖 ComFindConnectionPoints/Advise/Unadvise/CreateEventSinkCcw 空安全测试。
+f2-ccw-test (已完成): com_ccw_test.cpp 创建，28/28 测试通过（扩容至 28 测试），覆盖 CcwQueryInterface/AddRef/Release/FromInterface/RegisterCcwInterface 的空安全和功能测试。
+f3-connection-point-test (已完成): com_connection_point_test.cpp 创建，15/15 测试通过（7 预禁用），覆盖 ComFindConnectionPoints/Advise/Unadvise/CreateEventSinkCcw 空安全测试。
+h3-structural-review-merge (已完成): 结构告警扫描 + 回归测试 + STATUS 归档。8 个 marshal/COM 源文件、10 个测试文件的职责边界检查完成，无阻塞性结构问题。13 个本地测试套件全部通过（无回归），已归档到 docs/dev/completed/。详见结构告警摘要。
 
 ## 完成证据 (Phases A-G)
 

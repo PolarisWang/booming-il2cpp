@@ -1,0 +1,6 @@
+set(ROADMAP0_TARGET_NAME "windows-arm64-reference" CACHE STRING "Roadmap 0 target id")
+set(CMAKE_SYSTEM_NAME Windows)
+set(CMAKE_SYSTEM_PROCESSOR ARM64)
+set(CMAKE_SYSTEM_VERSION 10.0 CACHE STRING "Windows SDK version")
+set(ROADMAP0_HOST_PROFILE "windows" CACHE STRING "Roadmap 0 host profile")
+set(ROADMAP0_REFERENCE_DESKTOP ON CACHE BOOL "Reference desktop gate")

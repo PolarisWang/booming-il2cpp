@@ -203,7 +203,7 @@
     {
       "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "subjectId": "System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()",
       "reason": "external-call"
     },
     {

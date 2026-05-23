@@ -1,0 +1,149 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "ReflectionEdgeSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects",
+      "name": "ReflectionEdgeSubjects",
+      "displayName": "ReflectionEdgeSubjects",
+      "definitionSubjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects::_exitCode",
+      "declaringTypeSubjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects::Subject_0:System.Void()",
+      "name": "Subject_0",
+      "definitionSubjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects::Subject_1:System.Void()",
+      "name": "Subject_1",
+      "definitionSubjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects::Subject_2:System.Void()",
+      "name": "Subject_2",
+      "definitionSubjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects::Subject_3:System.Void()",
+      "name": "Subject_3",
+      "definitionSubjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects::Subject_4:System.Void()",
+      "name": "Subject_4",
+      "definitionSubjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects::Subject_5:System.Void()",
+      "name": "Subject_5",
+      "definitionSubjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects::Subject_6:System.Void()",
+      "name": "Subject_6",
+      "definitionSubjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects::Subject_7:System.Void()",
+      "name": "Subject_7",
+      "definitionSubjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects::Subject_7:System.Void()",
+      "declaringTypeSubjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects::Subject_8:System.Void()",
+      "name": "Subject_8",
+      "definitionSubjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects::Subject_8:System.Void()",
+      "declaringTypeSubjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects::Subject_9:System.Void()",
+      "name": "Subject_9",
+      "definitionSubjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects::Subject_9:System.Void()",
+      "declaringTypeSubjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects::Subject_10:System.Void()",
+      "name": "Subject_10",
+      "definitionSubjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects::Subject_10:System.Void()",
+      "declaringTypeSubjectId": "ReflectionEdgeSubjects/ReflectionEdgeSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

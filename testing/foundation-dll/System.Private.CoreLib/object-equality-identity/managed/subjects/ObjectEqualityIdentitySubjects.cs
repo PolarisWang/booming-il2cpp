@@ -15,21 +15,21 @@ public static partial class ObjectEqualityIdentitySubjects
     // [0] System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)
     public static void Subject_0()
     {
-        try { if (((new object().Equals(42)) ? 1 : 0) != ((new object().Equals(42)) ? 1 : 0)) _exitCode = 1; }
+        try { if (((new object().Equals(null!)) ? 1 : 0) != ((new object().Equals(null!)) ? 1 : 0)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [1] System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object,System.Object)
     public static void Subject_1()
     {
-        try { if (((Object.Equals(42, 42)) ? 1 : 0) != ((Object.Equals(42, 42)) ? 1 : 0)) _exitCode = 1; }
+        try { if (((Object.Equals(null!, null!)) ? 1 : 0) != ((Object.Equals(null!, null!)) ? 1 : 0)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [2] System.Private.CoreLib/System.Object::ReferenceEquals:System.Boolean(System.Object,System.Object)
     public static void Subject_2()
     {
-        try { if (((Object.ReferenceEquals(42, 42)) ? 1 : 0) != ((Object.ReferenceEquals(42, 42)) ? 1 : 0)) _exitCode = 1; }
+        try { if (((Object.ReferenceEquals(null!, null!)) ? 1 : 0) != ((Object.ReferenceEquals(null!, null!)) ? 1 : 0)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
@@ -57,7 +57,7 @@ public static partial class ObjectEqualityIdentitySubjects
     // [6] System.Private.CoreLib/System.Object::MemberwiseClone:System.Object()
     public static void Subject_6()
     {
-        // TODO: System.Private.CoreLib/System.Object::MemberwiseClone:System.Object() could not be auto-generated
+        // needs-manual — MemberwiseClone requires manual implementation: System.Private.CoreLib/System.Object::MemberwiseClone:System.Object()
     }
 
 }

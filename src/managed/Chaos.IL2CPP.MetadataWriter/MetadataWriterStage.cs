@@ -117,6 +117,7 @@ public sealed class MetadataWriterStage
                 NamespaceName = type.NamespaceName,
                 DisplayName = type.DisplayName,
                 DefinitionSubjectId = type.DefinitionSubjectId,
+                MetadataToken = type.MetadataToken,
             });
         }
 
@@ -160,6 +161,7 @@ public sealed class MetadataWriterStage
                 DeclaringTypeSubjectId = method.DeclaringTypeSubjectId,
                 MemberType = method.ReturnType,
                 ParameterCount = method.Parameters.Count,
+                MetadataToken = method.MetadataToken,
                 IsImported = method.Import is not null,
                 ImportModuleName = method.Import?.ModuleName,
                 ImportEntryPointName = method.Import?.EntryPointName,

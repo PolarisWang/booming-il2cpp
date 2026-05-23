@@ -50,7 +50,15 @@
     "SnapshotTestFixtures/DelegateHelper::RunDelegate:System.Int32()",
     "SnapshotTestFixtures/DerivedClass::.ctor:System.Void()",
     "SnapshotTestFixtures/DerivedClass::Compute:System.Int32()",
+    "SnapshotTestFixtures/EhCatchFinallyNestedHelper::CatchFinallyNested:System.Int32(System.Int32)",
+    "SnapshotTestFixtures/EhFaultFinallyHelper::FaultFinally:System.Int32(System.Int32)",
+    "SnapshotTestFixtures/EhFaultHelper::TryFault:System.Int32(System.Int32)",
+    "SnapshotTestFixtures/EhFilterFinallyHelper::FilterFinally:System.Int32(System.Int32)",
+    "SnapshotTestFixtures/EhFilterHelper::TryFilter:System.Int32(System.Int32)",
+    "SnapshotTestFixtures/EhFinallyHelper::TryFinally_Only:System.Int32(System.Int32)",
     "SnapshotTestFixtures/EhHelper::SafeDivide:System.Int32()",
+    "SnapshotTestFixtures/EhMultipleCatchHelper::MultipleCatch:System.Int32(System.Int32)",
+    "SnapshotTestFixtures/EhNestedTryCatchHelper::NestedTryCatch:System.Int32(System.Int32)",
     "SnapshotTestFixtures/ExternalCaller::CallExternal:System.Int32()",
     "SnapshotTestFixtures/FieldHelper::GetAndIncrement:System.Int32()",
     "SnapshotTestFixtures/FloatOpsHelper::RunFloatOps:System.Int32()",
@@ -169,13 +177,13 @@
     "SnapshotTestFixtures/Wrapper\u00601::.ctor:System.Void(!0)",
     "SnapshotTestFixtures/Wrapper\u00601::GetValue:!0()"
   ],
-  "translationUnitMethodCount": 158,
+  "translationUnitMethodCount": 166,
   "translationUnitPageSize": 1024,
   "translationUnitPageCount": 1,
   "translationUnitPages": [
     {
       "pageNumber": 1,
-      "methodCount": 158,
+      "methodCount": 166,
       "path": "generated/runtime/native-reference.runtime-skeleton.page-0001.cpp",
       "firstMethodSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::CustomEntrySubject_8:System.Void()",
       "lastMethodSubjectId": "SnapshotTestFixtures/Wrapper\u00601::GetValue:!0()"

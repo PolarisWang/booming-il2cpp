@@ -27,6 +27,24 @@ extern "C" void InterpreterEntryDirect(
 #pragma warning(push)
 #pragma warning(disable: 4065 4244)
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_0(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_1(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_10(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_11(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_12(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_2(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_3(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_4(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_5(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_6(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_7(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_8(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_9(void);
+extern "C" CHAOS_IL2CPP_INT32 ArrayIndexingCopySubjects_ArrayIndexingCopySubjects___c_Subject_3_b__4_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects___c__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects___c_cctor(void);
+
 namespace chaos::il2cpp::codegen::ArrayIndexingCopySubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup
@@ -306,6 +324,73 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
 
+
+// ── Bridge/import thunks ──
+extern "C" void* kChaosExternalRuntimeFnTable[];
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Byte
+extern "C" void chaos_bridge_thunk_0(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[0])();
+}
+
+// Bridge/import thunk for: ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::_exitCode
+extern "C" void chaos_bridge_thunk_1(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[2])();
+}
+
+// Bridge/import thunk for: ArrayIndexingCopySubjects/ArrayIndexingCopySubjects+<>c::<>9__4_0
+extern "C" void chaos_bridge_thunk_2(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[5])();
+}
+
+// Bridge/import thunk for: ArrayIndexingCopySubjects/ArrayIndexingCopySubjects+<>c::<>9
+extern "C" void chaos_bridge_thunk_3(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[6])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Func<System.Int32>::.ctor:System.Void(System.Object,System.IntPtr)
+extern "C" void chaos_bridge_thunk_4(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[7])(chaos_fn_arg_0, chaos_fn_arg_1);
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Func<System.Int32>::Invoke:System.Int32()
+extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_5(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)()>(kChaosExternalRuntimeFnTable[8])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Array::Resize<System.Byte>:System.Void(System.Byte[]&,System.Int32)
+extern "C" void chaos_bridge_thunk_6(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[9])(chaos_fn_arg_0, chaos_fn_arg_1);
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Array::Empty<System.Byte>:System.Byte[]()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_7(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[10])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Collections/System.Collections.Generic.Comparer<System.Byte>::get_Default:System.Collections.Generic.Comparer<System.Byte>()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_8(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[12])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Int32
+extern "C" void chaos_bridge_thunk_9(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[19])();
+}
+
 extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_0(void);
 extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_1(void);
 extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_2(void);
@@ -455,11 +540,18 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
 		/* .type_count        = */ 3u,
-	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
+	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 -- deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
 	/* .custom_attribute_materializer = */ nullptr,
-
+	/* .custom_attribute_method_offset   = */ nullptr,
+	/* .custom_attribute_field_offset    = */ nullptr,
+	/* .custom_attribute_property_offset = */ nullptr,
+	/* .custom_attribute_param_offset    = */ nullptr,
+	/* .custom_attribute_method_count    = */ 0u,
+	/* .custom_attribute_field_count     = */ 0u,
+	/* .custom_attribute_property_count  = */ 0u,
+	/* .custom_attribute_param_count   = */ 0u,
 		/* .abi_manifest      = */ s_abi_manifest,
 	};
 	static const CHAOS_IL2CPP_UINT32 s_native_aot_module_id =
@@ -1115,35 +1207,35 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // matching during IR lowering of patched methods.
 
 static constexpr ReflectionQueryFieldDescriptor kReflFields_ArrayIndexingCopySubjects_ArrayIndexingCopySubjects[1] = {
-	{ 0x04000001u, "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
+	{ 0x04000001u, "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::_exitCode", "_exitCode", "System.Int32", 0LL, 3u },
 };
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_ArrayIndexingCopySubjects_ArrayIndexingCopySubjects[13] = {
-	{ 0x00000006u, "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000007u, "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000008u, "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000009u, "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000000Au, "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000000Bu, "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000000Cu, "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000000Du, "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000000Eu, "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000000Fu, "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000010u, "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_10:System.Void()", "Subject_10", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000011u, "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_11:System.Void()", "Subject_11", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000012u, "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_12:System.Void()", "Subject_12", "System.Void", 0, nullptr, 0u, nullptr },
+	{ 0x00000006u, "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000007u, "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000008u, "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000009u, "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Au, "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Bu, "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Cu, "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Du, "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Eu, "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Fu, "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000010u, "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_10:System.Void()", "Subject_10", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000011u, "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_11:System.Void()", "Subject_11", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000012u, "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_12:System.Void()", "Subject_12", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_ArrayIndexingCopySubjects_ArrayIndexingCopySubjects___c[3] = {
-	{ 0x00000015u, "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects+<>c::<Subject_3>b__4_0:System.Int32()", "<Subject_3>b__4_0", "System.Int32", 0, nullptr, 0u, nullptr },
-	{ 0x00000013u, "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects+<>c::.cctor:System.Void()", ".cctor", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000014u, "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects+<>c::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr },
+	{ 0x00000015u, "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects+<>c::<Subject_3>b__4_0:System.Int32()", "<Subject_3>b__4_0", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000013u, "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects+<>c::.cctor:System.Void()", ".cctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000014u, "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects+<>c::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor kReflTypes[2] = {
 	{ 0x00000001u, "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects", "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects", "", "ArrayIndexingCopySubjects", "ArrayIndexingCopySubjects", nullptr, kReflFields_ArrayIndexingCopySubjects_ArrayIndexingCopySubjects, 1u, nullptr, 0u,
-	kReflMethods_ArrayIndexingCopySubjects_ArrayIndexingCopySubjects, 13u, nullptr, 0u, 0u },
+nullptr, 0u,    kReflMethods_ArrayIndexingCopySubjects_ArrayIndexingCopySubjects, 13u, nullptr, 0u, 0u },
 	{ 0x00000002u, "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects+<>c", "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects+<>c", "", "ArrayIndexingCopySubjects+<>c", "ArrayIndexingCopySubjects+<>c", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_ArrayIndexingCopySubjects_ArrayIndexingCopySubjects___c, 3u, nullptr, 0u, 0u },
+nullptr, 0u,    kReflMethods_ArrayIndexingCopySubjects_ArrayIndexingCopySubjects___c, 3u, nullptr, 0u, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor* kReflTypePtrs[2] = {
@@ -1151,7 +1243,7 @@ static const ReflectionQueryTypeDescriptor* kReflTypePtrs[2] = {
 	&kReflTypes[1],
 };
 
-static const ReflectionQueryImageDescriptor kReflImage = { "ArrayIndexingCopySubjects", kReflTypePtrs, 2u };
+static const ReflectionQueryImageDescriptor kReflImage = { "ArrayIndexingCopySubjects", kReflTypePtrs, 2u, 1, 0, 0, 0 };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via

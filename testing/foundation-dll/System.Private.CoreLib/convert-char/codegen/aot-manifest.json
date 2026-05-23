@@ -184,14 +184,14 @@
     },
     {
       "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "type",
-      "subjectId": "System.Private.CoreLib/System.Int32",
-      "reason": "boxed-value-type"
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String)",
+      "reason": "external-call"
     },
     {
       "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object,System.IFormatProvider)",
+      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)",
       "reason": "external-call"
     },
     {
@@ -204,18 +204,6 @@
       "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Single)",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String)",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)",
       "reason": "external-call"
     },
     {

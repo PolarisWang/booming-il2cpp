@@ -1,0 +1,6 @@
+string_stubs_test 1 0.0294157
+enum_stubs_test 1 0.0225029
+datetime_guid_math_test 1 0.0263402
+collection_stubs_test 1 0.025792
+convert_stubs_test 1 0.0294141
+---

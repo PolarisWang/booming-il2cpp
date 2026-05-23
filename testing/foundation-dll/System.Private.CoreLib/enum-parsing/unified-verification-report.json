@@ -2,8 +2,8 @@
   "family": "enum-parsing",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-23T15:11:37",
-  "duration_ms": 180568,
+  "timestamp": "2026-05-23T18:10:03",
+  "duration_ms": 190199,
   "overall_status": "passed",
   "stages": {
     "preflight": {
@@ -23,7 +23,7 @@
         ]
       },
       "errors": [],
-      "duration_ms": 0
+      "duration_ms": 1
     },
     "codegen": {
       "stage": "codegen",
@@ -34,7 +34,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\build-output\\EnumParsingSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 25078
+      "duration_ms": 28030
     },
     "jit_codegen": {
       "stage": "jit_codegen",
@@ -56,7 +56,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 402
+      "duration_ms": 396
     },
     "fact_jit": {
       "stage": "fact_jit",
@@ -71,7 +71,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 426
+      "duration_ms": 39
     },
     "audit": {
       "stage": "audit",
@@ -85,7 +85,7 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 1491
+      "duration_ms": 1690
     },
     "asm_compare": {
       "stage": "asm_compare",
@@ -93,22 +93,22 @@
       "summary": "Subjects DLL not found — run codegen stage first",
       "details": {},
       "errors": [],
-      "duration_ms": 30
+      "duration_ms": 46
     },
     "microbench": {
       "stage": "microbench",
       "status": "passed",
-      "summary": "FramePool=2.8ns/op | FastExecute=0.0ns/op | CallVirt dispatch=0.0ns",
+      "summary": "FramePool=2.9ns/op | FastExecute=0.0ns/op | CallVirt dispatch=0.0ns",
       "details": {
         "framePool": {
-          "acquireReleaseNsPerOp": 2.8,
+          "acquireReleaseNsPerOp": 2.9,
           "batchCount": 1000,
           "framesPerBatch": 32
         },
         "poolSize": 32
       },
       "errors": [],
-      "duration_ms": 131
+      "duration_ms": 128
     },
     "benchmark": {
       "stage": "benchmark",
@@ -116,7 +116,7 @@
       "summary": "All 13 non-stub methods are invalid (no managed harness)",
       "details": {},
       "errors": [],
-      "duration_ms": 142815
+      "duration_ms": 148613
     },
     "hotupdate": {
       "stage": "hotupdate",
@@ -135,15 +135,15 @@
     "hotupdate_aot_benchmark": {
       "stage": "hotupdate_aot_benchmark",
       "status": "passed",
-      "summary": "avg_slowdown=-3.6% (1.0x) over 12 methods (AOT patched path)",
+      "summary": "avg_slowdown=-6.57% (0.9x) over 13 methods (AOT patched path)",
       "details": {
-        "averageSlowdownPercent": -3.6,
-        "slowdownFactor": 0.9640000000000001,
+        "averageSlowdownPercent": -6.57,
+        "slowdownFactor": 0.9343,
         "threshold": 50.0,
-        "nonStubMethods": 12
+        "nonStubMethods": 13
       },
       "errors": [],
-      "duration_ms": 492
+      "duration_ms": 476
     },
     "hotupdate_jit_fact": {
       "stage": "hotupdate_jit_fact",
@@ -155,20 +155,20 @@
         "total": 13
       },
       "errors": [],
-      "duration_ms": 33
+      "duration_ms": 30
     },
     "hotupdate_jit_benchmark": {
       "stage": "hotupdate_jit_benchmark",
       "status": "passed",
-      "summary": "avg_slowdown=-20.27% (0.8x) over 13 methods (JIT patched path)",
+      "summary": "avg_slowdown=-13.09% (0.9x) over 13 methods (JIT patched path)",
       "details": {
-        "averageSlowdownPercent": -20.27,
-        "slowdownFactor": 0.7973,
+        "averageSlowdownPercent": -13.09,
+        "slowdownFactor": 0.8691,
         "threshold": 50.0,
         "nonStubMethods": 13
       },
       "errors": [],
-      "duration_ms": 9626
+      "duration_ms": 10705
     }
   },
   "coverage": {
@@ -178,7 +178,7 @@
   },
   "dashboard": {
     "interpreter": {
-      "fastFramePoolNsPerOp": 2.8,
+      "fastFramePoolNsPerOp": 2.9,
       "fastExecuteNsPerInstr": 0,
       "callVirtHandlerDispatchNs": 0,
       "callVirtMicHitNs": 0,
@@ -209,9 +209,9 @@
         "totalMethods": 13
       },
       "aotOverhead": {
-        "averageSlowdownPercent": -3.6,
-        "slowdownFactor": 0.9640000000000001,
-        "nonStubMethods": 12
+        "averageSlowdownPercent": -6.57,
+        "slowdownFactor": 0.9343,
+        "nonStubMethods": 13
       },
       "jitFunctional": {
         "passedMethods": 13,
@@ -219,15 +219,15 @@
         "totalMethods": 13
       },
       "jitOverhead": {
-        "averageSlowdownPercent": -20.27,
-        "slowdownFactor": 0.7973,
+        "averageSlowdownPercent": -13.09,
+        "slowdownFactor": 0.8691,
         "nonStubMethods": 13
       }
     },
     "keyRatios": {
       "nativeFasterRatio": 0,
       "irExpansionRatio": 0.21,
-      "interpreterSlowdownFactor": 0.9640000000000001,
+      "interpreterSlowdownFactor": 0.9343,
       "asmPassRate": 100.0
     }
   },

@@ -83,6 +83,14 @@ public sealed record MetadataRegistrationEntry
     /// (mask 0x0006), carried through metadata registration for DllImport materialization.
     /// </summary>
     public int? ImportCharSet { get; init; }
+
+    /// <summary>
+    /// ECMA metadata token (0x060000xx for methods, 0x020000xx for types, etc.).
+    /// Populated for "type" and "method" registration entries; null for others.
+    /// Used by cross-module generic AOT registration to resolve open definitions
+    /// defined in other assemblies.
+    /// </summary>
+    public int? MetadataToken { get; init; }
 }
 
 public sealed record SupplementalMetadataTemplateArtifact

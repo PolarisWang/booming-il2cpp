@@ -4,7 +4,7 @@
       "requestingAssemblyName": "GuidRandomHashcodeSubjects",
       "owningAssemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.HashCode::Add\u003CSystem.Int32\u003E:System.Void(System.Int32)",
+      "subjectId": "System.Private.CoreLib/System.HashCode::Add\u003CSystem.Object\u003E:System.Void(System.Object)",
       "definitionSubjectId": "System.Private.CoreLib/System.HashCode::Add:System.Void(!!0)",
       "demandSourceKind": "methodSpec",
       "instantiationKey": {
@@ -12,7 +12,7 @@
         "definitionSubjectId": "System.Private.CoreLib/System.HashCode::Add:System.Void(!!0)",
         "typeArguments": [],
         "methodArguments": [
-          "System.Int32"
+          "System.Object"
         ]
       },
       "supportKindCode": 3,

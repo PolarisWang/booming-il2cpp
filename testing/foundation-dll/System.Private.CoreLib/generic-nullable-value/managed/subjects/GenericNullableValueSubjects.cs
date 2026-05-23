@@ -36,13 +36,13 @@ public static partial class GenericNullableValueSubjects
     // [3] System.Private.CoreLib/System.Nullable`1::GetValueOrDefault:T(T)
     public static void Subject_3()
     {
-        // TODO: System.Private.CoreLib/System.Nullable`1::GetValueOrDefault:T(T) could not be auto-generated
+        // non-callable: System.Private.CoreLib/System.Nullable`1::GetValueOrDefault:T(T)
     }
 
     // [4] System.Private.CoreLib/System.Nullable`1::Equals:System.Boolean(System.Object)
     public static void Subject_4()
     {
-        try { if (((default(Nullable<int>).Equals(42)) ? 1 : 0) != ((default(Nullable<int>).Equals(42)) ? 1 : 0)) _exitCode = 1; }
+        try { if (((default(Nullable<int>).Equals(null!)) ? 1 : 0) != ((default(Nullable<int>).Equals(null!)) ? 1 : 0)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
@@ -63,7 +63,7 @@ public static partial class GenericNullableValueSubjects
     // [7] System.Private.CoreLib/System.ValueType::Equals:System.Boolean(System.Object)
     public static void Subject_7()
     {
-        try { if (((((ValueType)42).Equals(42)) ? 1 : 0) != ((((ValueType)42).Equals(42)) ? 1 : 0)) _exitCode = 1; }
+        try { if (((((ValueType)42).Equals(null!)) ? 1 : 0) != ((((ValueType)42).Equals(null!)) ? 1 : 0)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 

@@ -2908,11 +2908,14 @@ public sealed partial class NativeAotLoweringPlanner
             for (int j = 0; j < ac; j++)
             {
                 var abi = j < method.ParameterAbis.Count ? method.ParameterAbis[j] : null;
-                // Use IsStringParameterSlot (defined in InvocationAbi.cs partial class)
                 var isString = abi != null && IsStringParameterSlot(abi);
+                var isByRef = abi != null && (abi.CarrierKindCode == AotCoreIrAbiCarrierKind.ByRef
+                    || abi.CarrierKindCode == AotCoreIrAbiCarrierKind.ByRefToValueType
+                    || abi.CarrierKindCode == AotCoreIrAbiCarrierKind.MultiReturn);
                 paramList.Add(new ScriptObject
                 {
                     ["is_string"] = isString,
+                    ["is_byref"] = isByRef,
                     ["is_this"] = false,
                 });
             }

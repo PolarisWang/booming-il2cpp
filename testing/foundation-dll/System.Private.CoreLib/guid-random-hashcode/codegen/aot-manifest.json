@@ -197,7 +197,13 @@
     {
       "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.HashCode::Add\u003CSystem.Int32\u003E:System.Void(System.Int32)",
+      "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.HashCode::Add\u003CSystem.Object\u003E:System.Void(System.Object)",
       "reason": "external-call"
     },
     {

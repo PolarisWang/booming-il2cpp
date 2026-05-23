@@ -3,18 +3,18 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "SnapshotProverSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Private.CoreLib/snapshot-prover/managed/subjects/build-output/SnapshotProverSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/snapshot-prover/managed/subjects/build-output/SnapshotProverSubjects.dll",
   "additionalAssemblyPaths": [
-    "D:/agent/booming-il2cpp/testing/foundation-dll/System.Private.CoreLib/snapshot-prover/managed/subjects/build-output/SnapshotTestFixtures.dll"
+    "testing/foundation-dll/System.Private.CoreLib/snapshot-prover/managed/subjects/build-output/SnapshotTestFixtures.dll"
   ],
   "resolvedAssemblies": [
     {
       "assemblyName": "SnapshotProverSubjects",
-      "path": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Private.CoreLib/snapshot-prover/managed/subjects/build-output/SnapshotProverSubjects.dll"
+      "path": "testing/foundation-dll/System.Private.CoreLib/snapshot-prover/managed/subjects/build-output/SnapshotProverSubjects.dll"
     },
     {
       "assemblyName": "SnapshotTestFixtures",
-      "path": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Private.CoreLib/snapshot-prover/managed/subjects/build-output/SnapshotTestFixtures.dll"
+      "path": "testing/foundation-dll/System.Private.CoreLib/snapshot-prover/managed/subjects/build-output/SnapshotTestFixtures.dll"
     },
     {
       "assemblyName": "System.Collections",
@@ -26,7 +26,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "0bd98fb6-9311-4fe4-91ca-48207eb23c9e",
+  "inputModuleVersionId": "8c35dfe8-8682-4b64-96b3-94c18d1f037e",
   "artifacts": [
     {
       "kind": "typedIlIr",

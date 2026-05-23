@@ -8,27 +8,27 @@
     {
       "methodIndex": 0,
       "methodSubjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_Name:System.String()",
-      "elapsedMilliseconds": 0.294,
-      "calibratedMs": 0.294,
-      "opsPerSecond": 339904826.6,
+      "elapsedMilliseconds": 0.322,
+      "calibratedMs": 0.322,
+      "opsPerSecond": 310752019.9,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_MemberType:System.Reflection.MemberTypes()",
-      "elapsedMilliseconds": 0.423,
-      "calibratedMs": 0.423,
-      "opsPerSecond": 236462520.7,
+      "elapsedMilliseconds": 0.265,
+      "calibratedMs": 0.265,
+      "opsPerSecond": 377500943.8,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Private.CoreLib/System.Reflection.MemberInfo::get_DeclaringType:System.Type()",
-      "elapsedMilliseconds": 0.611,
-      "calibratedMs": 0.611,
-      "opsPerSecond": 163692912.1,
+      "elapsedMilliseconds": 0.342,
+      "calibratedMs": 0.342,
+      "opsPerSecond": 292312189.4,
       "iterations": 100000,
       "status": "completed"
     },
@@ -47,9 +47,9 @@
     {
       "methodIndex": 5,
       "methodSubjectId": "System.Private.CoreLib/System.Reflection.MethodInfo::get_ReturnType:System.Type()",
-      "elapsedMilliseconds": 0.272,
-      "calibratedMs": 0.272,
-      "opsPerSecond": 368188512.5,
+      "elapsedMilliseconds": 0.266,
+      "calibratedMs": 0.266,
+      "opsPerSecond": 375798572.0,
       "iterations": 100000,
       "status": "completed"
     },
@@ -65,27 +65,27 @@
     {
       "methodIndex": 7,
       "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::GetValue:System.Object(System.Object)",
-      "elapsedMilliseconds": 32.501,
-      "calibratedMs": 32.501,
-      "opsPerSecond": 3076818.9,
+      "elapsedMilliseconds": 25.768,
+      "calibratedMs": 25.768,
+      "opsPerSecond": 3880707.1,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 8,
       "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::SetValue:System.Void(System.Object,System.Object)",
-      "elapsedMilliseconds": 35.172,
-      "calibratedMs": 35.172,
-      "opsPerSecond": 2843178.8,
+      "elapsedMilliseconds": 34.333,
+      "calibratedMs": 34.333,
+      "opsPerSecond": 2912692.1,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 9,
       "methodSubjectId": "System.Private.CoreLib/System.Reflection.FieldInfo::get_FieldType:System.Type()",
-      "elapsedMilliseconds": 0.292,
-      "calibratedMs": 0.292,
-      "opsPerSecond": 342231348.4,
+      "elapsedMilliseconds": 0.48,
+      "calibratedMs": 0.48,
+      "opsPerSecond": 208203206.3,
       "iterations": 100000,
       "status": "completed"
     },
@@ -101,27 +101,27 @@
     {
       "methodIndex": 11,
       "methodSubjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::GetValue:System.Object(System.Object,System.Object[])",
-      "elapsedMilliseconds": 32.4,
-      "calibratedMs": 32.4,
-      "opsPerSecond": 3086429.3,
+      "elapsedMilliseconds": 23.879,
+      "calibratedMs": 23.879,
+      "opsPerSecond": 4187780.1,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 12,
       "methodSubjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::SetValue:System.Void(System.Object,System.Object)",
-      "elapsedMilliseconds": 38.89,
-      "calibratedMs": 38.89,
-      "opsPerSecond": 2571328.7,
+      "elapsedMilliseconds": 32.92,
+      "calibratedMs": 32.92,
+      "opsPerSecond": 3037704.0,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 13,
       "methodSubjectId": "System.Private.CoreLib/System.Reflection.PropertyInfo::get_PropertyType:System.Type()",
-      "elapsedMilliseconds": 0.501,
-      "calibratedMs": 0.501,
-      "opsPerSecond": 199441563.6,
+      "elapsedMilliseconds": 0.285,
+      "calibratedMs": 0.285,
+      "opsPerSecond": 351000351.0,
       "iterations": 100000,
       "status": "completed"
     }

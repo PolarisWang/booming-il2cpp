@@ -1,4 +1,4 @@
-#include <chaos/common.h>
+﻿#include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
 #include <chaos/eh.h>
@@ -16,6 +16,7 @@
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 #include "enum_metadata.generated.h"
+#include "enum_stubs.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -25,6 +26,24 @@ extern "C" void InterpreterEntryDirect(
 
 #pragma warning(push)
 #pragma warning(disable: 4065 4244)
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_0(void);
+extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_1(void);
+extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_10(void);
+extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_11(void);
+extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_12(void);
+extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_13(void);
+extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_14(void);
+extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_15(void);
+extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_2(void);
+extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_3(void);
+extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_4(void);
+extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_5(void);
+extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_6(void);
+extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_7(void);
+extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_8(void);
+extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_9(void);
 
 namespace chaos::il2cpp::codegen::TimeDateTimeTimespanSubjects {
 
@@ -339,6 +358,30 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
 
+
+// ── Bridge/import thunks ──
+extern "C" void* kChaosExternalRuntimeFnTable[];
+
+// Bridge/import thunk for: TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode
+extern "C" void chaos_bridge_thunk_0(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[1])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.DateTime::TryParse:System.Boolean(System.String,System.DateTime&)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[5])(chaos_fn_arg_0, chaos_fn_arg_1);
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()
+extern "C" CHAOS_IL2CPP_INT64 chaos_bridge_thunk_2(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INT64(*)()>(kChaosExternalRuntimeFnTable[17])();
+	return result;
+}
+
 extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_0(void);
 extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_1(void);
 extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_2(void);
@@ -477,11 +520,18 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
 		/* .type_count        = */ 2u,
-	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
+	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 -- deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
 	/* .custom_attribute_materializer = */ nullptr,
-
+	/* .custom_attribute_method_offset   = */ nullptr,
+	/* .custom_attribute_field_offset    = */ nullptr,
+	/* .custom_attribute_property_offset = */ nullptr,
+	/* .custom_attribute_param_offset    = */ nullptr,
+	/* .custom_attribute_method_count    = */ 0u,
+	/* .custom_attribute_field_count     = */ 0u,
+	/* .custom_attribute_property_count  = */ 0u,
+	/* .custom_attribute_param_count   = */ 0u,
 		/* .abi_manifest      = */ s_abi_manifest,
 	};
 	static const CHAOS_IL2CPP_UINT32 s_native_aot_module_id =
@@ -589,7 +639,7 @@ extern "C" const char* kChaosExternalRuntimeSubjects[21] = {
 	"System.Private.CoreLib/System.DateTime::DaysInMonth:System.Int32(System.Int32,System.Int32)",
 	"System.Private.CoreLib/System.TimeSpan::.ctor:System.Void(System.Int32,System.Int32,System.Int32)",
 	"System.Private.CoreLib/System.TimeSpan::FromDays:System.TimeSpan(System.Double)",
-	"System.Private.CoreLib/System.TimeSpan::GetHashCode:System.Int32()",
+	"System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()",
 	"System.Private.CoreLib/System.TimeSpan::FromHours:System.TimeSpan(System.Double)",
 	"System.Private.CoreLib/System.TimeSpan::FromMinutes:System.TimeSpan(System.Double)",
 	"System.Private.CoreLib/System.TimeSpan::Parse:System.TimeSpan(System.String)",
@@ -1117,37 +1167,37 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // matching during IR lowering of patched methods.
 
 static constexpr ReflectionQueryFieldDescriptor kReflFields_TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects[1] = {
-	{ 0u, "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
+	{ 0x04000001u, "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode", "_exitCode", "System.Int32", 0LL, 3u },
 };
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects[16] = {
-	{ 0u, "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u },
-	{ 0u, "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u },
-	{ 0u, "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u },
-	{ 0u, "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u },
-	{ 0u, "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u },
-	{ 0u, "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u },
-	{ 0u, "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u },
-	{ 0u, "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u },
-	{ 0u, "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u },
-	{ 0u, "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_10:System.Void()", "Subject_10", "System.Void", 0, nullptr, 0u },
-	{ 0u, "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_11:System.Void()", "Subject_11", "System.Void", 0, nullptr, 0u },
-	{ 0u, "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_12:System.Void()", "Subject_12", "System.Void", 0, nullptr, 0u },
-	{ 0u, "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_13:System.Void()", "Subject_13", "System.Void", 0, nullptr, 0u },
-	{ 0u, "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_14:System.Void()", "Subject_14", "System.Void", 0, nullptr, 0u },
-	{ 0u, "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_15:System.Void()", "Subject_15", "System.Void", 0, nullptr, 0u },
+	{ 0x00000003u, "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000004u, "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000005u, "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000006u, "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000007u, "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000008u, "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000009u, "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Au, "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Bu, "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Cu, "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Du, "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_10:System.Void()", "Subject_10", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Eu, "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_11:System.Void()", "Subject_11", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Fu, "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_12:System.Void()", "Subject_12", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000010u, "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_13:System.Void()", "Subject_13", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000011u, "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_14:System.Void()", "Subject_14", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000012u, "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::Subject_15:System.Void()", "Subject_15", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
-	{ 0u, "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects", "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects", "", "TimeDateTimeTimespanSubjects", "TimeDateTimeTimespanSubjects", nullptr, kReflFields_TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects, 1u, nullptr, 0u,
-	kReflMethods_TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects, 16u },
+	{ 0x00000001u, "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects", "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects", "", "TimeDateTimeTimespanSubjects", "TimeDateTimeTimespanSubjects", nullptr, kReflFields_TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects, 1u, nullptr, 0u,
+nullptr, 0u,    kReflMethods_TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects, 16u, nullptr, 0u, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static const ReflectionQueryImageDescriptor kReflImage = { "TimeDateTimeTimespanSubjects", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "TimeDateTimeTimespanSubjects", kReflTypePtrs, 1u, 1, 0, 0, 0 };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -2149,8 +2199,8 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 			chaos_locals[1] = _s0;
 			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[17])();
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT64(*)(void)>(kChaosExternalRuntimeFnTable[17])();
+				_s1 = ChaosStoreInt64(chaos_result);
 			}
 			_s2 = ChaosStoreFloat64(42);
 			{
@@ -2161,8 +2211,8 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 			chaos_locals[1] = _s2;
 			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[17])();
-				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT64(*)(void)>(kChaosExternalRuntimeFnTable[17])();
+				_s3 = ChaosStoreInt64(chaos_result);
 			}
 			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosLoadFloat64(_s2) == ChaosLoadFloat64(_s3) ? 1 : 0);
 			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
@@ -2225,8 +2275,8 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 			chaos_locals[1] = _s0;
 			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[17])();
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT64(*)(void)>(kChaosExternalRuntimeFnTable[17])();
+				_s1 = ChaosStoreInt64(chaos_result);
 			}
 			_s2 = ChaosStoreFloat64(42);
 			{
@@ -2237,8 +2287,8 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 			chaos_locals[1] = _s2;
 			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[17])();
-				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT64(*)(void)>(kChaosExternalRuntimeFnTable[17])();
+				_s3 = ChaosStoreInt64(chaos_result);
 			}
 			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosLoadFloat64(_s2) == ChaosLoadFloat64(_s3) ? 1 : 0);
 			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
@@ -2301,8 +2351,8 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 			chaos_locals[1] = _s0;
 			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[17])();
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT64(*)(void)>(kChaosExternalRuntimeFnTable[17])();
+				_s1 = ChaosStoreInt64(chaos_result);
 			}
 			_s2 = ChaosStoreFloat64(42);
 			{
@@ -2313,8 +2363,8 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 			chaos_locals[1] = _s2;
 			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[17])();
-				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT64(*)(void)>(kChaosExternalRuntimeFnTable[17])();
+				_s3 = ChaosStoreInt64(chaos_result);
 			}
 			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosLoadFloat64(_s2) == ChaosLoadFloat64(_s3) ? 1 : 0);
 			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
@@ -2379,8 +2429,8 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 			chaos_locals[1] = _s0;
 			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[17])();
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT64(*)(void)>(kChaosExternalRuntimeFnTable[17])();
+				_s1 = ChaosStoreInt64(chaos_result);
 			}
 			{{
 				_s2 = CHAOS_IL2CPP_STRING_ID("1:00:00");
@@ -2393,8 +2443,8 @@ extern "C" void TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subjec
 			chaos_locals[1] = _s2;
 			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[17])();
-				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT64(*)(void)>(kChaosExternalRuntimeFnTable[17])();
+				_s3 = ChaosStoreInt64(chaos_result);
 			}
 			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
 			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);

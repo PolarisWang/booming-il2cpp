@@ -2,19 +2,22 @@
   "assembly": "System.Private.CoreLib",
   "mode": "family-entrypoint",
   "total": 1,
-  "passed": 0,
-  "failed": 1,
+  "passed": 1,
+  "failed": 0,
   "results": [
     {
-      "family": "garbage-collection",
+      "family": "math-numerics",
       "config_tier": "CHECK",
       "steps": {
-        "build_subjects": "FAILED"
+        "build_subjects": "OK",
+        "convert_to_cpp": "OK",
+        "build_entry_exe": "OK"
       },
-      "success": false,
-      "methodCount": 12,
-      "error": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(67,45): error CS0023: Operator '.' cannot be applied to operand of type 'void' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(67,90): error CS0023: Operator '.' cannot be applied to operand of type 'void' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(74,24): error CS0117: 'GC' does not contain a definition for 'LatencyMode' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(74,60): error CS0117: 'GC' does not contain a definition for 'LatencyMode' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(81,24): error CS0117: 'GC' does not contain a definition for 'LatencyMode' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(81,70): error CS0117: 'GC' does not contain a definition for 'LatencyMode' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\n\nBuild FAILED.\n\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(67,45): error CS0023: Operator '.' cannot be applied to operand of type 'void' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(67,90): error CS0023: Operator '.' cannot be applied to operand of type 'void' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(74,24): error CS0117: 'GC' does not contain a definition for 'LatencyMode' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(74,60): error CS0117: 'GC' does not contain a definition for 'LatencyMode' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(81,24): error CS0117: 'GC' does not contain a definition for 'LatencyMode' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(81,70): error CS0117: 'GC' does not contain a definition for 'LatencyMode' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\n    0 Warning(s)\n    6 Error(s)\n\nTime Elapsed 00:00:01.00\n"
+      "success": true,
+      "methodCount": 18,
+      "entryPointSubjectId": "",
+      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\math-numerics\\managed\\subjects\\build-output\\MathNumericsSubjects.dll"
     }
   ],
-  "timestamp": "2026-05-23T01:57:27"
+  "timestamp": "2026-05-23T18:25:01"
 }

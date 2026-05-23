@@ -70,14 +70,14 @@ public:
     // ── GC interface ──────────────────────────────────────────────────
 
     /// Return the number of currently locked objects (for pinning).
-    uint32_t GetLockedCount() const noexcept;
+    uint32_t GetLockedCount() noexcept;
 
     /// Copy locked object pointers into @a out buffer (up to capacity).
     /// Returns the number written.
-    uint32_t GetLockedObjects(void** out, uint32_t capacity) const noexcept;
+    uint32_t GetLockedObjects(void** out, uint32_t capacity) noexcept;
 
     /// Check if a specific object is currently locked (has a table entry).
-    bool IsLocked(const void* obj) const noexcept;
+    bool IsLocked(const void* obj) noexcept;
 
     /// Re-key an entry after GC relocation.
     /// @a old_addr is the pre-GC address, @a new_addr is the post-GC address.
@@ -85,7 +85,8 @@ public:
     void RelocateEntry(void* old_addr, void* new_addr) noexcept;
 
     /// Remove all entries for objects in a given domain (domain unload).
-    void DrainForDomain(uint32_t domain_id) noexcept;
+    /// Returns the number of entries removed.
+    uint32_t DrainForDomain(uint32_t domain_id) noexcept;
 
     /// Singleton access.
     static ThinLockTable& Instance() noexcept;
@@ -96,14 +97,9 @@ private:
     ThinLockTable(const ThinLockTable&) = delete;
     ThinLockTable& operator=(const ThinLockTable&) = delete;
 
-    struct Entry {
-        void*     obj = nullptr;
-        uint64_t  sync_value = 0;
-    };
-
     struct Stripe {
         CHAOS_IL2CPP_MUTEX                      mutex;
-        CHAOS_IL2CPP_UNORDERED_DENSE_MAP_IDENTITY(void*, uint64_t) entries;
+        CHAOS_IL2CPP_UNORDERED_DENSE_MAP(uint64_t, uint64_t) entries;  // key = ptr_as_uint64, value = sync_state
     };
 
     Stripe stripes_[kThinLockStripes];

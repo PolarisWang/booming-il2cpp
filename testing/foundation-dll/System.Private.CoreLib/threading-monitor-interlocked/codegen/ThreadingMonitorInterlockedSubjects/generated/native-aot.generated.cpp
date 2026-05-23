@@ -1,4 +1,4 @@
-#include <chaos/common.h>
+﻿#include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
 #include <chaos/eh.h>
@@ -16,6 +16,7 @@
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 #include "enum_metadata.generated.h"
+#include "enum_stubs.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -25,6 +26,26 @@ extern "C" void InterpreterEntryDirect(
 
 #pragma warning(push)
 #pragma warning(disable: 4065 4244)
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_0(void);
+extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_1(void);
+extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_10(void);
+extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_11(void);
+extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_4(void);
+extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_5(void);
+extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_6(void);
+extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_7(void);
+extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_8(void);
+extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_9(void);
+extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_12(void);
+extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_13(void);
+extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_2(void);
+extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_3(void);
+extern "C" CHAOS_IL2CPP_INT32 ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c_Subject_13_b__14_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c_Subject_13_b__14_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c_cctor(void);
 
 namespace chaos::il2cpp::codegen::ThreadingMonitorInterlockedSubjects {
 
@@ -59,8 +80,6 @@ inline TypeInfoV0 chaos_mt_ThreadingMonitorInterlockedSubjects_ThreadingMonitorI
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects = static_cast<CHAOS_IL2CPP_INTPTR>(4882207410565625576ULL);
 inline TypeInfoV0 chaos_mt_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c, 9387555369835203792ULL, 3u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c = static_cast<CHAOS_IL2CPP_INTPTR>(9387555369835203792ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Int32 = {{nullptr, nullptr, 11009693519287992193ULL, 0u, 32, 2, 0}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_boxed_type_id_System_Private_CoreLib_System_Int32 = static_cast<CHAOS_IL2CPP_INTPTR>(11009693519287992193ULL);
 
 // ── Virtual method table arrays ──
 extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
@@ -194,12 +213,6 @@ struct chaos_type_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlocke
 {
 };
 
-struct chaos_boxed_type_System_Private_CoreLib_System_Int32
-{
-	PureTypeHeader header{};
-	CHAOS_IL2CPP_INTPTR value = 0;
-};
-
 CHAOS_IL2CPP_INTPTR chaos_static_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c____9 = 0;
 CHAOS_IL2CPP_INTPTR chaos_static_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c____9__14_0 = 0;
 CHAOS_IL2CPP_INTPTR chaos_static_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c____9__14_1 = 0;
@@ -252,6 +265,54 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
+
+
+// ── Bridge/import thunks ──
+extern "C" void* kChaosExternalRuntimeFnTable[];
+
+// Bridge/import thunk for: System.Threading/Monitor::TryEnter:System.Boolean(System.Object)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[0])(chaos_fn_arg_0);
+	return result;
+}
+
+// Bridge/import thunk for: ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode
+extern "C" void chaos_bridge_thunk_1(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[1])();
+}
+
+// Bridge/import thunk for: ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects+<>c::<>9__14_0
+extern "C" void chaos_bridge_thunk_2(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[4])();
+}
+
+// Bridge/import thunk for: ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects+<>c::<>9
+extern "C" void chaos_bridge_thunk_3(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[5])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Func<System.Int32>::.ctor:System.Void(System.Object,System.IntPtr)
+extern "C" void chaos_bridge_thunk_4(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[6])(chaos_fn_arg_0, chaos_fn_arg_1);
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Func<System.Int32>::Invoke:System.Int32()
+extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_5(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)()>(kChaosExternalRuntimeFnTable[7])();
+	return result;
+}
+
+// Bridge/import thunk for: ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects+<>c::<>9__14_1
+extern "C" void chaos_bridge_thunk_6(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[8])();
+}
 
 extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_0(void);
 extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_1(void);
@@ -408,11 +469,18 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
 		/* .type_count        = */ 3u,
-	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
+	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 -- deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
 	/* .custom_attribute_materializer = */ nullptr,
-
+	/* .custom_attribute_method_offset   = */ nullptr,
+	/* .custom_attribute_field_offset    = */ nullptr,
+	/* .custom_attribute_property_offset = */ nullptr,
+	/* .custom_attribute_param_offset    = */ nullptr,
+	/* .custom_attribute_method_count    = */ 0u,
+	/* .custom_attribute_field_count     = */ 0u,
+	/* .custom_attribute_property_count  = */ 0u,
+	/* .custom_attribute_param_count   = */ 0u,
 		/* .abi_manifest      = */ s_abi_manifest,
 	};
 	static const CHAOS_IL2CPP_UINT32 s_native_aot_module_id =
@@ -509,8 +577,7 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // ── External Runtime Dispatch Table ──────────────────────────
 // Startup-time-resolved function pointers for cross-assembly calls.
 
-extern "C" const char* kChaosExternalRuntimeSubjects[12] = {
-	"System.Private.CoreLib/System.Int32",
+extern "C" const char* kChaosExternalRuntimeSubjects[11] = {
 	"System.Threading/Monitor::TryEnter:System.Boolean(System.Object)",
 	"ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode",
 	"System.Threading/Monitor::TryEnter:System.Boolean(System.Object,System.Int32)",
@@ -524,8 +591,7 @@ extern "C" const char* kChaosExternalRuntimeSubjects[12] = {
 	"System.Private.CoreLib/System.Object::.ctor:System.Void()",
 };
 
-extern "C" void* kChaosExternalRuntimeFnTable[12] = {
-	nullptr,
+extern "C" void* kChaosExternalRuntimeFnTable[11] = {
 	nullptr,
 	nullptr,
 	nullptr,
@@ -539,7 +605,7 @@ extern "C" void* kChaosExternalRuntimeFnTable[12] = {
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__),
 };
 
-extern "C" int32_t kChaosExternalRuntimeCount = 12;
+extern "C" int32_t kChaosExternalRuntimeCount = 11;
 // (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
@@ -705,7 +771,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry0;
 	/* ── Entry 1: ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_3 ── */
 	struct {
@@ -713,7 +779,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[5];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry1;
 	/* ── Entry 2: ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_12 ── */
 	struct {
@@ -766,19 +832,19 @@ static const struct {
 } kChaosGcSlotMapsSection = {
 	/* entry0 = ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_2 */
 	.entry0 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_2),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
 	},
 	/* entry1 = ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_3 */
 	.entry1 = {
-		/* entry_total_size = 40 */ 40u,
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_3),
-		/* frame_size = 40 */ 40u,
-		/* num_gc_slots = 5 */ 5u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
 	/* entry2 = ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_12 */
 	.entry2 = {
@@ -833,7 +899,7 @@ static const struct {
 #pragma pack(pop)
 #endif
 
-static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 264u;
+static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 256u;
 
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
@@ -929,37 +995,37 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // matching during IR lowering of patched methods.
 
 static constexpr ReflectionQueryFieldDescriptor kReflFields_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects[1] = {
-	{ 0u, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
+	{ 0x04000001u, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode", "_exitCode", "System.Int32", 0LL, 3u },
 };
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects[14] = {
-	{ 0u, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_0:System.Void()", "CustomEntrySubject_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_1:System.Void()", "CustomEntrySubject_1", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_4:System.Void()", "CustomEntrySubject_4", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_5:System.Void()", "CustomEntrySubject_5", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_6:System.Void()", "CustomEntrySubject_6", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_7:System.Void()", "CustomEntrySubject_7", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_8:System.Void()", "CustomEntrySubject_8", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_9:System.Void()", "CustomEntrySubject_9", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_10:System.Void()", "CustomEntrySubject_10", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_11:System.Void()", "CustomEntrySubject_11", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_12:System.Void()", "Subject_12", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_13:System.Void()", "Subject_13", "System.Void", 0, nullptr, 0u },
+	{ 0x00000007u, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_0:System.Void()", "CustomEntrySubject_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000008u, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_1:System.Void()", "CustomEntrySubject_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000009u, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Au, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Bu, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_4:System.Void()", "CustomEntrySubject_4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Cu, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_5:System.Void()", "CustomEntrySubject_5", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Du, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_6:System.Void()", "CustomEntrySubject_6", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Eu, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_7:System.Void()", "CustomEntrySubject_7", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Fu, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_8:System.Void()", "CustomEntrySubject_8", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000010u, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_9:System.Void()", "CustomEntrySubject_9", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000011u, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_10:System.Void()", "CustomEntrySubject_10", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000012u, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_11:System.Void()", "CustomEntrySubject_11", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000013u, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_12:System.Void()", "Subject_12", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000014u, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_13:System.Void()", "Subject_13", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c[4] = {
-	{ 0u, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects+<>c::<Subject_13>b__14_0:System.Int32()", "<Subject_13>b__14_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects+<>c::<Subject_13>b__14_1:System.Int32()", "<Subject_13>b__14_1", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects+<>c::.cctor:System.Void()", ".cctor", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects+<>c::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u },
+	{ 0x00000017u, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects+<>c::<Subject_13>b__14_0:System.Int32()", "<Subject_13>b__14_0", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000018u, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects+<>c::<Subject_13>b__14_1:System.Int32()", "<Subject_13>b__14_1", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000015u, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects+<>c::.cctor:System.Void()", ".cctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000016u, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects+<>c::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor kReflTypes[2] = {
-	{ 0u, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects", "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects", "", "ThreadingMonitorInterlockedSubjects", "ThreadingMonitorInterlockedSubjects", nullptr, kReflFields_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects, 1u, nullptr, 0u,
-	kReflMethods_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects, 14u },
-	{ 0u, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects+<>c", "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects+<>c", "", "ThreadingMonitorInterlockedSubjects+<>c", "ThreadingMonitorInterlockedSubjects+<>c", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c, 4u },
+	{ 0x00000001u, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects", "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects", "", "ThreadingMonitorInterlockedSubjects", "ThreadingMonitorInterlockedSubjects", nullptr, kReflFields_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects, 1u, nullptr, 0u,
+nullptr, 0u,    kReflMethods_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects, 14u, nullptr, 0u, 0u },
+	{ 0x00000002u, "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects+<>c", "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects+<>c", "", "ThreadingMonitorInterlockedSubjects+<>c", "ThreadingMonitorInterlockedSubjects+<>c", nullptr, nullptr, 0u, nullptr, 0u,
+nullptr, 0u,    kReflMethods_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c, 4u, nullptr, 0u, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor* kReflTypePtrs[2] = {
@@ -967,7 +1033,7 @@ static const ReflectionQueryTypeDescriptor* kReflTypePtrs[2] = {
 	&kReflTypes[1],
 };
 
-static const ReflectionQueryImageDescriptor kReflImage = { "ThreadingMonitorInterlockedSubjects", kReflTypePtrs, 2u };
+static const ReflectionQueryImageDescriptor kReflImage = { "ThreadingMonitorInterlockedSubjects", kReflTypePtrs, 2u, 1, 0, 0, 0 };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -1046,41 +1112,23 @@ extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedS
 	CHAOS_IL2CPP_INTPTR _s12{};
 	CHAOS_IL2CPP_INTPTR _s13{};
 	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	CHAOS_IL2CPP_INTPTR _s18{};
 
 
 	CHAOS_EH_TRY
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s0;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
+			_s0 = 0;
 			{
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[1])(chaos_arg_0);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[0])(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			// brtrue (structured EH branch)
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 			// br (handled via structured EH branches)
 			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s3;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
+			_s3 = 0;
 			{
 				const auto chaos_arg_0 = _s3;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[1])(chaos_arg_0);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[0])(chaos_arg_0);
 				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			// brtrue (structured EH branch)
@@ -1138,21 +1186,10 @@ extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedS
 	CHAOS_IL2CPP_INTPTR _s14{};
 	CHAOS_IL2CPP_INTPTR _s15{};
 	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	CHAOS_IL2CPP_INTPTR _s18{};
-	CHAOS_IL2CPP_INTPTR _s19{};
-	CHAOS_IL2CPP_INTPTR _s20{};
 
 
 	CHAOS_EH_TRY
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s0;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
+			_s0 = 0;
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
 				const auto chaos_arg_1 = _s1;
@@ -1164,14 +1201,7 @@ extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedS
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 			// br (handled via structured EH branches)
 			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s3;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
+			_s3 = 0;
 			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
 				const auto chaos_arg_1 = _s4;

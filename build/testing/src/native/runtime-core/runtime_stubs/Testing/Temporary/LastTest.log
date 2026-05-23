@@ -1,0 +1,881 @@
+Start testing: May 23 15:19 China Standard Time
+----------------------------------------------------------
+1/5 Testing: string_stubs_test
+1/5 Test: string_stubs_test
+Command: "D:/agent/booming-il2cpp/build/testing/src/native/runtime-core/runtime_stubs/Debug/string_stubs_test.exe"
+Directory: D:/agent/booming-il2cpp/build/testing/src/native/runtime-core/runtime_stubs
+"string_stubs_test" start time: May 23 15:19 China Standard Time
+Output:
+----------------------------------------------------------
+Running main() from D:\agent\booming-il2cpp\build\testing\_deps\googletest-src\googletest\src\gtest_main.cc
+[==========] Running 77 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 77 tests from StringStubs
+[ RUN      ] StringStubs.Contains_Found
+[       OK ] StringStubs.Contains_Found (0 ms)
+[ RUN      ] StringStubs.Contains_NotFound
+[       OK ] StringStubs.Contains_NotFound (0 ms)
+[ RUN      ] StringStubs.Contains_EmptyHaystack
+[       OK ] StringStubs.Contains_EmptyHaystack (0 ms)
+[ RUN      ] StringStubs.Contains_EmptyNeedle
+[       OK ] StringStubs.Contains_EmptyNeedle (0 ms)
+[ RUN      ] StringStubs.Contains_NullStr
+[       OK ] StringStubs.Contains_NullStr (0 ms)
+[ RUN      ] StringStubs.Contains_NullValue
+[       OK ] StringStubs.Contains_NullValue (0 ms)
+[ RUN      ] StringStubs.Contains_NeedleLongerThanHaystack
+[       OK ] StringStubs.Contains_NeedleLongerThanHaystack (0 ms)
+[ RUN      ] StringStubs.StartsWith_Yes
+[       OK ] StringStubs.StartsWith_Yes (0 ms)
+[ RUN      ] StringStubs.StartsWith_No
+[       OK ] StringStubs.StartsWith_No (0 ms)
+[ RUN      ] StringStubs.StartsWith_ExactMatch
+[       OK ] StringStubs.StartsWith_ExactMatch (0 ms)
+[ RUN      ] StringStubs.StartsWith_EmptyValue
+[       OK ] StringStubs.StartsWith_EmptyValue (0 ms)
+[ RUN      ] StringStubs.StartsWith_NullStr
+[       OK ] StringStubs.StartsWith_NullStr (0 ms)
+[ RUN      ] StringStubs.EndsWith_Yes
+[       OK ] StringStubs.EndsWith_Yes (0 ms)
+[ RUN      ] StringStubs.EndsWith_No
+[       OK ] StringStubs.EndsWith_No (0 ms)
+[ RUN      ] StringStubs.EndsWith_ExactMatch
+[       OK ] StringStubs.EndsWith_ExactMatch (0 ms)
+[ RUN      ] StringStubs.EndsWith_NullStr
+[       OK ] StringStubs.EndsWith_NullStr (0 ms)
+[ RUN      ] StringStubs.IndexOf_Found
+[       OK ] StringStubs.IndexOf_Found (0 ms)
+[ RUN      ] StringStubs.IndexOf_FoundAtStart
+[       OK ] StringStubs.IndexOf_FoundAtStart (0 ms)
+[ RUN      ] StringStubs.IndexOf_NotFound
+[       OK ] StringStubs.IndexOf_NotFound (0 ms)
+[ RUN      ] StringStubs.IndexOf_EmptyNeedle
+[       OK ] StringStubs.IndexOf_EmptyNeedle (0 ms)
+[ RUN      ] StringStubs.IndexOf_NullStr
+[       OK ] StringStubs.IndexOf_NullStr (0 ms)
+[ RUN      ] StringStubs.IndexOf_NullValue
+[       OK ] StringStubs.IndexOf_NullValue (0 ms)
+[ RUN      ] StringStubs.Compare_Equal
+[       OK ] StringStubs.Compare_Equal (0 ms)
+[ RUN      ] StringStubs.Compare_ALessThanB
+[       OK ] StringStubs.Compare_ALessThanB (0 ms)
+[ RUN      ] StringStubs.Compare_AGreaterThanB
+[       OK ] StringStubs.Compare_AGreaterThanB (0 ms)
+[ RUN      ] StringStubs.Compare_ShorterPrefix
+[       OK ] StringStubs.Compare_ShorterPrefix (0 ms)
+[ RUN      ] StringStubs.Compare_BothNull
+[       OK ] StringStubs.Compare_BothNull (0 ms)
+[ RUN      ] StringStubs.Compare_ANullBNot
+[       OK ] StringStubs.Compare_ANullBNot (0 ms)
+[ RUN      ] StringStubs.Compare_BNullANot
+[       OK ] StringStubs.Compare_BNullANot (0 ms)
+[ RUN      ] StringStubs.Compare_EmptyBoth
+[       OK ] StringStubs.Compare_EmptyBoth (0 ms)
+[ RUN      ] StringStubs.JoinSs_TwoStrings
+[       OK ] StringStubs.JoinSs_TwoStrings (0 ms)
+[ RUN      ] StringStubs.JoinSs_EmptySeparator
+[       OK ] StringStubs.JoinSs_EmptySeparator (0 ms)
+[ RUN      ] StringStubs.JoinSs_SingleElement
+[       OK ] StringStubs.JoinSs_SingleElement (0 ms)
+[ RUN      ] StringStubs.JoinSs_NullSeparator
+[       OK ] StringStubs.JoinSs_NullSeparator (0 ms)
+[ RUN      ] StringStubs.Split_Basic
+[       OK ] StringStubs.Split_Basic (0 ms)
+[ RUN      ] StringStubs.Split_NoSeparator
+[       OK ] StringStubs.Split_NoSeparator (0 ms)
+[ RUN      ] StringStubs.Split_NullStr
+[       OK ] StringStubs.Split_NullStr (0 ms)
+[ RUN      ] StringStubs.Substring_Normal
+[       OK ] StringStubs.Substring_Normal (0 ms)
+[ RUN      ] StringStubs.Substring_WholeString
+[       OK ] StringStubs.Substring_WholeString (0 ms)
+[ RUN      ] StringStubs.Substring_ZeroLength
+[       OK ] StringStubs.Substring_ZeroLength (0 ms)
+[ RUN      ] StringStubs.Substring_NullStr
+[       OK ] StringStubs.Substring_NullStr (0 ms)
+[ RUN      ] StringStubs.Substring_OutOfBounds
+[       OK ] StringStubs.Substring_OutOfBounds (0 ms)
+[ RUN      ] StringStubs.Remove_Normal
+[       OK ] StringStubs.Remove_Normal (0 ms)
+[ RUN      ] StringStubs.Remove_Middle
+[       OK ] StringStubs.Remove_Middle (0 ms)
+[ RUN      ] StringStubs.Remove_All
+[       OK ] StringStubs.Remove_All (0 ms)
+[ RUN      ] StringStubs.Remove_NullStr
+[       OK ] StringStubs.Remove_NullStr (0 ms)
+[ RUN      ] StringStubs.Replace_Normal
+[       OK ] StringStubs.Replace_Normal (0 ms)
+[ RUN      ] StringStubs.Replace_NoMatch
+[       OK ] StringStubs.Replace_NoMatch (0 ms)
+[ RUN      ] StringStubs.Replace_EmptyOld
+[       OK ] StringStubs.Replace_EmptyOld (0 ms)
+[ RUN      ] StringStubs.Replace_NullInput
+[       OK ] StringStubs.Replace_NullInput (0 ms)
+[ RUN      ] StringStubs.ToLower_Normal
+[       OK ] StringStubs.ToLower_Normal (0 ms)
+[ RUN      ] StringStubs.ToLower_AlreadyLower
+[       OK ] StringStubs.ToLower_AlreadyLower (0 ms)
+[ RUN      ] StringStubs.ToLower_Empty
+[       OK ] StringStubs.ToLower_Empty (0 ms)
+[ RUN      ] StringStubs.ToLower_Null
+[       OK ] StringStubs.ToLower_Null (0 ms)
+[ RUN      ] StringStubs.ToUpper_Normal
+[       OK ] StringStubs.ToUpper_Normal (0 ms)
+[ RUN      ] StringStubs.ToUpper_Empty
+[       OK ] StringStubs.ToUpper_Empty (0 ms)
+[ RUN      ] StringStubs.ToUpper_Null
+[       OK ] StringStubs.ToUpper_Null (0 ms)
+[ RUN      ] StringStubs.Trim_LeadingAndTrailing
+[       OK ] StringStubs.Trim_LeadingAndTrailing (0 ms)
+[ RUN      ] StringStubs.Trim_NoWhitespace
+[       OK ] StringStubs.Trim_NoWhitespace (0 ms)
+[ RUN      ] StringStubs.Trim_AllWhitespace
+[       OK ] StringStubs.Trim_AllWhitespace (0 ms)
+[ RUN      ] StringStubs.Trim_Empty
+[       OK ] StringStubs.Trim_Empty (0 ms)
+[ RUN      ] StringStubs.Trim_Null
+[       OK ] StringStubs.Trim_Null (0 ms)
+[ RUN      ] StringStubs.FastAllocate_Normal
+[       OK ] StringStubs.FastAllocate_Normal (0 ms)
+[ RUN      ] StringStubs.FastAllocate_Zero
+[       OK ] StringStubs.FastAllocate_Zero (0 ms)
+[ RUN      ] StringStubs.FastAllocate_Negative
+[       OK ] StringStubs.FastAllocate_Negative (0 ms)
+[ RUN      ] StringStubs.FormatArray_NoPlaceholders
+[       OK ] StringStubs.FormatArray_NoPlaceholders (0 ms)
+[ RUN      ] StringStubs.FormatArray_OneArg
+[       OK ] StringStubs.FormatArray_OneArg (0 ms)
+[ RUN      ] StringStubs.FormatArray_TwoArgs
+[       OK ] StringStubs.FormatArray_TwoArgs (0 ms)
+[ RUN      ] StringStubs.FormatArray_EscapedBraces
+[       OK ] StringStubs.FormatArray_EscapedBraces (0 ms)
+[ RUN      ] StringStubs.FormatArray_NullFormat
+[       OK ] StringStubs.FormatArray_NullFormat (0 ms)
+[ RUN      ] StringStubs.Format1
+[       OK ] StringStubs.Format1 (0 ms)
+[ RUN      ] StringStubs.Format2
+[       OK ] StringStubs.Format2 (0 ms)
+[ RUN      ] StringStubs.Append_Normal
+[       OK ] StringStubs.Append_Normal (0 ms)
+[ RUN      ] StringStubs.Append_NullBuilder
+[       OK ] StringStubs.Append_NullBuilder (0 ms)
+[ RUN      ] StringStubs.Append_NullStr
+[       OK ] StringStubs.Append_NullStr (0 ms)
+[ RUN      ] StringStubs.FormattableStringFactoryCreate_Normal
+[       OK ] StringStubs.FormattableStringFactoryCreate_Normal (0 ms)
+[ RUN      ] StringStubs.FormattableStringFactoryCreate_NullFormat
+[       OK ] StringStubs.FormattableStringFactoryCreate_NullFormat (0 ms)
+[----------] 77 tests from StringStubs (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 77 tests from 1 test suite ran. (0 ms total)
+[  PASSED  ] 77 tests.
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"string_stubs_test" end time: May 23 15:19 China Standard Time
+"string_stubs_test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/5 Testing: enum_stubs_test
+2/5 Test: enum_stubs_test
+Command: "D:/agent/booming-il2cpp/build/testing/src/native/runtime-core/runtime_stubs/Debug/enum_stubs_test.exe"
+Directory: D:/agent/booming-il2cpp/build/testing/src/native/runtime-core/runtime_stubs
+"enum_stubs_test" start time: May 23 15:19 China Standard Time
+Output:
+----------------------------------------------------------
+Running main() from D:\agent\booming-il2cpp\build\testing\_deps\googletest-src\googletest\src\gtest_main.cc
+[==========] Running 16 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 16 tests from EnumStubs
+[ RUN      ] EnumStubs.IsDefined_NullType
+[       OK ] EnumStubs.IsDefined_NullType (0 ms)
+[ RUN      ] EnumStubs.GetName_NullType
+[       OK ] EnumStubs.GetName_NullType (0 ms)
+[ RUN      ] EnumStubs.GetNames_NullType
+[       OK ] EnumStubs.GetNames_NullType (0 ms)
+[ RUN      ] EnumStubs.GetValues_NullType
+[       OK ] EnumStubs.GetValues_NullType (0 ms)
+[ RUN      ] EnumStubs.Parse_NullType
+[       OK ] EnumStubs.Parse_NullType (0 ms)
+[ RUN      ] EnumStubs.Parse_NullName
+[       OK ] EnumStubs.Parse_NullName (0 ms)
+[ RUN      ] EnumStubs.ParseWithIgnoreCase_NullType
+[       OK ] EnumStubs.ParseWithIgnoreCase_NullType (0 ms)
+[ RUN      ] EnumStubs.Format_NullType
+[       OK ] EnumStubs.Format_NullType (0 ms)
+[ RUN      ] EnumStubs.ToString_NullObject
+[       OK ] EnumStubs.ToString_NullObject (0 ms)
+[ RUN      ] EnumStubs.ToStringRaw_NullHandle
+[       OK ] EnumStubs.ToStringRaw_NullHandle (0 ms)
+[ RUN      ] EnumStubs.ToStringWithFormat_NullObject
+[       OK ] EnumStubs.ToStringWithFormat_NullObject (0 ms)
+[ RUN      ] EnumStubs.TryParse_NullType
+[       OK ] EnumStubs.TryParse_NullType (0 ms)
+[ RUN      ] EnumStubs.TryParse_NullResultOut
+[       OK ] EnumStubs.TryParse_NullResultOut (0 ms)
+[ RUN      ] EnumStubs.TryParseWithIgnoreCase_NullType
+[       OK ] EnumStubs.TryParseWithIgnoreCase_NullType (0 ms)
+[ RUN      ] EnumStubs.TryParseWithIgnoreCase_NullResultOut
+[       OK ] EnumStubs.TryParseWithIgnoreCase_NullResultOut (0 ms)
+[ RUN      ] EnumStubs.Format_NullValue
+[       OK ] EnumStubs.Format_NullValue (0 ms)
+[----------] 16 tests from EnumStubs (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 16 tests from 1 test suite ran. (0 ms total)
+[  PASSED  ] 16 tests.
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"enum_stubs_test" end time: May 23 15:19 China Standard Time
+"enum_stubs_test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/5 Testing: datetime_guid_math_test
+3/5 Test: datetime_guid_math_test
+Command: "D:/agent/booming-il2cpp/build/testing/src/native/runtime-core/runtime_stubs/Debug/datetime_guid_math_test.exe"
+Directory: D:/agent/booming-il2cpp/build/testing/src/native/runtime-core/runtime_stubs
+"datetime_guid_math_test" start time: May 23 15:19 China Standard Time
+Output:
+----------------------------------------------------------
+Running main() from D:\agent\booming-il2cpp\build\testing\_deps\googletest-src\googletest\src\gtest_main.cc
+[==========] Running 57 tests from 3 test suites.
+[----------] Global test environment set-up.
+[----------] 25 tests from DatetimeStubs
+[ RUN      ] DatetimeStubs.GetUtcNow_ReturnsNonZero
+[       OK ] DatetimeStubs.GetUtcNow_ReturnsNonZero (0 ms)
+[ RUN      ] DatetimeStubs.GetHashCode_Null
+[       OK ] DatetimeStubs.GetHashCode_Null (0 ms)
+[ RUN      ] DatetimeStubs.ToString_ValidTicks
+[       OK ] DatetimeStubs.ToString_ValidTicks (0 ms)
+[ RUN      ] DatetimeStubs.ToStringFormat_NullFormat
+[       OK ] DatetimeStubs.ToStringFormat_NullFormat (0 ms)
+[ RUN      ] DatetimeStubs.AddDays_Positive
+[       OK ] DatetimeStubs.AddDays_Positive (0 ms)
+[ RUN      ] DatetimeStubs.AddDays_Negative
+[       OK ] DatetimeStubs.AddDays_Negative (0 ms)
+[ RUN      ] DatetimeStubs.AddHours_Positive
+[       OK ] DatetimeStubs.AddHours_Positive (0 ms)
+[ RUN      ] DatetimeStubs.AddMinutes_Positive
+[       OK ] DatetimeStubs.AddMinutes_Positive (0 ms)
+[ RUN      ] DatetimeStubs.Compare_Less
+[       OK ] DatetimeStubs.Compare_Less (0 ms)
+[ RUN      ] DatetimeStubs.Compare_Equal
+[       OK ] DatetimeStubs.Compare_Equal (0 ms)
+[ RUN      ] DatetimeStubs.Compare_Greater
+[       OK ] DatetimeStubs.Compare_Greater (0 ms)
+[ RUN      ] DatetimeStubs.DaysInMonth_January
+[       OK ] DatetimeStubs.DaysInMonth_January (0 ms)
+[ RUN      ] DatetimeStubs.DaysInMonth_FebruaryLeap
+[       OK ] DatetimeStubs.DaysInMonth_FebruaryLeap (0 ms)
+[ RUN      ] DatetimeStubs.DaysInMonth_FebruaryNonLeap
+[       OK ] DatetimeStubs.DaysInMonth_FebruaryNonLeap (0 ms)
+[ RUN      ] DatetimeStubs.DaysInMonth_InvalidMonth
+[       OK ] DatetimeStubs.DaysInMonth_InvalidMonth (0 ms)
+[ RUN      ] DatetimeStubs.DaysInMonth_InvalidMonthZero
+[       OK ] DatetimeStubs.DaysInMonth_InvalidMonthZero (0 ms)
+[ RUN      ] DatetimeStubs.TimeSpanFromDays
+[       OK ] DatetimeStubs.TimeSpanFromDays (0 ms)
+[ RUN      ] DatetimeStubs.TimeSpanFromHours
+[       OK ] DatetimeStubs.TimeSpanFromHours (0 ms)
+[ RUN      ] DatetimeStubs.TimeSpanFromMinutes
+[       OK ] DatetimeStubs.TimeSpanFromMinutes (0 ms)
+[ RUN      ] DatetimeStubs.TimeSpanParse_Null
+[       OK ] DatetimeStubs.TimeSpanParse_Null (0 ms)
+[ RUN      ] DatetimeStubs.DateTimeParse_Null
+[       OK ] DatetimeStubs.DateTimeParse_Null (0 ms)
+[ RUN      ] DatetimeStubs.Ctor3_NullInstance
+[       OK ] DatetimeStubs.Ctor3_NullInstance (0 ms)
+[ RUN      ] DatetimeStubs.Ctor6_NullInstance
+[       OK ] DatetimeStubs.Ctor6_NullInstance (0 ms)
+[ RUN      ] DatetimeStubs.TimeSpanCtor_NullInstance
+[       OK ] DatetimeStubs.TimeSpanCtor_NullInstance (0 ms)
+[ RUN      ] DatetimeStubs.GetHashCode_Valid
+[       OK ] DatetimeStubs.GetHashCode_Valid (0 ms)
+[----------] 25 tests from DatetimeStubs (0 ms total)
+
+[----------] 5 tests from GuidStubs
+[ RUN      ] GuidStubs.NewGuid_ReturnsNonNull
+[       OK ] GuidStubs.NewGuid_ReturnsNonNull (0 ms)
+[ RUN      ] GuidStubs.Parse_Null
+[       OK ] GuidStubs.Parse_Null (0 ms)
+[ RUN      ] GuidStubs.GetHashCode_Null
+[       OK ] GuidStubs.GetHashCode_Null (0 ms)
+[ RUN      ] GuidStubs.ToString_Null
+[       OK ] GuidStubs.ToString_Null (0 ms)
+[ RUN      ] GuidStubs.Ctor_NullInstance
+[       OK ] GuidStubs.Ctor_NullInstance (0 ms)
+[----------] 5 tests from GuidStubs (0 ms total)
+
+[----------] 27 tests from MathStubs
+[ RUN      ] MathStubs.AbsInt32_Positive
+[       OK ] MathStubs.AbsInt32_Positive (0 ms)
+[ RUN      ] MathStubs.AbsInt32_Negative
+[       OK ] MathStubs.AbsInt32_Negative (0 ms)
+[ RUN      ] MathStubs.AbsInt32_Zero
+[       OK ] MathStubs.AbsInt32_Zero (0 ms)
+[ RUN      ] MathStubs.AbsDouble_Positive
+[       OK ] MathStubs.AbsDouble_Positive (0 ms)
+[ RUN      ] MathStubs.AbsDouble_Negative
+[       OK ] MathStubs.AbsDouble_Negative (0 ms)
+[ RUN      ] MathStubs.AbsDouble_NaN
+[       OK ] MathStubs.AbsDouble_NaN (0 ms)
+[ RUN      ] MathStubs.Ceiling
+[       OK ] MathStubs.Ceiling (0 ms)
+[ RUN      ] MathStubs.Ceiling_Negative
+[       OK ] MathStubs.Ceiling_Negative (0 ms)
+[ RUN      ] MathStubs.Floor
+[       OK ] MathStubs.Floor (0 ms)
+[ RUN      ] MathStubs.Floor_Negative
+[       OK ] MathStubs.Floor_Negative (0 ms)
+[ RUN      ] MathStubs.Round
+[       OK ] MathStubs.Round (0 ms)
+[ RUN      ] MathStubs.Round2
+[       OK ] MathStubs.Round2 (0 ms)
+[ RUN      ] MathStubs.MaxInt32_ABigger
+[       OK ] MathStubs.MaxInt32_ABigger (0 ms)
+[ RUN      ] MathStubs.MaxInt32_BBigger
+[       OK ] MathStubs.MaxInt32_BBigger (0 ms)
+[ RUN      ] MathStubs.MaxInt32_Equal
+[       OK ] MathStubs.MaxInt32_Equal (0 ms)
+[ RUN      ] MathStubs.MaxDouble
+[       OK ] MathStubs.MaxDouble (0 ms)
+[ RUN      ] MathStubs.MinInt32_ABigger
+[       OK ] MathStubs.MinInt32_ABigger (0 ms)
+[ RUN      ] MathStubs.MinInt32_BBigger
+[       OK ] MathStubs.MinInt32_BBigger (0 ms)
+[ RUN      ] MathStubs.MinInt32_Equal
+[       OK ] MathStubs.MinInt32_Equal (0 ms)
+[ RUN      ] MathStubs.MinDouble
+[       OK ] MathStubs.MinDouble (0 ms)
+[ RUN      ] MathStubs.Pow
+[       OK ] MathStubs.Pow (0 ms)
+[ RUN      ] MathStubs.Sin
+[       OK ] MathStubs.Sin (0 ms)
+[ RUN      ] MathStubs.Cos
+[       OK ] MathStubs.Cos (0 ms)
+[ RUN      ] MathStubs.BigMul
+[       OK ] MathStubs.BigMul (0 ms)
+[ RUN      ] MathStubs.BigMul_Negative
+[       OK ] MathStubs.BigMul_Negative (0 ms)
+[ RUN      ] MathStubs.Sqrt_FromDouble
+[       OK ] MathStubs.Sqrt_FromDouble (0 ms)
+[ RUN      ] MathStubs.Sqrt_FromDoubleZero
+[       OK ] MathStubs.Sqrt_FromDoubleZero (0 ms)
+[----------] 27 tests from MathStubs (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 57 tests from 3 test suites ran. (1 ms total)
+[  PASSED  ] 57 tests.
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"datetime_guid_math_test" end time: May 23 15:19 China Standard Time
+"datetime_guid_math_test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/5 Testing: collection_stubs_test
+4/5 Test: collection_stubs_test
+Command: "D:/agent/booming-il2cpp/build/testing/src/native/runtime-core/runtime_stubs/Debug/collection_stubs_test.exe"
+Directory: D:/agent/booming-il2cpp/build/testing/src/native/runtime-core/runtime_stubs
+"collection_stubs_test" start time: May 23 15:19 China Standard Time
+Output:
+----------------------------------------------------------
+Running main() from D:\agent\booming-il2cpp\build\testing\_deps\googletest-src\googletest\src\gtest_main.cc
+[==========] Running 44 tests from 5 test suites.
+[----------] Global test environment set-up.
+[----------] 5 tests from CollectionList
+[ RUN      ] CollectionList.AddAndToArray_Empty
+[       OK ] CollectionList.AddAndToArray_Empty (0 ms)
+[ RUN      ] CollectionList.AddOneAndToArray
+[       OK ] CollectionList.AddOneAndToArray (0 ms)
+[ RUN      ] CollectionList.AddMultipleAndToArray
+[       OK ] CollectionList.AddMultipleAndToArray (0 ms)
+[ RUN      ] CollectionList.Add_NullHandle
+[       OK ] CollectionList.Add_NullHandle (0 ms)
+[ RUN      ] CollectionList.ToArray_NullHandle
+[       OK ] CollectionList.ToArray_NullHandle (0 ms)
+[----------] 5 tests from CollectionList (0 ms total)
+
+[----------] 17 tests from CollectionDict
+[ RUN      ] CollectionDict.GetCount_Empty
+[       OK ] CollectionDict.GetCount_Empty (0 ms)
+[ RUN      ] CollectionDict.GetCount_NullHandle
+[       OK ] CollectionDict.GetCount_NullHandle (0 ms)
+[ RUN      ] CollectionDict.AddAndGetItem
+[       OK ] CollectionDict.AddAndGetItem (0 ms)
+[ RUN      ] CollectionDict.SetItem_UpdateExisting
+[       OK ] CollectionDict.SetItem_UpdateExisting (0 ms)
+[ RUN      ] CollectionDict.SetItem_AddNew
+[       OK ] CollectionDict.SetItem_AddNew (0 ms)
+[ RUN      ] CollectionDict.TryGetValue_Found
+[       OK ] CollectionDict.TryGetValue_Found (0 ms)
+[ RUN      ] CollectionDict.TryGetValue_NotFound
+[       OK ] CollectionDict.TryGetValue_NotFound (0 ms)
+[ RUN      ] CollectionDict.TryGetValue_NullHandle
+[       OK ] CollectionDict.TryGetValue_NullHandle (0 ms)
+[ RUN      ] CollectionDict.TryGetValue_NullOutValue
+[       OK ] CollectionDict.TryGetValue_NullOutValue (0 ms)
+[ RUN      ] CollectionDict.ContainsKey_Yes
+[       OK ] CollectionDict.ContainsKey_Yes (0 ms)
+[ RUN      ] CollectionDict.ContainsKey_No
+[       OK ] CollectionDict.ContainsKey_No (0 ms)
+[ RUN      ] CollectionDict.ContainsKey_NullHandle
+[       OK ] CollectionDict.ContainsKey_NullHandle (0 ms)
+[ RUN      ] CollectionDict.Remove_Existing
+[       OK ] CollectionDict.Remove_Existing (0 ms)
+[ RUN      ] CollectionDict.Remove_NonExistent
+[       OK ] CollectionDict.Remove_NonExistent (0 ms)
+[ RUN      ] CollectionDict.Remove_NullHandle
+[       OK ] CollectionDict.Remove_NullHandle (0 ms)
+[ RUN      ] CollectionDict.Add_DuplicateKey
+[       OK ] CollectionDict.Add_DuplicateKey (0 ms)
+[ RUN      ] CollectionDict.NullHandle_Safe
+[       OK ] CollectionDict.NullHandle_Safe (0 ms)
+[----------] 17 tests from CollectionDict (0 ms total)
+
+[----------] 12 tests from CollectionHashSet
+[ RUN      ] CollectionHashSet.GetCount_Empty
+[       OK ] CollectionHashSet.GetCount_Empty (0 ms)
+[ RUN      ] CollectionHashSet.GetCount_NullHandle
+[       OK ] CollectionHashSet.GetCount_NullHandle (0 ms)
+[ RUN      ] CollectionHashSet.Add_NewValue
+[       OK ] CollectionHashSet.Add_NewValue (0 ms)
+[ RUN      ] CollectionHashSet.Add_Duplicate
+[       OK ] CollectionHashSet.Add_Duplicate (0 ms)
+[ RUN      ] CollectionHashSet.Add_NullHandle
+[       OK ] CollectionHashSet.Add_NullHandle (0 ms)
+[ RUN      ] CollectionHashSet.Contains_Yes
+[       OK ] CollectionHashSet.Contains_Yes (0 ms)
+[ RUN      ] CollectionHashSet.Contains_No
+[       OK ] CollectionHashSet.Contains_No (0 ms)
+[ RUN      ] CollectionHashSet.Contains_NullHandle
+[       OK ] CollectionHashSet.Contains_NullHandle (0 ms)
+[ RUN      ] CollectionHashSet.Remove_Existing
+[       OK ] CollectionHashSet.Remove_Existing (0 ms)
+[ RUN      ] CollectionHashSet.Remove_NonExistent
+[       OK ] CollectionHashSet.Remove_NonExistent (0 ms)
+[ RUN      ] CollectionHashSet.Remove_NullHandle
+[       OK ] CollectionHashSet.Remove_NullHandle (0 ms)
+[ RUN      ] CollectionHashSet.AddMultiple
+[       OK ] CollectionHashSet.AddMultiple (0 ms)
+[----------] 12 tests from CollectionHashSet (0 ms total)
+
+[----------] 6 tests from CollectionDict_Edge
+[ RUN      ] CollectionDict_Edge.LargeDataset
+[       OK ] CollectionDict_Edge.LargeDataset (0 ms)
+[ RUN      ] CollectionDict_Edge.SetItemOverwriteLarge
+[       OK ] CollectionDict_Edge.SetItemOverwriteLarge (0 ms)
+[ RUN      ] CollectionDict_Edge.AddRemoveAdd
+[       OK ] CollectionDict_Edge.AddRemoveAdd (0 ms)
+[ RUN      ] CollectionDict_Edge.RemoveAllThenAdd
+[       OK ] CollectionDict_Edge.RemoveAllThenAdd (0 ms)
+[ RUN      ] CollectionDict_Edge.ContainsKeyMany
+[       OK ] CollectionDict_Edge.ContainsKeyMany (0 ms)
+[ RUN      ] CollectionDict_Edge.TryGetValueMany
+[       OK ] CollectionDict_Edge.TryGetValueMany (0 ms)
+[----------] 6 tests from CollectionDict_Edge (1 ms total)
+
+[----------] 4 tests from CollectionHashSet_Edge
+[ RUN      ] CollectionHashSet_Edge.LargeDataset
+[       OK ] CollectionHashSet_Edge.LargeDataset (0 ms)
+[ RUN      ] CollectionHashSet_Edge.AddRemoveAdd
+[       OK ] CollectionHashSet_Edge.AddRemoveAdd (0 ms)
+[ RUN      ] CollectionHashSet_Edge.RemoveAllThenAdd
+[       OK ] CollectionHashSet_Edge.RemoveAllThenAdd (0 ms)
+[ RUN      ] CollectionHashSet_Edge.DuplicatesNotCounted
+[       OK ] CollectionHashSet_Edge.DuplicatesNotCounted (0 ms)
+[----------] 4 tests from CollectionHashSet_Edge (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 44 tests from 5 test suites ran. (2 ms total)
+[  PASSED  ] 44 tests.
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"collection_stubs_test" end time: May 23 15:19 China Standard Time
+"collection_stubs_test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+5/5 Testing: convert_stubs_test
+5/5 Test: convert_stubs_test
+Command: "D:/agent/booming-il2cpp/build/testing/src/native/runtime-core/runtime_stubs/Debug/convert_stubs_test.exe"
+Directory: D:/agent/booming-il2cpp/build/testing/src/native/runtime-core/runtime_stubs
+"convert_stubs_test" start time: May 23 15:19 China Standard Time
+Output:
+----------------------------------------------------------
+Running main() from D:\agent\booming-il2cpp\build\testing\_deps\googletest-src\googletest\src\gtest_main.cc
+[==========] Running 121 tests from 36 test suites.
+[----------] Global test environment set-up.
+[----------] 6 tests from Convert_ToBoolean
+[ RUN      ] Convert_ToBoolean.Null
+[       OK ] Convert_ToBoolean.Null (0 ms)
+[ RUN      ] Convert_ToBoolean.True
+[       OK ] Convert_ToBoolean.True (0 ms)
+[ RUN      ] Convert_ToBoolean.False
+[       OK ] Convert_ToBoolean.False (0 ms)
+[ RUN      ] Convert_ToBoolean.Invalid
+[       OK ] Convert_ToBoolean.Invalid (0 ms)
+[ RUN      ] Convert_ToBoolean.CaseSensitive
+[       OK ] Convert_ToBoolean.CaseSensitive (0 ms)
+[ RUN      ] Convert_ToBoolean.Empty
+[       OK ] Convert_ToBoolean.Empty (0 ms)
+[----------] 6 tests from Convert_ToBoolean (0 ms total)
+
+[----------] 8 tests from Convert_ToByte
+[ RUN      ] Convert_ToByte.Null
+[       OK ] Convert_ToByte.Null (0 ms)
+[ RUN      ] Convert_ToByte.Valid
+[       OK ] Convert_ToByte.Valid (0 ms)
+[ RUN      ] Convert_ToByte.Zero
+[       OK ] Convert_ToByte.Zero (0 ms)
+[ RUN      ] Convert_ToByte.MaxValue
+[       OK ] Convert_ToByte.MaxValue (0 ms)
+[ RUN      ] Convert_ToByte.Overflow
+[       OK ] Convert_ToByte.Overflow (0 ms)
+[ RUN      ] Convert_ToByte.Negative
+[       OK ] Convert_ToByte.Negative (0 ms)
+[ RUN      ] Convert_ToByte.Invalid
+[       OK ] Convert_ToByte.Invalid (0 ms)
+[ RUN      ] Convert_ToByte.LeadingWhitespace
+[       OK ] Convert_ToByte.LeadingWhitespace (0 ms)
+[----------] 8 tests from Convert_ToByte (0 ms total)
+
+[----------] 5 tests from Convert_ToInt16
+[ RUN      ] Convert_ToInt16.Null
+[       OK ] Convert_ToInt16.Null (0 ms)
+[ RUN      ] Convert_ToInt16.Valid
+[       OK ] Convert_ToInt16.Valid (0 ms)
+[ RUN      ] Convert_ToInt16.Negative
+[       OK ] Convert_ToInt16.Negative (0 ms)
+[ RUN      ] Convert_ToInt16.Overflow
+[       OK ] Convert_ToInt16.Overflow (0 ms)
+[ RUN      ] Convert_ToInt16.Invalid
+[       OK ] Convert_ToInt16.Invalid (0 ms)
+[----------] 5 tests from Convert_ToInt16 (0 ms total)
+
+[----------] 7 tests from Convert_ToInt32
+[ RUN      ] Convert_ToInt32.Null
+[       OK ] Convert_ToInt32.Null (0 ms)
+[ RUN      ] Convert_ToInt32.Valid
+[       OK ] Convert_ToInt32.Valid (0 ms)
+[ RUN      ] Convert_ToInt32.Negative
+[       OK ] Convert_ToInt32.Negative (0 ms)
+[ RUN      ] Convert_ToInt32.Zero
+[       OK ] Convert_ToInt32.Zero (0 ms)
+[ RUN      ] Convert_ToInt32.MaxValue
+[       OK ] Convert_ToInt32.MaxValue (0 ms)
+[ RUN      ] Convert_ToInt32.MinValue
+[       OK ] Convert_ToInt32.MinValue (0 ms)
+[ RUN      ] Convert_ToInt32.Invalid
+[       OK ] Convert_ToInt32.Invalid (0 ms)
+[----------] 7 tests from Convert_ToInt32 (0 ms total)
+
+[----------] 5 tests from Convert_ToInt64
+[ RUN      ] Convert_ToInt64.Null
+[       OK ] Convert_ToInt64.Null (0 ms)
+[ RUN      ] Convert_ToInt64.LargeNumber
+[       OK ] Convert_ToInt64.LargeNumber (0 ms)
+[ RUN      ] Convert_ToInt64.Negative
+[       OK ] Convert_ToInt64.Negative (0 ms)
+[ RUN      ] Convert_ToInt64.Overflow
+[       OK ] Convert_ToInt64.Overflow (0 ms)
+[ RUN      ] Convert_ToInt64.Invalid
+[       OK ] Convert_ToInt64.Invalid (0 ms)
+[----------] 5 tests from Convert_ToInt64 (0 ms total)
+
+[----------] 4 tests from Convert_ToSingle
+[ RUN      ] Convert_ToSingle.Null
+[       OK ] Convert_ToSingle.Null (0 ms)
+[ RUN      ] Convert_ToSingle.Valid
+[       OK ] Convert_ToSingle.Valid (0 ms)
+[ RUN      ] Convert_ToSingle.Negative
+[       OK ] Convert_ToSingle.Negative (0 ms)
+[ RUN      ] Convert_ToSingle.Invalid
+[       OK ] Convert_ToSingle.Invalid (0 ms)
+[----------] 4 tests from Convert_ToSingle (0 ms total)
+
+[----------] 5 tests from Convert_ToDouble
+[ RUN      ] Convert_ToDouble.Null
+[       OK ] Convert_ToDouble.Null (0 ms)
+[ RUN      ] Convert_ToDouble.Valid
+[       OK ] Convert_ToDouble.Valid (0 ms)
+[ RUN      ] Convert_ToDouble.Scientific
+[       OK ] Convert_ToDouble.Scientific (0 ms)
+[ RUN      ] Convert_ToDouble.Negative
+[       OK ] Convert_ToDouble.Negative (0 ms)
+[ RUN      ] Convert_ToDouble.Invalid
+[       OK ] Convert_ToDouble.Invalid (0 ms)
+[----------] 5 tests from Convert_ToDouble (0 ms total)
+
+[----------] 3 tests from Convert_ToDecimal
+[ RUN      ] Convert_ToDecimal.Null
+[       OK ] Convert_ToDecimal.Null (0 ms)
+[ RUN      ] Convert_ToDecimal.Positive
+[       OK ] Convert_ToDecimal.Positive (0 ms)
+[ RUN      ] Convert_ToDecimal.Negative
+[       OK ] Convert_ToDecimal.Negative (0 ms)
+[----------] 3 tests from Convert_ToDecimal (0 ms total)
+
+[----------] 5 tests from Convert_FormatInt32
+[ RUN      ] Convert_FormatInt32.Zero
+[       OK ] Convert_FormatInt32.Zero (0 ms)
+[ RUN      ] Convert_FormatInt32.Positive
+[       OK ] Convert_FormatInt32.Positive (0 ms)
+[ RUN      ] Convert_FormatInt32.Negative
+[       OK ] Convert_FormatInt32.Negative (0 ms)
+[ RUN      ] Convert_FormatInt32.MaxValue
+[       OK ] Convert_FormatInt32.MaxValue (0 ms)
+[ RUN      ] Convert_FormatInt32.MinValue
+[       OK ] Convert_FormatInt32.MinValue (0 ms)
+[----------] 5 tests from Convert_FormatInt32 (0 ms total)
+
+[----------] 3 tests from Convert_FormatDouble
+[ RUN      ] Convert_FormatDouble.Zero
+[       OK ] Convert_FormatDouble.Zero (0 ms)
+[ RUN      ] Convert_FormatDouble.Pi
+[       OK ] Convert_FormatDouble.Pi (0 ms)
+[ RUN      ] Convert_FormatDouble.Negative
+[       OK ] Convert_FormatDouble.Negative (0 ms)
+[----------] 3 tests from Convert_FormatDouble (0 ms total)
+
+[----------] 1 test from Convert_ParseInt32
+[ RUN      ] Convert_ParseInt32.Valid
+[       OK ] Convert_ParseInt32.Valid (0 ms)
+[----------] 1 test from Convert_ParseInt32 (0 ms total)
+
+[----------] 1 test from Convert_ParseInt64
+[ RUN      ] Convert_ParseInt64.Valid
+[       OK ] Convert_ParseInt64.Valid (0 ms)
+[----------] 1 test from Convert_ParseInt64 (0 ms total)
+
+[----------] 1 test from Convert_ParseDouble
+[ RUN      ] Convert_ParseDouble.Valid
+[       OK ] Convert_ParseDouble.Valid (0 ms)
+[----------] 1 test from Convert_ParseDouble (0 ms total)
+
+[----------] 6 tests from Convert_Int32FromDouble
+[ RUN      ] Convert_Int32FromDouble.Positive
+[       OK ] Convert_Int32FromDouble.Positive (0 ms)
+[ RUN      ] Convert_Int32FromDouble.Negative
+[       OK ] Convert_Int32FromDouble.Negative (0 ms)
+[ RUN      ] Convert_Int32FromDouble.Zero
+[       OK ] Convert_Int32FromDouble.Zero (0 ms)
+[ RUN      ] Convert_Int32FromDouble.NaN
+[       OK ] Convert_Int32FromDouble.NaN (0 ms)
+[ RUN      ] Convert_Int32FromDouble.Overflow_TooLarge
+[       OK ] Convert_Int32FromDouble.Overflow_TooLarge (0 ms)
+[ RUN      ] Convert_Int32FromDouble.Overflow_TooSmall
+[       OK ] Convert_Int32FromDouble.Overflow_TooSmall (0 ms)
+[----------] 6 tests from Convert_Int32FromDouble (0 ms total)
+
+[----------] 3 tests from Convert_DecimalToInt32
+[ RUN      ] Convert_DecimalToInt32.Positive
+[       OK ] Convert_DecimalToInt32.Positive (0 ms)
+[ RUN      ] Convert_DecimalToInt32.Negative
+[       OK ] Convert_DecimalToInt32.Negative (0 ms)
+[ RUN      ] Convert_DecimalToInt32.Zero
+[       OK ] Convert_DecimalToInt32.Zero (0 ms)
+[----------] 3 tests from Convert_DecimalToInt32 (0 ms total)
+
+[----------] 4 tests from Convert_DecimalFromDouble
+[ RUN      ] Convert_DecimalFromDouble.Positive
+[       OK ] Convert_DecimalFromDouble.Positive (0 ms)
+[ RUN      ] Convert_DecimalFromDouble.Negative
+[       OK ] Convert_DecimalFromDouble.Negative (0 ms)
+[ RUN      ] Convert_DecimalFromDouble.Zero
+[       OK ] Convert_DecimalFromDouble.Zero (0 ms)
+[ RUN      ] Convert_DecimalFromDouble.Truncation
+[       OK ] Convert_DecimalFromDouble.Truncation (0 ms)
+[----------] 4 tests from Convert_DecimalFromDouble (0 ms total)
+
+[----------] 1 test from Convert_DecimalAdd
+[ RUN      ] Convert_DecimalAdd.Simple
+[       OK ] Convert_DecimalAdd.Simple (0 ms)
+[----------] 1 test from Convert_DecimalAdd (0 ms total)
+
+[----------] 1 test from Convert_DecimalSubtract
+[ RUN      ] Convert_DecimalSubtract.Simple
+[       OK ] Convert_DecimalSubtract.Simple (0 ms)
+[----------] 1 test from Convert_DecimalSubtract (0 ms total)
+
+[----------] 1 test from Convert_DecimalMultiply
+[ RUN      ] Convert_DecimalMultiply.Simple
+[       OK ] Convert_DecimalMultiply.Simple (0 ms)
+[----------] 1 test from Convert_DecimalMultiply (0 ms total)
+
+[----------] 2 tests from Convert_DecimalDivide
+[ RUN      ] Convert_DecimalDivide.Simple
+[       OK ] Convert_DecimalDivide.Simple (0 ms)
+[ RUN      ] Convert_DecimalDivide.ByZero
+[       OK ] Convert_DecimalDivide.ByZero (0 ms)
+[----------] 2 tests from Convert_DecimalDivide (0 ms total)
+
+[----------] 4 tests from Convert_ToChar_Byte
+[ RUN      ] Convert_ToChar_Byte.Zero
+[       OK ] Convert_ToChar_Byte.Zero (0 ms)
+[ RUN      ] Convert_ToChar_Byte.MaxValue
+[       OK ] Convert_ToChar_Byte.MaxValue (0 ms)
+[ RUN      ] Convert_ToChar_Byte.AboveMaxTruncates
+[       OK ] Convert_ToChar_Byte.AboveMaxTruncates (0 ms)
+[ RUN      ] Convert_ToChar_Byte.NegativeTruncates
+[       OK ] Convert_ToChar_Byte.NegativeTruncates (0 ms)
+[----------] 4 tests from Convert_ToChar_Byte (0 ms total)
+
+[----------] 4 tests from Convert_ToChar_Char
+[ RUN      ] Convert_ToChar_Char.Zero
+[       OK ] Convert_ToChar_Char.Zero (0 ms)
+[ RUN      ] Convert_ToChar_Char.ValidValue
+[       OK ] Convert_ToChar_Char.ValidValue (0 ms)
+[ RUN      ] Convert_ToChar_Char.MaxValue
+[       OK ] Convert_ToChar_Char.MaxValue (0 ms)
+[ RUN      ] Convert_ToChar_Char.BeyondMaxTruncates
+[       OK ] Convert_ToChar_Char.BeyondMaxTruncates (0 ms)
+[----------] 4 tests from Convert_ToChar_Char (0 ms total)
+
+[----------] 3 tests from Convert_ToChar_UInt16
+[ RUN      ] Convert_ToChar_UInt16.Zero
+[       OK ] Convert_ToChar_UInt16.Zero (0 ms)
+[ RUN      ] Convert_ToChar_UInt16.MaxValue
+[       OK ] Convert_ToChar_UInt16.MaxValue (0 ms)
+[ RUN      ] Convert_ToChar_UInt16.BeyondMaxTruncates
+[       OK ] Convert_ToChar_UInt16.BeyondMaxTruncates (0 ms)
+[----------] 3 tests from Convert_ToChar_UInt16 (0 ms total)
+
+[----------] 3 tests from Convert_ToChar_Int16
+[ RUN      ] Convert_ToChar_Int16.Zero
+[       OK ] Convert_ToChar_Int16.Zero (0 ms)
+[ RUN      ] Convert_ToChar_Int16.Positive
+[       OK ] Convert_ToChar_Int16.Positive (0 ms)
+[ RUN      ] Convert_ToChar_Int16.NegativeOverflow
+[       OK ] Convert_ToChar_Int16.NegativeOverflow (0 ms)
+[----------] 3 tests from Convert_ToChar_Int16 (0 ms total)
+
+[----------] 5 tests from Convert_ToChar_Int32
+[ RUN      ] Convert_ToChar_Int32.Zero
+[       OK ] Convert_ToChar_Int32.Zero (0 ms)
+[ RUN      ] Convert_ToChar_Int32.Positive
+[       OK ] Convert_ToChar_Int32.Positive (0 ms)
+[ RUN      ] Convert_ToChar_Int32.MaxValue
+[       OK ] Convert_ToChar_Int32.MaxValue (0 ms)
+[ RUN      ] Convert_ToChar_Int32.NegativeOverflow
+[       OK ] Convert_ToChar_Int32.NegativeOverflow (0 ms)
+[ RUN      ] Convert_ToChar_Int32.TooLargeOverflow
+[       OK ] Convert_ToChar_Int32.TooLargeOverflow (0 ms)
+[----------] 5 tests from Convert_ToChar_Int32 (0 ms total)
+
+[----------] 4 tests from Convert_ToChar_Int64
+[ RUN      ] Convert_ToChar_Int64.Zero
+[       OK ] Convert_ToChar_Int64.Zero (0 ms)
+[ RUN      ] Convert_ToChar_Int64.Positive
+[       OK ] Convert_ToChar_Int64.Positive (0 ms)
+[ RUN      ] Convert_ToChar_Int64.NegativeOverflow
+[       OK ] Convert_ToChar_Int64.NegativeOverflow (0 ms)
+[ RUN      ] Convert_ToChar_Int64.TooLargeOverflow
+[       OK ] Convert_ToChar_Int64.TooLargeOverflow (0 ms)
+[----------] 4 tests from Convert_ToChar_Int64 (0 ms total)
+
+[----------] 3 tests from Convert_ToChar_SByte
+[ RUN      ] Convert_ToChar_SByte.Zero
+[       OK ] Convert_ToChar_SByte.Zero (0 ms)
+[ RUN      ] Convert_ToChar_SByte.Positive
+[       OK ] Convert_ToChar_SByte.Positive (0 ms)
+[ RUN      ] Convert_ToChar_SByte.NegativeOverflow
+[       OK ] Convert_ToChar_SByte.NegativeOverflow (0 ms)
+[----------] 3 tests from Convert_ToChar_SByte (0 ms total)
+
+[----------] 3 tests from Convert_ToChar_UInt32
+[ RUN      ] Convert_ToChar_UInt32.Zero
+[       OK ] Convert_ToChar_UInt32.Zero (0 ms)
+[ RUN      ] Convert_ToChar_UInt32.MaxValue
+[       OK ] Convert_ToChar_UInt32.MaxValue (0 ms)
+[ RUN      ] Convert_ToChar_UInt32.TooLargeOverflow
+[       OK ] Convert_ToChar_UInt32.TooLargeOverflow (0 ms)
+[----------] 3 tests from Convert_ToChar_UInt32 (0 ms total)
+
+[----------] 3 tests from Convert_ToChar_UInt64
+[ RUN      ] Convert_ToChar_UInt64.Zero
+[       OK ] Convert_ToChar_UInt64.Zero (0 ms)
+[ RUN      ] Convert_ToChar_UInt64.MaxValue
+[       OK ] Convert_ToChar_UInt64.MaxValue (0 ms)
+[ RUN      ] Convert_ToChar_UInt64.TooLargeOverflow
+[       OK ] Convert_ToChar_UInt64.TooLargeOverflow (0 ms)
+[----------] 3 tests from Convert_ToChar_UInt64 (0 ms total)
+
+[----------] 1 test from Convert_ToChar_Boolean
+[ RUN      ] Convert_ToChar_Boolean.AlwaysThrows
+[       OK ] Convert_ToChar_Boolean.AlwaysThrows (0 ms)
+[----------] 1 test from Convert_ToChar_Boolean (0 ms total)
+
+[----------] 1 test from Convert_ToChar_DateTime
+[ RUN      ] Convert_ToChar_DateTime.AlwaysThrows
+[       OK ] Convert_ToChar_DateTime.AlwaysThrows (0 ms)
+[----------] 1 test from Convert_ToChar_DateTime (0 ms total)
+
+[----------] 3 tests from Convert_ToChar_Decimal
+[ RUN      ] Convert_ToChar_Decimal.Positive
+[       OK ] Convert_ToChar_Decimal.Positive (0 ms)
+[ RUN      ] Convert_ToChar_Decimal.NegativeOverflow
+[       OK ] Convert_ToChar_Decimal.NegativeOverflow (0 ms)
+[ RUN      ] Convert_ToChar_Decimal.ScaleDivision
+[       OK ] Convert_ToChar_Decimal.ScaleDivision (0 ms)
+[----------] 3 tests from Convert_ToChar_Decimal (0 ms total)
+
+[----------] 4 tests from Convert_ToChar_Double
+[ RUN      ] Convert_ToChar_Double.Zero
+[       OK ] Convert_ToChar_Double.Zero (0 ms)
+[ RUN      ] Convert_ToChar_Double.Positive
+[       OK ] Convert_ToChar_Double.Positive (0 ms)
+[ RUN      ] Convert_ToChar_Double.NegativeOverflow
+[       OK ] Convert_ToChar_Double.NegativeOverflow (0 ms)
+[ RUN      ] Convert_ToChar_Double.TooLargeOverflow
+[       OK ] Convert_ToChar_Double.TooLargeOverflow (0 ms)
+[----------] 4 tests from Convert_ToChar_Double (0 ms total)
+
+[----------] 4 tests from Convert_ToChar_Single
+[ RUN      ] Convert_ToChar_Single.Zero
+[       OK ] Convert_ToChar_Single.Zero (0 ms)
+[ RUN      ] Convert_ToChar_Single.Positive
+[       OK ] Convert_ToChar_Single.Positive (0 ms)
+[ RUN      ] Convert_ToChar_Single.NegativeOverflow
+[       OK ] Convert_ToChar_Single.NegativeOverflow (0 ms)
+[ RUN      ] Convert_ToChar_Single.TooLargeOverflow
+[       OK ] Convert_ToChar_Single.TooLargeOverflow (0 ms)
+[----------] 4 tests from Convert_ToChar_Single (0 ms total)
+
+[----------] 3 tests from Convert_ToChar_Object
+[ RUN      ] Convert_ToChar_Object.ValidPayload
+[       OK ] Convert_ToChar_Object.ValidPayload (0 ms)
+[ RUN      ] Convert_ToChar_Object.MaxPayload
+[       OK ] Convert_ToChar_Object.MaxPayload (0 ms)
+[ RUN      ] Convert_ToChar_Object.OverflowPayload
+[       OK ] Convert_ToChar_Object.OverflowPayload (0 ms)
+[----------] 3 tests from Convert_ToChar_Object (0 ms total)
+
+[----------] 1 test from Convert_ToChar_ObjectProvider
+[ RUN      ] Convert_ToChar_ObjectProvider.DelegatesToInt32
+[       OK ] Convert_ToChar_ObjectProvider.DelegatesToInt32 (0 ms)
+[----------] 1 test from Convert_ToChar_ObjectProvider (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 121 tests from 36 test suites ran. (2 ms total)
+[  PASSED  ] 121 tests.
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"convert_stubs_test" end time: May 23 15:19 China Standard Time
+"convert_stubs_test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: May 23 15:19 China Standard Time
+
+core =   0.13 sec*proc
+
+unit =   0.13 sec*proc
+

@@ -1,4 +1,4 @@
-#include <chaos/common.h>
+﻿#include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
 #include <chaos/eh.h>
@@ -16,6 +16,7 @@
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 #include "enum_metadata.generated.h"
+#include "enum_stubs.h"
 #include "convert.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
@@ -53,8 +54,6 @@ inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo =
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_String = {{nullptr, nullptr, 1782325859292956794ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Int32 = {{nullptr, nullptr, 11009693519287992193ULL, 0u, 32, 2, 0}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_boxed_type_id_System_Private_CoreLib_System_Int32 = static_cast<CHAOS_IL2CPP_INTPTR>(11009693519287992193ULL);
 
 // ── Virtual method table arrays ──
 bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept
@@ -153,12 +152,6 @@ struct chaos_type_System_Private_CoreLib_System_String
 	CHAOS_IL2CPP_INTPTR length = 0;
 	const char* utf8_data = nullptr;
 	CHAOS_IL2CPP_UINT64 string_id = 0u;  // stable StringId, 0 = not yet materialized
-};
-
-struct chaos_boxed_type_System_Private_CoreLib_System_Int32
-{
-	PureTypeHeader header{};
-	CHAOS_IL2CPP_INTPTR value = 0;
 };
 
 const char* chaos_reflection_get_string_utf8(CHAOS_IL2CPP_INTPTR chaos_string_value) noexcept
@@ -270,11 +263,6 @@ static CHAOS_IL2CPP_UINT16 chaos_external_runtime_System_Private_CoreLib_System_
 	return chaos_convert_tochar_int64(chaos_arg_0);
 }
 
-static CHAOS_IL2CPP_UINT16 chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Object_System_IFormatProvider_(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1)
-{
-	return chaos_convert_tochar_object_provider(chaos_arg_0, chaos_arg_1);
-}
-
 static CHAOS_IL2CPP_UINT16 chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_SByte_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
 {
 	return chaos_convert_tochar_sbyte(chaos_arg_0);
@@ -330,6 +318,16 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
+
+
+// ── Bridge/import thunks ──
+extern "C" void* kChaosExternalRuntimeFnTable[];
+
+// Bridge/import thunk for: ConvertCharSubjects/ConvertCharSubjects::_exitCode
+extern "C" void chaos_bridge_thunk_0(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[1])();
+}
 
 extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_0(void);
 extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_1(void);
@@ -475,11 +473,18 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
 		/* .type_count        = */ 2u,
-	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
+	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 -- deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
 	/* .custom_attribute_materializer = */ nullptr,
-
+	/* .custom_attribute_method_offset   = */ nullptr,
+	/* .custom_attribute_field_offset    = */ nullptr,
+	/* .custom_attribute_property_offset = */ nullptr,
+	/* .custom_attribute_param_offset    = */ nullptr,
+	/* .custom_attribute_method_count    = */ 0u,
+	/* .custom_attribute_field_count     = */ 0u,
+	/* .custom_attribute_property_count  = */ 0u,
+	/* .custom_attribute_param_count   = */ 0u,
 		/* .abi_manifest      = */ s_abi_manifest,
 	};
 	static const CHAOS_IL2CPP_UINT32 s_native_aot_module_id =
@@ -575,7 +580,7 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // ── External Runtime Dispatch Table ──────────────────────────
 // Startup-time-resolved function pointers for cross-assembly calls.
 
-extern "C" const char* kChaosExternalRuntimeSubjects[21] = {
+extern "C" const char* kChaosExternalRuntimeSubjects[19] = {
 	"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)",
 	"ConvertCharSubjects/ConvertCharSubjects::_exitCode",
 	"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Byte)",
@@ -588,18 +593,16 @@ extern "C" const char* kChaosExternalRuntimeSubjects[21] = {
 	"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int16)",
 	"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int32)",
 	"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int64)",
-	"System.Private.CoreLib/System.Int32",
-	"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object,System.IFormatProvider)",
-	"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.SByte)",
-	"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Single)",
 	"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String)",
 	"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)",
+	"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.SByte)",
+	"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Single)",
 	"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt16)",
 	"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt32)",
 	"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt64)",
 };
 
-extern "C" void* kChaosExternalRuntimeFnTable[21] = {
+extern "C" void* kChaosExternalRuntimeFnTable[19] = {
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Boolean_),
 	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Byte_),
@@ -612,18 +615,16 @@ extern "C" void* kChaosExternalRuntimeFnTable[21] = {
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Int16_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Int32_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Int64_),
-	nullptr,
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Object_System_IFormatProvider_),
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_SByte_),
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Single_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_String_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_String_System_IFormatProvider_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_SByte_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Single_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_UInt16_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_UInt32_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_UInt64_),
 };
 
-extern "C" int32_t kChaosExternalRuntimeCount = 21;
+extern "C" int32_t kChaosExternalRuntimeCount = 19;
 // (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
@@ -873,7 +874,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry10;
 	/* ── Entry 11: ConvertCharSubjects_ConvertCharSubjects_Subject_11 ── */
 	struct {
@@ -1014,11 +1015,11 @@ static const struct {
 	},
 	/* entry10 = ConvertCharSubjects_ConvertCharSubjects_Subject_10 */
 	.entry10 = {
-		/* entry_total_size = 44 */ 44u,
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_10),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
 	/* entry11 = ConvertCharSubjects_ConvertCharSubjects_Subject_11 */
 	.entry11 = {
@@ -1081,7 +1082,7 @@ static const struct {
 #pragma pack(pop)
 #endif
 
-static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 608u;
+static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 600u;
 
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
@@ -1161,39 +1162,39 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // matching during IR lowering of patched methods.
 
 static constexpr ReflectionQueryFieldDescriptor kReflFields_ConvertCharSubjects_ConvertCharSubjects[1] = {
-	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
+	{ 0x04000001u, "ConvertCharSubjects/ConvertCharSubjects::_exitCode", "_exitCode", "System.Int32", 0LL, 3u },
 };
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_ConvertCharSubjects_ConvertCharSubjects[18] = {
-	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_10:System.Void()", "Subject_10", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_11:System.Void()", "Subject_11", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_12:System.Void()", "Subject_12", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_13:System.Void()", "Subject_13", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_14:System.Void()", "Subject_14", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_15:System.Void()", "Subject_15", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_16:System.Void()", "Subject_16", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ConvertCharSubjects/ConvertCharSubjects::Subject_17:System.Void()", "Subject_17", "System.Void", 0, nullptr, 0u },
+	{ 0x00000003u, "ConvertCharSubjects/ConvertCharSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000004u, "ConvertCharSubjects/ConvertCharSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000005u, "ConvertCharSubjects/ConvertCharSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000006u, "ConvertCharSubjects/ConvertCharSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000007u, "ConvertCharSubjects/ConvertCharSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000008u, "ConvertCharSubjects/ConvertCharSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000009u, "ConvertCharSubjects/ConvertCharSubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Au, "ConvertCharSubjects/ConvertCharSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Bu, "ConvertCharSubjects/ConvertCharSubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Cu, "ConvertCharSubjects/ConvertCharSubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Du, "ConvertCharSubjects/ConvertCharSubjects::Subject_10:System.Void()", "Subject_10", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Eu, "ConvertCharSubjects/ConvertCharSubjects::Subject_11:System.Void()", "Subject_11", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Fu, "ConvertCharSubjects/ConvertCharSubjects::Subject_12:System.Void()", "Subject_12", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000010u, "ConvertCharSubjects/ConvertCharSubjects::Subject_13:System.Void()", "Subject_13", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000011u, "ConvertCharSubjects/ConvertCharSubjects::Subject_14:System.Void()", "Subject_14", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000012u, "ConvertCharSubjects/ConvertCharSubjects::Subject_15:System.Void()", "Subject_15", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000013u, "ConvertCharSubjects/ConvertCharSubjects::Subject_16:System.Void()", "Subject_16", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000014u, "ConvertCharSubjects/ConvertCharSubjects::Subject_17:System.Void()", "Subject_17", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
-	{ 0u, "ConvertCharSubjects/ConvertCharSubjects", "ConvertCharSubjects/ConvertCharSubjects", "", "ConvertCharSubjects", "ConvertCharSubjects", nullptr, kReflFields_ConvertCharSubjects_ConvertCharSubjects, 1u, nullptr, 0u,
-	kReflMethods_ConvertCharSubjects_ConvertCharSubjects, 18u },
+	{ 0x00000001u, "ConvertCharSubjects/ConvertCharSubjects", "ConvertCharSubjects/ConvertCharSubjects", "", "ConvertCharSubjects", "ConvertCharSubjects", nullptr, kReflFields_ConvertCharSubjects_ConvertCharSubjects, 1u, nullptr, 0u,
+nullptr, 0u,    kReflMethods_ConvertCharSubjects_ConvertCharSubjects, 18u, nullptr, 0u, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static const ReflectionQueryImageDescriptor kReflImage = { "ConvertCharSubjects", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "ConvertCharSubjects", kReflTypePtrs, 1u, 1, 0, 0, 0 };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -1805,15 +1806,17 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_9(void)
 
 
 	CHAOS_EH_TRY
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			_s0 = 0;
 			{
-				const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s0);
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = chaos_convert_tochar_string(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			_s1 = 0;
 			{
-				const auto chaos_inline_result = static_cast<CHAOS_IL2CPP_UINT16>(_s1);
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_inline_result);
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = chaos_convert_tochar_string(chaos_arg_0);
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
@@ -1862,41 +1865,23 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_10(void)
 	CHAOS_IL2CPP_INTPTR _s10{};
 	CHAOS_IL2CPP_INTPTR _s11{};
 	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
 
 
 	CHAOS_EH_TRY
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s0;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
+			_s0 = 0;
 			_s1 = 0;
 			{
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = chaos_convert_tochar_object_provider(chaos_arg_0, chaos_arg_1);
+				const auto chaos_result = chaos_convert_tochar_string_provider(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s1;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
+			_s1 = 0;
 			_s2 = 0;
 			{
 				const auto chaos_arg_1 = _s2;
 				const auto chaos_arg_0 = _s1;
-				const auto chaos_result = chaos_convert_tochar_object_provider(chaos_arg_0, chaos_arg_1);
+				const auto chaos_result = chaos_convert_tochar_string_provider(chaos_arg_0, chaos_arg_1);
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);

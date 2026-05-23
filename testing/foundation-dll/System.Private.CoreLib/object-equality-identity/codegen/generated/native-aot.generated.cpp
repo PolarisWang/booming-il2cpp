@@ -27,6 +27,15 @@ extern "C" void InterpreterEntryDirect(
 #pragma warning(push)
 #pragma warning(disable: 4065 4244)
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_0(void);
+extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_1(void);
+extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_2(void);
+extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_3(void);
+extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_4(void);
+extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_5(void);
+extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_6(void);
+
 namespace chaos::il2cpp::codegen::ObjectEqualityIdentitySubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup
@@ -257,6 +266,23 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
 
+
+// ── Bridge/import thunks ──
+extern "C" void* kChaosExternalRuntimeFnTable[];
+
+// Bridge/import thunk for: ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::_exitCode
+extern "C" void chaos_bridge_thunk_0(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[2])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Object::GetType:System.Type()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_1(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[7])();
+	return result;
+}
+
 extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_0(void);
 extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_1(void);
 extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_2(void);
@@ -368,11 +394,18 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
 		/* .type_count        = */ 2u,
-	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
+	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 -- deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
 	/* .custom_attribute_materializer = */ nullptr,
-
+	/* .custom_attribute_method_offset   = */ nullptr,
+	/* .custom_attribute_field_offset    = */ nullptr,
+	/* .custom_attribute_property_offset = */ nullptr,
+	/* .custom_attribute_param_offset    = */ nullptr,
+	/* .custom_attribute_method_count    = */ 0u,
+	/* .custom_attribute_field_count     = */ 0u,
+	/* .custom_attribute_property_count  = */ 0u,
+	/* .custom_attribute_param_count   = */ 0u,
 		/* .abi_manifest      = */ s_abi_manifest,
 	};
 	static const CHAOS_IL2CPP_UINT32 s_native_aot_module_id =
@@ -759,28 +792,28 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // matching during IR lowering of patched methods.
 
 static constexpr ReflectionQueryFieldDescriptor kReflFields_ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects[1] = {
-	{ 0x04000001u, "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
+	{ 0x04000001u, "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::_exitCode", "_exitCode", "System.Int32", 0LL, 3u },
 };
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects[7] = {
-	{ 0x00000003u, "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000004u, "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000005u, "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000006u, "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000007u, "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000008u, "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000009u, "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u, nullptr },
+	{ 0x00000003u, "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000004u, "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000005u, "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000006u, "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000007u, "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000008u, "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000009u, "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
 	{ 0x00000001u, "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects", "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects", "", "ObjectEqualityIdentitySubjects", "ObjectEqualityIdentitySubjects", nullptr, kReflFields_ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects, 1u, nullptr, 0u,
-	kReflMethods_ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects, 7u, nullptr, 0u, 0u },
+nullptr, 0u,    kReflMethods_ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects, 7u, nullptr, 0u, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static const ReflectionQueryImageDescriptor kReflImage = { "ObjectEqualityIdentitySubjects", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "ObjectEqualityIdentitySubjects", kReflTypePtrs, 1u, 1, 0, 0, 0 };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -1263,34 +1296,4 @@ extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Su
 		if (chaos_header != nullptr)
 		{
 			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{ CHAOS_EH_RETHROW; }
-		}
-		_s0 = CHAOS_EH_EXCEPTION_OBJ;
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects___exitCode = chaos_value;
-			}
-	CHAOS_EH_END
-	return;
-}
-
-// Managed method: ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_6()
-extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_6(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-
-
-	return;
-}
-
-
-
-}  // namespace chaos::il2cpp::codegen::ObjectEqualityIdentitySubjects
-#pragma warning(pop)
-
-// extern "C" definition for link-time visibility from runtime-entry.cpp
-extern "C" const int kAotMethodCount = 7;
-
-extern "C" void ChaosJitRegisterAll() {}
+			{ CHAOS_EH_RETHRO

@@ -1,4 +1,4 @@
-#include <chaos/common.h>
+﻿#include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
 #include <chaos/eh.h>
@@ -16,6 +16,7 @@
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 #include "enum_metadata.generated.h"
+#include "enum_stubs.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -25,6 +26,15 @@ extern "C" void InterpreterEntryDirect(
 
 #pragma warning(push)
 #pragma warning(disable: 4065 4244)
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_0(void);
+extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_1(void);
+extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_2(void);
+extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_3(void);
+extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_4(void);
+extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_5(void);
+extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_6(void);
 
 namespace chaos::il2cpp::codegen::ObjectEqualityIdentitySubjects {
 
@@ -50,8 +60,6 @@ inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo =
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_String = {{nullptr, nullptr, 1782325859292956794ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Int32 = {{nullptr, nullptr, 11009693519287992193ULL, 0u, 32, 2, 0}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_boxed_type_id_System_Private_CoreLib_System_Int32 = static_cast<CHAOS_IL2CPP_INTPTR>(11009693519287992193ULL);
 
 // ── Virtual method table arrays ──
 bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept
@@ -147,12 +155,6 @@ struct chaos_type_System_Private_CoreLib_System_String
 	CHAOS_IL2CPP_UINT64 string_id = 0u;  // stable StringId, 0 = not yet materialized
 };
 
-struct chaos_boxed_type_System_Private_CoreLib_System_Int32
-{
-	PureTypeHeader header{};
-	CHAOS_IL2CPP_INTPTR value = 0;
-};
-
 	bool chaos_object_equals(CHAOS_IL2CPP_INTPTR chaos_left_value, CHAOS_IL2CPP_INTPTR chaos_right_value) noexcept
 	{
 		// StringId fast path: tagged integers compare directly (O(1)).
@@ -203,8 +205,6 @@ struct chaos_boxed_type_System_Private_CoreLib_System_Int32
 		}
 		switch (chaos_left_ti->stable_id)
 		{
-			case chaos_boxed_type_id_System_Private_CoreLib_System_Int32:
-				return reinterpret_cast<chaos_boxed_type_System_Private_CoreLib_System_Int32*>(chaos_left_value)->value == reinterpret_cast<chaos_boxed_type_System_Private_CoreLib_System_Int32*>(chaos_right_value)->value;
 			default:
 				return false;
 		}
@@ -265,6 +265,23 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
+
+
+// ── Bridge/import thunks ──
+extern "C" void* kChaosExternalRuntimeFnTable[];
+
+// Bridge/import thunk for: ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::_exitCode
+extern "C" void chaos_bridge_thunk_0(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[2])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Object::GetType:System.Type()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_1(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[7])();
+	return result;
+}
 
 extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_0(void);
 extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_1(void);
@@ -377,11 +394,18 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
 		/* .type_count        = */ 2u,
-	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
+	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 -- deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
 	/* .custom_attribute_materializer = */ nullptr,
-
+	/* .custom_attribute_method_offset   = */ nullptr,
+	/* .custom_attribute_field_offset    = */ nullptr,
+	/* .custom_attribute_property_offset = */ nullptr,
+	/* .custom_attribute_param_offset    = */ nullptr,
+	/* .custom_attribute_method_count    = */ 0u,
+	/* .custom_attribute_field_count     = */ 0u,
+	/* .custom_attribute_property_count  = */ 0u,
+	/* .custom_attribute_param_count   = */ 0u,
 		/* .abi_manifest      = */ s_abi_manifest,
 	};
 	static const CHAOS_IL2CPP_UINT32 s_native_aot_module_id =
@@ -444,9 +468,8 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // ── External Runtime Dispatch Table ──────────────────────────
 // Startup-time-resolved function pointers for cross-assembly calls.
 
-extern "C" const char* kChaosExternalRuntimeSubjects[9] = {
+extern "C" const char* kChaosExternalRuntimeSubjects[8] = {
 	"System.Private.CoreLib/System.Object::.ctor:System.Void()",
-	"System.Private.CoreLib/System.Int32",
 	"System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)",
 	"ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::_exitCode",
 	"System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object,System.Object)",
@@ -456,9 +479,8 @@ extern "C" const char* kChaosExternalRuntimeSubjects[9] = {
 	"System.Private.CoreLib/System.Object::GetType:System.Type()",
 };
 
-extern "C" void* kChaosExternalRuntimeFnTable[9] = {
+extern "C" void* kChaosExternalRuntimeFnTable[8] = {
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__),
-	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object__Equals_System_Boolean_System_Object_),
 	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object__Equals_System_Boolean_System_Object_System_Object_),
@@ -468,7 +490,7 @@ extern "C" void* kChaosExternalRuntimeFnTable[9] = {
 	nullptr,
 };
 
-extern "C" int32_t kChaosExternalRuntimeCount = 9;
+extern "C" int32_t kChaosExternalRuntimeCount = 8;
 // (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
@@ -605,7 +627,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[5];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry0;
 	/* ── Entry 1: ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_1 ── */
 	struct {
@@ -613,7 +635,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry1;
 	/* ── Entry 2: ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_2 ── */
 	struct {
@@ -621,7 +643,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry2;
 	/* ── Entry 3: ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_3 ── */
 	struct {
@@ -650,27 +672,27 @@ static const struct {
 } kChaosGcSlotMapsSection = {
 	/* entry0 = ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_0 */
 	.entry0 = {
-		/* entry_total_size = 40 */ 40u,
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_0),
-		/* frame_size = 40 */ 40u,
-		/* num_gc_slots = 5 */ 5u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
 	/* entry1 = ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_1 */
 	.entry1 = {
-		/* entry_total_size = 44 */ 44u,
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_1),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
 	/* entry2 = ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_2 */
 	.entry2 = {
-		/* entry_total_size = 44 */ 44u,
+		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_2),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
 	},
 	/* entry3 = ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_3 */
 	.entry3 = {
@@ -701,7 +723,7 @@ static const struct {
 #pragma pack(pop)
 #endif
 
-static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 232u;
+static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 208u;
 
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
@@ -770,28 +792,28 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // matching during IR lowering of patched methods.
 
 static constexpr ReflectionQueryFieldDescriptor kReflFields_ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects[1] = {
-	{ 0u, "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
+	{ 0x04000001u, "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::_exitCode", "_exitCode", "System.Int32", 0LL, 3u },
 };
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects[7] = {
-	{ 0u, "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u },
+	{ 0x00000003u, "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000004u, "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000005u, "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000006u, "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000007u, "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000008u, "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000009u, "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
-	{ 0u, "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects", "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects", "", "ObjectEqualityIdentitySubjects", "ObjectEqualityIdentitySubjects", nullptr, kReflFields_ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects, 1u, nullptr, 0u,
-	kReflMethods_ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects, 7u },
+	{ 0x00000001u, "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects", "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects", "", "ObjectEqualityIdentitySubjects", "ObjectEqualityIdentitySubjects", nullptr, kReflFields_ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects, 1u, nullptr, 0u,
+nullptr, 0u,    kReflMethods_ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects, 7u, nullptr, 0u, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static const ReflectionQueryImageDescriptor kReflImage = { "ObjectEqualityIdentitySubjects", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "ObjectEqualityIdentitySubjects", kReflTypePtrs, 1u, 1, 0, 0, 0 };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -852,10 +874,6 @@ extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Su
 	CHAOS_IL2CPP_INTPTR _s14{};
 	CHAOS_IL2CPP_INTPTR _s15{};
 	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	CHAOS_IL2CPP_INTPTR _s18{};
-	CHAOS_IL2CPP_INTPTR _s19{};
-	CHAOS_IL2CPP_INTPTR _s20{};
 
 
 	CHAOS_EH_TRY
@@ -865,14 +883,7 @@ extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Su
 				chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s1;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
+			_s1 = 0;
 			{
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
@@ -889,14 +900,7 @@ extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Su
 				chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 				_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
-			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s4;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
+			_s4 = 0;
 			{
 				const auto chaos_arg_1 = _s4;
 				const auto chaos_arg_0 = _s3;
@@ -958,33 +962,11 @@ extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Su
 	CHAOS_IL2CPP_INTPTR _s14{};
 	CHAOS_IL2CPP_INTPTR _s15{};
 	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	CHAOS_IL2CPP_INTPTR _s18{};
-	CHAOS_IL2CPP_INTPTR _s19{};
-	CHAOS_IL2CPP_INTPTR _s20{};
-	CHAOS_IL2CPP_INTPTR _s21{};
-	CHAOS_IL2CPP_INTPTR _s22{};
-	CHAOS_IL2CPP_INTPTR _s23{};
-	CHAOS_IL2CPP_INTPTR _s24{};
 
 
 	CHAOS_EH_TRY
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s0;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s1;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
+			_s0 = 0;
+			_s1 = 0;
 			{
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
@@ -995,22 +977,8 @@ extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Su
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 			// br (handled via structured EH branches)
 			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s3;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
-			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s4;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
+			_s3 = 0;
+			_s4 = 0;
 			{
 				const auto chaos_arg_1 = _s4;
 				const auto chaos_arg_0 = _s3;
@@ -1064,72 +1032,22 @@ extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Su
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
 	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	CHAOS_IL2CPP_INTPTR _s18{};
-	CHAOS_IL2CPP_INTPTR _s19{};
-	CHAOS_IL2CPP_INTPTR _s20{};
-	CHAOS_IL2CPP_INTPTR _s21{};
-	CHAOS_IL2CPP_INTPTR _s22{};
 
 
 	CHAOS_EH_TRY
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s0;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s1;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
-			// beq (structured EH branch)
-			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 			// br (handled via structured EH branches)
-			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s4;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
-			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s5;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
-			// beq (structured EH branch)
-			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			// br (handled via structured EH branches)
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
-			chaos_locals[0] = _s6;
-			_s6 = chaos_locals[0];
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
 			// brfalse (structured EH branch)
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s7;
+				auto chaos_value = _s1;
 				chaos_static_ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -1338,7 +1256,7 @@ extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Su
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[7])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			{
@@ -1353,7 +1271,7 @@ extern "C" void ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Su
 				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[7])();
 				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			{

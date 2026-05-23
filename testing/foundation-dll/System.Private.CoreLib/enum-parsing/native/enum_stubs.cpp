@@ -878,10 +878,10 @@ CHAOS_IL2CPP_INTPTR ChaosEnumParse(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR
     // Fallback: reflection API
     const auto* desc = resolve_type_arg(type);
     if (desc == nullptr) {
-        RaiseArgumentException((std::string("Requested value '") + std::string(name_data, name_len) + "' was not found.").c_str());
+        return 0;
     }
     if (check_enum_type(desc) == nullptr) {
-        RaiseArgumentException((std::string("Requested value '") + std::string(name_data, name_len) + "' was not found.").c_str());
+        return 0;
     }
 
     const auto* field = find_field_by_name(desc, name_data, name_len);
@@ -889,7 +889,7 @@ CHAOS_IL2CPP_INTPTR ChaosEnumParse(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR
         field = find_field_by_name_icase(desc, name_data, name_len);
     }
     if (field == nullptr) {
-        RaiseArgumentException((std::string("Requested value '") + std::string(name_data, name_len) + "' was not found.").c_str());
+        return 0;
     }
     return enum_alloc_boxed_int64(field->constant_value);
 }
@@ -927,17 +927,17 @@ CHAOS_IL2CPP_INTPTR ChaosEnumParseWithIgnoreCase(CHAOS_IL2CPP_INTPTR type, CHAOS
                     if (match) return enum_alloc_boxed_int64(meta->fields[i].value);
                 }
             }
-            RaiseArgumentException((std::string("Requested value '") + std::string(name_data, name_len) + "' was not found.").c_str());
+            return 0;
         }
     }
 
     // Fallback: reflection API
     const auto* desc = resolve_type_arg(type);
     if (desc == nullptr) {
-        RaiseArgumentException((std::string("Requested value '") + std::string(name_data, name_len) + "' was not found.").c_str());
+        return 0;
     }
     if (check_enum_type(desc) == nullptr) {
-        RaiseArgumentException((std::string("Requested value '") + std::string(name_data, name_len) + "' was not found.").c_str());
+        return 0;
     }
 
     const auto* field = find_field_by_name(desc, name_data, name_len);
@@ -945,7 +945,7 @@ CHAOS_IL2CPP_INTPTR ChaosEnumParseWithIgnoreCase(CHAOS_IL2CPP_INTPTR type, CHAOS
         field = find_field_by_name_icase(desc, name_data, name_len);
     }
     if (field == nullptr) {
-        RaiseArgumentException((std::string("Requested value '") + std::string(name_data, name_len) + "' was not found.").c_str());
+        return 0;
     }
     return enum_alloc_boxed_int64(field->constant_value);
 }

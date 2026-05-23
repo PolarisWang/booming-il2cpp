@@ -16,7 +16,7 @@
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 #include "enum_metadata.generated.h"
-#include "runtime_stubs/enum_stubs.h"
+#include "enum_stubs.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -178,6 +178,54 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
+
+
+// ── Bridge/import thunks ──
+extern "C" void* kChaosExternalRuntimeFnTable[];
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Byte
+extern "C" void chaos_bridge_thunk_0(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[0])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Buffer::BlockCopy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)
+extern "C" void chaos_bridge_thunk_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3, CHAOS_IL2CPP_INTPTR chaos_fn_arg_4)
+{
+	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[1])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3, chaos_fn_arg_4);
+}
+
+// Bridge/import thunk for: BufferMemorySubjects/BufferMemorySubjects::_exitCode
+extern "C" void chaos_bridge_thunk_2(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[2])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Array::Empty<System.Byte>:System.Byte[]()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_3(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[3])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Buffer::GetByte:System.Byte(System.Array,System.Int32)
+extern "C" CHAOS_IL2CPP_UINT8 chaos_bridge_thunk_4(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_UINT8(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[5])(chaos_fn_arg_0, chaos_fn_arg_1);
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Buffer::SetByte:System.Void(System.Array,System.Int32,System.Byte)
+extern "C" void chaos_bridge_thunk_5(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+{
+	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[6])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
+}
+
+// Bridge/import thunk for: BufferMemorySubjects/BufferMemoryNativeEntry::_exitCode
+extern "C" void chaos_bridge_thunk_6(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[7])();
+}
 
 extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_0(void);
 extern "C" void BufferMemorySubjects_BufferMemorySubjects_Subject_1(void);
@@ -431,6 +479,7 @@ extern "C" void* kChaosExternalRuntimeFnTable[8] = {
 };
 
 extern "C" int32_t kChaosExternalRuntimeCount = 8;
+// (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
 static void (*kAotMethods[13])() = {
@@ -794,10 +843,8 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_BufferMemorySubjec
 
 static const ReflectionQueryTypeDescriptor kReflTypes[2] = {
 	{ 0x00000001u, "BufferMemorySubjects/BufferMemorySubjects", "BufferMemorySubjects/BufferMemorySubjects", "", "BufferMemorySubjects", "BufferMemorySubjects", nullptr, kReflFields_BufferMemorySubjects_BufferMemorySubjects, 1u, nullptr, 0u,
-/* EVENT_SECTION_START */
 nullptr, 0u,    kReflMethods_BufferMemorySubjects_BufferMemorySubjects, 10u, nullptr, 0u, 0u },
 	{ 0x00000002u, "BufferMemorySubjects/BufferMemoryNativeEntry", "BufferMemorySubjects/BufferMemoryNativeEntry", "", "BufferMemoryNativeEntry", "BufferMemoryNativeEntry", nullptr, kReflFields_BufferMemorySubjects_BufferMemoryNativeEntry, 1u, nullptr, 0u,
-/* EVENT_SECTION_START */
 nullptr, 0u,    kReflMethods_BufferMemorySubjects_BufferMemoryNativeEntry, 3u, nullptr, 0u, 0u },
 };
 

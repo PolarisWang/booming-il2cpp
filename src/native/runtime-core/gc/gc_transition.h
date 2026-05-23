@@ -27,7 +27,7 @@ constexpr uint32_t kGcModePreemptive  = 1u;
 
 /// Transition from COOPERATIVE to PREEMPTIVE mode.
 /// Must be called before entering native code that may block.
-inline void GcTransitionToPreemptive() noexcept {
+__forceinline void GcTransitionToPreemptive() noexcept {
     auto* thread = threading::tls_this_thread;
     if (thread == nullptr) return;
     thread->gc_mode.store(kGcModePreemptive, std::memory_order_release);
@@ -37,7 +37,7 @@ inline void GcTransitionToPreemptive() noexcept {
 
 /// Transition from PREEMPTIVE to COOPERATIVE mode.
 /// Must be called after returning from native code.
-inline void GcTransitionToCooperative() noexcept {
+__forceinline void GcTransitionToCooperative() noexcept {
     auto* thread = threading::tls_this_thread;
     if (thread == nullptr) return;
     thread->gc_mode.store(kGcModeCooperative, std::memory_order_release);

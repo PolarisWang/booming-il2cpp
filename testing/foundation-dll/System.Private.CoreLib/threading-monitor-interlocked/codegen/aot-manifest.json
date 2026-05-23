@@ -135,12 +135,6 @@
       "reason": "instance-field-state"
     },
     {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "type",
-      "subjectId": "System.Private.CoreLib/System.Int32",
-      "reason": "boxed-value-type"
-    },
-    {
       "assemblyName": "System.Threading",
       "subjectKind": "method",
       "subjectId": "System.Threading/Monitor::TryEnter:System.Boolean(System.Object)",

@@ -22,7 +22,7 @@
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\interpreter\osr_state.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\agent\booming-il2cpp\src\native\interpreter\register_vm.cpp">
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\interpreter\register_vm_profiler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -49,6 +49,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\interpreter\register_vm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\interpreter\register_vm_profiler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
