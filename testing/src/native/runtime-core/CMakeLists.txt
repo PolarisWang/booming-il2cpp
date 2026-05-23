@@ -65,7 +65,7 @@ add_chaos_test(generic_instantiation_test generic_instantiation_test.cpp metadat
 # IE: Instantiation engine comprehensive tests (BuildClosedDescriptor, PrecacheCallTarget,
 #     AllocateRuntimeToken, QueryAotMethod, concurrency, reverse-index consistency)
 add_chaos_test(instantiation_engine_test instantiation_engine_test.cpp
-    gc/gc_test_stubs.cpp metadata/metadata_test_stubs.cpp
+    metadata/metadata_test_stubs.cpp
     LIBS ${CHAOS_COMMON_TEST_LIBS}
     LABELS "unit;core"
 )
@@ -117,6 +117,34 @@ add_chaos_test(marshal_api_basic marshal_api_basic_test.cpp
 
 # C1 — Struct marshalling descriptor tests (Phase C: struct marshalling)
 add_chaos_test(struct_marshal struct_marshal_test.cpp
+    ${MARSHAL_TEST_STUBS}
+    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    LABELS "unit;marshal"
+)
+
+# E1 — ICustomMarshaler test (Phase E: custom marshaler)
+add_chaos_test(custom_marshaler custom_marshaler_test.cpp
+    ${MARSHAL_TEST_STUBS}
+    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    LABELS "unit;marshal"
+)
+
+# F1 — COM RCW test (Phase F: COM RCW)
+add_chaos_test(com_rcw com_rcw_test.cpp
+    ${MARSHAL_TEST_STUBS}
+    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    LABELS "unit;marshal"
+)
+
+# F2 — COM CCW test (Phase F: COM CCW)
+add_chaos_test(com_ccw com_ccw_test.cpp
+    ${MARSHAL_TEST_STUBS}
+    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    LABELS "unit;marshal"
+)
+
+# F3 — COM connection point test (Phase F: COM connection point)
+add_chaos_test(com_connection_point com_connection_point_test.cpp
     ${MARSHAL_TEST_STUBS}
     LIBS ${CHAOS_COMMON_TEST_LIBS}
     LABELS "unit;marshal"

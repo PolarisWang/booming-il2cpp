@@ -1,4 +1,10 @@
+#include "marshal_internal.h"
+#include "runtime_core.h"
+
+#include <chaos/type_info.h>
+
 namespace chaos::il2cpp::runtime_core {
+using namespace chaos::il2cpp::marshal_abi;
 namespace {
 
 // Dynamic registry for codegen-emitted static StructMarshallingDescriptorV1 entries.

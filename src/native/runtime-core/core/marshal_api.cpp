@@ -5,9 +5,23 @@
 #include <atomic>
 #include <cstring>
 
+// CHAOS_SPIN_HINT is defined in runtime_core.cpp when compiled as Unity build.
+// Provide a local fallback for standalone TU compilation.
+#ifndef CHAOS_SPIN_HINT
+#if defined(_M_ARM64) || defined(__aarch64__)
+#define CHAOS_SPIN_HINT() __yield()
+#else
+#include <immintrin.h>
+#define CHAOS_SPIN_HINT() _mm_pause()
+#endif
+#endif
+
+#include "marshal_internal.h"
+#include "runtime_core.h"
+#include "struct_marshal.h"
+
 namespace chaos::il2cpp::runtime_core {
-// NOTE: no anonymous namespace — functions are declared in engine_binding.h
-// and called from bootstrap.cpp, struct_marshal.cpp, and other TUs.
+using namespace chaos::il2cpp::marshal_abi;
 
 // TLS: HRESULT stored by ChaosThrowComExceptionForHR so the managed-side
 // COMException constructor can retrieve it via ChaosGetComFailureHR().
@@ -383,17 +397,7 @@ CHAOS_IL2CPP_INT32 GetLastPInvokeErrorIcall() noexcept {
 }
 
 // ── DestroyStructure non-generic ──────────────────────────────────
-// Forward declarations (struct_marshal.cpp is unity-included after marshal_api.cpp
-// in runtime_core.cpp, so these aren't visible yet at parse time).
-// Close runtime_core and open the actual struct_marshal peer namespace.
-} // close chaos::il2cpp::runtime_core
-namespace chaos::il2cpp::struct_marshal {
-void DestroyMarshalledStruct(
-    const ::chaos::il2cpp::marshal_abi::StructMarshallingDescriptorV1* desc,
-    unsigned char* native_ptr,
-    RuntimeState* runtime) noexcept;
-}
-namespace chaos::il2cpp::runtime_core { // reopen
+// struct_marshal::DestroyMarshalledStruct is declared in struct_marshal.h.
 
 CHAOS_IL2CPP_INTPTR ChaosDestroyStructureByType(CHAOS_IL2CPP_INTPTR struct_ptr, CHAOS_IL2CPP_INTPTR type_obj) noexcept {
     if (struct_ptr == 0 || type_obj == 0) return 0;
@@ -885,7 +889,22 @@ namespace {
 
 // ── Cookie → marshaler cache ─────────────────────────────────────────────
 // Fixed-size cache with linear scan (small N, low contention).
-// Uses thread-safe slots: marshaler_instance != 0 means occupied.
+// Protected by a single std::atomic_flag spinlock.
+//
+// Lock hierarchy: s_marshaler_cache_lock → [no nested locks].
+// No marshaler method invocations while holding the cache lock.
+
+static std::atomic_flag s_marshaler_cache_lock = ATOMIC_FLAG_INIT;
+
+static void LockMarshalerCache() noexcept {
+    while (s_marshaler_cache_lock.test_and_set(std::memory_order_acquire)) {
+        CHAOS_SPIN_HINT();
+    }
+}
+
+static void UnlockMarshalerCache() noexcept {
+    s_marshaler_cache_lock.clear(std::memory_order_release);
+}
 
 struct MarshalerSlot {
     char cookie[64];             // cookie key (truncated)
@@ -922,14 +941,17 @@ static void* ResolveOrCreateMarshaler(
     const char* cookie_utf8) {
     if (cookie_utf8 == nullptr || cookie_utf8[0] == '\0') return nullptr;
 
-    // ── Scan cache ──
+    // ── Scan cache (under lock) ──
+    LockMarshalerCache();
     for (uint32_t i = 0; i < kMarshalerCacheSize; ++i) {
         if (s_marshaler_cache[i].marshaler_instance != nullptr &&
             std::strncmp(s_marshaler_cache[i].cookie, cookie_utf8,
                          sizeof(s_marshaler_cache[i].cookie)) == 0) {
+            UnlockMarshalerCache();
             return s_marshaler_cache[i].marshaler_instance;
         }
     }
+    UnlockMarshalerCache();
 
     // ── Cache miss: resolve type and call GetInstance ──
     const char* type_name_end = nullptr;
@@ -993,7 +1015,8 @@ static void* ResolveOrCreateMarshaler(
     const MethodInfoHandle method_cmm = abi->type_find_method(
         type_handle, "CleanUpManagedData", 1);
 
-    // Store in first empty cache slot.
+    // ── Store in first empty cache slot (under lock) ──
+    LockMarshalerCache();
     for (uint32_t i = 0; i < kMarshalerCacheSize; ++i) {
         if (s_marshaler_cache[i].marshaler_instance == nullptr) {
             std::strncpy(s_marshaler_cache[i].cookie, cookie_utf8,
@@ -1004,14 +1027,31 @@ static void* ResolveOrCreateMarshaler(
             s_marshaler_cache[i].method_m2n = method_m2n;
             s_marshaler_cache[i].method_cnn = method_cnn;
             s_marshaler_cache[i].method_cmm = method_cmm;
+            UnlockMarshalerCache();
             break;
         }
     }
+    // All slots full — marshaler not cached but still usable for this call.
+    LockMarshalerCache(); UnlockMarshalerCache();  // ensure lock released
 
     return marshaler_instance;
 }
 
 }  // anonymous namespace
+
+// ── Cache lookup helper ──────────────────────────────────────────────────
+
+/// Find the cache slot containing the given marshaler instance.
+/// Returns the slot index, or kMarshalerCacheSize if not found.
+/// Caller MUST hold s_marshaler_cache_lock.
+static uint32_t FindMarshalerSlotLocked(void* marshaler) noexcept {
+    for (uint32_t i = 0; i < kMarshalerCacheSize; ++i) {
+        if (s_marshaler_cache[i].marshaler_instance == marshaler) {
+            return i;
+        }
+    }
+    return kMarshalerCacheSize;
+}
 
 CHAOS_IL2CPP_INTPTR CustomMarshalerNativeToManaged(
     const char* cookie_utf8,
@@ -1024,14 +1064,12 @@ CHAOS_IL2CPP_INTPTR CustomMarshalerNativeToManaged(
     void* marshaler = ResolveOrCreateMarshaler(rs, ts, abi, cookie_utf8);
     if (marshaler == nullptr) return 0;
 
-    // Find the MarshalNativeToManaged method from cache.
-    MethodInfoHandle method_n2m = 0;
-    for (uint32_t i = 0; i < kMarshalerCacheSize; ++i) {
-        if (s_marshaler_cache[i].marshaler_instance == marshaler) {
-            method_n2m = s_marshaler_cache[i].method_n2m;
-            break;
-        }
-    }
+    // Find the MarshalNativeToManaged method from cache (under lock).
+    LockMarshalerCache();
+    const uint32_t slot = FindMarshalerSlotLocked(marshaler);
+    const MethodInfoHandle method_n2m = (slot < kMarshalerCacheSize)
+        ? s_marshaler_cache[slot].method_n2m : 0;
+    UnlockMarshalerCache();
     if (method_n2m == 0) return 0;
 
     // Call marshaler.MarshalNativeToManaged(native_ptr).
@@ -1054,14 +1092,12 @@ CHAOS_IL2CPP_INTPTR CustomMarshalerManagedToNative(
     void* marshaler = ResolveOrCreateMarshaler(rs, ts, abi, cookie_utf8);
     if (marshaler == nullptr) return managed_obj;
 
-    // Find the MarshalManagedToNative method from cache.
-    MethodInfoHandle method_m2n = 0;
-    for (uint32_t i = 0; i < kMarshalerCacheSize; ++i) {
-        if (s_marshaler_cache[i].marshaler_instance == marshaler) {
-            method_m2n = s_marshaler_cache[i].method_m2n;
-            break;
-        }
-    }
+    // Find the MarshalManagedToNative method from cache (under lock).
+    LockMarshalerCache();
+    const uint32_t slot = FindMarshalerSlotLocked(marshaler);
+    const MethodInfoHandle method_m2n = (slot < kMarshalerCacheSize)
+        ? s_marshaler_cache[slot].method_m2n : 0;
+    UnlockMarshalerCache();
     if (method_m2n == 0) return managed_obj;
 
     // Call marshaler.MarshalManagedToNative(managed_obj).
@@ -1071,19 +1107,6 @@ CHAOS_IL2CPP_INTPTR CustomMarshalerManagedToNative(
     abi->method_invoke(rs, ts, method_m2n, marshaler, args, 1,
                        &result, sizeof(CHAOS_IL2CPP_INTPTR), &exc);
     return result;
-}
-
-// ── Cache lookup helper ──────────────────────────────────────────────────
-
-/// Find the cache slot containing the given marshaler instance.
-/// Returns the slot index, or kMarshalerCacheSize if not found.
-static uint32_t FindMarshalerSlot(void* marshaler) noexcept {
-    for (uint32_t i = 0; i < kMarshalerCacheSize; ++i) {
-        if (s_marshaler_cache[i].marshaler_instance == marshaler) {
-            return i;
-        }
-    }
-    return kMarshalerCacheSize;
 }
 
 // ── Cleanup support (V4) ─────────────────────────────────────────────────
@@ -1103,14 +1126,18 @@ void CustomMarshalerCleanupNativeData(
     void* marshaler = ResolveOrCreateMarshaler(rs, ts, abi, cookie_utf8);
     if (marshaler == nullptr) return;
 
-    const uint32_t slot = FindMarshalerSlot(marshaler);
-    if (slot >= kMarshalerCacheSize) return;
-    if (s_marshaler_cache[slot].method_cnn == 0) return;
+    // Look up cached method handles (under lock).
+    LockMarshalerCache();
+    const uint32_t slot = FindMarshalerSlotLocked(marshaler);
+    const MethodInfoHandle method = (slot < kMarshalerCacheSize)
+        ? s_marshaler_cache[slot].method_cnn : 0;
+    UnlockMarshalerCache();
+    if (method == 0) return;
 
     // Call marshaler.CleanUpNativeData(native_data).
     void* const args[] = { &native_data };
     ExceptionHandle exc = nullptr;
-    abi->method_invoke(rs, ts, s_marshaler_cache[slot].method_cnn,
+    abi->method_invoke(rs, ts, method,
                        marshaler, args, 1, nullptr, 0, &exc);
 }
 
@@ -1129,14 +1156,18 @@ void CustomMarshalerCleanupManagedData(
     void* marshaler = ResolveOrCreateMarshaler(rs, ts, abi, cookie_utf8);
     if (marshaler == nullptr) return;
 
-    const uint32_t slot = FindMarshalerSlot(marshaler);
-    if (slot >= kMarshalerCacheSize) return;
-    if (s_marshaler_cache[slot].method_cmm == 0) return;
+    // Look up cached method handles (under lock).
+    LockMarshalerCache();
+    const uint32_t slot = FindMarshalerSlotLocked(marshaler);
+    const MethodInfoHandle method = (slot < kMarshalerCacheSize)
+        ? s_marshaler_cache[slot].method_cmm : 0;
+    UnlockMarshalerCache();
+    if (method == 0) return;
 
     // Call marshaler.CleanUpManagedData(managed_obj).
     void* const args[] = { &managed_obj };
     ExceptionHandle exc = nullptr;
-    abi->method_invoke(rs, ts, s_marshaler_cache[slot].method_cmm,
+    abi->method_invoke(rs, ts, method,
                        marshaler, args, 1, nullptr, 0, &exc);
 }
 
@@ -1146,10 +1177,10 @@ void CustomMarshalerCleanupManagedData(
 /// marshaler instances (which reference types from the unloaded module) are
 /// evicted. Subsequent P/Invoke calls will re-resolve marshalers via GetInstance.
 ///
-/// Thread-safety: does NOT synchronise with concurrent ResolveOrCreateMarshaler.
-/// Caller must ensure no P/Invoke dispatch is in-flight during module teardown
-/// (the caller already holds the module-unload safepoint).
+/// Thread-safety: synchronized via s_marshaler_cache_lock. Safe to call
+/// concurrently with ResolveOrCreateMarshaler and all CustomMarshaler* functions.
 void ClearMarshalerCache() noexcept {
+    LockMarshalerCache();
     for (uint32_t i = 0; i < kMarshalerCacheSize; ++i) {
         s_marshaler_cache[i].cookie[0] = '\0';
         s_marshaler_cache[i].marshaler_instance = nullptr;
@@ -1158,6 +1189,7 @@ void ClearMarshalerCache() noexcept {
         s_marshaler_cache[i].method_cnn = 0;
         s_marshaler_cache[i].method_cmm = 0;
     }
+    UnlockMarshalerCache();
 }
 
 // ── HRESULT exception helpers (V1) ────────────────────────────────────

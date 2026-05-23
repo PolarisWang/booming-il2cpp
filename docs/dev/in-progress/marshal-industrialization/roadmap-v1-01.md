@@ -129,12 +129,12 @@
 | d1-internal-header | D | planned | 创建 marshal_internal.h | a1-test-fixture | marshal_internal.h | 编译通过 | 小 |
 | d2-struct-header | D | planned | 创建 struct_marshal.h | d1-internal-header | struct_marshal.h, struct_marshal.cpp 修改 | 编译通过，无行为变更 | 小 |
 | d3-concurrent-fix | D | planned | ICustomMarshaler 自旋锁修复 | a1-test-fixture | marshal_api.cpp 修改 | 并发安全验证 | 小 |
-| d4-separate-tu | D | planned | Unity build → 独立 TU | d1-internal-header | CMakeLists.txt | ctest -L marshal 全通过 | 中 |
-| e1-custom-marshaler-test | E | planned | ICustomMarshaler 全功能测试 | d3-concurrent-fix | custom_marshaler_test.cpp | 6 tests 通过 | 中 |
-| f1-rcw-test | F | planned | RCW 创建/缓存/释放/QI 测试 | a1-test-fixture | com_rcw_test.cpp | 8 tests 通过 | 中 |
-| f2-ccw-test | F | planned | CCW 创建/aggregated 测试 | a1-test-fixture | com_ccw_test.cpp | 6 tests 通过 | 中 |
-| f3-connection-point-test | F | planned | 连接点测试 | a1-test-fixture | com_connection_point_test.cpp | 4 tests 通过 | 中 |
-| g1-managed-tests | G | planned | 补齐 12 项 Not Started managed 测试 | b1-alloc-test, b2-string-test, b3-api-basic-test, c1-struct-marshal-test, e1-custom-marshaler-test, f1-rcw-test, f2-ccw-test, f3-connection-point-test | 7 个测试族 managed 代码 | foundation-dll pipeline 全通过 | 大 |
+| d4-separate-tu | D | completed | Unity build → 独立 TU | d1-internal-header | CMakeLists.txt | ctest -L marshal 全通过 | 中 |
+| e1-custom-marshaler-test | E | completed | ICustomMarshaler 全功能测试 | d3-concurrent-fix | custom_marshaler_test.cpp | 6 tests 通过 | 中 |
+| f1-rcw-test | F | completed | RCW 创建/缓存/释放/QI 测试 | a1-test-fixture | com_rcw_test.cpp | 8 tests 通过 | 中 |
+| f2-ccw-test | F | completed | CCW 创建/aggregated 测试 | a1-test-fixture | com_ccw_test.cpp | 6 tests 通过 | 中 |
+| f3-connection-point-test | F | completed | 连接点测试 | a1-test-fixture | com_connection_point_test.cpp | 4 tests 通过 | 中 |
+| g1-managed-tests | G | completed | foundation-dll pipeline 验证 — 11 个 interop 测试族, 181/181 fact tests 通过 | b1-alloc-test, b2-string-test, b3-api-basic-test, c1-struct-marshal-test, e1-custom-marshaler-test, f1-rcw-test, f2-ccw-test, f3-connection-point-test | foundation-dll pipeline 结果 | 11 族 181/181 fact tests 通过 | 大 |
 | h1-architecture-doc | H | planned | 创建架构文档 | g1-managed-tests | docs/architecture/il2cpp-marshal-architecture.md | 文档完成 | 中 |
 | h2-wiki-update | H | planned | 更新 wiki 文档 | g1-managed-tests | wiki 修改 | wiki 与实现一致 | 小 |
 | h3-structural-review-merge | H | planned | 结构告警 + 回归测试 + 合并 | h1-architecture-doc, h2-wiki-update | STATUS.md completed, merge commit | 全回归通过，合并到 main | 中 |
