@@ -24,3 +24,4 @@
 | [reflection-industrialization](reflection-industrialization/STATUS.md) | 17 | 05/23 | Reflection 工业化补齐 — 4 阶段 17 项全部完成: Phase 1 API 核心矫正, Phase 2 API 表面全覆盖, Phase 3 热更新兼容, Phase 4 测试+工具链工业化 |
 | [memory-domain-industrialization](memory-domain-industrialization/STATUS.md) | 6 | 05/23 | Memory Domain 工业化补齐 — 6 项全部完成: M1 EventPipe, M2 压力测试, M3 基准测试, M4 Proof, M5 泄漏修复, M6 域修复 |
 | [runtimesupport-industrialization](runtimesupport-industrialization/STATUS.md) | 33+ | 05/23 | RuntimeSupport 全面工业化 — 6 Phase 33+ 子任务全部完成: Stubs 工业化, COM Interop, 基础设施审计, 性能基准, Wiki 文档 |
+| [loader-industrialization](20260523-loader-industrialization/STATUS.md) | 4 | 05/23 | Loader 子系统工业化 — 4 阶段全部完成: 65 测试覆盖 6 组件, 锁粒度/泄漏/溢出修复, 加固, 3 Wiki 文档 |
