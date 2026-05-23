@@ -1,8 +1,9 @@
-# Build smoke test + GC core tests + interpreter tests + threading tests + metadata tests
+# Build smoke test + GC core tests + interpreter tests + threading tests + metadata tests + runtime_stubs tests
 add_subdirectory(gc)
 add_subdirectory(interpreter)
 add_subdirectory(threading)
 add_subdirectory(metadata)
+add_subdirectory(runtime_stubs)
 
 # Smoke test for build verification
 add_chaos_test(smoke_test smoke_test.cpp
@@ -61,6 +62,14 @@ add_chaos_test(generic_instantiation_test generic_instantiation_test.cpp metadat
     LABELS "unit;core"
 )
 
+# IE: Instantiation engine comprehensive tests (BuildClosedDescriptor, PrecacheCallTarget,
+#     AllocateRuntimeToken, QueryAotMethod, concurrency, reverse-index consistency)
+add_chaos_test(instantiation_engine_test instantiation_engine_test.cpp
+    gc/gc_test_stubs.cpp metadata/metadata_test_stubs.cpp
+    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    LABELS "unit;core"
+)
+
 # B1 — Blittable benchmark (labelled "benchmark", excluded from default run)
 add_chaos_test(blittable_benchmark blittable_benchmark_test.cpp
     LIBS ${CHAOS_COMMON_TEST_LIBS}
@@ -80,6 +89,34 @@ set(MARSHAL_TEST_STUBS marshal_test_stubs.cpp)
 
 # M0 — Marshal fixture smoke test (Phase A: test infrastructure verification)
 add_chaos_test(marshal_smoke marshal_smoke_test.cpp
+    ${MARSHAL_TEST_STUBS}
+    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    LABELS "unit;marshal"
+)
+
+# B1 — Marshal alloc/free/read/write tests (Phase B: core marshal functionality)
+add_chaos_test(marshal_alloc marshal_alloc_test.cpp
+    ${MARSHAL_TEST_STUBS}
+    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    LABELS "unit;marshal"
+)
+
+# B2 — Marshal string tests (Phase B: core marshal functionality)
+add_chaos_test(marshal_string marshal_string_test.cpp
+    ${MARSHAL_TEST_STUBS}
+    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    LABELS "unit;marshal"
+)
+
+# B3 — Marshal API basic tests (Phase B: core marshal functionality)
+add_chaos_test(marshal_api_basic marshal_api_basic_test.cpp
+    ${MARSHAL_TEST_STUBS}
+    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    LABELS "unit;marshal"
+)
+
+# C1 — Struct marshalling descriptor tests (Phase C: struct marshalling)
+add_chaos_test(struct_marshal struct_marshal_test.cpp
     ${MARSHAL_TEST_STUBS}
     LIBS ${CHAOS_COMMON_TEST_LIBS}
     LABELS "unit;marshal"
