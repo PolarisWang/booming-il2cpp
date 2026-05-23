@@ -1,9 +1,19 @@
 #include "unwind_info.h"
 #include "code_buffer.h"
 
+#include <cstddef>
 #include <cstdlib>
 
 namespace chaos::il2cpp::codegen {
+
+// ── Cross-platform layout assertions ──────────────────────────────────
+// These static_asserts verify that the compiler's struct layout matches
+// the assumptions made by the manual byte-level emission below.  If the
+// assertion fires on a new platform or toolchain, the emission logic must
+// be adjusted for the target ABI.
+static_assert(sizeof(void*) == 8, "x64 is required — only 64-bit targets are supported");
+static_assert(offsetof(UnwindCode, code_offset) == 0,
+              "UnwindCode.code_offset must be at offset 0 for Win64 UNWIND_CODE layout");
 
 #if defined(_WIN64)
 
