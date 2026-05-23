@@ -100,7 +100,7 @@ dispatch_model: hybrid
 active_batches: [P2B]
 completed_batches: [P1A, P1B, P1C, P1-merge, P2A, P2C]
 terminals_active:
-  - terminal-1: B-P2-1 (in-progress)
+  - terminal-1: B-P2-1 (completed)
 pending_batches: [P2B-2, P2-merge, P3A, P3B, P3C]
 recommended_next_child: B-P2-2
 ```
@@ -119,11 +119,11 @@ recommended_next_child: B-P2-2
 | **A-P2-1** | P2 | **completed** | FT | G3 ABI ✅ + G4 flat fallback ✅ (2 边缘 case 剩余) |
 | **A-P2-2** | P2 | **completed** | FT | G2 Virtual/interface dispatch ✅ (IfaceMap 接口分派) |
 | **A-P2-3** | P2 | **completed** | FT | G5 Metadata closure ✅ (token/returnType/paramCount, Scriban 模板修复, 快照基线更新) |
-| **B-P2-1** | P2 | **in-progress** | HT | T2 OSR deopt (溢出→OSR — CaptureNativeFrame + FastExecute 恢复) |
-| **B-P2-2** | P2 | **ready** | HT | T4 PIC + T3 TLAB inline |
+| **B-P2-1** | P2 | **completed** | HT | T2 OSR deopt ✅ (Step A.5 CaptureNativeFrame → FastExecute, 构建通过) |
+| **B-P2-2** | P2 | **completed** | HT | T4 PIC ✅ (inline monomorphic CallVirt dispatch) + T3 TLAB ✅ (已存在) |
 | **C-P2-1** | P2 | **completed** | HT | C0(A3) verification pipeline ✅ (13 阶段全通, CI 更新) |
-| **C-P2-2** | P2 | **in-progress** | HT | V1 first 50 families (6/46 passed, 1 audit failure) |
-| **C-P2-3** | P2 | **ready** | HT | V2 Coverage gate |
+| **C-P2-2** | P2 | **in-progress** | HT | V1 first 50 families (6/46 passed, 1 audit failure) — restart needed |
+| **C-P2-3** | P2 | **completed** | HT | V2 Coverage gate ✅ (CI workflow + coverlet.runsettings + baseline doc) |
 | A-P3-1 | P3 | planned | FT | G6 Generics/sharing |
 | A-P3-2 | P3 | planned | FT | G7 Goto elimination + G8 D3-C P1 |
 | A-P3-3 | P3 | planned | FT | G9-G12 remaining gaps |

@@ -1,4 +1,4 @@
-name: Codegen Regression
+name: Codegen & Common Regression
 
 on:
   pull_request:
@@ -6,8 +6,9 @@ on:
       - 'src/managed/Chaos.IL2CPP.Generator/**'
       - 'src/native/codegen/**'
       - 'src/native/interpreter/**'
+      - 'src/native/common/**'
       - 'testing/snapshots/**'
-      - 'testing/src/native/codegen/**'
+      - 'testing/src/native/**'
       - 'contracts/native/v0/**'
   push:
     branches: [main]
@@ -15,8 +16,9 @@ on:
       - 'src/managed/Chaos.IL2CPP.Generator/**'
       - 'src/native/codegen/**'
       - 'src/native/interpreter/**'
+      - 'src/native/common/**'
       - 'testing/snapshots/**'
-      - 'testing/src/native/codegen/**'
+      - 'testing/src/native/**'
       - 'contracts/native/v0/**'
 
 jobs:
@@ -51,6 +53,21 @@ jobs:
       - name: Run Snapshot Tests
         run: dotnet test tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests/ --configuration Release --no-restore -v n
 
+      - name: Code Coverage Collection
+        run: |
+          dotnet test tests/managed/Chaos.IL2CPP.CodeGen.Tests/Chaos.IL2CPP.CodeGen.Tests.csproj `
+            --configuration Release `
+            --settings tests/managed/Chaos.IL2CPP.CodeGen.Tests/coverlet.runsettings `
+            /p:CollectCoverage=true `
+            /p:CoverletOutputFormat=cobertura `
+            /p:CoverletOutput=coverage-results/coverage.cobertura.xml
+
+      - name: Upload Coverage Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: codegen-coverage-report
+          path: coverage-results/
+
       - name: Configure CMake (windows-x64-reference)
         run: |
           cmake -S . -B build/native -G "Visual Studio 17 2022" `
@@ -70,6 +87,9 @@ jobs:
 
       - name: Run Codegen Native Tests
         run: ctest --test-dir testing/artifacts/run/native-test-build -R "test_codegen_native|test_codegen_abi|test_codegen_il_smoke" --output-on-failure -V
+
+      - name: Run Common Native Tests
+        run: ctest --test-dir testing/artifacts/run/native-test-build -R "test_common" --output-on-failure
 
       - name: Run Codegen Foundation-DLL Verification
         run: |
