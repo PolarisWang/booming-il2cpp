@@ -52,6 +52,18 @@ static constexpr uint32_t kBoxPoolSize = 8;
 static thread_local interpreter::InterpreterObject* tls_box_pool[kBoxPoolSize] = {};
 static thread_local uint32_t tls_box_pool_count = 0;
 
+/// Domain-aware destructor + free for InterpreterObject (Handle_NewObj).
+static void DomainFreeInterpreterObject(void* p) noexcept {
+    static_cast<interpreter::InterpreterObject*>(p)->~InterpreterObject();
+    CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(p);
+}
+
+/// Domain-aware destructor + free for ArrayStorage (Handle_NewArr).
+static void DomainFreeArrayStorage(void* p) noexcept {
+    static_cast<interpreter::ArrayStorage*>(p)->~ArrayStorage();
+    CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(p);
+}
+
 /// Return a boxed InterpreterObject to the TLS pool (or free if pool full).
 static void ReturnBoxToPool(void* p) noexcept {
     auto* obj = static_cast<interpreter::InterpreterObject*>(p);
@@ -63,7 +75,7 @@ static void ReturnBoxToPool(void* p) noexcept {
         tls_box_pool[tls_box_pool_count++] = obj;
     } else {
         obj->~InterpreterObject();
-        CHAOS_IL2CPP_FREE(obj);
+        CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(obj);
     }
 }
 
@@ -77,7 +89,7 @@ static interpreter::InterpreterObject* AcquireBoxedObject() noexcept {
         return obj;
     }
     auto* obj = static_cast<interpreter::InterpreterObject*>(
-        CHAOS_IL2CPP_MALLOC(sizeof(interpreter::InterpreterObject)));
+        CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE(sizeof(interpreter::InterpreterObject)));
     if (obj == nullptr) return nullptr;
     ::new (obj) interpreter::InterpreterObject();
     return obj;
@@ -153,10 +165,14 @@ static int FindEnclosingFinally(const interpreter::SEHClause* clauses,
 }
 
 // ── SEH helper: find innermost try clause covering idx with catch handler ──
+// upper_excl: exclusive upper bound for the reverse scan (for resumed search
+// after a filter rejected the exception).  -1 = scan all clauses.
 static int FindEnclosingCatch(const interpreter::SEHClause* clauses,
                                uint32_t clause_count,
-                               uint32_t idx) noexcept {
-    for (int i = static_cast<int>(clause_count) - 1; i >= 0; --i) {
+                               uint32_t idx,
+                               int upper_excl = -1) noexcept {
+    int upper = (upper_excl < 0) ? static_cast<int>(clause_count) : upper_excl;
+    for (int i = upper - 1; i >= 0; --i) {
         const auto& clause = clauses[static_cast<uint32_t>(i)];
         if (idx >= clause.try_start_idx && idx < clause.try_end_idx) {
             const auto flags = static_cast<uint32_t>(clause.flags);
@@ -195,6 +211,69 @@ static int SetupFinallyUnwind(FastFrame& frame,
         }
     }
     return frame.unwind_finally_count;
+}
+
+// ── SEH helper: dispatch an in-flight exception to the next handler ──
+// Returns true if a handler (or filter) was selected and frame.pc was set.
+// Returns false if no handler exists (caller must propagate via threw_exception).
+//
+// throw_pc: the pc at which the exception was thrown (for finally collection)
+// upper_excl: exclusive upper bound for the search (resume after filter reject)
+static bool DispatchExceptionToHandler(FastFrame& frame,
+                                       void* exc_obj,
+                                       uint32_t throw_pc,
+                                       int upper_excl) noexcept {
+    int catch_idx = FindEnclosingCatch(frame.seh_clauses, frame.seh_clause_count,
+                                        throw_pc, upper_excl);
+    if (catch_idx < 0) return false;
+
+    const auto& clause = frame.seh_clauses[static_cast<uint32_t>(catch_idx)];
+    const auto cflags = static_cast<uint32_t>(clause.flags);
+
+    if (cflags == static_cast<uint32_t>(interpreter::SEHFlags::Filter)) {
+        // Filter clause: push exception, transfer to filter expression.
+        // EndFilter then commits or rejects.
+        frame.filter_evaluating = true;
+        frame.filter_active_clause = catch_idx;
+        frame.filter_search_resume_idx = catch_idx;  // exclude on reject
+        frame.filter_throw_pc = throw_pc;
+        frame.exception_obj_val = exc_obj;
+        if (frame.sp >= FastFrame::kMaxStack) {
+            frame.threw_exception = true;
+            frame.pc = 9999;
+            return true;
+        }
+        frame.stack[frame.sp] = reinterpret_cast<uint64_t>(exc_obj);
+        frame.stack_tags[frame.sp] = static_cast<uint8_t>(interpreter::ValueTag::ObjectRef);
+        ++frame.sp;
+        frame.pc = static_cast<uint32_t>(clause.filter_start_idx);
+        return true;
+    }
+
+    // Plain catch: walk finally/fault unwind list before entering the handler.
+    SetupFinallyUnwind(frame, frame.seh_clauses, frame.seh_clause_count,
+                       catch_idx, throw_pc);
+    if (frame.unwind_finally_count > 0) {
+        frame.exception_in_flight = true;
+        frame.unwind_catch_clause = static_cast<int32_t>(catch_idx);
+        frame.unwind_finally_current = 0;
+        int first_finally = frame.unwind_finally_list[0];
+        frame.pc = static_cast<uint32_t>(
+            frame.seh_clauses[static_cast<uint32_t>(first_finally)].handler_start_idx);
+        frame.exception_obj_val = exc_obj;
+    } else {
+        frame.pc = static_cast<uint32_t>(clause.handler_start_idx);
+        if (frame.sp >= FastFrame::kMaxStack) {
+            frame.threw_exception = true;
+            frame.pc = 9999;
+            return true;
+        }
+        frame.stack[frame.sp] = reinterpret_cast<uint64_t>(exc_obj);
+        frame.stack_tags[frame.sp] = static_cast<uint8_t>(interpreter::ValueTag::ObjectRef);
+        ++frame.sp;
+        frame.exception_obj_val = exc_obj;
+    }
+    return true;
 }
 
 // ── Op Handlers ────────────────────────────────────────────────────────
@@ -328,6 +407,20 @@ static void Handle_Dup(FastFrame& frame, const interpreter::IRInstruction&) noex
     ++frame.pc;
 }
 
+// ── PGO branch profile recording (T5 collection) ──────────────────────────
+static void RecordBranch(FastFrame& frame, bool taken) noexcept {
+    using PM = chaos::il2cpp::runtime_core::PatchMethod;
+    auto* pm = static_cast<PM*>(frame.patch_method);
+    if (pm == nullptr) return;
+    uint32_t idx = frame.pc;
+    auto* profiles = static_cast<volatile chaos::il2cpp::runtime_core::BranchProfile*>(pm->branch_profiles);
+    if (profiles == nullptr) return;
+    if (taken)
+        profiles[idx].taken_count++;
+    else
+        profiles[idx].not_taken_count++;
+}
+
 static void Handle_Br(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_Br");
     frame.pc = static_cast<uint32_t>(instr.branch_target);
@@ -338,7 +431,9 @@ static void Handle_BrTrue(FastFrame& frame, const interpreter::IRInstruction& in
     if (frame.sp == 0) { frame.threw_exception = true; frame.pc = 9999; return; }
     int32_t val = static_cast<int32_t>(frame.stack[frame.sp - 1]);
     --frame.sp;
-    if (val != 0) {
+    bool taken = (val != 0);
+    RecordBranch(frame, taken);
+    if (taken) {
         frame.pc = static_cast<uint32_t>(instr.branch_target);
     } else {
         ++frame.pc;
@@ -350,7 +445,9 @@ static void Handle_BrFalse(FastFrame& frame, const interpreter::IRInstruction& i
     if (frame.sp == 0) { frame.threw_exception = true; frame.pc = 9999; return; }
     int32_t val = static_cast<int32_t>(frame.stack[frame.sp - 1]);
     --frame.sp;
-    if (val == 0) {
+    bool taken = (val == 0);
+    RecordBranch(frame, taken);
+    if (taken) {
         frame.pc = static_cast<uint32_t>(instr.branch_target);
     } else {
         ++frame.pc;
@@ -363,7 +460,9 @@ static void Handle_Beq(FastFrame& frame, const interpreter::IRInstruction& instr
     uint64_t r = frame.stack[frame.sp - 1];
     uint64_t l = frame.stack[frame.sp - 2];
     frame.sp -= 2;
-    if (l == r) {
+    bool taken = (l == r);
+    RecordBranch(frame, taken);
+    if (taken) {
         frame.pc = static_cast<uint32_t>(instr.branch_target);
     } else {
         ++frame.pc;
@@ -376,7 +475,9 @@ static void Handle_Blt(FastFrame& frame, const interpreter::IRInstruction& instr
     int32_t r = static_cast<int32_t>(frame.stack[frame.sp - 1]);
     int32_t l = static_cast<int32_t>(frame.stack[frame.sp - 2]);
     frame.sp -= 2;
-    if (l < r) {
+    bool taken = (l < r);
+    RecordBranch(frame, taken);
+    if (taken) {
         frame.pc = static_cast<uint32_t>(instr.branch_target);
     } else {
         ++frame.pc;
@@ -389,7 +490,9 @@ static void Handle_Bgt(FastFrame& frame, const interpreter::IRInstruction& instr
     int32_t r = static_cast<int32_t>(frame.stack[frame.sp - 1]);
     int32_t l = static_cast<int32_t>(frame.stack[frame.sp - 2]);
     frame.sp -= 2;
-    if (l > r) {
+    bool taken = (l > r);
+    RecordBranch(frame, taken);
+    if (taken) {
         frame.pc = static_cast<uint32_t>(instr.branch_target);
     } else {
         ++frame.pc;
@@ -402,7 +505,9 @@ static void Handle_Ble(FastFrame& frame, const interpreter::IRInstruction& instr
     int32_t r = static_cast<int32_t>(frame.stack[frame.sp - 1]);
     int32_t l = static_cast<int32_t>(frame.stack[frame.sp - 2]);
     frame.sp -= 2;
-    if (l <= r) {
+    bool taken = (l <= r);
+    RecordBranch(frame, taken);
+    if (taken) {
         frame.pc = static_cast<uint32_t>(instr.branch_target);
     } else {
         ++frame.pc;
@@ -415,7 +520,9 @@ static void Handle_Bge(FastFrame& frame, const interpreter::IRInstruction& instr
     int32_t r = static_cast<int32_t>(frame.stack[frame.sp - 1]);
     int32_t l = static_cast<int32_t>(frame.stack[frame.sp - 2]);
     frame.sp -= 2;
-    if (l >= r) {
+    bool taken = (l >= r);
+    RecordBranch(frame, taken);
+    if (taken) {
         frame.pc = static_cast<uint32_t>(instr.branch_target);
     } else {
         ++frame.pc;
@@ -428,7 +535,9 @@ static void Handle_BneUn(FastFrame& frame, const interpreter::IRInstruction& ins
     uint32_t r = static_cast<uint32_t>(frame.stack[frame.sp - 1]);
     uint32_t l = static_cast<uint32_t>(frame.stack[frame.sp - 2]);
     frame.sp -= 2;
-    if (l != r) {
+    bool taken = (l != r);
+    RecordBranch(frame, taken);
+    if (taken) {
         frame.pc = static_cast<uint32_t>(instr.branch_target);
     } else {
         ++frame.pc;
@@ -441,7 +550,9 @@ static void Handle_BgeUn(FastFrame& frame, const interpreter::IRInstruction& ins
     uint32_t r = static_cast<uint32_t>(frame.stack[frame.sp - 1]);
     uint32_t l = static_cast<uint32_t>(frame.stack[frame.sp - 2]);
     frame.sp -= 2;
-    if (l >= r) {
+    bool taken = (l >= r);
+    RecordBranch(frame, taken);
+    if (taken) {
         frame.pc = static_cast<uint32_t>(instr.branch_target);
     } else {
         ++frame.pc;
@@ -454,7 +565,9 @@ static void Handle_BgtUn(FastFrame& frame, const interpreter::IRInstruction& ins
     uint32_t r = static_cast<uint32_t>(frame.stack[frame.sp - 1]);
     uint32_t l = static_cast<uint32_t>(frame.stack[frame.sp - 2]);
     frame.sp -= 2;
-    if (l > r) {
+    bool taken = (l > r);
+    RecordBranch(frame, taken);
+    if (taken) {
         frame.pc = static_cast<uint32_t>(instr.branch_target);
     } else {
         ++frame.pc;
@@ -467,7 +580,9 @@ static void Handle_BleUn(FastFrame& frame, const interpreter::IRInstruction& ins
     uint32_t r = static_cast<uint32_t>(frame.stack[frame.sp - 1]);
     uint32_t l = static_cast<uint32_t>(frame.stack[frame.sp - 2]);
     frame.sp -= 2;
-    if (l <= r) {
+    bool taken = (l <= r);
+    RecordBranch(frame, taken);
+    if (taken) {
         frame.pc = static_cast<uint32_t>(instr.branch_target);
     } else {
         ++frame.pc;
@@ -480,7 +595,9 @@ static void Handle_BltUn(FastFrame& frame, const interpreter::IRInstruction& ins
     uint32_t r = static_cast<uint32_t>(frame.stack[frame.sp - 1]);
     uint32_t l = static_cast<uint32_t>(frame.stack[frame.sp - 2]);
     frame.sp -= 2;
-    if (l < r) {
+    bool taken = (l < r);
+    RecordBranch(frame, taken);
+    if (taken) {
         frame.pc = static_cast<uint32_t>(instr.branch_target);
     } else {
         ++frame.pc;
@@ -766,10 +883,10 @@ static void Handle_StSFld(FastFrame& frame, const interpreter::IRInstruction& in
 static void Handle_NewObj(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_NewObj");
     auto* storage = static_cast<interpreter::InterpreterObject*>(
-        CHAOS_IL2CPP_MALLOC(sizeof(interpreter::InterpreterObject)));
+        CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE(sizeof(interpreter::InterpreterObject)));
     if (storage == nullptr) { frame.threw_exception = true; frame.pc = 9999; return; }
     ::new (storage) interpreter::InterpreterObject();
-    frame.Track(storage, frame.Dtor<interpreter::InterpreterObject>);
+    frame.TrackPool(storage, DomainFreeInterpreterObject);
     uint32_t field_count = static_cast<uint32_t>(
         instr.secondary_index == 0u ? 1u : instr.secondary_index);
     storage->fields.resize(field_count);
@@ -783,10 +900,10 @@ static void Handle_NewArr(FastFrame& frame, const interpreter::IRInstruction&) n
     if (frame.sp < 1) { frame.threw_exception = true; frame.pc = 9999; return; }
     uint32_t len = static_cast<uint32_t>(frame.stack[--frame.sp]);
     auto* arr = static_cast<interpreter::ArrayStorage*>(
-        CHAOS_IL2CPP_MALLOC(sizeof(interpreter::ArrayStorage)));
+        CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE(sizeof(interpreter::ArrayStorage)));
     if (arr == nullptr) { frame.threw_exception = true; frame.pc = 9999; return; }
     ::new (arr) interpreter::ArrayStorage();
-    frame.Track(arr, frame.Dtor<interpreter::ArrayStorage>);
+    frame.TrackPool(arr, DomainFreeArrayStorage);
     arr->elements.resize(len);
     frame.PushObj(arr);
     ++frame.pc;
@@ -951,7 +1068,7 @@ static void Handle_Call_DoRaw(FastFrame& frame,
         if (dret.tag == static_cast<uint8_t>(interpreter::ValueTag::Struct) &&
             dret.struct_data != nullptr) {
             frame.stack[frame.sp] = reinterpret_cast<uint64_t>(dret.struct_data);
-            frame.Track(dret.struct_data, [](void* p) noexcept { std::free(p); });
+            frame.TrackPool(dret.struct_data, [](void* p) noexcept { CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(p); });
         } else {
             frame.stack[frame.sp] = dret.value;
         }
@@ -1249,29 +1366,7 @@ static void Handle_Throw(FastFrame& frame, const interpreter::IRInstruction& ins
 
     // Phase 1: Search for a matching catch handler (innermost first).
     if (frame.seh_clauses != nullptr && frame.seh_clause_count > 0) {
-        int catch_idx = FindEnclosingCatch(frame.seh_clauses, frame.seh_clause_count, frame.pc);
-        if (catch_idx >= 0) {
-            // Found a catch handler.  Build the finally unwind list.
-            SetupFinallyUnwind(frame, frame.seh_clauses, frame.seh_clause_count, catch_idx, frame.pc);
-            const auto& catch_clause = frame.seh_clauses[static_cast<uint32_t>(catch_idx)];
-
-            if (frame.unwind_finally_count > 0) {
-                // Phase 2: start unwinding through finally/fault handlers.
-                frame.exception_in_flight = true;
-                frame.unwind_catch_clause = static_cast<int32_t>(catch_idx);
-                frame.unwind_finally_current = 0;
-                int first_finally = frame.unwind_finally_list[0];
-                frame.pc = static_cast<uint32_t>(frame.seh_clauses[static_cast<uint32_t>(first_finally)].handler_start_idx);
-                // Store exception for later delivery to catch.
-                frame.exception_obj_val = exc_obj;
-            } else {
-                // No finally blocks — jump directly to catch handler.
-                frame.pc = static_cast<uint32_t>(catch_clause.handler_start_idx);
-                // Push exception object onto stack for catch handler.
-                frame.stack[frame.sp] = reinterpret_cast<uint64_t>(exc_obj);
-                frame.stack_tags[frame.sp] = static_cast<uint8_t>(interpreter::ValueTag::ObjectRef);
-                ++frame.sp;
-            }
+        if (DispatchExceptionToHandler(frame, exc_obj, frame.pc, /*upper_excl=*/-1)) {
             return;
         }
     }
@@ -1300,26 +1395,9 @@ static void Handle_Rethrow(FastFrame& frame, const interpreter::IRInstruction& i
         if (exc_obj == nullptr) { frame.threw_exception = true; frame.pc = 9999; return; }
 
         // Walk up: search for catch handlers OUTSIDE the current handler's try region.
-        // We re-use FindEnclosingCatch which naturally finds enclosing handlers
-        // since pc is now past the original try block.
-        int catch_idx = FindEnclosingCatch(frame.seh_clauses, frame.seh_clause_count, frame.pc);
-        if (catch_idx >= 0) {
-            SetupFinallyUnwind(frame, frame.seh_clauses, frame.seh_clause_count, catch_idx, frame.pc);
-            const auto& catch_clause = frame.seh_clauses[static_cast<uint32_t>(catch_idx)];
-
-            if (frame.unwind_finally_count > 0) {
-                frame.exception_in_flight = true;
-                frame.unwind_catch_clause = static_cast<int32_t>(catch_idx);
-                frame.unwind_finally_current = 0;
-                int first_finally = frame.unwind_finally_list[0];
-                frame.pc = static_cast<uint32_t>(frame.seh_clauses[static_cast<uint32_t>(first_finally)].handler_start_idx);
-                frame.exception_obj_val = exc_obj;
-            } else {
-                frame.pc = static_cast<uint32_t>(catch_clause.handler_start_idx);
-                frame.stack[frame.sp] = reinterpret_cast<uint64_t>(exc_obj);
-                frame.stack_tags[frame.sp] = static_cast<uint8_t>(interpreter::ValueTag::ObjectRef);
-                ++frame.sp;
-            }
+        // We re-use DispatchExceptionToHandler so Filter clauses are evaluated
+        // through their filter expressions instead of being treated as catch-all.
+        if (DispatchExceptionToHandler(frame, exc_obj, frame.pc, /*upper_excl=*/-1)) {
             return;
         }
     }
@@ -1387,10 +1465,72 @@ static void Handle_EndFinally(FastFrame& frame, const interpreter::IRInstruction
 
 static void Handle_EndFilter(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_EndFilter");
-    // EndFilter pops the filter result and branches to the catch handler
-    // if the result is non-zero.  For now, treat as EndFinally (continue).
-    // Full filter support would check the filter result and conditionally branch.
-    ++frame.pc;
+    // EndFilter consumes a single i32 from the stack:
+    //   non-zero (1) → exception accepted; transfer to handler
+    //   zero    (0) → exception rejected; resume search outward
+    //
+    // If invoked outside an in-flight filter (defensive), drop the result and
+    // continue sequentially.
+    if (!frame.filter_evaluating) {
+        if (frame.sp > 0) --frame.sp;
+        ++frame.pc;
+        return;
+    }
+
+    // Pop filter result.
+    int32_t filter_result = 0;
+    if (frame.sp > 0) {
+        --frame.sp;
+        filter_result = static_cast<int32_t>(frame.stack[frame.sp]);
+    }
+
+    const int32_t active = frame.filter_active_clause;
+    const int32_t resume_excl = frame.filter_search_resume_idx;
+    const uint32_t throw_pc = frame.filter_throw_pc;
+    void* exc_obj = frame.exception_obj_val;
+
+    frame.filter_evaluating = false;
+    frame.filter_active_clause = -1;
+
+    if (filter_result != 0) {
+        // Filter accepts: enter the handler for the active clause, walking
+        // any nested finally/fault first.
+        if (active < 0 || frame.seh_clauses == nullptr) {
+            frame.threw_exception = true;
+            frame.pc = 9999;
+            return;
+        }
+        const auto& clause = frame.seh_clauses[static_cast<uint32_t>(active)];
+        SetupFinallyUnwind(frame, frame.seh_clauses, frame.seh_clause_count,
+                           active, throw_pc);
+        if (frame.unwind_finally_count > 0) {
+            frame.exception_in_flight = true;
+            frame.unwind_catch_clause = active;
+            frame.unwind_finally_current = 0;
+            int first_finally = frame.unwind_finally_list[0];
+            frame.pc = static_cast<uint32_t>(
+                frame.seh_clauses[static_cast<uint32_t>(first_finally)].handler_start_idx);
+            frame.exception_obj_val = exc_obj;
+        } else {
+            frame.pc = static_cast<uint32_t>(clause.handler_start_idx);
+            if (frame.sp < FastFrame::kMaxStack) {
+                frame.stack[frame.sp] = reinterpret_cast<uint64_t>(exc_obj);
+                frame.stack_tags[frame.sp] = static_cast<uint8_t>(interpreter::ValueTag::ObjectRef);
+                ++frame.sp;
+            }
+        }
+        return;
+    }
+
+    // Filter rejects: resume search excluding the rejected clause.
+    if (frame.seh_clauses != nullptr && frame.seh_clause_count > 0 &&
+        DispatchExceptionToHandler(frame, exc_obj, throw_pc, resume_excl)) {
+        return;
+    }
+    // No further handler — propagate to caller.
+    frame.threw_exception = true;
+    frame.exception_obj_val = exc_obj;
+    frame.pc = 9999;
 }
 
 // ── Extended fast-path handlers ────────────────────────────────────────
@@ -1829,7 +1969,7 @@ static void Handle_Calli(FastFrame& frame, const interpreter::IRInstruction& ins
         if (dret.tag == static_cast<uint8_t>(interpreter::ValueTag::Struct) &&
             dret.struct_data != nullptr) {
             frame.stack[frame.sp] = reinterpret_cast<uint64_t>(dret.struct_data);
-            frame.Track(dret.struct_data, [](void* p) noexcept { std::free(p); });
+            frame.TrackPool(dret.struct_data, [](void* p) noexcept { CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(p); });
         } else {
             frame.stack[frame.sp] = dret.value;
         }
@@ -2134,6 +2274,19 @@ bool FastExecute(FastFrame& frame,
                  uint32_t instr_count) noexcept {
     frame.pc = 0;
 
+    // Lazy-allocate PGO branch profiles for T5 collection.
+    // The BranchProfile array is indexed by instruction index.  Non-branch
+    // entries stay zeroed.  Freed after T4 codegen consumes the data.
+    {
+        using PM = chaos::il2cpp::runtime_core::PatchMethod;
+        auto* pgo_pm = static_cast<PM*>(frame.patch_method);
+        if (pgo_pm && pgo_pm->branch_profiles == nullptr && pgo_pm->reg_ir_instr_count > 0) {
+            pgo_pm->branch_profiles = static_cast<chaos::il2cpp::runtime_core::BranchProfile*>(
+                std::calloc(pgo_pm->reg_ir_instr_count, sizeof(BranchProfile)));
+            pgo_pm->branch_profile_count = pgo_pm->branch_profiles ? pgo_pm->reg_ir_instr_count : 0;
+        }
+    }
+
     // TLS hoist: read once before the loop — thread identity is stable
     // during FastExecute.
     auto* thread = threading::tls_this_thread;
@@ -2161,6 +2314,34 @@ bool FastExecute(FastFrame& frame,
             auto* pm = static_cast<PatchMethod*>(frame.patch_method);
             if (pm) method_token = pm->token;
             if (diagnostics::DbgShouldPause(method_token, frame.pc, 0)) {
+                // Capture stack frame snapshot: walk prev_frame chain.
+                diagnostics::DbgClearFrameSnapshot();
+                auto& snap = diagnostics::DbgGetFrameSnapshot();
+                int fi = 0;
+                const runtime_core::FastFrame* walk = &frame;
+                while (walk && fi < diagnostics::kDbgMaxCapturedFrames) {
+                    uint32_t tk = 0;
+                    auto* wpm = static_cast<PatchMethod*>(walk->patch_method);
+                    if (wpm) tk = wpm->token;
+                    snap.frames[fi].method_token = tk;
+                    snap.frames[fi].il_offset   = walk->pc;
+                    ++fi;
+                    walk = static_cast<const runtime_core::FastFrame*>(walk->prev_frame);
+                }
+                snap.frame_count = fi;
+
+                // Capture local variables from the top frame.
+                int li = 0;
+                uint32_t max_locals = frame.local_count < diagnostics::kDbgMaxCapturedLocals
+                    ? frame.local_count : diagnostics::kDbgMaxCapturedLocals;
+                for (uint32_t i = 0; i < max_locals; ++i) {
+                    snap.locals[li].index = i;
+                    snap.locals[li].value = frame.locals[i];
+                    snap.locals[li].tag   = frame.local_tags[i];
+                    ++li;
+                }
+                snap.local_count = li;
+
                 diagnostics::DbgNotifyPaused(method_token, frame.pc);
             }
         }

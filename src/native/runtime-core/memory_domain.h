@@ -6,6 +6,9 @@
 #include <chaos/native_types.h>
 #include <chaos/log.h>
 
+#include "memory_domain_events.h"
+
+#include <atomic>
 #include <cstddef>
 #include <cstdint>
 
@@ -79,8 +82,8 @@ struct MemoryDomain {
     IDomainHeap*  heap;              ///< Owned by this domain (destroyed on unregister)
 
     /// Tracks total live allocation bytes (used for quotas / diagnostics).
-    CHAOS_IL2CPP_INT64  current_usage;
-    CHAOS_IL2CPP_INT64  peak_usage;
+    std::atomic<CHAOS_IL2CPP_INT64>  current_usage{0};
+    std::atomic<CHAOS_IL2CPP_INT64>  peak_usage{0};
     CHAOS_IL2CPP_INT64  usage_limit;       ///< 0 = unlimited
 
     /// GC allocation tracking (bytes allocated in the managed heap by this domain).
@@ -98,22 +101,30 @@ inline DomainId IDomainHeap::GetDomainId() const {
 
 inline bool IDomainHeap::TrackAlloc(CHAOS_IL2CPP_SIZE size) noexcept {
     if (owner_ == nullptr) return true;
-    CHAOS_IL2CPP_INT64 new_usage = owner_->current_usage + static_cast<CHAOS_IL2CPP_INT64>(size);
+    CHAOS_IL2CPP_INT64 new_usage = owner_->current_usage.load(std::memory_order_relaxed) + static_cast<CHAOS_IL2CPP_INT64>(size);
     if (owner_->usage_limit > 0 && new_usage > owner_->usage_limit) {
         CHAOS_IL2CPP_LOG_WARN_M("MemoryDomain", "allocation of {0} bytes would exceed limit {1}",
                               size, owner_->usage_limit);
+        MemoryDomainEventData ev_data{};
+        ev_data.domain_id = owner_->domain_id;
+        ev_data.module_name = owner_->module_name;
+        ev_data.module_kind = owner_->module_kind;
+        ev_data.current_usage = owner_->current_usage.load(std::memory_order_relaxed);
+        ev_data.usage_limit = owner_->usage_limit;
+        MemoryDomainFireEvent(MemoryDomainEvent::DOMAIN_USAGE_LIMIT_EXCEEDED, ev_data);
         return false;
     }
-    owner_->current_usage = new_usage;
-    if (new_usage > owner_->peak_usage) {
-        owner_->peak_usage = new_usage;
+    owner_->current_usage.store(new_usage, std::memory_order_relaxed);
+    CHAOS_IL2CPP_INT64 old_peak = owner_->peak_usage.load(std::memory_order_relaxed);
+    if (new_usage > old_peak) {
+        owner_->peak_usage.store(new_usage, std::memory_order_relaxed);
     }
     return true;
 }
 
 inline void IDomainHeap::TrackFree(CHAOS_IL2CPP_SIZE size) noexcept {
     if (owner_ == nullptr) return;
-    owner_->current_usage -= static_cast<CHAOS_IL2CPP_INT64>(size);
+    owner_->current_usage.fetch_sub(static_cast<CHAOS_IL2CPP_INT64>(size), std::memory_order_relaxed);
 }
 
 /// Record a GC allocation (managed heap bytes) against the current domain.

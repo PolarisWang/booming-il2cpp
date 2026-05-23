@@ -103,6 +103,26 @@ uint32_t PatchMetadataCache::MethodCount() const noexcept {
     return header_ ? header_->method_def_count : 0;
 }
 
+uint32_t PatchMetadataCache::FieldCount() const noexcept {
+    return header_ ? header_->field_def_count : 0;
+}
+
+const PatchFieldDefEntry* PatchMetadataCache::GetFieldDef(uint32_t index) const noexcept {
+    if (header_ == nullptr || index >= header_->field_def_count) return nullptr;
+    const auto* base = reinterpret_cast<const uint8_t*>(header_);
+    const auto* entries = reinterpret_cast<const PatchFieldDefEntry*>(
+        base + header_->field_def_offset);
+    return &entries[index];
+}
+
+const PatchTypeDefEntry* PatchMetadataCache::GetTypeDefByIndex(uint32_t index) const noexcept {
+    if (header_ == nullptr || index >= header_->type_def_count) return nullptr;
+    const auto* base = reinterpret_cast<const uint8_t*>(header_);
+    const auto* entries = reinterpret_cast<const PatchTypeDefEntry*>(
+        base + header_->type_def_offset);
+    return &entries[index];
+}
+
 const PatchTypeDefEntry* PatchMetadataCache::ResolveTypeDef(uint32_t token) const noexcept {
     // Token format: high byte = 0x02 (TypeDef), low 24 bits = 1-based index.
     uint32_t index = (token & 0x00FFFFFFu) - 1;  // convert to 0-based
@@ -363,11 +383,12 @@ static void DestroyPatchContext(PatchContext* ctx) {
             m.cached_ir = nullptr;
         }
 
-        // call_cache is heap-allocated by InlineLeafCallees (new CachedCallInfo[]).
+        // call_cache is allocated by RebuildCallCacheForT3 / InlineLeafCallees
+        // via CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE (domain-tagged).
         // NOTE: if ReapplyInlining replaced the array, the old allocation is leaked
         // (currently acceptable since InlineLeafCallees is only called once per method).
         if (m.call_cache != nullptr) {
-            delete[] static_cast<runtime_instantiation::CachedCallInfo*>(m.call_cache);
+            CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(m.call_cache);
             m.call_cache = nullptr;
         }
 

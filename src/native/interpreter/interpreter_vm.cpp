@@ -13,6 +13,10 @@
 #include <gc/gc_root_change.h>
 #include <gc/gc_helpers.h>
 
+#if CHAOS_IL2CPP_DEBUGGER
+#include <diagnostics/debugger/dbg_runtime.h>
+#endif
+
 namespace chaos::il2cpp::interpreter {
 
 namespace {
@@ -151,7 +155,7 @@ static int FindEnclosingCatch(const IRMethod& method, CHAOS_IL2CPP_SIZE idx) {
 
 void InterpreterValue::FreeStruct() {
     if (tag == ValueTag::Struct && obj != nullptr) {
-        CHAOS_IL2CPP_FREE(obj);
+        CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(obj);
         obj = nullptr;
         struct_size = 0u;
     }
@@ -163,7 +167,7 @@ InterpreterValue::InterpreterValue(const InterpreterValue& other)
 {
     if (tag == ValueTag::Struct && other.obj != nullptr) {
         // Deep-copy struct data.
-        obj = CHAOS_IL2CPP_MALLOC(struct_size);
+        obj = CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE(struct_size);
         if (obj != nullptr) {
             std::memcpy(obj, other.obj, struct_size);
         } else {
@@ -190,7 +194,7 @@ InterpreterValue& InterpreterValue::operator=(const InterpreterValue& other) {
     struct_size = other.struct_size;
 
     if (tag == ValueTag::Struct && other.obj != nullptr) {
-        obj = CHAOS_IL2CPP_MALLOC(struct_size);
+        obj = CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE(struct_size);
         if (obj != nullptr) {
             std::memcpy(obj, other.obj, struct_size);
         } else {
@@ -250,7 +254,7 @@ InterpreterValue InterpreterValue::from_struct(const void* data, CHAOS_IL2CPP_UI
     result.tag = ValueTag::Struct;
     result.struct_size = size;
     if (data != nullptr && size > 0u) {
-        result.obj = CHAOS_IL2CPP_MALLOC(size);
+        result.obj = CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE(size);
         if (result.obj != nullptr) {
             std::memcpy(result.obj, data, size);
         } else {
@@ -331,15 +335,38 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
     int32_t     unwind_finally_count    = 0;
     int32_t     unwind_finally_current  = 0;
 
+    // ── Filter evaluation state ───────────────────────────────────────────
+    // When a Filter clause is encountered during exception search, we transfer
+    // control to its filter expression (filter_start_idx) instead of directly
+    // to the handler.  EndFilter then reads the filter result:
+    //   - non-zero (accept) → enter the handler for filter_active_clause
+    //   - zero (reject)     → resume search from filter_search_resume_idx-1
+    //
+    // filter_evaluating is true while the filter expression is running.
+    // Original throw point (filter_throw_ip) is saved for the resume scan.
+    bool        filter_evaluating       = false;
+    int32_t     filter_active_clause    = -1;
+    int32_t     filter_search_resume_idx = 0;          // next clause idx (exclusive end) to scan
+    CHAOS_IL2CPP_SIZE filter_throw_ip   = 0u;
+
     // ── SEH helper lambdas (capture locals by reference) ──────────────────
 
     // Phase 1: find the innermost catch/filter handler covering ip.
     // If exc_val is provided and is a ThreadAbort/ThreadInterrupt sentinel
     // (ObjectRef with obj < 0), typed catch clauses are skipped — sentinels
     // must propagate to the managed exception dispatch layer.
+    //
+    // start_idx_excl is the upper bound (exclusive) for the reverse scan.
+    // Default (size of seh_clauses) means "scan all clauses".  When resuming
+    // after a filter rejected the exception, this is set to the rejected
+    // clause index, so we skip it and any inner clauses already considered.
     auto findCatchHandler = [&](CHAOS_IL2CPP_SIZE ip,
-                                const InterpreterValue* exc_val = nullptr) -> int {
-        for (int i = static_cast<int>(method.seh_clauses.size()) - 1; i >= 0; --i) {
+                                const InterpreterValue* exc_val = nullptr,
+                                int start_idx_excl = -1) -> int {
+        const int upper = (start_idx_excl < 0)
+            ? static_cast<int>(method.seh_clauses.size())
+            : start_idx_excl;
+        for (int i = upper - 1; i >= 0; --i) {
             const auto& clause = method.seh_clauses[static_cast<CHAOS_IL2CPP_SIZE>(i)];
             if (ip >= clause.try_start_idx && ip < clause.try_end_idx) {
                 const auto flags = static_cast<uint32_t>(clause.flags);
@@ -385,6 +412,61 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
         }
     };
 
+    // Dispatch an in-flight exception to the next matching handler.
+    // Returns true if a handler (or filter) was selected and execution should
+    // resume.  Returns false if no handler exists (caller should propagate).
+    //
+    // start_idx_excl: upper bound for the search.  -1 = scan all clauses.
+    // After a filter rejects the exception, this is set to the rejected
+    // filter clause index so that clause is excluded from the resumed search.
+    //
+    // For Filter clauses, this routine pushes the exception onto the
+    // evaluation stack and transfers to the filter expression
+    // (filter_start_idx).  EndFilter then commits or rejects.
+    //
+    // For Exception clauses, this routine performs the existing
+    // setupFinallyUnwind + handler entry sequence.
+    auto dispatchException = [&](int start_idx_excl) -> bool {
+        const int catch_idx = findCatchHandler(instruction_index, &exception_obj, start_idx_excl);
+        if (catch_idx < 0) {
+            return false;
+        }
+        const auto& clause = method.seh_clauses[static_cast<CHAOS_IL2CPP_SIZE>(catch_idx)];
+        const auto cflags = static_cast<uint32_t>(clause.flags);
+        if (cflags == static_cast<uint32_t>(SEHFlags::Filter)) {
+            // Begin filter evaluation — push exception object onto stack and
+            // transfer to filter_start_idx.  EndFilter pops the result and
+            // commits (handler) or rejects (resume search).
+            filter_evaluating = true;
+            filter_active_clause = catch_idx;
+            filter_search_resume_idx = catch_idx;     // exclude this clause on reject
+            filter_throw_ip = instruction_index;
+            frame->stack.push_back(exception_obj);
+            instruction_index = clause.filter_start_idx;
+            in_handler = true;
+            active_handler_clause = catch_idx;
+            return true;
+        }
+        // Plain catch (Exception flag): walk finally/fault unwind first, then
+        // hand off to the handler.
+        setupFinallyUnwind(catch_idx, instruction_index);
+        if (unwind_finally_count > 0) {
+            exception_in_flight = true;
+            unwind_catch_clause = catch_idx;
+            unwind_finally_current = 0;
+            instruction_index = method.seh_clauses[
+                static_cast<CHAOS_IL2CPP_SIZE>(unwind_finally_list[0])].handler_start_idx;
+            in_handler = true;
+            active_handler_clause = unwind_finally_list[0];
+        } else {
+            instruction_index = clause.handler_start_idx;
+            in_handler = true;
+            active_handler_clause = catch_idx;
+            frame->stack.push_back(exception_obj);
+        }
+        return true;
+    };
+
     // ── Action for handleDispatchResult — controls switch flow in call handlers. ──
     enum class DispatchAction { Return, Continue, Break };
 
@@ -395,25 +477,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
     auto handleDispatchResult = [&](const DispatchResult& dret) -> DispatchAction {
         if (dret.threw_exception) {
             exception_obj = dret.exception_value;
-            const int catch_idx = findCatchHandler(instruction_index, &exception_obj);
-            if (catch_idx >= 0) {
-                const auto& catch_clause = method.seh_clauses[
-                    static_cast<CHAOS_IL2CPP_SIZE>(catch_idx)];
-                setupFinallyUnwind(catch_idx, instruction_index);
-                if (unwind_finally_count > 0) {
-                    exception_in_flight = true;
-                    unwind_catch_clause = catch_idx;
-                    unwind_finally_current = 0;
-                    instruction_index = method.seh_clauses[
-                        static_cast<CHAOS_IL2CPP_SIZE>(unwind_finally_list[0])].handler_start_idx;
-                    in_handler = true;
-                    active_handler_clause = unwind_finally_list[0];
-                } else {
-                    instruction_index = catch_clause.handler_start_idx;
-                    in_handler = true;
-                    active_handler_clause = catch_idx;
-                    frame->stack.push_back(exception_obj);
-                }
+            if (dispatchException(/*start_idx_excl=*/-1)) {
                 return DispatchAction::Continue;
             }
             // No catch handler — propagate to caller.
@@ -437,6 +501,26 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
 
     while (instruction_index < method.instructions.size()) {
         const IRInstruction& instruction = method.instructions[instruction_index];
+
+#if CHAOS_IL2CPP_DEBUGGER
+        // Debugger breakpoint/stepping check at each instruction boundary.
+        if (diagnostics::DbgShouldPause(frame->method_token,
+                                        static_cast<uint32_t>(instruction_index), 0)) {
+            // Capture frame snapshot (top frame only; RegisterExecute doesn't
+            // have prev_frame chain access.  The FastExecute path captures the
+            // full chain for FastFrames.)
+            diagnostics::DbgClearFrameSnapshot();
+            auto& snap = diagnostics::DbgGetFrameSnapshot();
+            snap.frames[0].method_token = frame->method_token;
+            snap.frames[0].il_offset   = static_cast<uint32_t>(instruction_index);
+            snap.frame_count = 1;
+            snap.local_count = 0;
+
+            diagnostics::DbgNotifyPaused(frame->method_token,
+                                         static_cast<uint32_t>(instruction_index));
+        }
+#endif
+
         switch (instruction.op_code) {
             case IROpCode::LdcI4:
                 frame->stack.push_back(InterpreterValue::from_i32(instruction.immediate_i4));
@@ -1178,36 +1262,13 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 exception_obj = Pop(&frame->stack);
 
                 // Phase 1: Search for a matching catch handler (innermost first).
-                const int catch_idx = findCatchHandler(instruction_index, &exception_obj);
-
-                if (catch_idx >= 0) {
-                    // Found a catch handler.  Build the unwind list.
-                    const auto& catch_clause = method.seh_clauses[static_cast<CHAOS_IL2CPP_SIZE>(catch_idx)];
-                    setupFinallyUnwind(catch_idx, instruction_index);
-
-                    if (unwind_finally_count > 0) {
-                        // Phase 2: start unwinding through finally/fault handlers.
-                        exception_in_flight = true;
-                        unwind_catch_clause = catch_idx;
-                        unwind_finally_current = 0;
-                        const int first_finally = unwind_finally_list[0];
-                        instruction_index = method.seh_clauses[static_cast<CHAOS_IL2CPP_SIZE>(first_finally)].handler_start_idx;
-                        in_handler = true;
-                        active_handler_clause = first_finally;
-                    } else {
-                        // No finally blocks — jump directly to catch handler.
-                        instruction_index = catch_clause.handler_start_idx;
-                        in_handler = true;
-                        active_handler_clause = catch_idx;
-                        frame->stack.push_back(exception_obj);
-                    }
-                } else {
-                    // No catch handler — propagate to caller.
-                    result.threw_exception = true;
-                    result.exception_value = exception_obj;
-                    return result;
+                if (dispatchException(/*start_idx_excl=*/-1)) {
+                    continue;
                 }
-                continue;
+                // No catch handler — propagate to caller.
+                result.threw_exception = true;
+                result.exception_value = exception_obj;
+                return result;
             }
             case IROpCode::Leave: {
                 // Check if leaving a try block that has a finally handler.
@@ -1225,8 +1286,76 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
                 instruction_index = GetBranchTarget(method, instruction.branch_target);
                 continue;
             }
-            case IROpCode::EndFinally:
             case IROpCode::EndFilter: {
+                // EndFilter pops the filter result (i32) and decides whether to
+                // commit to the filter's handler or resume searching.
+                //
+                // Per ECMA-335, the filter expression must end with EndFilter,
+                // which consumes a single i32 from the stack:
+                //   non-zero (1) → exception caught; transfer control to handler
+                //   zero (0)     → filter rejects; continue searching outward
+                if (!filter_evaluating) {
+                    // Defensive: stray EndFilter outside any in-flight filter.
+                    // Drop the result if present and continue sequentially.
+                    if (!frame->stack.empty()) frame->stack.pop_back();
+                    in_handler = false;
+                    active_handler_clause = -1;
+                    break;
+                }
+
+                // Pop filter result; treat as i32.
+                const InterpreterValue r = Pop(&frame->stack);
+                int32_t filter_result = 0;
+                if (r.tag == ValueTag::Int32) {
+                    filter_result = r.i32;
+                } else if (r.tag == ValueTag::Int64) {
+                    filter_result = static_cast<int32_t>(r.i64 != 0 ? 1 : 0);
+                } else if (r.tag == ValueTag::ObjectRef) {
+                    filter_result = (r.obj != nullptr) ? 1 : 0;
+                }
+
+                const int active = filter_active_clause;
+                const int resume_excl = filter_search_resume_idx;
+                const CHAOS_IL2CPP_SIZE throw_ip = filter_throw_ip;
+                filter_evaluating = false;
+                filter_active_clause = -1;
+
+                if (filter_result != 0) {
+                    // Filter accepts: enter handler for the active clause.
+                    // Do not re-run findCatchHandler; commit directly.
+                    const auto& clause = method.seh_clauses[static_cast<CHAOS_IL2CPP_SIZE>(active)];
+                    // Restore instruction_index to the original throw ip so
+                    // setupFinallyUnwind selects the correct nested clauses.
+                    instruction_index = throw_ip;
+                    setupFinallyUnwind(active, throw_ip);
+                    if (unwind_finally_count > 0) {
+                        exception_in_flight = true;
+                        unwind_catch_clause = active;
+                        unwind_finally_current = 0;
+                        instruction_index = method.seh_clauses[
+                            static_cast<CHAOS_IL2CPP_SIZE>(unwind_finally_list[0])].handler_start_idx;
+                        in_handler = true;
+                        active_handler_clause = unwind_finally_list[0];
+                    } else {
+                        instruction_index = clause.handler_start_idx;
+                        in_handler = true;
+                        active_handler_clause = active;
+                        frame->stack.push_back(exception_obj);
+                    }
+                    continue;
+                }
+
+                // Filter rejects: resume search excluding the rejected clause.
+                instruction_index = throw_ip;
+                if (dispatchException(/*start_idx_excl=*/resume_excl)) {
+                    continue;
+                }
+                // No further handler — propagate.
+                result.threw_exception = true;
+                result.exception_value = exception_obj;
+                return result;
+            }
+            case IROpCode::EndFinally: {
                 if (exception_in_flight) {
                     // Phase 2 unwind: advance to the next finally/fault handler.
                     unwind_finally_current++;

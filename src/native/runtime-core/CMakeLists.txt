@@ -14,6 +14,7 @@ add_library(chaos_runtime_core STATIC
     runtime_core.h
     memory_domain.cpp
     memory_domain.h
+    memory_domain_events.h
     vtable_registry.cpp
     vtable_registry.h
     convert.h
