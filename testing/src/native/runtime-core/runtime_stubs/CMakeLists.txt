@@ -68,3 +68,22 @@ add_chaos_test(convert_stubs_test
     LIBS ${CHAOS_COMMON_TEST_LIBS}
     LABELS "unit;core"
 )
+
+# T4-1: Runtime Stubs performance benchmarks
+# Compiles stub .cpp directly (same GNU ar compat pattern as unit tests).
+add_chaos_test(runtime_stubs_benchmark
+    runtime_stubs_benchmark.cpp
+    gc_stubs_for_string_tests.cpp
+    "${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/runtime_stubs/string_stubs.cpp"
+    "${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/runtime_stubs/datetime_stubs.cpp"
+    "${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/runtime_stubs/guid_stubs.cpp"
+    "${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/runtime_stubs/math_stubs.cpp"
+    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    LABELS "benchmark;core"
+)
+target_compile_definitions(runtime_stubs_benchmark PRIVATE
+    NOMINMAX WIN32_LEAN_AND_MEAN
+)
+target_compile_options(runtime_stubs_benchmark PRIVATE
+    /FI"${CMAKE_CURRENT_SOURCE_DIR}/datetime_guid_test_pch.h"
+)

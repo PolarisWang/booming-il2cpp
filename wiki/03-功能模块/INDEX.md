@@ -12,6 +12,7 @@
 | `04-测试与验证` | skill 行为测试和验证策略 | [`04-测试与验证/INDEX.md`](./04-%E6%B5%8B%E8%AF%95%E4%B8%8E%E9%AA%8C%E8%AF%81/INDEX.md) |
 | `05-工具能力` | 项目内工具能力、生成链约束与长期技术方案 | [`05-工具能力/INDEX.md`](./05-%E5%B7%A5%E5%85%B7%E8%83%BD%E5%8A%9B/INDEX.md) |
 | `08-GC子系统` | CRAG GC 分配器、收集器、诊断知识 | [`08-GC子系统/INDEX.md`](./08-GC%E5%AD%90%E7%B3%BB%E7%BB%9F/INDEX.md) |
+| `06-il2cpp核心架构` | IL2CPP 运行时核心模块 | [`06-il2cpp核心架构/runtime-support-stubs.md`](./06-il2cpp%E6%A0%B8%E5%BF%83%E6%9E%B6%E6%9E%84/runtime-support-stubs.md) |
 
 ## 重要文档
 
