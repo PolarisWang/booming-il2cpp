@@ -198,7 +198,6 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetConstructors(CHAOS_IL2CPP_INTPTR type_hand
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethods(CHAOS_IL2CPP_INTPTR type_handle) {
     using namespace chaos::il2cpp::runtime_core;
     auto* desc = ResolveTypeFromReflectionOrGcHandle(type_handle);
-    if (desc == nullptr) return 0;
 
     constexpr CHAOS_IL2CPP_UINT32 kMaxMethods = 512;
     struct GetMethodsBuf {
@@ -213,10 +212,27 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethods(CHAOS_IL2CPP_INTPTR type_handle) {
 
     uint32_t idx = 0;
 
-    // Self methods
-    for (uint32_t i = 0; i < desc->method_count && idx < kMaxMethods; i++) {
-        s_elements[idx++] = static_cast<CHAOS_IL2CPP_INTPTR>(
-            EncodeReflectionQueryMethodHandle(&desc->methods[i]));
+    // Self methods (descriptor path or EEClass fallback)
+    if (desc != nullptr) {
+        for (uint32_t i = 0; i < desc->method_count && idx < kMaxMethods; i++) {
+            s_elements[idx++] = static_cast<CHAOS_IL2CPP_INTPTR>(
+                EncodeReflectionQueryMethodHandle(&desc->methods[i]));
+        }
+    } else {
+        // EEClass fallback for dynamic types (T2-3)
+        auto* ee = ResolveEEClassFromHandle(type_handle);
+        if (ee != nullptr) {
+            EnsureMethodsFilled(ee);
+            if (ee->methods.filled && ee->methods.data != nullptr) {
+                uint32_t count = ee->methods.count > kMaxMethods ? kMaxMethods : ee->methods.count;
+                for (uint32_t i = 0; i < count; i++) {
+                    s_elements[idx++] = static_cast<CHAOS_IL2CPP_INTPTR>(
+                        EncodeReflectionQueryMethodHandle(&ee->methods.data[i]));
+                }
+            }
+        } else {
+            return 0;
+        }
     }
 
     // Walk the parent TypeInfo chain to include inherited methods
@@ -260,7 +276,6 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethods(CHAOS_IL2CPP_INTPTR type_handle) {
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetFields(CHAOS_IL2CPP_INTPTR type_handle) {
     using namespace chaos::il2cpp::runtime_core;
     auto* desc = ResolveTypeFromReflectionOrGcHandle(type_handle);
-    if (desc == nullptr || desc->fields == nullptr) return 0;
 
     constexpr CHAOS_IL2CPP_UINT32 kMaxFields = 256;
     struct GetFieldsBuf {
@@ -273,14 +288,33 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetFields(CHAOS_IL2CPP_INTPTR type_handle) {
     static GetFieldsBuf s_buf{};
     static CHAOS_IL2CPP_INTPTR s_elements[kMaxFields]{};
 
-    const CHAOS_IL2CPP_UINT32 count = desc->field_count > kMaxFields ? kMaxFields : desc->field_count;
+    uint32_t count = 0;
+    const ReflectionQueryFieldDescriptor* fields = nullptr;
+
+    if (desc != nullptr && desc->fields != nullptr) {
+        count = desc->field_count > kMaxFields ? kMaxFields : desc->field_count;
+        fields = desc->fields;
+    } else {
+        // EEClass fallback for dynamic types (T2-3)
+        auto* ee = ResolveEEClassFromHandle(type_handle);
+        if (ee != nullptr) {
+            EnsureFieldsFilled(ee);
+            if (ee->fields.filled && ee->fields.data != nullptr) {
+                count = ee->fields.count > kMaxFields ? kMaxFields : ee->fields.count;
+                fields = reinterpret_cast<const ReflectionQueryFieldDescriptor*>(ee->fields.data);
+            }
+        }
+    }
+
+    if (fields == nullptr) return 0;
+
     s_buf = GetFieldsBuf{};
     s_buf.element_type_shape = 1;
     s_buf.length = static_cast<CHAOS_IL2CPP_INTPTR>(count);
     s_buf.elements = s_elements;
 
     for (CHAOS_IL2CPP_UINT32 i = 0; i < count; i++)
-        s_elements[i] = static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryFieldHandle(&desc->fields[i]));
+        s_elements[i] = static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryFieldHandle(&fields[i]));
 
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_buf);
 }
@@ -288,7 +322,6 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetFields(CHAOS_IL2CPP_INTPTR type_handle) {
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetProperties(CHAOS_IL2CPP_INTPTR type_handle) {
     using namespace chaos::il2cpp::runtime_core;
     auto* desc = ResolveTypeFromReflectionOrGcHandle(type_handle);
-    if (desc == nullptr || desc->properties == nullptr) return 0;
 
     constexpr CHAOS_IL2CPP_UINT32 kMaxProperties = 256;
     struct GetPropertiesBuf {
@@ -301,14 +334,33 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetProperties(CHAOS_IL2CPP_INTPTR type_handle
     static GetPropertiesBuf s_buf{};
     static CHAOS_IL2CPP_INTPTR s_elements[kMaxProperties]{};
 
-    const CHAOS_IL2CPP_UINT32 count = desc->property_count > kMaxProperties ? kMaxProperties : desc->property_count;
+    uint32_t count = 0;
+    const ReflectionQueryPropertyDescriptor* properties = nullptr;
+
+    if (desc != nullptr && desc->properties != nullptr) {
+        count = desc->property_count > kMaxProperties ? kMaxProperties : desc->property_count;
+        properties = desc->properties;
+    } else {
+        // EEClass fallback for dynamic types (T2-3)
+        auto* ee = ResolveEEClassFromHandle(type_handle);
+        if (ee != nullptr) {
+            EnsurePropertiesFilled(ee);
+            if (ee->properties.filled && ee->properties.data != nullptr) {
+                count = ee->properties.count > kMaxProperties ? kMaxProperties : ee->properties.count;
+                properties = reinterpret_cast<const ReflectionQueryPropertyDescriptor*>(ee->properties.data);
+            }
+        }
+    }
+
+    if (properties == nullptr) return 0;
+
     s_buf = GetPropertiesBuf{};
     s_buf.element_type_shape = 1;
     s_buf.length = static_cast<CHAOS_IL2CPP_INTPTR>(count);
     s_buf.elements = s_elements;
 
     for (CHAOS_IL2CPP_UINT32 i = 0; i < count; i++)
-        s_elements[i] = static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryPropertyHandle(&desc->properties[i]));
+        s_elements[i] = static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryPropertyHandle(&properties[i]));
 
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_buf);
 }

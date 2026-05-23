@@ -409,5 +409,40 @@ static inline const TypeInfoHot* GetTypeInfoFromReflectionOrGcHandle(
     return nullptr;
 }
 
+// ── EEClass resolution from handle (T2-3: dynamic type fallback) ──────────
+static inline EEClass* ResolveEEClassFromHandle(CHAOS_IL2CPP_INTPTR handle) noexcept {
+    if (handle == 0) return nullptr;
+
+    // Path 1: Module Registry handle → TypeInfoHot* → MethodTable* → EEClass
+    {
+        auto* ti = GetTypeInfoFromHandle(handle);
+        if (ti != nullptr) {
+            auto* mt = reinterpret_cast<MethodTable*>(const_cast<TypeInfoHot*>(ti));
+            if (EnsureEEClass(mt)) {
+                return GetEEClass(mt);
+            }
+        }
+    }
+
+    // Path 2: GC Type object → read runtime_type_handle → try Path 1
+    {
+        CHAOS_IL2CPP_INTPTR inner = 0;
+        std::memcpy(&inner, reinterpret_cast<const void*>(
+            static_cast<CHAOS_IL2CPP_INTPTR>(handle) + 16), sizeof(inner));
+        if (inner != 0) {
+            auto* ti = GetTypeInfoFromHandle(inner);
+            if (ti != nullptr) {
+                auto* mt = reinterpret_cast<MethodTable*>(const_cast<TypeInfoHot*>(ti));
+                if (EnsureEEClass(mt)) {
+                    return GetEEClass(mt);
+                }
+            }
+        }
+    }
+
+    // Path 3: (future) dynamic type reverse lookup from hotupdate handle.
+    return nullptr;
+}
+
 }  // anonymous namespace
 }  // namespace chaos::il2cpp::runtime_core

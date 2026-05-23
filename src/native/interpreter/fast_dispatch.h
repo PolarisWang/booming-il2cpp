@@ -53,6 +53,11 @@ struct FastFrame {
     bool        threw_exception       = false;
     void*       exception_obj_val     = nullptr;
 
+    // Frame linkage for InterpreterEntryDirect multi-step dispatch.
+    void*       prev_frame            = nullptr;
+    const void* ir_instrs             = nullptr;
+    uint32_t    instr_count           = 0;
+
     // Dispatch callback for Call instructions.
     // Set by InterpreterEntryDirect before calling FastExecute.
     void*       dispatch_fn           = nullptr;

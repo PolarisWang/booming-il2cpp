@@ -40,17 +40,17 @@ Layer 2: Tier 升级与自适应 (Tiering)              ~3.5 周 ✅ 完成
   ├── R-2 Phase 2: Backedge OSR                 2 周 ✅
   └── R-11: T4 Native Codegen 加固               1 周 ✅
 
-Layer 3: 交叉验证 (Cross-cutting)                 ~2 周  ← 当前
-  ├── R-6: GC × Interpreter 交互验证             5 天
-  ├── R-7: Stress / Soak 测试                    5 天
-  ├── R-8: Benchmark 回归管线                    3 天
-  └── R-9: Overflow-check 测试补齐               1 天
+Layer 3: 交叉验证 (Cross-cutting)                 ~2 周 ✅ 完成
+  ├── R-6: GC × Interpreter 交互验证             5 天 ✅
+  ├── R-7: Stress / Soak 测试                    5 天 ✅
+  ├── R-8: Benchmark 回归管线                    3 天 ✅
+  └── R-9: Overflow-check 测试补齐               1 天 ✅
 
-Layer 4: 诊断与可观测 (Diagnostics)               ~4-6 周
-  ├── Debugger Phase 1-4 (MVP: FastExecute+RegisterExecute)  3 周
-  ├── Debugger Phase 5-6 (完整: 4 层)                        +2 周
-  ├── EventPipe Phase 1-3 (IPC + 3 类事件)                   1.5 周
-  └── EventPipe Phase 4-5 (计数器 + receiver CLI)             1 周
+Layer 4: 诊断与可观测 (Diagnostics)               ~4-6 周  ← 当前
+  ├── Debugger (MVP: FastExecute hooks)           3 周 ← 执行中
+  ├── Debugger (完整: 调用栈+变量+RegisterExecute) +2 周
+  ├── EventPipe (IPC + 3 类事件)                  1.5 周 ✅
+  └── EventPipe (计数器 + receiver CLI)            1 周 ✅
 
 预估总工期: ~8-10 周（Layer 3+4 与 Layer 1+2 可并行）
 ```
@@ -69,11 +69,11 @@ Layer 4: 诊断与可观测 (Diagnostics)               ~4-6 周
 | I-R2b | 2 | **completed** | Backedge OSR | 2 周 |
 | I-R11 | 2 | **completed** | T4 Codegen 加固 | 1 周 |
 | I-R6 | 3 | **completed** | GC×Interpreter 验证 | 5 天 |
-| I-R7 | 3 | planned | Stress/Soak 测试 | 5 天 |
-| I-R8 | 3 | planned | Benchmark 回归管线 | 3 天 |
-| I-R9 | 3 | planned | Overflow 测试 | 1 天 |
-| I-DBG | 4 | planned | Debugger MVP | 3 周 |
-| I-EVP | 4 | planned | EventPipe 核心层 | 1.5 周 |
+| I-R7 | 3 | **completed** | Stress/Soak 测试 | 5 天 |
+| I-R8 | 3 | **completed** | Benchmark 回归管线 | 3 天 |
+| I-R9 | 3 | **completed** | Overflow 测试 | 1 天 |
+| I-DBG | 4 | **in-progress** | Debugger MVP | 3 周 |
+| I-EVP | 4 | **completed** | EventPipe 核心层 | 1.5 周 |
 
 ## 最近摘要
 
@@ -100,21 +100,54 @@ Layer 4: 诊断与可观测 (Diagnostics)               ~4-6 周
 | I-R2b | fast_dispatch.h/cpp, fast_frame_pool.cpp | Backedge OSR：loop_counter + TryFastOsrPromotion + T4 OSR 入口 |
 | I-R11 | code_buffer.h/cpp, code_generator.cpp | T4 Codegen 加固：数组溢出修复、OOM 安全、SEH 验证、Failed 标记 |
 
-### Phase 3 (Layer 3: 交叉验证) — 执行中
+### Phase 3 (Layer 3: 交叉验证) — 全部完成 ✅
 
-I-R6 (GC×Interpreter 交互验证) 已完成，审计结论：当前交互安全，FastFrame TLS 在并发 BGC 下存在极小间隙但不影响实际运行。接下来启动 I-R7 (Stress + Soak 测试)。
+全部 4 个子任务完成：
+
+| 子任务 | 说明 |
+|--------|------|
+| I-R6 | GC×Interpreter 交互验证 — 审计结论：当前交互安全 |
+| I-R7 | Stress/Soak 测试 — register interpreter stress + FastExecute stress |
+| I-R8 | Benchmark 回归管线 — bench-compare, baselines, multi-thread |
+| I-R9 | Overflow-check 测试补齐 — checked arithmetic 操作码覆盖 |
+
+### Phase 4 (Layer 4: 诊断与可观测) — 执行中
+
+#### EventPipe 核心层 ✅
+
+EventPipe 核心层已完成，详见 `docs/dev/completed/interpreter-industrialization/I-EVP-eventpipe/STATUS.md`：
+- IPC transport via Windows Named Pipes
+- 3 类事件：GC (9 种)、ThreadPool (6 种)、Exception (3 种)
+- `chaos_diag.exe` receiver CLI，输出 JSON Lines
+- 已接入 fast_dispatch.cpp Handle_Throw、interpreter_vm.cpp Throw/Rethrow、threadpool_events.cpp
+
+#### Debugger MVP — 执行中
+
+DAP 协议调试器核心模块已实现：
+- DAP 协议核心 `dbg_protocol.h`：JSON 序列化 + 消息构建
+- stdio transport `dbg_transport.h/cpp`：Content-Length wire format
+- DAP 服务器 `dbg_server.h/cpp`：12 个命令处理器
+- 断点管理器 `dbg_breakpoint.h/cpp`：O(1) hash map lookup
+- 单步控制器 `dbg_stepping.h/cpp`：Step Into/Over/Out
+- FastExecute 断点检查：已插入 fast_dispatch.cpp 主循环
+- 构建集成：chaos_debugger.lib 编译 0 errors
+
+待完成：
+- RegisterExecute hook（因 interpreter 有 pre-existing build errors 搁置）
+- 调用栈/变量完整实现（当前为 stub）
+- VSCode 端到端验证
 
 ## latest_stop_point
 
-Phase 2 全部完成。Phase 3 中 I-R6 完成，开始 I-R7。
+Phase 3 全部完成。Phase 4 中 I-EVP (EventPipe) 完成，I-DBG (Debugger MVP) 核心库实现中。
 
 ## 下一步
 
-开始执行 I-R7（Stress/Soak 测试）
+完成 I-DBG 剩余工作：RegisterExecute hook、调用栈/变量完整实现、VSCode 端到端验证。
 
 ## recommended_next_child
 
-I-R7
+I-DBG
 
 ## 关键文档
 

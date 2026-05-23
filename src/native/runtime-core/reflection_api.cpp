@@ -29,6 +29,7 @@
 #include "string_table.h"
 #include "instantiation_engine.h"
 #include "generic_context.h"
+#include "eeclass.h"
 
 #include <cstring>
 #include <fmt/format.h>

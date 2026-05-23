@@ -71,6 +71,8 @@
 
 ## 最近摘要
 
+2026-05-23 (Phase 2): B-P2-1 实现完成 — Step A.5(T4 deopt→OsrState→FastExecute), 修复 FastFrame/RegisterFrame/IRMethod/RegisterMethod 缺失字段, 构建通过。C-P2-2 后台运行(6/46 done, 5 passed, 1 audit). B-P2-1🔄 C-P2-2🔄 C-P2-3⏳ B-P2-2⏳
+
 2026-05-23: Phase 1 启动。三个并行调研 Agent 返回，关键发现：
 
 1. **G1 (异常 AOT lowering)** — 已基本完成: `EmitIRExceptionRegion` 覆盖全部 5 种 EH shape，`CHAOS_EH_TRY/CATCH/END` 宏完备。仅剩余 6 个 flat fallback（3 runtime-self-test + 2 snapshot-prover + 1 error-info-basic）由非常规 EH region 结构导致。A-P1-2 实际完成度 ≈ 98%
@@ -95,11 +97,12 @@ Phase 1 exit criteria 全部满足，进入 Phase 2 生产覆盖阶段。
 ```yaml
 dispatch_doc: DISPATCH.md
 dispatch_model: hybrid
-active_batches: [P2A, P2B, P2C]
+active_batches: [P2B]
 completed_batches: [P1A, P1B, P1C, P1-merge, P2A, P2C]
-terminals_active: {}
-pending_batches: [P2-merge, P2B, P3A, P3B, P3C]
-recommended_next_child: B-P2-1
+terminals_active:
+  - terminal-1: B-P2-1 (in-progress)
+pending_batches: [P2B-2, P2-merge, P3A, P3B, P3C]
+recommended_next_child: B-P2-2
 ```
 
 ## 子任务状态
@@ -116,11 +119,11 @@ recommended_next_child: B-P2-1
 | **A-P2-1** | P2 | **completed** | FT | G3 ABI ✅ + G4 flat fallback ✅ (2 边缘 case 剩余) |
 | **A-P2-2** | P2 | **completed** | FT | G2 Virtual/interface dispatch ✅ (IfaceMap 接口分派) |
 | **A-P2-3** | P2 | **completed** | FT | G5 Metadata closure ✅ (token/returnType/paramCount, Scriban 模板修复, 快照基线更新) |
-| **B-P2-1** | P2 | **ready** | HT | T2 OSR deopt (溢出→OSR) |
-| **B-P2-2** | P2 | **planned** | HT | T4 PIC + T3 TLAB inline |
+| **B-P2-1** | P2 | **in-progress** | HT | T2 OSR deopt (溢出→OSR — CaptureNativeFrame + FastExecute 恢复) |
+| **B-P2-2** | P2 | **ready** | HT | T4 PIC + T3 TLAB inline |
 | **C-P2-1** | P2 | **completed** | HT | C0(A3) verification pipeline ✅ (13 阶段全通, CI 更新) |
-| **C-P2-2** | P2 | **planned** | HT | V1 first 50 families |
-| **C-P2-3** | P2 | **planned** | HT | V2 Coverage gate |
+| **C-P2-2** | P2 | **in-progress** | HT | V1 first 50 families (6/46 passed, 1 audit failure) |
+| **C-P2-3** | P2 | **ready** | HT | V2 Coverage gate |
 | A-P3-1 | P3 | planned | FT | G6 Generics/sharing |
 | A-P3-2 | P3 | planned | FT | G7 Goto elimination + G8 D3-C P1 |
 | A-P3-3 | P3 | planned | FT | G9-G12 remaining gaps |
@@ -141,7 +144,7 @@ auto_stop_policy: blocking-only
 
 ## Latest Stop Point
 
-Phase 1 全部完成。Phase 2: A-P2-1(G3✅G4✅) A-P2-2(G2✅) C-P2-1(验证管线✅) A-P2-3(G5 元数据闭包✅). 当前: B-P2-1(T2 OSR) 待启动.
+Phase 2: A-P2-1✅ A-P2-2✅ A-P2-3✅ B-P2-1🔄(实现完成,构建通过) C-P2-1✅ C-P2-2🔄(6/46), C-P2-3⏳ B-P2-2⏳
 
 ## 下一步
 
@@ -149,9 +152,8 @@ Phase 2 当前可启动子任务:
 
 | 子任务 | 前置依赖 | 预估工作量 | 描述 |
 |--------|---------|-----------|------|
-| **B-P2-1** (T2 OSR deopt) | B-P1-2 | 3-4 周 | 真正 OSR 栈上替换，Backedge 触发 |
 | **B-P2-2** (T4 PIC + T3 TLAB inline) | B-P2-1 | 2-3 周 | PIC 内联缓存 + TLAB 内联分配 |
-| **C-P2-2** (V1 first 50 families) | C-P2-1 | 4-6 周 | 50 family 全 13 阶段验证通过 |
+| **C-P2-3** (V2 Coverage gate) | C-P2-1 | 1-2 周 | 覆盖率门禁配置 |
 
 ## 入口
 
@@ -175,4 +177,4 @@ clearance_confirmed_by_user: true
 
 ## Recommended Next Child
 
-`A-P2-1`
+`B-P2-2`

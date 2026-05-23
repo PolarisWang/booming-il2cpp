@@ -11,6 +11,7 @@
 #include "metadata_interface.h"   // ModuleLifecycleManager
 
 #include "gc_static_roots.h"
+#include "static_var_store.h"
 
 #include <mutex>
 
@@ -176,6 +177,10 @@ AssemblyLoadContext* AssemblyManager::LoadAssembly(
         desc.is_unloading.store(false, std::memory_order_relaxed);
 
         ++loaded_count_;
+        {
+            uint32_t hash = ComputeAssemblyHash(desc.name.c_str());
+            static_var_store_register(hash, desc.module_id, desc.domain_id);
+        }
         return &desc;
     }
 }
@@ -216,6 +221,13 @@ bool AssemblyManager::UnloadAssembly(AssemblyLoadContext* alc) noexcept {
     // 4. Unregister static root ranges before destroying domain memory.
     if (alc->domain_id != 0) {
         GcUnregisterDomainStaticRoots(alc->domain_id);
+        static_var_store_unregister_domain(alc->domain_id);
+    }
+
+    // 4a. Clean up field-level store for the AOT codegen indirect access path.
+    {
+        uint32_t hash = ComputeAssemblyHash(alc->name.c_str());
+        static_var_store_unregister_assembly(hash);
     }
 
     // 5. Destroy the memory domain (safe stop-the-world teardown).

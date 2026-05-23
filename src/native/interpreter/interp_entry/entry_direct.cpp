@@ -12,6 +12,7 @@
 #include <gc_root_scanner.h>
 
 #include <method_replacement.h>
+#include <osr_state.h>
 
 #include <chaos/log.h>
 
@@ -470,6 +471,102 @@ void InterpreterEntryDirect(
             }
         }
     }
+
+    // -- Step A.5: T2 deopt path -- reconstruct OsrState -> FastExecute --
+    {
+        auto* reg_m = static_cast<interpreter::RegisterMethod*>(
+            patch_method->cached_reg_method);
+        if (reg_m != nullptr &&
+            chaos::il2cpp::codegen::t_deopt_state.instr_pc <
+                static_cast<uint32_t>(reg_m->stack_map.entries.size()))
+        {
+            auto& stack_entry =
+                reg_m->stack_map.entries[chaos::il2cpp::codegen::t_deopt_state.instr_pc];
+
+            interpreter::OsrState osr;
+            interpreter::CaptureNativeFrame(osr,
+                chaos::il2cpp::codegen::t_deopt_state.gpr_file,
+                chaos::il2cpp::codegen::t_deopt_state.fpr_file,
+                stack_entry,
+                patch_method->cached_arg_count,
+                interpreter::OsrState::kMaxLocals,
+                chaos::il2cpp::codegen::t_deopt_state.gpr_tags);
+            osr.pc = chaos::il2cpp::codegen::t_deopt_state.instr_pc;
+
+            FastFrame* ff = tls_frame_pool.Acquire();
+            FastFrame ff_fallback;
+            bool using_pool = (ff != nullptr);
+            if (!using_pool) { ff = &ff_fallback; memset(ff, 0, sizeof(*ff)); }
+
+            void* a5_prev_frame = tls_current_frame;
+            ff->prev_frame = a5_prev_frame;
+
+            interpreter::RestoreOsrToFastFrame(osr, *ff);
+            {
+                auto* rs = GetCurrentRuntimeState();
+                auto* ts = GetCurrentThreadState();
+                runtime_instantiation::InterpreterDispatchContext a5_dispatch_ctx;
+                a5_dispatch_ctx.runtime_state = rs;
+                a5_dispatch_ctx.thread_state = ts;
+                SetupFastFrame(ff, patch_method, args_buf, ir,
+                    reinterpret_cast<void*>(runtime_instantiation::InterpreterDispatch),
+                    &a5_dispatch_ctx);
+            }
+
+            tls_current_frame = ff;
+            bool ok = FastExecute(*ff,
+                ir->instructions.data(),
+                static_cast<uint32_t>(ir->instructions.size()));
+
+            if (ok && ff->has_ret && ret_buf != nullptr) {
+                auto ret_tag = static_cast<interpreter::ValueTag>(ff->ret_tag);
+                ArgBuffer ret_writer(ret_buf);
+                switch (ret_tag) {
+                case interpreter::ValueTag::Int32:
+                    ret_writer.WriteI32(static_cast<int32_t>(ff->ret_val));
+                    if (using_pool) tls_frame_pool.Release(ff);
+                    chaos::il2cpp::codegen::t_deopt_state = {};
+                    tls_current_frame = a5_prev_frame;
+                    return;
+                case interpreter::ValueTag::Int64:
+                    ret_writer.WriteI64(static_cast<int64_t>(ff->ret_val));
+                    if (using_pool) tls_frame_pool.Release(ff);
+                    chaos::il2cpp::codegen::t_deopt_state = {};
+                    tls_current_frame = a5_prev_frame;
+                    return;
+                case interpreter::ValueTag::Float32: {
+                    float v;
+                    std::memcpy(&v, &ff->ret_val, sizeof(float));
+                    ret_writer.WriteF32(v);
+                    if (using_pool) tls_frame_pool.Release(ff);
+                    chaos::il2cpp::codegen::t_deopt_state = {};
+                    tls_current_frame = a5_prev_frame;
+                    return;
+                }
+                case interpreter::ValueTag::Float64: {
+                    double v;
+                    std::memcpy(&v, &ff->ret_val, sizeof(double));
+                    ret_writer.WriteF64(v);
+                    if (using_pool) tls_frame_pool.Release(ff);
+                    chaos::il2cpp::codegen::t_deopt_state = {};
+                    tls_current_frame = a5_prev_frame;
+                    return;
+                }
+                default:
+                    ret_writer.WritePtr(reinterpret_cast<void*>(ff->ret_val));
+                    if (using_pool) tls_frame_pool.Release(ff);
+                    chaos::il2cpp::codegen::t_deopt_state = {};
+                    tls_current_frame = a5_prev_frame;
+                    return;
+                }
+            }
+
+            if (using_pool) tls_frame_pool.Release(ff);
+            tls_current_frame = a5_prev_frame;
+            // Fall through to RegisterExecute (t_deopt_state preserved for Step B)
+        }
+    }
+
 
     CHAOS_IL2CPP_LOG_DEBUG("diag", "Step B (RegisterExecute) entering");
     // ── Step B: RegisterExecute path (Layer R) ─────────────────────────

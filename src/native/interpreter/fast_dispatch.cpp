@@ -12,6 +12,11 @@ namespace vr = chaos::il2cpp::vtable_registry;
 #include <t4_seh_handler.h>
 #include <codegen_helpers.h>
 
+#include <patch_loader.h>
+
+#include <eventpipe/ep_exception_bridge.h>
+#include <diagnostics/debugger/dbg_runtime.h>
+
 // Forward declarations from entry_direct.cpp
 namespace chaos::il2cpp::runtime_core {
 bool OptimizeToTier2(PatchMethod* pm) noexcept;
@@ -2149,6 +2154,16 @@ bool FastExecute(FastFrame& frame,
         ++g_fast_op_freq[op_val];  // opcode histogram (thread-local, ~1 cycle)
 
         uint32_t prev_pc = frame.pc;
+
+        // Debugger breakpoint/stepping check.
+        {
+            uint32_t method_token = 0;
+            auto* pm = static_cast<PatchMethod*>(frame.patch_method);
+            if (pm) method_token = pm->token;
+            if (diagnostics::DbgShouldPause(method_token, frame.pc, 0)) {
+                diagnostics::DbgNotifyPaused(method_token, frame.pc);
+            }
+        }
 
         switch (op_val) {
             DISPATCH_CASE( 0, LdcI4);
