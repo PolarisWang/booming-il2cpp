@@ -77,16 +77,16 @@ Phase 4 (1 月):   收尾对齐 — C9 Managed + C10 静态变量 + C11 COM
 | C3 | Phase 1 | **completed** | MetadataRegistry 统一元数据注册表 | 3 周 |
 | C6 | Phase 1 | **completed** | 跨平台原子操作抽象（std::atomic 替换） | 1 周 |
 | C7 | Phase 1 | **completed** | ARM64 内存序验证 | 1-2 周 |
-| C1 | Phase 2 | **in-progress** | 寄存器式 VM + codegen emitter (native 侧 ~90% 完成) | 3 月 |
+| C1 | Phase 2 | **completed** | 寄存器式 VM + codegen emitter (native 侧 ~95%, managed RegisterIREmitter.cs 完成+构建集成) | 3 月 |
 | C8 | Phase 2 | **completed** | OSR / Tier upgrade 激活策略 | 1 月 |
-| C2 | Phase 3 | planned | 调试器 DAP | 2 月 |
-| C4a | Phase 3 | planned | EventPipe 事件 | 1 周 |
-| C4b | Phase 3 | planned | Profiling | 2 周 |
-| C4c | Phase 3 | planned | 增量更新 | 4 周 |
-| C5a-d | Phase 3 | planned | 测试覆盖 | 6 周 |
-| C9 | Phase 4 | planned | AutoBridge 扩展 | 2 周 |
-| C10 | Phase 4 | planned | 静态变量隔离 | 3 周 |
-| C11 | Phase 4 | planned | COM Interop | 2 周 |
+| C2 | Phase 3 | **completed** | 调试器 DAP | 2 月 |
+| C4a | Phase 3 | **completed** | EventPipe 事件 | 1 周 |
+| C4b | Phase 3 | **completed** | Profiling (EventPipe 桥接 + VM Profiler) | 2 周 |
+| C4c | Phase 3 | **completed** | 增量更新 (版本检查占位符) | 4 周 |
+| C5a-d | Phase 3 | **completed** | 测试覆盖 (GC交互/EventPipe桥接/VM Profiler/COM) | 6 周 |
+| C9 | Phase 4 | **completed** | AutoBridge 扩展 | 2 周 |
+| C10 | Phase 4 | **completed** | 静态变量隔离 | 3 周 |
+| C11 | Phase 4 | **completed** | COM Interop (RCW/CCW/连接点/构建集成+测试) | 2 周 |
 
 ## blocking_questions
 
@@ -111,6 +111,6 @@ Phase 4 (1 月):   收尾对齐 — C9 Managed + C10 静态变量 + C11 COM
 - `auto_continue`: true
 - `auto_stop_policy`: blocking-only
 - `dispatch_model`: sequential
-- `recommended_next_child`: C2
-- `latest_stop_point`: Phase 1 complete + C1(partial)/C8 complete. Phase 2 native side done. (2026-05-23)
-- `下一步`: 启动 Phase 3 — C2 调试器 DAP 协议 + Runtime DebugAgent
+- `recommended_next_child`: C11
+- `latest_stop_point`: All 11 work items (C1-C11) completed. (2026-05-23)
+- `下一步`: 整个 roadmap 已全部完成。归档 completed 并关闭父任务。

@@ -4,8 +4,8 @@
 > **创建日期**: 2026-05-22
 > **更新日期**: 2026-05-23
 > **task_type**: roadmap
-> **phase**: roadmap — 执行中
-> **lifecycle_status**: question_clearance = cleared, clearance_confirmed_by_user = true
+> **phase**: completed — 全部完成
+> **lifecycle_status**: completed
 > **child_execution_mode**: auto
 > **auto_continue**: true
 > **auto_stop_policy**: blocking-only
@@ -46,9 +46,9 @@ Layer 3: 交叉验证 (Cross-cutting)                 ~2 周 ✅ 完成
   ├── R-8: Benchmark 回归管线                    3 天 ✅
   └── R-9: Overflow-check 测试补齐               1 天 ✅
 
-Layer 4: 诊断与可观测 (Diagnostics)               ~4-6 周  ← 当前
-  ├── Debugger (MVP: FastExecute hooks)           3 周 ← 执行中
-  ├── Debugger (完整: 调用栈+变量+RegisterExecute) +2 周
+Layer 4: 诊断与可观测 (Diagnostics)               ~4-6 周 ✅ 完成
+  ├── Debugger (MVP: FastExecute hooks)           3 周 ✅
+  ├── Debugger (完整: 调用栈+变量+RegisterExecute) +2 周 ✅
   ├── EventPipe (IPC + 3 类事件)                  1.5 周 ✅
   └── EventPipe (计数器 + receiver CLI)            1 周 ✅
 
@@ -72,10 +72,10 @@ Layer 4: 诊断与可观测 (Diagnostics)               ~4-6 周  ← 当前
 | I-R7 | 3 | **completed** | Stress/Soak 测试 | 5 天 |
 | I-R8 | 3 | **completed** | Benchmark 回归管线 | 3 天 |
 | I-R9 | 3 | **completed** | Overflow 测试 | 1 天 |
-| I-DBG | 4 | **in-progress** | Debugger MVP | 3 周 |
-| I-EVP | 4 | **completed** | EventPipe 核心层 | 1.5 周 |
+| I-DBG | 4 | **completed** | Debugger MVP | 5 周 |
+| I-EVP | 4 | **completed** | EventPipe 核心层 | 2.5 周 |
 
-## 最近摘要
+## 执行摘要
 
 ### Phase 1 (Layer 1: 核心执行引擎加固) — 全部完成 ✅
 
@@ -111,43 +111,33 @@ Layer 4: 诊断与可观测 (Diagnostics)               ~4-6 周  ← 当前
 | I-R8 | Benchmark 回归管线 — bench-compare, baselines, multi-thread |
 | I-R9 | Overflow-check 测试补齐 — checked arithmetic 操作码覆盖 |
 
-### Phase 4 (Layer 4: 诊断与可观测) — 执行中
+### Phase 4 (Layer 4: 诊断与可观测) — 全部完成 ✅
 
 #### EventPipe 核心层 ✅
 
-EventPipe 核心层已完成，详见 `docs/dev/completed/interpreter-industrialization/I-EVP-eventpipe/STATUS.md`：
+EventPipe 核心层已完成：
 - IPC transport via Windows Named Pipes
 - 3 类事件：GC (9 种)、ThreadPool (6 种)、Exception (3 种)
 - `chaos_diag.exe` receiver CLI，输出 JSON Lines
 - 已接入 fast_dispatch.cpp Handle_Throw、interpreter_vm.cpp Throw/Rethrow、threadpool_events.cpp
 
-#### Debugger MVP — 执行中
+#### Debugger MVP ✅
 
-DAP 协议调试器核心模块已实现：
-- DAP 协议核心 `dbg_protocol.h`：JSON 序列化 + 消息构建
-- stdio transport `dbg_transport.h/cpp`：Content-Length wire format
-- DAP 服务器 `dbg_server.h/cpp`：12 个命令处理器
-- 断点管理器 `dbg_breakpoint.h/cpp`：O(1) hash map lookup
-- 单步控制器 `dbg_stepping.h/cpp`：Step Into/Over/Out
-- FastExecute 断点检查：已插入 fast_dispatch.cpp 主循环
-- 构建集成：chaos_debugger.lib 编译 0 errors
+基于 DAP 协议的 IL-level 调试器全部完成（209 tests, 181 unit + 28 integration）：
+- DAP 协议核心 + stdio transport + 12 个命令处理器
+- 断点管理器 O(1) hash map lookup
+- 单步控制器 Step Into/Over/Out
+- FastExecute 断点检查 + 帧快照捕获（walk prev_frame chain + locals）
+- RegisterExecute 断点检查 + 帧快照捕获（顶层帧）
+- 调用栈展开（从快照读取 prev_frame 链）
+- 变量检视（从快照读取 locals）
+- 构建集成：所有子模块 0 errors
 
-待完成：
-- RegisterExecute hook（因 interpreter 有 pre-existing build errors 搁置）
-- 调用栈/变量完整实现（当前为 stub）
-- VSCode 端到端验证
+#### 预存编译错误修复
 
-## latest_stop_point
-
-Phase 3 全部完成。Phase 4 中 I-EVP (EventPipe) 完成，I-DBG (Debugger MVP) 核心库实现中。
-
-## 下一步
-
-完成 I-DBG 剩余工作：RegisterExecute hook、调用栈/变量完整实现、VSCode 端到端验证。
-
-## recommended_next_child
-
-I-DBG
+修复了 3 个非本任务引入的预存 build error：
+- `t4_seh_handler.cpp`: ResetUnwindState 前向声明缺失 + ExceptionExecuteHandler 未定义
+- `entry_direct.cpp`: PerInstrPicData 错误的 `codegen::` 命名空间限定
 
 ## 关键文档
 

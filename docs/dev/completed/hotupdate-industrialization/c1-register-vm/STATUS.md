@@ -5,7 +5,8 @@
 > **parent_task_id**: hotupdate-industrialization
 > **source_relation**: roadmap-child
 > **clearance_source**: parent-roadmap
-> **phase**: in-progress
+> **phase**: completed
+> **lifecycle_status**: completed
 
 ## 范围
 

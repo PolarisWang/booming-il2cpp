@@ -11,3 +11,4 @@
 | [foundation-dll-full-development](foundation-dll-full-development/STATUS.md) | roadmap | in-progress | 2026-05-05 | Foundation DLL 全量 il2cpp 开发 | false |
 | [foundation-dll-phase-1-corelib](foundation-dll-phase-1-corelib/STATUS.md) | plan | in-progress | 2026-05-05 | Phase 1 System.Private.CoreLib 全量 il2cpp 开发 | false |
 | [runtime-external-reflection-type](runtime-external-reflection-type/STATUS.md) | plan | completed | 2026-05-05 | Runtime External 依赖实现 — Reflection/Type + Exception | false |
+| [20260523-runtimesupport-industrialization](20260523-runtimesupport-industrialization/STATUS.md) | roadmap | roadmap | 2026-05-23 | 启动 Phase 0 T0-1 | true |
