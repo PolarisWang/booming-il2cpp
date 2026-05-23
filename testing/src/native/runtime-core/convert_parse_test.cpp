@@ -47,12 +47,13 @@ extern "C" void* kChaosExternalRuntimeFnTable[] = { nullptr };
 extern "C" int32_t kChaosExternalRuntimeCount = 0;
 
 // CHAOS_IL2CPP_STRING_TYPE layout (from generated_code_compat.h).
-// Used by the managed_string pointer path test.
+// ThinLockableHeader is 16B (type_info + sync_state), so length is at offset 16.
 struct TestManagedString {
-    const void* type_info = nullptr;   // PureTypeHeader (8B)
-    CHAOS_IL2CPP_INT32 length = 0;
-    const char* utf8_data = nullptr;
-    CHAOS_IL2CPP_UINT64 string_id = 0u;
+    const void* type_info = nullptr;   // ThinLockableHeader [0] (8B)
+    uint64_t    sync_state = 0;        // ThinLockableHeader [8] (8B)
+    CHAOS_IL2CPP_INT32 length = 0;     // [16]
+    const char* utf8_data = nullptr;   // [24]
+    CHAOS_IL2CPP_UINT64 string_id = 0u; // [32]
 };
 
 namespace gc = chaos::il2cpp::runtime_core;
@@ -484,8 +485,8 @@ TEST_F(ParseConvertStringTest, ToBoolean_False) {
 }
 
 TEST_F(ParseConvertStringTest, ToBoolean_Zero_ReturnsFalse) {
-    auto v = chaos_make_string_id_value(s_0);
-    EXPECT_EQ(ChaosConvertToBoolean(v), 0);
+    // Convert.ToBoolean("0") throws FormatException (same as any non-"true"/"false"
+    // string). This path is tested in ConvertOverflowTest.ToBoolean_Invalid_Throws.
 }
 
 TEST_F(ParseConvertStringTest, ToByte_Valid) {

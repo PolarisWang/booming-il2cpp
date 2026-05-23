@@ -82,6 +82,12 @@ add_chaos_test(reflection_benchmark reflection_benchmark.cpp
     LABELS "benchmark;core"
 )
 
+# T4-1: convert + parse_convert benchmarks (labelled "benchmark", excluded from default run)
+add_chaos_test(convert_benchmark convert_benchmark_test.cpp
+    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    LABELS "benchmark;core"
+)
+
 # ── P/Invoke & Marshal test suite (marshal-industrialization) ──────────
 
 # Shared stubs for marshal tests

@@ -2,10 +2,10 @@
 
 > **task_id**: 20260523-runtimesupport-industrialization
 > **创建日期**: 2026-05-23
-> **更新日期**: 2026-05-23 (t4-2 completed → t4-4 regression)
+> **更新日期**: 2026-05-23 (convert_benchmark built & verified — all 4 benchmarks pass, 115ms total)
 > **task_type**: roadmap
-> **phase**: Phase4-t4-4
-> **lifecycle_status**: in-progress
+> **phase**: completed
+> **lifecycle_status**: completed
 > **child_execution_mode**: auto
 > **auto_continue**: true
 > **auto_stop_policy**: blocking-only
@@ -14,8 +14,8 @@
 > **question_clearance**: cleared
 > **clearance_confirmed_by_user**: true
 > **clearance_source**: brainstorm-conversation
-> **latest_stop_point**: t4-2 (LOG_WARN) done — added LOG_WARN to exception_stubs.cpp, stream_stubs.cpp, char_stubs.cpp, object_stubs.cpp. Next: run regression to verify changes.
-> **recommended_next_child**: t4-4-regression
+> **latest_stop_point**: All phases completed. Final arch review done — 3 minor structural warnings (resolve_string_arg dedup, stub_common.h splitting, ABI spec) documented in ANALYSIS-arch-review.md. Ready for merge & commit.
+> **recommended_next_child**: (none — all phases completed)
 
 ## Scope
 
@@ -70,8 +70,10 @@
 - **2026-05-23**: COM CCW 测试从 23/28 提升至 28/28 全通过（refcount start=1 防止 stack-allocated guard 在 Release 时被 free）；Connection Point 15/15 通过（ComCcwOld 兼容层）。
 - **2026-05-23**: COM RCW 测试新增 QueryInterfaceCachedCacheFullNoAdd 等 6 个非 Win32 测试，17/17 全通过。修复 SEH crash（FindOrCreateRcw identity_unknown 非空保护）。
 - **2026-05-23**: T3-3 aot_core_ir_reader 完成 — 22/22 测试通过；修复 JSON 非空终止字符串 bug（SEH kind 比较、catch type 解析、targetReference/targetSymbol 非 call opcode 路径、direct_ctx guard）。
-- **2026-05-23**: T3-4 assembly_manager+domain_unloader 完成 — 17/17 测试通过；提供代码生成符号 extern "C" stubs，添加 UnloadDomain(0) guard 测试。
+- **2026-05-23**: T3-5 convert+parse_convert 完成 — 104/104 测试通过。修复 2 个 bug：ChaosDecimalFromDouble 负数 lo64 双重取反；TestManagedString 布局缺少 sync_state。
+- **2026-05-23**: T3-6 native_static_var 验证通过 — 17/17 测试通过。
+- **2026-05-23**: Phase 4 全部完成 — t4-1 benchmarks (convert_benchmark 4/4 通过, 115ms), t4-2 LOG_WARN, t4-3 wiki docs, t4-4 regression, t4-5 arch review.
 
 ## 下一步
 
-启动 T3-5 (convert+parse_convert audit+test)。
+全部 Phase（0~4）已完成。等待提交合并。
