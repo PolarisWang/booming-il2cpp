@@ -52,6 +52,17 @@ void EnterCooperativeMode() {}
 }  // namespace threading
 }}}  // namespace chaos::il2cpp::runtime_core
 
+// Stub for enum_stubs RaiseManagedException — not reached in null-safety tests.
+namespace chaos { namespace il2cpp { namespace runtime_core {
+void RaiseManagedException(const char*, const char*) noexcept {}
+void RaiseArgumentException(const char*) noexcept {}
+}}}  // namespace chaos::il2cpp::runtime_core
+
+// Extern "C" for reflection stubs — required by enum_stubs.cpp (compiled directly).
+extern "C" {
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeFromHandle(CHAOS_IL2CPP_INTPTR) noexcept { return 0; }
+}
+
 // Stub for string_table::Resolve — our tests never pass string_id-tagged values,
 // so this is never reached in practice. Required because string_stubs.cpp
 // calls it from resolve_string_arg().
