@@ -64,6 +64,15 @@ struct CodegenCallVirtArgs {
 };
 // Total: 64 bytes (aligns to 8)
 
+/// Per-instruction PIC data for inline monomorphic cache.
+/// Populated by entry_direct.cpp from the first PIC chain slot for each
+/// CallVirt instruction.  Zero entries mean "no inline data available"
+/// (fall back to the full CodegenCallVirt path).
+struct PerInstrPicData {
+    uint32_t expected_type_token = 0;
+    void*    direct_fn = nullptr;
+};
+
 // Returns the uint64_t result value (0 if no return).
 // Internal: reads args from gpr_base, calls direct_fn on PIC hit,
 // vtable_resolve on PIC miss with method_token, or deoptimization on miss.

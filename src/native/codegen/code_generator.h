@@ -16,6 +16,7 @@
 // operations load from stack, compute via scratch registers, store to stack.
 
 #include "native_method.h"
+#include "codegen_helpers.h"
 #include "../interpreter/ir_reg_alloc.h"  // RegisterMethod, RegisterInstruction
 
 #include <cstdint>
@@ -92,6 +93,15 @@ struct CodeGenConfig {
     // unavailable.  Indexed by current_instr_index_.
     const uint8_t* method_ret_tags = nullptr;
     uint32_t       method_ret_tag_count = 0;
+
+    // ── Per-instruction PIC data for inline monomorphic cache ──────────
+    // Populated by entry_direct.cpp from the first PIC chain slot for each
+    // CallVirt instruction.  When non-null and the entry for the current
+    // instruction has a valid direct_fn, the code generator emits an inline
+    // monomorphic check + direct call instead of going through CodegenCallVirt.
+    // Indexed by current_instr_index_.
+    const PerInstrPicData* per_instr_pic = nullptr;
+    uint32_t               per_instr_pic_count = 0;
 };
 
 /// Generate native x64 code from a RegisterMethod.
