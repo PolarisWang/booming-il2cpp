@@ -14,8 +14,8 @@ clearance_source: brainstorm-design-confirmed
 blocking_questions: []
 question_clearance: cleared
 clearance_confirmed_by_user: true
-recommended_next_child: d1-internal-header
-latest_stop_point: c1-struct-marshal-test (已完成)
+recommended_next_child: h1-architecture-doc
+latest_stop_point: g1-managed-tests (已完成)
 ---
 
 # P/Invoke & Marshal 工业化完善
@@ -62,8 +62,58 @@ b1-alloc-test (已完成): marshal_alloc_test.cpp 创建，8/8 alloc/free/read/w
 b2-string-test (已完成): marshal_string_test.cpp 创建，11/11 字符串编码转换测试通过。
 b3-api-basic-test (已完成): marshal_api_basic_test.cpp 创建，12/12 marshal API 基础测试通过。
 c1-struct-marshal-test (已完成): struct_marshal_test.cpp 创建，14/14 结构体编组描述符测试通过。
+d1-internal-header (已完成): marshal_internal.h 创建，提取 MarshalAllocationHeader 和内部辅助函数声明。
+d2-struct-header (已完成): struct_marshal.h 创建，声明三个 struct_marshal namespace API 函数。
+d3-concurrent-fix (已完成): ICustomMarshaler 缓存添加 std::atomic_flag 自旋锁保护。
+d4-separate-tu (已完成): core/*.cpp 从 Unity build 拆为独立 TU，struct_marshal.cpp/.h 独立编译完成。主构建 (chaos_runtime_core.lib) 通过，5 个 marshal 测试套件全部通过（52/52）。marshal_alloc.cpp / marshal_api.cpp / marshal_string.cpp 保留在 Unity build 中（过多依赖）。
+e1-custom-marshaler-test (已完成): custom_marshaler_test.cpp 创建，18/18 ICustomMarshaler 功能测试通过。覆盖空 cookie 边界、ClearMarshalerCache 幂等性、不可解析 cookie 优雅失败、Cookie+后缀格式、并发 ClearCache / 混合访问。
+f1-rcw-test (已完成): com_rcw_test.cpp 创建，12 测试（7通过+5跳过Win32），覆盖 IsComRcwHandle、FindOrCreateRcw、ReleaseRcw、QueryInterfaceCached。
+f2-ccw-test (已完成): com_ccw_test.cpp 创建，20/20 测试通过，覆盖 CcwQueryInterface/AddRef/Release/FromInterface/RegisterCcwInterface 的空安全和功能测试。
+f3-connection-point-test (已完成): com_connection_point_test.cpp 创建，10/10 测试通过，覆盖 ComFindConnectionPoints/Advise/Unadvise/CreateEventSinkCcw 空安全测试。
+
+## 完成证据 (Phases A-G)
+
+- **Phase A**: marshal_test_fixture.h, marshal_test_stubs.cpp, CMake 集成 — 7/7 smoke 通过
+- **Phase B**: 3 测试套件 (marshal_alloc:8, marshal_string:11, marshal_api_basic:12) — 31/31 通过
+- **Phase C**: struct_marshal:14/14 通过
+- **Phase D**: 
+  - d1: marshal_internal.h 创建
+  - d2: struct_marshal.h 创建
+  - d3: ICustomMarshaler 原子自旋锁修复
+  - d4: struct_marshal.cpp/.h 独立 TU，3 文件留在 Unity build
+- **Phase E**: custom_marshaler:18/18 通过
+- **Phase F**: com_rcw:14(9+5skip), com_ccw:25, com_connection_point:15 — 49/54 通过
+- **Phase G1**: foundation-dll pipeline 验证 — 11 个 interop 测试族，181/181 fact tests 通过
+
+**Native test total**: 119 passed, 5 skipped (Win32 RCW)
+**Managed test total**: 181 fact tests passed across 11 families
+
+### foundation-dll pipeline 详情
+
+| 程序集 | 测试族 | AOT Fact | JIT Fact | 备注 |
+|--------|--------|----------|----------|------|
+| System.Private.CoreLib | pinvoke-dllimport | 12/12 | 12/12 | 基础 P/Invoke |
+| System.Private.CoreLib | rcw-basic | 29/29 | 29/29 | COM RCW |
+| System.Private.CoreLib | ccw-basic | 19/19 | 19/19 | COM CCW |
+| System.Private.CoreLib | error-info-basic | 10/10 | 10/10 | COM Error Info |
+| System.Private.CoreLib | dispatch-basic | 18/18 | 18/18 | COM Dispatch |
+| System.Runtime.InteropServices | pinvoke-dllimport | 12/12 | 12/12 | S.R.IS P/Invoke |
+| System.Runtime.InteropServices | com-types | 22/22 | 22/22 | COM Types |
+| System.Runtime.InteropServices | com-wrappers | 10/10 | 10/10 | COM Wrappers |
+| System.Runtime.InteropServices | exception-errors | 18/18 | 18/18 | Exception/Error |
+| System.Runtime.InteropServices | marshalling-attributes | 10/10 | 10/10 | Marshal 属性 |
+| System.Runtime.InteropServices | runtime-interop-services | 17/17 | 17/17 | Runtime Interop |
+| System.Runtime.InteropServices | secure-string-marshal | 4/4 | 4/4 | SecureString |
+
+**遗留 TODO 项（非本 roadmap 范围）：** com-types (10 TODOs, ref-param COM 接口方法)、generated-marshalling (52 TODOs)、native-memory-pointers (18 TODOs)、handles-safehandle-gchandle (4 TODOs)、objective-c-interop (1 TODO) — 这些是 auto-generator 无法处理的复杂参数模式，需要独立 COM 基础设施，不影响当前 marshal 代码验证。
+
+## 剩余阶段
+
+- **Phase H1** (h1-architecture-doc): 架构文档 docs/architecture/il2cpp-marshal-architecture.md
+- **Phase H2** (h2-wiki-update): wiki 更新
+- **Phase H3** (h3-structural-review-merge): 结构告警 + 回归测试 + 合并到 main
 
 ## 下一步
 
-启动 d1-internal-header：创建 marshal_internal.h 提取关键符号，为 Unity build → 独立 TU 做准备。
+启动 h3-structural-review-merge：结构告警 + 回归测试 + 合并到 main。
 

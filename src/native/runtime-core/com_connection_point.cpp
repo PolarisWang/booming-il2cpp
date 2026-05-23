@@ -6,6 +6,7 @@
 #include "com_ccw.h"
 #include "runtime_core.h"
 #include "com_connection_point.h"
+#include "memory_domain.h"
 
 namespace chaos::il2cpp::runtime_core {
 
@@ -51,7 +52,7 @@ uint32_t ComFindConnectionPoints(
     }
 
     auto* ccw = reinterpret_cast<chaos::il2cpp::com_ccw::ComCcw*>(
-        static_cast<void*>(ccw_handle));
+        reinterpret_cast<void*>(ccw_handle));
 
     // Scan the CCW's registered interfaces for a match against the
     // requested source interface IID.
@@ -77,12 +78,12 @@ uint32_t ComAdvise(
     }
 
     auto* ccw = reinterpret_cast<chaos::il2cpp::com_ccw::ComCcw*>(
-        static_cast<void*>(ccw_handle));
+        reinterpret_cast<void*>(ccw_handle));
 
     // Lazily allocate the ConnectionPointContainer on first Advise.
     if (ccw->cp_container == nullptr) {
         auto* container = static_cast<ConnectionPointContainer*>(
-            CHAOS_IL2CPP_MALLOC(sizeof(ConnectionPointContainer)));
+            memory_domain::DomainCurrentAllocateTagged(sizeof(ConnectionPointContainer)));
         if (container == nullptr) {
             return kE_FAIL;
         }
@@ -105,7 +106,7 @@ uint32_t ComAdvise(
 
     // Allocate a new ConnectionPoint node.
     auto* cp = static_cast<ConnectionPoint*>(
-        CHAOS_IL2CPP_MALLOC(sizeof(ConnectionPoint)));
+        memory_domain::DomainCurrentAllocateTagged(sizeof(ConnectionPoint)));
     if (cp == nullptr) {
         return kE_FAIL;
     }
@@ -138,7 +139,7 @@ uint32_t ComUnadvise(
     }
 
     auto* ccw = reinterpret_cast<chaos::il2cpp::com_ccw::ComCcw*>(
-        static_cast<void*>(ccw_handle));
+        reinterpret_cast<void*>(ccw_handle));
 
     if (ccw->cp_container == nullptr) {
         return kCONNECT_E_NOCONNECTION;
@@ -171,7 +172,7 @@ uint32_t ComUnadvise(
             }
 
             // Free the ConnectionPoint node.
-            CHAOS_IL2CPP_FREE(cur);
+            memory_domain::DomainFreeTagged(cur);
 
             CHAOS_IL2CPP_LOG_DEBUG_M("COM", "CCW {0}: Unadvise cookie={1}",
                                       reinterpret_cast<void*>(ccw), cookie);

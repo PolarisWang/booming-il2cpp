@@ -4,6 +4,7 @@
 // (RuntimeHelperShapeRegistry.cs) already references in its StructureToPtr<T>,
 // PtrToStructure<T>, and DestroyStructure<T> shapes.
 
+#include "struct_marshal.h"
 #include "runtime_core.h"
 
 #include <chaos/type_info.h>

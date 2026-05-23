@@ -5,6 +5,7 @@
 #include <chaos/unordered_dense.h>
 #include <chaos/log.h>
 #include "com_rcw.h"
+#include "memory_domain.h"
 
 // On Windows, QueryInterface uses the real Windows GUID/IUnknown types.
 #if defined(_WIN32)
@@ -35,7 +36,7 @@ ComRcwNative* FindOrCreateRcw(void* unknown_ptr) noexcept {
     }
 
     // Allocate new RCW.
-    auto* rcw = static_cast<ComRcwNative*>(std::malloc(sizeof(ComRcwNative)));
+    auto* rcw = static_cast<ComRcwNative*>(memory_domain::DomainCurrentAllocateTagged(sizeof(ComRcwNative)));
     if (rcw == nullptr) return nullptr;
 
     rcw->magic = kComRcwMagic;
@@ -98,7 +99,7 @@ void ReleaseRcw(ComRcwNative* rcw) noexcept {
 
     CHAOS_IL2CPP_LOG_DEBUG_M("COM", "Released RCW {0} for IUnknown {1}",
                               static_cast<void*>(rcw), rcw->identity_unknown);
-    std::free(rcw);
+    memory_domain::DomainFreeTagged(rcw);
 }
 
 void* QueryInterfaceCached(ComRcwNative* rcw, const void* iid_bytes) noexcept {
@@ -108,7 +109,7 @@ void* QueryInterfaceCached(ComRcwNative* rcw, const void* iid_bytes) noexcept {
     // grows; entries are written-once).
     for (CHAOS_IL2CPP_SIZE i = 0; i < rcw->cache_count; ++i) {
         auto& entry = rcw->interface_cache[i];
-        if (std::memcmp(entry.iid, iid_bytes, 16) == 0) {
+        if (CHAOS_IL2CPP_MEMCMP(entry.iid, iid_bytes, 16) == 0) {
             entry.refcount++;
             return entry.interface_ptr;
         }

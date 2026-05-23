@@ -6,6 +6,7 @@
 #include <runtime_abi.h>
 #include "generated_code_compat.h"
 #include "com_ccw.h"
+#include "memory_domain.h"
 
 namespace chaos::il2cpp::com_ccw {
 namespace {
@@ -101,7 +102,7 @@ CHAOS_IL2CPP_UINT32 CHAOS_RUNTIME_ABI_CALL CcwRelease(void* self) noexcept {
             }
         }
 
-        std::free(ccw);
+        memory_domain::DomainFreeTagged(ccw);
     }
     return remaining;
 }
@@ -109,12 +110,14 @@ CHAOS_IL2CPP_UINT32 CHAOS_RUNTIME_ABI_CALL CcwRelease(void* self) noexcept {
 // ── IDispatch helper implementations ──
 
 CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL CcwGetTypeInfoCount(void* self, CHAOS_IL2CPP_UINT32* pctinfo) noexcept {
+    CHAOS_IL2CPP_LOG_WARN_M("COM", "CcwGetTypeInfoCount called — stub (returns 0)");
     if (pctinfo == nullptr) return kE_POINTER;
     *pctinfo = 0;  // No type info available
     return kS_OK;
 }
 
 CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL CcwGetTypeInfo(void* self, CHAOS_IL2CPP_UINT32 iTInfo, CHAOS_IL2CPP_UINT32 lcid, void** ppTInfo) noexcept {
+    CHAOS_IL2CPP_LOG_WARN_M("COM", "CcwGetTypeInfo called — stub (returns E_NOTIMPL)");
     if (ppTInfo == nullptr) return kE_POINTER;
     *ppTInfo = nullptr;
     return kE_NOTIMPL;
@@ -133,7 +136,7 @@ ComCcwVtbl s_ccw_vtbl = {
 CHAOS_IL2CPP_INTPTR CreateCcw(void* managed_object, void* runtime_state) noexcept {
     if (managed_object == nullptr) return 0;
 
-    auto* ccw = static_cast<ComCcw*>(std::malloc(sizeof(ComCcw)));
+    auto* ccw = static_cast<ComCcw*>(memory_domain::DomainCurrentAllocateTagged(sizeof(ComCcw)));
     if (ccw == nullptr) return 0;
 
     // Allocate a GCHandle to root the managed object.
@@ -174,7 +177,7 @@ CHAOS_IL2CPP_INTPTR CreateCcwAggregated(void* managed_object, void* runtime_stat
                                          void* outer_unknown) noexcept {
     if (managed_object == nullptr || outer_unknown == nullptr) return 0;
 
-    auto* ccw = static_cast<ComCcw*>(std::malloc(sizeof(ComCcw)));
+    auto* ccw = static_cast<ComCcw*>(memory_domain::DomainCurrentAllocateTagged(sizeof(ComCcw)));
     if (ccw == nullptr) return 0;
 
     // Allocate a GCHandle to root the managed object.
@@ -239,7 +242,7 @@ void DestroyCcw(void* ccw_ptr) noexcept {
         }
     }
 
-    std::free(ccw);
+    memory_domain::DomainFreeTagged(ccw);
 }
 
 bool RegisterCcwInterface(void* ccw_ptr, const CHAOS_IL2CPP_UINT8* guid, void* vtable) noexcept {

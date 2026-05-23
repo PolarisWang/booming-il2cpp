@@ -1,4 +1,9 @@
+#include "marshal_internal.h"
+#include "runtime_core.h"
+#include "runtime_stubs/stub_common.h"
+
 namespace chaos::il2cpp::runtime_core {
+using namespace chaos::il2cpp::marshal_abi;
 
 CHAOS_IL2CPP_INT32 InteropKernel32GetLastError() {
 #if defined(_WIN32)
@@ -175,11 +180,5 @@ void* MarshalAnsiToString(RuntimeState* runtime_state, ThreadState* thread_state
     return StringNewUtf8(runtime_state, thread_state, ansi_buf, static_cast<CHAOS_IL2CPP_UINTPTR>(byte_len));
 #endif
 }
-
-ValueTypeKernelBackendKind GetCharClassificationKernelBackend() { return kCharClassificationKernelBackend; }
-ValueTypeKernelBackendKind GetFloatingClassificationKernelBackend() { return kFloatingClassificationKernelBackend; }
-ValueTypeKernelBackendKind GetBitArithmeticKernelBackend() { return kBitArithmeticKernelBackend; }
-ValueTypeKernelBackendKind GetTickArithmeticKernelBackend() { return kTickArithmeticKernelBackend; }
-VectorKernelBackendKind GetVectorKernelBackend() { return kVectorKernelBackend; }
 
 }  // namespace chaos::il2cpp::runtime_core

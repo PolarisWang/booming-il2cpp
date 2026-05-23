@@ -1,11 +1,19 @@
-namespace chaos::il2cpp::runtime_core {
-namespace {
+#include <marshal_abi.h>
+#include "memory_domain.h"
 
-static void* GetMarshalAllocationStorage(CHAOS_IL2CPP_INTPTR memory) {
+// GetMarshalAllocationStorage: cast raw CHAOS_IL2CPP_INTPTR to usable void* pointer.
+// Defined here (not in marshal_internal.h) because marshal_alloc.cpp is compiled
+// as part of the Unity build where including marshal_internal.h would cause
+// AllocateBytes/FreeBytes ambiguity with anonymous-namespace definitions in
+// runtime_init.cpp and object_creation.cpp.
+inline static void* GetMarshalAllocationStorage(CHAOS_IL2CPP_INTPTR memory) {
     return reinterpret_cast<void*>(memory);
 }
 
-static MarshalAllocationHeader* TryGetMarshalAllocationHeader(CHAOS_IL2CPP_INTPTR memory) {
+namespace chaos::il2cpp::runtime_core {
+using namespace chaos::il2cpp::marshal_abi;
+
+MarshalAllocationHeader* TryGetMarshalAllocationHeader(CHAOS_IL2CPP_INTPTR memory) {
     if (memory == 0) {
         return nullptr;
     }
@@ -14,7 +22,7 @@ static MarshalAllocationHeader* TryGetMarshalAllocationHeader(CHAOS_IL2CPP_INTPT
     return header->magic == kMarshalAllocationMagic ? header : nullptr;
 }
 
-static CHAOS_IL2CPP_INTPTR AllocateMarshalBlock(RuntimeState* runtime_state, CHAOS_IL2CPP_SIZE requested_size, MarshalAllocationKind kind) {
+CHAOS_IL2CPP_INTPTR AllocateMarshalBlock(RuntimeState* runtime_state, CHAOS_IL2CPP_SIZE requested_size, MarshalAllocationKind kind) {
     const CHAOS_IL2CPP_SIZE safe_size = requested_size == 0u ? 1u : requested_size;
 
     auto* domain = memory_domain::CurrentDomain();
@@ -23,9 +31,11 @@ static CHAOS_IL2CPP_INTPTR AllocateMarshalBlock(RuntimeState* runtime_state, CHA
     if (domain != nullptr && domain->heap != nullptr) {
         allocation = domain->heap->Allocate(sizeof(MarshalAllocationHeader) + safe_size);
         if (allocation != nullptr) {
-            domain->current_usage += safe_size;
-            if (domain->current_usage > domain->peak_usage) {
-                domain->peak_usage = domain->current_usage;
+            CHAOS_IL2CPP_INT64 new_usage = domain->current_usage.load(std::memory_order_relaxed) + static_cast<CHAOS_IL2CPP_INT64>(safe_size);
+            domain->current_usage.store(new_usage, std::memory_order_relaxed);
+            CHAOS_IL2CPP_INT64 old_peak = domain->peak_usage.load(std::memory_order_relaxed);
+            if (new_usage > old_peak) {
+                domain->peak_usage.store(new_usage, std::memory_order_relaxed);
             }
         }
     } else {
@@ -44,7 +54,7 @@ static CHAOS_IL2CPP_INTPTR AllocateMarshalBlock(RuntimeState* runtime_state, CHA
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(allocation) + sizeof(MarshalAllocationHeader);
 }
 
-static CHAOS_IL2CPP_INTPTR ReallocateMarshalBlock(RuntimeState* runtime_state, CHAOS_IL2CPP_INTPTR memory, CHAOS_IL2CPP_SIZE requested_size, MarshalAllocationKind kind) {
+CHAOS_IL2CPP_INTPTR ReallocateMarshalBlock(RuntimeState* runtime_state, CHAOS_IL2CPP_INTPTR memory, CHAOS_IL2CPP_SIZE requested_size, MarshalAllocationKind kind) {
     if (memory == 0) {
         return AllocateMarshalBlock(runtime_state, requested_size, kind);
     }
@@ -99,7 +109,7 @@ static CHAOS_IL2CPP_INTPTR ReallocateMarshalBlock(RuntimeState* runtime_state, C
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(resized);
 }
 
-static bool FreeMarshalBlock(RuntimeState* runtime_state, CHAOS_IL2CPP_INTPTR memory, MarshalAllocationKind kind, bool zero_before_free) {
+bool FreeMarshalBlock(RuntimeState* runtime_state, CHAOS_IL2CPP_INTPTR memory, MarshalAllocationKind kind, bool zero_before_free) {
     if (memory == 0) {
         return true;
     }
@@ -133,26 +143,6 @@ static bool FreeMarshalBlock(RuntimeState* runtime_state, CHAOS_IL2CPP_INTPTR me
     return true;
 }
 
-template <typename TValue>
-static TValue MarshalReadValue(CHAOS_IL2CPP_INTPTR address, CHAOS_IL2CPP_INT32 offset) {
-    TValue value = {};
-    if (address == 0) {
-        return value;
-    }
-    auto* source = reinterpret_cast<const unsigned char*>(GetMarshalAllocationStorage(address)) + offset;
-    CHAOS_IL2CPP_MEMCPY(&value, source, sizeof(TValue));
-    return value;
-}
-
-template <typename TValue>
-static void MarshalWriteValue(CHAOS_IL2CPP_INTPTR address, CHAOS_IL2CPP_INT32 offset, TValue value) {
-    if (address == 0) {
-        return;
-    }
-    auto* destination = reinterpret_cast<unsigned char*>(GetMarshalAllocationStorage(address)) + offset;
-    CHAOS_IL2CPP_MEMCPY(destination, &value, sizeof(TValue));
-}
-
 bool IsAttached(RuntimeState* runtime_state, ThreadState* thread_state) {
     return runtime_state != nullptr && thread_state != nullptr && thread_state->runtime_state == runtime_state;
 }
@@ -165,5 +155,4 @@ ThreadInternalState* GetThreadInternalState(ThreadState* thread_state) {
     return thread_state != nullptr ? thread_state->internal_state : nullptr;
 }
 
-}  // anonymous namespace
 }  // namespace chaos::il2cpp::runtime_core

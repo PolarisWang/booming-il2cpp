@@ -6,6 +6,10 @@
 #include <atomic>
 #include <chaos/native_types.h>
 #include "com_abi.h"
+#include "com_connection_point.h"
+
+// Forward declaration for connection point container (defined in runtime_core namespace).
+namespace chaos::il2cpp::runtime_core { struct ConnectionPointContainer; }
 
 namespace chaos::il2cpp::com_ccw {
 
@@ -33,6 +37,9 @@ struct ComCcwInterfaceEntry {
     void* vtable;                       // Interface-specific vtable (IUnknown-compatible layout)
     void* ccw_ptr;                      // Back-pointer to owning ComCcw
 };
+
+// Forward declaration for connection point container (defined in runtime_core namespace).
+namespace chaos::il2cpp::runtime_core { struct ConnectionPointContainer; }
 
 /// CCW vtable — IUnknown only for V1.
 /// Extended vtables (for specific COM interfaces) require codegen
@@ -62,6 +69,7 @@ struct ComCcw {
     bool  is_aggregated;                          // true when outer_unknown is valid
 
     ComCcwInterfaceEntry interfaces[kMaxCcwInterfaces]; // GUID→vtable map (entry 0 = IUnknown)
+    runtime_core::ConnectionPointContainer* cp_container;
 };
 
 // ── IUnknown vtable function declarations (external linkage for generated code) ──
