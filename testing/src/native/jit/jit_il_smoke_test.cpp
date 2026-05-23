@@ -11,9 +11,9 @@
 
 #include <gtest/gtest.h>
 
-#include "code_generator.h"
-#include "native_method.h"
-#include "codegen_helpers.h"
+#include "jit_engine.h"
+#include "jit_method.h"
+#include "jit_helpers.h"
 #include "ir_reg_alloc.h"
 
 #include <windows.h>
@@ -34,10 +34,10 @@ using chaos::il2cpp::interpreter::kRegHasSrc2;
 using chaos::il2cpp::interpreter::kRegHasImm;
 using chaos::il2cpp::interpreter::kRegIsBranch;
 using chaos::il2cpp::interpreter::kRegIsStore;
-using chaos::il2cpp::codegen::GenerateNativeCode;
-using chaos::il2cpp::codegen::CanGenerateNativeCode;
-using chaos::il2cpp::codegen::NativeMethod;
-using chaos::il2cpp::codegen::CodeGenConfig;
+using chaos::il2cpp::jit::Compile;
+using chaos::il2cpp::jit::CanCompile;
+using chaos::il2cpp::jit::JitMethod;
+using chaos::il2cpp::jit::CompileConfig;
 
 using chaos::il2cpp::runtime_core::TLAB;
 using chaos::il2cpp::runtime_core::tls_tlab;
@@ -80,7 +80,7 @@ static uint64_t ExecuteNative(void* entry) {
     return ret_buf[0];
 }
 
-static void* SealAndGetEntry(NativeMethod* nm) {
+static void* SealAndGetEntry(JitMethod* nm) {
     if (nm == nullptr || nm->code == nullptr) return nullptr;
     return nm->code;
 }
@@ -135,8 +135,8 @@ TEST_F(CodegenIlSmokeTest, LdcI4_Ret) {
     method.instructions.push_back(InstrI4(IROpCode::LdcI4, 42, 0, 0));
     method.instructions.push_back(InstrRet(0));
 
-    ASSERT_TRUE(CanGenerateNativeCode(method));
-    auto* nm = GenerateNativeCode(method);
+    ASSERT_TRUE(CanCompile(method));
+    auto* nm = Compile(method);
     ASSERT_NE(nm, nullptr);
     void* entry = SealAndGetEntry(nm);
     ASSERT_NE(entry, nullptr);
@@ -149,8 +149,8 @@ TEST_F(CodegenIlSmokeTest, LdcI4_MaxValue) {
     method.instructions.push_back(InstrI4(IROpCode::LdcI4, INT32_MAX, 0, 0));
     method.instructions.push_back(InstrRet(0));
 
-    ASSERT_TRUE(CanGenerateNativeCode(method));
-    auto* nm = GenerateNativeCode(method);
+    ASSERT_TRUE(CanCompile(method));
+    auto* nm = Compile(method);
     ASSERT_NE(nm, nullptr);
     void* entry = SealAndGetEntry(nm);
     ASSERT_NE(entry, nullptr);
@@ -163,8 +163,8 @@ TEST_F(CodegenIlSmokeTest, LdcI4_MinValue) {
     method.instructions.push_back(InstrI4(IROpCode::LdcI4, INT32_MIN, 0, 0));
     method.instructions.push_back(InstrRet(0));
 
-    ASSERT_TRUE(CanGenerateNativeCode(method));
-    auto* nm = GenerateNativeCode(method);
+    ASSERT_TRUE(CanCompile(method));
+    auto* nm = Compile(method);
     ASSERT_NE(nm, nullptr);
     void* entry = SealAndGetEntry(nm);
     ASSERT_NE(entry, nullptr);
@@ -179,8 +179,8 @@ TEST_F(CodegenIlSmokeTest, Add_Simple) {
     method.instructions.push_back(InstrBinary(IROpCode::Add, 2, 0, 1));
     method.instructions.push_back(InstrRet(2));
 
-    ASSERT_TRUE(CanGenerateNativeCode(method));
-    auto* nm = GenerateNativeCode(method);
+    ASSERT_TRUE(CanCompile(method));
+    auto* nm = Compile(method);
     ASSERT_NE(nm, nullptr);
     void* entry = SealAndGetEntry(nm);
     ASSERT_NE(entry, nullptr);
@@ -195,8 +195,8 @@ TEST_F(CodegenIlSmokeTest, Add_NegativeValues) {
     method.instructions.push_back(InstrBinary(IROpCode::Add, 2, 0, 1));
     method.instructions.push_back(InstrRet(2));
 
-    ASSERT_TRUE(CanGenerateNativeCode(method));
-    auto* nm = GenerateNativeCode(method);
+    ASSERT_TRUE(CanCompile(method));
+    auto* nm = Compile(method);
     ASSERT_NE(nm, nullptr);
     void* entry = SealAndGetEntry(nm);
     ASSERT_NE(entry, nullptr);
@@ -211,8 +211,8 @@ TEST_F(CodegenIlSmokeTest, Sub_NegativeResult) {
     method.instructions.push_back(InstrBinary(IROpCode::Sub, 2, 0, 1));
     method.instructions.push_back(InstrRet(2));
 
-    ASSERT_TRUE(CanGenerateNativeCode(method));
-    auto* nm = GenerateNativeCode(method);
+    ASSERT_TRUE(CanCompile(method));
+    auto* nm = Compile(method);
     ASSERT_NE(nm, nullptr);
     void* entry = SealAndGetEntry(nm);
     ASSERT_NE(entry, nullptr);
@@ -227,8 +227,8 @@ TEST_F(CodegenIlSmokeTest, Mul_Zero) {
     method.instructions.push_back(InstrBinary(IROpCode::Mul, 2, 0, 1));
     method.instructions.push_back(InstrRet(2));
 
-    ASSERT_TRUE(CanGenerateNativeCode(method));
-    auto* nm = GenerateNativeCode(method);
+    ASSERT_TRUE(CanCompile(method));
+    auto* nm = Compile(method);
     ASSERT_NE(nm, nullptr);
     void* entry = SealAndGetEntry(nm);
     ASSERT_NE(entry, nullptr);
@@ -243,8 +243,8 @@ TEST_F(CodegenIlSmokeTest, Mul_ByOne) {
     method.instructions.push_back(InstrBinary(IROpCode::Mul, 2, 0, 1));
     method.instructions.push_back(InstrRet(2));
 
-    ASSERT_TRUE(CanGenerateNativeCode(method));
-    auto* nm = GenerateNativeCode(method);
+    ASSERT_TRUE(CanCompile(method));
+    auto* nm = Compile(method);
     ASSERT_NE(nm, nullptr);
     void* entry = SealAndGetEntry(nm);
     ASSERT_NE(entry, nullptr);
@@ -259,8 +259,8 @@ TEST_F(CodegenIlSmokeTest, BitwiseAnd) {
     method.instructions.push_back(InstrBinary(IROpCode::And, 2, 0, 1));
     method.instructions.push_back(InstrRet(2));
 
-    ASSERT_TRUE(CanGenerateNativeCode(method));
-    auto* nm = GenerateNativeCode(method);
+    ASSERT_TRUE(CanCompile(method));
+    auto* nm = Compile(method);
     ASSERT_NE(nm, nullptr);
     void* entry = SealAndGetEntry(nm);
     ASSERT_NE(entry, nullptr);
@@ -275,8 +275,8 @@ TEST_F(CodegenIlSmokeTest, BitwiseOr) {
     method.instructions.push_back(InstrBinary(IROpCode::Or, 2, 0, 1));
     method.instructions.push_back(InstrRet(2));
 
-    ASSERT_TRUE(CanGenerateNativeCode(method));
-    auto* nm = GenerateNativeCode(method);
+    ASSERT_TRUE(CanCompile(method));
+    auto* nm = Compile(method);
     ASSERT_NE(nm, nullptr);
     void* entry = SealAndGetEntry(nm);
     ASSERT_NE(entry, nullptr);
@@ -291,8 +291,8 @@ TEST_F(CodegenIlSmokeTest, ShiftLeft) {
     method.instructions.push_back(InstrBinary(IROpCode::Shl, 2, 0, 1));
     method.instructions.push_back(InstrRet(2));
 
-    ASSERT_TRUE(CanGenerateNativeCode(method));
-    auto* nm = GenerateNativeCode(method);
+    ASSERT_TRUE(CanCompile(method));
+    auto* nm = Compile(method);
     ASSERT_NE(nm, nullptr);
     void* entry = SealAndGetEntry(nm);
     ASSERT_NE(entry, nullptr);
@@ -311,8 +311,8 @@ TEST_F(CodegenIlSmokeTest, Branch_LessThan) {
     method.instructions.push_back(InstrI4(IROpCode::LdcI4, 0, 2, 0));
     method.instructions.push_back(InstrRet(2));
 
-    ASSERT_TRUE(CanGenerateNativeCode(method));
-    auto* nm = GenerateNativeCode(method);
+    ASSERT_TRUE(CanCompile(method));
+    auto* nm = Compile(method);
     ASSERT_NE(nm, nullptr);
     void* entry = SealAndGetEntry(nm);
     ASSERT_NE(entry, nullptr);
@@ -331,8 +331,8 @@ TEST_F(CodegenIlSmokeTest, Branch_Equal) {
     method.instructions.push_back(InstrI4(IROpCode::LdcI4, 0, 2, 0));
     method.instructions.push_back(InstrRet(2));
 
-    ASSERT_TRUE(CanGenerateNativeCode(method));
-    auto* nm = GenerateNativeCode(method);
+    ASSERT_TRUE(CanCompile(method));
+    auto* nm = Compile(method);
     ASSERT_NE(nm, nullptr);
     void* entry = SealAndGetEntry(nm);
     ASSERT_NE(entry, nullptr);
@@ -351,8 +351,8 @@ TEST_F(CodegenIlSmokeTest, Branch_NotEqual) {
     method.instructions.push_back(InstrI4(IROpCode::LdcI4, 0, 2, 0));
     method.instructions.push_back(InstrRet(2));
 
-    ASSERT_TRUE(CanGenerateNativeCode(method));
-    auto* nm = GenerateNativeCode(method);
+    ASSERT_TRUE(CanCompile(method));
+    auto* nm = Compile(method);
     ASSERT_NE(nm, nullptr);
     void* entry = SealAndGetEntry(nm);
     ASSERT_NE(entry, nullptr);
@@ -367,8 +367,8 @@ TEST_F(CodegenIlSmokeTest, RemOperation) {
     method.instructions.push_back(InstrBinary(IROpCode::Rem, 2, 0, 1));
     method.instructions.push_back(InstrRet(2));
 
-    ASSERT_TRUE(CanGenerateNativeCode(method));
-    auto* nm = GenerateNativeCode(method);
+    ASSERT_TRUE(CanCompile(method));
+    auto* nm = Compile(method);
     ASSERT_NE(nm, nullptr);
     void* entry = SealAndGetEntry(nm);
     ASSERT_NE(entry, nullptr);
@@ -388,8 +388,8 @@ TEST_F(CodegenIlSmokeTest, MultiInstrChain) {
     method.instructions.push_back(InstrBinary(IROpCode::Sub, 6, 4, 5));
     method.instructions.push_back(InstrRet(6));
 
-    ASSERT_TRUE(CanGenerateNativeCode(method));
-    auto* nm = GenerateNativeCode(method);
+    ASSERT_TRUE(CanCompile(method));
+    auto* nm = Compile(method);
     ASSERT_NE(nm, nullptr);
     void* entry = SealAndGetEntry(nm);
     ASSERT_NE(entry, nullptr);

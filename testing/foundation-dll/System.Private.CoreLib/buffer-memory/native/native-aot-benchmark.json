@@ -8,9 +8,9 @@
     {
       "methodIndex": 0,
       "methodSubjectId": "System.Private.CoreLib/System.Buffer::BlockCopy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)",
-      "elapsedMilliseconds": 35.609,
-      "calibratedMs": 35.609,
-      "opsPerSecond": 2808310.4,
+      "elapsedMilliseconds": 45.953,
+      "calibratedMs": 45.953,
+      "opsPerSecond": 2176146.0,
       "iterations": 100000,
       "status": "completed"
     },
@@ -23,18 +23,18 @@
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Private.CoreLib/System.Buffer::ByteLength:System.Int32(System.Array)",
-      "elapsedMilliseconds": 0.211,
-      "calibratedMs": 0.211,
-      "opsPerSecond": 472813238.8,
+      "elapsedMilliseconds": 0.381,
+      "calibratedMs": 0.381,
+      "opsPerSecond": 262743037.3,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "System.Private.CoreLib/System.Buffer::GetByte:System.Byte(System.Array,System.Int32)",
-      "elapsedMilliseconds": 0.21,
-      "calibratedMs": 0.21,
-      "opsPerSecond": 475511174.5,
+      "elapsedMilliseconds": 0.404,
+      "calibratedMs": 0.404,
+      "opsPerSecond": 247647350.2,
       "iterations": 100000,
       "status": "completed"
     },
@@ -71,9 +71,9 @@
     {
       "methodIndex": 9,
       "methodSubjectId": "System.Private.CoreLib/System.Buffer::SetByte:System.Void(System.Array,System.Int32,System.Byte)",
-      "elapsedMilliseconds": 15.269,
-      "calibratedMs": 15.269,
-      "opsPerSecond": 6549217.4,
+      "elapsedMilliseconds": 20.457,
+      "calibratedMs": 20.457,
+      "opsPerSecond": 4888206.7,
       "iterations": 100000,
       "status": "completed"
     }

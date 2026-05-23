@@ -19,7 +19,7 @@ link_directories(
     "${CHAOS_BUILD_TREE_DIR}/src/native/interpreter/Debug"
     "${CHAOS_BUILD_TREE_DIR}/src/native/bootstrap/Debug"
     "${CHAOS_BUILD_TREE_DIR}/src/native/support/Debug"
-    "${CHAOS_BUILD_TREE_DIR}/src/native/codegen/Debug"
+    "${CHAOS_BUILD_TREE_DIR}/src/native/jit/Debug"
     "${CHAOS_BUILD_TREE_DIR}/src/native/hot-update/Debug"
     "${CHAOS_BUILD_TREE_DIR}/fmt_build/Debug"
 )
@@ -35,7 +35,7 @@ target_include_directories(ir_precompile
         "${CHAOS_NATIVE_ROOT}/interpreter/generated"
         "${CHAOS_NATIVE_ROOT}/bootstrap"
         "${CHAOS_NATIVE_ROOT}/support"
-        "${CHAOS_NATIVE_ROOT}/codegen"
+        "${CHAOS_NATIVE_ROOT}/jit"
         "${CHAOS_NATIVE_ROOT}/hot-update"
         "${CMAKE_CURRENT_LIST_DIR}/ir_precompile"
         "${CMAKE_CURRENT_LIST_DIR}/../../../contracts/native/v0"

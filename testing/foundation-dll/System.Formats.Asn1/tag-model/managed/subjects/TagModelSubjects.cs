@@ -58,7 +58,7 @@ public static partial class TagModelSubjects
     // [6] System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::Equals:System.Boolean(System.Object)
     public static void Subject_6()
     {
-        try { if (((default(Asn1Tag).Equals(42)) ? 1 : 0) != ((default(Asn1Tag).Equals(42)) ? 1 : 0)) _exitCode = 1; }
+        try { if (((default(Asn1Tag).Equals(null!)) ? 1 : 0) != ((default(Asn1Tag).Equals(null!)) ? 1 : 0)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
@@ -128,7 +128,8 @@ public static partial class TagModelSubjects
     // [16] System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::TryEncode:System.Boolean(System.Span{System.Byte},System.Int32&)
     public static void Subject_16()
     {
-        try { if (((default(Asn1Tag).TryEncode(default(Span<byte>), out _)) ? 1 : 0) != ((default(Asn1Tag).TryEncode(default(Span<byte>), out _)) ? 1 : 0)) _exitCode = 1; }
+            System.Int32 refLocal_1 = 42;
+        try { if (((default(Asn1Tag).TryEncode(default(Span<byte>), out refLocal_1)) ? 1 : 0) != ((default(Asn1Tag).TryEncode(default(Span<byte>), out refLocal_1)) ? 1 : 0)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 

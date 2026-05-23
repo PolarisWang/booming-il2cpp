@@ -414,7 +414,17 @@ void MarkSweepOldGen::RebuildPageArray() {
         if (p->in_use.load(std::memory_order_acquire)) count++;
     }
 
-    if (count == 0) return;
+    if (count == 0) {
+        // No in-use pages — install a nullptr page_array so that
+        // FindPage() falls through to the (now-empty) page_list_
+        // linear scan and returns nullptr instead of a stale entry
+        // pointing to freed (VirtualFree'd) pages.
+        auto* old_array = page_array_.exchange(nullptr, std::memory_order_acq_rel);
+        if (old_array != nullptr) {
+            retired_arrays_.push_back(old_array);
+        }
+        return;
+    }
 
     int numa_node = GcNumaNodeCount() > 1 ? GcNumaCurrentNode() : 0;
     auto* new_pages = static_cast<OldGenPage**>(
@@ -2853,8 +2863,13 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     // Record into scheduler with actual heap size for full GC trigger decisions.
     G_Scheduler().RecordFullCollection(total_heap_bytes, pause_ns);
 
+    CHAOS_IL2CPP_LOG_DEBUG_M("OldGen", "collect_dbg AFTER_SWEEP page_count={0}",
+        static_cast<unsigned long long>(page_count_));
+
     CHAOS_IL2CPP_LOG_INFO_M("OldGen", "collect_done reclaimed={0} pause_ns={1}",
         static_cast<unsigned long long>(total_reclaimed), pause_ns);
+
+    CHAOS_IL2CPP_LOG_DEBUG_M("OldGen", "collect_dbg BEFORE_ETW");
 
     // Fire GC_FULL_DONE event.
     GcEtwFireGcFullEnd(pause_ns, total_reclaimed, marked_count,
@@ -2862,11 +2877,17 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
     GcEtwFireGcEnd(pause_ns, total_reclaimed);
     GcFireEvent(GcEvent::GC_FULL_DONE);
 
+    CHAOS_IL2CPP_LOG_DEBUG_M("OldGen", "collect_dbg AFTER_ETW");
+
     // Signal full GC complete for registered notification waiters.
     G_Scheduler().SignalFullGcComplete();
 
+    CHAOS_IL2CPP_LOG_DEBUG_M("OldGen", "collect_dbg AFTER_SIGNAL");
+
     // Replenish the emergency reserve after a full GC frees memory.
     ReplenishEmergencyReserve();
+
+    CHAOS_IL2CPP_LOG_DEBUG_M("OldGen", "collect_dbg COLLECT_END");
 }
 
 bool MarkSweepOldGen::CollectFull() {
@@ -3013,9 +3034,14 @@ CHAOS_IL2CPP_SIZE MarkSweepOldGen::RunFinalizers() {
             if (G_Loh().IsMarked(entry.obj)) {
                 unreachable = false;
             }
+        } else {
+            // Page was freed during sweep after demotion cleared the mark
+            // bits.  The object was collected but the finalizer entry was
+            // re-registered in Phase 3 (because the mark bit was still set
+            // before demotion).  Skip the finalizer here to avoid calling
+            // into freed memory.
+            unreachable = false;
         }
-        // For oversized pages or if we can't determine reachability,
-        // conservatively assume unreachable and run the finalizer.
 
         if (unreachable) {
             entry.finalizer(entry.obj);

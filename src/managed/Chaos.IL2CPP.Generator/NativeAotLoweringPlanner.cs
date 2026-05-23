@@ -739,14 +739,28 @@ public sealed partial class NativeAotLoweringPlanner
             : string.Empty;
 
         // Always define ChaosJitRegisterAll so runtime-entry.cpp can call it unconditionally.
-        // In AOT mode it's a no-op; in JIT mode it registers all methods for interpreter dispatch.
+        // In AOT mode it's a no-op; in JIT mode it registers all methods for T4 JIT dispatch;
+        // in Hybrid mode it registers all methods for Hybrid (AOT→JIT upgrade) dispatch.
         // This avoids linker errors in AOT builds where JIT symbols don't exist.
         if (_codegenMode == CodegenMode.Jit && methodCount > 0)
         {
-            globalDeclarations += "\n" + BuildJitMethodRegistration(methodsForLowering, metadataRegistration);
+            globalDeclarations += "\n" + BuildT4JitMethodRegistration(methodsForLowering, metadataRegistration);
             globalDeclarations += @"
 extern ""C"" void ChaosJitRegisterAll() {
-    RegisterJitMethods(kChaosJitMethodEntries, kChaosJitMethodEntryCount);
+    RegisterT4JitMethods(kChaosT4JitEntries, kChaosT4JitEntryCount);
+}
+";
+        }
+        else if (_codegenMode == CodegenMode.Hybrid && methodCount > 0)
+        {
+            // Hybrid mode: AOT C++ body is emitted (below), plus Hybrid registration data.
+            // At startup, RegisterHybridMethods creates HybridPrecode + trampoline for each
+            // method. Cold calls execute AOT; when call_count reaches 0, JIT compilation
+            // triggers and subsequent calls use JIT-compiled code.
+            globalDeclarations += "\n" + BuildHybridMethodRegistration(methodsForLowering, metadataRegistration);
+            globalDeclarations += @"
+extern ""C"" void ChaosJitRegisterAll() {
+    RegisterHybridMethods(kChaosHybridEntries, kChaosHybridEntryCount);
 }
 ";
         }

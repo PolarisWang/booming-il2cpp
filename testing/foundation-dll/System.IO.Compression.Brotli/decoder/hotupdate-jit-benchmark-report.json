@@ -7,32 +7,32 @@
       "methodIndex": 0,
       "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Decompress:System.Buffers.OperationStatus(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32&,System.Int32&)",
       "status": "passed",
-      "prePatchNsPerOp": 208801.55,
-      "postPatchNsPerOp": 98474.2,
-      "slowdownPercent": -52.84
+      "prePatchNsPerOp": 104801.84,
+      "postPatchNsPerOp": 90040.0,
+      "slowdownPercent": -14.09
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Dispose:System.Void()",
       "status": "passed",
-      "prePatchNsPerOp": 108375.36,
-      "postPatchNsPerOp": 42988.6,
-      "slowdownPercent": -60.33
+      "prePatchNsPerOp": 37461.53,
+      "postPatchNsPerOp": 35323.9,
+      "slowdownPercent": -5.71
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::TryDecompress:System.Boolean(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32&)",
       "status": "passed",
-      "prePatchNsPerOp": 162890.37,
-      "postPatchNsPerOp": 87051.3,
-      "slowdownPercent": -46.56
+      "prePatchNsPerOp": 86843.74,
+      "postPatchNsPerOp": 76843.9,
+      "slowdownPercent": -11.51
     }
   ],
   "summary": {
     "totalMethods": 3,
     "nonStubMethods": 3,
-    "averageSlowdownPercent": -53.24,
-    "slowdownFactor": 0.46759999999999996,
+    "averageSlowdownPercent": -10.44,
+    "slowdownFactor": 0.8956000000000001,
     "slowdownThresholdX": 50.0
   }
 }

@@ -7,8 +7,8 @@
 // Common runtime helper functions shared by ALL generated native-aot
 // translation units. Included at file scope before the generated
 // namespace block so these definitions are visible from inside
-// `namespace chaos::il2cpp::codegen::<AssemblyName>` via unqualified
-// lookup (they live in the parent `chaos::il2cpp::codegen` namespace).
+// `namespace chaos::il2cpp::jit::<AssemblyName>` via unqualified
+// lookup (they live in the parent `chaos::il2cpp::jit` namespace).
 //
 // These functions are `inline` to satisfy ODR — every TU that includes
 // this header gets the same function body.
@@ -24,7 +24,7 @@
 // generated code compiles without modification.
 #define GC_END_STUBBORN_CHANGE(obj) ((void)(obj))
 
-namespace chaos::il2cpp::codegen {
+namespace chaos::il2cpp::jit {
 
 // ── Managed array type ───────────────────────────────────────────────
 constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_managed_array = 1;
@@ -201,6 +201,17 @@ inline bool chaos_is_array_type_compatible(
         && chaos_actual_element_type_info == chaos_target_element_type_info;
 }
 
-}  // namespace chaos::il2cpp::codegen
+}  // namespace chaos::il2cpp::jit
+
+// File-scope aliases for the new codegen namespace pattern.
+// Generated code now uses `namespace chaos::il2cpp::codegen::<Assembly>`
+// with `using namespace chaos::il2cpp::runtime_core;` (not `jit`), so
+// bring commonly-used jit-only symbols into global scope for unqualified
+// lookup.  Type shape constants are excluded — they already exist in
+// chaos::il2cpp::common (via type_info.h) and bringing the jit copies
+// to file scope creates ambiguity.
+using chaos::il2cpp::jit::chaos_managed_pointer_local_slot_tag;
+using chaos::il2cpp::jit::chaos_is_type_compatible;
+using chaos::il2cpp::jit::chaos_does_type_implement_interface;
 
 #endif  // CHAOS_IL2CPP_GENERATED_RUNTIME_PRELUDE_H_

@@ -51,6 +51,12 @@ extern "C" int32_t kChaosExternalRuntimeCount;
 // mode).  Declared here so the host can call it unconditionally.
 extern "C" void ChaosJitRegisterAll();
 
+// ── ChaosRegisterGcLayouts forward declaration ─────────────────────────────
+// Generated code defines this to register all GC type layouts with the
+// GcLayoutRegistry.  Called from ChaosGeneratedModuleActivate() in the
+// generated module source (chaos_generated_module.cpp).
+extern "C" void ChaosRegisterGcLayouts();
+
 // ── ChaosResolveExternalRuntimeFnTable forward declaration ─────────────────
 // Defined in the bootstrap library.  Resolves external runtime table entries
 // by subject ID through the HotpatchNameRegistry.

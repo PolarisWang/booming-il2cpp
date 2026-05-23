@@ -2,22 +2,14 @@
   "schemaVersion": 1,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/buffer/memory",
-  "capturedAt": "2026-05-23T15:08:33",
+  "capturedAt": "2026-05-23T22:39:05",
   "metrics": {
     "framePool": {
-      "acquireReleaseNsPerOp": 2.7,
+      "acquireReleaseNsPerOp": 4.1,
       "batchCount": 1000,
       "framesPerBatch": 32
     },
-    "fastExecute": {
-      "runCount": 100000,
-      "nsPerCall": 462.6
-    },
-    "callVirt": {
-      "handlerDispatchNs": 503.1,
-      "emptyStackNs": 553.4
-    },
     "poolSize": 32
   },
-  "rawOutput": "[2026-05-23T15:08:33][DEBUG][codegen] T4 VEH handler registered\n[2026-05-23T15:08:33][DEBUG][GcEvents] registered callback 0x7ff6d5a305f0 at slot 0\n[2026-05-23T15:08:33][WARN][CRAG] young_collection_no_region\n[2026-05-23T15:08:33][INFO][NUMA] numa_init count=%d\n[2026-05-23T15:08:33][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-23T15:08:33][INFO][OldGen] emergency_reserve_allocated base=0x2408156954624 size=65536\n[2026-05-23T15:08:33][INFO][OldGen] init done base=0x2408127528960 pages=8\n[2026-05-23T15:08:33][DEBUG][codegen] T4 VEH handler registered\n[2026-05-23T15:08:33][DEBUG][GcEvents] registered callback 0x7ff6d5a305f0 at slot 1\nBenchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 2.7 ns/op (1000 batches x 32 frames)\n[2026-05-23T15:08:33][DEBUG][BGC] thread_started\n[2026-05-23T15:08:33][DEBUG][Finalizer] thread_started id={0}\nBenchmark 2: FastExecute (Subject_0): 100000 runs: 462.6 ns/op\n[2026-05-23T15:08:33][WARN][CRAG] young_collection_no_region\n[2026-05-23T15:08:33][DEBUG][BGC] start_cycle\n[2026-05-23T15:08:33][DEBUG][BGC] root_scan heap=910 oldgen=8 valid=0 marked=0\n[2026-05-23T15:08:33][DEBUG][BGC] root_set_populated\n[2026-05-23T15:08:33][DEBUG][BGC] concurrent_mark_started\n[2026-05-23T15:08:33][DEBUG][BGC] concurrent_mark_begin\n[2026-05-23T15:08:33][DEBUG][BGC] parallel_workers spawned=8\n[2026-05-23T15:08:33][DEBUG][BGC] concurrent_mark_complete\nHandler dispatch overhead (LdcI4): 503.1 ns/call\nCallVirt empty-stack: 553.4 ns/call\n"
+  "rawOutput": "[2026-05-23T22:39:05][DEBUG][codegen] T4 VEH handler registered\n[2026-05-23T22:39:05][DEBUG][GcEvents] registered callback 0x7ff6981f8db0 at slot 0\n[2026-05-23T22:39:05][WARN][CRAG] young_collection_no_region\n[2026-05-23T22:39:05][INFO][NUMA] numa_init count=%d\n[2026-05-23T22:39:05][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-23T22:39:05][INFO][OldGen] emergency_reserve_allocated base=0x2456365498368 size=65536\n[2026-05-23T22:39:05][INFO][OldGen] init done base=0x2456340267008 pages=8\n[2026-05-23T22:39:05][INFO][GcLowMem] low-memory monitor started\n[2026-05-23T22:39:05][DEBUG][codegen] T4 VEH handler registered\n[2026-05-23T22:39:05][DEBUG][GcEvents] registered callback 0x7ff6981f8db0 at slot 1\nBenchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 4.1 ns/op (1000 batches x 32 frames)\n[2026-05-23T22:39:05][DEBUG][BGC] thread_started\n[2026-05-23T22:39:05][DEBUG][Finalizer] thread_started id={0}\n"
 }

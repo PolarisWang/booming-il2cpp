@@ -1,5 +1,5 @@
-#include "deopt_runtime.h"
-#include "native_method.h"
+#include "jit_deopt.h"
+#include "jit_method.h"
 #include "../interpreter/ir_reg_alloc.h"
 #include "../interpreter/osr_state.h"
 
@@ -9,7 +9,7 @@
 
 #include <intrin.h>  // _AddressOfReturnAddress()
 
-namespace chaos::il2cpp::codegen {
+namespace chaos::il2cpp::jit {
 
 uint64_t DeoptRuntime::ReadSpillSlot(uint64_t codegen_rsp, int16_t spill_offset) noexcept {
     auto* addr = reinterpret_cast<const volatile uint64_t*>(codegen_rsp + spill_offset);
@@ -17,7 +17,7 @@ uint64_t DeoptRuntime::ReadSpillSlot(uint64_t codegen_rsp, int16_t spill_offset)
 }
 
 const DeoptEntry* DeoptRuntime::FindEntry(
-    const NativeMethod* nm,
+    const JitMethod* nm,
     uint32_t native_offset) noexcept {
 
     if (nm == nullptr || nm->deopt_entries == nullptr || nm->deopt_entry_count == 0) {
@@ -83,7 +83,7 @@ void DeoptRuntime::ReconstructRegisterFile(
 }
 
 void DeoptRuntime::DeoptTrap(
-    NativeMethod* nm,
+    JitMethod* nm,
     uint32_t      return_address,
     NativeContext ctx,
     uint64_t      codegen_rsp,
@@ -137,4 +137,4 @@ void DeoptRuntime::DeoptTrap(
         entry->instr_pc);
 }
 
-}  // namespace chaos::il2cpp::codegen
+}  // namespace chaos::il2cpp::jit

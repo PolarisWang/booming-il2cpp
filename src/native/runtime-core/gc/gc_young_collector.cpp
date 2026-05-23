@@ -186,11 +186,16 @@ void* GcScavengeObject(void* obj, YoungCollectionResult* result) {
 
     // Re-register finalizer at the promoted address.
     // The TypeInfo* was copied by memcpy into tenured — read from there.
-    if (auto* ti = *static_cast<const TypeInfoHot* const*>(tenured)) {
-        if (ti->flags & kTypeInfoHasFinalizer) [[unlikely]] {
-            auto& reg = GcLayoutRegistry::Instance();
-            if (auto* cb = reg.LookupFinalizer(ti->stable_id)) {
-                G_OldGen().RegisterFinalizer(tenured, cb);
+    // Validate the TypeInfo pointer before dereferencing — objects sized via
+    // the EstimateObjectSize fallback (e.g., stress tests without valid layout)
+    // have garbage in the first word and must not be treated as TypeInfo.
+    if (auto* ti_ptr = *static_cast<const TypeInfoHot* const*>(tenured)) {
+        auto& reg = GcLayoutRegistry::Instance();
+        if (reg.IsValidTypeInfoPointer(ti_ptr)) [[likely]] {
+            if (ti_ptr->flags & kTypeInfoHasFinalizer) [[unlikely]] {
+                if (auto* cb = reg.LookupFinalizer(ti_ptr->stable_id)) {
+                    G_OldGen().RegisterFinalizer(tenured, cb);
+                }
             }
         }
     }
@@ -284,11 +289,13 @@ void* GcScavengeObjectKnownNursery(void* obj, YoungCollectionResult* result) {
     SetForwardingAddress(obj, target);
 
     // Re-register finalizer at the promoted address.
-    if (auto* ti = *static_cast<const TypeInfoHot* const*>(target)) {
-        if (ti->flags & kTypeInfoHasFinalizer) [[unlikely]] {
-            auto& reg = GcLayoutRegistry::Instance();
-            if (auto* cb = reg.LookupFinalizer(ti->stable_id)) {
-                G_OldGen().RegisterFinalizer(target, cb);
+    auto& known_layout = GcLayoutRegistry::Instance();
+    if (auto* ti_ptr = *static_cast<const TypeInfoHot* const*>(target)) {
+        if (known_layout.IsValidTypeInfoPointer(ti_ptr)) [[likely]] {
+            if (ti_ptr->flags & kTypeInfoHasFinalizer) [[unlikely]] {
+                if (auto* cb = known_layout.LookupFinalizer(ti_ptr->stable_id)) {
+                    G_OldGen().RegisterFinalizer(target, cb);
+                }
             }
         }
     }
@@ -786,9 +793,13 @@ phase3:
             static_cast<unsigned long long>(result.objects_promoted));
     } else {
         // Clear nursery range — all nursery objects were promoted or dead.
-        if (nursery_used > nursery_begin) {
-            ClearCardRange(nursery_begin, nursery_used);
-        }
+        // When the nursery is empty (bump == begin), still clear the full
+        // nursery range to handle manually-dirtied cards (e.g., test setups
+        // where a card was dirtied before the second collection).
+        uintptr_t clear_end = (nursery_used > nursery_begin)
+            ? nursery_used
+            : reinterpret_cast<uintptr_t>(nursery->end);
+        ClearCardRange(nursery_begin, clear_end);
         // Clear Gen1 range — Phase 2b already scanned all Gen1→nursery refs.
         auto* gen1 = G_YoungGen().gen1_region.load(std::memory_order_acquire);
         if (gen1 != nullptr) {

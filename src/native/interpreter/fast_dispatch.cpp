@@ -8,9 +8,9 @@ namespace vr = chaos::il2cpp::vtable_registry;
 #include "osr_state.h"
 #include "ir_reg_alloc.h"
 #include <tier_manager.h>
-#include <code_generator.h>
-#include <t4_seh_handler.h>
-#include <codegen_helpers.h>
+#include <jit_engine.h>
+#include <jit_seh.h>
+#include <jit_helpers.h>
 
 #include <memory_domain.h>
 #include <patch_loader.h>
@@ -2158,14 +2158,14 @@ static bool TryFastOsrPromotion(FastFrame& frame) noexcept {
                 auto* rm = static_cast<interpreter::RegisterMethod*>(pm->cached_optimized_reg_method);
                 if (rm == nullptr) rm = static_cast<interpreter::RegisterMethod*>(pm->cached_reg_method);
                 if (rm != nullptr && rm->instructions.size() > 0) {
-                    chaos::il2cpp::codegen::CodeGenConfig cfg;
+                    chaos::il2cpp::jit::CompileConfig cfg;
                     cfg.enable_deopt = true;
                     cfg.enable_liveness = true;
                     cfg.safepoint_fn = nullptr;
-                    auto* nm = chaos::il2cpp::codegen::GenerateNativeCode(*rm, cfg);
+                    auto* nm = chaos::il2cpp::jit::Compile(*rm, cfg);
                     if (nm != nullptr) {
                         pm->cached_native_method = nm;
-                        chaos::il2cpp::codegen::RegisterT4Code(nm->code, nm->code_size, nm);
+                        chaos::il2cpp::jit::RegisterT4Code(nm->code, nm->code_size, nm);
 
                         // OSR V2: If native code has an OSR entry, transfer
                         // execution to native code with full frame state.
@@ -2201,7 +2201,7 @@ static bool TryFastOsrPromotion(FastFrame& frame) noexcept {
 
                             // Set OSR resume PC to trigger OSR entry on
                             // the next backward branch check in RegisterExecute.
-                            chaos::il2cpp::codegen::t_deopt_state.osr_resume_pc = frame.pc;
+                            chaos::il2cpp::jit::t_deopt_state.osr_resume_pc = frame.pc;
 
                             // Transfer tracked objects from OsrState to RegisterFrame.
                             for (uint32_t i = 0; i < osr.tracked_cnt && i < interpreter::RegisterFrame::kMaxTracked; ++i) {

@@ -12,6 +12,9 @@
 #include "tier_manager.h"
 #include "patch_loader.h"  // PatchMethod tier_state constants
 
+#include <jit/jit_precode.h>  // JitRecompileToTier1, HotpatchEntryV0
+#include <jit/jit_engine.h>   // CompileTier
+
 #include <chaos/log.h>
 
 namespace chaos::il2cpp::runtime_core {
@@ -156,6 +159,28 @@ bool TierManager::EnqueueOptimization(PatchMethod* method) noexcept {
     return true;
 }
 
+bool TierManager::EnqueueJitRecompilation(void* precode, bool is_hybrid) noexcept {
+    if (precode == nullptr) return false;
+
+    // Ensure background thread is running.
+    if (!running_.load(std::memory_order_acquire)) {
+        StartBackgroundThread();
+        if (!running_.load(std::memory_order_acquire)) return false;
+    }
+
+    {
+        std::lock_guard<std::mutex> lock(mutex_);
+        if (jit_queue_.size() >= kMaxJitRecompQueueSize) {
+            CHAOS_IL2CPP_LOG_WARN_M("Tier",
+                "JIT recomp queue full (max={})", kMaxJitRecompQueueSize);
+            return false;
+        }
+        jit_queue_.push_back({precode, is_hybrid});
+    }
+    cv_.notify_one();
+    return true;
+}
+
 void TierManager::StartBackgroundThread() noexcept {
     bool expected = false;
     if (!running_.compare_exchange_strong(expected, true,
@@ -196,6 +221,45 @@ void TierManager::BackgroundLoop() noexcept {
     CHAOS_IL2CPP_LOG_DEBUG_M("tier", "background thread started");
 
     while (running_.load(std::memory_order_acquire)) {
+        // ── Step 1: Process JIT recompilation queue (higher priority) ──────────
+        {
+            std::unique_lock<std::mutex> lock(mutex_);
+            if (!jit_queue_.empty()) {
+                auto je = jit_queue_.back();
+                jit_queue_.pop_back();
+                lock.unlock();  // Compilation must not hold the lock
+
+                CHAOS_IL2CPP_LOG_DEBUG_M("tier",
+                    "background JIT Tier0->Tier1 for %s precode=%p",
+                    je.is_hybrid ? "hybrid" : "jit", je.precode);
+
+                void* new_code = jit::JitRecompileToTier1(je.precode, je.is_hybrid);
+
+                lock.lock();
+                if (new_code != nullptr) {
+                    // Patch direct_ptr to Tier 1 code so future calls bypass
+                    // the trampoline and go directly to the optimized code.
+                    HotpatchEntryV0* entry = nullptr;
+                    if (je.is_hybrid) {
+                        entry = static_cast<jit::HybridPrecode*>(je.precode)->entry;
+                    } else {
+                        entry = static_cast<jit::JitPrecode*>(je.precode)->entry;
+                    }
+                    if (entry != nullptr) {
+                        entry->direct_ptr = new_code;
+                        CHAOS_IL2CPP_LOG_DEBUG_M("tier",
+                            "Tier1 complete: direct_ptr patched to %p", new_code);
+                    }
+                } else {
+                    CHAOS_IL2CPP_LOG_WARN_M("tier",
+                        "Tier1 recompilation failed — keeping Tier 0 code");
+                }
+                // Continue to next iteration to check for more work
+                continue;
+            }
+        }
+
+        // ── Step 2: Wait for work (condition variable with 200ms timeout) ──────
         OptimizationEntry entry;
         bool has_work = false;
 
@@ -203,6 +267,7 @@ void TierManager::BackgroundLoop() noexcept {
             std::unique_lock<std::mutex> lock(mutex_);
             cv_.wait_for(lock, std::chrono::milliseconds(200), [this]() {
                 return !queue_.empty() ||
+                       !jit_queue_.empty() ||
                        !running_.load(std::memory_order_acquire);
             });
 

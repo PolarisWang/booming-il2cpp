@@ -17,34 +17,11 @@
 
 #include "code_buffer.h"
 #include "interpreter_vm.h"
+#include "IEncoder.h"
 
-namespace chaos::il2cpp::codegen {
+namespace chaos::il2cpp::jit {
 
-// ── x64 register constants ────────────────────────────────────────────────
-
-// GPR
-static constexpr uint8_t kRAX = 0;
-static constexpr uint8_t kRCX = 1;
-static constexpr uint8_t kRDX = 2;
-static constexpr uint8_t kRBX = 3;
-static constexpr uint8_t kRSP = 4;
-static constexpr uint8_t kRBP = 5;
-static constexpr uint8_t kRSI = 6;
-static constexpr uint8_t kRDI = 7;
-static constexpr uint8_t kR8  = 8;
-static constexpr uint8_t kR9  = 9;
-static constexpr uint8_t kR10 = 10;
-static constexpr uint8_t kR11 = 11;
-static constexpr uint8_t kR12 = 12;
-static constexpr uint8_t kR13 = 13;
-static constexpr uint8_t kR14 = 14;
-static constexpr uint8_t kR15 = 15;
-
-// ── x64 instruction size helpers ───────────────────────────────────────────
-
-/// Max bytes for a single instruction emitted by this encoder.
-static constexpr uint32_t kMaxInstrSize = 16;
-
+// ── x64 register constants (defined in IEncoder.h; included above) ─────────
 // ── REX prefix ─────────────────────────────────────────────────────────────
 // Table 2-4: REX {0100wrb}
 //   w=1 → 64-bit operand size, w=0 → 32-bit (or default)
@@ -570,42 +547,6 @@ inline void EmitJccRel8(CodeBuffer& buf, uint8_t cc, int8_t offset) noexcept {
     buf.EmitByte(static_cast<uint8_t>(offset));
 }
 
-// Condition code constants for jcc/setcc/cmovcc
-static constexpr uint8_t kCC_O  = 0;   // overflow
-static constexpr uint8_t kCC_NO = 1;   // not overflow
-static constexpr uint8_t kCC_B  = 2;   // below (unsigned <)
-static constexpr uint8_t kCC_AE = 3;   // above or equal (unsigned >=)
-static constexpr uint8_t kCC_E  = 4;   // equal
-static constexpr uint8_t kCC_NE = 5;   // not equal
-static constexpr uint8_t kCC_BE = 6;   // below or equal (unsigned <=)
-static constexpr uint8_t kCC_A  = 7;   // above (unsigned >)
-static constexpr uint8_t kCC_S  = 8;   // sign (negative)
-static constexpr uint8_t kCC_NS = 9;   // not sign (non-negative)
-static constexpr uint8_t kCC_L  = 12;  // less (signed <)
-static constexpr uint8_t kCC_GE = 13;  // greater or equal (signed >=)
-static constexpr uint8_t kCC_LE = 14;  // less or equal (signed <=)
-static constexpr uint8_t kCC_G  = 15;  // greater (signed >)
-
-/// Map comparison opcode to jcc condition code for signed compare.
-using chaos::il2cpp::interpreter::IROpCode;
-inline uint8_t CmpToJccSigned(IROpCode op) noexcept {
-    switch (op) {
-    default:
-    case IROpCode::Beq: return kCC_E;
-    case IROpCode::BneUn: return kCC_NE;
-    case IROpCode::Blt:  return kCC_L;
-    case IROpCode::Bgt:  return kCC_G;
-    case IROpCode::Ble:  return kCC_LE;
-    case IROpCode::Bge:  return kCC_GE;
-    case IROpCode::BltUn: return kCC_B;
-    case IROpCode::BgtUn: return kCC_A;
-    case IROpCode::BleUn: return kCC_BE;
-    case IROpCode::BgeUn: return kCC_AE;
-    case IROpCode::Ceq:  return kCC_E;
-    case IROpCode::Clt:  return kCC_L;
-    case IROpCode::Cgt:  return kCC_G;
-    }
-}
 
 // ── Call / Return ─────────────────────────────────────────────────────────
 
@@ -923,6 +864,6 @@ inline void EmitXorpsRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
     buf.EmitByte(ModRM(3, dst, src));
 }
 
-}  // namespace chaos::il2cpp::codegen
+}  // namespace chaos::il2cpp::jit
 
 #endif  // CHAOS_IL2CPP_CODEGEN_X64_ENCODER_H_

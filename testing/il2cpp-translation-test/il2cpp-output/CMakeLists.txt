@@ -18,7 +18,7 @@ set(NATIVE_LIBS
     "${NATIVE_LIB_DIR}/src/native/support/${CFG}/chaos_support.lib"
     "${NATIVE_LIB_DIR}/src/native/interpreter/${CFG}/chaos_interpreter.lib"
     "${NATIVE_LIB_DIR}/src/native/hot-update/${CFG}/chaos_hot_update.lib"
-    "${NATIVE_LIB_DIR}/src/native/codegen/${CFG}/chaos_codegen.lib"
+    "${NATIVE_LIB_DIR}/src/native/codegen/${CFG}/chaos_jit.lib"
     "${NATIVE_LIB_DIR}/src/native/diagnostics/debugger/${CFG}/chaos_debugger.lib"
     "${NATIVE_LIB_DIR}/src/native/diagnostics/eventpipe/${CFG}/chaos_eventpipe.lib"
     "${NATIVE_LIB_DIR}/fmt_build/${CFG}/chaos_fmt.lib"

@@ -6,7 +6,7 @@ Unified pipeline calling the canonical 9-stage verify_family() for each family:
   1. Ledger overview     — per-DLL table (active vs placeholder)
   2. Phase 2 generation  — run_phase2.py
   3. Per-family verify   — verify_family(slug) for each active family
-  4. Results table       — aggregate preflight/codegen/fact/audit/overall
+  4. Results table       — aggregate preflight/jit/fact/audit/overall
   5. Inventory refresh   — test inventory projection refresh
 
 Returns exit code 0 on success, 1 on any family with failed required stages.
@@ -181,7 +181,7 @@ def _get_verifyable_families(dlls, lookup):
     return candidates
 
 
-def step_verify_families(families, *, mode, skip_stages, verbose, codegen_mode=None):
+def step_verify_families(families, *, mode, skip_stages, verbose, jit_mode=None):
     """Run verify_family() for each family.
 
     Returns dict mapping (assembly, slug) -> unified_report dict.
@@ -210,7 +210,7 @@ def step_verify_families(families, *, mode, skip_stages, verbose, codegen_mode=N
                 mode=mode,
                 skip_stages=skip_stages,
                 verbose=verbose,
-                codegen_mode=codegen_mode,
+                jit_mode=jit_mode,
             )
         except Exception as e:
             print(f"\n  FAMILY CRASHED: {e}")
@@ -230,7 +230,7 @@ def step_verify_families(families, *, mode, skip_stages, verbose, codegen_mode=N
         stages = report.get("stages", {})
         stage_line = " | ".join(
             f"{s}:{stages[s].get('status','?')[:4]}"
-            for s in ["preflight", "codegen", "fact", "audit", "benchmark", "hotupdate"]
+            for s in ["preflight", "jit", "fact", "audit", "benchmark", "hotupdate"]
             if s in stages
         )
         print(f"\n  => {overall.upper()}  ({elapsed:.1f}s)  [{stage_line}]\n")
@@ -254,8 +254,8 @@ def step_results_table(dlls, verify_results):
             "passed": 0,
             "failed": 0,
             "crashed": 0,
-            "stages": {"preflight": 0, "codegen": 0, "fact": 0, "audit": 0},
-            "stages_ok": {"preflight": 0, "codegen": 0, "fact": 0, "audit": 0},
+            "stages": {"preflight": 0, "jit": 0, "fact": 0, "audit": 0},
+            "stages_ok": {"preflight": 0, "jit": 0, "fact": 0, "audit": 0},
         }
 
     for (aname, slug), report in verify_results.items():
@@ -276,7 +276,7 @@ def step_results_table(dlls, verify_results):
             dll_agg[aname]["failed"] += 1
 
         stages = report.get("stages", {})
-        for s in ["preflight", "codegen", "fact", "audit"]:
+        for s in ["preflight", "jit", "fact", "audit"]:
             if s in stages:
                 dll_agg[aname]["stages"].setdefault(s, 0)
                 dll_agg[aname]["stages"][s] += 1
@@ -299,11 +299,11 @@ def step_results_table(dlls, verify_results):
         total_pass += r["passed"]
         total_fail += r["failed"] + r["crashed"]
         pre_ok = r["stages_ok"].get("preflight", 0)
-        cgn_ok = r["stages_ok"].get("codegen", 0)
+        cgn_ok = r["stages_ok"].get("jit", 0)
         fact_ok = r["stages_ok"].get("fact", 0)
         audit_ok = r["stages_ok"].get("audit", 0)
         pre_n = r["stages"].get("preflight", 0)
-        cgn_n = r["stages"].get("codegen", 0)
+        cgn_n = r["stages"].get("jit", 0)
         fact_n = r["stages"].get("fact", 0)
         audit_n = r["stages"].get("audit", 0)
         pre_s = f"{pre_ok}/{pre_n}" if pre_n > 0 else "-"
@@ -327,7 +327,7 @@ def step_results_table(dlls, verify_results):
             overall = report.get("overall_status", "?")
             stages = report.get("stages", {})
             pre = stages.get("preflight", {}).get("status", "skip")[:4]
-            cgn = stages.get("codegen", {}).get("status", "skip")[:4]
+            cgn = stages.get("jit", {}).get("status", "skip")[:4]
             fact = stages.get("fact", {}).get("status", "skip")[:4]
             audit = stages.get("audit", {}).get("status", "skip")[:4]
             bench = stages.get("benchmark", {}).get("status", "skip")[:4]
@@ -369,7 +369,7 @@ def main():
                         help="Single family to verify (e.g. convert-char). If omitted, verifies all active families.")
     parser.add_argument("--assembly", type=str, default=None,
                         help="Assembly name (default: System.Private.CoreLib). Only used with --family.")
-    parser.add_argument("--codegen-mode", type=str, default=None,
+    parser.add_argument("--jit-mode", type=str, default=None,
                         choices=["aot", "jit"],
                         help="Codegen mode: aot (native C++, default) or jit (interpreter dispatch)")
     args = parser.parse_args()
@@ -408,7 +408,7 @@ def main():
     verify_results = step_verify_families(families, mode=args.mode,
                                           skip_stages=skip_stages,
                                           verbose=args.verbose,
-                                          codegen_mode=args.codegen_mode)
+                                          jit_mode=args.jit_mode)
 
     # Check for failures
     for (aname, slug), report in verify_results.items():

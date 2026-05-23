@@ -15,17 +15,28 @@
 // computation.  Each virtual register has a fixed stack slot.  Arithmetic
 // operations load from stack, compute via scratch registers, store to stack.
 
-#include "native_method.h"
-#include "codegen_helpers.h"
+#include "IEncoder.h"
+#include "ISehHandler.h"
+#include "jit_method.h"
+#include "jit_helpers.h"
 #include "../interpreter/ir_reg_alloc.h"  // RegisterMethod, RegisterInstruction
 
 #include <cstdint>
 #include <cstddef>
 
-namespace chaos::il2cpp::codegen {
+namespace chaos::il2cpp::jit {
+
+/// Compilation tier for JIT code generation.
+/// Tier 0 produces code quickly with no optimizations (stack-only register access,
+/// no liveness, no deopt metadata, no SEH).  Tier 1 is the full pipeline with
+/// graph coloring, optimizer, liveness analysis, deopt, SEH, and OSR.
+enum class CompileTier : uint8_t {
+    kTier0 = 0,  // Quick JIT (<50µs target): stack-only, no optimizer/liveness/deopt/SEH
+    kTier1 = 1,  // Standard JIT: full pipeline with graph coloring + optimizations
+};
 
 /// Configuration for native code generation.
-struct CodeGenConfig {
+struct CompileConfig {
     // If true, insert GC safepoint polls at loop back edges.
     bool enable_safepoint_polls = true;
 
@@ -46,12 +57,12 @@ struct CodeGenConfig {
     uint32_t safepoint_interval = 64;
 
     // Function pointer to SafepointPoll (runtime_core::threading::SafepointPoll).
-    // Set by the caller (entry_direct.cpp) before calling GenerateNativeCode.
+    // Set by the caller (entry_direct.cpp) before calling Compile.
     // When non-null, EmitSafepointPoll emits a call through this pointer.
     void* safepoint_fn = nullptr;
 
     // PIC dispatch data from PatchMethod (for CallVirt fast path in T4 code).
-    // Set by entry_direct.cpp before GenerateNativeCode.  When non-null,
+    // Set by entry_direct.cpp before Compile.  When non-null,
     // CallVirt instructions use PIC chain lookup for direct dispatch.
     const void* pic_dispatch_data = nullptr;
 
@@ -102,6 +113,15 @@ struct CodeGenConfig {
     // Indexed by current_instr_index_.
     const PerInstrPicData* per_instr_pic = nullptr;
     uint32_t               per_instr_pic_count = 0;
+
+    /// Compilation tier.  kTier1 (full pipeline) by default.
+    CompileTier compile_tier = CompileTier::kTier1;
+
+    /// If true, enable PGO (Profile-Guided Optimization).  When enabled, Tier 0
+    /// compilation does NOT patch direct_ptr — calls continue through the dispatch
+    /// function which counts calls and triggers background Tier 1 recompilation
+    /// when the call count exceeds kPgoTier1Threshold.
+    bool enable_pgo = false;
 };
 
 /// Generate native x64 code from a RegisterMethod.
@@ -109,17 +129,17 @@ struct CodeGenConfig {
 /// @param rm       The register-allocated method to compile.
 /// @param config   Code generation configuration.
 ///
-/// @return NativeMethod containing the generated code + metadata,
+/// @return JitMethod containing the generated code + metadata,
 ///         or nullptr on failure (unsupported opcodes, allocation error).
-NativeMethod* GenerateNativeCode(
+JitMethod* Compile(
     const interpreter::RegisterMethod& rm,
-    const CodeGenConfig& config = CodeGenConfig()) noexcept;
+    const CompileConfig& config = CompileConfig()) noexcept;
 
-/// Check if GenerateNativeCode can handle this RegisterMethod.
+/// Check if Compile can handle this RegisterMethod.
 /// Returns false if the method contains unsupported opcodes.
-bool CanGenerateNativeCode(
+bool CanCompile(
     const interpreter::RegisterMethod& rm) noexcept;
 
-}  // namespace chaos::il2cpp::codegen
+}  // namespace chaos::il2cpp::jit
 
 #endif  // CHAOS_IL2CPP_CODEGEN_CODE_GENERATOR_H_

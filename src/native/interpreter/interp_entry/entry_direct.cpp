@@ -3,10 +3,10 @@
 
 #include "vtable_registry.h"
 
-#include <code_generator.h>
-#include <native_method.h>
-#include <codegen_helpers.h>
-#include <t4_seh_handler.h>
+#include <jit_engine.h>
+#include <jit_method.h>
+#include <jit_helpers.h>
+#include <jit_seh.h>
 
 #include <codegen_bridge.h>
 #include <gc_root_scanner.h>
@@ -455,15 +455,32 @@ void InterpreterEntryDirect(
                 auto native_entry = reinterpret_cast<NativeEntry>(nm->code);
                 native_entry(args_buf, ret_buf);
 
-                if (chaos::il2cpp::codegen::t_deopt_state.deopt_happened) {
+                if (chaos::il2cpp::jit::t_deopt_state.deopt_happened) {
                     GetTierCounters().deopt_t4.fetch_add(1, std::memory_order_relaxed);
                     ++patch_method->deopt_count;
+
+                    // Hybrid mode AOT fallback: redirect to AOT instead of interpreter
+                    if (nm != nullptr && nm->aot_entry != nullptr) {
+                        void* aot_entry = nm->aot_entry;
+                        chaos::il2cpp::jit::UnregisterT4Code(nm->code);
+                        chaos::il2cpp::runtime_core::GcUnregisterSlotMap(nm->code);
+                        patch_method->cached_native_method = nullptr;
+                        patch_method->tier_state.store(PatchMethod::kT4Skip, std::memory_order_release);
+                        patch_method->deopt_count = 0;
+                        auto* entry = GetHotpatchNameRegistry().GetDispatchEntry(
+                            patch_method->module_id, patch_method->token);
+                        if (entry != nullptr) entry->direct_ptr = aot_entry;
+                        reinterpret_cast<NativeEntry>(aot_entry)(args_buf, ret_buf);
+                        chaos::il2cpp::jit::t_deopt_state.deopt_happened = false;
+                        return;
+                    }
+
                     if (patch_method->deopt_count > PatchMethod::kMaxDeoptBeforeDemote) {
                         // Permanently skip T4: overflow/OSR deopts would recur on re-promotion.
                         patch_method->tier_state.store(PatchMethod::kT4Skip, std::memory_order_release);
                         auto* nm = patch_method->cached_native_method;
                         if (nm != nullptr) {
-                            chaos::il2cpp::codegen::UnregisterT4Code(nm->code);
+                            chaos::il2cpp::jit::UnregisterT4Code(nm->code);
                             chaos::il2cpp::runtime_core::GcUnregisterSlotMap(nm->code);
                             patch_method->cached_native_method = nullptr;
                         }
@@ -482,21 +499,21 @@ void InterpreterEntryDirect(
         auto* reg_m = static_cast<interpreter::RegisterMethod*>(
             patch_method->cached_reg_method);
         if (reg_m != nullptr &&
-            chaos::il2cpp::codegen::t_deopt_state.instr_pc <
+            chaos::il2cpp::jit::t_deopt_state.instr_pc <
                 static_cast<uint32_t>(reg_m->stack_map.entries.size()))
         {
             auto& stack_entry =
-                reg_m->stack_map.entries[chaos::il2cpp::codegen::t_deopt_state.instr_pc];
+                reg_m->stack_map.entries[chaos::il2cpp::jit::t_deopt_state.instr_pc];
 
             interpreter::OsrState osr;
             interpreter::CaptureNativeFrame(osr,
-                chaos::il2cpp::codegen::t_deopt_state.gpr_file,
-                chaos::il2cpp::codegen::t_deopt_state.fpr_file,
+                chaos::il2cpp::jit::t_deopt_state.gpr_file,
+                chaos::il2cpp::jit::t_deopt_state.fpr_file,
                 stack_entry,
                 patch_method->cached_arg_count,
                 interpreter::OsrState::kMaxLocals,
-                chaos::il2cpp::codegen::t_deopt_state.gpr_tags);
-            osr.pc = chaos::il2cpp::codegen::t_deopt_state.instr_pc;
+                chaos::il2cpp::jit::t_deopt_state.gpr_tags);
+            osr.pc = chaos::il2cpp::jit::t_deopt_state.instr_pc;
 
             FastFrame* ff = tls_frame_pool.Acquire();
             FastFrame ff_fallback;
@@ -530,13 +547,13 @@ void InterpreterEntryDirect(
                 case interpreter::ValueTag::Int32:
                     ret_writer.WriteI32(static_cast<int32_t>(ff->ret_val));
                     if (using_pool) tls_frame_pool.Release(ff);
-                    chaos::il2cpp::codegen::t_deopt_state = {};
+                    chaos::il2cpp::jit::t_deopt_state = {};
                     tls_current_frame = a5_prev_frame;
                     return;
                 case interpreter::ValueTag::Int64:
                     ret_writer.WriteI64(static_cast<int64_t>(ff->ret_val));
                     if (using_pool) tls_frame_pool.Release(ff);
-                    chaos::il2cpp::codegen::t_deopt_state = {};
+                    chaos::il2cpp::jit::t_deopt_state = {};
                     tls_current_frame = a5_prev_frame;
                     return;
                 case interpreter::ValueTag::Float32: {
@@ -544,7 +561,7 @@ void InterpreterEntryDirect(
                     std::memcpy(&v, &ff->ret_val, sizeof(float));
                     ret_writer.WriteF32(v);
                     if (using_pool) tls_frame_pool.Release(ff);
-                    chaos::il2cpp::codegen::t_deopt_state = {};
+                    chaos::il2cpp::jit::t_deopt_state = {};
                     tls_current_frame = a5_prev_frame;
                     return;
                 }
@@ -553,14 +570,14 @@ void InterpreterEntryDirect(
                     std::memcpy(&v, &ff->ret_val, sizeof(double));
                     ret_writer.WriteF64(v);
                     if (using_pool) tls_frame_pool.Release(ff);
-                    chaos::il2cpp::codegen::t_deopt_state = {};
+                    chaos::il2cpp::jit::t_deopt_state = {};
                     tls_current_frame = a5_prev_frame;
                     return;
                 }
                 default:
                     ret_writer.WritePtr(reinterpret_cast<void*>(ff->ret_val));
                     if (using_pool) tls_frame_pool.Release(ff);
-                    chaos::il2cpp::codegen::t_deopt_state = {};
+                    chaos::il2cpp::jit::t_deopt_state = {};
                     tls_current_frame = a5_prev_frame;
                     return;
                 }
@@ -645,8 +662,8 @@ void InterpreterEntryDirect(
                     if (patch_method->tier_state.compare_exchange_strong(t4_expected, PatchMethod::kT4Ready, std::memory_order_acq_rel)) {
                         auto* reg_m = static_cast<interpreter::RegisterMethod*>(patch_method->cached_optimized_reg_method);
                         if (reg_m == nullptr) reg_m = static_cast<interpreter::RegisterMethod*>(patch_method->cached_reg_method);
-                        if (reg_m != nullptr && codegen::CanGenerateNativeCode(*reg_m)) {
-                            codegen::CodeGenConfig cfg;
+                        if (reg_m != nullptr && jit::CanCompile(*reg_m)) {
+                            jit::CompileConfig cfg;
                             cfg.enable_safepoint_polls = true;
                             cfg.enable_liveness = true;
                             cfg.safepoint_fn = reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::threading::SafepointPoll);
@@ -658,7 +675,7 @@ void InterpreterEntryDirect(
                             cfg.arg_type_count = patch_method->cached_arg_count;
                             cfg.method_token = patch_method->token;
                             cfg.method_module_id = patch_method->module_id;
-                            auto* nm = codegen::GenerateNativeCode(*reg_m, cfg);
+                            auto* nm = jit::Compile(*reg_m, cfg);
                             patch_method->cached_native_method = nm;
                             if (nm != nullptr) {
                                 // Register GC slot map for precise hybrid root scanning
@@ -668,7 +685,7 @@ void InterpreterEntryDirect(
                                         static_cast<const GcSlotMapV0*>(nm->slot_map_data));
                                 }
                                 // Register T4 code range for VEH handler (SEH + deopt)
-                                chaos::il2cpp::codegen::RegisterT4Code(
+                                chaos::il2cpp::jit::RegisterT4Code(
                                     nm->code, nm->code_size, nm, patch_method->token);
                             } else {
                                 ++patch_method->codegen_fail_count;
@@ -692,15 +709,15 @@ void InterpreterEntryDirect(
         }
 
         // Deoptimization-aware RegisterFrame setup
-        bool t4_deopt_happened = chaos::il2cpp::codegen::t_deopt_state.deopt_happened;
+        bool t4_deopt_happened = chaos::il2cpp::jit::t_deopt_state.deopt_happened;
         if (t4_deopt_happened) {
-            std::memcpy(rf.regs.gpr, chaos::il2cpp::codegen::t_deopt_state.gpr_file, 64 * sizeof(uint64_t));
-            std::memcpy(rf.regs.fpr, chaos::il2cpp::codegen::t_deopt_state.fpr_file, 32 * sizeof(double));
-            std::memcpy(rf.regs.gpr_tags, chaos::il2cpp::codegen::t_deopt_state.gpr_tags, 64);
-            std::memcpy(rf.regs.fpr_tags, chaos::il2cpp::codegen::t_deopt_state.fpr_tags, 32);
-            rf.pc = chaos::il2cpp::codegen::t_deopt_state.instr_pc;
+            std::memcpy(rf.regs.gpr, chaos::il2cpp::jit::t_deopt_state.gpr_file, 64 * sizeof(uint64_t));
+            std::memcpy(rf.regs.fpr, chaos::il2cpp::jit::t_deopt_state.fpr_file, 32 * sizeof(double));
+            std::memcpy(rf.regs.gpr_tags, chaos::il2cpp::jit::t_deopt_state.gpr_tags, 64);
+            std::memcpy(rf.regs.fpr_tags, chaos::il2cpp::jit::t_deopt_state.fpr_tags, 32);
+            rf.pc = chaos::il2cpp::jit::t_deopt_state.instr_pc;
             rf.osr_reenable = true;  // trigger immediate OSR on first backedge
-            chaos::il2cpp::codegen::t_deopt_state = {};
+            chaos::il2cpp::jit::t_deopt_state = {};
         }
 
         CHAOS_IL2CPP_LOG_DEBUG("diag", "Step-B: before RegisterExecute");
@@ -763,13 +780,13 @@ void InterpreterEntryDirect(
                       if (patch_method->tier_state.compare_exchange_strong(t4_expected, PatchMethod::kT4Ready, std::memory_order_acq_rel)) {
                           auto* reg_m = static_cast<interpreter::RegisterMethod*>(patch_method->cached_optimized_reg_method);
                           if (reg_m == nullptr) reg_m = static_cast<interpreter::RegisterMethod*>(patch_method->cached_reg_method);
-                          if (reg_m != nullptr && codegen::CanGenerateNativeCode(*reg_m)) {
+                          if (reg_m != nullptr && jit::CanCompile(*reg_m)) {
                               auto* runtime_state = GetCurrentRuntimeState();
                               auto* thread_state  = GetCurrentThreadState();
                               runtime_instantiation::InterpreterDispatchContext reg_dispatch_ctx;
                               reg_dispatch_ctx.runtime_state = runtime_state;
                               reg_dispatch_ctx.thread_state = thread_state;
-                              codegen::CodeGenConfig cfg;
+                              jit::CompileConfig cfg;
                               cfg.enable_safepoint_polls = true;
                               cfg.enable_liveness = true;
                               cfg.safepoint_fn = reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::threading::SafepointPoll);
@@ -799,10 +816,17 @@ void InterpreterEntryDirect(
                                       for (uint32_t ci = 0; ci < chain_count; ++ci) {
                                           const auto& chain = chains[ci];
                                           if (chain.instruction_idx >= instr_count) continue;
-                                          if (chain.slots[0].type_token != 0 && chain.slots[0].direct_fn != nullptr) {
-                                              per_instr_pic[chain.instruction_idx].expected_type_token =
-                                                  static_cast<uint32_t>(chain.slots[0].type_token);
-                                              per_instr_pic[chain.instruction_idx].direct_fn = chain.slots[0].direct_fn;
+                                          auto& pic = per_instr_pic[chain.instruction_idx];
+                                          pic.slot_count = 0;
+                                          for (uint32_t si = 0; si < 3; ++si) {
+                                              if (chain.slots[si].type_token != 0 && chain.slots[si].direct_fn != nullptr) {
+                                                  pic.expected_type_tokens[si] =
+                                                      static_cast<uint32_t>(chain.slots[si].type_token);
+                                                  pic.direct_fns[si] = chain.slots[si].direct_fn;
+                                                  pic.slot_count = si + 1;
+                                              } else {
+                                                  break;  // slots are packed — first empty slot ends the list
+                                              }
                                           }
                                       }
                                       cfg.per_instr_pic = per_instr_pic;
@@ -810,7 +834,7 @@ void InterpreterEntryDirect(
                                   }
                               }
 
-                              auto* nm = codegen::GenerateNativeCode(*reg_m, cfg);
+                              auto* nm = jit::Compile(*reg_m, cfg);
 
                               if (per_instr_pic != nullptr) {
                                   std::free(per_instr_pic);
@@ -825,7 +849,7 @@ void InterpreterEntryDirect(
                                           nm->code,
                                           static_cast<const GcSlotMapV0*>(nm->slot_map_data));
                                   }
-                                  chaos::il2cpp::codegen::RegisterT4Code(
+                                  chaos::il2cpp::jit::RegisterT4Code(
                                       nm->code, nm->code_size, nm, patch_method->token);
                               } else {
                                   ++patch_method->codegen_fail_count;

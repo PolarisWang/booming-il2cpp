@@ -12,7 +12,7 @@
 // Thread-local buffer used by the deopt trampoline to signal deoptimization
 // back to InterpreterEntryDirect.
 
-namespace chaos::il2cpp::codegen {
+namespace chaos::il2cpp::jit {
 
 /// Magic value written to ret_buf[0] by the deopt trampoline to signal that
 /// deoptimization occurred.  InterpreterEntryDirect checks for this value
@@ -34,7 +34,7 @@ struct DeoptTlsState {
 
 extern thread_local DeoptTlsState t_deopt_state;
 
-}  // namespace chaos::il2cpp::codegen
+}  // namespace chaos::il2cpp::jit
 
 // ── LdFld / StFld helpers ──────────────────────────────────────────────
 // InterpreterObject::fields is a std::vector<InterpreterValue>, so field
@@ -64,13 +64,16 @@ struct CodegenCallVirtArgs {
 };
 // Total: 64 bytes (aligns to 8)
 
-/// Per-instruction PIC data for inline monomorphic cache.
-/// Populated by entry_direct.cpp from the first PIC chain slot for each
-/// CallVirt instruction.  Zero entries mean "no inline data available"
-/// (fall back to the full CodegenCallVirt path).
+/// Per-instruction PIC data for inline polymorphic cache.
+/// Populated by entry_direct.cpp from PIC chain slots for each CallVirt
+/// instruction.  Up to 3 type-check slots supporting monomorphic (1 slot),
+/// bimorphic (2), or trimorphic (3) inline dispatch.
+/// slot_count = 0 means "no inline data available" (fall back to the full
+/// CodegenCallVirt path).
 struct PerInstrPicData {
-    uint32_t expected_type_token = 0;
-    void*    direct_fn = nullptr;
+    uint32_t expected_type_tokens[3] = {};  // type tokens, sorted by hotness
+    void*    direct_fns[3] = {};            // pre-resolved AOT function pointers
+    uint32_t slot_count = 0;                // 0 = no data, 1-3 = active slots
 };
 
 // Returns the uint64_t result value (0 if no return).
@@ -168,7 +171,7 @@ extern "C" void DeoptTrapEntry(const void* ctx, uint64_t codegen_rsp) noexcept;
 // ── Inline deoptimization state saver ─────────────────────────────────────────
 // Called directly from EmitDeoptSequence in generated T4 native code.
 // codegen_rsp is the RSP value after prologue (sub rsp, kFrameSize).
-// Uses _ReturnAddress() to find the NativeMethod and DeoptEntry, then
+// Uses _ReturnAddress() to find the JitMethod and DeoptEntry, then
 // batch-copies all 64 GPRs + 32 FPRs from stack frame spill slots to
 // t_deopt_state along with their type tags.
 extern "C" void DeoptSaveFrameState(uint64_t codegen_rsp) noexcept;

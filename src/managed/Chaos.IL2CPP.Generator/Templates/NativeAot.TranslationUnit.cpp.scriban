@@ -13,8 +13,9 @@ extern "C" void InterpreterEntryDirect(
 
 namespace chaos::il2cpp::codegen::{{ codegen_namespace }} {
 
-// Bring runtime_core declarations into scope for unqualified lookup
+// Bring runtime_core and jit declarations into scope for unqualified lookup
 using namespace chaos::il2cpp::runtime_core;
+using namespace chaos::il2cpp::jit;
 
 {{ object_model_section }}
 

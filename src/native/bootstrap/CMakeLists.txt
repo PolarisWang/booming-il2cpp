@@ -28,6 +28,6 @@ target_link_libraries(
     PUBLIC
         chaos_runtime_core
     PRIVATE
-        chaos_codegen
+        chaos_jit
         chaos_hot_update
         chaos_support)

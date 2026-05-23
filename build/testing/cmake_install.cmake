@@ -59,7 +59,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("D:/agent/booming-il2cpp/build/testing/codegen/cmake_install.cmake")
+  include("D:/agent/booming-il2cpp/build/testing/jit/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)

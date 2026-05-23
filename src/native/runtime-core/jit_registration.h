@@ -3,7 +3,11 @@
 
 #include <cstdint>
 
-// ── JitMethodEntry ───────────────────────────────────────────────────────
+// .-- JitMethodEntry ---------------------------------------------------------
+// DEPRECATED: Use JitT4Entry + RegisterT4JitMethods() instead (T4 JIT dispatch).
+// JitMethodEntry routes through the interpreter tier pipeline (old behavior).
+// Kept for backward compatibility with pre-existing generated test files.
+// New codegen runs (--mode jit) now emit JitT4Entry + RegisterT4JitMethods().
 // Describes a single method's AotCoreIr JSON data for JIT/interpreter mode.
 // Codegen emits an array of these entries and RegisterJitMethods() processes
 // them at startup to activate interpreter dispatch for every method.
@@ -17,7 +21,25 @@ extern "C" struct JitMethodEntry {
     uint32_t    module_id;    // module index (0 for single-module)
 };
 
-// ── RegisterJitMethods ───────────────────────────────────────────────────
+// ── JitT4Entry ────────────────────────────────────────────────────────
+// Describes a single method for T4 JIT compilation (JitPrecode dispatch).
+// Codegen emits an array of these entries and RegisterT4JitMethods()
+// processes them at startup to create JitPrecode + PrecodeArena trampoline
+// for each method.  On first call, the trampoline triggers JitStubDispatchImpl
+// → Compile() → direct_ptr patched to compiled native code.
+//
+// Unlike JitMethodEntry (which routes through the interpreter tier pipeline),
+// JitT4Entry routes directly to JIT compilation via the Precode Stub dispatch.
+extern "C" struct JitT4Entry {
+    const char* json;         // AotCoreIr JSON string (null-terminated)
+    uint32_t    json_len;     // JSON string length (excluding null terminator)
+    uint32_t    token;        // metadata token for slot lookup
+    uint32_t    module_id;    // module index (0 for single-module)
+};
+
+// .-- RegisterJitMethods -----------------------------------------------------
+// DEPRECATED: Prefer RegisterT4JitMethods() for new --mode jit codegen runs.
+// Kept for backward compatibility with pre-existing generated test files.
 // Called once at startup (from runtime-entry.cpp) to register all methods'
 // AotCoreIr data and activate interpreter dispatch entries.
 //
@@ -26,5 +48,44 @@ extern "C" struct JitMethodEntry {
 // After this call, all methods in the array will execute through the
 // interpreter instead of native AOT.
 extern "C" void RegisterJitMethods(const JitMethodEntry* entries, uint32_t count) noexcept;
+
+// ── HybridT4Entry ─────────────────────────────────────────────────────
+// Describes a single method for Hybrid mode JIT compilation.
+// Codegen emits AOT C++ function body + AotCoreIr JSON for each method.
+// At startup, RegisterHybridMethods() creates a HybridPrecode with the
+// AOT entry saved, call_counter = kT4Threshold, and a PrecodeArena
+// trampoline.  Cold calls go through AOT; when counter reaches 0, JIT
+// compilation triggers and subsequent calls use JIT-compiled code.
+extern "C" struct HybridT4Entry {
+    const char* json;         // AotCoreIr JSON string (null-terminated)
+    uint32_t    json_len;     // JSON string length (excluding null terminator)
+    uint32_t    token;        // metadata token for slot lookup
+    uint32_t    module_id;    // module index (0 for single-module)
+};
+
+// ── RegisterT4JitMethods ─────────────────────────────────────────────────
+// Called once at startup to register all methods for T4 JIT compilation.
+// For each entry:
+//   1. Deserializes AotCoreIr JSON → IRMethod → AllocateRegisters → RegisterMethod
+//   2. Heap-allocates a JitPrecode with the RegisterMethod + CompileConfig
+//   3. Allocates a PrecodeArena trampoline for the JitPrecode
+//   4. Sets HotpatchEntryV0::direct_ptr to the trampoline
+//
+// After this call, first invocation of each method triggers JitStubDispatchImpl
+// which calls Compile() and atomically replaces direct_ptr with compiled code.
+extern "C" void RegisterT4JitMethods(const JitT4Entry* entries, uint32_t count) noexcept;
+
+// ── RegisterHybridMethods ────────────────────────────────────────────────
+// Called once at startup to register all methods for Hybrid mode.
+// In Hybrid mode, AOT C++ code is already compiled into the binary.
+// This function:
+//   1. Deserializes AotCoreIr JSON → RegisterMethod
+//   2. Heap-allocates HybridPrecode with counter = kT4Threshold
+//   3. Saves the AOT entry from HotpatchEntryV0::direct_ptr
+//   4. Replaces direct_ptr with a PrecodeArena trampoline
+//
+// Cold: trampoline → HybridStubDispatchImpl → aot_entry (counter decrements)
+// Hot:  direct_ptr patched to JIT-compiled code (counter reached 0)
+extern "C" void RegisterHybridMethods(const HybridT4Entry* entries, uint32_t count) noexcept;
 
 #endif // CHAOS_IL2CPP_JIT_REGISTRATION_H_

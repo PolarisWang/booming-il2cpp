@@ -129,12 +129,23 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_SYSTEM_INT32_TOSTRING = 0xE3BF8C09u,
     SHAPE_SYSTEM_INT64_PARSE_SYSTEM_STRING = 0x63EE794Fu,
     SHAPE_SYSTEM_INVALIDOPERATIONEXCEPTION__CTOR_SYSTEM_STRING = 0x637E36D4u,
+    SHAPE_SYSTEM_IO_BINARYREADER_READDOUBLE = 0x85F66B4Cu,
+    SHAPE_SYSTEM_IO_BINARYREADER_READINT32 = 0x14D326A9u,
+    SHAPE_SYSTEM_IO_BINARYREADER_READSTRING = 0xAE49B568u,
+    SHAPE_SYSTEM_IO_BINARYREADER__CTOR_SYSTEM_IO_STREAM = 0xD5A78A0Au,
+    SHAPE_SYSTEM_IO_BINARYWRITER_WRITE_SYSTEM_INT32 = 0x08F6CF13u,
+    SHAPE_SYSTEM_IO_BINARYWRITER_WRITE_SYSTEM_STRING = 0xC156C024u,
+    SHAPE_SYSTEM_IO_BINARYWRITER__CTOR_SYSTEM_IO_STREAM = 0xB17F5506u,
     SHAPE_SYSTEM_IO_MEMORYSTREAM__CTOR = 0xEFACA65Au,
+    SHAPE_SYSTEM_IO_MEMORYSTREAM__CTOR_SYSTEM_BYTE__ = 0x6919F511u,
+    SHAPE_SYSTEM_IO_STREAM_COPYTO_SYSTEM_IO_STREAM = 0xC1C616D4u,
     SHAPE_SYSTEM_IO_STREAM_FLUSH = 0xEEB8AF1Du,
     SHAPE_SYSTEM_IO_STREAM_GET_LENGTH = 0xA6A44D82u,
     SHAPE_SYSTEM_IO_STREAM_GET_POSITION = 0x65233C55u,
+    SHAPE_SYSTEM_IO_STREAM_READ_SYSTEM_BYTE___SYSTEM_INT32_SYSTEM_INT32 = 0x85467A58u,
     SHAPE_SYSTEM_IO_STREAM_SEEK_SYSTEM_INT64_SYSTEM_INT32 = 0xD6BC806Eu,
     SHAPE_SYSTEM_IO_STREAM_SETLENGTH_SYSTEM_INT64 = 0x1B48F127u,
+    SHAPE_SYSTEM_IO_STREAM_WRITE_SYSTEM_BYTE___SYSTEM_INT32_SYSTEM_INT32 = 0xBB7D65E5u,
     SHAPE_SYSTEM_IO_STRINGREADER__CTOR_SYSTEM_STRING = 0xC0E31D29u,
     SHAPE_SYSTEM_IO_STRINGWRITER__CTOR = 0xCFF7C345u,
     SHAPE_SYSTEM_IO_TEXTREADER_READLINE = 0x132D40DDu,
@@ -338,7 +349,7 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_VOLATILE_READ_SYSTEM_INT32_ = 0x779CC9A5u,
     SHAPE_VOLATILE_WRITE_SYSTEM_INT32__SYSTEM_INT32 = 0x6556008Du,
 
-    SHAPE_COUNT = 324u,
+    SHAPE_COUNT = 335u,
 };
 
 // ---- Compile-time dispatch: NativeInt-returning shapes ----
@@ -587,6 +598,14 @@ CHAOS_IL2CPP_INTPTR DispatchNativeInt(Args... args) {
     else if constexpr (S == SHAPE_SYSTEM_INT64_PARSE_SYSTEM_STRING) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             ChaosParseInt64(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_IO_BINARYREADER_READDOUBLE) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosBinaryReaderReadDouble(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_IO_BINARYREADER_READSTRING) {
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+            ChaosBinaryReaderReadString(args...));
     }
     else if constexpr (S == SHAPE_SYSTEM_IO_STREAM_GET_LENGTH) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
@@ -1253,14 +1272,35 @@ void DispatchVoid(Args... args) {
     else if constexpr (S == SHAPE_SYSTEM_INVALIDOPERATIONEXCEPTION__CTOR_SYSTEM_STRING) {
         ChaosReflectionSetExceptionMetadata(args...);
     }
+    else if constexpr (S == SHAPE_SYSTEM_IO_BINARYREADER__CTOR_SYSTEM_IO_STREAM) {
+        ChaosBinaryReaderCtor(args...);
+    }
+    else if constexpr (S == SHAPE_SYSTEM_IO_BINARYWRITER_WRITE_SYSTEM_INT32) {
+        ChaosBinaryWriterWriteInt32(args...);
+    }
+    else if constexpr (S == SHAPE_SYSTEM_IO_BINARYWRITER_WRITE_SYSTEM_STRING) {
+        ChaosBinaryWriterWriteString(args...);
+    }
+    else if constexpr (S == SHAPE_SYSTEM_IO_BINARYWRITER__CTOR_SYSTEM_IO_STREAM) {
+        ChaosBinaryWriterCtor(args...);
+    }
     else if constexpr (S == SHAPE_SYSTEM_IO_MEMORYSTREAM__CTOR) {
         ChaosMemoryStreamCtor(args...);
+    }
+    else if constexpr (S == SHAPE_SYSTEM_IO_MEMORYSTREAM__CTOR_SYSTEM_BYTE__) {
+        ChaosMemoryStreamCtorWithBuffer(args...);
+    }
+    else if constexpr (S == SHAPE_SYSTEM_IO_STREAM_COPYTO_SYSTEM_IO_STREAM) {
+        ChaosStreamCopyTo(args...);
     }
     else if constexpr (S == SHAPE_SYSTEM_IO_STREAM_FLUSH) {
         ChaosStreamFlush(args...);
     }
     else if constexpr (S == SHAPE_SYSTEM_IO_STREAM_SETLENGTH_SYSTEM_INT64) {
         ChaosStreamSetLength(args...);
+    }
+    else if constexpr (S == SHAPE_SYSTEM_IO_STREAM_WRITE_SYSTEM_BYTE___SYSTEM_INT32_SYSTEM_INT32) {
+        ChaosStreamWrite(args...);
     }
     else if constexpr (S == SHAPE_SYSTEM_IO_STRINGREADER__CTOR_SYSTEM_STRING) {
         ChaosStringReaderCtor(args...);
@@ -1458,6 +1498,14 @@ CHAOS_IL2CPP_INT32 DispatchInt32(Args... args) {
         return static_cast<CHAOS_IL2CPP_INT32>(
             ChaosParseInt32(args...));
     }
+    else if constexpr (S == SHAPE_SYSTEM_IO_BINARYREADER_READINT32) {
+        return static_cast<CHAOS_IL2CPP_INT32>(
+            ChaosBinaryReaderReadInt32(args...));
+    }
+    else if constexpr (S == SHAPE_SYSTEM_IO_STREAM_READ_SYSTEM_BYTE___SYSTEM_INT32_SYSTEM_INT32) {
+        return static_cast<CHAOS_IL2CPP_INT32>(
+            ChaosStreamRead(args...));
+    }
     else if constexpr (S == SHAPE_SYSTEM_MATH_ABS_SYSTEM_INT32) {
         return static_cast<CHAOS_IL2CPP_INT32>(
             ChaosMathAbsInt32(args...));
@@ -1609,7 +1657,7 @@ extern ShapeRuntimeEntry g_runtime_shape_entries[kMaxRuntimeShapeEntries];
 extern CHAOS_IL2CPP_UINT32 g_runtime_shape_count;
 
 // ---- Compile-time completeness verification ----
-static_assert(SHAPE_COUNT == 324u,
+static_assert(SHAPE_COUNT == 335u,
     "Number of registered shapes changed. Regenerate this header from RuntimeHelperShapeRegistry.");
 
 #pragma pack(pop)

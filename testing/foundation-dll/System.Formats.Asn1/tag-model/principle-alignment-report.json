@@ -1,14 +1,22 @@
 {
   "family": "tag-model",
   "assembly": "System.Formats.Asn1",
-  "generated_at": "2026-05-22T06:40:13.342145",
+  "generated_at": "2026-05-23T20:45:08.111208",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
       "status": "NOT_APPLICABLE",
-      "summary": "No benchmark data available — benchmarks not run for this family",
+      "summary": "19/19 methods are stubs — benchmark data not meaningful",
       "details": [],
-      "evidence": {}
+      "evidence": {
+        "average_speedup_percent": 0.0,
+        "average_native_jit_speedup_percent": null,
+        "managed_faster_count": 0,
+        "native_aot_faster_count": 0,
+        "native_jit_faster_count": 0,
+        "invalid_count": 19,
+        "total_methods": 19
+      }
     },
     "p1_lowering": {
       "check_id": "p1_lowering",
@@ -19,10 +27,86 @@
         "has_lowering": true,
         "stub_count": 0,
         "simple_forward_count": 0,
-        "methods_with_lowering": 38,
-        "methods_total": 38
+        "methods_with_lowering": 57,
+        "methods_total": 57
       },
       "per_method": [
+        {
+          "name": "TagModelSubjects_TagModelSubjects_Subject_0",
+          "has_lowering": true
+        },
+        {
+          "name": "TagModelSubjects_TagModelSubjects_Subject_1",
+          "has_lowering": true
+        },
+        {
+          "name": "TagModelSubjects_TagModelSubjects_Subject_10",
+          "has_lowering": true
+        },
+        {
+          "name": "TagModelSubjects_TagModelSubjects_Subject_11",
+          "has_lowering": true
+        },
+        {
+          "name": "TagModelSubjects_TagModelSubjects_Subject_12",
+          "has_lowering": true
+        },
+        {
+          "name": "TagModelSubjects_TagModelSubjects_Subject_13",
+          "has_lowering": true
+        },
+        {
+          "name": "TagModelSubjects_TagModelSubjects_Subject_14",
+          "has_lowering": true
+        },
+        {
+          "name": "TagModelSubjects_TagModelSubjects_Subject_15",
+          "has_lowering": true
+        },
+        {
+          "name": "TagModelSubjects_TagModelSubjects_Subject_16",
+          "has_lowering": true
+        },
+        {
+          "name": "TagModelSubjects_TagModelSubjects_Subject_17",
+          "has_lowering": true
+        },
+        {
+          "name": "TagModelSubjects_TagModelSubjects_Subject_18",
+          "has_lowering": true
+        },
+        {
+          "name": "TagModelSubjects_TagModelSubjects_Subject_2",
+          "has_lowering": true
+        },
+        {
+          "name": "TagModelSubjects_TagModelSubjects_Subject_3",
+          "has_lowering": true
+        },
+        {
+          "name": "TagModelSubjects_TagModelSubjects_Subject_4",
+          "has_lowering": true
+        },
+        {
+          "name": "TagModelSubjects_TagModelSubjects_Subject_5",
+          "has_lowering": true
+        },
+        {
+          "name": "TagModelSubjects_TagModelSubjects_Subject_6",
+          "has_lowering": true
+        },
+        {
+          "name": "TagModelSubjects_TagModelSubjects_Subject_7",
+          "has_lowering": true
+        },
+        {
+          "name": "TagModelSubjects_TagModelSubjects_Subject_8",
+          "has_lowering": true
+        },
+        {
+          "name": "TagModelSubjects_TagModelSubjects_Subject_9",
+          "has_lowering": true
+        },
         {
           "name": "TagModelSubjects_TagModelSubjects_Subject_0",
           "has_lowering": true
@@ -209,196 +293,259 @@
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "22 of 53 changed source files are outside expected architecture layers",
+      "summary": "30 of 71 changed source files are outside expected architecture layers",
       "details": [
         {
-          "file": "build/vs2022/testing/Temporary/LastTest.log",
+          "file": ".github/workflows/codegen-regression.yml",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/AotCoreIrLowering.cs",
+          "file": "build/check_foundation_dll_pipeline.py",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ExceptionEmission.cs",
+          "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/RuntimeHelperShapeRegistry.cs",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.StructuredControlFlow.cs",
+          "file": "src/native/jit/code_buffer.cpp",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs",
+          "file": "src/native/jit/code_buffer.h",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Planning/NativeAotLoweringPlanner.StaticInitializationPlanning.cs",
+          "file": "src/native/jit/jit_deopt.cpp",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Properties/AssemblyInfo.cs",
+          "file": "src/native/jit/jit_deopt.h",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.MetadataWriter/MetadataWriterStage.cs",
+          "file": "src/native/jit/jit_engine.cpp",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "testing/project-test/_core/python/project_pipeline_adapter.py",
+          "file": "src/native/jit/jit_engine.h",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "testing/project-test/runtime-self-test/codegen/RuntimeSelfTest/native-aot.methods.json",
+          "file": "src/native/jit/jit_helpers.cpp",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "testing/project-test/runtime-self-test/codegen/_input/RuntimeSelfTest.dll",
+          "file": "src/native/jit/jit_helpers.h",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "testing/project-test/runtime-self-test/codegen/aot-core-ir.json",
+          "file": "src/native/jit/jit_method.h",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "testing/project-test/runtime-self-test/codegen/aot-manifest.json",
+          "file": "src/native/jit/jit_reg_alloc.h",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "testing/project-test/runtime-self-test/codegen/metadata-registration.json",
+          "file": "src/native/jit/jit_seh.cpp",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "testing/project-test/runtime-self-test/codegen/optimization-facts.json",
+          "file": "src/native/jit/jit_seh.h",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "testing/project-test/runtime-self-test/codegen/preserve-descriptor.json",
+          "file": "src/native/jit/jit_unwind.cpp",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "testing/project-test/runtime-self-test/codegen/runtime-entry.cpp",
+          "file": "src/native/jit/jit_unwind.h",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "testing/project-test/runtime-self-test/managed/src/IntegrationProof.cs",
+          "file": "src/native/jit/x64_encoder.h",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "testing/project-test/runtime-self-test/native/entry-aot.exe",
+          "file": "testing/.gitignore",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "testing/project-test/runtime-self-test/native/entry-jit.exe",
+          "file": "testing/README.md",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "testing/project-test/runtime-self-test/native/entry.exe",
+          "file": "testing/config/foundation-dll/pipeline-config.yaml",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "testing/project-test/runtime-self-test/native/runtime-entry.cpp",
+          "file": "testing/fix_generated.py",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "testing/src/native/jit/jit_abi_test.cpp",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "testing/src/native/jit/jit_gc_slot_map_test.cpp",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "testing/src/native/jit/jit_il_smoke_test.cpp",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "testing/src/native/jit/jit_native_test.cpp",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "testing/src/native/jit/jit_osr_test.cpp",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "testing/src/native/jit/jit_seh_handler_test.cpp",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "testing/src/native/jit/jit_seh_test.cpp",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "testing/src/native/jit/jit_unwind_test.cpp",
           "reason": "outside expected architecture layers"
         }
       ],
       "evidence": {
-        "changed_source_count": 53,
+        "changed_source_count": 71,
         "layer_distribution": {
-          "TestInfra": 3,
-          "Codegen": 4,
-          "HotUpdate": 1,
-          "Interpreter": 5,
-          "RuntimeCore": 10,
-          "BuildConfig": 1,
+          "BuildConfig": 15,
+          "TestInfra": 2,
           "Contracts": 1,
-          "Tests": 6
+          "Bootstrap": 3,
+          "Interpreter": 5,
+          "RuntimeCore": 14,
+          "HotUpdate": 1
         },
         "violations": [
           {
-            "file": "build/vs2022/testing/Temporary/LastTest.log",
+            "file": ".github/workflows/codegen-regression.yml",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/AotCoreIrLowering.cs",
+            "file": "build/check_foundation_dll_pipeline.py",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ExceptionEmission.cs",
+            "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/RuntimeHelperShapeRegistry.cs",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.StructuredControlFlow.cs",
+            "file": "src/native/jit/code_buffer.cpp",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs",
+            "file": "src/native/jit/code_buffer.h",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Planning/NativeAotLoweringPlanner.StaticInitializationPlanning.cs",
+            "file": "src/native/jit/jit_deopt.cpp",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Properties/AssemblyInfo.cs",
+            "file": "src/native/jit/jit_deopt.h",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.MetadataWriter/MetadataWriterStage.cs",
+            "file": "src/native/jit/jit_engine.cpp",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "testing/project-test/_core/python/project_pipeline_adapter.py",
+            "file": "src/native/jit/jit_engine.h",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "testing/project-test/runtime-self-test/codegen/RuntimeSelfTest/native-aot.methods.json",
+            "file": "src/native/jit/jit_helpers.cpp",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "testing/project-test/runtime-self-test/codegen/_input/RuntimeSelfTest.dll",
+            "file": "src/native/jit/jit_helpers.h",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "testing/project-test/runtime-self-test/codegen/aot-core-ir.json",
+            "file": "src/native/jit/jit_method.h",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "testing/project-test/runtime-self-test/codegen/aot-manifest.json",
+            "file": "src/native/jit/jit_reg_alloc.h",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "testing/project-test/runtime-self-test/codegen/metadata-registration.json",
+            "file": "src/native/jit/jit_seh.cpp",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "testing/project-test/runtime-self-test/codegen/optimization-facts.json",
+            "file": "src/native/jit/jit_seh.h",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "testing/project-test/runtime-self-test/codegen/preserve-descriptor.json",
+            "file": "src/native/jit/jit_unwind.cpp",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "testing/project-test/runtime-self-test/codegen/runtime-entry.cpp",
+            "file": "src/native/jit/jit_unwind.h",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "testing/project-test/runtime-self-test/managed/src/IntegrationProof.cs",
+            "file": "src/native/jit/x64_encoder.h",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "testing/project-test/runtime-self-test/native/entry-aot.exe",
+            "file": "testing/.gitignore",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "testing/project-test/runtime-self-test/native/entry-jit.exe",
+            "file": "testing/README.md",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "testing/project-test/runtime-self-test/native/entry.exe",
+            "file": "testing/config/foundation-dll/pipeline-config.yaml",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "testing/project-test/runtime-self-test/native/runtime-entry.cpp",
+            "file": "testing/fix_generated.py",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "testing/src/native/jit/jit_abi_test.cpp",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "testing/src/native/jit/jit_gc_slot_map_test.cpp",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "testing/src/native/jit/jit_il_smoke_test.cpp",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "testing/src/native/jit/jit_native_test.cpp",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "testing/src/native/jit/jit_osr_test.cpp",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "testing/src/native/jit/jit_seh_handler_test.cpp",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "testing/src/native/jit/jit_seh_test.cpp",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "testing/src/native/jit/jit_unwind_test.cpp",
             "reason": "outside expected architecture layers"
           }
         ]

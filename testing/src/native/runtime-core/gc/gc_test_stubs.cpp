@@ -58,7 +58,7 @@ bool DeepInlineCallees(
 // (auto-guard not reliable across translation units)
 //
 // Instead, we conditionalize on whether the test needs real codegen:
-#ifndef CHAOS_IL2CPP_CODEGEN_TEST_ACTIVE
+#ifndef CHAOS_IL2CPP_JIT_TEST_ACTIVE
 namespace chaos::il2cpp::codegen {
 bool CanGenerateNativeCode(
     const interpreter::RegisterMethod& /*rm*/) noexcept

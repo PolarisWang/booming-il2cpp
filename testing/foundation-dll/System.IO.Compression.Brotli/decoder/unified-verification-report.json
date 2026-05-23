@@ -2,9 +2,9 @@
   "family": "decoder",
   "assembly": "System.IO.Compression.Brotli",
   "mode": "standard",
-  "timestamp": "2026-05-22T06:42:25",
-  "duration_ms": 134492,
-  "overall_status": "passed",
+  "timestamp": "2026-05-23T20:43:54",
+  "duration_ms": 62827,
+  "overall_status": "failed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -21,22 +21,25 @@
     },
     "codegen": {
       "stage": "codegen",
-      "status": "passed",
-      "summary": "Entrypoint built and IL2CPP compile OK",
+      "status": "failed",
+      "summary": "entry.exe build failed",
       "details": {
-        "methodCount": 3,
-        "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.IO.Compression.Brotli\\decoder\\managed\\subjects\\build-output\\DecoderSubjects.dll"
+        "steps": {
+          "build_subjects": "OK",
+          "convert_to_cpp": "OK",
+          "build_entry_exe": "FAILED"
+        }
       },
       "errors": [],
-      "duration_ms": 33377
+      "duration_ms": 24776
     },
     "jit_codegen": {
       "stage": "jit_codegen",
       "status": "passed",
-      "summary": "JIT entry-jit.exe built and AOT entry.exe restored",
+      "summary": "entry-jit.exe already exists, skipping rebuild",
       "details": {},
       "errors": [],
-      "duration_ms": 34186
+      "duration_ms": 0
     },
     "fact": {
       "stage": "fact",
@@ -50,7 +53,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 371
+      "duration_ms": 35
     },
     "fact_jit": {
       "stage": "fact_jit",
@@ -65,12 +68,12 @@
         }
       },
       "errors": [],
-      "duration_ms": 1817
+      "duration_ms": 27
     },
     "audit": {
       "stage": "audit",
       "status": "passed",
-      "summary": "false_passing=0, principle=ALIGNED",
+      "summary": "false_passing=0, principle=ALIGNED (mech_passed=True, strict_on_CONCERN=False)",
       "details": {
         "falsePassing": 0,
         "stubsFound": 0,
@@ -79,7 +82,7 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 3125
+      "duration_ms": 928
     },
     "asm_compare": {
       "stage": "asm_compare",
@@ -87,30 +90,30 @@
       "summary": "Subjects DLL not found — run codegen stage first",
       "details": {},
       "errors": [],
-      "duration_ms": 0
+      "duration_ms": 31
     },
     "microbench": {
       "stage": "microbench",
       "status": "passed",
-      "summary": "FramePool=3.2ns/op | FastExecute=10.1ns/op | CallVirt dispatch=7.6ns",
+      "summary": "FramePool=2.6ns/op | FastExecute=6.5ns/op | CallVirt dispatch=6.3ns",
       "details": {
         "framePool": {
-          "acquireReleaseNsPerOp": 3.2,
+          "acquireReleaseNsPerOp": 2.6,
           "batchCount": 1000,
           "framesPerBatch": 32
         },
         "fastExecute": {
           "runCount": 100000,
-          "nsPerCall": 10.1
+          "nsPerCall": 6.5
         },
         "callVirt": {
-          "handlerDispatchNs": 7.6,
-          "emptyStackNs": 8.4
+          "handlerDispatchNs": 6.3,
+          "emptyStackNs": 7.0
         },
         "poolSize": 32
       },
       "errors": [],
-      "duration_ms": 31
+      "duration_ms": 26
     },
     "benchmark": {
       "stage": "benchmark",
@@ -118,7 +121,7 @@
       "summary": "All 3 non-stub methods are invalid (no managed harness)",
       "details": {},
       "errors": [],
-      "duration_ms": 58821
+      "duration_ms": 34484
     },
     "hotupdate": {
       "stage": "hotupdate",
@@ -132,20 +135,20 @@
         "stubMethods": 0
       },
       "errors": [],
-      "duration_ms": 32
+      "duration_ms": 29
     },
     "hotupdate_aot_benchmark": {
       "stage": "hotupdate_aot_benchmark",
       "status": "passed",
-      "summary": "avg_slowdown=88.11% (1.9x) over 3 methods (AOT patched path)",
+      "summary": "avg_slowdown=41.75% (1.4x) over 3 methods (AOT patched path)",
       "details": {
-        "averageSlowdownPercent": 88.11,
-        "slowdownFactor": 1.8811000000000002,
+        "averageSlowdownPercent": 41.75,
+        "slowdownFactor": 1.4175,
         "threshold": 50.0,
         "nonStubMethods": 3
       },
       "errors": [],
-      "duration_ms": 82
+      "duration_ms": 72
     },
     "hotupdate_jit_fact": {
       "stage": "hotupdate_jit_fact",
@@ -157,20 +160,20 @@
         "total": 3
       },
       "errors": [],
-      "duration_ms": 28
+      "duration_ms": 24
     },
     "hotupdate_jit_benchmark": {
       "stage": "hotupdate_jit_benchmark",
       "status": "passed",
-      "summary": "avg_slowdown=-53.24% (0.5x) over 3 methods (JIT patched path)",
+      "summary": "avg_slowdown=-10.44% (0.9x) over 3 methods (JIT patched path)",
       "details": {
-        "averageSlowdownPercent": -53.24,
-        "slowdownFactor": 0.46759999999999996,
+        "averageSlowdownPercent": -10.44,
+        "slowdownFactor": 0.8956000000000001,
         "threshold": 50.0,
         "nonStubMethods": 3
       },
       "errors": [],
-      "duration_ms": 2613
+      "duration_ms": 2385
     }
   },
   "coverage": {
@@ -180,14 +183,29 @@
   },
   "dashboard": {
     "interpreter": {
-      "fastFramePoolNsPerOp": 3.2,
+      "fastFramePoolNsPerOp": 2.6,
       "fastExecuteNsPerInstr": 0,
-      "callVirtHandlerDispatchNs": 7.6,
+      "callVirtHandlerDispatchNs": 6.3,
       "callVirtMicHitNs": 0,
       "callVirtRawFallbackNs": 0,
       "poolSize": 32
     },
-    "irTranslation": {},
+    "irTranslation": {
+      "totalMethods": 3,
+      "okCount": 3,
+      "failedCount": 0,
+      "overallIrExpansionRatio": 0.73,
+      "averageExpansionRatio": 0.73,
+      "maxExpansionRatio": 1.09,
+      "jitInstructionAvg": 44.0,
+      "aotInstructionAvg": 32.0,
+      "totalExternalRuntimeCalls": 0,
+      "totalVirtualDispatches": 0,
+      "totalBoxingOps": 0,
+      "topInstructionCategories": {
+        "external_runtime_call": 5
+      }
+    },
     "performance": {},
     "hotupdate": {
       "aotFunctional": {
@@ -196,8 +214,8 @@
         "totalMethods": 3
       },
       "aotOverhead": {
-        "averageSlowdownPercent": 88.11,
-        "slowdownFactor": 1.8811000000000002,
+        "averageSlowdownPercent": 41.75,
+        "slowdownFactor": 1.4175,
         "nonStubMethods": 3
       },
       "jitFunctional": {
@@ -206,22 +224,28 @@
         "totalMethods": 3
       },
       "jitOverhead": {
-        "averageSlowdownPercent": -53.24,
-        "slowdownFactor": 0.46759999999999996,
+        "averageSlowdownPercent": -10.44,
+        "slowdownFactor": 0.8956000000000001,
         "nonStubMethods": 3
       }
     },
     "keyRatios": {
       "nativeFasterRatio": 0,
-      "irExpansionRatio": 0,
-      "interpreterSlowdownFactor": 1.8811000000000002,
-      "asmPassRate": 0.0
+      "irExpansionRatio": 0.73,
+      "interpreterSlowdownFactor": 1.4175,
+      "asmPassRate": 100.0
     }
   },
   "regression": {
     "benchmark": {
-      "status": "no_baseline",
-      "message": "Baseline auto-created from this run",
+      "status": "matched",
+      "baselineMetrics": {
+        "totalMethods": 3,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      },
       "currentMetrics": {
         "totalMethods": 3,
         "matchedCount": 0,

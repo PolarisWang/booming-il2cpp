@@ -5,7 +5,7 @@
 #include "../gc/gc_low_mem.h"
 
 // T4 VEH handler for SEH dispatch in native-generated code.
-#include "../codegen/t4_seh_handler.h"
+#include "../jit/jit_seh.h"
 
 #include <chaos/thread.h> // for common::current_thread_object
 
@@ -63,7 +63,7 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL RuntimeInit(
     g_low_memory_monitor.Start();
 
     // Register T4 VEH handler for SEH dispatch in native-generated code.
-    ::chaos::il2cpp::codegen::RegisterT4SehHandler();
+    ::chaos::il2cpp::jit::RegisterJitSehHandler();
 
     // Register ThreadPool-backed Task.Run so that async_task_run() in
     // chaos_common delegates to the real implementation instead of stubbing.

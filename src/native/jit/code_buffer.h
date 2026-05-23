@@ -17,7 +17,7 @@
 
 #include <chaos/log.h>
 
-namespace chaos::il2cpp::codegen {
+namespace chaos::il2cpp::jit {
 
 // Default buffer size (4KB — fits most small-to-medium methods).
 static constexpr uint32_t kCodeBufferInitSize = 4096;
@@ -148,6 +148,6 @@ private:
     bool      failed_   = false;  // Set on allocation failure; suppresses further writes
 };
 
-}  // namespace chaos::il2cpp::codegen
+}  // namespace chaos::il2cpp::jit
 
 #endif  // CHAOS_IL2CPP_CODEGEN_CODE_BUFFER_H_

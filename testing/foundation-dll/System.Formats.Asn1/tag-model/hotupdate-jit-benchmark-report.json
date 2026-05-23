@@ -7,160 +7,160 @@
       "methodIndex": 0,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::AsConstructed:System.Formats.Asn1.Asn1Tag()",
       "status": "passed",
-      "prePatchNsPerOp": 87606.81,
-      "postPatchNsPerOp": 77100.1,
-      "slowdownPercent": -11.99
+      "prePatchNsPerOp": 75030.15,
+      "postPatchNsPerOp": 57758.7,
+      "slowdownPercent": -23.02
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::AsPrimitive:System.Formats.Asn1.Asn1Tag()",
       "status": "passed",
-      "prePatchNsPerOp": 78806.37,
-      "postPatchNsPerOp": 78233.8,
-      "slowdownPercent": -0.73
+      "prePatchNsPerOp": 73931.2,
+      "postPatchNsPerOp": 58773.7,
+      "slowdownPercent": -20.5
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::CalculateEncodedSize:System.Int32()",
       "status": "passed",
-      "prePatchNsPerOp": 60577.29,
-      "postPatchNsPerOp": 57534.1,
-      "slowdownPercent": -5.02
+      "prePatchNsPerOp": 54827.24,
+      "postPatchNsPerOp": 47661.9,
+      "slowdownPercent": -13.07
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::Decode:System.Formats.Asn1.Asn1Tag(System.ReadOnlySpan{System.Byte},System.Int32&)",
       "status": "passed",
-      "prePatchNsPerOp": 86989.09,
-      "postPatchNsPerOp": 64365.3,
-      "slowdownPercent": -26.01
+      "prePatchNsPerOp": 78592.43,
+      "postPatchNsPerOp": 60283.5,
+      "slowdownPercent": -23.3
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::Encode:System.Int32(System.Span{System.Byte})",
       "status": "passed",
-      "prePatchNsPerOp": 76427.93,
-      "postPatchNsPerOp": 56164.5,
-      "slowdownPercent": -26.51
+      "prePatchNsPerOp": 66246.78,
+      "postPatchNsPerOp": 53902.6,
+      "slowdownPercent": -18.63
     },
     {
       "methodIndex": 5,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::Equals:System.Boolean(System.Formats.Asn1.Asn1Tag)",
       "status": "passed",
-      "prePatchNsPerOp": 86458.44,
-      "postPatchNsPerOp": 61598.9,
-      "slowdownPercent": -28.75
+      "prePatchNsPerOp": 76557.83,
+      "postPatchNsPerOp": 59556.8,
+      "slowdownPercent": -22.21
     },
     {
       "methodIndex": 6,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::Equals:System.Boolean(System.Object)",
       "status": "passed",
-      "prePatchNsPerOp": 110473.28,
-      "postPatchNsPerOp": 61920.3,
-      "slowdownPercent": -43.95
+      "prePatchNsPerOp": 72831.13,
+      "postPatchNsPerOp": 58112.1,
+      "slowdownPercent": -20.21
     },
     {
       "methodIndex": 7,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::get_IsConstructed:System.Boolean()",
       "status": "passed",
-      "prePatchNsPerOp": 186518.04,
-      "postPatchNsPerOp": 61492.8,
-      "slowdownPercent": -67.03
+      "prePatchNsPerOp": 67093.73,
+      "postPatchNsPerOp": 56163.8,
+      "slowdownPercent": -16.29
     },
     {
       "methodIndex": 8,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::get_TagClass:System.Formats.Asn1.TagClass()",
       "status": "passed",
-      "prePatchNsPerOp": 158359.34,
-      "postPatchNsPerOp": 64400.1,
-      "slowdownPercent": -59.33
+      "prePatchNsPerOp": 73761.89,
+      "postPatchNsPerOp": 57125.5,
+      "slowdownPercent": -22.55
     },
     {
       "methodIndex": 9,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::get_TagValue:System.Int32()",
       "status": "passed",
-      "prePatchNsPerOp": 134702.03,
-      "postPatchNsPerOp": 61927.8,
-      "slowdownPercent": -54.03
+      "prePatchNsPerOp": 55972.6,
+      "postPatchNsPerOp": 46221.7,
+      "slowdownPercent": -17.42
     },
     {
       "methodIndex": 10,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::GetHashCode:System.Int32()",
       "status": "passed",
-      "prePatchNsPerOp": 65058.3,
-      "postPatchNsPerOp": 62999.6,
-      "slowdownPercent": -3.16
+      "prePatchNsPerOp": 55707.93,
+      "postPatchNsPerOp": 46953.8,
+      "slowdownPercent": -15.71
     },
     {
       "methodIndex": 11,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::HasSameClassAndValue:System.Boolean(System.Formats.Asn1.Asn1Tag)",
       "status": "passed",
-      "prePatchNsPerOp": 133877.07,
-      "postPatchNsPerOp": 82392.5,
-      "slowdownPercent": -38.46
+      "prePatchNsPerOp": 77756.73,
+      "postPatchNsPerOp": 60120.1,
+      "slowdownPercent": -22.68
     },
     {
       "methodIndex": 12,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::op_Equality:System.Boolean(System.Formats.Asn1.Asn1Tag,System.Formats.Asn1.Asn1Tag)",
       "status": "passed",
-      "prePatchNsPerOp": 132336.33,
-      "postPatchNsPerOp": 154499.0,
-      "slowdownPercent": 16.75
+      "prePatchNsPerOp": 77811.11,
+      "postPatchNsPerOp": 60131.7,
+      "slowdownPercent": -22.72
     },
     {
       "methodIndex": 13,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::op_Inequality:System.Boolean(System.Formats.Asn1.Asn1Tag,System.Formats.Asn1.Asn1Tag)",
       "status": "passed",
-      "prePatchNsPerOp": 96770.98,
-      "postPatchNsPerOp": 77433.2,
-      "slowdownPercent": -19.98
+      "prePatchNsPerOp": 77417.4,
+      "postPatchNsPerOp": 60200.5,
+      "slowdownPercent": -22.24
     },
     {
       "methodIndex": 14,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::ToString:System.String()",
       "status": "passed",
-      "prePatchNsPerOp": 86402.12,
-      "postPatchNsPerOp": 59981.9,
-      "slowdownPercent": -30.58
+      "prePatchNsPerOp": 67334.63,
+      "postPatchNsPerOp": 55201.8,
+      "slowdownPercent": -18.02
     },
     {
       "methodIndex": 15,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::TryDecode:System.Boolean(System.ReadOnlySpan{System.Byte},System.Formats.Asn1.Asn1Tag&,System.Int32&)",
       "status": "passed",
-      "prePatchNsPerOp": 87469.58,
-      "postPatchNsPerOp": 79743.4,
-      "slowdownPercent": -8.83
+      "prePatchNsPerOp": 72567.73,
+      "postPatchNsPerOp": 57777.3,
+      "slowdownPercent": -20.38
     },
     {
       "methodIndex": 16,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::TryEncode:System.Boolean(System.Span{System.Byte},System.Int32&)",
       "status": "passed",
-      "prePatchNsPerOp": 89695.7,
-      "postPatchNsPerOp": 87905.3,
-      "slowdownPercent": -2.0
+      "prePatchNsPerOp": 82344.82,
+      "postPatchNsPerOp": 68256.6,
+      "slowdownPercent": -17.11
     },
     {
       "methodIndex": 17,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::.ctor:System.Void(System.Formats.Asn1.UniversalTagNumber,System.Boolean)",
       "status": "passed",
-      "prePatchNsPerOp": 9870.1,
-      "postPatchNsPerOp": 18056.3,
-      "slowdownPercent": 82.94
+      "prePatchNsPerOp": 8223.09,
+      "postPatchNsPerOp": 12526.2,
+      "slowdownPercent": 52.33
     },
     {
       "methodIndex": 18,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::.ctor:System.Void(System.Formats.Asn1.TagClass,System.Int32,System.Boolean)",
       "status": "passed",
-      "prePatchNsPerOp": 10367.909999999998,
-      "postPatchNsPerOp": 22252.8,
-      "slowdownPercent": 114.63
+      "prePatchNsPerOp": 8079.61,
+      "postPatchNsPerOp": 12992.8,
+      "slowdownPercent": 60.81
     }
   ],
   "summary": {
     "totalMethods": 19,
     "nonStubMethods": 19,
-    "averageSlowdownPercent": -11.16,
-    "slowdownFactor": 0.8884000000000001,
+    "averageSlowdownPercent": -11.73,
+    "slowdownFactor": 0.8826999999999999,
     "slowdownThresholdX": 50.0
   }
 }

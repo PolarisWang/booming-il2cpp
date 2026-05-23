@@ -20,8 +20,8 @@
     #include <pthread.h>
 #endif
 
-#include "../codegen/t4_seh_handler.h"    // FindT4CodeByAddress for hybrid GC scanning
-#include "../codegen/native_method.h"     // NativeMethod (slot_map_data for GcSlotMapV0)
+#include "../jit/jit_seh.h"    // FindT4CodeByAddress for hybrid GC scanning
+#include "../jit/jit_method.h"     // JitMethod (slot_map_data for GcSlotMapV0)
 
 #include <atomic>
 #include <cstdio>
@@ -714,7 +714,7 @@ void GcScanAllThreadRoots(void (*callback)(void* root_addr, bool is_interior, vo
             void* val = static_cast<void*>(
                 chaos::il2cpp::common::AsanReadPtrNoCheck(
                     reinterpret_cast<void*>(slot)));
-            const auto* nm = chaos::il2cpp::codegen::FindT4CodeByAddress(val);
+            const auto* nm = chaos::il2cpp::jit::FindT4CodeByAddress(val);
             if (nm == nullptr) continue;
             if (nm->slot_map_data == nullptr) continue;
 
