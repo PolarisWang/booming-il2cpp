@@ -52,13 +52,14 @@ def discover_families(assembly: str = "System.Private.CoreLib") -> list[str]:
     return [s for s in slugs if s not in SKIP_SLUGS]
 
 
-def run_family(slug: str, assembly: str = "System.Private.CoreLib") -> dict:
+def run_family(slug: str, assembly: str = "System.Private.CoreLib", skip_stages: set[str] | None = None) -> dict:
     """Run the full pipeline for one family. Returns result dict."""
     family_dir = _TESTING_ROOT / "foundation-dll" / assembly / slug
     ctx = FamilyContext(
         slug=slug,
         assembly=assembly,
         family_dir=family_dir,
+        skip_stages=skip_stages or set(),
     )
 
     print(f"\n{'='*60}")
@@ -107,11 +108,25 @@ def main() -> None:
     parser.add_argument("--output", "-o", default=None,
                         help="Output report path (default: testing/results/batch-report.json)")
     parser.add_argument("--assembly", default="System.Private.CoreLib")
+    parser.add_argument("--family", default=None,
+                        help="Single family slug to run (run all families if omitted)")
+    parser.add_argument("--skip-stages", default=None,
+                        help="Comma-separated stages to skip: preflight,codegen,jit_codegen,fact,fact_jit,audit,asm_compare,microbench,benchmark,hotupdate")
     parser.add_argument("--resume", default=None,
                         help="Resume from a specific slug (skip families before this)")
     args = parser.parse_args()
 
-    slugs = discover_families(args.assembly)
+    # Single-family mode
+    if args.family:
+        slugs = [args.family]
+    else:
+        slugs = discover_families(args.assembly)
+
+    # Parse skip stages
+    skip_stages = set()
+    if args.skip_stages:
+        skip_stages = set(s.strip() for s in args.skip_stages.split(","))
+
     print(f"Discovered {len(slugs)} families to run")
 
     # Resume support
@@ -139,7 +154,7 @@ def main() -> None:
 
     for i, slug in enumerate(slugs):
         print(f"\n[{i+1}/{len(slugs)}] ", end="")
-        result = run_family(slug, args.assembly)
+        result = run_family(slug, args.assembly, skip_stages)
         results.append(result)
 
         if result["status"] == "passed":

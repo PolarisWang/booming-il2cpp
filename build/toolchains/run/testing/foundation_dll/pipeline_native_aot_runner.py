@@ -270,8 +270,10 @@ def _run_convert_to_cpp(
 
     # Clean stale per-assembly directories from previous runs so the
     # per-assembly output check below only sees fresh converter output.
+    # Keep _subjects_input directory (created by pipeline_adapter before calling
+    # this function, containing the clean subjects DLL for convert-to-cpp).
     for d in sorted(codegen_out.iterdir()):
-        if d.is_dir() and d.name not in ("build", "generated"):
+        if d.is_dir() and d.name not in ("build", "generated", "_subjects_input"):
             shutil.rmtree(d)
             print(f"    [clean] removed stale codegen subdirectory: {d.name}")
 

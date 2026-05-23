@@ -311,8 +311,8 @@ extern ""C"" const CodegenRegistrationOptionsV0 chaos_codegen_options;
 // kAotMethodCount defined in codegen-emitted code (native-aot.generated.cpp)
 extern ""C"" const int kAotMethodCount;
 
-// RunMicrobench — default empty stub. Link a real microbench.cpp to enable microbenchmark mode.
-extern ""C"" void RunMicrobench() {{}}
+// RunMicrobench is defined in microbench.cpp (auto-generated in native/ directory).
+extern ""C"" void RunMicrobench();
 
 // SetExceptionFallback is declared at global scope in exception_helpers.h.
 extern ""C"" void SetExceptionFallback(void (*fn)());
