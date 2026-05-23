@@ -65,6 +65,9 @@ if(ROADMAP0_PRESET_TARGET STREQUAL "windows-x64-reference")
     # ── Foundation DLL native family skeletons ────────────────────
     add_subdirectory(testing/foundation-dll)
 
+    # ── Native testing suite (GoogleTest-based unit/stress/benchmark) ─────
+    add_subdirectory(testing)
+
     # ── Architecture check targets ─────────────────────────────────────
     # Each native module gets a per-module check target.
     # Run: cmake --build <build-dir> --target check_arch_<module>
