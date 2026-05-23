@@ -1246,8 +1246,7 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         return true;
     }
 
-    case IROpCode::EndFinally:
-    case IROpCode::EndFilter: {
+    case IROpCode::EndFinally: {
         // SEH V3: call T4EndFinallyHelper to advance the finally/fault
         // unwind chain.  Returns next handler address (non-zero) or 0
         // (continue normally).
@@ -1260,6 +1259,42 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         // .continue: normal fall-through
         uint32_t continue_pos = buf_.pos();
         int32_t jz_disp = static_cast<int32_t>(continue_pos - (jz_pos + 6));
+        buf_.Patch32(jz_pos + 2, static_cast<uint32_t>(jz_disp));
+        return true;
+    }
+
+    case IROpCode::EndFilter: {
+        // EndFilter: pop the filter result from src1_reg and decide.
+        //   non-zero (accept) → fall through to the handler (which is emitted
+        //                       sequentially right after the filter)
+        //   zero    (reject)  → call T4EndFinallyHelper to continue exception
+        //                       search outward; jmp rax to the next handler
+        //
+        // Per the SEH layout convention used by code_generator.cpp:
+        // for filter clauses, handler_start_offset stores the filter function
+        // offset, and the actual handler follows the EndFilter sequentially.
+        // The fall-through path therefore lands on the handler.
+        if (instr.has_src1()) {
+            LoadGpr(kRAX, instr.src1_reg());      // EAX = filter result
+        } else {
+            EmitMovImm64(buf_, kRAX, 0);           // defensive: treat as reject
+        }
+        EmitTestRR(buf_, kRAX, kRAX);
+        // jne .accept  (filter result != 0 → fall through to handler)
+        uint32_t jne_pos = buf_.pos();
+        EmitJccRel32(buf_, kCC_NE, 0);
+        // Reject path: dispatch via T4EndFinallyHelper.
+        EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(T4EndFinallyHelper));
+        EmitCallWithSpill(kRAX);
+        EmitTestRR(buf_, kRAX, kRAX);
+        uint32_t jz_pos = buf_.pos();
+        EmitJccRel32(buf_, kCC_E, 0);              // jz .accept (no further handler)
+        EmitJmpReg(buf_, kRAX);                    // jmp to next handler
+        // .accept: fall through to the handler block (sequentially after EndFilter).
+        uint32_t accept_pos = buf_.pos();
+        int32_t jne_disp = static_cast<int32_t>(accept_pos - (jne_pos + 6));
+        buf_.Patch32(jne_pos + 2, static_cast<uint32_t>(jne_disp));
+        int32_t jz_disp = static_cast<int32_t>(accept_pos - (jz_pos + 6));
         buf_.Patch32(jz_pos + 2, static_cast<uint32_t>(jz_disp));
         return true;
     }
@@ -2047,6 +2082,125 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         uint32_t first_arg_reg = instr.src1_reg();
         uint32_t arg_count = instr.call_arg_count();
 
+        // ── Inline PIC monomorphic fast path ────────────────────────────
+        // Check for per-instruction PIC data from entry_direct.cpp.
+        // When the first PIC slot has a resolved direct_fn and arg_count ≤ 4,
+        // emit an inline type check + direct call instead of going through
+        // the full CodegenCallVirt C helper.
+        bool has_inline_pic = false;
+        uint32_t inline_expected_type = 0;
+        void* inline_direct_fn = nullptr;
+        if (config_.per_instr_pic != nullptr && current_instr_index_ < config_.per_instr_pic_count) {
+            const auto& pic = config_.per_instr_pic[current_instr_index_];
+            if (pic.direct_fn != nullptr && arg_count <= 4) {
+                has_inline_pic = true;
+                inline_expected_type = pic.expected_type_token;
+                inline_direct_fn = pic.direct_fn;
+            }
+        }
+        uint32_t inline_null_jmp_pos = 0;
+        uint32_t inline_type_miss_jmp_pos = 0;
+        uint32_t inline_done_jmp_pos = 0;
+        uint32_t inline_call_pos = 0;
+
+        if (has_inline_pic) {
+            // Load receiver from register file (via LoadGpr for correct cache/coloring)
+            LoadGpr(kRAX, first_arg_reg);
+            EmitTestRR(buf_, kRAX, kRAX);
+            inline_null_jmp_pos = buf_.pos();
+            EmitJccRel32(buf_, kCC_E, 0);  // je .use_c_helper (null receiver)
+
+            // Load type_token from object at offset 56 (= sizeof(SmallFieldArray))
+            EmitMovRM(buf_, kRCX, kRAX, 56);
+            // Compare with expected type_token
+            EmitMovRIImm32(buf_, kRAX, inline_expected_type);
+            EmitCmpRR(buf_, kRAX, kRCX);
+            inline_type_miss_jmp_pos = buf_.pos();
+            EmitJccRel32(buf_, kCC_NE, 0);  // jne .use_c_helper
+
+            // Move up to 4 args from register file to Win64 calling convention
+            if (arg_count >= 1) LoadGpr(kRCX, first_arg_reg);
+            if (arg_count >= 2) LoadGpr(kRDX, first_arg_reg + 1);
+            if (arg_count >= 3) LoadGpr(kR8,  first_arg_reg + 2);
+            if (arg_count >= 4) LoadGpr(kR9,  first_arg_reg + 3);
+
+            // Direct call to pre-resolved AOT function pointer
+            inline_call_pos = buf_.pos();
+            EmitMovImm64(buf_, kRAX, reinterpret_cast<uint64_t>(inline_direct_fn));
+            EmitCallWithSpill(kRAX);
+
+            // Record call site for hotpatch tracking and GC point
+            {
+                uint32_t call_token = 0, call_module = 0;
+                if (config_.call_cache != nullptr && current_instr_index_ < config_.call_cache_count) {
+                    const auto& cached = static_cast<const runtime_instantiation::CachedCallInfo*>(config_.call_cache)[current_instr_index_];
+                    call_token = cached.method_token;
+                    call_module = cached.module_id;
+                }
+                call_sites_.push_back({current_instr_index_, inline_call_pos, call_token, call_module});
+            }
+            RecordGcPoint(inline_call_pos);
+
+            // Deoptimization metadata for inline path
+            if (config_.enable_deopt) {
+                uint32_t val_start = static_cast<uint32_t>(deopt_values_.size());
+                for (uint32_t vr = 0; vr < kGprCount; ++vr) {
+                    DeoptValue dv; dv.reg_index = vr;
+                    dv.value_tag = (vr < static_cast<uint32_t>(vreg_types_.size()))
+                                   ? vreg_types_[vr]
+                                   : static_cast<uint8_t>(interpreter::ValueTag::Int64);
+                    dv.is_spilled = true; dv.spill_offset = static_cast<int16_t>(GprOff(vr));
+                    deopt_values_.push_back(dv);
+                }
+                for (uint32_t vr = kGprCount; vr < kGprCount + kFprCount; ++vr) {
+                    DeoptValue dv; dv.reg_index = vr; dv.value_tag = static_cast<uint8_t>(interpreter::ValueTag::Float64);
+                    dv.is_spilled = true; dv.spill_offset = static_cast<int16_t>(FprOff(vr));
+                    deopt_values_.push_back(dv);
+                }
+                uint32_t n_vals = static_cast<uint32_t>(deopt_values_.size()) - val_start;
+                DeoptEntry entry; entry.native_offset = inline_call_pos; entry.instr_pc = current_instr_index_; entry.num_values = n_vals; entry.values_offset = val_start;
+                deopt_entries_.push_back(entry);
+            }
+
+            // Check ret_buf[0] for kDeoptMagic
+            EmitMovRM(buf_, kRCX, kRSI, 0);
+            EmitMovImm64(buf_, kRAX, kDeoptMagic);
+            EmitCmpRR(buf_, kRAX, kRCX);
+            uint32_t inline_jne_patch_off = buf_.pos() + 2;
+            EmitJccRel32(buf_, kCC_NE, 0);   // jne .inline_normal
+
+            // Inline deopt path: jump to common deopt trampoline
+            uint32_t inline_deopt_patch = buf_.pos() + 1;
+            EmitJmpRel32(buf_, 0);
+            deopt_jump_patches_.push_back({inline_deopt_patch});
+
+            // .inline_normal:
+            uint32_t inline_normal_off = buf_.pos();
+            {
+                int32_t disp = static_cast<int32_t>(inline_normal_off - (inline_jne_patch_off + 4));
+                buf_.Patch32(inline_jne_patch_off, static_cast<uint32_t>(disp));
+            }
+
+            // Store return value
+            if (instr.has_dst()) StoreGpr(kRAX, instr.dst_reg());
+
+            // Jump past C helper path
+            inline_done_jmp_pos = buf_.pos();
+            EmitJmpRel32(buf_, 0);  // jmp .done
+
+            // ── Patch inline jumps to C helper fallthrough ──
+            uint32_t c_helper_start = buf_.pos();
+            {
+                int32_t null_disp = static_cast<int32_t>(c_helper_start - (inline_null_jmp_pos + 6));
+                buf_.Patch32(inline_null_jmp_pos + 2, static_cast<uint32_t>(null_disp));
+            }
+            {
+                int32_t miss_disp = static_cast<int32_t>(c_helper_start - (inline_type_miss_jmp_pos + 6));
+                buf_.Patch32(inline_type_miss_jmp_pos + 2, static_cast<uint32_t>(miss_disp));
+            }
+        }
+
+        // ── Existing C helper path (CodegenCallVirt) ────────────────────
         // Build CodegenCallVirtArgs at [rsp + kCallVirtArgsOff]
         EmitLeaRM(buf_, kRCX, kRSP, static_cast<int32_t>(kCallVirtArgsOff));
         EmitLeaRM(buf_, kRAX, kRSP, static_cast<int32_t>(kGprFileOff));
@@ -2137,6 +2291,15 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         buf_.Patch32(jne_patch_off, static_cast<uint32_t>(jne_disp));
 
         if (instr.has_dst()) StoreGpr(kRAX, instr.dst_reg());
+
+        // .done (inline PIC fast path jumps here to skip C helper)
+        {
+            uint32_t done_pos = buf_.pos();
+            if (has_inline_pic) {
+                int32_t done_disp = static_cast<int32_t>(done_pos - (inline_done_jmp_pos + 5));
+                buf_.Patch32(inline_done_jmp_pos + 1, static_cast<uint32_t>(done_disp));
+            }
+        }
         return true;
     }
 
@@ -3206,6 +3369,13 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
 
     // ── Emit SEH clause table ──────────────────────────────────────────
     // Appended after code body; VEH handler reads from nm->code + seh_table_offset.
+    //
+    // Filter clauses (flags == 0x1) follow a special convention to keep the
+    // table fixed-size: the handler_start_offset slot stores the FILTER
+    // FUNCTION offset, not the handler offset.  The actual handler is
+    // emitted immediately after the filter (sequential layout).  The T4 VEH
+    // dispatch path runs the filter, and if it returns non-zero, control
+    // falls through into the handler; if zero, the search continues outward.
     uint32_t seh_offset = 0;
     if (!rm_.seh_clauses.empty()) {
         seh_offset = buf_.pos();
@@ -3217,18 +3387,27 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
             uint32_t try_start = static_cast<uint32_t>(clause.try_start_idx);
             uint32_t try_end = static_cast<uint32_t>(clause.try_end_idx);
             uint32_t handler_start = static_cast<uint32_t>(clause.handler_start_idx);
+            const auto cflags_u32 = static_cast<uint32_t>(clause.flags);
+            const bool is_filter = (cflags_u32 ==
+                static_cast<uint32_t>(interpreter::SEHFlags::Filter));
+            // For filter clauses, the dispatched offset is the filter function;
+            // the actual handler follows the filter sequentially.
+            uint32_t dispatch_idx = is_filter
+                ? static_cast<uint32_t>(clause.filter_start_idx)
+                : handler_start;
             // Validate indices: skip malformed clauses (defensive, not a crash).
-            if (try_start >= max_idx || try_end > max_idx || handler_start >= max_idx) {
+            if (try_start >= max_idx || try_end > max_idx || dispatch_idx >= max_idx ||
+                handler_start >= max_idx) {
                 CHAOS_IL2CPP_LOG_WARN_M("codegen",
                     "GenerateNativeCode: SEH clause has out-of-range indices "
-                    "(try_start={} try_end={} handler_start={} max_idx={}), skipping",
-                    try_start, try_end, handler_start, max_idx);
+                    "(try_start={} try_end={} handler_start={} dispatch_idx={} max_idx={}), skipping",
+                    try_start, try_end, handler_start, dispatch_idx, max_idx);
                 continue;
             }
-            buf_.Emit32(static_cast<uint32_t>(clause.flags));
+            buf_.Emit32(cflags_u32);
             buf_.Emit32(instr_offsets_[try_start]);
             buf_.Emit32(instr_offsets_[try_end]);
-            buf_.Emit32(instr_offsets_[handler_start]);
+            buf_.Emit32(instr_offsets_[dispatch_idx]);
             buf_.Emit32(clause.class_token);
             ++emitted_count;
         }

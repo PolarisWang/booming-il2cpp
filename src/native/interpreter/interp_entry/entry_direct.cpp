@@ -10,6 +10,7 @@
 
 #include <codegen_bridge.h>
 #include <gc_root_scanner.h>
+#include <patch_loader.h>
 
 #include <method_replacement.h>
 #include <osr_state.h>
@@ -776,7 +777,43 @@ void InterpreterEntryDirect(
                               cfg.arg_type_count = patch_method->cached_arg_count;
                               cfg.method_token = patch_method->token;
                               cfg.method_module_id = patch_method->module_id;
+
+                              // ── Pre-process per-instruction PIC data for inline monomorphic cache ──
+                              // Build a PerInstrPicData[] array indexed by instruction index from the raw
+                              // PIC dispatch chains.  The code_generator uses this to emit inline type
+                              // checks + direct calls for monomorphic CallVirt sites.
+                              ::PerInstrPicData* per_instr_pic = nullptr;
+                              if (patch_method->pic_dispatch_data != nullptr && reg_m != nullptr) {
+                                  uint32_t instr_count = static_cast<uint32_t>(reg_m->instructions.size());
+                                  if (instr_count > 0) {
+                                      per_instr_pic = static_cast<::PerInstrPicData*>(
+                                          std::calloc(instr_count, sizeof(::PerInstrPicData)));
+                                      auto* pic_base = static_cast<const uint8_t*>(patch_method->pic_dispatch_data);
+                                      uint32_t chain_count = *reinterpret_cast<const uint32_t*>(pic_base);
+                                      auto* chains = reinterpret_cast<const PicDispatchChain*>(
+                                          pic_base + sizeof(uint32_t));
+                                      for (uint32_t ci = 0; ci < chain_count; ++ci) {
+                                          const auto& chain = chains[ci];
+                                          if (chain.instruction_idx >= instr_count) continue;
+                                          if (chain.slots[0].type_token != 0 && chain.slots[0].direct_fn != nullptr) {
+                                              per_instr_pic[chain.instruction_idx].expected_type_token =
+                                                  static_cast<uint32_t>(chain.slots[0].type_token);
+                                              per_instr_pic[chain.instruction_idx].direct_fn = chain.slots[0].direct_fn;
+                                          }
+                                      }
+                                      cfg.per_instr_pic = per_instr_pic;
+                                      cfg.per_instr_pic_count = instr_count;
+                                  }
+                              }
+
                               auto* nm = codegen::GenerateNativeCode(*reg_m, cfg);
+
+                              if (per_instr_pic != nullptr) {
+                                  std::free(per_instr_pic);
+                                  cfg.per_instr_pic = nullptr;
+                                  cfg.per_instr_pic_count = 0;
+                              }
+
                               patch_method->cached_native_method = nm;
                               if (nm != nullptr) {
                                   if (nm->slot_map_data != nullptr) {
@@ -878,6 +915,7 @@ void InterpreterEntryDirect(
     dispatch_ctx.runtime_state = runtime_state; dispatch_ctx.thread_state = thread_state;
     frame.dispatch_fn = runtime_instantiation::InterpreterDispatch;
     frame.dispatch_context = &dispatch_ctx;
+    frame.method_token = patch_method->token;
     GetTierCounters().step_vm.fetch_add(1, std::memory_order_relaxed);
     interpreter::ExecutionResult result;
     CHAOS_IL2CPP_LOG_INFO("interpreter", "InterpreterVM::Execute entering");
