@@ -6,13 +6,13 @@
 {{~ if type_group.fields && type_group.fields.size > 0 ~}}
 static constexpr ReflectionQueryFieldDescriptor kReflFields_{{ type_group.safe_name }}[{{ type_group.fields.size }}] = {
 {{~ for field in type_group.fields ~}}
-    { 0u, "{{ field.subject_id_literal }}", "{{ field.name_literal }}", "{{ field.type_literal }}", {{ field.constant_value }}LL },
+    { {{ field.metadata_token_hex }}u, "{{ field.subject_id_literal }}", "{{ field.name_literal }}", "{{ field.type_literal }}", {{ field.constant_value }}LL },
 {{~ end ~}}
 };
 {{~ end ~}}
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_{{ type_group.safe_name }}[{{ type_group.method_count }}] = {
 {{~ for method in type_group.methods ~}}
-    { 0u, "{{ method.subject_id_literal }}", "{{ method.method_name_literal }}", "System.Void", 0, nullptr, 0u },
+    { {{ method.metadata_token_hex }}u, "{{ method.subject_id_literal }}", "{{ method.method_name_literal }}", "{{ method.return_type_literal }}", {{ method.parameter_count }}, nullptr, 0u, nullptr },
 {{~ end ~}}
 };
 
@@ -20,11 +20,11 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_{{ type_group.safe
 static const ReflectionQueryTypeDescriptor kReflTypes[{{ type_group_count }}] = {
 {{~ for type_group in type_groups ~}}
     {{~ if type_group.fields && type_group.fields.size > 0 ~}}
-    { 0u, "{{ type_group.subject_id_literal }}", "{{ type_group.subject_id_literal }}", "{{ type_group.namespace_literal }}", "{{ type_group.name_literal }}", "{{ type_group.name_literal }}", nullptr, kReflFields_{{ type_group.safe_name }}, {{ type_group.fields.size }}u, nullptr, 0u,
+    { {{ type_group.metadata_token_hex }}u, "{{ type_group.subject_id_literal }}", "{{ type_group.subject_id_literal }}", "{{ type_group.namespace_literal }}", "{{ type_group.name_literal }}", "{{ type_group.name_literal }}", nullptr, kReflFields_{{ type_group.safe_name }}, {{ type_group.fields.size }}u, nullptr, 0u,
     {{~ else ~}}
-    { 0u, "{{ type_group.subject_id_literal }}", "{{ type_group.subject_id_literal }}", "{{ type_group.namespace_literal }}", "{{ type_group.name_literal }}", "{{ type_group.name_literal }}", nullptr, nullptr, 0u, nullptr, 0u,
+    { {{ type_group.metadata_token_hex }}u, "{{ type_group.subject_id_literal }}", "{{ type_group.subject_id_literal }}", "{{ type_group.namespace_literal }}", "{{ type_group.name_literal }}", "{{ type_group.name_literal }}", nullptr, nullptr, 0u, nullptr, 0u,
     {{~ end ~}}
-    kReflMethods_{{ type_group.safe_name }}, {{ type_group.method_count }}u },
+    kReflMethods_{{ type_group.safe_name }}, {{ type_group.method_count }}u, nullptr, 0u, 0u },
 {{~ end ~}}
 };
 
