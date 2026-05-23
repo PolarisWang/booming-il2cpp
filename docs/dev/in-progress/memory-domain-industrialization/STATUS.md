@@ -52,10 +52,10 @@ Memory Domain 子系统核心实现质量高，但在工业化完备度上落后
 ```yaml
 dispatch_doc: DISPATCH.md
 dispatch_model: parallel-batch
-active_batches: [batch-1]
-completed_batches: []
+active_batches: [batch-2]
+completed_batches: [batch-1]
 terminals_active:
-  - terminal-3: M5+M6 (pending)
-pending_batches: [batch-2]
-completed_subtasks: [M1]
+  - terminal-2: M2+M3+M4 (in-progress)
+pending_batches: []
+completed_subtasks: [M1, M5, M6]
 ```

@@ -14,8 +14,8 @@
 > **question_clearance**: cleared
 > **clearance_confirmed_by_user**: true
 > **clearance_source**: brainstorm-conversation
-> **latest_stop_point**: T0-1 完成 — string_stubs 77 测试全部通过
-> **recommended_next_child**: t0-2-collection-stubs-test
+> **latest_stop_point**: T0-2 完成 — collection_stubs 34 测试全部通过
+> **recommended_next_child**: t0-3-enum-stubs-test
 
 ## Scope
 
@@ -60,6 +60,7 @@
 - **2026-05-23**: brainstorm 完成，所有边界拍板和问题清零。
 - **2026-05-23**: roadmap 编制完成，6 个 Phase，33+ 子任务。
 - **2026-05-23**: T0-1 完成 — string_stubs 19 API 共 77 测试全部通过，同时修复了 JoinSs 的 tagged-pointer copy bug。
+- **2026-05-23**: T0-2 完成 — collection_stubs 14 API 共 34 测试全部通过，修复 collection_stubs.h extern "C" 缺失。
 
 ## 下一步
 
