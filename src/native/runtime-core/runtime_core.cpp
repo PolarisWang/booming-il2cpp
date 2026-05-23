@@ -80,6 +80,7 @@ using namespace chaos::il2cpp::marshal_abi;
 #include "core/config_normalize.cpp"
 #include "core/marshal_alloc.cpp"
 #include "core/sync_mutex.cpp"
+#include "core/thin_lock_table.cpp"
 #include "core/type_capability.cpp"
 #include "core/runtime_init.cpp"
 #include "core/object_creation.cpp"

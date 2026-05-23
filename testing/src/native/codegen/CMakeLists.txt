@@ -55,3 +55,58 @@ add_chaos_test(test_codegen_abi
 target_compile_definitions(test_codegen_abi PRIVATE
     CHAOS_IL2CPP_CODEGEN_TEST_ACTIVE=1
 )
+
+# E-1 — Codegen GC slot map test
+# Tests GcRegisterSlotMap, GcUnregisterSlotMap, GcLookupSlotMap,
+# GcScanPreciseFrame, GcScanFrameHybrid, and GcRegisterSlotMapsFromSection.
+add_chaos_test(test_codegen_gc_slot_map
+    codegen_gc_slot_map_test.cpp
+    ../runtime-core/gc/gc_test_stubs.cpp
+    LIBS ${CHAOS_CODEGEN_LIBS}
+    LABELS "unit;codegen"
+)
+target_compile_definitions(test_codegen_gc_slot_map PRIVATE
+    CHAOS_IL2CPP_CODEGEN_TEST_ACTIVE=1
+)
+set_tests_properties(test_codegen_gc_slot_map PROPERTIES TIMEOUT 30)
+
+# E-2 — Codegen OSR test
+# Tests OsrResolveLoopHeader edge cases and DeoptTlsState management.
+add_chaos_test(test_codegen_osr
+    codegen_osr_test.cpp
+    ../runtime-core/gc/gc_test_stubs.cpp
+    LIBS ${CHAOS_CODEGEN_LIBS}
+    LABELS "unit;codegen"
+)
+target_compile_definitions(test_codegen_osr PRIVATE
+    CHAOS_IL2CPP_CODEGEN_TEST_ACTIVE=1
+)
+set_tests_properties(test_codegen_osr PROPERTIES TIMEOUT 30)
+
+# E-3 — Codegen unwind info test
+# Byte-level verification of EmitUnwindInfo, EmitDwarfCie, EmitDwarfFde,
+# and AllocRuntimeFunction output.
+add_chaos_test(test_codegen_unwind
+    codegen_unwind_test.cpp
+    ../runtime-core/gc/gc_test_stubs.cpp
+    LIBS ${CHAOS_CODEGEN_LIBS}
+    LABELS "unit;codegen"
+)
+target_compile_definitions(test_codegen_unwind PRIVATE
+    CHAOS_IL2CPP_CODEGEN_TEST_ACTIVE=1
+)
+set_tests_properties(test_codegen_unwind PROPERTIES TIMEOUT 30)
+
+# E-4 — Codegen SEH public API test
+# Tests RegisterT4Code, UnregisterT4Code, FindT4CodeByAddress, and
+# RegisterT4SehHandler through library linkage.
+add_chaos_test(test_codegen_seh
+    codegen_seh_test.cpp
+    ../runtime-core/gc/gc_test_stubs.cpp
+    LIBS ${CHAOS_CODEGEN_LIBS}
+    LABELS "unit;codegen"
+)
+target_compile_definitions(test_codegen_seh PRIVATE
+    CHAOS_IL2CPP_CODEGEN_TEST_ACTIVE=1
+)
+set_tests_properties(test_codegen_seh PROPERTIES TIMEOUT 30)
