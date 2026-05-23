@@ -314,7 +314,11 @@ static void InlineLeafCallees(
     }
 
     // Rebuild call_cache for the modified instruction array.
-    // Old cache is left for domain Destroy to bulk-free (avoids cross-domain free).
+    // Free the old cache before replacing — both allocations are domain-tagged
+    // and from the same domain scope.
+    if (patch_method.call_cache != nullptr) {
+        CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(patch_method.call_cache);
+    }
     uint32_t new_count = static_cast<uint32_t>(ir.instructions.size());
     auto* new_cc = static_cast<runtime_instantiation::CachedCallInfo*>(
         CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE(new_count * sizeof(runtime_instantiation::CachedCallInfo)));

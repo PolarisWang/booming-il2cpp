@@ -60,9 +60,11 @@ void ReapplyInlining(PatchMethod* methods, uint32_t method_count) noexcept {
                     new_cc[j].ret_tag = 0xFF;
                 }
             }
-            // Old cache may be from domain alloc — don't delete[] if domain-owned.
-            // Only delete if heap-allocated (non-domain).  For now, leak is acceptable
-            // since domain Destroy bulk-frees domain-owned memory.
+            // Free the old call_cache before replacing — both old and new
+            // are domain-tagged allocations from the same domain scope.
+            if (old_cc != nullptr) {
+                CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(old_cc);
+            }
             pm.call_cache = new_cc;
         }
 

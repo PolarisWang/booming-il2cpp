@@ -109,7 +109,9 @@ const ModuleDescriptor* LookupModuleByName(const char* name) {
     }
 
     for (uint32_t i = 0; i < kMaxModules; i++) {
-        // Skip unallocated slots and tombstone modules.
+        // Skip unallocated slots — break when past g_module_count and
+        // the slot is not a tombstone (tombstones can exist at any index
+        // due to free-list reuse, so we must scan all kMaxModules for them).
         if (i >= g_module_count && !g_module_storage[i].tombstone) {
             break;
         }

@@ -14,6 +14,7 @@
 #include "static_var_store.h"
 
 #include <mutex>
+#include <shared_mutex>
 
 namespace chaos::il2cpp::runtime_core {
 
@@ -21,9 +22,21 @@ namespace chaos::il2cpp::runtime_core {
 
 namespace {
 
+/// Reader-writer lock guarding assemblies_ table and loaded_count_.
+/// Read paths (FindAssembly, FindByModuleId, GetStaticField) acquire shared_lock.
+/// Write paths (LoadAssembly, UnloadAssembly) acquire unique_lock.
+/// Function-local static to avoid cross-TU static init ordering fiasco.
+static std::shared_mutex& s_asm_mutex() {
+    static std::shared_mutex mutex;
+    return mutex;
+}
+
 /// Default number of static fields to pre-allocate when the assembly
 /// doesn't specify a count. Grown on demand via GetStaticField.
 constexpr uint32_t kDefaultStaticFieldCount = 64;
+
+/// Maximum static field count per assembly to prevent unbounded growth.
+constexpr uint32_t kMaxStaticFieldCount = 1024 * 1024;
 
 /// Allocate an uninitialized InterpreterValue[] buffer on the given domain heap.
 /// Returns nullptr on failure. The caller owns the returned pointer and must
@@ -113,6 +126,17 @@ AssemblyLoadContext* AssemblyManager::LoadAssembly(
     //    All methods in one .patchdata belong to the same module.
     uint32_t module_id = ctx->methods[0].module_id;
 
+    // Validate module_id — the AOT-side module must be registered before
+    // a hotpatch assembly can reference it.  A missing tombstone check
+    // here is intentional: MarkModuleTombstone runs under the same
+    // unique_lock acquired below, so there's no race between validation
+    // and the slot assignment.
+    if (LookupModule(module_id) == nullptr) {
+        memory_domain::UnregisterMemoryDomain(domain_id);
+        Unpatch(ctx);
+        return nullptr;
+    }
+
     // 4. Pre-allocate static field storage on the assembly domain.
     void* static_fields = AllocateStaticFieldStorage(domain, kDefaultStaticFieldCount);
     if (static_fields == nullptr) {
@@ -146,9 +170,8 @@ AssemblyLoadContext* AssemblyManager::LoadAssembly(
     // 6. Find a free slot and register the assembly.
     uint32_t slot = static_cast<uint32_t>(assemblies_.size());
     {
-        // Thread-safe: only one load/unload at a time for the table.
-        static std::mutex table_mutex;
-        std::lock_guard<std::mutex> lock(table_mutex);
+        // Thread-safe: use shared_mutex for table writes.
+        std::unique_lock<std::shared_mutex> lock(s_asm_mutex());
 
         for (uint32_t i = 0; i < assemblies_.size(); ++i) {
             if (!assemblies_[i].is_loaded) {
@@ -158,10 +181,11 @@ AssemblyLoadContext* AssemblyManager::LoadAssembly(
         }
 
         if (slot >= assemblies_.size()) {
-            // Table full — roll back.
-            memory_domain::UnregisterMemoryDomain(domain_id);
-            Unpatch(ctx);
-            return nullptr;
+            // Table full — grow the vector (double capacity, min 64).
+            size_t old_size = assemblies_.size();
+            size_t new_size = old_size + (old_size < 64 ? 64 : old_size);
+            assemblies_.resize(new_size);
+            slot = static_cast<uint32_t>(old_size);
         }
 
         auto& desc = assemblies_[slot];
@@ -194,6 +218,9 @@ bool AssemblyManager::UnloadAssembly(AssemblyLoadContext* alc) noexcept {
 
     // Set unloading flag — prevents new type lookups during teardown.
     alc->is_unloading.store(true, std::memory_order_release);
+
+    // Acquire exclusive lock for the entire unload sequence.
+    std::unique_lock<std::shared_mutex> lock(s_asm_mutex());
 
     uint32_t module_id = alc->module_id;
 
@@ -267,6 +294,7 @@ bool AssemblyManager::UnloadAssembly(AssemblyLoadContext* alc) noexcept {
 AssemblyLoadContext* AssemblyManager::FindAssembly(const char* name) noexcept {
     if (name == nullptr || name[0] == '\0') return nullptr;
 
+    std::shared_lock<std::shared_mutex> lock(s_asm_mutex());
     for (uint32_t i = 0; i < assemblies_.size(); ++i) {
         auto& desc = assemblies_[i];
         if (desc.is_loaded && desc.name == name) {
@@ -281,6 +309,7 @@ AssemblyLoadContext* AssemblyManager::FindAssembly(const char* name) noexcept {
 AssemblyLoadContext* AssemblyManager::FindByModuleId(uint32_t module_id) noexcept {
     if (module_id == 0) return nullptr;
 
+    std::shared_lock<std::shared_mutex> lock(s_asm_mutex());
     for (uint32_t i = 0; i < assemblies_.size(); ++i) {
         auto& desc = assemblies_[i];
         if (desc.is_loaded && desc.module_id == module_id) {
@@ -294,18 +323,31 @@ AssemblyLoadContext* AssemblyManager::FindByModuleId(uint32_t module_id) noexcep
 
 void* AssemblyManager::GetStaticField(uint32_t module_id,
                                        uint32_t field_offset) noexcept {
-    // Find the ALC that owns this module_id.
+    // Reject clearly invalid offsets before lookup.
+    if (field_offset >= kMaxStaticFieldCount) return nullptr;
+
+    // Find the ALC that owns this module_id (read lock).
     AssemblyLoadContext* alc = nullptr;
-    for (uint32_t i = 0; i < assemblies_.size(); ++i) {
-        if (assemblies_[i].is_loaded && assemblies_[i].module_id == module_id) {
-            alc = &assemblies_[i];
-            break;
+    {
+        std::shared_lock<std::shared_mutex> lock(s_asm_mutex());
+        for (uint32_t i = 0; i < assemblies_.size(); ++i) {
+            if (assemblies_[i].is_loaded && assemblies_[i].module_id == module_id) {
+                alc = &assemblies_[i];
+                break;
+            }
         }
     }
     if (alc == nullptr) return nullptr;
 
     // Grow the static field array if needed (realloc on the domain heap).
     if (field_offset >= alc->static_field_count) {
+        // Prevent near-UINT32_MAX field_offset from wrapping to 0.
+        // kMaxStaticFieldCount check above already rejects near-wraparound values
+        // (1M << UINT32_MAX), but keep the explicit guard for defense-in-depth.
+        if (field_offset >= UINT32_MAX - 1) {
+            return nullptr;
+        }
+
         auto* domain = memory_domain::FindDomainById(alc->domain_id);
         if (domain == nullptr) return nullptr;
 
@@ -313,6 +355,14 @@ void* AssemblyManager::GetStaticField(uint32_t module_id,
         uint32_t new_count = field_offset + 1u;
         if (new_count < alc->static_field_count * 2) {
             new_count = alc->static_field_count * 2;
+        }
+
+        // Cap growth to kMaxStaticFieldCount.
+        if (new_count > kMaxStaticFieldCount) {
+            new_count = kMaxStaticFieldCount;
+        }
+        if (new_count <= alc->static_field_count) {
+            return nullptr;  // already at cap
         }
 
         void* grown = GrowStaticFieldStorage(
