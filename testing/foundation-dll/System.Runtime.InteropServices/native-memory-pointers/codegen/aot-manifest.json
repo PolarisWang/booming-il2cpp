@@ -1251,12 +1251,6 @@
       "reason": "external-call"
     },
     {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "type",
-      "subjectId": "System.Private.CoreLib/System.Int32",
-      "reason": "boxed-value-type"
-    },
-    {
       "assemblyName": "System.Runtime.InteropServices",
       "subjectKind": "method",
       "subjectId": "System.Runtime.InteropServices/Marshal::ChangeWrapperHandleStrength:System.Void(System.Object,System.Boolean)",
@@ -1271,7 +1265,7 @@
     {
       "assemblyName": "System.Runtime.InteropServices",
       "subjectKind": "method",
-      "subjectId": "System.Runtime.InteropServices/Marshal::CreateAggregatedObject\u003CSystem.Int32\u003E:System.IntPtr(System.IntPtr,System.Int32)",
+      "subjectId": "System.Runtime.InteropServices/Marshal::CreateAggregatedObject:System.IntPtr(System.IntPtr,System.Object)",
       "reason": "external-call"
     },
     {
@@ -1469,7 +1463,7 @@
     {
       "assemblyName": "System.Runtime.InteropServices",
       "subjectKind": "method",
-      "subjectId": "System.Runtime.InteropServices/Marshal::GetNativeVariantForObject\u003CSystem.Int32\u003E:System.Void(System.Int32,System.IntPtr)",
+      "subjectId": "System.Runtime.InteropServices/Marshal::GetNativeVariantForObject:System.Void(System.Object,System.IntPtr)",
       "reason": "external-call"
     },
     {
@@ -1631,7 +1625,7 @@
     {
       "assemblyName": "System.Runtime.InteropServices",
       "subjectKind": "method",
-      "subjectId": "System.Runtime.InteropServices/Marshal::PtrToStructure\u003CSystem.Int32\u003E:System.Void(System.IntPtr,System.Int32)",
+      "subjectId": "System.Runtime.InteropServices/Marshal::ReadByte:System.Byte(System.Object,System.Int32)",
       "reason": "external-call"
     },
     {
@@ -1649,6 +1643,12 @@
     {
       "assemblyName": "System.Runtime.InteropServices",
       "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::ReadInt16:System.Int16(System.Object,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
       "subjectId": "System.Runtime.InteropServices/Marshal::ReadInt16:System.Int16(System.IntPtr,System.Int32)",
       "reason": "external-call"
     },
@@ -1656,6 +1656,12 @@
       "assemblyName": "System.Runtime.InteropServices",
       "subjectKind": "method",
       "subjectId": "System.Runtime.InteropServices/Marshal::ReadInt16:System.Int16(System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::ReadInt32:System.Int32(System.Object,System.Int32)",
       "reason": "external-call"
     },
     {
@@ -1673,6 +1679,12 @@
     {
       "assemblyName": "System.Runtime.InteropServices",
       "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::ReadInt64:System.Int64(System.Object,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
       "subjectId": "System.Runtime.InteropServices/Marshal::ReadInt64:System.Int64(System.IntPtr,System.Int32)",
       "reason": "external-call"
     },
@@ -1680,6 +1692,12 @@
       "assemblyName": "System.Runtime.InteropServices",
       "subjectKind": "method",
       "subjectId": "System.Runtime.InteropServices/Marshal::ReadInt64:System.Int64(System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::ReadIntPtr:System.IntPtr(System.Object,System.Int32)",
       "reason": "external-call"
     },
     {
@@ -1769,12 +1787,6 @@
     {
       "assemblyName": "System.Runtime.InteropServices",
       "subjectKind": "method",
-      "subjectId": "System.Runtime.InteropServices/Marshal::SizeOf\u003CSystem.Int32\u003E:System.Int32(System.Int32)",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Runtime.InteropServices",
-      "subjectKind": "method",
       "subjectId": "System.Runtime.InteropServices/Marshal::SizeOf:System.Int32(System.Type)",
       "reason": "external-call"
     },
@@ -1829,7 +1841,7 @@
     {
       "assemblyName": "System.Runtime.InteropServices",
       "subjectKind": "method",
-      "subjectId": "System.Runtime.InteropServices/Marshal::StructureToPtr\u003CSystem.Int32\u003E:System.Void(System.Int32,System.IntPtr,System.Boolean)",
+      "subjectId": "System.Runtime.InteropServices/Marshal::StructureToPtr:System.Void(System.Object,System.IntPtr,System.Boolean)",
       "reason": "external-call"
     },
     {
@@ -1859,6 +1871,12 @@
     {
       "assemblyName": "System.Runtime.InteropServices",
       "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::WriteByte:System.Void(System.Object,System.Int32,System.Byte)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
       "subjectId": "System.Runtime.InteropServices/Marshal::WriteByte:System.Void(System.IntPtr,System.Int32,System.Byte)",
       "reason": "external-call"
     },
@@ -1866,6 +1884,12 @@
       "assemblyName": "System.Runtime.InteropServices",
       "subjectKind": "method",
       "subjectId": "System.Runtime.InteropServices/Marshal::WriteByte:System.Void(System.IntPtr,System.Byte)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::WriteInt16:System.Void(System.Object,System.Int32,System.Int16)",
       "reason": "external-call"
     },
     {
@@ -1889,7 +1913,19 @@
     {
       "assemblyName": "System.Runtime.InteropServices",
       "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::WriteInt16:System.Void(System.Object,System.Int32,System.Char)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
       "subjectId": "System.Runtime.InteropServices/Marshal::WriteInt16:System.Void(System.IntPtr,System.Char)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::WriteInt32:System.Void(System.Object,System.Int32,System.Int32)",
       "reason": "external-call"
     },
     {
@@ -1902,6 +1938,12 @@
       "assemblyName": "System.Runtime.InteropServices",
       "subjectKind": "method",
       "subjectId": "System.Runtime.InteropServices/Marshal::WriteInt32:System.Void(System.IntPtr,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::WriteInt64:System.Void(System.Object,System.Int32,System.Int64)",
       "reason": "external-call"
     },
     {
@@ -1920,6 +1962,12 @@
       "assemblyName": "System.Runtime.InteropServices",
       "subjectKind": "method",
       "subjectId": "System.Runtime.InteropServices/Marshal::WriteIntPtr:System.Void(System.IntPtr,System.Int32,System.IntPtr)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::WriteIntPtr:System.Void(System.Object,System.Int32,System.IntPtr)",
       "reason": "external-call"
     },
     {

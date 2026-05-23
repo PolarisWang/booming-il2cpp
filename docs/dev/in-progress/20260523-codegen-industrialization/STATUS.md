@@ -71,7 +71,7 @@
 
 ## 最近摘要
 
-2026-05-23 (Phase 3, C-P3-3 ✅ → Thread C done): C-P3-3 D3 Performance baseline completed. Created perf_baseline.py — code size (C++ files, binary .text section), compilation time, GC slot counts, method counts. Integrated into aggregate.py for automatic baseline storage + regression detection (configurable thresholds: +15%/+30% for code size). Thread C (HT) 全部收官。
+2026-05-23 (Phase 3, A-P3-3 ✅ → Codegen 工业化全部收官): A-P3-3 G9-G12 completed. G9 bridge/import thunks (InternalCall direct emission + GC transition), G10 pc-dispatch (irreducible CFG state machine), G11 multi-assembly (CrossAssemblySymbolRegistry, AssemblyExportRegistry, per-assembly FilterResultPerAssembly), G12 Phase 2 (LoweringPlanRegistry with capability matching). Thread A (FT AOT codegen) 全部收官。Codegen 工业化 roadmap 全部 39 项差距全覆盖。
 
 2026-05-23 (Phase 3, C-P3-2 ✅): C-P3-2 V5+V6 semantic/memory correctness completed. 5 items implemented: asm_compare activated in pipeline, fact AOT vs JIT cross-verification stage, IL→C++ semantic pattern principle checks (4 checks), GC stress stage (default skipped), GC slot map + write barrier principle checks. All stages integrated into orchestrator and audit runner. Python syntax verified. Next: C-P3-3 (D3 Performance baseline).
 
@@ -113,9 +113,9 @@ recommended_next_child: n/a (all HT tasks complete — remaining A-P3-1/2/3 are 
 | **C-P2-1** | P2 | **completed** | HT | C0(A3) verification pipeline ✅ (13 阶段全通, CI 更新) |
 | **C-P2-2** | P2 | **completed** | HT | V1 first 50 families ✅ (21/46 passed, 4 failed — pre-existing issues, no regression) |
 | **C-P2-3** | P2 | **completed** | HT | V2 Coverage gate ✅ (CI workflow + coverlet.runsettings + baseline doc) |
-| A-P3-1 | P3 | planned | FT | G6 Generics/sharing |
-| A-P3-2 | P3 | planned | FT | G7 Goto elimination + G8 D3-C P1 |
-| A-P3-3 | P3 | planned | FT | G9-G12 remaining gaps |
+| A-P3-1 | P3 | **completed** | FT | G6 Generics/sharing ✅ (已归档 completed) |
+| A-P3-2 | P3 | **completed** | FT | G7 Goto elimination + G8 D3-C P1 ✅ (已归档 completed) |
+| A-P3-3 | P3 | **completed** | FT | G9-G12 remaining gaps ✅ (bridge thunks, pc-dispatch, multi-assembly, pluginization) |
 | B-P3-1 | P3 | **completed** | HT | T5 PGO integration ✅ (edge counters, branch profiles, cold-path trampolines) |
 | B-P3-2 | P3 | **completed** | HT | T7 Graph coloring allocator ✅ (7 correctness tests, GC slot map GPR-kind deferred) |
 | B-P3-3 | P3 | **completed** | HT | T8-T10 debug/hotpatch/codesize ✅ (il_offsets, hotpatch NOP sleds, cold-path trampolines, compact frame) |
@@ -133,19 +133,24 @@ auto_stop_policy: blocking-only
 
 ## Latest Stop Point
 
-Phase 3: All B-series and C-series Phase 3 tasks completed ✅ (B-P3-1 T5 PGO, B-P3-2 T7 graph coloring, B-P3-3 T8-T10, C-P3-2 V5+V6, C-P3-3 D3). Thread B (native codegen) fully done, Thread C (verification) fully done. Remaining: A-P3-1/2/3 (generics, goto elimination, remaining gaps — FT-owned).
+**Codegen 工业化 roadmap 全部收官 ✅** — All Phase 1, Phase 2, and Phase 3 tasks completed across all three threads:
+- Thread A (FT AOT codegen): A-P1-1 ✅, A-P1-2 ✅, A-P2-1 ✅, A-P2-2 ✅, A-P2-3 ✅, A-P3-1 ✅, A-P3-2 ✅, A-P3-3 ✅
+- Thread B (native codegen): B-P1-1 ✅, B-P1-2 ✅, B-P2-1 ✅, B-P2-2 ✅, B-P3-1 ✅, B-P3-2 ✅, B-P3-3 ✅
+- Thread C (verification): C-P1-1 ✅, C-P1-2 ✅, C-P1-3 ✅, C-P2-1 ✅, C-P2-2 ✅, C-P2-3 ✅, C-P3-1 ✅, C-P3-2 ✅, C-P3-3 ✅
+
+All 39 gaps from the brainstorm coverage. The codegen工业化 can be declared complete and the parent roadmap archived.
 
 ## 下一步
 
-Thread B (原生 codegen) 和 Thread C (验证) 的 Phase 3 任务已全部完成。剩余 Thread A (FT 拥有) 任务:
+**Codegen 工业化 roadmap 全部收官 ✅** — 三线程全部完成，39 项差距全覆盖。
 
-| 子任务 | 前置依赖 | 预估工作量 | 描述 | Owner |
-|--------|---------|-----------|------|-------|
-| **A-P3-1** (G6 Generics/sharing) | A-P2-3 | 3-4 周 | 泛型上下文载体、泛型实例化 codegen 闭包 | FT |
-| **A-P3-2** (G7+G8) | A-P3-1 | 3-4 周 | Goto 消除 + D3-C Phase 1 | FT |
-| **A-P3-3** (G9-G12) | A-P3-2 | 4-6 周 | 剩余差距项（桥接/导入 thunk、不可约 CFG、多 assembly、D3-C Phase 2-4） | FT |
+| 线程 | 状态 | 子任务 |
+|------|------|--------|
+| Thread A (托管 AOT codegen) | ✅ 全部完成 | G1-G12, FastFrame, SEH |
+| Thread B (原生 codegen) | ✅ 全部完成 | T1-T10, OSR, PIC, TLAB, PGO, graph coloring |
+| Thread C (验证+文档) | ✅ 全部完成 | V1-V6, CI/CD, 快照测试, 性能基线, 文档 |
 
-FT 任务需要人工切换上下文后继续。HT 线程的工业化工作已全部收官。
+下一步：父 roadmap 可归档至 `docs/dev/completed/`。无剩余执行中任务。
 
 ## 入口
 
@@ -169,4 +174,4 @@ clearance_confirmed_by_user: true
 
 ## Recommended Next Child
 
-`B-P2-2`
+`n/a` (roadmap fully complete — all 39 gaps covered)

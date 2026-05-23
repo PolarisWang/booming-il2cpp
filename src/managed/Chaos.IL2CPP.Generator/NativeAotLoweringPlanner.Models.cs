@@ -32,6 +32,25 @@ public sealed partial class NativeAotLoweringPlanner
         string SubjectId,
         int Index);
 
+    // ── Bridge/Import thunk definition ────────────────────────────────────────
+    // A bridge thunk is a C++ wrapper function that adapts a managed calling
+    // convention to a native target (InternalCall, P/Invoke, interpreter bridge).
+    // It handles GC transition, argument marshalling, and exception boundaries
+    // for calls crossing the managed/native boundary.
+    private sealed record BridgeImportThunkDefinition(
+        string SubjectId,
+        string ThunkSymbol,
+        string TargetSymbol,
+        IReadOnlyList<AotCoreIrAbiSlotArtifact> ParameterAbis,
+        AotCoreIrAbiSlotArtifact ReturnAbi,
+        bool RequiresGcTransition,
+        bool HasMarshalling,
+        bool IsInternalCall,
+        bool IsPInvokeImport,
+        string? ModuleName = null,
+        string? EntryPointName = null,
+        int ImportCallingConvention = 0);
+
     private sealed record EnumerableJoinSupportVariant(
         string EnumerableTypeSubjectId,
         AotCoreIrMethodArtifact GetEnumeratorMethod,
@@ -151,6 +170,20 @@ public sealed partial class NativeAotLoweringPlanner
         IReadOnlyList<AotCoreIrInstructionArtifact> TryInstructions,
         IReadOnlyList<IReadOnlyList<AotCoreIrInstructionArtifact>> HandlerInstructionsList,
         IReadOnlyList<AotCoreIrInstructionArtifact> TailInstructions);
+
+    // ── Generic exception shape (fallback for non-standard EH patterns) ──
+
+    private sealed record GenericExceptionRegionEntry(
+        AotCoreIrExceptionRegionArtifact Region,
+        IReadOnlyList<AotCoreIrInstructionArtifact> TryInstructions,
+        IReadOnlyList<AotCoreIrInstructionArtifact> HandlerInstructions,
+        IReadOnlyList<AotCoreIrInstructionArtifact>? FilterInstructions = null);
+
+    private sealed record GenericExceptionMethodShape(
+        IReadOnlyList<AotCoreIrInstructionArtifact> PrefixInstructions,
+        IReadOnlyList<AotCoreIrInstructionArtifact> TailInstructions,
+        IReadOnlyList<GenericExceptionRegionEntry> Regions,
+        int HandlerPushes);
 
     private sealed record CustomAttributeSupportModel(
         IReadOnlyDictionary<string, string> QueryAttributeTypeByCallee,

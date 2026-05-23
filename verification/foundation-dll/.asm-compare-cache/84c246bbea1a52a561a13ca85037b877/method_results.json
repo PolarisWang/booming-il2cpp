@@ -1,0 +1,494 @@
+[
+  {
+    "methodIndex": 0,
+    "methodSubjectId": "System.Private.CoreLib/System.Guid::.ctor:System.Void(System.String)",
+    "shortName": "Subject_0",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 9,
+      "ratio": 0.2,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_0",
+      "instructions": 9
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 1,
+    "methodSubjectId": "System.Private.CoreLib/System.Guid::.ctor:System.Void(System.Byte[])",
+    "shortName": "Subject_1",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 13,
+      "ratio": 0.3,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_1",
+      "instructions": 13
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 1
+    }
+  },
+  {
+    "methodIndex": 2,
+    "methodSubjectId": "System.Private.CoreLib/System.Guid::NewGuid:System.Guid()",
+    "shortName": "Subject_2",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 22,
+      "ratio": 0.5,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_2",
+      "instructions": 22
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Guid::NewGuid:System.Guid()' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Guid::NewGuid:System.Guid()' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 2
+    }
+  },
+  {
+    "methodIndex": 3,
+    "methodSubjectId": "System.Private.CoreLib/System.Guid::Parse:System.Guid(System.String)",
+    "shortName": "Subject_3",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 24,
+      "ratio": 0.55,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_3",
+      "instructions": 24
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Guid::Parse:System.Guid(System.String)' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Guid::Parse:System.Guid(System.String)' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 2
+    }
+  },
+  {
+    "methodIndex": 4,
+    "methodSubjectId": "System.Private.CoreLib/System.Guid::TryParse:System.Boolean(System.String,System.Guid&)",
+    "shortName": "Subject_4",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 28,
+      "ratio": 0.64,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_4",
+      "instructions": 28
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Guid::TryParse:System.Boolean(System.String,System.Guid&)' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Guid::TryParse:System.Boolean(System.String,System.Guid&)' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 2
+    }
+  },
+  {
+    "methodIndex": 5,
+    "methodSubjectId": "System.Private.CoreLib/System.Guid::ToString:System.String()",
+    "shortName": "Subject_5",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 24,
+      "ratio": 0.55,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_5",
+      "instructions": 24
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Guid::NewGuid:System.Guid()' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.String::get_Length:System.Int32()' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Guid::NewGuid:System.Guid()' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.String::get_Length:System.Int32()' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 4
+    }
+  },
+  {
+    "methodIndex": 6,
+    "methodSubjectId": "System.Private.CoreLib/System.Random::.ctor:System.Void()",
+    "shortName": "Subject_6",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 8,
+      "ratio": 0.18,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_6",
+      "instructions": 8
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 7,
+    "methodSubjectId": "System.Private.CoreLib/System.Random::Next:System.Int32()",
+    "shortName": "Subject_7",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 18,
+      "ratio": 0.41,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_7",
+      "instructions": 18
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Random::Next:System.Int32()' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Random::Next:System.Int32()' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 2
+    }
+  },
+  {
+    "methodIndex": 8,
+    "methodSubjectId": "System.Private.CoreLib/System.Random::Next:System.Int32(System.Int32)",
+    "shortName": "Subject_8",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 20,
+      "ratio": 0.45,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_8",
+      "instructions": 20
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Random::Next:System.Int32(System.Int32)' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Random::Next:System.Int32(System.Int32)' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 2
+    }
+  },
+  {
+    "methodIndex": 9,
+    "methodSubjectId": "System.Private.CoreLib/System.Random::NextDouble:System.Double()",
+    "shortName": "Subject_9",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 20,
+      "ratio": 0.45,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_9",
+      "instructions": 20
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Random::NextDouble:System.Double()' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Random::NextDouble:System.Double()' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 2
+    }
+  },
+  {
+    "methodIndex": 10,
+    "methodSubjectId": "System.Private.CoreLib/System.Random::NextBytes:System.Void(System.Byte[])",
+    "shortName": "Subject_10",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 13,
+      "ratio": 0.3,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_10",
+      "instructions": 13
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Random::NextBytes:System.Void(System.Byte[])' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 2
+    }
+  },
+  {
+    "methodIndex": 11,
+    "methodSubjectId": "System.Private.CoreLib/System.HashCode::Add:System.Void(System.Object)",
+    "shortName": "Subject_11",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 11,
+      "ratio": 0.25,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_11",
+      "instructions": 11
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.HashCode::Add<System.Int32>:System.Void(System.Int32)' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 1
+    }
+  },
+  {
+    "methodIndex": 12,
+    "methodSubjectId": "System.Private.CoreLib/System.HashCode::ToHashCode:System.Int32()",
+    "shortName": "Subject_12",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 22,
+      "ratio": 0.5,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_12",
+      "instructions": 22
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.HashCode::ToHashCode:System.Int32()' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.HashCode::ToHashCode:System.Int32()' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 2
+    }
+  },
+  {
+    "methodIndex": 13,
+    "methodSubjectId": "System.Private.CoreLib/System.HashCode::Combine:System.Int32(System.Int32,System.Int32)",
+    "shortName": "Subject_13",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 20,
+      "ratio": 0.45,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_13",
+      "instructions": 20
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.HashCode::Combine<System.Int32,System.Int32>:System.Int32(System.Int32,System.Int32)' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.HashCode::Combine<System.Int32,System.Int32>:System.Int32(System.Int32,System.Int32)' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 2
+    }
+  }
+]

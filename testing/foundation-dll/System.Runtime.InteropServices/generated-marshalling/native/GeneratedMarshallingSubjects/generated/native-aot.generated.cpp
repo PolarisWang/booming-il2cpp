@@ -1,4 +1,4 @@
-#include <chaos/common.h>
+﻿#include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
 #include <chaos/eh.h>
@@ -16,6 +16,7 @@
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 #include "enum_metadata.generated.h"
+#include "runtime_stubs/enum_stubs.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -1154,11 +1155,18 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
 		/* .type_count        = */ 2u,
-	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
+	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 -- deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
 	/* .custom_attribute_materializer = */ nullptr,
-
+	/* .custom_attribute_method_offset   = */ nullptr,
+	/* .custom_attribute_field_offset    = */ nullptr,
+	/* .custom_attribute_property_offset = */ nullptr,
+	/* .custom_attribute_param_offset    = */ nullptr,
+	/* .custom_attribute_method_count    = */ 0u,
+	/* .custom_attribute_field_count     = */ 0u,
+	/* .custom_attribute_property_count  = */ 0u,
+	/* .custom_attribute_param_count   = */ 0u,
 		/* .abi_manifest      = */ s_abi_manifest,
 	};
 	static const CHAOS_IL2CPP_UINT32 s_native_aot_module_id =
@@ -1462,7 +1470,6 @@ extern "C" void* kChaosExternalRuntimeFnTable[24] = {
 };
 
 extern "C" int32_t kChaosExternalRuntimeCount = 24;
-// (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
 static void (*kAotMethods[69])() = {
@@ -2187,90 +2194,91 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // matching during IR lowering of patched methods.
 
 static constexpr ReflectionQueryFieldDescriptor kReflFields_GeneratedMarshallingSubjects_GeneratedMarshallingSubjects[1] = {
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
+	{ 0x04000001u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::_exitCode", "_exitCode", "System.Int32", 0LL, 3u },
 };
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_GeneratedMarshallingSubjects_GeneratedMarshallingSubjects[69] = {
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_10:System.Void()", "Subject_10", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_11:System.Void()", "Subject_11", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_12:System.Void()", "Subject_12", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_13:System.Void()", "Subject_13", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_14:System.Void()", "Subject_14", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_15:System.Void()", "Subject_15", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_16:System.Void()", "Subject_16", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_17:System.Void()", "Subject_17", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_18:System.Void()", "Subject_18", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_19:System.Void()", "Subject_19", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_20:System.Void()", "Subject_20", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_21:System.Void()", "Subject_21", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_22:System.Void()", "Subject_22", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_23:System.Void()", "Subject_23", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_24:System.Void()", "Subject_24", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_25:System.Void()", "Subject_25", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_26:System.Void()", "Subject_26", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_27:System.Void()", "Subject_27", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_28:System.Void()", "Subject_28", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_29:System.Void()", "Subject_29", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_30:System.Void()", "Subject_30", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_31:System.Void()", "Subject_31", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_32:System.Void()", "Subject_32", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_33:System.Void()", "Subject_33", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_34:System.Void()", "Subject_34", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_35:System.Void()", "Subject_35", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_36:System.Void()", "Subject_36", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_37:System.Void()", "Subject_37", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_38:System.Void()", "Subject_38", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_39:System.Void()", "Subject_39", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_40:System.Void()", "Subject_40", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_41:System.Void()", "Subject_41", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_42:System.Void()", "Subject_42", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_43:System.Void()", "Subject_43", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_44:System.Void()", "Subject_44", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_45:System.Void()", "Subject_45", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_46:System.Void()", "Subject_46", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_47:System.Void()", "Subject_47", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_48:System.Void()", "Subject_48", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_49:System.Void()", "Subject_49", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_50:System.Void()", "Subject_50", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_51:System.Void()", "Subject_51", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_52:System.Void()", "Subject_52", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_53:System.Void()", "Subject_53", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_54:System.Void()", "Subject_54", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_55:System.Void()", "Subject_55", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_56:System.Void()", "Subject_56", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_57:System.Void()", "Subject_57", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_58:System.Void()", "Subject_58", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_59:System.Void()", "Subject_59", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_60:System.Void()", "Subject_60", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_61:System.Void()", "Subject_61", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_62:System.Void()", "Subject_62", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_63:System.Void()", "Subject_63", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_64:System.Void()", "Subject_64", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_65:System.Void()", "Subject_65", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_66:System.Void()", "Subject_66", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_67:System.Void()", "Subject_67", "System.Void", 0, nullptr, 0u },
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_68:System.Void()", "Subject_68", "System.Void", 0, nullptr, 0u },
+	{ 0x00000003u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000004u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000005u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000006u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000007u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000008u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000009u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Au, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Bu, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Cu, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Du, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_10:System.Void()", "Subject_10", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Eu, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_11:System.Void()", "Subject_11", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Fu, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_12:System.Void()", "Subject_12", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000010u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_13:System.Void()", "Subject_13", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000011u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_14:System.Void()", "Subject_14", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000012u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_15:System.Void()", "Subject_15", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000013u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_16:System.Void()", "Subject_16", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000014u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_17:System.Void()", "Subject_17", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000015u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_18:System.Void()", "Subject_18", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000016u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_19:System.Void()", "Subject_19", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000017u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_20:System.Void()", "Subject_20", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000018u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_21:System.Void()", "Subject_21", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000019u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_22:System.Void()", "Subject_22", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000001Au, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_23:System.Void()", "Subject_23", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000001Bu, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_24:System.Void()", "Subject_24", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000001Cu, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_25:System.Void()", "Subject_25", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000001Du, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_26:System.Void()", "Subject_26", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000001Eu, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_27:System.Void()", "Subject_27", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000001Fu, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_28:System.Void()", "Subject_28", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000020u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_29:System.Void()", "Subject_29", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000021u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_30:System.Void()", "Subject_30", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000022u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_31:System.Void()", "Subject_31", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000023u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_32:System.Void()", "Subject_32", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000024u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_33:System.Void()", "Subject_33", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000025u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_34:System.Void()", "Subject_34", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000026u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_35:System.Void()", "Subject_35", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000027u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_36:System.Void()", "Subject_36", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000028u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_37:System.Void()", "Subject_37", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000029u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_38:System.Void()", "Subject_38", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000002Au, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_39:System.Void()", "Subject_39", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000002Bu, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_40:System.Void()", "Subject_40", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000002Cu, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_41:System.Void()", "Subject_41", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000002Du, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_42:System.Void()", "Subject_42", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000002Eu, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_43:System.Void()", "Subject_43", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000002Fu, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_44:System.Void()", "Subject_44", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000030u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_45:System.Void()", "Subject_45", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000031u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_46:System.Void()", "Subject_46", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000032u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_47:System.Void()", "Subject_47", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000033u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_48:System.Void()", "Subject_48", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000034u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_49:System.Void()", "Subject_49", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000035u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_50:System.Void()", "Subject_50", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000036u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_51:System.Void()", "Subject_51", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000037u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_52:System.Void()", "Subject_52", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000038u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_53:System.Void()", "Subject_53", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000039u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_54:System.Void()", "Subject_54", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000003Au, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_55:System.Void()", "Subject_55", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000003Bu, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_56:System.Void()", "Subject_56", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000003Cu, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_57:System.Void()", "Subject_57", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000003Du, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_58:System.Void()", "Subject_58", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000003Eu, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_59:System.Void()", "Subject_59", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000003Fu, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_60:System.Void()", "Subject_60", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000040u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_61:System.Void()", "Subject_61", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000041u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_62:System.Void()", "Subject_62", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000042u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_63:System.Void()", "Subject_63", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000043u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_64:System.Void()", "Subject_64", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000044u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_65:System.Void()", "Subject_65", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000045u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_66:System.Void()", "Subject_66", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000046u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_67:System.Void()", "Subject_67", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000047u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects::Subject_68:System.Void()", "Subject_68", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
-	{ 0u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects", "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects", "", "GeneratedMarshallingSubjects", "GeneratedMarshallingSubjects", nullptr, kReflFields_GeneratedMarshallingSubjects_GeneratedMarshallingSubjects, 1u, nullptr, 0u,
-	kReflMethods_GeneratedMarshallingSubjects_GeneratedMarshallingSubjects, 69u },
+	{ 0x00000001u, "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects", "GeneratedMarshallingSubjects/GeneratedMarshallingSubjects", "", "GeneratedMarshallingSubjects", "GeneratedMarshallingSubjects", nullptr, kReflFields_GeneratedMarshallingSubjects_GeneratedMarshallingSubjects, 1u, nullptr, 0u,
+/* EVENT_SECTION_START */
+nullptr, 0u,    kReflMethods_GeneratedMarshallingSubjects_GeneratedMarshallingSubjects, 69u, nullptr, 0u, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static const ReflectionQueryImageDescriptor kReflImage = { "GeneratedMarshallingSubjects", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "GeneratedMarshallingSubjects", kReflTypePtrs, 1u, 1, 0, 0, 0 };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via

@@ -1,4 +1,4 @@
-#include <chaos/common.h>
+﻿#include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
 #include <chaos/eh.h>
@@ -16,6 +16,7 @@
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 #include "enum_metadata.generated.h"
+#include "runtime_stubs/enum_stubs.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -356,11 +357,18 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
 		/* .type_count        = */ 2u,
-	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
+	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 -- deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
 	/* .custom_attribute_materializer = */ nullptr,
-
+	/* .custom_attribute_method_offset   = */ nullptr,
+	/* .custom_attribute_field_offset    = */ nullptr,
+	/* .custom_attribute_property_offset = */ nullptr,
+	/* .custom_attribute_param_offset    = */ nullptr,
+	/* .custom_attribute_method_count    = */ 0u,
+	/* .custom_attribute_field_count     = */ 0u,
+	/* .custom_attribute_property_count  = */ 0u,
+	/* .custom_attribute_param_count   = */ 0u,
 		/* .abi_manifest      = */ s_abi_manifest,
 	};
 	static const CHAOS_IL2CPP_UINT32 s_native_aot_module_id =
@@ -556,7 +564,6 @@ extern "C" void* kChaosExternalRuntimeFnTable[30] = {
 };
 
 extern "C" int32_t kChaosExternalRuntimeCount = 30;
-// (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
 static void (*kAotMethods[29])() = {
@@ -878,7 +885,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry15;
 	/* ── Entry 16: HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_17 ── */
 	struct {
@@ -1075,11 +1082,11 @@ static const struct {
 	},
 	/* entry15 = HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_16 */
 	.entry15 = {
-		/* entry_total_size = 44 */ 44u,
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_16),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
 	/* entry16 = HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects_Subject_17 */
 	.entry16 = {
@@ -1158,7 +1165,7 @@ static const struct {
 #pragma pack(pop)
 #endif
 
-static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 932u;
+static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 928u;
 
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
@@ -1249,50 +1256,51 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // matching during IR lowering of patched methods.
 
 static constexpr ReflectionQueryFieldDescriptor kReflFields_HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects[1] = {
-	{ 0u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
+	{ 0x04000001u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::_exitCode", "_exitCode", "System.Int32", 0LL, 3u },
 };
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects[29] = {
-	{ 0u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u },
-	{ 0u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u },
-	{ 0u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u },
-	{ 0u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u },
-	{ 0u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u },
-	{ 0u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u },
-	{ 0u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u },
-	{ 0u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u },
-	{ 0u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u },
-	{ 0u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_10:System.Void()", "Subject_10", "System.Void", 0, nullptr, 0u },
-	{ 0u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_11:System.Void()", "Subject_11", "System.Void", 0, nullptr, 0u },
-	{ 0u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_12:System.Void()", "Subject_12", "System.Void", 0, nullptr, 0u },
-	{ 0u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_13:System.Void()", "Subject_13", "System.Void", 0, nullptr, 0u },
-	{ 0u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_14:System.Void()", "Subject_14", "System.Void", 0, nullptr, 0u },
-	{ 0u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_15:System.Void()", "Subject_15", "System.Void", 0, nullptr, 0u },
-	{ 0u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_16:System.Void()", "Subject_16", "System.Void", 0, nullptr, 0u },
-	{ 0u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_17:System.Void()", "Subject_17", "System.Void", 0, nullptr, 0u },
-	{ 0u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_18:System.Void()", "Subject_18", "System.Void", 0, nullptr, 0u },
-	{ 0u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_19:System.Void()", "Subject_19", "System.Void", 0, nullptr, 0u },
-	{ 0u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_20:System.Void()", "Subject_20", "System.Void", 0, nullptr, 0u },
-	{ 0u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_21:System.Void()", "Subject_21", "System.Void", 0, nullptr, 0u },
-	{ 0u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_22:System.Void()", "Subject_22", "System.Void", 0, nullptr, 0u },
-	{ 0u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_23:System.Void()", "Subject_23", "System.Void", 0, nullptr, 0u },
-	{ 0u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_24:System.Void()", "Subject_24", "System.Void", 0, nullptr, 0u },
-	{ 0u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_25:System.Void()", "Subject_25", "System.Void", 0, nullptr, 0u },
-	{ 0u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_26:System.Void()", "Subject_26", "System.Void", 0, nullptr, 0u },
-	{ 0u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_27:System.Void()", "Subject_27", "System.Void", 0, nullptr, 0u },
-	{ 0u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_28:System.Void()", "Subject_28", "System.Void", 0, nullptr, 0u },
+	{ 0x00000003u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000004u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000005u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000006u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000007u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000008u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000009u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Au, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Bu, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Cu, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Du, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_10:System.Void()", "Subject_10", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Eu, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_11:System.Void()", "Subject_11", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Fu, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_12:System.Void()", "Subject_12", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000010u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_13:System.Void()", "Subject_13", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000011u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_14:System.Void()", "Subject_14", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000012u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_15:System.Void()", "Subject_15", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000013u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_16:System.Void()", "Subject_16", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000014u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_17:System.Void()", "Subject_17", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000015u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_18:System.Void()", "Subject_18", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000016u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_19:System.Void()", "Subject_19", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000017u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_20:System.Void()", "Subject_20", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000018u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_21:System.Void()", "Subject_21", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000019u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_22:System.Void()", "Subject_22", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000001Au, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_23:System.Void()", "Subject_23", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000001Bu, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_24:System.Void()", "Subject_24", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000001Cu, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_25:System.Void()", "Subject_25", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000001Du, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_26:System.Void()", "Subject_26", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000001Eu, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_27:System.Void()", "Subject_27", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000001Fu, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects::Subject_28:System.Void()", "Subject_28", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
-	{ 0u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects", "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects", "", "HandlesSafehandleGchandleSubjects", "HandlesSafehandleGchandleSubjects", nullptr, kReflFields_HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects, 1u, nullptr, 0u,
-	kReflMethods_HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects, 29u },
+	{ 0x00000001u, "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects", "HandlesSafehandleGchandleSubjects/HandlesSafehandleGchandleSubjects", "", "HandlesSafehandleGchandleSubjects", "HandlesSafehandleGchandleSubjects", nullptr, kReflFields_HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects, 1u, nullptr, 0u,
+/* EVENT_SECTION_START */
+nullptr, 0u,    kReflMethods_HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubjects, 29u, nullptr, 0u, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static const ReflectionQueryImageDescriptor kReflImage = { "HandlesSafehandleGchandleSubjects", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "HandlesSafehandleGchandleSubjects", kReflTypePtrs, 1u, 1, 0, 0, 0 };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -2226,10 +2234,6 @@ extern "C" void HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubje
 	CHAOS_IL2CPP_INTPTR _s16{};
 	CHAOS_IL2CPP_INTPTR _s17{};
 	CHAOS_IL2CPP_INTPTR _s18{};
-	CHAOS_IL2CPP_INTPTR _s19{};
-	CHAOS_IL2CPP_INTPTR _s20{};
-	CHAOS_IL2CPP_INTPTR _s21{};
-	CHAOS_IL2CPP_INTPTR _s22{};
 
 
 	CHAOS_EH_TRY
@@ -2247,14 +2251,7 @@ extern "C" void HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubje
 					*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
 				}
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s1;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
+			_s1 = 0;
 			{
 				const auto chaos_arg_0 = _s1;
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[19])(chaos_arg_0);
@@ -2278,14 +2275,7 @@ extern "C" void HandlesSafehandleGchandleSubjects_HandlesSafehandleGchandleSubje
 					*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
 				}
 			}
-			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s5;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
+			_s5 = 0;
 			{
 				const auto chaos_arg_0 = _s5;
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[19])(chaos_arg_0);

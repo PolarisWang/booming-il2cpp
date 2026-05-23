@@ -3,10 +3,10 @@
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/garbage/collection",
   "summary": {
-    "totalMethods": 7,
+    "totalMethods": 12,
     "matchedCount": 0,
     "unmatchedCount": 0,
-    "invalidCount": 7,
+    "invalidCount": 12,
     "nativeAotFasterCount": 0,
     "nativeJitFasterCount": 0,
     "managedFasterCount": 0,
@@ -43,6 +43,26 @@
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.GC::GetGCMemoryInfo: System.GCMemoryInfo()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.GC::Collect(System.Int32,System.GCCollectionMode):System.Void()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.GC::get_LatencyMode:System.GCLatencyMode()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.GC::set_LatencyMode(System.GCLatencyMode):System.Void()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.GC::CollectionCount(System.Int32):System.Int64()",
+      "status": "managed_harness_unavailable"
+    },
+    {
+      "methodSubjectId": "System.Private.CoreLib/System.GC::GetTotalPauseDuration:System.TimeSpan()",
       "status": "managed_harness_unavailable"
     }
   ]

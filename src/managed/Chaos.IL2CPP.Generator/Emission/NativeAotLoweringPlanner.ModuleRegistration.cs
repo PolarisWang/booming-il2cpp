@@ -269,6 +269,8 @@ public sealed partial class NativeAotLoweringPlanner
                             {
                                 ["native_symbol"] = slot.NativeSymbol,
                                 ["slot_index"] = mi,
+                                ["param_count"] = slot.ParamCount,
+                                ["token"] = "0x" + slot.Token.ToString("X8") + "u",
                             });
                         }
 

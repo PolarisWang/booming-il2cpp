@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "RuntimeInteropServicesSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Runtime.InteropServices/runtime-interop-services/managed/subjects/build-output/RuntimeInteropServicesSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Runtime.InteropServices/runtime-interop-services/managed/subjects/build-output/RuntimeInteropServicesSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "RuntimeInteropServicesSubjects",
-      "path": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Runtime.InteropServices/runtime-interop-services/managed/subjects/build-output/RuntimeInteropServicesSubjects.dll"
+      "path": "testing/foundation-dll/System.Runtime.InteropServices/runtime-interop-services/managed/subjects/build-output/RuntimeInteropServicesSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "33273c80-4bb7-4e23-879d-01b2780bfe32",
+  "inputModuleVersionId": "76408092-9fd5-4500-b8bd-37a57268a102",
   "artifacts": [
     {
       "kind": "typedIlIr",

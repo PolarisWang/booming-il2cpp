@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ComTypesSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Runtime.InteropServices/com-types/managed/subjects/build-output/ComTypesSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Runtime.InteropServices/com-types/managed/subjects/build-output/ComTypesSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "ComTypesSubjects",
-      "path": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Runtime.InteropServices/com-types/managed/subjects/build-output/ComTypesSubjects.dll"
+      "path": "testing/foundation-dll/System.Runtime.InteropServices/com-types/managed/subjects/build-output/ComTypesSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "2ba4ad35-b019-486e-811b-d20379177f48",
+  "inputModuleVersionId": "7a1e4d7d-6ab7-4c60-b89b-def147ab7b17",
   "artifacts": [
     {
       "kind": "typedIlIr",

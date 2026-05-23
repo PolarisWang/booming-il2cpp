@@ -2,8 +2,8 @@
   "family": "garbage-collection",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-23T01:54:33",
-  "duration_ms": 310080,
+  "timestamp": "2026-05-23T15:17:06",
+  "duration_ms": 329386,
   "overall_status": "failed",
   "stages": {
     "preflight": {
@@ -22,41 +22,150 @@
     "codegen": {
       "stage": "codegen",
       "status": "failed",
-      "summary": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(8,30): error CS1002: ; expected [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(8,30): error CS1022: Type or namespace definition, or end-of-file expected [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(9,27): error CS1002: ; expected [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(9,27): error CS1022: Type or namespace definition, or end-of-file expected [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(10,19): error CS1002: ; expected [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(10,19): error CS1022: Type or namespace definition, or end-of-file expected [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(11,1): error CS1529: A using clause must precede all other elements defined in the namespace except extern alias declarations [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\n\nBuild FAILED.\n\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(8,30): error CS1002: ; expected [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(8,30): error CS1022: Type or namespace definition, or end-of-file expected [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(9,27): error CS1002: ; expected [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(9,27): error CS1022: Type or namespace definition, or end-of-file expected [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(10,19): error CS1002: ; expected [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(10,19): error CS1022: Type or namespace definition, or end-of-file expected [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(11,1): error CS1529: A using clause must precede all other elements defined in the namespace except extern alias declarations [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\n    0 Warning(s)\n    7 Error(s)\n\nTime Elapsed 00:00:01.01\n",
+      "summary": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(74,24): error CS0117: 'GC' does not contain a definition for 'LatencyMode' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(74,60): error CS0117: 'GC' does not contain a definition for 'LatencyMode' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(81,18): error CS0117: 'GC' does not contain a definition for 'LatencyMode' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\n\nBuild FAILED.\n\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(74,24): error CS0117: 'GC' does not contain a definition for 'LatencyMode' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(74,60): error CS0117: 'GC' does not contain a definition for 'LatencyMode' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(81,18): error CS0117: 'GC' does not contain a definition for 'LatencyMode' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\n    0 Warning(s)\n    3 Error(s)\n\nTime Elapsed 00:00:01.17\n",
       "details": {
         "steps": {
           "build_subjects": "FAILED"
         }
       },
       "errors": [],
-      "duration_ms": 8385
+      "duration_ms": 4246
+    },
+    "jit_codegen": {
+      "stage": "jit_codegen",
+      "status": "passed",
+      "summary": "entry-jit.exe already exists, skipping rebuild",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
     },
     "fact": {
       "stage": "fact",
-      "status": "passed",
-      "summary": "Fact verify=passed (7/7)",
+      "status": "failed",
+      "summary": "Fact verify=failed (6/7)",
       "details": {
         "fact": {
-          "status": "passed",
-          "passed": 7,
+          "status": "failed",
+          "passed": 6,
           "total": 7
         }
       },
       "errors": [],
-      "duration_ms": 32
+      "duration_ms": 375
+    },
+    "fact_jit": {
+      "stage": "fact_jit",
+      "status": "failed",
+      "summary": "Fact JIT verify=failed (6/7)",
+      "details": {
+        "fact_jit": {
+          "status": "failed",
+          "passed": 6,
+          "total": 7,
+          "exit_code": 1
+        }
+      },
+      "errors": [],
+      "duration_ms": 359
+    },
+    "audit": {
+      "stage": "audit",
+      "status": "passed",
+      "summary": "false_passing=0, principle=ALIGNED",
+      "details": {
+        "falsePassing": 0,
+        "stubsFound": 0,
+        "skipsFound": 0,
+        "principleStatus": "ALIGNED",
+        "methodsWithoutLowering": 0
+      },
+      "errors": [],
+      "duration_ms": 1265
+    },
+    "asm_compare": {
+      "stage": "asm_compare",
+      "status": "failed",
+      "summary": "asm-compare: 7/12 methods OK, avg JIT=49.9 instr, avg AOT IR=8.7 instr, expansion=0.17x",
+      "details": {
+        "totalMethods": 12,
+        "okCount": 7,
+        "failedCount": 5,
+        "skippedCount": 0,
+        "jitInstructionCount": {
+          "min": 44,
+          "max": 85,
+          "avg": 49.9,
+          "total": 349
+        },
+        "aotInstructionCount": {
+          "min": 2,
+          "max": 15,
+          "avg": 8.7,
+          "total": 61
+        },
+        "totalExternalRuntimeCalls": 0,
+        "totalVirtualDispatches": 0,
+        "totalBoxingOps": 0,
+        "topInstructionCategories": {
+          "external_runtime_call": 9
+        },
+        "overallIrExpansionRatio": 0.17,
+        "averageExpansionRatio": 0.18,
+        "maxExpansionRatio": 0.34,
+        "minExpansionRatio": 0.05
+      },
+      "errors": [],
+      "duration_ms": 8395
+    },
+    "microbench": {
+      "stage": "microbench",
+      "status": "passed",
+      "summary": "FramePool=2.7ns/op | FastExecute=0.0ns/op | CallVirt dispatch=0.0ns",
+      "details": {
+        "framePool": {
+          "acquireReleaseNsPerOp": 2.7,
+          "batchCount": 1000,
+          "framesPerBatch": 32
+        },
+        "poolSize": 32
+      },
+      "errors": [],
+      "duration_ms": 31
+    },
+    "benchmark": {
+      "stage": "benchmark",
+      "status": "skipped",
+      "summary": "All 12 non-stub methods are invalid (no managed harness)",
+      "details": {},
+      "errors": [],
+      "duration_ms": 13288
+    },
+    "hotupdate": {
+      "stage": "hotupdate",
+      "status": "passed",
+      "summary": "6/7 passed, 0 failed (stub=0)",
+      "details": {
+        "passedMethods": 6,
+        "failedMethods": 0,
+        "totalMethods": 7,
+        "realMethods": 7,
+        "stubMethods": 0
+      },
+      "errors": [],
+      "duration_ms": 31
     },
     "hotupdate_aot_benchmark": {
       "stage": "hotupdate_aot_benchmark",
       "status": "passed",
-      "summary": "avg_slowdown=-40.58% (0.6x) over 7 methods (AOT patched path)",
+      "summary": "avg_slowdown=-15.15% (0.8x) over 7 methods (AOT patched path)",
       "details": {
-        "averageSlowdownPercent": -40.58,
-        "slowdownFactor": 0.5942000000000001,
+        "averageSlowdownPercent": -15.15,
+        "slowdownFactor": 0.8484999999999999,
         "threshold": 50.0,
         "nonStubMethods": 7
       },
       "errors": [],
-      "duration_ms": 1424
+      "duration_ms": 1125
     },
     "hotupdate_jit_fact": {
       "stage": "hotupdate_jit_fact",
@@ -68,7 +177,7 @@
         "total": 7
       },
       "errors": [],
-      "duration_ms": 26
+      "duration_ms": 30
     },
     "hotupdate_jit_benchmark": {
       "stage": "hotupdate_jit_benchmark",
@@ -80,12 +189,19 @@
     }
   },
   "coverage": {
-    "methodCoverage": 100.0,
-    "testedRate": 0.0,
-    "overall": 100.0
+    "methodCoverage": 85.71,
+    "testedRate": 100.0,
+    "overall": 92.85
   },
   "dashboard": {
-    "interpreter": {},
+    "interpreter": {
+      "fastFramePoolNsPerOp": 2.7,
+      "fastExecuteNsPerInstr": 0,
+      "callVirtHandlerDispatchNs": 0,
+      "callVirtMicHitNs": 0,
+      "callVirtRawFallbackNs": 0,
+      "poolSize": 32
+    },
     "irTranslation": {
       "totalMethods": 7,
       "okCount": 7,
@@ -104,9 +220,14 @@
     },
     "performance": {},
     "hotupdate": {
+      "aotFunctional": {
+        "passedMethods": 6,
+        "failedMethods": 0,
+        "totalMethods": 7
+      },
       "aotOverhead": {
-        "averageSlowdownPercent": -40.58,
-        "slowdownFactor": 0.5942000000000001,
+        "averageSlowdownPercent": -15.15,
+        "slowdownFactor": 0.8484999999999999,
         "nonStubMethods": 7
       },
       "jitFunctional": {
@@ -118,7 +239,7 @@
     "keyRatios": {
       "nativeFasterRatio": 0,
       "irExpansionRatio": 0.35,
-      "interpreterSlowdownFactor": 0.5942000000000001,
+      "interpreterSlowdownFactor": 0.8484999999999999,
       "asmPassRate": 100.0
     }
   },
@@ -133,7 +254,7 @@
         "averageSpeedupPercent": 0.0
       },
       "currentMetrics": {
-        "totalMethods": 7,
+        "totalMethods": 12,
         "matchedCount": 0,
         "nativeFasterCount": 0,
         "managedFasterCount": 0,

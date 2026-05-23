@@ -1,0 +1,255 @@
+[
+  {
+    "methodIndex": 0,
+    "methodSubjectId": "System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)",
+    "shortName": "Subject_0",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 28,
+      "ratio": 0.64,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_0",
+      "instructions": 28
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 2
+    }
+  },
+  {
+    "methodIndex": 1,
+    "methodSubjectId": "System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object,System.Object)",
+    "shortName": "Subject_1",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 28,
+      "ratio": 0.64,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_1",
+      "instructions": 28
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object,System.Object)' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object,System.Object)' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 2
+    }
+  },
+  {
+    "methodIndex": 2,
+    "methodSubjectId": "System.Private.CoreLib/System.Object::ReferenceEquals:System.Boolean(System.Object,System.Object)",
+    "shortName": "Subject_2",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 18,
+      "ratio": 0.41,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_2",
+      "instructions": 18
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 3,
+    "methodSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+    "shortName": "Subject_3",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 18,
+      "ratio": 0.41,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_3",
+      "instructions": 18
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 2
+    }
+  },
+  {
+    "methodIndex": 4,
+    "methodSubjectId": "System.Private.CoreLib/System.Object::ToString:System.String()",
+    "shortName": "Subject_4",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 20,
+      "ratio": 0.45,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_4",
+      "instructions": 20
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Object::ToString:System.String()' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.String::get_Length:System.Int32()' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Object::ToString:System.String()' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.String::get_Length:System.Int32()' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 4
+    }
+  },
+  {
+    "methodIndex": 5,
+    "methodSubjectId": "System.Private.CoreLib/System.Object::GetType:System.Type()",
+    "shortName": "Subject_5",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 20,
+      "ratio": 0.45,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_5",
+      "instructions": 20
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Object::GetType:System.Type()' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Object::GetType:System.Type()' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 4
+    }
+  },
+  {
+    "methodIndex": 6,
+    "methodSubjectId": "System.Private.CoreLib/System.Object::MemberwiseClone:System.Object()",
+    "shortName": "Subject_6",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 1,
+      "ratio": 0.02,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_6",
+      "instructions": 1
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  }
+]

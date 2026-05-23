@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "MarshallingAttributesSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Runtime.InteropServices/marshalling-attributes/managed/subjects/build-output/MarshallingAttributesSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Runtime.InteropServices/marshalling-attributes/managed/subjects/build-output/MarshallingAttributesSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "MarshallingAttributesSubjects",
-      "path": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Runtime.InteropServices/marshalling-attributes/managed/subjects/build-output/MarshallingAttributesSubjects.dll"
+      "path": "testing/foundation-dll/System.Runtime.InteropServices/marshalling-attributes/managed/subjects/build-output/MarshallingAttributesSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "66a19d09-7ba1-43e8-a0e8-b6331dd3ed81",
+  "inputModuleVersionId": "4aebee5a-4f16-44c3-ae89-2fc10d39b53d",
   "artifacts": [
     {
       "kind": "typedIlIr",

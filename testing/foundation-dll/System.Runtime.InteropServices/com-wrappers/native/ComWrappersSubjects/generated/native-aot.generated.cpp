@@ -1,4 +1,4 @@
-#include <chaos/common.h>
+﻿#include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
 #include <chaos/eh.h>
@@ -16,6 +16,7 @@
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 #include "enum_metadata.generated.h"
+#include "runtime_stubs/enum_stubs.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -299,11 +300,18 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
 		/* .type_count        = */ 2u,
-	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
+	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 -- deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
 	/* .custom_attribute_materializer = */ nullptr,
-
+	/* .custom_attribute_method_offset   = */ nullptr,
+	/* .custom_attribute_field_offset    = */ nullptr,
+	/* .custom_attribute_property_offset = */ nullptr,
+	/* .custom_attribute_param_offset    = */ nullptr,
+	/* .custom_attribute_method_count    = */ 0u,
+	/* .custom_attribute_field_count     = */ 0u,
+	/* .custom_attribute_property_count  = */ 0u,
+	/* .custom_attribute_param_count   = */ 0u,
 		/* .abi_manifest      = */ s_abi_manifest,
 	};
 	static const CHAOS_IL2CPP_UINT32 s_native_aot_module_id =
@@ -378,7 +386,6 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 extern "C" const char* kChaosExternalRuntimeSubjects[14] = {
 	"System.Runtime.InteropServices/ComWrappers::GetIUnknownImpl:System.Void(System.IntPtr&,System.IntPtr&,System.IntPtr&)",
 	"ComWrappersSubjects/ComWrappersSubjects::_exitCode",
-	"System.Private.CoreLib/System.Int32",
 	"System.Runtime.InteropServices/ComWrappers::GetOrCreateComInterfaceForObject:System.IntPtr(System.Object,CreateComInterfaceFlags)",
 	"System.Private.CoreLib/System.IntPtr::Zero",
 	"System.Runtime.InteropServices/ComWrappers::GetOrCreateObjectForComInstance:System.Object(System.IntPtr,CreateObjectFlags)",
@@ -388,12 +395,12 @@ extern "C" const char* kChaosExternalRuntimeSubjects[14] = {
 	"System.Runtime.InteropServices/ComWrappers::GetOrRegisterObjectForComInstance:System.Object(System.IntPtr,CreateObjectFlags,System.Object,System.IntPtr)",
 	"System.Runtime.InteropServices/ComWrappers::RegisterForMarshalling:System.Void(ComWrappers)",
 	"System.Runtime.InteropServices/ComWrappers::RegisterForTrackerSupport:System.Void(ComWrappers)",
+	"System.Private.CoreLib/System.Int32",
 	"System.Runtime.InteropServices/ComWrappers::TryGetComInstance:System.Boolean(System.Object,System.IntPtr&)",
 	"System.Runtime.InteropServices/ComWrappers::TryGetObject:System.Boolean(System.IntPtr,System.Object&)",
 };
 
 extern "C" void* kChaosExternalRuntimeFnTable[14] = {
-	nullptr,
 	nullptr,
 	nullptr,
 	nullptr,
@@ -407,10 +414,10 @@ extern "C" void* kChaosExternalRuntimeFnTable[14] = {
 	nullptr,
 	nullptr,
 	nullptr,
+	nullptr,
 };
 
 extern "C" int32_t kChaosExternalRuntimeCount = 14;
-// (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
 static void (*kAotMethods[10])() = {
@@ -563,7 +570,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[9];
+		CHAOS_IL2CPP_UINT32 slots[7];
 	} entry1;
 	/* ── Entry 2: ComWrappersSubjects_ComWrappersSubjects_Subject_2 ── */
 	struct {
@@ -579,7 +586,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[9];
+		CHAOS_IL2CPP_UINT32 slots[7];
 	} entry3;
 	/* ── Entry 4: ComWrappersSubjects_ComWrappersSubjects_Subject_4 ── */
 	struct {
@@ -587,7 +594,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[9];
+		CHAOS_IL2CPP_UINT32 slots[7];
 	} entry4;
 	/* ── Entry 5: ComWrappersSubjects_ComWrappersSubjects_Subject_5 ── */
 	struct {
@@ -595,7 +602,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[10];
+		CHAOS_IL2CPP_UINT32 slots[8];
 	} entry5;
 	/* ── Entry 6: ComWrappersSubjects_ComWrappersSubjects_Subject_6 ── */
 	struct {
@@ -640,11 +647,11 @@ static const struct {
 	},
 	/* entry1 = ComWrappersSubjects_ComWrappersSubjects_Subject_1 */
 	.entry1 = {
-		/* entry_total_size = 56 */ 56u,
+		/* entry_total_size = 48 */ 48u,
 		/* code_address */ reinterpret_cast<const void*>(&ComWrappersSubjects_ComWrappersSubjects_Subject_1),
-		/* frame_size = 72 */ 72u,
-		/* num_gc_slots = 9 */ 9u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u }
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
 	},
 	/* entry2 = ComWrappersSubjects_ComWrappersSubjects_Subject_2 */
 	.entry2 = {
@@ -656,27 +663,27 @@ static const struct {
 	},
 	/* entry3 = ComWrappersSubjects_ComWrappersSubjects_Subject_3 */
 	.entry3 = {
-		/* entry_total_size = 56 */ 56u,
+		/* entry_total_size = 48 */ 48u,
 		/* code_address */ reinterpret_cast<const void*>(&ComWrappersSubjects_ComWrappersSubjects_Subject_3),
-		/* frame_size = 72 */ 72u,
-		/* num_gc_slots = 9 */ 9u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u }
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
 	},
 	/* entry4 = ComWrappersSubjects_ComWrappersSubjects_Subject_4 */
 	.entry4 = {
-		/* entry_total_size = 56 */ 56u,
+		/* entry_total_size = 48 */ 48u,
 		/* code_address */ reinterpret_cast<const void*>(&ComWrappersSubjects_ComWrappersSubjects_Subject_4),
-		/* frame_size = 72 */ 72u,
-		/* num_gc_slots = 9 */ 9u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u }
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
 	},
 	/* entry5 = ComWrappersSubjects_ComWrappersSubjects_Subject_5 */
 	.entry5 = {
-		/* entry_total_size = 60 */ 60u,
+		/* entry_total_size = 52 */ 52u,
 		/* code_address */ reinterpret_cast<const void*>(&ComWrappersSubjects_ComWrappersSubjects_Subject_5),
-		/* frame_size = 80 */ 80u,
-		/* num_gc_slots = 10 */ 10u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u, 72u }
+		/* frame_size = 64 */ 64u,
+		/* num_gc_slots = 8 */ 8u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u }
 	},
 	/* entry6 = ComWrappersSubjects_ComWrappersSubjects_Subject_6 */
 	.entry6 = {
@@ -715,7 +722,7 @@ static const struct {
 #pragma pack(pop)
 #endif
 
-static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 448u;
+static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 416u;
 
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
@@ -787,31 +794,32 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // matching during IR lowering of patched methods.
 
 static constexpr ReflectionQueryFieldDescriptor kReflFields_ComWrappersSubjects_ComWrappersSubjects[1] = {
-	{ 0u, "ComWrappersSubjects/ComWrappersSubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
+	{ 0x04000001u, "ComWrappersSubjects/ComWrappersSubjects::_exitCode", "_exitCode", "System.Int32", 0LL, 3u },
 };
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_ComWrappersSubjects_ComWrappersSubjects[10] = {
-	{ 0u, "ComWrappersSubjects/ComWrappersSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ComWrappersSubjects/ComWrappersSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ComWrappersSubjects/ComWrappersSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ComWrappersSubjects/ComWrappersSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ComWrappersSubjects/ComWrappersSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ComWrappersSubjects/ComWrappersSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ComWrappersSubjects/ComWrappersSubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ComWrappersSubjects/ComWrappersSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ComWrappersSubjects/ComWrappersSubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ComWrappersSubjects/ComWrappersSubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u },
+	{ 0x00000003u, "ComWrappersSubjects/ComWrappersSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000004u, "ComWrappersSubjects/ComWrappersSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000005u, "ComWrappersSubjects/ComWrappersSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000006u, "ComWrappersSubjects/ComWrappersSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000007u, "ComWrappersSubjects/ComWrappersSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000008u, "ComWrappersSubjects/ComWrappersSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000009u, "ComWrappersSubjects/ComWrappersSubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Au, "ComWrappersSubjects/ComWrappersSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Bu, "ComWrappersSubjects/ComWrappersSubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Cu, "ComWrappersSubjects/ComWrappersSubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
-	{ 0u, "ComWrappersSubjects/ComWrappersSubjects", "ComWrappersSubjects/ComWrappersSubjects", "", "ComWrappersSubjects", "ComWrappersSubjects", nullptr, kReflFields_ComWrappersSubjects_ComWrappersSubjects, 1u, nullptr, 0u,
-	kReflMethods_ComWrappersSubjects_ComWrappersSubjects, 10u },
+	{ 0x00000001u, "ComWrappersSubjects/ComWrappersSubjects", "ComWrappersSubjects/ComWrappersSubjects", "", "ComWrappersSubjects", "ComWrappersSubjects", nullptr, kReflFields_ComWrappersSubjects_ComWrappersSubjects, 1u, nullptr, 0u,
+/* EVENT_SECTION_START */
+nullptr, 0u,    kReflMethods_ComWrappersSubjects_ComWrappersSubjects, 10u, nullptr, 0u, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static const ReflectionQueryImageDescriptor kReflImage = { "ComWrappersSubjects", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "ComWrappersSubjects", kReflTypePtrs, 1u, 1, 0, 0, 0 };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -914,44 +922,26 @@ extern "C" void ComWrappersSubjects_ComWrappersSubjects_Subject_1(void)
 	CHAOS_IL2CPP_INTPTR _s16{};
 	CHAOS_IL2CPP_INTPTR _s17{};
 	CHAOS_IL2CPP_INTPTR _s18{};
-	CHAOS_IL2CPP_INTPTR _s19{};
-	CHAOS_IL2CPP_INTPTR _s20{};
-	CHAOS_IL2CPP_INTPTR _s21{};
-	CHAOS_IL2CPP_INTPTR _s22{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s1;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
+			_s1 = 0;
 			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 			{
 				const auto chaos_arg_1 = _s2;
 				const auto chaos_arg_0 = _s1;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[3])(chaos_arg_0, chaos_arg_1);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[2])(chaos_arg_0, chaos_arg_1);
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
 			_s2 = 0;
-			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s3;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
+			_s3 = 0;
 			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 			{
 				const auto chaos_arg_1 = _s4;
 				const auto chaos_arg_0 = _s3;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[3])(chaos_arg_0, chaos_arg_1);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[2])(chaos_arg_0, chaos_arg_1);
 				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s3));
@@ -1015,7 +1005,7 @@ extern "C" void ComWrappersSubjects_ComWrappersSubjects_Subject_2(void)
 			{
 				const auto chaos_arg_1 = _s2;
 				const auto chaos_arg_0 = _s1;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[5])(chaos_arg_0, chaos_arg_1);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[4])(chaos_arg_0, chaos_arg_1);
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			{
@@ -1029,7 +1019,7 @@ extern "C" void ComWrappersSubjects_ComWrappersSubjects_Subject_2(void)
 			{
 				const auto chaos_arg_1 = _s4;
 				const auto chaos_arg_0 = _s3;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[5])(chaos_arg_0, chaos_arg_1);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[4])(chaos_arg_0, chaos_arg_1);
 				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			{
@@ -1090,29 +1080,18 @@ extern "C" void ComWrappersSubjects_ComWrappersSubjects_Subject_3(void)
 	CHAOS_IL2CPP_INTPTR _s16{};
 	CHAOS_IL2CPP_INTPTR _s17{};
 	CHAOS_IL2CPP_INTPTR _s18{};
-	CHAOS_IL2CPP_INTPTR _s19{};
-	CHAOS_IL2CPP_INTPTR _s20{};
-	CHAOS_IL2CPP_INTPTR _s21{};
-	CHAOS_IL2CPP_INTPTR _s22{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
 			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s3;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
+			_s3 = 0;
 			{
 				const auto chaos_arg_2 = _s3;
 				const auto chaos_arg_1 = _s2;
 				const auto chaos_arg_0 = _s1;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[7])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[6])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			{
@@ -1123,19 +1102,12 @@ extern "C" void ComWrappersSubjects_ComWrappersSubjects_Subject_3(void)
 			_s2 = 0;
 			_s3 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
 			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s5;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
+			_s5 = 0;
 			{
 				const auto chaos_arg_2 = _s5;
 				const auto chaos_arg_1 = _s4;
 				const auto chaos_arg_0 = _s3;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[7])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[6])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			{
@@ -1196,29 +1168,18 @@ extern "C" void ComWrappersSubjects_ComWrappersSubjects_Subject_4(void)
 	CHAOS_IL2CPP_INTPTR _s16{};
 	CHAOS_IL2CPP_INTPTR _s17{};
 	CHAOS_IL2CPP_INTPTR _s18{};
-	CHAOS_IL2CPP_INTPTR _s19{};
-	CHAOS_IL2CPP_INTPTR _s20{};
-	CHAOS_IL2CPP_INTPTR _s21{};
-	CHAOS_IL2CPP_INTPTR _s22{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
 			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s3;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
+			_s3 = 0;
 			{
 				const auto chaos_arg_2 = _s3;
 				const auto chaos_arg_1 = _s2;
 				const auto chaos_arg_0 = _s1;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[8])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[7])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			{
@@ -1229,19 +1190,12 @@ extern "C" void ComWrappersSubjects_ComWrappersSubjects_Subject_4(void)
 			_s2 = 0;
 			_s3 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
 			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s5;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
+			_s5 = 0;
 			{
 				const auto chaos_arg_2 = _s5;
 				const auto chaos_arg_1 = _s4;
 				const auto chaos_arg_0 = _s3;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[8])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[7])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			{
@@ -1304,31 +1258,20 @@ extern "C" void ComWrappersSubjects_ComWrappersSubjects_Subject_5(void)
 	CHAOS_IL2CPP_INTPTR _s18{};
 	CHAOS_IL2CPP_INTPTR _s19{};
 	CHAOS_IL2CPP_INTPTR _s20{};
-	CHAOS_IL2CPP_INTPTR _s21{};
-	CHAOS_IL2CPP_INTPTR _s22{};
-	CHAOS_IL2CPP_INTPTR _s23{};
-	CHAOS_IL2CPP_INTPTR _s24{};
 
 
 	CHAOS_EH_TRY
 			_s0 = 0;
 			_s1 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
 			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s3;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
+			_s3 = 0;
 			_s4 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
 			{
 				const auto chaos_arg_3 = _s4;
 				const auto chaos_arg_2 = _s3;
 				const auto chaos_arg_1 = _s2;
 				const auto chaos_arg_0 = _s1;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[9])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[8])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			{
@@ -1339,21 +1282,14 @@ extern "C" void ComWrappersSubjects_ComWrappersSubjects_Subject_5(void)
 			_s2 = 0;
 			_s3 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
 			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s5;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
+			_s5 = 0;
 			_s6 = chaos_static_System_Private_CoreLib_System_IntPtr__Zero;
 			{
 				const auto chaos_arg_3 = _s6;
 				const auto chaos_arg_2 = _s5;
 				const auto chaos_arg_1 = _s4;
 				const auto chaos_arg_0 = _s3;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[9])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[8])(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
 				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			{
@@ -1404,7 +1340,7 @@ extern "C" void ComWrappersSubjects_ComWrappersSubjects_Subject_6(void)
 			_s0 = 0;
 			{
 				const auto chaos_arg_0 = _s0;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[10])(chaos_arg_0);
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[9])(chaos_arg_0);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
@@ -1438,7 +1374,7 @@ extern "C" void ComWrappersSubjects_ComWrappersSubjects_Subject_7(void)
 			_s0 = 0;
 			{
 				const auto chaos_arg_0 = _s0;
-				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[11])(chaos_arg_0);
+				reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[10])(chaos_arg_0);
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }

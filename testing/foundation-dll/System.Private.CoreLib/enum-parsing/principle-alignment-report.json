@@ -1,7 +1,7 @@
 {
   "family": "enum-parsing",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-22T19:34:32.773553",
+  "generated_at": "2026-05-23T15:09:03.961524",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -169,26 +169,134 @@
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "9 of 23 changed source files are outside expected architecture layers",
+      "summary": "54 of 140 changed source files are outside expected architecture layers",
       "details": [
         {
-          "file": "CMakePresets.json",
+          "file": "batch_verify_family_results.json",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "build/testing/ALL_BUILD.vcxproj",
+          "file": "build/testing/ALL_BUILD.vcxproj.filters",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "build/testing/chaos_il2cpp_testing.sln",
+          "file": "build/testing/ZERO_CHECK.vcxproj",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "build/testing/runtime-core/gc/CTestTestfile.cmake",
+          "file": "build/testing/_deps/googletest-build/ALL_BUILD.vcxproj",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "build/testing/runtime-core/threading/CTestTestfile.cmake",
+          "file": "build/testing/_deps/googletest-build/cmake_install.cmake",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/_deps/googletest-build/googlemock/ALL_BUILD.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/_deps/googletest-build/googlemock/cmake_install.cmake",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/_deps/googletest-build/googlemock/gmock.sln",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/_deps/googletest-build/googlemock/gmock.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/_deps/googletest-build/googlemock/gmock_main.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/_deps/googletest-build/googletest-distribution.sln",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/_deps/googletest-build/googletest/ALL_BUILD.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/_deps/googletest-build/googletest/cmake_install.cmake",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/_deps/googletest-build/googletest/generated/gmock.pc",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/_deps/googletest-build/googletest/generated/gmock_main.pc",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/_deps/googletest-build/googletest/generated/gtest.pc",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/_deps/googletest-build/googletest/generated/gtest_main.pc",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/_deps/googletest-build/googletest/gtest.sln",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/_deps/googletest-build/googletest/gtest.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/_deps/googletest-build/googletest/gtest_main.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/cmake_install.cmake",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/vs2022/ALL_BUILD.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/vs2022/ZERO_CHECK.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/vs2022/cmake_install.cmake",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/vs2022/roadmap0_preset_router.sln",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/vs2022/src/native/benchmark-host/ALL_BUILD.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/vs2022/src/native/benchmark-host/chaos_benchmark_host.sln",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/vs2022/src/native/benchmark-host/chaos_benchmark_host.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/vs2022/src/native/engine-bridge/chaos_engine_bridge.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/vs2022/src/native/proof-host/chaos_proof_host.sln",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/vs2022/src/native/proof-host/chaos_proof_host.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/vs2022/src/native/support/chaos_support.vcxproj",
           "reason": "outside expected architecture layers"
         },
         {
@@ -200,40 +308,226 @@
           "reason": "outside expected architecture layers"
         },
         {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.MethodEmission.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ModuleRegistration.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ObjectModelUtilities.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.StructuredControlFlow.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.StructuredIR.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotEmitter.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.Models.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
           "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/NativeCodegenMetricsBuilder.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/NativeReferenceProofEmitter.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Planning/NativeAotLoweringPlanner.ExceptionShapePlanning.cs",
           "reason": "outside expected architecture layers"
         },
         {
           "file": "src/managed/Chaos.IL2CPP.Generator/Planning/NativeAotLoweringPlanner.InvocationPlanning.cs",
           "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Planning/NativeAotLoweringPlanner.MetadataSupport.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.HotpatchTable.cpp.scriban",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/native/diagnostics/eventpipe/ep_event.cpp",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/native/diagnostics/eventpipe/ep_event.h",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/native/diagnostics/eventpipe/ep_instance.cpp",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/native/diagnostics/eventpipe/ep_protocol.h",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "wiki/03-功能模块/07-COM互操作/05-测试与验证.md",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "wiki/06-测试验证/模块/interop.md",
+          "reason": "outside expected architecture layers"
         }
       ],
       "evidence": {
-        "changed_source_count": 23,
+        "changed_source_count": 140,
         "layer_distribution": {
-          "RuntimeCore": 9,
-          "Interpreter": 3,
-          "Contracts": 2
+          "TestInfra": 2,
+          "Bootstrap": 2,
+          "Codegen": 1,
+          "HotUpdate": 1,
+          "Interpreter": 2,
+          "RuntimeCore": 21,
+          "Contracts": 54,
+          "BuildConfig": 2,
+          "Tests": 1
         },
         "violations": [
           {
-            "file": "CMakePresets.json",
+            "file": "batch_verify_family_results.json",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "build/testing/ALL_BUILD.vcxproj",
+            "file": "build/testing/ALL_BUILD.vcxproj.filters",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "build/testing/chaos_il2cpp_testing.sln",
+            "file": "build/testing/ZERO_CHECK.vcxproj",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "build/testing/runtime-core/gc/CTestTestfile.cmake",
+            "file": "build/testing/_deps/googletest-build/ALL_BUILD.vcxproj",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "build/testing/runtime-core/threading/CTestTestfile.cmake",
+            "file": "build/testing/_deps/googletest-build/cmake_install.cmake",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/_deps/googletest-build/googlemock/ALL_BUILD.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/_deps/googletest-build/googlemock/cmake_install.cmake",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/_deps/googletest-build/googlemock/gmock.sln",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/_deps/googletest-build/googlemock/gmock.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/_deps/googletest-build/googlemock/gmock_main.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/_deps/googletest-build/googletest-distribution.sln",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/_deps/googletest-build/googletest/ALL_BUILD.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/_deps/googletest-build/googletest/cmake_install.cmake",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/_deps/googletest-build/googletest/generated/gmock.pc",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/_deps/googletest-build/googletest/generated/gmock_main.pc",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/_deps/googletest-build/googletest/generated/gtest.pc",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/_deps/googletest-build/googletest/generated/gtest_main.pc",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/_deps/googletest-build/googletest/gtest.sln",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/_deps/googletest-build/googletest/gtest.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/_deps/googletest-build/googletest/gtest_main.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/cmake_install.cmake",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/vs2022/ALL_BUILD.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/vs2022/ZERO_CHECK.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/vs2022/cmake_install.cmake",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/vs2022/roadmap0_preset_router.sln",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/vs2022/src/native/benchmark-host/ALL_BUILD.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/vs2022/src/native/benchmark-host/chaos_benchmark_host.sln",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/vs2022/src/native/benchmark-host/chaos_benchmark_host.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/vs2022/src/native/engine-bridge/chaos_engine_bridge.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/vs2022/src/native/proof-host/chaos_proof_host.sln",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/vs2022/src/native/proof-host/chaos_proof_host.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/vs2022/src/native/support/chaos_support.vcxproj",
             "reason": "outside expected architecture layers"
           },
           {
@@ -245,11 +539,83 @@
             "reason": "outside expected architecture layers"
           },
           {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.MethodEmission.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ModuleRegistration.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ObjectModelUtilities.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.StructuredControlFlow.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.StructuredIR.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotEmitter.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.Models.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
             "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs",
             "reason": "outside expected architecture layers"
           },
           {
+            "file": "src/managed/Chaos.IL2CPP.Generator/NativeCodegenMetricsBuilder.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/NativeReferenceProofEmitter.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Planning/NativeAotLoweringPlanner.ExceptionShapePlanning.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
             "file": "src/managed/Chaos.IL2CPP.Generator/Planning/NativeAotLoweringPlanner.InvocationPlanning.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Planning/NativeAotLoweringPlanner.MetadataSupport.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.HotpatchTable.cpp.scriban",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/native/diagnostics/eventpipe/ep_event.cpp",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/native/diagnostics/eventpipe/ep_event.h",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/native/diagnostics/eventpipe/ep_instance.cpp",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/native/diagnostics/eventpipe/ep_protocol.h",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "wiki/03-功能模块/07-COM互操作/05-测试与验证.md",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "wiki/06-测试验证/模块/interop.md",
             "reason": "outside expected architecture layers"
           }
         ]

@@ -45,11 +45,13 @@ internal sealed class LoweringPlanPluginAttribute : Attribute
     public LoweringPlanPluginAttribute(
         string id,
         CodeGenPluginProductLine productLine,
-        int order)
+        int order,
+        string[]? targetCapabilityFamilies = null)
     {
         Id = id;
         ProductLine = productLine;
         Order = order;
+        TargetCapabilityFamilies = targetCapabilityFamilies ?? [];
     }
 
     public string Id { get; }
@@ -57,6 +59,13 @@ internal sealed class LoweringPlanPluginAttribute : Attribute
     public CodeGenPluginProductLine ProductLine { get; }
 
     public int Order { get; }
+
+    /// <summary>
+    /// Optional capability family filter. When non-empty, this plugin only
+    /// activates for methods whose capability set intersects with these families.
+    /// When empty, the plugin is always considered (current default).
+    /// </summary>
+    public IReadOnlyList<string> TargetCapabilityFamilies { get; }
 }
 
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]

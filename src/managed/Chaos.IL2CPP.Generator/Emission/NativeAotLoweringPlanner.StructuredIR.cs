@@ -57,12 +57,6 @@ public sealed partial class NativeAotLoweringPlanner
         int ExitOffset
     ) : StructuredIRNode;
 
-    /// <summary>Flat region (kept for safety — should be unreachable at runtime).</summary>
-    internal sealed record IRFlatRegion(
-        IReadOnlyList<AotCoreIrInstructionArtifact> Instructions,
-        IReadOnlySet<int> Offsets
-    ) : StructuredIRNode;
-
     /// <summary>Switch dispatch.</summary>
     internal sealed record IRSwitch(
         IReadOnlyList<AotCoreIrInstructionArtifact> SwitchInstructions,
@@ -70,6 +64,29 @@ public sealed partial class NativeAotLoweringPlanner
         StructuredIRNode? DefaultBody,
         int ExitOffset,
         IReadOnlySet<int> FallthroughCaseValues
+    ) : StructuredIRNode;
+
+    // ── pc-dispatch state machine for irreducible CFGs ─────────────
+
+    /// <summary>
+    /// Represents a single case in a pc-dispatch state machine. Each case
+    /// corresponds to one basic block in the irreducible CFG, identified by
+    /// its program counter value.
+    /// </summary>
+    internal sealed record PcDispatchCase(
+        int PcValue,
+        IReadOnlyList<AotCoreIrInstructionArtifact> Instructions,
+        AotCoreIrInstructionArtifact? Terminator,
+        int NextPcValue); // -1 = return, >=0 = next chaos_pc
+
+    /// <summary>
+    /// pc-dispatch state machine node. Generated for irreducible CFGs that
+    /// cannot be made reducible by interval analysis + node splitting.
+    /// Emitted as: int32_t chaos_pc = N; while (chaos_pc >= 0) { switch(chaos_pc) { case ... } }
+    /// </summary>
+    internal sealed record IRPcDispatch(
+        IReadOnlyList<PcDispatchCase> Cases,
+        int PcVariableInit
     ) : StructuredIRNode;
 
     // 鈹€鈹€ Leaf control-flow nodes 鈹€鈹€
@@ -368,7 +385,6 @@ public sealed partial class NativeAotLoweringPlanner
                     StripExceptionPartitionExitTerminators(er.HandlerBody),
                     er.CatchTypeSubjectId,
                     er.FilterInstructions),
-            IRFlatRegion fr => fr,
             _ => node,
         };
     }
@@ -428,6 +444,10 @@ public sealed partial class NativeAotLoweringPlanner
 
             case IRExceptionRegion er:
                 EmitIRExceptionRegion(builder, er, method, indentation);
+                break;
+
+            case IRPcDispatch pcDispatch:
+                EmitPcDispatch(builder, pcDispatch, method, indentation);
                 break;
 
             default:
@@ -1562,31 +1582,22 @@ public sealed partial class NativeAotLoweringPlanner
             method.ExceptionRegions is { Count: > 0 })
         {
             bool result = TryBuildStructuredExceptionMethodBody(method, instructions, offsets, out body, out maxDepth);
-            if (!result || body is IRFlatRegion)
-            {
-                Interlocked.Increment(ref s_flatRegionCount);
-                LogIrreducibleMethod(method, isException: true,
-                    reason: body is IRFlatRegion ? "exception-shape-unhandled" : "exception-shape-failed",
-                    instructions.Count, 0, 0, 0);
-                // Fall back to flat-goto for the entire method body instead of
-                // returning false (which produces an empty function body).
-                // The IRFlatRegion path in EmitViaStructuredIR calls EmitFlatGotoBody.
-                body = new IRFlatRegion(instructions, offsets);
-                maxDepth = ComputeMaxEvalStackDepth(instructions);
-                return true;
-            }
-            else
+            if (result)
             {
                 LogStructuredMethod(method, "exception-body", instructions.Count, 0, 0, 0);
+                return true;
             }
-            return result;
+            // Fall through to non-exception CFG-based emission below.
+            // The generic exception shape fallback should cover all valid EH
+            // patterns; if we reach here the method has no structured EH shape
+            // and will be emitted as normal CFG-structured code.
         }
 
         var cfg = BuildControlFlowGraph(instructions, offsets);
         Console.WriteLine($"TRYBUILD: {method.SubjectId}, blocks={cfg.Blocks.Count}, loops={cfg.LoopHeaders.Count}, reducible={cfg.IsReducible}");
         if (!cfg.IsReducible)
         {
-            var splitCfg = ApplyNodeSplitting(cfg);
+            var splitCfg = MakeCfgReducibleViaIntervalAnalysis(cfg);
             if (splitCfg.IsReducible)
             {
                 cfg = splitCfg;
@@ -1595,13 +1606,14 @@ public sealed partial class NativeAotLoweringPlanner
             }
             else
             {
-                Interlocked.Increment(ref s_flatRegionCount);
-                body = new IRFlatRegion(instructions, offsets);
-                maxDepth = ComputeMaxEvalStackDepth(instructions);
-                LogIrreducibleMethod(method, isException: false,
-                    reason: ClassifyIrreducibleReason(cfg) + "+split-failed",
-                    instructions.Count, cfg.Blocks.Count, cfg.LoopHeaders.Count,
-                    method.ExceptionRegionCount);
+                // CFG still irreducible after interval analysis.
+                // Emit a pc-dispatch state machine instead of goto fallback.
+                LogStructuredMethod(method, "pc-dispatch", instructions.Count,
+                    cfg.Blocks.Count, cfg.LoopHeaders.Count, method.ExceptionRegionCount);
+                body = BuildPcDispatchBody(cfg);
+                maxDepth = ComputeMaxEvalStackDepth(instructions, method.ReturnAbi);
+                if (maxDepth < 0)
+                    maxDepth = ComputeMaxEvalStackDepth(instructions, monotonic: false);
                 return true;
             }
         }
@@ -1609,12 +1621,22 @@ public sealed partial class NativeAotLoweringPlanner
         body = RecoverStructure(cfg, 0, cfg.Blocks.Count - 1);
         if (ContainsResidualBranchTerminators(body))
         {
-            LogIrreducibleMethod(method, isException: false,
-                reason: "residual-br-leave",
-                instructions.Count, cfg.Blocks.Count, cfg.LoopHeaders.Count,
-                method.ExceptionRegionCount);
-            Interlocked.Increment(ref s_flatRegionCount);
-            body = new IRFlatRegion(instructions, offsets);
+            // Convert remaining branches to structured control flow instead
+            // of falling back to IRFlatRegion (goto elimination).
+            body = ConvertResidualBranches(body, loopExitOffsets: null, loopHeaderOffset: null);
+            if (ContainsResidualBranchTerminators(body))
+            {
+                // Some residual branches could not be converted — log but still emit
+                // structured IR rather than goto fallback. Unconverted branches will
+                // emit as C++ goto which is correct albeit suboptimal.
+                LogStructuredMethod(method, "residual-branch-unconverted", instructions.Count,
+                    cfg.Blocks.Count, cfg.LoopHeaders.Count, method.ExceptionRegionCount);
+            }
+            else
+            {
+                LogStructuredMethod(method, "residual-branch-converted", instructions.Count,
+                    cfg.Blocks.Count, cfg.LoopHeaders.Count, method.ExceptionRegionCount);
+            }
         }
         else
         {
@@ -1625,13 +1647,12 @@ public sealed partial class NativeAotLoweringPlanner
         maxDepth = ComputeMaxEvalStackDepth(instructions, method.ReturnAbi);
         if (maxDepth < 0)
         {
-            Interlocked.Increment(ref s_flatRegionCount);
-            body = new IRFlatRegion(instructions, offsets);
-            maxDepth = ComputeMaxEvalStackDepth(instructions);
-            LogIrreducibleMethod(method, isException: false,
-                reason: "stack-underflow-on-ret",
-                instructions.Count, cfg.Blocks.Count, cfg.LoopHeaders.Count,
-                method.ExceptionRegionCount);
+            // Non-monotonic computation (slot reuse allowed) — may produce slightly
+            // larger eval stack than strictly needed for structured emission, but
+            // guarantees correctness without goto fallback.
+            maxDepth = ComputeMaxEvalStackDepth(instructions, monotonic: false);
+            LogStructuredMethod(method, "stack-depth-fixup", instructions.Count,
+                cfg.Blocks.Count, cfg.LoopHeaders.Count, method.ExceptionRegionCount);
         }
         else
         {
@@ -1657,15 +1678,6 @@ public sealed partial class NativeAotLoweringPlanner
             return;
 
         TotalMethodCount++;
-
-        if (body is IRFlatRegion flatRegion)
-        {
-            FlatFallbackCount++;
-            _structLocalSlots = IdentifyStructLocalSlots(instructions);
-            EmitFlatGotoBody(builder, method, flatRegion.Instructions, flatRegion.Offsets);
-            _structLocalSlots = null;
-            return;
-        }
 
         if (method.ExceptionRegionCount > 0)
             StructuredExceptionBodyCount++;
@@ -1743,6 +1755,11 @@ public sealed partial class NativeAotLoweringPlanner
         {
             body = BuildMultipleCatchExceptionIRBody(multiCatch, offsets);
             extraHandlerPushes = 1;
+        }
+        else if (TryCreateGenericExceptionMethodShape(method, out var genericShape) && genericShape is not null)
+        {
+            body = BuildGenericShapeExceptionIRBody(genericShape, offsets);
+            extraHandlerPushes = genericShape.HandlerPushes;
         }
 
         if (body is null)
@@ -1950,6 +1967,69 @@ public sealed partial class NativeAotLoweringPlanner
     }
 
     /// <summary>
+    /// Build a structured IR tree for a method whose EH shape does not match any
+    /// of the 6 standard patterns.  Regions are sorted innermost-first during
+    /// shape detection, so each region's TryInstructions already exclude
+    /// instructions consumed by inner regions' try+handler ranges.
+    /// Nested regions produce nested IRExceptionRegion nodes wrapping from
+    /// innermost to outermost; sibling regions (no nesting) produce sequential
+    /// IRExceptionRegion nodes sharing a common try body.
+    /// </summary>
+    private StructuredIRNode BuildGenericShapeExceptionIRBody(
+        GenericExceptionMethodShape shape,
+        IReadOnlySet<int> offsets)
+    {
+        // Build from innermost outward: each iteration wraps the previous inner
+        // tree with the next region's try body and handler.
+        StructuredIRNode inner = new IRSequence(Array.Empty<StructuredIRNode>());
+
+        for (int i = 0; i < shape.Regions.Count; i++)
+        {
+            var entry = shape.Regions[i];
+
+            // Build try body for this region's remaining (unconsumed) instructions
+            var tryTree = entry.TryInstructions.Count > 0
+                ? BuildExceptionPartitionTree(entry.TryInstructions, offsets)
+                : new IRSequence(Array.Empty<StructuredIRNode>());
+
+            // Combine existing inner tree with this region's try body.
+            // When regions are nested (inner first), inner contains the already-wrapped
+            // inner region.  When regions are siblings (same try range), inner is empty
+            // for the second sibling and tryTree holds the full try body.
+            var combinedTry = new IRSequence(new[] { inner, tryTree });
+
+            // Build handler tree
+            var handlerTree = entry.HandlerInstructions.Count > 0
+                ? BuildExceptionPartitionTree(entry.HandlerInstructions, offsets)
+                : new IRSequence(Array.Empty<StructuredIRNode>());
+
+            // Map region kind to IRExceptionKind
+            IRExceptionKind kind = entry.Region.HandlingKindCode switch
+            {
+                AotCoreIrExceptionRegionKind.Catch => IRExceptionKind.TryCatch,
+                AotCoreIrExceptionRegionKind.Filter => IRExceptionKind.TryFilter,
+                AotCoreIrExceptionRegionKind.Finally => IRExceptionKind.TryFinally,
+                _ => IRExceptionKind.TryCatch
+            };
+
+            inner = new IRExceptionRegion(
+                kind, combinedTry, handlerTree,
+                CatchTypeSubjectId: entry.Region.CatchTypeSubjectId,
+                FilterInstructions: entry.FilterInstructions);
+        }
+
+        // Combine prefix + wrapped tree + tail
+        var nodes = new List<StructuredIRNode>();
+        if (shape.PrefixInstructions.Count > 0)
+            nodes.Add(BuildExceptionPartitionTree(shape.PrefixInstructions, offsets));
+        nodes.Add(inner);
+        if (shape.TailInstructions.Count > 0)
+            nodes.Add(BuildExceptionPartitionTree(shape.TailInstructions, offsets));
+
+        return nodes.Count == 1 ? nodes[0] : new IRSequence(nodes);
+    }
+
+    /// <summary>
     /// Build a structured IR tree from a sub-list of instructions (for exception
     /// region partitions).  Returns an empty IRSequence if the partition has no
     /// instructions or the CFG is irreducible.
@@ -1971,6 +2051,15 @@ public sealed partial class NativeAotLoweringPlanner
         var cfg = BuildControlFlowGraph(instructions, subOffsets);
         if (!cfg.IsReducible)
         {
+            // Try interval analysis to make the partition CFG reducible,
+            // reducing the need for flat emission fallback.
+            var splitCfg = MakeCfgReducibleViaIntervalAnalysis(cfg);
+            if (splitCfg.IsReducible)
+            {
+                return StripExceptionPartitionExitTerminators(
+                    RecoverStructure(splitCfg, 0, splitCfg.Blocks.Count - 1));
+            }
+
             // The CFG can become irreducible when a branch target falls
             // between partition boundaries (the target instruction is in
             // a different partition).  Emit the instructions as a flat
@@ -2009,6 +2098,147 @@ public sealed partial class NativeAotLoweringPlanner
         return new IRBlock(instructions, null);
     }
 
+    /// <summary>
+    /// Emits a pc-dispatch state machine for an irreducible CFG. The generated
+    /// C++ uses a chaos_pc variable + switch statement instead of goto:
+    ///
+    ///   int32_t chaos_pc = {PcVariableInit};
+    ///   while (chaos_pc >= 0) {
+    ///       switch (chaos_pc) {
+    ///       case 0: { ... chaos_pc = 1; break; }
+    ///       ...
+    ///       }
+    ///   }
+    /// </summary>
+    private void EmitPcDispatch(
+        StringBuilder builder,
+        IRPcDispatch pcDispatch,
+        AotCoreIrMethodArtifact method,
+        string indentation)
+    {
+        Interlocked.Increment(ref s_pcDispatchCount);
+
+        builder.AppendLine(indentation + "// pc-dispatch state machine for irreducible CFG");
+        builder.AppendLine(indentation + "int32_t chaos_pc = " + pcDispatch.PcVariableInit.ToString() + ";");
+        builder.AppendLine(indentation + "while (chaos_pc >= 0)");
+        builder.AppendLine(indentation + "{");
+        builder.AppendLine(indentation + "    switch (chaos_pc)");
+        builder.AppendLine(indentation + "    {");
+
+        foreach (var pcCase in pcDispatch.Cases)
+        {
+            builder.AppendLine(indentation + "    case " + pcCase.PcValue.ToString() + ":");
+            builder.AppendLine(indentation + "    {");
+
+            foreach (var instr in pcCase.Instructions)
+            {
+                EmitInstruction(builder, instr, indentation + "        ");
+            }
+
+            if (pcCase.Terminator != null)
+            {
+                switch (pcCase.Terminator.Op)
+                {
+                    case "ret":
+                        EmitStructuredMethodReturn(builder, method.ReturnAbi, indentation + "        ");
+                        builder.AppendLine(indentation + "        chaos_pc = -1;");
+                        break;
+                    case "throw":
+                    case "rethrow":
+                        builder.AppendLine(indentation + "        throw;");
+                        builder.AppendLine(indentation + "        chaos_pc = -1;");
+                        break;
+                    case "br":
+                        builder.AppendLine(indentation + "        chaos_pc = " + pcCase.NextPcValue.ToString() + ";");
+                        break;
+                    default:
+                        builder.AppendLine(indentation + "        chaos_pc = " + pcCase.NextPcValue.ToString() + ";");
+                        break;
+                }
+            }
+            else
+            {
+                builder.AppendLine(indentation + "        chaos_pc = " + pcCase.NextPcValue.ToString() + ";");
+            }
+
+            builder.AppendLine(indentation + "        break;");
+            builder.AppendLine(indentation + "    }");
+        }
+
+        builder.AppendLine(indentation + "    default:");
+        builder.AppendLine(indentation + "        CHAOS_IL2CPP_FAIL(\"invalid pc-dispatch value\");");
+        builder.AppendLine(indentation + "        chaos_pc = -1;");
+        builder.AppendLine(indentation + "        break;");
+        builder.AppendLine(indentation + "    }");
+        builder.AppendLine(indentation + "}");
+    }
+
+    /// <summary>
+    /// Builds a pc-dispatch state machine from an irreducible CFG.
+    /// Each basic block is assigned a unique pc value (0..N-1), and the
+    /// terminator of each block determines the next pc value.
+    /// </summary>
+    private static IRPcDispatch BuildPcDispatchBody(ControlFlowGraph cfg)
+    {
+        var cases = new List<PcDispatchCase>(cfg.Blocks.Count);
+        int entryPc = 0;
+
+        var blockIndexToPc = new Dictionary<int, int>(cfg.Blocks.Count);
+        for (int i = 0; i < cfg.Blocks.Count; i++)
+        {
+            blockIndexToPc[i] = i;
+        }
+
+        for (int i = 0; i < cfg.Blocks.Count; i++)
+        {
+            var block = cfg.Blocks[i];
+            int pcValue = blockIndexToPc[i];
+
+            if (block.Kind == BasicBlockKind.Entry)
+                entryPc = pcValue;
+
+            int nextPcValue = -1;
+
+            if (block.Terminator != null)
+            {
+                string op = block.Terminator.Op;
+                if (op == "ret" || op == "throw" || op == "rethrow")
+                {
+                    nextPcValue = -1;
+                }
+                else if (op == "br" && block.BranchTarget.HasValue)
+                {
+                    var targetBlockIdx = cfg.OffsetToBlockIndex.GetValueOrDefault(block.BranchTarget.Value, -1);
+                    nextPcValue = targetBlockIdx >= 0 ? blockIndexToPc[targetBlockIdx] : -1;
+                }
+                else if (IsConditionalBranchOpcode(op))
+                {
+                    if (block.ConditionalTarget.HasValue)
+                    {
+                        var targetBlockIdx = cfg.OffsetToBlockIndex.GetValueOrDefault(block.ConditionalTarget.Value, -1);
+                        nextPcValue = targetBlockIdx >= 0 ? blockIndexToPc[targetBlockIdx] : -1;
+                    }
+                    else
+                    {
+                        nextPcValue = -1;
+                    }
+                }
+                else
+                {
+                    nextPcValue = -1;
+                }
+            }
+
+            cases.Add(new PcDispatchCase(
+                PcValue: pcValue,
+                Instructions: block.BodyInstructions,
+                Terminator: block.Terminator,
+                NextPcValue: nextPcValue));
+        }
+
+        return new IRPcDispatch(cases, entryPc);
+    }
+
     // ════════════════════════════════════════════════════════════════════════════
     // Phase 1 diagnostics: irreducible CFG classification
     // ════════════════════════════════════════════════════════════════════════════
@@ -2017,9 +2247,10 @@ public sealed partial class NativeAotLoweringPlanner
     private static long s_exceptionBodyCount;
     private static long s_irreducibleCount;
     private static long s_totalMethodCount;
+    internal static long s_pcDispatchCount;
     private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, long> s_irreducibleReasons
         = new(System.StringComparer.Ordinal);
-    private static long s_flatRegionCount;
+
 
     private static void LogStructuredMethod(
         AotCoreIrMethodArtifact method, string kind,

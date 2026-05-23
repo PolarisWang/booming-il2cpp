@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ExceptionErrorsSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Runtime.InteropServices/exception-errors/managed/subjects/build-output/ExceptionErrorsSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Runtime.InteropServices/exception-errors/managed/subjects/build-output/ExceptionErrorsSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "ExceptionErrorsSubjects",
-      "path": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Runtime.InteropServices/exception-errors/managed/subjects/build-output/ExceptionErrorsSubjects.dll"
+      "path": "testing/foundation-dll/System.Runtime.InteropServices/exception-errors/managed/subjects/build-output/ExceptionErrorsSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "4dc56f62-d611-42fb-8242-29c5e09a674d",
+  "inputModuleVersionId": "48f12f74-74a2-4865-bc08-ff0b21fc0c1b",
   "artifacts": [
     {
       "kind": "typedIlIr",

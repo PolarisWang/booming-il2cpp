@@ -15,7 +15,6 @@ internal static partial class NativeCodegenMetricsBuilder
         IEnumerable<(string RelativePath, string Contents)> generatedSources,
         int structuredMethodCount = 0,
         int structuredExceptionBodyCount = 0,
-        int flatFallbackCount = 0,
         int totalMethodCount = 0,
         int aotReachableMethodCount = 0,
         int aotUnreachableMethodCount = 0)
@@ -57,7 +56,6 @@ internal static partial class NativeCodegenMetricsBuilder
             PeakWorkingSetBytes = Process.GetCurrentProcess().PeakWorkingSet64,
             StructuredMethodCount = structuredMethodCount,
             StructuredExceptionBodyCount = structuredExceptionBodyCount,
-            FlatFallbackCount = flatFallbackCount,
             TotalMethodCount = totalMethodCount,
             StructuredRecoveryRate = totalMethodCount > 0
                 ? (double)(structuredMethodCount + structuredExceptionBodyCount) / totalMethodCount

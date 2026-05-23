@@ -150,8 +150,93 @@ add_chaos_test(com_connection_point com_connection_point_test.cpp
     LABELS "unit;marshal"
 )
 
+# F4 — COM platform abstraction test
+add_chaos_test(com_platform com_platform_test.cpp
+    ${MARSHAL_TEST_STUBS}
+    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    LABELS "unit;marshal"
+)
+
+# F5 — COM factory registry test
+add_chaos_test(com_factory com_factory_test.cpp
+    ${MARSHAL_TEST_STUBS}
+    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    LABELS "unit;marshal"
+)
+
+# F6 — COM TypeLib test
+add_chaos_test(com_typelib com_typelib_test.cpp
+    ${MARSHAL_TEST_STUBS}
+    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    LABELS "unit;marshal"
+)
+
+# F7 — COM Dispatch test
+add_chaos_test(com_dispatch com_dispatch_test.cpp
+    ${MARSHAL_TEST_STUBS}
+    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    LABELS "unit;marshal"
+)
+
+# S1 — RCW stress test
+add_chaos_test(com_rcw_stress com_rcw_stress_test.cpp
+    ${MARSHAL_TEST_STUBS}
+    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    LABELS "stress;marshal"
+)
+
+# S2 — CCW stress test
+add_chaos_test(com_ccw_stress com_ccw_stress_test.cpp
+    ${MARSHAL_TEST_STUBS}
+    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    LABELS "stress;marshal"
+)
+
+# B2 — COM benchmark test
+add_chaos_test(com_benchmark com_benchmark_test.cpp
+    ${MARSHAL_TEST_STUBS}
+    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    LABELS "benchmark;marshal"
+)
+
 # R4.6 — Reflection stress/soak test
 add_chaos_test(reflection_stress_test reflection_stress_test.cpp
     LIBS ${CHAOS_COMMON_TEST_LIBS}
     LABELS "stress;core"
+)
+
+# T3-3: AotCoreIr reader deserialization tests
+# Compile aot_core_ir_reader.cpp from source alongside the test to test against
+# the current implementation rather than the prebuilt lib's older version.
+add_chaos_test(aot_core_ir_reader_test aot_core_ir_reader_test.cpp
+    ../../../../src/native/runtime-core/aot_core_ir_reader.cpp
+    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    LABELS "unit;core"
+)
+
+# T3-4: AssemblyManager + domain_unloader audit tests
+# Compile from source alongside test, with stubs for codegen-generated symbols.
+# assembly_manager_test.cpp provides external symbol stubs to satisfy linker.
+add_chaos_test(assembly_manager_test assembly_manager_test.cpp
+    ../../../../src/native/runtime-core/assembly_manager.cpp
+    ../../../../src/native/runtime-core/domain_unloader.cpp
+    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    LABELS "unit;core"
+)
+
+# T3-5: convert + parse_convert audit tests
+# Prebuilt lib is up-to-date (no uncommitted changes); link via CHAOS_COMMON_TEST_LIBS.
+add_chaos_test(convert_parse_test convert_parse_test.cpp
+    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    LABELS "unit;core"
+)
+
+# T3-6: native_library + static_var_store audit tests
+# Compile static_var_store.cpp from source to test against current implementation.
+# native_library functions resolve from the prebuilt lib (CHAOS_COMMON_TEST_LIBS).
+# No special stubs needed — the test exercises null-safety guards + field-level API.
+add_chaos_test(native_static_var_test native_static_var_test.cpp
+    ../../../../src/native/runtime-core/static_var_store.cpp
+    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    LABELS "unit;core"
 )

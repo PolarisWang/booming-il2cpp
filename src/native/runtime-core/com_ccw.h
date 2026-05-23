@@ -5,19 +5,26 @@
 #include <cstddef>
 #include <atomic>
 #include <chaos/native_types.h>
+#include <runtime_abi.h>
 #include "com_abi.h"
 #include "com_connection_point.h"
 
 // Forward declaration for connection point container (defined in runtime_core namespace).
 namespace chaos::il2cpp::runtime_core { struct ConnectionPointContainer; }
 
+// Forward declarations for TypeLib data structures.
+namespace chaos::il2cpp::runtime_core { struct ComTypeLibData; }
+
 namespace chaos::il2cpp::com_ccw {
 
 // ── Constants ────────────────────────────────────────────────────────
 
-/// Maximum number of COM interface vtables a single CCW can expose
-/// (IUnknown + up to 3 additional interfaces for V2).
-constexpr CHAOS_IL2CPP_SIZE kMaxCcwInterfaces = 4;
+/// Number of inline COM interface slots in ComCcw (no heap allocation needed).
+/// When interface_count exceeds this, a dynamic block is allocated.
+constexpr CHAOS_IL2CPP_SIZE kInlineCcwInterfaces = 4;
+
+/// Maximum interfaces supported via dynamic allocation (sanity limit).
+constexpr CHAOS_IL2CPP_SIZE kMaxCcwInterfaces = 256;
 
 // HRESULT constants (Win32 COM ABI).
 constexpr CHAOS_IL2CPP_INT32 kS_OK                 = 0;
@@ -54,12 +61,18 @@ struct ComCcwVtbl {
 /// Layout: first field is vtable pointer (true COM object layout).
 /// The identity_unknown of any RCW wrapping this CCW will equal
 /// the CCW pointer itself (COM identity rule).
+///
+/// Interface table uses SmallVector pattern:
+///   - Inline storage: inline_interfaces[4] (zero heap allocation for common case)
+///   - Dynamic storage: allocated via DomainCurrentAllocateTagged when >4 interfaces
+///   - interfaces pointer always points to the active storage (inline or dynamic)
 struct ComCcw {
     ComCcwVtbl* vtable;                         // Points to s_ccw_vtbl
     std::atomic<CHAOS_IL2CPP_UINT32> refcount{};  // External COM reference count (atomic for thread safety)
     CHAOS_IL2CPP_UINT64 gc_handle;              // GCHandle keeping the managed object alive
     void* runtime_state;                        // RuntimeState* for GC handle lifecycle
     CHAOS_IL2CPP_SIZE interface_count;           // Number of registered interfaces
+    CHAOS_IL2CPP_SIZE interface_capacity;        // Total capacity (inline + dynamic)
 
     // ── COM aggregation fields ───────────────────────────────────────────
     // When outer_unknown is non-null, this CCW is aggregated to an outer
@@ -68,7 +81,13 @@ struct ComCcw {
     void* outer_unknown;                          // Outer controlling IUnknown (or nullptr)
     bool  is_aggregated;                          // true when outer_unknown is valid
 
-    ComCcwInterfaceEntry interfaces[kMaxCcwInterfaces]; // GUID→vtable map (entry 0 = IUnknown)
+    // ── Interface table (SmallVector) ─────────────────────────────────────
+    ComCcwInterfaceEntry* interfaces;                     // Points to inline_interfaces or dynamic
+    ComCcwInterfaceEntry inline_interfaces[kInlineCcwInterfaces]; // Inline storage for ≤4 interfaces
+
+    // ── TypeLib data for IDispatch support ────────────────────────────────
+    const runtime_core::ComTypeLibData* typelib_data;     // TypeLib descriptor (nullptr if not IDispatch)
+
     runtime_core::ConnectionPointContainer* cp_container;
 };
 
@@ -87,7 +106,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL CcwGetTypeInfo(void* self, CHAOS_IL2CP
 /// Create a CCW for a managed object.
 /// Allocates a GCHandle to root the managed object.
 /// Returns the CCW pointer (IUnknown*), or 0 on failure.
-/// The CCW is allocated via std::malloc and freed when refcount reaches 0.
+/// The CCW is allocated via memory_domain::DomainCurrentAllocateTagged and freed when refcount reaches 0.
 CHAOS_IL2CPP_INTPTR CreateCcw(void* managed_object, void* runtime_state) noexcept;
 
 /// Create an aggregated CCW for a managed object.
@@ -128,6 +147,19 @@ inline ComCcw* CcwFromInterface(void* iface_ptr) noexcept {
 /// @param iface_stable_id   Stable ID (FNV-1a hash) of the COM interface.
 /// @param method_index      Index of the interface method (0 = first after IUnknown).
 void CcwDispatchMethod(void* ccw_ptr, CHAOS_IL2CPP_UINT64 iface_stable_id, CHAOS_IL2CPP_UINT32 method_index) noexcept;
+
+/// Dispatch an IDispatch::Invoke call with DISPPARAMS marshaling.
+/// Converts DISPPARAMS to managed object array and calls the method
+/// via the runtime's method_invoke using the metadata token from TypeLib data.
+/// @param ccw_ptr           The CCW pointer.
+/// @param iface_stable_id   Stable ID of the COM interface.
+/// @param dispIdMember      DISPID of the method to invoke.
+/// @param pDispParams       Pointer to DISPPARAMS (from IDispatch::Invoke).
+/// @param pVarResult        Pointer to VARIANT for return value (or nullptr).
+/// @return HRESULT (S_OK, DISP_E_MEMBERNOTFOUND, DISP_E_EXCEPTION, etc.)
+CHAOS_IL2CPP_INT32 CcwDispatchMethodInvoke(void* ccw_ptr, CHAOS_IL2CPP_UINT64 iface_stable_id,
+                                            CHAOS_IL2CPP_INT32 dispIdMember,
+                                            void* pDispParams, void* pVarResult) noexcept;
 
 }  // namespace chaos::il2cpp::com_ccw
 

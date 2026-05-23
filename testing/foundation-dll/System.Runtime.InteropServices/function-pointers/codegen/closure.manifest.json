@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "FunctionPointersSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Runtime.InteropServices/function-pointers/managed/subjects/build-output/FunctionPointersSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Runtime.InteropServices/function-pointers/managed/subjects/build-output/FunctionPointersSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "FunctionPointersSubjects",
-      "path": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Runtime.InteropServices/function-pointers/managed/subjects/build-output/FunctionPointersSubjects.dll"
+      "path": "testing/foundation-dll/System.Runtime.InteropServices/function-pointers/managed/subjects/build-output/FunctionPointersSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "9b0cc970-1c6a-423b-9aa3-3cc0e457fbd1",
+  "inputModuleVersionId": "0512c68f-d64e-4cb9-a7ea-0b1142b29cad",
   "artifacts": [
     {
       "kind": "typedIlIr",

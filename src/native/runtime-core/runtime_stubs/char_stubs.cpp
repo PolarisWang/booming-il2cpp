@@ -2,6 +2,7 @@
 
 // char_stubs.cpp — Char stub implementations with Unicode range tables
 #include <chaos/native_types.h>
+#include <chaos/log.h>
 #include "generated_code_compat.h"
 
 namespace chaos::il2cpp::runtime_core {
@@ -188,6 +189,7 @@ extern "C" {
 
 CHAOS_IL2CPP_INT32 ChaosCharIsDigit(CHAOS_IL2CPP_INT32 c) noexcept
 {
+    CHAOS_IL2CPP_LOG_WARN("Stub", "char_stubs called");
     // ASCII fast path
     if (c >= 0x30 && c <= 0x39) return 1;
     if (c < 0x0660 || c > 0xFF19) return 0;  // beyond BMP digit ranges

@@ -65,7 +65,6 @@ public sealed class NativeAotEmitter
             generatedSources.Select(generatedSource => (generatedSource.RelativePath, generatedSource.Contents)),
             planner.StructuredMethodCount,
             planner.StructuredExceptionBodyCount,
-            planner.FlatFallbackCount,
             planner.TotalMethodCount,
             planner.AotReachableMethodCount,
             planner?.AotUnreachableMethodCount ?? 0);

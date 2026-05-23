@@ -23,7 +23,7 @@ public static partial class HandlesSafehandleGchandleSubjects
     // [1] System.Runtime.InteropServices/System.Runtime.InteropServices.SafeHandle::DangerousAddRef:System.Void(System.Boolean&)
     public static void Subject_1()
     {
-        // TODO: System.Runtime.InteropServices/System.Runtime.InteropServices.SafeHandle::DangerousAddRef:System.Void(System.Boolean&) could not be auto-generated
+        // needs-manual — DangerousAddRef with 1 params requires manual implementation: System.Runtime.InteropServices/System.Runtime.InteropServices.SafeHandle::DangerousAddRef:System.Void(System.Boolean&)
     }
 
     // [2] System.Runtime.InteropServices/System.Runtime.InteropServices.SafeHandle::DangerousGetHandle:System.IntPtr()
@@ -127,7 +127,7 @@ public static partial class HandlesSafehandleGchandleSubjects
     // [16] System.Runtime.InteropServices/System.Runtime.InteropServices.GCHandle::Equals:System.Boolean(System.Object)
     public static void Subject_16()
     {
-        try { if (((default(GCHandle).Equals(42)) ? 1 : 0) != ((default(GCHandle).Equals(42)) ? 1 : 0)) _exitCode = 1; }
+        try { if (((default(GCHandle).Equals(null!)) ? 1 : 0) != ((default(GCHandle).Equals(null!)) ? 1 : 0)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
@@ -183,13 +183,13 @@ public static partial class HandlesSafehandleGchandleSubjects
     // [24] System.Runtime.InteropServices/System.Runtime.InteropServices.GCHandle::op_Explicit:System.Runtime.InteropServices.GCHandle(System.IntPtr)
     public static void Subject_24()
     {
-        // TODO: System.Runtime.InteropServices/System.Runtime.InteropServices.GCHandle::op_Explicit:System.Runtime.InteropServices.GCHandle(System.IntPtr) could not be auto-generated
+        // needs-manual — op_Explicit with 1 params requires manual implementation: System.Runtime.InteropServices/System.Runtime.InteropServices.GCHandle::op_Explicit:System.Runtime.InteropServices.GCHandle(System.IntPtr)
     }
 
     // [25] System.Runtime.InteropServices/System.Runtime.InteropServices.GCHandle::op_Explicit:System.IntPtr(System.Runtime.InteropServices.GCHandle)
     public static void Subject_25()
     {
-        // TODO: System.Runtime.InteropServices/System.Runtime.InteropServices.GCHandle::op_Explicit:System.IntPtr(System.Runtime.InteropServices.GCHandle) could not be auto-generated
+        // needs-manual — op_Explicit with 1 params requires manual implementation: System.Runtime.InteropServices/System.Runtime.InteropServices.GCHandle::op_Explicit:System.IntPtr(System.Runtime.InteropServices.GCHandle)
     }
 
     // [26] System.Runtime.InteropServices/System.Runtime.InteropServices.GCHandle::op_Inequality:System.Boolean(System.Runtime.InteropServices.GCHandle,System.Runtime.InteropServices.GCHandle)
@@ -202,7 +202,7 @@ public static partial class HandlesSafehandleGchandleSubjects
     // [27] System.Runtime.InteropServices/System.Runtime.InteropServices.GCHandle::set_Target:System.Void(System.Object)
     public static void Subject_27()
     {
-        // TODO: System.Runtime.InteropServices/System.Runtime.InteropServices.GCHandle::set_Target:System.Void(System.Object) could not be auto-generated
+        // needs-manual — set_Target with 1 params requires manual implementation: System.Runtime.InteropServices/System.Runtime.InteropServices.GCHandle::set_Target:System.Void(System.Object)
     }
 
     // [28] System.Runtime.InteropServices/System.Runtime.InteropServices.GCHandle::ToIntPtr:System.IntPtr(System.Runtime.InteropServices.GCHandle)

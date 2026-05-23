@@ -1,4 +1,4 @@
-#include <chaos/common.h>
+﻿#include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
 #include <chaos/eh.h>
@@ -16,6 +16,7 @@
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 #include "enum_metadata.generated.h"
+#include "runtime_stubs/enum_stubs.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -50,8 +51,6 @@ inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo =
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_String = {{nullptr, nullptr, 1782325859292956794ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Int32 = {{nullptr, nullptr, 11009693519287992193ULL, 0u, 32, 2, 0}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_boxed_type_id_System_Private_CoreLib_System_Int32 = static_cast<CHAOS_IL2CPP_INTPTR>(11009693519287992193ULL);
 
 // ── Virtual method table arrays ──
 bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept
@@ -145,12 +144,6 @@ struct chaos_type_System_Private_CoreLib_System_String
 	CHAOS_IL2CPP_INTPTR length = 0;
 	const char* utf8_data = nullptr;
 	CHAOS_IL2CPP_UINT64 string_id = 0u;  // stable StringId, 0 = not yet materialized
-};
-
-struct chaos_boxed_type_System_Private_CoreLib_System_Int32
-{
-	PureTypeHeader header{};
-	CHAOS_IL2CPP_INTPTR value = 0;
 };
 
 const char* chaos_reflection_get_string_utf8(CHAOS_IL2CPP_INTPTR chaos_string_value) noexcept
@@ -387,11 +380,18 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
 		/* .type_count        = */ 2u,
-	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
+	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 -- deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
 	/* .custom_attribute_materializer = */ nullptr,
-
+	/* .custom_attribute_method_offset   = */ nullptr,
+	/* .custom_attribute_field_offset    = */ nullptr,
+	/* .custom_attribute_property_offset = */ nullptr,
+	/* .custom_attribute_param_offset    = */ nullptr,
+	/* .custom_attribute_method_count    = */ 0u,
+	/* .custom_attribute_field_count     = */ 0u,
+	/* .custom_attribute_property_count  = */ 0u,
+	/* .custom_attribute_param_count   = */ 0u,
 		/* .abi_manifest      = */ s_abi_manifest,
 	};
 	static const CHAOS_IL2CPP_UINT32 s_native_aot_module_id =
@@ -484,7 +484,7 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // ── External Runtime Dispatch Table ──────────────────────────
 // Startup-time-resolved function pointers for cross-assembly calls.
 
-extern "C" const char* kChaosExternalRuntimeSubjects[22] = {
+extern "C" const char* kChaosExternalRuntimeSubjects[21] = {
 	"System.Private.CoreLib/System.Runtime.InteropServices.RuntimeInformation::get_FrameworkDescription:System.String()",
 	"System.Private.CoreLib/System.String::get_Length:System.Int32()",
 	"RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::_exitCode",
@@ -498,7 +498,6 @@ extern "C" const char* kChaosExternalRuntimeSubjects[22] = {
 	"System.Private.CoreLib/System.Runtime.InteropServices.OSPlatform::Create:System.Runtime.InteropServices.OSPlatform(System.String)",
 	"System.Private.CoreLib/System.Runtime.InteropServices.OSPlatform::GetHashCode:System.Int32()",
 	"System.Private.CoreLib/System.Runtime.InteropServices.OSPlatform::Equals:System.Boolean(System.Runtime.InteropServices.OSPlatform)",
-	"System.Private.CoreLib/System.Int32",
 	"System.Private.CoreLib/System.Runtime.InteropServices.OSPlatform::Equals:System.Boolean(System.Object)",
 	"System.Private.CoreLib/System.Runtime.InteropServices.OSPlatform::get_FreeBSD:System.Runtime.InteropServices.OSPlatform()",
 	"System.Private.CoreLib/System.Runtime.InteropServices.OSPlatform::get_Linux:System.Runtime.InteropServices.OSPlatform()",
@@ -509,7 +508,7 @@ extern "C" const char* kChaosExternalRuntimeSubjects[22] = {
 	"System.Private.CoreLib/System.Runtime.InteropServices.OSPlatform::ToString:System.String()",
 };
 
-extern "C" void* kChaosExternalRuntimeFnTable[22] = {
+extern "C" void* kChaosExternalRuntimeFnTable[21] = {
 	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__),
 	nullptr,
@@ -531,11 +530,9 @@ extern "C" void* kChaosExternalRuntimeFnTable[22] = {
 	nullptr,
 	nullptr,
 	nullptr,
-	nullptr,
 };
 
-extern "C" int32_t kChaosExternalRuntimeCount = 22;
-// (no method AOT entries for this module)
+extern "C" int32_t kChaosExternalRuntimeCount = 21;
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
 static void (*kAotMethods[17])() = {
@@ -765,7 +762,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry8;
 	/* ── Entry 9: RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Subject_9 ── */
 	struct {
@@ -898,11 +895,11 @@ static const struct {
 	},
 	/* entry8 = RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Subject_8 */
 	.entry8 = {
-		/* entry_total_size = 44 */ 44u,
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Subject_8),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
 	/* entry9 = RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Subject_9 */
 	.entry9 = {
@@ -973,7 +970,7 @@ static const struct {
 #pragma pack(pop)
 #endif
 
-static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 696u;
+static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 692u;
 
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
@@ -1052,38 +1049,39 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // matching during IR lowering of patched methods.
 
 static constexpr ReflectionQueryFieldDescriptor kReflFields_RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects[1] = {
-	{ 0u, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
+	{ 0x04000001u, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::_exitCode", "_exitCode", "System.Int32", 0LL, 3u },
 };
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects[17] = {
-	{ 0u, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u },
-	{ 0u, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u },
-	{ 0u, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u },
-	{ 0u, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u },
-	{ 0u, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u },
-	{ 0u, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u },
-	{ 0u, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u },
-	{ 0u, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u },
-	{ 0u, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u },
-	{ 0u, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_10:System.Void()", "Subject_10", "System.Void", 0, nullptr, 0u },
-	{ 0u, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_11:System.Void()", "Subject_11", "System.Void", 0, nullptr, 0u },
-	{ 0u, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_12:System.Void()", "Subject_12", "System.Void", 0, nullptr, 0u },
-	{ 0u, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_13:System.Void()", "Subject_13", "System.Void", 0, nullptr, 0u },
-	{ 0u, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_14:System.Void()", "Subject_14", "System.Void", 0, nullptr, 0u },
-	{ 0u, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_15:System.Void()", "Subject_15", "System.Void", 0, nullptr, 0u },
-	{ 0u, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_16:System.Void()", "Subject_16", "System.Void", 0, nullptr, 0u },
+	{ 0x00000003u, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000004u, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000005u, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000006u, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000007u, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000008u, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000009u, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Au, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Bu, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Cu, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Du, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_10:System.Void()", "Subject_10", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Eu, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_11:System.Void()", "Subject_11", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Fu, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_12:System.Void()", "Subject_12", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000010u, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_13:System.Void()", "Subject_13", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000011u, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_14:System.Void()", "Subject_14", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000012u, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_15:System.Void()", "Subject_15", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000013u, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects::Subject_16:System.Void()", "Subject_16", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
-	{ 0u, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects", "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects", "", "RuntimeInteropServicesSubjects", "RuntimeInteropServicesSubjects", nullptr, kReflFields_RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects, 1u, nullptr, 0u,
-	kReflMethods_RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects, 17u },
+	{ 0x00000001u, "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects", "RuntimeInteropServicesSubjects/RuntimeInteropServicesSubjects", "", "RuntimeInteropServicesSubjects", "RuntimeInteropServicesSubjects", nullptr, kReflFields_RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects, 1u, nullptr, 0u,
+/* EVENT_SECTION_START */
+nullptr, 0u,    kReflMethods_RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects, 17u, nullptr, 0u, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static const ReflectionQueryImageDescriptor kReflImage = { "RuntimeInteropServicesSubjects", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "RuntimeInteropServicesSubjects", kReflTypePtrs, 1u, 1, 0, 0, 0 };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -1820,10 +1818,6 @@ extern "C" void RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Su
 	CHAOS_IL2CPP_INTPTR _s16{};
 	CHAOS_IL2CPP_INTPTR _s17{};
 	CHAOS_IL2CPP_INTPTR _s18{};
-	CHAOS_IL2CPP_INTPTR _s19{};
-	CHAOS_IL2CPP_INTPTR _s20{};
-	CHAOS_IL2CPP_INTPTR _s21{};
-	CHAOS_IL2CPP_INTPTR _s22{};
 
 
 	CHAOS_EH_TRY
@@ -1841,17 +1835,10 @@ extern "C" void RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Su
 					*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
 				}
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s1;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
+			_s1 = 0;
 			{
 				const auto chaos_arg_0 = _s1;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[14])(chaos_arg_0);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[13])(chaos_arg_0);
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			// brtrue (structured EH branch)
@@ -1872,17 +1859,10 @@ extern "C" void RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Su
 					*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
 				}
 			}
-			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s5;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
+			_s5 = 0;
 			{
 				const auto chaos_arg_0 = _s5;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[14])(chaos_arg_0);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[13])(chaos_arg_0);
 				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			// brtrue (structured EH branch)
@@ -1940,7 +1920,7 @@ extern "C" void RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Su
 
 	CHAOS_EH_TRY
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[15])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[14])();
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			chaos_locals[1] = _s0;
@@ -1950,7 +1930,7 @@ extern "C" void RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Su
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[15])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[14])();
 				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			chaos_locals[1] = _s2;
@@ -2010,7 +1990,7 @@ extern "C" void RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Su
 
 	CHAOS_EH_TRY
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[16])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[15])();
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			chaos_locals[1] = _s0;
@@ -2020,7 +2000,7 @@ extern "C" void RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Su
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[16])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[15])();
 				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			chaos_locals[1] = _s2;
@@ -2080,7 +2060,7 @@ extern "C" void RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Su
 
 	CHAOS_EH_TRY
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[17])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[16])();
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			chaos_locals[1] = _s0;
@@ -2090,7 +2070,7 @@ extern "C" void RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Su
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[17])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[16])();
 				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			chaos_locals[1] = _s2;
@@ -2150,7 +2130,7 @@ extern "C" void RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Su
 
 	CHAOS_EH_TRY
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[18])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[17])();
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			chaos_locals[1] = _s0;
@@ -2160,7 +2140,7 @@ extern "C" void RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Su
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[18])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[17])();
 				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			chaos_locals[1] = _s2;
@@ -2344,7 +2324,7 @@ extern "C" void RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Su
 			{
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[19])(chaos_arg_0, chaos_arg_1);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[18])(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			// brtrue (structured EH branch)
@@ -2382,7 +2362,7 @@ extern "C" void RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Su
 			{
 				const auto chaos_arg_1 = _s4;
 				const auto chaos_arg_0 = _s3;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[19])(chaos_arg_0, chaos_arg_1);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[18])(chaos_arg_0, chaos_arg_1);
 				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			// brtrue (structured EH branch)
@@ -2478,7 +2458,7 @@ extern "C" void RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Su
 			{
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0, chaos_arg_1);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[19])(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			// brtrue (structured EH branch)
@@ -2516,7 +2496,7 @@ extern "C" void RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Su
 			{
 				const auto chaos_arg_1 = _s4;
 				const auto chaos_arg_0 = _s3;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0, chaos_arg_1);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[19])(chaos_arg_0, chaos_arg_1);
 				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			// brtrue (structured EH branch)
@@ -2590,7 +2570,7 @@ extern "C" void RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Su
 				}
 			}
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[21])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[20])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			{
@@ -2617,7 +2597,7 @@ extern "C" void RuntimeInteropServicesSubjects_RuntimeInteropServicesSubjects_Su
 				}
 			}
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[21])();
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[20])();
 				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			{

@@ -1,4 +1,4 @@
-#include <chaos/common.h>
+﻿#include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
 #include <chaos/eh.h>
@@ -16,6 +16,7 @@
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 #include "enum_metadata.generated.h"
+#include "runtime_stubs/enum_stubs.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -52,8 +53,6 @@ inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo =
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_String = {{nullptr, nullptr, 1782325859292956794ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Int32 = {{nullptr, nullptr, 11009693519287992193ULL, 0u, 32, 2, 0}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_boxed_type_id_System_Private_CoreLib_System_Int32 = static_cast<CHAOS_IL2CPP_INTPTR>(11009693519287992193ULL);
 
 // ── Virtual method table arrays ──
 bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept
@@ -152,12 +151,6 @@ struct chaos_type_System_Private_CoreLib_System_String
 	CHAOS_IL2CPP_INTPTR length = 0;
 	const char* utf8_data = nullptr;
 	CHAOS_IL2CPP_UINT64 string_id = 0u;  // stable StringId, 0 = not yet materialized
-};
-
-struct chaos_boxed_type_System_Private_CoreLib_System_Int32
-{
-	PureTypeHeader header{};
-	CHAOS_IL2CPP_INTPTR value = 0;
 };
 
 CHAOS_IL2CPP_INT32 chaos_static_ObjectiveCInteropSubjects_ObjectiveCInteropSubjects___exitCode = 0;
@@ -276,11 +269,18 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
 		/* .type_count        = */ 2u,
-	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
+	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 -- deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
 	/* .custom_attribute_materializer = */ nullptr,
-
+	/* .custom_attribute_method_offset   = */ nullptr,
+	/* .custom_attribute_field_offset    = */ nullptr,
+	/* .custom_attribute_property_offset = */ nullptr,
+	/* .custom_attribute_param_offset    = */ nullptr,
+	/* .custom_attribute_method_count    = */ 0u,
+	/* .custom_attribute_field_count     = */ 0u,
+	/* .custom_attribute_property_count  = */ 0u,
+	/* .custom_attribute_param_count   = */ 0u,
 		/* .abi_manifest      = */ s_abi_manifest,
 	};
 	static const CHAOS_IL2CPP_UINT32 s_native_aot_module_id =
@@ -335,7 +335,7 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // Startup-time-resolved function pointers for cross-assembly calls.
 
 extern "C" const char* kChaosExternalRuntimeSubjects[7] = {
-	"System.Private.CoreLib/System.Int32",
+	"System.Private.CoreLib/System.Span<System.IntPtr>",
 	"System.Runtime.InteropServices/System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal::CreateReferenceTrackingHandle:System.Runtime.InteropServices.GCHandle(System.Object,System.Span<System.IntPtr>&)",
 	"System.Private.CoreLib/System.Runtime.InteropServices.GCHandle::GetHashCode:System.Int32()",
 	"ObjectiveCInteropSubjects/ObjectiveCInteropSubjects::_exitCode",
@@ -355,7 +355,6 @@ extern "C" void* kChaosExternalRuntimeFnTable[7] = {
 };
 
 extern "C" int32_t kChaosExternalRuntimeCount = 7;
-// (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
 static void (*kAotMethods[4])() = {
@@ -482,7 +481,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[10];
+		CHAOS_IL2CPP_UINT32 slots[7];
 	} entry0;
 	/* ── Entry 1: ObjectiveCInteropSubjects_ObjectiveCInteropSubjects_Subject_2 ── */
 	struct {
@@ -503,11 +502,11 @@ static const struct {
 } kChaosGcSlotMapsSection = {
 	/* entry0 = ObjectiveCInteropSubjects_ObjectiveCInteropSubjects_Subject_0 */
 	.entry0 = {
-		/* entry_total_size = 60 */ 60u,
+		/* entry_total_size = 48 */ 48u,
 		/* code_address */ reinterpret_cast<const void*>(&ObjectiveCInteropSubjects_ObjectiveCInteropSubjects_Subject_0),
-		/* frame_size = 80 */ 80u,
-		/* num_gc_slots = 10 */ 10u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u, 72u }
+		/* frame_size = 56 */ 56u,
+		/* num_gc_slots = 7 */ 7u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
 	},
 	/* entry1 = ObjectiveCInteropSubjects_ObjectiveCInteropSubjects_Subject_2 */
 	.entry1 = {
@@ -530,7 +529,7 @@ static const struct {
 #pragma pack(pop)
 #endif
 
-static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 112u;
+static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 100u;
 
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
@@ -596,25 +595,26 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // matching during IR lowering of patched methods.
 
 static constexpr ReflectionQueryFieldDescriptor kReflFields_ObjectiveCInteropSubjects_ObjectiveCInteropSubjects[1] = {
-	{ 0u, "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
+	{ 0x04000001u, "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects::_exitCode", "_exitCode", "System.Int32", 0LL, 3u },
 };
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_ObjectiveCInteropSubjects_ObjectiveCInteropSubjects[4] = {
-	{ 0u, "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u },
+	{ 0x00000003u, "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000004u, "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000005u, "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000006u, "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
-	{ 0u, "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects", "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects", "", "ObjectiveCInteropSubjects", "ObjectiveCInteropSubjects", nullptr, kReflFields_ObjectiveCInteropSubjects_ObjectiveCInteropSubjects, 1u, nullptr, 0u,
-	kReflMethods_ObjectiveCInteropSubjects_ObjectiveCInteropSubjects, 4u },
+	{ 0x00000001u, "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects", "ObjectiveCInteropSubjects/ObjectiveCInteropSubjects", "", "ObjectiveCInteropSubjects", "ObjectiveCInteropSubjects", nullptr, kReflFields_ObjectiveCInteropSubjects_ObjectiveCInteropSubjects, 1u, nullptr, 0u,
+/* EVENT_SECTION_START */
+nullptr, 0u,    kReflMethods_ObjectiveCInteropSubjects_ObjectiveCInteropSubjects, 4u, nullptr, 0u, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static const ReflectionQueryImageDescriptor kReflImage = { "ObjectiveCInteropSubjects", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "ObjectiveCInteropSubjects", kReflTypePtrs, 1u, 1, 0, 0, 0 };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -657,7 +657,7 @@ struct ChaosGenericRegistrationInit {
 extern "C" void ObjectiveCInteropSubjects_ObjectiveCInteropSubjects_Subject_0(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
@@ -676,21 +676,24 @@ extern "C" void ObjectiveCInteropSubjects_ObjectiveCInteropSubjects_Subject_0(vo
 	CHAOS_IL2CPP_INTPTR _s15{};
 	CHAOS_IL2CPP_INTPTR _s16{};
 	CHAOS_IL2CPP_INTPTR _s17{};
-	CHAOS_IL2CPP_INTPTR _s18{};
-	CHAOS_IL2CPP_INTPTR _s19{};
-	CHAOS_IL2CPP_INTPTR _s20{};
 
 
+	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+	{
+		const auto chaos_address = _s0;
+		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+		{
+			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+			*chaos_slot = 0;
+		}
+		else
+		{
+			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
+		}
+	}
 	CHAOS_EH_TRY
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s0;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
-			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			_s0 = 0;
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
 			{
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
@@ -703,15 +706,8 @@ extern "C" void ObjectiveCInteropSubjects_ObjectiveCInteropSubjects_Subject_0(vo
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[2])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s2;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
-			_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[3]);
+			_s2 = 0;
+			_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
 			{
 				const auto chaos_arg_1 = _s3;
 				const auto chaos_arg_0 = _s2;
@@ -727,8 +723,8 @@ extern "C" void ObjectiveCInteropSubjects_ObjectiveCInteropSubjects_Subject_0(vo
 			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
 			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
-			chaos_locals[0] = _s2;
-			_s2 = chaos_locals[0];
+			chaos_locals[1] = _s2;
+			_s2 = chaos_locals[1];
 			// brfalse (structured EH branch)
 			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{

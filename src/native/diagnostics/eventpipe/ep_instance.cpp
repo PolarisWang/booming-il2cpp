@@ -10,6 +10,7 @@
 #include "ep_hotupdate_bridge.h"
 #include "ep_reflection_bridge.h"
 #include "ep_memorydomain_bridge.h"
+#include "ep_com_bridge.h"
 
 #include <atomic>
 #include <mutex>
@@ -41,6 +42,7 @@ bool EpInitialize() noexcept {
         EpHotupdateBridgeInitialize();
         EpReflectionBridgeInitialize();
         EpMemoryDomainBridgeInitialize();
+        EpComBridgeInitialize();
 
         g_initialized.store(true, std::memory_order_release);
         already = true;
@@ -57,6 +59,7 @@ void EpShutdown() noexcept {
     EpHotupdateBridgeShutdown();
     EpReflectionBridgeShutdown();
     EpMemoryDomainBridgeShutdown();
+    EpComBridgeShutdown();
     EpTpBridgeShutdown();
     EpGcBridgeShutdown();
     EpTransportShutdown();

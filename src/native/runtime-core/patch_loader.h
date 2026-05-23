@@ -186,6 +186,9 @@ public:
     // Iterate methods: return the i-th MethodDef entry.
     const PatchMethodDefEntry* GetMethodDef(uint32_t index) const noexcept;
     uint32_t MethodCount() const noexcept;
+    uint32_t FieldCount() const noexcept;
+    const PatchFieldDefEntry* GetFieldDef(uint32_t index) const noexcept;
+    const PatchTypeDefEntry* GetTypeDefByIndex(uint32_t index) const noexcept;
 
     // Get declaring type name for a method entry.
     // Returns "UnknownType" if the type token cannot be resolved.

@@ -23,7 +23,7 @@ public static partial class ComWrappersSubjects
     // [1] System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::GetOrCreateComInterfaceForObject:System.IntPtr(System.Object,System.Runtime.InteropServices.CreateComInterfaceFlags)
     public static void Subject_1()
     {
-        try { if ((int)(default(ComWrappers)!.GetOrCreateComInterfaceForObject(42, default)) != (int)(default(ComWrappers)!.GetOrCreateComInterfaceForObject(42, default))) _exitCode = 1; }
+        try { if ((int)(default(ComWrappers)!.GetOrCreateComInterfaceForObject(null!, default)) != (int)(default(ComWrappers)!.GetOrCreateComInterfaceForObject(null!, default))) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
@@ -37,21 +37,21 @@ public static partial class ComWrappersSubjects
     // [3] System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::GetOrCreateObjectForComInstance:System.Object(System.IntPtr,System.Runtime.InteropServices.CreateObjectFlags,System.Object)
     public static void Subject_3()
     {
-        try { if (((default(ComWrappers)!.GetOrCreateObjectForComInstance(IntPtr.Zero, default, 42)).GetHashCode()) != ((default(ComWrappers)!.GetOrCreateObjectForComInstance(IntPtr.Zero, default, 42)).GetHashCode())) _exitCode = 1; }
+        try { if (((default(ComWrappers)!.GetOrCreateObjectForComInstance(IntPtr.Zero, default, null!)).GetHashCode()) != ((default(ComWrappers)!.GetOrCreateObjectForComInstance(IntPtr.Zero, default, null!)).GetHashCode())) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [4] System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::GetOrRegisterObjectForComInstance:System.Object(System.IntPtr,System.Runtime.InteropServices.CreateObjectFlags,System.Object)
     public static void Subject_4()
     {
-        try { if (((default(ComWrappers)!.GetOrRegisterObjectForComInstance(IntPtr.Zero, default, 42)).GetHashCode()) != ((default(ComWrappers)!.GetOrRegisterObjectForComInstance(IntPtr.Zero, default, 42)).GetHashCode())) _exitCode = 1; }
+        try { if (((default(ComWrappers)!.GetOrRegisterObjectForComInstance(IntPtr.Zero, default, null!)).GetHashCode()) != ((default(ComWrappers)!.GetOrRegisterObjectForComInstance(IntPtr.Zero, default, null!)).GetHashCode())) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [5] System.Runtime.InteropServices/System.Runtime.InteropServices.ComWrappers::GetOrRegisterObjectForComInstance:System.Object(System.IntPtr,System.Runtime.InteropServices.CreateObjectFlags,System.Object,System.IntPtr)
     public static void Subject_5()
     {
-        try { if (((default(ComWrappers)!.GetOrRegisterObjectForComInstance(IntPtr.Zero, default, 42, IntPtr.Zero)).GetHashCode()) != ((default(ComWrappers)!.GetOrRegisterObjectForComInstance(IntPtr.Zero, default, 42, IntPtr.Zero)).GetHashCode())) _exitCode = 1; }
+        try { if (((default(ComWrappers)!.GetOrRegisterObjectForComInstance(IntPtr.Zero, default, null!, IntPtr.Zero)).GetHashCode()) != ((default(ComWrappers)!.GetOrRegisterObjectForComInstance(IntPtr.Zero, default, null!, IntPtr.Zero)).GetHashCode())) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 

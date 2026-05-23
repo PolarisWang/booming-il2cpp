@@ -1,4 +1,4 @@
-#include <chaos/common.h>
+﻿#include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
 #include <chaos/eh.h>
@@ -16,6 +16,7 @@
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 #include "enum_metadata.generated.h"
+#include "runtime_stubs/enum_stubs.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -314,11 +315,18 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
 		/* .type_count        = */ 3u,
-	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
+	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 -- deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
 	/* .custom_attribute_materializer = */ nullptr,
-
+	/* .custom_attribute_method_offset   = */ nullptr,
+	/* .custom_attribute_field_offset    = */ nullptr,
+	/* .custom_attribute_property_offset = */ nullptr,
+	/* .custom_attribute_param_offset    = */ nullptr,
+	/* .custom_attribute_method_count    = */ 0u,
+	/* .custom_attribute_field_count     = */ 0u,
+	/* .custom_attribute_property_count  = */ 0u,
+	/* .custom_attribute_param_count   = */ 0u,
 		/* .abi_manifest      = */ s_abi_manifest,
 	};
 	static const CHAOS_IL2CPP_UINT32 s_native_aot_module_id =
@@ -423,7 +431,6 @@ extern "C" void* kChaosExternalRuntimeFnTable[8] = {
 };
 
 extern "C" int32_t kChaosExternalRuntimeCount = 8;
-// (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
 static void (*kAotMethods[13])() = {
@@ -761,35 +768,37 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // matching during IR lowering of patched methods.
 
 static constexpr ReflectionQueryFieldDescriptor kReflFields_BufferMemorySubjects_BufferMemorySubjects[1] = {
-	{ 0u, "BufferMemorySubjects/BufferMemorySubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
+	{ 0x04000001u, "BufferMemorySubjects/BufferMemorySubjects::_exitCode", "_exitCode", "System.Int32", 0LL, 3u },
 };
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_BufferMemorySubjects_BufferMemorySubjects[10] = {
-	{ 0u, "BufferMemorySubjects/BufferMemorySubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "BufferMemorySubjects/BufferMemorySubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u },
-	{ 0u, "BufferMemorySubjects/BufferMemorySubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u },
-	{ 0u, "BufferMemorySubjects/BufferMemorySubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u },
-	{ 0u, "BufferMemorySubjects/BufferMemorySubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u },
-	{ 0u, "BufferMemorySubjects/BufferMemorySubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u },
-	{ 0u, "BufferMemorySubjects/BufferMemorySubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u },
-	{ 0u, "BufferMemorySubjects/BufferMemorySubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u },
-	{ 0u, "BufferMemorySubjects/BufferMemorySubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u },
-	{ 0u, "BufferMemorySubjects/BufferMemorySubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u },
+	{ 0x00000005u, "BufferMemorySubjects/BufferMemorySubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000006u, "BufferMemorySubjects/BufferMemorySubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000007u, "BufferMemorySubjects/BufferMemorySubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000008u, "BufferMemorySubjects/BufferMemorySubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000009u, "BufferMemorySubjects/BufferMemorySubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Au, "BufferMemorySubjects/BufferMemorySubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Bu, "BufferMemorySubjects/BufferMemorySubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Cu, "BufferMemorySubjects/BufferMemorySubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Du, "BufferMemorySubjects/BufferMemorySubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Eu, "BufferMemorySubjects/BufferMemorySubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryFieldDescriptor kReflFields_BufferMemorySubjects_BufferMemoryNativeEntry[1] = {
-	{ 0u, "BufferMemorySubjects/BufferMemoryNativeEntry::_exitCode", "_exitCode", "System.Int32", 0LL },
+	{ 0x04000002u, "BufferMemorySubjects/BufferMemoryNativeEntry::_exitCode", "_exitCode", "System.Int32", 0LL, 3u },
 };
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_BufferMemorySubjects_BufferMemoryNativeEntry[3] = {
-	{ 0u, "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod0:System.Void()", "CustomEntryMethod0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod3:System.Void()", "CustomEntryMethod3", "System.Void", 0, nullptr, 0u },
-	{ 0u, "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod9:System.Void()", "CustomEntryMethod9", "System.Void", 0, nullptr, 0u },
+	{ 0x0000000Fu, "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod0:System.Void()", "CustomEntryMethod0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000010u, "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod3:System.Void()", "CustomEntryMethod3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000011u, "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod9:System.Void()", "CustomEntryMethod9", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor kReflTypes[2] = {
-	{ 0u, "BufferMemorySubjects/BufferMemorySubjects", "BufferMemorySubjects/BufferMemorySubjects", "", "BufferMemorySubjects", "BufferMemorySubjects", nullptr, kReflFields_BufferMemorySubjects_BufferMemorySubjects, 1u, nullptr, 0u,
-	kReflMethods_BufferMemorySubjects_BufferMemorySubjects, 10u },
-	{ 0u, "BufferMemorySubjects/BufferMemoryNativeEntry", "BufferMemorySubjects/BufferMemoryNativeEntry", "", "BufferMemoryNativeEntry", "BufferMemoryNativeEntry", nullptr, kReflFields_BufferMemorySubjects_BufferMemoryNativeEntry, 1u, nullptr, 0u,
-	kReflMethods_BufferMemorySubjects_BufferMemoryNativeEntry, 3u },
+	{ 0x00000001u, "BufferMemorySubjects/BufferMemorySubjects", "BufferMemorySubjects/BufferMemorySubjects", "", "BufferMemorySubjects", "BufferMemorySubjects", nullptr, kReflFields_BufferMemorySubjects_BufferMemorySubjects, 1u, nullptr, 0u,
+/* EVENT_SECTION_START */
+nullptr, 0u,    kReflMethods_BufferMemorySubjects_BufferMemorySubjects, 10u, nullptr, 0u, 0u },
+	{ 0x00000002u, "BufferMemorySubjects/BufferMemoryNativeEntry", "BufferMemorySubjects/BufferMemoryNativeEntry", "", "BufferMemoryNativeEntry", "BufferMemoryNativeEntry", nullptr, kReflFields_BufferMemorySubjects_BufferMemoryNativeEntry, 1u, nullptr, 0u,
+/* EVENT_SECTION_START */
+nullptr, 0u,    kReflMethods_BufferMemorySubjects_BufferMemoryNativeEntry, 3u, nullptr, 0u, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor* kReflTypePtrs[2] = {
@@ -797,7 +806,7 @@ static const ReflectionQueryTypeDescriptor* kReflTypePtrs[2] = {
 	&kReflTypes[1],
 };
 
-static const ReflectionQueryImageDescriptor kReflImage = { "BufferMemorySubjects", kReflTypePtrs, 2u };
+static const ReflectionQueryImageDescriptor kReflImage = { "BufferMemorySubjects", kReflTypePtrs, 2u, 1, 0, 0, 0 };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via

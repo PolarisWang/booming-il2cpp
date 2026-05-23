@@ -1,0 +1,106 @@
+﻿{
+  "schemaVersion": 2,
+  "assemblyName": "PinvokeDllimportSubjects",
+  "methodCount": 12,
+  "defaultStringId": 0,
+  "methods": [
+    {
+      "index": 0,
+      "nativeSymbol": "PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_0",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 0
+    },
+    {
+      "index": 1,
+      "nativeSymbol": "PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_1",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 1
+    },
+    {
+      "index": 2,
+      "nativeSymbol": "PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_2",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 2
+    },
+    {
+      "index": 3,
+      "nativeSymbol": "PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_3",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 3
+    },
+    {
+      "index": 4,
+      "nativeSymbol": "PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_GetCurrentProcess",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 5,
+      "nativeSymbol": "PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_GetCurrentThread",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 6,
+      "nativeSymbol": "PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_GetModuleHandle_System_String",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 7,
+      "nativeSymbol": "PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_GetProcessId_System_IntPtr",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 8,
+      "nativeSymbol": "PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_TestGetCurrentProcess",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 9,
+      "nativeSymbol": "PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_TestGetCurrentThread",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 10,
+      "nativeSymbol": "PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_TestGetModuleHandle",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 11,
+      "nativeSymbol": "PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_TestGetProcessId",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    }
+  ]
+}

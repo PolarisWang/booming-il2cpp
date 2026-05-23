@@ -17,14 +17,15 @@ public static partial class ObjectiveCInteropSubjects
     // [0] System.Runtime.InteropServices/System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal::CreateReferenceTrackingHandle:System.Runtime.InteropServices.GCHandle(System.Object,System.Span{System.IntPtr}&)
     public static void Subject_0()
     {
-        try { if (((ObjectiveCMarshal.CreateReferenceTrackingHandle(42, out _)).GetHashCode()) != ((ObjectiveCMarshal.CreateReferenceTrackingHandle(42, out _)).GetHashCode())) _exitCode = 1; }
+            System.Span<System.IntPtr> refLocal_1 = default;
+        try { if (((ObjectiveCMarshal.CreateReferenceTrackingHandle(null!, out refLocal_1)).GetHashCode()) != ((ObjectiveCMarshal.CreateReferenceTrackingHandle(null!, out refLocal_1)).GetHashCode())) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [1] System.Runtime.InteropServices/System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal::Initialize:System.Void(System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal+UnhandledExceptionPropagationHandler)
     public static void Subject_1()
     {
-        // TODO: System.Runtime.InteropServices/System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal::Initialize:System.Void(System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal+UnhandledExceptionPropagationHandler) could not be auto-generated
+        // needs-manual — Initialize with 1 params requires manual implementation: System.Runtime.InteropServices/System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal::Initialize:System.Void(System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal+UnhandledExceptionPropagationHandler)
     }
 
     // [2] System.Runtime.InteropServices/System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal::SetMessageSendCallback:System.Void(System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal+MessageSendFunction,System.IntPtr)

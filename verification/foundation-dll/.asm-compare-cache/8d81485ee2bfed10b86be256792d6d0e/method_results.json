@@ -1,0 +1,268 @@
+[
+  {
+    "methodIndex": 0,
+    "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.StructLayoutAttribute::get_Value:System.Runtime.InteropServices.LayoutKind()",
+    "shortName": "Subject_0",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 24,
+      "ratio": 0.55,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "MarshallingAttributesSubjects_MarshallingAttributesSubjects_Subject_0",
+      "instructions": 24
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Runtime.InteropServices.StructLayoutAttribute::get_Value:System.Runtime.InteropServices.LayoutKind()' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Private.CoreLib/System.Runtime.InteropServices.StructLayoutAttribute::get_Value:System.Runtime.InteropServices.LayoutKind()' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 2
+    }
+  },
+  {
+    "methodIndex": 1,
+    "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.StructLayoutAttribute::.ctor:System.Void(System.Runtime.InteropServices.LayoutKind)",
+    "shortName": "Subject_1",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 9,
+      "ratio": 0.2,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "MarshallingAttributesSubjects_MarshallingAttributesSubjects_Subject_1",
+      "instructions": 9
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 2,
+    "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.StructLayoutAttribute::.ctor:System.Void(System.Int16)",
+    "shortName": "Subject_2",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 9,
+      "ratio": 0.2,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "MarshallingAttributesSubjects_MarshallingAttributesSubjects_Subject_2",
+      "instructions": 9
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 3,
+    "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.MarshalAsAttribute::get_Value:System.Runtime.InteropServices.UnmanagedType()",
+    "shortName": "Subject_3",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 24,
+      "ratio": 0.55,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "MarshallingAttributesSubjects_MarshallingAttributesSubjects_Subject_3",
+      "instructions": 24
+    },
+    "analysis": [
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Runtime.InteropServices/MarshalAsAttribute::get_Value:System.Runtime.InteropServices.UnmanagedType()' uses ExternalRuntime dispatch"
+      },
+      {
+        "severity": "info",
+        "category": "external_runtime_call",
+        "message": "Call to 'System.Runtime.InteropServices/MarshalAsAttribute::get_Value:System.Runtime.InteropServices.UnmanagedType()' uses ExternalRuntime dispatch"
+      }
+    ],
+    "instructionCategories": {
+      "external_runtime_call": 2
+    }
+  },
+  {
+    "methodIndex": 4,
+    "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.MarshalAsAttribute::.ctor:System.Void(System.Runtime.InteropServices.UnmanagedType)",
+    "shortName": "Subject_4",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 9,
+      "ratio": 0.2,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "MarshallingAttributesSubjects_MarshallingAttributesSubjects_Subject_4",
+      "instructions": 9
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 5,
+    "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.MarshalAsAttribute::.ctor:System.Void(System.Int16)",
+    "shortName": "Subject_5",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 9,
+      "ratio": 0.2,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "MarshallingAttributesSubjects_MarshallingAttributesSubjects_Subject_5",
+      "instructions": 9
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 6,
+    "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.InAttribute::.ctor:System.Void()",
+    "shortName": "Subject_6",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 8,
+      "ratio": 0.18,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "MarshallingAttributesSubjects_MarshallingAttributesSubjects_Subject_6",
+      "instructions": 8
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 7,
+    "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.OutAttribute::.ctor:System.Void()",
+    "shortName": "Subject_7",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 8,
+      "ratio": 0.18,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "MarshallingAttributesSubjects_MarshallingAttributesSubjects_Subject_7",
+      "instructions": 8
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 8,
+    "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.OptionalAttribute::.ctor:System.Void()",
+    "shortName": "Subject_8",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 8,
+      "ratio": 0.18,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "MarshallingAttributesSubjects_MarshallingAttributesSubjects_Subject_8",
+      "instructions": 8
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  },
+  {
+    "methodIndex": 9,
+    "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.PreserveSigAttribute::.ctor:System.Void()",
+    "shortName": "Subject_9",
+    "status": "ok",
+    "metrics": {
+      "jitInstructionCount": 44,
+      "aotInstructionCount": 8,
+      "ratio": 0.18,
+      "jitCodeSize": 256
+    },
+    "jit": {
+      "status": "ok",
+      "size": 256,
+      "instructions": 44
+    },
+    "aot": {
+      "status": "ok",
+      "symbol": "MarshallingAttributesSubjects_MarshallingAttributesSubjects_Subject_9",
+      "instructions": 8
+    },
+    "analysis": [],
+    "instructionCategories": {}
+  }
+]

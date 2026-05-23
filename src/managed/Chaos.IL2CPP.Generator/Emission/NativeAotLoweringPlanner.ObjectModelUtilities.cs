@@ -948,7 +948,7 @@ public sealed partial class NativeAotLoweringPlanner
 			var slots = methods.Select(m => {
 				var mn = ExtractComMethodName(m.SubjectId);
 				return new NativeAotLoweringPlanner.ComInterfaceMethodSlot(
-					tokenLookup.TryGetMethodToken(m.SubjectId), m.NativeSymbol, mn);
+					tokenLookup.TryGetMethodToken(m.SubjectId), m.NativeSymbol, mn, m.ParameterCount);
 			}).ToArray();
 
 			var (guid, typeKind) = kvp.Value;

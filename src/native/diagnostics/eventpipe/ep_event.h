@@ -87,6 +87,16 @@ void EpEmitDomainUnloaded(uint32_t domain_id) noexcept;
 void EpEmitDomainUsageLimitExceeded(uint32_t domain_id, int64_t current_usage,
                                      int64_t usage_limit) noexcept;
 
+// ── COM event convenience helpers ─────────────────────────────────────
+
+void EpEmitComRcwCreated(uint64_t rcw_ptr) noexcept;
+void EpEmitComRcwReleased(uint64_t rcw_ptr) noexcept;
+void EpEmitComCcwCreated(uint64_t ccw_ptr, uint64_t gc_handle) noexcept;
+void EpEmitComCcwReleased(uint64_t ccw_ptr) noexcept;
+void EpEmitComConnectionPointAdvise(uint64_t cp_ptr, uint32_t cookie) noexcept;
+void EpEmitComConnectionPointUnadvise(uint64_t cp_ptr, uint32_t cookie) noexcept;
+void EpEmitComDispatchInvoke(int32_t disp_id, int32_t result_code) noexcept;
+
 }  // namespace chaos::il2cpp::diagnostics
 
 #endif  // CHAOS_IL2CPP_EVENTPIPE
