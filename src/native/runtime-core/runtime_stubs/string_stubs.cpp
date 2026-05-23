@@ -161,7 +161,7 @@ CHAOS_IL2CPP_INTPTR ChaosStringJoinSs(CHAOS_IL2CPP_INTPTR separator, CHAOS_IL2CP
         auto elem_raw = resolve_string_arg(arr->elements[i]);
         auto* elem = reinterpret_cast<const StubStringHeader*>(elem_raw);
         if (elem && elem->byte_count > 0) {
-            std::memcpy(dest, stub_string_data(reinterpret_cast<const void*>(arr->elements[i])), elem->byte_count);
+            std::memcpy(dest, stub_string_data(reinterpret_cast<const void*>(elem_raw)), elem->byte_count);
             dest += elem->byte_count;
         }
     }
