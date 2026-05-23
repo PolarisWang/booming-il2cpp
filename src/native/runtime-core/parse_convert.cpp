@@ -370,8 +370,9 @@ extern "C" CHAOS_IL2CPP_INTPTR ChaosDecimalFromDouble(CHAOS_IL2CPP_FLOAT64 value
     auto* out = &s_tls_decimal;
     if (value < 0) {
         out->flags = 0x80000000u;
+        // -value is positive; store the absolute truncated value.
         out->lo64 = static_cast<CHAOS_IL2CPP_UINT64>(
-            -static_cast<CHAOS_IL2CPP_INT64>(std::trunc(-value)));
+            static_cast<CHAOS_IL2CPP_INT64>(std::trunc(-value)));
     } else {
         out->flags = 0u;
         out->lo64 = static_cast<CHAOS_IL2CPP_UINT64>(
