@@ -8,21 +8,19 @@
 namespace chaos::il2cpp::runtime_core {
 
 // ── DelegateObject ──────────────────────────────────────────────────────
-// 56-byte unified struct matching the scriban template's codegen output
-// (chaos_type_System_Private_CoreLib_System_Delegate).
+// 48-byte unified struct matching the ThinLockableHeader-optimized codegen.
+// sync_state removed — moved to ThinLockTable (8B saved per object).
 //
 // Layout:
 //   [0..7]   void* type_info
-//   [8..15]  uint64_t sync_state (ThinLockableHeader)
-//   [16..23] intptr_t chaos_delegate_target
-//   [24..31] intptr_t chaos_delegate_method_ptr
-//   [32..39] intptr_t chaos_delegate_invocation_list (vector<INTPTR>*)
-//   [40..47] intptr_t chaos_delegate_invocation_count
-//   [48..51] uint32_t chaos_delegate_method_token
-//   [52..55] uint32_t _pad
+//   [8..15]  intptr_t chaos_delegate_target
+//   [16..23] intptr_t chaos_delegate_method_ptr
+//   [24..31] intptr_t chaos_delegate_invocation_list (vector<INTPTR>*)
+//   [32..39] intptr_t chaos_delegate_invocation_count
+//   [40..43] uint32_t chaos_delegate_method_token
+//   [44..47] uint32_t _pad
 struct DelegateObject {
     void* type_info;
-    uint64_t sync_state;
     CHAOS_IL2CPP_INTPTR chaos_delegate_target;
     CHAOS_IL2CPP_INTPTR chaos_delegate_method_ptr;
     CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_list;
@@ -30,7 +28,7 @@ struct DelegateObject {
     CHAOS_IL2CPP_UINT32 chaos_delegate_method_token;
     CHAOS_IL2CPP_UINT32 _pad;
 };
-static_assert(sizeof(DelegateObject) == 56, "DelegateObject must be 56 bytes");
+static_assert(sizeof(DelegateObject) == 48, "DelegateObject must be 48 bytes");
 
 }  // namespace chaos::il2cpp::runtime_core
 

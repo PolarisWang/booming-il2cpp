@@ -13,7 +13,8 @@
       "subjectId": "ReflectionEventSubjects/ReflectionEventSubjects",
       "name": "ReflectionEventSubjects",
       "displayName": "ReflectionEventSubjects",
-      "definitionSubjectId": "ReflectionEventSubjects/ReflectionEventSubjects"
+      "definitionSubjectId": "ReflectionEventSubjects/ReflectionEventSubjects",
+      "metadataToken": 33554434
     },
     {
       "registrationKind": "field",
@@ -33,7 +34,8 @@
       "declaringTypeSubjectId": "ReflectionEventSubjects/ReflectionEventSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663297
     },
     {
       "registrationKind": "method",
@@ -44,7 +46,8 @@
       "declaringTypeSubjectId": "ReflectionEventSubjects/ReflectionEventSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663298
     },
     {
       "registrationKind": "method",
@@ -55,7 +58,8 @@
       "declaringTypeSubjectId": "ReflectionEventSubjects/ReflectionEventSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663299
     }
   ]
 }

@@ -13,7 +13,8 @@
       "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects",
       "name": "PinvokeDllimportSubjects",
       "displayName": "PinvokeDllimportSubjects",
-      "definitionSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects"
+      "definitionSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects",
+      "metadataToken": 33554434
     },
     {
       "registrationKind": "type",
@@ -21,7 +22,8 @@
       "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportNativeEntry",
       "name": "PinvokeDllimportNativeEntry",
       "displayName": "PinvokeDllimportNativeEntry",
-      "definitionSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportNativeEntry"
+      "definitionSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportNativeEntry",
+      "metadataToken": 33554435
     },
     {
       "registrationKind": "field",
@@ -41,7 +43,8 @@
       "declaringTypeSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663297
     },
     {
       "registrationKind": "method",
@@ -52,7 +55,8 @@
       "declaringTypeSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663298
     },
     {
       "registrationKind": "method",
@@ -63,7 +67,8 @@
       "declaringTypeSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663299
     },
     {
       "registrationKind": "method",
@@ -74,7 +79,8 @@
       "declaringTypeSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663300
     },
     {
       "registrationKind": "method",
@@ -87,7 +93,8 @@
       "parameterCount": 0,
       "isImported": true,
       "importModuleName": "kernel32",
-      "importEntryPointName": "GetCurrentProcess"
+      "importEntryPointName": "GetCurrentProcess",
+      "metadataToken": 100663301
     },
     {
       "registrationKind": "method",
@@ -98,7 +105,8 @@
       "declaringTypeSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportNativeEntry",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663302
     },
     {
       "registrationKind": "method",
@@ -111,7 +119,8 @@
       "parameterCount": 0,
       "isImported": true,
       "importModuleName": "kernel32",
-      "importEntryPointName": "GetCurrentThread"
+      "importEntryPointName": "GetCurrentThread",
+      "metadataToken": 100663303
     },
     {
       "registrationKind": "method",
@@ -122,7 +131,8 @@
       "declaringTypeSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportNativeEntry",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663304
     },
     {
       "registrationKind": "method",
@@ -135,7 +145,8 @@
       "parameterCount": 1,
       "isImported": true,
       "importModuleName": "kernel32",
-      "importEntryPointName": "GetProcessId"
+      "importEntryPointName": "GetProcessId",
+      "metadataToken": 100663305
     },
     {
       "registrationKind": "method",
@@ -146,7 +157,8 @@
       "declaringTypeSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportNativeEntry",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663306
     },
     {
       "registrationKind": "method",
@@ -159,7 +171,8 @@
       "parameterCount": 1,
       "isImported": true,
       "importModuleName": "kernel32",
-      "importEntryPointName": "GetModuleHandleW"
+      "importEntryPointName": "GetModuleHandleW",
+      "metadataToken": 100663307
     },
     {
       "registrationKind": "method",
@@ -170,7 +183,8 @@
       "declaringTypeSubjectId": "PinvokeDllimportSubjects/PinvokeDllimportNativeEntry",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663308
     },
     {
       "registrationKind": "parameter",

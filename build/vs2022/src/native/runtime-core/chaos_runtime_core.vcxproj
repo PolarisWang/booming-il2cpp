@@ -302,6 +302,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\exception_stubs.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\object_stubs.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\threading_stubs.cpp" />
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\monitor_stubs.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\mutex_stubs.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\threadpool_events.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\convert_stubs.cpp" />

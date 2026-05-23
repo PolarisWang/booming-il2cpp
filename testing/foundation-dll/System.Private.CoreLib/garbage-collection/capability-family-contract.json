@@ -13,12 +13,10 @@
     "System.Private.CoreLib/System.GC::GetTotalMemory:System.Int64(System.Boolean)",
     "System.Private.CoreLib/System.GC::GetGCMemoryInfo: System.GCMemoryInfo()",
     "System.Private.CoreLib/System.GC::Collect(System.Int32,System.GCCollectionMode):System.Void()",
-    "System.Private.CoreLib/System.GC::get_LatencyMode:System.GCLatencyMode()",
-    "System.Private.CoreLib/System.GC::set_LatencyMode(System.GCLatencyMode):System.Void()",
     "System.Private.CoreLib/System.GC::CollectionCount(System.Int32):System.Int64()",
     "System.Private.CoreLib/System.GC::GetTotalPauseDuration:System.TimeSpan()"
   ],
-  "methodSubjectCount": 12,
+  "methodSubjectCount": 10,
   "functionalObligation": {
     "required": false
   },

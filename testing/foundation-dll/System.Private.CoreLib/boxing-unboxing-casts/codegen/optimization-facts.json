@@ -139,25 +139,25 @@
     {
       "methodSubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_8:System.Void()",
       "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "targetSubjectId": "System.Private.CoreLib/System.Array::get_Length:System.Int32()",
       "devirtualized": false
     },
     {
       "methodSubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_8:System.Void()",
       "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "targetSubjectId": "System.Private.CoreLib/System.Array::get_Length:System.Int32()",
       "devirtualized": false
     },
     {
       "methodSubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_9:System.Void()",
       "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "targetSubjectId": "System.Private.CoreLib/System.Array::get_Length:System.Int32()",
       "devirtualized": false
     },
     {
       "methodSubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_9:System.Void()",
       "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "targetSubjectId": "System.Private.CoreLib/System.Array::get_Length:System.Int32()",
       "devirtualized": false
     },
     {

@@ -13,7 +13,8 @@
       "subjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects",
       "name": "CodegenEdgeCasesSubjects",
       "displayName": "CodegenEdgeCasesSubjects",
-      "definitionSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects"
+      "definitionSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects",
+      "metadataToken": 33554434
     },
     {
       "registrationKind": "field",
@@ -33,7 +34,8 @@
       "declaringTypeSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663297
     },
     {
       "registrationKind": "method",
@@ -44,7 +46,8 @@
       "declaringTypeSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects",
       "memberType": "System.Void",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663298
     },
     {
       "registrationKind": "method",
@@ -55,7 +58,8 @@
       "declaringTypeSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663299
     },
     {
       "registrationKind": "method",
@@ -66,7 +70,8 @@
       "declaringTypeSubjectId": "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects",
       "memberType": "System.Int32",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663300
     },
     {
       "registrationKind": "parameter",

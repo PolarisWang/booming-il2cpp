@@ -15,8 +15,14 @@ set(CHAOS_NATIVE_BUILD "D:/agent/booming-il2cpp/artifacts/presets/windows-x64-re
 
 # Source files — codegen outputs to codegen/<AssemblyName>/generated/
 file(GLOB CHAOS_CODEGEN_CPP "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.generated.cpp")
-# Fallback: some families sync generated files alongside CMakeLists.txt
-file(GLOB CHAOS_CODEGEN_FALLBACK_CPP "${CMAKE_CURRENT_SOURCE_DIR}/*Subjects/generated/native-aot.generated.cpp")
+# Also search native/ (pipeline syncs codegen output there after convert-to-cpp)
+file(GLOB CHAOS_CODEGEN_NATIVE_CPP "${CMAKE_CURRENT_SOURCE_DIR}/*Subjects/generated/native-aot.generated.cpp")
+# Use codegen path if available, fall back to native path (avoids compiling both)
+if(CHAOS_CODEGEN_CPP)
+  set(CHAOS_AOT_GENERATED_CPP ${CHAOS_CODEGEN_CPP})
+else()
+  set(CHAOS_AOT_GENERATED_CPP ${CHAOS_CODEGEN_NATIVE_CPP})
+endif()
 file(GLOB CHAOS_NATIVE_STUBS "*.cpp")
 list(REMOVE_ITEM CHAOS_NATIVE_STUBS
     "${CMAKE_CURRENT_SOURCE_DIR}/runtime-entry.cpp"
@@ -28,8 +34,7 @@ set(CHAOS_ENTRY_SOURCES
     "runtime-patchdata.cpp"
     "verification_dispatch.generated.cpp"
     ${CHAOS_NATIVE_STUBS}
-    ${CHAOS_CODEGEN_CPP}
-    ${CHAOS_CODEGEN_FALLBACK_CPP}
+    ${CHAOS_AOT_GENERATED_CPP}
 )
 
 # Include directories

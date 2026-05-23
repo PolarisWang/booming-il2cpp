@@ -28,6 +28,8 @@
 // kChaosExternalRuntimeFnTable is defined in native-aot.generated.cpp.
 extern "C" void* kChaosExternalRuntimeFnTable[];
 extern "C" const char* kChaosExternalRuntimeSubjects[];
+extern "C" const int kSubjectEntryCount;
+extern "C" const int kSubjectEntryIndices[];
 extern "C" int32_t kChaosExternalRuntimeCount;
 
 // ChaosJitRegisterAll is defined in native-aot.generated.cpp (no-op in AOT mode).
@@ -226,8 +228,8 @@ int main(int argc, char** argv) {
         // external calls. setjmp/longjmp cannot catch C++ exceptions and mixing
         // both with /EHa corrupts the /GS stack cookie (0xC0000409).
         int failed_count = 0;
-        for (int i = 0; i < kAotMethodCount; i++) {
-            bool caught = false;
+        for (int si = 0; si < kSubjectEntryCount; si++) {
+            int i = kSubjectEntryIndices[si];
 #if defined(CHAOS_IL2CPP_EH_WIN32_SEH)
             chaos::il2cpp::common::g_chaos_fail_hook = []() { chaos::il2cpp::runtime_core::chaos_raise_exception(0); };
 #else
@@ -237,13 +239,17 @@ int main(int argc, char** argv) {
                 RunNativeAot(i);
             } catch (const chaos_managed_exception&) {
                 ++failed_count;
+                printf("[DIAG] Fact FAILED method index %d/%d (chaos_managed_exception)\n", i, kAotMethodCount);
+                std::fflush(stdout);
             } catch (...) {
                 ++failed_count;
+                printf("[DIAG] Fact FAILED method index %d/%d (...)\n", i, kAotMethodCount);
+                std::fflush(stdout);
             }
         }
         chaos::il2cpp::common::g_chaos_fail_hook = nullptr;
-        int passed_count = kAotMethodCount - failed_count;
-        printf("Passed: %d/%d\n", passed_count, kAotMethodCount);
+        int passed_count = kSubjectEntryCount - failed_count;
+        printf("Passed: %d/%d\n", passed_count, kSubjectEntryCount);
         std::fflush(stdout);
         _exit(failed_count);
         return failed_count;

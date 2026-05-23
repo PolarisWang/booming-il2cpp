@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/convert/char",
-  "capturedAt": "2026-05-22T01:19:21",
+  "capturedAt": "2026-05-23T19:06:27",
   "batchMode": true,
   "summary": {
     "totalMethods": 18,
@@ -17,9 +17,9 @@
     },
     "aotInstructionCount": {
       "min": 18,
-      "max": 22,
-      "avg": 18.7,
-      "total": 336
+      "max": 20,
+      "avg": 18.6,
+      "total": 334
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
@@ -29,7 +29,7 @@
     },
     "overallIrExpansionRatio": 0.42,
     "averageExpansionRatio": 0.42,
-    "maxExpansionRatio": 0.5,
+    "maxExpansionRatio": 0.45,
     "minExpansionRatio": 0.41
   },
   "methodResults": [
@@ -401,12 +401,12 @@
         {
           "severity": "info",
           "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int32)' uses ExternalRuntime dispatch"
+          "message": "Call to 'System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String)' uses ExternalRuntime dispatch"
         },
         {
           "severity": "info",
           "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int32)' uses ExternalRuntime dispatch"
+          "message": "Call to 'System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String)' uses ExternalRuntime dispatch"
         }
       ],
       "instructionCategories": {
@@ -420,8 +420,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 22,
-        "ratio": 0.5,
+        "aotInstructionCount": 20,
+        "ratio": 0.45,
         "jitCodeSize": 256
       },
       "jit": {
@@ -432,18 +432,18 @@
       "aot": {
         "status": "ok",
         "symbol": "ConvertCharSubjects_ConvertCharSubjects_Subject_10",
-        "instructions": 22
+        "instructions": 20
       },
       "analysis": [
         {
           "severity": "info",
           "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object,System.IFormatProvider)' uses ExternalRuntime dispatch"
+          "message": "Call to 'System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)' uses ExternalRuntime dispatch"
         },
         {
           "severity": "info",
           "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object,System.IFormatProvider)' uses ExternalRuntime dispatch"
+          "message": "Call to 'System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)' uses ExternalRuntime dispatch"
         }
       ],
       "instructionCategories": {

@@ -9,7 +9,7 @@
     <RootNamespace>BoxingUnboxingCastsSubjects</RootNamespace>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <NoWarn>$(NoWarn);SYSLIB0011;SYSLIB0050</NoWarn>
+    <NoWarn>$(NoWarn);SYSLIB0011;SYSLIB0020;SYSLIB0050;CS8602;CS8604</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BoxingUnboxingCastsSubjects.cs" />

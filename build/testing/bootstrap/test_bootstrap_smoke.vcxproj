@@ -330,6 +330,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="D:\agent\booming-il2cpp\testing\src\native\bootstrap\bootstrap_test.cpp" />
+    <ClCompile Include="D:\agent\booming-il2cpp\testing\src\native\bootstrap\bootstrap_test_stubs.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\testing\ZERO_CHECK.vcxproj">

@@ -13,19 +13,12 @@
       "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects",
       "name": "ThreadSyncSubjects",
       "displayName": "ThreadSyncSubjects",
-      "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects"
-    },
-    {
-      "registrationKind": "type",
-      "slot": 2,
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec",
-      "name": "\u003C\u003Ec",
-      "displayName": "ThreadSyncSubjects\u002B\u003C\u003Ec",
-      "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec"
+      "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects",
+      "metadataToken": 33554434
     },
     {
       "registrationKind": "field",
-      "slot": 3,
+      "slot": 2,
       "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::_exitCode",
       "name": "_exitCode",
       "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects::_exitCode",
@@ -33,210 +26,100 @@
       "memberType": "System.Int32"
     },
     {
-      "registrationKind": "field",
-      "slot": 4,
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
-      "name": "\u003C\u003E9",
-      "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
-      "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec",
-      "memberType": "ThreadSyncSubjects\u002B\u003C\u003Ec"
-    },
-    {
-      "registrationKind": "field",
-      "slot": 5,
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9__6_0",
-      "name": "\u003C\u003E9__6_0",
-      "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9__6_0",
-      "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec",
-      "memberType": "System.Threading.WaitCallback"
-    },
-    {
-      "registrationKind": "field",
-      "slot": 6,
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9__7_0",
-      "name": "\u003C\u003E9__7_0",
-      "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9__7_0",
-      "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec",
-      "memberType": "System.Threading.WaitCallback"
-    },
-    {
-      "registrationKind": "field",
-      "slot": 7,
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_0",
-      "name": "\u003C\u003E9__8_0",
-      "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_0",
-      "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec",
-      "memberType": "System.Threading.WaitCallback"
-    },
-    {
       "registrationKind": "method",
-      "slot": 8,
+      "slot": 3,
       "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_0:System.Void()",
       "name": "Subject_0",
       "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_0:System.Void()",
       "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663297
     },
     {
       "registrationKind": "method",
-      "slot": 9,
+      "slot": 4,
       "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_1:System.Void()",
       "name": "Subject_1",
       "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_1:System.Void()",
       "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663298
     },
     {
       "registrationKind": "method",
-      "slot": 10,
+      "slot": 5,
       "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_2:System.Void()",
       "name": "Subject_2",
       "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_2:System.Void()",
       "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663299
     },
     {
       "registrationKind": "method",
-      "slot": 11,
+      "slot": 6,
       "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_3:System.Void()",
       "name": "Subject_3",
       "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_3:System.Void()",
       "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663300
     },
     {
       "registrationKind": "method",
-      "slot": 12,
+      "slot": 7,
       "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_4:System.Void()",
       "name": "Subject_4",
       "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_4:System.Void()",
       "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663301
     },
     {
       "registrationKind": "method",
-      "slot": 13,
+      "slot": 8,
       "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_5:System.Void()",
       "name": "Subject_5",
       "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_5:System.Void()",
       "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663302
     },
     {
       "registrationKind": "method",
-      "slot": 14,
+      "slot": 9,
       "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_6:System.Void()",
       "name": "Subject_6",
       "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_6:System.Void()",
       "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663303
     },
     {
       "registrationKind": "method",
-      "slot": 15,
+      "slot": 10,
       "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_7:System.Void()",
       "name": "Subject_7",
       "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_7:System.Void()",
       "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
-    },
-    {
-      "registrationKind": "method",
-      "slot": 16,
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
-      "name": ".cctor",
-      "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
-      "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec",
-      "memberType": "System.Void",
-      "parameterCount": 0,
-      "isImported": false
-    },
-    {
-      "registrationKind": "method",
-      "slot": 17,
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
-      "name": ".ctor",
-      "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
-      "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec",
-      "memberType": "System.Void",
-      "parameterCount": 0,
-      "isImported": false
-    },
-    {
-      "registrationKind": "method",
-      "slot": 18,
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_0:System.Void(System.Object)",
-      "name": "\u003CSubject_5\u003Eb__6_0",
-      "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_0:System.Void(System.Object)",
-      "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec",
-      "memberType": "System.Void",
-      "parameterCount": 1,
-      "isImported": false
-    },
-    {
-      "registrationKind": "method",
-      "slot": 19,
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_6\u003Eb__7_0:System.Void(System.Object)",
-      "name": "\u003CSubject_6\u003Eb__7_0",
-      "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_6\u003Eb__7_0:System.Void(System.Object)",
-      "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec",
-      "memberType": "System.Void",
-      "parameterCount": 1,
-      "isImported": false
-    },
-    {
-      "registrationKind": "method",
-      "slot": 20,
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_0:System.Void(System.Object)",
-      "name": "\u003CSubject_7\u003Eb__8_0",
-      "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_0:System.Void(System.Object)",
-      "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec",
-      "memberType": "System.Void",
-      "parameterCount": 1,
-      "isImported": false
-    },
-    {
-      "registrationKind": "parameter",
-      "slot": 21,
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_0:System.Void(System.Object)::parameter[0]:_",
-      "name": "_",
-      "declaringMethodSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_0:System.Void(System.Object)",
-      "memberType": "System.Object",
-      "parameterIndex": 0
-    },
-    {
-      "registrationKind": "parameter",
-      "slot": 22,
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_6\u003Eb__7_0:System.Void(System.Object)::parameter[0]:_",
-      "name": "_",
-      "declaringMethodSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_6\u003Eb__7_0:System.Void(System.Object)",
-      "memberType": "System.Object",
-      "parameterIndex": 0
-    },
-    {
-      "registrationKind": "parameter",
-      "slot": 23,
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_0:System.Void(System.Object)::parameter[0]:_",
-      "name": "_",
-      "declaringMethodSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_0:System.Void(System.Object)",
-      "memberType": "System.Object",
-      "parameterIndex": 0
+      "isImported": false,
+      "metadataToken": 100663304
     }
   ]
 }

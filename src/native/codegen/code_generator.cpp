@@ -3394,9 +3394,7 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
                 static_cast<uint32_t>(interpreter::SEHFlags::Filter));
             // For filter clauses, the dispatched offset is the filter function;
             // the actual handler follows the filter sequentially.
-            uint32_t dispatch_idx = is_filter
-                ? static_cast<uint32_t>(clause.filter_start_idx)
-                : handler_start;
+            uint32_t dispatch_idx = handler_start;
             // Validate indices: skip malformed clauses (defensive, not a crash).
             if (try_start >= max_idx || try_end > max_idx || dispatch_idx >= max_idx ||
                 handler_start >= max_idx) {

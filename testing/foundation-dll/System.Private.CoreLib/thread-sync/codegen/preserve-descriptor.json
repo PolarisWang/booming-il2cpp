@@ -9,38 +9,8 @@
       "reason": "full-assembly-closure"
     },
     {
-      "subjectKind": "type",
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec",
-      "preserve": "all",
-      "reason": "full-assembly-closure"
-    },
-    {
       "subjectKind": "field",
       "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::_exitCode",
-      "preserve": "members",
-      "reason": "full-assembly-closure"
-    },
-    {
-      "subjectKind": "field",
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
-      "preserve": "members",
-      "reason": "full-assembly-closure"
-    },
-    {
-      "subjectKind": "field",
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9__6_0",
-      "preserve": "members",
-      "reason": "full-assembly-closure"
-    },
-    {
-      "subjectKind": "field",
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9__7_0",
-      "preserve": "members",
-      "reason": "full-assembly-closure"
-    },
-    {
-      "subjectKind": "field",
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_0",
       "preserve": "members",
       "reason": "full-assembly-closure"
     },
@@ -89,36 +59,6 @@
     {
       "subjectKind": "method",
       "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_7:System.Void()",
-      "preserve": "signature",
-      "reason": "full-assembly-closure"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
-      "preserve": "signature",
-      "reason": "full-assembly-closure"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
-      "preserve": "signature",
-      "reason": "full-assembly-closure"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_0:System.Void(System.Object)",
-      "preserve": "signature",
-      "reason": "full-assembly-closure"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_6\u003Eb__7_0:System.Void(System.Object)",
-      "preserve": "signature",
-      "reason": "full-assembly-closure"
-    },
-    {
-      "subjectKind": "method",
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_0:System.Void(System.Object)",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     }

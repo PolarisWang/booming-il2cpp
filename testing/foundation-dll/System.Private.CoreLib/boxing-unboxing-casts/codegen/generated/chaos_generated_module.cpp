@@ -6,6 +6,7 @@
 
 #include "chaos_runtime_host.h"
 #include "chaos_generated_module.h"
+#include <gc/gc_layout.h>
 
 // extern "C" symbols from native-aot.generated.cpp
 extern "C" const CodeRegistrationV0 chaos_codegen_code_registration;
@@ -95,9 +96,13 @@ bool ChaosGeneratedModuleActivate(ChaosRuntimeHost* host) {
     if (!host) return false;
     if (!host->IsInitialized()) return false;
 
-    return host->RegisterModule(
+    bool ok = host->RegisterModule(
         &chaos_codegen_code_registration,
         &chaos_codegen_metadata_registration,
         &chaos_codegen_options
     );
+    if (ok) {
+        ChaosRegisterGcLayouts();
+    }
+    return ok;
 }

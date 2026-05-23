@@ -27,6 +27,28 @@ extern "C" void InterpreterEntryDirect(
 #pragma warning(push)
 #pragma warning(disable: 4065 4244)
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_0(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_1(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_2(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_3(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_4(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_5(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_6(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_7(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_8(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_9(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_2_b__3_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_2_b__3_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_3_b__4_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_3_b__4_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_4_b__5_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_4_b__5_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_7_b__8_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_7_b__8_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_cctor(void);
+
 namespace chaos::il2cpp::codegen::DelegateCoreInvocationSubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup
@@ -211,6 +233,47 @@ struct chaos_type_System_Private_CoreLib_System_String
 	CHAOS_IL2CPP_UINT64 string_id = 0u;  // stable StringId, 0 = not yet materialized
 };
 
+
+// ── GcTypeLayout pointer offset arrays (computed via offsetof) ──
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Delegate[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_target)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_invocation_list))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_MulticastDelegate[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_target)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_invocation_list))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
+
+extern "C" void ChaosRegisterGcLayouts() {
+	auto& registry = chaos::il2cpp::runtime_core::GcLayoutRegistry::Instance();
+
+	registry.Register(12315111816129013648ULL, sizeof(chaos_type_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects), nullptr, 0);
+	registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
+	registry.Register(871985485055265288ULL, sizeof(chaos_type_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c), nullptr, 0);
+	registry.Register(7451128447593600616ULL, sizeof(chaos_type_System_Private_CoreLib_System_Delegate), kGcOffsets_chaos_type_System_Private_CoreLib_System_Delegate, 2);
+	registry.Register(6681393039041505440ULL, sizeof(chaos_type_System_Private_CoreLib_System_MulticastDelegate), kGcOffsets_chaos_type_System_Private_CoreLib_System_MulticastDelegate, 2);
+	registry.Register(14722794505377461205ULL, sizeof(chaos_type_System_Private_CoreLib_System_Action), nullptr, 0);
+	registry.Register(5474029880995115448ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly, 1);
+	registry.Register(17082367815459723707ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, 1);
+	registry.Register(4137207361503509124ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, 5);
+	registry.Register(17040031516751226236ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, 2);
+	registry.Register(10748947813473285525ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, 5);
+	registry.Register(1782325859292956794ULL, sizeof(chaos_type_System_Private_CoreLib_System_String), nullptr, 0);
+
+	// Register TypeInfoV0 address ranges for IsValidTypeInfoPointer.
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects), reinterpret_cast<uintptr_t>(&chaos_mt_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects) + sizeof(chaos_mt_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object) + sizeof(chaos_mt_System_Private_CoreLib_System_Object));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c), reinterpret_cast<uintptr_t>(&chaos_mt_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c) + sizeof(chaos_mt_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Delegate), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Delegate) + sizeof(chaos_mt_System_Private_CoreLib_System_Delegate));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_MulticastDelegate), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_MulticastDelegate) + sizeof(chaos_mt_System_Private_CoreLib_System_MulticastDelegate));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Action), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Action) + sizeof(chaos_mt_System_Private_CoreLib_System_Action));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_Assembly));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_String), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_String) + sizeof(chaos_mt_System_Private_CoreLib_System_String));
+}
+
 CHAOS_IL2CPP_INTPTR chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c____9 = 0;
 CHAOS_IL2CPP_INTPTR chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c____9__3_0 = 0;
 CHAOS_IL2CPP_INTPTR chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c____9__3_1 = 0;
@@ -227,8 +290,8 @@ using chaos_delegate_invocation_list = CHAOS_IL2CPP_VECTOR(CHAOS_IL2CPP_INTPTR);
 // struct chaos_type_System_Private_CoreLib_System_Delegate is defined by the
 // object model (EmitObjectModelDeclarations) with proper : public System_Object
 // inheritance. Only the size assertion lives here to avoid C2011 redefinition.
-static_assert(sizeof(chaos_type_System_Private_CoreLib_System_Delegate) == 56,
-	"System.Delegate struct size must be 56 bytes");
+static_assert(sizeof(chaos_type_System_Private_CoreLib_System_Delegate) == 48,
+	"System.Delegate struct size must be 48 bytes");
 
 CHAOS_IL2CPP_INTPTR chaos_delegate_allocate_with_type_info(const TypeInfo* chaos_delegate_type_info)
 {
@@ -349,6 +412,111 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
+
+
+// ── Bridge/import thunks ──
+extern "C" void* kChaosExternalRuntimeFnTable[];
+
+// Bridge/import thunk for: DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode
+extern "C" void chaos_bridge_thunk_0(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[2])();
+}
+
+// Bridge/import thunk for: DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects+<>c::<>9__3_0
+extern "C" void chaos_bridge_thunk_1(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[4])();
+}
+
+// Bridge/import thunk for: DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects+<>c::<>9__5_0
+extern "C" void chaos_bridge_thunk_10(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[13])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Delegate::get_Target:System.Object()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_11(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[14])();
+	return result;
+}
+
+// Bridge/import thunk for: DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects+<>c::<>9__5_1
+extern "C" void chaos_bridge_thunk_12(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[15])();
+}
+
+// Bridge/import thunk for: DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects+<>c::<>9__8_0
+extern "C" void chaos_bridge_thunk_13(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[16])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Delegate::GetInvocationList:System.Delegate[]()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_14(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[17])();
+	return result;
+}
+
+// Bridge/import thunk for: DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects+<>c::<>9__8_1
+extern "C" void chaos_bridge_thunk_15(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[18])();
+}
+
+// Bridge/import thunk for: DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects+<>c::<>9
+extern "C" void chaos_bridge_thunk_2(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[5])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)
+extern "C" void chaos_bridge_thunk_3(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[6])(chaos_fn_arg_0, chaos_fn_arg_1);
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Array::Empty<System.Object>:System.Object[]()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_4(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[7])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Delegate::DynamicInvoke:System.Object(System.Object[])
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_5(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[8])(chaos_fn_arg_0);
+	return result;
+}
+
+// Bridge/import thunk for: DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects+<>c::<>9__3_1
+extern "C" void chaos_bridge_thunk_6(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[9])();
+}
+
+// Bridge/import thunk for: DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects+<>c::<>9__4_0
+extern "C" void chaos_bridge_thunk_7(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[10])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Delegate::get_Method:System.Reflection.MethodInfo()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_8(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[11])();
+	return result;
+}
+
+// Bridge/import thunk for: DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects+<>c::<>9__4_1
+extern "C" void chaos_bridge_thunk_9(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[12])();
+}
 
 extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_0(void);
 extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_1(void);
@@ -511,11 +679,18 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
 		/* .type_count        = */ 3u,
-	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
+	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 -- deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
 	/* .custom_attribute_materializer = */ nullptr,
-
+	/* .custom_attribute_method_offset   = */ nullptr,
+	/* .custom_attribute_field_offset    = */ nullptr,
+	/* .custom_attribute_property_offset = */ nullptr,
+	/* .custom_attribute_param_offset    = */ nullptr,
+	/* .custom_attribute_method_count    = */ 0u,
+	/* .custom_attribute_field_count     = */ 0u,
+	/* .custom_attribute_property_count  = */ 0u,
+	/* .custom_attribute_param_count   = */ 0u,
 		/* .abi_manifest      = */ s_abi_manifest,
 	};
 	static const CHAOS_IL2CPP_UINT32 s_native_aot_module_id =
@@ -1184,39 +1359,39 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // matching during IR lowering of patched methods.
 
 static constexpr ReflectionQueryFieldDescriptor kReflFields_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects[1] = {
-	{ 0x04000001u, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
+	{ 0x04000001u, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode", "_exitCode", "System.Int32", 0LL, 3u },
 };
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects[10] = {
-	{ 0x0000000Du, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000000Eu, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000000Fu, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000010u, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000011u, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000012u, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000013u, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000014u, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000015u, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000016u, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u, nullptr },
+	{ 0x0000000Du, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Eu, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Fu, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000010u, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000011u, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000012u, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000013u, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000014u, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000015u, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000016u, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c[10] = {
-	{ 0x00000019u, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects+<>c::<Subject_2>b__3_0:System.Void()", "<Subject_2>b__3_0", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000001Au, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects+<>c::<Subject_2>b__3_1:System.Void()", "<Subject_2>b__3_1", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000001Bu, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects+<>c::<Subject_3>b__4_0:System.Void()", "<Subject_3>b__4_0", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000001Cu, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects+<>c::<Subject_3>b__4_1:System.Void()", "<Subject_3>b__4_1", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000001Du, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects+<>c::<Subject_4>b__5_0:System.Void()", "<Subject_4>b__5_0", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000001Eu, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects+<>c::<Subject_4>b__5_1:System.Void()", "<Subject_4>b__5_1", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000001Fu, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects+<>c::<Subject_7>b__8_0:System.Void()", "<Subject_7>b__8_0", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000020u, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects+<>c::<Subject_7>b__8_1:System.Void()", "<Subject_7>b__8_1", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000017u, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects+<>c::.cctor:System.Void()", ".cctor", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000018u, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects+<>c::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr },
+	{ 0x00000019u, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects+<>c::<Subject_2>b__3_0:System.Void()", "<Subject_2>b__3_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000001Au, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects+<>c::<Subject_2>b__3_1:System.Void()", "<Subject_2>b__3_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000001Bu, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects+<>c::<Subject_3>b__4_0:System.Void()", "<Subject_3>b__4_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000001Cu, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects+<>c::<Subject_3>b__4_1:System.Void()", "<Subject_3>b__4_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000001Du, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects+<>c::<Subject_4>b__5_0:System.Void()", "<Subject_4>b__5_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000001Eu, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects+<>c::<Subject_4>b__5_1:System.Void()", "<Subject_4>b__5_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000001Fu, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects+<>c::<Subject_7>b__8_0:System.Void()", "<Subject_7>b__8_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000020u, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects+<>c::<Subject_7>b__8_1:System.Void()", "<Subject_7>b__8_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000017u, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects+<>c::.cctor:System.Void()", ".cctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000018u, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects+<>c::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor kReflTypes[2] = {
 	{ 0x00000001u, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects", "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects", "", "DelegateCoreInvocationSubjects", "DelegateCoreInvocationSubjects", nullptr, kReflFields_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects, 1u, nullptr, 0u,
-	kReflMethods_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects, 10u, nullptr, 0u, 0u },
+nullptr, 0u,    kReflMethods_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects, 10u, nullptr, 0u, 0u },
 	{ 0x00000002u, "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects+<>c", "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects+<>c", "", "DelegateCoreInvocationSubjects+<>c", "DelegateCoreInvocationSubjects+<>c", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c, 10u, nullptr, 0u, 0u },
+nullptr, 0u,    kReflMethods_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c, 10u, nullptr, 0u, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor* kReflTypePtrs[2] = {
@@ -1224,7 +1399,7 @@ static const ReflectionQueryTypeDescriptor* kReflTypePtrs[2] = {
 	&kReflTypes[1],
 };
 
-static const ReflectionQueryImageDescriptor kReflImage = { "DelegateCoreInvocationSubjects", kReflTypePtrs, 2u };
+static const ReflectionQueryImageDescriptor kReflImage = { "DelegateCoreInvocationSubjects", kReflTypePtrs, 2u, 1, 0, 0, 0 };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via

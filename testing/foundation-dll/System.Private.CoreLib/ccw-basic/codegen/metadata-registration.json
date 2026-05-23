@@ -13,7 +13,8 @@
       "subjectId": "CcwBasicSubjects/CcwBasicSubjects",
       "name": "CcwBasicSubjects",
       "displayName": "CcwBasicSubjects",
-      "definitionSubjectId": "CcwBasicSubjects/CcwBasicSubjects"
+      "definitionSubjectId": "CcwBasicSubjects/CcwBasicSubjects",
+      "metadataToken": 33554434
     },
     {
       "registrationKind": "type",
@@ -21,7 +22,8 @@
       "subjectId": "CcwBasicSubjects/ISimpleMath",
       "name": "ISimpleMath",
       "displayName": "ISimpleMath",
-      "definitionSubjectId": "CcwBasicSubjects/ISimpleMath"
+      "definitionSubjectId": "CcwBasicSubjects/ISimpleMath",
+      "metadataToken": 33554435
     },
     {
       "registrationKind": "type",
@@ -29,7 +31,8 @@
       "subjectId": "CcwBasicSubjects/IConstantValue",
       "name": "IConstantValue",
       "displayName": "IConstantValue",
-      "definitionSubjectId": "CcwBasicSubjects/IConstantValue"
+      "definitionSubjectId": "CcwBasicSubjects/IConstantValue",
+      "metadataToken": 33554436
     },
     {
       "registrationKind": "type",
@@ -37,7 +40,8 @@
       "subjectId": "CcwBasicSubjects/SimpleMath",
       "name": "SimpleMath",
       "displayName": "SimpleMath",
-      "definitionSubjectId": "CcwBasicSubjects/SimpleMath"
+      "definitionSubjectId": "CcwBasicSubjects/SimpleMath",
+      "metadataToken": 33554437
     },
     {
       "registrationKind": "type",
@@ -45,7 +49,8 @@
       "subjectId": "CcwBasicSubjects/ConstantFortyTwo",
       "name": "ConstantFortyTwo",
       "displayName": "ConstantFortyTwo",
-      "definitionSubjectId": "CcwBasicSubjects/ConstantFortyTwo"
+      "definitionSubjectId": "CcwBasicSubjects/ConstantFortyTwo",
+      "metadataToken": 33554438
     },
     {
       "registrationKind": "type",
@@ -53,7 +58,8 @@
       "subjectId": "CcwBasicSubjects/DualInterfaceImpl",
       "name": "DualInterfaceImpl",
       "displayName": "DualInterfaceImpl",
-      "definitionSubjectId": "CcwBasicSubjects/DualInterfaceImpl"
+      "definitionSubjectId": "CcwBasicSubjects/DualInterfaceImpl",
+      "metadataToken": 33554439
     },
     {
       "registrationKind": "type",
@@ -61,7 +67,8 @@
       "subjectId": "CcwBasicSubjects/CcwBasicNativeEntry",
       "name": "CcwBasicNativeEntry",
       "displayName": "CcwBasicNativeEntry",
-      "definitionSubjectId": "CcwBasicSubjects/CcwBasicNativeEntry"
+      "definitionSubjectId": "CcwBasicSubjects/CcwBasicNativeEntry",
+      "metadataToken": 33554440
     },
     {
       "registrationKind": "field",
@@ -81,7 +88,8 @@
       "declaringTypeSubjectId": "CcwBasicSubjects/CcwBasicSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663297
     },
     {
       "registrationKind": "method",
@@ -92,7 +100,8 @@
       "declaringTypeSubjectId": "CcwBasicSubjects/CcwBasicSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663298
     },
     {
       "registrationKind": "method",
@@ -103,7 +112,8 @@
       "declaringTypeSubjectId": "CcwBasicSubjects/CcwBasicSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663299
     },
     {
       "registrationKind": "method",
@@ -114,7 +124,8 @@
       "declaringTypeSubjectId": "CcwBasicSubjects/CcwBasicSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663300
     },
     {
       "registrationKind": "method",
@@ -125,7 +136,8 @@
       "declaringTypeSubjectId": "CcwBasicSubjects/CcwBasicSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663301
     },
     {
       "registrationKind": "method",
@@ -136,7 +148,8 @@
       "declaringTypeSubjectId": "CcwBasicSubjects/ISimpleMath",
       "memberType": "System.Int32",
       "parameterCount": 2,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663302
     },
     {
       "registrationKind": "method",
@@ -147,7 +160,8 @@
       "declaringTypeSubjectId": "CcwBasicSubjects/ISimpleMath",
       "memberType": "System.Int32",
       "parameterCount": 2,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663303
     },
     {
       "registrationKind": "method",
@@ -158,7 +172,8 @@
       "declaringTypeSubjectId": "CcwBasicSubjects/IConstantValue",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663304
     },
     {
       "registrationKind": "method",
@@ -169,7 +184,8 @@
       "declaringTypeSubjectId": "CcwBasicSubjects/SimpleMath",
       "memberType": "System.Int32",
       "parameterCount": 2,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663305
     },
     {
       "registrationKind": "method",
@@ -180,7 +196,8 @@
       "declaringTypeSubjectId": "CcwBasicSubjects/SimpleMath",
       "memberType": "System.Int32",
       "parameterCount": 2,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663306
     },
     {
       "registrationKind": "method",
@@ -191,7 +208,8 @@
       "declaringTypeSubjectId": "CcwBasicSubjects/SimpleMath",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663307
     },
     {
       "registrationKind": "method",
@@ -202,7 +220,8 @@
       "declaringTypeSubjectId": "CcwBasicSubjects/ConstantFortyTwo",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663308
     },
     {
       "registrationKind": "method",
@@ -213,7 +232,8 @@
       "declaringTypeSubjectId": "CcwBasicSubjects/ConstantFortyTwo",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663309
     },
     {
       "registrationKind": "method",
@@ -224,7 +244,8 @@
       "declaringTypeSubjectId": "CcwBasicSubjects/DualInterfaceImpl",
       "memberType": "System.Int32",
       "parameterCount": 2,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663310
     },
     {
       "registrationKind": "method",
@@ -235,7 +256,8 @@
       "declaringTypeSubjectId": "CcwBasicSubjects/DualInterfaceImpl",
       "memberType": "System.Int32",
       "parameterCount": 2,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663311
     },
     {
       "registrationKind": "method",
@@ -246,7 +268,8 @@
       "declaringTypeSubjectId": "CcwBasicSubjects/DualInterfaceImpl",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663312
     },
     {
       "registrationKind": "method",
@@ -257,7 +280,8 @@
       "declaringTypeSubjectId": "CcwBasicSubjects/DualInterfaceImpl",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663313
     },
     {
       "registrationKind": "method",
@@ -268,7 +292,8 @@
       "declaringTypeSubjectId": "CcwBasicSubjects/CcwBasicNativeEntry",
       "memberType": "System.Int32",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663314
     },
     {
       "registrationKind": "method",
@@ -279,7 +304,8 @@
       "declaringTypeSubjectId": "CcwBasicSubjects/CcwBasicNativeEntry",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663315
     },
     {
       "registrationKind": "method",
@@ -290,7 +316,8 @@
       "declaringTypeSubjectId": "CcwBasicSubjects/CcwBasicNativeEntry",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663316
     },
     {
       "registrationKind": "method",
@@ -301,7 +328,8 @@
       "declaringTypeSubjectId": "CcwBasicSubjects/CcwBasicNativeEntry",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663317
     },
     {
       "registrationKind": "method",
@@ -312,7 +340,8 @@
       "declaringTypeSubjectId": "CcwBasicSubjects/CcwBasicNativeEntry",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663318
     },
     {
       "registrationKind": "parameter",

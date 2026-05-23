@@ -1,4 +1,4 @@
-#include <chaos/common.h>
+﻿#include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
 #include <chaos/eh.h>
@@ -16,6 +16,7 @@
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 #include "enum_metadata.generated.h"
+#include "enum_stubs.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -25,6 +26,26 @@ extern "C" void InterpreterEntryDirect(
 
 #pragma warning(push)
 #pragma warning(disable: 4065 4244)
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_BasicImpl_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DispatchBasicSubjects_BasicImpl__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" void DispatchBasicSubjects_Calculator__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_Run_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus(void);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd(void);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub(void);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue(void);
+extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_0(void);
+extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_1(void);
+extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_2(void);
+extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_3(void);
+extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_4(void);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_StatusProvider_GetStatusCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DispatchBasicSubjects_StatusProvider__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute__ctor_ComInterfaceType(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
 
 namespace chaos::il2cpp::codegen::DispatchBasicSubjects {
 
@@ -216,6 +237,43 @@ struct chaos_type_System_Private_CoreLib_System_String
 	CHAOS_IL2CPP_UINT64 string_id = 0u;  // stable StringId, 0 = not yet materialized
 };
 
+
+// ── GcTypeLayout pointer offset arrays (computed via offsetof) ──
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
+
+extern "C" void ChaosRegisterGcLayouts() {
+	auto& registry = chaos::il2cpp::runtime_core::GcLayoutRegistry::Instance();
+
+	registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
+	registry.Register(5722114412902280165ULL, sizeof(chaos_type_DispatchBasicSubjects_BasicImpl), nullptr, 0);
+	registry.Register(5786799786101565947ULL, sizeof(chaos_type_DispatchBasicSubjects_Calculator), nullptr, 0);
+	registry.Register(13619514316044602496ULL, sizeof(chaos_type_DispatchBasicSubjects_DispatchBasicSubjects), nullptr, 0);
+	registry.Register(11732973143578276300ULL, sizeof(chaos_type_DispatchBasicSubjects_StatusProvider), nullptr, 0);
+	registry.Register(5474029880995115448ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly, 1);
+	registry.Register(17082367815459723707ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, 1);
+	registry.Register(4137207361503509124ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, 5);
+	registry.Register(17040031516751226236ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, 2);
+	registry.Register(10748947813473285525ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, 5);
+	registry.Register(1782325859292956794ULL, sizeof(chaos_type_System_Private_CoreLib_System_String), nullptr, 0);
+
+	// Register TypeInfoV0 address ranges for IsValidTypeInfoPointer.
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object) + sizeof(chaos_mt_System_Private_CoreLib_System_Object));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_DispatchBasicSubjects_BasicImpl), reinterpret_cast<uintptr_t>(&chaos_mt_DispatchBasicSubjects_BasicImpl) + sizeof(chaos_mt_DispatchBasicSubjects_BasicImpl));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_DispatchBasicSubjects_Calculator), reinterpret_cast<uintptr_t>(&chaos_mt_DispatchBasicSubjects_Calculator) + sizeof(chaos_mt_DispatchBasicSubjects_Calculator));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_DispatchBasicSubjects_DispatchBasicSubjects), reinterpret_cast<uintptr_t>(&chaos_mt_DispatchBasicSubjects_DispatchBasicSubjects) + sizeof(chaos_mt_DispatchBasicSubjects_DispatchBasicSubjects));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_DispatchBasicSubjects_StatusProvider), reinterpret_cast<uintptr_t>(&chaos_mt_DispatchBasicSubjects_StatusProvider) + sizeof(chaos_mt_DispatchBasicSubjects_StatusProvider));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_Assembly));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_String), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_String) + sizeof(chaos_mt_System_Private_CoreLib_System_String));
+}
+
 CHAOS_IL2CPP_INT32 chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = 0;
 
 static void chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
@@ -233,6 +291,22 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
+
+
+// ── Bridge/import thunks ──
+extern "C" void* kChaosExternalRuntimeFnTable[];
+
+// Bridge/import thunk for: DispatchBasicSubjects/DispatchBasicSubjects::_exitCode
+extern "C" void chaos_bridge_thunk_0(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[0])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Attribute::.ctor:System.Void()
+extern "C" void chaos_bridge_thunk_1(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[2])();
+}
 
 extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_0(void);
 extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_1(void);
@@ -440,11 +514,18 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
 		/* .type_count        = */ 10u,
-	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
+	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 -- deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
 	/* .custom_attribute_materializer = */ nullptr,
-
+	/* .custom_attribute_method_offset   = */ nullptr,
+	/* .custom_attribute_field_offset    = */ nullptr,
+	/* .custom_attribute_property_offset = */ nullptr,
+	/* .custom_attribute_param_offset    = */ nullptr,
+	/* .custom_attribute_method_count    = */ 0u,
+	/* .custom_attribute_field_count     = */ 0u,
+	/* .custom_attribute_property_count  = */ 0u,
+	/* .custom_attribute_param_count   = */ 0u,
 		/* .abi_manifest      = */ s_abi_manifest,
 	};
 	static const CHAOS_IL2CPP_UINT32 s_native_aot_module_id =
@@ -1124,57 +1205,57 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // matching during IR lowering of patched methods.
 
 static constexpr ReflectionQueryFieldDescriptor kReflFields_DispatchBasicSubjects_DispatchBasicSubjects[1] = {
-	{ 0u, "DispatchBasicSubjects/DispatchBasicSubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
+	{ 0x04000001u, "DispatchBasicSubjects/DispatchBasicSubjects::_exitCode", "_exitCode", "System.Int32", 0LL, 3u },
 };
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_DispatchBasicSubjects_DispatchBasicSubjects[5] = {
-	{ 0u, "DispatchBasicSubjects/DispatchBasicSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "DispatchBasicSubjects/DispatchBasicSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u },
-	{ 0u, "DispatchBasicSubjects/DispatchBasicSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u },
-	{ 0u, "DispatchBasicSubjects/DispatchBasicSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u },
-	{ 0u, "DispatchBasicSubjects/DispatchBasicSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u },
+	{ 0x0000000Bu, "DispatchBasicSubjects/DispatchBasicSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Cu, "DispatchBasicSubjects/DispatchBasicSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Du, "DispatchBasicSubjects/DispatchBasicSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Eu, "DispatchBasicSubjects/DispatchBasicSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Fu, "DispatchBasicSubjects/DispatchBasicSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_DispatchBasicSubjects_BasicImpl[2] = {
-	{ 0u, "DispatchBasicSubjects/BasicImpl::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u },
-	{ 0u, "DispatchBasicSubjects/BasicImpl::GetValue:System.Int32()", "GetValue", "System.Void", 0, nullptr, 0u },
+	{ 0x0000001Au, "DispatchBasicSubjects/BasicImpl::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000019u, "DispatchBasicSubjects/BasicImpl::GetValue:System.Int32()", "GetValue", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_DispatchBasicSubjects_Calculator[3] = {
-	{ 0u, "DispatchBasicSubjects/Calculator::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u },
-	{ 0u, "DispatchBasicSubjects/Calculator::Add:System.Int32(System.Int32,System.Int32)", "Add", "System.Void", 0, nullptr, 0u },
-	{ 0u, "DispatchBasicSubjects/Calculator::Subtract:System.Int32(System.Int32,System.Int32)", "Subtract", "System.Void", 0, nullptr, 0u },
+	{ 0x00000016u, "DispatchBasicSubjects/Calculator::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000014u, "DispatchBasicSubjects/Calculator::Add:System.Int32(System.Int32,System.Int32)", "Add", "System.Int32", 2, nullptr, 0u, nullptr, 0u },
+	{ 0x00000015u, "DispatchBasicSubjects/Calculator::Subtract:System.Int32(System.Int32,System.Int32)", "Subtract", "System.Int32", 2, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_DispatchBasicSubjects_DispatchBasicNativeEntry[5] = {
-	{ 0u, "DispatchBasicSubjects/DispatchBasicNativeEntry::Run:System.Int32(System.Int32)", "Run", "System.Void", 0, nullptr, 0u },
-	{ 0u, "DispatchBasicSubjects/DispatchBasicNativeEntry::TestDualGetStatus:System.Int32()", "TestDualGetStatus", "System.Void", 0, nullptr, 0u },
-	{ 0u, "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchAdd:System.Int32()", "TestIDispatchAdd", "System.Void", 0, nullptr, 0u },
-	{ 0u, "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchSub:System.Int32()", "TestIDispatchSub", "System.Void", 0, nullptr, 0u },
-	{ 0u, "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIUnknownGetValue:System.Int32()", "TestIUnknownGetValue", "System.Void", 0, nullptr, 0u },
+	{ 0x0000001Bu, "DispatchBasicSubjects/DispatchBasicNativeEntry::Run:System.Int32(System.Int32)", "Run", "System.Int32", 1, nullptr, 0u, nullptr, 0u },
+	{ 0x0000001Eu, "DispatchBasicSubjects/DispatchBasicNativeEntry::TestDualGetStatus:System.Int32()", "TestDualGetStatus", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000001Cu, "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchAdd:System.Int32()", "TestIDispatchAdd", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000001Du, "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchSub:System.Int32()", "TestIDispatchSub", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000001Fu, "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIUnknownGetValue:System.Int32()", "TestIUnknownGetValue", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_DispatchBasicSubjects_StatusProvider[2] = {
-	{ 0u, "DispatchBasicSubjects/StatusProvider::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u },
-	{ 0u, "DispatchBasicSubjects/StatusProvider::GetStatusCode:System.Int32()", "GetStatusCode", "System.Void", 0, nullptr, 0u },
+	{ 0x00000018u, "DispatchBasicSubjects/StatusProvider::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000017u, "DispatchBasicSubjects/StatusProvider::GetStatusCode:System.Int32()", "GetStatusCode", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute[1] = {
-	{ 0u, "DispatchBasicSubjects/System.Runtime.InteropServices.ComInterfaceTypeAttribute::.ctor:System.Void(ComInterfaceType)", ".ctor", "System.Void", 0, nullptr, 0u },
+	{ 0x00000020u, "DispatchBasicSubjects/System.Runtime.InteropServices.ComInterfaceTypeAttribute::.ctor:System.Void(ComInterfaceType)", ".ctor", "System.Void", 1, nullptr, 0u, nullptr, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor kReflTypes[6] = {
-	{ 0u, "DispatchBasicSubjects/DispatchBasicSubjects", "DispatchBasicSubjects/DispatchBasicSubjects", "", "DispatchBasicSubjects", "DispatchBasicSubjects", nullptr, kReflFields_DispatchBasicSubjects_DispatchBasicSubjects, 1u, nullptr, 0u,
-	kReflMethods_DispatchBasicSubjects_DispatchBasicSubjects, 5u },
-	{ 0u, "DispatchBasicSubjects/BasicImpl", "DispatchBasicSubjects/BasicImpl", "", "BasicImpl", "BasicImpl", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_DispatchBasicSubjects_BasicImpl, 2u },
-	{ 0u, "DispatchBasicSubjects/Calculator", "DispatchBasicSubjects/Calculator", "", "Calculator", "Calculator", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_DispatchBasicSubjects_Calculator, 3u },
-	{ 0u, "DispatchBasicSubjects/DispatchBasicNativeEntry", "DispatchBasicSubjects/DispatchBasicNativeEntry", "", "DispatchBasicNativeEntry", "DispatchBasicNativeEntry", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_DispatchBasicSubjects_DispatchBasicNativeEntry, 5u },
-	{ 0u, "DispatchBasicSubjects/StatusProvider", "DispatchBasicSubjects/StatusProvider", "", "StatusProvider", "StatusProvider", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_DispatchBasicSubjects_StatusProvider, 2u },
-	{ 0u, "DispatchBasicSubjects/System.Runtime.InteropServices.ComInterfaceTypeAttribute", "DispatchBasicSubjects/System.Runtime.InteropServices.ComInterfaceTypeAttribute", "System.Runtime.InteropServices", "System.Runtime.InteropServices.ComInterfaceTypeAttribute", "System.Runtime.InteropServices.ComInterfaceTypeAttribute", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute, 1u },
+	{ 0x00000001u, "DispatchBasicSubjects/DispatchBasicSubjects", "DispatchBasicSubjects/DispatchBasicSubjects", "", "DispatchBasicSubjects", "DispatchBasicSubjects", nullptr, kReflFields_DispatchBasicSubjects_DispatchBasicSubjects, 1u, nullptr, 0u,
+nullptr, 0u,    kReflMethods_DispatchBasicSubjects_DispatchBasicSubjects, 5u, nullptr, 0u, 0u },
+	{ 0x00000007u, "DispatchBasicSubjects/BasicImpl", "DispatchBasicSubjects/BasicImpl", "", "BasicImpl", "BasicImpl", nullptr, nullptr, 0u, nullptr, 0u,
+nullptr, 0u,    kReflMethods_DispatchBasicSubjects_BasicImpl, 2u, nullptr, 0u, 0u },
+	{ 0x00000005u, "DispatchBasicSubjects/Calculator", "DispatchBasicSubjects/Calculator", "", "Calculator", "Calculator", nullptr, nullptr, 0u, nullptr, 0u,
+nullptr, 0u,    kReflMethods_DispatchBasicSubjects_Calculator, 3u, nullptr, 0u, 0u },
+	{ 0x00000008u, "DispatchBasicSubjects/DispatchBasicNativeEntry", "DispatchBasicSubjects/DispatchBasicNativeEntry", "", "DispatchBasicNativeEntry", "DispatchBasicNativeEntry", nullptr, nullptr, 0u, nullptr, 0u,
+nullptr, 0u,    kReflMethods_DispatchBasicSubjects_DispatchBasicNativeEntry, 5u, nullptr, 0u, 0u },
+	{ 0x00000006u, "DispatchBasicSubjects/StatusProvider", "DispatchBasicSubjects/StatusProvider", "", "StatusProvider", "StatusProvider", nullptr, nullptr, 0u, nullptr, 0u,
+nullptr, 0u,    kReflMethods_DispatchBasicSubjects_StatusProvider, 2u, nullptr, 0u, 0u },
+	{ 0x00000009u, "DispatchBasicSubjects/System.Runtime.InteropServices.ComInterfaceTypeAttribute", "DispatchBasicSubjects/System.Runtime.InteropServices.ComInterfaceTypeAttribute", "System.Runtime.InteropServices", "System.Runtime.InteropServices.ComInterfaceTypeAttribute", "System.Runtime.InteropServices.ComInterfaceTypeAttribute", nullptr, nullptr, 0u, nullptr, 0u,
+nullptr, 0u,    kReflMethods_DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute, 1u, nullptr, 0u, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor* kReflTypePtrs[6] = {
@@ -1186,7 +1267,7 @@ static const ReflectionQueryTypeDescriptor* kReflTypePtrs[6] = {
 	&kReflTypes[5],
 };
 
-static const ReflectionQueryImageDescriptor kReflImage = { "DispatchBasicSubjects", kReflTypePtrs, 6u };
+static const ReflectionQueryImageDescriptor kReflImage = { "DispatchBasicSubjects", kReflTypePtrs, 6u, 1, 0, 0, 0 };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via

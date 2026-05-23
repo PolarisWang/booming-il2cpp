@@ -27,6 +27,18 @@ extern "C" void InterpreterEntryDirect(
 #pragma warning(push)
 #pragma warning(disable: 4065 4244)
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0(void);
+extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_1(void);
+extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_2(void);
+extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_3(void);
+extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_4(void);
+extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5(void);
+extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_6(void);
+extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_7(void);
+extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_8(void);
+extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_9(void);
+
 namespace chaos::il2cpp::codegen::GarbageCollectionSubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup
@@ -387,6 +399,21 @@ CHAOS_IL2CPP_INTPTR chaos_reflection_resolve_method_handle(CHAOS_IL2CPP_INTPTR c
 				return static_cast<CHAOS_IL2CPP_INTPTR>(112048855u);
 			}
 
+			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "Subject_7") == 0)
+			{
+				return static_cast<CHAOS_IL2CPP_INTPTR>(111927144u);
+			}
+
+			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "Subject_8") == 0)
+			{
+				return static_cast<CHAOS_IL2CPP_INTPTR>(104104061u);
+			}
+
+			if (CHAOS_IL2CPP_STRCMP(chaos_method_name, "Subject_9") == 0)
+			{
+				return static_cast<CHAOS_IL2CPP_INTPTR>(108942566u);
+			}
+
 			break;
 		default:
 			break;
@@ -497,6 +524,40 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionInvokeMethod(CHAOS_IL2CPP_INTPTR chaos_method
 	return 0;
 }
 
+
+// ── GcTypeLayout pointer offset arrays (computed via offsetof) ──
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Type[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_name_value))};
+
+extern "C" void ChaosRegisterGcLayouts() {
+	auto& registry = chaos::il2cpp::runtime_core::GcLayoutRegistry::Instance();
+
+	registry.Register(6074204908258229484ULL, sizeof(chaos_type_GarbageCollectionSubjects_GarbageCollectionSubjects), nullptr, 0);
+	registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
+	registry.Register(5474029880995115448ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly, 1);
+	registry.Register(17082367815459723707ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, 1);
+	registry.Register(4137207361503509124ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, 5);
+	registry.Register(17040031516751226236ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, 2);
+	registry.Register(10748947813473285525ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, 5);
+	registry.Register(1782325859292956794ULL, sizeof(chaos_type_System_Private_CoreLib_System_String), nullptr, 0);
+	registry.Register(3222174513575444759ULL, sizeof(chaos_type_System_Private_CoreLib_System_Type), kGcOffsets_chaos_type_System_Private_CoreLib_System_Type, 2);
+
+	// Register TypeInfoV0 address ranges for IsValidTypeInfoPointer.
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_GarbageCollectionSubjects_GarbageCollectionSubjects), reinterpret_cast<uintptr_t>(&chaos_mt_GarbageCollectionSubjects_GarbageCollectionSubjects) + sizeof(chaos_mt_GarbageCollectionSubjects_GarbageCollectionSubjects));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object) + sizeof(chaos_mt_System_Private_CoreLib_System_Object));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_Assembly));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_String), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_String) + sizeof(chaos_mt_System_Private_CoreLib_System_String));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Type), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Type) + sizeof(chaos_mt_System_Private_CoreLib_System_Type));
+}
+
 CHAOS_IL2CPP_INT32 chaos_static_GarbageCollectionSubjects_GarbageCollectionSubjects___exitCode = 0;
 
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Array__CreateInstance_System_Array_System_Type_System_Int32_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
@@ -504,19 +565,29 @@ static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_
 	return ChaosArrayCreateInstance(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
+static void chaos_external_runtime_System_Private_CoreLib_System_GC__Collect_System_Void_System_Int32_System_GCCollectionMode_(CHAOS_IL2CPP_INT32 chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
+{
+	chaos_gc_collect_with_mode(chaos_fn_arg_0, chaos_fn_arg_1);
+}
+
+static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_GC__CollectionCount_System_Int32_System_Int32_(CHAOS_IL2CPP_INT32 chaos_fn_arg_0)
+{
+	return chaos_gc_get_collection_count(chaos_fn_arg_0);
+}
+
 static CHAOS_IL2CPP_INT64 chaos_external_runtime_System_Private_CoreLib_System_GC__GetTotalMemory_System_Int64_System_Boolean_(CHAOS_IL2CPP_INT32 chaos_fn_arg_0)
 {
 	return chaos_gc_get_total_memory(chaos_fn_arg_0);
 }
 
+static CHAOS_IL2CPP_INT64 chaos_external_runtime_System_Private_CoreLib_System_GC__GetTotalPauseDuration_System_TimeSpan__(void)
+{
+	return chaos_gc_get_total_pause_duration();
+}
+
 static void chaos_external_runtime_System_Private_CoreLib_System_GC__KeepAlive_System_Void_System_Object_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	chaos_gc_keepalive(chaos_fn_arg_0);
-}
-
-static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	return ChaosObjectGetHashCode(chaos_fn_arg_0);
 }
 
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
@@ -535,6 +606,69 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
 
+
+// ── Bridge/import thunks ──
+extern "C" void* kChaosExternalRuntimeFnTable[];
+
+// Bridge/import thunk for: System.Private.CoreLib/System.GC::Collect:System.Void()
+extern "C" void chaos_bridge_thunk_0(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[0])();
+}
+
+// Bridge/import thunk for: GarbageCollectionSubjects/GarbageCollectionSubjects::_exitCode
+extern "C" void chaos_bridge_thunk_1(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[1])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.GC::WaitForPendingFinalizers:System.Void()
+extern "C" void chaos_bridge_thunk_2(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[2])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.GC::GetGeneration:System.Int32(System.WeakReference)
+extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_3(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[4])(chaos_fn_arg_0);
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Byte
+extern "C" void chaos_bridge_thunk_4(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[5])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Array::get_Length:System.Int32()
+extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_5(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)()>(kChaosExternalRuntimeFnTable[8])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.GC::GetGCMemoryInfo:System.GCMemoryInfo()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_6(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[10])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.GCMemoryInfo::get_TotalCommittedBytes:System.Int64()
+extern "C" CHAOS_IL2CPP_INT64 chaos_bridge_thunk_7(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INT64(*)()>(kChaosExternalRuntimeFnTable[11])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()
+extern "C" CHAOS_IL2CPP_INT64 chaos_bridge_thunk_8(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INT64(*)()>(kChaosExternalRuntimeFnTable[15])();
+	return result;
+}
+
 extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0(void);
 extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_1(void);
 extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_2(void);
@@ -542,6 +676,9 @@ extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_3(vo
 extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_4(void);
 extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5(void);
 extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_6(void);
+extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_7(void);
+extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_8(void);
+extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_9(void);
 
 
 // Forward declaration for module.image (defined in Step 3 below)
@@ -555,7 +692,10 @@ extern "C" const int kAotMethodCount;
 // so CHAOS_ABI_MANIFEST_ENTRIES/CHAOS_ABI_MANIFEST_PARAMETERS find them by offset.
 
 // Param offset prefix-sum: [i] = cumulative parameter count before method i
-static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[8] = {
+static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[11] = {
+	0u,
+	0u,
+	0u,
 	0u,
 	0u,
 	0u,
@@ -568,14 +708,14 @@ static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[8] = {
 
 static constexpr struct {
 	::ChaosAbiManifestV0 header;
-	::ChaosAbiMethodEntryV0 entries[7];
+	::ChaosAbiMethodEntryV0 entries[10];
 	CHAOS_IL2CPP_UINT8 params[1];
 } s_abi_manifest_storage = {
 	{
 		CHAOS_ABI_MANIFEST_VERSION,
-		7u,
+		10u,
 		0u,
-		892911165u,  // FNV-1a over entries+params
+		3120489557u,  // FNV-1a over entries+params
 		s_abi_manifest_prefix_sum  // O(1) prefix-sum
 	},
 	{
@@ -586,6 +726,9 @@ static constexpr struct {
 		{ 0u, 0u },  // GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_4
 		{ 0u, 0u },  // GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5
 		{ 0u, 0u },  // GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_6
+		{ 0u, 0u },  // GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_7
+		{ 0u, 0u },  // GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_8
+		{ 0u, 0u },  // GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_9
 	},
 	{
 	},
@@ -646,18 +789,25 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
 		/* .type_count        = */ 2u,
-	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
+	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 -- deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
 	/* .custom_attribute_materializer = */ nullptr,
-
+	/* .custom_attribute_method_offset   = */ nullptr,
+	/* .custom_attribute_field_offset    = */ nullptr,
+	/* .custom_attribute_property_offset = */ nullptr,
+	/* .custom_attribute_param_offset    = */ nullptr,
+	/* .custom_attribute_method_count    = */ 0u,
+	/* .custom_attribute_field_count     = */ 0u,
+	/* .custom_attribute_property_count  = */ 0u,
+	/* .custom_attribute_param_count   = */ 0u,
 		/* .abi_manifest      = */ s_abi_manifest,
 	};
 	static const CHAOS_IL2CPP_UINT32 s_native_aot_module_id =
 		::chaos::il2cpp::runtime_core::RegisterModule("GarbageCollectionSubjects", &s_native_aot_module);
 // ── Hotpatch name index + dispatch table ────────────────────
 // Method name index entries
-static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[7] = {
+static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[10] = {
 	{ "Subject_0", 0x00000003u, 0u },  // GarbageCollectionSubjects
 	{ "Subject_1", 0x00000004u, 0u },  // GarbageCollectionSubjects
 	{ "Subject_2", 0x00000005u, 0u },  // GarbageCollectionSubjects
@@ -665,15 +815,18 @@ static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[7] = {
 	{ "Subject_4", 0x00000007u, 0u },  // GarbageCollectionSubjects
 	{ "Subject_5", 0x00000008u, 0u },  // GarbageCollectionSubjects
 	{ "Subject_6", 0x00000009u, 0u },  // GarbageCollectionSubjects
+	{ "Subject_7", 0x0000000Au, 0u },  // GarbageCollectionSubjects
+	{ "Subject_8", 0x0000000Bu, 0u },  // GarbageCollectionSubjects
+	{ "Subject_9", 0x0000000Cu, 0u },  // GarbageCollectionSubjects
 };
 
 // Type name index entries (namespace, short_name)
 static constexpr HotpatchTypeEntryV0 s_hotpatch_types[1] = {
-	{ "GarbageCollectionSubjects", "", 0u, 7u },
+	{ "GarbageCollectionSubjects", "", 0u, 10u },
 };
 
 // Token→Slot mapping (sorted by token for binary search)
-static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[7] = {
+static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[10] = {
 	{ 0x00000003u, 0u },
 	{ 0x00000004u, 1u },
 	{ 0x00000005u, 2u },
@@ -681,10 +834,13 @@ static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[7] = {
 	{ 0x00000007u, 4u },
 	{ 0x00000008u, 5u },
 	{ 0x00000009u, 6u },
+	{ 0x0000000Au, 7u },
+	{ 0x0000000Bu, 8u },
+	{ 0x0000000Cu, 9u },
 };
 
 // Dispatch table (function pointers)
-static HotpatchEntryV0 s_hotpatch_entries[7] = {
+static HotpatchEntryV0 s_hotpatch_entries[10] = {
 	{ reinterpret_cast<void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // GarbageCollectionSubjects::Subject_0
 	{ reinterpret_cast<void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // GarbageCollectionSubjects::Subject_1
 	{ reinterpret_cast<void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // GarbageCollectionSubjects::Subject_2
@@ -692,6 +848,9 @@ static HotpatchEntryV0 s_hotpatch_entries[7] = {
 	{ reinterpret_cast<void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // GarbageCollectionSubjects::Subject_4
 	{ reinterpret_cast<void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // GarbageCollectionSubjects::Subject_5
 	{ reinterpret_cast<void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_6), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // GarbageCollectionSubjects::Subject_6
+	{ reinterpret_cast<void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_7), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // GarbageCollectionSubjects::Subject_7
+	{ reinterpret_cast<void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_8), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // GarbageCollectionSubjects::Subject_8
+	{ reinterpret_cast<void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_9), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // GarbageCollectionSubjects::Subject_9
 };
 
 // Module hotpatch bundle
@@ -700,11 +859,11 @@ static constexpr HotpatchModuleV0 s_hotpatch_module = {
 	s_hotpatch_types,
 	1u,
 	s_hotpatch_methods,
-	7u,
+	10u,
 	s_hotpatch_slots,
-	7u,
+	10u,
 	s_hotpatch_entries,
-	7u,
+	10u,
 };
 
 // Expose hotpatch module to BootstrapRuntime
@@ -713,7 +872,7 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // ── External Runtime Dispatch Table ──────────────────────────
 // Startup-time-resolved function pointers for cross-assembly calls.
 
-extern "C" const char* kChaosExternalRuntimeSubjects[12] = {
+extern "C" const char* kChaosExternalRuntimeSubjects[16] = {
 	"System.Private.CoreLib/System.GC::Collect:System.Void()",
 	"GarbageCollectionSubjects/GarbageCollectionSubjects::_exitCode",
 	"System.Private.CoreLib/System.GC::WaitForPendingFinalizers:System.Void()",
@@ -722,13 +881,17 @@ extern "C" const char* kChaosExternalRuntimeSubjects[12] = {
 	"System.Private.CoreLib/System.Byte",
 	"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
 	"System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)",
-	"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+	"System.Private.CoreLib/System.Array::get_Length:System.Int32()",
 	"System.Private.CoreLib/System.GC::GetTotalMemory:System.Int64(System.Boolean)",
 	"System.Private.CoreLib/System.GC::GetGCMemoryInfo:System.GCMemoryInfo()",
-	"System.Private.CoreLib/System.GCMemoryInfo::GetHashCode:System.Int32()",
+	"System.Private.CoreLib/System.GCMemoryInfo::get_TotalCommittedBytes:System.Int64()",
+	"System.Private.CoreLib/System.GC::Collect:System.Void(System.Int32,System.GCCollectionMode)",
+	"System.Private.CoreLib/System.GC::CollectionCount:System.Int32(System.Int32)",
+	"System.Private.CoreLib/System.GC::GetTotalPauseDuration:System.TimeSpan()",
+	"System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()",
 };
 
-extern "C" void* kChaosExternalRuntimeFnTable[12] = {
+extern "C" void* kChaosExternalRuntimeFnTable[16] = {
 	nullptr,
 	nullptr,
 	nullptr,
@@ -737,17 +900,21 @@ extern "C" void* kChaosExternalRuntimeFnTable[12] = {
 	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Array__CreateInstance_System_Array_System_Type_System_Int32_),
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__),
+	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_GC__GetTotalMemory_System_Int64_System_Boolean_),
 	nullptr,
 	nullptr,
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_GC__Collect_System_Void_System_Int32_System_GCCollectionMode_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_GC__CollectionCount_System_Int32_System_Int32_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_GC__GetTotalPauseDuration_System_TimeSpan__),
+	nullptr,
 };
 
-extern "C" int32_t kChaosExternalRuntimeCount = 12;
+extern "C" int32_t kChaosExternalRuntimeCount = 16;
 // (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
-static void (*kAotMethods[7])() = {
+static void (*kAotMethods[10])() = {
 	reinterpret_cast<void(*)()>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0),
 	reinterpret_cast<void(*)()>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_1),
 	reinterpret_cast<void(*)()>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_2),
@@ -755,6 +922,9 @@ static void (*kAotMethods[7])() = {
 	reinterpret_cast<void(*)()>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_4),
 	reinterpret_cast<void(*)()>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5),
 	reinterpret_cast<void(*)()>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_6),
+	reinterpret_cast<void(*)()>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_7),
+	reinterpret_cast<void(*)()>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_8),
+	reinterpret_cast<void(*)()>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_9),
 };
 
 // ── Benchmark wrappers (kBenchmarkWrappers[]) ──────────────────────────
@@ -762,7 +932,7 @@ static void (*kAotMethods[7])() = {
 // String params receive a valid StringId; all others receive 0.
 // Instance methods receive a sentinel this-pointer so they don't crash on null.
 static CHAOS_IL2CPP_UINT8 __g_benchmark_this_sentinel = 0;
-extern "C" void (*kBenchmarkWrappers[7])() = {
+extern "C" void (*kBenchmarkWrappers[10])() = {
 	[]() {kAotMethods[0]();},
 	[]() {kAotMethods[1]();},
 	[]() {kAotMethods[2]();},
@@ -770,6 +940,9 @@ extern "C" void (*kBenchmarkWrappers[7])() = {
 	[]() {kAotMethods[4]();},
 	[]() {kAotMethods[5]();},
 	[]() {kAotMethods[6]();},
+	[]() {kAotMethods[7]();},
+	[]() {kAotMethods[8]();},
+	[]() {kAotMethods[9]();},
 };
 
 // ── Subject entry index mapping ─────────────────────────────────
@@ -777,8 +950,8 @@ extern "C" void (*kBenchmarkWrappers[7])() = {
 // Used by runtime-entry.cpp to route --benchmark N to the correct
 // AOT method slot, since kAotMethods[] includes lambdas/closures
 // that shift subject methods to non-contiguous indices.
-extern "C" const int kSubjectEntryCount = 7;
-extern "C" const int kSubjectEntryIndices[7] = {
+extern "C" const int kSubjectEntryCount = 10;
+extern "C" const int kSubjectEntryIndices[10] = {
 	0,
 	1,
 	2,
@@ -786,6 +959,9 @@ extern "C" const int kSubjectEntryIndices[7] = {
 	4,
 	5,
 	6,
+	7,
+	8,
+	9,
 };
 
 // Single-method dispatch via hotpatch dispatch table.
@@ -912,7 +1088,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry4;
 	/* ── Entry 5: GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5 ── */
 	struct {
@@ -930,6 +1106,30 @@ static const struct {
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
 		CHAOS_IL2CPP_UINT32 slots[6];
 	} entry6;
+	/* ── Entry 7: GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_7 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[2];
+	} entry7;
+	/* ── Entry 8: GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_8 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[3];
+	} entry8;
+	/* ── Entry 9: GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_9 ── */
+	struct {
+		CHAOS_IL2CPP_UINT32 entry_total_size;
+		const void*         code_address;
+		CHAOS_IL2CPP_UINT32 frame_size;
+		CHAOS_IL2CPP_UINT32 num_gc_slots;
+		CHAOS_IL2CPP_UINT32 slots[6];
+	} entry9;
 } kChaosGcSlotMapsSection = {
 	/* entry0 = GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0 */
 	.entry0 = {
@@ -965,11 +1165,11 @@ static const struct {
 	},
 	/* entry4 = GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_4 */
 	.entry4 = {
-		/* entry_total_size = 36 */ 36u,
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_4),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
 	/* entry5 = GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5 */
 	.entry5 = {
@@ -986,17 +1186,41 @@ static const struct {
 		/* frame_size = 48 */ 48u,
 		/* num_gc_slots = 6 */ 6u,
 		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
+	},
+	/* entry7 = GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_7 */
+	.entry7 = {
+		/* entry_total_size = 28 */ 28u,
+		/* code_address */ reinterpret_cast<const void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_7),
+		/* frame_size = 16 */ 16u,
+		/* num_gc_slots = 2 */ 2u,
+		/* slots */ { 0u, 8u }
+	},
+	/* entry8 = GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_8 */
+	.entry8 = {
+		/* entry_total_size = 32 */ 32u,
+		/* code_address */ reinterpret_cast<const void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_8),
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
+	},
+	/* entry9 = GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_9 */
+	.entry9 = {
+		/* entry_total_size = 44 */ 44u,
+		/* code_address */ reinterpret_cast<const void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_9),
+		/* frame_size = 48 */ 48u,
+		/* num_gc_slots = 6 */ 6u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
 	}
 };
 #if defined(_MSC_VER)
 #pragma pack(pop)
 #endif
 
-static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 224u;
+static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 332u;
 
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
-static void* const kMethodPointers[7] = {
+static void* const kMethodPointers[10] = {
 	reinterpret_cast<void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0),
 	reinterpret_cast<void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_1),
 	reinterpret_cast<void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_2),
@@ -1004,6 +1228,9 @@ static void* const kMethodPointers[7] = {
 	reinterpret_cast<void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_4),
 	reinterpret_cast<void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5),
 	reinterpret_cast<void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_6),
+	reinterpret_cast<void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_7),
+	reinterpret_cast<void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_8),
+	reinterpret_cast<void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_9),
 };
 
 // CodeRegistrationV0 struct (invoker_pointers = nullptr for native-aot path)
@@ -1011,7 +1238,7 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	= {
 	.struct_size               = sizeof(CodeRegistrationV0),
 	.method_pointers           = kMethodPointers,
-	.method_pointer_count      = 7u,
+	.method_pointer_count      = 10u,
 	.reverse_pinvoke_wrappers  = nullptr,
 	.reverse_pinvoke_wrapper_count = 0u,
 	.invoker_pointers          = nullptr,
@@ -1061,28 +1288,31 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // matching during IR lowering of patched methods.
 
 static constexpr ReflectionQueryFieldDescriptor kReflFields_GarbageCollectionSubjects_GarbageCollectionSubjects[1] = {
-	{ 0x04000001u, "GarbageCollectionSubjects/GarbageCollectionSubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
+	{ 0x04000001u, "GarbageCollectionSubjects/GarbageCollectionSubjects::_exitCode", "_exitCode", "System.Int32", 0LL, 3u },
 };
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_GarbageCollectionSubjects_GarbageCollectionSubjects[7] = {
-	{ 0x00000003u, "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000004u, "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000005u, "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000006u, "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000007u, "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000008u, "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000009u, "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u, nullptr },
+static constexpr ReflectionQueryMethodDescriptor kReflMethods_GarbageCollectionSubjects_GarbageCollectionSubjects[10] = {
+	{ 0x00000003u, "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000004u, "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000005u, "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000006u, "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000007u, "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000008u, "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000009u, "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Au, "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Bu, "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Cu, "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
 	{ 0x00000001u, "GarbageCollectionSubjects/GarbageCollectionSubjects", "GarbageCollectionSubjects/GarbageCollectionSubjects", "", "GarbageCollectionSubjects", "GarbageCollectionSubjects", nullptr, kReflFields_GarbageCollectionSubjects_GarbageCollectionSubjects, 1u, nullptr, 0u,
-	kReflMethods_GarbageCollectionSubjects_GarbageCollectionSubjects, 7u, nullptr, 0u, 0u },
+nullptr, 0u,    kReflMethods_GarbageCollectionSubjects_GarbageCollectionSubjects, 10u, nullptr, 0u, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static const ReflectionQueryImageDescriptor kReflImage = { "GarbageCollectionSubjects", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "GarbageCollectionSubjects", kReflTypePtrs, 1u, 1, 0, 0, 0 };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -1316,37 +1546,35 @@ extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_4(vo
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			{
-				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[8])();
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
 			{
-				const auto chaos_arg_0 = _s1;
+				const auto chaos_arg_0 = _s2;
 				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
-				const auto chaos_arg_1 = _s2;
-				const auto chaos_arg_0 = _s1;
+				const auto chaos_arg_1 = _s3;
+				const auto chaos_arg_0 = _s2;
 				const auto chaos_result = ChaosArrayCreateInstance(chaos_arg_0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			{
-				const auto chaos_arg_0 = _s1;
-				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[8])();
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-			chaos_locals[0] = _s0;
-			_s0 = chaos_locals[0];
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
 			// brfalse (structured EH branch)
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s1;
+				auto chaos_value = _s3;
 				chaos_static_GarbageCollectionSubjects_GarbageCollectionSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -1461,8 +1689,8 @@ extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_6(vo
 			chaos_locals[1] = _s0;
 			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[11])();
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT64(*)(void)>(kChaosExternalRuntimeFnTable[11])();
+				_s1 = ChaosStoreInt64(chaos_result);
 			}
 			{
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[10])();
@@ -1471,8 +1699,175 @@ extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_6(vo
 			chaos_locals[1] = _s2;
 			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
 			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[11])();
-				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT64(*)(void)>(kChaosExternalRuntimeFnTable[11])();
+				_s3 = ChaosStoreInt64(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
+				chaos_static_GarbageCollectionSubjects_GarbageCollectionSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_GarbageCollectionSubjects_GarbageCollectionSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_END
+	return;
+}
+
+// Managed method: GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_7()
+extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_7(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+
+
+	CHAOS_EH_TRY
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			{
+				const auto chaos_arg_1 = _s1;
+				const auto chaos_arg_0 = _s0;
+				chaos_gc_collect_with_mode(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_GarbageCollectionSubjects_GarbageCollectionSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_END
+	return;
+}
+
+// Managed method: GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_8()
+extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_8(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+
+
+	CHAOS_EH_TRY
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = chaos_gc_get_collection_count(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			{
+				const auto chaos_arg_0 = _s1;
+				const auto chaos_result = chaos_gc_get_collection_count(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
+			chaos_locals[0] = _s0;
+			_s0 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s1;
+				chaos_static_GarbageCollectionSubjects_GarbageCollectionSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_CATCH_BEGIN
+		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
+		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
+		if (chaos_header != nullptr)
+		{
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			{ CHAOS_EH_RETHROW; }
+		}
+		_s0 = CHAOS_EH_EXCEPTION_OBJ;
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s0;
+				chaos_static_GarbageCollectionSubjects_GarbageCollectionSubjects___exitCode = chaos_value;
+			}
+	CHAOS_EH_END
+	return;
+}
+
+// Managed method: GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_9()
+extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_9(void)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+
+
+	CHAOS_EH_TRY
+			{
+				const auto chaos_result = chaos_gc_get_total_pause_duration();
+				_s0 = ChaosStoreInt64(chaos_result);
+			}
+			chaos_locals[1] = _s0;
+			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT64(*)(void)>(kChaosExternalRuntimeFnTable[15])();
+				_s1 = ChaosStoreInt64(chaos_result);
+			}
+			{
+				const auto chaos_result = chaos_gc_get_total_pause_duration();
+				_s2 = ChaosStoreInt64(chaos_result);
+			}
+			chaos_locals[1] = _s2;
+			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT64(*)(void)>(kChaosExternalRuntimeFnTable[15])();
+				_s3 = ChaosStoreInt64(chaos_result);
 			}
 			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
 			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
@@ -1509,6 +1904,6 @@ extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_6(vo
 #pragma warning(pop)
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
-extern "C" const int kAotMethodCount = 7;
+extern "C" const int kAotMethodCount = 10;
 
 extern "C" void ChaosJitRegisterAll() {}

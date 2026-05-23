@@ -27,6 +27,43 @@ extern "C" void InterpreterEntryDirect(
 #pragma warning(push)
 #pragma warning(disable: 4065 4244)
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_CalcAdd_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_CalcAdd_Multiply_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" void InterfaceDispatchSubjects_CalcAdd__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_CalcMul_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_CalcMul_Multiply_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" void InterfaceDispatchSubjects_CalcMul__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_IWithDefault_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplDiamond2_BaseMethod(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplDiamond2_DerivedMethod(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void InterfaceDispatchSubjects_ImplDiamond2__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplDiamond_BaseMethod(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplDiamond_DerivedMethod(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void InterfaceDispatchSubjects_ImplDiamond__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplSimple_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void InterfaceDispatchSubjects_ImplSimple__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplWithDefault_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void InterfaceDispatchSubjects_ImplWithDefault__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_Run_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestAsCheck(void);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondBase(void);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondDerived(void);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondMulti(void);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestIsCheck(void);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestMultiImplCalc(void);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplDefault(void);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplSimple(void);
+extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_0(void);
+extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_1(void);
+extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_2(void);
+extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_3(void);
+extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_4(void);
+extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_5(void);
+extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_6(void);
+extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_7(void);
+extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_8(void);
+
 namespace chaos::il2cpp::codegen::InterfaceDispatchSubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup
@@ -332,6 +369,49 @@ struct chaos_type_System_Private_CoreLib_System_String
 	CHAOS_IL2CPP_UINT64 string_id = 0u;  // stable StringId, 0 = not yet materialized
 };
 
+
+// ── GcTypeLayout pointer offset arrays (computed via offsetof) ──
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
+
+extern "C" void ChaosRegisterGcLayouts() {
+	auto& registry = chaos::il2cpp::runtime_core::GcLayoutRegistry::Instance();
+
+	registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
+	registry.Register(2898228154134497916ULL, sizeof(chaos_type_InterfaceDispatchSubjects_CalcAdd), nullptr, 0);
+	registry.Register(13787125010580401065ULL, sizeof(chaos_type_InterfaceDispatchSubjects_CalcMul), nullptr, 0);
+	registry.Register(5829620332136686238ULL, sizeof(chaos_type_InterfaceDispatchSubjects_ImplDiamond), nullptr, 0);
+	registry.Register(16094583433855183428ULL, sizeof(chaos_type_InterfaceDispatchSubjects_ImplDiamond2), nullptr, 0);
+	registry.Register(17332692813202302180ULL, sizeof(chaos_type_InterfaceDispatchSubjects_ImplSimple), nullptr, 0);
+	registry.Register(10131636431187859815ULL, sizeof(chaos_type_InterfaceDispatchSubjects_ImplWithDefault), nullptr, 0);
+	registry.Register(16224833485471026240ULL, sizeof(chaos_type_InterfaceDispatchSubjects_InterfaceDispatchSubjects), nullptr, 0);
+	registry.Register(5474029880995115448ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly, 1);
+	registry.Register(17082367815459723707ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, 1);
+	registry.Register(4137207361503509124ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, 5);
+	registry.Register(17040031516751226236ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, 2);
+	registry.Register(10748947813473285525ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, 5);
+	registry.Register(1782325859292956794ULL, sizeof(chaos_type_System_Private_CoreLib_System_String), nullptr, 0);
+
+	// Register TypeInfoV0 address ranges for IsValidTypeInfoPointer.
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object) + sizeof(chaos_mt_System_Private_CoreLib_System_Object));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_InterfaceDispatchSubjects_CalcAdd), reinterpret_cast<uintptr_t>(&chaos_mt_InterfaceDispatchSubjects_CalcAdd) + sizeof(chaos_mt_InterfaceDispatchSubjects_CalcAdd));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_InterfaceDispatchSubjects_CalcMul), reinterpret_cast<uintptr_t>(&chaos_mt_InterfaceDispatchSubjects_CalcMul) + sizeof(chaos_mt_InterfaceDispatchSubjects_CalcMul));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_InterfaceDispatchSubjects_ImplDiamond), reinterpret_cast<uintptr_t>(&chaos_mt_InterfaceDispatchSubjects_ImplDiamond) + sizeof(chaos_mt_InterfaceDispatchSubjects_ImplDiamond));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_InterfaceDispatchSubjects_ImplDiamond2), reinterpret_cast<uintptr_t>(&chaos_mt_InterfaceDispatchSubjects_ImplDiamond2) + sizeof(chaos_mt_InterfaceDispatchSubjects_ImplDiamond2));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_InterfaceDispatchSubjects_ImplSimple), reinterpret_cast<uintptr_t>(&chaos_mt_InterfaceDispatchSubjects_ImplSimple) + sizeof(chaos_mt_InterfaceDispatchSubjects_ImplSimple));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_InterfaceDispatchSubjects_ImplWithDefault), reinterpret_cast<uintptr_t>(&chaos_mt_InterfaceDispatchSubjects_ImplWithDefault) + sizeof(chaos_mt_InterfaceDispatchSubjects_ImplWithDefault));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_InterfaceDispatchSubjects_InterfaceDispatchSubjects), reinterpret_cast<uintptr_t>(&chaos_mt_InterfaceDispatchSubjects_InterfaceDispatchSubjects) + sizeof(chaos_mt_InterfaceDispatchSubjects_InterfaceDispatchSubjects));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_Assembly));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_String), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_String) + sizeof(chaos_mt_System_Private_CoreLib_System_String));
+}
+
 CHAOS_IL2CPP_INT32 chaos_static_InterfaceDispatchSubjects_InterfaceDispatchSubjects___exitCode = 0;
 
 static void chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
@@ -349,6 +429,28 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
+
+
+// ── Bridge/import thunks ──
+extern "C" void* kChaosExternalRuntimeFnTable[];
+
+// Bridge/import thunk for: InterfaceDispatchSubjects/InterfaceDispatchSubjects::_exitCode
+extern "C" void chaos_bridge_thunk_0(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[0])();
+}
+
+// Bridge/import thunk for: InterfaceDispatchSubjects/ISimple
+extern "C" void chaos_bridge_thunk_1(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[2])();
+}
+
+// Bridge/import thunk for: InterfaceDispatchSubjects/ICalculator
+extern "C" void chaos_bridge_thunk_2(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[3])();
+}
 
 extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_0(void);
 extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_1(void);
@@ -638,11 +740,18 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
 		/* .type_count        = */ 14u,
-	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
+	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 -- deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
 	/* .custom_attribute_materializer = */ nullptr,
-
+	/* .custom_attribute_method_offset   = */ nullptr,
+	/* .custom_attribute_field_offset    = */ nullptr,
+	/* .custom_attribute_property_offset = */ nullptr,
+	/* .custom_attribute_param_offset    = */ nullptr,
+	/* .custom_attribute_method_count    = */ 0u,
+	/* .custom_attribute_field_count     = */ 0u,
+	/* .custom_attribute_property_count  = */ 0u,
+	/* .custom_attribute_param_count   = */ 0u,
 		/* .abi_manifest      = */ s_abi_manifest,
 	};
 	static const CHAOS_IL2CPP_UINT32 s_native_aot_module_id =
@@ -1744,89 +1853,89 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // matching during IR lowering of patched methods.
 
 static constexpr ReflectionQueryFieldDescriptor kReflFields_InterfaceDispatchSubjects_InterfaceDispatchSubjects[1] = {
-	{ 0x04000001u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
+	{ 0x04000001u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::_exitCode", "_exitCode", "System.Int32", 0LL, 3u },
 };
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_InterfaceDispatchSubjects_InterfaceDispatchSubjects[9] = {
-	{ 0x0000000Fu, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000010u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000011u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000012u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000013u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000014u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000015u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000016u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000017u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u, nullptr },
+	{ 0x0000000Fu, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000010u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000011u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000012u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000013u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000014u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000015u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000016u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000017u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_InterfaceDispatchSubjects_CalcAdd[3] = {
-	{ 0x00000024u, "InterfaceDispatchSubjects/CalcAdd::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000022u, "InterfaceDispatchSubjects/CalcAdd::Add:System.Int32(System.Int32,System.Int32)", "Add", "System.Int32", 2, nullptr, 0u, nullptr },
-	{ 0x00000023u, "InterfaceDispatchSubjects/CalcAdd::Multiply:System.Int32(System.Int32,System.Int32)", "Multiply", "System.Int32", 2, nullptr, 0u, nullptr },
+	{ 0x00000024u, "InterfaceDispatchSubjects/CalcAdd::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000022u, "InterfaceDispatchSubjects/CalcAdd::Add:System.Int32(System.Int32,System.Int32)", "Add", "System.Int32", 2, nullptr, 0u, nullptr, 0u },
+	{ 0x00000023u, "InterfaceDispatchSubjects/CalcAdd::Multiply:System.Int32(System.Int32,System.Int32)", "Multiply", "System.Int32", 2, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_InterfaceDispatchSubjects_CalcMul[3] = {
-	{ 0x00000027u, "InterfaceDispatchSubjects/CalcMul::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000025u, "InterfaceDispatchSubjects/CalcMul::Add:System.Int32(System.Int32,System.Int32)", "Add", "System.Int32", 2, nullptr, 0u, nullptr },
-	{ 0x00000026u, "InterfaceDispatchSubjects/CalcMul::Multiply:System.Int32(System.Int32,System.Int32)", "Multiply", "System.Int32", 2, nullptr, 0u, nullptr },
+	{ 0x00000027u, "InterfaceDispatchSubjects/CalcMul::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000025u, "InterfaceDispatchSubjects/CalcMul::Add:System.Int32(System.Int32,System.Int32)", "Add", "System.Int32", 2, nullptr, 0u, nullptr, 0u },
+	{ 0x00000026u, "InterfaceDispatchSubjects/CalcMul::Multiply:System.Int32(System.Int32,System.Int32)", "Multiply", "System.Int32", 2, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_InterfaceDispatchSubjects_ImplDiamond[3] = {
-	{ 0x0000002Au, "InterfaceDispatchSubjects/ImplDiamond::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000028u, "InterfaceDispatchSubjects/ImplDiamond::BaseMethod:System.Int32()", "BaseMethod", "System.Int32", 0, nullptr, 0u, nullptr },
-	{ 0x00000029u, "InterfaceDispatchSubjects/ImplDiamond::DerivedMethod:System.Int32()", "DerivedMethod", "System.Int32", 0, nullptr, 0u, nullptr },
+	{ 0x0000002Au, "InterfaceDispatchSubjects/ImplDiamond::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000028u, "InterfaceDispatchSubjects/ImplDiamond::BaseMethod:System.Int32()", "BaseMethod", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000029u, "InterfaceDispatchSubjects/ImplDiamond::DerivedMethod:System.Int32()", "DerivedMethod", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_InterfaceDispatchSubjects_ImplDiamond2[3] = {
-	{ 0x0000002Du, "InterfaceDispatchSubjects/ImplDiamond2::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000002Bu, "InterfaceDispatchSubjects/ImplDiamond2::BaseMethod:System.Int32()", "BaseMethod", "System.Int32", 0, nullptr, 0u, nullptr },
-	{ 0x0000002Cu, "InterfaceDispatchSubjects/ImplDiamond2::DerivedMethod:System.Int32()", "DerivedMethod", "System.Int32", 0, nullptr, 0u, nullptr },
+	{ 0x0000002Du, "InterfaceDispatchSubjects/ImplDiamond2::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000002Bu, "InterfaceDispatchSubjects/ImplDiamond2::BaseMethod:System.Int32()", "BaseMethod", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000002Cu, "InterfaceDispatchSubjects/ImplDiamond2::DerivedMethod:System.Int32()", "DerivedMethod", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_InterfaceDispatchSubjects_ImplSimple[2] = {
-	{ 0x0000001Fu, "InterfaceDispatchSubjects/ImplSimple::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000001Eu, "InterfaceDispatchSubjects/ImplSimple::GetValue:System.Int32()", "GetValue", "System.Int32", 0, nullptr, 0u, nullptr },
+	{ 0x0000001Fu, "InterfaceDispatchSubjects/ImplSimple::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000001Eu, "InterfaceDispatchSubjects/ImplSimple::GetValue:System.Int32()", "GetValue", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_InterfaceDispatchSubjects_ImplWithDefault[2] = {
-	{ 0x00000021u, "InterfaceDispatchSubjects/ImplWithDefault::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000020u, "InterfaceDispatchSubjects/ImplWithDefault::GetValue:System.Int32()", "GetValue", "System.Int32", 0, nullptr, 0u, nullptr },
+	{ 0x00000021u, "InterfaceDispatchSubjects/ImplWithDefault::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000020u, "InterfaceDispatchSubjects/ImplWithDefault::GetValue:System.Int32()", "GetValue", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_InterfaceDispatchSubjects_InterfaceDispatchNativeEntry[9] = {
-	{ 0x0000002Eu, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::Run:System.Int32(System.Int32)", "Run", "System.Int32", 1, nullptr, 0u, nullptr },
-	{ 0x00000033u, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestAsCheck:System.Int32()", "TestAsCheck", "System.Int32", 0, nullptr, 0u, nullptr },
-	{ 0x00000034u, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondBase:System.Int32()", "TestDiamondBase", "System.Int32", 0, nullptr, 0u, nullptr },
-	{ 0x00000035u, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondDerived:System.Int32()", "TestDiamondDerived", "System.Int32", 0, nullptr, 0u, nullptr },
-	{ 0x00000036u, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondMulti:System.Int32()", "TestDiamondMulti", "System.Int32", 0, nullptr, 0u, nullptr },
-	{ 0x00000032u, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestIsCheck:System.Int32()", "TestIsCheck", "System.Int32", 0, nullptr, 0u, nullptr },
-	{ 0x00000031u, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestMultiImplCalc:System.Int32()", "TestMultiImplCalc", "System.Int32", 0, nullptr, 0u, nullptr },
-	{ 0x00000030u, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestSingleImplDefault:System.Int32()", "TestSingleImplDefault", "System.Int32", 0, nullptr, 0u, nullptr },
-	{ 0x0000002Fu, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestSingleImplSimple:System.Int32()", "TestSingleImplSimple", "System.Int32", 0, nullptr, 0u, nullptr },
+	{ 0x0000002Eu, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::Run:System.Int32(System.Int32)", "Run", "System.Int32", 1, nullptr, 0u, nullptr, 0u },
+	{ 0x00000033u, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestAsCheck:System.Int32()", "TestAsCheck", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000034u, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondBase:System.Int32()", "TestDiamondBase", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000035u, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondDerived:System.Int32()", "TestDiamondDerived", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000036u, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondMulti:System.Int32()", "TestDiamondMulti", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000032u, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestIsCheck:System.Int32()", "TestIsCheck", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000031u, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestMultiImplCalc:System.Int32()", "TestMultiImplCalc", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000030u, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestSingleImplDefault:System.Int32()", "TestSingleImplDefault", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000002Fu, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestSingleImplSimple:System.Int32()", "TestSingleImplSimple", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_InterfaceDispatchSubjects_IWithDefault[1] = {
-	{ 0x00000019u, "InterfaceDispatchSubjects/IWithDefault::GetValue:System.Int32()", "GetValue", "System.Int32", 0, nullptr, 0u, nullptr },
+	{ 0x00000019u, "InterfaceDispatchSubjects/IWithDefault::GetValue:System.Int32()", "GetValue", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor kReflTypes[9] = {
 	{ 0x00000001u, "InterfaceDispatchSubjects/InterfaceDispatchSubjects", "InterfaceDispatchSubjects/InterfaceDispatchSubjects", "", "InterfaceDispatchSubjects", "InterfaceDispatchSubjects", nullptr, kReflFields_InterfaceDispatchSubjects_InterfaceDispatchSubjects, 1u, nullptr, 0u,
-	kReflMethods_InterfaceDispatchSubjects_InterfaceDispatchSubjects, 9u, nullptr, 0u, 0u },
+nullptr, 0u,    kReflMethods_InterfaceDispatchSubjects_InterfaceDispatchSubjects, 9u, nullptr, 0u, 0u },
 	{ 0x00000009u, "InterfaceDispatchSubjects/CalcAdd", "InterfaceDispatchSubjects/CalcAdd", "", "CalcAdd", "CalcAdd", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_InterfaceDispatchSubjects_CalcAdd, 3u, nullptr, 0u, 0u },
+nullptr, 0u,    kReflMethods_InterfaceDispatchSubjects_CalcAdd, 3u, nullptr, 0u, 0u },
 	{ 0x0000000Au, "InterfaceDispatchSubjects/CalcMul", "InterfaceDispatchSubjects/CalcMul", "", "CalcMul", "CalcMul", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_InterfaceDispatchSubjects_CalcMul, 3u, nullptr, 0u, 0u },
+nullptr, 0u,    kReflMethods_InterfaceDispatchSubjects_CalcMul, 3u, nullptr, 0u, 0u },
 	{ 0x0000000Bu, "InterfaceDispatchSubjects/ImplDiamond", "InterfaceDispatchSubjects/ImplDiamond", "", "ImplDiamond", "ImplDiamond", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_InterfaceDispatchSubjects_ImplDiamond, 3u, nullptr, 0u, 0u },
+nullptr, 0u,    kReflMethods_InterfaceDispatchSubjects_ImplDiamond, 3u, nullptr, 0u, 0u },
 	{ 0x0000000Cu, "InterfaceDispatchSubjects/ImplDiamond2", "InterfaceDispatchSubjects/ImplDiamond2", "", "ImplDiamond2", "ImplDiamond2", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_InterfaceDispatchSubjects_ImplDiamond2, 3u, nullptr, 0u, 0u },
+nullptr, 0u,    kReflMethods_InterfaceDispatchSubjects_ImplDiamond2, 3u, nullptr, 0u, 0u },
 	{ 0x00000007u, "InterfaceDispatchSubjects/ImplSimple", "InterfaceDispatchSubjects/ImplSimple", "", "ImplSimple", "ImplSimple", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_InterfaceDispatchSubjects_ImplSimple, 2u, nullptr, 0u, 0u },
+nullptr, 0u,    kReflMethods_InterfaceDispatchSubjects_ImplSimple, 2u, nullptr, 0u, 0u },
 	{ 0x00000008u, "InterfaceDispatchSubjects/ImplWithDefault", "InterfaceDispatchSubjects/ImplWithDefault", "", "ImplWithDefault", "ImplWithDefault", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_InterfaceDispatchSubjects_ImplWithDefault, 2u, nullptr, 0u, 0u },
+nullptr, 0u,    kReflMethods_InterfaceDispatchSubjects_ImplWithDefault, 2u, nullptr, 0u, 0u },
 	{ 0x0000000Du, "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry", "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry", "", "InterfaceDispatchNativeEntry", "InterfaceDispatchNativeEntry", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_InterfaceDispatchSubjects_InterfaceDispatchNativeEntry, 9u, nullptr, 0u, 0u },
+nullptr, 0u,    kReflMethods_InterfaceDispatchSubjects_InterfaceDispatchNativeEntry, 9u, nullptr, 0u, 0u },
 	{ 0x00000003u, "InterfaceDispatchSubjects/IWithDefault", "InterfaceDispatchSubjects/IWithDefault", "", "IWithDefault", "IWithDefault", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_InterfaceDispatchSubjects_IWithDefault, 1u, nullptr, 0u, 0u },
+nullptr, 0u,    kReflMethods_InterfaceDispatchSubjects_IWithDefault, 1u, nullptr, 0u, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor* kReflTypePtrs[9] = {
@@ -1841,7 +1950,7 @@ static const ReflectionQueryTypeDescriptor* kReflTypePtrs[9] = {
 	&kReflTypes[8],
 };
 
-static const ReflectionQueryImageDescriptor kReflImage = { "InterfaceDispatchSubjects", kReflTypePtrs, 9u };
+static const ReflectionQueryImageDescriptor kReflImage = { "InterfaceDispatchSubjects", kReflTypePtrs, 9u, 1, 0, 0, 0 };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via

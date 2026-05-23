@@ -2,33 +2,20 @@
   "family": "exception-throw-diagnostics",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-22T08:39:47",
-  "duration_ms": 75843,
+  "timestamp": "2026-05-23T18:40:35",
+  "duration_ms": 24161,
   "overall_status": "passed",
   "stages": {
-    "preflight": {
-      "stage": "preflight",
-      "status": "passed",
-      "summary": "14 methods, 0 custom entries",
-      "details": {
-        "methodCount": 14,
-        "customMethodCount": 0,
-        "hasCustomEntryFile": false,
-        "customMethods": []
-      },
-      "errors": [],
-      "duration_ms": 1
-    },
     "codegen": {
       "stage": "codegen",
       "status": "passed",
       "summary": "Entrypoint built and IL2CPP compile OK",
       "details": {
-        "methodCount": 14,
+        "methodCount": 17,
         "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\exception-throw-diagnostics\\managed\\subjects\\build-output\\ExceptionThrowDiagnosticsSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 54687
+      "duration_ms": 23369
     },
     "jit_codegen": {
       "stage": "jit_codegen",
@@ -41,16 +28,16 @@
     "fact": {
       "stage": "fact",
       "status": "passed",
-      "summary": "Fact verify=passed (14/14)",
+      "summary": "Fact verify=passed (17/17)",
       "details": {
         "fact": {
           "status": "passed",
-          "passed": 14,
-          "total": 14
+          "passed": 17,
+          "total": 17
         }
       },
       "errors": [],
-      "duration_ms": 811
+      "duration_ms": 396
     },
     "fact_jit": {
       "stage": "fact_jit",
@@ -65,128 +52,16 @@
         }
       },
       "errors": [],
-      "duration_ms": 57
-    },
-    "audit": {
-      "stage": "audit",
-      "status": "passed",
-      "summary": "false_passing=0, principle=CONCERN",
-      "details": {
-        "falsePassing": 0,
-        "stubsFound": 0,
-        "skipsFound": 0,
-        "principleStatus": "CONCERN",
-        "methodsWithoutLowering": 0
-      },
-      "errors": [],
-      "duration_ms": 2778
-    },
-    "asm_compare": {
-      "stage": "asm_compare",
-      "status": "skipped",
-      "summary": "Subjects DLL not found — run codegen stage first",
-      "details": {},
-      "errors": [],
-      "duration_ms": 55
-    },
-    "microbench": {
-      "stage": "microbench",
-      "status": "passed",
-      "summary": "FramePool=5.1ns/op | FastExecute=546.1ns/op | CallVirt dispatch=1686.3ns",
-      "details": {
-        "framePool": {
-          "acquireReleaseNsPerOp": 5.1,
-          "batchCount": 1000,
-          "framesPerBatch": 32
-        },
-        "fastExecute": {
-          "runCount": 100000,
-          "nsPerCall": 546.1
-        },
-        "callVirt": {
-          "handlerDispatchNs": 1686.3,
-          "emptyStackNs": 1854.9
-        },
-        "poolSize": 32
-      },
-      "errors": [],
-      "duration_ms": 300
-    },
-    "benchmark": {
-      "stage": "benchmark",
-      "status": "skipped",
-      "summary": "All 14 non-stub methods are invalid (no managed harness)",
-      "details": {},
-      "errors": [],
-      "duration_ms": 7456
-    },
-    "hotupdate": {
-      "stage": "hotupdate",
-      "status": "passed",
-      "summary": "14/14 passed, 0 failed (stub=0)",
-      "details": {
-        "passedMethods": 14,
-        "failedMethods": 0,
-        "totalMethods": 14,
-        "realMethods": 14,
-        "stubMethods": 0
-      },
-      "errors": [],
-      "duration_ms": 105
-    },
-    "hotupdate_aot_benchmark": {
-      "stage": "hotupdate_aot_benchmark",
-      "status": "passed",
-      "summary": "avg_slowdown=-6.91% (0.9x) over 14 methods (AOT patched path)",
-      "details": {
-        "averageSlowdownPercent": -6.91,
-        "slowdownFactor": 0.9309000000000001,
-        "threshold": 50.0,
-        "nonStubMethods": 14
-      },
-      "errors": [],
-      "duration_ms": 1920
-    },
-    "hotupdate_jit_fact": {
-      "stage": "hotupdate_jit_fact",
-      "status": "passed",
-      "summary": "14/14 passed, 0 failed",
-      "details": {
-        "passed": 14,
-        "failed": 0,
-        "total": 14
-      },
-      "errors": [],
-      "duration_ms": 98
-    },
-    "hotupdate_jit_benchmark": {
-      "stage": "hotupdate_jit_benchmark",
-      "status": "passed",
-      "summary": "avg_slowdown=0.0% (1.0x) over 0 methods (JIT patched path)",
-      "details": {
-        "averageSlowdownPercent": 0.0,
-        "slowdownFactor": 1.0,
-        "threshold": 50.0,
-        "nonStubMethods": 0
-      },
-      "errors": [],
-      "duration_ms": 7565
+      "duration_ms": 393
     }
   },
   "coverage": {
     "methodCoverage": 100.0,
-    "testedRate": 100.0,
+    "testedRate": 0.0,
     "overall": 100.0
   },
   "dashboard": {
-    "interpreter": {
-      "fastFramePoolNsPerOp": 5.1,
-      "fastExecuteNsPerInstr": 0,
-      "callVirtHandlerDispatchNs": 1686.3,
-      "callVirtMicHitNs": 0,
-      "callVirtRawFallbackNs": 0,
-      "poolSize": 32
-    },
+    "interpreter": {},
     "irTranslation": {
       "totalMethods": 14,
       "okCount": 14,
@@ -204,39 +79,24 @@
       }
     },
     "performance": {},
-    "hotupdate": {
-      "aotFunctional": {
-        "passedMethods": 14,
-        "failedMethods": 0,
-        "totalMethods": 14
-      },
-      "aotOverhead": {
-        "averageSlowdownPercent": -6.91,
-        "slowdownFactor": 0.9309000000000001,
-        "nonStubMethods": 14
-      },
-      "jitFunctional": {
-        "passedMethods": 14,
-        "failedMethods": 0,
-        "totalMethods": 14
-      },
-      "jitOverhead": {
-        "averageSlowdownPercent": 0.0,
-        "slowdownFactor": 1.0,
-        "nonStubMethods": 0
-      }
-    },
+    "hotupdate": {},
     "keyRatios": {
       "nativeFasterRatio": 0,
       "irExpansionRatio": 0.32,
-      "interpreterSlowdownFactor": 0.9309000000000001,
+      "interpreterSlowdownFactor": 0,
       "asmPassRate": 100.0
     }
   },
   "regression": {
     "benchmark": {
-      "status": "no_baseline",
-      "message": "Baseline auto-created from this run",
+      "status": "matched",
+      "baselineMetrics": {
+        "totalMethods": 14,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      },
       "currentMetrics": {
         "totalMethods": 14,
         "matchedCount": 0,

@@ -10,6 +10,8 @@ on:
       - 'src/native/common/**'
       - 'testing/snapshots/**'
       - 'testing/src/native/**'
+      - 'testing/src/managed/**'
+      - 'testing/foundation-dll/**'
       - 'contracts/native/v0/**'
   push:
     branches: [main]
@@ -21,6 +23,8 @@ on:
       - 'src/native/common/**'
       - 'testing/snapshots/**'
       - 'testing/src/native/**'
+      - 'testing/src/managed/**'
+      - 'testing/foundation-dll/**'
       - 'contracts/native/v0/**'
 
 jobs:
@@ -48,12 +52,37 @@ jobs:
         run: |
           dotnet restore src/managed/Chaos.IL2CPP.Generator/
           dotnet restore tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests/
+          dotnet restore testing/src/managed/Chaos.IL2CPP.Tests.MetadataWriter/
 
       - name: Build Chaos.IL2CPP.Generator
         run: dotnet build src/managed/Chaos.IL2CPP.Generator/ --configuration Release --no-restore
 
+      - name: Build Chaos.IL2CPP.Driver
+        run: dotnet build src/managed/Chaos.IL2CPP.Driver/ --configuration Release
+
+      - name: Build MetadataWriter Tests
+        run: dotnet build testing/src/managed/Chaos.IL2CPP.Tests.MetadataWriter/ --configuration Release --no-restore
+
       - name: Run Snapshot Tests
         run: dotnet test tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests/ --configuration Release --no-restore -v n
+
+      - name: Run MetadataWriter Tests
+        run: dotnet test testing/src/managed/Chaos.IL2CPP.Tests.MetadataWriter/ --configuration Release --no-restore -v n
+
+      - name: MetadataWriter Coverage Collection
+        run: |
+          dotnet test testing/src/managed/Chaos.IL2CPP.Tests.MetadataWriter/ `
+            --configuration Release `
+            --settings testing/src/managed/Chaos.IL2CPP.Tests.MetadataWriter/coverlet.runsettings `
+            "-p:CollectCoverage=true" `
+            "-p:CoverletOutputFormat=cobertura" `
+            "-p:CoverletOutput=coverage-results/metadatawriter-coverage.cobertura.xml"
+
+      - name: Upload MetadataWriter Coverage Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: metadatawriter-coverage-report
+          path: coverage-results/metadatawriter-coverage.cobertura.xml
 
       - name: Code Coverage Collection
         run: |
@@ -93,7 +122,7 @@ jobs:
       - name: Run Common Native Tests
         run: ctest --test-dir testing/artifacts/run/native-test-build -R "test_common" --output-on-failure
 
-      - name: Run Codegen Foundation-DLL Verification
+      - name: Foundation-DLL CI Smoke
         run: |
           cd testing/foundation-dll
-          python -m _core.cli verify-family System.Private.CoreLib/garbage-collection || echo "Verification not fully set up yet"
+          python _core/python/ci_smoke.py

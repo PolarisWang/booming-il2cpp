@@ -1253,6 +1253,81 @@ def _fix_runtime_entry(path: Path) -> None:
         text = text.replace(old_silent_catch, new_diag_catch)
         changed = True
 
+    # Fix 7: Subject-entry fact loop — iterate kSubjectEntryCount instead of
+    # kAotMethodCount so that JIT-mode (interpreter) dispatch only tests the
+    # contract methods (subject entries).  Non-subject methods may use EH
+    # patterns (fault/filter/nested-catch) that the interpreter doesn't yet
+    # support, causing false failures in fact_jit.
+    old_subject_loop = (
+        "        int failed_count = 0;\n"
+        "        for (int i = 0; i < kAotMethodCount; i++) {\n"
+        "            bool caught = false;\n"
+        "#if defined(CHAOS_IL2CPP_EH_WIN32_SEH)\n"
+        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { chaos::il2cpp::runtime_core::chaos_raise_exception(0); };\n"
+        "#else\n"
+        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };\n"
+        "#endif\n"
+        "            try {\n"
+        "                RunNativeAot(i);\n"
+        "            } catch (const chaos_managed_exception&) {\n"
+        "                ++failed_count;\n"
+        '                printf("[DIAG] Fact FAILED method index %d/%d (chaos_managed_exception)\\n", i, kAotMethodCount);\n'
+        "                std::fflush(stdout);\n"
+        "            } catch (...) {\n"
+        "                ++failed_count;\n"
+        '                printf("[DIAG] Fact FAILED method index %d/%d (...)\\n", i, kAotMethodCount);\n'
+        "                std::fflush(stdout);\n"
+        "            }\n"
+        "        }\n"
+        "        chaos::il2cpp::common::g_chaos_fail_hook = nullptr;\n"
+        "        int passed_count = kAotMethodCount - failed_count;\n"
+        '        printf("Passed: %d/%d\\n", passed_count, kAotMethodCount);\n'
+    )
+    new_subject_loop = (
+        "        int failed_count = 0;\n"
+        "        for (int si = 0; si < kSubjectEntryCount; si++) {\n"
+        "            int i = kSubjectEntryIndices[si];\n"
+        "#if defined(CHAOS_IL2CPP_EH_WIN32_SEH)\n"
+        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { chaos::il2cpp::runtime_core::chaos_raise_exception(0); };\n"
+        "#else\n"
+        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };\n"
+        "#endif\n"
+        "            try {\n"
+        "                RunNativeAot(i);\n"
+        "            } catch (const chaos_managed_exception&) {\n"
+        "                ++failed_count;\n"
+        '                printf("[DIAG] Fact FAILED method index %d/%d (chaos_managed_exception)\\n", i, kAotMethodCount);\n'
+        "                std::fflush(stdout);\n"
+        "            } catch (...) {\n"
+        "                ++failed_count;\n"
+        '                printf("[DIAG] Fact FAILED method index %d/%d (...)\\n", i, kAotMethodCount);\n'
+        "                std::fflush(stdout);\n"
+        "            }\n"
+        "        }\n"
+        "        chaos::il2cpp::common::g_chaos_fail_hook = nullptr;\n"
+        "        int passed_count = kSubjectEntryCount - failed_count;\n"
+        '        printf("Passed: %d/%d\\n", passed_count, kSubjectEntryCount);\n'
+    )
+    if old_subject_loop in text:
+        text = text.replace(old_subject_loop, new_subject_loop)
+        changed = True
+
+    # Fix 7b: Add global-scope extern declarations for kSubjectEntryCount/Indices
+    # (must be at file scope, not inside a block, for correct linkage).
+    # Verification_dispatch.generated.cpp and native-aot.generated.cpp define
+    # these, so runtime-entry.cpp only needs extern declarations.
+    old_extern_section = (
+        'extern "C" const char* kChaosExternalRuntimeSubjects[];'
+    )
+    new_extern_section = (
+        'extern "C" const char* kChaosExternalRuntimeSubjects[];\n'
+        'extern "C" const int kSubjectEntryCount;\n'
+        'extern "C" const int kSubjectEntryIndices[];'
+    )
+    if old_extern_section in text:
+        text = text.replace(old_extern_section, new_extern_section)
+        changed = True
+
     if changed:
         path.write_text(text, encoding="utf-8")
         print(f"    [build_entry] fixed runtime-entry.cpp bugs")

@@ -52,62 +52,8 @@
     },
     {
       "assemblyName": "ThreadSyncSubjects",
-      "subjectKind": "method",
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "ThreadSyncSubjects",
-      "subjectKind": "method",
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "ThreadSyncSubjects",
-      "subjectKind": "method",
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_0:System.Void(System.Object)",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "ThreadSyncSubjects",
-      "subjectKind": "method",
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_6\u003Eb__7_0:System.Void(System.Object)",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "ThreadSyncSubjects",
-      "subjectKind": "method",
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_0:System.Void(System.Object)",
-      "reason": "generated-direct-call"
-    },
-    {
-      "assemblyName": "ThreadSyncSubjects",
       "subjectKind": "field",
       "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::_exitCode",
-      "reason": "instance-field-state"
-    },
-    {
-      "assemblyName": "ThreadSyncSubjects",
-      "subjectKind": "field",
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
-      "reason": "instance-field-state"
-    },
-    {
-      "assemblyName": "ThreadSyncSubjects",
-      "subjectKind": "field",
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9__6_0",
-      "reason": "instance-field-state"
-    },
-    {
-      "assemblyName": "ThreadSyncSubjects",
-      "subjectKind": "field",
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9__7_0",
-      "reason": "instance-field-state"
-    },
-    {
-      "assemblyName": "ThreadSyncSubjects",
-      "subjectKind": "field",
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_0",
       "reason": "instance-field-state"
     },
     {
@@ -153,9 +99,9 @@
       "reason": "external-call"
     },
     {
-      "assemblyName": "System.Threading.ThreadPool",
+      "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
-      "subjectId": "System.Threading.ThreadPool/System.Threading.WaitCallback::.ctor:System.Void(System.Object,System.IntPtr)",
+      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "reason": "external-call"
     },
     {
@@ -166,26 +112,14 @@
     },
     {
       "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "type",
-      "subjectId": "System.Private.CoreLib/System.Int32",
-      "reason": "boxed-value-type"
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Boolean::GetHashCode:System.Int32()",
+      "reason": "external-call"
     },
     {
       "assemblyName": "System.Threading.ThreadPool",
       "subjectKind": "method",
       "subjectId": "System.Threading.ThreadPool/System.Threading.ThreadPool::QueueUserWorkItem:System.Boolean(System.Threading.WaitCallback,System.Object)",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Delegate::GetInvocationList:System.Delegate[]()",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
       "reason": "external-call"
     }
   ]

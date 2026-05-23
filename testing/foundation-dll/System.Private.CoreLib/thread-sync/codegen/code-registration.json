@@ -52,36 +52,6 @@
           "slot": 7,
           "symbol": "ThreadSyncSubjects_ThreadSyncSubjects_Subject_7",
           "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_7:System.Void()"
-        },
-        {
-          "registrationKind": "methodPointer",
-          "slot": 8,
-          "symbol": "ThreadSyncSubjects_ThreadSyncSubjects___c_cctor",
-          "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::.cctor:System.Void()"
-        },
-        {
-          "registrationKind": "methodPointer",
-          "slot": 9,
-          "symbol": "ThreadSyncSubjects_ThreadSyncSubjects___c__ctor",
-          "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::.ctor:System.Void()"
-        },
-        {
-          "registrationKind": "methodPointer",
-          "slot": 10,
-          "symbol": "ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_5_b__6_0_System_Object",
-          "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_0:System.Void(System.Object)"
-        },
-        {
-          "registrationKind": "methodPointer",
-          "slot": 11,
-          "symbol": "ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_6_b__7_0_System_Object",
-          "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_6\u003Eb__7_0:System.Void(System.Object)"
-        },
-        {
-          "registrationKind": "methodPointer",
-          "slot": 12,
-          "symbol": "ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_7_b__8_0_System_Object",
-          "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_0:System.Void(System.Object)"
         }
       ]
     }

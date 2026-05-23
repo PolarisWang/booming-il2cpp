@@ -27,6 +27,25 @@ extern "C" void InterpreterEntryDirect(
 #pragma warning(push)
 #pragma warning(disable: 4065 4244)
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_0(void);
+extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_1(void);
+extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_10(void);
+extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_11(void);
+extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_12(void);
+extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_13(void);
+extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_14(void);
+extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_15(void);
+extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_16(void);
+extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_2(void);
+extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_3(void);
+extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_4(void);
+extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_5(void);
+extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_6(void);
+extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_7(void);
+extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_8(void);
+extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_9(void);
+
 namespace chaos::il2cpp::codegen::ExceptionThrowDiagnosticsSubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup
@@ -107,7 +126,7 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 struct chaos_type_ExceptionThrowDiagnosticsSubjects__PrivateImplementationDetails_
 {
 	ThinLockableHeader header{};
-	CHAOS_IL2CPP_INTPTR field_ExceptionThrowDiagnosticsSubjects__PrivateImplementationDetails___9F64A747E1B97F131FABB6B447296C9B6F0201E79FB3C5356E6C77E89B6A806A = 0;
+	CHAOS_IL2CPP_INT32 field_ExceptionThrowDiagnosticsSubjects__PrivateImplementationDetails___9F64A747E1B97F131FABB6B447296C9B6F0201E79FB3C5356E6C77E89B6A806A = 0;
 };
 
 struct chaos_type_ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects
@@ -283,6 +302,62 @@ CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) no
 	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_string);
 }
 
+
+// ── GcTypeLayout pointer offset arrays (computed via offsetof) ──
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_ArgumentException[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_ArgumentException, _message)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_ArgumentException, _innerException)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_ArgumentException, _stackTrace))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_ArgumentNullException[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_ArgumentNullException, _message)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_ArgumentNullException, _innerException)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_ArgumentNullException, _stackTrace))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_ArgumentOutOfRangeException[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_ArgumentOutOfRangeException, _message)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_ArgumentOutOfRangeException, _innerException)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_ArgumentOutOfRangeException, _stackTrace))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Exception[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Exception, _message)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Exception, _innerException)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Exception, _stackTrace))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_InvalidOperationException[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_InvalidOperationException, _message)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_InvalidOperationException, _innerException)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_InvalidOperationException, _stackTrace))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_NotImplementedException[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_NotImplementedException, _message)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_NotImplementedException, _innerException)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_NotImplementedException, _stackTrace))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_NotSupportedException[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_NotSupportedException, _message)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_NotSupportedException, _innerException)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_NotSupportedException, _stackTrace))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
+
+extern "C" void ChaosRegisterGcLayouts() {
+	auto& registry = chaos::il2cpp::runtime_core::GcLayoutRegistry::Instance();
+
+	registry.Register(7495683690410207557ULL, sizeof(chaos_type_ExceptionThrowDiagnosticsSubjects__PrivateImplementationDetails_), nullptr, 0);
+	registry.Register(8016410208713659828ULL, sizeof(chaos_type_ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects), nullptr, 0);
+	registry.Register(4429271818216920541ULL, sizeof(chaos_type_System_Private_CoreLib_System_ArgumentException), kGcOffsets_chaos_type_System_Private_CoreLib_System_ArgumentException, 3);
+	registry.Register(12400915656331929738ULL, sizeof(chaos_type_System_Private_CoreLib_System_ArgumentNullException), kGcOffsets_chaos_type_System_Private_CoreLib_System_ArgumentNullException, 3);
+	registry.Register(15763389239383405623ULL, sizeof(chaos_type_System_Private_CoreLib_System_ArgumentOutOfRangeException), kGcOffsets_chaos_type_System_Private_CoreLib_System_ArgumentOutOfRangeException, 3);
+	registry.Register(3217969471912086765ULL, sizeof(chaos_type_System_Private_CoreLib_System_Byte), nullptr, 0);
+	registry.Register(10972282733316558392ULL, sizeof(chaos_type_System_Private_CoreLib_System_Exception), kGcOffsets_chaos_type_System_Private_CoreLib_System_Exception, 3);
+	registry.Register(5529823529457257812ULL, sizeof(chaos_type_System_Private_CoreLib_System_InvalidOperationException), kGcOffsets_chaos_type_System_Private_CoreLib_System_InvalidOperationException, 3);
+	registry.Register(16853252435633719857ULL, sizeof(chaos_type_System_Private_CoreLib_System_NotImplementedException), kGcOffsets_chaos_type_System_Private_CoreLib_System_NotImplementedException, 3);
+	registry.Register(9608462597425565551ULL, sizeof(chaos_type_System_Private_CoreLib_System_NotSupportedException), kGcOffsets_chaos_type_System_Private_CoreLib_System_NotSupportedException, 3);
+	registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
+	registry.Register(5474029880995115448ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly, 1);
+	registry.Register(17082367815459723707ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, 1);
+	registry.Register(4137207361503509124ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, 5);
+	registry.Register(17040031516751226236ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, 2);
+	registry.Register(10748947813473285525ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, 5);
+	registry.Register(1782325859292956794ULL, sizeof(chaos_type_System_Private_CoreLib_System_String), nullptr, 0);
+
+	// Register TypeInfoV0 address ranges for IsValidTypeInfoPointer.
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_ExceptionThrowDiagnosticsSubjects__PrivateImplementationDetails_), reinterpret_cast<uintptr_t>(&chaos_mt_ExceptionThrowDiagnosticsSubjects__PrivateImplementationDetails_) + sizeof(chaos_mt_ExceptionThrowDiagnosticsSubjects__PrivateImplementationDetails_));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects), reinterpret_cast<uintptr_t>(&chaos_mt_ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects) + sizeof(chaos_mt_ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_ArgumentException), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_ArgumentException) + sizeof(chaos_mt_System_Private_CoreLib_System_ArgumentException));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_ArgumentNullException), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_ArgumentNullException) + sizeof(chaos_mt_System_Private_CoreLib_System_ArgumentNullException));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_ArgumentOutOfRangeException), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_ArgumentOutOfRangeException) + sizeof(chaos_mt_System_Private_CoreLib_System_ArgumentOutOfRangeException));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Byte), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Byte) + sizeof(chaos_mt_System_Private_CoreLib_System_Byte));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Exception), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Exception) + sizeof(chaos_mt_System_Private_CoreLib_System_Exception));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_InvalidOperationException), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_InvalidOperationException) + sizeof(chaos_mt_System_Private_CoreLib_System_InvalidOperationException));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_NotImplementedException), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_NotImplementedException) + sizeof(chaos_mt_System_Private_CoreLib_System_NotImplementedException));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_NotSupportedException), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_NotSupportedException) + sizeof(chaos_mt_System_Private_CoreLib_System_NotSupportedException));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object) + sizeof(chaos_mt_System_Private_CoreLib_System_Object));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_Assembly));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_String), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_String) + sizeof(chaos_mt_System_Private_CoreLib_System_String));
+}
+
 CHAOS_IL2CPP_INT32 chaos_static_ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects___exitCode = 0;
 
 
@@ -426,6 +501,83 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
+
+
+// ── Bridge/import thunks ──
+extern "C" void* kChaosExternalRuntimeFnTable[];
+
+// Bridge/import thunk for: ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::_exitCode
+extern "C" void chaos_bridge_thunk_0(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[1])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Exception::.ctor:System.Void(System.String,System.Exception)
+extern "C" void chaos_bridge_thunk_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[2])(chaos_fn_arg_0, chaos_fn_arg_1);
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Runtime.CompilerServices.Unsafe::CopyBlock:System.Void(System.Byte&,System.Byte&,System.UInt32)
+extern "C" void chaos_bridge_thunk_10(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+{
+	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[21])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Runtime.CompilerServices.Unsafe::InitBlock:System.Void(System.Byte&,System.Byte,System.UInt32)
+extern "C" void chaos_bridge_thunk_11(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+{
+	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Exception::get_StackTrace:System.String()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_2(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[8])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.ArgumentException::.ctor:System.Void(System.String,System.String)
+extern "C" void chaos_bridge_thunk_3(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[12])(chaos_fn_arg_0, chaos_fn_arg_1);
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.ArgumentNullException::.ctor:System.Void(System.String)
+extern "C" void chaos_bridge_thunk_4(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[13])(chaos_fn_arg_0);
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.ArgumentOutOfRangeException::.ctor:System.Void(System.String)
+extern "C" void chaos_bridge_thunk_5(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[14])(chaos_fn_arg_0);
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.NotSupportedException::.ctor:System.Void(System.String)
+extern "C" void chaos_bridge_thunk_6(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[16])(chaos_fn_arg_0);
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.NotImplementedException::.ctor:System.Void(System.String)
+extern "C" void chaos_bridge_thunk_7(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_fn_arg_0);
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Byte
+extern "C" void chaos_bridge_thunk_8(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[18])();
+}
+
+// Bridge/import thunk for: ExceptionThrowDiagnosticsSubjects/<PrivateImplementationDetails>::9F64A747E1B97F131FABB6B447296C9B6F0201E79FB3C5356E6C77E89B6A806A
+extern "C" void chaos_bridge_thunk_9(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[19])();
+}
 
 extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_0(void);
 extern "C" void ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_1(void);
@@ -575,11 +727,18 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
 		/* .type_count        = */ 3u,
-	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
+	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 -- deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
 	/* .custom_attribute_materializer = */ nullptr,
-
+	/* .custom_attribute_method_offset   = */ nullptr,
+	/* .custom_attribute_field_offset    = */ nullptr,
+	/* .custom_attribute_property_offset = */ nullptr,
+	/* .custom_attribute_param_offset    = */ nullptr,
+	/* .custom_attribute_method_count    = */ 0u,
+	/* .custom_attribute_field_count     = */ 0u,
+	/* .custom_attribute_property_count  = */ 0u,
+	/* .custom_attribute_param_count   = */ 0u,
 		/* .abi_manifest      = */ s_abi_manifest,
 	};
 	static const CHAOS_IL2CPP_UINT32 s_native_aot_module_id =
@@ -1242,38 +1401,38 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // matching during IR lowering of patched methods.
 
 static constexpr ReflectionQueryFieldDescriptor kReflFields_ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects[1] = {
-	{ 0u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
+	{ 0x04000001u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::_exitCode", "_exitCode", "System.Int32", 0LL, 3u },
 };
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects[17] = {
-	{ 0u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_10:System.Void()", "Subject_10", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_11:System.Void()", "Subject_11", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_12:System.Void()", "Subject_12", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_13:System.Void()", "Subject_13", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_14:System.Void()", "Subject_14", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_15:System.Void()", "Subject_15", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_16:System.Void()", "Subject_16", "System.Void", 0, nullptr, 0u },
+	{ 0x00000005u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000006u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000007u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000008u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000009u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Au, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Bu, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Cu, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Du, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Eu, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Fu, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_10:System.Void()", "Subject_10", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000010u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_11:System.Void()", "Subject_11", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000011u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_12:System.Void()", "Subject_12", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000012u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_13:System.Void()", "Subject_13", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000013u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_14:System.Void()", "Subject_14", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000014u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_15:System.Void()", "Subject_15", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000015u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects::Subject_16:System.Void()", "Subject_16", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
-	{ 0u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects", "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects", "", "ExceptionThrowDiagnosticsSubjects", "ExceptionThrowDiagnosticsSubjects", nullptr, kReflFields_ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects, 1u, nullptr, 0u,
-	kReflMethods_ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects, 17u },
+	{ 0x00000001u, "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects", "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects", "", "ExceptionThrowDiagnosticsSubjects", "ExceptionThrowDiagnosticsSubjects", nullptr, kReflFields_ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects, 1u, nullptr, 0u,
+nullptr, 0u,    kReflMethods_ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects, 17u, nullptr, 0u, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static const ReflectionQueryImageDescriptor kReflImage = { "ExceptionThrowDiagnosticsSubjects", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "ExceptionThrowDiagnosticsSubjects", kReflTypePtrs, 1u, 1, 0, 0, 0 };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via

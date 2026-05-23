@@ -10,11 +10,6 @@
   "runtimeExecutionKind": "assembly-bound-native-reference-skeleton",
   "translationUnitMode": "runtime-skeleton",
   "translationUnitMethodSubjectIds": [
-    "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
-    "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
-    "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_0:System.Void(System.Object)",
-    "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_6\u003Eb__7_0:System.Void(System.Object)",
-    "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_0:System.Void(System.Object)",
     "ThreadSyncSubjects/ThreadSyncSubjects::Subject_0:System.Void()",
     "ThreadSyncSubjects/ThreadSyncSubjects::Subject_1:System.Void()",
     "ThreadSyncSubjects/ThreadSyncSubjects::Subject_2:System.Void()",
@@ -24,15 +19,15 @@
     "ThreadSyncSubjects/ThreadSyncSubjects::Subject_6:System.Void()",
     "ThreadSyncSubjects/ThreadSyncSubjects::Subject_7:System.Void()"
   ],
-  "translationUnitMethodCount": 13,
+  "translationUnitMethodCount": 8,
   "translationUnitPageSize": 1024,
   "translationUnitPageCount": 1,
   "translationUnitPages": [
     {
       "pageNumber": 1,
-      "methodCount": 13,
+      "methodCount": 8,
       "path": "generated/runtime/native-reference.runtime-skeleton.page-0001.cpp",
-      "firstMethodSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+      "firstMethodSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_0:System.Void()",
       "lastMethodSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_7:System.Void()"
     }
   ],

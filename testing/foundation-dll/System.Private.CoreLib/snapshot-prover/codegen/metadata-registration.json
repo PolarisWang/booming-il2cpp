@@ -15,1100 +15,1100 @@
     {
       "registrationKind": "type",
       "slot": 2,
-      "metadataToken": 33554434,
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
       "name": "SnapshotProverSubjects",
       "displayName": "SnapshotProverSubjects",
-      "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects"
+      "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+      "metadataToken": 33554434
     },
     {
       "registrationKind": "type",
       "slot": 3,
-      "metadataToken": 33554434,
       "subjectId": "SnapshotTestFixtures/ArithmeticOps",
       "name": "ArithmeticOps",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "ArithmeticOps",
-      "definitionSubjectId": "SnapshotTestFixtures/ArithmeticOps"
+      "definitionSubjectId": "SnapshotTestFixtures/ArithmeticOps",
+      "metadataToken": 33554434
     },
     {
       "registrationKind": "type",
       "slot": 4,
-      "metadataToken": 33554435,
       "subjectId": "SnapshotTestFixtures/StringOps",
       "name": "StringOps",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "StringOps",
-      "definitionSubjectId": "SnapshotTestFixtures/StringOps"
+      "definitionSubjectId": "SnapshotTestFixtures/StringOps",
+      "metadataToken": 33554435
     },
     {
       "registrationKind": "type",
       "slot": 5,
-      "metadataToken": 33554436,
       "subjectId": "SnapshotTestFixtures/VoidCaller",
       "name": "VoidCaller",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "VoidCaller",
-      "definitionSubjectId": "SnapshotTestFixtures/VoidCaller"
+      "definitionSubjectId": "SnapshotTestFixtures/VoidCaller",
+      "metadataToken": 33554436
     },
     {
       "registrationKind": "type",
       "slot": 6,
-      "metadataToken": 33554437,
       "subjectId": "SnapshotTestFixtures/MathHelper",
       "name": "MathHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "MathHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/MathHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/MathHelper",
+      "metadataToken": 33554437
     },
     {
       "registrationKind": "type",
       "slot": 7,
-      "metadataToken": 33554438,
       "subjectId": "SnapshotTestFixtures/FlowControl",
       "name": "FlowControl",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "FlowControl",
-      "definitionSubjectId": "SnapshotTestFixtures/FlowControl"
+      "definitionSubjectId": "SnapshotTestFixtures/FlowControl",
+      "metadataToken": 33554438
     },
     {
       "registrationKind": "type",
       "slot": 8,
-      "metadataToken": 33554439,
       "subjectId": "SnapshotTestFixtures/InstanceHelper",
       "name": "InstanceHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "InstanceHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/InstanceHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/InstanceHelper",
+      "metadataToken": 33554439
     },
     {
       "registrationKind": "type",
       "slot": 9,
-      "metadataToken": 33554440,
       "subjectId": "SnapshotTestFixtures/CallVirtHelper",
       "name": "CallVirtHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "CallVirtHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/CallVirtHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/CallVirtHelper",
+      "metadataToken": 33554440
     },
     {
       "registrationKind": "type",
       "slot": 10,
-      "metadataToken": 33554441,
       "subjectId": "SnapshotTestFixtures/BoxingHelper",
       "name": "BoxingHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "BoxingHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/BoxingHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/BoxingHelper",
+      "metadataToken": 33554441
     },
     {
       "registrationKind": "type",
       "slot": 11,
-      "metadataToken": 33554442,
       "subjectId": "SnapshotTestFixtures/FieldHelper",
       "name": "FieldHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "FieldHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/FieldHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/FieldHelper",
+      "metadataToken": 33554442
     },
     {
       "registrationKind": "type",
       "slot": 12,
-      "metadataToken": 33554443,
       "subjectId": "SnapshotTestFixtures/LoopHelper",
       "name": "LoopHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "LoopHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/LoopHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/LoopHelper",
+      "metadataToken": 33554443
     },
     {
       "registrationKind": "type",
       "slot": 13,
-      "metadataToken": 33554444,
       "subjectId": "SnapshotTestFixtures/ConversionHelper",
       "name": "ConversionHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "ConversionHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/ConversionHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/ConversionHelper",
+      "metadataToken": 33554444
     },
     {
       "registrationKind": "type",
       "slot": 14,
-      "metadataToken": 33554445,
       "subjectId": "SnapshotTestFixtures/Helper",
       "name": "Helper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "Helper",
-      "definitionSubjectId": "SnapshotTestFixtures/Helper"
+      "definitionSubjectId": "SnapshotTestFixtures/Helper",
+      "metadataToken": 33554445
     },
     {
       "registrationKind": "type",
       "slot": 15,
-      "metadataToken": 33554446,
       "subjectId": "SnapshotTestFixtures/SwitchHelper",
       "name": "SwitchHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "SwitchHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/SwitchHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/SwitchHelper",
+      "metadataToken": 33554446
     },
     {
       "registrationKind": "type",
       "slot": 16,
-      "metadataToken": 33554447,
       "subjectId": "SnapshotTestFixtures/LdftnHelper",
       "name": "LdftnHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "LdftnHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/LdftnHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/LdftnHelper",
+      "metadataToken": 33554447
     },
     {
       "registrationKind": "type",
       "slot": 17,
-      "metadataToken": 33554448,
       "subjectId": "SnapshotTestFixtures/TargetHelper",
       "name": "TargetHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "TargetHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/TargetHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/TargetHelper",
+      "metadataToken": 33554448
     },
     {
       "registrationKind": "type",
       "slot": 18,
-      "metadataToken": 33554449,
       "subjectId": "SnapshotTestFixtures/ArrayHelper",
       "name": "ArrayHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "ArrayHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/ArrayHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/ArrayHelper",
+      "metadataToken": 33554449
     },
     {
       "registrationKind": "type",
       "slot": 19,
-      "metadataToken": 33554450,
       "subjectId": "SnapshotTestFixtures/EhHelper",
       "name": "EhHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "EhHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/EhHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/EhHelper",
+      "metadataToken": 33554450
     },
     {
       "registrationKind": "type",
       "slot": 20,
-      "metadataToken": 33554451,
       "subjectId": "SnapshotTestFixtures/GenericHelper",
       "name": "GenericHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "GenericHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/GenericHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/GenericHelper",
+      "metadataToken": 33554451
     },
     {
       "registrationKind": "type",
       "slot": 21,
-      "metadataToken": 33554452,
       "subjectId": "SnapshotTestFixtures/Wrapper\u00601",
       "name": "Wrapper\u00601",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "Wrapper\u00601",
-      "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601"
+      "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601",
+      "metadataToken": 33554452
     },
     {
       "registrationKind": "type",
       "slot": 22,
-      "metadataToken": 33554453,
       "subjectId": "SnapshotTestFixtures/DelegateHelper",
       "name": "DelegateHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "DelegateHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/DelegateHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/DelegateHelper",
+      "metadataToken": 33554453
     },
     {
       "registrationKind": "type",
       "slot": 23,
-      "metadataToken": 33554454,
       "subjectId": "SnapshotTestFixtures/BaseClass",
       "name": "BaseClass",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "BaseClass",
-      "definitionSubjectId": "SnapshotTestFixtures/BaseClass"
+      "definitionSubjectId": "SnapshotTestFixtures/BaseClass",
+      "metadataToken": 33554454
     },
     {
       "registrationKind": "type",
       "slot": 24,
-      "metadataToken": 33554455,
       "subjectId": "SnapshotTestFixtures/DerivedClass",
       "name": "DerivedClass",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "DerivedClass",
-      "definitionSubjectId": "SnapshotTestFixtures/DerivedClass"
+      "definitionSubjectId": "SnapshotTestFixtures/DerivedClass",
+      "metadataToken": 33554455
     },
     {
       "registrationKind": "type",
       "slot": 25,
-      "metadataToken": 33554456,
       "subjectId": "SnapshotTestFixtures/VirtualHelper",
       "name": "VirtualHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "VirtualHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/VirtualHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/VirtualHelper",
+      "metadataToken": 33554456
     },
     {
       "registrationKind": "type",
       "slot": 26,
-      "metadataToken": 33554458,
       "subjectId": "SnapshotTestFixtures/MarkedClass",
       "name": "MarkedClass",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "MarkedClass",
-      "definitionSubjectId": "SnapshotTestFixtures/MarkedClass"
+      "definitionSubjectId": "SnapshotTestFixtures/MarkedClass",
+      "metadataToken": 33554458
     },
     {
       "registrationKind": "type",
       "slot": 27,
-      "metadataToken": 33554459,
       "subjectId": "SnapshotTestFixtures/TypeCheckHelper",
       "name": "TypeCheckHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "TypeCheckHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/TypeCheckHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/TypeCheckHelper",
+      "metadataToken": 33554459
     },
     {
       "registrationKind": "type",
       "slot": 28,
-      "metadataToken": 33554461,
       "subjectId": "SnapshotTestFixtures/SizeOfHelper",
       "name": "SizeOfHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "SizeOfHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/SizeOfHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/SizeOfHelper",
+      "metadataToken": 33554461
     },
     {
       "registrationKind": "type",
       "slot": 29,
-      "metadataToken": 33554462,
       "subjectId": "SnapshotTestFixtures/IndirectHelper",
       "name": "IndirectHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "IndirectHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/IndirectHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/IndirectHelper",
+      "metadataToken": 33554462
     },
     {
       "registrationKind": "type",
       "slot": 30,
-      "metadataToken": 33554463,
       "subjectId": "SnapshotTestFixtures/ArithmeticCompareHelper",
       "name": "ArithmeticCompareHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "ArithmeticCompareHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/ArithmeticCompareHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/ArithmeticCompareHelper",
+      "metadataToken": 33554463
     },
     {
       "registrationKind": "type",
       "slot": 31,
-      "metadataToken": 33554464,
       "subjectId": "SnapshotTestFixtures/BranchDupHelper",
       "name": "BranchDupHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "BranchDupHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/BranchDupHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/BranchDupHelper",
+      "metadataToken": 33554464
     },
     {
       "registrationKind": "type",
       "slot": 32,
-      "metadataToken": 33554465,
       "subjectId": "SnapshotTestFixtures/HasInstanceFields",
       "name": "HasInstanceFields",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "HasInstanceFields",
-      "definitionSubjectId": "SnapshotTestFixtures/HasInstanceFields"
+      "definitionSubjectId": "SnapshotTestFixtures/HasInstanceFields",
+      "metadataToken": 33554465
     },
     {
       "registrationKind": "type",
       "slot": 33,
-      "metadataToken": 33554466,
       "subjectId": "SnapshotTestFixtures/InstanceFieldHelper",
       "name": "InstanceFieldHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "InstanceFieldHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/InstanceFieldHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/InstanceFieldHelper",
+      "metadataToken": 33554466
     },
     {
       "registrationKind": "type",
       "slot": 34,
-      "metadataToken": 33554467,
       "subjectId": "SnapshotTestFixtures/StaticFieldWriteHelper",
       "name": "StaticFieldWriteHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "StaticFieldWriteHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/StaticFieldWriteHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/StaticFieldWriteHelper",
+      "metadataToken": 33554467
     },
     {
       "registrationKind": "type",
       "slot": 35,
-      "metadataToken": 33554468,
       "subjectId": "SnapshotTestFixtures/VirtualDispatchHelper",
       "name": "VirtualDispatchHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "VirtualDispatchHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/VirtualDispatchHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/VirtualDispatchHelper",
+      "metadataToken": 33554468
     },
     {
       "registrationKind": "type",
       "slot": 36,
-      "metadataToken": 33554469,
       "subjectId": "SnapshotTestFixtures/BitwiseHelper",
       "name": "BitwiseHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "BitwiseHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/BitwiseHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/BitwiseHelper",
+      "metadataToken": 33554469
     },
     {
       "registrationKind": "type",
       "slot": 37,
-      "metadataToken": 33554470,
       "subjectId": "SnapshotTestFixtures/ShiftHelper",
       "name": "ShiftHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "ShiftHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/ShiftHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/ShiftHelper",
+      "metadataToken": 33554470
     },
     {
       "registrationKind": "type",
       "slot": 38,
-      "metadataToken": 33554471,
       "subjectId": "SnapshotTestFixtures/ArrayLengthHelper",
       "name": "ArrayLengthHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "ArrayLengthHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/ArrayLengthHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/ArrayLengthHelper",
+      "metadataToken": 33554471
     },
     {
       "registrationKind": "type",
       "slot": 39,
-      "metadataToken": 33554473,
       "subjectId": "SnapshotTestFixtures/ValueTypeHelper",
       "name": "ValueTypeHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "ValueTypeHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/ValueTypeHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/ValueTypeHelper",
+      "metadataToken": 33554473
     },
     {
       "registrationKind": "type",
       "slot": 40,
-      "metadataToken": 33554474,
       "subjectId": "SnapshotTestFixtures/LocalAllocHelper",
       "name": "LocalAllocHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "LocalAllocHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/LocalAllocHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/LocalAllocHelper",
+      "metadataToken": 33554474
     },
     {
       "registrationKind": "type",
       "slot": 41,
-      "metadataToken": 33554475,
       "subjectId": "SnapshotTestFixtures/MulDivHelper",
       "name": "MulDivHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "MulDivHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/MulDivHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/MulDivHelper",
+      "metadataToken": 33554475
     },
     {
       "registrationKind": "type",
       "slot": 42,
-      "metadataToken": 33554476,
       "subjectId": "SnapshotTestFixtures/BranchCompareHelper",
       "name": "BranchCompareHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "BranchCompareHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/BranchCompareHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/BranchCompareHelper",
+      "metadataToken": 33554476
     },
     {
       "registrationKind": "type",
       "slot": 43,
-      "metadataToken": 33554477,
       "subjectId": "SnapshotTestFixtures/FloatOpsHelper",
       "name": "FloatOpsHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "FloatOpsHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/FloatOpsHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/FloatOpsHelper",
+      "metadataToken": 33554477
     },
     {
       "registrationKind": "type",
       "slot": 44,
-      "metadataToken": 33554478,
       "subjectId": "SnapshotTestFixtures/ConvWideHelper",
       "name": "ConvWideHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "ConvWideHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/ConvWideHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/ConvWideHelper",
+      "metadataToken": 33554478
     },
     {
       "registrationKind": "type",
       "slot": 45,
-      "metadataToken": 33554479,
       "subjectId": "SnapshotTestFixtures/NegShiftHelper",
       "name": "NegShiftHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "NegShiftHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/NegShiftHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/NegShiftHelper",
+      "metadataToken": 33554479
     },
     {
       "registrationKind": "type",
       "slot": 46,
-      "metadataToken": 33554480,
       "subjectId": "SnapshotTestFixtures/LdcI8Helper",
       "name": "LdcI8Helper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "LdcI8Helper",
-      "definitionSubjectId": "SnapshotTestFixtures/LdcI8Helper"
+      "definitionSubjectId": "SnapshotTestFixtures/LdcI8Helper",
+      "metadataToken": 33554480
     },
     {
       "registrationKind": "type",
       "slot": 47,
-      "metadataToken": 33554481,
       "subjectId": "SnapshotTestFixtures/ConvSmallIntHelper",
       "name": "ConvSmallIntHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "ConvSmallIntHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/ConvSmallIntHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/ConvSmallIntHelper",
+      "metadataToken": 33554481
     },
     {
       "registrationKind": "type",
       "slot": 48,
-      "metadataToken": 33554482,
       "subjectId": "SnapshotTestFixtures/LdindI1Helper",
       "name": "LdindI1Helper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "LdindI1Helper",
-      "definitionSubjectId": "SnapshotTestFixtures/LdindI1Helper"
+      "definitionSubjectId": "SnapshotTestFixtures/LdindI1Helper",
+      "metadataToken": 33554482
     },
     {
       "registrationKind": "type",
       "slot": 49,
-      "metadataToken": 33554483,
       "subjectId": "SnapshotTestFixtures/BranchCompareBHelper",
       "name": "BranchCompareBHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "BranchCompareBHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/BranchCompareBHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/BranchCompareBHelper",
+      "metadataToken": 33554483
     },
     {
       "registrationKind": "type",
       "slot": 50,
-      "metadataToken": 33554484,
       "subjectId": "SnapshotTestFixtures/HasFields",
       "name": "HasFields",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "HasFields",
-      "definitionSubjectId": "SnapshotTestFixtures/HasFields"
+      "definitionSubjectId": "SnapshotTestFixtures/HasFields",
+      "metadataToken": 33554484
     },
     {
       "registrationKind": "type",
       "slot": 51,
-      "metadataToken": 33554485,
       "subjectId": "SnapshotTestFixtures/AddressHelper",
       "name": "AddressHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "AddressHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/AddressHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/AddressHelper",
+      "metadataToken": 33554485
     },
     {
       "registrationKind": "type",
       "slot": 52,
-      "metadataToken": 33554486,
       "subjectId": "SnapshotTestFixtures/LdtokenHelper",
       "name": "LdtokenHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "LdtokenHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/LdtokenHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/LdtokenHelper",
+      "metadataToken": 33554486
     },
     {
       "registrationKind": "type",
       "slot": 53,
-      "metadataToken": 33554487,
       "subjectId": "SnapshotTestFixtures/LdelemaHelper",
       "name": "LdelemaHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "LdelemaHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/LdelemaHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/LdelemaHelper",
+      "metadataToken": 33554487
     },
     {
       "registrationKind": "type",
       "slot": 54,
-      "metadataToken": 33554488,
       "subjectId": "SnapshotTestFixtures/LdargaHelper",
       "name": "LdargaHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "LdargaHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/LdargaHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/LdargaHelper",
+      "metadataToken": 33554488
     },
     {
       "registrationKind": "type",
       "slot": 55,
-      "metadataToken": 33554489,
       "subjectId": "SnapshotTestFixtures/CpobjHelper",
       "name": "CpobjHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "CpobjHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/CpobjHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/CpobjHelper",
+      "metadataToken": 33554489
     },
     {
       "registrationKind": "type",
       "slot": 56,
-      "metadataToken": 33554490,
       "subjectId": "SnapshotTestFixtures/StindNarrowHelper",
       "name": "StindNarrowHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "StindNarrowHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/StindNarrowHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/StindNarrowHelper",
+      "metadataToken": 33554490
     },
     {
       "registrationKind": "type",
       "slot": 57,
-      "metadataToken": 33554491,
       "subjectId": "SnapshotTestFixtures/CallvirtHelper",
       "name": "CallvirtHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "CallvirtHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/CallvirtHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/CallvirtHelper",
+      "metadataToken": 33554491
     },
     {
       "registrationKind": "type",
       "slot": 58,
-      "metadataToken": 33554492,
       "subjectId": "SnapshotTestFixtures/UnboxHelper",
       "name": "UnboxHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "UnboxHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/UnboxHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/UnboxHelper",
+      "metadataToken": 33554492
     },
     {
       "registrationKind": "type",
       "slot": 59,
-      "metadataToken": 33554493,
       "subjectId": "SnapshotTestFixtures/CpblkHelper",
       "name": "CpblkHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "CpblkHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/CpblkHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/CpblkHelper",
+      "metadataToken": 33554493
     },
     {
       "registrationKind": "type",
       "slot": 60,
-      "metadataToken": 33554494,
       "subjectId": "SnapshotTestFixtures/LdindUnsignedHelper",
       "name": "LdindUnsignedHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "LdindUnsignedHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/LdindUnsignedHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/LdindUnsignedHelper",
+      "metadataToken": 33554494
     },
     {
       "registrationKind": "type",
       "slot": 61,
-      "metadataToken": 33554495,
       "subjectId": "SnapshotTestFixtures/LdindI8Helper",
       "name": "LdindI8Helper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "LdindI8Helper",
-      "definitionSubjectId": "SnapshotTestFixtures/LdindI8Helper"
+      "definitionSubjectId": "SnapshotTestFixtures/LdindI8Helper",
+      "metadataToken": 33554495
     },
     {
       "registrationKind": "type",
       "slot": 62,
-      "metadataToken": 33554496,
       "subjectId": "SnapshotTestFixtures/LdindWideHelper",
       "name": "LdindWideHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "LdindWideHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/LdindWideHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/LdindWideHelper",
+      "metadataToken": 33554496
     },
     {
       "registrationKind": "type",
       "slot": 63,
-      "metadataToken": 33554497,
       "subjectId": "SnapshotTestFixtures/StindWideHelper",
       "name": "StindWideHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "StindWideHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/StindWideHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/StindWideHelper",
+      "metadataToken": 33554497
     },
     {
       "registrationKind": "type",
       "slot": 64,
-      "metadataToken": 33554498,
       "subjectId": "SnapshotTestFixtures/ArrayRefHelper",
       "name": "ArrayRefHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "ArrayRefHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/ArrayRefHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/ArrayRefHelper",
+      "metadataToken": 33554498
     },
     {
       "registrationKind": "type",
       "slot": 65,
-      "metadataToken": 33554499,
       "subjectId": "SnapshotTestFixtures/ThrowHelper",
       "name": "ThrowHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "ThrowHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/ThrowHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/ThrowHelper",
+      "metadataToken": 33554499
     },
     {
       "registrationKind": "type",
       "slot": 66,
-      "metadataToken": 33554500,
       "subjectId": "SnapshotTestFixtures/OverflowHelper",
       "name": "OverflowHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "OverflowHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/OverflowHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/OverflowHelper",
+      "metadataToken": 33554500
     },
     {
       "registrationKind": "type",
       "slot": 67,
-      "metadataToken": 33554501,
       "subjectId": "SnapshotTestFixtures/OverflowConvHelper",
       "name": "OverflowConvHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "OverflowConvHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/OverflowConvHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/OverflowConvHelper",
+      "metadataToken": 33554501
     },
     {
       "registrationKind": "type",
       "slot": 68,
-      "metadataToken": 33554502,
       "subjectId": "SnapshotTestFixtures/CalliHelper",
       "name": "CalliHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "CalliHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/CalliHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/CalliHelper",
+      "metadataToken": 33554502
     },
     {
       "registrationKind": "type",
       "slot": 69,
-      "metadataToken": 33554503,
       "subjectId": "SnapshotTestFixtures/MyClass",
       "name": "MyClass",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "MyClass",
-      "definitionSubjectId": "SnapshotTestFixtures/MyClass"
+      "definitionSubjectId": "SnapshotTestFixtures/MyClass",
+      "metadataToken": 33554503
     },
     {
       "registrationKind": "type",
       "slot": 70,
-      "metadataToken": 33554504,
       "subjectId": "SnapshotTestFixtures/LdVirtftnHelper",
       "name": "LdVirtftnHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "LdVirtftnHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/LdVirtftnHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/LdVirtftnHelper",
+      "metadataToken": 33554504
     },
     {
       "registrationKind": "type",
       "slot": 71,
-      "metadataToken": 33554505,
       "subjectId": "SnapshotTestFixtures/LdelemAllHelper",
       "name": "LdelemAllHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "LdelemAllHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/LdelemAllHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/LdelemAllHelper",
+      "metadataToken": 33554505
     },
     {
       "registrationKind": "type",
       "slot": 72,
-      "metadataToken": 33554506,
       "subjectId": "SnapshotTestFixtures/StelemAllHelper",
       "name": "StelemAllHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "StelemAllHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/StelemAllHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/StelemAllHelper",
+      "metadataToken": 33554506
     },
     {
       "registrationKind": "type",
       "slot": 73,
-      "metadataToken": 33554507,
       "subjectId": "SnapshotTestFixtures/UnsignedOpsHelper",
       "name": "UnsignedOpsHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "UnsignedOpsHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/UnsignedOpsHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/UnsignedOpsHelper",
+      "metadataToken": 33554507
     },
     {
       "registrationKind": "type",
       "slot": 74,
-      "metadataToken": 33554508,
       "subjectId": "SnapshotTestFixtures/RareOpsHelper",
       "name": "RareOpsHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "RareOpsHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/RareOpsHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/RareOpsHelper",
+      "metadataToken": 33554508
     },
     {
       "registrationKind": "type",
       "slot": 75,
-      "metadataToken": 33554509,
       "subjectId": "SnapshotTestFixtures/StringFormatHelper",
       "name": "StringFormatHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "StringFormatHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/StringFormatHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/StringFormatHelper",
+      "metadataToken": 33554509
     },
     {
       "registrationKind": "type",
       "slot": 76,
-      "metadataToken": 33554510,
       "subjectId": "SnapshotTestFixtures/BranchUnsignedHelper",
       "name": "BranchUnsignedHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "BranchUnsignedHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/BranchUnsignedHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/BranchUnsignedHelper",
+      "metadataToken": 33554510
     },
     {
       "registrationKind": "type",
       "slot": 77,
-      "metadataToken": 33554511,
       "subjectId": "SnapshotTestFixtures/BranchUnsignedBHelper",
       "name": "BranchUnsignedBHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "BranchUnsignedBHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/BranchUnsignedBHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/BranchUnsignedBHelper",
+      "metadataToken": 33554511
     },
     {
       "registrationKind": "type",
       "slot": 78,
-      "metadataToken": 33554512,
       "subjectId": "SnapshotTestFixtures/RethrowHelper",
       "name": "RethrowHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "RethrowHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/RethrowHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/RethrowHelper",
+      "metadataToken": 33554512
     },
     {
       "registrationKind": "type",
       "slot": 79,
-      "metadataToken": 33554513,
       "subjectId": "SnapshotTestFixtures/OverflowUnHelper",
       "name": "OverflowUnHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "OverflowUnHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/OverflowUnHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/OverflowUnHelper",
+      "metadataToken": 33554513
     },
     {
       "registrationKind": "type",
       "slot": 80,
-      "metadataToken": 33554514,
       "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper",
       "name": "MoreRareOpsHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "MoreRareOpsHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper",
+      "metadataToken": 33554514
     },
     {
       "registrationKind": "type",
       "slot": 81,
-      "metadataToken": 33554515,
       "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper",
       "name": "OverflowConvExtHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "OverflowConvExtHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper",
+      "metadataToken": 33554515
     },
     {
       "registrationKind": "type",
       "slot": 82,
-      "metadataToken": 33554516,
       "subjectId": "SnapshotTestFixtures/SimpleGapsHelper",
       "name": "SimpleGapsHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "SimpleGapsHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/SimpleGapsHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/SimpleGapsHelper",
+      "metadataToken": 33554516
     },
     {
       "registrationKind": "type",
       "slot": 83,
-      "metadataToken": 33554517,
       "subjectId": "SnapshotTestFixtures/LdindStindGapsHelper",
       "name": "LdindStindGapsHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "LdindStindGapsHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/LdindStindGapsHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/LdindStindGapsHelper",
+      "metadataToken": 33554517
     },
     {
       "registrationKind": "type",
       "slot": 84,
-      "metadataToken": 33554518,
       "subjectId": "SnapshotTestFixtures/CollectionsHelper",
       "name": "CollectionsHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "CollectionsHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/CollectionsHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/CollectionsHelper",
+      "metadataToken": 33554518
     },
     {
       "registrationKind": "type",
       "slot": 85,
-      "metadataToken": 33554519,
       "subjectId": "SnapshotTestFixtures/ExternalCaller",
       "name": "ExternalCaller",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "ExternalCaller",
-      "definitionSubjectId": "SnapshotTestFixtures/ExternalCaller"
+      "definitionSubjectId": "SnapshotTestFixtures/ExternalCaller",
+      "metadataToken": 33554519
     },
     {
       "registrationKind": "type",
       "slot": 86,
-      "metadataToken": 33554520,
       "subjectId": "SnapshotTestFixtures/MultiDispatcher",
       "name": "MultiDispatcher",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "MultiDispatcher",
-      "definitionSubjectId": "SnapshotTestFixtures/MultiDispatcher"
+      "definitionSubjectId": "SnapshotTestFixtures/MultiDispatcher",
+      "metadataToken": 33554520
     },
     {
       "registrationKind": "type",
       "slot": 87,
-      "metadataToken": 33554521,
       "subjectId": "SnapshotTestFixtures/InternalHelper",
       "name": "InternalHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "InternalHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/InternalHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/InternalHelper",
+      "metadataToken": 33554521
     },
     {
       "registrationKind": "type",
       "slot": 88,
-      "metadataToken": 33554522,
       "subjectId": "SnapshotTestFixtures/StringConcatHelper",
       "name": "StringConcatHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "StringConcatHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/StringConcatHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/StringConcatHelper",
+      "metadataToken": 33554522
     },
     {
       "registrationKind": "type",
       "slot": 89,
-      "metadataToken": 33554523,
       "subjectId": "SnapshotTestFixtures/GenericsVirtEhDemo",
       "name": "GenericsVirtEhDemo",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "GenericsVirtEhDemo",
-      "definitionSubjectId": "SnapshotTestFixtures/GenericsVirtEhDemo"
+      "definitionSubjectId": "SnapshotTestFixtures/GenericsVirtEhDemo",
+      "metadataToken": 33554523
     },
     {
       "registrationKind": "type",
       "slot": 90,
-      "metadataToken": 33554524,
       "subjectId": "SnapshotTestFixtures/BoxInterfaceArrayDemo",
       "name": "BoxInterfaceArrayDemo",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "BoxInterfaceArrayDemo",
-      "definitionSubjectId": "SnapshotTestFixtures/BoxInterfaceArrayDemo"
+      "definitionSubjectId": "SnapshotTestFixtures/BoxInterfaceArrayDemo",
+      "metadataToken": 33554524
     },
     {
       "registrationKind": "type",
       "slot": 91,
-      "metadataToken": 33554525,
       "subjectId": "SnapshotTestFixtures/HotUpdateWithTypesDemo",
       "name": "HotUpdateWithTypesDemo",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "HotUpdateWithTypesDemo",
-      "definitionSubjectId": "SnapshotTestFixtures/HotUpdateWithTypesDemo"
+      "definitionSubjectId": "SnapshotTestFixtures/HotUpdateWithTypesDemo",
+      "metadataToken": 33554525
     },
     {
       "registrationKind": "type",
       "slot": 92,
-      "metadataToken": 33554526,
       "subjectId": "SnapshotTestFixtures/HotUpdateWithGenericsDemo",
       "name": "HotUpdateWithGenericsDemo",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "HotUpdateWithGenericsDemo",
-      "definitionSubjectId": "SnapshotTestFixtures/HotUpdateWithGenericsDemo"
+      "definitionSubjectId": "SnapshotTestFixtures/HotUpdateWithGenericsDemo",
+      "metadataToken": 33554526
     },
     {
       "registrationKind": "type",
       "slot": 93,
-      "metadataToken": 33554527,
       "subjectId": "SnapshotTestFixtures/SealedHelper",
       "name": "SealedHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "SealedHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/SealedHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/SealedHelper",
+      "metadataToken": 33554527
     },
     {
       "registrationKind": "type",
       "slot": 94,
-      "metadataToken": 33554528,
       "subjectId": "SnapshotTestFixtures/SealedClassVirtualHelper",
       "name": "SealedClassVirtualHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "SealedClassVirtualHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/SealedClassVirtualHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/SealedClassVirtualHelper",
+      "metadataToken": 33554528
     },
     {
       "registrationKind": "type",
       "slot": 95,
-      "metadataToken": 33554529,
       "subjectId": "SnapshotTestFixtures/IMyInterface",
       "name": "IMyInterface",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "IMyInterface",
-      "definitionSubjectId": "SnapshotTestFixtures/IMyInterface"
+      "definitionSubjectId": "SnapshotTestFixtures/IMyInterface",
+      "metadataToken": 33554529
     },
     {
       "registrationKind": "type",
       "slot": 96,
-      "metadataToken": 33554530,
       "subjectId": "SnapshotTestFixtures/ImplHelper",
       "name": "ImplHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "ImplHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/ImplHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/ImplHelper",
+      "metadataToken": 33554530
     },
     {
       "registrationKind": "type",
       "slot": 97,
-      "metadataToken": 33554531,
       "subjectId": "SnapshotTestFixtures/InterfaceDevirtHelper",
       "name": "InterfaceDevirtHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "InterfaceDevirtHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/InterfaceDevirtHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/InterfaceDevirtHelper",
+      "metadataToken": 33554531
     },
     {
       "registrationKind": "type",
       "slot": 98,
-      "metadataToken": 33554532,
       "subjectId": "SnapshotTestFixtures/EhFinallyHelper",
       "name": "EhFinallyHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "EhFinallyHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/EhFinallyHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/EhFinallyHelper",
+      "metadataToken": 33554532
     },
     {
       "registrationKind": "type",
       "slot": 99,
-      "metadataToken": 33554533,
       "subjectId": "SnapshotTestFixtures/EhFaultHelper",
       "name": "EhFaultHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "EhFaultHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/EhFaultHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/EhFaultHelper",
+      "metadataToken": 33554533
     },
     {
       "registrationKind": "type",
       "slot": 100,
-      "metadataToken": 33554534,
       "subjectId": "SnapshotTestFixtures/EhFilterHelper",
       "name": "EhFilterHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "EhFilterHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/EhFilterHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/EhFilterHelper",
+      "metadataToken": 33554534
     },
     {
       "registrationKind": "type",
       "slot": 101,
-      "metadataToken": 33554535,
       "subjectId": "SnapshotTestFixtures/EhMultipleCatchHelper",
       "name": "EhMultipleCatchHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "EhMultipleCatchHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/EhMultipleCatchHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/EhMultipleCatchHelper",
+      "metadataToken": 33554535
     },
     {
       "registrationKind": "type",
       "slot": 102,
-      "metadataToken": 33554536,
       "subjectId": "SnapshotTestFixtures/EhCatchFinallyNestedHelper",
       "name": "EhCatchFinallyNestedHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "EhCatchFinallyNestedHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/EhCatchFinallyNestedHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/EhCatchFinallyNestedHelper",
+      "metadataToken": 33554536
     },
     {
       "registrationKind": "type",
       "slot": 103,
-      "metadataToken": 33554537,
       "subjectId": "SnapshotTestFixtures/EhFilterFinallyHelper",
       "name": "EhFilterFinallyHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "EhFilterFinallyHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/EhFilterFinallyHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/EhFilterFinallyHelper",
+      "metadataToken": 33554537
     },
     {
       "registrationKind": "type",
       "slot": 104,
-      "metadataToken": 33554538,
       "subjectId": "SnapshotTestFixtures/EhNestedTryCatchHelper",
       "name": "EhNestedTryCatchHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "EhNestedTryCatchHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/EhNestedTryCatchHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/EhNestedTryCatchHelper",
+      "metadataToken": 33554538
     },
     {
       "registrationKind": "type",
       "slot": 105,
-      "metadataToken": 33554539,
       "subjectId": "SnapshotTestFixtures/EhFaultFinallyHelper",
       "name": "EhFaultFinallyHelper",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "EhFaultFinallyHelper",
-      "definitionSubjectId": "SnapshotTestFixtures/EhFaultFinallyHelper"
+      "definitionSubjectId": "SnapshotTestFixtures/EhFaultFinallyHelper",
+      "metadataToken": 33554539
     },
     {
       "registrationKind": "type",
       "slot": 106,
-      "metadataToken": 452984834,
       "subjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E",
       "name": "Wrapper\u003CSystem.Int32\u003E",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "Wrapper\u003CSystem.Int32\u003E",
-      "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601"
+      "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601",
+      "metadataToken": 452984834
     },
     {
       "registrationKind": "type",
       "slot": 107,
-      "metadataToken": 452984835,
       "subjectId": "SnapshotTestFixtures/Wrapper\u003C!0\u003E",
       "name": "Wrapper\u003C!0\u003E",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "Wrapper\u003C!0\u003E",
-      "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601"
+      "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601",
+      "metadataToken": 452984835
     },
     {
       "registrationKind": "type",
       "slot": 108,
-      "metadataToken": 33554457,
       "subjectId": "SnapshotTestFixtures/IMarker",
       "name": "IMarker",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "IMarker",
-      "definitionSubjectId": "SnapshotTestFixtures/IMarker"
+      "definitionSubjectId": "SnapshotTestFixtures/IMarker",
+      "metadataToken": 33554457
     },
     {
       "registrationKind": "type",
       "slot": 109,
-      "metadataToken": 33554460,
       "subjectId": "SnapshotTestFixtures/SmallStruct",
       "name": "SmallStruct",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "SmallStruct",
-      "definitionSubjectId": "SnapshotTestFixtures/SmallStruct"
+      "definitionSubjectId": "SnapshotTestFixtures/SmallStruct",
+      "metadataToken": 33554460
     },
     {
       "registrationKind": "type",
       "slot": 110,
-      "metadataToken": 33554472,
       "subjectId": "SnapshotTestFixtures/MyValueType",
       "name": "MyValueType",
       "namespaceName": "SnapshotTestFixtures",
       "displayName": "MyValueType",
-      "definitionSubjectId": "SnapshotTestFixtures/MyValueType"
+      "definitionSubjectId": "SnapshotTestFixtures/MyValueType",
+      "metadataToken": 33554472
     },
     {
       "registrationKind": "type",
       "slot": 111,
-      "metadataToken": 33554540,
       "subjectId": "SnapshotTestFixtures/LdftnHelper\u002B\u003C\u003EO",
       "name": "\u003C\u003EO",
       "displayName": "LdftnHelper\u002B\u003C\u003EO",
-      "definitionSubjectId": "SnapshotTestFixtures/LdftnHelper\u002B\u003C\u003EO"
+      "definitionSubjectId": "SnapshotTestFixtures/LdftnHelper\u002B\u003C\u003EO",
+      "metadataToken": 33554540
     },
     {
       "registrationKind": "field",
@@ -1293,1994 +1293,1994 @@
     {
       "registrationKind": "method",
       "slot": 132,
-      "metadataToken": 100663297,
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_0:System.Void()",
       "name": "Subject_0",
       "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_0:System.Void()",
       "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663297
     },
     {
       "registrationKind": "method",
       "slot": 133,
-      "metadataToken": 100663297,
       "subjectId": "SnapshotTestFixtures/ArithmeticOps::RunAdd:System.Int32()",
       "name": "RunAdd",
       "definitionSubjectId": "SnapshotTestFixtures/ArithmeticOps::RunAdd:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/ArithmeticOps",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663297
     },
     {
       "registrationKind": "method",
       "slot": 134,
-      "metadataToken": 100663298,
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_1:System.Void()",
       "name": "Subject_1",
       "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_1:System.Void()",
       "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663298
     },
     {
       "registrationKind": "method",
       "slot": 135,
-      "metadataToken": 100663298,
       "subjectId": "SnapshotTestFixtures/StringOps::UseString:System.Int32()",
       "name": "UseString",
       "definitionSubjectId": "SnapshotTestFixtures/StringOps::UseString:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/StringOps",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663298
     },
     {
       "registrationKind": "method",
       "slot": 136,
-      "metadataToken": 100663299,
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_2:System.Void()",
       "name": "Subject_2",
       "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_2:System.Void()",
       "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663299
     },
     {
       "registrationKind": "method",
       "slot": 137,
-      "metadataToken": 100663299,
       "subjectId": "SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()",
       "name": "DoNothing",
       "definitionSubjectId": "SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/VoidCaller",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663299
     },
     {
       "registrationKind": "method",
       "slot": 138,
-      "metadataToken": 100663300,
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_3:System.Void()",
       "name": "Subject_3",
       "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_3:System.Void()",
       "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663300
     },
     {
       "registrationKind": "method",
       "slot": 139,
-      "metadataToken": 100663300,
       "subjectId": "SnapshotTestFixtures/MathHelper::RunSquare:System.Int32()",
       "name": "RunSquare",
       "definitionSubjectId": "SnapshotTestFixtures/MathHelper::RunSquare:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/MathHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663300
     },
     {
       "registrationKind": "method",
       "slot": 140,
-      "metadataToken": 100663301,
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_4:System.Void()",
       "name": "Subject_4",
       "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_4:System.Void()",
       "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663301
     },
     {
       "registrationKind": "method",
       "slot": 141,
-      "metadataToken": 100663301,
       "subjectId": "SnapshotTestFixtures/FlowControl::IsPositive:System.Int32()",
       "name": "IsPositive",
       "definitionSubjectId": "SnapshotTestFixtures/FlowControl::IsPositive:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/FlowControl",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663301
     },
     {
       "registrationKind": "method",
       "slot": 142,
-      "metadataToken": 100663302,
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_5:System.Void()",
       "name": "Subject_5",
       "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_5:System.Void()",
       "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663302
     },
     {
       "registrationKind": "method",
       "slot": 143,
-      "metadataToken": 100663302,
       "subjectId": "SnapshotTestFixtures/InstanceHelper::.ctor:System.Void(System.Int32)",
       "name": ".ctor",
       "definitionSubjectId": "SnapshotTestFixtures/InstanceHelper::.ctor:System.Void(System.Int32)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/InstanceHelper",
       "memberType": "System.Void",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663302
     },
     {
       "registrationKind": "method",
       "slot": 144,
-      "metadataToken": 100663303,
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_6:System.Void()",
       "name": "Subject_6",
       "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_6:System.Void()",
       "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663303
     },
     {
       "registrationKind": "method",
       "slot": 145,
-      "metadataToken": 100663303,
       "subjectId": "SnapshotTestFixtures/InstanceHelper::GetValue:System.Int32()",
       "name": "GetValue",
       "definitionSubjectId": "SnapshotTestFixtures/InstanceHelper::GetValue:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/InstanceHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663303
     },
     {
       "registrationKind": "method",
       "slot": 146,
-      "metadataToken": 100663304,
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_7:System.Void()",
       "name": "Subject_7",
       "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_7:System.Void()",
       "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663304
     },
     {
       "registrationKind": "method",
       "slot": 147,
-      "metadataToken": 100663304,
       "subjectId": "SnapshotTestFixtures/CallVirtHelper::CreateAndUse:System.Int32()",
       "name": "CreateAndUse",
       "definitionSubjectId": "SnapshotTestFixtures/CallVirtHelper::CreateAndUse:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/CallVirtHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663304
     },
     {
       "registrationKind": "method",
       "slot": 148,
-      "metadataToken": 100663305,
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::CustomEntrySubject_8:System.Void()",
       "name": "CustomEntrySubject_8",
       "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::CustomEntrySubject_8:System.Void()",
       "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663305
     },
     {
       "registrationKind": "method",
       "slot": 149,
-      "metadataToken": 100663305,
       "subjectId": "SnapshotTestFixtures/BoxingHelper::BoxAndUnbox:System.Int32()",
       "name": "BoxAndUnbox",
       "definitionSubjectId": "SnapshotTestFixtures/BoxingHelper::BoxAndUnbox:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/BoxingHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663305
     },
     {
       "registrationKind": "method",
       "slot": 150,
-      "metadataToken": 100663306,
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()",
       "name": "Subject_9",
       "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()",
       "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663306
     },
     {
       "registrationKind": "method",
       "slot": 151,
-      "metadataToken": 100663306,
       "subjectId": "SnapshotTestFixtures/FieldHelper::GetAndIncrement:System.Int32()",
       "name": "GetAndIncrement",
       "definitionSubjectId": "SnapshotTestFixtures/FieldHelper::GetAndIncrement:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/FieldHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663306
     },
     {
       "registrationKind": "method",
       "slot": 152,
-      "metadataToken": 100663307,
       "subjectId": "SnapshotTestFixtures/LoopHelper::SumToFive:System.Int32()",
       "name": "SumToFive",
       "definitionSubjectId": "SnapshotTestFixtures/LoopHelper::SumToFive:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/LoopHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663307
     },
     {
       "registrationKind": "method",
       "slot": 153,
-      "metadataToken": 100663308,
       "subjectId": "SnapshotTestFixtures/ConversionHelper::ConvertToInt:System.Int32()",
       "name": "ConvertToInt",
       "definitionSubjectId": "SnapshotTestFixtures/ConversionHelper::ConvertToInt:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/ConversionHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663308
     },
     {
       "registrationKind": "method",
       "slot": 154,
-      "metadataToken": 100663309,
       "subjectId": "SnapshotTestFixtures/Helper::Nop:System.Void()",
       "name": "Nop",
       "definitionSubjectId": "SnapshotTestFixtures/Helper::Nop:System.Void()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/Helper",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663309
     },
     {
       "registrationKind": "method",
       "slot": 155,
-      "metadataToken": 100663310,
       "subjectId": "SnapshotTestFixtures/Helper::Square:System.Int32(System.Int32)",
       "name": "Square",
       "definitionSubjectId": "SnapshotTestFixtures/Helper::Square:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/Helper",
       "memberType": "System.Int32",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663310
     },
     {
       "registrationKind": "method",
       "slot": 156,
-      "metadataToken": 100663311,
       "subjectId": "SnapshotTestFixtures/Helper::ConsumeString:System.Void(System.String)",
       "name": "ConsumeString",
       "definitionSubjectId": "SnapshotTestFixtures/Helper::ConsumeString:System.Void(System.String)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/Helper",
       "memberType": "System.Void",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663311
     },
     {
       "registrationKind": "method",
       "slot": 157,
-      "metadataToken": 100663312,
       "subjectId": "SnapshotTestFixtures/Helper::GetValue:System.Int32()",
       "name": "GetValue",
       "definitionSubjectId": "SnapshotTestFixtures/Helper::GetValue:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/Helper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663312
     },
     {
       "registrationKind": "method",
       "slot": 158,
-      "metadataToken": 100663313,
       "subjectId": "SnapshotTestFixtures/SwitchHelper::Classify:System.Int32()",
       "name": "Classify",
       "definitionSubjectId": "SnapshotTestFixtures/SwitchHelper::Classify:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/SwitchHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663313
     },
     {
       "registrationKind": "method",
       "slot": 159,
-      "metadataToken": 100663314,
       "subjectId": "SnapshotTestFixtures/LdftnHelper::GetFnPtr:System.Int32()",
       "name": "GetFnPtr",
       "definitionSubjectId": "SnapshotTestFixtures/LdftnHelper::GetFnPtr:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/LdftnHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663314
     },
     {
       "registrationKind": "method",
       "slot": 160,
-      "metadataToken": 100663315,
       "subjectId": "SnapshotTestFixtures/TargetHelper::GetValue:System.Int32()",
       "name": "GetValue",
       "definitionSubjectId": "SnapshotTestFixtures/TargetHelper::GetValue:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/TargetHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663315
     },
     {
       "registrationKind": "method",
       "slot": 161,
-      "metadataToken": 100663316,
       "subjectId": "SnapshotTestFixtures/ArrayHelper::MakeAndFill:System.Int32()",
       "name": "MakeAndFill",
       "definitionSubjectId": "SnapshotTestFixtures/ArrayHelper::MakeAndFill:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/ArrayHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663316
     },
     {
       "registrationKind": "method",
       "slot": 162,
-      "metadataToken": 100663317,
       "subjectId": "SnapshotTestFixtures/EhHelper::SafeDivide:System.Int32()",
       "name": "SafeDivide",
       "definitionSubjectId": "SnapshotTestFixtures/EhHelper::SafeDivide:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/EhHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663317
     },
     {
       "registrationKind": "method",
       "slot": 163,
-      "metadataToken": 100663318,
       "subjectId": "SnapshotTestFixtures/GenericHelper::UseGeneric:System.Int32()",
       "name": "UseGeneric",
       "definitionSubjectId": "SnapshotTestFixtures/GenericHelper::UseGeneric:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/GenericHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663318
     },
     {
       "registrationKind": "method",
       "slot": 164,
-      "metadataToken": 100663319,
       "subjectId": "SnapshotTestFixtures/Wrapper\u00601::.ctor:System.Void(!0)",
       "name": ".ctor",
       "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601::.ctor:System.Void(!0)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/Wrapper\u00601",
       "memberType": "System.Void",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663319
     },
     {
       "registrationKind": "method",
       "slot": 165,
-      "metadataToken": 100663320,
       "subjectId": "SnapshotTestFixtures/Wrapper\u00601::GetValue:!0()",
       "name": "GetValue",
       "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601::GetValue:!0()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/Wrapper\u00601",
       "memberType": "!0",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663320
     },
     {
       "registrationKind": "method",
       "slot": 166,
-      "metadataToken": 100663321,
       "subjectId": "SnapshotTestFixtures/DelegateHelper::RunDelegate:System.Int32()",
       "name": "RunDelegate",
       "definitionSubjectId": "SnapshotTestFixtures/DelegateHelper::RunDelegate:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/DelegateHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663321
     },
     {
       "registrationKind": "method",
       "slot": 167,
-      "metadataToken": 100663322,
       "subjectId": "SnapshotTestFixtures/BaseClass::Compute:System.Int32()",
       "name": "Compute",
       "definitionSubjectId": "SnapshotTestFixtures/BaseClass::Compute:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/BaseClass",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663322
     },
     {
       "registrationKind": "method",
       "slot": 168,
-      "metadataToken": 100663323,
       "subjectId": "SnapshotTestFixtures/BaseClass::.ctor:System.Void()",
       "name": ".ctor",
       "definitionSubjectId": "SnapshotTestFixtures/BaseClass::.ctor:System.Void()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/BaseClass",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663323
     },
     {
       "registrationKind": "method",
       "slot": 169,
-      "metadataToken": 100663324,
       "subjectId": "SnapshotTestFixtures/DerivedClass::Compute:System.Int32()",
       "name": "Compute",
       "definitionSubjectId": "SnapshotTestFixtures/DerivedClass::Compute:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/DerivedClass",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663324
     },
     {
       "registrationKind": "method",
       "slot": 170,
-      "metadataToken": 100663325,
       "subjectId": "SnapshotTestFixtures/DerivedClass::.ctor:System.Void()",
       "name": ".ctor",
       "definitionSubjectId": "SnapshotTestFixtures/DerivedClass::.ctor:System.Void()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/DerivedClass",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663325
     },
     {
       "registrationKind": "method",
       "slot": 171,
-      "metadataToken": 100663326,
       "subjectId": "SnapshotTestFixtures/VirtualHelper::UseVirtual:System.Int32()",
       "name": "UseVirtual",
       "definitionSubjectId": "SnapshotTestFixtures/VirtualHelper::UseVirtual:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/VirtualHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663326
     },
     {
       "registrationKind": "method",
       "slot": 172,
-      "metadataToken": 100663327,
       "subjectId": "SnapshotTestFixtures/MarkedClass::.ctor:System.Void()",
       "name": ".ctor",
       "definitionSubjectId": "SnapshotTestFixtures/MarkedClass::.ctor:System.Void()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/MarkedClass",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663327
     },
     {
       "registrationKind": "method",
       "slot": 173,
-      "metadataToken": 100663328,
       "subjectId": "SnapshotTestFixtures/TypeCheckHelper::CheckAndCast:System.Int32()",
       "name": "CheckAndCast",
       "definitionSubjectId": "SnapshotTestFixtures/TypeCheckHelper::CheckAndCast:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/TypeCheckHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663328
     },
     {
       "registrationKind": "method",
       "slot": 174,
-      "metadataToken": 100663329,
       "subjectId": "SnapshotTestFixtures/SizeOfHelper::GetSize:System.Int32()",
       "name": "GetSize",
       "definitionSubjectId": "SnapshotTestFixtures/SizeOfHelper::GetSize:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/SizeOfHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663329
     },
     {
       "registrationKind": "method",
       "slot": 175,
-      "metadataToken": 100663330,
       "subjectId": "SnapshotTestFixtures/IndirectHelper::ReadWriteRef:System.Int32()",
       "name": "ReadWriteRef",
       "definitionSubjectId": "SnapshotTestFixtures/IndirectHelper::ReadWriteRef:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/IndirectHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663330
     },
     {
       "registrationKind": "method",
       "slot": 176,
-      "metadataToken": 100663331,
       "subjectId": "SnapshotTestFixtures/ArithmeticCompareHelper::RunCompare:System.Int32()",
       "name": "RunCompare",
       "definitionSubjectId": "SnapshotTestFixtures/ArithmeticCompareHelper::RunCompare:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/ArithmeticCompareHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663331
     },
     {
       "registrationKind": "method",
       "slot": 177,
-      "metadataToken": 100663332,
       "subjectId": "SnapshotTestFixtures/BranchDupHelper::RunBranchDup:System.Int32()",
       "name": "RunBranchDup",
       "definitionSubjectId": "SnapshotTestFixtures/BranchDupHelper::RunBranchDup:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/BranchDupHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663332
     },
     {
       "registrationKind": "method",
       "slot": 178,
-      "metadataToken": 100663333,
       "subjectId": "SnapshotTestFixtures/HasInstanceFields::.ctor:System.Void(System.Int32)",
       "name": ".ctor",
       "definitionSubjectId": "SnapshotTestFixtures/HasInstanceFields::.ctor:System.Void(System.Int32)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/HasInstanceFields",
       "memberType": "System.Void",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663333
     },
     {
       "registrationKind": "method",
       "slot": 179,
-      "metadataToken": 100663334,
       "subjectId": "SnapshotTestFixtures/InstanceFieldHelper::CreateAndUseFields:System.Int32()",
       "name": "CreateAndUseFields",
       "definitionSubjectId": "SnapshotTestFixtures/InstanceFieldHelper::CreateAndUseFields:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/InstanceFieldHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663334
     },
     {
       "registrationKind": "method",
       "slot": 180,
-      "metadataToken": 100663335,
       "subjectId": "SnapshotTestFixtures/StaticFieldWriteHelper::WriteAndRead:System.Int32()",
       "name": "WriteAndRead",
       "definitionSubjectId": "SnapshotTestFixtures/StaticFieldWriteHelper::WriteAndRead:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/StaticFieldWriteHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663335
     },
     {
       "registrationKind": "method",
       "slot": 181,
-      "metadataToken": 100663336,
       "subjectId": "SnapshotTestFixtures/VirtualDispatchHelper::UseVirtualDispatch:System.Int32()",
       "name": "UseVirtualDispatch",
       "definitionSubjectId": "SnapshotTestFixtures/VirtualDispatchHelper::UseVirtualDispatch:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/VirtualDispatchHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663336
     },
     {
       "registrationKind": "method",
       "slot": 182,
-      "metadataToken": 100663337,
       "subjectId": "SnapshotTestFixtures/BitwiseHelper::RunBitwise:System.Int32()",
       "name": "RunBitwise",
       "definitionSubjectId": "SnapshotTestFixtures/BitwiseHelper::RunBitwise:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/BitwiseHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663337
     },
     {
       "registrationKind": "method",
       "slot": 183,
-      "metadataToken": 100663338,
       "subjectId": "SnapshotTestFixtures/ShiftHelper::RunShift:System.Int32()",
       "name": "RunShift",
       "definitionSubjectId": "SnapshotTestFixtures/ShiftHelper::RunShift:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/ShiftHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663338
     },
     {
       "registrationKind": "method",
       "slot": 184,
-      "metadataToken": 100663339,
       "subjectId": "SnapshotTestFixtures/ArrayLengthHelper::RunLength:System.Int32()",
       "name": "RunLength",
       "definitionSubjectId": "SnapshotTestFixtures/ArrayLengthHelper::RunLength:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/ArrayLengthHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663339
     },
     {
       "registrationKind": "method",
       "slot": 185,
-      "metadataToken": 100663340,
       "subjectId": "SnapshotTestFixtures/ValueTypeHelper::RunValueType:System.Int32()",
       "name": "RunValueType",
       "definitionSubjectId": "SnapshotTestFixtures/ValueTypeHelper::RunValueType:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/ValueTypeHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663340
     },
     {
       "registrationKind": "method",
       "slot": 186,
-      "metadataToken": 100663341,
       "subjectId": "SnapshotTestFixtures/LocalAllocHelper::RunAlloc:System.Int32()",
       "name": "RunAlloc",
       "definitionSubjectId": "SnapshotTestFixtures/LocalAllocHelper::RunAlloc:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/LocalAllocHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663341
     },
     {
       "registrationKind": "method",
       "slot": 187,
-      "metadataToken": 100663342,
       "subjectId": "SnapshotTestFixtures/MulDivHelper::RunMulDiv:System.Int32()",
       "name": "RunMulDiv",
       "definitionSubjectId": "SnapshotTestFixtures/MulDivHelper::RunMulDiv:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/MulDivHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663342
     },
     {
       "registrationKind": "method",
       "slot": 188,
-      "metadataToken": 100663343,
       "subjectId": "SnapshotTestFixtures/BranchCompareHelper::RunBranchCompare:System.Int32()",
       "name": "RunBranchCompare",
       "definitionSubjectId": "SnapshotTestFixtures/BranchCompareHelper::RunBranchCompare:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/BranchCompareHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663343
     },
     {
       "registrationKind": "method",
       "slot": 189,
-      "metadataToken": 100663344,
       "subjectId": "SnapshotTestFixtures/FloatOpsHelper::RunFloatOps:System.Int32()",
       "name": "RunFloatOps",
       "definitionSubjectId": "SnapshotTestFixtures/FloatOpsHelper::RunFloatOps:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/FloatOpsHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663344
     },
     {
       "registrationKind": "method",
       "slot": 190,
-      "metadataToken": 100663345,
       "subjectId": "SnapshotTestFixtures/ConvWideHelper::RunConvWide:System.Int32()",
       "name": "RunConvWide",
       "definitionSubjectId": "SnapshotTestFixtures/ConvWideHelper::RunConvWide:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/ConvWideHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663345
     },
     {
       "registrationKind": "method",
       "slot": 191,
-      "metadataToken": 100663346,
       "subjectId": "SnapshotTestFixtures/NegShiftHelper::RunNegShift:System.Int32()",
       "name": "RunNegShift",
       "definitionSubjectId": "SnapshotTestFixtures/NegShiftHelper::RunNegShift:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/NegShiftHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663346
     },
     {
       "registrationKind": "method",
       "slot": 192,
-      "metadataToken": 100663347,
       "subjectId": "SnapshotTestFixtures/LdcI8Helper::RunLdcI8:System.Int64()",
       "name": "RunLdcI8",
       "definitionSubjectId": "SnapshotTestFixtures/LdcI8Helper::RunLdcI8:System.Int64()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/LdcI8Helper",
       "memberType": "System.Int64",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663347
     },
     {
       "registrationKind": "method",
       "slot": 193,
-      "metadataToken": 100663348,
       "subjectId": "SnapshotTestFixtures/ConvSmallIntHelper::RunConvSmall:System.Int32()",
       "name": "RunConvSmall",
       "definitionSubjectId": "SnapshotTestFixtures/ConvSmallIntHelper::RunConvSmall:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/ConvSmallIntHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663348
     },
     {
       "registrationKind": "method",
       "slot": 194,
-      "metadataToken": 100663349,
       "subjectId": "SnapshotTestFixtures/LdindI1Helper::RunLdindI1:System.Int32()",
       "name": "RunLdindI1",
       "definitionSubjectId": "SnapshotTestFixtures/LdindI1Helper::RunLdindI1:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/LdindI1Helper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663349
     },
     {
       "registrationKind": "method",
       "slot": 195,
-      "metadataToken": 100663350,
       "subjectId": "SnapshotTestFixtures/BranchCompareBHelper::RunBranchCompareB:System.Int32()",
       "name": "RunBranchCompareB",
       "definitionSubjectId": "SnapshotTestFixtures/BranchCompareBHelper::RunBranchCompareB:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/BranchCompareBHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663350
     },
     {
       "registrationKind": "method",
       "slot": 196,
-      "metadataToken": 100663351,
       "subjectId": "SnapshotTestFixtures/HasFields::.ctor:System.Void()",
       "name": ".ctor",
       "definitionSubjectId": "SnapshotTestFixtures/HasFields::.ctor:System.Void()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/HasFields",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663351
     },
     {
       "registrationKind": "method",
       "slot": 197,
-      "metadataToken": 100663352,
       "subjectId": "SnapshotTestFixtures/AddressHelper::RunAddress:System.Int32()",
       "name": "RunAddress",
       "definitionSubjectId": "SnapshotTestFixtures/AddressHelper::RunAddress:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/AddressHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663352
     },
     {
       "registrationKind": "method",
       "slot": 198,
-      "metadataToken": 100663353,
       "subjectId": "SnapshotTestFixtures/LdtokenHelper::RunLdtoken:System.Int32()",
       "name": "RunLdtoken",
       "definitionSubjectId": "SnapshotTestFixtures/LdtokenHelper::RunLdtoken:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/LdtokenHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663353
     },
     {
       "registrationKind": "method",
       "slot": 199,
-      "metadataToken": 100663354,
       "subjectId": "SnapshotTestFixtures/LdelemaHelper::RunLdelema:System.Int32()",
       "name": "RunLdelema",
       "definitionSubjectId": "SnapshotTestFixtures/LdelemaHelper::RunLdelema:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/LdelemaHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663354
     },
     {
       "registrationKind": "method",
       "slot": 200,
-      "metadataToken": 100663355,
       "subjectId": "SnapshotTestFixtures/LdargaHelper::RunLdarga:System.Int32(System.Int32)",
       "name": "RunLdarga",
       "definitionSubjectId": "SnapshotTestFixtures/LdargaHelper::RunLdarga:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/LdargaHelper",
       "memberType": "System.Int32",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663355
     },
     {
       "registrationKind": "method",
       "slot": 201,
-      "metadataToken": 100663356,
       "subjectId": "SnapshotTestFixtures/CpobjHelper::RunCpobj:System.Int32()",
       "name": "RunCpobj",
       "definitionSubjectId": "SnapshotTestFixtures/CpobjHelper::RunCpobj:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/CpobjHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663356
     },
     {
       "registrationKind": "method",
       "slot": 202,
-      "metadataToken": 100663357,
       "subjectId": "SnapshotTestFixtures/StindNarrowHelper::RunStindNarrow:System.Int32()",
       "name": "RunStindNarrow",
       "definitionSubjectId": "SnapshotTestFixtures/StindNarrowHelper::RunStindNarrow:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/StindNarrowHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663357
     },
     {
       "registrationKind": "method",
       "slot": 203,
-      "metadataToken": 100663358,
       "subjectId": "SnapshotTestFixtures/CallvirtHelper::RunCallvirt:System.Int32()",
       "name": "RunCallvirt",
       "definitionSubjectId": "SnapshotTestFixtures/CallvirtHelper::RunCallvirt:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/CallvirtHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663358
     },
     {
       "registrationKind": "method",
       "slot": 204,
-      "metadataToken": 100663359,
       "subjectId": "SnapshotTestFixtures/UnboxHelper::RunUnbox:System.Int32()",
       "name": "RunUnbox",
       "definitionSubjectId": "SnapshotTestFixtures/UnboxHelper::RunUnbox:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/UnboxHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663359
     },
     {
       "registrationKind": "method",
       "slot": 205,
-      "metadataToken": 100663360,
       "subjectId": "SnapshotTestFixtures/CpblkHelper::RunCpblk:System.Int32()",
       "name": "RunCpblk",
       "definitionSubjectId": "SnapshotTestFixtures/CpblkHelper::RunCpblk:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/CpblkHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663360
     },
     {
       "registrationKind": "method",
       "slot": 206,
-      "metadataToken": 100663361,
       "subjectId": "SnapshotTestFixtures/LdindUnsignedHelper::RunLdindUnsigned:System.Int32()",
       "name": "RunLdindUnsigned",
       "definitionSubjectId": "SnapshotTestFixtures/LdindUnsignedHelper::RunLdindUnsigned:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/LdindUnsignedHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663361
     },
     {
       "registrationKind": "method",
       "slot": 207,
-      "metadataToken": 100663362,
       "subjectId": "SnapshotTestFixtures/LdindI8Helper::RunLdindI8:System.Int32()",
       "name": "RunLdindI8",
       "definitionSubjectId": "SnapshotTestFixtures/LdindI8Helper::RunLdindI8:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/LdindI8Helper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663362
     },
     {
       "registrationKind": "method",
       "slot": 208,
-      "metadataToken": 100663363,
       "subjectId": "SnapshotTestFixtures/LdindWideHelper::RunLdindWide:System.Int32()",
       "name": "RunLdindWide",
       "definitionSubjectId": "SnapshotTestFixtures/LdindWideHelper::RunLdindWide:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/LdindWideHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663363
     },
     {
       "registrationKind": "method",
       "slot": 209,
-      "metadataToken": 100663364,
       "subjectId": "SnapshotTestFixtures/StindWideHelper::RunStindWide:System.Int32()",
       "name": "RunStindWide",
       "definitionSubjectId": "SnapshotTestFixtures/StindWideHelper::RunStindWide:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/StindWideHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663364
     },
     {
       "registrationKind": "method",
       "slot": 210,
-      "metadataToken": 100663365,
       "subjectId": "SnapshotTestFixtures/ArrayRefHelper::RunArrayRef:System.Int32()",
       "name": "RunArrayRef",
       "definitionSubjectId": "SnapshotTestFixtures/ArrayRefHelper::RunArrayRef:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/ArrayRefHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663365
     },
     {
       "registrationKind": "method",
       "slot": 211,
-      "metadataToken": 100663366,
       "subjectId": "SnapshotTestFixtures/ThrowHelper::CheckPositive:System.Int32(System.Int32)",
       "name": "CheckPositive",
       "definitionSubjectId": "SnapshotTestFixtures/ThrowHelper::CheckPositive:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/ThrowHelper",
       "memberType": "System.Int32",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663366
     },
     {
       "registrationKind": "method",
       "slot": 212,
-      "metadataToken": 100663367,
       "subjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowAdd:System.Int32()",
       "name": "RunOverflowAdd",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowAdd:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663367
     },
     {
       "registrationKind": "method",
       "slot": 213,
-      "metadataToken": 100663368,
       "subjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowSub:System.Int32()",
       "name": "RunOverflowSub",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowSub:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663368
     },
     {
       "registrationKind": "method",
       "slot": 214,
-      "metadataToken": 100663369,
       "subjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowMul:System.Int32()",
       "name": "RunOverflowMul",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowMul:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663369
     },
     {
       "registrationKind": "method",
       "slot": 215,
-      "metadataToken": 100663370,
       "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI4:System.Int32()",
       "name": "ConvOvfI4",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI4:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663370
     },
     {
       "registrationKind": "method",
       "slot": 216,
-      "metadataToken": 100663371,
       "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU1:System.Int32(System.Int32)",
       "name": "ConvOvfU1",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU1:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvHelper",
       "memberType": "System.Int32",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663371
     },
     {
       "registrationKind": "method",
       "slot": 217,
-      "metadataToken": 100663372,
       "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI2:System.Int32(System.Int32)",
       "name": "ConvOvfI2",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI2:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvHelper",
       "memberType": "System.Int32",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663372
     },
     {
       "registrationKind": "method",
       "slot": 218,
-      "metadataToken": 100663373,
       "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU2:System.Int32(System.Int32)",
       "name": "ConvOvfU2",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU2:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvHelper",
       "memberType": "System.Int32",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663373
     },
     {
       "registrationKind": "method",
       "slot": 219,
-      "metadataToken": 100663374,
       "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU4:System.Int32(System.Int64)",
       "name": "ConvOvfU4",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU4:System.Int32(System.Int64)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvHelper",
       "memberType": "System.Int32",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663374
     },
     {
       "registrationKind": "method",
       "slot": 220,
-      "metadataToken": 100663375,
       "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI8:System.Int64(System.Single)",
       "name": "ConvOvfI8",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI8:System.Int64(System.Single)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvHelper",
       "memberType": "System.Int64",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663375
     },
     {
       "registrationKind": "method",
       "slot": 221,
-      "metadataToken": 100663376,
       "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU8:System.Int64(System.Double)",
       "name": "ConvOvfU8",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU8:System.Int64(System.Double)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvHelper",
       "memberType": "System.Int64",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663376
     },
     {
       "registrationKind": "method",
       "slot": 222,
-      "metadataToken": 100663377,
       "subjectId": "SnapshotTestFixtures/CalliHelper::RunCalli:System.Int32(System.Int32)",
       "name": "RunCalli",
       "definitionSubjectId": "SnapshotTestFixtures/CalliHelper::RunCalli:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/CalliHelper",
       "memberType": "System.Int32",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663377
     },
     {
       "registrationKind": "method",
       "slot": 223,
-      "metadataToken": 100663378,
       "subjectId": "SnapshotTestFixtures/MyClass::.ctor:System.Void(System.Int32)",
       "name": ".ctor",
       "definitionSubjectId": "SnapshotTestFixtures/MyClass::.ctor:System.Void(System.Int32)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/MyClass",
       "memberType": "System.Void",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663378
     },
     {
       "registrationKind": "method",
       "slot": 224,
-      "metadataToken": 100663379,
       "subjectId": "SnapshotTestFixtures/MyClass::GetValue:System.Int32()",
       "name": "GetValue",
       "definitionSubjectId": "SnapshotTestFixtures/MyClass::GetValue:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/MyClass",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663379
     },
     {
       "registrationKind": "method",
       "slot": 225,
-      "metadataToken": 100663380,
       "subjectId": "SnapshotTestFixtures/LdVirtftnHelper::RunLdVirtftn:System.Int32()",
       "name": "RunLdVirtftn",
       "definitionSubjectId": "SnapshotTestFixtures/LdVirtftnHelper::RunLdVirtftn:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/LdVirtftnHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663380
     },
     {
       "registrationKind": "method",
       "slot": 226,
-      "metadataToken": 100663381,
       "subjectId": "SnapshotTestFixtures/LdelemAllHelper::TestAllElems:System.Int32()",
       "name": "TestAllElems",
       "definitionSubjectId": "SnapshotTestFixtures/LdelemAllHelper::TestAllElems:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/LdelemAllHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663381
     },
     {
       "registrationKind": "method",
       "slot": 227,
-      "metadataToken": 100663382,
       "subjectId": "SnapshotTestFixtures/StelemAllHelper::TestAllElems:System.Int32()",
       "name": "TestAllElems",
       "definitionSubjectId": "SnapshotTestFixtures/StelemAllHelper::TestAllElems:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/StelemAllHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663382
     },
     {
       "registrationKind": "method",
       "slot": 228,
-      "metadataToken": 100663383,
       "subjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestCltUn:System.Int32()",
       "name": "TestCltUn",
       "definitionSubjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestCltUn:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/UnsignedOpsHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663383
     },
     {
       "registrationKind": "method",
       "slot": 229,
-      "metadataToken": 100663384,
       "subjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestDivUn:System.Int32()",
       "name": "TestDivUn",
       "definitionSubjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestDivUn:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/UnsignedOpsHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663384
     },
     {
       "registrationKind": "method",
       "slot": 230,
-      "metadataToken": 100663385,
       "subjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestRemUn:System.Int32()",
       "name": "TestRemUn",
       "definitionSubjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestRemUn:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/UnsignedOpsHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663385
     },
     {
       "registrationKind": "method",
       "slot": 231,
-      "metadataToken": 100663386,
       "subjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestCkfinite:System.Double(System.Double)",
       "name": "TestCkfinite",
       "definitionSubjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestCkfinite:System.Double(System.Double)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/UnsignedOpsHelper",
       "memberType": "System.Double",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663386
     },
     {
       "registrationKind": "method",
       "slot": 232,
-      "metadataToken": 100663387,
       "subjectId": "SnapshotTestFixtures/RareOpsHelper::TestInitBlk:System.Void(System.Int32\u0026)",
       "name": "TestInitBlk",
       "definitionSubjectId": "SnapshotTestFixtures/RareOpsHelper::TestInitBlk:System.Void(System.Int32\u0026)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/RareOpsHelper",
       "memberType": "System.Void",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663387
     },
     {
       "registrationKind": "method",
       "slot": 233,
-      "metadataToken": 100663388,
       "subjectId": "SnapshotTestFixtures/RareOpsHelper::TestStarg:System.Int32(System.Int32)",
       "name": "TestStarg",
       "definitionSubjectId": "SnapshotTestFixtures/RareOpsHelper::TestStarg:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/RareOpsHelper",
       "memberType": "System.Int32",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663388
     },
     {
       "registrationKind": "method",
       "slot": 234,
-      "metadataToken": 100663389,
       "subjectId": "SnapshotTestFixtures/RareOpsHelper::TestConvRUn:System.Int32(System.Single)",
       "name": "TestConvRUn",
       "definitionSubjectId": "SnapshotTestFixtures/RareOpsHelper::TestConvRUn:System.Int32(System.Single)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/RareOpsHelper",
       "memberType": "System.Int32",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663389
     },
     {
       "registrationKind": "method",
       "slot": 235,
-      "metadataToken": 100663390,
       "subjectId": "SnapshotTestFixtures/StringFormatHelper::TestFormatOne:System.Int32()",
       "name": "TestFormatOne",
       "definitionSubjectId": "SnapshotTestFixtures/StringFormatHelper::TestFormatOne:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/StringFormatHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663390
     },
     {
       "registrationKind": "method",
       "slot": 236,
-      "metadataToken": 100663391,
       "subjectId": "SnapshotTestFixtures/BranchUnsignedHelper::RunBranchUnsigned:System.Int32()",
       "name": "RunBranchUnsigned",
       "definitionSubjectId": "SnapshotTestFixtures/BranchUnsignedHelper::RunBranchUnsigned:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/BranchUnsignedHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663391
     },
     {
       "registrationKind": "method",
       "slot": 237,
-      "metadataToken": 100663392,
       "subjectId": "SnapshotTestFixtures/BranchUnsignedBHelper::RunBranchUnsignedB:System.Int32()",
       "name": "RunBranchUnsignedB",
       "definitionSubjectId": "SnapshotTestFixtures/BranchUnsignedBHelper::RunBranchUnsignedB:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/BranchUnsignedBHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663392
     },
     {
       "registrationKind": "method",
       "slot": 238,
-      "metadataToken": 100663393,
       "subjectId": "SnapshotTestFixtures/RethrowHelper::RunRethrow:System.Int32()",
       "name": "RunRethrow",
       "definitionSubjectId": "SnapshotTestFixtures/RethrowHelper::RunRethrow:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/RethrowHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663393
     },
     {
       "registrationKind": "method",
       "slot": 239,
-      "metadataToken": 100663394,
       "subjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowAddUn:System.Int32()",
       "name": "RunOverflowAddUn",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowAddUn:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowUnHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663394
     },
     {
       "registrationKind": "method",
       "slot": 240,
-      "metadataToken": 100663395,
       "subjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowSubUn:System.Int32()",
       "name": "RunOverflowSubUn",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowSubUn:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowUnHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663395
     },
     {
       "registrationKind": "method",
       "slot": 241,
-      "metadataToken": 100663396,
       "subjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowMulUn:System.Int32()",
       "name": "RunOverflowMulUn",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowMulUn:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowUnHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663396
     },
     {
       "registrationKind": "method",
       "slot": 242,
-      "metadataToken": 100663397,
       "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunArglist:System.Int32()",
       "name": "RunArglist",
       "definitionSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunArglist:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663397
     },
     {
       "registrationKind": "method",
       "slot": 243,
-      "metadataToken": 100663398,
       "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunMkrefany:System.Int32()",
       "name": "RunMkrefany",
       "definitionSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunMkrefany:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663398
     },
     {
       "registrationKind": "method",
       "slot": 244,
-      "metadataToken": 100663399,
       "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunRefanyval:System.Int32()",
       "name": "RunRefanyval",
       "definitionSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunRefanyval:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663399
     },
     {
       "registrationKind": "method",
       "slot": 245,
-      "metadataToken": 100663400,
       "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunRefanytype:System.Int32()",
       "name": "RunRefanytype",
       "definitionSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunRefanytype:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663400
     },
     {
       "registrationKind": "method",
       "slot": 246,
-      "metadataToken": 100663401,
       "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunJmp:System.Int32()",
       "name": "RunJmp",
       "definitionSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunJmp:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663401
     },
     {
       "registrationKind": "method",
       "slot": 247,
-      "metadataToken": 100663402,
       "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI1:System.Int32(System.Int32)",
       "name": "ConvOvfI1",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI1:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper",
       "memberType": "System.Int32",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663402
     },
     {
       "registrationKind": "method",
       "slot": 248,
-      "metadataToken": 100663403,
       "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI1Un:System.Int32(System.Int32)",
       "name": "ConvOvfI1Un",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI1Un:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper",
       "memberType": "System.Int32",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663403
     },
     {
       "registrationKind": "method",
       "slot": 249,
-      "metadataToken": 100663404,
       "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU1Un:System.Int32(System.Int32)",
       "name": "ConvOvfU1Un",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU1Un:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper",
       "memberType": "System.Int32",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663404
     },
     {
       "registrationKind": "method",
       "slot": 250,
-      "metadataToken": 100663405,
       "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI2Un:System.Int32(System.Int32)",
       "name": "ConvOvfI2Un",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI2Un:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper",
       "memberType": "System.Int32",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663405
     },
     {
       "registrationKind": "method",
       "slot": 251,
-      "metadataToken": 100663406,
       "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU2Un:System.Int32(System.Int32)",
       "name": "ConvOvfU2Un",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU2Un:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper",
       "memberType": "System.Int32",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663406
     },
     {
       "registrationKind": "method",
       "slot": 252,
-      "metadataToken": 100663407,
       "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI4Un:System.Int32(System.Int64)",
       "name": "ConvOvfI4Un",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI4Un:System.Int32(System.Int64)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper",
       "memberType": "System.Int32",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663407
     },
     {
       "registrationKind": "method",
       "slot": 253,
-      "metadataToken": 100663408,
       "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU4Un:System.Int32(System.Int64)",
       "name": "ConvOvfU4Un",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU4Un:System.Int32(System.Int64)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper",
       "memberType": "System.Int32",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663408
     },
     {
       "registrationKind": "method",
       "slot": 254,
-      "metadataToken": 100663409,
       "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI8Un:System.Int64(System.Single)",
       "name": "ConvOvfI8Un",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI8Un:System.Int64(System.Single)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper",
       "memberType": "System.Int64",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663409
     },
     {
       "registrationKind": "method",
       "slot": 255,
-      "metadataToken": 100663410,
       "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU8Un:System.Int64(System.Double)",
       "name": "ConvOvfU8Un",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU8Un:System.Int64(System.Double)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper",
       "memberType": "System.Int64",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663410
     },
     {
       "registrationKind": "method",
       "slot": 256,
-      "metadataToken": 100663411,
       "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfIUn:System.Int32(System.Int32)",
       "name": "ConvOvfIUn",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfIUn:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper",
       "memberType": "System.Int32",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663411
     },
     {
       "registrationKind": "method",
       "slot": 257,
-      "metadataToken": 100663412,
       "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfUUn:System.Int32(System.Int32)",
       "name": "ConvOvfUUn",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfUUn:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper",
       "memberType": "System.Int32",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663412
     },
     {
       "registrationKind": "method",
       "slot": 258,
-      "metadataToken": 100663413,
       "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunLdnull:System.Int32()",
       "name": "RunLdnull",
       "definitionSubjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunLdnull:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/SimpleGapsHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663413
     },
     {
       "registrationKind": "method",
       "slot": 259,
-      "metadataToken": 100663414,
       "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvU4:System.Int32()",
       "name": "RunConvU4",
       "definitionSubjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvU4:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/SimpleGapsHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663414
     },
     {
       "registrationKind": "method",
       "slot": 260,
-      "metadataToken": 100663415,
       "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvI:System.Int32()",
       "name": "RunConvI",
       "definitionSubjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvI:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/SimpleGapsHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663415
     },
     {
       "registrationKind": "method",
       "slot": 261,
-      "metadataToken": 100663416,
       "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfI:System.Int32(System.Int32)",
       "name": "RunConvOvfI",
       "definitionSubjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfI:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/SimpleGapsHelper",
       "memberType": "System.Int32",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663416
     },
     {
       "registrationKind": "method",
       "slot": 262,
-      "metadataToken": 100663417,
       "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfU:System.Int32(System.Int32)",
       "name": "RunConvOvfU",
       "definitionSubjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfU:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/SimpleGapsHelper",
       "memberType": "System.Int32",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663417
     },
     {
       "registrationKind": "method",
       "slot": 263,
-      "metadataToken": 100663418,
       "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfIUn:System.Int32(System.Int32)",
       "name": "RunConvOvfIUn",
       "definitionSubjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfIUn:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/SimpleGapsHelper",
       "memberType": "System.Int32",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663418
     },
     {
       "registrationKind": "method",
       "slot": 264,
-      "metadataToken": 100663419,
       "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfUUn:System.Int32(System.Int32)",
       "name": "RunConvOvfUUn",
       "definitionSubjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfUUn:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/SimpleGapsHelper",
       "memberType": "System.Int32",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663419
     },
     {
       "registrationKind": "method",
       "slot": 265,
-      "metadataToken": 100663420,
       "subjectId": "SnapshotTestFixtures/LdindStindGapsHelper::RunLdindI4:System.Int32()",
       "name": "RunLdindI4",
       "definitionSubjectId": "SnapshotTestFixtures/LdindStindGapsHelper::RunLdindI4:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/LdindStindGapsHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663420
     },
     {
       "registrationKind": "method",
       "slot": 266,
-      "metadataToken": 100663421,
       "subjectId": "SnapshotTestFixtures/LdindStindGapsHelper::RunLdindI:System.Int32()",
       "name": "RunLdindI",
       "definitionSubjectId": "SnapshotTestFixtures/LdindStindGapsHelper::RunLdindI:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/LdindStindGapsHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663421
     },
     {
       "registrationKind": "method",
       "slot": 267,
-      "metadataToken": 100663422,
       "subjectId": "SnapshotTestFixtures/LdindStindGapsHelper::RunStindI:System.Int32()",
       "name": "RunStindI",
       "definitionSubjectId": "SnapshotTestFixtures/LdindStindGapsHelper::RunStindI:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/LdindStindGapsHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663422
     },
     {
       "registrationKind": "method",
       "slot": 268,
-      "metadataToken": 100663423,
       "subjectId": "SnapshotTestFixtures/CollectionsHelper::TestList:System.Int32()",
       "name": "TestList",
       "definitionSubjectId": "SnapshotTestFixtures/CollectionsHelper::TestList:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/CollectionsHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663423
     },
     {
       "registrationKind": "method",
       "slot": 269,
-      "metadataToken": 100663424,
       "subjectId": "SnapshotTestFixtures/CollectionsHelper::TestDict:System.Int32()",
       "name": "TestDict",
       "definitionSubjectId": "SnapshotTestFixtures/CollectionsHelper::TestDict:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/CollectionsHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663424
     },
     {
       "registrationKind": "method",
       "slot": 270,
-      "metadataToken": 100663425,
       "subjectId": "SnapshotTestFixtures/CollectionsHelper::TestSet:System.Int32()",
       "name": "TestSet",
       "definitionSubjectId": "SnapshotTestFixtures/CollectionsHelper::TestSet:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/CollectionsHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663425
     },
     {
       "registrationKind": "method",
       "slot": 271,
-      "metadataToken": 100663426,
       "subjectId": "SnapshotTestFixtures/ExternalCaller::CallExternal:System.Int32()",
       "name": "CallExternal",
       "definitionSubjectId": "SnapshotTestFixtures/ExternalCaller::CallExternal:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/ExternalCaller",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663426
     },
     {
       "registrationKind": "method",
       "slot": 272,
-      "metadataToken": 100663427,
       "subjectId": "SnapshotTestFixtures/MultiDispatcher::DispatchBoth:System.Int32()",
       "name": "DispatchBoth",
       "definitionSubjectId": "SnapshotTestFixtures/MultiDispatcher::DispatchBoth:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/MultiDispatcher",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663427
     },
     {
       "registrationKind": "method",
       "slot": 273,
-      "metadataToken": 100663428,
       "subjectId": "SnapshotTestFixtures/InternalHelper::Double:System.Int32(System.Int32)",
       "name": "Double",
       "definitionSubjectId": "SnapshotTestFixtures/InternalHelper::Double:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/InternalHelper",
       "memberType": "System.Int32",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663428
     },
     {
       "registrationKind": "method",
       "slot": 274,
-      "metadataToken": 100663429,
       "subjectId": "SnapshotTestFixtures/StringConcatHelper::TestConcat:System.Int32()",
       "name": "TestConcat",
       "definitionSubjectId": "SnapshotTestFixtures/StringConcatHelper::TestConcat:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/StringConcatHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663429
     },
     {
       "registrationKind": "method",
       "slot": 275,
-      "metadataToken": 100663430,
       "subjectId": "SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()",
       "name": "DemoCombine",
       "definitionSubjectId": "SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/GenericsVirtEhDemo",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663430
     },
     {
       "registrationKind": "method",
       "slot": 276,
-      "metadataToken": 100663431,
       "subjectId": "SnapshotTestFixtures/BoxInterfaceArrayDemo::DemoBoxStore:System.Int32()",
       "name": "DemoBoxStore",
       "definitionSubjectId": "SnapshotTestFixtures/BoxInterfaceArrayDemo::DemoBoxStore:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/BoxInterfaceArrayDemo",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663431
     },
     {
       "registrationKind": "method",
       "slot": 277,
-      "metadataToken": 100663432,
       "subjectId": "SnapshotTestFixtures/HotUpdateWithTypesDemo::Run:System.Int32()",
       "name": "Run",
       "definitionSubjectId": "SnapshotTestFixtures/HotUpdateWithTypesDemo::Run:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/HotUpdateWithTypesDemo",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663432
     },
     {
       "registrationKind": "method",
       "slot": 278,
-      "metadataToken": 100663433,
       "subjectId": "SnapshotTestFixtures/HotUpdateWithGenericsDemo::Run:System.Int32()",
       "name": "Run",
       "definitionSubjectId": "SnapshotTestFixtures/HotUpdateWithGenericsDemo::Run:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/HotUpdateWithGenericsDemo",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663433
     },
     {
       "registrationKind": "method",
       "slot": 279,
-      "metadataToken": 100663434,
       "subjectId": "SnapshotTestFixtures/SealedHelper::.ctor:System.Void(System.Int32)",
       "name": ".ctor",
       "definitionSubjectId": "SnapshotTestFixtures/SealedHelper::.ctor:System.Void(System.Int32)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/SealedHelper",
       "memberType": "System.Void",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663434
     },
     {
       "registrationKind": "method",
       "slot": 280,
-      "metadataToken": 100663435,
       "subjectId": "SnapshotTestFixtures/SealedHelper::GetValueVirtual:System.Int32()",
       "name": "GetValueVirtual",
       "definitionSubjectId": "SnapshotTestFixtures/SealedHelper::GetValueVirtual:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/SealedHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663435
     },
     {
       "registrationKind": "method",
       "slot": 281,
-      "metadataToken": 100663436,
       "subjectId": "SnapshotTestFixtures/SealedClassVirtualHelper::RunSealedVirtual:System.Int32()",
       "name": "RunSealedVirtual",
       "definitionSubjectId": "SnapshotTestFixtures/SealedClassVirtualHelper::RunSealedVirtual:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/SealedClassVirtualHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663436
     },
     {
       "registrationKind": "method",
       "slot": 282,
-      "metadataToken": 100663437,
       "subjectId": "SnapshotTestFixtures/IMyInterface::GetValue:System.Int32()",
       "name": "GetValue",
       "definitionSubjectId": "SnapshotTestFixtures/IMyInterface::GetValue:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/IMyInterface",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663437
     },
     {
       "registrationKind": "method",
       "slot": 283,
-      "metadataToken": 100663438,
       "subjectId": "SnapshotTestFixtures/ImplHelper::.ctor:System.Void(System.Int32)",
       "name": ".ctor",
       "definitionSubjectId": "SnapshotTestFixtures/ImplHelper::.ctor:System.Void(System.Int32)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/ImplHelper",
       "memberType": "System.Void",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663438
     },
     {
       "registrationKind": "method",
       "slot": 284,
-      "metadataToken": 100663439,
       "subjectId": "SnapshotTestFixtures/ImplHelper::GetValue:System.Int32()",
       "name": "GetValue",
       "definitionSubjectId": "SnapshotTestFixtures/ImplHelper::GetValue:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/ImplHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663439
     },
     {
       "registrationKind": "method",
       "slot": 285,
-      "metadataToken": 100663440,
       "subjectId": "SnapshotTestFixtures/InterfaceDevirtHelper::RunInterfaceTest:System.Int32()",
       "name": "RunInterfaceTest",
       "definitionSubjectId": "SnapshotTestFixtures/InterfaceDevirtHelper::RunInterfaceTest:System.Int32()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/InterfaceDevirtHelper",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663440
     },
     {
       "registrationKind": "method",
       "slot": 286,
-      "metadataToken": 100663441,
       "subjectId": "SnapshotTestFixtures/EhFinallyHelper::TryFinally_Only:System.Int32(System.Int32)",
       "name": "TryFinally_Only",
       "definitionSubjectId": "SnapshotTestFixtures/EhFinallyHelper::TryFinally_Only:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/EhFinallyHelper",
       "memberType": "System.Int32",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663441
     },
     {
       "registrationKind": "method",
       "slot": 287,
-      "metadataToken": 100663442,
       "subjectId": "SnapshotTestFixtures/EhFaultHelper::TryFault:System.Int32(System.Int32)",
       "name": "TryFault",
       "definitionSubjectId": "SnapshotTestFixtures/EhFaultHelper::TryFault:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/EhFaultHelper",
       "memberType": "System.Int32",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663442
     },
     {
       "registrationKind": "method",
       "slot": 288,
-      "metadataToken": 100663443,
       "subjectId": "SnapshotTestFixtures/EhFilterHelper::TryFilter:System.Int32(System.Int32)",
       "name": "TryFilter",
       "definitionSubjectId": "SnapshotTestFixtures/EhFilterHelper::TryFilter:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/EhFilterHelper",
       "memberType": "System.Int32",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663443
     },
     {
       "registrationKind": "method",
       "slot": 289,
-      "metadataToken": 100663444,
       "subjectId": "SnapshotTestFixtures/EhMultipleCatchHelper::MultipleCatch:System.Int32(System.Int32)",
       "name": "MultipleCatch",
       "definitionSubjectId": "SnapshotTestFixtures/EhMultipleCatchHelper::MultipleCatch:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/EhMultipleCatchHelper",
       "memberType": "System.Int32",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663444
     },
     {
       "registrationKind": "method",
       "slot": 290,
-      "metadataToken": 100663445,
       "subjectId": "SnapshotTestFixtures/EhCatchFinallyNestedHelper::CatchFinallyNested:System.Int32(System.Int32)",
       "name": "CatchFinallyNested",
       "definitionSubjectId": "SnapshotTestFixtures/EhCatchFinallyNestedHelper::CatchFinallyNested:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/EhCatchFinallyNestedHelper",
       "memberType": "System.Int32",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663445
     },
     {
       "registrationKind": "method",
       "slot": 291,
-      "metadataToken": 100663446,
       "subjectId": "SnapshotTestFixtures/EhFilterFinallyHelper::FilterFinally:System.Int32(System.Int32)",
       "name": "FilterFinally",
       "definitionSubjectId": "SnapshotTestFixtures/EhFilterFinallyHelper::FilterFinally:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/EhFilterFinallyHelper",
       "memberType": "System.Int32",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663446
     },
     {
       "registrationKind": "method",
       "slot": 292,
-      "metadataToken": 100663447,
       "subjectId": "SnapshotTestFixtures/EhNestedTryCatchHelper::NestedTryCatch:System.Int32(System.Int32)",
       "name": "NestedTryCatch",
       "definitionSubjectId": "SnapshotTestFixtures/EhNestedTryCatchHelper::NestedTryCatch:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/EhNestedTryCatchHelper",
       "memberType": "System.Int32",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663447
     },
     {
       "registrationKind": "method",
       "slot": 293,
-      "metadataToken": 100663448,
       "subjectId": "SnapshotTestFixtures/EhFaultFinallyHelper::FaultFinally:System.Int32(System.Int32)",
       "name": "FaultFinally",
       "definitionSubjectId": "SnapshotTestFixtures/EhFaultFinallyHelper::FaultFinally:System.Int32(System.Int32)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/EhFaultFinallyHelper",
       "memberType": "System.Int32",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663448
     },
     {
       "registrationKind": "method",
       "slot": 294,
-      "metadataToken": 1912602624,
       "subjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E::.ctor:System.Void(System.Int32)",
       "name": ".ctor",
       "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601::.ctor:System.Void(!0)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E",
       "memberType": "System.Void",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 1912602624
     },
     {
       "registrationKind": "method",
       "slot": 295,
-      "metadataToken": 1912602625,
       "subjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E::GetValue:System.Int32()",
       "name": "GetValue",
       "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601::GetValue:!0()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 1912602625
     },
     {
       "registrationKind": "method",
       "slot": 296,
-      "metadataToken": 1912602626,
       "subjectId": "SnapshotTestFixtures/Wrapper\u003C!0\u003E::.ctor:System.Void(!0)",
       "name": ".ctor",
       "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601::.ctor:System.Void(!0)",
       "declaringTypeSubjectId": "SnapshotTestFixtures/Wrapper\u003C!0\u003E",
       "memberType": "System.Void",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 1912602626
     },
     {
       "registrationKind": "method",
       "slot": 297,
-      "metadataToken": 1912602627,
       "subjectId": "SnapshotTestFixtures/Wrapper\u003C!0\u003E::GetValue:!0()",
       "name": "GetValue",
       "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601::GetValue:!0()",
       "declaringTypeSubjectId": "SnapshotTestFixtures/Wrapper\u003C!0\u003E",
       "memberType": "!0",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 1912602627
     },
     {
       "registrationKind": "parameter",

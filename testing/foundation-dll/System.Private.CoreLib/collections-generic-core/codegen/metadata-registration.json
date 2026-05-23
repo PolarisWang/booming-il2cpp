@@ -10,11 +10,11 @@
     {
       "registrationKind": "type",
       "slot": 1,
-      "metadataToken": 33554434,
       "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
       "name": "CollectionsGenericCoreSubjects",
       "displayName": "CollectionsGenericCoreSubjects",
-      "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects"
+      "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
+      "metadataToken": 33554434
     },
     {
       "registrationKind": "field",
@@ -28,194 +28,194 @@
     {
       "registrationKind": "method",
       "slot": 3,
-      "metadataToken": 100663297,
       "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_0:System.Void()",
       "name": "Subject_0",
       "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_0:System.Void()",
       "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663297
     },
     {
       "registrationKind": "method",
       "slot": 4,
-      "metadataToken": 100663298,
       "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_1:System.Void()",
       "name": "Subject_1",
       "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_1:System.Void()",
       "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663298
     },
     {
       "registrationKind": "method",
       "slot": 5,
-      "metadataToken": 100663299,
       "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_2:System.Void()",
       "name": "Subject_2",
       "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_2:System.Void()",
       "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663299
     },
     {
       "registrationKind": "method",
       "slot": 6,
-      "metadataToken": 100663300,
       "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_3:System.Void()",
       "name": "Subject_3",
       "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_3:System.Void()",
       "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663300
     },
     {
       "registrationKind": "method",
       "slot": 7,
-      "metadataToken": 100663301,
       "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_4:System.Void()",
       "name": "Subject_4",
       "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_4:System.Void()",
       "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663301
     },
     {
       "registrationKind": "method",
       "slot": 8,
-      "metadataToken": 100663302,
       "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_5:System.Void()",
       "name": "Subject_5",
       "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_5:System.Void()",
       "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663302
     },
     {
       "registrationKind": "method",
       "slot": 9,
-      "metadataToken": 100663303,
       "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_6:System.Void()",
       "name": "Subject_6",
       "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_6:System.Void()",
       "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663303
     },
     {
       "registrationKind": "method",
       "slot": 10,
-      "metadataToken": 100663304,
       "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_7:System.Void()",
       "name": "Subject_7",
       "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_7:System.Void()",
       "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663304
     },
     {
       "registrationKind": "method",
       "slot": 11,
-      "metadataToken": 100663305,
       "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_8:System.Void()",
       "name": "Subject_8",
       "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_8:System.Void()",
       "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663305
     },
     {
       "registrationKind": "method",
       "slot": 12,
-      "metadataToken": 100663306,
       "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_9:System.Void()",
       "name": "Subject_9",
       "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_9:System.Void()",
       "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663306
     },
     {
       "registrationKind": "method",
       "slot": 13,
-      "metadataToken": 100663307,
       "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_10:System.Void()",
       "name": "Subject_10",
       "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_10:System.Void()",
       "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663307
     },
     {
       "registrationKind": "method",
       "slot": 14,
-      "metadataToken": 100663308,
       "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_11:System.Void()",
       "name": "Subject_11",
       "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_11:System.Void()",
       "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663308
     },
     {
       "registrationKind": "method",
       "slot": 15,
-      "metadataToken": 100663309,
       "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_12:System.Void()",
       "name": "Subject_12",
       "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_12:System.Void()",
       "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663309
     },
     {
       "registrationKind": "method",
       "slot": 16,
-      "metadataToken": 100663310,
       "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_13:System.Void()",
       "name": "Subject_13",
       "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_13:System.Void()",
       "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663310
     },
     {
       "registrationKind": "method",
       "slot": 17,
-      "metadataToken": 100663311,
       "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_14:System.Void()",
       "name": "Subject_14",
       "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_14:System.Void()",
       "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663311
     },
     {
       "registrationKind": "method",
       "slot": 18,
-      "metadataToken": 100663312,
       "subjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_15:System.Void()",
       "name": "Subject_15",
       "definitionSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_15:System.Void()",
       "declaringTypeSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663312
     }
   ]
 }

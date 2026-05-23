@@ -3,9 +3,9 @@
   "artifactKind": "nativeAotLoweringPlan",
   "planKind": "full-assembly-entry",
   "assemblyName": "ThreadSyncSubjects",
-  "entrySubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+  "entrySubjectId": "ThreadSyncSubjects/ThreadSyncSubjects::Subject_0:System.Void()",
   "nativeEntryFunctionName": "",
-  "entrySymbol": "ThreadSyncSubjects_ThreadSyncSubjects___c_cctor",
+  "entrySymbol": "ThreadSyncSubjects_ThreadSyncSubjects_Subject_0",
   "entryMethodToken": "0u",
   "workloadAbi": "full-assembly"
 }

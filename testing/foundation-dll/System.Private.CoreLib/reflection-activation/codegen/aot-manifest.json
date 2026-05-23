@@ -107,6 +107,12 @@
     {
       "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Array::get_Length:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32,System.Int32)",
       "reason": "external-call"
     },

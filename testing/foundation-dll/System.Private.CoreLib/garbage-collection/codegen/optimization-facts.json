@@ -41,31 +41,34 @@
       "subjectKind": "method",
       "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_6:System.Void()",
       "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_7:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_8:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_9:System.Void()",
+      "reason": "closed-world-method"
     }
   ],
   "dispatchFacts": [
     {
       "methodSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_4:System.Void()",
       "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "targetSubjectId": "System.Private.CoreLib/System.Array::get_Length:System.Int32()",
       "devirtualized": false
     },
     {
       "methodSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_4:System.Void()",
       "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_6:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
-      "devirtualized": false
-    },
-    {
-      "methodSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_6:System.Void()",
-      "dispatchKind": "callvirt",
-      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "targetSubjectId": "System.Private.CoreLib/System.Array::get_Length:System.Int32()",
       "devirtualized": false
     }
   ],
@@ -110,6 +113,21 @@
     },
     {
       "methodSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_6:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_7:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_8:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_9:System.Void()",
       "handlingKind": "catch",
       "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
     }

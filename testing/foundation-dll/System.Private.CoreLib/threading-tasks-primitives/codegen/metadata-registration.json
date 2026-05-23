@@ -13,7 +13,8 @@
       "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
       "name": "ThreadingTasksPrimitivesSubjects",
       "displayName": "ThreadingTasksPrimitivesSubjects",
-      "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects"
+      "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
+      "metadataToken": 33554434
     },
     {
       "registrationKind": "type",
@@ -21,7 +22,8 @@
       "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry",
       "name": "ThreadingTasksPrimitivesNativeEntry",
       "displayName": "ThreadingTasksPrimitivesNativeEntry",
-      "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry"
+      "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry",
+      "metadataToken": 33554435
     },
     {
       "registrationKind": "type",
@@ -29,7 +31,8 @@
       "subjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry\u002B\u003C\u003Ec",
       "name": "\u003C\u003Ec",
       "displayName": "ThreadingTasksPrimitivesNativeEntry\u002B\u003C\u003Ec",
-      "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry\u002B\u003C\u003Ec"
+      "definitionSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry\u002B\u003C\u003Ec",
+      "metadataToken": 33554436
     },
     {
       "registrationKind": "field",
@@ -130,7 +133,8 @@
       "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663297
     },
     {
       "registrationKind": "method",
@@ -141,7 +145,8 @@
       "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663298
     },
     {
       "registrationKind": "method",
@@ -152,7 +157,8 @@
       "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663299
     },
     {
       "registrationKind": "method",
@@ -163,7 +169,8 @@
       "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663300
     },
     {
       "registrationKind": "method",
@@ -174,7 +181,8 @@
       "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663301
     },
     {
       "registrationKind": "method",
@@ -185,7 +193,8 @@
       "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663302
     },
     {
       "registrationKind": "method",
@@ -196,7 +205,8 @@
       "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663303
     },
     {
       "registrationKind": "method",
@@ -207,7 +217,8 @@
       "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663304
     },
     {
       "registrationKind": "method",
@@ -218,7 +229,8 @@
       "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663305
     },
     {
       "registrationKind": "method",
@@ -229,7 +241,8 @@
       "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663306
     },
     {
       "registrationKind": "method",
@@ -240,7 +253,8 @@
       "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663307
     },
     {
       "registrationKind": "method",
@@ -251,7 +265,8 @@
       "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663308
     },
     {
       "registrationKind": "method",
@@ -262,7 +277,8 @@
       "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663309
     },
     {
       "registrationKind": "method",
@@ -273,7 +289,8 @@
       "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663310
     },
     {
       "registrationKind": "method",
@@ -284,7 +301,8 @@
       "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663311
     },
     {
       "registrationKind": "method",
@@ -295,7 +313,8 @@
       "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663312
     },
     {
       "registrationKind": "method",
@@ -306,7 +325,8 @@
       "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663313
     },
     {
       "registrationKind": "method",
@@ -317,7 +337,8 @@
       "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663314
     },
     {
       "registrationKind": "method",
@@ -328,7 +349,8 @@
       "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663315
     },
     {
       "registrationKind": "method",
@@ -339,7 +361,8 @@
       "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663316
     },
     {
       "registrationKind": "method",
@@ -350,7 +373,8 @@
       "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663317
     },
     {
       "registrationKind": "method",
@@ -361,7 +385,8 @@
       "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663318
     },
     {
       "registrationKind": "method",
@@ -372,7 +397,8 @@
       "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663319
     },
     {
       "registrationKind": "method",
@@ -383,7 +409,8 @@
       "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663320
     },
     {
       "registrationKind": "method",
@@ -394,7 +421,8 @@
       "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663321
     },
     {
       "registrationKind": "method",
@@ -405,7 +433,8 @@
       "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663322
     },
     {
       "registrationKind": "method",
@@ -416,7 +445,8 @@
       "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663323
     },
     {
       "registrationKind": "method",
@@ -427,7 +457,8 @@
       "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663324
     },
     {
       "registrationKind": "method",
@@ -438,7 +469,8 @@
       "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663325
     },
     {
       "registrationKind": "method",
@@ -449,7 +481,8 @@
       "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry\u002B\u003C\u003Ec",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663326
     },
     {
       "registrationKind": "method",
@@ -460,7 +493,8 @@
       "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry\u002B\u003C\u003Ec",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663327
     },
     {
       "registrationKind": "method",
@@ -471,7 +505,8 @@
       "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry\u002B\u003C\u003Ec",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663328
     },
     {
       "registrationKind": "method",
@@ -482,7 +517,8 @@
       "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry\u002B\u003C\u003Ec",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663329
     },
     {
       "registrationKind": "method",
@@ -493,7 +529,8 @@
       "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry\u002B\u003C\u003Ec",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663330
     },
     {
       "registrationKind": "method",
@@ -504,7 +541,8 @@
       "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry\u002B\u003C\u003Ec",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663331
     },
     {
       "registrationKind": "method",
@@ -515,7 +553,8 @@
       "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry\u002B\u003C\u003Ec",
       "memberType": "System.Void",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663332
     },
     {
       "registrationKind": "method",
@@ -526,7 +565,8 @@
       "declaringTypeSubjectId": "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry\u002B\u003C\u003Ec",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663333
     },
     {
       "registrationKind": "parameter",

@@ -12,6 +12,7 @@ namespace vr = chaos::il2cpp::vtable_registry;
 #include <t4_seh_handler.h>
 #include <codegen_helpers.h>
 
+#include <memory_domain.h>
 #include <patch_loader.h>
 
 #include <eventpipe/ep_exception_bridge.h>
@@ -246,7 +247,7 @@ static bool DispatchExceptionToHandler(FastFrame& frame,
         frame.stack[frame.sp] = reinterpret_cast<uint64_t>(exc_obj);
         frame.stack_tags[frame.sp] = static_cast<uint8_t>(interpreter::ValueTag::ObjectRef);
         ++frame.sp;
-        frame.pc = static_cast<uint32_t>(clause.filter_start_idx);
+        frame.pc = static_cast<uint32_t>(clause.handler_start_idx);
         return true;
     }
 
@@ -408,17 +409,10 @@ static void Handle_Dup(FastFrame& frame, const interpreter::IRInstruction&) noex
 }
 
 // ── PGO branch profile recording (T5 collection) ──────────────────────────
+// REMOVED: branch_profiles and BranchProfile were removed from PatchMethod.
 static void RecordBranch(FastFrame& frame, bool taken) noexcept {
-    using PM = chaos::il2cpp::runtime_core::PatchMethod;
-    auto* pm = static_cast<PM*>(frame.patch_method);
-    if (pm == nullptr) return;
-    uint32_t idx = frame.pc;
-    auto* profiles = static_cast<volatile chaos::il2cpp::runtime_core::BranchProfile*>(pm->branch_profiles);
-    if (profiles == nullptr) return;
-    if (taken)
-        profiles[idx].taken_count++;
-    else
-        profiles[idx].not_taken_count++;
+    (void)frame;
+    (void)taken;
 }
 
 static void Handle_Br(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
@@ -2274,18 +2268,7 @@ bool FastExecute(FastFrame& frame,
                  uint32_t instr_count) noexcept {
     frame.pc = 0;
 
-    // Lazy-allocate PGO branch profiles for T5 collection.
-    // The BranchProfile array is indexed by instruction index.  Non-branch
-    // entries stay zeroed.  Freed after T4 codegen consumes the data.
-    {
-        using PM = chaos::il2cpp::runtime_core::PatchMethod;
-        auto* pgo_pm = static_cast<PM*>(frame.patch_method);
-        if (pgo_pm && pgo_pm->branch_profiles == nullptr && pgo_pm->reg_ir_instr_count > 0) {
-            pgo_pm->branch_profiles = static_cast<chaos::il2cpp::runtime_core::BranchProfile*>(
-                std::calloc(pgo_pm->reg_ir_instr_count, sizeof(BranchProfile)));
-            pgo_pm->branch_profile_count = pgo_pm->branch_profiles ? pgo_pm->reg_ir_instr_count : 0;
-        }
-    }
+    // REMOVED: branch_profiles lazy allocation — fields removed from PatchMethod.
 
     // TLS hoist: read once before the loop — thread identity is stable
     // during FastExecute.

@@ -264,7 +264,7 @@ struct chaos_type_System_Private_CoreLib_System_Object
 
 struct chaos_type_CustomGenericsSubjects_CustomGenerics_Box_System_Int32_ : public chaos_type_System_Private_CoreLib_System_Object
 {
-	CHAOS_IL2CPP_INTPTR field_CustomGenericsSubjects_CustomGenerics_Box_System_Int32____value = 0;
+	CHAOS_IL2CPP_INT32 field_CustomGenericsSubjects_CustomGenerics_Box_System_Int32____value = 0;
 };
 
 struct chaos_type_CustomGenericsSubjects_CustomGenerics_Wrapper__0_
@@ -356,7 +356,7 @@ struct chaos_valuetype_CustomGenericsSubjects_CustomGenerics_Pair__0__1_
 
 struct chaos_valuetype_CustomGenericsSubjects_CustomGenerics_Pair_System_Int32_System_String_
 {
-	CHAOS_IL2CPP_INTPTR field_CustomGenericsSubjects_CustomGenerics_Pair_System_Int32_System_String___First = 0;
+	CHAOS_IL2CPP_INT32 field_CustomGenericsSubjects_CustomGenerics_Pair_System_Int32_System_String___First = 0;
 	CHAOS_IL2CPP_INTPTR field_CustomGenericsSubjects_CustomGenerics_Pair_System_Int32_System_String___Second = 0;
 };
 
@@ -999,6 +999,48 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionInvokeMethod(CHAOS_IL2CPP_INTPTR chaos_method
 	return 0;
 }
 
+
+// ── GcTypeLayout pointer offset arrays (computed via offsetof) ──
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Type[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_name_value))};
+
+extern "C" void ChaosRegisterGcLayouts() {
+	auto& registry = chaos::il2cpp::runtime_core::GcLayoutRegistry::Instance();
+
+	registry.Register(16631257188485470305ULL, sizeof(chaos_type_CustomGenericsSubjects_CustomGenerics_Box__0_), nullptr, 0);
+	registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
+	registry.Register(5207933901502182743ULL, sizeof(chaos_type_CustomGenericsSubjects_CustomGenerics_Box_System_Int32_), nullptr, 0);
+	registry.Register(16395831064008788899ULL, sizeof(chaos_type_CustomGenericsSubjects_CustomGenerics_Wrapper__0_), nullptr, 0);
+	registry.Register(1566872199215318928ULL, sizeof(chaos_type_CustomGenericsSubjects_CustomGenerics_Wrapper_System_String_), nullptr, 0);
+	registry.Register(9789882378046446790ULL, sizeof(chaos_type_CustomGenericsSubjects_CustomGenericsSubjects), nullptr, 0);
+	registry.Register(5474029880995115448ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly, 1);
+	registry.Register(17082367815459723707ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, 1);
+	registry.Register(4137207361503509124ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, 5);
+	registry.Register(17040031516751226236ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, 2);
+	registry.Register(10748947813473285525ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, 5);
+	registry.Register(1782325859292956794ULL, sizeof(chaos_type_System_Private_CoreLib_System_String), nullptr, 0);
+	registry.Register(3222174513575444759ULL, sizeof(chaos_type_System_Private_CoreLib_System_Type), kGcOffsets_chaos_type_System_Private_CoreLib_System_Type, 2);
+
+	// Register TypeInfoV0 address ranges for IsValidTypeInfoPointer.
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_CustomGenericsSubjects_CustomGenerics_Box__0_), reinterpret_cast<uintptr_t>(&chaos_mt_CustomGenericsSubjects_CustomGenerics_Box__0_) + sizeof(chaos_mt_CustomGenericsSubjects_CustomGenerics_Box__0_));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object) + sizeof(chaos_mt_System_Private_CoreLib_System_Object));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_CustomGenericsSubjects_CustomGenerics_Box_System_Int32_), reinterpret_cast<uintptr_t>(&chaos_mt_CustomGenericsSubjects_CustomGenerics_Box_System_Int32_) + sizeof(chaos_mt_CustomGenericsSubjects_CustomGenerics_Box_System_Int32_));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_CustomGenericsSubjects_CustomGenerics_Wrapper__0_), reinterpret_cast<uintptr_t>(&chaos_mt_CustomGenericsSubjects_CustomGenerics_Wrapper__0_) + sizeof(chaos_mt_CustomGenericsSubjects_CustomGenerics_Wrapper__0_));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_CustomGenericsSubjects_CustomGenerics_Wrapper_System_String_), reinterpret_cast<uintptr_t>(&chaos_mt_CustomGenericsSubjects_CustomGenerics_Wrapper_System_String_) + sizeof(chaos_mt_CustomGenericsSubjects_CustomGenerics_Wrapper_System_String_));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_CustomGenericsSubjects_CustomGenericsSubjects), reinterpret_cast<uintptr_t>(&chaos_mt_CustomGenericsSubjects_CustomGenericsSubjects) + sizeof(chaos_mt_CustomGenericsSubjects_CustomGenericsSubjects));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_Assembly));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_String), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_String) + sizeof(chaos_mt_System_Private_CoreLib_System_String));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Type), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Type) + sizeof(chaos_mt_System_Private_CoreLib_System_Type));
+}
+
 CHAOS_IL2CPP_INT32 chaos_static_CustomGenericsSubjects_CustomGenericsSubjects___exitCode = 0;
 
 
@@ -1278,7 +1320,7 @@ static constexpr struct {
 		CHAOS_ABI_MANIFEST_VERSION,
 		35u,
 		27u,
-		3183376856u,  // FNV-1a over entries+params
+		1855564128u,  // FNV-1a over entries+params
 		s_abi_manifest_prefix_sum  // O(1) prefix-sum
 	},
 	{
@@ -1327,16 +1369,16 @@ static constexpr struct {
 		1u,
 		2u,
 		2u,
+		12u,
+		12u,
 		2u,
 		2u,
-		2u,
-		2u,
-		2u,
-		2u,
+		12u,
+		12u,
 		1u,
 		2u,
-		2u,
-		2u,
+		12u,
+		12u,
 		2u,
 		1u,
 		2u,
@@ -1719,11 +1761,11 @@ extern "C" void (*kBenchmarkWrappers[35])() = {
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[16])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[17])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[18])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0,0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[19])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0,0);},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[19])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),([](){ static CHAOS_IL2CPP_UINT8 __b[sizeof(CHAOS_IL2CPP_INTPTR)] = {}; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__b); })(),([](){ static CHAOS_IL2CPP_UINT8 __b[sizeof(CHAOS_IL2CPP_INTPTR)] = {}; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__b); })());},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[20])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0,0);},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[21])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0,0);},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[21])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),([](){ static CHAOS_IL2CPP_UINT8 __b[sizeof(CHAOS_IL2CPP_INTPTR)] = {}; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__b); })(),([](){ static CHAOS_IL2CPP_UINT8 __b[sizeof(CHAOS_IL2CPP_INTPTR)] = {}; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__b); })());},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[22])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0,chaos_make_string_id_value(1875936269717626031ULL));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[23])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0,0);},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[23])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),([](){ static CHAOS_IL2CPP_UINT8 __b[sizeof(CHAOS_IL2CPP_INTPTR)] = {}; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__b); })(),([](){ static CHAOS_IL2CPP_UINT8 __b[sizeof(CHAOS_IL2CPP_INTPTR)] = {}; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__b); })());},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[24])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[25])(0);},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[26])(0);},
@@ -2028,7 +2070,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[7];
+		CHAOS_IL2CPP_UINT32 slots[6];
 	} entry23;
 	/* ── Entry 24: CustomGenericsSubjects_CustomGenerics_Util__ctor ── */
 	struct {
@@ -2305,11 +2347,11 @@ static const struct {
 	},
 	/* entry23 = CustomGenericsSubjects_CustomGenerics_Pair_System_Int32_System_String_Deconstruct_System_Int32_System_String */
 	.entry23 = {
-		/* entry_total_size = 48 */ 48u,
+		/* entry_total_size = 44 */ 44u,
 		/* code_address */ reinterpret_cast<const void*>(&CustomGenericsSubjects_CustomGenerics_Pair_System_Int32_System_String_Deconstruct_System_Int32_System_String),
 		/* frame_size = 56 */ 56u,
-		/* num_gc_slots = 7 */ 7u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
+		/* num_gc_slots = 6 */ 6u,
+		/* slots */ { 0u, 16u, 24u, 32u, 40u, 48u }
 	},
 	/* entry24 = CustomGenericsSubjects_CustomGenerics_Util__ctor */
 	.entry24 = {
@@ -2404,7 +2446,7 @@ static const struct {
 #pragma pack(pop)
 #endif
 
-static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 1344u;
+static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 1340u;
 
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
