@@ -26,6 +26,29 @@ add_chaos_test(enum_stubs_test
     LIBS ${CHAOS_COMMON_TEST_LIBS}
     LABELS "unit;core"
 )
+
+# T0-4: datetime/guid/math stubs unit tests
+# NOTE: datetime_stubs.cpp and guid_stubs.cpp are compiled directly (same GNU
+# ar issue).  GC stubs from gc_stubs_for_string_tests.cpp for GcAllocateAtomic.
+# math_stubs.cpp has no GC dependency but is compiled directly for consistency.
+add_chaos_test(datetime_guid_math_test
+    datetime_guid_math_test.cpp
+    gc_stubs_for_string_tests.cpp
+    "${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/runtime_stubs/datetime_stubs.cpp"
+    "${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/runtime_stubs/guid_stubs.cpp"
+    "${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/runtime_stubs/math_stubs.cpp"
+    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    LABELS "unit;core"
+)
+# datetime/guid need NOMINMAX + WIN32_LEAN_AND_MEAN because the stub .cpp files
+# include Windows.h too broadly, which collides with std::min/max and defines
+# GetCurrentThreadId that thread_state.h also declares.
+target_compile_definitions(datetime_guid_math_test PRIVATE
+    NOMINMAX WIN32_LEAN_AND_MEAN
+)
+target_compile_options(datetime_guid_math_test PRIVATE
+    /FI"${CMAKE_CURRENT_SOURCE_DIR}/datetime_guid_test_pch.h"
+)
 # T0-2: collection_stubs unit tests (all 14 public API functions)
 # NOTE: collection_stubs.cpp is compiled directly (same GNU ar issue as
 # string_stubs).  GC stubs from gc_stubs_for_string_tests.cpp are reused
