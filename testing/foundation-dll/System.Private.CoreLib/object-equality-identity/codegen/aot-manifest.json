@@ -58,12 +58,6 @@
     },
     {
       "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "type",
-      "subjectId": "System.Private.CoreLib/System.Int32",
-      "reason": "boxed-value-type"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)",
       "reason": "external-call"

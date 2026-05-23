@@ -620,6 +620,8 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     ("Asn1Tag", "op_Inequality", 2): "default(Asn1Tag) != default(Asn1Tag)",
     # AsnWriter ambiguous overloads (CS0121 — default is ambiguous between overloads)
     ("AsnWriter", "EncodedValueEquals", 1): "default(AsnWriter)!.EncodedValueEquals(default(AsnWriter)!)",
+    # HashCode.Add<T> cannot infer T from null! (CS0411) with <Nullable>enable</Nullable>
+    ("HashCode", "Add", 1): "default(HashCode).Add(new object())",
     ("AsnWriter", "WriteInteger", 2): "default(AsnWriter)!.WriteInteger(42L, default)",
     ("AsnWriter", "WriteNamedBitList", 2): "default(AsnWriter)!.WriteNamedBitList(DayOfWeek.Monday, default)",
     # BrotliDecoder instance methods (CS0120 — called as static but are instance)

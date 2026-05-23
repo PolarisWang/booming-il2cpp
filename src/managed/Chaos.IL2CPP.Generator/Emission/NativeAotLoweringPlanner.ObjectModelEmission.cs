@@ -212,7 +212,7 @@ public sealed partial class NativeAotLoweringPlanner
 				}
 				else
 				{
-					hashSet[targetReference.SubjectId] = null;
+					hashSet[targetReference.SubjectId] = targetReference.FieldTypeSubjectId;
 				}
 				continue;
 				IL_06ac:
@@ -1104,6 +1104,7 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 		EmitObjectEqualityHelpers(builder, reachableMethods, referenceTypeSubjectIds, hashSet3);
 		EmitReflectionObjectHelpers(builder, reachableMethods, referenceTypeSubjectIds, hashSet3);
 		EmitExceptionMetadataHelpers(builder, reachableMethods);
+		EmitGcTypeLayoutRegistration(builder, referenceTypeSubjectIds, referenceTypeBaseSubjectIds, fieldsByDeclaringType, fieldTypeMap, valueTypeSubjectIds);
 		foreach (KeyValuePair<string, string?> item11 in hashSet2.OrderBy<KeyValuePair<string, string?>, string>((KeyValuePair<string, string?> result) => result.Key, StringComparer.Ordinal))
 		{
 			var cppType = MapFieldTypeToCppType(item11.Value);

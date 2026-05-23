@@ -163,6 +163,9 @@
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\assembly_manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\static_var_store.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_scheduler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -229,10 +232,25 @@
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_heap_manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_low_mem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\com_rcw.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\com_ccw.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\com_connection_point.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\com_platform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\com_factory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\com_typelib.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\domain_unloader.cpp">
@@ -259,6 +277,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\memory_domain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\memory_domain_events.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\vtable_registry.h">
@@ -343,6 +364,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\assembly_manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\static_var_store.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_bump_cache.h">
@@ -435,10 +459,25 @@
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_heap_manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_low_mem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\com_rcw.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\com_ccw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\com_connection_point.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\com_platform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\com_factory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\com_typelib.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\domain_unloader.h">

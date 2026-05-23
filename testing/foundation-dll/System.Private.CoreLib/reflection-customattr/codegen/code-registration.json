@@ -1,0 +1,30 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ReflectionCustomattrSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ReflectionCustomattrSubjects_ReflectionCustomattrSubjects_Subject_0",
+          "subjectId": "ReflectionCustomattrSubjects/ReflectionCustomattrSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ReflectionCustomattrSubjects_ReflectionCustomattrSubjects_Subject_1",
+          "subjectId": "ReflectionCustomattrSubjects/ReflectionCustomattrSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ReflectionCustomattrSubjects_ReflectionCustomattrSubjects_Subject_2",
+          "subjectId": "ReflectionCustomattrSubjects/ReflectionCustomattrSubjects::Subject_2:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

@@ -99,28 +99,28 @@ public static partial class TimeDateTimeTimespanSubjects
     // [12] System.Private.CoreLib/System.TimeSpan::FromDays:System.TimeSpan(System.Double)
     public static void Subject_12()
     {
-        try { if (((TimeSpan.FromDays(42.0)).GetHashCode()) != ((TimeSpan.FromDays(42.0)).GetHashCode())) _exitCode = 1; }
+        try { if ((long)((TimeSpan.FromDays(42.0)).Ticks) != (long)((TimeSpan.FromDays(42.0)).Ticks)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [13] System.Private.CoreLib/System.TimeSpan::FromHours:System.TimeSpan(System.Double)
     public static void Subject_13()
     {
-        try { if (((TimeSpan.FromHours(42.0)).GetHashCode()) != ((TimeSpan.FromHours(42.0)).GetHashCode())) _exitCode = 1; }
+        try { if ((long)((TimeSpan.FromHours(42.0)).Ticks) != (long)((TimeSpan.FromHours(42.0)).Ticks)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [14] System.Private.CoreLib/System.TimeSpan::FromMinutes:System.TimeSpan(System.Double)
     public static void Subject_14()
     {
-        try { if (((TimeSpan.FromMinutes(42.0)).GetHashCode()) != ((TimeSpan.FromMinutes(42.0)).GetHashCode())) _exitCode = 1; }
+        try { if ((long)((TimeSpan.FromMinutes(42.0)).Ticks) != (long)((TimeSpan.FromMinutes(42.0)).Ticks)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [15] System.Private.CoreLib/System.TimeSpan::Parse:System.TimeSpan(System.String)
     public static void Subject_15()
     {
-        try { if (((TimeSpan.Parse("1:00:00")).GetHashCode()) != ((TimeSpan.Parse("1:00:00")).GetHashCode())) _exitCode = 1; }
+        try { if ((long)((TimeSpan.Parse("1:00:00")).Ticks) != (long)((TimeSpan.Parse("1:00:00")).Ticks)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 

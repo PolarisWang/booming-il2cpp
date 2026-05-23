@@ -929,6 +929,54 @@
     {
       "assemblyName": "SnapshotTestFixtures",
       "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/EhFinallyHelper::TryFinally_Only:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/EhFaultHelper::TryFault:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/EhFilterHelper::TryFilter:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/EhMultipleCatchHelper::MultipleCatch:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/EhCatchFinallyNestedHelper::CatchFinallyNested:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/EhFilterFinallyHelper::FilterFinally:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/EhNestedTryCatchHelper::NestedTryCatch:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/EhFaultFinallyHelper::FaultFinally:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
       "subjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E::.ctor:System.Void(System.Int32)",
       "reason": "generated-direct-call"
     },
@@ -1266,6 +1314,12 @@
       "assemblyName": "System.Collections",
       "subjectKind": "method",
       "subjectId": "System.Collections/System.Collections.Generic.HashSet\u003CSystem.Int32\u003E::Remove:System.Boolean(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Exception",
       "reason": "external-call"
     }
   ]

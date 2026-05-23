@@ -1,0 +1,61 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "ReflectionEventSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "ReflectionEventSubjects/ReflectionEventSubjects",
+      "name": "ReflectionEventSubjects",
+      "displayName": "ReflectionEventSubjects",
+      "definitionSubjectId": "ReflectionEventSubjects/ReflectionEventSubjects"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "ReflectionEventSubjects/ReflectionEventSubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "ReflectionEventSubjects/ReflectionEventSubjects::_exitCode",
+      "declaringTypeSubjectId": "ReflectionEventSubjects/ReflectionEventSubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "ReflectionEventSubjects/ReflectionEventSubjects::Subject_0:System.Void()",
+      "name": "Subject_0",
+      "definitionSubjectId": "ReflectionEventSubjects/ReflectionEventSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "ReflectionEventSubjects/ReflectionEventSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "ReflectionEventSubjects/ReflectionEventSubjects::Subject_1:System.Void()",
+      "name": "Subject_1",
+      "definitionSubjectId": "ReflectionEventSubjects/ReflectionEventSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "ReflectionEventSubjects/ReflectionEventSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "ReflectionEventSubjects/ReflectionEventSubjects::Subject_2:System.Void()",
+      "name": "Subject_2",
+      "definitionSubjectId": "ReflectionEventSubjects/ReflectionEventSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "ReflectionEventSubjects/ReflectionEventSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false
+    }
+  ]
+}

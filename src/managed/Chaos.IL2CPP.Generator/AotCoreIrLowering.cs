@@ -762,9 +762,40 @@ public sealed class AotCoreIrLowering
         string assemblyName,
         IReadOnlyDictionary<string, ManagedTypeModel> managedTypes)
     {
-        var managedType = TryResolveManagedType(typeIdentity, assemblyName, managedTypes);
-        var resolvedTypeShape = ResolveTypeShape(managedType, typeIdentity);
-        if (string.Equals(typeIdentity, "System.Void", StringComparison.Ordinal))
+        // Strip byref suffix (&) for underlying type resolution;
+        // the caller uses CarrierKindCode to determine the native ABI type.
+        string innerType;
+        bool isByRef;
+        if (typeIdentity.Length > 1 && typeIdentity[^1] == '&')
+        {
+            innerType = typeIdentity[..^1];
+            isByRef = true;
+        }
+        else
+        {
+            innerType = typeIdentity;
+            isByRef = false;
+        }
+
+        var managedType = TryResolveManagedType(innerType, assemblyName, managedTypes);
+        var resolvedTypeShape = ResolveTypeShape(managedType, innerType);
+
+        // If this is a byref parameter, determine the right ByRef carrier kind
+        // and delegate to ByRef resolution (no need to match primitive types).
+        if (isByRef)
+        {
+            var isByRefToValueType = managedType is { IsValueType: true };
+            return new AotCoreIrAbiSlotArtifact
+            {
+                CarrierKindCode = isByRefToValueType
+                    ? AotCoreIrAbiCarrierKind.ByRefToValueType
+                    : AotCoreIrAbiCarrierKind.ByRef,
+                TypeSubjectId = managedType?.SubjectId,
+                TypeShape = resolvedTypeShape,
+            };
+        }
+
+        if (string.Equals(innerType, "System.Void", StringComparison.Ordinal))
         {
             return new AotCoreIrAbiSlotArtifact
             {

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\agent\booming-il2cpp\build\vs2022\tests\CMakeFiles\acc7e05513ecd8adf2fe2faf6f8fc04f\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{2B01F6C1-A442-37DA-9C32-E66A57C25BC2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

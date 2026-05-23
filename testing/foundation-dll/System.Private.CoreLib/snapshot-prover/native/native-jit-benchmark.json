@@ -8,74 +8,74 @@
     {
       "methodIndex": 0,
       "methodSubjectId": "SnapshotTestFixtures/ArithmeticOps::RunAdd:System.Int32()",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
-      "opsPerSecond": 0.0,
+      "elapsedMilliseconds": 6967.51,
+      "calibratedMs": 6967.51,
+      "opsPerSecond": 14352.3,
       "iterations": 100000,
-      "status": "failed"
+      "status": "completed"
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
-      "opsPerSecond": 0.0,
+      "elapsedMilliseconds": 6463.315,
+      "calibratedMs": 6463.315,
+      "opsPerSecond": 15471.9,
       "iterations": 100000,
-      "status": "failed"
+      "status": "completed"
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "SnapshotTestFixtures/MathHelper::RunSquare:System.Int32()",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
-      "opsPerSecond": 0.0,
+      "elapsedMilliseconds": 6781.092,
+      "calibratedMs": 6781.092,
+      "opsPerSecond": 14746.9,
       "iterations": 100000,
-      "status": "failed"
+      "status": "completed"
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "SnapshotTestFixtures/FlowControl::IsPositive:System.Int32()",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
-      "opsPerSecond": 0.0,
+      "elapsedMilliseconds": 6429.537,
+      "calibratedMs": 6429.537,
+      "opsPerSecond": 15553.2,
       "iterations": 100000,
-      "status": "failed"
+      "status": "completed"
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "SnapshotTestFixtures/CallVirtHelper::CreateAndUse:System.Int32()",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
-      "opsPerSecond": 0.0,
+      "elapsedMilliseconds": 6295.856,
+      "calibratedMs": 6295.856,
+      "opsPerSecond": 15883.5,
       "iterations": 100000,
-      "status": "failed"
+      "status": "completed"
     },
     {
       "methodIndex": 5,
       "methodSubjectId": "SnapshotTestFixtures/BoxingHelper::BoxAndUnbox:System.Int32()",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
-      "opsPerSecond": 0.0,
+      "elapsedMilliseconds": 6513.043,
+      "calibratedMs": 6513.043,
+      "opsPerSecond": 15353.8,
       "iterations": 100000,
-      "status": "failed"
+      "status": "completed"
     },
     {
       "methodIndex": 6,
       "methodSubjectId": "SnapshotTestFixtures/ConversionHelper::ConvertToInt:System.Int32()",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
-      "opsPerSecond": 0.0,
+      "elapsedMilliseconds": 6514.868,
+      "calibratedMs": 6514.868,
+      "opsPerSecond": 15349.5,
       "iterations": 100000,
-      "status": "failed"
+      "status": "completed"
     },
     {
       "methodIndex": 7,
       "methodSubjectId": "SnapshotTestFixtures/LoopHelper::SumToFive:System.Int32()",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
-      "opsPerSecond": 0.0,
+      "elapsedMilliseconds": 6423.005,
+      "calibratedMs": 6423.005,
+      "opsPerSecond": 15569.0,
       "iterations": 100000,
-      "status": "failed"
+      "status": "completed"
     },
     {
       "methodIndex": 8,
@@ -86,11 +86,11 @@
     {
       "methodIndex": 9,
       "methodSubjectId": "SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
-      "opsPerSecond": 0.0,
+      "elapsedMilliseconds": 6842.631,
+      "calibratedMs": 6842.631,
+      "opsPerSecond": 14614.3,
       "iterations": 100000,
-      "status": "failed"
+      "status": "completed"
     }
   ]
 }

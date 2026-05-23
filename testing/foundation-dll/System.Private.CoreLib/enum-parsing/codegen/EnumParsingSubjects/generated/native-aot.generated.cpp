@@ -16,7 +16,7 @@
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 #include "enum_metadata.generated.h"
-#include "runtime_stubs/enum_stubs.h"
+#include "enum_stubs.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -26,6 +26,21 @@ extern "C" void InterpreterEntryDirect(
 
 #pragma warning(push)
 #pragma warning(disable: 4065 4244)
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_10(void);
+extern "C" void EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_11(void);
+extern "C" void EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_12(void);
+extern "C" void EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_6(void);
+extern "C" void EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_7(void);
+extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_0(void);
+extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_1(void);
+extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_2(void);
+extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_3(void);
+extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_4(void);
+extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_5(void);
+extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_8(void);
+extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_9(void);
 
 namespace chaos::il2cpp::codegen::EnumParsingSubjects {
 
@@ -655,11 +670,6 @@ static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_E
 	return ChaosEnumTryParse(chaos_arg_0, chaos_arg_1, chaos_arg_2);
 }
 
-static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	return ChaosObjectGetHashCode(chaos_fn_arg_0);
-}
-
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Object__ToString_System_String__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
 {
 	return ChaosObjectToString(chaos_fn_arg_0);
@@ -698,6 +708,41 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
+
+
+// ── Bridge/import thunks ──
+extern "C" void* kChaosExternalRuntimeFnTable[];
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Byte
+extern "C" void chaos_bridge_thunk_0(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[0])();
+}
+
+// Bridge/import thunk for: EnumParsingSubjects/EnumParsingSubjects::_exitCode
+extern "C" void chaos_bridge_thunk_1(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[4])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.DayOfWeek
+extern "C" void chaos_bridge_thunk_2(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[5])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Int32
+extern "C" void chaos_bridge_thunk_3(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[6])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Array::get_Length:System.Int32()
+extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_4(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)()>(kChaosExternalRuntimeFnTable[10])();
+	return result;
+}
 
 extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_0(void);
 extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_1(void);
@@ -931,7 +976,7 @@ extern "C" const char* kChaosExternalRuntimeSubjects[17] = {
 	"System.Private.CoreLib/System.Enum::GetName:System.String(System.Type,System.Object)",
 	"System.Private.CoreLib/System.Enum::GetNames:System.String[](System.Type)",
 	"System.Private.CoreLib/System.Enum::GetValues:System.Array(System.Type)",
-	"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+	"System.Private.CoreLib/System.Array::get_Length:System.Int32()",
 	"System.Private.CoreLib/System.Enum::IsDefined:System.Boolean(System.Type,System.Object)",
 	"System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String)",
 	"System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String,System.Boolean)",
@@ -951,7 +996,7 @@ extern "C" void* kChaosExternalRuntimeFnTable[17] = {
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Enum__GetName_System_String_System_Type_System_Object_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Enum__GetNames_System_String___System_Type_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Enum__GetValues_System_Array_System_Type_),
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__),
+	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Enum__IsDefined_System_Boolean_System_Type_System_Object_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Enum__Parse_System_Object_System_Type_System_String_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Enum__Parse_System_Object_System_Type_System_String_System_Boolean_),
@@ -961,6 +1006,7 @@ extern "C" void* kChaosExternalRuntimeFnTable[17] = {
 };
 
 extern "C" int32_t kChaosExternalRuntimeCount = 17;
+// (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
 static void (*kAotMethods[13])() = {
@@ -1146,7 +1192,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry4;
 	/* ── Entry 5: EnumParsingSubjects_EnumParsingSubjects_Subject_5 ── */
 	struct {
@@ -1247,11 +1293,11 @@ static const struct {
 	},
 	/* entry4 = EnumParsingSubjects_EnumParsingSubjects_Subject_4 */
 	.entry4 = {
-		/* entry_total_size = 32 */ 32u,
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&EnumParsingSubjects_EnumParsingSubjects_Subject_4),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
 	/* entry5 = EnumParsingSubjects_EnumParsingSubjects_Subject_5 */
 	.entry5 = {
@@ -1322,7 +1368,7 @@ static const struct {
 #pragma pack(pop)
 #endif
 
-static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 528u;
+static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 536u;
 
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
@@ -1417,7 +1463,6 @@ static constexpr ReflectionQueryMethodDescriptor kReflMethods_EnumParsingSubject
 
 static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
 	{ 0x00000001u, "EnumParsingSubjects/EnumParsingSubjects", "EnumParsingSubjects/EnumParsingSubjects", "", "EnumParsingSubjects", "EnumParsingSubjects", nullptr, kReflFields_EnumParsingSubjects_EnumParsingSubjects, 1u, nullptr, 0u,
-/* EVENT_SECTION_START */
 nullptr, 0u,    kReflMethods_EnumParsingSubjects_EnumParsingSubjects, 13u, nullptr, 0u, 0u },
 };
 
@@ -1923,35 +1968,33 @@ extern "C" void EnumParsingSubjects_EnumParsingSubjects_Subject_4(void)
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			{
-				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[10])();
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
 			{
-				const auto chaos_arg_0 = _s1;
+				const auto chaos_arg_0 = _s2;
 				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			{
-				const auto chaos_arg_0 = _s1;
+				const auto chaos_arg_0 = _s2;
 				const auto chaos_result = ChaosEnumGetValues(chaos_arg_0);
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			{
-				const auto chaos_arg_0 = _s1;
-				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[10])();
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-			chaos_locals[0] = _s0;
-			_s0 = chaos_locals[0];
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
 			// brfalse (structured EH branch)
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s1;
+				auto chaos_value = _s3;
 				chaos_static_EnumParsingSubjects_EnumParsingSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN

@@ -4,75 +4,24 @@
 #include "gc_region.h"
 #include "thread_state.h"
 #include "forbid_suspend.h"
+#include "thin_lock_table.h"
 
 namespace chaos::il2cpp::runtime_core {
-namespace {
 
-// ── Atomic helpers for uint64_t (sync_state) ──────────────────────────
-#if defined(_MSC_VER)
-    #include <intrin.h>
-    #pragma intrinsic(_InterlockedCompareExchange64, _InterlockedExchange64)
-    #define __ATOMIC_RELAXED 0
-    #define __ATOMIC_ACQUIRE 0
-    #define __ATOMIC_RELEASE 0
-    inline uint64_t AtomicLoadRelaxed(const uint64_t* p) noexcept {
-        return *const_cast<volatile uint64_t*>(p);
-    }
-    inline uint64_t AtomicLoadAcquire(const uint64_t* p) noexcept {
-        uint64_t v = *const_cast<volatile uint64_t*>(p);
-        #if defined(_M_ARM64)
-        __dmb(0xB);  // full memory barrier for ARM64 acquire semantics
-        #else
-        _ReadWriteBarrier();
-        #endif
-        return v;
-    }
-    inline void AtomicStoreRelease(uint64_t* p, uint64_t val) noexcept {
-        _InterlockedExchange64(reinterpret_cast<volatile LONG64*>(p), static_cast<LONG64>(val));
-    }
-    inline void AtomicStoreRelaxed(uint64_t* p, uint64_t val) noexcept {
-        *const_cast<volatile uint64_t*>(p) = val;
-    }
-    inline bool AtomicCAS(uint64_t* p, uint64_t& expected, uint64_t desired, int = 0, int = 0) noexcept {
-        LONG64 prev = _InterlockedCompareExchange64(
-            reinterpret_cast<volatile LONG64*>(p), static_cast<LONG64>(desired), static_cast<LONG64>(expected));
-        if (prev == static_cast<LONG64>(expected)) return true;
-        expected = static_cast<uint64_t>(prev);
-        return false;
-    }
-#else
-    inline uint64_t AtomicLoadRelaxed(const uint64_t* p) noexcept {
-        return __atomic_load_n(p, __ATOMIC_RELAXED);
-    }
-    inline uint64_t AtomicLoadAcquire(const uint64_t* p) noexcept {
-        return __atomic_load_n(p, __ATOMIC_ACQUIRE);
-    }
-    inline void AtomicStoreRelease(uint64_t* p, uint64_t val) noexcept {
-        __atomic_store_n(p, val, __ATOMIC_RELEASE);
-    }
-    inline void AtomicStoreRelaxed(uint64_t* p, uint64_t val) noexcept {
-        __atomic_store_n(p, val, __ATOMIC_RELAXED);
-    }
-    inline bool AtomicCAS(uint64_t* p, uint64_t& expected, uint64_t desired,
-                          int success_order = __ATOMIC_ACQUIRE, int failure_order = __ATOMIC_RELAXED) noexcept {
-        return __atomic_compare_exchange_n(p, &expected, desired, false, success_order, failure_order);
-    }
-#endif
-
-// Thin lock / SyncBlock constants
-constexpr uint64_t kSyncLockedBit     = 1ull << 0;
-constexpr uint64_t kSyncInflatedBit   = 1ull << 1;
-constexpr uint64_t kSyncThreadShift   = 2;
-constexpr uint64_t kSyncRecursionShift = 32;
-
-constexpr uint32_t kSyncBlockStripes  = 64;
-constexpr uint32_t kSyncBlockSpinMax  = 1000;
+// ── SyncBlock struct (must be at namespace scope to match the
+// forward declaration in thin_lock_table.h) ───────────────────────────
 
 struct SyncBlock {
     const TypeInfoHot*                     type_info = nullptr;
     CHAOS_IL2CPP_RECURSIVE_LOCK_MUTEX    mutex;
     std::condition_variable_any          cond;
     std::atomic<int32_t>                 owner_tid{0};  // ThreadId that owns mutex, 0 = none
+
+    /// Number of times the owning thread has entered (reentrancy tracking
+    /// for inflated SyncBlock path).  Incremented in MonitorEnter,
+    /// decremented in MonitorExit.  The mutex is physically released only
+    /// when recursion reaches 0.
+    std::atomic<uint32_t>                recursion{0};
 
     /// Number of threads currently waiting on cond (MonitorWait).
     /// Used to gauge PulseAll fan-out.
@@ -86,6 +35,14 @@ struct SyncBlock {
     std::atomic<uint32_t>                pulse_count{0};
 };
 
+namespace {
+
+// Old SyncBlock stripe infrastructure — kept for DrainSyncBlocksForDomain
+// (domain unload path).  New ThinLockTable-based code uses ThinLockTable::Inflate
+// instead of g_sync_block_stripes.
+
+constexpr uint32_t kSyncBlockStripes  = 64;
+
 struct SyncBlockStripe {
     CHAOS_IL2CPP_MUTEX                              table_lock;
     CHAOS_IL2CPP_UNORDERED_DENSE_MAP_IDENTITY(void*, SyncBlock*)   entries;
@@ -93,59 +50,10 @@ struct SyncBlockStripe {
 
 SyncBlockStripe g_sync_block_stripes[kSyncBlockStripes];
 
-// Tier 1E: Pre-allocated SyncBlock pool — avoids heap allocation in the
-// inflation hot path. SyncBlock contains std::recursive_mutex (non-movable),
-// so we use a fixed array and a lock-free bump counter.
+// SyncBlock pool — shared by both old and new inflation paths.
 constexpr uint32_t kSyncBlockPoolSize = 128;
 SyncBlock g_sync_block_pool[kSyncBlockPoolSize];
 std::atomic<uint32_t> g_sync_block_pool_next{0};
-
-SyncBlock* AllocateSyncBlockFromPool() noexcept {
-    threading::ForbidSuspendScope forbid;
-    uint32_t idx = g_sync_block_pool_next.fetch_add(1, std::memory_order_relaxed);
-    if (idx < kSyncBlockPoolSize) {
-        return &g_sync_block_pool[idx];
-    }
-    return new SyncBlock();
-}
-
-inline uint32_t SyncBlockStripeIndex(void* obj) noexcept {
-    return (reinterpret_cast<uintptr_t>(obj) >> 3) % kSyncBlockStripes;
-}
-
-static bool InflateAndEnter(void* obj) noexcept {
-    const uint32_t stripe_idx = SyncBlockStripeIndex(obj);
-    auto& stripe = g_sync_block_stripes[stripe_idx];
-
-    CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) guard(stripe.table_lock);
-
-    auto* sync_ptr = GetSyncStatePtr(obj);
-    uint64_t sync = *sync_ptr;
-    if ((sync & kSyncInflatedBit) != 0) {
-        // Another thread already inflated — contend on existing SyncBlock.
-        auto it = stripe.entries.find(obj);
-        if (it != stripe.entries.end() && it->second != nullptr) {
-            it->second->mutex.lock();
-            it->second->owner_tid.store(threading::GetCurrentThreadId(), std::memory_order_relaxed);
-            return true;
-        }
-        return false;
-    }
-
-    auto* sb = AllocateSyncBlockFromPool();
-    stripe.entries[obj] = sb;
-
-    // Lock sb->mutex BEFORE publishing the inflated bit. This ensures
-    // any thread that sees the inflated state finds sb->mutex already
-    // locked, preventing races between the inflater and the original
-    // thin-lock holder's MonitorExit/MonitorWait.
-    sb->mutex.lock();
-    sb->owner_tid.store(threading::GetCurrentThreadId(), std::memory_order_relaxed);
-
-    const uint64_t inflated_val = kSyncInflatedBit | reinterpret_cast<uint64_t>(sb);
-    AtomicStoreRelease(sync_ptr, inflated_val);
-    return true;
-}
 
 bool IsLikelyMetadataTokenHandle(MethodInfoHandle method) {
     const CHAOS_IL2CPP_UINTPTR raw_method = static_cast<CHAOS_IL2CPP_UINTPTR>(method);
@@ -156,30 +64,47 @@ bool IsLikelyMetadataTokenHandle(MethodInfoHandle method) {
 
 }  // anonymous namespace
 
+// ── AllocateSyncBlockFromPool ───────────────────────────────────────────────
+
+SyncBlock* AllocateSyncBlockFromPool() noexcept {
+    threading::ForbidSuspendScope forbid;
+    uint32_t idx = g_sync_block_pool_next.fetch_add(1, std::memory_order_relaxed);
+    if (idx < kSyncBlockPoolSize) {
+        return &g_sync_block_pool[idx];
+    }
+    return new SyncBlock();
+}
+
+// ── InflateAndEnter (ThinLockTable path) ────────────────────────────────────
+
+bool InflateAndEnter(void* obj) noexcept {
+    auto* sb = AllocateSyncBlockFromPool();
+    if (sb == nullptr) return false;
+
+    auto& table = ThinLockTable::Instance();
+    SyncBlock* actual = table.Inflate(obj, sb);
+
+    // Lock the SyncBlock stored in the table and set ownership.
+    // Whether we won the inflation race or another thread did, we
+    // contend on the published SyncBlock.
+    actual->mutex.lock();
+    actual->owner_tid.store(threading::GetCurrentThreadId(), std::memory_order_relaxed);
+    actual->recursion.store(1, std::memory_order_relaxed);
+
+    // If our sb lost the race, it remains in the pool (never individually
+    // freed — same leak semantics as old code; pool entries are reusable
+    // in theory but the pool is only 128 entries deep).
+    return true;
+}
+
 // ======================================================================
-// DrainSyncBlocksForDomain — remove SyncBlock stripe entries for domain
+// DrainSyncBlocksForDomain — drain ThinLockTable entries for domain unload
 // ======================================================================
 void DrainSyncBlocksForDomain(CHAOS_IL2CPP_UINT32 domain_id) noexcept {
-    uint32_t removed = 0;
-    RegionManager& mgr = RegionManager::Instance();
-
-    for (uint32_t si = 0; si < kSyncBlockStripes; si++) {
-        auto& stripe = g_sync_block_stripes[si];
-        CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(stripe.table_lock);
-
-        auto it = stripe.entries.begin();
-        while (it != stripe.entries.end()) {
-            void* obj = it->first;
-            // Check if the object is in the domain being unloaded.
-            if (obj != nullptr && mgr.IsInDomain(domain_id, obj)) {
-                it = stripe.entries.erase(it);
-                removed++;
-            } else {
-                ++it;
-            }
-        }
-    }
-
+    // Delegates to ThinLockTable which now owns all lock state
+    // (both thin and inflated entries). SyncBlock pool entries are never
+    // individually freed — the pool is a fixed array + heap fallback.
+    uint32_t removed = ThinLockTable::Instance().DrainForDomain(domain_id);
     if (removed > 0) {
         CHAOS_IL2CPP_LOG_DEBUG_M("SyncBlock", "drain_domain id={0} removed={1}",
             domain_id, removed);

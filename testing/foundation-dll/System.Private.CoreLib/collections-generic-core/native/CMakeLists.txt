@@ -35,6 +35,7 @@ set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_PROJECT_ROOT}/src/native/common"
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core"
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/gc"
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs"  # runtime_stubs for enum_stubs.h
     "${CHAOS_PROJECT_ROOT}/src/native/bootstrap"
     "${CHAOS_PROJECT_ROOT}/src/native/interpreter"
     "${CHAOS_PROJECT_ROOT}/src/native/interpreter/generated"
@@ -58,6 +59,7 @@ set(CHAOS_LIB_DIRS
     "${CHAOS_NATIVE_BUILD}/src/native/codegen"
     "${CHAOS_NATIVE_BUILD}/src/native/support"
     "${CHAOS_NATIVE_BUILD}/src/native/hot-update"
+    "${CHAOS_NATIVE_BUILD}/src/native/diagnostics/eventpipe"
     "${CHAOS_NATIVE_BUILD}/fmt_build"
 )
 
@@ -70,6 +72,7 @@ set(CHAOS_RUNTIME_LIBS
     chaos_codegen
     chaos_support
     chaos_hot_update
+    chaos_eventpipe
     chaos_fmt
 )
 

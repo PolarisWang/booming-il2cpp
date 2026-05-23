@@ -10,6 +10,7 @@
     {
       "registrationKind": "type",
       "slot": 1,
+      "metadataToken": 33554434,
       "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects",
       "name": "ReflectionMemberBasicsSubjects",
       "displayName": "ReflectionMemberBasicsSubjects",
@@ -27,6 +28,7 @@
     {
       "registrationKind": "method",
       "slot": 3,
+      "metadataToken": 100663297,
       "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_0:System.Void()",
       "name": "Subject_0",
       "definitionSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_0:System.Void()",
@@ -38,6 +40,7 @@
     {
       "registrationKind": "method",
       "slot": 4,
+      "metadataToken": 100663298,
       "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_1:System.Void()",
       "name": "Subject_1",
       "definitionSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_1:System.Void()",
@@ -49,6 +52,7 @@
     {
       "registrationKind": "method",
       "slot": 5,
+      "metadataToken": 100663299,
       "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_2:System.Void()",
       "name": "Subject_2",
       "definitionSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_2:System.Void()",
@@ -60,6 +64,7 @@
     {
       "registrationKind": "method",
       "slot": 6,
+      "metadataToken": 100663300,
       "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_3:System.Void()",
       "name": "Subject_3",
       "definitionSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_3:System.Void()",
@@ -71,6 +76,7 @@
     {
       "registrationKind": "method",
       "slot": 7,
+      "metadataToken": 100663301,
       "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_4:System.Void()",
       "name": "Subject_4",
       "definitionSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_4:System.Void()",
@@ -82,6 +88,7 @@
     {
       "registrationKind": "method",
       "slot": 8,
+      "metadataToken": 100663302,
       "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_5:System.Void()",
       "name": "Subject_5",
       "definitionSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_5:System.Void()",
@@ -93,6 +100,7 @@
     {
       "registrationKind": "method",
       "slot": 9,
+      "metadataToken": 100663303,
       "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_6:System.Void()",
       "name": "Subject_6",
       "definitionSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_6:System.Void()",
@@ -104,6 +112,7 @@
     {
       "registrationKind": "method",
       "slot": 10,
+      "metadataToken": 100663304,
       "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_7:System.Void()",
       "name": "Subject_7",
       "definitionSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_7:System.Void()",
@@ -115,6 +124,7 @@
     {
       "registrationKind": "method",
       "slot": 11,
+      "metadataToken": 100663305,
       "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_8:System.Void()",
       "name": "Subject_8",
       "definitionSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_8:System.Void()",
@@ -126,6 +136,7 @@
     {
       "registrationKind": "method",
       "slot": 12,
+      "metadataToken": 100663306,
       "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_9:System.Void()",
       "name": "Subject_9",
       "definitionSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_9:System.Void()",
@@ -137,6 +148,7 @@
     {
       "registrationKind": "method",
       "slot": 13,
+      "metadataToken": 100663307,
       "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_10:System.Void()",
       "name": "Subject_10",
       "definitionSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_10:System.Void()",
@@ -148,6 +160,7 @@
     {
       "registrationKind": "method",
       "slot": 14,
+      "metadataToken": 100663308,
       "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_11:System.Void()",
       "name": "Subject_11",
       "definitionSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_11:System.Void()",
@@ -159,6 +172,7 @@
     {
       "registrationKind": "method",
       "slot": 15,
+      "metadataToken": 100663309,
       "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_12:System.Void()",
       "name": "Subject_12",
       "definitionSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_12:System.Void()",
@@ -170,6 +184,7 @@
     {
       "registrationKind": "method",
       "slot": 16,
+      "metadataToken": 100663310,
       "subjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_13:System.Void()",
       "name": "Subject_13",
       "definitionSubjectId": "ReflectionMemberBasicsSubjects/ReflectionMemberBasicsSubjects::Subject_13:System.Void()",

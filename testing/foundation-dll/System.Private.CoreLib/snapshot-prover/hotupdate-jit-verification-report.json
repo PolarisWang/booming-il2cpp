@@ -1,6 +1,6 @@
 {
-  "status": "passed",
-  "passed": 157,
+  "status": "failed",
+  "passed": 156,
   "total": 157,
-  "exit_code": 0
+  "exit_code": 1
 }

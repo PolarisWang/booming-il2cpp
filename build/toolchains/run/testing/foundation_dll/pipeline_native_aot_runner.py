@@ -800,14 +800,13 @@ def _inject_eha_directive(cmakelists: Path) -> None:
 
 
 def _ensure_cmakelists(cmakelists: Path, family_slug: str, verification: Path) -> None:
-    """Auto-generate native/CMakeLists.txt if it doesn't exist.
+    """Auto-generate or update native/CMakeLists.txt with the latest template.
 
     Uses the same template pattern as convert-char's verified CMakeLists.txt.
     The generated file references codegen/ and native/runtime-entry.cpp,
     plus verification_dispatch.generated.cpp (sentinel or real).
+    Always regenerates to pick up template updates (e.g. new library dependencies).
     """
-    if cmakelists.exists():
-        return
 
     repo_root_str = str(_REPO_ROOT).replace("\\", "/")
     codegen_rel = str((verification / family_slug / "codegen").resolve()).replace("\\", "/")
@@ -830,6 +829,14 @@ def _ensure_cmakelists(cmakelists: Path, family_slug: str, verification: Path) -
         f'\n'
         f'# Source files — codegen outputs to codegen/<AssemblyName>/generated/\n'
         f'file(GLOB CHAOS_CODEGEN_CPP "${{CHAOS_CODEGEN_DIR}}/*Subjects/generated/native-aot.generated.cpp")\n'
+        f'# Also search native/ (pipeline syncs codegen output there after convert-to-cpp)\n'
+        f'file(GLOB CHAOS_CODEGEN_NATIVE_CPP "${{CMAKE_CURRENT_SOURCE_DIR}}/*Subjects/generated/native-aot.generated.cpp")\n'
+        f'# Use codegen path if available, fall back to native path (avoids compiling both)\n'
+        f'if(CHAOS_CODEGEN_CPP)\n'
+        f'  set(CHAOS_AOT_GENERATED_CPP ${{CHAOS_CODEGEN_CPP}})\n'
+        f'else()\n'
+        f'  set(CHAOS_AOT_GENERATED_CPP ${{CHAOS_CODEGEN_NATIVE_CPP}})\n'
+        f'endif()\n'
         f'file(GLOB CHAOS_NATIVE_STUBS "*.cpp")\n'
         f'list(REMOVE_ITEM CHAOS_NATIVE_STUBS\n'
         f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/runtime-entry.cpp"\n'
@@ -841,7 +848,7 @@ def _ensure_cmakelists(cmakelists: Path, family_slug: str, verification: Path) -
         f'    "runtime-patchdata.cpp"\n'
         f'    "verification_dispatch.generated.cpp"\n'
         f'    ${{CHAOS_NATIVE_STUBS}}\n'
-        f'    ${{CHAOS_CODEGEN_CPP}}\n'
+        f'    ${{CHAOS_AOT_GENERATED_CPP}}\n'
         f')\n'
         f'\n'
         f'# Include directories\n'
@@ -862,6 +869,7 @@ def _ensure_cmakelists(cmakelists: Path, family_slug: str, verification: Path) -
         f'    "${{CHAOS_PROJECT_ROOT}}/third_party/fmt/include"\n'
         f'    "${{CHAOS_PROJECT_ROOT}}/third_party/unordered_dense/include"\n'
         f'    "${{CHAOS_CODEGEN_DIR}}/NumericAggregationSubjects/generated"\n'
+        f'    "${{CMAKE_CURRENT_SOURCE_DIR}}"\n'
         f')\n'
         f'\n'
         f'# Library link directories\n'
@@ -873,6 +881,7 @@ def _ensure_cmakelists(cmakelists: Path, family_slug: str, verification: Path) -
         f'    "${{CHAOS_NATIVE_BUILD}}/src/native/codegen"\n'
         f'    "${{CHAOS_NATIVE_BUILD}}/src/native/support"\n'
         f'    "${{CHAOS_NATIVE_BUILD}}/src/native/hot-update"\n'
+        f'    "${{CHAOS_NATIVE_BUILD}}/src/native/diagnostics/eventpipe"\n'
         f'    "${{CHAOS_NATIVE_BUILD}}/fmt_build"\n'
         f')\n'
         f'\n'
@@ -885,6 +894,7 @@ def _ensure_cmakelists(cmakelists: Path, family_slug: str, verification: Path) -
         f'    chaos_codegen\n'
         f'    chaos_support\n'
         f'    chaos_hot_update\n'
+        f'    chaos_eventpipe\n'
         f'    chaos_fmt\n'
         f')\n'
         f'\n'
@@ -1219,6 +1229,30 @@ def _fix_runtime_entry(path: Path) -> None:
                             "RunBenchmark(entry_index, iterations)")
         changed = True
 
+    # Fix 6: Add DIAG printfs to catch blocks in fact loop (for all template
+    # formats). Replaces silent catch blocks that lack DIAG prints.
+    old_silent_catch = (
+        "        } catch (const chaos_managed_exception&) {\n"
+        "                ++failed_count;\n"
+        "            } catch (...) {\n"
+        "                ++failed_count;\n"
+        "            }"
+    )
+    new_diag_catch = (
+        "        } catch (const chaos_managed_exception&) {\n"
+        "                ++failed_count;\n"
+        '                printf("[DIAG] Fact FAILED method index %d/%d (chaos_managed_exception)\\n", i, kAotMethodCount);\n'
+        "                std::fflush(stdout);\n"
+        "            } catch (...) {\n"
+        "                ++failed_count;\n"
+        '                printf("[DIAG] Fact FAILED method index %d/%d (...)\\n", i, kAotMethodCount);\n'
+        "                std::fflush(stdout);\n"
+        "            }"
+    )
+    if old_silent_catch in text:
+        text = text.replace(old_silent_catch, new_diag_catch)
+        changed = True
+
     if changed:
         path.write_text(text, encoding="utf-8")
         print(f"    [build_entry] fixed runtime-entry.cpp bugs")
@@ -1299,6 +1333,96 @@ def _fix_native_aot_bridge_thunks(native_dir: Path) -> None:
         if changed:
             gen_cpp.write_text(text, encoding="utf-8")
             print(f"    [build_entry] fixed bridge thunks in {gen_cpp.name}")
+
+
+def _fix_forward_declarations(native_dir: Path) -> None:
+    """Add forward declarations for extern \"C\" functions referenced before
+    their declaration in generated native-aot.generated.cpp.
+
+    The codegen emits generic dispatch wrappers (AOT entry resolution by
+    generic_argument_type_handle) that call instantiated function bodies
+    declared later in the file.  MSVC requires a visible declaration before
+    the call site.
+    """
+    import re as _re
+    for gen_cpp in native_dir.glob("**/native-aot.generated.cpp"):
+        text = gen_cpp.read_text(encoding="utf-8")
+        changed = False
+
+        # Find the namespace opening line — insert at file scope (before namespace)
+        ns_match = _re.search(r'^namespace chaos::il2cpp::codegen::(\w+)', text, _re.MULTILINE)
+        if not ns_match:
+            continue
+        insert_pos = text.rfind('\n', 0, ns_match.start()) + 1
+
+        # Find ALL extern "C" declarations of project-specific functions
+        # (those matching the namespace name prefix)
+        prefix = ns_match.group(1)
+        # Match lines like: extern "C" CHAOS_IL2CPP_xxx func_name(params);
+        ext_dec_pattern = _re.compile(
+            r'^extern\s+"C"\s+(?:CHAOS_IL2CPP_\w+|void|int|double)\s+'
+            + _re.escape(prefix) + r'[\w_]+\s*\(',
+            _re.MULTILINE)
+        all_decls = list(ext_dec_pattern.finditer(text))
+
+        # For each declaration, check if its function name appears in code
+        # before the declaration position.  If so, we need a forward decl.
+        added = set()
+        insertions = []
+        for decl_match in all_decls:
+            decl_line_start = text.rfind('\n', 0, decl_match.start()) + 1
+            decl_pos = decl_match.start()
+
+            # Extract function name
+            fn_match = _re.match(
+                r'extern\s+"C"\s+(?:CHAOS_IL2CPP_\w+|void|int|double)\s+([\w_]+)\s*\(',
+                text[decl_match.start():decl_match.end()])
+            if not fn_match:
+                continue
+            fn_name = fn_match.group(1)
+            if fn_name in added:
+                continue
+
+            # Check if fn_name is referenced before decl_pos (exclude its own decl line)
+            before_text = text[:decl_line_start]
+            # Use word-boundary matching to avoid partial matches
+            ref_pattern = _re.compile(r'\b' + _re.escape(fn_name) + r'\b')
+            first_ref = ref_pattern.search(before_text)
+            if first_ref:
+                # This function IS referenced before its declaration.
+                # Check if it already has a forward decl (extern "C" before the first ref)
+                candidates_before_ref = [
+                    d for d in all_decls if d.start() < first_ref.start()
+                    and text[d.start():d.end()].startswith('extern "C"')
+                    and fn_name in text[d.start():d.end()]
+                ]
+                # Also check for any existing forward declaration marker or
+                # non-extern definition before the first reference
+                has_fwd = _re.search(
+                    r'(?:^|[\n;])\s*(?:extern\s+"C"\s+)?' + _re.escape(fn_name) + r'\s*\(',
+                    before_text[:first_ref.start()])
+                if not has_fwd:
+                    # Add forward declaration right after the namespace opening
+                    insertions.append(fn_name)
+                    added.add(fn_name)
+
+        if insertions:
+            # Build forward declaration block from the original extern "C" lines
+            fwd_lines = ["// Forward declarations (pipeline fix: used before extern \"C\" decl)"]
+            for fn_name in sorted(insertions):
+                # Find the original extern declaration line
+                for d in all_decls:
+                    if fn_name in text[d.start():d.end()]:
+                        line = text[d.start():text.find('\n', d.start())]
+                        fwd_lines.append(line)
+                        break
+            fwd_block = "\n".join(fwd_lines) + "\n\n"
+            text = text[:insert_pos] + fwd_block + text[insert_pos:]
+            changed = True
+
+        if changed:
+            gen_cpp.write_text(text, encoding="utf-8")
+            print(f"    [build_entry] added forward declarations in {gen_cpp.name}")
 
 
 def _write_sentinel_dispatch(dispatch_cpp: Path) -> None:
@@ -1489,9 +1613,14 @@ def _build_entry_exe(family_slug: str, *, verification: Path | None = None, conf
     # (p0 undeclared, TryStartNoGCRegion arg count mismatch).
     # Patch BOTH native_dir (synced copy) and codegen_dir (source compiled by cmake).
     _fix_native_aot_bridge_thunks(native_dir)
+    # Add forward declarations for functions referenced before their extern "C" decl.
+    # This happens when generic dispatch wrappers call instantiated function bodies
+    # declared later in the file.
+    _fix_forward_declarations(native_dir)
     codegen_native_dir = v / family_slug / "codegen"
     if codegen_native_dir.exists():
         _fix_native_aot_bridge_thunks(codegen_native_dir)
+        _fix_forward_declarations(codegen_native_dir)
 
     build_dir = native_dir / "build"
     # Remove stale cmake cache to avoid generator/platform mismatch errors

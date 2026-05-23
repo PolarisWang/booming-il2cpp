@@ -1,0 +1,51 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "ReflectionHotupdateSubjects",
+      "subjectId": "ReflectionHotupdateSubjects/ReflectionHotupdateSubjects",
+      "definitionSubjectId": "ReflectionHotupdateSubjects/ReflectionHotupdateSubjects",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "ReflectionHotupdateSubjects",
+      "subjectId": "ReflectionHotupdateSubjects/ReflectionHotupdateSubjects::Subject_0:System.Void()",
+      "definitionSubjectId": "ReflectionHotupdateSubjects/ReflectionHotupdateSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "ReflectionHotupdateSubjects/ReflectionHotupdateSubjects",
+      "metadataToken": 100663297,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionHotupdateSubjects",
+      "subjectId": "ReflectionHotupdateSubjects/ReflectionHotupdateSubjects::Subject_1:System.Void()",
+      "definitionSubjectId": "ReflectionHotupdateSubjects/ReflectionHotupdateSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "ReflectionHotupdateSubjects/ReflectionHotupdateSubjects",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionHotupdateSubjects",
+      "subjectId": "ReflectionHotupdateSubjects/ReflectionHotupdateSubjects::Subject_2:System.Void()",
+      "definitionSubjectId": "ReflectionHotupdateSubjects/ReflectionHotupdateSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "ReflectionHotupdateSubjects/ReflectionHotupdateSubjects",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionHotupdateSubjects",
+      "subjectId": "ReflectionHotupdateSubjects/ReflectionHotupdateSubjects::Subject_3:System.Void()",
+      "definitionSubjectId": "ReflectionHotupdateSubjects/ReflectionHotupdateSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "ReflectionHotupdateSubjects/ReflectionHotupdateSubjects",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

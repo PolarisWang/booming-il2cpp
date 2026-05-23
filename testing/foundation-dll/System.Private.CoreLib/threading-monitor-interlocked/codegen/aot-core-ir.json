@@ -113,50 +113,24 @@
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 55,
-          "handlerOffset": 56,
+          "tryLength": 43,
+          "handlerOffset": 44,
           "handlerLength": 11,
           "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
         {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 42,
+          "op": "ldnull",
+          "opCode": 5,
           "ilOffset": 2,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "box",
-          "opCode": 35,
-          "operand": "System.Private.CoreLib/System.Int32",
-          "ilOffset": 4,
           "resultType": "System.Object",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "type",
-            "subjectId": "System.Private.CoreLib/System.Int32"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Int32",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 9,
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 9,
+          "ilOffset": 3,
           "resultType": "System.Boolean",
           "callee": "System.Threading/Monitor::TryEnter:System.Boolean(System.Object)",
           "reference": {
@@ -181,72 +155,46 @@
         {
           "op": "brtrue",
           "opCode": 18,
-          "operand": 19,
+          "operand": 13,
+          "ilOffset": 8,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 10,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 14,
+          "ilOffset": 11,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 13,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
           "ilOffset": 14,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 16,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 20,
-          "ilOffset": 17,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 19,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 42,
-          "ilOffset": 20,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "box",
-          "opCode": 35,
-          "operand": "System.Private.CoreLib/System.Int32",
-          "ilOffset": 22,
           "resultType": "System.Object",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "type",
-            "subjectId": "System.Private.CoreLib/System.Int32"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Int32",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 9,
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 27,
+          "ilOffset": 15,
           "resultType": "System.Boolean",
           "callee": "System.Threading/Monitor::TryEnter:System.Boolean(System.Object)",
           "reference": {
@@ -271,8 +219,8 @@
         {
           "op": "brtrue",
           "opCode": 18,
-          "operand": 37,
-          "ilOffset": 32,
+          "operand": 25,
+          "ilOffset": 20,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -280,15 +228,15 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 34,
+          "ilOffset": 22,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
-          "operand": 38,
-          "ilOffset": 35,
+          "operand": 26,
+          "ilOffset": 23,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -296,14 +244,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 37,
+          "ilOffset": 25,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 38,
+          "ilOffset": 26,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -311,14 +259,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 40,
+          "ilOffset": 28,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 41,
+          "ilOffset": 29,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -326,7 +274,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 43,
+          "ilOffset": 31,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -334,14 +282,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 44,
+          "ilOffset": 32,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 53,
-          "ilOffset": 45,
+          "operand": 41,
+          "ilOffset": 33,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -349,7 +297,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 47,
+          "ilOffset": 35,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -357,7 +305,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode",
-          "ilOffset": 48,
+          "ilOffset": 36,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "ThreadingMonitorInterlockedSubjects",
@@ -383,22 +331,22 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 67,
-          "ilOffset": 54,
+          "operand": 55,
+          "ilOffset": 42,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 56,
+          "ilOffset": 44,
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 58,
+          "ilOffset": 46,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -406,7 +354,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode",
-          "ilOffset": 59,
+          "ilOffset": 47,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "ThreadingMonitorInterlockedSubjects",
@@ -432,15 +380,15 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 67,
-          "ilOffset": 65,
+          "operand": 55,
+          "ilOffset": 53,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 67,
+          "ilOffset": 55,
           "isPreserveSig": false
         }
       ],
@@ -481,58 +429,32 @@
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 59,
-          "handlerOffset": 60,
+          "tryLength": 47,
+          "handlerOffset": 48,
           "handlerLength": 11,
           "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
         {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 42,
+          "op": "ldnull",
+          "opCode": 5,
           "ilOffset": 2,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "box",
-          "opCode": 35,
-          "operand": "System.Private.CoreLib/System.Int32",
-          "ilOffset": 4,
           "resultType": "System.Object",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "type",
-            "subjectId": "System.Private.CoreLib/System.Int32"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Int32",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 9,
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 42,
-          "ilOffset": 9,
+          "ilOffset": 3,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 11,
+          "ilOffset": 5,
           "resultType": "System.Boolean",
           "callee": "System.Threading/Monitor::TryEnter:System.Boolean(System.Object,System.Int32)",
           "reference": {
@@ -557,8 +479,8 @@
         {
           "op": "brtrue",
           "opCode": 18,
-          "operand": 21,
-          "ilOffset": 16,
+          "operand": 15,
+          "ilOffset": 10,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -566,15 +488,15 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 18,
+          "ilOffset": 12,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
-          "operand": 22,
-          "ilOffset": 19,
+          "operand": 16,
+          "ilOffset": 13,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -582,112 +504,86 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 21,
+          "ilOffset": 15,
           "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 16,
+          "resultType": "System.Object",
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 42,
-          "ilOffset": 22,
+          "ilOffset": 17,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
-          "op": "box",
-          "opCode": 35,
-          "operand": "System.Private.CoreLib/System.Int32",
-          "ilOffset": 24,
-          "resultType": "System.Object",
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 19,
+          "resultType": "System.Boolean",
+          "callee": "System.Threading/Monitor::TryEnter:System.Boolean(System.Object,System.Int32)",
           "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "type",
-            "subjectId": "System.Private.CoreLib/System.Int32"
+            "assemblyName": "System.Threading",
+            "subjectKind": "method",
+            "subjectId": "System.Threading/Monitor::TryEnter:System.Boolean(System.Object,System.Int32)"
           },
           "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Int32",
-            "typeShape": 1,
+            "kind": 3,
+            "assemblyName": "System.Threading",
+            "subjectId": "System.Threading/Monitor::TryEnter:System.Boolean(System.Object,System.Int32)",
+            "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
             "isComImport": false,
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "runtimeServiceKind": 9,
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 29,
+          "ilOffset": 24,
+          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 42,
+          "operand": 0,
+          "ilOffset": 26,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 30,
+          "ilOffset": 27,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
           "ilOffset": 29,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
-          "op": "call",
-          "opCode": 14,
-          "ilOffset": 31,
-          "resultType": "System.Boolean",
-          "callee": "System.Threading/Monitor::TryEnter:System.Boolean(System.Object,System.Int32)",
-          "reference": {
-            "assemblyName": "System.Threading",
-            "subjectKind": "method",
-            "subjectId": "System.Threading/Monitor::TryEnter:System.Boolean(System.Object,System.Int32)"
-          },
-          "targetReference": {
-            "kind": 3,
-            "assemblyName": "System.Threading",
-            "subjectId": "System.Threading/Monitor::TryEnter:System.Boolean(System.Object,System.Int32)",
-            "typeShape": 0,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "dispatchKindCode": 4,
-          "isPreserveSig": false
-        },
-        {
-          "op": "brtrue",
-          "opCode": 18,
-          "operand": 41,
-          "ilOffset": 36,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 38,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 42,
-          "ilOffset": 39,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 1,
-          "ilOffset": 41,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 42,
+          "ilOffset": 30,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -695,14 +591,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 44,
+          "ilOffset": 32,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 45,
+          "ilOffset": 33,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -710,7 +606,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 47,
+          "ilOffset": 35,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -718,14 +614,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 48,
+          "ilOffset": 36,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 57,
-          "ilOffset": 49,
+          "operand": 45,
+          "ilOffset": 37,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -733,7 +629,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 51,
+          "ilOffset": 39,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -741,7 +637,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode",
-          "ilOffset": 52,
+          "ilOffset": 40,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "ThreadingMonitorInterlockedSubjects",
@@ -767,22 +663,22 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 71,
-          "ilOffset": 58,
+          "operand": 59,
+          "ilOffset": 46,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 60,
+          "ilOffset": 48,
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 62,
+          "ilOffset": 50,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -790,7 +686,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::_exitCode",
-          "ilOffset": 63,
+          "ilOffset": 51,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "ThreadingMonitorInterlockedSubjects",
@@ -816,15 +712,15 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 71,
-          "ilOffset": 69,
+          "operand": 59,
+          "ilOffset": 57,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 71,
+          "ilOffset": 59,
           "isPreserveSig": false
         }
       ],

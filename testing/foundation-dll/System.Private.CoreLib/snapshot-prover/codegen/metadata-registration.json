@@ -15,6 +15,7 @@
     {
       "registrationKind": "type",
       "slot": 2,
+      "metadataToken": 33554434,
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
       "name": "SnapshotProverSubjects",
       "displayName": "SnapshotProverSubjects",
@@ -23,6 +24,7 @@
     {
       "registrationKind": "type",
       "slot": 3,
+      "metadataToken": 33554434,
       "subjectId": "SnapshotTestFixtures/ArithmeticOps",
       "name": "ArithmeticOps",
       "namespaceName": "SnapshotTestFixtures",
@@ -32,6 +34,7 @@
     {
       "registrationKind": "type",
       "slot": 4,
+      "metadataToken": 33554435,
       "subjectId": "SnapshotTestFixtures/StringOps",
       "name": "StringOps",
       "namespaceName": "SnapshotTestFixtures",
@@ -41,6 +44,7 @@
     {
       "registrationKind": "type",
       "slot": 5,
+      "metadataToken": 33554436,
       "subjectId": "SnapshotTestFixtures/VoidCaller",
       "name": "VoidCaller",
       "namespaceName": "SnapshotTestFixtures",
@@ -50,6 +54,7 @@
     {
       "registrationKind": "type",
       "slot": 6,
+      "metadataToken": 33554437,
       "subjectId": "SnapshotTestFixtures/MathHelper",
       "name": "MathHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -59,6 +64,7 @@
     {
       "registrationKind": "type",
       "slot": 7,
+      "metadataToken": 33554438,
       "subjectId": "SnapshotTestFixtures/FlowControl",
       "name": "FlowControl",
       "namespaceName": "SnapshotTestFixtures",
@@ -68,6 +74,7 @@
     {
       "registrationKind": "type",
       "slot": 8,
+      "metadataToken": 33554439,
       "subjectId": "SnapshotTestFixtures/InstanceHelper",
       "name": "InstanceHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -77,6 +84,7 @@
     {
       "registrationKind": "type",
       "slot": 9,
+      "metadataToken": 33554440,
       "subjectId": "SnapshotTestFixtures/CallVirtHelper",
       "name": "CallVirtHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -86,6 +94,7 @@
     {
       "registrationKind": "type",
       "slot": 10,
+      "metadataToken": 33554441,
       "subjectId": "SnapshotTestFixtures/BoxingHelper",
       "name": "BoxingHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -95,6 +104,7 @@
     {
       "registrationKind": "type",
       "slot": 11,
+      "metadataToken": 33554442,
       "subjectId": "SnapshotTestFixtures/FieldHelper",
       "name": "FieldHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -104,6 +114,7 @@
     {
       "registrationKind": "type",
       "slot": 12,
+      "metadataToken": 33554443,
       "subjectId": "SnapshotTestFixtures/LoopHelper",
       "name": "LoopHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -113,6 +124,7 @@
     {
       "registrationKind": "type",
       "slot": 13,
+      "metadataToken": 33554444,
       "subjectId": "SnapshotTestFixtures/ConversionHelper",
       "name": "ConversionHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -122,6 +134,7 @@
     {
       "registrationKind": "type",
       "slot": 14,
+      "metadataToken": 33554445,
       "subjectId": "SnapshotTestFixtures/Helper",
       "name": "Helper",
       "namespaceName": "SnapshotTestFixtures",
@@ -131,6 +144,7 @@
     {
       "registrationKind": "type",
       "slot": 15,
+      "metadataToken": 33554446,
       "subjectId": "SnapshotTestFixtures/SwitchHelper",
       "name": "SwitchHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -140,6 +154,7 @@
     {
       "registrationKind": "type",
       "slot": 16,
+      "metadataToken": 33554447,
       "subjectId": "SnapshotTestFixtures/LdftnHelper",
       "name": "LdftnHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -149,6 +164,7 @@
     {
       "registrationKind": "type",
       "slot": 17,
+      "metadataToken": 33554448,
       "subjectId": "SnapshotTestFixtures/TargetHelper",
       "name": "TargetHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -158,6 +174,7 @@
     {
       "registrationKind": "type",
       "slot": 18,
+      "metadataToken": 33554449,
       "subjectId": "SnapshotTestFixtures/ArrayHelper",
       "name": "ArrayHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -167,6 +184,7 @@
     {
       "registrationKind": "type",
       "slot": 19,
+      "metadataToken": 33554450,
       "subjectId": "SnapshotTestFixtures/EhHelper",
       "name": "EhHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -176,6 +194,7 @@
     {
       "registrationKind": "type",
       "slot": 20,
+      "metadataToken": 33554451,
       "subjectId": "SnapshotTestFixtures/GenericHelper",
       "name": "GenericHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -185,6 +204,7 @@
     {
       "registrationKind": "type",
       "slot": 21,
+      "metadataToken": 33554452,
       "subjectId": "SnapshotTestFixtures/Wrapper\u00601",
       "name": "Wrapper\u00601",
       "namespaceName": "SnapshotTestFixtures",
@@ -194,6 +214,7 @@
     {
       "registrationKind": "type",
       "slot": 22,
+      "metadataToken": 33554453,
       "subjectId": "SnapshotTestFixtures/DelegateHelper",
       "name": "DelegateHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -203,6 +224,7 @@
     {
       "registrationKind": "type",
       "slot": 23,
+      "metadataToken": 33554454,
       "subjectId": "SnapshotTestFixtures/BaseClass",
       "name": "BaseClass",
       "namespaceName": "SnapshotTestFixtures",
@@ -212,6 +234,7 @@
     {
       "registrationKind": "type",
       "slot": 24,
+      "metadataToken": 33554455,
       "subjectId": "SnapshotTestFixtures/DerivedClass",
       "name": "DerivedClass",
       "namespaceName": "SnapshotTestFixtures",
@@ -221,6 +244,7 @@
     {
       "registrationKind": "type",
       "slot": 25,
+      "metadataToken": 33554456,
       "subjectId": "SnapshotTestFixtures/VirtualHelper",
       "name": "VirtualHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -230,6 +254,7 @@
     {
       "registrationKind": "type",
       "slot": 26,
+      "metadataToken": 33554458,
       "subjectId": "SnapshotTestFixtures/MarkedClass",
       "name": "MarkedClass",
       "namespaceName": "SnapshotTestFixtures",
@@ -239,6 +264,7 @@
     {
       "registrationKind": "type",
       "slot": 27,
+      "metadataToken": 33554459,
       "subjectId": "SnapshotTestFixtures/TypeCheckHelper",
       "name": "TypeCheckHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -248,6 +274,7 @@
     {
       "registrationKind": "type",
       "slot": 28,
+      "metadataToken": 33554461,
       "subjectId": "SnapshotTestFixtures/SizeOfHelper",
       "name": "SizeOfHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -257,6 +284,7 @@
     {
       "registrationKind": "type",
       "slot": 29,
+      "metadataToken": 33554462,
       "subjectId": "SnapshotTestFixtures/IndirectHelper",
       "name": "IndirectHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -266,6 +294,7 @@
     {
       "registrationKind": "type",
       "slot": 30,
+      "metadataToken": 33554463,
       "subjectId": "SnapshotTestFixtures/ArithmeticCompareHelper",
       "name": "ArithmeticCompareHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -275,6 +304,7 @@
     {
       "registrationKind": "type",
       "slot": 31,
+      "metadataToken": 33554464,
       "subjectId": "SnapshotTestFixtures/BranchDupHelper",
       "name": "BranchDupHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -284,6 +314,7 @@
     {
       "registrationKind": "type",
       "slot": 32,
+      "metadataToken": 33554465,
       "subjectId": "SnapshotTestFixtures/HasInstanceFields",
       "name": "HasInstanceFields",
       "namespaceName": "SnapshotTestFixtures",
@@ -293,6 +324,7 @@
     {
       "registrationKind": "type",
       "slot": 33,
+      "metadataToken": 33554466,
       "subjectId": "SnapshotTestFixtures/InstanceFieldHelper",
       "name": "InstanceFieldHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -302,6 +334,7 @@
     {
       "registrationKind": "type",
       "slot": 34,
+      "metadataToken": 33554467,
       "subjectId": "SnapshotTestFixtures/StaticFieldWriteHelper",
       "name": "StaticFieldWriteHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -311,6 +344,7 @@
     {
       "registrationKind": "type",
       "slot": 35,
+      "metadataToken": 33554468,
       "subjectId": "SnapshotTestFixtures/VirtualDispatchHelper",
       "name": "VirtualDispatchHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -320,6 +354,7 @@
     {
       "registrationKind": "type",
       "slot": 36,
+      "metadataToken": 33554469,
       "subjectId": "SnapshotTestFixtures/BitwiseHelper",
       "name": "BitwiseHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -329,6 +364,7 @@
     {
       "registrationKind": "type",
       "slot": 37,
+      "metadataToken": 33554470,
       "subjectId": "SnapshotTestFixtures/ShiftHelper",
       "name": "ShiftHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -338,6 +374,7 @@
     {
       "registrationKind": "type",
       "slot": 38,
+      "metadataToken": 33554471,
       "subjectId": "SnapshotTestFixtures/ArrayLengthHelper",
       "name": "ArrayLengthHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -347,6 +384,7 @@
     {
       "registrationKind": "type",
       "slot": 39,
+      "metadataToken": 33554473,
       "subjectId": "SnapshotTestFixtures/ValueTypeHelper",
       "name": "ValueTypeHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -356,6 +394,7 @@
     {
       "registrationKind": "type",
       "slot": 40,
+      "metadataToken": 33554474,
       "subjectId": "SnapshotTestFixtures/LocalAllocHelper",
       "name": "LocalAllocHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -365,6 +404,7 @@
     {
       "registrationKind": "type",
       "slot": 41,
+      "metadataToken": 33554475,
       "subjectId": "SnapshotTestFixtures/MulDivHelper",
       "name": "MulDivHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -374,6 +414,7 @@
     {
       "registrationKind": "type",
       "slot": 42,
+      "metadataToken": 33554476,
       "subjectId": "SnapshotTestFixtures/BranchCompareHelper",
       "name": "BranchCompareHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -383,6 +424,7 @@
     {
       "registrationKind": "type",
       "slot": 43,
+      "metadataToken": 33554477,
       "subjectId": "SnapshotTestFixtures/FloatOpsHelper",
       "name": "FloatOpsHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -392,6 +434,7 @@
     {
       "registrationKind": "type",
       "slot": 44,
+      "metadataToken": 33554478,
       "subjectId": "SnapshotTestFixtures/ConvWideHelper",
       "name": "ConvWideHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -401,6 +444,7 @@
     {
       "registrationKind": "type",
       "slot": 45,
+      "metadataToken": 33554479,
       "subjectId": "SnapshotTestFixtures/NegShiftHelper",
       "name": "NegShiftHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -410,6 +454,7 @@
     {
       "registrationKind": "type",
       "slot": 46,
+      "metadataToken": 33554480,
       "subjectId": "SnapshotTestFixtures/LdcI8Helper",
       "name": "LdcI8Helper",
       "namespaceName": "SnapshotTestFixtures",
@@ -419,6 +464,7 @@
     {
       "registrationKind": "type",
       "slot": 47,
+      "metadataToken": 33554481,
       "subjectId": "SnapshotTestFixtures/ConvSmallIntHelper",
       "name": "ConvSmallIntHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -428,6 +474,7 @@
     {
       "registrationKind": "type",
       "slot": 48,
+      "metadataToken": 33554482,
       "subjectId": "SnapshotTestFixtures/LdindI1Helper",
       "name": "LdindI1Helper",
       "namespaceName": "SnapshotTestFixtures",
@@ -437,6 +484,7 @@
     {
       "registrationKind": "type",
       "slot": 49,
+      "metadataToken": 33554483,
       "subjectId": "SnapshotTestFixtures/BranchCompareBHelper",
       "name": "BranchCompareBHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -446,6 +494,7 @@
     {
       "registrationKind": "type",
       "slot": 50,
+      "metadataToken": 33554484,
       "subjectId": "SnapshotTestFixtures/HasFields",
       "name": "HasFields",
       "namespaceName": "SnapshotTestFixtures",
@@ -455,6 +504,7 @@
     {
       "registrationKind": "type",
       "slot": 51,
+      "metadataToken": 33554485,
       "subjectId": "SnapshotTestFixtures/AddressHelper",
       "name": "AddressHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -464,6 +514,7 @@
     {
       "registrationKind": "type",
       "slot": 52,
+      "metadataToken": 33554486,
       "subjectId": "SnapshotTestFixtures/LdtokenHelper",
       "name": "LdtokenHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -473,6 +524,7 @@
     {
       "registrationKind": "type",
       "slot": 53,
+      "metadataToken": 33554487,
       "subjectId": "SnapshotTestFixtures/LdelemaHelper",
       "name": "LdelemaHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -482,6 +534,7 @@
     {
       "registrationKind": "type",
       "slot": 54,
+      "metadataToken": 33554488,
       "subjectId": "SnapshotTestFixtures/LdargaHelper",
       "name": "LdargaHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -491,6 +544,7 @@
     {
       "registrationKind": "type",
       "slot": 55,
+      "metadataToken": 33554489,
       "subjectId": "SnapshotTestFixtures/CpobjHelper",
       "name": "CpobjHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -500,6 +554,7 @@
     {
       "registrationKind": "type",
       "slot": 56,
+      "metadataToken": 33554490,
       "subjectId": "SnapshotTestFixtures/StindNarrowHelper",
       "name": "StindNarrowHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -509,6 +564,7 @@
     {
       "registrationKind": "type",
       "slot": 57,
+      "metadataToken": 33554491,
       "subjectId": "SnapshotTestFixtures/CallvirtHelper",
       "name": "CallvirtHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -518,6 +574,7 @@
     {
       "registrationKind": "type",
       "slot": 58,
+      "metadataToken": 33554492,
       "subjectId": "SnapshotTestFixtures/UnboxHelper",
       "name": "UnboxHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -527,6 +584,7 @@
     {
       "registrationKind": "type",
       "slot": 59,
+      "metadataToken": 33554493,
       "subjectId": "SnapshotTestFixtures/CpblkHelper",
       "name": "CpblkHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -536,6 +594,7 @@
     {
       "registrationKind": "type",
       "slot": 60,
+      "metadataToken": 33554494,
       "subjectId": "SnapshotTestFixtures/LdindUnsignedHelper",
       "name": "LdindUnsignedHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -545,6 +604,7 @@
     {
       "registrationKind": "type",
       "slot": 61,
+      "metadataToken": 33554495,
       "subjectId": "SnapshotTestFixtures/LdindI8Helper",
       "name": "LdindI8Helper",
       "namespaceName": "SnapshotTestFixtures",
@@ -554,6 +614,7 @@
     {
       "registrationKind": "type",
       "slot": 62,
+      "metadataToken": 33554496,
       "subjectId": "SnapshotTestFixtures/LdindWideHelper",
       "name": "LdindWideHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -563,6 +624,7 @@
     {
       "registrationKind": "type",
       "slot": 63,
+      "metadataToken": 33554497,
       "subjectId": "SnapshotTestFixtures/StindWideHelper",
       "name": "StindWideHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -572,6 +634,7 @@
     {
       "registrationKind": "type",
       "slot": 64,
+      "metadataToken": 33554498,
       "subjectId": "SnapshotTestFixtures/ArrayRefHelper",
       "name": "ArrayRefHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -581,6 +644,7 @@
     {
       "registrationKind": "type",
       "slot": 65,
+      "metadataToken": 33554499,
       "subjectId": "SnapshotTestFixtures/ThrowHelper",
       "name": "ThrowHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -590,6 +654,7 @@
     {
       "registrationKind": "type",
       "slot": 66,
+      "metadataToken": 33554500,
       "subjectId": "SnapshotTestFixtures/OverflowHelper",
       "name": "OverflowHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -599,6 +664,7 @@
     {
       "registrationKind": "type",
       "slot": 67,
+      "metadataToken": 33554501,
       "subjectId": "SnapshotTestFixtures/OverflowConvHelper",
       "name": "OverflowConvHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -608,6 +674,7 @@
     {
       "registrationKind": "type",
       "slot": 68,
+      "metadataToken": 33554502,
       "subjectId": "SnapshotTestFixtures/CalliHelper",
       "name": "CalliHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -617,6 +684,7 @@
     {
       "registrationKind": "type",
       "slot": 69,
+      "metadataToken": 33554503,
       "subjectId": "SnapshotTestFixtures/MyClass",
       "name": "MyClass",
       "namespaceName": "SnapshotTestFixtures",
@@ -626,6 +694,7 @@
     {
       "registrationKind": "type",
       "slot": 70,
+      "metadataToken": 33554504,
       "subjectId": "SnapshotTestFixtures/LdVirtftnHelper",
       "name": "LdVirtftnHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -635,6 +704,7 @@
     {
       "registrationKind": "type",
       "slot": 71,
+      "metadataToken": 33554505,
       "subjectId": "SnapshotTestFixtures/LdelemAllHelper",
       "name": "LdelemAllHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -644,6 +714,7 @@
     {
       "registrationKind": "type",
       "slot": 72,
+      "metadataToken": 33554506,
       "subjectId": "SnapshotTestFixtures/StelemAllHelper",
       "name": "StelemAllHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -653,6 +724,7 @@
     {
       "registrationKind": "type",
       "slot": 73,
+      "metadataToken": 33554507,
       "subjectId": "SnapshotTestFixtures/UnsignedOpsHelper",
       "name": "UnsignedOpsHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -662,6 +734,7 @@
     {
       "registrationKind": "type",
       "slot": 74,
+      "metadataToken": 33554508,
       "subjectId": "SnapshotTestFixtures/RareOpsHelper",
       "name": "RareOpsHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -671,6 +744,7 @@
     {
       "registrationKind": "type",
       "slot": 75,
+      "metadataToken": 33554509,
       "subjectId": "SnapshotTestFixtures/StringFormatHelper",
       "name": "StringFormatHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -680,6 +754,7 @@
     {
       "registrationKind": "type",
       "slot": 76,
+      "metadataToken": 33554510,
       "subjectId": "SnapshotTestFixtures/BranchUnsignedHelper",
       "name": "BranchUnsignedHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -689,6 +764,7 @@
     {
       "registrationKind": "type",
       "slot": 77,
+      "metadataToken": 33554511,
       "subjectId": "SnapshotTestFixtures/BranchUnsignedBHelper",
       "name": "BranchUnsignedBHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -698,6 +774,7 @@
     {
       "registrationKind": "type",
       "slot": 78,
+      "metadataToken": 33554512,
       "subjectId": "SnapshotTestFixtures/RethrowHelper",
       "name": "RethrowHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -707,6 +784,7 @@
     {
       "registrationKind": "type",
       "slot": 79,
+      "metadataToken": 33554513,
       "subjectId": "SnapshotTestFixtures/OverflowUnHelper",
       "name": "OverflowUnHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -716,6 +794,7 @@
     {
       "registrationKind": "type",
       "slot": 80,
+      "metadataToken": 33554514,
       "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper",
       "name": "MoreRareOpsHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -725,6 +804,7 @@
     {
       "registrationKind": "type",
       "slot": 81,
+      "metadataToken": 33554515,
       "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper",
       "name": "OverflowConvExtHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -734,6 +814,7 @@
     {
       "registrationKind": "type",
       "slot": 82,
+      "metadataToken": 33554516,
       "subjectId": "SnapshotTestFixtures/SimpleGapsHelper",
       "name": "SimpleGapsHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -743,6 +824,7 @@
     {
       "registrationKind": "type",
       "slot": 83,
+      "metadataToken": 33554517,
       "subjectId": "SnapshotTestFixtures/LdindStindGapsHelper",
       "name": "LdindStindGapsHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -752,6 +834,7 @@
     {
       "registrationKind": "type",
       "slot": 84,
+      "metadataToken": 33554518,
       "subjectId": "SnapshotTestFixtures/CollectionsHelper",
       "name": "CollectionsHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -761,6 +844,7 @@
     {
       "registrationKind": "type",
       "slot": 85,
+      "metadataToken": 33554519,
       "subjectId": "SnapshotTestFixtures/ExternalCaller",
       "name": "ExternalCaller",
       "namespaceName": "SnapshotTestFixtures",
@@ -770,6 +854,7 @@
     {
       "registrationKind": "type",
       "slot": 86,
+      "metadataToken": 33554520,
       "subjectId": "SnapshotTestFixtures/MultiDispatcher",
       "name": "MultiDispatcher",
       "namespaceName": "SnapshotTestFixtures",
@@ -779,6 +864,7 @@
     {
       "registrationKind": "type",
       "slot": 87,
+      "metadataToken": 33554521,
       "subjectId": "SnapshotTestFixtures/InternalHelper",
       "name": "InternalHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -788,6 +874,7 @@
     {
       "registrationKind": "type",
       "slot": 88,
+      "metadataToken": 33554522,
       "subjectId": "SnapshotTestFixtures/StringConcatHelper",
       "name": "StringConcatHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -797,6 +884,7 @@
     {
       "registrationKind": "type",
       "slot": 89,
+      "metadataToken": 33554523,
       "subjectId": "SnapshotTestFixtures/GenericsVirtEhDemo",
       "name": "GenericsVirtEhDemo",
       "namespaceName": "SnapshotTestFixtures",
@@ -806,6 +894,7 @@
     {
       "registrationKind": "type",
       "slot": 90,
+      "metadataToken": 33554524,
       "subjectId": "SnapshotTestFixtures/BoxInterfaceArrayDemo",
       "name": "BoxInterfaceArrayDemo",
       "namespaceName": "SnapshotTestFixtures",
@@ -815,6 +904,7 @@
     {
       "registrationKind": "type",
       "slot": 91,
+      "metadataToken": 33554525,
       "subjectId": "SnapshotTestFixtures/HotUpdateWithTypesDemo",
       "name": "HotUpdateWithTypesDemo",
       "namespaceName": "SnapshotTestFixtures",
@@ -824,6 +914,7 @@
     {
       "registrationKind": "type",
       "slot": 92,
+      "metadataToken": 33554526,
       "subjectId": "SnapshotTestFixtures/HotUpdateWithGenericsDemo",
       "name": "HotUpdateWithGenericsDemo",
       "namespaceName": "SnapshotTestFixtures",
@@ -833,6 +924,7 @@
     {
       "registrationKind": "type",
       "slot": 93,
+      "metadataToken": 33554527,
       "subjectId": "SnapshotTestFixtures/SealedHelper",
       "name": "SealedHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -842,6 +934,7 @@
     {
       "registrationKind": "type",
       "slot": 94,
+      "metadataToken": 33554528,
       "subjectId": "SnapshotTestFixtures/SealedClassVirtualHelper",
       "name": "SealedClassVirtualHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -851,6 +944,7 @@
     {
       "registrationKind": "type",
       "slot": 95,
+      "metadataToken": 33554529,
       "subjectId": "SnapshotTestFixtures/IMyInterface",
       "name": "IMyInterface",
       "namespaceName": "SnapshotTestFixtures",
@@ -860,6 +954,7 @@
     {
       "registrationKind": "type",
       "slot": 96,
+      "metadataToken": 33554530,
       "subjectId": "SnapshotTestFixtures/ImplHelper",
       "name": "ImplHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -869,6 +964,7 @@
     {
       "registrationKind": "type",
       "slot": 97,
+      "metadataToken": 33554531,
       "subjectId": "SnapshotTestFixtures/InterfaceDevirtHelper",
       "name": "InterfaceDevirtHelper",
       "namespaceName": "SnapshotTestFixtures",
@@ -878,6 +974,87 @@
     {
       "registrationKind": "type",
       "slot": 98,
+      "metadataToken": 33554532,
+      "subjectId": "SnapshotTestFixtures/EhFinallyHelper",
+      "name": "EhFinallyHelper",
+      "namespaceName": "SnapshotTestFixtures",
+      "displayName": "EhFinallyHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/EhFinallyHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 99,
+      "metadataToken": 33554533,
+      "subjectId": "SnapshotTestFixtures/EhFaultHelper",
+      "name": "EhFaultHelper",
+      "namespaceName": "SnapshotTestFixtures",
+      "displayName": "EhFaultHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/EhFaultHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 100,
+      "metadataToken": 33554534,
+      "subjectId": "SnapshotTestFixtures/EhFilterHelper",
+      "name": "EhFilterHelper",
+      "namespaceName": "SnapshotTestFixtures",
+      "displayName": "EhFilterHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/EhFilterHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 101,
+      "metadataToken": 33554535,
+      "subjectId": "SnapshotTestFixtures/EhMultipleCatchHelper",
+      "name": "EhMultipleCatchHelper",
+      "namespaceName": "SnapshotTestFixtures",
+      "displayName": "EhMultipleCatchHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/EhMultipleCatchHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 102,
+      "metadataToken": 33554536,
+      "subjectId": "SnapshotTestFixtures/EhCatchFinallyNestedHelper",
+      "name": "EhCatchFinallyNestedHelper",
+      "namespaceName": "SnapshotTestFixtures",
+      "displayName": "EhCatchFinallyNestedHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/EhCatchFinallyNestedHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 103,
+      "metadataToken": 33554537,
+      "subjectId": "SnapshotTestFixtures/EhFilterFinallyHelper",
+      "name": "EhFilterFinallyHelper",
+      "namespaceName": "SnapshotTestFixtures",
+      "displayName": "EhFilterFinallyHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/EhFilterFinallyHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 104,
+      "metadataToken": 33554538,
+      "subjectId": "SnapshotTestFixtures/EhNestedTryCatchHelper",
+      "name": "EhNestedTryCatchHelper",
+      "namespaceName": "SnapshotTestFixtures",
+      "displayName": "EhNestedTryCatchHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/EhNestedTryCatchHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 105,
+      "metadataToken": 33554539,
+      "subjectId": "SnapshotTestFixtures/EhFaultFinallyHelper",
+      "name": "EhFaultFinallyHelper",
+      "namespaceName": "SnapshotTestFixtures",
+      "displayName": "EhFaultFinallyHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/EhFaultFinallyHelper"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 106,
+      "metadataToken": 452984834,
       "subjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E",
       "name": "Wrapper\u003CSystem.Int32\u003E",
       "namespaceName": "SnapshotTestFixtures",
@@ -886,7 +1063,8 @@
     },
     {
       "registrationKind": "type",
-      "slot": 99,
+      "slot": 107,
+      "metadataToken": 452984835,
       "subjectId": "SnapshotTestFixtures/Wrapper\u003C!0\u003E",
       "name": "Wrapper\u003C!0\u003E",
       "namespaceName": "SnapshotTestFixtures",
@@ -895,7 +1073,8 @@
     },
     {
       "registrationKind": "type",
-      "slot": 100,
+      "slot": 108,
+      "metadataToken": 33554457,
       "subjectId": "SnapshotTestFixtures/IMarker",
       "name": "IMarker",
       "namespaceName": "SnapshotTestFixtures",
@@ -904,7 +1083,8 @@
     },
     {
       "registrationKind": "type",
-      "slot": 101,
+      "slot": 109,
+      "metadataToken": 33554460,
       "subjectId": "SnapshotTestFixtures/SmallStruct",
       "name": "SmallStruct",
       "namespaceName": "SnapshotTestFixtures",
@@ -913,7 +1093,8 @@
     },
     {
       "registrationKind": "type",
-      "slot": 102,
+      "slot": 110,
+      "metadataToken": 33554472,
       "subjectId": "SnapshotTestFixtures/MyValueType",
       "name": "MyValueType",
       "namespaceName": "SnapshotTestFixtures",
@@ -922,7 +1103,8 @@
     },
     {
       "registrationKind": "type",
-      "slot": 103,
+      "slot": 111,
+      "metadataToken": 33554540,
       "subjectId": "SnapshotTestFixtures/LdftnHelper\u002B\u003C\u003EO",
       "name": "\u003C\u003EO",
       "displayName": "LdftnHelper\u002B\u003C\u003EO",
@@ -930,7 +1112,7 @@
     },
     {
       "registrationKind": "field",
-      "slot": 104,
+      "slot": 112,
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode",
       "name": "_exitCode",
       "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode",
@@ -939,7 +1121,7 @@
     },
     {
       "registrationKind": "field",
-      "slot": 105,
+      "slot": 113,
       "subjectId": "SnapshotTestFixtures/InstanceHelper::_val",
       "name": "_val",
       "definitionSubjectId": "SnapshotTestFixtures/InstanceHelper::_val",
@@ -948,7 +1130,7 @@
     },
     {
       "registrationKind": "field",
-      "slot": 106,
+      "slot": 114,
       "subjectId": "SnapshotTestFixtures/FieldHelper::_counter",
       "name": "_counter",
       "definitionSubjectId": "SnapshotTestFixtures/FieldHelper::_counter",
@@ -957,7 +1139,7 @@
     },
     {
       "registrationKind": "field",
-      "slot": 107,
+      "slot": 115,
       "subjectId": "SnapshotTestFixtures/Wrapper\u00601::_val",
       "name": "_val",
       "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601::_val",
@@ -966,7 +1148,7 @@
     },
     {
       "registrationKind": "field",
-      "slot": 108,
+      "slot": 116,
       "subjectId": "SnapshotTestFixtures/MarkedClass::Value",
       "name": "Value",
       "definitionSubjectId": "SnapshotTestFixtures/MarkedClass::Value",
@@ -975,7 +1157,7 @@
     },
     {
       "registrationKind": "field",
-      "slot": 109,
+      "slot": 117,
       "subjectId": "SnapshotTestFixtures/SmallStruct::X",
       "name": "X",
       "definitionSubjectId": "SnapshotTestFixtures/SmallStruct::X",
@@ -984,7 +1166,7 @@
     },
     {
       "registrationKind": "field",
-      "slot": 110,
+      "slot": 118,
       "subjectId": "SnapshotTestFixtures/SmallStruct::Y",
       "name": "Y",
       "definitionSubjectId": "SnapshotTestFixtures/SmallStruct::Y",
@@ -993,7 +1175,7 @@
     },
     {
       "registrationKind": "field",
-      "slot": 111,
+      "slot": 119,
       "subjectId": "SnapshotTestFixtures/HasInstanceFields::Value",
       "name": "Value",
       "definitionSubjectId": "SnapshotTestFixtures/HasInstanceFields::Value",
@@ -1002,7 +1184,7 @@
     },
     {
       "registrationKind": "field",
-      "slot": 112,
+      "slot": 120,
       "subjectId": "SnapshotTestFixtures/StaticFieldWriteHelper::_writeTarget",
       "name": "_writeTarget",
       "definitionSubjectId": "SnapshotTestFixtures/StaticFieldWriteHelper::_writeTarget",
@@ -1011,7 +1193,7 @@
     },
     {
       "registrationKind": "field",
-      "slot": 113,
+      "slot": 121,
       "subjectId": "SnapshotTestFixtures/StaticFieldWriteHelper::_readTarget",
       "name": "_readTarget",
       "definitionSubjectId": "SnapshotTestFixtures/StaticFieldWriteHelper::_readTarget",
@@ -1020,7 +1202,7 @@
     },
     {
       "registrationKind": "field",
-      "slot": 114,
+      "slot": 122,
       "subjectId": "SnapshotTestFixtures/MyValueType::X",
       "name": "X",
       "definitionSubjectId": "SnapshotTestFixtures/MyValueType::X",
@@ -1029,7 +1211,7 @@
     },
     {
       "registrationKind": "field",
-      "slot": 115,
+      "slot": 123,
       "subjectId": "SnapshotTestFixtures/MyValueType::Y",
       "name": "Y",
       "definitionSubjectId": "SnapshotTestFixtures/MyValueType::Y",
@@ -1038,7 +1220,7 @@
     },
     {
       "registrationKind": "field",
-      "slot": 116,
+      "slot": 124,
       "subjectId": "SnapshotTestFixtures/HasFields::instanceVal",
       "name": "instanceVal",
       "definitionSubjectId": "SnapshotTestFixtures/HasFields::instanceVal",
@@ -1047,7 +1229,7 @@
     },
     {
       "registrationKind": "field",
-      "slot": 117,
+      "slot": 125,
       "subjectId": "SnapshotTestFixtures/HasFields::staticVal",
       "name": "staticVal",
       "definitionSubjectId": "SnapshotTestFixtures/HasFields::staticVal",
@@ -1056,7 +1238,7 @@
     },
     {
       "registrationKind": "field",
-      "slot": 118,
+      "slot": 126,
       "subjectId": "SnapshotTestFixtures/MyClass::_val",
       "name": "_val",
       "definitionSubjectId": "SnapshotTestFixtures/MyClass::_val",
@@ -1065,7 +1247,7 @@
     },
     {
       "registrationKind": "field",
-      "slot": 119,
+      "slot": 127,
       "subjectId": "SnapshotTestFixtures/SealedHelper::_val",
       "name": "_val",
       "definitionSubjectId": "SnapshotTestFixtures/SealedHelper::_val",
@@ -1074,7 +1256,7 @@
     },
     {
       "registrationKind": "field",
-      "slot": 120,
+      "slot": 128,
       "subjectId": "SnapshotTestFixtures/ImplHelper::_val",
       "name": "_val",
       "definitionSubjectId": "SnapshotTestFixtures/ImplHelper::_val",
@@ -1083,7 +1265,7 @@
     },
     {
       "registrationKind": "field",
-      "slot": 121,
+      "slot": 129,
       "subjectId": "SnapshotTestFixtures/LdftnHelper\u002B\u003C\u003EO::\u003C0\u003E__GetValue",
       "name": "\u003C0\u003E__GetValue",
       "definitionSubjectId": "SnapshotTestFixtures/LdftnHelper\u002B\u003C\u003EO::\u003C0\u003E__GetValue",
@@ -1092,7 +1274,7 @@
     },
     {
       "registrationKind": "field",
-      "slot": 122,
+      "slot": 130,
       "subjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E::_val",
       "name": "_val",
       "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601::_val",
@@ -1101,7 +1283,7 @@
     },
     {
       "registrationKind": "field",
-      "slot": 123,
+      "slot": 131,
       "subjectId": "SnapshotTestFixtures/Wrapper\u003C!0\u003E::_val",
       "name": "_val",
       "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601::_val",
@@ -1110,7 +1292,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 124,
+      "slot": 132,
+      "metadataToken": 100663297,
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_0:System.Void()",
       "name": "Subject_0",
       "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_0:System.Void()",
@@ -1121,7 +1304,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 125,
+      "slot": 133,
+      "metadataToken": 100663297,
       "subjectId": "SnapshotTestFixtures/ArithmeticOps::RunAdd:System.Int32()",
       "name": "RunAdd",
       "definitionSubjectId": "SnapshotTestFixtures/ArithmeticOps::RunAdd:System.Int32()",
@@ -1132,7 +1316,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 126,
+      "slot": 134,
+      "metadataToken": 100663298,
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_1:System.Void()",
       "name": "Subject_1",
       "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_1:System.Void()",
@@ -1143,7 +1328,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 127,
+      "slot": 135,
+      "metadataToken": 100663298,
       "subjectId": "SnapshotTestFixtures/StringOps::UseString:System.Int32()",
       "name": "UseString",
       "definitionSubjectId": "SnapshotTestFixtures/StringOps::UseString:System.Int32()",
@@ -1154,7 +1340,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 128,
+      "slot": 136,
+      "metadataToken": 100663299,
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_2:System.Void()",
       "name": "Subject_2",
       "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_2:System.Void()",
@@ -1165,7 +1352,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 129,
+      "slot": 137,
+      "metadataToken": 100663299,
       "subjectId": "SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()",
       "name": "DoNothing",
       "definitionSubjectId": "SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()",
@@ -1176,7 +1364,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 130,
+      "slot": 138,
+      "metadataToken": 100663300,
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_3:System.Void()",
       "name": "Subject_3",
       "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_3:System.Void()",
@@ -1187,7 +1376,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 131,
+      "slot": 139,
+      "metadataToken": 100663300,
       "subjectId": "SnapshotTestFixtures/MathHelper::RunSquare:System.Int32()",
       "name": "RunSquare",
       "definitionSubjectId": "SnapshotTestFixtures/MathHelper::RunSquare:System.Int32()",
@@ -1198,7 +1388,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 132,
+      "slot": 140,
+      "metadataToken": 100663301,
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_4:System.Void()",
       "name": "Subject_4",
       "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_4:System.Void()",
@@ -1209,7 +1400,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 133,
+      "slot": 141,
+      "metadataToken": 100663301,
       "subjectId": "SnapshotTestFixtures/FlowControl::IsPositive:System.Int32()",
       "name": "IsPositive",
       "definitionSubjectId": "SnapshotTestFixtures/FlowControl::IsPositive:System.Int32()",
@@ -1220,7 +1412,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 134,
+      "slot": 142,
+      "metadataToken": 100663302,
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_5:System.Void()",
       "name": "Subject_5",
       "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_5:System.Void()",
@@ -1231,7 +1424,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 135,
+      "slot": 143,
+      "metadataToken": 100663302,
       "subjectId": "SnapshotTestFixtures/InstanceHelper::.ctor:System.Void(System.Int32)",
       "name": ".ctor",
       "definitionSubjectId": "SnapshotTestFixtures/InstanceHelper::.ctor:System.Void(System.Int32)",
@@ -1242,7 +1436,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 136,
+      "slot": 144,
+      "metadataToken": 100663303,
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_6:System.Void()",
       "name": "Subject_6",
       "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_6:System.Void()",
@@ -1253,7 +1448,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 137,
+      "slot": 145,
+      "metadataToken": 100663303,
       "subjectId": "SnapshotTestFixtures/InstanceHelper::GetValue:System.Int32()",
       "name": "GetValue",
       "definitionSubjectId": "SnapshotTestFixtures/InstanceHelper::GetValue:System.Int32()",
@@ -1264,7 +1460,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 138,
+      "slot": 146,
+      "metadataToken": 100663304,
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_7:System.Void()",
       "name": "Subject_7",
       "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_7:System.Void()",
@@ -1275,7 +1472,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 139,
+      "slot": 147,
+      "metadataToken": 100663304,
       "subjectId": "SnapshotTestFixtures/CallVirtHelper::CreateAndUse:System.Int32()",
       "name": "CreateAndUse",
       "definitionSubjectId": "SnapshotTestFixtures/CallVirtHelper::CreateAndUse:System.Int32()",
@@ -1286,7 +1484,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 140,
+      "slot": 148,
+      "metadataToken": 100663305,
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::CustomEntrySubject_8:System.Void()",
       "name": "CustomEntrySubject_8",
       "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::CustomEntrySubject_8:System.Void()",
@@ -1297,7 +1496,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 141,
+      "slot": 149,
+      "metadataToken": 100663305,
       "subjectId": "SnapshotTestFixtures/BoxingHelper::BoxAndUnbox:System.Int32()",
       "name": "BoxAndUnbox",
       "definitionSubjectId": "SnapshotTestFixtures/BoxingHelper::BoxAndUnbox:System.Int32()",
@@ -1308,7 +1508,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 142,
+      "slot": 150,
+      "metadataToken": 100663306,
       "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()",
       "name": "Subject_9",
       "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()",
@@ -1319,7 +1520,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 143,
+      "slot": 151,
+      "metadataToken": 100663306,
       "subjectId": "SnapshotTestFixtures/FieldHelper::GetAndIncrement:System.Int32()",
       "name": "GetAndIncrement",
       "definitionSubjectId": "SnapshotTestFixtures/FieldHelper::GetAndIncrement:System.Int32()",
@@ -1330,7 +1532,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 144,
+      "slot": 152,
+      "metadataToken": 100663307,
       "subjectId": "SnapshotTestFixtures/LoopHelper::SumToFive:System.Int32()",
       "name": "SumToFive",
       "definitionSubjectId": "SnapshotTestFixtures/LoopHelper::SumToFive:System.Int32()",
@@ -1341,7 +1544,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 145,
+      "slot": 153,
+      "metadataToken": 100663308,
       "subjectId": "SnapshotTestFixtures/ConversionHelper::ConvertToInt:System.Int32()",
       "name": "ConvertToInt",
       "definitionSubjectId": "SnapshotTestFixtures/ConversionHelper::ConvertToInt:System.Int32()",
@@ -1352,7 +1556,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 146,
+      "slot": 154,
+      "metadataToken": 100663309,
       "subjectId": "SnapshotTestFixtures/Helper::Nop:System.Void()",
       "name": "Nop",
       "definitionSubjectId": "SnapshotTestFixtures/Helper::Nop:System.Void()",
@@ -1363,7 +1568,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 147,
+      "slot": 155,
+      "metadataToken": 100663310,
       "subjectId": "SnapshotTestFixtures/Helper::Square:System.Int32(System.Int32)",
       "name": "Square",
       "definitionSubjectId": "SnapshotTestFixtures/Helper::Square:System.Int32(System.Int32)",
@@ -1374,7 +1580,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 148,
+      "slot": 156,
+      "metadataToken": 100663311,
       "subjectId": "SnapshotTestFixtures/Helper::ConsumeString:System.Void(System.String)",
       "name": "ConsumeString",
       "definitionSubjectId": "SnapshotTestFixtures/Helper::ConsumeString:System.Void(System.String)",
@@ -1385,7 +1592,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 149,
+      "slot": 157,
+      "metadataToken": 100663312,
       "subjectId": "SnapshotTestFixtures/Helper::GetValue:System.Int32()",
       "name": "GetValue",
       "definitionSubjectId": "SnapshotTestFixtures/Helper::GetValue:System.Int32()",
@@ -1396,7 +1604,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 150,
+      "slot": 158,
+      "metadataToken": 100663313,
       "subjectId": "SnapshotTestFixtures/SwitchHelper::Classify:System.Int32()",
       "name": "Classify",
       "definitionSubjectId": "SnapshotTestFixtures/SwitchHelper::Classify:System.Int32()",
@@ -1407,7 +1616,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 151,
+      "slot": 159,
+      "metadataToken": 100663314,
       "subjectId": "SnapshotTestFixtures/LdftnHelper::GetFnPtr:System.Int32()",
       "name": "GetFnPtr",
       "definitionSubjectId": "SnapshotTestFixtures/LdftnHelper::GetFnPtr:System.Int32()",
@@ -1418,7 +1628,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 152,
+      "slot": 160,
+      "metadataToken": 100663315,
       "subjectId": "SnapshotTestFixtures/TargetHelper::GetValue:System.Int32()",
       "name": "GetValue",
       "definitionSubjectId": "SnapshotTestFixtures/TargetHelper::GetValue:System.Int32()",
@@ -1429,7 +1640,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 153,
+      "slot": 161,
+      "metadataToken": 100663316,
       "subjectId": "SnapshotTestFixtures/ArrayHelper::MakeAndFill:System.Int32()",
       "name": "MakeAndFill",
       "definitionSubjectId": "SnapshotTestFixtures/ArrayHelper::MakeAndFill:System.Int32()",
@@ -1440,7 +1652,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 154,
+      "slot": 162,
+      "metadataToken": 100663317,
       "subjectId": "SnapshotTestFixtures/EhHelper::SafeDivide:System.Int32()",
       "name": "SafeDivide",
       "definitionSubjectId": "SnapshotTestFixtures/EhHelper::SafeDivide:System.Int32()",
@@ -1451,7 +1664,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 155,
+      "slot": 163,
+      "metadataToken": 100663318,
       "subjectId": "SnapshotTestFixtures/GenericHelper::UseGeneric:System.Int32()",
       "name": "UseGeneric",
       "definitionSubjectId": "SnapshotTestFixtures/GenericHelper::UseGeneric:System.Int32()",
@@ -1462,7 +1676,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 156,
+      "slot": 164,
+      "metadataToken": 100663319,
       "subjectId": "SnapshotTestFixtures/Wrapper\u00601::.ctor:System.Void(!0)",
       "name": ".ctor",
       "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601::.ctor:System.Void(!0)",
@@ -1473,7 +1688,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 157,
+      "slot": 165,
+      "metadataToken": 100663320,
       "subjectId": "SnapshotTestFixtures/Wrapper\u00601::GetValue:!0()",
       "name": "GetValue",
       "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601::GetValue:!0()",
@@ -1484,7 +1700,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 158,
+      "slot": 166,
+      "metadataToken": 100663321,
       "subjectId": "SnapshotTestFixtures/DelegateHelper::RunDelegate:System.Int32()",
       "name": "RunDelegate",
       "definitionSubjectId": "SnapshotTestFixtures/DelegateHelper::RunDelegate:System.Int32()",
@@ -1495,7 +1712,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 159,
+      "slot": 167,
+      "metadataToken": 100663322,
       "subjectId": "SnapshotTestFixtures/BaseClass::Compute:System.Int32()",
       "name": "Compute",
       "definitionSubjectId": "SnapshotTestFixtures/BaseClass::Compute:System.Int32()",
@@ -1506,7 +1724,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 160,
+      "slot": 168,
+      "metadataToken": 100663323,
       "subjectId": "SnapshotTestFixtures/BaseClass::.ctor:System.Void()",
       "name": ".ctor",
       "definitionSubjectId": "SnapshotTestFixtures/BaseClass::.ctor:System.Void()",
@@ -1517,7 +1736,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 161,
+      "slot": 169,
+      "metadataToken": 100663324,
       "subjectId": "SnapshotTestFixtures/DerivedClass::Compute:System.Int32()",
       "name": "Compute",
       "definitionSubjectId": "SnapshotTestFixtures/DerivedClass::Compute:System.Int32()",
@@ -1528,7 +1748,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 162,
+      "slot": 170,
+      "metadataToken": 100663325,
       "subjectId": "SnapshotTestFixtures/DerivedClass::.ctor:System.Void()",
       "name": ".ctor",
       "definitionSubjectId": "SnapshotTestFixtures/DerivedClass::.ctor:System.Void()",
@@ -1539,7 +1760,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 163,
+      "slot": 171,
+      "metadataToken": 100663326,
       "subjectId": "SnapshotTestFixtures/VirtualHelper::UseVirtual:System.Int32()",
       "name": "UseVirtual",
       "definitionSubjectId": "SnapshotTestFixtures/VirtualHelper::UseVirtual:System.Int32()",
@@ -1550,7 +1772,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 164,
+      "slot": 172,
+      "metadataToken": 100663327,
       "subjectId": "SnapshotTestFixtures/MarkedClass::.ctor:System.Void()",
       "name": ".ctor",
       "definitionSubjectId": "SnapshotTestFixtures/MarkedClass::.ctor:System.Void()",
@@ -1561,7 +1784,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 165,
+      "slot": 173,
+      "metadataToken": 100663328,
       "subjectId": "SnapshotTestFixtures/TypeCheckHelper::CheckAndCast:System.Int32()",
       "name": "CheckAndCast",
       "definitionSubjectId": "SnapshotTestFixtures/TypeCheckHelper::CheckAndCast:System.Int32()",
@@ -1572,7 +1796,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 166,
+      "slot": 174,
+      "metadataToken": 100663329,
       "subjectId": "SnapshotTestFixtures/SizeOfHelper::GetSize:System.Int32()",
       "name": "GetSize",
       "definitionSubjectId": "SnapshotTestFixtures/SizeOfHelper::GetSize:System.Int32()",
@@ -1583,7 +1808,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 167,
+      "slot": 175,
+      "metadataToken": 100663330,
       "subjectId": "SnapshotTestFixtures/IndirectHelper::ReadWriteRef:System.Int32()",
       "name": "ReadWriteRef",
       "definitionSubjectId": "SnapshotTestFixtures/IndirectHelper::ReadWriteRef:System.Int32()",
@@ -1594,7 +1820,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 168,
+      "slot": 176,
+      "metadataToken": 100663331,
       "subjectId": "SnapshotTestFixtures/ArithmeticCompareHelper::RunCompare:System.Int32()",
       "name": "RunCompare",
       "definitionSubjectId": "SnapshotTestFixtures/ArithmeticCompareHelper::RunCompare:System.Int32()",
@@ -1605,7 +1832,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 169,
+      "slot": 177,
+      "metadataToken": 100663332,
       "subjectId": "SnapshotTestFixtures/BranchDupHelper::RunBranchDup:System.Int32()",
       "name": "RunBranchDup",
       "definitionSubjectId": "SnapshotTestFixtures/BranchDupHelper::RunBranchDup:System.Int32()",
@@ -1616,7 +1844,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 170,
+      "slot": 178,
+      "metadataToken": 100663333,
       "subjectId": "SnapshotTestFixtures/HasInstanceFields::.ctor:System.Void(System.Int32)",
       "name": ".ctor",
       "definitionSubjectId": "SnapshotTestFixtures/HasInstanceFields::.ctor:System.Void(System.Int32)",
@@ -1627,7 +1856,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 171,
+      "slot": 179,
+      "metadataToken": 100663334,
       "subjectId": "SnapshotTestFixtures/InstanceFieldHelper::CreateAndUseFields:System.Int32()",
       "name": "CreateAndUseFields",
       "definitionSubjectId": "SnapshotTestFixtures/InstanceFieldHelper::CreateAndUseFields:System.Int32()",
@@ -1638,7 +1868,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 172,
+      "slot": 180,
+      "metadataToken": 100663335,
       "subjectId": "SnapshotTestFixtures/StaticFieldWriteHelper::WriteAndRead:System.Int32()",
       "name": "WriteAndRead",
       "definitionSubjectId": "SnapshotTestFixtures/StaticFieldWriteHelper::WriteAndRead:System.Int32()",
@@ -1649,7 +1880,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 173,
+      "slot": 181,
+      "metadataToken": 100663336,
       "subjectId": "SnapshotTestFixtures/VirtualDispatchHelper::UseVirtualDispatch:System.Int32()",
       "name": "UseVirtualDispatch",
       "definitionSubjectId": "SnapshotTestFixtures/VirtualDispatchHelper::UseVirtualDispatch:System.Int32()",
@@ -1660,7 +1892,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 174,
+      "slot": 182,
+      "metadataToken": 100663337,
       "subjectId": "SnapshotTestFixtures/BitwiseHelper::RunBitwise:System.Int32()",
       "name": "RunBitwise",
       "definitionSubjectId": "SnapshotTestFixtures/BitwiseHelper::RunBitwise:System.Int32()",
@@ -1671,7 +1904,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 175,
+      "slot": 183,
+      "metadataToken": 100663338,
       "subjectId": "SnapshotTestFixtures/ShiftHelper::RunShift:System.Int32()",
       "name": "RunShift",
       "definitionSubjectId": "SnapshotTestFixtures/ShiftHelper::RunShift:System.Int32()",
@@ -1682,7 +1916,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 176,
+      "slot": 184,
+      "metadataToken": 100663339,
       "subjectId": "SnapshotTestFixtures/ArrayLengthHelper::RunLength:System.Int32()",
       "name": "RunLength",
       "definitionSubjectId": "SnapshotTestFixtures/ArrayLengthHelper::RunLength:System.Int32()",
@@ -1693,7 +1928,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 177,
+      "slot": 185,
+      "metadataToken": 100663340,
       "subjectId": "SnapshotTestFixtures/ValueTypeHelper::RunValueType:System.Int32()",
       "name": "RunValueType",
       "definitionSubjectId": "SnapshotTestFixtures/ValueTypeHelper::RunValueType:System.Int32()",
@@ -1704,7 +1940,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 178,
+      "slot": 186,
+      "metadataToken": 100663341,
       "subjectId": "SnapshotTestFixtures/LocalAllocHelper::RunAlloc:System.Int32()",
       "name": "RunAlloc",
       "definitionSubjectId": "SnapshotTestFixtures/LocalAllocHelper::RunAlloc:System.Int32()",
@@ -1715,7 +1952,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 179,
+      "slot": 187,
+      "metadataToken": 100663342,
       "subjectId": "SnapshotTestFixtures/MulDivHelper::RunMulDiv:System.Int32()",
       "name": "RunMulDiv",
       "definitionSubjectId": "SnapshotTestFixtures/MulDivHelper::RunMulDiv:System.Int32()",
@@ -1726,7 +1964,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 180,
+      "slot": 188,
+      "metadataToken": 100663343,
       "subjectId": "SnapshotTestFixtures/BranchCompareHelper::RunBranchCompare:System.Int32()",
       "name": "RunBranchCompare",
       "definitionSubjectId": "SnapshotTestFixtures/BranchCompareHelper::RunBranchCompare:System.Int32()",
@@ -1737,7 +1976,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 181,
+      "slot": 189,
+      "metadataToken": 100663344,
       "subjectId": "SnapshotTestFixtures/FloatOpsHelper::RunFloatOps:System.Int32()",
       "name": "RunFloatOps",
       "definitionSubjectId": "SnapshotTestFixtures/FloatOpsHelper::RunFloatOps:System.Int32()",
@@ -1748,7 +1988,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 182,
+      "slot": 190,
+      "metadataToken": 100663345,
       "subjectId": "SnapshotTestFixtures/ConvWideHelper::RunConvWide:System.Int32()",
       "name": "RunConvWide",
       "definitionSubjectId": "SnapshotTestFixtures/ConvWideHelper::RunConvWide:System.Int32()",
@@ -1759,7 +2000,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 183,
+      "slot": 191,
+      "metadataToken": 100663346,
       "subjectId": "SnapshotTestFixtures/NegShiftHelper::RunNegShift:System.Int32()",
       "name": "RunNegShift",
       "definitionSubjectId": "SnapshotTestFixtures/NegShiftHelper::RunNegShift:System.Int32()",
@@ -1770,7 +2012,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 184,
+      "slot": 192,
+      "metadataToken": 100663347,
       "subjectId": "SnapshotTestFixtures/LdcI8Helper::RunLdcI8:System.Int64()",
       "name": "RunLdcI8",
       "definitionSubjectId": "SnapshotTestFixtures/LdcI8Helper::RunLdcI8:System.Int64()",
@@ -1781,7 +2024,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 185,
+      "slot": 193,
+      "metadataToken": 100663348,
       "subjectId": "SnapshotTestFixtures/ConvSmallIntHelper::RunConvSmall:System.Int32()",
       "name": "RunConvSmall",
       "definitionSubjectId": "SnapshotTestFixtures/ConvSmallIntHelper::RunConvSmall:System.Int32()",
@@ -1792,7 +2036,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 186,
+      "slot": 194,
+      "metadataToken": 100663349,
       "subjectId": "SnapshotTestFixtures/LdindI1Helper::RunLdindI1:System.Int32()",
       "name": "RunLdindI1",
       "definitionSubjectId": "SnapshotTestFixtures/LdindI1Helper::RunLdindI1:System.Int32()",
@@ -1803,7 +2048,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 187,
+      "slot": 195,
+      "metadataToken": 100663350,
       "subjectId": "SnapshotTestFixtures/BranchCompareBHelper::RunBranchCompareB:System.Int32()",
       "name": "RunBranchCompareB",
       "definitionSubjectId": "SnapshotTestFixtures/BranchCompareBHelper::RunBranchCompareB:System.Int32()",
@@ -1814,7 +2060,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 188,
+      "slot": 196,
+      "metadataToken": 100663351,
       "subjectId": "SnapshotTestFixtures/HasFields::.ctor:System.Void()",
       "name": ".ctor",
       "definitionSubjectId": "SnapshotTestFixtures/HasFields::.ctor:System.Void()",
@@ -1825,7 +2072,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 189,
+      "slot": 197,
+      "metadataToken": 100663352,
       "subjectId": "SnapshotTestFixtures/AddressHelper::RunAddress:System.Int32()",
       "name": "RunAddress",
       "definitionSubjectId": "SnapshotTestFixtures/AddressHelper::RunAddress:System.Int32()",
@@ -1836,7 +2084,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 190,
+      "slot": 198,
+      "metadataToken": 100663353,
       "subjectId": "SnapshotTestFixtures/LdtokenHelper::RunLdtoken:System.Int32()",
       "name": "RunLdtoken",
       "definitionSubjectId": "SnapshotTestFixtures/LdtokenHelper::RunLdtoken:System.Int32()",
@@ -1847,7 +2096,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 191,
+      "slot": 199,
+      "metadataToken": 100663354,
       "subjectId": "SnapshotTestFixtures/LdelemaHelper::RunLdelema:System.Int32()",
       "name": "RunLdelema",
       "definitionSubjectId": "SnapshotTestFixtures/LdelemaHelper::RunLdelema:System.Int32()",
@@ -1858,7 +2108,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 192,
+      "slot": 200,
+      "metadataToken": 100663355,
       "subjectId": "SnapshotTestFixtures/LdargaHelper::RunLdarga:System.Int32(System.Int32)",
       "name": "RunLdarga",
       "definitionSubjectId": "SnapshotTestFixtures/LdargaHelper::RunLdarga:System.Int32(System.Int32)",
@@ -1869,7 +2120,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 193,
+      "slot": 201,
+      "metadataToken": 100663356,
       "subjectId": "SnapshotTestFixtures/CpobjHelper::RunCpobj:System.Int32()",
       "name": "RunCpobj",
       "definitionSubjectId": "SnapshotTestFixtures/CpobjHelper::RunCpobj:System.Int32()",
@@ -1880,7 +2132,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 194,
+      "slot": 202,
+      "metadataToken": 100663357,
       "subjectId": "SnapshotTestFixtures/StindNarrowHelper::RunStindNarrow:System.Int32()",
       "name": "RunStindNarrow",
       "definitionSubjectId": "SnapshotTestFixtures/StindNarrowHelper::RunStindNarrow:System.Int32()",
@@ -1891,7 +2144,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 195,
+      "slot": 203,
+      "metadataToken": 100663358,
       "subjectId": "SnapshotTestFixtures/CallvirtHelper::RunCallvirt:System.Int32()",
       "name": "RunCallvirt",
       "definitionSubjectId": "SnapshotTestFixtures/CallvirtHelper::RunCallvirt:System.Int32()",
@@ -1902,7 +2156,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 196,
+      "slot": 204,
+      "metadataToken": 100663359,
       "subjectId": "SnapshotTestFixtures/UnboxHelper::RunUnbox:System.Int32()",
       "name": "RunUnbox",
       "definitionSubjectId": "SnapshotTestFixtures/UnboxHelper::RunUnbox:System.Int32()",
@@ -1913,7 +2168,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 197,
+      "slot": 205,
+      "metadataToken": 100663360,
       "subjectId": "SnapshotTestFixtures/CpblkHelper::RunCpblk:System.Int32()",
       "name": "RunCpblk",
       "definitionSubjectId": "SnapshotTestFixtures/CpblkHelper::RunCpblk:System.Int32()",
@@ -1924,7 +2180,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 198,
+      "slot": 206,
+      "metadataToken": 100663361,
       "subjectId": "SnapshotTestFixtures/LdindUnsignedHelper::RunLdindUnsigned:System.Int32()",
       "name": "RunLdindUnsigned",
       "definitionSubjectId": "SnapshotTestFixtures/LdindUnsignedHelper::RunLdindUnsigned:System.Int32()",
@@ -1935,7 +2192,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 199,
+      "slot": 207,
+      "metadataToken": 100663362,
       "subjectId": "SnapshotTestFixtures/LdindI8Helper::RunLdindI8:System.Int32()",
       "name": "RunLdindI8",
       "definitionSubjectId": "SnapshotTestFixtures/LdindI8Helper::RunLdindI8:System.Int32()",
@@ -1946,7 +2204,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 200,
+      "slot": 208,
+      "metadataToken": 100663363,
       "subjectId": "SnapshotTestFixtures/LdindWideHelper::RunLdindWide:System.Int32()",
       "name": "RunLdindWide",
       "definitionSubjectId": "SnapshotTestFixtures/LdindWideHelper::RunLdindWide:System.Int32()",
@@ -1957,7 +2216,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 201,
+      "slot": 209,
+      "metadataToken": 100663364,
       "subjectId": "SnapshotTestFixtures/StindWideHelper::RunStindWide:System.Int32()",
       "name": "RunStindWide",
       "definitionSubjectId": "SnapshotTestFixtures/StindWideHelper::RunStindWide:System.Int32()",
@@ -1968,7 +2228,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 202,
+      "slot": 210,
+      "metadataToken": 100663365,
       "subjectId": "SnapshotTestFixtures/ArrayRefHelper::RunArrayRef:System.Int32()",
       "name": "RunArrayRef",
       "definitionSubjectId": "SnapshotTestFixtures/ArrayRefHelper::RunArrayRef:System.Int32()",
@@ -1979,7 +2240,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 203,
+      "slot": 211,
+      "metadataToken": 100663366,
       "subjectId": "SnapshotTestFixtures/ThrowHelper::CheckPositive:System.Int32(System.Int32)",
       "name": "CheckPositive",
       "definitionSubjectId": "SnapshotTestFixtures/ThrowHelper::CheckPositive:System.Int32(System.Int32)",
@@ -1990,7 +2252,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 204,
+      "slot": 212,
+      "metadataToken": 100663367,
       "subjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowAdd:System.Int32()",
       "name": "RunOverflowAdd",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowAdd:System.Int32()",
@@ -2001,7 +2264,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 205,
+      "slot": 213,
+      "metadataToken": 100663368,
       "subjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowSub:System.Int32()",
       "name": "RunOverflowSub",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowSub:System.Int32()",
@@ -2012,7 +2276,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 206,
+      "slot": 214,
+      "metadataToken": 100663369,
       "subjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowMul:System.Int32()",
       "name": "RunOverflowMul",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowMul:System.Int32()",
@@ -2023,7 +2288,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 207,
+      "slot": 215,
+      "metadataToken": 100663370,
       "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI4:System.Int32()",
       "name": "ConvOvfI4",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI4:System.Int32()",
@@ -2034,7 +2300,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 208,
+      "slot": 216,
+      "metadataToken": 100663371,
       "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU1:System.Int32(System.Int32)",
       "name": "ConvOvfU1",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU1:System.Int32(System.Int32)",
@@ -2045,7 +2312,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 209,
+      "slot": 217,
+      "metadataToken": 100663372,
       "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI2:System.Int32(System.Int32)",
       "name": "ConvOvfI2",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI2:System.Int32(System.Int32)",
@@ -2056,7 +2324,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 210,
+      "slot": 218,
+      "metadataToken": 100663373,
       "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU2:System.Int32(System.Int32)",
       "name": "ConvOvfU2",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU2:System.Int32(System.Int32)",
@@ -2067,7 +2336,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 211,
+      "slot": 219,
+      "metadataToken": 100663374,
       "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU4:System.Int32(System.Int64)",
       "name": "ConvOvfU4",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU4:System.Int32(System.Int64)",
@@ -2078,7 +2348,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 212,
+      "slot": 220,
+      "metadataToken": 100663375,
       "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI8:System.Int64(System.Single)",
       "name": "ConvOvfI8",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI8:System.Int64(System.Single)",
@@ -2089,7 +2360,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 213,
+      "slot": 221,
+      "metadataToken": 100663376,
       "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU8:System.Int64(System.Double)",
       "name": "ConvOvfU8",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU8:System.Int64(System.Double)",
@@ -2100,7 +2372,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 214,
+      "slot": 222,
+      "metadataToken": 100663377,
       "subjectId": "SnapshotTestFixtures/CalliHelper::RunCalli:System.Int32(System.Int32)",
       "name": "RunCalli",
       "definitionSubjectId": "SnapshotTestFixtures/CalliHelper::RunCalli:System.Int32(System.Int32)",
@@ -2111,7 +2384,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 215,
+      "slot": 223,
+      "metadataToken": 100663378,
       "subjectId": "SnapshotTestFixtures/MyClass::.ctor:System.Void(System.Int32)",
       "name": ".ctor",
       "definitionSubjectId": "SnapshotTestFixtures/MyClass::.ctor:System.Void(System.Int32)",
@@ -2122,7 +2396,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 216,
+      "slot": 224,
+      "metadataToken": 100663379,
       "subjectId": "SnapshotTestFixtures/MyClass::GetValue:System.Int32()",
       "name": "GetValue",
       "definitionSubjectId": "SnapshotTestFixtures/MyClass::GetValue:System.Int32()",
@@ -2133,7 +2408,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 217,
+      "slot": 225,
+      "metadataToken": 100663380,
       "subjectId": "SnapshotTestFixtures/LdVirtftnHelper::RunLdVirtftn:System.Int32()",
       "name": "RunLdVirtftn",
       "definitionSubjectId": "SnapshotTestFixtures/LdVirtftnHelper::RunLdVirtftn:System.Int32()",
@@ -2144,7 +2420,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 218,
+      "slot": 226,
+      "metadataToken": 100663381,
       "subjectId": "SnapshotTestFixtures/LdelemAllHelper::TestAllElems:System.Int32()",
       "name": "TestAllElems",
       "definitionSubjectId": "SnapshotTestFixtures/LdelemAllHelper::TestAllElems:System.Int32()",
@@ -2155,7 +2432,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 219,
+      "slot": 227,
+      "metadataToken": 100663382,
       "subjectId": "SnapshotTestFixtures/StelemAllHelper::TestAllElems:System.Int32()",
       "name": "TestAllElems",
       "definitionSubjectId": "SnapshotTestFixtures/StelemAllHelper::TestAllElems:System.Int32()",
@@ -2166,7 +2444,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 220,
+      "slot": 228,
+      "metadataToken": 100663383,
       "subjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestCltUn:System.Int32()",
       "name": "TestCltUn",
       "definitionSubjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestCltUn:System.Int32()",
@@ -2177,7 +2456,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 221,
+      "slot": 229,
+      "metadataToken": 100663384,
       "subjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestDivUn:System.Int32()",
       "name": "TestDivUn",
       "definitionSubjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestDivUn:System.Int32()",
@@ -2188,7 +2468,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 222,
+      "slot": 230,
+      "metadataToken": 100663385,
       "subjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestRemUn:System.Int32()",
       "name": "TestRemUn",
       "definitionSubjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestRemUn:System.Int32()",
@@ -2199,7 +2480,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 223,
+      "slot": 231,
+      "metadataToken": 100663386,
       "subjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestCkfinite:System.Double(System.Double)",
       "name": "TestCkfinite",
       "definitionSubjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestCkfinite:System.Double(System.Double)",
@@ -2210,7 +2492,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 224,
+      "slot": 232,
+      "metadataToken": 100663387,
       "subjectId": "SnapshotTestFixtures/RareOpsHelper::TestInitBlk:System.Void(System.Int32\u0026)",
       "name": "TestInitBlk",
       "definitionSubjectId": "SnapshotTestFixtures/RareOpsHelper::TestInitBlk:System.Void(System.Int32\u0026)",
@@ -2221,7 +2504,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 225,
+      "slot": 233,
+      "metadataToken": 100663388,
       "subjectId": "SnapshotTestFixtures/RareOpsHelper::TestStarg:System.Int32(System.Int32)",
       "name": "TestStarg",
       "definitionSubjectId": "SnapshotTestFixtures/RareOpsHelper::TestStarg:System.Int32(System.Int32)",
@@ -2232,7 +2516,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 226,
+      "slot": 234,
+      "metadataToken": 100663389,
       "subjectId": "SnapshotTestFixtures/RareOpsHelper::TestConvRUn:System.Int32(System.Single)",
       "name": "TestConvRUn",
       "definitionSubjectId": "SnapshotTestFixtures/RareOpsHelper::TestConvRUn:System.Int32(System.Single)",
@@ -2243,7 +2528,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 227,
+      "slot": 235,
+      "metadataToken": 100663390,
       "subjectId": "SnapshotTestFixtures/StringFormatHelper::TestFormatOne:System.Int32()",
       "name": "TestFormatOne",
       "definitionSubjectId": "SnapshotTestFixtures/StringFormatHelper::TestFormatOne:System.Int32()",
@@ -2254,7 +2540,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 228,
+      "slot": 236,
+      "metadataToken": 100663391,
       "subjectId": "SnapshotTestFixtures/BranchUnsignedHelper::RunBranchUnsigned:System.Int32()",
       "name": "RunBranchUnsigned",
       "definitionSubjectId": "SnapshotTestFixtures/BranchUnsignedHelper::RunBranchUnsigned:System.Int32()",
@@ -2265,7 +2552,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 229,
+      "slot": 237,
+      "metadataToken": 100663392,
       "subjectId": "SnapshotTestFixtures/BranchUnsignedBHelper::RunBranchUnsignedB:System.Int32()",
       "name": "RunBranchUnsignedB",
       "definitionSubjectId": "SnapshotTestFixtures/BranchUnsignedBHelper::RunBranchUnsignedB:System.Int32()",
@@ -2276,7 +2564,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 230,
+      "slot": 238,
+      "metadataToken": 100663393,
       "subjectId": "SnapshotTestFixtures/RethrowHelper::RunRethrow:System.Int32()",
       "name": "RunRethrow",
       "definitionSubjectId": "SnapshotTestFixtures/RethrowHelper::RunRethrow:System.Int32()",
@@ -2287,7 +2576,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 231,
+      "slot": 239,
+      "metadataToken": 100663394,
       "subjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowAddUn:System.Int32()",
       "name": "RunOverflowAddUn",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowAddUn:System.Int32()",
@@ -2298,7 +2588,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 232,
+      "slot": 240,
+      "metadataToken": 100663395,
       "subjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowSubUn:System.Int32()",
       "name": "RunOverflowSubUn",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowSubUn:System.Int32()",
@@ -2309,7 +2600,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 233,
+      "slot": 241,
+      "metadataToken": 100663396,
       "subjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowMulUn:System.Int32()",
       "name": "RunOverflowMulUn",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowMulUn:System.Int32()",
@@ -2320,7 +2612,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 234,
+      "slot": 242,
+      "metadataToken": 100663397,
       "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunArglist:System.Int32()",
       "name": "RunArglist",
       "definitionSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunArglist:System.Int32()",
@@ -2331,7 +2624,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 235,
+      "slot": 243,
+      "metadataToken": 100663398,
       "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunMkrefany:System.Int32()",
       "name": "RunMkrefany",
       "definitionSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunMkrefany:System.Int32()",
@@ -2342,7 +2636,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 236,
+      "slot": 244,
+      "metadataToken": 100663399,
       "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunRefanyval:System.Int32()",
       "name": "RunRefanyval",
       "definitionSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunRefanyval:System.Int32()",
@@ -2353,7 +2648,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 237,
+      "slot": 245,
+      "metadataToken": 100663400,
       "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunRefanytype:System.Int32()",
       "name": "RunRefanytype",
       "definitionSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunRefanytype:System.Int32()",
@@ -2364,7 +2660,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 238,
+      "slot": 246,
+      "metadataToken": 100663401,
       "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunJmp:System.Int32()",
       "name": "RunJmp",
       "definitionSubjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunJmp:System.Int32()",
@@ -2375,7 +2672,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 239,
+      "slot": 247,
+      "metadataToken": 100663402,
       "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI1:System.Int32(System.Int32)",
       "name": "ConvOvfI1",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI1:System.Int32(System.Int32)",
@@ -2386,7 +2684,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 240,
+      "slot": 248,
+      "metadataToken": 100663403,
       "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI1Un:System.Int32(System.Int32)",
       "name": "ConvOvfI1Un",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI1Un:System.Int32(System.Int32)",
@@ -2397,7 +2696,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 241,
+      "slot": 249,
+      "metadataToken": 100663404,
       "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU1Un:System.Int32(System.Int32)",
       "name": "ConvOvfU1Un",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU1Un:System.Int32(System.Int32)",
@@ -2408,7 +2708,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 242,
+      "slot": 250,
+      "metadataToken": 100663405,
       "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI2Un:System.Int32(System.Int32)",
       "name": "ConvOvfI2Un",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI2Un:System.Int32(System.Int32)",
@@ -2419,7 +2720,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 243,
+      "slot": 251,
+      "metadataToken": 100663406,
       "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU2Un:System.Int32(System.Int32)",
       "name": "ConvOvfU2Un",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU2Un:System.Int32(System.Int32)",
@@ -2430,7 +2732,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 244,
+      "slot": 252,
+      "metadataToken": 100663407,
       "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI4Un:System.Int32(System.Int64)",
       "name": "ConvOvfI4Un",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI4Un:System.Int32(System.Int64)",
@@ -2441,7 +2744,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 245,
+      "slot": 253,
+      "metadataToken": 100663408,
       "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU4Un:System.Int32(System.Int64)",
       "name": "ConvOvfU4Un",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU4Un:System.Int32(System.Int64)",
@@ -2452,7 +2756,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 246,
+      "slot": 254,
+      "metadataToken": 100663409,
       "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI8Un:System.Int64(System.Single)",
       "name": "ConvOvfI8Un",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI8Un:System.Int64(System.Single)",
@@ -2463,7 +2768,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 247,
+      "slot": 255,
+      "metadataToken": 100663410,
       "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU8Un:System.Int64(System.Double)",
       "name": "ConvOvfU8Un",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU8Un:System.Int64(System.Double)",
@@ -2474,7 +2780,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 248,
+      "slot": 256,
+      "metadataToken": 100663411,
       "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfIUn:System.Int32(System.Int32)",
       "name": "ConvOvfIUn",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfIUn:System.Int32(System.Int32)",
@@ -2485,7 +2792,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 249,
+      "slot": 257,
+      "metadataToken": 100663412,
       "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfUUn:System.Int32(System.Int32)",
       "name": "ConvOvfUUn",
       "definitionSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfUUn:System.Int32(System.Int32)",
@@ -2496,7 +2804,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 250,
+      "slot": 258,
+      "metadataToken": 100663413,
       "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunLdnull:System.Int32()",
       "name": "RunLdnull",
       "definitionSubjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunLdnull:System.Int32()",
@@ -2507,7 +2816,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 251,
+      "slot": 259,
+      "metadataToken": 100663414,
       "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvU4:System.Int32()",
       "name": "RunConvU4",
       "definitionSubjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvU4:System.Int32()",
@@ -2518,7 +2828,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 252,
+      "slot": 260,
+      "metadataToken": 100663415,
       "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvI:System.Int32()",
       "name": "RunConvI",
       "definitionSubjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvI:System.Int32()",
@@ -2529,7 +2840,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 253,
+      "slot": 261,
+      "metadataToken": 100663416,
       "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfI:System.Int32(System.Int32)",
       "name": "RunConvOvfI",
       "definitionSubjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfI:System.Int32(System.Int32)",
@@ -2540,7 +2852,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 254,
+      "slot": 262,
+      "metadataToken": 100663417,
       "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfU:System.Int32(System.Int32)",
       "name": "RunConvOvfU",
       "definitionSubjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfU:System.Int32(System.Int32)",
@@ -2551,7 +2864,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 255,
+      "slot": 263,
+      "metadataToken": 100663418,
       "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfIUn:System.Int32(System.Int32)",
       "name": "RunConvOvfIUn",
       "definitionSubjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfIUn:System.Int32(System.Int32)",
@@ -2562,7 +2876,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 256,
+      "slot": 264,
+      "metadataToken": 100663419,
       "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfUUn:System.Int32(System.Int32)",
       "name": "RunConvOvfUUn",
       "definitionSubjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfUUn:System.Int32(System.Int32)",
@@ -2573,7 +2888,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 257,
+      "slot": 265,
+      "metadataToken": 100663420,
       "subjectId": "SnapshotTestFixtures/LdindStindGapsHelper::RunLdindI4:System.Int32()",
       "name": "RunLdindI4",
       "definitionSubjectId": "SnapshotTestFixtures/LdindStindGapsHelper::RunLdindI4:System.Int32()",
@@ -2584,7 +2900,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 258,
+      "slot": 266,
+      "metadataToken": 100663421,
       "subjectId": "SnapshotTestFixtures/LdindStindGapsHelper::RunLdindI:System.Int32()",
       "name": "RunLdindI",
       "definitionSubjectId": "SnapshotTestFixtures/LdindStindGapsHelper::RunLdindI:System.Int32()",
@@ -2595,7 +2912,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 259,
+      "slot": 267,
+      "metadataToken": 100663422,
       "subjectId": "SnapshotTestFixtures/LdindStindGapsHelper::RunStindI:System.Int32()",
       "name": "RunStindI",
       "definitionSubjectId": "SnapshotTestFixtures/LdindStindGapsHelper::RunStindI:System.Int32()",
@@ -2606,7 +2924,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 260,
+      "slot": 268,
+      "metadataToken": 100663423,
       "subjectId": "SnapshotTestFixtures/CollectionsHelper::TestList:System.Int32()",
       "name": "TestList",
       "definitionSubjectId": "SnapshotTestFixtures/CollectionsHelper::TestList:System.Int32()",
@@ -2617,7 +2936,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 261,
+      "slot": 269,
+      "metadataToken": 100663424,
       "subjectId": "SnapshotTestFixtures/CollectionsHelper::TestDict:System.Int32()",
       "name": "TestDict",
       "definitionSubjectId": "SnapshotTestFixtures/CollectionsHelper::TestDict:System.Int32()",
@@ -2628,7 +2948,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 262,
+      "slot": 270,
+      "metadataToken": 100663425,
       "subjectId": "SnapshotTestFixtures/CollectionsHelper::TestSet:System.Int32()",
       "name": "TestSet",
       "definitionSubjectId": "SnapshotTestFixtures/CollectionsHelper::TestSet:System.Int32()",
@@ -2639,7 +2960,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 263,
+      "slot": 271,
+      "metadataToken": 100663426,
       "subjectId": "SnapshotTestFixtures/ExternalCaller::CallExternal:System.Int32()",
       "name": "CallExternal",
       "definitionSubjectId": "SnapshotTestFixtures/ExternalCaller::CallExternal:System.Int32()",
@@ -2650,7 +2972,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 264,
+      "slot": 272,
+      "metadataToken": 100663427,
       "subjectId": "SnapshotTestFixtures/MultiDispatcher::DispatchBoth:System.Int32()",
       "name": "DispatchBoth",
       "definitionSubjectId": "SnapshotTestFixtures/MultiDispatcher::DispatchBoth:System.Int32()",
@@ -2661,7 +2984,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 265,
+      "slot": 273,
+      "metadataToken": 100663428,
       "subjectId": "SnapshotTestFixtures/InternalHelper::Double:System.Int32(System.Int32)",
       "name": "Double",
       "definitionSubjectId": "SnapshotTestFixtures/InternalHelper::Double:System.Int32(System.Int32)",
@@ -2672,7 +2996,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 266,
+      "slot": 274,
+      "metadataToken": 100663429,
       "subjectId": "SnapshotTestFixtures/StringConcatHelper::TestConcat:System.Int32()",
       "name": "TestConcat",
       "definitionSubjectId": "SnapshotTestFixtures/StringConcatHelper::TestConcat:System.Int32()",
@@ -2683,7 +3008,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 267,
+      "slot": 275,
+      "metadataToken": 100663430,
       "subjectId": "SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()",
       "name": "DemoCombine",
       "definitionSubjectId": "SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()",
@@ -2694,7 +3020,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 268,
+      "slot": 276,
+      "metadataToken": 100663431,
       "subjectId": "SnapshotTestFixtures/BoxInterfaceArrayDemo::DemoBoxStore:System.Int32()",
       "name": "DemoBoxStore",
       "definitionSubjectId": "SnapshotTestFixtures/BoxInterfaceArrayDemo::DemoBoxStore:System.Int32()",
@@ -2705,7 +3032,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 269,
+      "slot": 277,
+      "metadataToken": 100663432,
       "subjectId": "SnapshotTestFixtures/HotUpdateWithTypesDemo::Run:System.Int32()",
       "name": "Run",
       "definitionSubjectId": "SnapshotTestFixtures/HotUpdateWithTypesDemo::Run:System.Int32()",
@@ -2716,7 +3044,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 270,
+      "slot": 278,
+      "metadataToken": 100663433,
       "subjectId": "SnapshotTestFixtures/HotUpdateWithGenericsDemo::Run:System.Int32()",
       "name": "Run",
       "definitionSubjectId": "SnapshotTestFixtures/HotUpdateWithGenericsDemo::Run:System.Int32()",
@@ -2727,7 +3056,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 271,
+      "slot": 279,
+      "metadataToken": 100663434,
       "subjectId": "SnapshotTestFixtures/SealedHelper::.ctor:System.Void(System.Int32)",
       "name": ".ctor",
       "definitionSubjectId": "SnapshotTestFixtures/SealedHelper::.ctor:System.Void(System.Int32)",
@@ -2738,7 +3068,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 272,
+      "slot": 280,
+      "metadataToken": 100663435,
       "subjectId": "SnapshotTestFixtures/SealedHelper::GetValueVirtual:System.Int32()",
       "name": "GetValueVirtual",
       "definitionSubjectId": "SnapshotTestFixtures/SealedHelper::GetValueVirtual:System.Int32()",
@@ -2749,7 +3080,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 273,
+      "slot": 281,
+      "metadataToken": 100663436,
       "subjectId": "SnapshotTestFixtures/SealedClassVirtualHelper::RunSealedVirtual:System.Int32()",
       "name": "RunSealedVirtual",
       "definitionSubjectId": "SnapshotTestFixtures/SealedClassVirtualHelper::RunSealedVirtual:System.Int32()",
@@ -2760,7 +3092,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 274,
+      "slot": 282,
+      "metadataToken": 100663437,
       "subjectId": "SnapshotTestFixtures/IMyInterface::GetValue:System.Int32()",
       "name": "GetValue",
       "definitionSubjectId": "SnapshotTestFixtures/IMyInterface::GetValue:System.Int32()",
@@ -2771,7 +3104,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 275,
+      "slot": 283,
+      "metadataToken": 100663438,
       "subjectId": "SnapshotTestFixtures/ImplHelper::.ctor:System.Void(System.Int32)",
       "name": ".ctor",
       "definitionSubjectId": "SnapshotTestFixtures/ImplHelper::.ctor:System.Void(System.Int32)",
@@ -2782,7 +3116,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 276,
+      "slot": 284,
+      "metadataToken": 100663439,
       "subjectId": "SnapshotTestFixtures/ImplHelper::GetValue:System.Int32()",
       "name": "GetValue",
       "definitionSubjectId": "SnapshotTestFixtures/ImplHelper::GetValue:System.Int32()",
@@ -2793,7 +3128,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 277,
+      "slot": 285,
+      "metadataToken": 100663440,
       "subjectId": "SnapshotTestFixtures/InterfaceDevirtHelper::RunInterfaceTest:System.Int32()",
       "name": "RunInterfaceTest",
       "definitionSubjectId": "SnapshotTestFixtures/InterfaceDevirtHelper::RunInterfaceTest:System.Int32()",
@@ -2804,7 +3140,104 @@
     },
     {
       "registrationKind": "method",
-      "slot": 278,
+      "slot": 286,
+      "metadataToken": 100663441,
+      "subjectId": "SnapshotTestFixtures/EhFinallyHelper::TryFinally_Only:System.Int32(System.Int32)",
+      "name": "TryFinally_Only",
+      "definitionSubjectId": "SnapshotTestFixtures/EhFinallyHelper::TryFinally_Only:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/EhFinallyHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 287,
+      "metadataToken": 100663442,
+      "subjectId": "SnapshotTestFixtures/EhFaultHelper::TryFault:System.Int32(System.Int32)",
+      "name": "TryFault",
+      "definitionSubjectId": "SnapshotTestFixtures/EhFaultHelper::TryFault:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/EhFaultHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 288,
+      "metadataToken": 100663443,
+      "subjectId": "SnapshotTestFixtures/EhFilterHelper::TryFilter:System.Int32(System.Int32)",
+      "name": "TryFilter",
+      "definitionSubjectId": "SnapshotTestFixtures/EhFilterHelper::TryFilter:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/EhFilterHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 289,
+      "metadataToken": 100663444,
+      "subjectId": "SnapshotTestFixtures/EhMultipleCatchHelper::MultipleCatch:System.Int32(System.Int32)",
+      "name": "MultipleCatch",
+      "definitionSubjectId": "SnapshotTestFixtures/EhMultipleCatchHelper::MultipleCatch:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/EhMultipleCatchHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 290,
+      "metadataToken": 100663445,
+      "subjectId": "SnapshotTestFixtures/EhCatchFinallyNestedHelper::CatchFinallyNested:System.Int32(System.Int32)",
+      "name": "CatchFinallyNested",
+      "definitionSubjectId": "SnapshotTestFixtures/EhCatchFinallyNestedHelper::CatchFinallyNested:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/EhCatchFinallyNestedHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 291,
+      "metadataToken": 100663446,
+      "subjectId": "SnapshotTestFixtures/EhFilterFinallyHelper::FilterFinally:System.Int32(System.Int32)",
+      "name": "FilterFinally",
+      "definitionSubjectId": "SnapshotTestFixtures/EhFilterFinallyHelper::FilterFinally:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/EhFilterFinallyHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 292,
+      "metadataToken": 100663447,
+      "subjectId": "SnapshotTestFixtures/EhNestedTryCatchHelper::NestedTryCatch:System.Int32(System.Int32)",
+      "name": "NestedTryCatch",
+      "definitionSubjectId": "SnapshotTestFixtures/EhNestedTryCatchHelper::NestedTryCatch:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/EhNestedTryCatchHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 293,
+      "metadataToken": 100663448,
+      "subjectId": "SnapshotTestFixtures/EhFaultFinallyHelper::FaultFinally:System.Int32(System.Int32)",
+      "name": "FaultFinally",
+      "definitionSubjectId": "SnapshotTestFixtures/EhFaultFinallyHelper::FaultFinally:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/EhFaultFinallyHelper",
+      "memberType": "System.Int32",
+      "parameterCount": 1,
+      "isImported": false
+    },
+    {
+      "registrationKind": "method",
+      "slot": 294,
+      "metadataToken": 1912602624,
       "subjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E::.ctor:System.Void(System.Int32)",
       "name": ".ctor",
       "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601::.ctor:System.Void(!0)",
@@ -2815,7 +3248,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 279,
+      "slot": 295,
+      "metadataToken": 1912602625,
       "subjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E::GetValue:System.Int32()",
       "name": "GetValue",
       "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601::GetValue:!0()",
@@ -2826,7 +3260,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 280,
+      "slot": 296,
+      "metadataToken": 1912602626,
       "subjectId": "SnapshotTestFixtures/Wrapper\u003C!0\u003E::.ctor:System.Void(!0)",
       "name": ".ctor",
       "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601::.ctor:System.Void(!0)",
@@ -2837,7 +3272,8 @@
     },
     {
       "registrationKind": "method",
-      "slot": 281,
+      "slot": 297,
+      "metadataToken": 1912602627,
       "subjectId": "SnapshotTestFixtures/Wrapper\u003C!0\u003E::GetValue:!0()",
       "name": "GetValue",
       "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601::GetValue:!0()",
@@ -2848,7 +3284,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 282,
+      "slot": 298,
       "subjectId": "SnapshotTestFixtures/InstanceHelper::.ctor:System.Void(System.Int32)::parameter[0]:val",
       "name": "val",
       "declaringMethodSubjectId": "SnapshotTestFixtures/InstanceHelper::.ctor:System.Void(System.Int32)",
@@ -2857,7 +3293,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 283,
+      "slot": 299,
       "subjectId": "SnapshotTestFixtures/Helper::Square:System.Int32(System.Int32)::parameter[0]:x",
       "name": "x",
       "declaringMethodSubjectId": "SnapshotTestFixtures/Helper::Square:System.Int32(System.Int32)",
@@ -2866,7 +3302,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 284,
+      "slot": 300,
       "subjectId": "SnapshotTestFixtures/Helper::ConsumeString:System.Void(System.String)::parameter[0]:s",
       "name": "s",
       "declaringMethodSubjectId": "SnapshotTestFixtures/Helper::ConsumeString:System.Void(System.String)",
@@ -2875,7 +3311,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 285,
+      "slot": 301,
       "subjectId": "SnapshotTestFixtures/Wrapper\u00601::.ctor:System.Void(!0)::parameter[0]:val",
       "name": "val",
       "declaringMethodSubjectId": "SnapshotTestFixtures/Wrapper\u00601::.ctor:System.Void(!0)",
@@ -2884,7 +3320,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 286,
+      "slot": 302,
       "subjectId": "SnapshotTestFixtures/HasInstanceFields::.ctor:System.Void(System.Int32)::parameter[0]:val",
       "name": "val",
       "declaringMethodSubjectId": "SnapshotTestFixtures/HasInstanceFields::.ctor:System.Void(System.Int32)",
@@ -2893,7 +3329,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 287,
+      "slot": 303,
       "subjectId": "SnapshotTestFixtures/LdargaHelper::RunLdarga:System.Int32(System.Int32)::parameter[0]:val",
       "name": "val",
       "declaringMethodSubjectId": "SnapshotTestFixtures/LdargaHelper::RunLdarga:System.Int32(System.Int32)",
@@ -2902,7 +3338,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 288,
+      "slot": 304,
       "subjectId": "SnapshotTestFixtures/ThrowHelper::CheckPositive:System.Int32(System.Int32)::parameter[0]:arg",
       "name": "arg",
       "declaringMethodSubjectId": "SnapshotTestFixtures/ThrowHelper::CheckPositive:System.Int32(System.Int32)",
@@ -2911,7 +3347,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 289,
+      "slot": 305,
       "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU1:System.Int32(System.Int32)::parameter[0]:val",
       "name": "val",
       "declaringMethodSubjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU1:System.Int32(System.Int32)",
@@ -2920,7 +3356,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 290,
+      "slot": 306,
       "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI2:System.Int32(System.Int32)::parameter[0]:val",
       "name": "val",
       "declaringMethodSubjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI2:System.Int32(System.Int32)",
@@ -2929,7 +3365,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 291,
+      "slot": 307,
       "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU2:System.Int32(System.Int32)::parameter[0]:val",
       "name": "val",
       "declaringMethodSubjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU2:System.Int32(System.Int32)",
@@ -2938,7 +3374,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 292,
+      "slot": 308,
       "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU4:System.Int32(System.Int64)::parameter[0]:val",
       "name": "val",
       "declaringMethodSubjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU4:System.Int32(System.Int64)",
@@ -2947,7 +3383,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 293,
+      "slot": 309,
       "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI8:System.Int64(System.Single)::parameter[0]:val",
       "name": "val",
       "declaringMethodSubjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI8:System.Int64(System.Single)",
@@ -2956,7 +3392,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 294,
+      "slot": 310,
       "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU8:System.Int64(System.Double)::parameter[0]:val",
       "name": "val",
       "declaringMethodSubjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU8:System.Int64(System.Double)",
@@ -2965,7 +3401,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 295,
+      "slot": 311,
       "subjectId": "SnapshotTestFixtures/CalliHelper::RunCalli:System.Int32(System.Int32)::parameter[0]:arg",
       "name": "arg",
       "declaringMethodSubjectId": "SnapshotTestFixtures/CalliHelper::RunCalli:System.Int32(System.Int32)",
@@ -2974,7 +3410,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 296,
+      "slot": 312,
       "subjectId": "SnapshotTestFixtures/MyClass::.ctor:System.Void(System.Int32)::parameter[0]:val",
       "name": "val",
       "declaringMethodSubjectId": "SnapshotTestFixtures/MyClass::.ctor:System.Void(System.Int32)",
@@ -2983,7 +3419,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 297,
+      "slot": 313,
       "subjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestCkfinite:System.Double(System.Double)::parameter[0]:val",
       "name": "val",
       "declaringMethodSubjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestCkfinite:System.Double(System.Double)",
@@ -2992,7 +3428,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 298,
+      "slot": 314,
       "subjectId": "SnapshotTestFixtures/RareOpsHelper::TestInitBlk:System.Void(System.Int32\u0026)::parameter[0]:addr",
       "name": "addr",
       "declaringMethodSubjectId": "SnapshotTestFixtures/RareOpsHelper::TestInitBlk:System.Void(System.Int32\u0026)",
@@ -3001,7 +3437,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 299,
+      "slot": 315,
       "subjectId": "SnapshotTestFixtures/RareOpsHelper::TestStarg:System.Int32(System.Int32)::parameter[0]:val",
       "name": "val",
       "declaringMethodSubjectId": "SnapshotTestFixtures/RareOpsHelper::TestStarg:System.Int32(System.Int32)",
@@ -3010,7 +3446,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 300,
+      "slot": 316,
       "subjectId": "SnapshotTestFixtures/RareOpsHelper::TestConvRUn:System.Int32(System.Single)::parameter[0]:val",
       "name": "val",
       "declaringMethodSubjectId": "SnapshotTestFixtures/RareOpsHelper::TestConvRUn:System.Int32(System.Single)",
@@ -3019,7 +3455,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 301,
+      "slot": 317,
       "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI1:System.Int32(System.Int32)::parameter[0]:val",
       "name": "val",
       "declaringMethodSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI1:System.Int32(System.Int32)",
@@ -3028,7 +3464,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 302,
+      "slot": 318,
       "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI1Un:System.Int32(System.Int32)::parameter[0]:val",
       "name": "val",
       "declaringMethodSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI1Un:System.Int32(System.Int32)",
@@ -3037,7 +3473,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 303,
+      "slot": 319,
       "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU1Un:System.Int32(System.Int32)::parameter[0]:val",
       "name": "val",
       "declaringMethodSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU1Un:System.Int32(System.Int32)",
@@ -3046,7 +3482,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 304,
+      "slot": 320,
       "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI2Un:System.Int32(System.Int32)::parameter[0]:val",
       "name": "val",
       "declaringMethodSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI2Un:System.Int32(System.Int32)",
@@ -3055,7 +3491,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 305,
+      "slot": 321,
       "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU2Un:System.Int32(System.Int32)::parameter[0]:val",
       "name": "val",
       "declaringMethodSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU2Un:System.Int32(System.Int32)",
@@ -3064,7 +3500,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 306,
+      "slot": 322,
       "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI4Un:System.Int32(System.Int64)::parameter[0]:val",
       "name": "val",
       "declaringMethodSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI4Un:System.Int32(System.Int64)",
@@ -3073,7 +3509,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 307,
+      "slot": 323,
       "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU4Un:System.Int32(System.Int64)::parameter[0]:val",
       "name": "val",
       "declaringMethodSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU4Un:System.Int32(System.Int64)",
@@ -3082,7 +3518,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 308,
+      "slot": 324,
       "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI8Un:System.Int64(System.Single)::parameter[0]:val",
       "name": "val",
       "declaringMethodSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI8Un:System.Int64(System.Single)",
@@ -3091,7 +3527,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 309,
+      "slot": 325,
       "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU8Un:System.Int64(System.Double)::parameter[0]:val",
       "name": "val",
       "declaringMethodSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU8Un:System.Int64(System.Double)",
@@ -3100,7 +3536,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 310,
+      "slot": 326,
       "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfIUn:System.Int32(System.Int32)::parameter[0]:val",
       "name": "val",
       "declaringMethodSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfIUn:System.Int32(System.Int32)",
@@ -3109,7 +3545,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 311,
+      "slot": 327,
       "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfUUn:System.Int32(System.Int32)::parameter[0]:val",
       "name": "val",
       "declaringMethodSubjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfUUn:System.Int32(System.Int32)",
@@ -3118,7 +3554,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 312,
+      "slot": 328,
       "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfI:System.Int32(System.Int32)::parameter[0]:val",
       "name": "val",
       "declaringMethodSubjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfI:System.Int32(System.Int32)",
@@ -3127,7 +3563,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 313,
+      "slot": 329,
       "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfU:System.Int32(System.Int32)::parameter[0]:val",
       "name": "val",
       "declaringMethodSubjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfU:System.Int32(System.Int32)",
@@ -3136,7 +3572,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 314,
+      "slot": 330,
       "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfIUn:System.Int32(System.Int32)::parameter[0]:val",
       "name": "val",
       "declaringMethodSubjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfIUn:System.Int32(System.Int32)",
@@ -3145,7 +3581,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 315,
+      "slot": 331,
       "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfUUn:System.Int32(System.Int32)::parameter[0]:val",
       "name": "val",
       "declaringMethodSubjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfUUn:System.Int32(System.Int32)",
@@ -3154,7 +3590,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 316,
+      "slot": 332,
       "subjectId": "SnapshotTestFixtures/InternalHelper::Double:System.Int32(System.Int32)::parameter[0]:x",
       "name": "x",
       "declaringMethodSubjectId": "SnapshotTestFixtures/InternalHelper::Double:System.Int32(System.Int32)",
@@ -3163,7 +3599,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 317,
+      "slot": 333,
       "subjectId": "SnapshotTestFixtures/SealedHelper::.ctor:System.Void(System.Int32)::parameter[0]:val",
       "name": "val",
       "declaringMethodSubjectId": "SnapshotTestFixtures/SealedHelper::.ctor:System.Void(System.Int32)",
@@ -3172,7 +3608,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 318,
+      "slot": 334,
       "subjectId": "SnapshotTestFixtures/ImplHelper::.ctor:System.Void(System.Int32)::parameter[0]:val",
       "name": "val",
       "declaringMethodSubjectId": "SnapshotTestFixtures/ImplHelper::.ctor:System.Void(System.Int32)",
@@ -3181,7 +3617,79 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 319,
+      "slot": 335,
+      "subjectId": "SnapshotTestFixtures/EhFinallyHelper::TryFinally_Only:System.Int32(System.Int32)::parameter[0]:x",
+      "name": "x",
+      "declaringMethodSubjectId": "SnapshotTestFixtures/EhFinallyHelper::TryFinally_Only:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 336,
+      "subjectId": "SnapshotTestFixtures/EhFaultHelper::TryFault:System.Int32(System.Int32)::parameter[0]:x",
+      "name": "x",
+      "declaringMethodSubjectId": "SnapshotTestFixtures/EhFaultHelper::TryFault:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 337,
+      "subjectId": "SnapshotTestFixtures/EhFilterHelper::TryFilter:System.Int32(System.Int32)::parameter[0]:x",
+      "name": "x",
+      "declaringMethodSubjectId": "SnapshotTestFixtures/EhFilterHelper::TryFilter:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 338,
+      "subjectId": "SnapshotTestFixtures/EhMultipleCatchHelper::MultipleCatch:System.Int32(System.Int32)::parameter[0]:x",
+      "name": "x",
+      "declaringMethodSubjectId": "SnapshotTestFixtures/EhMultipleCatchHelper::MultipleCatch:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 339,
+      "subjectId": "SnapshotTestFixtures/EhCatchFinallyNestedHelper::CatchFinallyNested:System.Int32(System.Int32)::parameter[0]:x",
+      "name": "x",
+      "declaringMethodSubjectId": "SnapshotTestFixtures/EhCatchFinallyNestedHelper::CatchFinallyNested:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 340,
+      "subjectId": "SnapshotTestFixtures/EhFilterFinallyHelper::FilterFinally:System.Int32(System.Int32)::parameter[0]:x",
+      "name": "x",
+      "declaringMethodSubjectId": "SnapshotTestFixtures/EhFilterFinallyHelper::FilterFinally:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 341,
+      "subjectId": "SnapshotTestFixtures/EhNestedTryCatchHelper::NestedTryCatch:System.Int32(System.Int32)::parameter[0]:x",
+      "name": "x",
+      "declaringMethodSubjectId": "SnapshotTestFixtures/EhNestedTryCatchHelper::NestedTryCatch:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 342,
+      "subjectId": "SnapshotTestFixtures/EhFaultFinallyHelper::FaultFinally:System.Int32(System.Int32)::parameter[0]:x",
+      "name": "x",
+      "declaringMethodSubjectId": "SnapshotTestFixtures/EhFaultFinallyHelper::FaultFinally:System.Int32(System.Int32)",
+      "memberType": "System.Int32",
+      "parameterIndex": 0
+    },
+    {
+      "registrationKind": "parameter",
+      "slot": 343,
       "subjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E::.ctor:System.Void(System.Int32)::parameter[0]:val",
       "name": "val",
       "declaringMethodSubjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E::.ctor:System.Void(System.Int32)",
@@ -3190,7 +3698,7 @@
     },
     {
       "registrationKind": "parameter",
-      "slot": 320,
+      "slot": 344,
       "subjectId": "SnapshotTestFixtures/Wrapper\u003C!0\u003E::.ctor:System.Void(!0)::parameter[0]:val",
       "name": "val",
       "declaringMethodSubjectId": "SnapshotTestFixtures/Wrapper\u003C!0\u003E::.ctor:System.Void(!0)",

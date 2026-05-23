@@ -580,6 +580,54 @@
     },
     {
       "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/EhFinallyHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/EhFinallyHelper",
+      "metadataToken": 33554532
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/EhFaultHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/EhFaultHelper",
+      "metadataToken": 33554533
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/EhFilterHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/EhFilterHelper",
+      "metadataToken": 33554534
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/EhMultipleCatchHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/EhMultipleCatchHelper",
+      "metadataToken": 33554535
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/EhCatchFinallyNestedHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/EhCatchFinallyNestedHelper",
+      "metadataToken": 33554536
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/EhFilterFinallyHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/EhFilterFinallyHelper",
+      "metadataToken": 33554537
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/EhNestedTryCatchHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/EhNestedTryCatchHelper",
+      "metadataToken": 33554538
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/EhFaultFinallyHelper",
+      "definitionSubjectId": "SnapshotTestFixtures/EhFaultFinallyHelper",
+      "metadataToken": 33554539
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
       "subjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E",
       "definitionSubjectId": "SnapshotTestFixtures/Wrapper\u00601",
       "runtimeGenericContext": {
@@ -676,7 +724,7 @@
       "assemblyName": "SnapshotTestFixtures",
       "subjectId": "SnapshotTestFixtures/LdftnHelper\u002B\u003C\u003EO",
       "definitionSubjectId": "SnapshotTestFixtures/LdftnHelper\u002B\u003C\u003EO",
-      "metadataToken": 33554532
+      "metadataToken": 33554540
     }
   ],
   "registeredMethods": [
@@ -1911,6 +1959,70 @@
       "declaringTypeSubjectId": "SnapshotTestFixtures/InterfaceDevirtHelper",
       "metadataToken": 100663440,
       "parameterCount": 0
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/EhFinallyHelper::TryFinally_Only:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/EhFinallyHelper::TryFinally_Only:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/EhFinallyHelper",
+      "metadataToken": 100663441,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/EhFaultHelper::TryFault:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/EhFaultHelper::TryFault:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/EhFaultHelper",
+      "metadataToken": 100663442,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/EhFilterHelper::TryFilter:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/EhFilterHelper::TryFilter:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/EhFilterHelper",
+      "metadataToken": 100663443,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/EhMultipleCatchHelper::MultipleCatch:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/EhMultipleCatchHelper::MultipleCatch:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/EhMultipleCatchHelper",
+      "metadataToken": 100663444,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/EhCatchFinallyNestedHelper::CatchFinallyNested:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/EhCatchFinallyNestedHelper::CatchFinallyNested:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/EhCatchFinallyNestedHelper",
+      "metadataToken": 100663445,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/EhFilterFinallyHelper::FilterFinally:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/EhFilterFinallyHelper::FilterFinally:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/EhFilterFinallyHelper",
+      "metadataToken": 100663446,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/EhNestedTryCatchHelper::NestedTryCatch:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/EhNestedTryCatchHelper::NestedTryCatch:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/EhNestedTryCatchHelper",
+      "metadataToken": 100663447,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectId": "SnapshotTestFixtures/EhFaultFinallyHelper::FaultFinally:System.Int32(System.Int32)",
+      "definitionSubjectId": "SnapshotTestFixtures/EhFaultFinallyHelper::FaultFinally:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SnapshotTestFixtures/EhFaultFinallyHelper",
+      "metadataToken": 100663448,
+      "parameterCount": 1
     },
     {
       "assemblyName": "SnapshotTestFixtures",

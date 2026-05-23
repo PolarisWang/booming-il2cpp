@@ -272,30 +272,6 @@ void chaos_thread_set_priority(CHAOS_IL2CPP_INTPTR thread_obj, CHAOS_IL2CPP_INT3
     });
 }
 
-void chaos_monitor_enter(CHAOS_IL2CPP_INTPTR obj, CHAOS_IL2CPP_INTPTR lockTaken) noexcept
-{
-    if (obj == 0) return;
-    void* monitor_target = reinterpret_cast<void*>(obj);
-
-    GC_TRANSITION_TO_PREEMPTIVE();
-    bool result = MonitorEnter(monitor_target);
-    GC_TRANSITION_TO_COOPERATIVE();
-
-    if (lockTaken != 0) {
-        *reinterpret_cast<CHAOS_IL2CPP_INT32*>(lockTaken) = result ? 1 : 0;
-    }
-}
-
-void chaos_monitor_exit(CHAOS_IL2CPP_INTPTR obj) noexcept
-{
-    if (obj == 0) return;
-    void* monitor_target = reinterpret_cast<void*>(obj);
-
-    GC_TRANSITION_TO_PREEMPTIVE();
-    MonitorExit(monitor_target);
-    GC_TRANSITION_TO_COOPERATIVE();
-}
-
 CHAOS_IL2CPP_INT32 chaos_thread_is_threadpool(CHAOS_IL2CPP_INTPTR thread_obj) noexcept
 {
     using threading::ManagedThread;

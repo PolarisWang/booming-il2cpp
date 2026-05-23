@@ -276,7 +276,10 @@ public partial class NativeAotLoweringPlanner
     /// generic method calls whose instantiation was pre-compiled by AOT.
     ///
     /// Cross-module definitions (where the open method is defined in a different
-    /// assembly) are skipped — they fall back to the interpreter gracefully.
+    /// assembly) are resolved via the MetadataRegistration fallback: the full
+    /// metadata registration covering all assemblies is queried for the
+    /// DefinitionSubjectId's ECMA token, so even methods defined in referenced
+    /// assemblies get valid AOT entries in the current module's map.
     ///
     /// The emitted array is sorted by open_token for per-module binary search.
     /// </summary>
@@ -306,9 +309,31 @@ public partial class NativeAotLoweringPlanner
                 typeTokenBySubjectId[t.SubjectId] = (uint)t.MetadataToken;
         }
 
+        // ── Cross-module fallback for DefinitionSubjectId resolution ────
+        // When a closed generic's definition lives in another assembly
+        // (e.g. custom-generics from System.Private.CoreLib referenced by
+        // the entry assembly), supplemental entries won't contain it.  Fall
+        // back to the full metadata registration covering all assemblies.
+        var crossModuleMethodTokenBySubjectId = new Dictionary<string, uint>(StringComparer.Ordinal);
+        var crossModuleTypeTokenBySubjectId = new Dictionary<string, uint>(StringComparer.Ordinal);
+        foreach (var reg in metadataRegistration.Registrations)
+        {
+            if (reg.MetadataToken.HasValue)
+            {
+                uint token = (uint)reg.MetadataToken.Value;
+                switch (reg.RegistrationKind)
+                {
+                    case "method": crossModuleMethodTokenBySubjectId.TryAdd(reg.SubjectId, token); break;
+                    case "type":   crossModuleTypeTokenBySubjectId.TryAdd(reg.SubjectId, token);   break;
+                }
+            }
+        }
+
         uint ResolveTypeToken(string subjectId)
         {
-            return typeTokenBySubjectId.TryGetValue(subjectId, out var t) ? t : 0u;
+            if (typeTokenBySubjectId.TryGetValue(subjectId, out var t)) return t;
+            if (crossModuleTypeTokenBySubjectId.TryGetValue(subjectId, out var ct)) return ct;
+            return 0u;
         }
 
         // ── Collect entries (with temp args) before sorting ─────────────
@@ -324,11 +349,12 @@ public partial class NativeAotLoweringPlanner
             uint closedToken = (uint)methodEntry.MetadataToken;
 
             // Resolve open definition token from DefinitionSubjectId.
-            // This succeeds only when the open method is defined in the same
-            // module (cross-module definitions → 0 → skip → interpreter).
+            // Checks supplemental entries first (same-module), then falls
+            // back to the cross-module metadata registration lookups.
             if (string.IsNullOrEmpty(methodEntry.DefinitionSubjectId))
                 continue;
-            if (!methodTokenBySubjectId.TryGetValue(methodEntry.DefinitionSubjectId, out var openToken))
+            if (!methodTokenBySubjectId.TryGetValue(methodEntry.DefinitionSubjectId, out var openToken)
+                && !crossModuleMethodTokenBySubjectId.TryGetValue(methodEntry.DefinitionSubjectId, out openToken))
                 continue;
 
             // Collect ALL type arguments (class-level + method-level) into

@@ -43,6 +43,7 @@ add_library(chaos_runtime_core STATIC
     runtime_stubs/exception_stubs.cpp
     runtime_stubs/object_stubs.cpp
     runtime_stubs/threading_stubs.cpp
+    runtime_stubs/monitor_stubs.cpp
     runtime_stubs/mutex_stubs.cpp
     runtime_stubs/threadpool_events.cpp
     runtime_stubs/convert_stubs.cpp

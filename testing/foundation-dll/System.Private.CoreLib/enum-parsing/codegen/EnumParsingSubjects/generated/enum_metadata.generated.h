@@ -27,7 +27,8 @@ extern "C" void ChaosRegisterExternalType(
     const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor* type_desc) noexcept;
 
 // ── Enum dispatch entry struct (file scope for extern "C" access) ──
-#ifndef CHAOS_IL2CPP_GENERATED_CODE_COMPAT_H_
+#ifndef CHAOS_IL2CPP_ENUM_DISPATCH_ENTRY_DEFINED
+#define CHAOS_IL2CPP_ENUM_DISPATCH_ENTRY_DEFINED
 struct EnumDispatchEntry {
     CHAOS_IL2CPP_UINT32 fnv24;
     const EnumMetadataTable* table;

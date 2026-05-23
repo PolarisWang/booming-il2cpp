@@ -484,6 +484,46 @@
     },
     {
       "subjectKind": "type",
+      "subjectId": "SnapshotTestFixtures/EhFinallyHelper",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "SnapshotTestFixtures/EhFaultHelper",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "SnapshotTestFixtures/EhFilterHelper",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "SnapshotTestFixtures/EhMultipleCatchHelper",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "SnapshotTestFixtures/EhCatchFinallyNestedHelper",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "SnapshotTestFixtures/EhFilterFinallyHelper",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "SnapshotTestFixtures/EhNestedTryCatchHelper",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "SnapshotTestFixtures/EhFaultFinallyHelper",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
       "subjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E",
       "reason": "closed-world-type"
     },
@@ -1284,6 +1324,46 @@
     },
     {
       "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/EhFinallyHelper::TryFinally_Only:System.Int32(System.Int32)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/EhFaultHelper::TryFault:System.Int32(System.Int32)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/EhFilterHelper::TryFilter:System.Int32(System.Int32)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/EhMultipleCatchHelper::MultipleCatch:System.Int32(System.Int32)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/EhCatchFinallyNestedHelper::CatchFinallyNested:System.Int32(System.Int32)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/EhFilterFinallyHelper::FilterFinally:System.Int32(System.Int32)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/EhNestedTryCatchHelper::NestedTryCatch:System.Int32(System.Int32)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/EhFaultFinallyHelper::FaultFinally:System.Int32(System.Int32)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
       "subjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E::.ctor:System.Void(System.Int32)",
       "reason": "closed-world-method"
     },
@@ -1639,6 +1719,58 @@
       "methodSubjectId": "SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()",
       "handlingKind": "catch",
       "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "SnapshotTestFixtures/EhFinallyHelper::TryFinally_Only:System.Int32(System.Int32)",
+      "handlingKind": "finally"
+    },
+    {
+      "methodSubjectId": "SnapshotTestFixtures/EhFaultHelper::TryFault:System.Int32(System.Int32)",
+      "handlingKind": "finally"
+    },
+    {
+      "methodSubjectId": "SnapshotTestFixtures/EhFilterHelper::TryFilter:System.Int32(System.Int32)",
+      "handlingKind": "filter"
+    },
+    {
+      "methodSubjectId": "SnapshotTestFixtures/EhMultipleCatchHelper::MultipleCatch:System.Int32(System.Int32)",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.DivideByZeroException"
+    },
+    {
+      "methodSubjectId": "SnapshotTestFixtures/EhMultipleCatchHelper::MultipleCatch:System.Int32(System.Int32)",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Exception"
+    },
+    {
+      "methodSubjectId": "SnapshotTestFixtures/EhCatchFinallyNestedHelper::CatchFinallyNested:System.Int32(System.Int32)",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.DivideByZeroException"
+    },
+    {
+      "methodSubjectId": "SnapshotTestFixtures/EhCatchFinallyNestedHelper::CatchFinallyNested:System.Int32(System.Int32)",
+      "handlingKind": "finally"
+    },
+    {
+      "methodSubjectId": "SnapshotTestFixtures/EhFilterFinallyHelper::FilterFinally:System.Int32(System.Int32)",
+      "handlingKind": "filter"
+    },
+    {
+      "methodSubjectId": "SnapshotTestFixtures/EhFilterFinallyHelper::FilterFinally:System.Int32(System.Int32)",
+      "handlingKind": "finally"
+    },
+    {
+      "methodSubjectId": "SnapshotTestFixtures/EhNestedTryCatchHelper::NestedTryCatch:System.Int32(System.Int32)",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.DivideByZeroException"
+    },
+    {
+      "methodSubjectId": "SnapshotTestFixtures/EhFaultFinallyHelper::FaultFinally:System.Int32(System.Int32)",
+      "handlingKind": "finally"
+    },
+    {
+      "methodSubjectId": "SnapshotTestFixtures/EhFaultFinallyHelper::FaultFinally:System.Int32(System.Int32)",
+      "handlingKind": "finally"
     }
   ]
 }

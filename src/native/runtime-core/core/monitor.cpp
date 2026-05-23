@@ -1,4 +1,11 @@
-// monitor.cpp — Monitor (lock) implementation
+// monitor.cpp — Monitor (lock) implementation backed by ThinLockTable
+//
+// Type System Phase 1: sync_state moved from object header to ThinLockTable.
+// MonitorEnter/Exit operate on ThinLockTable entries instead of direct field CAS.
+// SyncBlock (contention, MonitorWait/Pulse) is unchanged — entries stored in
+// ThinLockTable with kThinInflatedBit set and SyncBlock* as the value.
+
+#include "thin_lock_table.h"
 #include "wait_handle.h"
 #include "thread_state.h"
 #include "generated_code_compat.h"
@@ -6,209 +13,216 @@
 
 namespace chaos::il2cpp::runtime_core {
 
+// ── Helpers ─────────────────────────────────────────────────────────────────
+
+static SyncBlock* GetSyncBlockFromEntry(uint64_t entry_value) noexcept {
+    if ((entry_value & kThinInflatedBit) == 0) return nullptr;
+    return reinterpret_cast<SyncBlock*>(entry_value & ~3ull);
+}
+
+// ── MonitorEnter ────────────────────────────────────────────────────────────
+
 bool MonitorEnter(void* monitor_target) {
     if (monitor_target == nullptr) return false;
 
-    auto* sync_ptr = GetSyncStatePtr(monitor_target);
-    if (sync_ptr == nullptr) return false;
+    auto& table = ThinLockTable::Instance();
     const int32_t tid = threading::GetCurrentThreadId();
     if (tid == 0) return false;
 
-    const uint64_t tid_bits = static_cast<uint64_t>(tid) << kSyncThreadShift;
+    // Phase 1: Try thin lock (fast path).
+    if (table.TryLock(monitor_target, tid)) {
+        return true;
+    }
 
-    uint64_t sync = *sync_ptr;
-    for (;;) {
-        if ((sync & kSyncInflatedBit) != 0) {
-            auto* sb = reinterpret_cast<SyncBlock*>(sync & ~3ull);
-            if (sb != nullptr) {
+    // Phase 1A: Check if already inflated — contend on SyncBlock.
+    uint64_t sync = table.ReadSyncValue(monitor_target);
+    if (sync & kThinInflatedBit) {
+        auto* sb = GetSyncBlockFromEntry(sync);
+        if (sb != nullptr) {
+            const int32_t tid_local = threading::GetCurrentThreadId();
+            if (sb->owner_tid.load(std::memory_order_acquire) != tid_local) {
+                // First entry from this thread — must lock the mutex.
                 sb->mutex.lock();
-                sb->owner_tid.store(threading::GetCurrentThreadId(), std::memory_order_relaxed);
+                sb->recursion.store(1, std::memory_order_relaxed);
+            } else {
+                // Reentrant entry — already own the mutex.
+                sb->recursion.fetch_add(1, std::memory_order_relaxed);
+            }
+            sb->owner_tid.store(tid_local, std::memory_order_relaxed);
+            return true;
+        }
+        return false;
+    }
+
+    // Phase 2: Adaptive spin — 3-phase strategy.
+    // Phase 2: 64 fast pauses (CHAOS_SPIN_HINT).
+    for (uint32_t spin = 0; spin < 64; ++spin) {
+        CHAOS_SPIN_HINT();
+        if (table.TryLock(monitor_target, tid)) {
+            return true;
+        }
+        sync = table.ReadSyncValue(monitor_target);
+        if (sync & kThinInflatedBit) {
+            auto* sb = GetSyncBlockFromEntry(sync);
+            if (sb != nullptr) {
+                const int32_t tid_spin = threading::GetCurrentThreadId();
+                if (sb->owner_tid.load(std::memory_order_acquire) != tid_spin) {
+                    sb->mutex.lock();
+                    sb->recursion.store(1, std::memory_order_relaxed);
+                } else {
+                    sb->recursion.fetch_add(1, std::memory_order_relaxed);
+                }
+                sb->owner_tid.store(tid_spin, std::memory_order_relaxed);
                 return true;
             }
             return false;
         }
+    }
 
-        if ((sync & kSyncLockedBit) == 0) {
-            const uint64_t desired = kSyncLockedBit | tid_bits;
-            if (AtomicCAS(sync_ptr, sync, desired, __ATOMIC_ACQUIRE, __ATOMIC_RELAXED)) {
-                return true;
-            }
-            continue;
-        }
-
-        const int32_t owner_tid = static_cast<int32_t>((sync & ~3ull) >> kSyncThreadShift);
-        if (owner_tid == tid) {
-            // Tier 1D: We already hold the lock — relaxed store is safe because
-            // only this thread writes the thin lock bits (inflation by another
-            // thread could overwrite, but that's benign: MonitorExit will see
-            // inflated bit and route to the SyncBlock correctly).
-            const uint64_t recursion = (sync >> kSyncRecursionShift) + 1;
-            const uint64_t desired = kSyncLockedBit | tid_bits | (recursion << kSyncRecursionShift);
-            AtomicStoreRelaxed(sync_ptr, desired);
+    // Phase 2: 64 pauses with periodic yield.
+    for (uint32_t spin = 0; spin < 64; ++spin) {
+        CHAOS_SPIN_HINT();
+        if ((spin & 7) == 0) std::this_thread::yield();
+        if (table.TryLock(monitor_target, tid)) {
             return true;
         }
-
-        // Tier 1C: Adaptive spin — 3-phase strategy.
-        // Phase 1: 64 fast pauses (CHAOS_SPIN_HINT / _mm_pause / __yield).
-        for (uint32_t spin = 0; spin < 64; ++spin) {
-            CHAOS_SPIN_HINT();
-            sync = *sync_ptr;
-            if ((sync & kSyncLockedBit) == 0) {
-                const uint64_t desired = kSyncLockedBit | tid_bits;
-                if (AtomicCAS(sync_ptr, sync, desired, __ATOMIC_ACQUIRE, __ATOMIC_RELAXED)) {
-                    return true;
-                }
-                break;
-            }
-            if ((sync & kSyncInflatedBit) != 0) {
-                auto* sb = reinterpret_cast<SyncBlock*>(sync & ~3ull);
-                if (sb != nullptr) {
+        sync = table.ReadSyncValue(monitor_target);
+        if (sync & kThinInflatedBit) {
+            auto* sb = GetSyncBlockFromEntry(sync);
+            if (sb != nullptr) {
+                const int32_t tid_spin = threading::GetCurrentThreadId();
+                if (sb->owner_tid.load(std::memory_order_acquire) != tid_spin) {
                     sb->mutex.lock();
-                    sb->owner_tid.store(threading::GetCurrentThreadId(), std::memory_order_relaxed);
-                    return true;
+                    sb->recursion.store(1, std::memory_order_relaxed);
+                } else {
+                    sb->recursion.fetch_add(1, std::memory_order_relaxed);
                 }
-                return false;
+                sb->owner_tid.store(tid_spin, std::memory_order_relaxed);
+                return true;
             }
+            return false;
         }
-
-        // Phase 2: 64 pauses with periodic yield (every 8 iterations).
-        for (uint32_t spin = 0; spin < 64; ++spin) {
-            CHAOS_SPIN_HINT();
-            if ((spin & 7) == 0) std::this_thread::yield();
-            sync = *sync_ptr;
-            if ((sync & kSyncLockedBit) == 0) {
-                const uint64_t desired = kSyncLockedBit | tid_bits;
-                if (AtomicCAS(sync_ptr, sync, desired, __ATOMIC_ACQUIRE, __ATOMIC_RELAXED)) {
-                    return true;
-                }
-                break;
-            }
-            if ((sync & kSyncInflatedBit) != 0) {
-                auto* sb = reinterpret_cast<SyncBlock*>(sync & ~3ull);
-                if (sb != nullptr) {
-                    sb->mutex.lock();
-                    sb->owner_tid.store(threading::GetCurrentThreadId(), std::memory_order_relaxed);
-                    return true;
-                }
-                return false;
-            }
-        }
-
-        // Phase 3: Inflate immediately — no more wasteful spinning.
-        return InflateAndEnter(monitor_target);
     }
+
+    // Phase 3: Inflate immediately — no more wasteful spinning.
+    return InflateAndEnter(monitor_target);
 }
+
+// ── MonitorExit ─────────────────────────────────────────────────────────────
 
 bool MonitorExit(void* monitor_target) {
     if (monitor_target == nullptr) return false;
 
-    auto* sync_ptr = GetSyncStatePtr(monitor_target);
-    if (sync_ptr == nullptr) return false;
+    auto& table = ThinLockTable::Instance();
     const int32_t tid = threading::GetCurrentThreadId();
 
-    uint64_t sync = *sync_ptr;
+    // Try thin-lock unlock first.
+    if (table.Unlock(monitor_target, tid)) {
+        return true;  // Fully released.
+    }
 
-    if ((sync & kSyncInflatedBit) != 0) {
-        auto* sb = reinterpret_cast<SyncBlock*>(sync & ~3ull);
+    // Unlock returned false — check if inflated.
+    uint64_t sync = table.ReadSyncValue(monitor_target);
+    if (sync & kThinInflatedBit) {
+        auto* sb = GetSyncBlockFromEntry(sync);
         if (sb != nullptr) {
-            // Ownership check: if this thread doesn't own sb->mutex, it was a
-            // thin-lock holder whose lock was absorbed by concurrent inflation.
-            // The inflater owns the mutex on our behalf — skip the unlock.
+            // Ownership check.
             int32_t expected_tid = sb->owner_tid.load(std::memory_order_acquire);
             if (expected_tid != 0 && expected_tid == threading::GetCurrentThreadId()) {
-                sb->owner_tid.store(0, std::memory_order_release);
-                sb->mutex.unlock();
+                uint32_t remaining = sb->recursion.fetch_sub(1, std::memory_order_release);
+                if (remaining <= 1) {
+                    // Physical release — last nested exit.
+                    sb->owner_tid.store(0, std::memory_order_release);
+                    sb->mutex.unlock();
+                }
             }
             return true;
         }
         return false;
     }
 
-    if ((sync & kSyncLockedBit) == 0) return false;
-
-    const int32_t owner_tid = static_cast<int32_t>((sync & ~3ull) >> kSyncThreadShift);
-    if (owner_tid != tid) return false;
-
-    const uint64_t recursion = sync >> kSyncRecursionShift;
-    if (recursion > 0) {
-        const uint64_t desired = kSyncLockedBit |
-            (static_cast<uint64_t>(tid) << kSyncThreadShift) |
-            ((recursion - 1) << kSyncRecursionShift);
-        AtomicStoreRelaxed(sync_ptr, desired);
-    } else {
-        AtomicStoreRelease(sync_ptr, 0);
-    }
-    return true;
+    // Not in table and not inflated — not locked.
+    return false;
 }
+
+// ── MonitorTryEnter ─────────────────────────────────────────────────────────
 
 bool MonitorTryEnter(void* monitor_target) {
     if (monitor_target == nullptr) return false;
-    auto* sync_ptr = GetSyncStatePtr(monitor_target);
-    if (sync_ptr == nullptr) return false;
+    auto& table = ThinLockTable::Instance();
     const int32_t tid = threading::GetCurrentThreadId();
     if (tid == 0) return false;
-    uint64_t sync = *sync_ptr;
-    for (;;) {
-        if ((sync & kSyncInflatedBit) != 0) {
-            auto* sb = reinterpret_cast<SyncBlock*>(sync & ~3ull);
-            if (sb != nullptr && sb->mutex.try_lock()) {
-                sb->owner_tid.store(threading::GetCurrentThreadId(), std::memory_order_relaxed);
-                return true;
-            }
-            return false;
-        }
-        if ((sync & kSyncLockedBit) == 0) {
-            const uint64_t desired = kSyncLockedBit | (static_cast<uint64_t>(tid) << kSyncThreadShift);
-            if (AtomicCAS(sync_ptr, sync, desired, __ATOMIC_ACQUIRE, __ATOMIC_RELAXED)) {
-                return true;
-            }
-            continue;
-        }
-        return false;
+
+    // Fast path: try thin-lock entry.
+    if (table.TryEnter(monitor_target, tid)) {
+        return true;
     }
+
+    // Check if inflated — try SyncBlock::try_lock.
+    uint64_t sync = table.ReadSyncValue(monitor_target);
+    if (sync & kThinInflatedBit) {
+        auto* sb = GetSyncBlockFromEntry(sync);
+        if (sb != nullptr && sb->mutex.try_lock()) {
+            sb->owner_tid.store(threading::GetCurrentThreadId(), std::memory_order_relaxed);
+            return true;
+        }
+    }
+
+    return false;
 }
+
+// ── MonitorIsEntered ────────────────────────────────────────────────────────
 
 bool MonitorIsEntered(void* monitor_target) {
     if (monitor_target == nullptr) return false;
-    auto* sync_ptr = GetSyncStatePtr(monitor_target);
-    if (sync_ptr == nullptr) return false;
+    auto& table = ThinLockTable::Instance();
     const int32_t tid = threading::GetCurrentThreadId();
     if (tid == 0) return false;
-    uint64_t sync = *sync_ptr;
-    if ((sync & kSyncInflatedBit) != 0) {
-        // Read owner_tid instead of try_lock — try_lock modifies lock state.
-        auto* sb = reinterpret_cast<SyncBlock*>(sync & ~3ull);
-        if (sb == nullptr) return false;
-        return sb->owner_tid.load(std::memory_order_acquire) == threading::GetCurrentThreadId();
+
+    // Check thin-lock table first.
+    if (table.IsEntered(monitor_target, tid)) {
+        return true;
     }
-    if ((sync & kSyncLockedBit) != 0) {
-        const uint64_t stored_tid = (sync >> kSyncThreadShift) & 0x3FFFFFFF;
-        return stored_tid == static_cast<uint64_t>(tid);
+
+    // Check if inflated — read owner_tid.
+    uint64_t sync = table.ReadSyncValue(monitor_target);
+    if (sync & kThinInflatedBit) {
+        auto* sb = GetSyncBlockFromEntry(sync);
+        if (sb != nullptr) {
+            return sb->owner_tid.load(std::memory_order_acquire) == threading::GetCurrentThreadId();
+        }
     }
+
     return false;
 }
+
+// ── MonitorWait ─────────────────────────────────────────────────────────────
 
 bool MonitorWait(void* monitor_target, int32_t timeout_ms) {
     if (monitor_target == nullptr) return false;
 
-    auto* sync_ptr = GetSyncStatePtr(monitor_target);
-    if (sync_ptr == nullptr) return false;
-    uint64_t sync = *sync_ptr;
+    auto& table = ThinLockTable::Instance();
+    const int32_t tid = threading::GetCurrentThreadId();
+
+    uint64_t sync = table.ReadSyncValue(monitor_target);
+
     SyncBlock* sb = nullptr;
-    if ((sync & kSyncInflatedBit) != 0) {
-        sb = reinterpret_cast<SyncBlock*>(sync & ~3ull);
+    if (sync & kThinInflatedBit) {
+        sb = GetSyncBlockFromEntry(sync);
     } else {
-        if ((sync & kSyncLockedBit) == 0) return false;
+        // Not inflated — must inflate for MonitorWait.
+        if ((sync & kThinLockedBit) == 0) return false;  // Not locked.
+
         sb = AllocateSyncBlockFromPool();
-        const uint32_t stripe_idx = SyncBlockStripeIndex(monitor_target);
-        auto& stripe = g_sync_block_stripes[stripe_idx];
-        {
-            CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) guard(stripe.table_lock);
-            stripe.entries[monitor_target] = sb;
-            const uint64_t inflated_val = kSyncInflatedBit | reinterpret_cast<uint64_t>(sb);
-            AtomicStoreRelease(sync_ptr, inflated_val);
+
+        // Update ThinLockTable entry to inflated.
+        auto* existing = table.Inflate(monitor_target, sb);
+        if (existing != sb) {
+            // Another thread already inflated — use existing SyncBlock.
+            sb = existing;
         }
     }
+
     if (sb == nullptr) return false;
 
     // Check abort/interrupt before blocking.
@@ -224,21 +238,15 @@ bool MonitorWait(void* monitor_target, int32_t timeout_ms) {
         }
     }
 
-    // Set WaitSleepJoin after confirming sb is valid and no abort/interrupt pending.
+    // Set WaitSleepJoin after confirming sb is valid and no abort/interrupt.
     if (thread) threading::SetThreadState(*thread, threading::ManagedThreadState::WaitSleepJoin);
 
     // Release the monitor before wait (Monitor.Wait semantics).
-    if ((sync & kSyncInflatedBit) != 0) {
-        // Only unlock if we actually hold sb->mutex. The original thin-lock
-        // holder whose lock was absorbed by inflation does NOT hold sb->mutex
-        // (the inflater does). Unlocking a mutex we don't own is UB.
-        int32_t owner = sb->owner_tid.load(std::memory_order_acquire);
-        if (owner == threading::GetCurrentThreadId()) {
-            sb->owner_tid.store(0, std::memory_order_release);
-            sb->mutex.unlock();
-        }
-    }
-    // Thin-lock path: sync was just inflated; no sb->mutex held.
+    int32_t owner = sb->owner_tid.load(std::memory_order_acquire);
+    if (owner == threading::GetCurrentThreadId()) {
+        sb->owner_tid.store(0, std::memory_order_release);
+        sb->mutex.unlock();
+    }  // If we don't own it, the inflater does — skip unlock.
 
     // Lock condition mutex and wait (cond.wait atomically unlocks during sleep).
     std::unique_lock<CHAOS_IL2CPP_RECURSIVE_LOCK_MUTEX> wait_lock(sb->mutex);
@@ -259,8 +267,7 @@ bool MonitorWait(void* monitor_target, int32_t timeout_ms) {
     uint32_t remaining = sb->wait_count.fetch_sub(1, std::memory_order_relaxed) - 1;
 
     // Chain-signal: if woken by a pulse (not timeout) and more waiters
-    // remain, wake the next one.  This avoids the PulseAll thundering herd:
-    // only one thread wakes at a time, chained sequentially.
+    // remain, wake the next one.
     if (result && remaining > 0) {
         sb->cond.notify_one();
     }
@@ -269,37 +276,41 @@ bool MonitorWait(void* monitor_target, int32_t timeout_ms) {
 
     // Re-acquire the monitor after wait completes.
     sb->mutex.lock();
+    sb->owner_tid.store(threading::GetCurrentThreadId(), std::memory_order_relaxed);
 
     // Restore Running state after wait completes.
     if (thread) threading::SetThreadState(*thread, threading::ManagedThreadState::Running);
     return result;
 }
 
+// ── MonitorPulse ────────────────────────────────────────────────────────────
+
 bool MonitorPulse(void* monitor_target) {
     if (monitor_target == nullptr) return false;
-    auto* sync_ptr = GetSyncStatePtr(monitor_target);
-    if (sync_ptr == nullptr) return false;
-    uint64_t sync = *sync_ptr;
-    if ((sync & kSyncInflatedBit) != 0) {
-        auto* sb = reinterpret_cast<SyncBlock*>(sync & ~3ull);
+
+    auto& table = ThinLockTable::Instance();
+    uint64_t sync = table.ReadSyncValue(monitor_target);
+
+    if (sync & kThinInflatedBit) {
+        auto* sb = GetSyncBlockFromEntry(sync);
         if (sb != nullptr) { sb->cond.notify_one(); return true; }
     }
     return false;
 }
 
+// ── MonitorPulseAll ─────────────────────────────────────────────────────────
+
 bool MonitorPulseAll(void* monitor_target) {
     if (monitor_target == nullptr) return false;
-    auto* sync_ptr = GetSyncStatePtr(monitor_target);
-    if (sync_ptr == nullptr) return false;
-    uint64_t sync = *sync_ptr;
-    if ((sync & kSyncInflatedBit) != 0) {
-        auto* sb = reinterpret_cast<SyncBlock*>(sync & ~3ull);
+
+    auto& table = ThinLockTable::Instance();
+    uint64_t sync = table.ReadSyncValue(monitor_target);
+
+    if (sync & kThinInflatedBit) {
+        auto* sb = GetSyncBlockFromEntry(sync);
         if (sb != nullptr) {
             // Chain-signal PulseAll: increment pulse_count, then wake one
-            // waiter.  Each woken thread calls notify_one for the next,
-            // creating a sequential wake chain that avoids thundering herd.
-            // Only if wait_count is 0 (no waiters) do we fall back to
-            // notify_all for safety.
+            // waiter.  Each woken thread calls notify_one for the next.
             uint32_t wc = sb->wait_count.load(std::memory_order_acquire);
             if (wc > 0) {
                 sb->pulse_count.fetch_add(1, std::memory_order_release);
@@ -312,6 +323,8 @@ bool MonitorPulseAll(void* monitor_target) {
     }
     return false;
 }
+
+// ── ThreadSleep ─────────────────────────────────────────────────────────────
 
 bool ThreadSleep(int32_t timeout_ms) {
     if (timeout_ms < 0) return false;
@@ -338,29 +351,23 @@ bool ThreadSleep(int32_t timeout_ms) {
     return true;
 }
 
+// ── SpinLockExit (unused by monitors, kept for API compatibility) ──────────
+
 bool SpinLockExit(void* spinlock_target) {
-    if (spinlock_target == nullptr) return false;
-    auto* sync_ptr = GetSyncStatePtr(spinlock_target);
-    if (sync_ptr == nullptr) return false;
-    const int32_t tid = threading::GetCurrentThreadId();
-    uint64_t sync = *sync_ptr;
-    if ((sync & kSyncLockedBit) == 0) return false;
-    const uint64_t stored_tid = (sync >> kSyncThreadShift) & 0x3FFFFFFF;
-    if (stored_tid != static_cast<uint64_t>(tid)) return false;
-    AtomicStoreRelease(sync_ptr, 0);
-    return true;
+    // SpinLock is not supported via ThinLockTable — use MonitorExit.
+    return MonitorExit(spinlock_target);
 }
 
 bool SpinLockIsHeld(void* spinlock_target) {
-    if (spinlock_target == nullptr) return false;
-    auto* sync_ptr = GetSyncStatePtr(spinlock_target);
-    if (sync_ptr == nullptr) return false;
-    return (*sync_ptr & kSyncLockedBit) != 0;
+    return MonitorIsEntered(spinlock_target);
 }
 
-bool LockEnter(void* lock_target) { return MonitorEnter(lock_target); }
+// ── LockEnter/LockExit (aliases) ───────────────────────────────────────────
 
+bool LockEnter(void* lock_target) { return MonitorEnter(lock_target); }
 bool LockExit(void* lock_target) { return MonitorExit(lock_target); }
+
+// ── WaitHandleSet/Reset ────────────────────────────────────────────────────
 
 bool WaitHandleSet(void* wait_handle) {
     if (wait_handle == nullptr) return false;
@@ -374,9 +381,13 @@ bool WaitHandleReset(void* wait_handle) {
     return threading::WaitHandleReset(handle_id);
 }
 
+// ── InflateAndEnter (need access to SyncBlock pool) ───────────────────────
+// Defined in sync_mutex.cpp — forward declaration.
+extern bool InflateAndEnter(void* obj) noexcept;
+
 }  // namespace chaos::il2cpp::runtime_core
 
-// ── extern "C" ABI exports ──────────────────────────────────────────
+// ── extern "C" ABI exports ──────────────────────────────────────────────────
 extern "C" {
 namespace chaos::il2cpp::runtime_core {
 

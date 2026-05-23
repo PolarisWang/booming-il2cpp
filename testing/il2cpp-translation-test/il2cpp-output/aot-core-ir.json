@@ -1,0 +1,1795 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "il2-cpp-translation-test.program.main",
+      "subjectId": "Il2CppTranslationTest/Program::\u003CMain\u003E$:System.Int32(System.String[])",
+      "signature": "System.Int32 Program::\u003CMain\u003E$(System.String[])",
+      "identity": {
+        "assemblyName": "Il2CppTranslationTest",
+        "declaringTypeSubjectId": "Il2CppTranslationTest/Program",
+        "definitionSubjectId": "Il2CppTranslationTest/Program::\u003CMain\u003E$:System.Int32(System.String[])",
+        "subjectId": "Il2CppTranslationTest/Program::\u003CMain\u003E$:System.Int32(System.String[])",
+        "methodId": "il2-cpp-translation-test.program.main",
+        "signature": "System.Int32 Program::\u003CMain\u003E$(System.String[])"
+      },
+      "nativeSymbol": "Il2CppTranslationTest_Program_Main_System_String",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 2,
+          "typeShape": 1
+        }
+      ],
+      "localCount": 12,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "Hello, il2cpp!",
+          "ilOffset": 0,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 5,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 6,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 7,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 12,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 13,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "il2cpp",
+          "ilOffset": 14,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 19,
+          "resultType": "System.Boolean",
+          "callee": "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 2,
+          "ilOffset": 24,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 10,
+          "ilOffset": 25,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 20,
+          "ilOffset": 27,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 29,
+          "resultType": "System.Int32",
+          "callee": "Il2CppTranslationTest/Program::\u003C\u003CMain\u003E$\u003Eg__Add|0_0:System.Int32(System.Int32,System.Int32)",
+          "reference": {
+            "assemblyName": "Il2CppTranslationTest",
+            "subjectKind": "method",
+            "subjectId": "Il2CppTranslationTest/Program::\u003C\u003CMain\u003E$\u003Eg__Add|0_0:System.Int32(System.Int32,System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "Il2CppTranslationTest",
+            "subjectId": "Il2CppTranslationTest/Program::\u003C\u003CMain\u003E$\u003Eg__Add|0_0:System.Int32(System.Int32,System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "Il2CppTranslationTest_Program_Main___g__Add_0_0_System_Int32_System_Int32",
+          "targetParameterCount": 2,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 3,
+          "ilOffset": 34,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 3,
+          "ilOffset": 35,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 7,
+          "ilOffset": 36,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 37,
+          "resultType": "System.Int32",
+          "callee": "Il2CppTranslationTest/Program::\u003C\u003CMain\u003E$\u003Eg__Multiply|0_1:System.Int32(System.Int32,System.Int32)",
+          "reference": {
+            "assemblyName": "Il2CppTranslationTest",
+            "subjectKind": "method",
+            "subjectId": "Il2CppTranslationTest/Program::\u003C\u003CMain\u003E$\u003Eg__Multiply|0_1:System.Int32(System.Int32,System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "Il2CppTranslationTest",
+            "subjectId": "Il2CppTranslationTest/Program::\u003C\u003CMain\u003E$\u003Eg__Multiply|0_1:System.Int32(System.Int32,System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "Il2CppTranslationTest_Program_Main___g__Multiply_0_1_System_Int32_System_Int32",
+          "targetParameterCount": 2,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 4,
+          "ilOffset": 42,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 5,
+          "ilOffset": 44,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "newarr",
+          "opCode": 43,
+          "operand": "System.Private.CoreLib/System.Int32",
+          "ilOffset": 45,
+          "resultType": "System.Int32[]",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Int32"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 6,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 50,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldtoken",
+          "opCode": 70,
+          "operand": "Il2CppTranslationTest/\u003CPrivateImplementationDetails\u003E::4F6ADDC9659D6FB90FE94B6688A79F2A1FA8D36EC43F8F3E1D9B6528C448A384",
+          "ilOffset": 51,
+          "resultType": "System.RuntimeFieldHandle",
+          "reference": {
+            "assemblyName": "Il2CppTranslationTest",
+            "subjectKind": "field",
+            "subjectId": "Il2CppTranslationTest/\u003CPrivateImplementationDetails\u003E::4F6ADDC9659D6FB90FE94B6688A79F2A1FA8D36EC43F8F3E1D9B6528C448A384"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "Il2CppTranslationTest",
+            "subjectId": "Il2CppTranslationTest/\u003CPrivateImplementationDetails\u003E::4F6ADDC9659D6FB90FE94B6688A79F2A1FA8D36EC43F8F3E1D9B6528C448A384",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "Il2CppTranslationTest/\u003CPrivateImplementationDetails\u003E",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=20"
+          },
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 56,
+          "resultType": "System.Void",
+          "callee": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 5,
+          "ilOffset": 61,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 5,
+          "ilOffset": 63,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 65,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldelem",
+          "opCode": 44,
+          "operand": "System.Int32",
+          "ilOffset": 66,
+          "resultType": "System.Int32",
+          "runtimeServiceKind": 12,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 6,
+          "ilOffset": 67,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 5,
+          "ilOffset": 69,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 5,
+          "ilOffset": 71,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldlen",
+          "opCode": 46,
+          "ilOffset": 73,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "conv.i4",
+          "opCode": 39,
+          "ilOffset": 74,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 75,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "sub",
+          "opCode": 26,
+          "ilOffset": 76,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldelem",
+          "opCode": 44,
+          "operand": "System.Int32",
+          "ilOffset": 77,
+          "resultType": "System.Int32",
+          "runtimeServiceKind": 12,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 7,
+          "ilOffset": 78,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 5,
+          "ilOffset": 80,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 82,
+          "resultType": "System.Int32",
+          "callee": "Il2CppTranslationTest/Program::\u003C\u003CMain\u003E$\u003Eg__SumArray|0_2:System.Int32(System.Int32[])",
+          "reference": {
+            "assemblyName": "Il2CppTranslationTest",
+            "subjectKind": "method",
+            "subjectId": "Il2CppTranslationTest/Program::\u003C\u003CMain\u003E$\u003Eg__SumArray|0_2:System.Int32(System.Int32[])"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "Il2CppTranslationTest",
+            "subjectId": "Il2CppTranslationTest/Program::\u003C\u003CMain\u003E$\u003Eg__SumArray|0_2:System.Int32(System.Int32[])",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "Il2CppTranslationTest_Program_Main___g__SumArray_0_2_System_Int32",
+          "targetParameterCount": 1,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 8,
+          "ilOffset": 87,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 3,
+          "ilOffset": 89,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 4,
+          "ilOffset": 90,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 91,
+          "resultType": "Il2CppTranslationTest/Point",
+          "callee": "Il2CppTranslationTest/Point::.ctor:System.Void(System.Int32,System.Int32)",
+          "reference": {
+            "assemblyName": "Il2CppTranslationTest",
+            "subjectKind": "method",
+            "subjectId": "Il2CppTranslationTest/Point::.ctor:System.Void(System.Int32,System.Int32)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "Il2CppTranslationTest",
+            "subjectId": "Il2CppTranslationTest/Point",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "baseTypeSubjectId": "System.Private.CoreLib/System.Object",
+            "implementedInterfaceSubjectIds": [],
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 9,
+          "ilOffset": 96,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 9,
+          "ilOffset": 98,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 100,
+          "resultType": "System.Double",
+          "callee": "Il2CppTranslationTest/Point::Distance:System.Double()",
+          "reference": {
+            "assemblyName": "Il2CppTranslationTest",
+            "subjectKind": "method",
+            "subjectId": "Il2CppTranslationTest/Point::Distance:System.Double()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "Il2CppTranslationTest",
+            "subjectId": "Il2CppTranslationTest/Point::Distance:System.Double()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "Il2CppTranslationTest_Point_Distance",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Double",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 10,
+          "ilOffset": 105,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 107,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 108,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "cgt",
+          "opCode": 33,
+          "ilOffset": 109,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 2,
+          "ilOffset": 111,
+          "isPreserveSig": false
+        },
+        {
+          "op": "and",
+          "opCode": 57,
+          "ilOffset": 112,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 155,
+          "ilOffset": 113,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 3,
+          "ilOffset": 115,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 30,
+          "ilOffset": 116,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "bne.un",
+          "opCode": 79,
+          "operand": 155,
+          "ilOffset": 118,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 4,
+          "ilOffset": 120,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 21,
+          "ilOffset": 122,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "bne.un",
+          "opCode": 79,
+          "operand": 155,
+          "ilOffset": 124,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 6,
+          "ilOffset": 126,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 128,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "bne.un",
+          "opCode": 79,
+          "operand": 155,
+          "ilOffset": 129,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 7,
+          "ilOffset": 131,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 5,
+          "ilOffset": 133,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "bne.un",
+          "opCode": 79,
+          "operand": 155,
+          "ilOffset": 134,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 8,
+          "ilOffset": 136,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 15,
+          "ilOffset": 138,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "bne.un",
+          "opCode": 79,
+          "operand": 155,
+          "ilOffset": 140,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 10,
+          "ilOffset": 142,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.r8",
+          "opCode": 3,
+          "operand": 0,
+          "ilOffset": 144,
+          "resultType": "System.Double",
+          "isPreserveSig": false
+        },
+        {
+          "op": "bgt",
+          "opCode": 22,
+          "operand": 158,
+          "ilOffset": 153,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 155,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 159,
+          "ilOffset": 156,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 158,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 11,
+          "ilOffset": 159,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 11,
+          "ilOffset": 161,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 163,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "Il2CppTranslationTest"
+    },
+    {
+      "methodId": "il2-cpp-translation-test.program.ctor",
+      "subjectId": "Il2CppTranslationTest/Program::.ctor:System.Void()",
+      "signature": "System.Void Program::.ctor()",
+      "identity": {
+        "assemblyName": "Il2CppTranslationTest",
+        "declaringTypeSubjectId": "Il2CppTranslationTest/Program",
+        "definitionSubjectId": "Il2CppTranslationTest/Program::.ctor:System.Void()",
+        "subjectId": "Il2CppTranslationTest/Program::.ctor:System.Void()",
+        "methodId": "il2-cpp-translation-test.program.ctor",
+        "signature": "System.Void Program::.ctor()"
+      },
+      "nativeSymbol": "Il2CppTranslationTest_Program__ctor",
+      "isStatic": false,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "Il2CppTranslationTest/Program",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 1,
+          "resultType": "System.Void",
+          "callee": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 6,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "Il2CppTranslationTest"
+    },
+    {
+      "methodId": "il2-cpp-translation-test.program.main-g-add-0-0",
+      "subjectId": "Il2CppTranslationTest/Program::\u003C\u003CMain\u003E$\u003Eg__Add|0_0:System.Int32(System.Int32,System.Int32)",
+      "signature": "System.Int32 Program::\u003C\u003CMain\u003E$\u003Eg__Add|0_0(System.Int32,System.Int32)",
+      "identity": {
+        "assemblyName": "Il2CppTranslationTest",
+        "declaringTypeSubjectId": "Il2CppTranslationTest/Program",
+        "definitionSubjectId": "Il2CppTranslationTest/Program::\u003C\u003CMain\u003E$\u003Eg__Add|0_0:System.Int32(System.Int32,System.Int32)",
+        "subjectId": "Il2CppTranslationTest/Program::\u003C\u003CMain\u003E$\u003Eg__Add|0_0:System.Int32(System.Int32,System.Int32)",
+        "methodId": "il2-cpp-translation-test.program.main-g-add-0-0",
+        "signature": "System.Int32 Program::\u003C\u003CMain\u003E$\u003Eg__Add|0_0(System.Int32,System.Int32)"
+      },
+      "nativeSymbol": "Il2CppTranslationTest_Program_Main___g__Add_0_0_System_Int32_System_Int32",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 2,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        },
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 1,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "add",
+          "opCode": 25,
+          "ilOffset": 2,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 3,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "Il2CppTranslationTest"
+    },
+    {
+      "methodId": "il2-cpp-translation-test.program.main-g-multiply-0-1",
+      "subjectId": "Il2CppTranslationTest/Program::\u003C\u003CMain\u003E$\u003Eg__Multiply|0_1:System.Int32(System.Int32,System.Int32)",
+      "signature": "System.Int32 Program::\u003C\u003CMain\u003E$\u003Eg__Multiply|0_1(System.Int32,System.Int32)",
+      "identity": {
+        "assemblyName": "Il2CppTranslationTest",
+        "declaringTypeSubjectId": "Il2CppTranslationTest/Program",
+        "definitionSubjectId": "Il2CppTranslationTest/Program::\u003C\u003CMain\u003E$\u003Eg__Multiply|0_1:System.Int32(System.Int32,System.Int32)",
+        "subjectId": "Il2CppTranslationTest/Program::\u003C\u003CMain\u003E$\u003Eg__Multiply|0_1:System.Int32(System.Int32,System.Int32)",
+        "methodId": "il2-cpp-translation-test.program.main-g-multiply-0-1",
+        "signature": "System.Int32 Program::\u003C\u003CMain\u003E$\u003Eg__Multiply|0_1(System.Int32,System.Int32)"
+      },
+      "nativeSymbol": "Il2CppTranslationTest_Program_Main___g__Multiply_0_1_System_Int32_System_Int32",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 2,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        },
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 1,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "mul",
+          "opCode": 27,
+          "ilOffset": 2,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 3,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "Il2CppTranslationTest"
+    },
+    {
+      "methodId": "il2-cpp-translation-test.program.main-g-sum-array-0-2",
+      "subjectId": "Il2CppTranslationTest/Program::\u003C\u003CMain\u003E$\u003Eg__SumArray|0_2:System.Int32(System.Int32[])",
+      "signature": "System.Int32 Program::\u003C\u003CMain\u003E$\u003Eg__SumArray|0_2(System.Int32[])",
+      "identity": {
+        "assemblyName": "Il2CppTranslationTest",
+        "declaringTypeSubjectId": "Il2CppTranslationTest/Program",
+        "definitionSubjectId": "Il2CppTranslationTest/Program::\u003C\u003CMain\u003E$\u003Eg__SumArray|0_2:System.Int32(System.Int32[])",
+        "subjectId": "Il2CppTranslationTest/Program::\u003C\u003CMain\u003E$\u003Eg__SumArray|0_2:System.Int32(System.Int32[])",
+        "methodId": "il2-cpp-translation-test.program.main-g-sum-array-0-2",
+        "signature": "System.Int32 Program::\u003C\u003CMain\u003E$\u003Eg__SumArray|0_2(System.Int32[])"
+      },
+      "nativeSymbol": "Il2CppTranslationTest_Program_Main___g__SumArray_0_2_System_Int32",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 2,
+          "typeShape": 1
+        }
+      ],
+      "localCount": 4,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 1,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 2,
+          "resultType": "System.Int32[]",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 3,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 4,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 2,
+          "ilOffset": 5,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 20,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 8,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 2,
+          "ilOffset": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldelem",
+          "opCode": 44,
+          "operand": "System.Int32",
+          "ilOffset": 10,
+          "resultType": "System.Int32",
+          "runtimeServiceKind": 12,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 3,
+          "ilOffset": 11,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 12,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 3,
+          "ilOffset": 13,
+          "isPreserveSig": false
+        },
+        {
+          "op": "add",
+          "opCode": 25,
+          "ilOffset": 14,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 15,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 2,
+          "ilOffset": 16,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 17,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "add",
+          "opCode": 25,
+          "ilOffset": 18,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 2,
+          "ilOffset": 19,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 2,
+          "ilOffset": 20,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 1,
+          "ilOffset": 21,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldlen",
+          "opCode": 46,
+          "ilOffset": 22,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "conv.i4",
+          "opCode": 39,
+          "ilOffset": 23,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "blt",
+          "opCode": 21,
+          "operand": 8,
+          "ilOffset": 24,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 26,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 27,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "Il2CppTranslationTest"
+    },
+    {
+      "methodId": "il2-cpp-translation-test.auto-generated-program.main",
+      "subjectId": "Il2CppTranslationTest/AutoGeneratedProgram::Main:System.Void(System.String[])",
+      "signature": "System.Void AutoGeneratedProgram::Main(System.String[])",
+      "identity": {
+        "assemblyName": "Il2CppTranslationTest",
+        "declaringTypeSubjectId": "Il2CppTranslationTest/AutoGeneratedProgram",
+        "definitionSubjectId": "Il2CppTranslationTest/AutoGeneratedProgram::Main:System.Void(System.String[])",
+        "subjectId": "Il2CppTranslationTest/AutoGeneratedProgram::Main:System.Void(System.String[])",
+        "methodId": "il2-cpp-translation-test.auto-generated-program.main",
+        "signature": "System.Void AutoGeneratedProgram::Main(System.String[])"
+      },
+      "nativeSymbol": "Il2CppTranslationTest_AutoGeneratedProgram_Main_System_String",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 2,
+          "typeShape": 1
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 0,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "Il2CppTranslationTest"
+    },
+    {
+      "methodId": "il2-cpp-translation-test.auto-generated-program.ctor",
+      "subjectId": "Il2CppTranslationTest/AutoGeneratedProgram::.ctor:System.Void()",
+      "signature": "System.Void AutoGeneratedProgram::.ctor()",
+      "identity": {
+        "assemblyName": "Il2CppTranslationTest",
+        "declaringTypeSubjectId": "Il2CppTranslationTest/AutoGeneratedProgram",
+        "definitionSubjectId": "Il2CppTranslationTest/AutoGeneratedProgram::.ctor:System.Void()",
+        "subjectId": "Il2CppTranslationTest/AutoGeneratedProgram::.ctor:System.Void()",
+        "methodId": "il2-cpp-translation-test.auto-generated-program.ctor",
+        "signature": "System.Void AutoGeneratedProgram::.ctor()"
+      },
+      "nativeSymbol": "Il2CppTranslationTest_AutoGeneratedProgram__ctor",
+      "isStatic": false,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "Il2CppTranslationTest/AutoGeneratedProgram",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 1,
+          "resultType": "System.Void",
+          "callee": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 6,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "Il2CppTranslationTest"
+    },
+    {
+      "methodId": "il2-cpp-translation-test.point.ctor",
+      "subjectId": "Il2CppTranslationTest/Point::.ctor:System.Void(System.Int32,System.Int32)",
+      "signature": "System.Void Point::.ctor(System.Int32,System.Int32)",
+      "identity": {
+        "assemblyName": "Il2CppTranslationTest",
+        "declaringTypeSubjectId": "Il2CppTranslationTest/Point",
+        "definitionSubjectId": "Il2CppTranslationTest/Point::.ctor:System.Void(System.Int32,System.Int32)",
+        "subjectId": "Il2CppTranslationTest/Point::.ctor:System.Void(System.Int32,System.Int32)",
+        "methodId": "il2-cpp-translation-test.point.ctor",
+        "signature": "System.Void Point::.ctor(System.Int32,System.Int32)"
+      },
+      "nativeSymbol": "Il2CppTranslationTest_Point__ctor_System_Int32_System_Int32",
+      "isStatic": false,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 2,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        },
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "Il2CppTranslationTest/Point",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 1,
+          "resultType": "System.Void",
+          "callee": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "Il2CppTranslationTest/Point",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 1,
+          "ilOffset": 7,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stfld",
+          "opCode": 11,
+          "operand": "Il2CppTranslationTest/Point::_x",
+          "ilOffset": 8,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "Il2CppTranslationTest",
+            "subjectKind": "field",
+            "subjectId": "Il2CppTranslationTest/Point::_x"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "Il2CppTranslationTest",
+            "subjectId": "Il2CppTranslationTest/Point::_x",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "Il2CppTranslationTest/Point",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 3,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 13,
+          "resultType": "Il2CppTranslationTest/Point",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 2,
+          "ilOffset": 14,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stfld",
+          "opCode": 11,
+          "operand": "Il2CppTranslationTest/Point::_y",
+          "ilOffset": 15,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "Il2CppTranslationTest",
+            "subjectKind": "field",
+            "subjectId": "Il2CppTranslationTest/Point::_y"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "Il2CppTranslationTest",
+            "subjectId": "Il2CppTranslationTest/Point::_y",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "Il2CppTranslationTest/Point",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 3,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 20,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "Il2CppTranslationTest"
+    },
+    {
+      "methodId": "il2-cpp-translation-test.point.distance",
+      "subjectId": "Il2CppTranslationTest/Point::Distance:System.Double()",
+      "signature": "System.Double Point::Distance()",
+      "identity": {
+        "assemblyName": "Il2CppTranslationTest",
+        "declaringTypeSubjectId": "Il2CppTranslationTest/Point",
+        "definitionSubjectId": "Il2CppTranslationTest/Point::Distance:System.Double()",
+        "subjectId": "Il2CppTranslationTest/Point::Distance:System.Double()",
+        "methodId": "il2-cpp-translation-test.point.distance",
+        "signature": "System.Double Point::Distance()"
+      },
+      "nativeSymbol": "Il2CppTranslationTest_Point_Distance",
+      "isStatic": false,
+      "returnType": "System.Double",
+      "returnAbi": {
+        "carrierKindCode": 9,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "Il2CppTranslationTest/Point",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldfld",
+          "opCode": 10,
+          "operand": "Il2CppTranslationTest/Point::_x",
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "reference": {
+            "assemblyName": "Il2CppTranslationTest",
+            "subjectKind": "field",
+            "subjectId": "Il2CppTranslationTest/Point::_x"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "Il2CppTranslationTest",
+            "subjectId": "Il2CppTranslationTest/Point::_x",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "Il2CppTranslationTest/Point",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 2,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "Il2CppTranslationTest/Point",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldfld",
+          "opCode": 10,
+          "operand": "Il2CppTranslationTest/Point::_x",
+          "ilOffset": 7,
+          "resultType": "System.Int32",
+          "reference": {
+            "assemblyName": "Il2CppTranslationTest",
+            "subjectKind": "field",
+            "subjectId": "Il2CppTranslationTest/Point::_x"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "Il2CppTranslationTest",
+            "subjectId": "Il2CppTranslationTest/Point::_x",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "Il2CppTranslationTest/Point",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 2,
+          "isPreserveSig": false
+        },
+        {
+          "op": "mul",
+          "opCode": 27,
+          "ilOffset": 12,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 13,
+          "resultType": "Il2CppTranslationTest/Point",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldfld",
+          "opCode": 10,
+          "operand": "Il2CppTranslationTest/Point::_y",
+          "ilOffset": 14,
+          "resultType": "System.Int32",
+          "reference": {
+            "assemblyName": "Il2CppTranslationTest",
+            "subjectKind": "field",
+            "subjectId": "Il2CppTranslationTest/Point::_y"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "Il2CppTranslationTest",
+            "subjectId": "Il2CppTranslationTest/Point::_y",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "Il2CppTranslationTest/Point",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 2,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 19,
+          "resultType": "Il2CppTranslationTest/Point",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldfld",
+          "opCode": 10,
+          "operand": "Il2CppTranslationTest/Point::_y",
+          "ilOffset": 20,
+          "resultType": "System.Int32",
+          "reference": {
+            "assemblyName": "Il2CppTranslationTest",
+            "subjectKind": "field",
+            "subjectId": "Il2CppTranslationTest/Point::_y"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "Il2CppTranslationTest",
+            "subjectId": "Il2CppTranslationTest/Point::_y",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "Il2CppTranslationTest/Point",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 2,
+          "isPreserveSig": false
+        },
+        {
+          "op": "mul",
+          "opCode": 27,
+          "ilOffset": 25,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "add",
+          "opCode": 25,
+          "ilOffset": 26,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "conv.r8",
+          "opCode": 42,
+          "ilOffset": 27,
+          "resultType": "System.Double",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 28,
+          "resultType": "System.Double",
+          "callee": "System.Private.CoreLib/System.Math::Sqrt:System.Double(System.Double)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Math::Sqrt:System.Double(System.Double)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Math::Sqrt:System.Double(System.Double)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 33,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "Il2CppTranslationTest"
+    }
+  ]
+}

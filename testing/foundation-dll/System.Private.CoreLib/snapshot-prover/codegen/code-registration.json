@@ -937,24 +937,72 @@
         {
           "registrationKind": "methodPointer",
           "slot": 144,
+          "symbol": "SnapshotTestFixtures_EhFinallyHelper_TryFinally_Only_System_Int32",
+          "subjectId": "SnapshotTestFixtures/EhFinallyHelper::TryFinally_Only:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 145,
+          "symbol": "SnapshotTestFixtures_EhFaultHelper_TryFault_System_Int32",
+          "subjectId": "SnapshotTestFixtures/EhFaultHelper::TryFault:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 146,
+          "symbol": "SnapshotTestFixtures_EhFilterHelper_TryFilter_System_Int32",
+          "subjectId": "SnapshotTestFixtures/EhFilterHelper::TryFilter:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 147,
+          "symbol": "SnapshotTestFixtures_EhMultipleCatchHelper_MultipleCatch_System_Int32",
+          "subjectId": "SnapshotTestFixtures/EhMultipleCatchHelper::MultipleCatch:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 148,
+          "symbol": "SnapshotTestFixtures_EhCatchFinallyNestedHelper_CatchFinallyNested_System_Int32",
+          "subjectId": "SnapshotTestFixtures/EhCatchFinallyNestedHelper::CatchFinallyNested:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 149,
+          "symbol": "SnapshotTestFixtures_EhFilterFinallyHelper_FilterFinally_System_Int32",
+          "subjectId": "SnapshotTestFixtures/EhFilterFinallyHelper::FilterFinally:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 150,
+          "symbol": "SnapshotTestFixtures_EhNestedTryCatchHelper_NestedTryCatch_System_Int32",
+          "subjectId": "SnapshotTestFixtures/EhNestedTryCatchHelper::NestedTryCatch:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 151,
+          "symbol": "SnapshotTestFixtures_EhFaultFinallyHelper_FaultFinally_System_Int32",
+          "subjectId": "SnapshotTestFixtures/EhFaultFinallyHelper::FaultFinally:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 152,
           "symbol": "SnapshotTestFixtures_Wrapper_System_Int32__ctor_System_Int32",
           "subjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E::.ctor:System.Void(System.Int32)"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 145,
+          "slot": 153,
           "symbol": "SnapshotTestFixtures_Wrapper_System_Int32_GetValue",
           "subjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E::GetValue:System.Int32()"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 146,
+          "slot": 154,
           "symbol": "SnapshotTestFixtures_Wrapper__0__ctor_0",
           "subjectId": "SnapshotTestFixtures/Wrapper\u003C!0\u003E::.ctor:System.Void(!0)"
         },
         {
           "registrationKind": "methodPointer",
-          "slot": 147,
+          "slot": 155,
           "symbol": "SnapshotTestFixtures_Wrapper__0_GetValue",
           "subjectId": "SnapshotTestFixtures/Wrapper\u003C!0\u003E::GetValue:!0()"
         }

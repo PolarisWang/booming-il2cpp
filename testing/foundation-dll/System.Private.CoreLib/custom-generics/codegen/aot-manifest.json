@@ -1,0 +1,348 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "CustomGenericsSubjects/CustomGenericsSubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "CustomGenericsSubjects/CustomGenericsSubjects::Subject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "CustomGenericsSubjects/CustomGenericsSubjects::Subject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "CustomGenericsSubjects/CustomGenericsSubjects::Subject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "CustomGenericsSubjects/CustomGenericsSubjects::Subject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "CustomGenericsSubjects/CustomGenericsSubjects::Subject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::.ctor:System.Void(!0)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::Get:!0()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::Set:System.Void(!0)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::IsDefault:System.Boolean()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u00602::.ctor:System.Void(!0,!1)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u00602::Deconstruct:System.Void(!0\u0026,!1\u0026)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Util::Echo\u00601:!!0(!!0)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Util::Equal\u00601:System.Boolean(!!0,!!0)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Util::.ctor:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u00601::.ctor:System.Void(!0)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u00601::GetRefType:System.Type()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Util::Echo\u003CSystem.Int32\u003E:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Util::Equal\u003CSystem.Int32\u003E:System.Boolean(System.Int32,System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003CSystem.Int32\u003E::.ctor:System.Void(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003CSystem.Int32\u003E::Get:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003CSystem.Int32\u003E::Set:System.Void(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003CSystem.Int32\u003E::IsDefault:System.Boolean()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u003CSystem.Int32,System.String\u003E::.ctor:System.Void(System.Int32,System.String)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u003CSystem.Int32,System.String\u003E::Deconstruct:System.Void(System.Int32\u0026,System.String\u0026)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u003CSystem.String\u003E::.ctor:System.Void(System.String)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u003CSystem.String\u003E::GetRefType:System.Type()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003C!0\u003E::.ctor:System.Void(!0)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003C!0\u003E::Get:!0()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003C!0\u003E::Set:System.Void(!0)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003C!0\u003E::IsDefault:System.Boolean()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u003C!0,!1\u003E::.ctor:System.Void(!0,!1)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u003C!0,!1\u003E::Deconstruct:System.Void(!0\u0026,!1\u0026)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u003C!0\u003E::.ctor:System.Void(!0)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "method",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u003C!0\u003E::GetRefType:System.Type()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "field",
+      "subjectId": "CustomGenericsSubjects/CustomGenericsSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "field",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u00601::_value",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "field",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u00602::First",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "field",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u00602::Second",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "field",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u00601::Ref",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "field",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003CSystem.Int32\u003E::_value",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "field",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u003CSystem.Int32,System.String\u003E::First",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "field",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u003CSystem.Int32,System.String\u003E::Second",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "field",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u003CSystem.String\u003E::Ref",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "field",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box\u003C!0\u003E::_value",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "field",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u003C!0,!1\u003E::First",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "field",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Pair\u003C!0,!1\u003E::Second",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "CustomGenericsSubjects",
+      "subjectKind": "field",
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper\u003C!0\u003E::Ref",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::op_Inequality:System.Boolean(System.String,System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.String",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::op_Inequality:System.Boolean(System.Type,System.Type)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.IEquatable\u003C!!0\u003E::Equals:System.Boolean(!!0)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::GetType:System.Type()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.IEquatable\u003CSystem.Int32\u003E::Equals:System.Boolean(System.Int32)",
+      "reason": "external-call"
+    }
+  ]
+}

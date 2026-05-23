@@ -62,7 +62,6 @@ void* CHAOS_RUNTIME_ABI_CALL ObjectNew(
     if (object == nullptr) return nullptr;
 
     object->type_info = type_info;
-    object->sync_state = 0;
 
     return object;
 }
@@ -82,7 +81,6 @@ void* CHAOS_RUNTIME_ABI_CALL ObjectNewDirect(
     if (object == nullptr) return nullptr;
 
     object->type_info = type_info;
-    object->sync_state = 0;
     return object;
 }
 

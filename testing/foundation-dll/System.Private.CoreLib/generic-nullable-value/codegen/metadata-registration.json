@@ -10,6 +10,7 @@
     {
       "registrationKind": "type",
       "slot": 1,
+      "metadataToken": 33554434,
       "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects",
       "name": "GenericNullableValueSubjects",
       "displayName": "GenericNullableValueSubjects",
@@ -27,6 +28,7 @@
     {
       "registrationKind": "method",
       "slot": 3,
+      "metadataToken": 100663297,
       "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_0:System.Void()",
       "name": "Subject_0",
       "definitionSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_0:System.Void()",
@@ -38,6 +40,7 @@
     {
       "registrationKind": "method",
       "slot": 4,
+      "metadataToken": 100663298,
       "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_1:System.Void()",
       "name": "Subject_1",
       "definitionSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_1:System.Void()",
@@ -49,6 +52,7 @@
     {
       "registrationKind": "method",
       "slot": 5,
+      "metadataToken": 100663299,
       "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_2:System.Void()",
       "name": "Subject_2",
       "definitionSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_2:System.Void()",
@@ -60,6 +64,7 @@
     {
       "registrationKind": "method",
       "slot": 6,
+      "metadataToken": 100663300,
       "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_3:System.Void()",
       "name": "Subject_3",
       "definitionSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_3:System.Void()",
@@ -71,6 +76,7 @@
     {
       "registrationKind": "method",
       "slot": 7,
+      "metadataToken": 100663301,
       "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_4:System.Void()",
       "name": "Subject_4",
       "definitionSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_4:System.Void()",
@@ -82,6 +88,7 @@
     {
       "registrationKind": "method",
       "slot": 8,
+      "metadataToken": 100663302,
       "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_5:System.Void()",
       "name": "Subject_5",
       "definitionSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_5:System.Void()",
@@ -93,6 +100,7 @@
     {
       "registrationKind": "method",
       "slot": 9,
+      "metadataToken": 100663303,
       "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_6:System.Void()",
       "name": "Subject_6",
       "definitionSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_6:System.Void()",
@@ -104,6 +112,7 @@
     {
       "registrationKind": "method",
       "slot": 10,
+      "metadataToken": 100663304,
       "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_7:System.Void()",
       "name": "Subject_7",
       "definitionSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_7:System.Void()",
@@ -115,6 +124,7 @@
     {
       "registrationKind": "method",
       "slot": 11,
+      "metadataToken": 100663305,
       "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_8:System.Void()",
       "name": "Subject_8",
       "definitionSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_8:System.Void()",
@@ -126,6 +136,7 @@
     {
       "registrationKind": "method",
       "slot": 12,
+      "metadataToken": 100663306,
       "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_9:System.Void()",
       "name": "Subject_9",
       "definitionSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_9:System.Void()",

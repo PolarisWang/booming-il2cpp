@@ -143,7 +143,7 @@
     {
       "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "subjectId": "System.Private.CoreLib/System.Array::get_Length:System.Int32()",
       "reason": "external-call"
     },
     {

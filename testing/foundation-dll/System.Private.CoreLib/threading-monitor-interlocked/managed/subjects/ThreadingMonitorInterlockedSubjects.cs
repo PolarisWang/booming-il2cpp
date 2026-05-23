@@ -26,14 +26,14 @@ public static partial class ThreadingMonitorInterlockedSubjects
     // [2] System.Private.CoreLib/System.Threading.Monitor::TryEnter:System.Boolean(System.Object)
     public static void Subject_2()
     {
-        try { if (((Monitor.TryEnter(42)) ? 1 : 0) != ((Monitor.TryEnter(42)) ? 1 : 0)) _exitCode = 1; }
+        try { if (((Monitor.TryEnter(null!)) ? 1 : 0) != ((Monitor.TryEnter(null!)) ? 1 : 0)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [3] System.Private.CoreLib/System.Threading.Monitor::TryEnter:System.Boolean(System.Object,System.Int32)
     public static void Subject_3()
     {
-        try { if (((Monitor.TryEnter(42, 42)) ? 1 : 0) != ((Monitor.TryEnter(42, 42)) ? 1 : 0)) _exitCode = 1; }
+        try { if (((Monitor.TryEnter(null!, 42)) ? 1 : 0) != ((Monitor.TryEnter(null!, 42)) ? 1 : 0)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 

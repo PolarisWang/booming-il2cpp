@@ -1,4 +1,4 @@
-#include <chaos/common.h>
+﻿#include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
 #include <chaos/eh.h>
@@ -16,6 +16,7 @@
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 #include "enum_metadata.generated.h"
+#include "enum_stubs.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -239,6 +240,28 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
 
+
+// ── Bridge/import thunks ──
+extern "C" void* kChaosExternalRuntimeFnTable[];
+
+// Bridge/import thunk for: System.Collections/System.Collections.Generic.List<System.Int32>::.ctor:System.Void()
+extern "C" void chaos_bridge_thunk_0(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[0])();
+}
+
+// Bridge/import thunk for: CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::_exitCode
+extern "C" void chaos_bridge_thunk_1(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[2])();
+}
+
+// Bridge/import thunk for: System.Collections/System.Collections.Generic.Dictionary<System.String,System.Int32>::.ctor:System.Void()
+extern "C" void chaos_bridge_thunk_2(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[7])();
+}
+
 extern "C" void CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_0(void);
 extern "C" void CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_1(void);
 extern "C" void CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_2(void);
@@ -377,11 +400,18 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
 		/* .type_count        = */ 2u,
-	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
+	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 -- deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
 	/* .custom_attribute_materializer = */ nullptr,
-
+	/* .custom_attribute_method_offset   = */ nullptr,
+	/* .custom_attribute_field_offset    = */ nullptr,
+	/* .custom_attribute_property_offset = */ nullptr,
+	/* .custom_attribute_param_offset    = */ nullptr,
+	/* .custom_attribute_method_count    = */ 0u,
+	/* .custom_attribute_field_count     = */ 0u,
+	/* .custom_attribute_property_count  = */ 0u,
+	/* .custom_attribute_param_count   = */ 0u,
 		/* .abi_manifest      = */ s_abi_manifest,
 	};
 	static const CHAOS_IL2CPP_UINT32 s_native_aot_module_id =
@@ -817,37 +847,37 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // matching during IR lowering of patched methods.
 
 static constexpr ReflectionQueryFieldDescriptor kReflFields_CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects[1] = {
-	{ 0u, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
+	{ 0x04000001u, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::_exitCode", "_exitCode", "System.Int32", 0LL, 3u },
 };
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects[16] = {
-	{ 0u, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u },
-	{ 0u, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u },
-	{ 0u, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u },
-	{ 0u, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u },
-	{ 0u, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u },
-	{ 0u, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u },
-	{ 0u, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u },
-	{ 0u, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u },
-	{ 0u, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u },
-	{ 0u, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_10:System.Void()", "Subject_10", "System.Void", 0, nullptr, 0u },
-	{ 0u, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_11:System.Void()", "Subject_11", "System.Void", 0, nullptr, 0u },
-	{ 0u, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_12:System.Void()", "Subject_12", "System.Void", 0, nullptr, 0u },
-	{ 0u, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_13:System.Void()", "Subject_13", "System.Void", 0, nullptr, 0u },
-	{ 0u, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_14:System.Void()", "Subject_14", "System.Void", 0, nullptr, 0u },
-	{ 0u, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_15:System.Void()", "Subject_15", "System.Void", 0, nullptr, 0u },
+	{ 0x00000003u, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000004u, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000005u, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000006u, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000007u, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000008u, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000009u, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Au, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Bu, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Cu, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Du, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_10:System.Void()", "Subject_10", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Eu, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_11:System.Void()", "Subject_11", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Fu, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_12:System.Void()", "Subject_12", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000010u, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_13:System.Void()", "Subject_13", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000011u, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_14:System.Void()", "Subject_14", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000012u, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_15:System.Void()", "Subject_15", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
-	{ 0u, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects", "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects", "", "CollectionsGenericCoreSubjects", "CollectionsGenericCoreSubjects", nullptr, kReflFields_CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects, 1u, nullptr, 0u,
-	kReflMethods_CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects, 16u },
+	{ 0x00000001u, "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects", "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects", "", "CollectionsGenericCoreSubjects", "CollectionsGenericCoreSubjects", nullptr, kReflFields_CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects, 1u, nullptr, 0u,
+nullptr, 0u,    kReflMethods_CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects, 16u, nullptr, 0u, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static const ReflectionQueryImageDescriptor kReflImage = { "CollectionsGenericCoreSubjects", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "CollectionsGenericCoreSubjects", kReflTypePtrs, 1u, 1, 0, 0, 0 };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via

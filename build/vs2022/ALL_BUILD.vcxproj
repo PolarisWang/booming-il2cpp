@@ -193,13 +193,33 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{9E8CE054-3831-387A-88CD-8D4B9D09F82D}</Project>
       <Name>chaos_common</Name>
     </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\src\native\diagnostics\debugger\chaos_debugger.vcxproj">
+      <Project>{FBCC9814-82B9-3C34-90A8-94A91B087080}</Project>
+      <Name>chaos_debugger</Name>
+    </ProjectReference>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_delegate_stress_test.vcxproj">
       <Project>{24EDA71B-F6E3-321D-B533-C7568B70F0DD}</Project>
       <Name>chaos_delegate_stress_test</Name>
     </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\src\native\diagnostics\eventpipe\receiver\chaos_diag.vcxproj">
+      <Project>{737CA6F9-B74B-3C7F-A7C1-91B28153AECF}</Project>
+      <Name>chaos_diag</Name>
+    </ProjectReference>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_domain_unload_test.vcxproj">
       <Project>{D29D40E7-5D5E-3607-A90A-55E2C43ECDED}</Project>
       <Name>chaos_domain_unload_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\src\native\benchmark-host\chaos_eh_benchmark_cpp_throw.vcxproj">
+      <Project>{3DCB3FFD-1DEE-3A29-8B78-36FB5B825E2D}</Project>
+      <Name>chaos_eh_benchmark_cpp_throw</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\src\native\benchmark-host\chaos_eh_benchmark_setjmp.vcxproj">
+      <Project>{A8588147-59BC-33B7-A969-4E3D22F86CC9}</Project>
+      <Name>chaos_eh_benchmark_setjmp</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\src\native\benchmark-host\chaos_eh_benchmark_win32_seh.vcxproj">
+      <Project>{A567145B-BB66-3B59-B39D-A9BB1623B8CA}</Project>
+      <Name>chaos_eh_benchmark_win32_seh</Name>
     </ProjectReference>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\engine-binding\chaos_engine_binding_compile_only_smoke.vcxproj">
       <Project>{3D4EA538-2845-3565-97FC-B5A05F890F9A}</Project>
@@ -210,6 +230,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\src\native\engine-bridge\chaos_engine_bridge.vcxproj">
       <Project>{D97DA6F2-A492-3B4C-8D5F-1D128178CA73}</Project>
       <Name>chaos_engine_bridge</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\src\native\diagnostics\eventpipe\chaos_eventpipe.vcxproj">
+      <Project>{ABFDF2D3-C400-3CA4-A755-60279707CBD3}</Project>
+      <Name>chaos_eventpipe</Name>
     </ProjectReference>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\tests\contracts\native\runtime-core\chaos_exception_sentinel_test.vcxproj">
       <Project>{F8ED9319-9B32-3328-AEF6-DFDF79004125}</Project>

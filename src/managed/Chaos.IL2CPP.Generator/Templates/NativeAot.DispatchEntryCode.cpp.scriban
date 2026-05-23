@@ -13,7 +13,7 @@ static void (*kAotMethods[{{ methods_count }}])() = {
 static CHAOS_IL2CPP_UINT8 __g_benchmark_this_sentinel = 0;
 extern "C" void (*kBenchmarkWrappers[{{ methods_count }}])() = {
 {{~ for method in methods ~}}
-    []() { {{~ if method.param_count == 0 ~}}kAotMethods[{{ method.index }}]();{{~ else ~}}reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR{{~ for param in method.params offset:1 ~}}, CHAOS_IL2CPP_INTPTR{{~ end ~}})>(kAotMethods[{{ method.index }}])({{~ for param in method.params ~}}{{~ if param.is_string && default_string_id != 0 ~}}chaos_make_string_id_value({{ default_string_id }}ULL){{~ else if param.is_this ~}}reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel){{~ else ~}}0{{~ end ~}}{{~ if !for.last ~}}, {{~ end ~}}{{~ end ~}});{{~ end ~}} },
+    []() { {{~ if method.param_count == 0 ~}}kAotMethods[{{ method.index }}]();{{~ else ~}}reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR{{~ for param in method.params offset:1 ~}}, CHAOS_IL2CPP_INTPTR{{~ end ~}})>(kAotMethods[{{ method.index }}])({{~ for param in method.params ~}}{{~ if param.is_string && default_string_id != 0 ~}}chaos_make_string_id_value({{ default_string_id }}ULL){{~ else if param.is_this ~}}reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel){{~ else if param.is_byref ~}}([](){ static CHAOS_IL2CPP_UINT8 __b[sizeof(CHAOS_IL2CPP_INTPTR)] = {}; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__b); })(){{~ else ~}}0{{~ end ~}}{{~ if !for.last ~}}, {{~ end ~}}{{~ end ~}});{{~ end ~}} },
 {{~ end ~}}
 };
 

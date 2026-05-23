@@ -7,65 +7,65 @@
       "methodIndex": 0,
       "methodSubjectId": "SnapshotTestFixtures/ArithmeticOps::RunAdd:System.Int32()",
       "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 17645.0,
-      "slowdownPercent": 0.0
+      "prePatchNsPerOp": 69675.1,
+      "postPatchNsPerOp": 57626.1,
+      "slowdownPercent": -17.29
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()",
       "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 17802.8,
-      "slowdownPercent": 0.0
+      "prePatchNsPerOp": 64633.15,
+      "postPatchNsPerOp": 64620.6,
+      "slowdownPercent": -0.02
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "SnapshotTestFixtures/MathHelper::RunSquare:System.Int32()",
       "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 18919.2,
-      "slowdownPercent": 0.0
+      "prePatchNsPerOp": 67810.92,
+      "postPatchNsPerOp": 63924.2,
+      "slowdownPercent": -5.73
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "SnapshotTestFixtures/FlowControl::IsPositive:System.Int32()",
       "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 18135.3,
-      "slowdownPercent": 0.0
+      "prePatchNsPerOp": 64295.37,
+      "postPatchNsPerOp": 58467.3,
+      "slowdownPercent": -9.06
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "SnapshotTestFixtures/CallVirtHelper::CreateAndUse:System.Int32()",
       "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 17358.9,
-      "slowdownPercent": 0.0
+      "prePatchNsPerOp": 62958.56,
+      "postPatchNsPerOp": 60069.3,
+      "slowdownPercent": -4.59
     },
     {
       "methodIndex": 5,
       "methodSubjectId": "SnapshotTestFixtures/BoxingHelper::BoxAndUnbox:System.Int32()",
       "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 17686.7,
-      "slowdownPercent": 0.0
+      "prePatchNsPerOp": 65130.43,
+      "postPatchNsPerOp": 60177.2,
+      "slowdownPercent": -7.61
     },
     {
       "methodIndex": 6,
       "methodSubjectId": "SnapshotTestFixtures/ConversionHelper::ConvertToInt:System.Int32()",
       "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 19508.7,
-      "slowdownPercent": 0.0
+      "prePatchNsPerOp": 65148.68,
+      "postPatchNsPerOp": 58339.2,
+      "slowdownPercent": -10.45
     },
     {
       "methodIndex": 7,
       "methodSubjectId": "SnapshotTestFixtures/LoopHelper::SumToFive:System.Int32()",
       "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 19685.4,
-      "slowdownPercent": 0.0
+      "prePatchNsPerOp": 64230.05,
+      "postPatchNsPerOp": 59472.0,
+      "slowdownPercent": -7.41
     },
     {
       "methodIndex": 8,
@@ -76,16 +76,16 @@
       "methodIndex": 9,
       "methodSubjectId": "SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()",
       "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 27538.9,
-      "slowdownPercent": 0.0
+      "prePatchNsPerOp": 68426.31,
+      "postPatchNsPerOp": 59089.6,
+      "slowdownPercent": -13.64
     }
   ],
   "summary": {
     "totalMethods": 10,
-    "nonStubMethods": 0,
-    "averageSlowdownPercent": 0.0,
-    "slowdownFactor": 1.0,
+    "nonStubMethods": 9,
+    "averageSlowdownPercent": -8.42,
+    "slowdownFactor": 0.9158,
     "slowdownThresholdX": 50.0
   }
 }

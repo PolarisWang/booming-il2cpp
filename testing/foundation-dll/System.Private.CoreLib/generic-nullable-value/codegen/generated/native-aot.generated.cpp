@@ -283,6 +283,62 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
 
+
+// ── Bridge/import thunks ──
+extern "C" void* kChaosExternalRuntimeFnTable[];
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Nullable<System.Int32>
+extern "C" void chaos_bridge_thunk_0(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[0])();
+}
+
+// Bridge/import thunk for: GenericNullableValueSubjects/GenericNullableValueSubjects::_exitCode
+extern "C" void chaos_bridge_thunk_1(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[2])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Nullable<System.Int32>::.ctor:System.Void(System.Int32)
+extern "C" void chaos_bridge_thunk_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[3])(chaos_fn_arg_0);
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Nullable<System.Int32>::get_Value:System.Int32()
+extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_3(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)()>(kChaosExternalRuntimeFnTable[4])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Nullable<System.Int32>::Equals:System.Boolean(System.Object)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_4(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[7])(chaos_fn_arg_0);
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Nullable<System.Int32>::GetHashCode:System.Int32()
+extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_5(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)()>(kChaosExternalRuntimeFnTable[8])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Nullable<System.Int32>::ToString:System.String()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_6(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[9])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Int32
+extern "C" void chaos_bridge_thunk_7(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[11])();
+}
+
 extern "C" void GenericNullableValueSubjects_GenericNullableValueSubjects_Subject_0(void);
 extern "C" void GenericNullableValueSubjects_GenericNullableValueSubjects_Subject_1(void);
 extern "C" void GenericNullableValueSubjects_GenericNullableValueSubjects_Subject_2(void);
@@ -523,6 +579,7 @@ extern "C" void* kChaosExternalRuntimeFnTable[15] = {
 };
 
 extern "C" int32_t kChaosExternalRuntimeCount = 15;
+// (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
 static void (*kAotMethods[10])() = {

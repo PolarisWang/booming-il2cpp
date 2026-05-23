@@ -86,10 +86,10 @@ struct Functions {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
-        CHAOS_IL2CPP_INT32 (*<Subject_13>b__14_0)(
+        CHAOS_IL2CPP_INT32 (*_Subject_13_b__14_0)(
                     CHAOS_IL2CPP_INTPTR
         );
-        CHAOS_IL2CPP_INT32 (*<Subject_13>b__14_1)(
+        CHAOS_IL2CPP_INT32 (*_Subject_13_b__14_1)(
                     CHAOS_IL2CPP_INTPTR
         );
     } threadingMonitorInterlockedSubjects___c;
@@ -199,17 +199,17 @@ struct ThreadingMonitorInterlockedSubjects___c {
                     arg_0
         );
     }
-    static inline CHAOS_IL2CPP_INT32 <Subject_13>b__14_0(
+    static inline CHAOS_IL2CPP_INT32 _Subject_13_b__14_0(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.threadingMonitorInterlockedSubjects___c.<Subject_13>b__14_0(
+        return kFunctions.threadingMonitorInterlockedSubjects___c._Subject_13_b__14_0(
                     arg_0
         );
     }
-    static inline CHAOS_IL2CPP_INT32 <Subject_13>b__14_1(
+    static inline CHAOS_IL2CPP_INT32 _Subject_13_b__14_1(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.threadingMonitorInterlockedSubjects___c.<Subject_13>b__14_1(
+        return kFunctions.threadingMonitorInterlockedSubjects___c._Subject_13_b__14_1(
                     arg_0
         );
     }

@@ -3830,8 +3830,8 @@
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 75,
-          "handlerOffset": 76,
+          "tryLength": 63,
+          "handlerOffset": 64,
           "handlerLength": 11,
           "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
@@ -3887,20 +3887,20 @@
           "isPreserveSig": false
         },
         {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 25,
-          "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.TimeSpan::GetHashCode:System.Int32()",
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 19,
+          "resultType": "System.Int64",
+          "callee": "System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()",
           "reference": {
             "assemblyName": "System.Private.CoreLib",
             "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+            "subjectId": "System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()"
           },
           "targetReference": {
             "kind": 3,
             "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "subjectId": "System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
@@ -3908,22 +3908,21 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 1,
-          "constrainedTypeSubjectId": "System.Private.CoreLib/System.TimeSpan",
+          "dispatchKindCode": 4,
           "isPreserveSig": false
         },
         {
           "op": "ldc.r8",
           "opCode": 3,
           "operand": 42,
-          "ilOffset": 30,
+          "ilOffset": 24,
           "resultType": "System.Double",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 39,
+          "ilOffset": 33,
           "resultType": "System.TimeSpan",
           "callee": "System.Private.CoreLib/System.TimeSpan::FromDays:System.TimeSpan(System.Double)",
           "reference": {
@@ -3949,7 +3948,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 1,
-          "ilOffset": 44,
+          "ilOffset": 38,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -3957,25 +3956,25 @@
           "op": "ldloca",
           "opCode": 76,
           "operand": 1,
-          "ilOffset": 45,
+          "ilOffset": 39,
           "resultType": "System.IntPtr",
           "isPreserveSig": false
         },
         {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 53,
-          "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.TimeSpan::GetHashCode:System.Int32()",
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 41,
+          "resultType": "System.Int64",
+          "callee": "System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()",
           "reference": {
             "assemblyName": "System.Private.CoreLib",
             "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+            "subjectId": "System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()"
           },
           "targetReference": {
             "kind": 3,
             "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "subjectId": "System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
@@ -3983,14 +3982,13 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 1,
-          "constrainedTypeSubjectId": "System.Private.CoreLib/System.TimeSpan",
+          "dispatchKindCode": 4,
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 58,
+          "ilOffset": 46,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -3998,14 +3996,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 60,
+          "ilOffset": 48,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 61,
+          "ilOffset": 49,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -4013,7 +4011,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 63,
+          "ilOffset": 51,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -4021,14 +4019,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 64,
+          "ilOffset": 52,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 73,
-          "ilOffset": 65,
+          "operand": 61,
+          "ilOffset": 53,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -4036,7 +4034,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 67,
+          "ilOffset": 55,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -4044,7 +4042,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode",
-          "ilOffset": 68,
+          "ilOffset": 56,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "TimeDateTimeTimespanSubjects",
@@ -4070,22 +4068,22 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 87,
-          "ilOffset": 74,
+          "operand": 75,
+          "ilOffset": 62,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 76,
+          "ilOffset": 64,
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 78,
+          "ilOffset": 66,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -4093,7 +4091,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode",
-          "ilOffset": 79,
+          "ilOffset": 67,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "TimeDateTimeTimespanSubjects",
@@ -4119,15 +4117,15 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 87,
-          "ilOffset": 85,
+          "operand": 75,
+          "ilOffset": 73,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 87,
+          "ilOffset": 75,
           "isPreserveSig": false
         }
       ],
@@ -4168,8 +4166,8 @@
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 75,
-          "handlerOffset": 76,
+          "tryLength": 63,
+          "handlerOffset": 64,
           "handlerLength": 11,
           "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
@@ -4225,20 +4223,20 @@
           "isPreserveSig": false
         },
         {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 25,
-          "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.TimeSpan::GetHashCode:System.Int32()",
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 19,
+          "resultType": "System.Int64",
+          "callee": "System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()",
           "reference": {
             "assemblyName": "System.Private.CoreLib",
             "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+            "subjectId": "System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()"
           },
           "targetReference": {
             "kind": 3,
             "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "subjectId": "System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
@@ -4246,22 +4244,21 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 1,
-          "constrainedTypeSubjectId": "System.Private.CoreLib/System.TimeSpan",
+          "dispatchKindCode": 4,
           "isPreserveSig": false
         },
         {
           "op": "ldc.r8",
           "opCode": 3,
           "operand": 42,
-          "ilOffset": 30,
+          "ilOffset": 24,
           "resultType": "System.Double",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 39,
+          "ilOffset": 33,
           "resultType": "System.TimeSpan",
           "callee": "System.Private.CoreLib/System.TimeSpan::FromHours:System.TimeSpan(System.Double)",
           "reference": {
@@ -4287,7 +4284,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 1,
-          "ilOffset": 44,
+          "ilOffset": 38,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -4295,25 +4292,25 @@
           "op": "ldloca",
           "opCode": 76,
           "operand": 1,
-          "ilOffset": 45,
+          "ilOffset": 39,
           "resultType": "System.IntPtr",
           "isPreserveSig": false
         },
         {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 53,
-          "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.TimeSpan::GetHashCode:System.Int32()",
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 41,
+          "resultType": "System.Int64",
+          "callee": "System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()",
           "reference": {
             "assemblyName": "System.Private.CoreLib",
             "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+            "subjectId": "System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()"
           },
           "targetReference": {
             "kind": 3,
             "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "subjectId": "System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
@@ -4321,14 +4318,13 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 1,
-          "constrainedTypeSubjectId": "System.Private.CoreLib/System.TimeSpan",
+          "dispatchKindCode": 4,
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 58,
+          "ilOffset": 46,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -4336,14 +4332,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 60,
+          "ilOffset": 48,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 61,
+          "ilOffset": 49,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -4351,7 +4347,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 63,
+          "ilOffset": 51,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -4359,14 +4355,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 64,
+          "ilOffset": 52,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 73,
-          "ilOffset": 65,
+          "operand": 61,
+          "ilOffset": 53,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -4374,7 +4370,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 67,
+          "ilOffset": 55,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -4382,7 +4378,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode",
-          "ilOffset": 68,
+          "ilOffset": 56,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "TimeDateTimeTimespanSubjects",
@@ -4408,22 +4404,22 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 87,
-          "ilOffset": 74,
+          "operand": 75,
+          "ilOffset": 62,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 76,
+          "ilOffset": 64,
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 78,
+          "ilOffset": 66,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -4431,7 +4427,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode",
-          "ilOffset": 79,
+          "ilOffset": 67,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "TimeDateTimeTimespanSubjects",
@@ -4457,15 +4453,15 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 87,
-          "ilOffset": 85,
+          "operand": 75,
+          "ilOffset": 73,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 87,
+          "ilOffset": 75,
           "isPreserveSig": false
         }
       ],
@@ -4506,8 +4502,8 @@
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 75,
-          "handlerOffset": 76,
+          "tryLength": 63,
+          "handlerOffset": 64,
           "handlerLength": 11,
           "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
@@ -4563,20 +4559,20 @@
           "isPreserveSig": false
         },
         {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 25,
-          "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.TimeSpan::GetHashCode:System.Int32()",
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 19,
+          "resultType": "System.Int64",
+          "callee": "System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()",
           "reference": {
             "assemblyName": "System.Private.CoreLib",
             "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+            "subjectId": "System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()"
           },
           "targetReference": {
             "kind": 3,
             "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "subjectId": "System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
@@ -4584,22 +4580,21 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 1,
-          "constrainedTypeSubjectId": "System.Private.CoreLib/System.TimeSpan",
+          "dispatchKindCode": 4,
           "isPreserveSig": false
         },
         {
           "op": "ldc.r8",
           "opCode": 3,
           "operand": 42,
-          "ilOffset": 30,
+          "ilOffset": 24,
           "resultType": "System.Double",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 39,
+          "ilOffset": 33,
           "resultType": "System.TimeSpan",
           "callee": "System.Private.CoreLib/System.TimeSpan::FromMinutes:System.TimeSpan(System.Double)",
           "reference": {
@@ -4625,7 +4620,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 1,
-          "ilOffset": 44,
+          "ilOffset": 38,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -4633,25 +4628,25 @@
           "op": "ldloca",
           "opCode": 76,
           "operand": 1,
-          "ilOffset": 45,
+          "ilOffset": 39,
           "resultType": "System.IntPtr",
           "isPreserveSig": false
         },
         {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 53,
-          "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.TimeSpan::GetHashCode:System.Int32()",
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 41,
+          "resultType": "System.Int64",
+          "callee": "System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()",
           "reference": {
             "assemblyName": "System.Private.CoreLib",
             "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+            "subjectId": "System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()"
           },
           "targetReference": {
             "kind": 3,
             "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "subjectId": "System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
@@ -4659,14 +4654,13 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 1,
-          "constrainedTypeSubjectId": "System.Private.CoreLib/System.TimeSpan",
+          "dispatchKindCode": 4,
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 58,
+          "ilOffset": 46,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -4674,14 +4668,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 60,
+          "ilOffset": 48,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 61,
+          "ilOffset": 49,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -4689,7 +4683,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 63,
+          "ilOffset": 51,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -4697,14 +4691,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 64,
+          "ilOffset": 52,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 73,
-          "ilOffset": 65,
+          "operand": 61,
+          "ilOffset": 53,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -4712,7 +4706,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 67,
+          "ilOffset": 55,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -4720,7 +4714,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode",
-          "ilOffset": 68,
+          "ilOffset": 56,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "TimeDateTimeTimespanSubjects",
@@ -4746,22 +4740,22 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 87,
-          "ilOffset": 74,
+          "operand": 75,
+          "ilOffset": 62,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 76,
+          "ilOffset": 64,
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 78,
+          "ilOffset": 66,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -4769,7 +4763,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode",
-          "ilOffset": 79,
+          "ilOffset": 67,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "TimeDateTimeTimespanSubjects",
@@ -4795,15 +4789,15 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 87,
-          "ilOffset": 85,
+          "operand": 75,
+          "ilOffset": 73,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 87,
+          "ilOffset": 75,
           "isPreserveSig": false
         }
       ],
@@ -4844,8 +4838,8 @@
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 67,
-          "handlerOffset": 68,
+          "tryLength": 55,
+          "handlerOffset": 56,
           "handlerLength": 11,
           "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
@@ -4901,20 +4895,20 @@
           "isPreserveSig": false
         },
         {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 21,
-          "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.TimeSpan::GetHashCode:System.Int32()",
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 15,
+          "resultType": "System.Int64",
+          "callee": "System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()",
           "reference": {
             "assemblyName": "System.Private.CoreLib",
             "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+            "subjectId": "System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()"
           },
           "targetReference": {
             "kind": 3,
             "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "subjectId": "System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
@@ -4922,22 +4916,21 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 1,
-          "constrainedTypeSubjectId": "System.Private.CoreLib/System.TimeSpan",
+          "dispatchKindCode": 4,
           "isPreserveSig": false
         },
         {
           "op": "ldstr",
           "opCode": 4,
           "operand": "1:00:00",
-          "ilOffset": 26,
+          "ilOffset": 20,
           "resultType": "System.String",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 31,
+          "ilOffset": 25,
           "resultType": "System.TimeSpan",
           "callee": "System.Private.CoreLib/System.TimeSpan::Parse:System.TimeSpan(System.String)",
           "reference": {
@@ -4963,7 +4956,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 1,
-          "ilOffset": 36,
+          "ilOffset": 30,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -4971,25 +4964,25 @@
           "op": "ldloca",
           "opCode": 76,
           "operand": 1,
-          "ilOffset": 37,
+          "ilOffset": 31,
           "resultType": "System.IntPtr",
           "isPreserveSig": false
         },
         {
-          "op": "callvirt",
-          "opCode": 15,
-          "ilOffset": 45,
-          "resultType": "System.Int32",
-          "callee": "System.Private.CoreLib/System.TimeSpan::GetHashCode:System.Int32()",
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 33,
+          "resultType": "System.Int64",
+          "callee": "System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()",
           "reference": {
             "assemblyName": "System.Private.CoreLib",
             "subjectKind": "method",
-            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+            "subjectId": "System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()"
           },
           "targetReference": {
             "kind": 3,
             "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "subjectId": "System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()",
             "typeShape": 0,
             "arrayElementTypeShape": 0,
             "isSealed": false,
@@ -4997,14 +4990,13 @@
             "comInterfaceTypeKind": 0,
             "declaringTypeShape": 0
           },
-          "dispatchKindCode": 1,
-          "constrainedTypeSubjectId": "System.Private.CoreLib/System.TimeSpan",
+          "dispatchKindCode": 4,
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 50,
+          "ilOffset": 38,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -5012,14 +5004,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 52,
+          "ilOffset": 40,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 53,
+          "ilOffset": 41,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -5027,7 +5019,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 55,
+          "ilOffset": 43,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -5035,14 +5027,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 56,
+          "ilOffset": 44,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 65,
-          "ilOffset": 57,
+          "operand": 53,
+          "ilOffset": 45,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -5050,7 +5042,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 59,
+          "ilOffset": 47,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -5058,7 +5050,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode",
-          "ilOffset": 60,
+          "ilOffset": 48,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "TimeDateTimeTimespanSubjects",
@@ -5084,22 +5076,22 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 79,
-          "ilOffset": 66,
+          "operand": 67,
+          "ilOffset": 54,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 68,
+          "ilOffset": 56,
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 70,
+          "ilOffset": 58,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -5107,7 +5099,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "TimeDateTimeTimespanSubjects/TimeDateTimeTimespanSubjects::_exitCode",
-          "ilOffset": 71,
+          "ilOffset": 59,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "TimeDateTimeTimespanSubjects",
@@ -5133,15 +5125,15 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 79,
-          "ilOffset": 77,
+          "operand": 67,
+          "ilOffset": 65,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 79,
+          "ilOffset": 67,
           "isPreserveSig": false
         }
       ],

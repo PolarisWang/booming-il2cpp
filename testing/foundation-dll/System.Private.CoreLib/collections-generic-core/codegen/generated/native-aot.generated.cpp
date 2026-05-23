@@ -240,6 +240,28 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
 
+
+// ── Bridge/import thunks ──
+extern "C" void* kChaosExternalRuntimeFnTable[];
+
+// Bridge/import thunk for: System.Collections/System.Collections.Generic.List<System.Int32>::.ctor:System.Void()
+extern "C" void chaos_bridge_thunk_0(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[0])();
+}
+
+// Bridge/import thunk for: CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::_exitCode
+extern "C" void chaos_bridge_thunk_1(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[2])();
+}
+
+// Bridge/import thunk for: System.Collections/System.Collections.Generic.Dictionary<System.String,System.Int32>::.ctor:System.Void()
+extern "C" void chaos_bridge_thunk_2(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[7])();
+}
+
 extern "C" void CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_0(void);
 extern "C" void CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_1(void);
 extern "C" void CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_2(void);
@@ -504,6 +526,7 @@ extern "C" void* kChaosExternalRuntimeFnTable[9] = {
 };
 
 extern "C" int32_t kChaosExternalRuntimeCount = 9;
+// (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
 static void (*kAotMethods[16])() = {
