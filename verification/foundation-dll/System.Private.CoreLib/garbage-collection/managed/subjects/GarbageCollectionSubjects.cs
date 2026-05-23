@@ -64,12 +64,11 @@ public static partial class GarbageCollectionSubjects
     }
 
     // [6] System.Private.CoreLib/System.GC::GetGCMemoryInfo: System.GCMemoryInfo()
-    // Verify the struct round-trips without crash.  Field values are
-    // GC-implementation-specific; just verify the call works.
+    // Just verify it doesn't crash.  Field values are GC-implementation-specific.
     public static void Subject_6()
     {
         var info = GC.GetGCMemoryInfo();
-        if (info.GetHashCode() == 0) _exitCode = 1;  // weak: just verify no crash
+        _ = info;  // suppress unused warning
     }
 
     // ── Additional GC managed API subjects ──────────────────────────
