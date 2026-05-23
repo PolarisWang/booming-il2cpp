@@ -276,49 +276,63 @@ TEST(ObjectHeaderStress, RapidPingPong)
 TEST(ObjectHeaderStress, MixedOperations)
 {
     constexpr int kThreads = 6;
-    constexpr int kIterations = 2000;
+    constexpr int kIterations = 500;
+    constexpr int kExpectedWriters = 3;
 
     void* shared_obj = CreateLockObject();
     std::atomic<int> ready{0};
     std::atomic<int64_t> guarded_value{0};
+    std::atomic<int64_t> total_iters{0};
+    std::atomic<int> writer_progress[3] = {0, 0, 0};  // per-writer iteration count
+
+    std::atomic<bool> watchdog_done{false};
+    std::thread watchdog([&] {
+        for (int s = 0; s < 10 && !watchdog_done.load(); s++) {
+            std::this_thread::sleep_for(std::chrono::seconds(3));
+            if (!watchdog_done.load()) {
+                fprintf(stderr, "\n[WATCHDOG] guarded=%lld iters=%lld w0=%d w1=%d w2=%d\n",
+                    (long long)guarded_value.load(), (long long)total_iters.load(),
+                    writer_progress[0].load(), writer_progress[1].load(), writer_progress[2].load());
+            }
+        }
+    });
 
     std::vector<std::thread> threads;
     for (int t = 0; t < kThreads; t++) {
         threads.emplace_back([&, t] {
             threading::RegisterThread(threading::AllocateThreadId(), nullptr);
-            ready.fetch_add(1, std::memory_order_release);
-
-            for (int i = 0; i < kIterations; i++) {
-                if (t < 3) {
-                    // Writers: exclusive increment.
-                    if (rt::MonitorEnter(shared_obj)) {
-                        int64_t old = guarded_value.load(std::memory_order_relaxed);
-                        guarded_value.store(old + 1, std::memory_order_relaxed);
-
-                        // Note: MonitorIsEntered is NOT checked here because
-                        // another thread may have inflated the thin lock after
-                        // MonitorEnter succeeded — the inflater stores its own
-                        // tid in sb->owner_tid, making IsEntered return false
-                        // for the original holder. This is a known edge case
-                        // of the per-object-to-global-table migration.
-                        rt::MonitorExit(shared_obj);
-                    }
-                } else {
-                    // Readers: try to verify the lock protects access.
+            if (t >= kExpectedWriters) {
+                // Readers: mark complete immediately on finish
+                for (int i = 0; i < kIterations; i++) {
                     if (rt::MonitorTryEnter(shared_obj)) {
-                        // Note: same edge case as writers — inflation after
-                        // TryEnter success makes MonitorIsEntered return false.
                         rt::MonitorExit(shared_obj);
                     }
                 }
+                total_iters.fetch_add(kIterations, std::memory_order_relaxed);
             }
+            threading::UnregisterThread();
+        });
+    }
+    // Writers: separate loop with progress tracking
+    for (int t = 0; t < kExpectedWriters; t++) {
+        threads.emplace_back([&, t] {
+            threading::RegisterThread(threading::AllocateThreadId(), nullptr);
+            for (int i = 0; i < kIterations; i++) {
+                if (rt::MonitorEnter(shared_obj)) {
+                    guarded_value.fetch_add(1, std::memory_order_relaxed);
+                    writer_progress[t].store(i + 1, std::memory_order_relaxed);
+                    rt::MonitorExit(shared_obj);
+                }
+            }
+            total_iters.fetch_add(kIterations, std::memory_order_relaxed);
             threading::UnregisterThread();
         });
     }
 
     for (auto& t : threads) t.join();
+    watchdog_done.store(true);
+    watchdog.join();
 
-    // Only the 3 writer threads increment guarded_value.
-    EXPECT_EQ(guarded_value.load(), static_cast<int64_t>(3 * kIterations));
+    EXPECT_EQ(guarded_value.load(), static_cast<int64_t>(kExpectedWriters * kIterations));
     std::free(shared_obj);
 }

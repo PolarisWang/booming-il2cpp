@@ -164,6 +164,7 @@ bool MonitorTryEnter(void* monitor_target) {
         auto* sb = GetSyncBlockFromEntry(sync);
         if (sb != nullptr && sb->mutex.try_lock()) {
             sb->owner_tid.store(threading::GetCurrentThreadId(), std::memory_order_relaxed);
+            sb->recursion.store(1, std::memory_order_relaxed);
             return true;
         }
     }

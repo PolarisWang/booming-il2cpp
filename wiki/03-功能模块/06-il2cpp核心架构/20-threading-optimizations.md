@@ -1,8 +1,8 @@
 # Threading 子系统深度优化
 
-> **版本**: v4 | **更新日期**: 2026-05-23
+> **版本**: v5 | **更新日期**: 2026-05-23
 >
-> 覆盖 ThreadPool（工作窃取 + 完整 HillClimbing V2）、WaitHandle O(1) 哈希表、Monitor 自适应自旋 + SyncBlock 池、ExecutionContext 动态 slot + SuppressFlow、Task inlining、GC safepoint 集成、ForbidSuspendScope、Semaphore/Barrier/CDE O(1) 固定数组、TimerQueue min-heap + 哈希表、注入速率控制等 20+ 项优化。
+> 覆盖 ThreadPool（工作窃取 + 完整 HillClimbing V2）、WaitHandle O(1) 哈希表、Monitor ThinLockTable + 自适应自旋 + SyncBlock 池、ExecutionContext 动态 slot + SuppressFlow、Task inlining、GC safepoint 集成、ForbidSuspendScope、Semaphore/Barrier/CDE O(1) 固定数组、TimerQueue min-heap + 哈希表、注入速率控制等 20+ 项优化。
 
 ---
 
@@ -125,7 +125,34 @@ std::unordered_map<uint32_t, std::unique_ptr<WaitHandleEntry>> s_handles;
 
 **文件**: `src/native/runtime-core/wait_handle.h`, `wait_handle.cpp`
 
-### 2.3 Monitor: 自适应自旋 + SyncBlock 池
+### 2.3 Monitor: ThinLockTable + 自适应自旋 + SyncBlock 池
+
+**Type System Phase 1 架构变更**（2026-05）：
+
+```
+旧架构 (ThinLockableHeader 16B):
+  [0] TypeInfo* type_info   (8B)
+  [8] uint64_t sync_state   (8B)  ← 95% 对象从不锁定，纯浪费
+
+新架构 (ThinLockableHeader 8B):
+  [0] TypeInfo* type_info   (8B)  ← 不变，GC 直接读
+
+ThinLockTable (全局 stripe hash):
+  ┌─────────────┬─────────────┬─────────────┐
+  │ stripe 0    │ stripe 1    │ │ stripe 63 │  ← 64 路分片
+  │ mutex       │ mutex       │ │ mutex     │
+  │ map<void*,  │ map<void*,  │ │ map<void*,│
+  │ uint64_t>   │ uint64_t>   │ │ uint64_t> │
+  └─────────────┴─────────────┴─────────────┘
+```
+
+- **8B header**: 删除 sync_state，TypeInfo* 位置不变，GC 零改动读取
+- **ThinLockTable**: 64 路 stripe，每个 stripe 一个 `ankerl::unordered_dense::map<void*, uint64_t>`
+- **Bit layout**: `bit0=kThinLockedBit`, `bit1=kThinInflatedBit`, `bits[2,32)=thread_id`, `bits[32,64)=recursion`
+- **仅在锁定时创建条目**：~95% 从不锁定的对象零额外开销
+- **碎片表后膨胀**: 竞争时标记 `kThinInflatedBit`，值存储 `SyncBlock*` 指针
+- **永不缩表**: 膨胀条目不会被删除（除 DrainForDomain）
+- **GC 耦合**: `ThinLockTable::GetLockedObjects()` 返回锁对象列表供 young/old gen pinning
 
 **三阶段自适应自旋**（替代固定 1000 次 PAUSE）:
 
@@ -140,6 +167,20 @@ std::unordered_map<uint32_t, std::unique_ptr<WaitHandleEntry>> s_handles;
 - 128 项预分配（`std::array<SyncBlock, 128>`）
 - 无锁 bump counter（`std::atomic<uint32_t>`）— 分配 O(1)
 - 超出 128 项回退到堆分配
+
+**递归进入跳过 CAS**:
+
+- 入口处 check `thread_id == current_tid`
+- 匹配则 `relaxed store(recursion + 1)` — 零 CAS 开销
+- 从 ~15 cycles 降到 ~2 cycles
+
+**MonitorTryEnter 修复（2026-05-23 调试发现）**:
+
+- MonitorTryEnter 获取 SyncBlock（`try_lock`）后未设置 `sb->recursion`
+- 导致后续 MonitorExit `fetch_sub(1)` 溢出到 `0xFFFFFFFF` → 永不解锁
+- 修复: `sb->recursion.store(1, std::memory_order_relaxed)`
+
+**文件**: `src/native/runtime-core/core/thin_lock_table.h/.cpp`, `core/monitor.cpp`, `core/sync_mutex.cpp`, `forbid_suspend.h`
 
 **递归进入跳过 CAS**:
 
@@ -258,6 +299,20 @@ CountdownEventEntryFixed g_countdown_events[1024];
 | 递归进入 | CAS~15 cycles | load~2 cycles | **7.5x** |
 | 中等竞争 | 固定 1000 次自旋 | 自适应 128 次 | **节省 ~3us** |
 | SyncBlock 膨胀 | 堆分配 | bump 池分配 | **零分配** |
+| 对象头大小（95% 不锁定） | 16B (TypeInfo* + sync_state) | **8B** (TypeInfo* only) | **节省 8B/对象** |
+
+**Type System Phase 1 新增基准数据（P4.2/P4.4）**:
+
+| 基准 | 结果 | 详情 |
+|------|------|------|
+| ThinLock 无竞争延迟 | 707 ns/iter | 10K lock/unlock 无条件竞争 |
+| 头部分配延迟 | 72 ns/alloc | 100K `ObjectNew` 调用（包含分配 + TypeInfo 设置） |
+| ContentionStress (8T, 5K iter) | 120 ms | 8 线程高争用，0 锁丢失 |
+| ReentrantStress (4T, 10 depth, 1K iter) | 42 ms | 递归深度 10 正确 |
+| MultiObjectStress (1K objs, 8T) | 1253 ms | 1000 对象分区访问 |
+| TryEnterContention (8T, 2K iter) | 22 ms | 非阻塞 trylock 高争用 |
+| RapidPingPong (2T, 100ms) | 108 ms | 快速 ping-pong 无死锁 |
+| MixedOperations (6T, 500 iter) | 3016 ms | 3 writers + 3 readers 混合 |
 
 ### 3.4 futex/ulock（平台相关）
 
@@ -339,6 +394,8 @@ chaos_monitor_enter (ABI stub) → MonitorEnter (thin lock/inflate)
 | Threading Stress | `threading_stress_test.cpp` | 6 (30s) | ✅ |
 | Phase 3 Industrialization | `phase3_industrialization_test.cpp` | 5 | ✅ |
 | RWLock Upgrade | `rwlock_upgrade_test.cpp` | 专测 | ✅ |
+| ObjectHeader Stress | `object_header_stress_test.cpp` | 6 (P4.3) | ✅ |
+| ObjectHeader Benchmark | `object_header_benchmark_test.cpp` | 2 (P4.2/P4.4) | ✅ |
 
 ### 5.2 验收标准
 
@@ -348,6 +405,8 @@ chaos_monitor_enter (ABI stub) → MonitorEnter (thin lock/inflate)
 | WaitHandle storm ≥ 80K ops/sec | 通过 | ✅ |
 | ThreadPool 8 worker, 100K tasks | ≤ 1/3 原时间 | ✅ |
 | Benchmark 模式无崩溃 | 安全处理异常 | ✅ |
+| 薄锁 stress 6 测试 (8T 高争用) | 0 锁丢失，无死锁 | ✅ |
+| 对象头分配延迟 | 72 ns/alloc (Debug) | ✅ |
 | GC 暂停 ≤ 100ms | 通过 | ✅ |
 | EC 5+ slot 无溢出 | 动态扩容至 64 | ✅ |
 | HC CPU 真实测量 | GetProcessCpuTimeNs | ✅ |
@@ -371,7 +430,14 @@ chaos_monitor_enter (ABI stub) → MonitorEnter (thin lock/inflate)
 | WaitHandle 多等待 | `WaitHandleWaitAny/WaitAll(ids, count, timeout)` | `wait_handle.cpp` |
 | Monitor 进入 | `MonitorEnter(obj, tid)` | `core/monitor.cpp` |
 | Monitor 退出 | `MonitorExit(obj, tid)` | `core/monitor.cpp` |
+| Monitor 尝试进入 | `MonitorTryEnter(obj, tid)` | `core/monitor.cpp` |
+| Monitor 查询 | `MonitorIsEntered(obj, tid)` | `core/monitor.cpp` |
 | SyncBlock 分配 | `AllocateSyncBlockFromPool()` | `core/sync_mutex.cpp` |
+| ThinLock 锁定 | `ThinLockTable::TryLock(obj, tid)` | `core/thin_lock_table.cpp` |
+| ThinLock 解锁 | `ThinLockTable::Unlock(obj, tid)` | `core/thin_lock_table.cpp` |
+| ThinLock 尝试 | `ThinLockTable::TryEnter(obj, tid)` | `core/thin_lock_table.cpp` |
+| ThinLock 膨胀 | `ThinLockTable::Inflate(obj, sb)` | `core/thin_lock_table.cpp` |
+| ThinLock GC 查询 | `ThinLockTable::GetLockedObjects()` | `core/thin_lock_table.cpp` |
 | Task.Run | `TaskRun(delegate_fn)` | `task_runner.cpp` |
 | ExecutionContext 捕获 | `ExecutionContextCapture()` | `execution_context.cpp` |
 | ExecutionContext 运行 | `ExecutionContextRun(ctx, cb, state)` | `execution_context.cpp` |
@@ -435,7 +501,9 @@ Worker 线程获取工作的优先级：
 | 1A | WaitHandle O(1) hash map | `wait_handle.cpp` | ✅ |
 | 1B | WaitHandle 读写锁分解 | `wait_handle.cpp` | ✅ |
 | 1C | Monitor 自适应自旋 (3 阶段) | `core/monitor.cpp` | ✅ |
-| 1D | Monitor 递归 CAS 跳过 | `core/monitor.cpp` | ✅ |
+| 1C2 | Monitor 递归 CAS 跳过 | `core/monitor.cpp` | ✅ |
+| 1C3 | **ThinLockTable 64 路 stripe** | `core/thin_lock_table.cpp` | ✅ Type System P1 |
+| 1D | 8B ObjectHeader (删除 sync_state) | `generated_code_compat.h` | ✅ Type System P1 |
 | 1E | SyncBlock 预分配池 | `core/sync_mutex.cpp` | ✅ |
 | 2A | ThreadPool 工作窃取 | `thread_pool.cpp` | ✅ |
 | 2B | Hill Climbing 完整状态机 | `thread_pool.cpp` | ✅ |

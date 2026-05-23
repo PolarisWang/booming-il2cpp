@@ -89,3 +89,19 @@ add_chaos_test(test_phase3_industrialization
     LIBS ${CHAOS_THREADING_LIBS}
     LABELS "unit;threading"
 )
+
+# object_header_stress_test — Type System Phase 1 stress tests (P4.3)
+# ThinLockTable contention, reentrancy, multi-object, TryEnter, ping-pong, mixed
+add_chaos_test(test_object_header_stress
+    object_header_stress_test.cpp
+    LIBS ${CHAOS_THREADING_LIBS}
+    LABELS "stress;threading;typesystem"
+)
+
+# object_header_benchmark_test — Type System Phase 1 benchmarks (P4.2/P4.4)
+# ThinLock uncontended latency + header allocation latency
+add_chaos_test(test_object_header_benchmark
+    object_header_benchmark_test.cpp
+    LIBS ${CHAOS_THREADING_LIBS}
+    LABELS "benchmark;threading;typesystem"
+)
