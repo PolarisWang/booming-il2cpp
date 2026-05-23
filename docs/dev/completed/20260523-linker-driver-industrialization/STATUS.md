@@ -2,7 +2,7 @@
 task_id: 20260523-linker-driver-industrialization
 task_type: roadmap
 phase: roadmap
-lifecycle_status: in-progress
+lifecycle_status: completed
 roadmap_or_plan: roadmap-v1-01.md
 design_doc: n/a (design summary in STATUS.md)
 arch_review_mode: critical
