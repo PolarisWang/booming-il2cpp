@@ -290,9 +290,10 @@ inline void ProfileDump() noexcept {
         }
     }
 
-    // Aggregate data from retired (exited) threads.
-    for (auto* node = g_retired_profile_head.load(std::memory_order_acquire);
-         node != nullptr; node = node->next) {
+    // Aggregate data from retired (exited) threads, then free the nodes
+    // to prevent unbounded memory growth in long-lived processes.
+    auto* retired = g_retired_profile_head.exchange(nullptr, std::memory_order_acq_rel);
+    for (auto* node = retired; node != nullptr; node = node->next) {
         for (int si = 0; si < node->data.slot_count; ++si) {
             const auto& src = node->data.slots[si];
             if (src.name == nullptr || src.call_count == 0) continue;
@@ -316,6 +317,12 @@ inline void ProfileDump() noexcept {
             if (src.min_cycles < agg[ai].minv) agg[ai].minv = src.min_cycles;
             if (src.max_cycles > agg[ai].maxv) agg[ai].maxv = src.max_cycles;
         }
+    }
+    // Free retired node list after aggregation.
+    while (retired != nullptr) {
+        auto* next = retired->next;
+        delete retired;
+        retired = next;
     }
 
     for (int i = 0; i < agg_count; ++i) {

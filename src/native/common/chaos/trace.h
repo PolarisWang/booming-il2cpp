@@ -87,16 +87,17 @@ inline void trace_atexit_flush() {
 // Global traceId (set from CHAOS_TRACE_ID env var by TRACE_INIT)
 inline char g_trace_id[32] = {};
 
-// Timestamp cache: refreshed at most once per ms to avoid repeated clock_gettime
-inline uint64_t g_last_ts_ms = 0;
-inline char g_cached_timestamp[32] = {};
-
+// Timestamp cache using thread_local to avoid data races under concurrent
+// trace writes. Each thread independently caches its last formatted timestamp
+// and refreshes it at most once per millisecond.
 inline const char* cached_iso8601() {
+    thread_local uint64_t tls_last_ts_ms = 0;
+    thread_local char tls_cached_timestamp[32] = {};
     using namespace std::chrono;
     auto now_ms = duration_cast<milliseconds>(
         system_clock::now().time_since_epoch()).count();
-    if (now_ms != g_last_ts_ms || g_cached_timestamp[0] == '\0') {
-        g_last_ts_ms = now_ms;
+    if (now_ms != tls_last_ts_ms || tls_cached_timestamp[0] == '\0') {
+        tls_last_ts_ms = now_ms;
         auto sec = static_cast<time_t>(now_ms / 1000);
         struct tm buf;
 #if defined(_WIN32)
@@ -104,10 +105,10 @@ inline const char* cached_iso8601() {
 #else
         localtime_r(&sec, &buf);
 #endif
-        std::strftime(g_cached_timestamp, sizeof(g_cached_timestamp),
+        std::strftime(tls_cached_timestamp, sizeof(tls_cached_timestamp),
                       "%Y-%m-%dT%H:%M:%S", &buf);
     }
-    return g_cached_timestamp;
+    return tls_cached_timestamp;
 }
 
 } // namespace detail

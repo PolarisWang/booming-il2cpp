@@ -8,6 +8,7 @@
 | [02-core-stages](02-core-stages/MILESTONE.md) | 21 | 04/05–05/08 | IL2CPP reboot, Stages 1a-5d, baseline, runtime expansion |
 | [03-subject-framework](03-subject-framework/MILESTONE.md) | 13 | 04/06–05/05 | Subject framework rollout, stages A-F, test system redesign |
 | [04-pipeline-infrastructure](04-pipeline-infrastructure/MILESTONE.md) | 7 | 04/07–04/10 | Pipeline phases 1-4, project generation |
+| [commonlib-industrialization](commonlib-industrialization/STATUS.md) | 17 | 05/23 | CommonLibrary 工业化完善：25 模块测试覆盖 + CI + 风险修复 + 文档 |
 | [05-mainline-capabilities](05-mainline-capabilities/MILESTONE.md) | 13 | 04/09–04/10 | Performance core, capability batches, contract freeze |
 | [06-full-project](06-full-project/MILESTONE.md) | 7 | 04/11 | Full project ingestion, AOT, engine, hotupdate, interpreter |
 | [07-gc-benchmark](07-gc-benchmark/MILESTONE.md) | 4 | 04/12 | GC AOT, benchmark system, hotupdate e2e, mobile |

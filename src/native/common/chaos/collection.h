@@ -49,6 +49,25 @@ DictionaryRuntimeStorage<TKey, TValue>* require_dictionary_runtime_storage(CHAOS
     return storage;
 }
 
+/// Const-qualified accessor for read-only dictionary operations (lookup, count).
+/// Returns nullptr if no storage has been allocated yet — callers must check.
+template <typename TKey, typename TValue>
+const DictionaryRuntimeStorage<TKey, TValue>*
+get_dictionary_runtime_storage(CHAOS_IL2CPP_INTPTR handle) noexcept
+{
+    if (handle == static_cast<CHAOS_IL2CPP_INTPTR>(0))
+    {
+        return nullptr;
+    }
+    auto* slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(
+        reinterpret_cast<char*>(handle) + kNativeStorageSlotOffset);
+    if (*slot == 0)
+    {
+        return nullptr;
+    }
+    return reinterpret_cast<const DictionaryRuntimeStorage<TKey, TValue>*>(*slot);
+}
+
 // ── HashSet<T> ──────────────────────────────────────────────────
 // HashSet<T> reuses ListRuntimeStorage (vector of values with linear scan).
 // For HashSet<T>, the GC object also embeds the native storage pointer.
