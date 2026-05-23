@@ -234,7 +234,9 @@ add_chaos_test(assembly_manager_test assembly_manager_test.cpp
 # Compile domain_unloader.cpp from source alongside the test.
 add_chaos_test(domain_unloader_stress_test domain_unloader_stress_test.cpp
     ../../../../src/native/runtime-core/domain_unloader.cpp
+    gc/gc_test_stubs.cpp gc/gc_test_base.cpp
     LIBS ${CHAOS_COMMON_TEST_LIBS}
+    INCLUDES gc
     LABELS "stress;core;loader"
 )
 

@@ -43,3 +43,7 @@
 | [`25-Marshal平台ABI与互操作体系.md`](./25-Marshal%E5%B9%B3%E5%8F%B0ABI%E4%B8%8E%E4%BA%92%E6%93%8D%E4%BD%9C%E4%BD%93%E7%B3%BB.md) | Marshal 方法 Alloc/Free、String、Struct、Delegate、COM Interop |
 | [`26-CodeGen度量与结构化恢复.md`](./26-CodeGen%E5%BA%A6%E9%87%8F%E4%B8%8E%E7%BB%93%E6%9E%84%E5%8C%96%E6%81%A2%E5%A4%8D.md) | codegen-metrics 格式、flat-fallback 消除、4 种模式、100% structuredRecoveryRate |
 | [`27-T4原生代码生成器架构.md`](./27-T4%E5%8E%9F%E7%94%9F%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8%E6%9E%B6%E6%9E%84.md) | T4 自适应分层、NativeCodeGenerator IR→x64 翻译、5 阶段 V3 能力、全部 103 opcode 支持 |
+| [`28-AssemblyManager与ALC.md`](./28-AssemblyManager%E4%B8%8EALC.md) | AssemblyLoadContext 生命周期、shared_mutex 锁策略、静态字段管理、加载/卸载流程 |
+| [`28-MetadataWriter架构.md`](./28-MetadataWriter%E6%9E%B6%E6%9E%84.md) | MetadataWriter 模型与增量/全量 emit 流程 |
+| [`29-ModuleRegistry运行时参考.md`](./29-ModuleRegistry%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8F%82%E8%80%83.md) | 模块注册/查找/墓碑/回收、TypeInfoHandle、并发安全 |
+| [`30-PatchLoader运行时参考.md`](./30-PatchLoader%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8F%82%E8%80%83.md) | .patchdata 加载验证、PatchContext/PatchMetadataCache 生命周期、溢出保护 |

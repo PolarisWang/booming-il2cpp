@@ -31,6 +31,69 @@ namespace chaos::il2cpp::runtime_core {
 // Holds all per-assembly state loaded from a .patchdata binary.
 // Extended with ALC fields: alc_id, is_shared, is_unloading + tombstone.
 struct AssemblyLoadContext {
+    AssemblyLoadContext() = default;
+
+    // Move constructor/assignment required because std::atomic<bool> deletes
+    // the implicit move operations.  Vector reallocation (in LoadAssembly)
+    // moves elements.
+    AssemblyLoadContext(AssemblyLoadContext&& other) noexcept
+        : alc_id(other.alc_id)
+        , name(std::move(other.name))
+        , is_shared(other.is_shared)
+        , module_id(other.module_id)
+        , patch_context(other.patch_context)
+        , static_field_ptr(other.static_field_ptr)
+        , static_field_count(other.static_field_count)
+        , domain_id(other.domain_id)
+        , generics_registered(other.generics_registered)
+        , is_loaded(other.is_loaded)
+        , is_unloading(other.is_unloading.load(std::memory_order_relaxed))
+        , type_count(other.type_count)
+    {
+        other.alc_id = 0;
+        other.is_shared = false;
+        other.module_id = 0;
+        other.patch_context = nullptr;
+        other.static_field_ptr = nullptr;
+        other.static_field_count = 0;
+        other.domain_id = 0;
+        other.generics_registered = false;
+        other.is_loaded = false;
+        other.is_unloading.store(false, std::memory_order_relaxed);
+        other.type_count = 0;
+    }
+
+    AssemblyLoadContext& operator=(AssemblyLoadContext&& other) noexcept {
+        if (this == &other) return *this;
+        alc_id = other.alc_id;
+        name = std::move(other.name);
+        is_shared = other.is_shared;
+        module_id = other.module_id;
+        patch_context = other.patch_context;
+        static_field_ptr = other.static_field_ptr;
+        static_field_count = other.static_field_count;
+        domain_id = other.domain_id;
+        generics_registered = other.generics_registered;
+        is_loaded = other.is_loaded;
+        is_unloading.store(other.is_unloading.load(std::memory_order_relaxed), std::memory_order_relaxed);
+        type_count = other.type_count;
+        other.alc_id = 0;
+        other.is_shared = false;
+        other.module_id = 0;
+        other.patch_context = nullptr;
+        other.static_field_ptr = nullptr;
+        other.static_field_count = 0;
+        other.domain_id = 0;
+        other.generics_registered = false;
+        other.is_loaded = false;
+        other.is_unloading.store(false, std::memory_order_relaxed);
+        other.type_count = 0;
+        return *this;
+    }
+
+    AssemblyLoadContext(const AssemblyLoadContext&) = delete;
+    AssemblyLoadContext& operator=(const AssemblyLoadContext&) = delete;
+
     // ── ALC identity ─────────────────────────────────────────────────
     uint32_t        alc_id          = 0;       // 0 = SharedContext / CoreLib
     std::string     name;                      // e.g. "SharedContext" | "MyAssembly"
@@ -120,7 +183,7 @@ private:
     AssemblyManager& operator=(const AssemblyManager&) = delete;
 
     std::vector<AssemblyLoadContext> assemblies_{kInitialAssemblies};
-    uint32_t loaded_count_ = 0;
+    std::atomic<uint32_t> loaded_count_{0};
 };
 
 }  // namespace chaos::il2cpp::runtime_core

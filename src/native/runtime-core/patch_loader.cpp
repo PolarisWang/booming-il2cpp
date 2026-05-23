@@ -341,10 +341,25 @@ static PatchContext* CreatePatchContext(const PatchDataHeader* header, size_t to
     uint32_t method_count = header->method_def_count;
     size_t ctx_size = sizeof(PatchContext);
     size_t cache_size = sizeof(PatchMetadataCache);
-    size_t methods_size = sizeof(PatchMethod) * method_count;
 
-    auto* block = static_cast<uint8_t*>(
-        memory_domain::DomainCurrentAllocateTagged(ctx_size + cache_size + methods_size));
+    // Overflow protection for the methods allocation.
+    size_t methods_size = 0;
+    if (method_count > 0) {
+        if (method_count > SIZE_MAX / sizeof(PatchMethod)) {
+            return nullptr;  // multiplication overflow
+        }
+        methods_size = sizeof(PatchMethod) * method_count;
+    }
+
+    // Overflow protection for the total block allocation.
+    size_t total_alloc = ctx_size + cache_size;
+    if (methods_size > SIZE_MAX - total_alloc) {
+        return nullptr;  // addition overflow
+    }
+    total_alloc += methods_size;
+
+    uint8_t* block = static_cast<uint8_t*>(
+        memory_domain::DomainCurrentAllocateTagged(total_alloc));
     if (block == nullptr) return nullptr;
 
     auto* ctx = new (block) PatchContext();
@@ -385,8 +400,8 @@ static void DestroyPatchContext(PatchContext* ctx) {
 
         // call_cache is allocated by RebuildCallCacheForT3 / InlineLeafCallees
         // via CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE (domain-tagged).
-        // NOTE: if ReapplyInlining replaced the array, the old allocation is leaked
-        // (currently acceptable since InlineLeafCallees is only called once per method).
+        // ReapplyInlining and InlineLeafCallees free the old cache before
+        // replacement, so only the current call_cache reaches this point.
         if (m.call_cache != nullptr) {
             CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(m.call_cache);
             m.call_cache = nullptr;
