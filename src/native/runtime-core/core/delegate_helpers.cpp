@@ -86,7 +86,6 @@ CHAOS_IL2CPP_INTPTR DelegateCreateMulticast(
     auto* delegate = static_cast<DelegateObject*>(
         G_OldGen().Allocate(sizeof(DelegateObject), true));
     delegate->type_info = template_delegate->type_info;
-    delegate->sync_state = 0;
     delegate->chaos_delegate_target = 0;
     delegate->chaos_delegate_method_ptr = 0;
 

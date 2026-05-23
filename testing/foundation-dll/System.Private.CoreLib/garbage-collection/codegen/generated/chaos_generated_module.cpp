@@ -6,6 +6,7 @@
 
 #include "chaos_runtime_host.h"
 #include "chaos_generated_module.h"
+#include <gc/gc_layout.h>
 
 // extern "C" symbols from native-aot.generated.cpp
 extern "C" const CodeRegistrationV0 chaos_codegen_code_registration;
@@ -36,6 +37,15 @@ extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5(
 extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_6(
         void
 );
+extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_7(
+        void
+);
+extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_8(
+        void
+);
+extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_9(
+        void
+);
 
 // ═══════════════════════════════════════════════════════════════════════════
 // Typed Dispatch Table — wires extern "C" native symbols into typed pointers
@@ -50,8 +60,11 @@ static const Functions s_functions = {
         &GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_4,
         &GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5,
         &GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_6,
+        &GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_7,
+        &GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_8,
+        &GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_9,
     },
-    7,
+    10,
 };
 
 const Functions kFunctions = s_functions;
@@ -59,8 +72,8 @@ const Functions kFunctions = s_functions;
 // Flat function pointer array for indexed dispatch (benchmarking).
 // Avoids fragile reinterpret_cast<void* const*>(&kFunctions) which depends on
 // struct layout uniformity across sub-struct members.
-extern "C" void* kFunctionsFlat[7];
-void* kFunctionsFlat[7] = {
+extern "C" void* kFunctionsFlat[10];
+void* kFunctionsFlat[10] = {
     reinterpret_cast<void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0),
     reinterpret_cast<void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_1),
     reinterpret_cast<void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_2),
@@ -68,6 +81,9 @@ void* kFunctionsFlat[7] = {
     reinterpret_cast<void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_4),
     reinterpret_cast<void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5),
     reinterpret_cast<void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_6),
+    reinterpret_cast<void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_7),
+    reinterpret_cast<void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_8),
+    reinterpret_cast<void*>(&GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_9),
 };
 
 
@@ -75,9 +91,13 @@ bool ChaosGeneratedModuleActivate(ChaosRuntimeHost* host) {
     if (!host) return false;
     if (!host->IsInitialized()) return false;
 
-    return host->RegisterModule(
+    bool ok = host->RegisterModule(
         &chaos_codegen_code_registration,
         &chaos_codegen_metadata_registration,
         &chaos_codegen_options
     );
+    if (ok) {
+        ChaosRegisterGcLayouts();
+    }
+    return ok;
 }

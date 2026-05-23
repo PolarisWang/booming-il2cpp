@@ -3300,7 +3300,7 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     // Skip paramTypes check for diagnostic — accept any param count
                     // Comma expression: size=0, version++, result ignored (void return)
-                    return "(reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>({0}) + 16)->size = 0, reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>({0}) + 16)->version++)";
+                    return "(reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>({0}) + 8)->size = 0, reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>({0}) + 8)->version++)";
                 })
             { IsInstanceMethod = true });
 
@@ -3312,7 +3312,7 @@ public sealed partial class NativeAotLoweringPlanner
                 Resolver: static (callee, paramTypes) =>
                 {
                     if (paramTypes.Count != 1) return null;
-                    return "([&]() -> CHAOS_IL2CPP_INT32 { auto* _list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>({0}) + 16); auto* _elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(reinterpret_cast<char*>(_list->items_array) + sizeof(CHAOS_IL2CPP_INT32)); for (CHAOS_IL2CPP_INT32 _i = 0; _i < _list->size; _i++) { if (_elems[_i] == ({1})) return 1; } return 0; })()";
+                    return "([&]() -> CHAOS_IL2CPP_INT32 { auto* _list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>({0}) + 8); auto* _elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(reinterpret_cast<char*>(_list->items_array) + sizeof(CHAOS_IL2CPP_INT32)); for (CHAOS_IL2CPP_INT32 _i = 0; _i < _list->size; _i++) { if (_elems[_i] == ({1})) return 1; } return 0; })()";
                 })
             { IsInstanceMethod = true });
 
@@ -3323,7 +3323,7 @@ public sealed partial class NativeAotLoweringPlanner
                 Resolver: static (callee, paramTypes) =>
                 {
                     if (paramTypes.Count != 1) return null;
-                    return "([&]() -> CHAOS_IL2CPP_INT32 { auto* _list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>({0}) + 16); auto* _elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(reinterpret_cast<char*>(_list->items_array) + sizeof(CHAOS_IL2CPP_INT32)); for (CHAOS_IL2CPP_INT32 _i = 0; _i < _list->size; _i++) { if (_elems[_i] == ({1})) return _i; } return -1; })()";
+                    return "([&]() -> CHAOS_IL2CPP_INT32 { auto* _list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>({0}) + 8); auto* _elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(reinterpret_cast<char*>(_list->items_array) + sizeof(CHAOS_IL2CPP_INT32)); for (CHAOS_IL2CPP_INT32 _i = 0; _i < _list->size; _i++) { if (_elems[_i] == ({1})) return _i; } return -1; })()";
                 })
             { IsInstanceMethod = true });
 
@@ -3335,7 +3335,7 @@ public sealed partial class NativeAotLoweringPlanner
                 Resolver: static (callee, paramTypes) =>
                 {
                     if (paramTypes.Count != 1) return null;
-                    return "([&]() -> CHAOS_IL2CPP_INT32 { auto* _list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>({0}) + 16); auto* _elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(reinterpret_cast<char*>(_list->items_array) + sizeof(CHAOS_IL2CPP_INT32)); for (CHAOS_IL2CPP_INT32 _i = 0; _i < _list->size; _i++) { if (_elems[_i] == ({1})) { auto _shift = static_cast<CHAOS_IL2CPP_SIZE>(_list->size - _i - 1); if (_shift > 0) std::memmove(&_elems[_i], &_elems[_i + 1], _shift * sizeof(CHAOS_IL2CPP_INTPTR)); _list->size--; _list->version++; return 1; } } return 0; })()";
+                    return "([&]() -> CHAOS_IL2CPP_INT32 { auto* _list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>({0}) + 8); auto* _elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(reinterpret_cast<char*>(_list->items_array) + sizeof(CHAOS_IL2CPP_INT32)); for (CHAOS_IL2CPP_INT32 _i = 0; _i < _list->size; _i++) { if (_elems[_i] == ({1})) { auto _shift = static_cast<CHAOS_IL2CPP_SIZE>(_list->size - _i - 1); if (_shift > 0) std::memmove(&_elems[_i], &_elems[_i + 1], _shift * sizeof(CHAOS_IL2CPP_INTPTR)); _list->size--; _list->version++; return 1; } } return 0; })()";
                 })
             { IsInstanceMethod = true });
 
@@ -3350,7 +3350,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("void", symbol,
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0",
                     [
-                        "    auto* _list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>(chaos_arg_0) + 16);",
+                        "    auto* _list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>(chaos_arg_0) + 8);",
                         "    _list->size = 0;",
                         "    _list->version++;",
                     ]);
@@ -3371,7 +3371,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("void", symbol,
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
                     [
-                        "    auto* _list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>(chaos_arg_0) + 16);",
+                        "    auto* _list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>(chaos_arg_0) + 8);",
                         "    auto* hdr = reinterpret_cast<chaos_list_array_header*>(_list->items_array);",
                         "    if (hdr == nullptr || _list->size >= hdr->capacity) {",
                         "        auto old_cap = (hdr != nullptr) ? hdr->capacity : 0;",
@@ -3413,7 +3413,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
                     [
-                        "    auto* _list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>(chaos_arg_0) + 16);",
+                        "    auto* _list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>(chaos_arg_0) + 8);",
                         "    auto* hdr = reinterpret_cast<chaos_list_array_header*>(_list->items_array);",
                         "    if (hdr == nullptr || _list->size == 0) return 0;",
                         "    auto* elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(hdr + 1);",
@@ -3442,7 +3442,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
                     [
-                        "    auto* _list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>(chaos_arg_0) + 16);",
+                        "    auto* _list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>(chaos_arg_0) + 8);",
                         "    auto* hdr = reinterpret_cast<chaos_list_array_header*>(_list->items_array);",
                         "    if (hdr == nullptr || _list->size == 0) return -1;",
                         "    auto* elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(hdr + 1);",
@@ -3471,7 +3471,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
                     [
-                        "    auto* _list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>(chaos_arg_0) + 16);",
+                        "    auto* _list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>(chaos_arg_0) + 8);",
                         "    auto* hdr = reinterpret_cast<chaos_list_array_header*>(_list->items_array);",
                         "    if (hdr == nullptr || _list->size == 0) return 0;",
                         "    auto* elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(hdr + 1);",
@@ -3506,7 +3506,7 @@ public sealed partial class NativeAotLoweringPlanner
                     var src = RenderSimpleExternalRuntimeHelper("void", symbol,
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INT32 chaos_arg_1",
                     [
-                        "    auto* _list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>(chaos_arg_0) + 16);",
+                        "    auto* _list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>(chaos_arg_0) + 8);",
                         "    auto* hdr = reinterpret_cast<chaos_list_array_header*>(_list->items_array);",
                         "    if (hdr == nullptr || chaos_arg_1 < 0 || chaos_arg_1 >= _list->size) return;",
                         "    auto* elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(hdr + 1);",
@@ -3748,7 +3748,7 @@ public sealed partial class NativeAotLoweringPlanner
                         var src0 = RenderSimpleExternalRuntimeHelper("void", symbol,
                             "CHAOS_IL2CPP_INTPTR chaos_arg_0",
                         [
-                            "    auto* _list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>(chaos_arg_0) + 16);",
+                            "    auto* _list = reinterpret_cast<chaos_list_fields*>(reinterpret_cast<char*>(chaos_arg_0) + 8);",
                             "    auto* hdr = reinterpret_cast<chaos_list_array_header*>(_list->items_array);",
                             "    if (hdr == nullptr || _list->size < 2) return;",
                             "    auto* elems = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(hdr + 1);",

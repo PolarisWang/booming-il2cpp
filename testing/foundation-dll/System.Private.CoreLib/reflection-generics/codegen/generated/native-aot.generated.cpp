@@ -27,6 +27,20 @@ extern "C" void InterpreterEntryDirect(
 #pragma warning(push)
 #pragma warning(disable: 4065 4244)
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ReflectionGenericsSubjects_ReflectionGenericsSubjects_Subject_0(void);
+extern "C" void ReflectionGenericsSubjects_ReflectionGenericsSubjects_Subject_1(void);
+extern "C" void ReflectionGenericsSubjects_ReflectionGenericsSubjects_Subject_10(void);
+extern "C" void ReflectionGenericsSubjects_ReflectionGenericsSubjects_Subject_11(void);
+extern "C" void ReflectionGenericsSubjects_ReflectionGenericsSubjects_Subject_2(void);
+extern "C" void ReflectionGenericsSubjects_ReflectionGenericsSubjects_Subject_3(void);
+extern "C" void ReflectionGenericsSubjects_ReflectionGenericsSubjects_Subject_4(void);
+extern "C" void ReflectionGenericsSubjects_ReflectionGenericsSubjects_Subject_5(void);
+extern "C" void ReflectionGenericsSubjects_ReflectionGenericsSubjects_Subject_6(void);
+extern "C" void ReflectionGenericsSubjects_ReflectionGenericsSubjects_Subject_7(void);
+extern "C" void ReflectionGenericsSubjects_ReflectionGenericsSubjects_Subject_8(void);
+extern "C" void ReflectionGenericsSubjects_ReflectionGenericsSubjects_Subject_9(void);
+
 namespace chaos::il2cpp::codegen::ReflectionGenericsSubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup
@@ -522,6 +536,40 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionInvokeMethod(CHAOS_IL2CPP_INTPTR chaos_method
 	return 0;
 }
 
+
+// ── GcTypeLayout pointer offset arrays (computed via offsetof) ──
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Type[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_name_value))};
+
+extern "C" void ChaosRegisterGcLayouts() {
+	auto& registry = chaos::il2cpp::runtime_core::GcLayoutRegistry::Instance();
+
+	registry.Register(3653690386884475450ULL, sizeof(chaos_type_ReflectionGenericsSubjects_ReflectionGenericsSubjects), nullptr, 0);
+	registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
+	registry.Register(5474029880995115448ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly, 1);
+	registry.Register(17082367815459723707ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, 1);
+	registry.Register(4137207361503509124ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, 5);
+	registry.Register(17040031516751226236ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, 2);
+	registry.Register(10748947813473285525ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, 5);
+	registry.Register(1782325859292956794ULL, sizeof(chaos_type_System_Private_CoreLib_System_String), nullptr, 0);
+	registry.Register(3222174513575444759ULL, sizeof(chaos_type_System_Private_CoreLib_System_Type), kGcOffsets_chaos_type_System_Private_CoreLib_System_Type, 2);
+
+	// Register TypeInfoV0 address ranges for IsValidTypeInfoPointer.
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_ReflectionGenericsSubjects_ReflectionGenericsSubjects), reinterpret_cast<uintptr_t>(&chaos_mt_ReflectionGenericsSubjects_ReflectionGenericsSubjects) + sizeof(chaos_mt_ReflectionGenericsSubjects_ReflectionGenericsSubjects));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object) + sizeof(chaos_mt_System_Private_CoreLib_System_Object));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_Assembly));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_String), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_String) + sizeof(chaos_mt_System_Private_CoreLib_System_String));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Type), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Type) + sizeof(chaos_mt_System_Private_CoreLib_System_Type));
+}
+
 CHAOS_IL2CPP_INT32 chaos_static_ReflectionGenericsSubjects_ReflectionGenericsSubjects___exitCode = 0;
 
 static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
@@ -604,6 +652,29 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
+
+
+// ── Bridge/import thunks ──
+extern "C" void* kChaosExternalRuntimeFnTable[];
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Byte
+extern "C" void chaos_bridge_thunk_0(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[0])();
+}
+
+// Bridge/import thunk for: ReflectionGenericsSubjects/ReflectionGenericsSubjects::_exitCode
+extern "C" void chaos_bridge_thunk_1(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[4])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Array::Empty<System.Type>:System.Type[]()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_2(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[5])();
+	return result;
+}
 
 extern "C" void ReflectionGenericsSubjects_ReflectionGenericsSubjects_Subject_0(void);
 extern "C" void ReflectionGenericsSubjects_ReflectionGenericsSubjects_Subject_1(void);
@@ -861,6 +932,7 @@ extern "C" void* kChaosExternalRuntimeFnTable[17] = {
 };
 
 extern "C" int32_t kChaosExternalRuntimeCount = 17;
+// (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
 static void (*kAotMethods[12])() = {

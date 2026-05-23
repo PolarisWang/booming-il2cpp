@@ -27,6 +27,26 @@ extern "C" void InterpreterEntryDirect(
 #pragma warning(push)
 #pragma warning(disable: 4065 4244)
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_0(void);
+extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_1(void);
+extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_10(void);
+extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_11(void);
+extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_12(void);
+extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_13(void);
+extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_14(void);
+extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_15(void);
+extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_16(void);
+extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_17(void);
+extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_2(void);
+extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_3(void);
+extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_4(void);
+extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_5(void);
+extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_6(void);
+extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_7(void);
+extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_8(void);
+extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_9(void);
+
 namespace chaos::il2cpp::codegen::IoStreamsBasicsSubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup
@@ -233,6 +253,49 @@ CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) no
 	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_string);
 }
 
+
+// ── GcTypeLayout pointer offset arrays (computed via offsetof) ──
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
+
+extern "C" void ChaosRegisterGcLayouts() {
+	auto& registry = chaos::il2cpp::runtime_core::GcLayoutRegistry::Instance();
+
+	registry.Register(13364025341430610304ULL, sizeof(chaos_type_IoStreamsBasicsSubjects_IoStreamsBasicsSubjects), nullptr, 0);
+	registry.Register(3217969471912086765ULL, sizeof(chaos_type_System_Private_CoreLib_System_Byte), nullptr, 0);
+	registry.Register(8142529082164247609ULL, sizeof(chaos_type_System_Private_CoreLib_System_IO_BinaryReader), nullptr, 0);
+	registry.Register(15406090504116211001ULL, sizeof(chaos_type_System_Private_CoreLib_System_IO_BinaryWriter), nullptr, 0);
+	registry.Register(7740506271772842812ULL, sizeof(chaos_type_System_Private_CoreLib_System_IO_MemoryStream), nullptr, 0);
+	registry.Register(12492575098174306897ULL, sizeof(chaos_type_System_Private_CoreLib_System_IO_StringReader), nullptr, 0);
+	registry.Register(7116827954295356577ULL, sizeof(chaos_type_System_Private_CoreLib_System_IO_StringWriter), nullptr, 0);
+	registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
+	registry.Register(5474029880995115448ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly, 1);
+	registry.Register(17082367815459723707ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, 1);
+	registry.Register(4137207361503509124ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, 5);
+	registry.Register(17040031516751226236ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, 2);
+	registry.Register(10748947813473285525ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, 5);
+	registry.Register(1782325859292956794ULL, sizeof(chaos_type_System_Private_CoreLib_System_String), nullptr, 0);
+
+	// Register TypeInfoV0 address ranges for IsValidTypeInfoPointer.
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_IoStreamsBasicsSubjects_IoStreamsBasicsSubjects), reinterpret_cast<uintptr_t>(&chaos_mt_IoStreamsBasicsSubjects_IoStreamsBasicsSubjects) + sizeof(chaos_mt_IoStreamsBasicsSubjects_IoStreamsBasicsSubjects));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Byte), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Byte) + sizeof(chaos_mt_System_Private_CoreLib_System_Byte));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_IO_BinaryReader), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_IO_BinaryReader) + sizeof(chaos_mt_System_Private_CoreLib_System_IO_BinaryReader));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_IO_BinaryWriter), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_IO_BinaryWriter) + sizeof(chaos_mt_System_Private_CoreLib_System_IO_BinaryWriter));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_IO_MemoryStream), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_IO_MemoryStream) + sizeof(chaos_mt_System_Private_CoreLib_System_IO_MemoryStream));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_IO_StringReader), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_IO_StringReader) + sizeof(chaos_mt_System_Private_CoreLib_System_IO_StringReader));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_IO_StringWriter), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_IO_StringWriter) + sizeof(chaos_mt_System_Private_CoreLib_System_IO_StringWriter));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object) + sizeof(chaos_mt_System_Private_CoreLib_System_Object));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_Assembly));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_String), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_String) + sizeof(chaos_mt_System_Private_CoreLib_System_String));
+}
+
 CHAOS_IL2CPP_INT32 chaos_static_IoStreamsBasicsSubjects_IoStreamsBasicsSubjects___exitCode = 0;
 
 
@@ -340,6 +403,93 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
+
+
+// ── Bridge/import thunks ──
+extern "C" void* kChaosExternalRuntimeFnTable[];
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Byte
+extern "C" void chaos_bridge_thunk_0(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[0])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.IO.MemoryStream::.ctor:System.Void(System.Byte[])
+extern "C" void chaos_bridge_thunk_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[1])(chaos_fn_arg_0);
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.IO.BinaryReader::ReadDouble:System.Double()
+extern "C" double chaos_bridge_thunk_10(void)
+{
+	auto result = reinterpret_cast<double(*)()>(kChaosExternalRuntimeFnTable[23])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.IO.BinaryWriter::.ctor:System.Void(System.IO.Stream)
+extern "C" void chaos_bridge_thunk_11(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[24])(chaos_fn_arg_0);
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.IO.BinaryWriter::Write:System.Void(System.Int32)
+extern "C" void chaos_bridge_thunk_12(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[25])(chaos_fn_arg_0);
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.IO.Stream::Read:System.Int32(System.Byte[],System.Int32,System.Int32)
+extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[2])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
+	return result;
+}
+
+// Bridge/import thunk for: IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode
+extern "C" void chaos_bridge_thunk_3(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[3])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.IO.Stream::Write:System.Void(System.Byte[],System.Int32,System.Int32)
+extern "C" void chaos_bridge_thunk_4(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+{
+	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[5])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.IO.Stream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)
+extern "C" CHAOS_IL2CPP_INT64 chaos_bridge_thunk_5(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INT64(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[7])(chaos_fn_arg_0, chaos_fn_arg_1);
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.IO.Stream::CopyTo:System.Void(System.IO.Stream)
+extern "C" void chaos_bridge_thunk_6(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[11])(chaos_fn_arg_0);
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.IO.BinaryReader::.ctor:System.Void(System.IO.Stream)
+extern "C" void chaos_bridge_thunk_7(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_fn_arg_0);
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.IO.BinaryReader::ReadInt32:System.Int32()
+extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_8(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)()>(kChaosExternalRuntimeFnTable[21])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.IO.BinaryReader::ReadString:System.String()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_9(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[22])();
+	return result;
+}
 
 extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_0(void);
 extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_1(void);
@@ -485,11 +635,18 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
 		/* .type_count        = */ 2u,
-	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
+	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 -- deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
 	/* .custom_attribute_materializer = */ nullptr,
-
+	/* .custom_attribute_method_offset   = */ nullptr,
+	/* .custom_attribute_field_offset    = */ nullptr,
+	/* .custom_attribute_property_offset = */ nullptr,
+	/* .custom_attribute_param_offset    = */ nullptr,
+	/* .custom_attribute_method_count    = */ 0u,
+	/* .custom_attribute_field_count     = */ 0u,
+	/* .custom_attribute_property_count  = */ 0u,
+	/* .custom_attribute_param_count   = */ 0u,
 		/* .abi_manifest      = */ s_abi_manifest,
 	};
 	static const CHAOS_IL2CPP_UINT32 s_native_aot_module_id =
@@ -1181,39 +1338,39 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // matching during IR lowering of patched methods.
 
 static constexpr ReflectionQueryFieldDescriptor kReflFields_IoStreamsBasicsSubjects_IoStreamsBasicsSubjects[1] = {
-	{ 0x04000001u, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
+	{ 0x04000001u, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::_exitCode", "_exitCode", "System.Int32", 0LL, 3u },
 };
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_IoStreamsBasicsSubjects_IoStreamsBasicsSubjects[18] = {
-	{ 0x00000003u, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000004u, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000005u, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000006u, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000007u, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000008u, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000009u, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000000Au, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000000Bu, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000000Cu, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000000Du, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_10:System.Void()", "Subject_10", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000000Eu, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_11:System.Void()", "Subject_11", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000000Fu, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_12:System.Void()", "Subject_12", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000010u, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_13:System.Void()", "Subject_13", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000011u, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_14:System.Void()", "Subject_14", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000012u, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_15:System.Void()", "Subject_15", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000013u, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_16:System.Void()", "Subject_16", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000014u, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_17:System.Void()", "Subject_17", "System.Void", 0, nullptr, 0u, nullptr },
+	{ 0x00000003u, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000004u, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000005u, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000006u, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000007u, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000008u, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000009u, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Au, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Bu, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Cu, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Du, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_10:System.Void()", "Subject_10", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Eu, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_11:System.Void()", "Subject_11", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Fu, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_12:System.Void()", "Subject_12", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000010u, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_13:System.Void()", "Subject_13", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000011u, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_14:System.Void()", "Subject_14", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000012u, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_15:System.Void()", "Subject_15", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000013u, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_16:System.Void()", "Subject_16", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000014u, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects::Subject_17:System.Void()", "Subject_17", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
 	{ 0x00000001u, "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects", "IoStreamsBasicsSubjects/IoStreamsBasicsSubjects", "", "IoStreamsBasicsSubjects", "IoStreamsBasicsSubjects", nullptr, kReflFields_IoStreamsBasicsSubjects_IoStreamsBasicsSubjects, 1u, nullptr, 0u,
-	kReflMethods_IoStreamsBasicsSubjects_IoStreamsBasicsSubjects, 18u, nullptr, 0u, 0u },
+nullptr, 0u,    kReflMethods_IoStreamsBasicsSubjects_IoStreamsBasicsSubjects, 18u, nullptr, 0u, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static const ReflectionQueryImageDescriptor kReflImage = { "IoStreamsBasicsSubjects", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "IoStreamsBasicsSubjects", kReflTypePtrs, 1u, 1, 0, 0, 0 };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via

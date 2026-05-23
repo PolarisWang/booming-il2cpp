@@ -122,7 +122,7 @@ extern void (*g_chaos_fail_hook)();
 // Used by generated code that emits direct field operations for List<T>
 // methods instead of routing through CollectionList* runtime stubs.
 // These fields are embedded in the GC object right after ThinLockableHeader
-// (immediately after offset 16). Must match the field emission order in
+// (offset 8, right after header). Must match the field emission order in
 // ObjectModelEmission.cs for generic List<T> types.
 struct chaos_list_fields {
     CHAOS_IL2CPP_INTPTR items_array;   // [0] pointer to chaos_list_array_header + elements

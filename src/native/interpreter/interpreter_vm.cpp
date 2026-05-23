@@ -8,6 +8,7 @@
 #include <chaos/type_info.h>
 #include "vtable_registry.h"
 #include "generated_code_compat.h"
+#include <memory_domain.h>
 
 #include <gc/gc_bgc_inline.h>
 #include <gc/gc_root_change.h>
@@ -442,7 +443,7 @@ ExecutionResult InterpreterVM::Execute(const IRMethod& method, ExecutionFrame* f
             filter_search_resume_idx = catch_idx;     // exclude this clause on reject
             filter_throw_ip = instruction_index;
             frame->stack.push_back(exception_obj);
-            instruction_index = clause.filter_start_idx;
+            instruction_index = clause.handler_start_idx;
             in_handler = true;
             active_handler_clause = catch_idx;
             return true;

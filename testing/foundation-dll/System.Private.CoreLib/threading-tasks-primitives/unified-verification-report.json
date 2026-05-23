@@ -2,39 +2,10 @@
   "family": "threading-tasks-primitives",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-22T08:38:36",
-  "duration_ms": 59024,
+  "timestamp": "2026-05-23T18:49:59",
+  "duration_ms": 24980,
   "overall_status": "passed",
   "stages": {
-    "preflight": {
-      "stage": "preflight",
-      "status": "passed",
-      "summary": "15 methods, 15 custom entries",
-      "details": {
-        "methodCount": 15,
-        "customMethodCount": 15,
-        "hasCustomEntryFile": false,
-        "customMethods": [
-          "System.Private.CoreLib/System.Threading.Tasks.Task::Run:System.Threading.Tasks.Task(System.Action)",
-          "System.Private.CoreLib/System.Threading.Tasks.Task::Run:System.Threading.Tasks.Task`1(System.Func`1)",
-          "System.Private.CoreLib/System.Threading.Tasks.Task::Delay:System.Threading.Tasks.Task(System.Int32)",
-          "System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Void()",
-          "System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Boolean(System.Int32)",
-          "System.Private.CoreLib/System.Threading.Tasks.Task::get_IsCompleted:System.Boolean()",
-          "System.Private.CoreLib/System.Threading.Tasks.Task::get_Status:System.Threading.Tasks.TaskStatus()",
-          "System.Private.CoreLib/System.Threading.Tasks.Task::ContinueWith:System.Threading.Tasks.Task(System.Action{System.Threading.Tasks.Task})",
-          "System.Private.CoreLib/System.Threading.Tasks.Task::WhenAll:System.Threading.Tasks.Task(System.Threading.Tasks.Task[])",
-          "System.Private.CoreLib/System.Threading.Tasks.Task::WhenAny:System.Threading.Tasks.Task{System.Threading.Tasks.Task}(System.Threading.Tasks.Task[])",
-          "System.Private.CoreLib/System.Threading.Tasks.Task::FromResult:System.Threading.Tasks.Task`1(TResult)",
-          "System.Private.CoreLib/System.Threading.Thread::Start:System.Void()",
-          "System.Private.CoreLib/System.Threading.Thread::Sleep:System.Void(System.Int32)",
-          "System.Private.CoreLib/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()",
-          "System.Private.CoreLib/System.Threading.Thread::get_ManagedThreadId:System.Int32()"
-        ]
-      },
-      "errors": [],
-      "duration_ms": 1
-    },
     "codegen": {
       "stage": "codegen",
       "status": "passed",
@@ -44,7 +15,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\threading-tasks-primitives\\managed\\subjects\\build-output\\ThreadingTasksPrimitivesSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 53941
+      "duration_ms": 24160
     },
     "jit_codegen": {
       "stage": "jit_codegen",
@@ -57,16 +28,16 @@
     "fact": {
       "stage": "fact",
       "status": "passed",
-      "summary": "Fact verify=passed (37/37)",
+      "summary": "Fact verify=passed (15/15)",
       "details": {
         "fact": {
           "status": "passed",
-          "passed": 37,
-          "total": 37
+          "passed": 15,
+          "total": 15
         }
       },
       "errors": [],
-      "duration_ms": 659
+      "duration_ms": 377
     },
     "fact_jit": {
       "stage": "fact_jit",
@@ -81,112 +52,16 @@
         }
       },
       "errors": [],
-      "duration_ms": 164
-    },
-    "audit": {
-      "stage": "audit",
-      "status": "passed",
-      "summary": "false_passing=0, principle=CONCERN",
-      "details": {
-        "falsePassing": 0,
-        "stubsFound": 0,
-        "skipsFound": 1,
-        "principleStatus": "CONCERN",
-        "methodsWithoutLowering": 0
-      },
-      "errors": [],
-      "duration_ms": 3532
-    },
-    "asm_compare": {
-      "stage": "asm_compare",
-      "status": "skipped",
-      "summary": "Subjects DLL not found — run codegen stage first",
-      "details": {},
-      "errors": [],
-      "duration_ms": 49
-    },
-    "microbench": {
-      "stage": "microbench",
-      "status": "passed",
-      "summary": "FramePool=5.8ns/op | FastExecute=3.5ns/op | CallVirt dispatch=7.9ns",
-      "details": {
-        "framePool": {
-          "acquireReleaseNsPerOp": 5.8,
-          "batchCount": 1000,
-          "framesPerBatch": 32
-        },
-        "fastExecute": {
-          "runCount": 100000,
-          "nsPerCall": 3.5
-        },
-        "callVirt": {
-          "handlerDispatchNs": 7.9,
-          "emptyStackNs": 8.7
-        },
-        "poolSize": 32
-      },
-      "errors": [],
-      "duration_ms": 580
-    },
-    "benchmark": {
-      "stage": "benchmark",
-      "status": "skipped",
-      "summary": "All methods are stubs — no benchmark possible",
-      "details": {},
-      "errors": [],
-      "duration_ms": 2
-    },
-    "hotupdate": {
-      "stage": "hotupdate",
-      "status": "skipped",
-      "summary": "All methods are stubs — no hotupdate possible",
-      "details": {},
-      "errors": [],
-      "duration_ms": 1
-    },
-    "hotupdate_aot_benchmark": {
-      "stage": "hotupdate_aot_benchmark",
-      "status": "skipped",
-      "summary": "All methods are stubs — no benchmark possible",
-      "details": {},
-      "errors": [],
-      "duration_ms": 1
-    },
-    "hotupdate_jit_fact": {
-      "stage": "hotupdate_jit_fact",
-      "status": "passed",
-      "summary": "44/44 passed, 0 failed",
-      "details": {
-        "passed": 44,
-        "failed": 0,
-        "total": 44
-      },
-      "errors": [],
-      "duration_ms": 85
-    },
-    "hotupdate_jit_benchmark": {
-      "stage": "hotupdate_jit_benchmark",
-      "status": "skipped",
-      "summary": "All methods are stubs — no benchmark possible",
-      "details": {},
-      "errors": [],
-      "duration_ms": 1
+      "duration_ms": 439
     }
   },
   "coverage": {
     "methodCoverage": 100.0,
-    "testedRate": 93.33,
-    "overall": 96.66
+    "testedRate": 0.0,
+    "overall": 100.0
   },
   "dashboard": {
-    "interpreter": {
-      "fastFramePoolNsPerOp": 5.8,
-      "fastExecuteNsPerInstr": 0,
-      "callVirtHandlerDispatchNs": 7.9,
-      "callVirtMicHitNs": 0,
-      "callVirtRawFallbackNs": 0,
-      "poolSize": 32
-    },
+    "interpreter": {},
     "irTranslation": {
       "totalMethods": 15,
       "okCount": 15,
@@ -202,13 +77,7 @@
       "topInstructionCategories": {}
     },
     "performance": {},
-    "hotupdate": {
-      "jitFunctional": {
-        "passedMethods": 44,
-        "failedMethods": 0,
-        "totalMethods": 44
-      }
-    },
+    "hotupdate": {},
     "keyRatios": {
       "nativeFasterRatio": 0,
       "irExpansionRatio": 0.0,

@@ -1,5 +1,5 @@
-libdir=C:/Program Files (x86)/chaos_il2cpp_testing/lib
-includedir=C:/Program Files (x86)/chaos_il2cpp_testing/include
+libdir=C:/Program Files/chaos_il2cpp_testing/lib
+includedir=C:/Program Files/chaos_il2cpp_testing/include
 
 Name: gtest_main
 Description: GoogleTest (with main() function)

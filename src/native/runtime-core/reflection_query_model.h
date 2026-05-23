@@ -8,6 +8,13 @@
 #include <cstdint>
 #include <cstring>
 
+// Declaration for codegen-visible custom attribute blob lookup.
+// Defined in reflection/attributes.cpp, called from generated code.
+extern "C" CHAOS_IL2CPP_INTPTR ChaosGetCustomAttributeFromBlob(
+    CHAOS_IL2CPP_INTPTR member_kind,
+    CHAOS_IL2CPP_INTPTR member_handle,
+    CHAOS_IL2CPP_INTPTR attr_type_handle) noexcept;
+
 namespace chaos::il2cpp::runtime_core {
 
 struct ReflectionQueryParameterDescriptor {

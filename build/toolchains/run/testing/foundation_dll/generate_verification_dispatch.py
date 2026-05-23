@@ -105,11 +105,15 @@ def generate_verification_dispatch(
         write('')
 
     # ── RunFactAll ──────────────────────────────────────────────────
-    # Uses RunNativeAot for each method, catching exceptions.
-    write("// ── RunFactAll: run every method via RunNativeAot, return failure count ──")
+    # Uses RunNativeAot for each subject entry, catching exceptions.
+    # Iterates kSubjectEntryIndices (subject methods only) rather than
+    # all kAotMethodCount methods, to avoid false failures from
+    # interpreter-unsupported EH patterns (fault/filter/nested-catch).
+    write("// ── RunFactAll: run every subject entry via RunNativeAot, return failure count ──")
     write('extern "C" CHAOS_IL2CPP_INT32 RunFactAll() {')
     write('    int failed_count = 0;')
-    write('    for (int i = 0; i < kAotMethodCount; i++) {')
+    write('    for (int si = 0; si < kSubjectEntryCount; si++) {')
+    write('        int i = kSubjectEntryIndices[si];')
     write('        try {')
     write('            RunNativeAot(i);')
     write('        } catch (...) {')
@@ -139,11 +143,13 @@ def generate_verification_dispatch(
 
     # ── RunHotpatchAll ──────────────────────────────────────────────
     # Same as RunFactAll but semantically "after hotpatch".  RunNativeAot
-    # checks the hotpatch dispatch table internally.
-    write("// ── RunHotpatchAll: all-methods loop via RunNativeAot (post-patch) ──")
+    # checks the hotpatch dispatch table internally.  Iterates subject
+    # entries only (same reason as RunFactAll).
+    write("// ── RunHotpatchAll: all-subject-entries loop via RunNativeAot (post-patch) ──")
     write('extern "C" CHAOS_IL2CPP_INT32 RunHotpatchAll() {')
     write('    int failed_count = 0;')
-    write('    for (int i = 0; i < kAotMethodCount; i++) {')
+    write('    for (int si = 0; si < kSubjectEntryCount; si++) {')
+    write('        int i = kSubjectEntryIndices[si];')
     write('        try {')
     write('            RunNativeAot(i);')
     write('        } catch (...) {')

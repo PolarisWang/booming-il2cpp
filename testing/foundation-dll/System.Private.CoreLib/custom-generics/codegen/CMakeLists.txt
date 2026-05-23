@@ -8,8 +8,8 @@ project(chaos_gen LANGUAGES CXX)
 
 set(REPO_ROOT "D:/agent/booming-il2cpp")
 set(CHAOS_GEN_DIR "${CMAKE_CURRENT_LIST_DIR}")
-set(NATIVE_LIB_DIR "D:/agent/booming-il2cpp/build/vs2022")
-set(CFG "Release")
+set(NATIVE_LIB_DIR "D:/agent/booming-il2cpp/build/native")
+set(CFG "RelWithDebInfo")
 
 set(NATIVE_LIBS
     "${NATIVE_LIB_DIR}/src/native/runtime-core/${CFG}/chaos_runtime_core.lib"
@@ -59,7 +59,6 @@ target_compile_options(chaos_gen_CustomGenericsSubjects PUBLIC ${COMMON_COMPILE_
 # Entry executable — links generated code + native runtime
 add_executable(entry
     ${CHAOS_GEN_DIR}/runtime-entry.cpp
-    ${CHAOS_GEN_DIR}/chaos_stubs.cpp
 )
 
 target_link_libraries(entry PRIVATE

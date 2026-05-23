@@ -57,6 +57,15 @@ struct Functions {
         void (*Subject_6)(
                 void
         );
+        void (*Subject_7)(
+                void
+        );
+        void (*Subject_8)(
+                void
+        );
+        void (*Subject_9)(
+                void
+        );
     } garbageCollectionSubjects;
     int32_t method_count;
 };
@@ -112,8 +121,23 @@ struct GarbageCollectionSubjects {
         return kFunctions.garbageCollectionSubjects.Subject_6(
         );
     }
+    static inline void Subject_7(
+    ) {
+        return kFunctions.garbageCollectionSubjects.Subject_7(
+        );
+    }
+    static inline void Subject_8(
+    ) {
+        return kFunctions.garbageCollectionSubjects.Subject_8(
+        );
+    }
+    static inline void Subject_9(
+    ) {
+        return kFunctions.garbageCollectionSubjects.Subject_9(
+        );
+    }
     /// Total number of AOT-compiled methods in this type.
-    static constexpr int32_t MethodCount = 7;
+    static constexpr int32_t MethodCount = 10;
 };
 
 

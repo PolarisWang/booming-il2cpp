@@ -229,6 +229,7 @@ def _auto_generate_managed_benchmark(family_slug: str, assembly: str,
         '    <TargetFramework>net10.0</TargetFramework>\n'
         '    <Nullable>enable</Nullable>\n'
         '    <ImplicitUsings>enable</ImplicitUsings>\n'
+        '    <StartupObject>ManagedBenchmarkHarness</StartupObject>\n'
         '  </PropertyGroup>\n'
         '</Project>\n',
         encoding="utf-8",

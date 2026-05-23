@@ -251,13 +251,10 @@ def adapt_csproj_for_multitarget(csproj_path: Path, target_frameworks: list[str]
         f'<TargetFrameworks>{tfms}</TargetFrameworks>',
         content,
     )
-    # Add conditional PublishAot for MS AOT targets
-    aot_tfms = [t for t in target_frameworks if t in ("net8.0", "net9.0", "net10.0")]
-    if aot_tfms:
-        for tfm in aot_tfms:
-            aot_condition = f"    <PublishAot Condition=\"'$(TargetFramework)' == '{tfm}'\">true</PublishAot>\n"
-            content = content.replace("  </PropertyGroup>", f"{aot_condition}  </PropertyGroup>")
-
+    # Suppress auto-generated Program.Main — harness has explicit Main()
+    if '<GenerateProgramFile>' not in content:
+        content = content.replace("  </PropertyGroup>",
+            "    <GenerateProgramFile>false</GenerateProgramFile>\n  </PropertyGroup>")
     csproj_path.write_text(content, encoding="utf-8")
 
 
@@ -331,7 +328,16 @@ def _run_net_benchmark(
                 }
 
         data = json.loads(r.stdout)
-        method_results = data.get("results", [])
+        method_results_raw = data.get("results", [])
+        # Normalize camelCase keys from managed harness to snake_case
+        method_results = []
+        for item in method_results_raw:
+            method_results.append({
+                "method_index": item.get("methodIndex", -1),
+                "elapsed_ms": item.get("elapsedMilliseconds", 0),
+                "iterations": item.get("iterations", iterations),
+                "status": "ok" if item.get("isBodyReal", False) else "stub",
+            })
 
         # Get SDK version
         sdk_r = subprocess.run(
@@ -385,8 +391,17 @@ def _run_mono_benchmark(
                     "error": f"mono exit_code={r.returncode}: {r.stderr[:200]}"}
 
         data = json.loads(r.stdout)
+        method_results_raw = data.get("results", [])
+        method_results = []
+        for item in method_results_raw:
+            method_results.append({
+                "method_index": item.get("methodIndex", -1),
+                "elapsed_ms": item.get("elapsedMilliseconds", 0),
+                "iterations": item.get("iterations", iterations),
+                "status": "ok" if item.get("isBodyReal", False) else "stub",
+            })
         return {
-            "method_results": data.get("results", []),
+            "method_results": method_results,
             "runtime_info": {"tfm": tfm, "runner": "mono"},
             "duration_s": round(elapsed, 2),
         }
@@ -497,12 +512,18 @@ def _run_native_benchmark(
                 if line.startswith("{"):
                     try:
                         data = json.loads(line)
-                        ns_per_op = (data.get("elapsed_ms", 0) * 1_000_000) / max(data.get("iterations", 1), 1)
+                        # entry.exe uses camelCase keys: elapsedMilliseconds, calibratedMs
+                        elapsed_ms = data.get("elapsedMilliseconds",
+                                      data.get("elapsed_ms", 0))
+                        calibrated_ms = data.get("calibratedMs",
+                                           data.get("calibrated_ms", 0))
+                        iters = data.get("iterations", iterations)
+                        ns_per_op = (elapsed_ms * 1_000_000) / max(iters, 1)
                         results.append({
                             "method_index": idx,
-                            "elapsed_ms": data.get("elapsed_ms", 0),
-                            "calibrated_ms": data.get("calibrated_ms", 0),
-                            "iterations": data.get("iterations", iterations),
+                            "elapsed_ms": elapsed_ms,
+                            "calibrated_ms": calibrated_ms,
+                            "iterations": iters,
                             "ns_per_op": ns_per_op,
                             "status": "ok",
                         })

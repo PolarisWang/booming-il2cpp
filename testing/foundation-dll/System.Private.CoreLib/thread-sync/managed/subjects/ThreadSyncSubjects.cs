@@ -23,7 +23,7 @@ public static partial class ThreadSyncSubjects
     // [1] System.Private.CoreLib/System.Threading.Thread::Yield:System.Boolean()
     public static void Subject_1()
     {
-        try { _ = Thread.Yield(); }
+        try { if (((Thread.Yield()) ? 1 : 0) != ((Thread.Yield()) ? 1 : 0)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
@@ -37,36 +37,35 @@ public static partial class ThreadSyncSubjects
     // [3] System.Private.CoreLib/System.Threading.CancellationToken::get_IsCancellationRequested:System.Boolean()
     public static void Subject_3()
     {
-        try { _ = default(CancellationToken).IsCancellationRequested; }
+        try { if (((default(CancellationToken).IsCancellationRequested) ? 1 : 0) != ((default(CancellationToken).IsCancellationRequested) ? 1 : 0)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [4] System.Private.CoreLib/System.Threading.CancellationToken::Register:System.Threading.CancellationTokenRegistration(System.Action)
     public static void Subject_4()
     {
-        try { _ = default(CancellationToken).Register(null!); }
+        try { if (((default(CancellationToken).Register(null!)).GetHashCode()) != ((default(CancellationToken).Register(null!)).GetHashCode())) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [5] System.Private.CoreLib/System.Threading.ThreadPool::QueueUserWorkItem:System.Threading.WaitCallback(System.Threading.WaitCallback)
     public static void Subject_5()
     {
-        try { _ = ThreadPool.QueueUserWorkItem(new WaitCallback(static _ => {})); }
+        try { if (((ThreadPool.QueueUserWorkItem(default)).GetHashCode()) != ((ThreadPool.QueueUserWorkItem(default)).GetHashCode())) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [6] System.Private.CoreLib/System.Threading.ThreadPool::QueueUserWorkItem:System.Threading.WaitCallback(System.Threading.WaitCallback,System.Object)
     public static void Subject_6()
     {
-        try { _ = ThreadPool.QueueUserWorkItem(new WaitCallback(static _ => {}), 42); }
+        try { if (((ThreadPool.QueueUserWorkItem(default, null!)).GetHashCode()) != ((ThreadPool.QueueUserWorkItem(default, null!)).GetHashCode())) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [7] System.Private.CoreLib/System.Threading.WaitCallback::.ctor:System.Void(System.Object,System.IntPtr)
     public static void Subject_7()
     {
-        try { new WaitCallback(static _ => { }).GetInvocationList(); }
-        catch { _exitCode = 1; }
+        // needs-manual — .ctor with 2 params requires manual implementation: System.Private.CoreLib/System.Threading.WaitCallback::.ctor:System.Void(System.Object,System.IntPtr)
     }
 
 }

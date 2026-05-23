@@ -1,4 +1,4 @@
-#include <chaos/common.h>
+﻿#include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
 #include <chaos/eh.h>
@@ -16,6 +16,7 @@
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 #include "enum_metadata.generated.h"
+#include "enum_stubs.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -25,6 +26,12 @@ extern "C" void InterpreterEntryDirect(
 
 #pragma warning(push)
 #pragma warning(disable: 4065 4244)
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_0(void);
+extern "C" void CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_1_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
+extern "C" void CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_2(void);
+extern "C" CHAOS_IL2CPP_INT32 CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_3_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
 
 namespace chaos::il2cpp::codegen::CodegenEdgeCasesSubjects {
 
@@ -145,6 +152,37 @@ struct chaos_type_System_Private_CoreLib_System_String
 	CHAOS_IL2CPP_UINT64 string_id = 0u;  // stable StringId, 0 = not yet materialized
 };
 
+
+// ── GcTypeLayout pointer offset arrays (computed via offsetof) ──
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
+
+extern "C" void ChaosRegisterGcLayouts() {
+	auto& registry = chaos::il2cpp::runtime_core::GcLayoutRegistry::Instance();
+
+	registry.Register(15093617223225431358ULL, sizeof(chaos_type_CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects), nullptr, 0);
+	registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
+	registry.Register(5474029880995115448ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly, 1);
+	registry.Register(17082367815459723707ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, 1);
+	registry.Register(4137207361503509124ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, 5);
+	registry.Register(17040031516751226236ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, 2);
+	registry.Register(10748947813473285525ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, 5);
+	registry.Register(1782325859292956794ULL, sizeof(chaos_type_System_Private_CoreLib_System_String), nullptr, 0);
+
+	// Register TypeInfoV0 address ranges for IsValidTypeInfoPointer.
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects), reinterpret_cast<uintptr_t>(&chaos_mt_CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects) + sizeof(chaos_mt_CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object) + sizeof(chaos_mt_System_Private_CoreLib_System_Object));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_Assembly));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_String), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_String) + sizeof(chaos_mt_System_Private_CoreLib_System_String));
+}
+
 CHAOS_IL2CPP_INT32 chaos_static_CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects___exitCode = 0;
 
 static constexpr CHAOS_IL2CPP_UINT32 kGenericTypeArgTokens[1] = { 0 };
@@ -157,6 +195,16 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
+
+
+// ── Bridge/import thunks ──
+extern "C" void* kChaosExternalRuntimeFnTable[];
+
+// Bridge/import thunk for: CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::_exitCode
+extern "C" void chaos_bridge_thunk_0(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[0])();
+}
 
 extern "C" void CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_0(void);
 extern "C" void CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_1_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
@@ -262,11 +310,18 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
 		/* .type_count        = */ 2u,
-	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
+	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 -- deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
 	/* .custom_attribute_materializer = */ nullptr,
-
+	/* .custom_attribute_method_offset   = */ nullptr,
+	/* .custom_attribute_field_offset    = */ nullptr,
+	/* .custom_attribute_property_offset = */ nullptr,
+	/* .custom_attribute_param_offset    = */ nullptr,
+	/* .custom_attribute_method_count    = */ 0u,
+	/* .custom_attribute_field_count     = */ 0u,
+	/* .custom_attribute_property_count  = */ 0u,
+	/* .custom_attribute_param_count   = */ 0u,
 		/* .abi_manifest      = */ s_abi_manifest,
 	};
 	static const CHAOS_IL2CPP_UINT32 s_native_aot_module_id =
@@ -586,25 +641,25 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // matching during IR lowering of patched methods.
 
 static constexpr ReflectionQueryFieldDescriptor kReflFields_CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects[1] = {
-	{ 0u, "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
+	{ 0x04000001u, "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::_exitCode", "_exitCode", "System.Int32", 0LL, 3u },
 };
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects[4] = {
-	{ 0u, "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_1:System.Void(System.Int32)", "Subject_1", "System.Void", 0, nullptr, 0u },
-	{ 0u, "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u },
-	{ 0u, "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Int32(System.Int32)", "Subject_3", "System.Void", 0, nullptr, 0u },
+	{ 0x00000003u, "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000004u, "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_1:System.Void(System.Int32)", "Subject_1", "System.Void", 1, nullptr, 0u, nullptr, 0u },
+	{ 0x00000005u, "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000006u, "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects::Subject_3:System.Int32(System.Int32)", "Subject_3", "System.Int32", 1, nullptr, 0u, nullptr, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
-	{ 0u, "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects", "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects", "", "CodegenEdgeCasesSubjects", "CodegenEdgeCasesSubjects", nullptr, kReflFields_CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects, 1u, nullptr, 0u,
-	kReflMethods_CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects, 4u },
+	{ 0x00000001u, "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects", "CodegenEdgeCasesSubjects/CodegenEdgeCasesSubjects", "", "CodegenEdgeCasesSubjects", "CodegenEdgeCasesSubjects", nullptr, kReflFields_CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects, 1u, nullptr, 0u,
+nullptr, 0u,    kReflMethods_CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects, 4u, nullptr, 0u, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static const ReflectionQueryImageDescriptor kReflImage = { "CodegenEdgeCasesSubjects", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "CodegenEdgeCasesSubjects", kReflTypePtrs, 1u, 1, 0, 0, 0 };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via

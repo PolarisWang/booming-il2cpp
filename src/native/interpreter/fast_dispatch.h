@@ -97,6 +97,12 @@ struct FastFrame {
     bool        pending_leave             = false;
     uint32_t    pending_leave_target      = 0;
 
+    // ── SEH filter state ────────────────────────────────────
+    bool        filter_evaluating         = false;
+    int32_t     filter_active_clause      = -1;
+    int32_t     filter_search_resume_idx  = -1;
+    uint32_t    filter_throw_pc           = 0;
+
     // ── Tracked object cleanup for interpreter heap objects ──────────
     // Fast dispatch heap-allocates InterpreterObject/ArrayStorage via
     // CHAOS_IL2CPP_MALLOC+placement new.  We track pointers here so

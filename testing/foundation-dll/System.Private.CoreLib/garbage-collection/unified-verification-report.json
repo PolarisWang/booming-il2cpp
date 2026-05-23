@@ -2,34 +2,21 @@
   "family": "garbage-collection",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-23T15:17:06",
-  "duration_ms": 329386,
+  "timestamp": "2026-05-23T18:50:13",
+  "duration_ms": 3567,
   "overall_status": "failed",
   "stages": {
-    "preflight": {
-      "stage": "preflight",
-      "status": "passed",
-      "summary": "12 methods, 0 custom entries",
-      "details": {
-        "methodCount": 12,
-        "customMethodCount": 0,
-        "hasCustomEntryFile": false,
-        "customMethods": []
-      },
-      "errors": [],
-      "duration_ms": 0
-    },
     "codegen": {
       "stage": "codegen",
       "status": "failed",
-      "summary": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(74,24): error CS0117: 'GC' does not contain a definition for 'LatencyMode' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(74,60): error CS0117: 'GC' does not contain a definition for 'LatencyMode' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(81,18): error CS0117: 'GC' does not contain a definition for 'LatencyMode' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\n\nBuild FAILED.\n\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(74,24): error CS0117: 'GC' does not contain a definition for 'LatencyMode' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(74,60): error CS0117: 'GC' does not contain a definition for 'LatencyMode' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(81,18): error CS0117: 'GC' does not contain a definition for 'LatencyMode' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\n    0 Warning(s)\n    3 Error(s)\n\nTime Elapsed 00:00:01.17\n",
+      "summary": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(74,24): error CS0117: 'GC' does not contain a definition for 'LatencyMode' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(74,60): error CS0117: 'GC' does not contain a definition for 'LatencyMode' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(81,18): error CS0117: 'GC' does not contain a definition for 'LatencyMode' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\n\nBuild FAILED.\n\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(74,24): error CS0117: 'GC' does not contain a definition for 'LatencyMode' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(74,60): error CS0117: 'GC' does not contain a definition for 'LatencyMode' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.cs(81,18): error CS0117: 'GC' does not contain a definition for 'LatencyMode' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\garbage-collection\\managed\\subjects\\GarbageCollectionSubjects.csproj]\n    0 Warning(s)\n    3 Error(s)\n\nTime Elapsed 00:00:01.16\n",
       "details": {
         "steps": {
           "build_subjects": "FAILED"
         }
       },
       "errors": [],
-      "duration_ms": 4246
+      "duration_ms": 3502
     },
     "jit_codegen": {
       "stage": "jit_codegen",
@@ -42,16 +29,16 @@
     "fact": {
       "stage": "fact",
       "status": "failed",
-      "summary": "Fact verify=failed (6/7)",
+      "summary": "Fact verify=failed (13/15)",
       "details": {
         "fact": {
           "status": "failed",
-          "passed": 6,
-          "total": 7
+          "passed": 13,
+          "total": 15
         }
       },
       "errors": [],
-      "duration_ms": 375
+      "duration_ms": 33
     },
     "fact_jit": {
       "stage": "fact_jit",
@@ -66,142 +53,16 @@
         }
       },
       "errors": [],
-      "duration_ms": 359
-    },
-    "audit": {
-      "stage": "audit",
-      "status": "passed",
-      "summary": "false_passing=0, principle=ALIGNED",
-      "details": {
-        "falsePassing": 0,
-        "stubsFound": 0,
-        "skipsFound": 0,
-        "principleStatus": "ALIGNED",
-        "methodsWithoutLowering": 0
-      },
-      "errors": [],
-      "duration_ms": 1265
-    },
-    "asm_compare": {
-      "stage": "asm_compare",
-      "status": "failed",
-      "summary": "asm-compare: 7/12 methods OK, avg JIT=49.9 instr, avg AOT IR=8.7 instr, expansion=0.17x",
-      "details": {
-        "totalMethods": 12,
-        "okCount": 7,
-        "failedCount": 5,
-        "skippedCount": 0,
-        "jitInstructionCount": {
-          "min": 44,
-          "max": 85,
-          "avg": 49.9,
-          "total": 349
-        },
-        "aotInstructionCount": {
-          "min": 2,
-          "max": 15,
-          "avg": 8.7,
-          "total": 61
-        },
-        "totalExternalRuntimeCalls": 0,
-        "totalVirtualDispatches": 0,
-        "totalBoxingOps": 0,
-        "topInstructionCategories": {
-          "external_runtime_call": 9
-        },
-        "overallIrExpansionRatio": 0.17,
-        "averageExpansionRatio": 0.18,
-        "maxExpansionRatio": 0.34,
-        "minExpansionRatio": 0.05
-      },
-      "errors": [],
-      "duration_ms": 8395
-    },
-    "microbench": {
-      "stage": "microbench",
-      "status": "passed",
-      "summary": "FramePool=2.7ns/op | FastExecute=0.0ns/op | CallVirt dispatch=0.0ns",
-      "details": {
-        "framePool": {
-          "acquireReleaseNsPerOp": 2.7,
-          "batchCount": 1000,
-          "framesPerBatch": 32
-        },
-        "poolSize": 32
-      },
-      "errors": [],
-      "duration_ms": 31
-    },
-    "benchmark": {
-      "stage": "benchmark",
-      "status": "skipped",
-      "summary": "All 12 non-stub methods are invalid (no managed harness)",
-      "details": {},
-      "errors": [],
-      "duration_ms": 13288
-    },
-    "hotupdate": {
-      "stage": "hotupdate",
-      "status": "passed",
-      "summary": "6/7 passed, 0 failed (stub=0)",
-      "details": {
-        "passedMethods": 6,
-        "failedMethods": 0,
-        "totalMethods": 7,
-        "realMethods": 7,
-        "stubMethods": 0
-      },
-      "errors": [],
-      "duration_ms": 31
-    },
-    "hotupdate_aot_benchmark": {
-      "stage": "hotupdate_aot_benchmark",
-      "status": "passed",
-      "summary": "avg_slowdown=-15.15% (0.8x) over 7 methods (AOT patched path)",
-      "details": {
-        "averageSlowdownPercent": -15.15,
-        "slowdownFactor": 0.8484999999999999,
-        "threshold": 50.0,
-        "nonStubMethods": 7
-      },
-      "errors": [],
-      "duration_ms": 1125
-    },
-    "hotupdate_jit_fact": {
-      "stage": "hotupdate_jit_fact",
-      "status": "failed",
-      "summary": "6/7 passed, 0 failed",
-      "details": {
-        "passed": 6,
-        "failed": 0,
-        "total": 7
-      },
-      "errors": [],
-      "duration_ms": 30
-    },
-    "hotupdate_jit_benchmark": {
-      "stage": "hotupdate_jit_benchmark",
-      "status": "failed",
-      "summary": "HotUpdate JIT benchmark stage crashed: Command '['D:\\\\agent\\\\booming-il2cpp\\\\testing\\\\foundation-dll\\\\System.Private.CoreLib\\\\garbage-collection\\\\native\\\\entry-jit.exe', '--hotupdate-and-benchmark', '2', '10000']' timed out after 300 seconds",
-      "details": {},
-      "errors": [],
-      "duration_ms": 0
+      "duration_ms": 29
     }
   },
   "coverage": {
-    "methodCoverage": 85.71,
-    "testedRate": 100.0,
-    "overall": 92.85
+    "methodCoverage": 86.67,
+    "testedRate": 0.0,
+    "overall": 86.67
   },
   "dashboard": {
-    "interpreter": {
-      "fastFramePoolNsPerOp": 2.7,
-      "fastExecuteNsPerInstr": 0,
-      "callVirtHandlerDispatchNs": 0,
-      "callVirtMicHitNs": 0,
-      "callVirtRawFallbackNs": 0,
-      "poolSize": 32
-    },
+    "interpreter": {},
     "irTranslation": {
       "totalMethods": 7,
       "okCount": 7,
@@ -219,27 +80,11 @@
       }
     },
     "performance": {},
-    "hotupdate": {
-      "aotFunctional": {
-        "passedMethods": 6,
-        "failedMethods": 0,
-        "totalMethods": 7
-      },
-      "aotOverhead": {
-        "averageSlowdownPercent": -15.15,
-        "slowdownFactor": 0.8484999999999999,
-        "nonStubMethods": 7
-      },
-      "jitFunctional": {
-        "passedMethods": 6,
-        "failedMethods": 0,
-        "totalMethods": 7
-      }
-    },
+    "hotupdate": {},
     "keyRatios": {
       "nativeFasterRatio": 0,
       "irExpansionRatio": 0.35,
-      "interpreterSlowdownFactor": 0.8484999999999999,
+      "interpreterSlowdownFactor": 0,
       "asmPassRate": 100.0
     }
   },

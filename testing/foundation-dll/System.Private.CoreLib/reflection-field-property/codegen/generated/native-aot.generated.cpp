@@ -27,6 +27,42 @@ extern "C" void InterpreterEntryDirect(
 #pragma warning(push)
 #pragma warning(disable: 4065 4244)
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_0(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_1(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_10(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_11(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_12(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_13(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_14(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_15(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_16(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_17(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_18(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_19(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_2(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_20(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_21(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_22(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_23(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_24(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_25(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_26(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_27(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_28(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_29(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_3(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_30(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_31(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_32(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_33(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_4(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_5(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_6(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_7(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_8(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_9(void);
+
 namespace chaos::il2cpp::codegen::ReflectionFieldPropertySubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup
@@ -146,6 +182,37 @@ struct chaos_type_System_Private_CoreLib_System_String
 	CHAOS_IL2CPP_UINT64 string_id = 0u;  // stable StringId, 0 = not yet materialized
 };
 
+
+// ── GcTypeLayout pointer offset arrays (computed via offsetof) ──
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
+
+extern "C" void ChaosRegisterGcLayouts() {
+	auto& registry = chaos::il2cpp::runtime_core::GcLayoutRegistry::Instance();
+
+	registry.Register(5983620812774523272ULL, sizeof(chaos_type_ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects), nullptr, 0);
+	registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
+	registry.Register(5474029880995115448ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly, 1);
+	registry.Register(17082367815459723707ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, 1);
+	registry.Register(4137207361503509124ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, 5);
+	registry.Register(17040031516751226236ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, 2);
+	registry.Register(10748947813473285525ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, 5);
+	registry.Register(1782325859292956794ULL, sizeof(chaos_type_System_Private_CoreLib_System_String), nullptr, 0);
+
+	// Register TypeInfoV0 address ranges for IsValidTypeInfoPointer.
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects), reinterpret_cast<uintptr_t>(&chaos_mt_ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects) + sizeof(chaos_mt_ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object) + sizeof(chaos_mt_System_Private_CoreLib_System_Object));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_Assembly));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_String), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_String) + sizeof(chaos_mt_System_Private_CoreLib_System_String));
+}
+
 CHAOS_IL2CPP_INT32 chaos_static_ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects___exitCode = 0;
 
 static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_Object__GetHashCode_System_Int32__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
@@ -163,6 +230,280 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
+
+
+// ── Bridge/import thunks ──
+extern "C" void* kChaosExternalRuntimeFnTable[];
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.MemberInfo::get_MemberType:System.Reflection.MemberTypes()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_0(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[0])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.MemberTypes::GetHashCode:System.Int32()
+extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_1(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)()>(kChaosExternalRuntimeFnTable[1])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.FieldInfo::get_IsFamilyAndAssembly:System.Boolean()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_10(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[10])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.FieldInfo::get_IsFamilyOrAssembly:System.Boolean()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_11(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[11])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.FieldInfo::get_IsPrivate:System.Boolean()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_12(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[12])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.FieldInfo::get_IsPublic:System.Boolean()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_13(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[13])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.FieldInfo::get_IsSecurityCritical:System.Boolean()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_14(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[14])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.FieldInfo::get_IsSecuritySafeCritical:System.Boolean()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_15(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[15])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.FieldInfo::get_IsSecurityTransparent:System.Boolean()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_16(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[16])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.FieldInfo::SetValue:System.Void(System.Object,System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Globalization.CultureInfo)
+extern "C" void chaos_bridge_thunk_17(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3, CHAOS_IL2CPP_INTPTR chaos_fn_arg_4)
+{
+	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3, chaos_fn_arg_4);
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.FieldInfo::GetRawConstantValue:System.Object()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_18(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[18])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.FieldInfo::GetOptionalCustomModifiers:System.Type[]()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_19(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[20])();
+	return result;
+}
+
+// Bridge/import thunk for: ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::_exitCode
+extern "C" void chaos_bridge_thunk_2(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[2])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.FieldInfo::GetRequiredCustomModifiers:System.Type[]()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_20(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[21])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.PropertyInfo::get_Attributes:System.Reflection.PropertyAttributes()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_21(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[22])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.PropertyAttributes::GetHashCode:System.Int32()
+extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_22(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)()>(kChaosExternalRuntimeFnTable[23])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.PropertyInfo::get_IsSpecialName:System.Boolean()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_23(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[24])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.PropertyInfo::GetAccessors:System.Reflection.MethodInfo[]()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_24(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[25])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.PropertyInfo::GetAccessors:System.Reflection.MethodInfo[](System.Boolean)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_25(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[26])(chaos_fn_arg_0);
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.PropertyInfo::get_GetMethod:System.Reflection.MethodInfo()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_26(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[27])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.PropertyInfo::GetGetMethod:System.Reflection.MethodInfo()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_27(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[28])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.PropertyInfo::GetGetMethod:System.Reflection.MethodInfo(System.Boolean)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_28(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[29])(chaos_fn_arg_0);
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.PropertyInfo::get_SetMethod:System.Reflection.MethodInfo()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_29(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[30])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.FieldInfo::get_Attributes:System.Reflection.FieldAttributes()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_3(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[3])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.PropertyInfo::GetSetMethod:System.Reflection.MethodInfo()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_30(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[31])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.PropertyInfo::GetSetMethod:System.Reflection.MethodInfo(System.Boolean)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_31(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[32])(chaos_fn_arg_0);
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Array::Empty<System.Object>:System.Object[]()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_32(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[33])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.PropertyInfo::GetValue:System.Object(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_33(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3, CHAOS_IL2CPP_INTPTR chaos_fn_arg_4)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[34])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3, chaos_fn_arg_4);
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.PropertyInfo::GetConstantValue:System.Object()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_34(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[35])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.PropertyInfo::GetRawConstantValue:System.Object()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_35(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[36])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.PropertyInfo::SetValue:System.Void(System.Object,System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)
+extern "C" void chaos_bridge_thunk_36(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3, CHAOS_IL2CPP_INTPTR chaos_fn_arg_4, CHAOS_IL2CPP_INTPTR chaos_fn_arg_5)
+{
+	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[37])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3, chaos_fn_arg_4, chaos_fn_arg_5);
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.PropertyInfo::GetOptionalCustomModifiers:System.Type[]()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_37(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[38])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.PropertyInfo::GetRequiredCustomModifiers:System.Type[]()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_38(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[39])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.FieldAttributes::GetHashCode:System.Int32()
+extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_4(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)()>(kChaosExternalRuntimeFnTable[4])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.FieldInfo::get_IsNotSerialized:System.Boolean()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_5(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[5])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.FieldInfo::get_IsPinvokeImpl:System.Boolean()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_6(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[6])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.FieldInfo::get_IsSpecialName:System.Boolean()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_7(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[7])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.FieldInfo::get_IsAssembly:System.Boolean()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_8(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[8])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.FieldInfo::get_IsFamily:System.Boolean()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_9(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[9])();
+	return result;
+}
 
 extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_0(void);
 extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_1(void);
@@ -356,11 +697,18 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
 		/* .type_count        = */ 2u,
-	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
+	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 -- deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
 	/* .custom_attribute_materializer = */ nullptr,
-
+	/* .custom_attribute_method_offset   = */ nullptr,
+	/* .custom_attribute_field_offset    = */ nullptr,
+	/* .custom_attribute_property_offset = */ nullptr,
+	/* .custom_attribute_param_offset    = */ nullptr,
+	/* .custom_attribute_method_count    = */ 0u,
+	/* .custom_attribute_field_count     = */ 0u,
+	/* .custom_attribute_property_count  = */ 0u,
+	/* .custom_attribute_param_count   = */ 0u,
 		/* .abi_manifest      = */ s_abi_manifest,
 	};
 	static const CHAOS_IL2CPP_UINT32 s_native_aot_module_id =
@@ -1448,55 +1796,55 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // matching during IR lowering of patched methods.
 
 static constexpr ReflectionQueryFieldDescriptor kReflFields_ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects[1] = {
-	{ 0x04000001u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
+	{ 0x04000001u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::_exitCode", "_exitCode", "System.Int32", 0LL, 3u },
 };
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects[34] = {
-	{ 0x00000003u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000004u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000005u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000006u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000007u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000008u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000009u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000000Au, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000000Bu, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000000Cu, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000000Du, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_10:System.Void()", "Subject_10", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000000Eu, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_11:System.Void()", "Subject_11", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000000Fu, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_12:System.Void()", "Subject_12", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000010u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_13:System.Void()", "Subject_13", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000011u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_14:System.Void()", "Subject_14", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000012u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_15:System.Void()", "Subject_15", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000013u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_16:System.Void()", "Subject_16", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000014u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_17:System.Void()", "Subject_17", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000015u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_18:System.Void()", "Subject_18", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000016u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_19:System.Void()", "Subject_19", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000017u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_20:System.Void()", "Subject_20", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000018u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_21:System.Void()", "Subject_21", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000019u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_22:System.Void()", "Subject_22", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000001Au, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_23:System.Void()", "Subject_23", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000001Bu, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_24:System.Void()", "Subject_24", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000001Cu, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_25:System.Void()", "Subject_25", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000001Du, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_26:System.Void()", "Subject_26", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000001Eu, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_27:System.Void()", "Subject_27", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000001Fu, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_28:System.Void()", "Subject_28", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000020u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_29:System.Void()", "Subject_29", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000021u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_30:System.Void()", "Subject_30", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000022u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_31:System.Void()", "Subject_31", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000023u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_32:System.Void()", "Subject_32", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000024u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_33:System.Void()", "Subject_33", "System.Void", 0, nullptr, 0u, nullptr },
+	{ 0x00000003u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000004u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000005u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000006u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000007u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000008u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000009u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Au, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Bu, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Cu, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Du, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_10:System.Void()", "Subject_10", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Eu, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_11:System.Void()", "Subject_11", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Fu, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_12:System.Void()", "Subject_12", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000010u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_13:System.Void()", "Subject_13", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000011u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_14:System.Void()", "Subject_14", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000012u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_15:System.Void()", "Subject_15", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000013u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_16:System.Void()", "Subject_16", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000014u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_17:System.Void()", "Subject_17", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000015u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_18:System.Void()", "Subject_18", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000016u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_19:System.Void()", "Subject_19", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000017u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_20:System.Void()", "Subject_20", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000018u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_21:System.Void()", "Subject_21", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000019u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_22:System.Void()", "Subject_22", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000001Au, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_23:System.Void()", "Subject_23", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000001Bu, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_24:System.Void()", "Subject_24", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000001Cu, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_25:System.Void()", "Subject_25", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000001Du, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_26:System.Void()", "Subject_26", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000001Eu, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_27:System.Void()", "Subject_27", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000001Fu, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_28:System.Void()", "Subject_28", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000020u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_29:System.Void()", "Subject_29", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000021u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_30:System.Void()", "Subject_30", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000022u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_31:System.Void()", "Subject_31", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000023u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_32:System.Void()", "Subject_32", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000024u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects::Subject_33:System.Void()", "Subject_33", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
 	{ 0x00000001u, "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects", "ReflectionFieldPropertySubjects/ReflectionFieldPropertySubjects", "", "ReflectionFieldPropertySubjects", "ReflectionFieldPropertySubjects", nullptr, kReflFields_ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects, 1u, nullptr, 0u,
-	kReflMethods_ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects, 34u, nullptr, 0u, 0u },
+nullptr, 0u,    kReflMethods_ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects, 34u, nullptr, 0u, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static const ReflectionQueryImageDescriptor kReflImage = { "ReflectionFieldPropertySubjects", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "ReflectionFieldPropertySubjects", kReflTypePtrs, 1u, 1, 0, 0, 0 };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via

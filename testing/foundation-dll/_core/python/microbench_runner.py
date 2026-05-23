@@ -41,6 +41,22 @@ def run_microbench(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageR
     output = (r.stdout or "") + (r.stderr or "")
     exit_code = r.returncode
 
+    # Check for access violation (0xC0000005) — known GC BGC concurrency issue
+    # when allocation-heavy methods trigger BGC during the timing loop.
+    # The BGC thread races with the mutator, causing a crash. This is a systemic
+    # GC engineering issue, not specific to microbench.
+    ACCESS_VIOLATION_EXIT = 0xC0000005
+    if exit_code < 0:
+        # Unix-style signal exit: 128 + SIGSEGV(11) = 139
+        pass
+    elif exit_code == ACCESS_VIOLATION_EXIT:
+        print(f"  [microbench] CRASHED with access violation (0xC0000005)")
+        print(f"    This is a known GC concurrency issue: BGC thread races with")
+        print(f"    mutator during repeated allocations. See FD-I2 in")
+        print(f"    docs/dev/in-progress/foundation-dll-industrialization/industrialization-assessment.md")
+    elif exit_code != 0:
+        print(f"  [microbench] non-zero exit: {exit_code}")
+
     # Parse metrics lines
     # Format examples:
     #   "Benchmark 1: FastFramePool: Batch Acquire+Release: 6.8 ns/op ..."

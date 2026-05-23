@@ -3,8 +3,8 @@ using chaos_delegate_invocation_list = CHAOS_IL2CPP_VECTOR(CHAOS_IL2CPP_INTPTR);
 // struct chaos_type_System_Private_CoreLib_System_Delegate is defined by the
 // object model (EmitObjectModelDeclarations) with proper : public System_Object
 // inheritance. Only the size assertion lives here to avoid C2011 redefinition.
-static_assert(sizeof(chaos_type_System_Private_CoreLib_System_Delegate) == 56,
-    "System.Delegate struct size must be 56 bytes");
+static_assert(sizeof(chaos_type_System_Private_CoreLib_System_Delegate) == 48,
+    "System.Delegate struct size must be 48 bytes");
 
 CHAOS_IL2CPP_INTPTR chaos_delegate_allocate_with_type_info(const TypeInfo* chaos_delegate_type_info)
 {

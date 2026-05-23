@@ -74,28 +74,28 @@ struct Functions {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
-        void (*<Subject_2>b__3_0)(
+        void (*_Subject_2_b__3_0)(
                     CHAOS_IL2CPP_INTPTR
         );
-        void (*<Subject_2>b__3_1)(
+        void (*_Subject_2_b__3_1)(
                     CHAOS_IL2CPP_INTPTR
         );
-        void (*<Subject_3>b__4_0)(
+        void (*_Subject_3_b__4_0)(
                     CHAOS_IL2CPP_INTPTR
         );
-        void (*<Subject_3>b__4_1)(
+        void (*_Subject_3_b__4_1)(
                     CHAOS_IL2CPP_INTPTR
         );
-        void (*<Subject_4>b__5_0)(
+        void (*_Subject_4_b__5_0)(
                     CHAOS_IL2CPP_INTPTR
         );
-        void (*<Subject_4>b__5_1)(
+        void (*_Subject_4_b__5_1)(
                     CHAOS_IL2CPP_INTPTR
         );
-        void (*<Subject_7>b__8_0)(
+        void (*_Subject_7_b__8_0)(
                     CHAOS_IL2CPP_INTPTR
         );
-        void (*<Subject_7>b__8_1)(
+        void (*_Subject_7_b__8_1)(
                     CHAOS_IL2CPP_INTPTR
         );
     } delegateCoreInvocationSubjects___c;
@@ -185,59 +185,59 @@ struct DelegateCoreInvocationSubjects___c {
                     arg_0
         );
     }
-    static inline void <Subject_2>b__3_0(
+    static inline void _Subject_2_b__3_0(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.delegateCoreInvocationSubjects___c.<Subject_2>b__3_0(
+        return kFunctions.delegateCoreInvocationSubjects___c._Subject_2_b__3_0(
                     arg_0
         );
     }
-    static inline void <Subject_2>b__3_1(
+    static inline void _Subject_2_b__3_1(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.delegateCoreInvocationSubjects___c.<Subject_2>b__3_1(
+        return kFunctions.delegateCoreInvocationSubjects___c._Subject_2_b__3_1(
                     arg_0
         );
     }
-    static inline void <Subject_3>b__4_0(
+    static inline void _Subject_3_b__4_0(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.delegateCoreInvocationSubjects___c.<Subject_3>b__4_0(
+        return kFunctions.delegateCoreInvocationSubjects___c._Subject_3_b__4_0(
                     arg_0
         );
     }
-    static inline void <Subject_3>b__4_1(
+    static inline void _Subject_3_b__4_1(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.delegateCoreInvocationSubjects___c.<Subject_3>b__4_1(
+        return kFunctions.delegateCoreInvocationSubjects___c._Subject_3_b__4_1(
                     arg_0
         );
     }
-    static inline void <Subject_4>b__5_0(
+    static inline void _Subject_4_b__5_0(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.delegateCoreInvocationSubjects___c.<Subject_4>b__5_0(
+        return kFunctions.delegateCoreInvocationSubjects___c._Subject_4_b__5_0(
                     arg_0
         );
     }
-    static inline void <Subject_4>b__5_1(
+    static inline void _Subject_4_b__5_1(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.delegateCoreInvocationSubjects___c.<Subject_4>b__5_1(
+        return kFunctions.delegateCoreInvocationSubjects___c._Subject_4_b__5_1(
                     arg_0
         );
     }
-    static inline void <Subject_7>b__8_0(
+    static inline void _Subject_7_b__8_0(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.delegateCoreInvocationSubjects___c.<Subject_7>b__8_0(
+        return kFunctions.delegateCoreInvocationSubjects___c._Subject_7_b__8_0(
                     arg_0
         );
     }
-    static inline void <Subject_7>b__8_1(
+    static inline void _Subject_7_b__8_1(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.delegateCoreInvocationSubjects___c.<Subject_7>b__8_1(
+        return kFunctions.delegateCoreInvocationSubjects___c._Subject_7_b__8_1(
                     arg_0
         );
     }

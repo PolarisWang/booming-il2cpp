@@ -27,6 +27,25 @@ extern "C" void InterpreterEntryDirect(
 #pragma warning(push)
 #pragma warning(disable: 4065 4244)
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_10(void);
+extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_11(void);
+extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_12(void);
+extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_14(void);
+extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_15(void);
+extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_16(void);
+extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_2(void);
+extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_3(void);
+extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_4(void);
+extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_6(void);
+extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_7(void);
+extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_8(void);
+extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_Subject_0(void);
+extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_Subject_1(void);
+extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_Subject_13(void);
+extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_Subject_5(void);
+extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_Subject_9(void);
+
 namespace chaos::il2cpp::codegen::ThreadingSyncSubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup
@@ -174,6 +193,45 @@ struct chaos_type_ThreadingSyncSubjects_ThreadingSyncSubjects
 	ThinLockableHeader header{};
 };
 
+
+// ── GcTypeLayout pointer offset arrays (computed via offsetof) ──
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
+
+extern "C" void ChaosRegisterGcLayouts() {
+	auto& registry = chaos::il2cpp::runtime_core::GcLayoutRegistry::Instance();
+
+	registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
+	registry.Register(5474029880995115448ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly, 1);
+	registry.Register(17082367815459723707ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, 1);
+	registry.Register(4137207361503509124ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, 5);
+	registry.Register(17040031516751226236ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, 2);
+	registry.Register(10748947813473285525ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, 5);
+	registry.Register(1782325859292956794ULL, sizeof(chaos_type_System_Private_CoreLib_System_String), nullptr, 0);
+	registry.Register(9111865296079522101ULL, sizeof(chaos_type_System_Threading_AutoResetEvent), nullptr, 0);
+	registry.Register(8137036073600629176ULL, sizeof(chaos_type_System_Threading_ManualResetEvent), nullptr, 0);
+	registry.Register(10823106288603913950ULL, sizeof(chaos_type_System_Threading_SemaphoreSlim), nullptr, 0);
+	registry.Register(8630705894240840840ULL, sizeof(chaos_type_System_Threading_SpinLock), nullptr, 0);
+	registry.Register(4025799244050259528ULL, sizeof(chaos_type_ThreadingSyncSubjects_ThreadingSyncSubjects), nullptr, 0);
+
+	// Register TypeInfoV0 address ranges for IsValidTypeInfoPointer.
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object) + sizeof(chaos_mt_System_Private_CoreLib_System_Object));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_Assembly));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_String), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_String) + sizeof(chaos_mt_System_Private_CoreLib_System_String));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Threading_AutoResetEvent), reinterpret_cast<uintptr_t>(&chaos_mt_System_Threading_AutoResetEvent) + sizeof(chaos_mt_System_Threading_AutoResetEvent));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Threading_ManualResetEvent), reinterpret_cast<uintptr_t>(&chaos_mt_System_Threading_ManualResetEvent) + sizeof(chaos_mt_System_Threading_ManualResetEvent));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Threading_SemaphoreSlim), reinterpret_cast<uintptr_t>(&chaos_mt_System_Threading_SemaphoreSlim) + sizeof(chaos_mt_System_Threading_SemaphoreSlim));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Threading_SpinLock), reinterpret_cast<uintptr_t>(&chaos_mt_System_Threading_SpinLock) + sizeof(chaos_mt_System_Threading_SpinLock));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_ThreadingSyncSubjects_ThreadingSyncSubjects), reinterpret_cast<uintptr_t>(&chaos_mt_ThreadingSyncSubjects_ThreadingSyncSubjects) + sizeof(chaos_mt_ThreadingSyncSubjects_ThreadingSyncSubjects));
+}
+
 CHAOS_IL2CPP_INT32 chaos_static_ThreadingSyncSubjects_ThreadingSyncSubjects___exitCode = 0;
 
 static constexpr CHAOS_IL2CPP_UINT32 kGenericTypeArgTokens[1] = { 0 };
@@ -186,6 +244,46 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
+
+
+// ── Bridge/import thunks ──
+extern "C" void* kChaosExternalRuntimeFnTable[];
+
+// Bridge/import thunk for: System.Threading/SemaphoreSlim::.ctor:System.Void(System.Int32)
+extern "C" void chaos_bridge_thunk_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[0])(chaos_fn_arg_0);
+}
+
+// Bridge/import thunk for: ThreadingSyncSubjects/ThreadingSyncSubjects::_exitCode
+extern "C" void chaos_bridge_thunk_1(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[1])();
+}
+
+// Bridge/import thunk for: System.Threading/SemaphoreSlim::.ctor:System.Void(System.Int32,System.Int32)
+extern "C" void chaos_bridge_thunk_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[2])(chaos_fn_arg_0, chaos_fn_arg_1);
+}
+
+// Bridge/import thunk for: System.Threading/ManualResetEvent::.ctor:System.Void(System.Boolean)
+extern "C" void chaos_bridge_thunk_3(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[3])(chaos_fn_arg_0);
+}
+
+// Bridge/import thunk for: System.Threading/AutoResetEvent::.ctor:System.Void(System.Boolean)
+extern "C" void chaos_bridge_thunk_4(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[4])(chaos_fn_arg_0);
+}
+
+// Bridge/import thunk for: System.Threading/SpinLock::.ctor:System.Void(System.Boolean)
+extern "C" void chaos_bridge_thunk_5(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[5])(chaos_fn_arg_0);
+}
 
 extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_Subject_0(void);
 extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_Subject_1(void);
@@ -328,11 +426,18 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
 		/* .type_count        = */ 2u,
-	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
+	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 -- deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
 	/* .custom_attribute_materializer = */ nullptr,
-
+	/* .custom_attribute_method_offset   = */ nullptr,
+	/* .custom_attribute_field_offset    = */ nullptr,
+	/* .custom_attribute_property_offset = */ nullptr,
+	/* .custom_attribute_param_offset    = */ nullptr,
+	/* .custom_attribute_method_count    = */ 0u,
+	/* .custom_attribute_field_count     = */ 0u,
+	/* .custom_attribute_property_count  = */ 0u,
+	/* .custom_attribute_param_count   = */ 0u,
 		/* .abi_manifest      = */ s_abi_manifest,
 	};
 	static const CHAOS_IL2CPP_UINT32 s_native_aot_module_id =
@@ -769,38 +874,38 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // matching during IR lowering of patched methods.
 
 static constexpr ReflectionQueryFieldDescriptor kReflFields_ThreadingSyncSubjects_ThreadingSyncSubjects[1] = {
-	{ 0x04000001u, "ThreadingSyncSubjects/ThreadingSyncSubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
+	{ 0x04000001u, "ThreadingSyncSubjects/ThreadingSyncSubjects::_exitCode", "_exitCode", "System.Int32", 0LL, 3u },
 };
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_ThreadingSyncSubjects_ThreadingSyncSubjects[17] = {
-	{ 0x00000003u, "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000004u, "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000005u, "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_2:System.Void()", "CustomEntrySubject_2", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000006u, "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_3:System.Void()", "CustomEntrySubject_3", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000007u, "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_4:System.Void()", "CustomEntrySubject_4", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000008u, "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000009u, "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_6:System.Void()", "CustomEntrySubject_6", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000000Au, "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_7:System.Void()", "CustomEntrySubject_7", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000000Bu, "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_8:System.Void()", "CustomEntrySubject_8", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000000Cu, "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000000Du, "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_10:System.Void()", "CustomEntrySubject_10", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000000Eu, "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_11:System.Void()", "CustomEntrySubject_11", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x0000000Fu, "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_12:System.Void()", "CustomEntrySubject_12", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000010u, "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_13:System.Void()", "Subject_13", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000011u, "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_14:System.Void()", "CustomEntrySubject_14", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000012u, "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_15:System.Void()", "CustomEntrySubject_15", "System.Void", 0, nullptr, 0u, nullptr },
-	{ 0x00000013u, "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_16:System.Void()", "CustomEntrySubject_16", "System.Void", 0, nullptr, 0u, nullptr },
+	{ 0x00000003u, "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000004u, "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000005u, "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_2:System.Void()", "CustomEntrySubject_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000006u, "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_3:System.Void()", "CustomEntrySubject_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000007u, "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_4:System.Void()", "CustomEntrySubject_4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000008u, "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000009u, "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_6:System.Void()", "CustomEntrySubject_6", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Au, "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_7:System.Void()", "CustomEntrySubject_7", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Bu, "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_8:System.Void()", "CustomEntrySubject_8", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Cu, "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Du, "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_10:System.Void()", "CustomEntrySubject_10", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Eu, "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_11:System.Void()", "CustomEntrySubject_11", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Fu, "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_12:System.Void()", "CustomEntrySubject_12", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000010u, "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_13:System.Void()", "Subject_13", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000011u, "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_14:System.Void()", "CustomEntrySubject_14", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000012u, "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_15:System.Void()", "CustomEntrySubject_15", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000013u, "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_16:System.Void()", "CustomEntrySubject_16", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
 	{ 0x00000001u, "ThreadingSyncSubjects/ThreadingSyncSubjects", "ThreadingSyncSubjects/ThreadingSyncSubjects", "", "ThreadingSyncSubjects", "ThreadingSyncSubjects", nullptr, kReflFields_ThreadingSyncSubjects_ThreadingSyncSubjects, 1u, nullptr, 0u,
-	kReflMethods_ThreadingSyncSubjects_ThreadingSyncSubjects, 17u, nullptr, 0u, 0u },
+nullptr, 0u,    kReflMethods_ThreadingSyncSubjects_ThreadingSyncSubjects, 17u, nullptr, 0u, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static const ReflectionQueryImageDescriptor kReflImage = { "ThreadingSyncSubjects", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "ThreadingSyncSubjects", kReflTypePtrs, 1u, 1, 0, 0, 0 };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via

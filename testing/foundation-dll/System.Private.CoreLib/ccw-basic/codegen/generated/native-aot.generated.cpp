@@ -27,6 +27,27 @@ extern "C" void InterpreterEntryDirect(
 #pragma warning(push)
 #pragma warning(disable: 4065 4244)
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_CcwBasicNativeEntry_Run_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_CcwBasicNativeEntry_TestConstantValue(void);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_CcwBasicNativeEntry_TestDualInterface(void);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_CcwBasicNativeEntry_TestSimpleMathAdd(void);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_CcwBasicNativeEntry_TestSimpleMathMul(void);
+extern "C" void CcwBasicSubjects_CcwBasicSubjects_Subject_0(void);
+extern "C" void CcwBasicSubjects_CcwBasicSubjects_Subject_1(void);
+extern "C" void CcwBasicSubjects_CcwBasicSubjects_Subject_2(void);
+extern "C" void CcwBasicSubjects_CcwBasicSubjects_Subject_3(void);
+extern "C" void CcwBasicSubjects_CcwBasicSubjects_Subject_4(void);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_ConstantFortyTwo_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void CcwBasicSubjects_ConstantFortyTwo__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_DualInterfaceImpl_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_DualInterfaceImpl_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_DualInterfaceImpl_Multiply_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" void CcwBasicSubjects_DualInterfaceImpl__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_SimpleMath_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_SimpleMath_Multiply_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" void CcwBasicSubjects_SimpleMath__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+
 namespace chaos::il2cpp::codegen::CcwBasicSubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup
@@ -37,6 +58,9 @@ using namespace chaos::il2cpp::runtime_core;
 
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_CcwBasicSubjects_IConstantValue = static_cast<CHAOS_IL2CPP_INTPTR>(11127514427160927756ULL);
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_CcwBasicSubjects_ISimpleMath = static_cast<CHAOS_IL2CPP_INTPTR>(502509295808532539ULL);
+const void* chaos_vtable_CcwBasicSubjects_ConstantFortyTwo[];
+const void* chaos_vtable_CcwBasicSubjects_DualInterfaceImpl[];
+const void* chaos_vtable_CcwBasicSubjects_SimpleMath[];
 inline TypeInfoV0 chaos_mt_CcwBasicSubjects_CcwBasicSubjects = {{nullptr, nullptr, 5516802378886089046ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_CcwBasicSubjects_CcwBasicSubjects = static_cast<CHAOS_IL2CPP_INTPTR>(5516802378886089046ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Object = {{nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
@@ -44,18 +68,18 @@ inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System
 static constexpr InterfaceMapEntry chaos_iface_map_CcwBasicSubjects_ConstantFortyTwo[] = {
 	{ chaos_type_id_CcwBasicSubjects_IConstantValue, 1, 1 }
 };
-inline TypeInfoV2 chaos_mt_CcwBasicSubjects_ConstantFortyTwo = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, &inline_slots[0], 9147543264357235806ULL, 2u, 32, 1, 1}, {chaos_iface_map_CcwBasicSubjects_ConstantFortyTwo, nullptr, 1, 0, 0, 0}, {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}};
+inline TypeInfoV0 chaos_mt_CcwBasicSubjects_ConstantFortyTwo = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_CcwBasicSubjects_ConstantFortyTwo, 9147543264357235806ULL, 2u, 32, 1, 1}, {chaos_iface_map_CcwBasicSubjects_ConstantFortyTwo, nullptr, 1, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_CcwBasicSubjects_ConstantFortyTwo = static_cast<CHAOS_IL2CPP_INTPTR>(9147543264357235806ULL);
 static constexpr InterfaceMapEntry chaos_iface_map_CcwBasicSubjects_DualInterfaceImpl[] = {
 	{ chaos_type_id_CcwBasicSubjects_ISimpleMath, 2, 2 },
 	{ chaos_type_id_CcwBasicSubjects_IConstantValue, 1, 1 }
 };
-inline TypeInfoV2 chaos_mt_CcwBasicSubjects_DualInterfaceImpl = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, &inline_slots[0], 14234888545717869799ULL, 4u, 32, 1, 1}, {chaos_iface_map_CcwBasicSubjects_DualInterfaceImpl, nullptr, 2, 0, 0, 0}, {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}};
+inline TypeInfoV0 chaos_mt_CcwBasicSubjects_DualInterfaceImpl = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_CcwBasicSubjects_DualInterfaceImpl, 14234888545717869799ULL, 4u, 32, 1, 1}, {chaos_iface_map_CcwBasicSubjects_DualInterfaceImpl, nullptr, 2, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_CcwBasicSubjects_DualInterfaceImpl = static_cast<CHAOS_IL2CPP_INTPTR>(14234888545717869799ULL);
 static constexpr InterfaceMapEntry chaos_iface_map_CcwBasicSubjects_SimpleMath[] = {
 	{ chaos_type_id_CcwBasicSubjects_ISimpleMath, 2, 2 }
 };
-inline TypeInfoV2 chaos_mt_CcwBasicSubjects_SimpleMath = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, &inline_slots[0], 4431683709018832856ULL, 4u, 32, 1, 1}, {chaos_iface_map_CcwBasicSubjects_SimpleMath, nullptr, 1, 0, 0, 0}, {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}};
+inline TypeInfoV0 chaos_mt_CcwBasicSubjects_SimpleMath = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_CcwBasicSubjects_SimpleMath, 4431683709018832856ULL, 4u, 32, 1, 1}, {chaos_iface_map_CcwBasicSubjects_SimpleMath, nullptr, 1, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_CcwBasicSubjects_SimpleMath = static_cast<CHAOS_IL2CPP_INTPTR>(4431683709018832856ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);
@@ -228,6 +252,43 @@ struct chaos_type_System_Private_CoreLib_System_String
 	CHAOS_IL2CPP_UINT64 string_id = 0u;  // stable StringId, 0 = not yet materialized
 };
 
+
+// ── GcTypeLayout pointer offset arrays (computed via offsetof) ──
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
+
+extern "C" void ChaosRegisterGcLayouts() {
+	auto& registry = chaos::il2cpp::runtime_core::GcLayoutRegistry::Instance();
+
+	registry.Register(5516802378886089046ULL, sizeof(chaos_type_CcwBasicSubjects_CcwBasicSubjects), nullptr, 0);
+	registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
+	registry.Register(9147543264357235806ULL, sizeof(chaos_type_CcwBasicSubjects_ConstantFortyTwo), nullptr, 0);
+	registry.Register(14234888545717869799ULL, sizeof(chaos_type_CcwBasicSubjects_DualInterfaceImpl), nullptr, 0);
+	registry.Register(4431683709018832856ULL, sizeof(chaos_type_CcwBasicSubjects_SimpleMath), nullptr, 0);
+	registry.Register(5474029880995115448ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly, 1);
+	registry.Register(17082367815459723707ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, 1);
+	registry.Register(4137207361503509124ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, 5);
+	registry.Register(17040031516751226236ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, 2);
+	registry.Register(10748947813473285525ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, 5);
+	registry.Register(1782325859292956794ULL, sizeof(chaos_type_System_Private_CoreLib_System_String), nullptr, 0);
+
+	// Register TypeInfoV0 address ranges for IsValidTypeInfoPointer.
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_CcwBasicSubjects_CcwBasicSubjects), reinterpret_cast<uintptr_t>(&chaos_mt_CcwBasicSubjects_CcwBasicSubjects) + sizeof(chaos_mt_CcwBasicSubjects_CcwBasicSubjects));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object) + sizeof(chaos_mt_System_Private_CoreLib_System_Object));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_CcwBasicSubjects_ConstantFortyTwo), reinterpret_cast<uintptr_t>(&chaos_mt_CcwBasicSubjects_ConstantFortyTwo) + sizeof(chaos_mt_CcwBasicSubjects_ConstantFortyTwo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_CcwBasicSubjects_DualInterfaceImpl), reinterpret_cast<uintptr_t>(&chaos_mt_CcwBasicSubjects_DualInterfaceImpl) + sizeof(chaos_mt_CcwBasicSubjects_DualInterfaceImpl));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_CcwBasicSubjects_SimpleMath), reinterpret_cast<uintptr_t>(&chaos_mt_CcwBasicSubjects_SimpleMath) + sizeof(chaos_mt_CcwBasicSubjects_SimpleMath));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_Assembly));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_String), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_String) + sizeof(chaos_mt_System_Private_CoreLib_System_String));
+}
+
 CHAOS_IL2CPP_INT32 chaos_static_CcwBasicSubjects_CcwBasicSubjects___exitCode = 0;
 
 static void chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
@@ -245,6 +306,16 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
+
+
+// ── Bridge/import thunks ──
+extern "C" void* kChaosExternalRuntimeFnTable[];
+
+// Bridge/import thunk for: CcwBasicSubjects/CcwBasicSubjects::_exitCode
+extern "C" void chaos_bridge_thunk_0(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[0])();
+}
 
 extern "C" void CcwBasicSubjects_CcwBasicSubjects_Subject_0(void);
 extern "C" void CcwBasicSubjects_CcwBasicSubjects_Subject_1(void);

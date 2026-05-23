@@ -10,11 +10,11 @@
     {
       "registrationKind": "type",
       "slot": 1,
-      "metadataToken": 33554434,
       "subjectId": "EnumParsingSubjects/EnumParsingSubjects",
       "name": "EnumParsingSubjects",
       "displayName": "EnumParsingSubjects",
-      "definitionSubjectId": "EnumParsingSubjects/EnumParsingSubjects"
+      "definitionSubjectId": "EnumParsingSubjects/EnumParsingSubjects",
+      "metadataToken": 33554434
     },
     {
       "registrationKind": "field",
@@ -28,158 +28,158 @@
     {
       "registrationKind": "method",
       "slot": 3,
-      "metadataToken": 100663297,
       "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_0:System.Void()",
       "name": "Subject_0",
       "definitionSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_0:System.Void()",
       "declaringTypeSubjectId": "EnumParsingSubjects/EnumParsingSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663297
     },
     {
       "registrationKind": "method",
       "slot": 4,
-      "metadataToken": 100663298,
       "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_1:System.Void()",
       "name": "Subject_1",
       "definitionSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_1:System.Void()",
       "declaringTypeSubjectId": "EnumParsingSubjects/EnumParsingSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663298
     },
     {
       "registrationKind": "method",
       "slot": 5,
-      "metadataToken": 100663299,
       "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_2:System.Void()",
       "name": "Subject_2",
       "definitionSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_2:System.Void()",
       "declaringTypeSubjectId": "EnumParsingSubjects/EnumParsingSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663299
     },
     {
       "registrationKind": "method",
       "slot": 6,
-      "metadataToken": 100663300,
       "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_3:System.Void()",
       "name": "Subject_3",
       "definitionSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_3:System.Void()",
       "declaringTypeSubjectId": "EnumParsingSubjects/EnumParsingSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663300
     },
     {
       "registrationKind": "method",
       "slot": 7,
-      "metadataToken": 100663301,
       "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_4:System.Void()",
       "name": "Subject_4",
       "definitionSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_4:System.Void()",
       "declaringTypeSubjectId": "EnumParsingSubjects/EnumParsingSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663301
     },
     {
       "registrationKind": "method",
       "slot": 8,
-      "metadataToken": 100663302,
       "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_5:System.Void()",
       "name": "Subject_5",
       "definitionSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_5:System.Void()",
       "declaringTypeSubjectId": "EnumParsingSubjects/EnumParsingSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663302
     },
     {
       "registrationKind": "method",
       "slot": 9,
-      "metadataToken": 100663303,
       "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_8:System.Void()",
       "name": "Subject_8",
       "definitionSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_8:System.Void()",
       "declaringTypeSubjectId": "EnumParsingSubjects/EnumParsingSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663303
     },
     {
       "registrationKind": "method",
       "slot": 10,
-      "metadataToken": 100663304,
       "subjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_9:System.Void()",
       "name": "Subject_9",
       "definitionSubjectId": "EnumParsingSubjects/EnumParsingSubjects::Subject_9:System.Void()",
       "declaringTypeSubjectId": "EnumParsingSubjects/EnumParsingSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663304
     },
     {
       "registrationKind": "method",
       "slot": 11,
-      "metadataToken": 100663305,
       "subjectId": "EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_6:System.Void()",
       "name": "CustomEntrySubject_6",
       "definitionSubjectId": "EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_6:System.Void()",
       "declaringTypeSubjectId": "EnumParsingSubjects/EnumParsingSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663305
     },
     {
       "registrationKind": "method",
       "slot": 12,
-      "metadataToken": 100663306,
       "subjectId": "EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_7:System.Void()",
       "name": "CustomEntrySubject_7",
       "definitionSubjectId": "EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_7:System.Void()",
       "declaringTypeSubjectId": "EnumParsingSubjects/EnumParsingSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663306
     },
     {
       "registrationKind": "method",
       "slot": 13,
-      "metadataToken": 100663307,
       "subjectId": "EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_10:System.Void()",
       "name": "CustomEntrySubject_10",
       "definitionSubjectId": "EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_10:System.Void()",
       "declaringTypeSubjectId": "EnumParsingSubjects/EnumParsingSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663307
     },
     {
       "registrationKind": "method",
       "slot": 14,
-      "metadataToken": 100663308,
       "subjectId": "EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_11:System.Void()",
       "name": "CustomEntrySubject_11",
       "definitionSubjectId": "EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_11:System.Void()",
       "declaringTypeSubjectId": "EnumParsingSubjects/EnumParsingSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663308
     },
     {
       "registrationKind": "method",
       "slot": 15,
-      "metadataToken": 100663309,
       "subjectId": "EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_12:System.Void()",
       "name": "CustomEntrySubject_12",
       "definitionSubjectId": "EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_12:System.Void()",
       "declaringTypeSubjectId": "EnumParsingSubjects/EnumParsingSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663309
     }
   ]
 }

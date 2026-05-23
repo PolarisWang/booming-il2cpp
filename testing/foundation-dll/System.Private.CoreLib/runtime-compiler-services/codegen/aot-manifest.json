@@ -70,12 +70,6 @@
     },
     {
       "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "type",
-      "subjectId": "System.Private.CoreLib/System.Int32",
-      "reason": "boxed-value-type"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetHashCode:System.Int32(System.Object)",
       "reason": "external-call"
@@ -139,6 +133,12 @@
       "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeWrappedException::.ctor:System.Void(System.Object)",
       "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Int32",
+      "reason": "boxed-value-type"
     },
     {
       "assemblyName": "System.Private.CoreLib",

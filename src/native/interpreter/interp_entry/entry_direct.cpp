@@ -919,7 +919,6 @@ void InterpreterEntryDirect(
     dispatch_ctx.runtime_state = runtime_state; dispatch_ctx.thread_state = thread_state;
     frame.dispatch_fn = runtime_instantiation::InterpreterDispatch;
     frame.dispatch_context = &dispatch_ctx;
-    frame.method_token = patch_method->token;
     GetTierCounters().step_vm.fetch_add(1, std::memory_order_relaxed);
     interpreter::ExecutionResult result;
     CHAOS_IL2CPP_LOG_INFO("interpreter", "InterpreterVM::Execute entering");

@@ -27,6 +27,26 @@ extern "C" void InterpreterEntryDirect(
 #pragma warning(push)
 #pragma warning(disable: 4065 4244)
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_BasicImpl_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DispatchBasicSubjects_BasicImpl__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" void DispatchBasicSubjects_Calculator__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_Run_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus(void);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd(void);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub(void);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue(void);
+extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_0(void);
+extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_1(void);
+extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_2(void);
+extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_3(void);
+extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_4(void);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_StatusProvider_GetStatusCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DispatchBasicSubjects_StatusProvider__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute__ctor_ComInterfaceType(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+
 namespace chaos::il2cpp::codegen::DispatchBasicSubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup
@@ -35,15 +55,18 @@ using namespace chaos::il2cpp::runtime_core;
 // Runtime prelude dependencies included at translation unit level
 
 
+const void* chaos_vtable_DispatchBasicSubjects_BasicImpl[];
+const void* chaos_vtable_DispatchBasicSubjects_Calculator[];
+const void* chaos_vtable_DispatchBasicSubjects_StatusProvider[];
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Object = {{nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_INTPTR>(15228727185366376748ULL);
-inline TypeInfoV2 chaos_mt_DispatchBasicSubjects_BasicImpl = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, &inline_slots[0], 5722114412902280165ULL, 2u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}, {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}};
+inline TypeInfoV0 chaos_mt_DispatchBasicSubjects_BasicImpl = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_DispatchBasicSubjects_BasicImpl, 5722114412902280165ULL, 2u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_DispatchBasicSubjects_BasicImpl = static_cast<CHAOS_IL2CPP_INTPTR>(5722114412902280165ULL);
-inline TypeInfoV2 chaos_mt_DispatchBasicSubjects_Calculator = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, &inline_slots[0], 5786799786101565947ULL, 4u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}, {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}};
+inline TypeInfoV0 chaos_mt_DispatchBasicSubjects_Calculator = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_DispatchBasicSubjects_Calculator, 5786799786101565947ULL, 4u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_DispatchBasicSubjects_Calculator = static_cast<CHAOS_IL2CPP_INTPTR>(5786799786101565947ULL);
 inline TypeInfoV0 chaos_mt_DispatchBasicSubjects_DispatchBasicSubjects = {{nullptr, nullptr, 13619514316044602496ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_DispatchBasicSubjects_DispatchBasicSubjects = static_cast<CHAOS_IL2CPP_INTPTR>(13619514316044602496ULL);
-inline TypeInfoV2 chaos_mt_DispatchBasicSubjects_StatusProvider = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, &inline_slots[0], 11732973143578276300ULL, 5u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}, {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr}};
+inline TypeInfoV0 chaos_mt_DispatchBasicSubjects_StatusProvider = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_DispatchBasicSubjects_StatusProvider, 11732973143578276300ULL, 5u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_DispatchBasicSubjects_StatusProvider = static_cast<CHAOS_IL2CPP_INTPTR>(11732973143578276300ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);
@@ -214,6 +237,43 @@ struct chaos_type_System_Private_CoreLib_System_String
 	CHAOS_IL2CPP_UINT64 string_id = 0u;  // stable StringId, 0 = not yet materialized
 };
 
+
+// ── GcTypeLayout pointer offset arrays (computed via offsetof) ──
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
+
+extern "C" void ChaosRegisterGcLayouts() {
+	auto& registry = chaos::il2cpp::runtime_core::GcLayoutRegistry::Instance();
+
+	registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
+	registry.Register(5722114412902280165ULL, sizeof(chaos_type_DispatchBasicSubjects_BasicImpl), nullptr, 0);
+	registry.Register(5786799786101565947ULL, sizeof(chaos_type_DispatchBasicSubjects_Calculator), nullptr, 0);
+	registry.Register(13619514316044602496ULL, sizeof(chaos_type_DispatchBasicSubjects_DispatchBasicSubjects), nullptr, 0);
+	registry.Register(11732973143578276300ULL, sizeof(chaos_type_DispatchBasicSubjects_StatusProvider), nullptr, 0);
+	registry.Register(5474029880995115448ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly, 1);
+	registry.Register(17082367815459723707ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, 1);
+	registry.Register(4137207361503509124ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, 5);
+	registry.Register(17040031516751226236ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, 2);
+	registry.Register(10748947813473285525ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, 5);
+	registry.Register(1782325859292956794ULL, sizeof(chaos_type_System_Private_CoreLib_System_String), nullptr, 0);
+
+	// Register TypeInfoV0 address ranges for IsValidTypeInfoPointer.
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object) + sizeof(chaos_mt_System_Private_CoreLib_System_Object));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_DispatchBasicSubjects_BasicImpl), reinterpret_cast<uintptr_t>(&chaos_mt_DispatchBasicSubjects_BasicImpl) + sizeof(chaos_mt_DispatchBasicSubjects_BasicImpl));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_DispatchBasicSubjects_Calculator), reinterpret_cast<uintptr_t>(&chaos_mt_DispatchBasicSubjects_Calculator) + sizeof(chaos_mt_DispatchBasicSubjects_Calculator));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_DispatchBasicSubjects_DispatchBasicSubjects), reinterpret_cast<uintptr_t>(&chaos_mt_DispatchBasicSubjects_DispatchBasicSubjects) + sizeof(chaos_mt_DispatchBasicSubjects_DispatchBasicSubjects));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_DispatchBasicSubjects_StatusProvider), reinterpret_cast<uintptr_t>(&chaos_mt_DispatchBasicSubjects_StatusProvider) + sizeof(chaos_mt_DispatchBasicSubjects_StatusProvider));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_Assembly));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_String), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_String) + sizeof(chaos_mt_System_Private_CoreLib_System_String));
+}
+
 CHAOS_IL2CPP_INT32 chaos_static_DispatchBasicSubjects_DispatchBasicSubjects___exitCode = 0;
 
 static void chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
@@ -231,6 +291,22 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
+
+
+// ── Bridge/import thunks ──
+extern "C" void* kChaosExternalRuntimeFnTable[];
+
+// Bridge/import thunk for: DispatchBasicSubjects/DispatchBasicSubjects::_exitCode
+extern "C" void chaos_bridge_thunk_0(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[0])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Attribute::.ctor:System.Void()
+extern "C" void chaos_bridge_thunk_1(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[2])();
+}
 
 extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_0(void);
 extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_1(void);

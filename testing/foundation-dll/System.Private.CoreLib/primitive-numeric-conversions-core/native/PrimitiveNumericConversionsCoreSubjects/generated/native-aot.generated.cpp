@@ -1,4 +1,4 @@
-#include <chaos/common.h>
+﻿#include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
 #include <chaos/eh.h>
@@ -16,6 +16,7 @@
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 #include "enum_metadata.generated.h"
+#include "enum_stubs.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -25,6 +26,28 @@ extern "C" void InterpreterEntryDirect(
 
 #pragma warning(push)
 #pragma warning(disable: 4065 4244)
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" CHAOS_IL2CPP_INT32 PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreNativeEntry_TestByteToInt(void);
+extern "C" CHAOS_IL2CPP_INT32 PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreNativeEntry_TestDoubleToFloat(void);
+extern "C" CHAOS_IL2CPP_INT32 PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreNativeEntry_TestDoubleToInt(void);
+extern "C" CHAOS_IL2CPP_INT32 PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreNativeEntry_TestFloatToDouble(void);
+extern "C" CHAOS_IL2CPP_INT32 PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreNativeEntry_TestIntToByte(void);
+extern "C" CHAOS_IL2CPP_INT32 PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreNativeEntry_TestIntToDouble(void);
+extern "C" CHAOS_IL2CPP_INT32 PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreNativeEntry_TestIntToLong(void);
+extern "C" CHAOS_IL2CPP_INT32 PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreNativeEntry_TestIntToShort(void);
+extern "C" CHAOS_IL2CPP_INT32 PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreNativeEntry_TestLongToInt(void);
+extern "C" CHAOS_IL2CPP_INT32 PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreNativeEntry_TestUintToLong(void);
+extern "C" void PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreSubjects_Subject_0(void);
+extern "C" void PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreSubjects_Subject_1(void);
+extern "C" void PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreSubjects_Subject_2(void);
+extern "C" void PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreSubjects_Subject_3(void);
+extern "C" void PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreSubjects_Subject_4(void);
+extern "C" void PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreSubjects_Subject_5(void);
+extern "C" void PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreSubjects_Subject_6(void);
+extern "C" void PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreSubjects_Subject_7(void);
+extern "C" void PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreSubjects_Subject_8(void);
+extern "C" void PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreSubjects_Subject_9(void);
 
 namespace chaos::il2cpp::codegen::PrimitiveNumericConversionsCoreSubjects {
 
@@ -145,6 +168,37 @@ struct chaos_type_System_Private_CoreLib_System_String
 	CHAOS_IL2CPP_UINT64 string_id = 0u;  // stable StringId, 0 = not yet materialized
 };
 
+
+// ── GcTypeLayout pointer offset arrays (computed via offsetof) ──
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
+
+extern "C" void ChaosRegisterGcLayouts() {
+	auto& registry = chaos::il2cpp::runtime_core::GcLayoutRegistry::Instance();
+
+	registry.Register(3329548187654970984ULL, sizeof(chaos_type_PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreSubjects), nullptr, 0);
+	registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
+	registry.Register(5474029880995115448ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly, 1);
+	registry.Register(17082367815459723707ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, 1);
+	registry.Register(4137207361503509124ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, 5);
+	registry.Register(17040031516751226236ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, 2);
+	registry.Register(10748947813473285525ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, 5);
+	registry.Register(1782325859292956794ULL, sizeof(chaos_type_System_Private_CoreLib_System_String), nullptr, 0);
+
+	// Register TypeInfoV0 address ranges for IsValidTypeInfoPointer.
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreSubjects), reinterpret_cast<uintptr_t>(&chaos_mt_PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreSubjects) + sizeof(chaos_mt_PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreSubjects));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object) + sizeof(chaos_mt_System_Private_CoreLib_System_Object));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_Assembly));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_String), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_String) + sizeof(chaos_mt_System_Private_CoreLib_System_String));
+}
+
 CHAOS_IL2CPP_INT32 chaos_static_PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreSubjects___exitCode = 0;
 
 static constexpr CHAOS_IL2CPP_UINT32 kGenericTypeArgTokens[1] = { 0 };
@@ -157,6 +211,16 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
+
+
+// ── Bridge/import thunks ──
+extern "C" void* kChaosExternalRuntimeFnTable[];
+
+// Bridge/import thunk for: PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects::_exitCode
+extern "C" void chaos_bridge_thunk_0(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[0])();
+}
 
 extern "C" void PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreSubjects_Subject_0(void);
 extern "C" void PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreSubjects_Subject_1(void);
@@ -315,11 +379,18 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
 		/* .type_count        = */ 3u,
-	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
+	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 -- deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
 	/* .custom_attribute_materializer = */ nullptr,
-
+	/* .custom_attribute_method_offset   = */ nullptr,
+	/* .custom_attribute_field_offset    = */ nullptr,
+	/* .custom_attribute_property_offset = */ nullptr,
+	/* .custom_attribute_param_offset    = */ nullptr,
+	/* .custom_attribute_method_count    = */ 0u,
+	/* .custom_attribute_field_count     = */ 0u,
+	/* .custom_attribute_property_count  = */ 0u,
+	/* .custom_attribute_param_count   = */ 0u,
 		/* .abi_manifest      = */ s_abi_manifest,
 	};
 	static const CHAOS_IL2CPP_UINT32 s_native_aot_module_id =
@@ -998,39 +1069,39 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // matching during IR lowering of patched methods.
 
 static constexpr ReflectionQueryFieldDescriptor kReflFields_PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreSubjects[1] = {
-	{ 0u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
+	{ 0x04000001u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects::_exitCode", "_exitCode", "System.Int32", 0LL, 3u },
 };
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreSubjects[10] = {
-	{ 0u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u },
-	{ 0u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u },
-	{ 0u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u },
-	{ 0u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u },
-	{ 0u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u },
-	{ 0u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u },
-	{ 0u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u },
-	{ 0u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u },
-	{ 0u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u },
+	{ 0x00000004u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000005u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000006u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000007u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000008u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000009u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Au, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Bu, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Cu, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Du, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreNativeEntry[10] = {
-	{ 0u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreNativeEntry::TestByteToInt:System.Int32()", "TestByteToInt", "System.Void", 0, nullptr, 0u },
-	{ 0u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreNativeEntry::TestDoubleToFloat:System.Int32()", "TestDoubleToFloat", "System.Void", 0, nullptr, 0u },
-	{ 0u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreNativeEntry::TestDoubleToInt:System.Int32()", "TestDoubleToInt", "System.Void", 0, nullptr, 0u },
-	{ 0u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreNativeEntry::TestFloatToDouble:System.Int32()", "TestFloatToDouble", "System.Void", 0, nullptr, 0u },
-	{ 0u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreNativeEntry::TestIntToByte:System.Int32()", "TestIntToByte", "System.Void", 0, nullptr, 0u },
-	{ 0u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreNativeEntry::TestIntToDouble:System.Int32()", "TestIntToDouble", "System.Void", 0, nullptr, 0u },
-	{ 0u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreNativeEntry::TestIntToLong:System.Int32()", "TestIntToLong", "System.Void", 0, nullptr, 0u },
-	{ 0u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreNativeEntry::TestIntToShort:System.Int32()", "TestIntToShort", "System.Void", 0, nullptr, 0u },
-	{ 0u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreNativeEntry::TestLongToInt:System.Int32()", "TestLongToInt", "System.Void", 0, nullptr, 0u },
-	{ 0u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreNativeEntry::TestUintToLong:System.Int32()", "TestUintToLong", "System.Void", 0, nullptr, 0u },
+	{ 0x0000000Eu, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreNativeEntry::TestByteToInt:System.Int32()", "TestByteToInt", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000013u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreNativeEntry::TestDoubleToFloat:System.Int32()", "TestDoubleToFloat", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000015u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreNativeEntry::TestDoubleToInt:System.Int32()", "TestDoubleToInt", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000012u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreNativeEntry::TestFloatToDouble:System.Int32()", "TestFloatToDouble", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000011u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreNativeEntry::TestIntToByte:System.Int32()", "TestIntToByte", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000014u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreNativeEntry::TestIntToDouble:System.Int32()", "TestIntToDouble", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Fu, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreNativeEntry::TestIntToLong:System.Int32()", "TestIntToLong", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000010u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreNativeEntry::TestIntToShort:System.Int32()", "TestIntToShort", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000017u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreNativeEntry::TestLongToInt:System.Int32()", "TestLongToInt", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000016u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreNativeEntry::TestUintToLong:System.Int32()", "TestUintToLong", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor kReflTypes[2] = {
-	{ 0u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects", "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects", "", "PrimitiveNumericConversionsCoreSubjects", "PrimitiveNumericConversionsCoreSubjects", nullptr, kReflFields_PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreSubjects, 1u, nullptr, 0u,
-	kReflMethods_PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreSubjects, 10u },
-	{ 0u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreNativeEntry", "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreNativeEntry", "", "PrimitiveNumericConversionsCoreNativeEntry", "PrimitiveNumericConversionsCoreNativeEntry", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreNativeEntry, 10u },
+	{ 0x00000001u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects", "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects", "", "PrimitiveNumericConversionsCoreSubjects", "PrimitiveNumericConversionsCoreSubjects", nullptr, kReflFields_PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreSubjects, 1u, nullptr, 0u,
+nullptr, 0u,    kReflMethods_PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreSubjects, 10u, nullptr, 0u, 0u },
+	{ 0x00000002u, "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreNativeEntry", "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreNativeEntry", "", "PrimitiveNumericConversionsCoreNativeEntry", "PrimitiveNumericConversionsCoreNativeEntry", nullptr, nullptr, 0u, nullptr, 0u,
+nullptr, 0u,    kReflMethods_PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreNativeEntry, 10u, nullptr, 0u, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor* kReflTypePtrs[2] = {
@@ -1038,7 +1109,7 @@ static const ReflectionQueryTypeDescriptor* kReflTypePtrs[2] = {
 	&kReflTypes[1],
 };
 
-static const ReflectionQueryImageDescriptor kReflImage = { "PrimitiveNumericConversionsCoreSubjects", kReflTypePtrs, 2u };
+static const ReflectionQueryImageDescriptor kReflImage = { "PrimitiveNumericConversionsCoreSubjects", kReflTypePtrs, 2u, 1, 0, 0, 0 };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via

@@ -13,7 +13,8 @@
       "subjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
       "name": "ExceptionThrowDiagnosticsSubjects",
       "displayName": "ExceptionThrowDiagnosticsSubjects",
-      "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects"
+      "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
+      "metadataToken": 33554434
     },
     {
       "registrationKind": "type",
@@ -21,7 +22,8 @@
       "subjectId": "ExceptionThrowDiagnosticsSubjects/\u003CPrivateImplementationDetails\u003E",
       "name": "\u003CPrivateImplementationDetails\u003E",
       "displayName": "\u003CPrivateImplementationDetails\u003E",
-      "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/\u003CPrivateImplementationDetails\u003E"
+      "definitionSubjectId": "ExceptionThrowDiagnosticsSubjects/\u003CPrivateImplementationDetails\u003E",
+      "metadataToken": 33554435
     },
     {
       "registrationKind": "field",
@@ -50,7 +52,8 @@
       "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663297
     },
     {
       "registrationKind": "method",
@@ -61,7 +64,8 @@
       "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663298
     },
     {
       "registrationKind": "method",
@@ -72,7 +76,8 @@
       "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663299
     },
     {
       "registrationKind": "method",
@@ -83,7 +88,8 @@
       "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663300
     },
     {
       "registrationKind": "method",
@@ -94,7 +100,8 @@
       "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663301
     },
     {
       "registrationKind": "method",
@@ -105,7 +112,8 @@
       "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663302
     },
     {
       "registrationKind": "method",
@@ -116,7 +124,8 @@
       "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663303
     },
     {
       "registrationKind": "method",
@@ -127,7 +136,8 @@
       "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663304
     },
     {
       "registrationKind": "method",
@@ -138,7 +148,8 @@
       "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663305
     },
     {
       "registrationKind": "method",
@@ -149,7 +160,8 @@
       "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663306
     },
     {
       "registrationKind": "method",
@@ -160,7 +172,8 @@
       "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663307
     },
     {
       "registrationKind": "method",
@@ -171,7 +184,8 @@
       "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663308
     },
     {
       "registrationKind": "method",
@@ -182,7 +196,8 @@
       "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663309
     },
     {
       "registrationKind": "method",
@@ -193,7 +208,8 @@
       "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663310
     },
     {
       "registrationKind": "method",
@@ -204,7 +220,8 @@
       "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663311
     },
     {
       "registrationKind": "method",
@@ -215,7 +232,8 @@
       "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663312
     },
     {
       "registrationKind": "method",
@@ -226,7 +244,8 @@
       "declaringTypeSubjectId": "ExceptionThrowDiagnosticsSubjects/ExceptionThrowDiagnosticsSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663313
     }
   ]
 }

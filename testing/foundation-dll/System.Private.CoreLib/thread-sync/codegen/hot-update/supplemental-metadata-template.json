@@ -7,12 +7,6 @@
       "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects",
       "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects",
       "metadataToken": 33554434
-    },
-    {
-      "assemblyName": "ThreadSyncSubjects",
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec",
-      "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec",
-      "metadataToken": 33554435
     }
   ],
   "registeredMethods": [
@@ -79,46 +73,6 @@
       "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects",
       "metadataToken": 100663304,
       "parameterCount": 0
-    },
-    {
-      "assemblyName": "ThreadSyncSubjects",
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
-      "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
-      "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec",
-      "metadataToken": 100663305,
-      "parameterCount": 0
-    },
-    {
-      "assemblyName": "ThreadSyncSubjects",
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
-      "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
-      "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec",
-      "metadataToken": 100663306,
-      "parameterCount": 0
-    },
-    {
-      "assemblyName": "ThreadSyncSubjects",
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_0:System.Void(System.Object)",
-      "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_5\u003Eb__6_0:System.Void(System.Object)",
-      "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec",
-      "metadataToken": 100663307,
-      "parameterCount": 1
-    },
-    {
-      "assemblyName": "ThreadSyncSubjects",
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_6\u003Eb__7_0:System.Void(System.Object)",
-      "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_6\u003Eb__7_0:System.Void(System.Object)",
-      "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec",
-      "metadataToken": 100663308,
-      "parameterCount": 1
-    },
-    {
-      "assemblyName": "ThreadSyncSubjects",
-      "subjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_0:System.Void(System.Object)",
-      "definitionSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_0:System.Void(System.Object)",
-      "declaringTypeSubjectId": "ThreadSyncSubjects/ThreadSyncSubjects\u002B\u003C\u003Ec",
-      "metadataToken": 100663309,
-      "parameterCount": 1
     }
   ],
   "reservedSlots": {

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Chaos.IL2CPP.Contracts;
 
 namespace Chaos.IL2CPP.Generator;
 
@@ -58,7 +59,12 @@ public sealed partial class NativeAotLoweringPlanner
                 continue;
 
             bool isSkeleton = skeletonTypeIds.Contains(typeId);
-            bool hasHardcodedRefs = !isSkeleton && HasHardcodedGcRefs(ns, out var hardcodedMembers);
+            bool hasHardcodedRefs = false;
+            var hardcodedMembers = new List<string>();
+            if (!isSkeleton)
+            {
+                hasHardcodedRefs = HasHardcodedGcRefs(ns, out hardcodedMembers);
+            }
 
             var gcMemberNames = new List<string>();
 

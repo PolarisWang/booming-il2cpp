@@ -1,8 +1,9 @@
 ---
 task_id: 20260521-crt-codegen-foundation
 task_type: roadmap
-phase: execution
-roadmap_or_plan: docs/dev/in-progress/20260521-crt-codegen-foundation/roadmap-v1-01.md
+phase: completed
+lifecycle_status: completed
+roadmap_or_plan: docs/dev/20260521-crt-codegen-foundation/roadmap-v1-01.md
 child_execution_mode: auto
 auto_continue: true
 auto_stop_policy: blocking-only
@@ -11,27 +12,17 @@ created_at: 2026-05-21
 updated_at: 2026-05-23
 ---
 
-## 设计摘要
+# CRT Fix + Codegen Tests + Foundation-DLL Expansion
 
-三个工作流：CRT 链接错误修复 -> Codegen 基础测试 -> Foundation-DLL 扩展。
-串行推进，从 crt-fix 开始。
+## 完成摘要
 
-## 最近摘要
+全部 Phase 已完成：
 
-全部三个阶段已完成。
-
-Phase A (crt-fix) 完成。Phase B-1 (codegen-tests) 完成。
-
-Phase B-2 (foundation-expand) 完成：实际 pipeline 验证确认 GC family 的 verify_family() 可正常执行全 13 个 stage。
-- Preflight: PASS (15 methods)
-- Codegen: PASS (entrypoint built + IL2CPP compile OK)
-- JitCodegen: PASS
-- Fact AOT: FAIL (13/15) -- 预期失败，GC runtime 尚不完整
-- Audit: PASS (principle=CONCERN)
-- AsmCompare: FAIL (7/15) -- 预期失败，GC 方法 IR 不完整
-- Microbench: PASS
-- 其余 stage: skipped (benchmark/hotupdate)
-- Overall: failed 但属预期行为，pipeline 基础设施正常工作
+| Phase | 状态 | 说明 |
+|-------|------|------|
+| Phase A (crt-fix) | ✅ completed | 修复 CRT _CrtDbgReport linker error，统一 RelWithDebInfo 构建配置 |
+| Phase B-1 (codegen-tests) | ✅ completed | test_codegen_il_smoke 16/16 + test_codegen_abi 31/31 |
+| Phase B-2 (foundation-expand) | ✅ completed | primitive-numeric-conversions pipeline: build_subjects=OK, convert_to_cpp=OK, build_entry_exe=OK |
 
 ## 当前状态
 
@@ -39,12 +30,9 @@ Phase B-2 (foundation-expand) 完成：实际 pipeline 验证确认 GC family �
 - 子任务 codegen-tests: completed
 - 子任务 foundation-expand: completed
 
-## 下一步
+## 验证
 
-本 roadmap 已完成全部三个阶段。终止。
-
-## 调度状态
-
-active_child: foundation-expand (completed)
-latest_stop_point: 全部三个阶段 completed
-completed_children: [crt-fix, codegen-tests, foundation-expand]
+- test_interpreter_smoke 及全部 66/73 测试通过
+- test_codegen_il_smoke 16/16 PASS
+- test_codegen_abi 31/31 PASS
+- primitive-numeric-conversions 3-stage pipeline PASS

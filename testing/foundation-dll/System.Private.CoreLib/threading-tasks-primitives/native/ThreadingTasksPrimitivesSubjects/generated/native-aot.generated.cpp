@@ -1,4 +1,4 @@
-#include <chaos/common.h>
+﻿#include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
 #include <chaos/eh.h>
@@ -16,6 +16,7 @@
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 #include "enum_metadata.generated.h"
+#include "enum_stubs.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -25,6 +26,45 @@ extern "C" void InterpreterEntryDirect(
 
 #pragma warning(push)
 #pragma warning(disable: 4065 4244)
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod0(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod1(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod10(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod11(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod12(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod14(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod2(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod3(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod4(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod5(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod6(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod7(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod8(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod9(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c_CustomEntryMethod0_b__2_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c_CustomEntryMethod11_b__13_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c_CustomEntryMethod1_b__3_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c_CustomEntryMethod3_b__5_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c_CustomEntryMethod7_b__9_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c_CustomEntryMethod7_b__9_1_System_Threading_Tasks_Task(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c_cctor(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_0(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_1(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_10(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_11(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_12(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_13(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_14(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_2(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_3(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_4(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_5(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_6(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_7(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_8(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_9(void);
 
 namespace chaos::il2cpp::codegen::ThreadingTasksPrimitivesSubjects {
 
@@ -229,6 +269,55 @@ struct chaos_type_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativ
 {
 };
 
+
+// ── GcTypeLayout pointer offset arrays (computed via offsetof) ──
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Delegate[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_target)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Delegate, chaos_delegate_invocation_list))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_MulticastDelegate[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_target)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_MulticastDelegate, chaos_delegate_invocation_list))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
+
+extern "C" void ChaosRegisterGcLayouts() {
+	auto& registry = chaos::il2cpp::runtime_core::GcLayoutRegistry::Instance();
+
+	registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
+	registry.Register(7451128447593600616ULL, sizeof(chaos_type_System_Private_CoreLib_System_Delegate), kGcOffsets_chaos_type_System_Private_CoreLib_System_Delegate, 2);
+	registry.Register(6681393039041505440ULL, sizeof(chaos_type_System_Private_CoreLib_System_MulticastDelegate), kGcOffsets_chaos_type_System_Private_CoreLib_System_MulticastDelegate, 2);
+	registry.Register(14722794505377461205ULL, sizeof(chaos_type_System_Private_CoreLib_System_Action), nullptr, 0);
+	registry.Register(3665167686475733763ULL, sizeof(chaos_type_System_Private_CoreLib_System_Action_System_Threading_Tasks_Task_), nullptr, 0);
+	registry.Register(8866194404114377402ULL, sizeof(chaos_type_System_Private_CoreLib_System_Func_System_Int32_), nullptr, 0);
+	registry.Register(5474029880995115448ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly, 1);
+	registry.Register(17082367815459723707ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, 1);
+	registry.Register(4137207361503509124ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, 5);
+	registry.Register(17040031516751226236ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, 2);
+	registry.Register(10748947813473285525ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, 5);
+	registry.Register(1782325859292956794ULL, sizeof(chaos_type_System_Private_CoreLib_System_String), nullptr, 0);
+	registry.Register(11502368789179341480ULL, sizeof(chaos_type_System_Threading_Thread_System_Threading_Thread), nullptr, 0);
+	registry.Register(17186843898991579444ULL, sizeof(chaos_type_System_Threading_Thread_System_Threading_ThreadStart), nullptr, 0);
+	registry.Register(2186445116007965406ULL, sizeof(chaos_type_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry), nullptr, 0);
+	registry.Register(16753052439711259458ULL, sizeof(chaos_type_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c), nullptr, 0);
+
+	// Register TypeInfoV0 address ranges for IsValidTypeInfoPointer.
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object) + sizeof(chaos_mt_System_Private_CoreLib_System_Object));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Delegate), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Delegate) + sizeof(chaos_mt_System_Private_CoreLib_System_Delegate));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_MulticastDelegate), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_MulticastDelegate) + sizeof(chaos_mt_System_Private_CoreLib_System_MulticastDelegate));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Action), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Action) + sizeof(chaos_mt_System_Private_CoreLib_System_Action));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Action_System_Threading_Tasks_Task_), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Action_System_Threading_Tasks_Task_) + sizeof(chaos_mt_System_Private_CoreLib_System_Action_System_Threading_Tasks_Task_));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Func_System_Int32_), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Func_System_Int32_) + sizeof(chaos_mt_System_Private_CoreLib_System_Func_System_Int32_));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_Assembly));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_String), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_String) + sizeof(chaos_mt_System_Private_CoreLib_System_String));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Threading_Thread_System_Threading_Thread), reinterpret_cast<uintptr_t>(&chaos_mt_System_Threading_Thread_System_Threading_Thread) + sizeof(chaos_mt_System_Threading_Thread_System_Threading_Thread));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Threading_Thread_System_Threading_ThreadStart), reinterpret_cast<uintptr_t>(&chaos_mt_System_Threading_Thread_System_Threading_ThreadStart) + sizeof(chaos_mt_System_Threading_Thread_System_Threading_ThreadStart));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry), reinterpret_cast<uintptr_t>(&chaos_mt_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry) + sizeof(chaos_mt_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c), reinterpret_cast<uintptr_t>(&chaos_mt_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c) + sizeof(chaos_mt_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c));
+}
+
 CHAOS_IL2CPP_INTPTR chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c____9 = 0;
 CHAOS_IL2CPP_INTPTR chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c____9__13_0 = 0;
 CHAOS_IL2CPP_INTPTR chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c____9__2_0 = 0;
@@ -296,6 +385,178 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
+
+
+// ── Bridge/import thunks ──
+extern "C" void* kChaosExternalRuntimeFnTable[];
+
+// Bridge/import thunk for: ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry+<>c::<>9__2_0
+extern "C" void chaos_bridge_thunk_0(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[0])();
+}
+
+// Bridge/import thunk for: ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry+<>c::<>9
+extern "C" void chaos_bridge_thunk_1(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[1])();
+}
+
+// Bridge/import thunk for: ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry::_exitCode
+extern "C" void chaos_bridge_thunk_10(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[10])();
+}
+
+// Bridge/import thunk for: ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry::s_sharedState
+extern "C" void chaos_bridge_thunk_11(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[11])();
+}
+
+// Bridge/import thunk for: ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry+<>c::<>9__13_0
+extern "C" void chaos_bridge_thunk_12(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[12])();
+}
+
+// Bridge/import thunk for: System.Threading.Thread/System.Threading.ThreadStart::.ctor:System.Void(System.Object,System.IntPtr)
+extern "C" void chaos_bridge_thunk_13(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[13])(chaos_fn_arg_0, chaos_fn_arg_1);
+}
+
+// Bridge/import thunk for: System.Threading.Thread/System.Threading.Thread::get_ManagedThreadId:System.Int32()
+extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_14(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)()>(kChaosExternalRuntimeFnTable[19])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Threading.Tasks.Task::Delay:System.Threading.Tasks.Task(System.Int32)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_15(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_fn_arg_0);
+	return result;
+}
+
+// Bridge/import thunk for: ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry+<>c::<>9__5_0
+extern "C" void chaos_bridge_thunk_16(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[21])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Boolean(System.Int32)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_17(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_fn_arg_0);
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Threading.Tasks.Task::get_IsCompleted:System.Boolean()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_18(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[23])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Threading.Tasks.Task::get_Status:System.Threading.Tasks.TaskStatus()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_19(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[24])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)
+extern "C" void chaos_bridge_thunk_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[2])(chaos_fn_arg_0, chaos_fn_arg_1);
+}
+
+// Bridge/import thunk for: ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry+<>c::<>9__9_0
+extern "C" void chaos_bridge_thunk_20(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[25])();
+}
+
+// Bridge/import thunk for: ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry+<>c::<>9__9_1
+extern "C" void chaos_bridge_thunk_21(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[26])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Action<System.Threading.Tasks.Task>::.ctor:System.Void(System.Object,System.IntPtr)
+extern "C" void chaos_bridge_thunk_22(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[27])(chaos_fn_arg_0, chaos_fn_arg_1);
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Threading.Tasks.Task::ContinueWith:System.Threading.Tasks.Task(System.Action<System.Threading.Tasks.Task>)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_23(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[28])(chaos_fn_arg_0);
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Threading.Tasks.Task::WhenAny:System.Threading.Tasks.Task<System.Threading.Tasks.Task>(System.Threading.Tasks.Task,System.Threading.Tasks.Task)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_24(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[29])(chaos_fn_arg_0, chaos_fn_arg_1);
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Threading.Tasks.Task<System.Threading.Tasks.Task>::get_Result:System.Threading.Tasks.Task()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_25(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[30])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Threading.Tasks.Task::Run:System.Threading.Tasks.Task(System.Action)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_3(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[3])(chaos_fn_arg_0);
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Void()
+extern "C" void chaos_bridge_thunk_4(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[4])();
+}
+
+// Bridge/import thunk for: ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry+<>c::<>9__3_0
+extern "C" void chaos_bridge_thunk_5(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[5])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Func<System.Int32>::.ctor:System.Void(System.Object,System.IntPtr)
+extern "C" void chaos_bridge_thunk_6(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[6])(chaos_fn_arg_0, chaos_fn_arg_1);
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Threading.Tasks.Task::Run<System.Int32>:System.Threading.Tasks.Task<System.Int32>(System.Func<System.Int32>)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_7(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[7])(chaos_fn_arg_0);
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Threading.Tasks.Task::FromResult<System.Int32>:System.Threading.Tasks.Task<System.Int32>(System.Int32)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_8(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[8])(chaos_fn_arg_0);
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Threading.Tasks.Task<System.Int32>::get_Result:System.Int32()
+extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_9(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)()>(kChaosExternalRuntimeFnTable[9])();
+	return result;
+}
 
 extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_0(void);
 extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_1(void);
@@ -517,11 +778,18 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
 		/* .type_count        = */ 4u,
-	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
+	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 -- deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
 	/* .custom_attribute_materializer = */ nullptr,
-
+	/* .custom_attribute_method_offset   = */ nullptr,
+	/* .custom_attribute_field_offset    = */ nullptr,
+	/* .custom_attribute_property_offset = */ nullptr,
+	/* .custom_attribute_param_offset    = */ nullptr,
+	/* .custom_attribute_method_count    = */ 0u,
+	/* .custom_attribute_field_count     = */ 0u,
+	/* .custom_attribute_property_count  = */ 0u,
+	/* .custom_attribute_param_count   = */ 0u,
 		/* .abi_manifest      = */ s_abi_manifest,
 	};
 	static const CHAOS_IL2CPP_UINT32 s_native_aot_module_id =
@@ -1402,65 +1670,65 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // matching during IR lowering of patched methods.
 
 static constexpr ReflectionQueryFieldDescriptor kReflFields_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects[1] = {
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
+	{ 0x04000001u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::_exitCode", "_exitCode", "System.Int32", 0LL, 3u },
 };
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects[15] = {
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_0:System.Void()", "CustomEntrySubject_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_1:System.Void()", "CustomEntrySubject_1", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_2:System.Void()", "CustomEntrySubject_2", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_3:System.Void()", "CustomEntrySubject_3", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_4:System.Void()", "CustomEntrySubject_4", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_5:System.Void()", "CustomEntrySubject_5", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_6:System.Void()", "CustomEntrySubject_6", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_7:System.Void()", "CustomEntrySubject_7", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_8:System.Void()", "CustomEntrySubject_8", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_9:System.Void()", "CustomEntrySubject_9", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_10:System.Void()", "CustomEntrySubject_10", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_11:System.Void()", "CustomEntrySubject_11", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_12:System.Void()", "CustomEntrySubject_12", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_13:System.Void()", "CustomEntrySubject_13", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_14:System.Void()", "CustomEntrySubject_14", "System.Void", 0, nullptr, 0u },
+	{ 0x0000000Eu, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_0:System.Void()", "CustomEntrySubject_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Fu, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_1:System.Void()", "CustomEntrySubject_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000010u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_2:System.Void()", "CustomEntrySubject_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000011u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_3:System.Void()", "CustomEntrySubject_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000012u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_4:System.Void()", "CustomEntrySubject_4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000013u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_5:System.Void()", "CustomEntrySubject_5", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000014u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_6:System.Void()", "CustomEntrySubject_6", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000015u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_7:System.Void()", "CustomEntrySubject_7", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000016u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_8:System.Void()", "CustomEntrySubject_8", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000017u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_9:System.Void()", "CustomEntrySubject_9", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000018u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_10:System.Void()", "CustomEntrySubject_10", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000019u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_11:System.Void()", "CustomEntrySubject_11", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000001Au, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_12:System.Void()", "CustomEntrySubject_12", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000001Bu, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_13:System.Void()", "CustomEntrySubject_13", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000001Cu, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects::CustomEntrySubject_14:System.Void()", "CustomEntrySubject_14", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryFieldDescriptor kReflFields_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry[2] = {
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry::_exitCode", "_exitCode", "System.Int32", 0LL },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry::s_sharedState", "s_sharedState", "System.Int32", 0LL },
+	{ 0x04000002u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry::_exitCode", "_exitCode", "System.Int32", 0LL, 3u },
+	{ 0x04000003u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry::s_sharedState", "s_sharedState", "System.Int32", 0LL, 2u },
 };
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry[14] = {
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry::CustomEntryMethod0:System.Void()", "CustomEntryMethod0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry::CustomEntryMethod1:System.Void()", "CustomEntryMethod1", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry::CustomEntryMethod10:System.Void()", "CustomEntryMethod10", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry::CustomEntryMethod11:System.Void()", "CustomEntryMethod11", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry::CustomEntryMethod12:System.Void()", "CustomEntryMethod12", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry::CustomEntryMethod14:System.Void()", "CustomEntryMethod14", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry::CustomEntryMethod2:System.Void()", "CustomEntryMethod2", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry::CustomEntryMethod3:System.Void()", "CustomEntryMethod3", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry::CustomEntryMethod4:System.Void()", "CustomEntryMethod4", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry::CustomEntryMethod5:System.Void()", "CustomEntryMethod5", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry::CustomEntryMethod6:System.Void()", "CustomEntryMethod6", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry::CustomEntryMethod7:System.Void()", "CustomEntryMethod7", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry::CustomEntryMethod8:System.Void()", "CustomEntryMethod8", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry::CustomEntryMethod9:System.Void()", "CustomEntryMethod9", "System.Void", 0, nullptr, 0u },
+	{ 0x0000001Du, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry::CustomEntryMethod0:System.Void()", "CustomEntryMethod0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000001Eu, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry::CustomEntryMethod1:System.Void()", "CustomEntryMethod1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000027u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry::CustomEntryMethod10:System.Void()", "CustomEntryMethod10", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000028u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry::CustomEntryMethod11:System.Void()", "CustomEntryMethod11", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000029u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry::CustomEntryMethod12:System.Void()", "CustomEntryMethod12", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000002Au, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry::CustomEntryMethod14:System.Void()", "CustomEntryMethod14", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000001Fu, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry::CustomEntryMethod2:System.Void()", "CustomEntryMethod2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000020u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry::CustomEntryMethod3:System.Void()", "CustomEntryMethod3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000021u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry::CustomEntryMethod4:System.Void()", "CustomEntryMethod4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000022u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry::CustomEntryMethod5:System.Void()", "CustomEntryMethod5", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000023u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry::CustomEntryMethod6:System.Void()", "CustomEntryMethod6", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000024u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry::CustomEntryMethod7:System.Void()", "CustomEntryMethod7", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000025u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry::CustomEntryMethod8:System.Void()", "CustomEntryMethod8", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000026u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry::CustomEntryMethod9:System.Void()", "CustomEntryMethod9", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c[8] = {
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry+<>c::.cctor:System.Void()", ".cctor", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry+<>c::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry+<>c::<CustomEntryMethod0>b__2_0:System.Void()", "<CustomEntryMethod0>b__2_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry+<>c::<CustomEntryMethod1>b__3_0:System.Int32()", "<CustomEntryMethod1>b__3_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry+<>c::<CustomEntryMethod11>b__13_0:System.Void()", "<CustomEntryMethod11>b__13_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry+<>c::<CustomEntryMethod3>b__5_0:System.Void()", "<CustomEntryMethod3>b__5_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry+<>c::<CustomEntryMethod7>b__9_0:System.Void()", "<CustomEntryMethod7>b__9_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry+<>c::<CustomEntryMethod7>b__9_1:System.Void(System.Threading.Tasks.Task)", "<CustomEntryMethod7>b__9_1", "System.Void", 0, nullptr, 0u },
+	{ 0x0000002Bu, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry+<>c::.cctor:System.Void()", ".cctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000002Cu, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry+<>c::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000002Du, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry+<>c::<CustomEntryMethod0>b__2_0:System.Void()", "<CustomEntryMethod0>b__2_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000002Eu, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry+<>c::<CustomEntryMethod1>b__3_0:System.Int32()", "<CustomEntryMethod1>b__3_0", "System.Int32", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000032u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry+<>c::<CustomEntryMethod11>b__13_0:System.Void()", "<CustomEntryMethod11>b__13_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000002Fu, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry+<>c::<CustomEntryMethod3>b__5_0:System.Void()", "<CustomEntryMethod3>b__5_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000030u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry+<>c::<CustomEntryMethod7>b__9_0:System.Void()", "<CustomEntryMethod7>b__9_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000031u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry+<>c::<CustomEntryMethod7>b__9_1:System.Void(System.Threading.Tasks.Task)", "<CustomEntryMethod7>b__9_1", "System.Void", 1, nullptr, 0u, nullptr, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor kReflTypes[3] = {
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects", "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects", "", "ThreadingTasksPrimitivesSubjects", "ThreadingTasksPrimitivesSubjects", nullptr, kReflFields_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects, 1u, nullptr, 0u,
-	kReflMethods_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects, 15u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry", "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry", "", "ThreadingTasksPrimitivesNativeEntry", "ThreadingTasksPrimitivesNativeEntry", nullptr, kReflFields_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry, 2u, nullptr, 0u,
-	kReflMethods_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry, 14u },
-	{ 0u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry+<>c", "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry+<>c", "", "ThreadingTasksPrimitivesNativeEntry+<>c", "ThreadingTasksPrimitivesNativeEntry+<>c", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c, 8u },
+	{ 0x00000001u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects", "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesSubjects", "", "ThreadingTasksPrimitivesSubjects", "ThreadingTasksPrimitivesSubjects", nullptr, kReflFields_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects, 1u, nullptr, 0u,
+nullptr, 0u,    kReflMethods_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects, 15u, nullptr, 0u, 0u },
+	{ 0x00000002u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry", "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry", "", "ThreadingTasksPrimitivesNativeEntry", "ThreadingTasksPrimitivesNativeEntry", nullptr, kReflFields_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry, 2u, nullptr, 0u,
+nullptr, 0u,    kReflMethods_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry, 14u, nullptr, 0u, 0u },
+	{ 0x00000003u, "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry+<>c", "ThreadingTasksPrimitivesSubjects/ThreadingTasksPrimitivesNativeEntry+<>c", "", "ThreadingTasksPrimitivesNativeEntry+<>c", "ThreadingTasksPrimitivesNativeEntry+<>c", nullptr, nullptr, 0u, nullptr, 0u,
+nullptr, 0u,    kReflMethods_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c, 8u, nullptr, 0u, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor* kReflTypePtrs[3] = {
@@ -1469,7 +1737,7 @@ static const ReflectionQueryTypeDescriptor* kReflTypePtrs[3] = {
 	&kReflTypes[2],
 };
 
-static const ReflectionQueryImageDescriptor kReflImage = { "ThreadingTasksPrimitivesSubjects", kReflTypePtrs, 3u };
+static const ReflectionQueryImageDescriptor kReflImage = { "ThreadingTasksPrimitivesSubjects", kReflTypePtrs, 3u, 1, 0, 0, 0 };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via

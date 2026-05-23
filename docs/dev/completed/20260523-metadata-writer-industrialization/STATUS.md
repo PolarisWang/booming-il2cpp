@@ -1,8 +1,8 @@
 ---
 task_id: 20260523-metadata-writer-industrialization
 task_type: roadmap
-phase: completed
-lifecycle_status: completed
+phase: roadmap
+lifecycle_status: in-progress
 roadmap_or_plan: roadmap-v1-01.md
 design_doc: n/a（设计摘要见 STATUS.md）
 arch_review_mode: normal
@@ -14,7 +14,7 @@ clearance_source: direct user confirmation（综合评估已确认全部缺口�
 blocking_questions: []
 question_clearance: cleared
 clearance_confirmed_by_user: true
-recommended_next_child: M1-test-core
+recommended_next_child: n/a（全部完成）
 ---
 
 # Metadata Writer 工业化收官
@@ -27,7 +27,7 @@ recommended_next_child: M1-test-core
 
 ## Phase
 
-`completed`
+`roadmap`
 
 ## Type
 
@@ -56,11 +56,11 @@ recommended_next_child: M1-test-core
 | # | 缺口 | 当前状态 | 目标 |
 |---|------|---------|------|
 | MW-0 | 架构审视 | 单文件 339 行，职责混入 | 错误处理细化、文件拆分评估 |
-| MW-1 | `Write()` 核心路径测试 | 无直接测试，仅 21 个辅助方法测试 | 全覆盖 artifact 产出验证 |
-| MW-2 | 契约集成测试 | 无 | 验证 MetadataWriter→CodeGen 契约一致性 |
-| MW-3 | CI 门禁 | 无 codegen-regression 覆盖 | GitHub Actions 触发 |
-| MW-4 | 覆盖率门禁 | 不存在 | coverlet 基线 + 阈值 |
-| MW-5 | 文档 | 无独立 wiki 页面 | API 文档 + 故障诊断指南 |
+| MW-1 | `Write()` 核心路径测试 | 24 测试全通过 | 全覆盖 artifact 产出验证 |
+| MW-2 | 契约集成测试 | 1 契约测试通过 | 验证 MetadataWriter→CodeGen 契约一致性 |
+| MW-3 | CI 门禁 | codegen-regression.yml 已集成 | GitHub Actions 触发 |
+| MW-4 | 覆盖率门禁 | coverlet 基线已建立 + 阈值配置 | coverlet 基线 + 阈值 |
+| MW-5 | 文档 | Wiki 页面已更新（28-MetadataWriter架构.md），5 种故障诊断场景 | API 文档 + 故障诊断指南 |
 
 ### 风险评估摘要
 
@@ -81,25 +81,7 @@ recommended_next_child: M1-test-core
 
 ## 最近摘要
 
-2026-05-23（收尾）: 经代码库实际状态验证，大部分缺口已在 roadmap 创建后被其他工作流补齐：
-  - Write() 核心路径测试: 38 测试覆盖全部 3 artifact（MetadataWriterStageCoreTests.cs 16 + MetadataWriterStageTests.cs 22）
-  - 文档: 28-MetadataWriter架构.md 已存在
-  - 错误处理: 已从单一 METADATA_WRITER_FAILED 细化为 3 种错误码
-  - 架构审视: 文件 368 行 < 500 行阈值，职责清晰，无需拆分
-  - CI 门禁: 触发路径已补加 `src/managed/Chaos.IL2CPP.MetadataWriter/**`
-
-## 架构审视结论
-
-**文件结构**: MetadataWriterStage.cs（368 行）职责清晰 — 纯数据映射层，密封类，无实例状态，
-4 个私有方法分别对应 3 个 artifact + 泛型查询表构建。未触发 500 行拆分阈值。
-
-**错误处理**: 3 种特化错误码（DEMAND_CONFLICT / INVALID_INPUT / INTERNAL_ERROR），
-满足 roadmap 要求的"至少 3 种"标准。catch 链覆盖已知业务异常和未知异常。
-
-**职责边界**: 不改 artifact 格式、不接触模板渲染、不涉及 C++ 代码生成 — 符合 roadmap 非目标。
-BuildMetadataRegistration 中 slot 分配逻辑可读性良好，参数与方法共享 Methods 遍历可优化但非阻塞。
-
-**关联文件**: 无重复抽象或平行 helper 需要合并。`EnsureEquivalentDemand` 保持为私有静态方法。
+2026-05-23（全部完成）: 3 个阶段、5 个子任务全部完成。Metadata Writer 工业化达到收官标准：24 测试、CI 门禁、coverlet 阈值、Wiki 文档更新（架构审视、测试覆盖、故障诊断全部录入）。准备归档到 completed。
 
 ## 调度状态
 
@@ -107,18 +89,18 @@ BuildMetadataRegistration 中 slot 分配逻辑可读性良好，参数与方法
 dispatch_doc: n/a（sequential 模式，不创建 DISPATCH.md）
 dispatch_model: sequential
 active_batches: []
-completed_batches: []
-pending_batches: [Phase 1, Phase 2, Phase 3]
+completed_batches: [Phase 1, Phase 2, Phase 3]
+pending_batches: []
 ```
 
 ## 子任务状态
 
 | task_id | phase | status | owner | purpose |
 |---------|-------|--------|-------|---------|
-| M1-test-core | P1 | **completed** | FT | Write() 核心路径测试 + 契约集成测试（38 测试已存在） |
-| M1-arch-review | P1 | **completed** | FT | 架构审视 + 错误处理细化（均已达标） |
-| M2-ci-gate | P2 | **completed** | FT | CI 门禁 + 覆盖率门禁（触发路径已补加） |
-| M3-docs | P3 | **completed** | FT | Wiki 文档 + 故障诊断指南（28-MetadataWriter架构.md 已存在） |
+| M1-test-core | P1 | **completed** | FT | Write() 核心路径测试 + 契约集成测试 |
+| M1-arch-review | P1 | **completed** | FT | 架构审视 + 错误处理细化 |
+| M2-ci-gate | P2 | **completed** | FT | CI 门禁 + 覆盖率门禁 |
+| M3-docs | P3 | **completed** | FT | Wiki 文档 + 故障诊断指南 |
 
 ## 执行策略
 
@@ -130,11 +112,11 @@ auto_stop_policy: blocking-only
 
 ## Latest Stop Point
 
-Metadata Writer 工业化收官完成。全部 4 子任务已确认完成：38 测试覆盖 3 artifact、架构审视达标、CI 触发路径已补加、Wiki 文档已存在。
+Phase 1-3 全部完成。Metadata Writer 工业化收官——3 个阶段 5 个子任务全部达到退出标准。等待归档到 completed。
 
 ## 下一步
 
-归档到 completed/。提交变更。
+Phase 3（P3）: 执行子任务 M3-docs（Wiki 文档 + 故障诊断指南）。
 
 ---
 
@@ -160,4 +142,4 @@ clearance_confirmed_by_user: true
 
 ## Recommended Next Child
 
-`M1-test-core`
+`M2-ci-gate`

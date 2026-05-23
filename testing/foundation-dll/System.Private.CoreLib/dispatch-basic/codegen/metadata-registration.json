@@ -13,7 +13,8 @@
       "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects",
       "name": "DispatchBasicSubjects",
       "displayName": "DispatchBasicSubjects",
-      "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects"
+      "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects",
+      "metadataToken": 33554434
     },
     {
       "registrationKind": "type",
@@ -21,7 +22,8 @@
       "subjectId": "DispatchBasicSubjects/ICalculator",
       "name": "ICalculator",
       "displayName": "ICalculator",
-      "definitionSubjectId": "DispatchBasicSubjects/ICalculator"
+      "definitionSubjectId": "DispatchBasicSubjects/ICalculator",
+      "metadataToken": 33554435
     },
     {
       "registrationKind": "type",
@@ -29,7 +31,8 @@
       "subjectId": "DispatchBasicSubjects/IStatusProvider",
       "name": "IStatusProvider",
       "displayName": "IStatusProvider",
-      "definitionSubjectId": "DispatchBasicSubjects/IStatusProvider"
+      "definitionSubjectId": "DispatchBasicSubjects/IStatusProvider",
+      "metadataToken": 33554436
     },
     {
       "registrationKind": "type",
@@ -37,7 +40,8 @@
       "subjectId": "DispatchBasicSubjects/IBasicOp",
       "name": "IBasicOp",
       "displayName": "IBasicOp",
-      "definitionSubjectId": "DispatchBasicSubjects/IBasicOp"
+      "definitionSubjectId": "DispatchBasicSubjects/IBasicOp",
+      "metadataToken": 33554437
     },
     {
       "registrationKind": "type",
@@ -45,7 +49,8 @@
       "subjectId": "DispatchBasicSubjects/Calculator",
       "name": "Calculator",
       "displayName": "Calculator",
-      "definitionSubjectId": "DispatchBasicSubjects/Calculator"
+      "definitionSubjectId": "DispatchBasicSubjects/Calculator",
+      "metadataToken": 33554438
     },
     {
       "registrationKind": "type",
@@ -53,7 +58,8 @@
       "subjectId": "DispatchBasicSubjects/StatusProvider",
       "name": "StatusProvider",
       "displayName": "StatusProvider",
-      "definitionSubjectId": "DispatchBasicSubjects/StatusProvider"
+      "definitionSubjectId": "DispatchBasicSubjects/StatusProvider",
+      "metadataToken": 33554439
     },
     {
       "registrationKind": "type",
@@ -61,7 +67,8 @@
       "subjectId": "DispatchBasicSubjects/BasicImpl",
       "name": "BasicImpl",
       "displayName": "BasicImpl",
-      "definitionSubjectId": "DispatchBasicSubjects/BasicImpl"
+      "definitionSubjectId": "DispatchBasicSubjects/BasicImpl",
+      "metadataToken": 33554440
     },
     {
       "registrationKind": "type",
@@ -69,7 +76,8 @@
       "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry",
       "name": "DispatchBasicNativeEntry",
       "displayName": "DispatchBasicNativeEntry",
-      "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry"
+      "definitionSubjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry",
+      "metadataToken": 33554441
     },
     {
       "registrationKind": "type",
@@ -78,7 +86,8 @@
       "name": "ComInterfaceTypeAttribute",
       "namespaceName": "System.Runtime.InteropServices",
       "displayName": "System.Runtime.InteropServices.ComInterfaceTypeAttribute",
-      "definitionSubjectId": "DispatchBasicSubjects/System.Runtime.InteropServices.ComInterfaceTypeAttribute"
+      "definitionSubjectId": "DispatchBasicSubjects/System.Runtime.InteropServices.ComInterfaceTypeAttribute",
+      "metadataToken": 33554442
     },
     {
       "registrationKind": "field",
@@ -98,7 +107,8 @@
       "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663297
     },
     {
       "registrationKind": "method",
@@ -109,7 +119,8 @@
       "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663298
     },
     {
       "registrationKind": "method",
@@ -120,7 +131,8 @@
       "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663299
     },
     {
       "registrationKind": "method",
@@ -131,7 +143,8 @@
       "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663300
     },
     {
       "registrationKind": "method",
@@ -142,7 +155,8 @@
       "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663301
     },
     {
       "registrationKind": "method",
@@ -153,7 +167,8 @@
       "declaringTypeSubjectId": "DispatchBasicSubjects/ICalculator",
       "memberType": "System.Int32",
       "parameterCount": 2,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663302
     },
     {
       "registrationKind": "method",
@@ -164,7 +179,8 @@
       "declaringTypeSubjectId": "DispatchBasicSubjects/ICalculator",
       "memberType": "System.Int32",
       "parameterCount": 2,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663303
     },
     {
       "registrationKind": "method",
@@ -175,7 +191,8 @@
       "declaringTypeSubjectId": "DispatchBasicSubjects/IStatusProvider",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663304
     },
     {
       "registrationKind": "method",
@@ -186,7 +203,8 @@
       "declaringTypeSubjectId": "DispatchBasicSubjects/IBasicOp",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663305
     },
     {
       "registrationKind": "method",
@@ -197,7 +215,8 @@
       "declaringTypeSubjectId": "DispatchBasicSubjects/Calculator",
       "memberType": "System.Int32",
       "parameterCount": 2,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663306
     },
     {
       "registrationKind": "method",
@@ -208,7 +227,8 @@
       "declaringTypeSubjectId": "DispatchBasicSubjects/Calculator",
       "memberType": "System.Int32",
       "parameterCount": 2,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663307
     },
     {
       "registrationKind": "method",
@@ -219,7 +239,8 @@
       "declaringTypeSubjectId": "DispatchBasicSubjects/Calculator",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663308
     },
     {
       "registrationKind": "method",
@@ -230,7 +251,8 @@
       "declaringTypeSubjectId": "DispatchBasicSubjects/StatusProvider",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663309
     },
     {
       "registrationKind": "method",
@@ -241,7 +263,8 @@
       "declaringTypeSubjectId": "DispatchBasicSubjects/StatusProvider",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663310
     },
     {
       "registrationKind": "method",
@@ -252,7 +275,8 @@
       "declaringTypeSubjectId": "DispatchBasicSubjects/BasicImpl",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663311
     },
     {
       "registrationKind": "method",
@@ -263,7 +287,8 @@
       "declaringTypeSubjectId": "DispatchBasicSubjects/BasicImpl",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663312
     },
     {
       "registrationKind": "method",
@@ -274,7 +299,8 @@
       "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry",
       "memberType": "System.Int32",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663313
     },
     {
       "registrationKind": "method",
@@ -285,7 +311,8 @@
       "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663314
     },
     {
       "registrationKind": "method",
@@ -296,7 +323,8 @@
       "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663315
     },
     {
       "registrationKind": "method",
@@ -307,7 +335,8 @@
       "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663316
     },
     {
       "registrationKind": "method",
@@ -318,7 +347,8 @@
       "declaringTypeSubjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663317
     },
     {
       "registrationKind": "method",
@@ -329,7 +359,8 @@
       "declaringTypeSubjectId": "DispatchBasicSubjects/System.Runtime.InteropServices.ComInterfaceTypeAttribute",
       "memberType": "System.Void",
       "parameterCount": 1,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663318
     },
     {
       "registrationKind": "parameter",

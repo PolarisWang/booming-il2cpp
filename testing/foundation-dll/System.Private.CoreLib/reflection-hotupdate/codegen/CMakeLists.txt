@@ -19,6 +19,8 @@ set(NATIVE_LIBS
     "${NATIVE_LIB_DIR}/src/native/interpreter/${CFG}/chaos_interpreter.lib"
     "${NATIVE_LIB_DIR}/src/native/hot-update/${CFG}/chaos_hot_update.lib"
     "${NATIVE_LIB_DIR}/src/native/codegen/${CFG}/chaos_codegen.lib"
+    "${NATIVE_LIB_DIR}/src/native/diagnostics/debugger/${CFG}/chaos_debugger.lib"
+    "${NATIVE_LIB_DIR}/src/native/diagnostics/eventpipe/${CFG}/chaos_eventpipe.lib"
     "${NATIVE_LIB_DIR}/fmt_build/${CFG}/chaos_fmt.lib"
 )
 
@@ -39,6 +41,9 @@ set(COMMON_INCLUDE_DIRS
 )
 
 set(COMMON_COMPILE_OPTIONS "$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
+
+# /EHa needed for SEH exception catching (catch(...) in fact/benchmark mode)
+set(ENTRY_EHA_FLAG $<$<CXX_COMPILER_ID:MSVC>:/EHa>)
 
 # Assembly: ReflectionHotupdateSubjects
 add_library(chaos_gen_ReflectionHotupdateSubjects STATIC
@@ -62,4 +67,4 @@ target_link_libraries(entry PRIVATE
 )
 
 target_include_directories(entry PRIVATE ${COMMON_INCLUDE_DIRS})
-target_compile_options(entry PRIVATE ${COMMON_COMPILE_OPTIONS})
+target_compile_options(entry PRIVATE ${COMMON_COMPILE_OPTIONS} ${ENTRY_EHA_FLAG})

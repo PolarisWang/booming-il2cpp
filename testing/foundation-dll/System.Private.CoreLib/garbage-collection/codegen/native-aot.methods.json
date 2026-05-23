@@ -1,7 +1,7 @@
 ﻿{
   "schemaVersion": 2,
   "assemblyName": "GarbageCollectionSubjects",
-  "methodCount": 7,
+  "methodCount": 10,
   "defaultStringId": 0,
   "methods": [
     {
@@ -59,6 +59,30 @@
       "params": [],
       "isInstance": false,
       "subjectIndex": 6
+    },
+    {
+      "index": 7,
+      "nativeSymbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_7",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 7
+    },
+    {
+      "index": 8,
+      "nativeSymbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_8",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 8
+    },
+    {
+      "index": 9,
+      "nativeSymbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_9",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 9
     }
   ]
 }

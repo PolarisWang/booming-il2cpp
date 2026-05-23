@@ -10,20 +10,20 @@
     {
       "registrationKind": "type",
       "slot": 1,
-      "metadataToken": 33554434,
       "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
       "name": "ArrayIndexingCopySubjects",
       "displayName": "ArrayIndexingCopySubjects",
-      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects"
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
+      "metadataToken": 33554434
     },
     {
       "registrationKind": "type",
       "slot": 2,
-      "metadataToken": 33554435,
       "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec",
       "name": "\u003C\u003Ec",
       "displayName": "ArrayIndexingCopySubjects\u002B\u003C\u003Ec",
-      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec"
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec",
+      "metadataToken": 33554435
     },
     {
       "registrationKind": "field",
@@ -55,194 +55,194 @@
     {
       "registrationKind": "method",
       "slot": 6,
-      "metadataToken": 100663297,
       "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_0:System.Void()",
       "name": "Subject_0",
       "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_0:System.Void()",
       "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663297
     },
     {
       "registrationKind": "method",
       "slot": 7,
-      "metadataToken": 100663298,
       "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_1:System.Void()",
       "name": "Subject_1",
       "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_1:System.Void()",
       "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663298
     },
     {
       "registrationKind": "method",
       "slot": 8,
-      "metadataToken": 100663299,
       "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_2:System.Void()",
       "name": "Subject_2",
       "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_2:System.Void()",
       "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663299
     },
     {
       "registrationKind": "method",
       "slot": 9,
-      "metadataToken": 100663300,
       "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_3:System.Void()",
       "name": "Subject_3",
       "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_3:System.Void()",
       "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663300
     },
     {
       "registrationKind": "method",
       "slot": 10,
-      "metadataToken": 100663301,
       "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_4:System.Void()",
       "name": "Subject_4",
       "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_4:System.Void()",
       "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663301
     },
     {
       "registrationKind": "method",
       "slot": 11,
-      "metadataToken": 100663302,
       "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_5:System.Void()",
       "name": "Subject_5",
       "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_5:System.Void()",
       "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663302
     },
     {
       "registrationKind": "method",
       "slot": 12,
-      "metadataToken": 100663303,
       "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_6:System.Void()",
       "name": "Subject_6",
       "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_6:System.Void()",
       "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663303
     },
     {
       "registrationKind": "method",
       "slot": 13,
-      "metadataToken": 100663304,
       "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_7:System.Void()",
       "name": "Subject_7",
       "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_7:System.Void()",
       "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663304
     },
     {
       "registrationKind": "method",
       "slot": 14,
-      "metadataToken": 100663305,
       "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_8:System.Void()",
       "name": "Subject_8",
       "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_8:System.Void()",
       "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663305
     },
     {
       "registrationKind": "method",
       "slot": 15,
-      "metadataToken": 100663306,
       "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_9:System.Void()",
       "name": "Subject_9",
       "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_9:System.Void()",
       "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663306
     },
     {
       "registrationKind": "method",
       "slot": 16,
-      "metadataToken": 100663307,
       "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_10:System.Void()",
       "name": "Subject_10",
       "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_10:System.Void()",
       "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663307
     },
     {
       "registrationKind": "method",
       "slot": 17,
-      "metadataToken": 100663308,
       "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_11:System.Void()",
       "name": "Subject_11",
       "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_11:System.Void()",
       "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663308
     },
     {
       "registrationKind": "method",
       "slot": 18,
-      "metadataToken": 100663309,
       "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_12:System.Void()",
       "name": "Subject_12",
       "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_12:System.Void()",
       "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663309
     },
     {
       "registrationKind": "method",
       "slot": 19,
-      "metadataToken": 100663310,
       "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
       "name": ".cctor",
       "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
       "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663310
     },
     {
       "registrationKind": "method",
       "slot": 20,
-      "metadataToken": 100663311,
       "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
       "name": ".ctor",
       "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
       "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663311
     },
     {
       "registrationKind": "method",
       "slot": 21,
-      "metadataToken": 100663312,
       "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_0:System.Int32()",
       "name": "\u003CSubject_3\u003Eb__4_0",
       "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_0:System.Int32()",
       "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663312
     }
   ]
 }

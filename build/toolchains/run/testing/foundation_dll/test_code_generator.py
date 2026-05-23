@@ -106,6 +106,8 @@ INSTANCE_EXPR_MAP: dict[str, str] = {
     "FlushResult": "default(FlushResult)",
     "Formatter": "default(Formatter)!",
     "GCHandle": "default(GCHandle)",
+    "CancellationTokenSource": "new CancellationTokenSource()",
+    "CancellationToken": "default(CancellationToken)",
     "GeneratedComInterfaceAttribute": "default(GeneratedComInterfaceAttribute)!",
     "IDuplexPipe": "default(IDuplexPipe)!",
     "IFieldInfo": "default(IFieldInfo)!",
@@ -485,6 +487,7 @@ _METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     ("MulticastDelegate", "GetInvocationList", 0): "new System.Action(() => {}).GetInvocationList()",
     ("Delegate", "op_Equality", 2): "skip",  # Operator overload; can't auto-generate
     ("Delegate", "op_Inequality", 2): "skip",  # Operator overload
+    ("WaitCallback", ".ctor", 2): "skip",  # Delegate constructor; C# can't call (object, IntPtr) directly
     # Enum with non-enum type — auto-generatable for subjects variant
     # Note: For benchmark variant, these have explicit patterns in family_verification_orchestrator.py
     # Override: GetName with UInt64 param triggers boxed_type codegen bug for System.UInt64

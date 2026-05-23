@@ -10,20 +10,20 @@
     {
       "registrationKind": "type",
       "slot": 1,
-      "metadataToken": 33554434,
       "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
       "name": "ThreadingThreadBasicsSubjects",
       "displayName": "ThreadingThreadBasicsSubjects",
-      "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects"
+      "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
+      "metadataToken": 33554434
     },
     {
       "registrationKind": "type",
       "slot": 2,
-      "metadataToken": 33554435,
       "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry",
       "name": "ThreadingThreadBasicsNativeEntry",
       "displayName": "ThreadingThreadBasicsNativeEntry",
-      "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry"
+      "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry",
+      "metadataToken": 33554435
     },
     {
       "registrationKind": "field",
@@ -37,266 +37,266 @@
     {
       "registrationKind": "method",
       "slot": 4,
-      "metadataToken": 100663297,
       "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_0:System.Void()",
       "name": "CustomEntrySubject_0",
       "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_0:System.Void()",
       "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663297
     },
     {
       "registrationKind": "method",
       "slot": 5,
-      "metadataToken": 100663298,
       "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_1:System.Void()",
       "name": "CustomEntrySubject_1",
       "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_1:System.Void()",
       "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663298
     },
     {
       "registrationKind": "method",
       "slot": 6,
-      "metadataToken": 100663299,
       "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_2:System.Void()",
       "name": "CustomEntrySubject_2",
       "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_2:System.Void()",
       "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663299
     },
     {
       "registrationKind": "method",
       "slot": 7,
-      "metadataToken": 100663300,
       "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_3:System.Void()",
       "name": "CustomEntrySubject_3",
       "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_3:System.Void()",
       "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663300
     },
     {
       "registrationKind": "method",
       "slot": 8,
-      "metadataToken": 100663301,
       "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_4:System.Void()",
       "name": "CustomEntrySubject_4",
       "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_4:System.Void()",
       "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663301
     },
     {
       "registrationKind": "method",
       "slot": 9,
-      "metadataToken": 100663302,
       "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_5:System.Void()",
       "name": "CustomEntrySubject_5",
       "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_5:System.Void()",
       "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663302
     },
     {
       "registrationKind": "method",
       "slot": 10,
-      "metadataToken": 100663303,
       "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_6:System.Void()",
       "name": "CustomEntrySubject_6",
       "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_6:System.Void()",
       "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663303
     },
     {
       "registrationKind": "method",
       "slot": 11,
-      "metadataToken": 100663304,
       "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_7:System.Void()",
       "name": "CustomEntrySubject_7",
       "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_7:System.Void()",
       "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663304
     },
     {
       "registrationKind": "method",
       "slot": 12,
-      "metadataToken": 100663305,
       "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_8:System.Void()",
       "name": "CustomEntrySubject_8",
       "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_8:System.Void()",
       "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663305
     },
     {
       "registrationKind": "method",
       "slot": 13,
-      "metadataToken": 100663306,
       "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_9:System.Void()",
       "name": "CustomEntrySubject_9",
       "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_9:System.Void()",
       "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663306
     },
     {
       "registrationKind": "method",
       "slot": 14,
-      "metadataToken": 100663307,
       "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_10:System.Void()",
       "name": "CustomEntrySubject_10",
       "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects::CustomEntrySubject_10:System.Void()",
       "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663307
     },
     {
       "registrationKind": "method",
       "slot": 15,
-      "metadataToken": 100663308,
       "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod0:System.Void()",
       "name": "CustomEntryMethod0",
       "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod0:System.Void()",
       "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663308
     },
     {
       "registrationKind": "method",
       "slot": 16,
-      "metadataToken": 100663309,
       "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod1:System.Void()",
       "name": "CustomEntryMethod1",
       "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod1:System.Void()",
       "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663309
     },
     {
       "registrationKind": "method",
       "slot": 17,
-      "metadataToken": 100663310,
       "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod2:System.Void()",
       "name": "CustomEntryMethod2",
       "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod2:System.Void()",
       "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663310
     },
     {
       "registrationKind": "method",
       "slot": 18,
-      "metadataToken": 100663311,
       "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod3:System.Void()",
       "name": "CustomEntryMethod3",
       "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod3:System.Void()",
       "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663311
     },
     {
       "registrationKind": "method",
       "slot": 19,
-      "metadataToken": 100663312,
       "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod4:System.Void()",
       "name": "CustomEntryMethod4",
       "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod4:System.Void()",
       "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663312
     },
     {
       "registrationKind": "method",
       "slot": 20,
-      "metadataToken": 100663313,
       "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod5:System.Void()",
       "name": "CustomEntryMethod5",
       "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod5:System.Void()",
       "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663313
     },
     {
       "registrationKind": "method",
       "slot": 21,
-      "metadataToken": 100663314,
       "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod6:System.Void()",
       "name": "CustomEntryMethod6",
       "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod6:System.Void()",
       "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663314
     },
     {
       "registrationKind": "method",
       "slot": 22,
-      "metadataToken": 100663315,
       "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod7:System.Void()",
       "name": "CustomEntryMethod7",
       "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod7:System.Void()",
       "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663315
     },
     {
       "registrationKind": "method",
       "slot": 23,
-      "metadataToken": 100663316,
       "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod8:System.Void()",
       "name": "CustomEntryMethod8",
       "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod8:System.Void()",
       "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663316
     },
     {
       "registrationKind": "method",
       "slot": 24,
-      "metadataToken": 100663317,
       "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod9:System.Void()",
       "name": "CustomEntryMethod9",
       "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod9:System.Void()",
       "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663317
     },
     {
       "registrationKind": "method",
       "slot": 25,
-      "metadataToken": 100663318,
       "subjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod10:System.Void()",
       "name": "CustomEntryMethod10",
       "definitionSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry::CustomEntryMethod10:System.Void()",
       "declaringTypeSubjectId": "ThreadingThreadBasicsSubjects/ThreadingThreadBasicsNativeEntry",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663318
     }
   ]
 }

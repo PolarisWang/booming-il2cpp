@@ -10,20 +10,20 @@
     {
       "registrationKind": "type",
       "slot": 1,
-      "metadataToken": 33554434,
       "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
       "name": "ThreadingMonitorInterlockedSubjects",
       "displayName": "ThreadingMonitorInterlockedSubjects",
-      "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects"
+      "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
+      "metadataToken": 33554434
     },
     {
       "registrationKind": "type",
       "slot": 2,
-      "metadataToken": 33554435,
       "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec",
       "name": "\u003C\u003Ec",
       "displayName": "ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec",
-      "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec"
+      "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 33554435
     },
     {
       "registrationKind": "field",
@@ -64,218 +64,218 @@
     {
       "registrationKind": "method",
       "slot": 7,
-      "metadataToken": 100663297,
       "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_0:System.Void()",
       "name": "CustomEntrySubject_0",
       "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_0:System.Void()",
       "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663297
     },
     {
       "registrationKind": "method",
       "slot": 8,
-      "metadataToken": 100663298,
       "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_1:System.Void()",
       "name": "CustomEntrySubject_1",
       "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_1:System.Void()",
       "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663298
     },
     {
       "registrationKind": "method",
       "slot": 9,
-      "metadataToken": 100663299,
       "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_2:System.Void()",
       "name": "Subject_2",
       "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_2:System.Void()",
       "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663299
     },
     {
       "registrationKind": "method",
       "slot": 10,
-      "metadataToken": 100663300,
       "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_3:System.Void()",
       "name": "Subject_3",
       "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_3:System.Void()",
       "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663300
     },
     {
       "registrationKind": "method",
       "slot": 11,
-      "metadataToken": 100663301,
       "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_4:System.Void()",
       "name": "CustomEntrySubject_4",
       "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_4:System.Void()",
       "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663301
     },
     {
       "registrationKind": "method",
       "slot": 12,
-      "metadataToken": 100663302,
       "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_5:System.Void()",
       "name": "CustomEntrySubject_5",
       "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_5:System.Void()",
       "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663302
     },
     {
       "registrationKind": "method",
       "slot": 13,
-      "metadataToken": 100663303,
       "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_6:System.Void()",
       "name": "CustomEntrySubject_6",
       "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_6:System.Void()",
       "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663303
     },
     {
       "registrationKind": "method",
       "slot": 14,
-      "metadataToken": 100663304,
       "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_7:System.Void()",
       "name": "CustomEntrySubject_7",
       "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_7:System.Void()",
       "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663304
     },
     {
       "registrationKind": "method",
       "slot": 15,
-      "metadataToken": 100663305,
       "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_8:System.Void()",
       "name": "CustomEntrySubject_8",
       "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_8:System.Void()",
       "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663305
     },
     {
       "registrationKind": "method",
       "slot": 16,
-      "metadataToken": 100663306,
       "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_9:System.Void()",
       "name": "CustomEntrySubject_9",
       "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_9:System.Void()",
       "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663306
     },
     {
       "registrationKind": "method",
       "slot": 17,
-      "metadataToken": 100663307,
       "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_10:System.Void()",
       "name": "CustomEntrySubject_10",
       "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_10:System.Void()",
       "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663307
     },
     {
       "registrationKind": "method",
       "slot": 18,
-      "metadataToken": 100663308,
       "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_11:System.Void()",
       "name": "CustomEntrySubject_11",
       "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::CustomEntrySubject_11:System.Void()",
       "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663308
     },
     {
       "registrationKind": "method",
       "slot": 19,
-      "metadataToken": 100663309,
       "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_12:System.Void()",
       "name": "Subject_12",
       "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_12:System.Void()",
       "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663309
     },
     {
       "registrationKind": "method",
       "slot": 20,
-      "metadataToken": 100663310,
       "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_13:System.Void()",
       "name": "Subject_13",
       "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects::Subject_13:System.Void()",
       "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663310
     },
     {
       "registrationKind": "method",
       "slot": 21,
-      "metadataToken": 100663311,
       "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
       "name": ".cctor",
       "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
       "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663311
     },
     {
       "registrationKind": "method",
       "slot": 22,
-      "metadataToken": 100663312,
       "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
       "name": ".ctor",
       "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
       "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663312
     },
     {
       "registrationKind": "method",
       "slot": 23,
-      "metadataToken": 100663313,
       "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::\u003CSubject_13\u003Eb__14_0:System.Int32()",
       "name": "\u003CSubject_13\u003Eb__14_0",
       "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::\u003CSubject_13\u003Eb__14_0:System.Int32()",
       "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663313
     },
     {
       "registrationKind": "method",
       "slot": 24,
-      "metadataToken": 100663314,
       "subjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::\u003CSubject_13\u003Eb__14_1:System.Int32()",
       "name": "\u003CSubject_13\u003Eb__14_1",
       "definitionSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec::\u003CSubject_13\u003Eb__14_1:System.Int32()",
       "declaringTypeSubjectId": "ThreadingMonitorInterlockedSubjects/ThreadingMonitorInterlockedSubjects\u002B\u003C\u003Ec",
       "memberType": "System.Int32",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663314
     }
   ]
 }

@@ -13,7 +13,8 @@
       "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
       "name": "DelegateCoreInvocationSubjects",
       "displayName": "DelegateCoreInvocationSubjects",
-      "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects"
+      "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+      "metadataToken": 33554434
     },
     {
       "registrationKind": "type",
@@ -21,7 +22,8 @@
       "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
       "name": "\u003C\u003Ec",
       "displayName": "DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
-      "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec"
+      "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+      "metadataToken": 33554435
     },
     {
       "registrationKind": "field",
@@ -122,7 +124,8 @@
       "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663297
     },
     {
       "registrationKind": "method",
@@ -133,7 +136,8 @@
       "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663298
     },
     {
       "registrationKind": "method",
@@ -144,7 +148,8 @@
       "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663299
     },
     {
       "registrationKind": "method",
@@ -155,7 +160,8 @@
       "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663300
     },
     {
       "registrationKind": "method",
@@ -166,7 +172,8 @@
       "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663301
     },
     {
       "registrationKind": "method",
@@ -177,7 +184,8 @@
       "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663302
     },
     {
       "registrationKind": "method",
@@ -188,7 +196,8 @@
       "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663303
     },
     {
       "registrationKind": "method",
@@ -199,7 +208,8 @@
       "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663304
     },
     {
       "registrationKind": "method",
@@ -210,7 +220,8 @@
       "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663305
     },
     {
       "registrationKind": "method",
@@ -221,7 +232,8 @@
       "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663306
     },
     {
       "registrationKind": "method",
@@ -232,7 +244,8 @@
       "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663307
     },
     {
       "registrationKind": "method",
@@ -243,7 +256,8 @@
       "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663308
     },
     {
       "registrationKind": "method",
@@ -254,7 +268,8 @@
       "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663309
     },
     {
       "registrationKind": "method",
@@ -265,7 +280,8 @@
       "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663310
     },
     {
       "registrationKind": "method",
@@ -276,7 +292,8 @@
       "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663311
     },
     {
       "registrationKind": "method",
@@ -287,7 +304,8 @@
       "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663312
     },
     {
       "registrationKind": "method",
@@ -298,7 +316,8 @@
       "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663313
     },
     {
       "registrationKind": "method",
@@ -309,7 +328,8 @@
       "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663314
     },
     {
       "registrationKind": "method",
@@ -320,7 +340,8 @@
       "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663315
     },
     {
       "registrationKind": "method",
@@ -331,7 +352,8 @@
       "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663316
     }
   ]
 }

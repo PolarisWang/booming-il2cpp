@@ -2,23 +2,63 @@
   "family": "snapshot-prover",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-23T18:23:34",
-  "duration_ms": 43446,
+  "timestamp": "2026-05-23T18:33:49",
+  "duration_ms": 65634,
   "overall_status": "passed",
   "stages": {
+    "codegen": {
+      "stage": "codegen",
+      "status": "passed",
+      "summary": "Entrypoint built and IL2CPP compile OK",
+      "details": {
+        "methodCount": 10,
+        "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\snapshot-prover\\managed\\subjects\\build-output\\SnapshotProverSubjects.dll"
+      },
+      "errors": [],
+      "duration_ms": 25701
+    },
     "jit_codegen": {
       "stage": "jit_codegen",
       "status": "passed",
       "summary": "JIT entry-jit.exe built and AOT entry.exe restored",
       "details": {},
       "errors": [],
-      "duration_ms": 43441
+      "duration_ms": 38977
+    },
+    "fact": {
+      "stage": "fact",
+      "status": "passed",
+      "summary": "Fact verify=passed (10/10)",
+      "details": {
+        "fact": {
+          "status": "passed",
+          "passed": 10,
+          "total": 10
+        }
+      },
+      "errors": [],
+      "duration_ms": 402
+    },
+    "fact_jit": {
+      "stage": "fact_jit",
+      "status": "passed",
+      "summary": "Fact JIT verify=passed (10/10)",
+      "details": {
+        "fact_jit": {
+          "status": "passed",
+          "passed": 10,
+          "total": 10,
+          "exit_code": 0
+        }
+      },
+      "errors": [],
+      "duration_ms": 551
     }
   },
   "coverage": {
-    "methodCoverage": 0.0,
+    "methodCoverage": 100.0,
     "testedRate": 0.0,
-    "overall": 0.0
+    "overall": 100.0
   },
   "dashboard": {
     "interpreter": {},

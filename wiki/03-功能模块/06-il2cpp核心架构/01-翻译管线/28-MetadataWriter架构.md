@@ -128,10 +128,32 @@ sealed record SupplementalMetadataTemplateArtifact {
    - `METADATA_WRITER_INVALID_INPUT` — 输入数据为空/无效
    - `METADATA_WRITER_INTERNAL_ERROR` — 其他内部错误
 
+### 架构审视发现（2026-05-23）
+
+- `EnsureEquivalentDemand()` 方法（~50 行）为死代码——从未在任何路径中被调用。`BuildGenericDemandLookup` 在遇到重复 SubjectId 时直接走 first-wins 语义，不调用此验证方法。
+- 推荐操作：在下次重构时移除该方法和关联常量 `METADATA_WRITER_DEMAND_CONFLICT`。
+
 ## 测试覆盖
 
+### 工业化前（2026-05-23 前）
 - **MetadataWriterStageTests.cs**（22 tests）— 私有辅助方法测试（SequenceEqual、AreEquivalentInstantiationKeys、BuildGenericDemandLookup、ResolveRuntimeGenericContext、EnsureEquivalentDemand）
-- **MetadataWriterStageCoreTests.cs**（16 tests，工业化新增）— `Write()` 核心路径测试：artifact 格式验证、字段映射验证、slot 分配验证、参数注册验证、P/Invoke 导入验证、泛型上下文解析验证、错误处理验证
+- **MetadataWriterStageCoreTests.cs**（16 tests）— `Write()` 核心路径测试：artifact 格式验证、字段映射验证、slot 分配验证、参数注册验证、P/Invoke 导入验证、泛型上下文解析验证、错误处理验证
+
+### 工业化新增（2026-05-23）
+- **Chaos.IL2CPP.Tests.MetadataWriter**（24 tests）— 独立测试项目，覆盖：
+  - AotManifest 构建：空 world、简单方法、入口点、字段、依赖项、多条目排序（6 tests）
+  - MetadataRegistration 构建：assembly、type 全字段、property、method 全字段、parameter 注册、imported method、slot 顺序（7 tests）
+  - SupplementalMetadataTemplate 构建：reserved slots、type 条目、method 条目（3 tests）
+  - 泛型实例化解析（2 tests）
+  - 错误/边界处理（4 tests）
+  - 格式契约（2 tests）
+  - CodeGen 契约集成（1 test）
+
+### CI 门禁
+- 集成到 `codegen-regression.yml`：PR/push 修改 `test/src/managed/**` 时自动触发
+- 管线步骤：restore → build → test → coverlet 覆盖率收集（cobertura 格式）
+- 覆盖率阈值：line coverage ≥ 70%（通过 `coverlet.runsettings` 配置）
+- 覆盖率报告作为 CI artifact 上传
 
 ## 故障诊断
 
@@ -178,6 +200,18 @@ sealed record SupplementalMetadataTemplateArtifact {
 1. 检查 `GenericInstantiationDemandGraph` 是否为空
 2. 检查 Linker 阶段是否对该 type/method 产生了 demand
 3. 如果 type/method 不是泛型或没有泛型实例化需求，RuntimeGenericContext 为 null 是正常行为
+
+### CI 覆盖率门禁失败
+
+**症状：** CI（codegen-regression.yml）中 MetadataWriter Coverage Collection 步骤失败，报 "coverlet threshold not met"。
+
+**原因：** 新增代码降低了总体 line coverage，低于 70% 阈值。
+
+**排查：**
+1. 检查覆盖率报告 artifact 中的各模块行覆盖明细
+2. 如果新增了 MetadataWriterStage.cs 的逻辑但未加对应测试，补充测试
+3. 如果新增代码在被排除的目录中（如 `**/obj/**`），确认排除配置正确
+4. 阈值可在 `testing/src/managed/Chaos.IL2CPP.Tests.MetadataWriter/coverlet.runsettings` 中调整
 
 ---
 

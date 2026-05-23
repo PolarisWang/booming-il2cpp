@@ -1,4 +1,4 @@
-#include <chaos/common.h>
+﻿#include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
 #include <chaos/eh.h>
@@ -16,6 +16,7 @@
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 #include "enum_metadata.generated.h"
+#include "enum_stubs.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -26,6 +27,16 @@ extern "C" void InterpreterEntryDirect(
 #pragma warning(push)
 #pragma warning(disable: 4065 4244)
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ThreadSyncSubjects_ThreadSyncSubjects_Subject_0(void);
+extern "C" void ThreadSyncSubjects_ThreadSyncSubjects_Subject_1(void);
+extern "C" void ThreadSyncSubjects_ThreadSyncSubjects_Subject_2(void);
+extern "C" void ThreadSyncSubjects_ThreadSyncSubjects_Subject_3(void);
+extern "C" void ThreadSyncSubjects_ThreadSyncSubjects_Subject_4(void);
+extern "C" void ThreadSyncSubjects_ThreadSyncSubjects_Subject_5(void);
+extern "C" void ThreadSyncSubjects_ThreadSyncSubjects_Subject_6(void);
+extern "C" void ThreadSyncSubjects_ThreadSyncSubjects_Subject_7(void);
+
 namespace chaos::il2cpp::codegen::ThreadSyncSubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup
@@ -34,13 +45,8 @@ using namespace chaos::il2cpp::runtime_core;
 // Runtime prelude dependencies included at translation unit level
 
 
-const void* chaos_vtable_ThreadSyncSubjects_ThreadSyncSubjects___c[];
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Object = {{nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_INTPTR>(15228727185366376748ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Delegate = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, nullptr, 7451128447593600616ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Delegate = static_cast<CHAOS_IL2CPP_INTPTR>(7451128447593600616ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_MulticastDelegate = {{&chaos_mt_System_Private_CoreLib_System_Delegate.hot, nullptr, 6681393039041505440ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_MulticastDelegate = static_cast<CHAOS_IL2CPP_INTPTR>(6681393039041505440ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {{nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
@@ -55,35 +61,10 @@ inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_String = {{nullptr, nul
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Threading_CancellationTokenSource = {{nullptr, nullptr, 4891961527530841086ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Threading_CancellationTokenSource = static_cast<CHAOS_IL2CPP_INTPTR>(4891961527530841086ULL);
-inline TypeInfoV0 chaos_mt_System_Threading_ThreadPool_System_Threading_WaitCallback = {{&chaos_mt_System_Private_CoreLib_System_MulticastDelegate.hot, nullptr, 9117327787469315868ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Threading_ThreadPool_System_Threading_WaitCallback = static_cast<CHAOS_IL2CPP_INTPTR>(9117327787469315868ULL);
 inline TypeInfoV0 chaos_mt_ThreadSyncSubjects_ThreadSyncSubjects = {{nullptr, nullptr, 5838439009180101786ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_ThreadSyncSubjects_ThreadSyncSubjects = static_cast<CHAOS_IL2CPP_INTPTR>(5838439009180101786ULL);
-inline TypeInfoV0 chaos_mt_ThreadSyncSubjects_ThreadSyncSubjects___c = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_ThreadSyncSubjects_ThreadSyncSubjects___c, 2193514339371815678ULL, 4u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_ThreadSyncSubjects_ThreadSyncSubjects___c = static_cast<CHAOS_IL2CPP_INTPTR>(2193514339371815678ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Int32 = {{nullptr, nullptr, 11009693519287992193ULL, 0u, 32, 2, 0}, {nullptr, nullptr, 0, 0, 0, 0}};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_boxed_type_id_System_Private_CoreLib_System_Int32 = static_cast<CHAOS_IL2CPP_INTPTR>(11009693519287992193ULL);
 
 // ── Virtual method table arrays ──
-extern "C" void ThreadSyncSubjects_ThreadSyncSubjects___c__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_5_b__6_0_System_Object(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_6_b__7_0_System_Object(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_7_b__8_0_System_Object(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-const void* chaos_vtable_ThreadSyncSubjects_ThreadSyncSubjects___c[] =
-{
-	reinterpret_cast<void*>(ThreadSyncSubjects_ThreadSyncSubjects___c__ctor),
-	reinterpret_cast<void*>(ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_5_b__6_0_System_Object),
-	reinterpret_cast<void*>(ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_6_b__7_0_System_Object),
-	reinterpret_cast<void*>(ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_7_b__8_0_System_Object),
-};
-static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_ThreadSyncSubjects_ThreadSyncSubjects___c[] =
-{
-	{ 0x00000011u, reinterpret_cast<void*>(&ThreadSyncSubjects_ThreadSyncSubjects___c__ctor) },
-	{ 0x00000012u, reinterpret_cast<void*>(&ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_5_b__6_0_System_Object) },
-	{ 0x00000013u, reinterpret_cast<void*>(&ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_6_b__7_0_System_Object) },
-	{ 0x00000014u, reinterpret_cast<void*>(&ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_7_b__8_0_System_Object) },
-};
-
 bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept
 {
 	if (chaos_array == nullptr)
@@ -120,20 +101,6 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 struct chaos_type_System_Private_CoreLib_System_Object
 {
 	ThinLockableHeader header{};
-};
-
-struct chaos_type_System_Private_CoreLib_System_Delegate : public chaos_type_System_Private_CoreLib_System_Object
-{
-	CHAOS_IL2CPP_INTPTR chaos_delegate_target = 0;
-	CHAOS_IL2CPP_INTPTR chaos_delegate_method_ptr = 0;
-	CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_list = 0;
-	CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_count = 0;
-	CHAOS_IL2CPP_UINT32 chaos_delegate_method_token = 0;
-	CHAOS_IL2CPP_UINT32 _pad = 0;
-};
-
-struct chaos_type_System_Private_CoreLib_System_MulticastDelegate : public chaos_type_System_Private_CoreLib_System_Delegate
-{
 };
 
 struct chaos_type_System_Private_CoreLib_System_Reflection_Assembly
@@ -191,35 +158,45 @@ struct chaos_type_System_Private_CoreLib_System_Threading_CancellationTokenSourc
 	ThinLockableHeader header{};
 };
 
-struct chaos_type_System_Threading_ThreadPool_System_Threading_WaitCallback : public chaos_type_System_Private_CoreLib_System_MulticastDelegate
-{
-};
-
 struct chaos_type_ThreadSyncSubjects_ThreadSyncSubjects
 {
 	ThinLockableHeader header{};
 };
 
-struct chaos_type_ThreadSyncSubjects_ThreadSyncSubjects___c : public chaos_type_System_Private_CoreLib_System_Object
-{
-};
 
-struct chaos_boxed_type_System_Private_CoreLib_System_Int32
-{
-	PureTypeHeader header{};
-	CHAOS_IL2CPP_INTPTR value = 0;
-};
+// ── GcTypeLayout pointer offset arrays (computed via offsetof) ──
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
 
-CHAOS_IL2CPP_INTPTR chaos_static_ThreadSyncSubjects_ThreadSyncSubjects___c____9 = 0;
-CHAOS_IL2CPP_INTPTR chaos_static_ThreadSyncSubjects_ThreadSyncSubjects___c____9__6_0 = 0;
-CHAOS_IL2CPP_INTPTR chaos_static_ThreadSyncSubjects_ThreadSyncSubjects___c____9__7_0 = 0;
-CHAOS_IL2CPP_INTPTR chaos_static_ThreadSyncSubjects_ThreadSyncSubjects___c____9__8_0 = 0;
-CHAOS_IL2CPP_INT32 chaos_static_ThreadSyncSubjects_ThreadSyncSubjects___exitCode = 0;
+extern "C" void ChaosRegisterGcLayouts() {
+	auto& registry = chaos::il2cpp::runtime_core::GcLayoutRegistry::Instance();
 
-static void chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	ChaosObjectCtor(chaos_fn_arg_0);
+	registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
+	registry.Register(5474029880995115448ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly, 1);
+	registry.Register(17082367815459723707ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, 1);
+	registry.Register(4137207361503509124ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, 5);
+	registry.Register(17040031516751226236ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, 2);
+	registry.Register(10748947813473285525ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, 5);
+	registry.Register(1782325859292956794ULL, sizeof(chaos_type_System_Private_CoreLib_System_String), nullptr, 0);
+	registry.Register(4891961527530841086ULL, sizeof(chaos_type_System_Private_CoreLib_System_Threading_CancellationTokenSource), nullptr, 0);
+	registry.Register(5838439009180101786ULL, sizeof(chaos_type_ThreadSyncSubjects_ThreadSyncSubjects), nullptr, 0);
+
+	// Register TypeInfoV0 address ranges for IsValidTypeInfoPointer.
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object) + sizeof(chaos_mt_System_Private_CoreLib_System_Object));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_Assembly));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_String), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_String) + sizeof(chaos_mt_System_Private_CoreLib_System_String));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Threading_CancellationTokenSource), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Threading_CancellationTokenSource) + sizeof(chaos_mt_System_Private_CoreLib_System_Threading_CancellationTokenSource));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_ThreadSyncSubjects_ThreadSyncSubjects), reinterpret_cast<uintptr_t>(&chaos_mt_ThreadSyncSubjects_ThreadSyncSubjects) + sizeof(chaos_mt_ThreadSyncSubjects_ThreadSyncSubjects));
 }
+
+CHAOS_IL2CPP_INT32 chaos_static_ThreadSyncSubjects_ThreadSyncSubjects___exitCode = 0;
 
 static void chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__Sleep_System_Void_System_Int32_(CHAOS_IL2CPP_INT32 chaos_fn_arg_0)
 {
@@ -229,23 +206,6 @@ static void chaos_external_runtime_System_Threading_Thread_System_Threading_Thre
 static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__Yield_System_Boolean__(void)
 {
 	return chaos_thread_yield();
-}
-
-CHAOS_IL2CPP_ONCE_FLAG chaos_type_init_once_ThreadSyncSubjects_ThreadSyncSubjects___c;
-
-void chaos_ensure_type_initialized_ThreadSyncSubjects_ThreadSyncSubjects___c()
-{
-	CHAOS_IL2CPP_CALL_ONCE(chaos_type_init_once_ThreadSyncSubjects_ThreadSyncSubjects___c, []()
-	{
-	if (chaos_static_ThreadSyncSubjects_ThreadSyncSubjects___c____9 == 0)
-	{
-	    auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_ThreadSyncSubjects_ThreadSyncSubjects___c);
-	    chaos_object->header.type_info = &chaos_mt_ThreadSyncSubjects_ThreadSyncSubjects___c.hot;
-		const auto chaos_arg_0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-		ThreadSyncSubjects_ThreadSyncSubjects___c__ctor(chaos_arg_0);
-	    chaos_static_ThreadSyncSubjects_ThreadSyncSubjects___c____9 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	});
 }
 
 static constexpr CHAOS_IL2CPP_UINT32 kGenericTypeArgTokens[1] = { 0 };
@@ -259,19 +219,84 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
 
+
+// ── Bridge/import thunks ──
+extern "C" void* kChaosExternalRuntimeFnTable[];
+
+// Bridge/import thunk for: ThreadSyncSubjects/ThreadSyncSubjects::_exitCode
+extern "C" void chaos_bridge_thunk_0(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[1])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Threading.CancellationTokenSource::.ctor:System.Void()
+extern "C" void chaos_bridge_thunk_1(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[3])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Threading.CancellationTokenSource::Cancel:System.Void()
+extern "C" void chaos_bridge_thunk_2(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[4])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Threading.CancellationToken
+extern "C" void chaos_bridge_thunk_3(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[5])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Threading.CancellationToken::get_IsCancellationRequested:System.Boolean()
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_4(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[6])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Threading.CancellationToken::Register:System.Threading.CancellationTokenRegistration(System.Action)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_5(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[7])(chaos_fn_arg_0);
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Threading.CancellationTokenRegistration::GetHashCode:System.Int32()
+extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_6(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)()>(kChaosExternalRuntimeFnTable[8])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Threading.ThreadPool/System.Threading.ThreadPool::QueueUserWorkItem:System.Boolean(System.Threading.WaitCallback)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_7(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[9])(chaos_fn_arg_0);
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Boolean::GetHashCode:System.Int32()
+extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_8(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)()>(kChaosExternalRuntimeFnTable[10])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Threading.ThreadPool/System.Threading.ThreadPool::QueueUserWorkItem:System.Boolean(System.Threading.WaitCallback,System.Object)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_9(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[11])(chaos_fn_arg_0, chaos_fn_arg_1);
+	return result;
+}
+
 extern "C" void ThreadSyncSubjects_ThreadSyncSubjects_Subject_0(void);
 extern "C" void ThreadSyncSubjects_ThreadSyncSubjects_Subject_1(void);
 extern "C" void ThreadSyncSubjects_ThreadSyncSubjects_Subject_2(void);
 extern "C" void ThreadSyncSubjects_ThreadSyncSubjects_Subject_3(void);
 extern "C" void ThreadSyncSubjects_ThreadSyncSubjects_Subject_4(void);
 extern "C" void ThreadSyncSubjects_ThreadSyncSubjects_Subject_5(void);
-extern "C" void ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_5_b__6_0_System_Object(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
 extern "C" void ThreadSyncSubjects_ThreadSyncSubjects_Subject_6(void);
-extern "C" void ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_6_b__7_0_System_Object(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
 extern "C" void ThreadSyncSubjects_ThreadSyncSubjects_Subject_7(void);
-extern "C" void ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_7_b__8_0_System_Object(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-extern "C" void ThreadSyncSubjects_ThreadSyncSubjects___c_cctor(void);
-extern "C" void ThreadSyncSubjects_ThreadSyncSubjects___c__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 
 
 // Forward declaration for module.image (defined in Step 3 below)
@@ -285,7 +310,7 @@ extern "C" const int kAotMethodCount;
 // so CHAOS_ABI_MANIFEST_ENTRIES/CHAOS_ABI_MANIFEST_PARAMETERS find them by offset.
 
 // Param offset prefix-sum: [i] = cumulative parameter count before method i
-static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[14] = {
+static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[9] = {
 	0u,
 	0u,
 	0u,
@@ -293,25 +318,20 @@ static constexpr CHAOS_IL2CPP_UINT32 s_abi_manifest_prefix_sum[14] = {
 	0u,
 	0u,
 	0u,
-	1u,
-	1u,
-	2u,
-	2u,
-	3u,
-	3u,
-	3u,
+	0u,
+	0u,
 };
 
 static constexpr struct {
 	::ChaosAbiManifestV0 header;
-	::ChaosAbiMethodEntryV0 entries[13];
-	CHAOS_IL2CPP_UINT8 params[3];
+	::ChaosAbiMethodEntryV0 entries[8];
+	CHAOS_IL2CPP_UINT8 params[1];
 } s_abi_manifest_storage = {
 	{
 		CHAOS_ABI_MANIFEST_VERSION,
-		13u,
-		3u,
-		4079064724u,  // FNV-1a over entries+params
+		8u,
+		0u,
+		1768495365u,  // FNV-1a over entries+params
 		s_abi_manifest_prefix_sum  // O(1) prefix-sum
 	},
 	{
@@ -321,67 +341,48 @@ static constexpr struct {
 		{ 0u, 0u },  // ThreadSyncSubjects_ThreadSyncSubjects_Subject_3
 		{ 0u, 0u },  // ThreadSyncSubjects_ThreadSyncSubjects_Subject_4
 		{ 0u, 0u },  // ThreadSyncSubjects_ThreadSyncSubjects_Subject_5
-		{ 0u, 1u },  // ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_5_b__6_0_System_Object
 		{ 0u, 0u },  // ThreadSyncSubjects_ThreadSyncSubjects_Subject_6
-		{ 0u, 1u },  // ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_6_b__7_0_System_Object
 		{ 0u, 0u },  // ThreadSyncSubjects_ThreadSyncSubjects_Subject_7
-		{ 0u, 1u },  // ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_7_b__8_0_System_Object
-		{ 0u, 0u },  // ThreadSyncSubjects_ThreadSyncSubjects___c_cctor
-		{ 0u, 0u },  // ThreadSyncSubjects_ThreadSyncSubjects___c__ctor
 	},
 	{
-		2u,
-		2u,
-		2u,
 	},
 };
 static const ::ChaosAbiManifestV0* const s_abi_manifest =
 	reinterpret_cast<const ::ChaosAbiManifestV0*>(&s_abi_manifest_storage);
 // ── Module registration ──
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_type_flags[3] = {
+	static constexpr CHAOS_IL2CPP_UINT32 s_type_flags[2] = {
 		0u,
 		1548u,
-		1544u,
 	};
 
-	static constexpr const char* s_type_names[3] = {
+	static constexpr const char* s_type_names[2] = {
 		"<Module>",
 		"ThreadSyncSubjects",
-		"<>c",
 	};
 
-	static constexpr const char* s_type_namespaces[3] = {
-		"",
+	static constexpr const char* s_type_namespaces[2] = {
 		"",
 		"",
 	};
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_type_parent_tokens[3] = {
-		0u,
+	static constexpr CHAOS_IL2CPP_UINT32 s_type_parent_tokens[2] = {
 		0u,
 		0u,
 	};
 
-	static const TypeInfoHot* const s_type_info_ptrs[3] = {
+	static const TypeInfoHot* const s_type_info_ptrs[2] = {
 		nullptr,
 		&chaos_mt_ThreadSyncSubjects_ThreadSyncSubjects.hot,
-		&chaos_mt_ThreadSyncSubjects_ThreadSyncSubjects___c.hot,
 	};
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_children[1] = {
-		33554435u,
+	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_offset[3] = {
+		0u,
+		0u,
+		0u,
 	};
 
-	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_offset[4] = {
-		0u,
-		0u,
-		1u,
-		1u,
-	};
-
-	static constexpr CHAOS_IL2CPP_UINT32 s_generic_param_constraint_offset[4] = {
-		0u,
+	static constexpr CHAOS_IL2CPP_UINT32 s_generic_param_constraint_offset[3] = {
 		0u,
 		0u,
 		0u,
@@ -397,89 +398,80 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		/* .type_namespaces   = */ s_type_namespaces,
 		/* .type_parent_tokens= */ s_type_parent_tokens,
 		/* .type_info_ptrs    = */ s_type_info_ptrs,
-		/* .nested_type_children= */ s_nested_type_children,
+		/* .nested_type_children= */ nullptr,
 		/* .nested_type_offset = */ s_nested_type_offset,
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
-		/* .type_count        = */ 3u,
-	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
+		/* .type_count        = */ 2u,
+	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 -- deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
 	/* .custom_attribute_materializer = */ nullptr,
-
+	/* .custom_attribute_method_offset   = */ nullptr,
+	/* .custom_attribute_field_offset    = */ nullptr,
+	/* .custom_attribute_property_offset = */ nullptr,
+	/* .custom_attribute_param_offset    = */ nullptr,
+	/* .custom_attribute_method_count    = */ 0u,
+	/* .custom_attribute_field_count     = */ 0u,
+	/* .custom_attribute_property_count  = */ 0u,
+	/* .custom_attribute_param_count   = */ 0u,
 		/* .abi_manifest      = */ s_abi_manifest,
 	};
 	static const CHAOS_IL2CPP_UINT32 s_native_aot_module_id =
 		::chaos::il2cpp::runtime_core::RegisterModule("ThreadSyncSubjects", &s_native_aot_module);
 // ── Hotpatch name index + dispatch table ────────────────────
 // Method name index entries
-static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[13] = {
-	{ "Subject_0", 0x00000008u, 0u },  // ThreadSyncSubjects
-	{ "Subject_1", 0x00000009u, 0u },  // ThreadSyncSubjects
-	{ "Subject_2", 0x0000000Au, 0u },  // ThreadSyncSubjects
-	{ "Subject_3", 0x0000000Bu, 0u },  // ThreadSyncSubjects
-	{ "Subject_4", 0x0000000Cu, 0u },  // ThreadSyncSubjects
-	{ "Subject_5", 0x0000000Du, 0u },  // ThreadSyncSubjects
-	{ "Subject_6", 0x0000000Eu, 0u },  // ThreadSyncSubjects
-	{ "Subject_7", 0x0000000Fu, 0u },  // ThreadSyncSubjects
-	{ "<Subject_5>b__6_0", 0x00000012u, 1u },  // ThreadSyncSubjects+<>c
-	{ "<Subject_6>b__7_0", 0x00000013u, 1u },  // ThreadSyncSubjects+<>c
-	{ "<Subject_7>b__8_0", 0x00000014u, 1u },  // ThreadSyncSubjects+<>c
-	{ ".cctor", 0x00000010u, 0u },  // ThreadSyncSubjects+<>c
-	{ ".ctor", 0x00000011u, 0u },  // ThreadSyncSubjects+<>c
+static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[8] = {
+	{ "Subject_0", 0x00000003u, 0u },  // ThreadSyncSubjects
+	{ "Subject_1", 0x00000004u, 0u },  // ThreadSyncSubjects
+	{ "Subject_2", 0x00000005u, 0u },  // ThreadSyncSubjects
+	{ "Subject_3", 0x00000006u, 0u },  // ThreadSyncSubjects
+	{ "Subject_4", 0x00000007u, 0u },  // ThreadSyncSubjects
+	{ "Subject_5", 0x00000008u, 0u },  // ThreadSyncSubjects
+	{ "Subject_6", 0x00000009u, 0u },  // ThreadSyncSubjects
+	{ "Subject_7", 0x0000000Au, 0u },  // ThreadSyncSubjects
 };
 
 // Type name index entries (namespace, short_name)
-static constexpr HotpatchTypeEntryV0 s_hotpatch_types[2] = {
+static constexpr HotpatchTypeEntryV0 s_hotpatch_types[1] = {
 	{ "ThreadSyncSubjects", "", 0u, 8u },
-	{ "ThreadSyncSubjects+<>c", "", 8u, 5u },
 };
 
 // Token→Slot mapping (sorted by token for binary search)
-static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[13] = {
-	{ 0x00000008u, 0u },
-	{ 0x00000009u, 1u },
-	{ 0x0000000Au, 2u },
-	{ 0x0000000Bu, 3u },
-	{ 0x0000000Cu, 4u },
-	{ 0x0000000Du, 5u },
-	{ 0x0000000Eu, 7u },
-	{ 0x0000000Fu, 9u },
-	{ 0x00000010u, 11u },
-	{ 0x00000011u, 12u },
-	{ 0x00000012u, 6u },
-	{ 0x00000013u, 8u },
-	{ 0x00000014u, 10u },
+static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[8] = {
+	{ 0x00000003u, 0u },
+	{ 0x00000004u, 1u },
+	{ 0x00000005u, 2u },
+	{ 0x00000006u, 3u },
+	{ 0x00000007u, 4u },
+	{ 0x00000008u, 5u },
+	{ 0x00000009u, 6u },
+	{ 0x0000000Au, 7u },
 };
 
 // Dispatch table (function pointers)
-static HotpatchEntryV0 s_hotpatch_entries[13] = {
+static HotpatchEntryV0 s_hotpatch_entries[8] = {
 	{ reinterpret_cast<void*>(&ThreadSyncSubjects_ThreadSyncSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ThreadSyncSubjects::Subject_0
 	{ reinterpret_cast<void*>(&ThreadSyncSubjects_ThreadSyncSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ThreadSyncSubjects::Subject_1
 	{ reinterpret_cast<void*>(&ThreadSyncSubjects_ThreadSyncSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ThreadSyncSubjects::Subject_2
 	{ reinterpret_cast<void*>(&ThreadSyncSubjects_ThreadSyncSubjects_Subject_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ThreadSyncSubjects::Subject_3
 	{ reinterpret_cast<void*>(&ThreadSyncSubjects_ThreadSyncSubjects_Subject_4), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ThreadSyncSubjects::Subject_4
 	{ reinterpret_cast<void*>(&ThreadSyncSubjects_ThreadSyncSubjects_Subject_5), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ThreadSyncSubjects::Subject_5
-	{ reinterpret_cast<void*>(&ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_5_b__6_0_System_Object), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ThreadSyncSubjects+<>c::<Subject_5>b__6_0
 	{ reinterpret_cast<void*>(&ThreadSyncSubjects_ThreadSyncSubjects_Subject_6), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ThreadSyncSubjects::Subject_6
-	{ reinterpret_cast<void*>(&ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_6_b__7_0_System_Object), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ThreadSyncSubjects+<>c::<Subject_6>b__7_0
-	{ reinterpret_cast<void*>(&ThreadSyncSubjects_ThreadSyncSubjects_Subject_7), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ThreadSyncSubjects::Subject_7
-	{ reinterpret_cast<void*>(&ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_7_b__8_0_System_Object), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ThreadSyncSubjects+<>c::<Subject_7>b__8_0
-	{ reinterpret_cast<void*>(&ThreadSyncSubjects_ThreadSyncSubjects___c_cctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ThreadSyncSubjects+<>c::.cctor
-	{ reinterpret_cast<void*>(&ThreadSyncSubjects_ThreadSyncSubjects___c__ctor), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // ThreadSyncSubjects+<>c::.ctor
+	{ reinterpret_cast<void*>(&ThreadSyncSubjects_ThreadSyncSubjects_Subject_7), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // ThreadSyncSubjects::Subject_7
 };
 
 // Module hotpatch bundle
 static constexpr HotpatchModuleV0 s_hotpatch_module = {
 	"ThreadSyncSubjects",
 	s_hotpatch_types,
-	2u,
+	1u,
 	s_hotpatch_methods,
-	13u,
+	8u,
 	s_hotpatch_slots,
-	13u,
+	8u,
 	s_hotpatch_entries,
-	13u,
+	8u,
 };
 
 // Expose hotpatch module to BootstrapRuntime
@@ -488,7 +480,7 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // ── External Runtime Dispatch Table ──────────────────────────
 // Startup-time-resolved function pointers for cross-assembly calls.
 
-extern "C" const char* kChaosExternalRuntimeSubjects[18] = {
+extern "C" const char* kChaosExternalRuntimeSubjects[12] = {
 	"System.Threading.Thread/System.Threading.Thread::Sleep:System.Void(System.Int32)",
 	"ThreadSyncSubjects/ThreadSyncSubjects::_exitCode",
 	"System.Threading.Thread/System.Threading.Thread::Yield:System.Boolean()",
@@ -497,19 +489,13 @@ extern "C" const char* kChaosExternalRuntimeSubjects[18] = {
 	"System.Private.CoreLib/System.Threading.CancellationToken",
 	"System.Private.CoreLib/System.Threading.CancellationToken::get_IsCancellationRequested:System.Boolean()",
 	"System.Private.CoreLib/System.Threading.CancellationToken::Register:System.Threading.CancellationTokenRegistration(System.Action)",
-	"ThreadSyncSubjects/ThreadSyncSubjects+<>c::<>9__6_0",
-	"ThreadSyncSubjects/ThreadSyncSubjects+<>c::<>9",
-	"System.Threading.ThreadPool/System.Threading.WaitCallback::.ctor:System.Void(System.Object,System.IntPtr)",
+	"System.Private.CoreLib/System.Threading.CancellationTokenRegistration::GetHashCode:System.Int32()",
 	"System.Threading.ThreadPool/System.Threading.ThreadPool::QueueUserWorkItem:System.Boolean(System.Threading.WaitCallback)",
-	"ThreadSyncSubjects/ThreadSyncSubjects+<>c::<>9__7_0",
-	"System.Private.CoreLib/System.Int32",
+	"System.Private.CoreLib/System.Boolean::GetHashCode:System.Int32()",
 	"System.Threading.ThreadPool/System.Threading.ThreadPool::QueueUserWorkItem:System.Boolean(System.Threading.WaitCallback,System.Object)",
-	"ThreadSyncSubjects/ThreadSyncSubjects+<>c::<>9__8_0",
-	"System.Private.CoreLib/System.Delegate::GetInvocationList:System.Delegate[]()",
-	"System.Private.CoreLib/System.Object::.ctor:System.Void()",
 };
 
-extern "C" void* kChaosExternalRuntimeFnTable[18] = {
+extern "C" void* kChaosExternalRuntimeFnTable[12] = {
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__Sleep_System_Void_System_Int32_),
 	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Threading_Thread_System_Threading_Thread__Yield_System_Boolean__),
@@ -522,32 +508,21 @@ extern "C" void* kChaosExternalRuntimeFnTable[18] = {
 	nullptr,
 	nullptr,
 	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	nullptr,
-	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__),
 };
 
-extern "C" int32_t kChaosExternalRuntimeCount = 18;
+extern "C" int32_t kChaosExternalRuntimeCount = 12;
 // (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
-static void (*kAotMethods[13])() = {
+static void (*kAotMethods[8])() = {
 	reinterpret_cast<void(*)()>(&ThreadSyncSubjects_ThreadSyncSubjects_Subject_0),
 	reinterpret_cast<void(*)()>(&ThreadSyncSubjects_ThreadSyncSubjects_Subject_1),
 	reinterpret_cast<void(*)()>(&ThreadSyncSubjects_ThreadSyncSubjects_Subject_2),
 	reinterpret_cast<void(*)()>(&ThreadSyncSubjects_ThreadSyncSubjects_Subject_3),
 	reinterpret_cast<void(*)()>(&ThreadSyncSubjects_ThreadSyncSubjects_Subject_4),
 	reinterpret_cast<void(*)()>(&ThreadSyncSubjects_ThreadSyncSubjects_Subject_5),
-	reinterpret_cast<void(*)()>(&ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_5_b__6_0_System_Object),
 	reinterpret_cast<void(*)()>(&ThreadSyncSubjects_ThreadSyncSubjects_Subject_6),
-	reinterpret_cast<void(*)()>(&ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_6_b__7_0_System_Object),
 	reinterpret_cast<void(*)()>(&ThreadSyncSubjects_ThreadSyncSubjects_Subject_7),
-	reinterpret_cast<void(*)()>(&ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_7_b__8_0_System_Object),
-	reinterpret_cast<void(*)()>(&ThreadSyncSubjects_ThreadSyncSubjects___c_cctor),
-	reinterpret_cast<void(*)()>(&ThreadSyncSubjects_ThreadSyncSubjects___c__ctor),
 };
 
 // ── Benchmark wrappers (kBenchmarkWrappers[]) ──────────────────────────
@@ -555,20 +530,15 @@ static void (*kAotMethods[13])() = {
 // String params receive a valid StringId; all others receive 0.
 // Instance methods receive a sentinel this-pointer so they don't crash on null.
 static CHAOS_IL2CPP_UINT8 __g_benchmark_this_sentinel = 0;
-extern "C" void (*kBenchmarkWrappers[13])() = {
+extern "C" void (*kBenchmarkWrappers[8])() = {
 	[]() {kAotMethods[0]();},
 	[]() {kAotMethods[1]();},
 	[]() {kAotMethods[2]();},
 	[]() {kAotMethods[3]();},
 	[]() {kAotMethods[4]();},
 	[]() {kAotMethods[5]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[6])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
+	[]() {kAotMethods[6]();},
 	[]() {kAotMethods[7]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[8])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
-	[]() {kAotMethods[9]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kAotMethods[10])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel),0);},
-	[]() {kAotMethods[11]();},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kAotMethods[12])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel));},
 };
 
 // ── Subject entry index mapping ─────────────────────────────────
@@ -584,8 +554,8 @@ extern "C" const int kSubjectEntryIndices[8] = {
 	3,
 	4,
 	5,
+	6,
 	7,
-	9,
 };
 
 // Single-method dispatch via hotpatch dispatch table.
@@ -688,7 +658,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry1;
 	/* ── Entry 2: ThreadSyncSubjects_ThreadSyncSubjects_Subject_2 ── */
 	struct {
@@ -704,7 +674,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry3;
 	/* ── Entry 4: ThreadSyncSubjects_ThreadSyncSubjects_Subject_4 ── */
 	struct {
@@ -712,7 +682,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
+		CHAOS_IL2CPP_UINT32 slots[9];
 	} entry4;
 	/* ── Entry 5: ThreadSyncSubjects_ThreadSyncSubjects_Subject_5 ── */
 	struct {
@@ -720,64 +690,16 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[6];
 	} entry5;
-	/* ── Entry 6: ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_5_b__6_0_System_Object ── */
+	/* ── Entry 6: ThreadSyncSubjects_ThreadSyncSubjects_Subject_6 ── */
 	struct {
 		CHAOS_IL2CPP_UINT32 entry_total_size;
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
+		CHAOS_IL2CPP_UINT32 slots[6];
 	} entry6;
-	/* ── Entry 7: ThreadSyncSubjects_ThreadSyncSubjects_Subject_6 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[3];
-	} entry7;
-	/* ── Entry 8: ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_6_b__7_0_System_Object ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry8;
-	/* ── Entry 9: ThreadSyncSubjects_ThreadSyncSubjects_Subject_7 ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry9;
-	/* ── Entry 10: ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_7_b__8_0_System_Object ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry10;
-	/* ── Entry 11: ThreadSyncSubjects_ThreadSyncSubjects___c_cctor ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[1];
-	} entry11;
-	/* ── Entry 12: ThreadSyncSubjects_ThreadSyncSubjects___c__ctor ── */
-	struct {
-		CHAOS_IL2CPP_UINT32 entry_total_size;
-		const void*         code_address;
-		CHAOS_IL2CPP_UINT32 frame_size;
-		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[2];
-	} entry12;
 } kChaosGcSlotMapsSection = {
 	/* entry0 = ThreadSyncSubjects_ThreadSyncSubjects_Subject_0 */
 	.entry0 = {
@@ -789,11 +711,11 @@ static const struct {
 	},
 	/* entry1 = ThreadSyncSubjects_ThreadSyncSubjects_Subject_1 */
 	.entry1 = {
-		/* entry_total_size = 24 */ 24u,
+		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&ThreadSyncSubjects_ThreadSyncSubjects_Subject_1),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
 	},
 	/* entry2 = ThreadSyncSubjects_ThreadSyncSubjects_Subject_2 */
 	.entry2 = {
@@ -805,131 +727,62 @@ static const struct {
 	},
 	/* entry3 = ThreadSyncSubjects_ThreadSyncSubjects_Subject_3 */
 	.entry3 = {
-		/* entry_total_size = 32 */ 32u,
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&ThreadSyncSubjects_ThreadSyncSubjects_Subject_3),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
 	/* entry4 = ThreadSyncSubjects_ThreadSyncSubjects_Subject_4 */
 	.entry4 = {
-		/* entry_total_size = 32 */ 32u,
+		/* entry_total_size = 56 */ 56u,
 		/* code_address */ reinterpret_cast<const void*>(&ThreadSyncSubjects_ThreadSyncSubjects_Subject_4),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
+		/* frame_size = 72 */ 72u,
+		/* num_gc_slots = 9 */ 9u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u }
 	},
 	/* entry5 = ThreadSyncSubjects_ThreadSyncSubjects_Subject_5 */
 	.entry5 = {
-		/* entry_total_size = 28 */ 28u,
+		/* entry_total_size = 44 */ 44u,
 		/* code_address */ reinterpret_cast<const void*>(&ThreadSyncSubjects_ThreadSyncSubjects_Subject_5),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 48 */ 48u,
+		/* num_gc_slots = 6 */ 6u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
 	},
-	/* entry6 = ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_5_b__6_0_System_Object */
+	/* entry6 = ThreadSyncSubjects_ThreadSyncSubjects_Subject_6 */
 	.entry6 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_5_b__6_0_System_Object),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
-	},
-	/* entry7 = ThreadSyncSubjects_ThreadSyncSubjects_Subject_6 */
-	.entry7 = {
-		/* entry_total_size = 32 */ 32u,
+		/* entry_total_size = 44 */ 44u,
 		/* code_address */ reinterpret_cast<const void*>(&ThreadSyncSubjects_ThreadSyncSubjects_Subject_6),
-		/* frame_size = 24 */ 24u,
-		/* num_gc_slots = 3 */ 3u,
-		/* slots */ { 0u, 8u, 16u }
-	},
-	/* entry8 = ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_6_b__7_0_System_Object */
-	.entry8 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_6_b__7_0_System_Object),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
-	},
-	/* entry9 = ThreadSyncSubjects_ThreadSyncSubjects_Subject_7 */
-	.entry9 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&ThreadSyncSubjects_ThreadSyncSubjects_Subject_7),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
-	},
-	/* entry10 = ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_7_b__8_0_System_Object */
-	.entry10 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_7_b__8_0_System_Object),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
-	},
-	/* entry11 = ThreadSyncSubjects_ThreadSyncSubjects___c_cctor */
-	.entry11 = {
-		/* entry_total_size = 24 */ 24u,
-		/* code_address */ reinterpret_cast<const void*>(&ThreadSyncSubjects_ThreadSyncSubjects___c_cctor),
-		/* frame_size = 8 */ 8u,
-		/* num_gc_slots = 1 */ 1u,
-		/* slots */ { 0u }
-	},
-	/* entry12 = ThreadSyncSubjects_ThreadSyncSubjects___c__ctor */
-	.entry12 = {
-		/* entry_total_size = 28 */ 28u,
-		/* code_address */ reinterpret_cast<const void*>(&ThreadSyncSubjects_ThreadSyncSubjects___c__ctor),
-		/* frame_size = 16 */ 16u,
-		/* num_gc_slots = 2 */ 2u,
-		/* slots */ { 0u, 8u }
+		/* frame_size = 48 */ 48u,
+		/* num_gc_slots = 6 */ 6u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
 	}
 };
 #if defined(_MSC_VER)
 #pragma pack(pop)
 #endif
 
-static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 360u;
+static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 264u;
 
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
-static void* const kMethodPointers[13] = {
+static void* const kMethodPointers[8] = {
 	reinterpret_cast<void*>(&ThreadSyncSubjects_ThreadSyncSubjects_Subject_0),
 	reinterpret_cast<void*>(&ThreadSyncSubjects_ThreadSyncSubjects_Subject_1),
 	reinterpret_cast<void*>(&ThreadSyncSubjects_ThreadSyncSubjects_Subject_2),
 	reinterpret_cast<void*>(&ThreadSyncSubjects_ThreadSyncSubjects_Subject_3),
 	reinterpret_cast<void*>(&ThreadSyncSubjects_ThreadSyncSubjects_Subject_4),
 	reinterpret_cast<void*>(&ThreadSyncSubjects_ThreadSyncSubjects_Subject_5),
-	reinterpret_cast<void*>(&ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_5_b__6_0_System_Object),
 	reinterpret_cast<void*>(&ThreadSyncSubjects_ThreadSyncSubjects_Subject_6),
-	reinterpret_cast<void*>(&ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_6_b__7_0_System_Object),
 	reinterpret_cast<void*>(&ThreadSyncSubjects_ThreadSyncSubjects_Subject_7),
-	reinterpret_cast<void*>(&ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_7_b__8_0_System_Object),
-	reinterpret_cast<void*>(&ThreadSyncSubjects_ThreadSyncSubjects___c_cctor),
-	reinterpret_cast<void*>(&ThreadSyncSubjects_ThreadSyncSubjects___c__ctor),
 };
 
 // CodeRegistrationV0 struct (invoker_pointers = nullptr for native-aot path)
-// ── VTable descriptors (for BootstrapRuntime TypeVTable registration) ──
-static const VTableDescriptorV0 kChaosVTableDescriptors[] = {
-	{
-		CHAOS_IL2CPP_UINT64_C(0x1E70EDAB7FFB92FE),
-		0x00000002u,
-		0u,
-		4u,
-		reinterpret_cast<const void*>(kSlots_ThreadSyncSubjects_ThreadSyncSubjects___c),
-		reinterpret_cast<const void**>(chaos_vtable_ThreadSyncSubjects_ThreadSyncSubjects___c),
-		4u,
-		1,
-		{0, 0, 0},
-		nullptr,
-		0u,
-	},
-};
 extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	= {
 	.struct_size               = sizeof(CodeRegistrationV0),
 	.method_pointers           = kMethodPointers,
-	.method_pointer_count      = 13u,
+	.method_pointer_count      = 8u,
 	.reverse_pinvoke_wrappers  = nullptr,
 	.reverse_pinvoke_wrapper_count = 0u,
 	.invoker_pointers          = nullptr,
@@ -938,8 +791,8 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	.unresolved_virtual_call_count = 0u,
 	.type_capabilities       = nullptr,
 	.type_capability_count   = 0u,
-	.vtable_descriptors = kChaosVTableDescriptors,
-	.vtable_descriptor_count = 1u,
+	.vtable_descriptors = nullptr,
+	.vtable_descriptor_count = 0u,
 	.slot_map_section_begin = reinterpret_cast<const void*>(&kChaosGcSlotMapsSection),
 	.slot_map_section_end   = reinterpret_cast<const void*>(
 		reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&kChaosGcSlotMapsSection) + kChaosGcSlotMapsSize),
@@ -979,40 +832,29 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // matching during IR lowering of patched methods.
 
 static constexpr ReflectionQueryFieldDescriptor kReflFields_ThreadSyncSubjects_ThreadSyncSubjects[1] = {
-	{ 0u, "ThreadSyncSubjects/ThreadSyncSubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
+	{ 0x04000001u, "ThreadSyncSubjects/ThreadSyncSubjects::_exitCode", "_exitCode", "System.Int32", 0LL, 3u },
 };
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_ThreadSyncSubjects_ThreadSyncSubjects[8] = {
-	{ 0u, "ThreadSyncSubjects/ThreadSyncSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadSyncSubjects/ThreadSyncSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadSyncSubjects/ThreadSyncSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadSyncSubjects/ThreadSyncSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadSyncSubjects/ThreadSyncSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadSyncSubjects/ThreadSyncSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadSyncSubjects/ThreadSyncSubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadSyncSubjects/ThreadSyncSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u },
+	{ 0x00000003u, "ThreadSyncSubjects/ThreadSyncSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000004u, "ThreadSyncSubjects/ThreadSyncSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000005u, "ThreadSyncSubjects/ThreadSyncSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000006u, "ThreadSyncSubjects/ThreadSyncSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000007u, "ThreadSyncSubjects/ThreadSyncSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000008u, "ThreadSyncSubjects/ThreadSyncSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000009u, "ThreadSyncSubjects/ThreadSyncSubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Au, "ThreadSyncSubjects/ThreadSyncSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
-static constexpr ReflectionQueryMethodDescriptor kReflMethods_ThreadSyncSubjects_ThreadSyncSubjects___c[5] = {
-	{ 0u, "ThreadSyncSubjects/ThreadSyncSubjects+<>c::<Subject_5>b__6_0:System.Void(System.Object)", "<Subject_5>b__6_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadSyncSubjects/ThreadSyncSubjects+<>c::<Subject_6>b__7_0:System.Void(System.Object)", "<Subject_6>b__7_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadSyncSubjects/ThreadSyncSubjects+<>c::<Subject_7>b__8_0:System.Void(System.Object)", "<Subject_7>b__8_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadSyncSubjects/ThreadSyncSubjects+<>c::.cctor:System.Void()", ".cctor", "System.Void", 0, nullptr, 0u },
-	{ 0u, "ThreadSyncSubjects/ThreadSyncSubjects+<>c::.ctor:System.Void()", ".ctor", "System.Void", 0, nullptr, 0u },
+static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
+	{ 0x00000001u, "ThreadSyncSubjects/ThreadSyncSubjects", "ThreadSyncSubjects/ThreadSyncSubjects", "", "ThreadSyncSubjects", "ThreadSyncSubjects", nullptr, kReflFields_ThreadSyncSubjects_ThreadSyncSubjects, 1u, nullptr, 0u,
+nullptr, 0u,    kReflMethods_ThreadSyncSubjects_ThreadSyncSubjects, 8u, nullptr, 0u, 0u },
 };
 
-static const ReflectionQueryTypeDescriptor kReflTypes[2] = {
-	{ 0u, "ThreadSyncSubjects/ThreadSyncSubjects", "ThreadSyncSubjects/ThreadSyncSubjects", "", "ThreadSyncSubjects", "ThreadSyncSubjects", nullptr, kReflFields_ThreadSyncSubjects_ThreadSyncSubjects, 1u, nullptr, 0u,
-	kReflMethods_ThreadSyncSubjects_ThreadSyncSubjects, 8u },
-	{ 0u, "ThreadSyncSubjects/ThreadSyncSubjects+<>c", "ThreadSyncSubjects/ThreadSyncSubjects+<>c", "", "ThreadSyncSubjects+<>c", "ThreadSyncSubjects+<>c", nullptr, nullptr, 0u, nullptr, 0u,
-	kReflMethods_ThreadSyncSubjects_ThreadSyncSubjects___c, 5u },
-};
-
-static const ReflectionQueryTypeDescriptor* kReflTypePtrs[2] = {
+static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
-	&kReflTypes[1],
 };
 
-static const ReflectionQueryImageDescriptor kReflImage = { "ThreadSyncSubjects", kReflTypePtrs, 2u };
+static const ReflectionQueryImageDescriptor kReflImage = { "ThreadSyncSubjects", kReflTypePtrs, 1u, 1, 0, 0, 0 };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -1094,12 +936,45 @@ extern "C" void ThreadSyncSubjects_ThreadSyncSubjects_Subject_1(void)
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	CHAOS_EH_TRY
 			{
 				const auto chaos_result = chaos_thread_yield();
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			// brtrue (structured EH branch)
+			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				const auto chaos_result = chaos_thread_yield();
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			// brtrue (structured EH branch)
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			chaos_locals[0] = _s4;
+			_s4 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s5;
+				chaos_static_ThreadSyncSubjects_ThreadSyncSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
@@ -1160,16 +1035,28 @@ extern "C" void ThreadSyncSubjects_ThreadSyncSubjects_Subject_2(void)
 extern "C" void ThreadSyncSubjects_ThreadSyncSubjects_Subject_3(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
 
 
 	CHAOS_EH_TRY
-			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
 			_s1 = _s0;
 			{
 				const auto chaos_address = _s1;
@@ -1186,6 +1073,43 @@ extern "C" void ThreadSyncSubjects_ThreadSyncSubjects_Subject_3(void)
 			{
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[6])();
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			// brtrue (structured EH branch)
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			_s5 = _s4;
+			{
+				const auto chaos_address = _s5;
+				if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+				{
+					auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+					*chaos_slot = 0;
+				}
+				else
+				{
+					*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
+				}
+			}
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[6])();
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			// brtrue (structured EH branch)
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			// br (handled via structured EH branches)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s6) == static_cast<CHAOS_IL2CPP_INTPTR>(_s7) ? 1 : 0);
+			chaos_locals[0] = _s6;
+			_s6 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s7;
+				chaos_static_ThreadSyncSubjects_ThreadSyncSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
@@ -1209,17 +1133,30 @@ extern "C" void ThreadSyncSubjects_ThreadSyncSubjects_Subject_3(void)
 extern "C" void ThreadSyncSubjects_ThreadSyncSubjects_Subject_4(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
+	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
+	CHAOS_IL2CPP_INTPTR _s17{};
+	CHAOS_IL2CPP_INTPTR _s18{};
 
 
 	CHAOS_EH_TRY
-			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
 			_s1 = _s0;
 			{
 				const auto chaos_address = _s1;
@@ -1238,6 +1175,49 @@ extern "C" void ThreadSyncSubjects_ThreadSyncSubjects_Subject_4(void)
 				const auto chaos_arg_0 = _s1;
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[7])(chaos_arg_0);
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			chaos_locals[2] = _s1;
+			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[2]);
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[8])();
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			_s4 = _s3;
+			{
+				const auto chaos_address = _s4;
+				if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
+				{
+					auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
+					*chaos_slot = 0;
+				}
+				else
+				{
+					*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
+				}
+			}
+			_s4 = 0;
+			{
+				const auto chaos_arg_0 = _s4;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[7])(chaos_arg_0);
+				_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			chaos_locals[2] = _s4;
+			_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[2]);
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[8])();
+				_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
+			chaos_locals[0] = _s4;
+			_s4 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s5;
+				chaos_static_ThreadSyncSubjects_ThreadSyncSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
@@ -1261,102 +1241,7 @@ extern "C" void ThreadSyncSubjects_ThreadSyncSubjects_Subject_4(void)
 extern "C" void ThreadSyncSubjects_ThreadSyncSubjects_Subject_5(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-
-
-	CHAOS_EH_TRY
-			chaos_ensure_type_initialized_ThreadSyncSubjects_ThreadSyncSubjects___c();
-			_s0 = chaos_static_ThreadSyncSubjects_ThreadSyncSubjects___c____9__6_0;
-			_s1 = _s0;
-			{
-				if (_s1 == 0)
-				{
-					chaos_ensure_type_initialized_ThreadSyncSubjects_ThreadSyncSubjects___c();
-					_s0 = chaos_static_ThreadSyncSubjects_ThreadSyncSubjects___c____9;
-					{
-						// Hotpatch-aware ldftn wrapper (slot 6)
-						static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1) -> void {
-							auto& _d_entry = s_hotpatch_entries[6];
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-							{
-								alignas(16) uint8_t _d_ab[16];
-								ArgBuffer _d_bw(_d_ab);
-								_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-								_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_1));
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d_entry.method_key, _d_ab, nullptr);
-								return;
-							}
-							reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
-						};
-					_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-					}
-					{
-						const auto chaos_method_ptr = _s1;
-						const auto chaos_target = _s0;
-						auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Threading_ThreadPool_System_Threading_WaitCallback, {});
-						chaos_object->header.type_info = &chaos_mt_System_Threading_ThreadPool_System_Threading_WaitCallback.hot;
-						chaos_object->chaos_delegate_target = chaos_target;
-						chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-						_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-					}
-					_s1 = _s0;
-					{
-						auto chaos_value = _s1;
-					chaos_ensure_type_initialized_ThreadSyncSubjects_ThreadSyncSubjects___c();
-						chaos_static_ThreadSyncSubjects_ThreadSyncSubjects___c____9__6_0 = chaos_value;
-					}
-				}
-				{
-					const auto chaos_arg_0 = _s0;
-					const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[11])(chaos_arg_0);
-					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-				}
-			}
-	CHAOS_EH_CATCH_BEGIN
-		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
-			{ CHAOS_EH_RETHROW; }
-		}
-		_s0 = CHAOS_EH_EXCEPTION_OBJ;
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{
-				auto chaos_value = _s0;
-				chaos_static_ThreadSyncSubjects_ThreadSyncSubjects___exitCode = chaos_value;
-			}
-	CHAOS_EH_END
-	return;
-}
-
-// Managed method: ThreadSyncSubjects/ThreadSyncSubjects+<>c::<Subject_5>b__6_0(System.Object)
-extern "C" void ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_5_b__6_0_System_Object(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	return;
-}
-
-// Managed method: ThreadSyncSubjects/ThreadSyncSubjects::Subject_6()
-extern "C" void ThreadSyncSubjects_ThreadSyncSubjects_Subject_6(void)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
@@ -1369,66 +1254,46 @@ extern "C" void ThreadSyncSubjects_ThreadSyncSubjects_Subject_6(void)
 	CHAOS_IL2CPP_INTPTR _s9{};
 	CHAOS_IL2CPP_INTPTR _s10{};
 	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
-			chaos_ensure_type_initialized_ThreadSyncSubjects_ThreadSyncSubjects___c();
-			_s0 = chaos_static_ThreadSyncSubjects_ThreadSyncSubjects___c____9__7_0;
-			_s1 = _s0;
+			_s0 = 0;
 			{
-				if (_s1 == 0)
-				{
-					chaos_ensure_type_initialized_ThreadSyncSubjects_ThreadSyncSubjects___c();
-					_s0 = chaos_static_ThreadSyncSubjects_ThreadSyncSubjects___c____9;
-					{
-						// Hotpatch-aware ldftn wrapper (slot 8)
-						static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1) -> void {
-							auto& _d_entry = s_hotpatch_entries[8];
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-							{
-								alignas(16) uint8_t _d_ab[16];
-								ArgBuffer _d_bw(_d_ab);
-								_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-								_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_1));
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d_entry.method_key, _d_ab, nullptr);
-								return;
-							}
-							reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
-						};
-					_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-					}
-					{
-						const auto chaos_method_ptr = _s1;
-						const auto chaos_target = _s0;
-						auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Threading_ThreadPool_System_Threading_WaitCallback, {});
-						chaos_object->header.type_info = &chaos_mt_System_Threading_ThreadPool_System_Threading_WaitCallback.hot;
-						chaos_object->chaos_delegate_target = chaos_target;
-						chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-						_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-					}
-					_s1 = _s0;
-					{
-						auto chaos_value = _s1;
-					chaos_ensure_type_initialized_ThreadSyncSubjects_ThreadSyncSubjects___c();
-						chaos_static_ThreadSyncSubjects_ThreadSyncSubjects___c____9__7_0 = chaos_value;
-					}
-				}
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-				{
-					const auto chaos_value = _s1;
-					auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-					chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-					chaos_boxed->value = chaos_value;
-					_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-				}
-				{
-					const auto chaos_arg_1 = _s1;
-					const auto chaos_arg_0 = _s0;
-					const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[14])(chaos_arg_0, chaos_arg_1);
-					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-				}
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[9])(chaos_arg_0);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			chaos_locals[1] = _s0;
+			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[10])();
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = 0;
+			{
+				const auto chaos_arg_0 = _s2;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[9])(chaos_arg_0);
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			chaos_locals[1] = _s2;
+			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[10])();
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
+				chaos_static_ThreadSyncSubjects_ThreadSyncSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
@@ -1448,22 +1313,11 @@ extern "C" void ThreadSyncSubjects_ThreadSyncSubjects_Subject_6(void)
 	return;
 }
 
-// Managed method: ThreadSyncSubjects/ThreadSyncSubjects+<>c::<Subject_6>b__7_0(System.Object)
-extern "C" void ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_6_b__7_0_System_Object(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	return;
-}
-
-// Managed method: ThreadSyncSubjects/ThreadSyncSubjects::Subject_7()
-extern "C" void ThreadSyncSubjects_ThreadSyncSubjects_Subject_7(void)
+// Managed method: ThreadSyncSubjects/ThreadSyncSubjects::Subject_6()
+extern "C" void ThreadSyncSubjects_ThreadSyncSubjects_Subject_6(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
@@ -1473,56 +1327,55 @@ extern "C" void ThreadSyncSubjects_ThreadSyncSubjects_Subject_7(void)
 	CHAOS_IL2CPP_INTPTR _s6{};
 	CHAOS_IL2CPP_INTPTR _s7{};
 	CHAOS_IL2CPP_INTPTR _s8{};
+	CHAOS_IL2CPP_INTPTR _s9{};
+	CHAOS_IL2CPP_INTPTR _s10{};
+	CHAOS_IL2CPP_INTPTR _s11{};
+	CHAOS_IL2CPP_INTPTR _s12{};
+	CHAOS_IL2CPP_INTPTR _s13{};
+	CHAOS_IL2CPP_INTPTR _s14{};
+	CHAOS_IL2CPP_INTPTR _s15{};
+	CHAOS_IL2CPP_INTPTR _s16{};
 
 
 	CHAOS_EH_TRY
-			chaos_ensure_type_initialized_ThreadSyncSubjects_ThreadSyncSubjects___c();
-			_s0 = chaos_static_ThreadSyncSubjects_ThreadSyncSubjects___c____9__8_0;
-			_s1 = _s0;
+			_s0 = 0;
+			_s1 = 0;
 			{
-				if (_s1 == 0)
-				{
-					chaos_ensure_type_initialized_ThreadSyncSubjects_ThreadSyncSubjects___c();
-					_s0 = chaos_static_ThreadSyncSubjects_ThreadSyncSubjects___c____9;
-					{
-						// Hotpatch-aware ldftn wrapper (slot 10)
-						static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1) -> void {
-							auto& _d_entry = s_hotpatch_entries[10];
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
-							{
-								alignas(16) uint8_t _d_ab[16];
-								ArgBuffer _d_bw(_d_ab);
-								_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
-								_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_1));
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d_entry.method_key, _d_ab, nullptr);
-								return;
-							}
-							reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
-						};
-					_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
-					}
-					{
-						const auto chaos_method_ptr = _s1;
-						const auto chaos_target = _s0;
-						auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Threading_ThreadPool_System_Threading_WaitCallback, {});
-						chaos_object->header.type_info = &chaos_mt_System_Threading_ThreadPool_System_Threading_WaitCallback.hot;
-						chaos_object->chaos_delegate_target = chaos_target;
-						chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
-						_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-					}
-					_s1 = _s0;
-					{
-						auto chaos_value = _s1;
-					chaos_ensure_type_initialized_ThreadSyncSubjects_ThreadSyncSubjects___c();
-						chaos_static_ThreadSyncSubjects_ThreadSyncSubjects___c____9__8_0 = chaos_value;
-					}
-				}
-				{
-					const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[16])();
-					_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-				}
+				const auto chaos_arg_1 = _s1;
+				const auto chaos_arg_0 = _s0;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[11])(chaos_arg_0, chaos_arg_1);
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			chaos_locals[1] = _s0;
+			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[10])();
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = 0;
+			_s3 = 0;
+			{
+				const auto chaos_arg_1 = _s3;
+				const auto chaos_arg_0 = _s2;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[11])(chaos_arg_0, chaos_arg_1);
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			chaos_locals[1] = _s2;
+			_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
+			{
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[10])();
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
+			// brfalse (structured EH branch)
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			{
+				auto chaos_value = _s3;
+				chaos_static_ThreadSyncSubjects_ThreadSyncSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
 		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
@@ -1542,53 +1395,13 @@ extern "C" void ThreadSyncSubjects_ThreadSyncSubjects_Subject_7(void)
 	return;
 }
 
-// Managed method: ThreadSyncSubjects/ThreadSyncSubjects+<>c::<Subject_7>b__8_0(System.Object)
-extern "C" void ThreadSyncSubjects_ThreadSyncSubjects___c_Subject_7_b__8_0_System_Object(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	return;
-}
-
-// Managed method: ThreadSyncSubjects/ThreadSyncSubjects+<>c::.cctor()
-extern "C" void ThreadSyncSubjects_ThreadSyncSubjects___c_cctor(void)
+// Managed method: ThreadSyncSubjects/ThreadSyncSubjects::Subject_7()
+extern "C" void ThreadSyncSubjects_ThreadSyncSubjects_Subject_7(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
 
-	chaos_ensure_type_initialized_ThreadSyncSubjects_ThreadSyncSubjects___c();
 
-	{
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_ThreadSyncSubjects_ThreadSyncSubjects___c, {});
-		chaos_object->header.type_info = &chaos_mt_ThreadSyncSubjects_ThreadSyncSubjects___c.hot;
-		ThreadSyncSubjects_ThreadSyncSubjects___c__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	{
-		auto chaos_value = _s0;
-	chaos_ensure_type_initialized_ThreadSyncSubjects_ThreadSyncSubjects___c();
-		chaos_static_ThreadSyncSubjects_ThreadSyncSubjects___c____9 = chaos_value;
-	}
-	return;
-}
-
-// Managed method: ThreadSyncSubjects/ThreadSyncSubjects+<>c::.ctor()
-extern "C" void ThreadSyncSubjects_ThreadSyncSubjects___c__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_arg_0 = _s0;
-		ChaosObjectCtor(chaos_arg_0);
-	}
 	return;
 }
 
@@ -1598,6 +1411,6 @@ extern "C" void ThreadSyncSubjects_ThreadSyncSubjects___c__ctor(CHAOS_IL2CPP_INT
 #pragma warning(pop)
 
 // extern "C" definition for link-time visibility from runtime-entry.cpp
-extern "C" const int kAotMethodCount = 13;
+extern "C" const int kAotMethodCount = 8;
 
 extern "C" void ChaosJitRegisterAll() {}

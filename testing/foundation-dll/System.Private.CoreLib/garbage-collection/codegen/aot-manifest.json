@@ -46,6 +46,24 @@
     },
     {
       "assemblyName": "GarbageCollectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_7:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GarbageCollectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_8:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GarbageCollectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_9:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GarbageCollectionSubjects",
       "subjectKind": "field",
       "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::_exitCode",
       "reason": "instance-field-state"
@@ -64,12 +82,6 @@
     },
     {
       "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "type",
-      "subjectId": "System.Private.CoreLib/System.Int32",
-      "reason": "boxed-value-type"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.GC::KeepAlive:System.Void(System.Object)",
       "reason": "external-call"
@@ -77,7 +89,7 @@
     {
       "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.GC::GetGeneration:System.Int32(System.Object)",
+      "subjectId": "System.Private.CoreLib/System.GC::GetGeneration:System.Int32(System.WeakReference)",
       "reason": "external-call"
     },
     {
@@ -101,7 +113,7 @@
     {
       "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "subjectId": "System.Private.CoreLib/System.Array::get_Length:System.Int32()",
       "reason": "external-call"
     },
     {
@@ -114,6 +126,36 @@
       "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.GC::GetGCMemoryInfo:System.GCMemoryInfo()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.GCMemoryInfo::get_TotalCommittedBytes:System.Int64()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.GC::Collect:System.Void(System.Int32,System.GCCollectionMode)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.GC::CollectionCount:System.Int32(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.GC::GetTotalPauseDuration:System.TimeSpan()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()",
       "reason": "external-call"
     }
   ]

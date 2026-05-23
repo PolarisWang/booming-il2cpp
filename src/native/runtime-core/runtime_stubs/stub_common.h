@@ -12,18 +12,19 @@ struct StubArrayHeader {
     CHAOS_IL2CPP_UINTPTR length;
 };
 
-// ManagedArrayAccessor mirrors chaos_managed_array (ThinLockableHeader 16B + fields).
+// ManagedArrayAccessor mirrors chaos_managed_array (ThinLockableHeader 8B + fields).
+// NOTE: ThinLockableHeader was 16B before sync_state was moved to ThinLockTable.
 // Stubs must NOT reinterpret_cast<StubArrayHeader> on codegen arrays.
 struct ManagedArrayAccessor {
-    CHAOS_IL2CPP_UINT8  header_data[16];
+    CHAOS_IL2CPP_UINT8  header_data[8];
     CHAOS_IL2CPP_UINT8  element_type_shape;
     CHAOS_IL2CPP_UINT8  padding[7];
     const void*         element_type_info;
     CHAOS_IL2CPP_INTPTR length;
     CHAOS_IL2CPP_INTPTR* elements;
 };
-static_assert(sizeof(ManagedArrayAccessor) == 48,
-    "ManagedArrayAccessor must be 48 bytes");
+static_assert(sizeof(ManagedArrayAccessor) == 40,
+    "ManagedArrayAccessor must be 40 bytes");
 
 inline const ManagedArrayAccessor* get_managed_array(CHAOS_IL2CPP_INTPTR handle) noexcept {
     return reinterpret_cast<const ManagedArrayAccessor*>(handle);

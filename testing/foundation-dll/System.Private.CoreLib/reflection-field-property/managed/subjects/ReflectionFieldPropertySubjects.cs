@@ -115,7 +115,7 @@ public static partial class ReflectionFieldPropertySubjects
     // [14] System.Private.CoreLib/System.Reflection.FieldInfo::SetValue:System.Void(System.Object,System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Globalization.CultureInfo)
     public static void Subject_14()
     {
-        try { default(FieldInfo)!.SetValue(42, 42, System.Reflection.BindingFlags.Default, default, default); }
+        try { default(FieldInfo)!.SetValue(null!, null!, System.Reflection.BindingFlags.Default, default, default); }
         catch { _exitCode = 1; }
     }
 
@@ -213,7 +213,7 @@ public static partial class ReflectionFieldPropertySubjects
     // [28] System.Private.CoreLib/System.Reflection.PropertyInfo::GetValue:System.Object(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)
     public static void Subject_28()
     {
-        try { if (((default(PropertyInfo)!.GetValue(42, System.Reflection.BindingFlags.Default, default, Array.Empty<System.Object>(), default)).GetHashCode()) != ((default(PropertyInfo)!.GetValue(42, System.Reflection.BindingFlags.Default, default, Array.Empty<System.Object>(), default)).GetHashCode())) _exitCode = 1; }
+        try { if (((default(PropertyInfo)!.GetValue(null!, System.Reflection.BindingFlags.Default, default, Array.Empty<System.Object>(), default)).GetHashCode()) != ((default(PropertyInfo)!.GetValue(null!, System.Reflection.BindingFlags.Default, default, Array.Empty<System.Object>(), default)).GetHashCode())) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
@@ -234,7 +234,7 @@ public static partial class ReflectionFieldPropertySubjects
     // [31] System.Private.CoreLib/System.Reflection.PropertyInfo::SetValue:System.Void(System.Object,System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)
     public static void Subject_31()
     {
-        try { default(PropertyInfo)!.SetValue(42, 42, System.Reflection.BindingFlags.Default, default, Array.Empty<System.Object>(), default); }
+        try { default(PropertyInfo)!.SetValue(null!, null!, System.Reflection.BindingFlags.Default, default, Array.Empty<System.Object>(), default); }
         catch { _exitCode = 1; }
     }
 

@@ -11,6 +11,9 @@ public class Program
         GarbageCollectionPatchEntry._exitCode = 0; GarbageCollectionPatchEntry.Method4(); failures += GarbageCollectionPatchEntry._exitCode << 4;
         GarbageCollectionPatchEntry._exitCode = 0; GarbageCollectionPatchEntry.Method5(); failures += GarbageCollectionPatchEntry._exitCode << 5;
         GarbageCollectionPatchEntry._exitCode = 0; GarbageCollectionPatchEntry.Method6(); failures += GarbageCollectionPatchEntry._exitCode << 6;
+        GarbageCollectionPatchEntry._exitCode = 0; GarbageCollectionPatchEntry.Method7(); failures += GarbageCollectionPatchEntry._exitCode << 7;
+        GarbageCollectionPatchEntry._exitCode = 0; GarbageCollectionPatchEntry.Method8(); failures += GarbageCollectionPatchEntry._exitCode << 8;
+        GarbageCollectionPatchEntry._exitCode = 0; GarbageCollectionPatchEntry.Method9(); failures += GarbageCollectionPatchEntry._exitCode << 9;
         return failures;
     }
 }

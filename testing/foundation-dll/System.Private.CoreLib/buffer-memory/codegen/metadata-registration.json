@@ -10,20 +10,20 @@
     {
       "registrationKind": "type",
       "slot": 1,
-      "metadataToken": 33554434,
       "subjectId": "BufferMemorySubjects/BufferMemorySubjects",
       "name": "BufferMemorySubjects",
       "displayName": "BufferMemorySubjects",
-      "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects"
+      "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
+      "metadataToken": 33554434
     },
     {
       "registrationKind": "type",
       "slot": 2,
-      "metadataToken": 33554435,
       "subjectId": "BufferMemorySubjects/BufferMemoryNativeEntry",
       "name": "BufferMemoryNativeEntry",
       "displayName": "BufferMemoryNativeEntry",
-      "definitionSubjectId": "BufferMemorySubjects/BufferMemoryNativeEntry"
+      "definitionSubjectId": "BufferMemorySubjects/BufferMemoryNativeEntry",
+      "metadataToken": 33554435
     },
     {
       "registrationKind": "field",
@@ -46,158 +46,158 @@
     {
       "registrationKind": "method",
       "slot": 5,
-      "metadataToken": 100663297,
       "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_0:System.Void()",
       "name": "Subject_0",
       "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_0:System.Void()",
       "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663297
     },
     {
       "registrationKind": "method",
       "slot": 6,
-      "metadataToken": 100663298,
       "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_1:System.Void()",
       "name": "Subject_1",
       "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_1:System.Void()",
       "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663298
     },
     {
       "registrationKind": "method",
       "slot": 7,
-      "metadataToken": 100663299,
       "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_2:System.Void()",
       "name": "Subject_2",
       "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_2:System.Void()",
       "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663299
     },
     {
       "registrationKind": "method",
       "slot": 8,
-      "metadataToken": 100663300,
       "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_3:System.Void()",
       "name": "Subject_3",
       "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_3:System.Void()",
       "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663300
     },
     {
       "registrationKind": "method",
       "slot": 9,
-      "metadataToken": 100663301,
       "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_4:System.Void()",
       "name": "Subject_4",
       "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_4:System.Void()",
       "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663301
     },
     {
       "registrationKind": "method",
       "slot": 10,
-      "metadataToken": 100663302,
       "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_5:System.Void()",
       "name": "Subject_5",
       "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_5:System.Void()",
       "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663302
     },
     {
       "registrationKind": "method",
       "slot": 11,
-      "metadataToken": 100663303,
       "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_6:System.Void()",
       "name": "Subject_6",
       "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_6:System.Void()",
       "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663303
     },
     {
       "registrationKind": "method",
       "slot": 12,
-      "metadataToken": 100663304,
       "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_7:System.Void()",
       "name": "Subject_7",
       "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_7:System.Void()",
       "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663304
     },
     {
       "registrationKind": "method",
       "slot": 13,
-      "metadataToken": 100663305,
       "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_8:System.Void()",
       "name": "Subject_8",
       "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_8:System.Void()",
       "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663305
     },
     {
       "registrationKind": "method",
       "slot": 14,
-      "metadataToken": 100663306,
       "subjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_9:System.Void()",
       "name": "Subject_9",
       "definitionSubjectId": "BufferMemorySubjects/BufferMemorySubjects::Subject_9:System.Void()",
       "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemorySubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663306
     },
     {
       "registrationKind": "method",
       "slot": 15,
-      "metadataToken": 100663307,
       "subjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod0:System.Void()",
       "name": "CustomEntryMethod0",
       "definitionSubjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod0:System.Void()",
       "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemoryNativeEntry",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663307
     },
     {
       "registrationKind": "method",
       "slot": 16,
-      "metadataToken": 100663308,
       "subjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod3:System.Void()",
       "name": "CustomEntryMethod3",
       "definitionSubjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod3:System.Void()",
       "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemoryNativeEntry",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663308
     },
     {
       "registrationKind": "method",
       "slot": 17,
-      "metadataToken": 100663309,
       "subjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod9:System.Void()",
       "name": "CustomEntryMethod9",
       "definitionSubjectId": "BufferMemorySubjects/BufferMemoryNativeEntry::CustomEntryMethod9:System.Void()",
       "declaringTypeSubjectId": "BufferMemorySubjects/BufferMemoryNativeEntry",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663309
     }
   ]
 }

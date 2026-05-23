@@ -1,4 +1,4 @@
-#include <chaos/common.h>
+﻿#include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
 #include <chaos/eh.h>
@@ -16,6 +16,7 @@
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 #include "enum_metadata.generated.h"
+#include "enum_stubs.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -25,6 +26,19 @@ extern "C" void InterpreterEntryDirect(
 
 #pragma warning(push)
 #pragma warning(disable: 4065 4244)
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_0(void);
+extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_1(void);
+extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_10(void);
+extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_2(void);
+extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_3(void);
+extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_4(void);
+extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_5(void);
+extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_6(void);
+extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_7(void);
+extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_8(void);
+extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_9(void);
 
 namespace chaos::il2cpp::codegen::BoxingUnboxingCastsSubjects {
 
@@ -581,6 +595,40 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionInvokeMethod(CHAOS_IL2CPP_INTPTR chaos_method
 	return 0;
 }
 
+
+// ── GcTypeLayout pointer offset arrays (computed via offsetof) ──
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Type[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Type, runtime_name_value))};
+
+extern "C" void ChaosRegisterGcLayouts() {
+	auto& registry = chaos::il2cpp::runtime_core::GcLayoutRegistry::Instance();
+
+	registry.Register(10022041640107287784ULL, sizeof(chaos_type_BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects), nullptr, 0);
+	registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
+	registry.Register(5474029880995115448ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly, 1);
+	registry.Register(17082367815459723707ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, 1);
+	registry.Register(4137207361503509124ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, 5);
+	registry.Register(17040031516751226236ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, 2);
+	registry.Register(10748947813473285525ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, 5);
+	registry.Register(1782325859292956794ULL, sizeof(chaos_type_System_Private_CoreLib_System_String), nullptr, 0);
+	registry.Register(3222174513575444759ULL, sizeof(chaos_type_System_Private_CoreLib_System_Type), kGcOffsets_chaos_type_System_Private_CoreLib_System_Type, 2);
+
+	// Register TypeInfoV0 address ranges for IsValidTypeInfoPointer.
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects), reinterpret_cast<uintptr_t>(&chaos_mt_BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects) + sizeof(chaos_mt_BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object) + sizeof(chaos_mt_System_Private_CoreLib_System_Object));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_Assembly));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_String), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_String) + sizeof(chaos_mt_System_Private_CoreLib_System_String));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Type), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Type) + sizeof(chaos_mt_System_Private_CoreLib_System_Type));
+}
+
 CHAOS_IL2CPP_INT32 chaos_static_BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects___exitCode = 0;
 
 static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Array__CreateInstance_System_Array_System_Type_System_Int32_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
@@ -652,6 +700,42 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
+
+
+// ── Bridge/import thunks ──
+extern "C" void* kChaosExternalRuntimeFnTable[];
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Byte
+extern "C" void chaos_bridge_thunk_0(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[0])();
+}
+
+// Bridge/import thunk for: BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::_exitCode
+extern "C" void chaos_bridge_thunk_1(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[4])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Array::get_Length:System.Int32()
+extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_2(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)()>(kChaosExternalRuntimeFnTable[12])();
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32,System.Int32)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_3(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[13])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Int32
+extern "C" void chaos_bridge_thunk_4(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[14])();
+}
 
 extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_0(void);
 extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_1(void);
@@ -776,11 +860,18 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
 		/* .type_count        = */ 2u,
-	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
+	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 -- deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
 	/* .custom_attribute_materializer = */ nullptr,
-
+	/* .custom_attribute_method_offset   = */ nullptr,
+	/* .custom_attribute_field_offset    = */ nullptr,
+	/* .custom_attribute_property_offset = */ nullptr,
+	/* .custom_attribute_param_offset    = */ nullptr,
+	/* .custom_attribute_method_count    = */ 0u,
+	/* .custom_attribute_field_count     = */ 0u,
+	/* .custom_attribute_property_count  = */ 0u,
+	/* .custom_attribute_param_count   = */ 0u,
 		/* .abi_manifest      = */ s_abi_manifest,
 	};
 	static const CHAOS_IL2CPP_UINT32 s_native_aot_module_id =
@@ -855,8 +946,7 @@ extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module
 // ── External Runtime Dispatch Table ──────────────────────────
 // Startup-time-resolved function pointers for cross-assembly calls.
 
-extern "C" const char* kChaosExternalRuntimeSubjects[15] = {
-	"System.Private.CoreLib/System.Int32",
+extern "C" const char* kChaosExternalRuntimeSubjects[16] = {
 	"System.Private.CoreLib/System.Byte",
 	"System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
 	"System.Private.CoreLib/System.Convert::ChangeType:System.Object(System.Object,System.Type)",
@@ -869,12 +959,13 @@ extern "C" const char* kChaosExternalRuntimeSubjects[15] = {
 	"System.Private.CoreLib/System.Type::IsAssignableTo:System.Boolean(System.Type)",
 	"System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetObjectValue:System.Object(System.Object)",
 	"System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)",
+	"System.Private.CoreLib/System.Array::get_Length:System.Int32()",
 	"System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32,System.Int32)",
+	"System.Private.CoreLib/System.Int32",
 	"System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)",
 };
 
-extern "C" void* kChaosExternalRuntimeFnTable[15] = {
-	nullptr,
+extern "C" void* kChaosExternalRuntimeFnTable[16] = {
 	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Type__GetTypeFromHandle_System_Type_System_RuntimeTypeHandle_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Convert__ChangeType_System_Object_System_Object_System_Type_),
@@ -888,10 +979,12 @@ extern "C" void* kChaosExternalRuntimeFnTable[15] = {
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers__GetObjectValue_System_Object_System_Object_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Array__CreateInstance_System_Array_System_Type_System_Int32_),
 	nullptr,
+	nullptr,
+	nullptr,
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_Object__Equals_System_Boolean_System_Object_),
 };
 
-extern "C" int32_t kChaosExternalRuntimeCount = 15;
+extern "C" int32_t kChaosExternalRuntimeCount = 16;
 // (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
@@ -1040,7 +1133,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry0;
 	/* ── Entry 1: BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_1 ── */
 	struct {
@@ -1048,7 +1141,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[7];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry1;
 	/* ── Entry 2: BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_2 ── */
 	struct {
@@ -1064,7 +1157,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[5];
+		CHAOS_IL2CPP_UINT32 slots[4];
 	} entry3;
 	/* ── Entry 4: BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_4 ── */
 	struct {
@@ -1088,7 +1181,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[5];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry6;
 	/* ── Entry 7: BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_8 ── */
 	struct {
@@ -1096,7 +1189,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[4];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry7;
 	/* ── Entry 8: BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_9 ── */
 	struct {
@@ -1104,7 +1197,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[5];
+		CHAOS_IL2CPP_UINT32 slots[6];
 	} entry8;
 	/* ── Entry 9: BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_10 ── */
 	struct {
@@ -1112,24 +1205,24 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[6];
+		CHAOS_IL2CPP_UINT32 slots[5];
 	} entry9;
 } kChaosGcSlotMapsSection = {
 	/* entry0 = BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_0 */
 	.entry0 = {
-		/* entry_total_size = 44 */ 44u,
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_0),
-		/* frame_size = 48 */ 48u,
-		/* num_gc_slots = 6 */ 6u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
 	/* entry1 = BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_1 */
 	.entry1 = {
-		/* entry_total_size = 48 */ 48u,
+		/* entry_total_size = 40 */ 40u,
 		/* code_address */ reinterpret_cast<const void*>(&BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_1),
-		/* frame_size = 56 */ 56u,
-		/* num_gc_slots = 7 */ 7u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u }
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
 	/* entry2 = BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_2 */
 	.entry2 = {
@@ -1141,11 +1234,11 @@ static const struct {
 	},
 	/* entry3 = BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_3 */
 	.entry3 = {
-		/* entry_total_size = 40 */ 40u,
+		/* entry_total_size = 36 */ 36u,
 		/* code_address */ reinterpret_cast<const void*>(&BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_3),
-		/* frame_size = 40 */ 40u,
-		/* num_gc_slots = 5 */ 5u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+		/* frame_size = 32 */ 32u,
+		/* num_gc_slots = 4 */ 4u,
+		/* slots */ { 0u, 8u, 16u, 24u }
 	},
 	/* entry4 = BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_4 */
 	.entry4 = {
@@ -1165,42 +1258,42 @@ static const struct {
 	},
 	/* entry6 = BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_7 */
 	.entry6 = {
-		/* entry_total_size = 40 */ 40u,
+		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_7),
-		/* frame_size = 40 */ 40u,
-		/* num_gc_slots = 5 */ 5u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
 	},
 	/* entry7 = BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_8 */
 	.entry7 = {
-		/* entry_total_size = 36 */ 36u,
-		/* code_address */ reinterpret_cast<const void*>(&BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_8),
-		/* frame_size = 32 */ 32u,
-		/* num_gc_slots = 4 */ 4u,
-		/* slots */ { 0u, 8u, 16u, 24u }
-	},
-	/* entry8 = BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_9 */
-	.entry8 = {
 		/* entry_total_size = 40 */ 40u,
-		/* code_address */ reinterpret_cast<const void*>(&BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_9),
+		/* code_address */ reinterpret_cast<const void*>(&BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_8),
 		/* frame_size = 40 */ 40u,
 		/* num_gc_slots = 5 */ 5u,
 		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	},
-	/* entry9 = BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_10 */
-	.entry9 = {
+	/* entry8 = BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_9 */
+	.entry8 = {
 		/* entry_total_size = 44 */ 44u,
-		/* code_address */ reinterpret_cast<const void*>(&BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_10),
+		/* code_address */ reinterpret_cast<const void*>(&BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_9),
 		/* frame_size = 48 */ 48u,
 		/* num_gc_slots = 6 */ 6u,
 		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u }
+	},
+	/* entry9 = BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_10 */
+	.entry9 = {
+		/* entry_total_size = 40 */ 40u,
+		/* code_address */ reinterpret_cast<const void*>(&BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_10),
+		/* frame_size = 40 */ 40u,
+		/* num_gc_slots = 5 */ 5u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u }
 	}
 };
 #if defined(_MSC_VER)
 #pragma pack(pop)
 #endif
 
-static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 400u;
+static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 376u;
 
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
@@ -1273,32 +1366,32 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // matching during IR lowering of patched methods.
 
 static constexpr ReflectionQueryFieldDescriptor kReflFields_BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects[1] = {
-	{ 0u, "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
+	{ 0x04000001u, "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::_exitCode", "_exitCode", "System.Int32", 0LL, 3u },
 };
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects[11] = {
-	{ 0u, "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u },
-	{ 0u, "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u },
-	{ 0u, "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u },
-	{ 0u, "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u },
-	{ 0u, "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u },
-	{ 0u, "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u },
-	{ 0u, "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u },
-	{ 0u, "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u },
-	{ 0u, "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u },
-	{ 0u, "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_10:System.Void()", "Subject_10", "System.Void", 0, nullptr, 0u },
+	{ 0x00000003u, "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000004u, "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000005u, "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000006u, "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000007u, "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_4:System.Void()", "Subject_4", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000008u, "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_5:System.Void()", "Subject_5", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000009u, "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_6:System.Void()", "Subject_6", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Au, "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_7:System.Void()", "Subject_7", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Bu, "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_8:System.Void()", "Subject_8", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Cu, "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_9:System.Void()", "Subject_9", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x0000000Du, "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_10:System.Void()", "Subject_10", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
-	{ 0u, "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects", "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects", "", "BoxingUnboxingCastsSubjects", "BoxingUnboxingCastsSubjects", nullptr, kReflFields_BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects, 1u, nullptr, 0u,
-	kReflMethods_BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects, 11u },
+	{ 0x00000001u, "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects", "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects", "", "BoxingUnboxingCastsSubjects", "BoxingUnboxingCastsSubjects", nullptr, kReflFields_BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects, 1u, nullptr, 0u,
+nullptr, 0u,    kReflMethods_BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects, 11u, nullptr, 0u, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static const ReflectionQueryImageDescriptor kReflImage = { "BoxingUnboxingCastsSubjects", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "BoxingUnboxingCastsSubjects", kReflTypePtrs, 1u, 1, 0, 0, 0 };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -1359,21 +1452,10 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 	CHAOS_IL2CPP_INTPTR _s14{};
 	CHAOS_IL2CPP_INTPTR _s15{};
 	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	CHAOS_IL2CPP_INTPTR _s18{};
-	CHAOS_IL2CPP_INTPTR _s19{};
-	CHAOS_IL2CPP_INTPTR _s20{};
 
 
 	CHAOS_EH_TRY
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s0;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
+			_s0 = 0;
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
 			{
 				const auto chaos_arg_0 = _s1;
@@ -1391,14 +1473,7 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s1;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
+			_s1 = 0;
 			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
 			{
 				const auto chaos_arg_0 = _s2;
@@ -1469,21 +1544,10 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 	CHAOS_IL2CPP_INTPTR _s16{};
 	CHAOS_IL2CPP_INTPTR _s17{};
 	CHAOS_IL2CPP_INTPTR _s18{};
-	CHAOS_IL2CPP_INTPTR _s19{};
-	CHAOS_IL2CPP_INTPTR _s20{};
-	CHAOS_IL2CPP_INTPTR _s21{};
-	CHAOS_IL2CPP_INTPTR _s22{};
 
 
 	CHAOS_EH_TRY
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s0;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
+			_s0 = 0;
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
 			{
 				const auto chaos_arg_0 = _s1;
@@ -1503,14 +1567,7 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s1;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
+			_s1 = 0;
 			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
 			{
 				const auto chaos_arg_0 = _s2;
@@ -1685,10 +1742,6 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 	CHAOS_IL2CPP_INTPTR _s16{};
 	CHAOS_IL2CPP_INTPTR _s17{};
 	CHAOS_IL2CPP_INTPTR _s18{};
-	CHAOS_IL2CPP_INTPTR _s19{};
-	CHAOS_IL2CPP_INTPTR _s20{};
-	CHAOS_IL2CPP_INTPTR _s21{};
-	CHAOS_IL2CPP_INTPTR _s22{};
 
 
 	CHAOS_EH_TRY
@@ -1698,14 +1751,7 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s1;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
+			_s1 = 0;
 			{
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
@@ -1722,14 +1768,7 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
 				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s4;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
+			_s4 = 0;
 			{
 				const auto chaos_arg_1 = _s4;
 				const auto chaos_arg_0 = _s3;
@@ -2001,21 +2040,10 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 	CHAOS_IL2CPP_INTPTR _s10{};
 	CHAOS_IL2CPP_INTPTR _s11{};
 	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
 
 
 	CHAOS_EH_TRY
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s0;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
+			_s0 = 0;
 			{
 				const auto chaos_arg_0 = _s0;
 				const auto chaos_result = ChaosRuntimeHelpersGetObjectValue(chaos_arg_0);
@@ -2026,14 +2054,7 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s1;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
+			_s1 = 0;
 			{
 				const auto chaos_arg_0 = _s1;
 				const auto chaos_result = ChaosRuntimeHelpersGetObjectValue(chaos_arg_0);
@@ -2112,37 +2133,35 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			{
-				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[12])();
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
 			{
-				const auto chaos_arg_0 = _s1;
+				const auto chaos_arg_0 = _s2;
 				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
-				const auto chaos_arg_1 = _s2;
-				const auto chaos_arg_0 = _s1;
+				const auto chaos_arg_1 = _s3;
+				const auto chaos_arg_0 = _s2;
 				const auto chaos_result = ChaosArrayCreateInstance(chaos_arg_0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			{
-				const auto chaos_arg_0 = _s1;
-				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[12])();
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-			chaos_locals[0] = _s0;
-			_s0 = chaos_locals[0];
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
 			// brfalse (structured EH branch)
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s1;
+				auto chaos_value = _s3;
 				chaos_static_BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -2206,39 +2225,37 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			{
-				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[12])();
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
 			{
-				const auto chaos_arg_0 = _s1;
+				const auto chaos_arg_0 = _s2;
 				const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
-				const auto chaos_arg_2 = _s3;
-				const auto chaos_arg_1 = _s2;
-				const auto chaos_arg_0 = _s1;
+				const auto chaos_arg_2 = _s4;
+				const auto chaos_arg_1 = _s3;
+				const auto chaos_arg_0 = _s2;
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[13])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			{
-				const auto chaos_arg_0 = _s1;
-				const auto chaos_result = ChaosObjectGetHashCode(chaos_arg_0);
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(void)>(kChaosExternalRuntimeFnTable[12])();
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-			chaos_locals[0] = _s0;
-			_s0 = chaos_locals[0];
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s2) == static_cast<CHAOS_IL2CPP_INTPTR>(_s3) ? 1 : 0);
+			chaos_locals[0] = _s2;
+			_s2 = chaos_locals[0];
 			// brfalse (structured EH branch)
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
-				auto chaos_value = _s1;
+				auto chaos_value = _s3;
 				chaos_static_BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
@@ -2285,10 +2302,6 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 	CHAOS_IL2CPP_INTPTR _s18{};
 	CHAOS_IL2CPP_INTPTR _s19{};
 	CHAOS_IL2CPP_INTPTR _s20{};
-	CHAOS_IL2CPP_INTPTR _s21{};
-	CHAOS_IL2CPP_INTPTR _s22{};
-	CHAOS_IL2CPP_INTPTR _s23{};
-	CHAOS_IL2CPP_INTPTR _s24{};
 
 
 	CHAOS_EH_TRY
@@ -2300,14 +2313,7 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 				chaos_boxed->value = chaos_value;
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 			}
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s1;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
+			_s1 = 0;
 			{
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
@@ -2326,14 +2332,7 @@ extern "C" void BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_
 				chaos_boxed->value = chaos_value;
 				_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 			}
-			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
-			{
-				const auto chaos_value = _s4;
-				auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_System_Private_CoreLib_System_Int32, {});
-				chaos_boxed->header.type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
-				chaos_boxed->value = chaos_value;
-				_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
-			}
+			_s4 = 0;
 			{
 				const auto chaos_arg_1 = _s4;
 				const auto chaos_arg_0 = _s3;
