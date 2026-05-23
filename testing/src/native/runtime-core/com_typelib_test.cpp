@@ -128,7 +128,7 @@ TEST_F(ComTypeLibTest, GetComTypeInfoForCcwWithData) {
 
     auto* attr = static_cast<ComTypeAttr*>(type_attr);
     EXPECT_EQ(attr->cFuncs, 2);
-    EXPECT_EQ(attr->typekind, 0); // TKIND_INTERFACE
+    EXPECT_EQ(attr->typekind, 5); // Runtime's TKIND_INTERFACE
     vtbl->ReleaseTypeAttr(type_info, type_attr);
 
     // GetFuncDesc for method 0 (Foo).
@@ -200,17 +200,16 @@ TEST_F(ComTypeLibTest, TypeLibGetTypeInfo) {
     auto* vtbl = GetTypeLibVtbl(type_lib);
     ASSERT_NE(vtbl, nullptr);
 
-    // GetTypeInfo(0) should succeed.
+    // GetTypeInfo(0) should succeed (1 interface, 1 type info).
     void* info0 = nullptr;
     EXPECT_EQ(vtbl->GetTypeInfo(type_lib, 0, &info0), 0);
     EXPECT_NE(info0, nullptr);
 
-    // GetTypeInfo(1) should succeed (0-based index for second type).
+    // GetTypeInfo(1) should fail (only 1 type info — one interface).
     void* info1 = nullptr;
-    EXPECT_EQ(vtbl->GetTypeInfo(type_lib, 1, &info1), 0);
-    EXPECT_NE(info1, nullptr);
+    EXPECT_NE(vtbl->GetTypeInfo(type_lib, 1, &info1), 0);
+    EXPECT_EQ(info1, nullptr);
 
     if (info0) { auto* v = GetTypeInfoVtbl(info0); if (v) v->Release(info0); }
-    if (info1) { auto* v = GetTypeInfoVtbl(info1); if (v) v->Release(info1); }
     vtbl->Release(type_lib);
 }

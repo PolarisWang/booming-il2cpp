@@ -3329,15 +3329,36 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		}
 		else
 		{
-			// Direct call to target symbol (InternalCall or generic external)
 			bool isVoid = thunk.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Void;
-			if (!isVoid)
+			if (thunk.ExternalRuntimeTableIndex >= 0)
 			{
-				builder.AppendLine("    auto result = " + thunk.TargetSymbol + "(" + paramNames + ");");
+				// Route through the external runtime dispatch table (resolved at startup).
+				// This is needed for callees without a shape-matching ExternalRuntimeHelper
+				// definition — the function symbol doesn't exist at link time, so we call
+				// through kChaosExternalRuntimeFnTable[idx] instead.
+				string fnPointerType = string.IsNullOrEmpty(paramSig)
+					? $"{returnType}(*)()"
+					: $"{returnType}(*)({string.Join(", ", Enumerable.Repeat("CHAOS_IL2CPP_INTPTR", thunk.ParameterAbis.Count))})";
+				if (!isVoid)
+				{
+					builder.AppendLine($"    auto result = reinterpret_cast<{fnPointerType}>(kChaosExternalRuntimeFnTable[{thunk.ExternalRuntimeTableIndex}])({paramNames});");
+				}
+				else
+				{
+					builder.AppendLine($"    reinterpret_cast<{fnPointerType}>(kChaosExternalRuntimeFnTable[{thunk.ExternalRuntimeTableIndex}])({paramNames});");
+				}
 			}
 			else
 			{
-				builder.AppendLine("    " + thunk.TargetSymbol + "(" + paramNames + ");");
+				// Direct call to target symbol (InternalCall or generic external)
+				if (!isVoid)
+				{
+					builder.AppendLine("    auto result = " + thunk.TargetSymbol + "(" + paramNames + ");");
+				}
+				else
+				{
+					builder.AppendLine("    " + thunk.TargetSymbol + "(" + paramNames + ");");
+				}
 			}
 		}
 
@@ -3368,7 +3389,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 
 		var names = new string[paramAbis.Count];
 		for (int i = 0; i < paramAbis.Count; i++)
-			names[i] = "p" + i.ToString();
+			names[i] = "chaos_fn_arg_" + i.ToString();
 		return string.Join(", ", names);
 	}
 

@@ -24,8 +24,9 @@ internal sealed class ConvertToCppConfig
     /// <summary>Enable verbose diagnostics</summary>
     public bool Verbose { get; init; } = false;
 
-    /// <summary>When true, compile full assembly closure instead of entry-point reachable</summary>
-    public bool FullClosure { get; init; } = false;
+    /// <summary>When true, compile full assembly closure instead of entry-point reachable.
+    /// Default true for convert-to-cpp (full assembly translation).</summary>
+    public bool FullClosure { get; init; } = true;
 
     /// <summary>Code generation mode: AOT (default) or JIT</summary>
     public CodegenMode Mode { get; init; } = CodegenMode.Aot;
@@ -40,7 +41,7 @@ internal sealed class ConvertToCppConfig
         string outputDir = "il2cpp_dist";
         var assemblyDirs = new List<string>();
         bool verbose = false;
-        bool fullClosure = false;
+        bool fullClosure = true;  // convert-to-cpp defaults to full assembly translation
         string? entryPoint = null;
         var mode = CodegenMode.Aot;
 

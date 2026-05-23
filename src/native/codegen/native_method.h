@@ -45,7 +45,7 @@ struct GcPoint {
     uint32_t   native_offset;       // byte offset from code entry
     uint32_t   slot_count;          // number of GcSlots at this point
     GcSlot*    slots;               // array of slot_count GcSlot entries
-    // TODO(Phase 3d): precise slot map; for Phase 3b, use conservative scanning.
+    // Slot map entries for precise root scanning (GcSlotMapV0).
 };
 
 /// Deoptimization entry — maps a native safepoint back to RegisterInstruction

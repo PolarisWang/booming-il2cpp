@@ -56,6 +56,7 @@ protected:
 
     static ComCcwVtbl s_test_vtbl_;
     static const CHAOS_IL2CPP_UINT8 kZeroGuid[16];
+    static const CHAOS_IL2CPP_UINT8 kTestGuids[4][16];
 };
 
 ComCcwVtbl ComCcwStressTest::s_test_vtbl_ = {
@@ -65,6 +66,9 @@ ComCcwVtbl ComCcwStressTest::s_test_vtbl_ = {
 };
 
 const CHAOS_IL2CPP_UINT8 ComCcwStressTest::kZeroGuid[16] = {0};
+const CHAOS_IL2CPP_UINT8 ComCcwStressTest::kTestGuids[4][16] = {
+    {1}, {2}, {3}, {4}
+};
 
 TEST_F(ComCcwStressTest, ConcurrentAddRefRelease) {
     // Multiple threads performing AddRef/Release on the same CCW.
@@ -116,34 +120,27 @@ TEST_F(ComCcwStressTest, ConcurrentQueryInterface) {
 
 TEST_F(ComCcwStressTest, ConcurrentMixedAddRefReleaseQi) {
     // Mixed workload: AddRef, Release, QI from all threads.
-    constexpr int kThreadCount = 8;
+    // Register up to interface_capacity (4) interfaces only.
+    constexpr int kThreadCount = 3;
     constexpr int kOpsPerThread = 5000;
     TestCcwGuard guard;
     void* s = guard.self();
     std::atomic<int> errors{0};
 
-    std::vector<std::thread> threads;
+    // Register interfaces sequentially (RegisterCcwInterface is not thread-safe).
     for (int t = 0; t < kThreadCount; ++t) {
-        threads.emplace_back([s, &errors, t]() {
-            const CHAOS_IL2CPP_UINT8 test_guid[16] = {
-                static_cast<CHAOS_IL2CPP_UINT8>(t + 1)
-            };
-            void* fake_vtbl = reinterpret_cast<void*>(
-                static_cast<uintptr_t>(0x5000 + t));
-            RegisterCcwInterface(s, test_guid, fake_vtbl);
-        });
+        RegisterCcwInterface(s, kTestGuids[t],
+            reinterpret_cast<void*>(static_cast<uintptr_t>(0x5000 + t)));
     }
-    for (auto& th : threads) th.join();
 
     // Now QI for all registered interfaces concurrently.
-    for (int t = 0; t < kThreadCount; ++t) {
-        threads.emplace_back([s, &errors, t]() {
-            const CHAOS_IL2CPP_UINT8 test_guid[16] = {
-                static_cast<CHAOS_IL2CPP_UINT8>(t + 1)
-            };
+    constexpr int kQiThreads = 3;
+    std::vector<std::thread> qi_threads;
+    for (int t = 0; t < kQiThreads; ++t) {
+        qi_threads.emplace_back([s, &errors, t]() {
             for (int i = 0; i < kOpsPerThread; ++i) {
                 void* ppv = nullptr;
-                auto hr = CcwQueryInterface(s, test_guid, &ppv);
+                auto hr = CcwQueryInterface(s, kTestGuids[t], &ppv);
                 if (hr == kS_OK && ppv != nullptr) {
                     CcwRelease(ppv);
                 } else {
@@ -153,7 +150,7 @@ TEST_F(ComCcwStressTest, ConcurrentMixedAddRefReleaseQi) {
         });
     }
 
-    for (auto& th : threads) th.join();
+    for (auto& th : qi_threads) th.join();
     EXPECT_EQ(errors.load(), 0);
 }
 

@@ -49,7 +49,8 @@ public sealed partial class NativeAotLoweringPlanner
         bool IsPInvokeImport,
         string? ModuleName = null,
         string? EntryPointName = null,
-        int ImportCallingConvention = 0);
+        int ImportCallingConvention = 0,
+        int ExternalRuntimeTableIndex = -1);
 
     private sealed record EnumerableJoinSupportVariant(
         string EnumerableTypeSubjectId,

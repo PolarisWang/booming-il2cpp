@@ -1397,10 +1397,13 @@ def _build_call_expr_with_ref_locals(
         pt = pt.strip()
         if pt.endswith("&"):
             base_type = pt.rstrip("&").strip()
+            # Convert CLR metadata generics ({}) to C# generics (<>)
+            # e.g. System.Span{System.IntPtr} -> System.Span<System.IntPtr>
+            base_type = base_type.replace("{", "<").replace("}", ">")
             default_val = _default_expr_for_type(base_type, tm)
             var_name = f"refLocal_{i}"
             prelude_lines.append(f"            {base_type} {var_name} = {default_val};")
-            call_args.append(f"ref {var_name}")
+            call_args.append(f"out {var_name}")
         else:
             call_args.append(_default_expr_for_type(pt, tm))
 
@@ -1496,9 +1499,17 @@ def _cast_return_to_int(ret: str, call_expr: str) -> str:
     if ret == "System.String":
         return f"(({call_expr}).Length)"
 
+    # Value types with deterministic property extraction (avoid non-deterministic GetHashCode)
+    if ret == "System.TimeSpan":
+        return f"(long)(({call_expr}).Ticks)"
+    if ret == "System.Array":
+        return f"(int)(((Array)({call_expr})).Length)"
+    if ret == "System.GCMemoryInfo":
+        return f"(long)(({call_expr}).TotalCommittedBytes)"
+
     # Types that use .GetHashCode() for checksum
     _HASHCODE_TYPES = frozenset({
-        "System.Object", "System.DateTime", "System.TimeSpan",
+        "System.Object", "System.DateTime",
         "System.Exception", "System.Attribute", "System.Enum",
         "System.DateTimeOffset", "System.Collections.BitArray",
         "System.RuntimeTypeHandle", "System.RuntimeMethodHandle",
@@ -1516,7 +1527,7 @@ def _cast_return_to_int(ret: str, call_expr: str) -> str:
         "System.Reflection.MemberInfo", "System.Reflection.FieldInfo",
         "System.Reflection.PropertyInfo", "System.Reflection.EventInfo",
         "System.Reflection.ParameterInfo", "System.Reflection.ConstructorInfo",
-        "System.Array", "System.Delegate", "System.MulticastDelegate",
+        "System.Delegate", "System.MulticastDelegate",
         "System.Threading.Tasks.Task", "System.Threading.Thread",
     })
     normal = _normalize_clr_type(ret)

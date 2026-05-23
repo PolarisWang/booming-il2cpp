@@ -165,7 +165,7 @@ static void* s_ccw_vtable_{{ ccw.guid_symbol_suffix }}[{{ 3 + ccw.method_slot_co
 // TypeLib: method descriptors for ITypeInfo/ITypeLib support
 static constexpr ComMethodData s_ccw_methoddata_{{ ccw.guid_symbol_suffix }}[] = {
 {{~ for method in ccw.methods ~}}
-    { "{{ ccw.method_names[for.index0] }}", {{ method.slot_index }}, {{ method.param_count }}, {{ 3 + method.slot_index }}, {{ method.token }}, nullptr },
+    { "{{ ccw.method_names[for.index] }}", {{ method.slot_index }}, {{ method.param_count }}, {{ 3 + method.slot_index }}, {{ method.token }}, nullptr },
 {{~ end ~}}
 };
 
