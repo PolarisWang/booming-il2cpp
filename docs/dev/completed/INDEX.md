@@ -27,3 +27,4 @@
 | [loader-industrialization](20260523-loader-industrialization/STATUS.md) | 4 | 05/23 | Loader 子系统工业化 — 4 阶段全部完成: 65 测试覆盖 6 组件, 锁粒度/泄漏/溢出修复, 加固, 3 Wiki 文档 |
 | [metadata-writer-industrialization](20260523-metadata-writer-industrialization/STATUS.md) | 4 | 05/23 | Metadata Writer 工业化收官 — 4 子任务全部完成: 38 测试, 架构审视, CI 门禁, Wiki 文档 |
 | [gc-iw-a3](gc-iw-a3/STATUS.md) | 1 | 05/23 | GC codegen verification 管线 — 修复非确定性断言, API 扩充, 管线集成 |
+| [child-fd-p0-precheck](child-fd-p0-precheck/STATUS.md) | 8 | 05/23 | Foundation DLL Phase 0 Pipeline 预检 — 5 项修复 (microbench SEH, audit 口径, subject IDs ×2, pipeline-config) |

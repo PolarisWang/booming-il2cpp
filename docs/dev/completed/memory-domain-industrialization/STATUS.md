@@ -1,3 +1,10 @@
+---
+lifecycle_status: completed
+task_id: memory-domain-industrialization
+task_type: roadmap
+phase: completed
+---
+
 # Memory Domain 工业化补齐
 
 > **task_id**: memory-domain-industrialization
