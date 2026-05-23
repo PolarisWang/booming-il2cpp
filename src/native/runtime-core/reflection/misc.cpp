@@ -147,6 +147,9 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetParameterType(CHAOS_IL2CPP_INTPTR param_ha
 }
 
 // ── GetParamAttributes ─────────────────────────────────────────────
+// Returns 0 when no special attributes are set — this is valid and expected,
+// not a stub. Parameter attributes (In/Out/Optional) are not emitted in AOT
+// metadata by default; callers must handle 0 as "no special attributes".
 CHAOS_IL2CPP_INT32 ChaosReflectionGetParamAttributes(CHAOS_IL2CPP_INTPTR /*param*/) noexcept {
     return 0;
 }
@@ -168,21 +171,193 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetPropertyType(CHAOS_IL2CPP_INTPTR property_
 }
 
 // ── GetFieldsBindingflags ───────────────────────────────────────────
-// For now, ignore BindingFlags and delegate to GetFields.
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetFieldsBindingflags(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INT32 /*flags*/) noexcept {
-    return ChaosReflectionGetFields(type);
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetFieldsBindingflags(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INT32 flags) noexcept {
+    using namespace chaos::il2cpp::runtime_core;
+    flags = NormalizeBindingFlags(flags);
+    auto* desc = ResolveTypeFromReflectionOrGcHandle(type);
+
+    constexpr CHAOS_IL2CPP_UINT32 kMaxFields = 256;
+    struct FieldsBuf {
+        ThinLockableHeader header;
+        CHAOS_IL2CPP_UINT8  element_type_shape;
+        CHAOS_IL2CPP_INTPTR element_type_info;
+        CHAOS_IL2CPP_INTPTR length;
+        CHAOS_IL2CPP_INTPTR* elements;
+    };
+    static FieldsBuf s_buf{};
+    static CHAOS_IL2CPP_INTPTR s_elements[kMaxFields]{};
+
+    uint32_t total = 0;
+    const ReflectionQueryFieldDescriptor* fields = nullptr;
+
+    if (desc != nullptr && desc->fields != nullptr) {
+        total = desc->field_count > kMaxFields ? kMaxFields : desc->field_count;
+        fields = desc->fields;
+    } else {
+        // EEClass fallback for dynamic types (T2-3) — no flags filtering for now
+        auto* ee = ResolveEEClassFromHandle(type);
+        if (ee != nullptr) {
+            EnsureFieldsFilled(ee);
+            if (ee->fields.filled && ee->fields.data != nullptr) {
+                total = ee->fields.count > kMaxFields ? kMaxFields : ee->fields.count;
+                fields = reinterpret_cast<const ReflectionQueryFieldDescriptor*>(ee->fields.data);
+            }
+        }
+    }
+
+    if (fields == nullptr) return 0;
+
+    uint32_t idx = 0;
+    for (CHAOS_IL2CPP_UINT32 i = 0; i < total; i++) {
+        if (MatchFieldFlags(fields[i].flags, flags)) {
+            s_elements[idx++] = static_cast<CHAOS_IL2CPP_INTPTR>(
+                EncodeReflectionQueryFieldHandle(&fields[i]));
+        }
+    }
+
+    s_buf = FieldsBuf{};
+    s_buf.element_type_shape = 1;
+    s_buf.length = static_cast<CHAOS_IL2CPP_INTPTR>(idx);
+    s_buf.elements = s_elements;
+
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_buf);
 }
 
 // ── GetPropertiesBindingflags ──────────────────────────────────────
-// For now, ignore BindingFlags and delegate to GetProperties.
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetPropertiesBindingflags(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INT32 /*flags*/) noexcept {
-    return ChaosReflectionGetProperties(type);
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetPropertiesBindingflags(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INT32 flags) noexcept {
+    using namespace chaos::il2cpp::runtime_core;
+    flags = NormalizeBindingFlags(flags);
+    auto* desc = ResolveTypeFromReflectionOrGcHandle(type);
+
+    constexpr CHAOS_IL2CPP_UINT32 kMaxProperties = 256;
+    struct PropertiesBuf {
+        ThinLockableHeader header;
+        CHAOS_IL2CPP_UINT8  element_type_shape;
+        CHAOS_IL2CPP_INTPTR element_type_info;
+        CHAOS_IL2CPP_INTPTR length;
+        CHAOS_IL2CPP_INTPTR* elements;
+    };
+    static PropertiesBuf s_buf{};
+    static CHAOS_IL2CPP_INTPTR s_elements[kMaxProperties]{};
+
+    uint32_t total = 0;
+    const ReflectionQueryPropertyDescriptor* properties = nullptr;
+
+    if (desc != nullptr && desc->properties != nullptr) {
+        total = desc->property_count > kMaxProperties ? kMaxProperties : desc->property_count;
+        properties = desc->properties;
+    } else {
+        // EEClass fallback for dynamic types (T2-3)
+        auto* ee = ResolveEEClassFromHandle(type);
+        if (ee != nullptr) {
+            EnsurePropertiesFilled(ee);
+            if (ee->properties.filled && ee->properties.data != nullptr) {
+                total = ee->properties.count > kMaxProperties ? kMaxProperties : ee->properties.count;
+                properties = reinterpret_cast<const ReflectionQueryPropertyDescriptor*>(ee->properties.data);
+            }
+        }
+    }
+
+    if (properties == nullptr) return 0;
+
+    uint32_t idx = 0;
+    for (CHAOS_IL2CPP_UINT32 i = 0; i < total; i++) {
+        if (MatchPropertyFlags(properties[i].flags, flags)) {
+            s_elements[idx++] = static_cast<CHAOS_IL2CPP_INTPTR>(
+                EncodeReflectionQueryPropertyHandle(&properties[i]));
+        }
+    }
+
+    s_buf = PropertiesBuf{};
+    s_buf.element_type_shape = 1;
+    s_buf.length = static_cast<CHAOS_IL2CPP_INTPTR>(idx);
+    s_buf.elements = s_elements;
+
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_buf);
 }
 
 // ── GetMethodsBindingflags ──────────────────────────────────────────
-// For now, ignore BindingFlags and delegate to GetMethods.
-CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethodsBindingflags(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INT32 /*flags*/) noexcept {
-    return ChaosReflectionGetMethods(type);
+CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethodsBindingflags(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INT32 flags) noexcept {
+    using namespace chaos::il2cpp::runtime_core;
+    flags = NormalizeBindingFlags(flags);
+    auto* desc = ResolveTypeFromReflectionOrGcHandle(type);
+
+    constexpr CHAOS_IL2CPP_UINT32 kMaxMethods = 512;
+    struct MethodsBuf {
+        ThinLockableHeader header;
+        CHAOS_IL2CPP_UINT8  element_type_shape;
+        CHAOS_IL2CPP_INTPTR element_type_info;
+        CHAOS_IL2CPP_INTPTR length;
+        CHAOS_IL2CPP_INTPTR* elements;
+    };
+    static MethodsBuf s_buf{};
+    static CHAOS_IL2CPP_INTPTR s_elements[kMaxMethods]{};
+
+    uint32_t idx = 0;
+
+    // Self methods (descriptor path or EEClass fallback)
+    if (desc != nullptr && desc->methods != nullptr) {
+        for (CHAOS_IL2CPP_UINT32 i = 0; i < desc->method_count && idx < kMaxMethods; i++) {
+            if (MatchMethodFlags(desc->methods[i].flags, flags)) {
+                s_elements[idx++] = static_cast<CHAOS_IL2CPP_INTPTR>(
+                    EncodeReflectionQueryMethodHandle(&desc->methods[i]));
+            }
+        }
+    } else if (desc == nullptr) {
+        // EEClass fallback for dynamic types (T2-3) — no flags filtering for now
+        auto* ee = ResolveEEClassFromHandle(type);
+        if (ee != nullptr) {
+            EnsureMethodsFilled(ee);
+            if (ee->methods.filled && ee->methods.data != nullptr) {
+                uint32_t count = ee->methods.count > kMaxMethods ? kMaxMethods : ee->methods.count;
+                for (uint32_t i = 0; i < count && idx < kMaxMethods; i++) {
+                    s_elements[idx++] = static_cast<CHAOS_IL2CPP_INTPTR>(
+                        EncodeReflectionQueryMethodHandle(&ee->methods.data[i]));
+                }
+            }
+        } else {
+            return 0;
+        }
+    }
+
+    // Walk the parent TypeInfo chain to include inherited methods
+    auto* type_info = GetTypeInfoFromReflectionOrGcHandle(type);
+    if (type_info != nullptr) {
+        const TypeInfoHot* parent = type_info->parent;
+        uint32_t max_depth = 20;
+        while (parent != nullptr && max_depth > 0) {
+            uint32_t count = GetModuleCount();
+            bool found = false;
+            for (uint32_t i = 0; i < count && !found; i++) {
+                const auto* mod = GetModuleByIndex(i);
+                if (mod == nullptr || mod->type_info_ptrs == nullptr || mod->image == nullptr) continue;
+                for (uint32_t j = 0; j < mod->type_count && j < mod->image->type_count && !found; j++) {
+                    if (mod->type_info_ptrs[j] == parent) {
+                        const auto* parent_desc = mod->image->types[j];
+                        if (parent_desc != nullptr && parent_desc->methods != nullptr) {
+                            for (uint32_t k = 0; k < parent_desc->method_count && idx < kMaxMethods; k++) {
+                                if (MatchMethodFlags(parent_desc->methods[k].flags, flags)) {
+                                    s_elements[idx++] = static_cast<CHAOS_IL2CPP_INTPTR>(
+                                        EncodeReflectionQueryMethodHandle(&parent_desc->methods[k]));
+                                }
+                            }
+                        }
+                        found = true;
+                    }
+                }
+            }
+            if (!found) break;
+            parent = parent->parent;
+            max_depth--;
+        }
+    }
+
+    s_buf = MethodsBuf{};
+    s_buf.element_type_shape = 1;
+    s_buf.length = static_cast<CHAOS_IL2CPP_INTPTR>(idx);
+    s_buf.elements = s_elements;
+
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_buf);
 }
 
 }  // namespace chaos::il2cpp::runtime_core

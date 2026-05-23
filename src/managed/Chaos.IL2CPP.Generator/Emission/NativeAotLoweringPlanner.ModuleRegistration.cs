@@ -1,5 +1,9 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection.Metadata;
+using System.Reflection.Metadata.Ecma335;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Text.Json;
 using Chaos.IL2CPP.Contracts;
@@ -73,7 +77,7 @@ public sealed partial class NativeAotLoweringPlanner
 
     /// <summary>
     /// Emit hotpatch name index + dispatch table data.
-    /// Generates flat .rodata arrays: type index, method index, token→slot map,
+    /// Generates flat .rodata arrays: type index, method index, token->slot map,
     /// dispatch table, and a HotpatchModuleV0 bundle with a static init caller.
     ///
     /// Generated C++ pattern:
@@ -155,13 +159,13 @@ public sealed partial class NativeAotLoweringPlanner
             }
         }
 
-        // Token→Slot mapping (sorted by token for bsearch)
+        // Token->Slot mapping (sorted by token for bsearch)
         var tokenSlotList = entries
             .Select((e, idx) => (Token: e.Token, Slot: (uint)idx))
             .OrderBy(ts => ts.Token)
             .ToList();
 
-        // ── Build Scriban model ──
+        // --- Build Scriban model ---
 
         // Type groups with nested method models
         var typeGroupModels = new ScriptObject[grouped.Count];
@@ -210,7 +214,7 @@ public sealed partial class NativeAotLoweringPlanner
             };
         }
 
-        // Token→Slot models
+        // Token->Slot models
         var tokenSlotModels = new ScriptObject[tokenSlotList.Count];
         for (int i = 0; i < tokenSlotList.Count; i++)
         {
@@ -231,7 +235,7 @@ public sealed partial class NativeAotLoweringPlanner
             };
         }
 
-        // ── CCW interface vtable data ─────────────────────────────────
+        // --- CCW interface vtable data ---
         // Collect unique declaring type subject IDs that have a COM interface GUID.
         // V2 emits: GUID byte-array constant + vtable array + factory function.
         var ccwInterfaceModels = new List<ScriptObject>();
@@ -248,7 +252,7 @@ public sealed partial class NativeAotLoweringPlanner
 
                 if (_comInterfaceVtableData.TryGetValue(declaringTypeSubjectId, out var vtableInfo))
                 {
-                    // Convert "ABCDEF01-2345-6789-ABCD-EF0123456789" → GUID bytes.
+                    // Convert "ABCDEF01-2345-6789-ABCD-EF0123456789" -> GUID bytes.
                     var guidBytes = ParseGuidStringToBytes(vtableInfo.Guid);
                     if (guidBytes != null)
                     {
@@ -307,9 +311,11 @@ public sealed partial class NativeAotLoweringPlanner
             NativeAotTemplateCatalog.GetHotpatchTableTemplate(), model);
     }
 
-    // ── CustomAttribute blob data emission ──────────────────────────
+    // --- CustomAttribute blob data emission ---
     // Builds the binary blob, offset array, and materializer switch for
-    // per-module CustomAttribute query support.
+    // per-module CustomAttribute query support. Supports 5 entity kinds:
+    // Type, Method, Field, Property, Param — all share a single blob stream
+    // with separate prefix-sum offset arrays.
 
     private static uint CustomAttributeFieldSize(CustomAttributeLiteralKind kind)
     {
@@ -403,44 +409,18 @@ public sealed partial class NativeAotLoweringPlanner
             _moduleTypeSubjectIds.Count != _moduleTypeCount)
             return string.Empty;
 
-        // Filter to Type-kind only (method deferred)
-        var typeMaterializations = materializations
-            .Where(m => m.TargetKind == CustomAttributeTargetKind.Type)
-            .ToList();
-        if (typeMaterializations.Count == 0)
-            return string.Empty;
+        // Group materializations by target kind
+        var kindGroups = materializations
+            .GroupBy(m => m.TargetKind)
+            .ToDictionary(g => g.Key, g => g.ToList());
 
-        // Build subjectId → type index mapping
-        var subjectIdToTypeIndex = new Dictionary<string, int>(_moduleTypeCount, StringComparer.Ordinal);
-        for (int i = 0; i < _moduleTypeCount; i++)
-            subjectIdToTypeIndex[_moduleTypeSubjectIds[i]] = i;
-
-        // Group materializations by type index
-        var typeIndexToPlans = new Dictionary<int, List<CustomAttributeMaterializationPlan>>();
-        foreach (var plan in typeMaterializations)
-        {
-            if (subjectIdToTypeIndex.TryGetValue(plan.TargetSubjectId, out int ti))
-            {
-                if (!typeIndexToPlans.TryGetValue(ti, out var list))
-                {
-                    list = new List<CustomAttributeMaterializationPlan>();
-                    typeIndexToPlans[ti] = list;
-                }
-                list.Add(plan);
-            }
-        }
-
-        if (typeIndexToPlans.Count == 0)
-            return string.Empty;
-
-        // Collect unique attribute types for the materializer switch
+        // Collect unique attribute types for the materializer switch (shared across all kinds)
         var uniqueAttrTypes = new List<(string SubjectId, uint Token, List<(string FieldSubjectId, CustomAttributeLiteralValue Value)> Fields)>();
         var attrTypeKeySet = new HashSet<string>(StringComparer.Ordinal);
-        foreach (var plan in typeMaterializations)
+        foreach (var plan in materializations)
         {
             if (attrTypeKeySet.Add(plan.AttributeTypeSubjectId))
             {
-                // Deduplicate fields (same field can appear multiple times across entities)
                 var fieldSet = new Dictionary<string, CustomAttributeLiteralValue>(StringComparer.Ordinal);
                 foreach (var a in plan.Assignments)
                     fieldSet[a.FieldSubjectId] = a.Value;
@@ -450,53 +430,51 @@ public sealed partial class NativeAotLoweringPlanner
             }
         }
 
-        // Build per-entity blob segments
-        var blobStream = new MemoryStream();
-        var offsets = new uint[_moduleTypeCount + 1];
-        uint currentOffset = 0;
-
-        for (int ti = 0; ti < _moduleTypeCount; ti++)
+        // Read metadata table row counts (for offset array sizing of each entity kind).
+        uint methodCount = 0, fieldCount = 0, propertyCount = 0, paramCount = 0;
+        try
         {
-            offsets[ti] = currentOffset;
-
-            if (typeIndexToPlans.TryGetValue(ti, out var plans))
+            if (_closureAssemblyPathByName.TryGetValue(_assemblyName, out var assemblyPath) &&
+                File.Exists(assemblyPath))
             {
-                // Emit attr_count + per-attribute data
-                uint attrCount = (uint)plans.Count;
-                var attrCountBytes = BitConverter.GetBytes((ushort)attrCount);
-                blobStream.Write(attrCountBytes, 0, 2);
-                currentOffset += 2;
-
-                foreach (var plan in plans)
+                using var stream = File.OpenRead(assemblyPath);
+                using var peReader = new PEReader(stream);
+                if (peReader.HasMetadata)
                 {
-                    // attr_type_token
-                    uint token = GetTypeTokenForSubjectId(plan.AttributeTypeSubjectId);
-                    var tokenBytes = BitConverter.GetBytes(token);
-                    blobStream.Write(tokenBytes, 0, 4);
-                    currentOffset += 4;
-
-                    // Encode field values and compute packed_size
-                    using var fieldStream = new MemoryStream();
-                    foreach (var assignment in plan.Assignments)
-                    {
-                        var fieldBytes = EncodeCustomAttributeFieldValue(assignment.Value);
-                        fieldStream.Write(fieldBytes, 0, fieldBytes.Length);
-                    }
-
-                    var fieldData = fieldStream.ToArray();
-                    ushort packedSize = (ushort)fieldData.Length;
-                    var sizeBytes = BitConverter.GetBytes(packedSize);
-                    blobStream.Write(sizeBytes, 0, 2);
-                    blobStream.Write(fieldData, 0, fieldData.Length);
-                    currentOffset += 2 + (uint)fieldData.Length;
+                    var metadataReader = peReader.GetMetadataReader();
+                    methodCount = (uint)metadataReader.GetTableRowCount(TableIndex.MethodDef);
+                    fieldCount = (uint)metadataReader.GetTableRowCount(TableIndex.Field);
+                    propertyCount = (uint)metadataReader.GetTableRowCount(TableIndex.Property);
+                    paramCount = (uint)metadataReader.GetTableRowCount(TableIndex.Param);
                 }
             }
-            // else: no attributes for this type → zero-byte segment
         }
-        offsets[_moduleTypeCount] = currentOffset;
+        catch
+        {
+            // If metadata reading fails, counts stay 0 (offset arrays will be nullptr/0).
+        }
+
+        // Build per-kind entity index -> plans mapping
+        var typeIndexToPlans = BuildKindEntityMap(kindGroups, CustomAttributeTargetKind.Type, _moduleTypeCount);
+        var methodIndexToPlans = BuildKindEntityMap(kindGroups, CustomAttributeTargetKind.Method, (int)methodCount);
+        var fieldIndexToPlans = BuildKindEntityMap(kindGroups, CustomAttributeTargetKind.Field, (int)fieldCount);
+        var propertyIndexToPlans = BuildKindEntityMap(kindGroups, CustomAttributeTargetKind.Property, (int)propertyCount);
+        var paramIndexToPlans = BuildKindEntityMap(kindGroups, CustomAttributeTargetKind.Param, (int)paramCount);
+
+        // Build blob stream and offset arrays
+        var blobStream = new MemoryStream();
+        var typeOffsets = BuildKindOffsetArray(blobStream, typeIndexToPlans, _moduleTypeCount);
+        var methodOffsets = methodCount > 0
+            ? BuildKindOffsetArray(blobStream, methodIndexToPlans, (int)methodCount) : null;
+        var fieldOffsets = fieldCount > 0
+            ? BuildKindOffsetArray(blobStream, fieldIndexToPlans, (int)fieldCount) : null;
+        var propertyOffsets = propertyCount > 0
+            ? BuildKindOffsetArray(blobStream, propertyIndexToPlans, (int)propertyCount) : null;
+        var paramOffsets = paramCount > 0
+            ? BuildKindOffsetArray(blobStream, paramIndexToPlans, (int)paramCount) : null;
 
         var sb = new StringBuilder(4096);
-        sb.AppendLine("// ── CustomAttribute blob ─────────────────────────────────────────");
+        sb.AppendLine("// --- CustomAttribute blob ---");
 
         // Emit blob as constexpr CHAOS_IL2CPP_UINT8[]
         var blobBytes = blobStream.ToArray();
@@ -515,19 +493,37 @@ public sealed partial class NativeAotLoweringPlanner
             sb.AppendLine();
         }
 
-        // Emit offset array
-        sb.Append("static constexpr CHAOS_IL2CPP_UINT32 s_custom_attribute_offset[")
-            .Append(_moduleTypeCount + 1).AppendLine("] =");
-        sb.AppendLine("{");
-        for (int i = 0; i <= _moduleTypeCount; i++)
-        {
-            sb.Append("    ").Append(offsets[i]).Append("u,");
-            if (i <= _moduleTypeCount) sb.AppendLine();
-        }
-        sb.AppendLine("};");
+        // Emit type offset array (always present with _moduleTypeCount)
+        EmitOffsetArray(sb, "s_custom_attribute_offset", typeOffsets, _moduleTypeCount + 1);
+
+        // Emit method offset array
+        if (methodOffsets != null)
+            EmitOffsetArray(sb, "s_custom_attribute_method_offset", methodOffsets, (int)methodCount + 1);
+
+        // Emit field offset array
+        if (fieldOffsets != null)
+            EmitOffsetArray(sb, "s_custom_attribute_field_offset", fieldOffsets, (int)fieldCount + 1);
+
+        // Emit property offset array
+        if (propertyOffsets != null)
+            EmitOffsetArray(sb, "s_custom_attribute_property_offset", propertyOffsets, (int)propertyCount + 1);
+
+        // Emit param offset array
+        if (paramOffsets != null)
+            EmitOffsetArray(sb, "s_custom_attribute_param_offset", paramOffsets, (int)paramCount + 1);
+
+        // Emit count constants for ModuleDescriptor initialization
+        sb.Append("static constexpr CHAOS_IL2CPP_UINT32 s_custom_attribute_method_count = ")
+            .Append(methodCount).AppendLine("u;");
+        sb.Append("static constexpr CHAOS_IL2CPP_UINT32 s_custom_attribute_field_count = ")
+            .Append(fieldCount).AppendLine("u;");
+        sb.Append("static constexpr CHAOS_IL2CPP_UINT32 s_custom_attribute_property_count = ")
+            .Append(propertyCount).AppendLine("u;");
+        sb.Append("static constexpr CHAOS_IL2CPP_UINT32 s_custom_attribute_param_count = ")
+            .Append(paramCount).AppendLine("u;");
         sb.AppendLine();
 
-        // Emit materializer switch
+        // Emit materializer switch (shared by all kinds)
         sb.AppendLine("static CHAOS_IL2CPP_INTPTR ModuleCustomAttributeMaterializer(");
         sb.AppendLine("    CHAOS_IL2CPP_UINT32 attr_type_token, const CHAOS_IL2CPP_UINT8* field_data)");
         sb.AppendLine("{");
@@ -574,6 +570,113 @@ public sealed partial class NativeAotLoweringPlanner
         _hasCustomAttributeBlob = true;
 
         return sb.ToString();
+    }
+
+    /// <summary>
+    /// Build a map from entity index (TokenToIndex) to list of materialization plans
+    /// for the given kind. Plans whose token maps to an index >= entityCount are excluded.
+    /// </summary>
+    private static Dictionary<int, List<CustomAttributeMaterializationPlan>> BuildKindEntityMap(
+        Dictionary<CustomAttributeTargetKind, List<CustomAttributeMaterializationPlan>>? kindGroups,
+        CustomAttributeTargetKind kind,
+        int entityCount)
+    {
+        var result = new Dictionary<int, List<CustomAttributeMaterializationPlan>>();
+
+        if (kindGroups == null || !kindGroups.TryGetValue(kind, out var plans))
+            return result;
+
+        foreach (var plan in plans)
+        {
+            int entityIdx = (int)((plan.TargetMetadataToken & 0x00FFFFFFu) - 1);
+            if (entityIdx < 0 || entityIdx >= entityCount)
+                continue;
+
+            if (!result.TryGetValue(entityIdx, out var list))
+            {
+                list = new List<CustomAttributeMaterializationPlan>();
+                result[entityIdx] = list;
+            }
+            list.Add(plan);
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    /// Build a prefix-sum offset array for a given entity kind. Each entity index
+    /// maps to a byte offset in the shared blob stream. Entities with no attributes
+    /// get offset[i] == offset[i+1] (zero-length segment). Data is appended to the
+    /// shared blobStream.
+    /// </summary>
+    private uint[] BuildKindOffsetArray(
+        MemoryStream blobStream,
+        Dictionary<int, List<CustomAttributeMaterializationPlan>> entityIndexToPlans,
+        int entityCount)
+    {
+        if (entityCount <= 0)
+            return [];
+
+        var offsets = new uint[entityCount + 1];
+        uint currentOffset = (uint)blobStream.Length;
+
+        for (int ei = 0; ei < entityCount; ei++)
+        {
+            offsets[ei] = currentOffset;
+
+            if (entityIndexToPlans.TryGetValue(ei, out var plans) && plans.Count > 0)
+            {
+                // Emit attr_count + per-attribute data
+                var attrCountBytes = BitConverter.GetBytes((ushort)plans.Count);
+                blobStream.Write(attrCountBytes, 0, 2);
+                currentOffset += 2;
+
+                foreach (var plan in plans)
+                {
+                    // For the attribute type token in the blob, use GetTypeTokenForSubjectId
+                    // (resolves to the TypeDef token of the attribute type).
+                    uint attrTypeToken = GetTypeTokenForSubjectId(plan.AttributeTypeSubjectId);
+                    var tokenBytes = BitConverter.GetBytes(attrTypeToken);
+                    blobStream.Write(tokenBytes, 0, 4);
+                    currentOffset += 4;
+
+                    // Encode field values and compute packed_size
+                    using var fieldStream = new MemoryStream();
+                    foreach (var assignment in plan.Assignments)
+                    {
+                        var fieldBytes = EncodeCustomAttributeFieldValue(assignment.Value);
+                        fieldStream.Write(fieldBytes, 0, fieldBytes.Length);
+                    }
+
+                    var fieldData = fieldStream.ToArray();
+                    ushort packedSize = (ushort)fieldData.Length;
+                    var sizeBytes = BitConverter.GetBytes(packedSize);
+                    blobStream.Write(sizeBytes, 0, 2);
+                    blobStream.Write(fieldData, 0, fieldData.Length);
+                    currentOffset += 2 + (uint)fieldData.Length;
+                }
+            }
+        }
+        offsets[entityCount] = currentOffset;
+
+        return offsets;
+    }
+
+    /// <summary>
+    /// Emit a constexpr offset array to the StringBuilder.
+    /// </summary>
+    private static void EmitOffsetArray(StringBuilder sb, string name, uint[] offsets, int count)
+    {
+        sb.Append("static constexpr CHAOS_IL2CPP_UINT32 ").Append(name)
+            .Append("[").Append(count).AppendLine("] =");
+        sb.AppendLine("{");
+        for (int i = 0; i < count; i++)
+        {
+            sb.Append("    ").Append(offsets[i]).Append("u,");
+            sb.AppendLine();
+        }
+        sb.AppendLine("};");
+        sb.AppendLine();
     }
 
     private Dictionary<string, int>? _typeTokenCache;
@@ -697,13 +800,29 @@ public sealed partial class NativeAotLoweringPlanner
             sb.AppendLine("    /* .custom_attribute_offset     = */ s_custom_attribute_offset,");
             sb.Append("    /* .custom_attribute_entity_count = */ ").Append(_moduleTypeCount).AppendLine("u,");
             sb.AppendLine("    /* .custom_attribute_materializer = */ &ModuleCustomAttributeMaterializer,");
+            sb.AppendLine("    /* .custom_attribute_method_offset   = */ s_custom_attribute_method_offset,");
+            sb.AppendLine("    /* .custom_attribute_field_offset    = */ s_custom_attribute_field_offset,");
+            sb.AppendLine("    /* .custom_attribute_property_offset = */ s_custom_attribute_property_offset,");
+            sb.AppendLine("    /* .custom_attribute_param_offset    = */ s_custom_attribute_param_offset,");
+            sb.AppendLine("    /* .custom_attribute_method_count    = */ s_custom_attribute_method_count,");
+            sb.AppendLine("    /* .custom_attribute_field_count     = */ s_custom_attribute_field_count,");
+            sb.AppendLine("    /* .custom_attribute_property_count  = */ s_custom_attribute_property_count,");
+            sb.Append("    /* .custom_attribute_param_count   = */ s_custom_attribute_param_count,");
         }
         else
         {
-            sb.AppendLine("    /* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred");
+            sb.AppendLine("    /* .custom_attribute_blob       = */ nullptr,  // Tier 1 -- deferred");
             sb.AppendLine("    /* .custom_attribute_offset     = */ nullptr,");
             sb.AppendLine("    /* .custom_attribute_entity_count = */ 0u,");
             sb.AppendLine("    /* .custom_attribute_materializer = */ nullptr,");
+            sb.AppendLine("    /* .custom_attribute_method_offset   = */ nullptr,");
+            sb.AppendLine("    /* .custom_attribute_field_offset    = */ nullptr,");
+            sb.AppendLine("    /* .custom_attribute_property_offset = */ nullptr,");
+            sb.AppendLine("    /* .custom_attribute_param_offset    = */ nullptr,");
+            sb.AppendLine("    /* .custom_attribute_method_count    = */ 0u,");
+            sb.AppendLine("    /* .custom_attribute_field_count     = */ 0u,");
+            sb.AppendLine("    /* .custom_attribute_property_count  = */ 0u,");
+            sb.Append("    /* .custom_attribute_param_count   = */ 0u,");
         }
     }
 
@@ -809,7 +928,7 @@ public sealed partial class NativeAotLoweringPlanner
         {
             // Always emit the count symbol so the runtime can safely reference it.
             var emptySb = new StringBuilder(256);
-            emptySb.AppendLine("// ── External Runtime Dispatch Table (empty) ─────────────────");
+            emptySb.AppendLine("// --- External Runtime Dispatch Table (empty) ---");
             emptySb.AppendLine("extern \"C\" const char* kChaosExternalRuntimeSubjects[1] = { nullptr };");
             emptySb.AppendLine("extern \"C\" void* kChaosExternalRuntimeFnTable[1] = { nullptr };");
             emptySb.AppendLine("extern \"C\" int32_t kChaosExternalRuntimeCount = 0;");
@@ -818,7 +937,7 @@ public sealed partial class NativeAotLoweringPlanner
 
         // Emit entries in dict-value index order so the table position matches
         // the ExternalRuntimeTableIndex used by call sites.  The dict is populated
-        // deterministically (same input → same scan order), so this is stable.
+        // deterministically (same input -> same scan order), so this is stable.
         var entriesByIndex = new KeyValuePair<string, int>[_externalRuntimeSubjects.Count];
         foreach (var kvp in _externalRuntimeSubjects)
         {
@@ -955,7 +1074,7 @@ public sealed partial class NativeAotLoweringPlanner
         var tokenLookup = new MetadataTokenLookup(metadataRegistration.Registrations);
 
         var sb = new StringBuilder(4096);
-        sb.AppendLine("// ── JIT Method Entry Table ───────────────────────────────────────────");
+        sb.AppendLine("// --- JIT Method Entry Table ---");
         sb.AppendLine("// Auto-generated by chaos-il2cpp codegen for --mode jit.");
         sb.AppendLine("#include <cstdint>");
         sb.AppendLine("#include \"jit_registration.h\"");
@@ -1002,8 +1121,6 @@ public sealed partial class NativeAotLoweringPlanner
                         int adjusted = chunkEnd;
                         while (adjusted > pos && escaped[adjusted - 1] == '\\')
                             adjusted--;
-                        // adjusted is now at a position not preceded by backslash,
-                        // or we gave up and use chunkEnd directly
                         if (adjusted > pos)
                             chunkEnd = adjusted;
                     }

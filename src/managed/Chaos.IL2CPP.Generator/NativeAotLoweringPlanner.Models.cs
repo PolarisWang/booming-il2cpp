@@ -175,6 +175,9 @@ public sealed partial class NativeAotLoweringPlanner
     {
         Type = 1,
         Method = 2,
+        Field = 3,
+        Property = 4,
+        Param = 5,
     }
 
     private enum CustomAttributeLiteralKind : byte
@@ -207,6 +210,7 @@ public sealed partial class NativeAotLoweringPlanner
 
     private sealed record CustomAttributeMaterializationPlan(
         CustomAttributeTargetKind TargetKind,
+        uint TargetMetadataToken,
         string TargetSubjectId,
         string AttributeTypeSubjectId,
         IReadOnlyList<CustomAttributeFieldAssignment> Assignments);

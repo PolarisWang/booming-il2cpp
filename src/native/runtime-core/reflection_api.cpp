@@ -25,6 +25,7 @@
 #include "runtime_core.h"
 #include "module_registry.h"
 #include "reflection_query_model.h"
+#include "reflection_binding_flags.h"
 #include "reflection_metadata_impl.h"
 #include "string_table.h"
 #include "instantiation_engine.h"

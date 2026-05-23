@@ -28,7 +28,13 @@ struct ReflectionQueryMethodDescriptor {
     const ReflectionQueryParameterDescriptor* parameters;
     CHAOS_IL2CPP_UINT32 parameter_descriptor_count;
     const void* default_value_blob;
+    CHAOS_IL2CPP_UINT32 flags;          // Method attribute flags (kMethodFlag*), must be last for ABI compat
 };
+
+// Method descriptor flags (populated from managed metadata)
+static constexpr CHAOS_IL2CPP_UINT32 kMethodFlagIsPublic  = 1u << 0;
+static constexpr CHAOS_IL2CPP_UINT32 kMethodFlagIsStatic  = 1u << 1;
+static constexpr CHAOS_IL2CPP_UINT32 kMethodFlagIsVirtual = 1u << 2;
 
 struct ReflectionQueryFieldDescriptor {
     CHAOS_IL2CPP_UINT32 metadata_token;
@@ -36,13 +42,36 @@ struct ReflectionQueryFieldDescriptor {
     const char* name_utf8;
     const char* member_type_utf8;
     CHAOS_IL2CPP_INT64 constant_value;  // For enum literal fields: the constant value; 0 otherwise
+    CHAOS_IL2CPP_UINT32 flags;          // Field attribute flags (kFieldFlag*), must be last for ABI compat
 };
+
+// Field descriptor flags (populated from managed metadata)
+static constexpr CHAOS_IL2CPP_UINT32 kFieldFlagIsPublic   = 1u << 0;
+static constexpr CHAOS_IL2CPP_UINT32 kFieldFlagIsStatic   = 1u << 1;
+static constexpr CHAOS_IL2CPP_UINT32 kFieldFlagIsInitOnly = 1u << 2;  // readonly
+static constexpr CHAOS_IL2CPP_UINT32 kFieldFlagIsLiteral  = 1u << 3;  // const
 
 struct ReflectionQueryPropertyDescriptor {
     const char* subject_id_utf8;
     const char* name_utf8;
     const char* member_type_utf8;
+    CHAOS_IL2CPP_UINT32 flags;          // Property attribute flags (kPropertyFlag*), must be last for ABI compat
 };
+
+// Property descriptor flags (populated from managed metadata)
+static constexpr CHAOS_IL2CPP_UINT32 kPropertyFlagIsStatic = 1u << 0;
+static constexpr CHAOS_IL2CPP_UINT32 kPropertyFlagCanRead  = 1u << 1;
+static constexpr CHAOS_IL2CPP_UINT32 kPropertyFlagCanWrite = 1u << 2;
+
+struct ReflectionQueryEventDescriptor {
+    const char* subject_id_utf8;
+    const char* name_utf8;
+    const char* member_type_utf8;  // EventHandler type
+    CHAOS_IL2CPP_UINT32 flags;    // kEventFlag*, must be last for ABI compat
+};
+
+// Event descriptor flags
+static constexpr CHAOS_IL2CPP_UINT32 kEventFlagIsStatic = 1u << 0;
 
 struct ReflectionQueryTypeDescriptor {
     CHAOS_IL2CPP_UINT32 metadata_token;
@@ -56,6 +85,8 @@ struct ReflectionQueryTypeDescriptor {
     CHAOS_IL2CPP_UINT32 field_count;
     const ReflectionQueryPropertyDescriptor* properties;
     CHAOS_IL2CPP_UINT32 property_count;
+    const ReflectionQueryEventDescriptor* events;
+    CHAOS_IL2CPP_UINT32 event_count;
     const ReflectionQueryMethodDescriptor* methods;
     CHAOS_IL2CPP_UINT32 method_count;
     const void* generic_parameters;
@@ -67,6 +98,10 @@ struct ReflectionQueryImageDescriptor {
     const char* image_name_utf8;
     const ReflectionQueryTypeDescriptor* const* types;
     CHAOS_IL2CPP_UINT32 type_count;
+    CHAOS_IL2CPP_UINT16 version_major;
+    CHAOS_IL2CPP_UINT16 version_minor;
+    CHAOS_IL2CPP_UINT16 version_build;
+    CHAOS_IL2CPP_UINT16 version_revision;
 };
 
 constexpr CHAOS_IL2CPP_UINTPTR kReflectionQueryHandleTag =
@@ -103,6 +138,10 @@ inline FieldInfoHandle EncodeReflectionQueryFieldHandle(const ReflectionQueryFie
 
 inline PropertyInfoHandle EncodeReflectionQueryPropertyHandle(const ReflectionQueryPropertyDescriptor* descriptor) {
     return EncodeReflectionQueryHandle<PropertyInfoHandle>(descriptor);
+}
+
+inline EventInfoHandle EncodeReflectionQueryEventHandle(const ReflectionQueryEventDescriptor* descriptor) {
+    return EncodeReflectionQueryHandle<EventInfoHandle>(descriptor);
 }
 
 inline MethodInfoHandle EncodeReflectionQueryMethodHandle(const ReflectionQueryMethodDescriptor* descriptor) {
@@ -244,6 +283,23 @@ inline const ReflectionQueryPropertyDescriptor* FindReflectionQueryProperty(
         const ReflectionQueryPropertyDescriptor* property = &type->properties[index];
         if (NamesMatch(property->name_utf8, property_name_utf8)) {
             return property;
+        }
+    }
+
+    return nullptr;
+}
+
+inline const ReflectionQueryEventDescriptor* FindReflectionQueryEvent(
+    const ReflectionQueryTypeDescriptor* type,
+    const char* event_name_utf8) {
+    if (type == nullptr || type->events == nullptr || event_name_utf8 == nullptr) {
+        return nullptr;
+    }
+
+    for (CHAOS_IL2CPP_UINT32 index = 0u; index < type->event_count; index++) {
+        const ReflectionQueryEventDescriptor* event = &type->events[index];
+        if (NamesMatch(event->name_utf8, event_name_utf8)) {
+            return event;
         }
     }
 

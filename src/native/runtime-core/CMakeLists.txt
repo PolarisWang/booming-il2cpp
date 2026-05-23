@@ -154,6 +154,8 @@ add_library(chaos_runtime_core STATIC
     com_rcw.cpp
     com_ccw.h
     com_ccw.cpp
+    com_connection_point.h
+    com_connection_point.cpp
     domain_unloader.h
     domain_unloader.cpp
     native_library.h
@@ -245,4 +247,5 @@ else()
 endif()
 target_include_directories(chaos_runtime_core PRIVATE
     "${REPO_ROOT}/src/native"
+    "${REPO_ROOT}/src/native/diagnostics"
     "${REPO_ROOT}/third_party/fmt/include")

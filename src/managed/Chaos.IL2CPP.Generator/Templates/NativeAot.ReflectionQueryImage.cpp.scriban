@@ -6,13 +6,20 @@
 {{~ if type_group.fields && type_group.fields.size > 0 ~}}
 static constexpr ReflectionQueryFieldDescriptor kReflFields_{{ type_group.safe_name }}[{{ type_group.fields.size }}] = {
 {{~ for field in type_group.fields ~}}
-    { {{ field.metadata_token_hex }}u, "{{ field.subject_id_literal }}", "{{ field.name_literal }}", "{{ field.type_literal }}", {{ field.constant_value }}LL },
+    { {{ field.metadata_token_hex }}u, "{{ field.subject_id_literal }}", "{{ field.name_literal }}", "{{ field.type_literal }}", {{ field.constant_value }}LL, {{ field.flags }}u },
+{{~ end ~}}
+};
+{{~ end ~}}
+{{~ if type_group.events && type_group.events.size > 0 ~}}
+static constexpr ReflectionQueryEventDescriptor kReflEvents_{{ type_group.safe_name }}[{{ type_group.events.size }}] = {
+{{~ for evt in type_group.events ~}}
+    { "{{ evt.subject_id_literal }}", "{{ evt.name_literal }}", "{{ evt.type_literal }}", /*flags*/ 0u },
 {{~ end ~}}
 };
 {{~ end ~}}
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_{{ type_group.safe_name }}[{{ type_group.method_count }}] = {
 {{~ for method in type_group.methods ~}}
-    { {{ method.metadata_token_hex }}u, "{{ method.subject_id_literal }}", "{{ method.method_name_literal }}", "{{ method.return_type_literal }}", {{ method.parameter_count }}, nullptr, 0u, nullptr },
+    { {{ method.metadata_token_hex }}u, "{{ method.subject_id_literal }}", "{{ method.method_name_literal }}", "{{ method.return_type_literal }}", {{ method.parameter_count }}, nullptr, 0u, nullptr, {{ method.flags }}u },
 {{~ end ~}}
 };
 
@@ -24,6 +31,7 @@ static const ReflectionQueryTypeDescriptor kReflTypes[{{ type_group_count }}] = 
     {{~ else ~}}
     { {{ type_group.metadata_token_hex }}u, "{{ type_group.subject_id_literal }}", "{{ type_group.subject_id_literal }}", "{{ type_group.namespace_literal }}", "{{ type_group.name_literal }}", "{{ type_group.name_literal }}", nullptr, nullptr, 0u, nullptr, 0u,
     {{~ end ~}}
+    {{~ if type_group.event_count > 0 ~}}kReflEvents_{{ type_group.safe_name }}, {{ type_group.event_count }}u,{{~ else ~}}nullptr, 0u,{{~ end ~}}
     kReflMethods_{{ type_group.safe_name }}, {{ type_group.method_count }}u, nullptr, 0u, 0u },
 {{~ end ~}}
 };
@@ -34,7 +42,7 @@ static const ReflectionQueryTypeDescriptor* kReflTypePtrs[{{ type_group_count }}
 {{~ end ~}}
 };
 
-static const ReflectionQueryImageDescriptor kReflImage = { "{{ assembly_name_literal }}", kReflTypePtrs, {{ type_group_count }}u };
+static const ReflectionQueryImageDescriptor kReflImage = { "{{ assembly_name_literal }}", kReflTypePtrs, {{ type_group_count }}u, 1, 0, 0, 0 };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via

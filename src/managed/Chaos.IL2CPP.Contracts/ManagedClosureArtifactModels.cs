@@ -233,6 +233,12 @@ public sealed record ManagedClosureManifestArtifact
     public required string InputModuleVersionId { get; init; }
 
     public required IReadOnlyList<ManagedClosureArtifactRef> Artifacts { get; init; }
+
+    /// Assembly names that are hot-update assemblies.
+    /// Static fields in these assemblies use indirect access via static_var_store
+    /// instead of direct C++ global variables. Null/empty means no hot-update
+    /// assemblies in this closure.
+    public IReadOnlySet<string>? HotUpdateAssemblyNames { get; init; }
 }
 
 public sealed record ManagedClosureResult

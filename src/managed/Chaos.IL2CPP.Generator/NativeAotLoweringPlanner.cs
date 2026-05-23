@@ -39,6 +39,8 @@ public sealed partial class NativeAotLoweringPlanner
     private AssemblyReflectionSupportModel _assemblyReflectionSupport = AssemblyReflectionSupportModel.Empty;
     private ReflectionMemberSupportModel _reflectionMemberSupport = ReflectionMemberSupportModel.Empty;
     private StaticFieldDataSupportModel _staticFieldDataSupport = StaticFieldDataSupportModel.Empty;
+    private IReadOnlySet<string> _hotUpdateAssemblyNames =
+        new HashSet<string>(StringComparer.Ordinal);
 
     private IReadOnlyList<string> _cachedClosureAssemblyPaths = Array.Empty<string>();
     private IReadOnlyDictionary<string, string> _closureAssemblyPathByName =
@@ -84,6 +86,38 @@ public sealed partial class NativeAotLoweringPlanner
 
     // Verification dispatch manifest (populated by BuildDispatchEntryCode)
     private string? _manifestJson;
+
+    // ── Hot-update static field helpers ───────────────────────────────────
+
+    /// Compute FNV-1a 24-bit hash (matches ComputeAssemblyHash in static_var_store.h).
+    private static uint ComputeFNVHash(ReadOnlySpan<char> text)
+    {
+        uint hash = 2166136261u;
+        foreach (char c in text)
+        {
+            hash ^= (uint)c;
+            hash *= 16777619u;
+        }
+        uint result = hash & 0x00FFFFFFu;
+        return result != 0 ? result : 1u;
+    }
+
+    /// Returns true if the field belongs to a hot-update assembly.
+    private bool IsHotUpdateField(string subjectId)
+    {
+        if (_hotUpdateAssemblyNames.Count == 0) return false;
+        var slashIdx = subjectId.IndexOf('/');
+        if (slashIdx <= 0) return false;
+        var assemblyName = subjectId.Substring(0, slashIdx);
+        return _hotUpdateAssemblyNames.Contains(assemblyName);
+    }
+
+    /// Compute (assembly_hash, field_hash) for use with static_var_store_read/write_field.
+    private (uint AssemblyHash, uint FieldHash) GetHotUpdateFieldHashes(string subjectId)
+    {
+        var assemblyName = GetAssemblyNameFromSubjectId(subjectId);
+        return (ComputeFNVHash(assemblyName), ComputeFNVHash(subjectId));
+    }
 
 	private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, string> _cppStringLiteralCache =
 		new System.Collections.Concurrent.ConcurrentDictionary<string, string>(StringComparer.Ordinal);
@@ -479,6 +513,8 @@ public sealed partial class NativeAotLoweringPlanner
         _stringIdMapping = BuildStringIdMapping(stringLiterals);
         _cachedClosureAssemblyPaths = EnumerateClosureAssemblyPaths(closureManifest).ToArray();
         _closureAssemblyPathByName = BuildClosureAssemblyPathByNameCore(_cachedClosureAssemblyPaths);
+        _hotUpdateAssemblyNames = closureManifest.HotUpdateAssemblyNames
+            ?? new HashSet<string>(StringComparer.Ordinal);
         _methodsGroupedByDeclaringType = _methodsBySubjectId.Values
             .Where(m => !string.IsNullOrWhiteSpace(m.Identity.DeclaringTypeSubjectId))
             .OrderBy(m => m.Identity.DeclaringTypeSubjectId, StringComparer.Ordinal)
@@ -1899,6 +1935,7 @@ extern ""C"" void ChaosJitRegisterAll() {}
         string currentAssemblyName,
         string targetSubjectId,
         CustomAttributeTargetKind targetKind,
+        uint entityMetadataToken,
         CustomAttributeHandleCollection attributeHandles,
         IReadOnlySet<string> queriedDisplayNames,
         IReadOnlySet<string> memberInfoIsDefinedAttributeTypeSubjectIds,
@@ -1938,6 +1975,7 @@ extern ""C"" void ChaosJitRegisterAll() {}
                 metadataReader,
                 targetSubjectId,
                 targetKind,
+                entityMetadataToken,
                 attributeHandle,
                 attributeTypeIdentity.SubjectId));
         }
@@ -1947,6 +1985,7 @@ extern ""C"" void ChaosJitRegisterAll() {}
         MetadataReader metadataReader,
         string assemblyName,
         string targetSubjectId,
+        uint methodToken,
         MethodDefinition methodDefinition,
         IReadOnlySet<string> queriedDisplayNames,
         IReadOnlySet<string> memberInfoIsDefinedAttributeTypeSubjectIds,
@@ -1969,7 +2008,7 @@ extern ""C"" void ChaosJitRegisterAll() {}
             var key = $"{(byte)CustomAttributeTargetKind.Method}:{targetSubjectId}:{DllImportAttributeTypeSubjectId}";
             if (materializationKeys.Add(key))
             {
-                materializations.Add(CreateDllImportAttributeMaterializationPlan(metadataReader, targetSubjectId, methodDefinition));
+                materializations.Add(CreateDllImportAttributeMaterializationPlan(metadataReader, targetSubjectId, methodDefinition, methodToken));
             }
         }
 
@@ -2012,6 +2051,7 @@ extern ""C"" void ChaosJitRegisterAll() {}
                 metadataReader,
                 targetSubjectId,
                 CustomAttributeTargetKind.Method,
+                methodToken,
                 attributeHandle,
                 UnmanagedCallersOnlyAttributeTypeSubjectId));
         }
@@ -2063,6 +2103,7 @@ extern ""C"" void ChaosJitRegisterAll() {}
                     metadataReader,
                     assemblyName,
                     targetSubjectId!,
+                    (uint)MetadataTokens.GetToken(methodHandle),
                     metadataReader.GetMethodDefinition(methodHandle),
                     queriedDisplayNames,
                     memberInfoIsDefinedAttributeTypeSubjectIds,
@@ -2104,7 +2145,8 @@ extern ""C"" void ChaosJitRegisterAll() {}
     private CustomAttributeMaterializationPlan CreateDllImportAttributeMaterializationPlan(
         MetadataReader metadataReader,
         string targetSubjectId,
-        MethodDefinition methodDefinition)
+        MethodDefinition methodDefinition,
+        uint methodToken)
     {
         var import = methodDefinition.GetImport();
         var moduleReference = metadataReader.GetModuleReference(import.Module);
@@ -2173,6 +2215,7 @@ extern ""C"" void ChaosJitRegisterAll() {}
 
         return new CustomAttributeMaterializationPlan(
             CustomAttributeTargetKind.Method,
+            methodToken,
             targetSubjectId,
             DllImportAttributeTypeSubjectId,
             assignments);
@@ -2182,6 +2225,7 @@ extern ""C"" void ChaosJitRegisterAll() {}
         MetadataReader metadataReader,
         string targetSubjectId,
         CustomAttributeTargetKind targetKind,
+        uint entityMetadataToken,
         CustomAttributeHandle attributeHandle,
         string attributeTypeSubjectId)
     {
@@ -2217,6 +2261,7 @@ extern ""C"" void ChaosJitRegisterAll() {}
 
         return new CustomAttributeMaterializationPlan(
             targetKind,
+            entityMetadataToken,
             targetSubjectId,
             attributeTypeSubjectId,
             assignments);
@@ -3057,7 +3102,9 @@ public sealed partial class NativeAotLoweringPlanner
         var typeIndexToMethods = new List<(string TypeSubjectId, int Count, string SafeName, string Ns, string Name)>();
         // Pre-collect field data for all types in the type method map by assembly.
         // This ensures field descriptor arrays can be emitted in the reflection query image.
-        var typeFieldMap = new Dictionary<string, List<(string SubjectId, string Name, string Type, long Value, uint Token)>>(StringComparer.Ordinal);
+        var typeFieldMap = new Dictionary<string, List<(string SubjectId, string Name, string Type, long Value, uint Token, uint Flags)>>(StringComparer.Ordinal);
+        var typeMethodAttrMap = new Dictionary<string, Dictionary<uint, uint>>(StringComparer.Ordinal); // typeSubjectId → {methodToken → flags}
+        var typeEventMap = new Dictionary<string, List<(string SubjectId, string Name, string Type)>>(StringComparer.Ordinal);
         var assemblyTypeQueue = new Dictionary<string, HashSet<string>>(StringComparer.Ordinal);
         foreach (var typeSubjectId in typeMethodMap.Keys)
         {
@@ -3094,7 +3141,7 @@ public sealed partial class NativeAotLoweringPlanner
                     if (!typeIds.Contains(candidateId))
                         continue;
 
-                    var fields = new List<(string SubjectId, string Name, string Type, long Value, uint Token)>();
+                    var fields = new List<(string SubjectId, string Name, string Type, long Value, uint Token, uint Flags)>();
                     foreach (var fieldHandle in typeDef.GetFields())
                     {
                         var fieldDef = metadataReader.GetFieldDefinition(fieldHandle);
@@ -3126,11 +3173,66 @@ public sealed partial class NativeAotLoweringPlanner
                             catch { }
                         }
 
+                        // Compute field flags from PE FieldAttributes
+                        var fa = fieldDef.Attributes;
+                        uint fieldFlags = 0;
+                        if ((fa & System.Reflection.FieldAttributes.FieldAccessMask) == System.Reflection.FieldAttributes.Public)
+                            fieldFlags |= 1u << 0; // kFieldFlagIsPublic
+                        if (fa.HasFlag(System.Reflection.FieldAttributes.Static))
+                            fieldFlags |= 1u << 1; // kFieldFlagIsStatic
+                        if (fa.HasFlag(System.Reflection.FieldAttributes.InitOnly))
+                            fieldFlags |= 1u << 2; // kFieldFlagIsInitOnly
+                        if (fa.HasFlag(System.Reflection.FieldAttributes.Literal))
+                            fieldFlags |= 1u << 3; // kFieldFlagIsLiteral
+
                         var fieldSubjectId = candidateId + "::" + fieldName;
-                        fields.Add((fieldSubjectId, fieldName, "System.Int32", fieldValue, fieldToken));
+                        fields.Add((fieldSubjectId, fieldName, "System.Int32", fieldValue, fieldToken, fieldFlags));
                     }
 
                     typeFieldMap[candidateId] = fields;
+
+                    // Collect method attributes for flag emission
+                    var methodTokenFlags = new Dictionary<uint, uint>();
+                    foreach (var methodHandle in typeDef.GetMethods())
+                    {
+                        var methodDef = metadataReader.GetMethodDefinition(methodHandle);
+                        uint mToken = (uint)MetadataTokens.GetToken(methodHandle);
+                        var ma = methodDef.Attributes;
+                        uint methodFlags = 0;
+                        if ((ma & System.Reflection.MethodAttributes.MemberAccessMask) == System.Reflection.MethodAttributes.Public)
+                            methodFlags |= 1u << 0; // kMethodFlagIsPublic
+                        if (ma.HasFlag(System.Reflection.MethodAttributes.Static))
+                            methodFlags |= 1u << 1; // kMethodFlagIsStatic
+                        if (ma.HasFlag(System.Reflection.MethodAttributes.Virtual))
+                            methodFlags |= 1u << 2; // kMethodFlagIsVirtual
+                        methodTokenFlags[mToken] = methodFlags;
+                    }
+                    typeMethodAttrMap[candidateId] = methodTokenFlags;
+
+                    // Collect event data for this type
+                    var events = new List<(string SubjectId, string Name, string Type)>();
+                    foreach (var eventHandle in typeDef.GetEvents())
+                    {
+                        var eventDef = metadataReader.GetEventDefinition(eventHandle);
+                        var eventName = metadataReader.GetString(eventDef.Name);
+                        var eventSubjectId = candidateId + "::" + eventName;
+
+                        // Resolve event handler type from the event's Type property
+                        string eventType = "System.EventHandler";
+                        try
+                        {
+                            var eventTypeHandle = eventDef.Type;
+                            if (!eventTypeHandle.IsNil &&
+                                TryResolveTypeIdentity(metadataReader, assemblyName, eventTypeHandle, out var typeIdentity))
+                            {
+                                eventType = typeIdentity.DisplayName;
+                            }
+                        }
+                        catch { }
+
+                        events.Add((eventSubjectId, eventName, eventType));
+                    }
+                    typeEventMap[candidateId] = events;
                 }
             }
             catch { }
@@ -3146,11 +3248,15 @@ public sealed partial class NativeAotLoweringPlanner
 
             uint typeToken = tokenLookup.TryGetTypeToken(typeSubjectId);
 
+            var typeMethodAttrs = typeMethodAttrMap.TryGetValue(typeSubjectId, out var mta)
+                ? mta : null;
+
             var methodEntries = methodsInType.Select(m =>
             {
                 uint mToken = tokenLookup.TryGetMethodToken(m.Artifact.SubjectId);
                 string returnType = m.Artifact.ReturnType ?? "System.Void";
                 string methodName = GetMethodName(m.Artifact.SubjectId);
+                uint methodFlags = (mToken > 0 && typeMethodAttrs != null && typeMethodAttrs.TryGetValue(mToken, out var mf)) ? mf : 0u;
                 return new
                 {
                     metadata_token_hex = mToken > 0 ? "0x" + mToken.ToString("X8") : "0u",
@@ -3158,6 +3264,7 @@ public sealed partial class NativeAotLoweringPlanner
                     method_name_literal = EscapeCppStringLiteral(methodName),
                     return_type_literal = EscapeCppStringLiteral(returnType),
                     parameter_count = m.Artifact.ParameterCount,
+                    flags = methodFlags,
                 };
             }).ToArray();
 
@@ -3169,6 +3276,16 @@ public sealed partial class NativeAotLoweringPlanner
                     name_literal = EscapeCppStringLiteral(f.Name),
                     type_literal = EscapeCppStringLiteral(f.Type),
                     constant_value = f.Value,
+                    flags = f.Flags,
+                }).ToArray()
+                : System.Array.Empty<object>();
+
+            var eventEntries = typeEventMap.TryGetValue(typeSubjectId, out var tEvents)
+                ? tEvents.Select(e => new
+                {
+                    subject_id_literal = EscapeCppStringLiteral(e.SubjectId),
+                    name_literal = EscapeCppStringLiteral(e.Name),
+                    type_literal = EscapeCppStringLiteral(e.Type),
                 }).ToArray()
                 : System.Array.Empty<object>();
 
@@ -3182,6 +3299,8 @@ public sealed partial class NativeAotLoweringPlanner
                 name_literal = EscapeCppStringLiteral(methodsInType[0].TypeName),
                 methods = methodEntries,
                 fields = fieldEntries,
+                events = eventEntries,
+                event_count = eventEntries.Length,
             });
         }
 

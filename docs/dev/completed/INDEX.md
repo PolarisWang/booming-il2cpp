@@ -20,3 +20,5 @@
 | [13-generic-verification](13-generic-verification/MILESTONE.md) | 14 | 04/21–04/24 | Generic runtime, verification v1 |
 | [14-foundation-dll-runtime](14-foundation-dll-runtime/MILESTONE.md) | 32 | 04/25–05/17 | Foundation DLL, interpreter, generic runtime, thread/GC |
 | [15-hotupdate-final](15-hotupdate-final/MILESTONE.md) | 4 | 05/04–05/19 | Hotupdate dispatch, CRAG GC, misc |
+| [hotupdate-industrialization](hotupdate-industrialization/STATUS.md) | 11 | 05/23 | HotUpdate 工业化补齐 — 11 项全部完成: C1 寄存器 VM, C3 MetadataRegistry, C4 工具链, C5 测试覆盖, C9-C11 收尾 |
+| [reflection-industrialization](reflection-industrialization/STATUS.md) | 17 | 05/23 | Reflection 工业化补齐 — 4 阶段 17 项全部完成: Phase 1 API 核心矫正, Phase 2 API 表面全覆盖, Phase 3 热更新兼容, Phase 4 测试+工具链工业化 |

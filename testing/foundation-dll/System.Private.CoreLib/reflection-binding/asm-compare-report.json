@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/reflection/binding",
-  "capturedAt": "2026-05-22T01:19:24",
+  "capturedAt": "2026-05-23T11:09:55",
   "batchMode": true,
   "summary": {
     "totalMethods": 12,
@@ -17,9 +17,9 @@
     },
     "aotInstructionCount": {
       "min": 1,
-      "max": 32,
-      "avg": 23.8,
-      "total": 285
+      "max": 30,
+      "avg": 23.6,
+      "total": 283
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
@@ -29,7 +29,7 @@
     },
     "overallIrExpansionRatio": 0.54,
     "averageExpansionRatio": 0.54,
-    "maxExpansionRatio": 0.73,
+    "maxExpansionRatio": 0.68,
     "minExpansionRatio": 0.02
   },
   "methodResults": [
@@ -654,8 +654,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 32,
-        "ratio": 0.73,
+        "aotInstructionCount": 30,
+        "ratio": 0.68,
         "jitCodeSize": 256
       },
       "jit": {
@@ -666,7 +666,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ReflectionBindingSubjects_ReflectionBindingSubjects_Subject_11",
-        "instructions": 32
+        "instructions": 30
       },
       "analysis": [
         {
