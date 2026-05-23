@@ -163,7 +163,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetConstructorsDefault(CHAOS_IL2CPP_INTPTR ty
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetConstructors(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_IL2CPP_INT32 binding_flags) {
     using namespace chaos::il2cpp::runtime_core;
-    (void)binding_flags;
+    binding_flags = NormalizeBindingFlags(binding_flags);
     auto* desc = ResolveTypeFromReflectionOrGcHandle(type_handle);
     if (desc == nullptr || desc->methods == nullptr) return 0;
 
@@ -181,7 +181,8 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetConstructors(CHAOS_IL2CPP_INTPTR type_hand
     uint32_t idx = 0;
     for (uint32_t i = 0; i < desc->method_count && idx < kMaxCtors; i++) {
         if (desc->methods[i].name_utf8 != nullptr &&
-            std::strcmp(desc->methods[i].name_utf8, ".ctor") == 0) {
+            std::strcmp(desc->methods[i].name_utf8, ".ctor") == 0 &&
+            MatchMethodFlags(desc->methods[i].flags, binding_flags)) {
             s_elements[idx++] = static_cast<CHAOS_IL2CPP_INTPTR>(
                 EncodeReflectionQueryMethodHandle(&desc->methods[i]));
         }

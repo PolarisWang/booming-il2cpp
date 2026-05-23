@@ -9,6 +9,8 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <unordered_map>
+#include <mutex>
 
 namespace chaos::il2cpp::hot_update {
 
@@ -120,15 +122,6 @@ char* DuplicateCString(const CHAOS_IL2CPP_STRING& value) {
 
 }  // namespace
 
-// ── Module ID allocation for hot-update packages (>0, unique) ──
-// Function-local static to avoid CRT dynamic initializer ordering issues
-// (MSVC 14.42+ C++17: std::atomic ctor is not constexpr, so file-scope
-//  static creates a .CRT$XCU entry that may crash during CRT init).
-std::atomic<CHAOS_IL2CPP_UINT32>& GetNextModuleId() {
-    static std::atomic<CHAOS_IL2CPP_UINT32> id{1u};
-    return id;
-}
-
 // ── Hot-update generic registration ───────────────────────────────────────
 
 void RegisterHotUpdateModuleGenerics(
@@ -165,13 +158,21 @@ void ReleaseSupplementalMetadataImage(SupplementalMetadataImage* image) {
     ReleaseBinaryImage(image);
 }
 
+// ── Incremental update version registry ────────────────────────────────────
+// Tracks loaded packages by package_id → target_aot_version.
+// Enables idempotent reload: if the same or newer version is already loaded,
+// the load is skipped.  This is a placeholder for full incremental update.
+std::mutex g_version_registry_mutex;
+std::unordered_map<CHAOS_IL2CPP_STRING, CHAOS_IL2CPP_STRING> g_version_registry;
+
 bool LoadHotUpdatePackage(const char* package_root_utf8, HotUpdatePackageHandle* out_handle) {
     if (package_root_utf8 == nullptr || out_handle == nullptr) {
         return false;
     }
 
-    UnloadHotUpdatePackage(out_handle);
-
+    // ── Incremental update: version check ──────────────────────────────
+    // Check if a package with the same ID is already loaded.
+    // Also extract the manifest version to compare.
     const CHAOS_IL2CPP_STRING manifest_path = JoinPath(package_root_utf8, "package.manifest.json");
     const CHAOS_IL2CPP_STRING fallback_manifest_path = JoinPath(package_root_utf8, "manifest.json");
     CHAOS_IL2CPP_STRING manifest_contents;
@@ -188,6 +189,21 @@ bool LoadHotUpdatePackage(const char* package_root_utf8, HotUpdatePackageHandle*
         return false;
     }
 
+    {
+        std::lock_guard<std::mutex> lock(g_version_registry_mutex);
+        auto it = g_version_registry.find(package_id);
+        if (it != g_version_registry.end()) {
+            if (it->second >= target_aot_version) {
+                CHAOS_IL2CPP_LOG_INFO_M("HotUpdate",
+                    "Incremental: package '{}' version '{}' already loaded (requested '{}'), skipping",
+                    package_id, it->second, target_aot_version);
+                return false;
+            }
+        }
+    }
+
+    UnloadHotUpdatePackage(out_handle);
+
     const CHAOS_IL2CPP_STRING assembly_path = JoinPath(package_root_utf8, assembly_name.c_str());
     const CHAOS_IL2CPP_STRING metadata_path = JoinPath(package_root_utf8, metadata_name.c_str());
     if (!LoadAssemblyImageFromPath(assembly_path.c_str(), &out_handle->assembly_image)) {
@@ -202,7 +218,38 @@ bool LoadHotUpdatePackage(const char* package_root_utf8, HotUpdatePackageHandle*
     out_handle->package_id = DuplicateCString(package_id);
     out_handle->target_aot_version = DuplicateCString(target_aot_version);
     out_handle->assembly_name = DuplicateCString(assembly_name);
-    out_handle->module_id = GetNextModuleId().fetch_add(1u, std::memory_order_acq_rel);
+
+    // Register the package version in the incremental update registry.
+    {
+        std::lock_guard<std::mutex> lock(g_version_registry_mutex);
+        g_version_registry[package_id] = target_aot_version;
+    }
+
+    // Register the hot-update module in the ModuleRegistry so reflection
+    // queries (GetTypeByName, GetTypeFromHandle) can find its types.
+    // A minimal ModuleDescriptor is registered with just the assembly name;
+    // type_names / type_flags / type_info_ptrs / image will be populated
+    // from supplemental metadata in a later phase.
+    {
+        using chaos::il2cpp::runtime_core::ModuleDescriptor;
+        using chaos::il2cpp::runtime_core::RegisterModule;
+        using chaos::il2cpp::runtime_core::kInvalidModuleId;
+
+        ModuleDescriptor hu_desc = {};
+        hu_desc.name_utf8 = out_handle->assembly_name;
+        // type_count = 0, all other pointers = nullptr (minimal registration)
+        uint32_t mod_id = RegisterModule(out_handle->assembly_name, &hu_desc);
+        if (mod_id == kInvalidModuleId) {
+            CHAOS_IL2CPP_LOG_ERROR_M("HotUpdate",
+                "LoadHotUpdatePackage: RegisterModule failed for '{0}'",
+                out_handle->assembly_name ? out_handle->assembly_name : "(null)");
+            ReleaseAssemblyImage(&out_handle->assembly_image);
+            ReleaseSupplementalMetadataImage(&out_handle->metadata_image);
+            g_version_registry.erase(package_id);
+            return false;
+        }
+        out_handle->module_id = mod_id;
+    }
     out_handle->loaded = true;
 
     // Register a per-package memory domain so marshal allocations during
@@ -227,7 +274,9 @@ void UnloadHotUpdatePackage(HotUpdatePackageHandle* handle) {
     // Unregister generic instantiations before releasing memory resources.
     if (handle->module_id != 0u) {
         using chaos::il2cpp::runtime_core::ModuleLifecycleManager;
+        using chaos::il2cpp::runtime_core::MarkModuleTombstone;
         ModuleLifecycleManager::Get()->UnregisterHotUpdateGenerics(handle->module_id);
+        MarkModuleTombstone(handle->module_id);
         handle->module_id = 0u;
     }
 
@@ -241,6 +290,13 @@ void UnloadHotUpdatePackage(HotUpdatePackageHandle* handle) {
 
     ReleaseAssemblyImage(&handle->assembly_image);
     ReleaseSupplementalMetadataImage(&handle->metadata_image);
+
+    // Remove from version registry.
+    if (handle->package_id != nullptr) {
+        std::lock_guard<std::mutex> lock(g_version_registry_mutex);
+        g_version_registry.erase(CHAOS_IL2CPP_STRING(handle->package_id));
+    }
+
     delete[] handle->package_id;
     delete[] handle->target_aot_version;
     delete[] handle->assembly_name;

@@ -105,6 +105,7 @@ const chaos::il2cpp::runtime_core::ReflectionQueryImageDescriptor kProofImage = 
     "{{ assembly_name }}",
     kProofTypes,
     static_cast<CHAOS_IL2CPP_UINT32>(sizeof(kProofTypes) / sizeof(kProofTypes[0])),
+    1, 0, 0, 0,
 };
 
 struct NativeReferenceContext {

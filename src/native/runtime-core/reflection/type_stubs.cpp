@@ -83,14 +83,30 @@ CHAOS_IL2CPP_INTPTR ChaosTypeGetProperties(CHAOS_IL2CPP_INTPTR type) noexcept {
 }
 
 CHAOS_IL2CPP_INTPTR ChaosTypeGetEvents(CHAOS_IL2CPP_INTPTR type) noexcept {
-    // Events not yet in Tier 2 descriptors. Return empty array.
-    static CHAOS_IL2CPP_INTPTR s_buffer[1] = {0};
+    auto* desc = GetTypeDescriptorFromHandle(type);
+    if (desc == nullptr || desc->events == nullptr) return 0;
+
+    static CHAOS_IL2CPP_INTPTR s_buffer[65];
+    uint32_t count = desc->event_count > 32 ? 32 : desc->event_count;
+    s_buffer[0] = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<intptr_t>(count));
+    for (uint32_t i = 0; i < count; i++) {
+        s_buffer[1 + i] = static_cast<CHAOS_IL2CPP_INTPTR>(
+            EncodeReflectionQueryEventHandle(&desc->events[i]));
+    }
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_buffer);
 }
 
 CHAOS_IL2CPP_INTPTR ChaosTypeGetEvent(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR name) noexcept {
-    (void)type; (void)name;
-    return 0;
+    auto* desc = GetTypeDescriptorFromHandle(type);
+    if (desc == nullptr || desc->events == nullptr) return 0;
+
+    const char* evt_name = DecodeAndNullTerminateString(name);
+    if (evt_name == nullptr) return 0;
+
+    auto* evt = FindReflectionQueryEvent(desc, evt_name);
+    if (evt == nullptr) return 0;
+
+    return static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryEventHandle(evt));
 }
 
 CHAOS_IL2CPP_INTPTR ChaosTypeGetProperty(
@@ -112,7 +128,7 @@ CHAOS_IL2CPP_INTPTR ChaosTypeGetProperty(
 CHAOS_IL2CPP_INTPTR ChaosTypeGetFieldBindingFlags(
     CHAOS_IL2CPP_INTPTR type,
     CHAOS_IL2CPP_INTPTR name,
-    CHAOS_IL2CPP_INTPTR /*bindingFlags*/) noexcept
+    CHAOS_IL2CPP_INTPTR bindingFlags) noexcept
 {
     // Resolve type descriptor and find field by name.
     auto* desc = GetTypeDescriptorFromHandle(type);
@@ -121,10 +137,20 @@ CHAOS_IL2CPP_INTPTR ChaosTypeGetFieldBindingFlags(
     const char* field_name = DecodeAndNullTerminateString(name);
     if (field_name == nullptr) return 0;
 
-    const auto* field = FindReflectionQueryField(desc, field_name);
-    if (field == nullptr) return 0;
+    // Find the field by name, then check BindingFlags
+    for (CHAOS_IL2CPP_UINT32 i = 0; i < desc->field_count; i++) {
+        if (NamesMatch(desc->fields[i].name_utf8, field_name)) {
+            const int normalized_flags = NormalizeBindingFlags(static_cast<int>(bindingFlags));
+            if (MatchFieldFlags(desc->fields[i].flags, normalized_flags)) {
+                return static_cast<CHAOS_IL2CPP_INTPTR>(
+                    EncodeReflectionQueryFieldHandle(&desc->fields[i]));
+            }
+            // Field exists but doesn't match flags — return 0
+            return 0;
+        }
+    }
 
-    return static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryFieldHandle(field));
+    return 0;
 }
 
 CHAOS_IL2CPP_INTPTR ChaosTypeGetMembers(CHAOS_IL2CPP_INTPTR type) noexcept {
@@ -183,70 +209,249 @@ CHAOS_IL2CPP_INTPTR ChaosTypeGetUnderlyingSystemType(CHAOS_IL2CPP_INTPTR type) n
     return type;  // Non-enum types return themselves
 }
 
+// ── Internal helpers: cross-module type search ─────────────────────────
+
+// Search for a type descriptor by subject_id across all module images and
+// static AOT metadata (aot_metadata::kAllTypes).
+static const ReflectionQueryTypeDescriptor* FindDescBySubjectId(const char* subject_id) noexcept {
+    if (subject_id == nullptr) return nullptr;
+    uint32_t mod_count = GetModuleCount();
+    for (uint32_t mid = 0; mid < mod_count; mid++) {
+        const auto* mod = GetModuleByIndex(mid);
+        if (mod == nullptr || mod->image == nullptr) continue;
+        for (uint32_t ti = 0; ti < mod->image->type_count; ti++) {
+            auto* t = mod->image->types[ti];
+            if (t != nullptr && t->subject_id_utf8 != nullptr &&
+                std::strcmp(t->subject_id_utf8, subject_id) == 0) {
+                return t;
+            }
+        }
+    }
+    // Fallback: scan static AOT metadata
+    for (uint32_t i = 0; i < aot_metadata::kAllTypeCount; i++) {
+        auto* t = aot_metadata::kAllTypes[i];
+        if (t != nullptr && t->subject_id_utf8 != nullptr &&
+            std::strcmp(t->subject_id_utf8, subject_id) == 0) {
+            return t;
+        }
+    }
+    return nullptr;
+}
+
+// Search for a TypeRef (module_id + token) by type name across all modules.
+// Used to resolve "TypeName[]", "TypeName&", "TypeName*" composite type names.
+// Returns true and fills out_mod_id / out_token on match.
+static bool FindTypeRefByName(const char* target_name,
+                              uint32_t& out_mod_id,
+                              uint32_t& out_token) noexcept {
+    if (target_name == nullptr) return false;
+    uint32_t mod_count = GetModuleCount();
+    for (uint32_t mid = 0; mid < mod_count; mid++) {
+        const auto* mod = GetModuleByIndex(mid);
+        if (mod == nullptr || mod->tombstone || mod->type_names == nullptr) continue;
+        for (uint32_t ti = 0; ti < mod->type_count; ti++) {
+            if (mod->type_names[ti] != nullptr &&
+                std::strcmp(mod->type_names[ti], target_name) == 0) {
+                out_mod_id = mid;
+                out_token = 0x02000000u | (ti + 1);
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 CHAOS_IL2CPP_INTPTR ChaosTypeGetElementType(CHAOS_IL2CPP_INTPTR type) noexcept {
-    // For array types: resolve element type from the type name.
-    // Array names end with "[]" — strip them and look up the element type.
+    // Shared static buffer for constructing element type name/subject_id
+    static char s_elem_buf[1024];
+
+    // ── Path 1: ModuleRegistry handle (TypeRef) ──
     TypeRef tr;
     if (ResolveTypeRef(type, tr)) {
         const char* name = tr.module->type_names[tr.type_index];
         if (name != nullptr) {
             size_t len = std::strlen(name);
-            if (len >= 2 && name[len - 1] == ']' && name[len - 2] == '[') {
-                // Element type name = name without trailing "[]"
-                // This requires module search — Phase 2+ TBD.
+            uint32_t flags = tr.module->type_flags[tr.type_index];
+
+            // Determine which suffix to strip: ByRef ("&") > Pointer ("*") > Array ("[]")
+            size_t suffix_len = 0;
+            if ((flags & kFlagIsByRef) != 0u && len >= 1 && name[len - 1] == '&') {
+                suffix_len = 1;
+            } else if ((flags & kFlagIsPointer) != 0u && len >= 1 && name[len - 1] == '*') {
+                suffix_len = 1;
+            } else if (len >= 2 && name[len - 1] == ']' && name[len - 2] == '[') {
+                suffix_len = 2;
             }
-        }
-    }
 
-    // Fallback: try descriptor-based element type resolution
-    auto* desc = GetTypeDescriptorFromHandle(type);
-    if (desc != nullptr && desc->subject_id_utf8 != nullptr) {
-        // subject_id format: "ElementType[]" — strip trailing "[]"
-        auto sid_len = std::strlen(desc->subject_id_utf8);
-        if (sid_len >= 3 && desc->subject_id_utf8[sid_len - 1] == ']') {
-            // Build element type subject_id
-            static char s_elem_buf[1024];
-            size_t elem_len = sid_len - 2;
-            if (elem_len >= sizeof(s_elem_buf)) elem_len = sizeof(s_elem_buf) - 1;
-            std::memcpy(s_elem_buf, desc->subject_id_utf8, elem_len);
-            s_elem_buf[elem_len] = '\0';
+            if (suffix_len > 0) {
+                size_t elem_len = len - suffix_len;
+                if (elem_len >= sizeof(s_elem_buf)) elem_len = sizeof(s_elem_buf) - 1;
+                std::memcpy(s_elem_buf, name, elem_len);
+                s_elem_buf[elem_len] = '\0';
 
-            // Scan modules for a type with matching subject_id
-            uint32_t mod_count = GetModuleCount();
-            for (uint32_t mid = 0; mid < mod_count; mid++) {
-                const auto* mod = GetModuleByIndex(mid);
-                if (mod == nullptr || mod->image == nullptr) continue;
-                for (uint32_t ti = 0; ti < mod->image->type_count; ti++) {
-                    auto* t = mod->image->types[ti];
-                    if (t != nullptr && t->subject_id_utf8 != nullptr &&
-                        std::strcmp(t->subject_id_utf8, s_elem_buf) == 0) {
-                        return static_cast<CHAOS_IL2CPP_INTPTR>(
-                            EncodeReflectionQueryTypeHandle(t));
-                    }
+                // Search for element type by name across all modules
+                uint32_t elem_mod_id = 0;
+                uint32_t elem_token = 0;
+                if (FindTypeRefByName(s_elem_buf, elem_mod_id, elem_token)) {
+                    return static_cast<CHAOS_IL2CPP_INTPTR>(
+                        MakeTypeHandle(elem_mod_id, elem_token));
                 }
             }
         }
     }
+
+    // ── Path 2: Descriptor-based handle (ReflectionQuery or fallback) ──
+    auto* desc = GetTypeDescriptorFromHandle(type);
+    if (desc != nullptr && desc->subject_id_utf8 != nullptr) {
+        auto sid_len = std::strlen(desc->subject_id_utf8);
+
+        // Determine which suffix to strip: ByRef ("&") > Pointer ("*") > Array ("[]")
+        size_t suffix_len = 0;
+        if (sid_len >= 1 && desc->subject_id_utf8[sid_len - 1] == '&') {
+            suffix_len = 1;
+        } else if (sid_len >= 1 && desc->subject_id_utf8[sid_len - 1] == '*') {
+            suffix_len = 1;
+        } else if (sid_len >= 2 && desc->subject_id_utf8[sid_len - 1] == ']' &&
+                   desc->subject_id_utf8[sid_len - 2] == '[') {
+            suffix_len = 2;
+        }
+
+        if (suffix_len > 0) {
+            size_t elem_len = sid_len - suffix_len;
+            if (elem_len >= sizeof(s_elem_buf)) elem_len = sizeof(s_elem_buf) - 1;
+            std::memcpy(s_elem_buf, desc->subject_id_utf8, elem_len);
+            s_elem_buf[elem_len] = '\0';
+
+            // Search for element type descriptor by subject_id
+            auto* elem_desc = FindDescBySubjectId(s_elem_buf);
+            if (elem_desc != nullptr) {
+                return static_cast<CHAOS_IL2CPP_INTPTR>(
+                    EncodeReflectionQueryTypeHandle(elem_desc));
+            }
+        }
+    }
+
     return 0;
 }
 
 CHAOS_IL2CPP_INTPTR ChaosTypeMakeArrayType(CHAOS_IL2CPP_INTPTR type) noexcept {
-    (void)type;
-    // Return pseudo-pointer whose low 32 bits match expected hash 35342034.
-    // Subjects compare GetHashCode() (address truncation) against this value.
-    return static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(0x8000000000000000ULL | 35342034ULL));
+    static char s_buf[1024];
+
+    // Path 1: ModuleRegistry TypeRef handle — append "[]" and search type_names
+    TypeRef tr;
+    if (ResolveTypeRef(type, tr)) {
+        const char* name = tr.module->type_names[tr.type_index];
+        if (name != nullptr) {
+            size_t len = std::strlen(name);
+            if (len + 3 > sizeof(s_buf)) return 0;
+            std::memcpy(s_buf, name, len);
+            s_buf[len] = '['; s_buf[len + 1] = ']'; s_buf[len + 2] = '\0';
+
+            uint32_t found_mod_id = 0;
+            uint32_t found_token = 0;
+            if (FindTypeRefByName(s_buf, found_mod_id, found_token)) {
+                return static_cast<CHAOS_IL2CPP_INTPTR>(
+                    MakeTypeHandle(found_mod_id, found_token));
+            }
+        }
+    }
+
+    // Path 2: Descriptor-based handle (ReflectionQuery or fallback) — append "[]" and search subject_id
+    auto* desc = GetTypeDescriptorFromHandle(type);
+    if (desc != nullptr && desc->subject_id_utf8 != nullptr) {
+        size_t len = std::strlen(desc->subject_id_utf8);
+        if (len + 3 > sizeof(s_buf)) return 0;
+        std::memcpy(s_buf, desc->subject_id_utf8, len);
+        s_buf[len] = '['; s_buf[len + 1] = ']'; s_buf[len + 2] = '\0';
+
+        auto* found_desc = FindDescBySubjectId(s_buf);
+        if (found_desc != nullptr) {
+            return static_cast<CHAOS_IL2CPP_INTPTR>(
+                EncodeReflectionQueryTypeHandle(found_desc));
+        }
+    }
+
+    return 0;
 }
 
 CHAOS_IL2CPP_INTPTR ChaosTypeMakeByRefType(CHAOS_IL2CPP_INTPTR type) noexcept {
-    (void)type;
-    // Return pseudo-pointer whose low 32 bits match expected hash 56793269.
-    return static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(0x8000000000000000ULL | 56793269ULL));
+    static char s_buf[1024];
+
+    // Path 1: ModuleRegistry TypeRef handle — append "&" and search type_names
+    TypeRef tr;
+    if (ResolveTypeRef(type, tr)) {
+        const char* name = tr.module->type_names[tr.type_index];
+        if (name != nullptr) {
+            size_t len = std::strlen(name);
+            if (len + 2 > sizeof(s_buf)) return 0;
+            std::memcpy(s_buf, name, len);
+            s_buf[len] = '&'; s_buf[len + 1] = '\0';
+
+            uint32_t found_mod_id = 0;
+            uint32_t found_token = 0;
+            if (FindTypeRefByName(s_buf, found_mod_id, found_token)) {
+                return static_cast<CHAOS_IL2CPP_INTPTR>(
+                    MakeTypeHandle(found_mod_id, found_token));
+            }
+        }
+    }
+
+    // Path 2: Descriptor-based handle — append "&" and search subject_id
+    auto* desc = GetTypeDescriptorFromHandle(type);
+    if (desc != nullptr && desc->subject_id_utf8 != nullptr) {
+        size_t len = std::strlen(desc->subject_id_utf8);
+        if (len + 2 > sizeof(s_buf)) return 0;
+        std::memcpy(s_buf, desc->subject_id_utf8, len);
+        s_buf[len] = '&'; s_buf[len + 1] = '\0';
+
+        auto* found_desc = FindDescBySubjectId(s_buf);
+        if (found_desc != nullptr) {
+            return static_cast<CHAOS_IL2CPP_INTPTR>(
+                EncodeReflectionQueryTypeHandle(found_desc));
+        }
+    }
+
+    return 0;
 }
 
 CHAOS_IL2CPP_INTPTR ChaosTypeMakePointerType(CHAOS_IL2CPP_INTPTR type) noexcept {
-    (void)type;
-    // Return pseudo-pointer whose low 32 bits match expected hash 115000.
-    return static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINTPTR>(0x8000000000000000ULL | 115000ULL));
+    static char s_buf[1024];
+
+    // Path 1: ModuleRegistry TypeRef handle — append "*" and search type_names
+    TypeRef tr;
+    if (ResolveTypeRef(type, tr)) {
+        const char* name = tr.module->type_names[tr.type_index];
+        if (name != nullptr) {
+            size_t len = std::strlen(name);
+            if (len + 2 > sizeof(s_buf)) return 0;
+            std::memcpy(s_buf, name, len);
+            s_buf[len] = '*'; s_buf[len + 1] = '\0';
+
+            uint32_t found_mod_id = 0;
+            uint32_t found_token = 0;
+            if (FindTypeRefByName(s_buf, found_mod_id, found_token)) {
+                return static_cast<CHAOS_IL2CPP_INTPTR>(
+                    MakeTypeHandle(found_mod_id, found_token));
+            }
+        }
+    }
+
+    // Path 2: Descriptor-based handle — append "*" and search subject_id
+    auto* desc = GetTypeDescriptorFromHandle(type);
+    if (desc != nullptr && desc->subject_id_utf8 != nullptr) {
+        size_t len = std::strlen(desc->subject_id_utf8);
+        if (len + 2 > sizeof(s_buf)) return 0;
+        std::memcpy(s_buf, desc->subject_id_utf8, len);
+        s_buf[len] = '*'; s_buf[len + 1] = '\0';
+
+        auto* found_desc = FindDescBySubjectId(s_buf);
+        if (found_desc != nullptr) {
+            return static_cast<CHAOS_IL2CPP_INTPTR>(
+                EncodeReflectionQueryTypeHandle(found_desc));
+        }
+    }
+
+    return 0;
 }
 
 }  // namespace chaos::il2cpp::runtime_core

@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.Private.CoreLib/reflection/event/proof",
+  "displayName": "Reflection Event Proof",
+  "methodSubjectIds": [
+    "System.Private.CoreLib/System.Type::GetEvents:System.Reflection.EventInfo[]()",
+    "System.Private.CoreLib/System.Type::GetEvents:System.Reflection.EventInfo[](System.Reflection.BindingFlags)",
+    "System.Private.CoreLib/System.Type::GetEvent:System.Reflection.EventInfo(System.String)"
+  ],
+  "methodSubjectCount": 3,
+  "functionalObligation": {
+    "required": true
+  },
+  "performanceObligation": {
+    "required": false
+  },
+  "hotupdateFunctionalObligation": {
+    "required": false
+  },
+  "hotupdatePerformanceObligation": {
+    "required": false
+  },
+  "reviewBundleRequired": false
+}

@@ -54,6 +54,14 @@ struct ModuleDescriptor {
     CHAOS_IL2CPP_INTPTR (*custom_attribute_materializer)(   // Per-module materializer: resolves TypeInfo*/VTable*
         uint32_t attr_type_token,                            //   by attr type token, creates + assigns from field_data
         const uint8_t* field_data);                          //   Returns object pointer or 0
+    const uint32_t* custom_attribute_method_offset;     // [method_count+1] prefix-sum into blob by TokenToIndex
+    const uint32_t* custom_attribute_field_offset;       // [field_count+1] prefix-sum into blob by TokenToIndex
+    const uint32_t* custom_attribute_property_offset;    // [property_count+1] prefix-sum into blob by TokenToIndex
+    const uint32_t* custom_attribute_param_offset;       // [param_count+1] prefix-sum into blob by TokenToIndex
+    uint32_t custom_attribute_method_count;              // method_def count for offset array sizing
+    uint32_t custom_attribute_field_count;               // field_def count for offset array sizing
+    uint32_t custom_attribute_property_count;            // property count for offset array sizing
+    uint32_t custom_attribute_param_count;               // param count for offset array sizing
     const ChaosAbiManifestV0* abi_manifest; // Per-module ABI manifest (null = no validation)
     bool tombstone = false;                 // true after hot-unload (module entry retained for handle safety)
 };

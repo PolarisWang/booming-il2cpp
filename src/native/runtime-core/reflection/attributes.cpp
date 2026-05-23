@@ -1,6 +1,12 @@
 // ── CustomAttribute blob query ──────────────────────────────────────
 // Called from per-family generated code (the short extraction wrapper)
 // after it has decoded (kind, handle) from the managed reflection object.
+//
+// For member_kind == 1 (Type), member_handle is a TypeInfoHandle:
+//   [module_id:32][token:32].
+// For member_kind 2-5 (Method/Field/Property/Param), member_handle
+// follows the same [module_id:32][token:32] encoding, packed by the
+// generated per-family wrapper which knows both values.
 
 extern "C" {
 namespace chaos::il2cpp::runtime_core {
@@ -12,20 +18,51 @@ CHAOS_IL2CPP_INTPTR ChaosGetCustomAttributeFromBlob(
 {
     if (member_kind == 0 || member_handle == 0 || attr_type_handle == 0) return 0;
 
-    // Phase 1: only Type kind (kind == 1). Method kind deferred.
-    if (member_kind != 1) return 0;
-
-    TypeInfoHandle handle = static_cast<TypeInfoHandle>(member_handle);
-    uint32_t module_id = GetModuleId(handle);
-    uint32_t token = GetTypeToken(handle);
+    // Decode module_id and token from the handle.
+    // Type handles use TypeInfoHandle encoding; all other kinds use
+    // the same [module_id:32][token:32] layout.
+    uint64_t encoded = static_cast<uint64_t>(member_handle);
+    uint32_t module_id = static_cast<uint32_t>(encoded >> 32);
+    uint32_t token = static_cast<uint32_t>(encoded & 0xFFFFFFFFu);
     uint32_t entity_idx = TokenToIndex(token);
 
     const auto* mod = LookupModule(module_id);
     if (mod == nullptr || mod->custom_attribute_blob == nullptr) return 0;
-    if (entity_idx >= mod->custom_attribute_entity_count) return 0;
 
-    uint32_t start = mod->custom_attribute_offset[entity_idx];
-    uint32_t end = mod->custom_attribute_offset[entity_idx + 1];
+    // Determine offset array and entity count based on member kind.
+    const uint32_t* offset_array = nullptr;
+    uint32_t entity_count = 0;
+
+    switch (member_kind) {
+        case 1: // Type
+            offset_array = mod->custom_attribute_offset;
+            entity_count = mod->custom_attribute_entity_count;
+            break;
+        case 2: // Method
+            offset_array = mod->custom_attribute_method_offset;
+            entity_count = mod->custom_attribute_method_count;
+            break;
+        case 3: // Field
+            offset_array = mod->custom_attribute_field_offset;
+            entity_count = mod->custom_attribute_field_count;
+            break;
+        case 4: // Property
+            offset_array = mod->custom_attribute_property_offset;
+            entity_count = mod->custom_attribute_property_count;
+            break;
+        case 5: // Param
+            offset_array = mod->custom_attribute_param_offset;
+            entity_count = mod->custom_attribute_param_count;
+            break;
+        default:
+            return 0;
+    }
+
+    if (offset_array == nullptr || entity_count == 0) return 0;
+    if (entity_idx >= entity_count) return 0;
+
+    uint32_t start = offset_array[entity_idx];
+    uint32_t end = offset_array[entity_idx + 1];
     if (start >= end) return 0;  // no attributes for this entity
 
     uint32_t target_attr_token = GetTypeToken(attr_type_handle);

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.Private.CoreLib/reflection/hotupdate",
+  "displayName": "Reflection HotUpdate",
+  "methodSubjectIds": [
+    "System.Private.CoreLib/System.Reflection.Assembly::GetModules:System.Reflection.Module[]()",
+    "System.Private.CoreLib/System.Reflection.Assembly::GetTypes:System.Type[]()",
+    "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+    "System.Private.CoreLib/System.Reflection.Assembly::GetType:System.Type(System.String)"
+  ],
+  "methodSubjectCount": 4,
+  "functionalObligation": {
+    "required": true
+  },
+  "performanceObligation": {
+    "required": false
+  },
+  "hotupdateFunctionalObligation": {
+    "required": true
+  },
+  "hotupdatePerformanceObligation": {
+    "required": false
+  },
+  "reviewBundleRequired": false
+}

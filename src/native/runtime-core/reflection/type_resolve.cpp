@@ -62,6 +62,42 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeFromHandle(CHAOS_IL2CPP_INTPTR runtime
         }
     }
 
+    // Try ModuleRegistry handle: [module_id:32][token:32] encoding.
+    // Hot-update modules registered via RegisterModule() can be resolved
+    // through their module_id and TypeDef token.
+    {
+        TypeInfoHandle type_handle = static_cast<TypeInfoHandle>(runtime_type_handle);
+        uint32_t mid = GetModuleId(type_handle);
+        uint32_t tok = GetTypeToken(type_handle);
+        if (mid != 0 && tok != 0) {
+            const auto* mod = LookupModule(mid);
+            if (mod != nullptr && !mod->tombstone) {
+                // Path A: resolve through type_info_ptrs[] (Tier 1).
+                uint32_t idx = TokenToIndex(tok);
+                if (idx < mod->type_count && mod->type_info_ptrs != nullptr) {
+                    const auto* ti = mod->type_info_ptrs[idx];
+                    if (ti != nullptr) {
+                        // Encode as ReflectionQuery handle if image is available.
+                        if (mod->image != nullptr && idx < mod->image->type_count) {
+                            return static_cast<CHAOS_IL2CPP_INTPTR>(
+                                EncodeReflectionQueryTypeHandle(mod->image->types[idx]));
+                        }
+                        // Otherwise return the raw module_id+token as the handle.
+                        return runtime_type_handle;
+                    }
+                }
+                // Path B: resolve through image descriptor (Tier 2).
+                if (mod->image != nullptr) {
+                    auto* typeDesc = FindReflectionQueryTypeByToken(mod->image, tok);
+                    if (typeDesc != nullptr) {
+                        return static_cast<CHAOS_IL2CPP_INTPTR>(
+                            EncodeReflectionQueryTypeHandle(typeDesc));
+                    }
+                }
+            }
+        }
+    }
+
     return 0;
 }
 
@@ -92,6 +128,29 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeByName(
         auto* type = FindReflectionQueryTypeByName(module->image, ns, type_name);
         if (type != nullptr) {
             return static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryTypeHandle(type));
+        }
+    }
+
+    // Fallback: scan ModuleRegistry type_names[] for modules without an image.
+    // Hot-update modules registered via RegisterModule() with a minimal
+    // ModuleDescriptor (image == nullptr) are not covered by the loop above.
+    // This path scans type_names[] / type_namespaces[] directly and returns
+    // a ModuleRegistry-style handle [module_id:32][synthetic_token:32].
+    for (uint32_t i = 0; i < count; i++) {
+        const auto* module = GetModuleByIndex(i);
+        if (module == nullptr || module->type_names == nullptr) continue;
+        if (module->image != nullptr) continue;  // already scanned in the loop above
+        for (uint32_t j = 0; j < module->type_count; j++) {
+            const char* mod_ns = module->type_namespaces != nullptr
+                ? module->type_namespaces[j] : "";
+            const char* mod_name = module->type_names[j];
+            if (mod_name != nullptr &&
+                NamesMatch(mod_ns, ns) &&
+                NamesMatch(mod_name, type_name)) {
+                // Return ModuleRegistry handle: [module_id:32][synthetic_typedef_token:32]
+                uint32_t synthetic_token = 0x02000000u | (j + 1);
+                return static_cast<CHAOS_IL2CPP_INTPTR>(MakeTypeHandle(i, synthetic_token));
+            }
         }
     }
 
