@@ -371,7 +371,7 @@ namespace chaos { namespace il2cpp { namespace common {
 	#define CHAOS_IL2CPP_UINTPTR_MAX  (std::numeric_limits<CHAOS_IL2CPP_UINTPTR>::max)()
 
 // ── Indirect load/store templates ────────────────────────────
-#define CHAOS_IL2CPP_RAW_POINTER_TAG  CHAOS_IL2CPP_UINTPTR(1) << 63
+#define CHAOS_IL2CPP_RAW_POINTER_TAG  (CHAOS_IL2CPP_UINTPTR(1) << 63)
 
 // Resolve a native int slot pointer — used by chaos_load_indirect / chaos_store_indirect.
 namespace chaos::il2cpp::common {

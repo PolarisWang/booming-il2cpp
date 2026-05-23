@@ -114,6 +114,15 @@ inline CHAOS_IL2CPP_INTPTR async_task_awaiter_get_result_raw(CHAOS_IL2CPP_INTPTR
     return task->result;
 }
 
+/// Retrieve the exception from a faulted task, or 0 if no exception.
+/// Provides an escape hatch for callers that need to inspect the exception
+/// rather than letting the default awaiter abort on fault.
+inline CHAOS_IL2CPP_INTPTR async_task_awaiter_get_exception(CHAOS_IL2CPP_INTPTR awaiter_ref)
+{
+    auto* task = require_async_task(*resolve_native_int_slot(awaiter_ref));
+    return task->exception;
+}
+
 /// Task.Run: queue a delegate for execution on the thread pool.
 /// The task is created, queued, and the task handle is returned.
 /// When the delegate completes, the task is marked as completed.
