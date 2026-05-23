@@ -14,8 +14,8 @@
 > **question_clearance**: cleared
 > **clearance_confirmed_by_user**: true
 > **clearance_source**: brainstorm-conversation
-> **latest_stop_point**: T0-3 完成 — enum_stubs 16 测试全部通过
-> **recommended_next_child**: t0-4-datetime-guid-math-test
+> **latest_stop_point**: T0-4 完成 — datetime/guid/math 57 测试全部通过
+> **recommended_next_child**: t0-5-misc-stubs-test
 
 ## Scope
 
@@ -62,7 +62,8 @@
 - **2026-05-23**: T0-1 完成 — string_stubs 19 API 共 77 测试全部通过，同时修复了 JoinSs 的 tagged-pointer copy bug。
 - **2026-05-23**: T0-2 完成 — collection_stubs 14 API 共 34 测试全部通过，修复 collection_stubs.h extern "C" 缺失。
 - **2026-05-23**: T0-3 完成 — enum_stubs 12 API 共 16 测试全部通过，添加 enum_stubs GC/reflection 桩支持。
+- **2026-05-23**: T0-4 完成 — datetime/guid/math 17+5+16 API 共 57 测试全部通过，添加 Windows SDK 冲突的 PCH 头文件解决。
 
 ## 下一步
 
-启动 Phase 0 下一个子任务 T0-4（datetime/guid/math stubs 单元测试）。
+启动 Phase 0 下一个子任务 T0-5（misc_stubs 单元测试）。
