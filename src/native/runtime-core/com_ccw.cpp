@@ -4,8 +4,12 @@
 #include <chaos/native_types.h>
 #include <chaos/type_info.h>
 #include <runtime_abi.h>
+#include "runtime_core.h"
+#include "runtime_capability.h"
+#include "engine_binding.h"
 #include "generated_code_compat.h"
 #include "com_ccw.h"
+#include "com_typelib.h"
 #include "memory_domain.h"
 
 namespace chaos::il2cpp::com_ccw {
@@ -20,16 +24,23 @@ static const CHAOS_IL2CPP_UINT8 kIidIUnknown[16] = {0};
 
 /// Recover ComCcw* from either a direct CCW pointer or an interface identity pointer.
 /// Identity pointers are &ComCcwInterfaceEntry::vtable (the address of the vtable field).
+/// Uses address-distance sanity check to avoid dereferencing garbage memory when
+/// self is the CCW base pointer (not an interface identity pointer).
 inline ComCcw* ResolveCcw(void* self) noexcept {
     // Try interface-identity path: self is &interfaces[i].vtable.
     // Compute the presumed ComCcwInterfaceEntry address and verify ccw_ptr.
     auto* entry = reinterpret_cast<ComCcwInterfaceEntry*>(
         static_cast<char*>(self) - offsetof(ComCcwInterfaceEntry, vtable));
-    if (entry->ccw_ptr != nullptr) {
-        auto* ccw = static_cast<ComCcw*>(entry->ccw_ptr);
-        // Verify that entry is within ccw->interfaces[].
-        if (entry >= ccw->interfaces && entry < ccw->interfaces + kMaxCcwInterfaces) {
-            return ccw;
+    void* raw_ccw = entry->ccw_ptr;
+    if (raw_ccw != nullptr) {
+        // Integer-only sanity check before casting: ccw must own entry.
+        // A valid ComCcw starts before its interfaces[] array (ccw < entry)
+        // and the span is well under 1024 bytes.
+        auto e_addr = reinterpret_cast<uintptr_t>(entry);
+        auto c_addr = reinterpret_cast<uintptr_t>(raw_ccw);
+        constexpr uintptr_t kMaxCcwSpan = 1024u;
+        if (c_addr < e_addr && (e_addr - c_addr) < kMaxCcwSpan) {
+            return static_cast<ComCcw*>(raw_ccw);
         }
     }
     // Fallback: self is the ComCcw pointer directly.
@@ -298,4 +309,95 @@ void CcwDispatchMethod(void* ccw_ptr, CHAOS_IL2CPP_UINT64 iface_stable_id, CHAOS
     }
 }
 
+CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL CcwDispatchMethodInvoke(
+    void* ccw_ptr, CHAOS_IL2CPP_UINT64 iface_stable_id,
+    CHAOS_IL2CPP_INT32 dispIdMember, void* pDispParams, void* pVarResult) noexcept
+{
+    if (ccw_ptr == nullptr) return ::chaos::il2cpp::com_ccw::kE_POINTER;
+    auto* ccw = static_cast<ComCcw*>(ccw_ptr);
+
+    // Validate: TypeLib data must have method info.
+    if (ccw->typelib_data == nullptr || dispIdMember < 0 ||
+        dispIdMember >= ccw->typelib_data->method_count)
+        return ::chaos::il2cpp::com_ccw::kDISP_E_MEMBERNOTFOUND;
+
+    const auto& md = ccw->typelib_data->methods[dispIdMember];
+
+    // Get managed object from GCHandle.
+    const auto* abi = static_cast<const RuntimeAbiV0*>(chaos_runtime_get_abi_v0());
+    if (abi == nullptr || abi->gc_handle_get == nullptr || abi->method_invoke == nullptr)
+        return ::chaos::il2cpp::com_ccw::kE_NOTIMPL;
+    void* obj = abi->gc_handle_get(
+        static_cast<RuntimeState*>(ccw->runtime_state),
+        static_cast<GCHandle>(ccw->gc_handle));
+    if (obj == nullptr) return ::chaos::il2cpp::com_ccw::kE_NOTIMPL;
+
+    auto* rs = static_cast<RuntimeState*>(ccw->runtime_state);
+    auto* ts = runtime_core::GetCurrentThreadState();
+    auto* params = static_cast<com_abi::DISPPARAMS*>(pDispParams);
+    uint32_t argc = (params != nullptr) ? params->cArgs : 0;
+
+    // Fast path: no args — use existing CcwDispatchMethod.
+    if (argc == 0) {
+        CcwDispatchMethod(ccw_ptr, iface_stable_id, static_cast<uint32_t>(dispIdMember));
+        return ::chaos::il2cpp::com_ccw::kS_OK;
+    }
+
+    // Convert DISPPARAMS to managed object array.
+    // Stack-allocate for small arg counts (up to 8).
+    void* arg_buffer[8];
+    void** managed_args = arg_buffer;
+    if (argc > 8) {
+        managed_args = static_cast<void**>(std::malloc(argc * sizeof(void*)));
+        if (managed_args == nullptr) return static_cast<int32_t>(0x8007000Eu); // E_OUTOFMEMORY
+    }
+
+    // DISPPARAMS.rgvarg is in REVERSE order: rgvarg[0] = last parameter.
+    // Each VARIANT is 16 bytes (sizeof(VariantLayout)).
+    auto* variant_base = static_cast<const char*>(params->rgvarg);
+    constexpr uint32_t kVariantSize = 16;
+    for (uint32_t i = 0; i < argc; i++) {
+        void* variant_ptr = const_cast<char*>(variant_base + (argc - 1 - i) * kVariantSize);
+        managed_args[i] = runtime_core::ChaosGetObjectForNativeVariant(
+            reinterpret_cast<CHAOS_IL2CPP_INTPTR>(variant_ptr));
+    }
+
+    // Call method via method_invoke using metadata token as handle.
+    MethodInfoHandle method_handle = static_cast<MethodInfoHandle>(md.method_token);
+    uint64_t ret_buf[8] = {};  // 64-byte return buffer (covers SIMD types)
+    ExceptionHandle ex = nullptr;
+
+    RuntimeStatus status = abi->method_invoke(
+        rs, ts, method_handle, obj,
+        const_cast<void* const*>(managed_args), argc,
+        ret_buf, sizeof(ret_buf), &ex);
+
+    if (managed_args != arg_buffer) {
+        std::free(managed_args);
+    }
+
+    // Set return value as VARIANT.
+    if (pVarResult != nullptr && status == CHAOS_RUNTIME_STATUS_OK) {
+        runtime_core::ChaosGetNativeVariantForObject(
+            reinterpret_cast<void*>(ret_buf[0]),
+            reinterpret_cast<CHAOS_IL2CPP_INTPTR>(pVarResult),
+            1); // destroy_old = true
+    }
+
+    if (status == CHAOS_RUNTIME_STATUS_MANAGED_EXCEPTION) {
+        // Store exception info in pVarResult as VT_ERROR + scode if available.
+        if (pVarResult != nullptr) {
+            // Zero out the 16-byte VARIANT, then write vt=VT_ERROR(0x0A) at [0]
+            // and scode=DISP_E_EXCEPTION(0x80020009) at [8].
+            CHAOS_IL2CPP_MEMSET(pVarResult, 0, kVariantSize);
+            uint16_t vt_error = 0x0Au;
+            CHAOS_IL2CPP_MEMCPY(pVarResult, &vt_error, sizeof(uint16_t));
+            int32_t scode = 0x80020009;
+            CHAOS_IL2CPP_MEMCPY(static_cast<char*>(pVarResult) + 8, &scode, sizeof(scode));
+        }
+        return 0x80020009; // DISP_E_EXCEPTION
+    }
+
+    return ::chaos::il2cpp::com_ccw::kS_OK;
+}
 }  // namespace chaos::il2cpp::com_ccw

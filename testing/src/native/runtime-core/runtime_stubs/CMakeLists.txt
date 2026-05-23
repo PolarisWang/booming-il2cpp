@@ -60,3 +60,11 @@ add_chaos_test(collection_stubs_test
     LIBS ${CHAOS_COMMON_TEST_LIBS}
     LABELS "unit;core"
 )
+
+# T1a-1: convert/parse/decimal stubs unit tests
+# Uses self-contained test-harness implementations matching parse_convert.cpp.
+add_chaos_test(convert_stubs_test
+    convert_stubs_test.cpp
+    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    LABELS "unit;core"
+)

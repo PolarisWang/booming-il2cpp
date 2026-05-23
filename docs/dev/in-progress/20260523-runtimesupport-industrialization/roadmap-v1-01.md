@@ -203,14 +203,14 @@
 
 | task_id | phase | status | purpose | depends_on | deliverables | estimated_effort |
 |---------|-------|--------|---------|------------|--------------|-----------------|
-| t3-1-layout-engine | Phase 3 | planned | layout_engine audit+修复+测试 | Phase 2 | ANALYSIS.md + tests | 5d |
-| t3-2-generic-context | Phase 3 | planned | generic_context audit+修复+测试 | Phase 2 | ANALYSIS.md + tests | 3d |
-| t3-3-aot-ir-reader | Phase 3 | planned | aot_core_ir_reader audit+测试 | Phase 2 | 测试 | 2d |
-| t3-4-assembly-manager | Phase 3 | planned | assembly_manager+domain_unloader audit+测试 | Phase 2 | 测试 | 2d |
-| t3-5-convert-parse | Phase 3 | planned | convert+parse_convert audit+测试 | Phase 2 | 测试 | 2d |
-| t3-6-native-static | Phase 3 | planned | native_library+static_var_store audit+测试 | Phase 2 | 测试 | 1d |
-| t3-7-thread-state | Phase 3 | planned | thread_state 快速验证 | Phase 2 | 验证报告 | 1d |
-| t3-8-memory-domain | Phase 3 | planned | memory_domain 快速验证 | Phase 2 | 验证报告 | 1d |
+| t3-1-layout-engine | Phase 3 | completed | layout_engine audit+修复+测试 | Phase 2 | ANALYSIS.md + tests | 5d |
+| t3-2-generic-context | Phase 3 | completed | generic_context audit+修复+测试 | Phase 2 | ANALYSIS.md + tests | 3d |
+| t3-3-aot-ir-reader | Phase 3 | completed | aot_core_ir_reader audit+测试 | Phase 2 | 测试 | 2d |
+| t3-4-assembly-manager | Phase 3 | completed | assembly_manager+domain_unloader audit+测试 | Phase 2 | 测试 | 2d |
+| t3-5-convert-parse | Phase 3 | completed | convert+parse_convert audit+测试 | Phase 2 | 测试 | 2d |
+| t3-6-native-static | Phase 3 | completed | native_library+static_var_store audit+测试 | Phase 2 | 测试 | 1d |
+| t3-7-thread-state | Phase 3 | completed | thread_state 快速验证 | Phase 2 | 验证报告 | 1d |
+| t3-8-memory-domain | Phase 3 | completed | memory_domain 快速验证 | Phase 2 | 验证报告 | 1d |
 
 ### Phase 4：硬化 + 文档 + 验证
 

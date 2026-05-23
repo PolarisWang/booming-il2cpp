@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "SecureStringMarshalSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Runtime.InteropServices/secure-string-marshal/managed/subjects/build-output/SecureStringMarshalSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Runtime.InteropServices/secure-string-marshal/managed/subjects/build-output/SecureStringMarshalSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "SecureStringMarshalSubjects",
-      "path": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Runtime.InteropServices/secure-string-marshal/managed/subjects/build-output/SecureStringMarshalSubjects.dll"
+      "path": "testing/foundation-dll/System.Runtime.InteropServices/secure-string-marshal/managed/subjects/build-output/SecureStringMarshalSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "cb8e66c6-8ef1-4070-94c9-b5c15c12ea0d",
+  "inputModuleVersionId": "f2dc852e-6fc9-4672-baef-109654a9a462",
   "artifacts": [
     {
       "kind": "typedIlIr",

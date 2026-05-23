@@ -390,16 +390,19 @@ interpreter::IRMethod DeserializeAotCoreIrMethod(
                     }
 
                     // 2nd priority: targetReference.subjectId
+                    // Note: JSON reader's string_value may NOT be null-terminated
+                    // for non-escaped strings (points into raw JSON buffer).
                     if (instr.call_target == nullptr)
                     {
                         auto target_ref = json::JsonParser::FindKey(elem, "targetReference");
                         if (target_ref.IsObject() && resolve_fn != nullptr)
                         {
                             auto subject_id = json::JsonParser::FindKey(target_ref, "subjectId");
-                            const char* sid = JsonStringOr(subject_id);
-                            if (sid != nullptr)
+                            if (subject_id.IsString())
                             {
-                                instr.call_target = resolve_fn(sid, resolve_ctx);
+                                std::string sid(subject_id.string_value, subject_id.string_length);
+                                if (!sid.empty())
+                                    instr.call_target = resolve_fn(sid.c_str(), resolve_ctx);
                             }
                         }
                     }
@@ -408,10 +411,11 @@ interpreter::IRMethod DeserializeAotCoreIrMethod(
                     if (instr.call_target == nullptr)
                     {
                         auto target_sym = json::JsonParser::FindKey(elem, "targetSymbol");
-                        const char* sym = JsonStringOr(target_sym);
-                        if (sym != nullptr && resolve_fn != nullptr)
+                        if (target_sym.IsString() && resolve_fn != nullptr)
                         {
-                            instr.call_target = resolve_fn(sym, resolve_ctx);
+                            std::string sym(target_sym.string_value, target_sym.string_length);
+                            if (!sym.empty())
+                                instr.call_target = resolve_fn(sym.c_str(), resolve_ctx);
                         }
                     }
                 }
@@ -422,10 +426,11 @@ interpreter::IRMethod DeserializeAotCoreIrMethod(
                     if (target_ref.IsObject() && resolve_fn != nullptr)
                     {
                         auto subject_id = json::JsonParser::FindKey(target_ref, "subjectId");
-                        const char* sid = JsonStringOr(subject_id);
-                        if (sid != nullptr)
+                        if (subject_id.IsString())
                         {
-                            instr.call_target = resolve_fn(sid, resolve_ctx);
+                            std::string sid(subject_id.string_value, subject_id.string_length);
+                            if (!sid.empty())
+                                instr.call_target = resolve_fn(sid.c_str(), resolve_ctx);
                         }
                     }
 
@@ -433,10 +438,11 @@ interpreter::IRMethod DeserializeAotCoreIrMethod(
                     if (instr.call_target == nullptr)
                     {
                         auto target_sym = json::JsonParser::FindKey(elem, "targetSymbol");
-                        const char* sym = JsonStringOr(target_sym);
-                        if (sym != nullptr && resolve_fn != nullptr)
+                        if (target_sym.IsString() && resolve_fn != nullptr)
                         {
-                            instr.call_target = resolve_fn(sym, resolve_ctx);
+                            std::string sym(target_sym.string_value, target_sym.string_length);
+                            if (!sym.empty())
+                                instr.call_target = resolve_fn(sym.c_str(), resolve_ctx);
                         }
                     }
                 }
@@ -475,7 +481,7 @@ interpreter::IRMethod DeserializeAotCoreIrMethod(
                 // call's subjectId in the kAotDirectFnTable to get the pre-resolved
                 // chaos_external_runtime_* function pointer.
                 if (instr.op_code == interpreter::IROpCode::Call &&
-                    resolve_direct_fn != nullptr && direct_ctx != nullptr)
+                    resolve_direct_fn != nullptr)
                 {
                     auto callee = json::JsonParser::FindKey(elem, "callee");
                     if (callee.kind == json::JsonValueKind::String &&
@@ -547,16 +553,15 @@ interpreter::IRMethod DeserializeAotCoreIrMethod(
 
                 // Parse handling kind.
                 auto kind = json::JsonParser::FindKey(elem, "handlingKindCode");
-                const char* kind_str = JsonStringOr(kind);
-                if (kind_str != nullptr) {
-                    if (std::strcmp(kind_str, "Catch") == 0 ||
-                        std::strcmp(kind_str, "Exception") == 0)
+                if (kind.IsString()) {
+                    std::string kind_str(kind.string_value, kind.string_length);
+                    if (kind_str == "Catch" || kind_str == "Exception")
                         clause.flags = interpreter::SEHFlags::Exception;
-                    else if (std::strcmp(kind_str, "Finally") == 0)
+                    else if (kind_str == "Finally")
                         clause.flags = interpreter::SEHFlags::Finally;
-                    else if (std::strcmp(kind_str, "Fault") == 0)
+                    else if (kind_str == "Fault")
                         clause.flags = interpreter::SEHFlags::Fault;
-                    else if (std::strcmp(kind_str, "Filter") == 0)
+                    else if (kind_str == "Filter")
                         clause.flags = interpreter::SEHFlags::Filter;
                 }
 
@@ -583,15 +588,17 @@ interpreter::IRMethod DeserializeAotCoreIrMethod(
 
                 // Parse catch type.
                 auto catch_type = json::JsonParser::FindKey(elem, "catchTypeSubjectId");
-                const char* type_sid = JsonStringOr(catch_type);
-                if (type_sid != nullptr && resolve_fn != nullptr) {
-                    void* raw_handle = resolve_fn(type_sid, resolve_ctx);
-                    if (raw_handle != nullptr) {
-                        TypeInfoHandle type_handle = static_cast<TypeInfoHandle>(
-                            reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(raw_handle));
-                        const auto* desc = TryDecodeReflectionQueryTypeHandle(type_handle);
-                        if (desc != nullptr) {
-                            clause.class_token = desc->metadata_token;
+                if (catch_type.IsString() && resolve_fn != nullptr) {
+                    std::string type_sid(catch_type.string_value, catch_type.string_length);
+                    if (!type_sid.empty()) {
+                        void* raw_handle = resolve_fn(type_sid.c_str(), resolve_ctx);
+                        if (raw_handle != nullptr) {
+                            TypeInfoHandle type_handle = static_cast<TypeInfoHandle>(
+                                reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(raw_handle));
+                            const auto* desc = TryDecodeReflectionQueryTypeHandle(type_handle);
+                            if (desc != nullptr) {
+                                clause.class_token = desc->metadata_token;
+                            }
                         }
                     }
                 }

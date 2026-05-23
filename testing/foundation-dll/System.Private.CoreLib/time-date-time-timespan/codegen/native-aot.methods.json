@@ -1,0 +1,136 @@
+﻿{
+  "schemaVersion": 2,
+  "assemblyName": "TimeDateTimeTimespanSubjects",
+  "methodCount": 16,
+  "defaultStringId": 2607821981565500683,
+  "methods": [
+    {
+      "index": 0,
+      "nativeSymbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_0",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 0
+    },
+    {
+      "index": 1,
+      "nativeSymbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_1",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 1
+    },
+    {
+      "index": 2,
+      "nativeSymbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_2",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 2
+    },
+    {
+      "index": 3,
+      "nativeSymbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_3",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 3
+    },
+    {
+      "index": 4,
+      "nativeSymbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_4",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 4
+    },
+    {
+      "index": 5,
+      "nativeSymbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_5",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 5
+    },
+    {
+      "index": 6,
+      "nativeSymbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_6",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 6
+    },
+    {
+      "index": 7,
+      "nativeSymbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_7",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 7
+    },
+    {
+      "index": 8,
+      "nativeSymbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_8",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 8
+    },
+    {
+      "index": 9,
+      "nativeSymbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_9",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 9
+    },
+    {
+      "index": 10,
+      "nativeSymbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_10",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 10
+    },
+    {
+      "index": 11,
+      "nativeSymbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_11",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 11
+    },
+    {
+      "index": 12,
+      "nativeSymbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_12",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 12
+    },
+    {
+      "index": 13,
+      "nativeSymbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_13",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 13
+    },
+    {
+      "index": 14,
+      "nativeSymbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_14",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 14
+    },
+    {
+      "index": 15,
+      "nativeSymbol": "TimeDateTimeTimespanSubjects_TimeDateTimeTimespanSubjects_Subject_15",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 15
+    }
+  ]
+}

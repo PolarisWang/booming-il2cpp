@@ -11,7 +11,7 @@ primaryModuleId: interop
 ## 目的
 
 - 为 P/Invoke、marshal 与 COM 互操作相关改动提供默认完成前模块验证。
-- 覆盖 native 测试（GoogleTest，107 tests）和 managed 测试（foundation-dll pipeline，181 fact tests across 11 families）。
+- 覆盖 native 测试（GoogleTest，119 tests，5 skipped）和 managed 测试（foundation-dll pipeline，185 fact tests across 14 families）。
 
 ## 覆盖
 
@@ -75,6 +75,9 @@ primaryModuleId: interop
 | System.Runtime.InteropServices | marshalling-attributes | 10/10 | Marshal 属性 |
 | System.Runtime.InteropServices | runtime-interop-services | 17/17 | Runtime Interop |
 | System.Runtime.InteropServices | secure-string-marshal | 4/4 | SecureString |
+| System.Runtime.InteropServices | custom-marshaller-contracts | 0/0 (contract-only) | ICustomMarshaler 接口契约 |
+| System.Runtime.InteropServices | objective-c-interop | 4/4 | Objective-C 互操作 |
+| **合计** | **14 家族** | **185/185** | **全部通过** |
 
 ## 验证命令
 
@@ -83,7 +86,11 @@ primaryModuleId: interop
 ctest --test-dir build/testing -L marshal --output-on-failure
 
 # Managed 测试（foundation-dll pipeline）
-python testing/foundation-dll/_core/python/cli.py pinvoke-dllimport --assembly System.Private.CoreLib
-python testing/foundation-dll/_core/python/cli.py rcw-basic --assembly System.Private.CoreLib
-python testing/foundation-dll/_core/python/cli.py ccw-basic --assembly System.Private.CoreLib
+# --all 标志运行所有 interop 家族
+run foundation-dll --assembly System.Private.CoreLib --all
+run foundation-dll --assembly System.Runtime.InteropServices --all
+
+# 单家族运行
+run foundation-dll verify-family --family pinvoke-dllimport --assembly System.Private.CoreLib
+run foundation-dll verify-family --family rcw-basic --assembly System.Private.CoreLib
 ```

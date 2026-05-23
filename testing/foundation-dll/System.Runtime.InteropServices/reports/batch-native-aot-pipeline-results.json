@@ -2,8 +2,8 @@
   "assembly": "System.Runtime.InteropServices",
   "mode": "family-entrypoint",
   "total": 14,
-  "passed": 13,
-  "failed": 1,
+  "passed": 14,
+  "failed": 0,
   "results": [
     {
       "family": "com-types",
@@ -35,8 +35,8 @@
       "family": "custom-marshaller-contracts",
       "config_tier": "CHECK",
       "steps": {},
-      "success": false,
-      "error": "no method subject IDs"
+      "success": true,
+      "error": null
     },
     {
       "family": "exception-errors",
@@ -182,5 +182,5 @@
       "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Runtime.InteropServices\\unmanaged-calling-conventions\\managed\\subjects\\build-output\\UnmanagedCallingConventionsSubjects.dll"
     }
   ],
-  "timestamp": "2026-05-22T06:31:49"
+  "timestamp": "2026-05-23T14:54:04"
 }

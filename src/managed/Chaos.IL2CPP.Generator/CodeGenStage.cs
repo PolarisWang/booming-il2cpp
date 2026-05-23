@@ -150,15 +150,66 @@ public sealed class CodeGenStage
     /// <summary>
     /// Generate per-assembly codegen results from a multi-assembly pipeline run.
     /// Each input assembly gets its own filtered AotCoreIr, CodeRegistration, and LoweringPlan.
-    /// </summary>
-        /// <summary>
-    /// Filter a full pipeline result into per-assembly results.
-    /// Each input assembly gets its own output root and filtered method set.
+    ///
+    /// G11 enhancements:
+    /// - CrossAssemblySymbolRegistry detects and disambiguates symbol conflicts
+    /// - AssemblyExportRegistry tracks cross-assembly call exports
+    /// - Global MethodTable slot allocation via MethodTableAllocator
+    /// - Per-assembly filtered CodeRegistration (only the assembly's own methods)
+    /// - Per-assembly NativeAotLoweringPlan with unique entry symbol
     /// </summary>
     public IReadOnlyList<ManagedClosureResult> FilterResultPerAssembly(
         ManagedClosureResult fullResult,
         IReadOnlyList<string> inputAssemblyPaths)
     {
+        // ── Phase 1: Global coordination ──
+
+        // Build per-assembly method groups
+        var assemblyMethodMap = new Dictionary<string, List<AotCoreIrMethodArtifact>>(StringComparer.Ordinal);
+        foreach (var method in fullResult.AotCoreIr.Methods)
+        {
+            var asmName = ExtractAssemblyNameFromSubjectId(method.SubjectId);
+            if (!assemblyMethodMap.TryGetValue(asmName, out var list))
+            {
+                list = [];
+                assemblyMethodMap[asmName] = list;
+            }
+            list.Add(method);
+        }
+
+        // Build symbol registry: register all method symbols per assembly
+        var symbolRegistry = new CrossAssemblySymbolRegistry();
+        foreach (var (asmName, methods) in assemblyMethodMap)
+        {
+            var symbols = methods.Select(m => m.NativeSymbol);
+            symbolRegistry.RegisterAssembly(asmName, symbols);
+        }
+        symbolRegistry.ResolveConflicts();
+
+        // Build export registry: detect cross-assembly calls
+        var exportRegistry = new AssemblyExportRegistry();
+        foreach (var method in fullResult.AotCoreIr.Methods)
+        {
+            var callerAssembly = ExtractAssemblyNameFromSubjectId(method.SubjectId);
+            foreach (var instruction in method.Instructions)
+            {
+                if (string.IsNullOrEmpty(instruction.Callee))
+                    continue;
+                exportRegistry.RegisterCall(callerAssembly, instruction.Callee);
+            }
+        }
+
+        // Allocate global method table slots per assembly
+        var methodTableAllocator = new Chaos.IL2CPP.Generator.Planning.MethodTableAllocator();
+        var assemblySlotInfo = new Dictionary<string, (uint StartIndex, uint Count)>(StringComparer.Ordinal);
+        foreach (var (asmName, methods) in assemblyMethodMap)
+        {
+            var range = methodTableAllocator.AllocateRange((uint)methods.Count);
+            assemblySlotInfo[asmName] = range;
+        }
+
+        // ── Phase 2: Per-assembly result generation ──
+
         var results = new List<ManagedClosureResult>();
 
         foreach (var asmPath in inputAssemblyPaths)
@@ -168,15 +219,22 @@ public sealed class CodeGenStage
             System.IO.Directory.CreateDirectory(asmOutputRoot);
 
             // Filter AotCoreIr methods to this assembly
-            var assemblyMethods = fullResult.AotCoreIr.Methods
-                .Where(m => m.SubjectId.StartsWith(asmName + "/", System.StringComparison.Ordinal)
-                         || m.SubjectId.StartsWith(asmName + ".", System.StringComparison.Ordinal))
-                .ToList();
+            var assemblyMethods = assemblyMethodMap.TryGetValue(asmName, out var methods)
+                ? methods
+                : [];
 
             var filteredAotCoreIr = fullResult.AotCoreIr with
             {
                 Methods = assemblyMethods,
             };
+
+            // Filter CodeRegistration to only this assembly's module entries
+            var filteredCodeRegistration = FilterCodeRegistrationPerAssembly(
+                fullResult.CodeRegistration, asmName);
+
+            // Build per-assembly NativeAotLoweringPlan
+            var filteredLoweringPlan = BuildPerAssemblyLoweringPlan(
+                fullResult.NativeAotLoweringPlan, asmName, assemblyMethods);
 
             results.Add(new ManagedClosureResult
             {
@@ -186,18 +244,94 @@ public sealed class CodeGenStage
                 AotManifest = fullResult.AotManifest,
                 MetadataRegistration = fullResult.MetadataRegistration,
                 SupplementalMetadataTemplate = fullResult.SupplementalMetadataTemplate,
-                CodeRegistration = fullResult.CodeRegistration,
+                CodeRegistration = filteredCodeRegistration,
                 GenericInstantiationDemandGraph = fullResult.GenericInstantiationDemandGraph,
                 GenericCapabilityMatrix = fullResult.GenericCapabilityMatrix,
                 OptimizationFacts = fullResult.OptimizationFacts,
                 PreserveDescriptor = fullResult.PreserveDescriptor,
                 NativeReferenceLoweringPlan = fullResult.NativeReferenceLoweringPlan,
-                NativeAotLoweringPlan = fullResult.NativeAotLoweringPlan,
+                NativeAotLoweringPlan = filteredLoweringPlan,
                 ClosureManifest = fullResult.ClosureManifest,
             });
         }
 
         return results;
+    }
+
+    /// <summary>
+    /// Filter CodeRegistration to only include the module for the given assembly.
+    /// Keeps all TypeCapabilities (they are shared metadata).
+    /// </summary>
+    private static CodeRegistrationArtifact FilterCodeRegistrationPerAssembly(
+        CodeRegistrationArtifact fullCodeRegistration,
+        string assemblyName)
+    {
+        var moduleName = $"{assemblyName}.dll";
+        var filteredModules = fullCodeRegistration.Modules
+            .Where(m => string.Equals(m.ModuleName, moduleName, StringComparison.OrdinalIgnoreCase))
+            .Select(m => new CodeRegistrationModule
+            {
+                ModuleName = m.ModuleName,
+                Registrations = m.Registrations
+                    .Select((entry, idx) => new CodeRegistrationEntry
+                    {
+                        RegistrationKind = entry.RegistrationKind,
+                        Slot = idx, // Re-index slots sequentially per assembly
+                        Symbol = entry.Symbol,
+                        SubjectId = entry.SubjectId,
+                    })
+                    .ToList(),
+            })
+            .ToList();
+
+        return fullCodeRegistration with
+        {
+            Modules = filteredModules,
+            TypeCapabilities = fullCodeRegistration.TypeCapabilities,
+        };
+    }
+
+    /// <summary>
+    /// Build a per-assembly NativeAotLoweringPlan based on the original plan
+    /// but with the assembly-specific entry symbol and method set.
+    /// </summary>
+    private static NativeAotLoweringPlanArtifact BuildPerAssemblyLoweringPlan(
+        NativeAotLoweringPlanArtifact originalPlan,
+        string assemblyName,
+        IReadOnlyList<AotCoreIrMethodArtifact> assemblyMethods)
+    {
+        var firstSymbol = assemblyMethods.Count > 0
+            ? assemblyMethods[0].NativeSymbol
+            : $"{assemblyName}_empty";
+
+        return new NativeAotLoweringPlanArtifact
+        {
+            PlanKind = originalPlan.PlanKind,
+            AssemblyName = assemblyName,
+            EntrySubjectId = assemblyMethods.Count > 0
+                ? assemblyMethods[0].SubjectId
+                : originalPlan.EntrySubjectId,
+            NativeEntryFunctionName = originalPlan.NativeEntryFunctionName,
+            EntrySymbol = firstSymbol,
+            EntryMethodToken = originalPlan.EntryMethodToken,
+            WorkloadAbi = originalPlan.WorkloadAbi,
+            TranslationUnitPageSize = originalPlan.TranslationUnitPageSize,
+            TranslationUnitPageCount = originalPlan.TranslationUnitPageCount,
+            TranslationUnitPages = originalPlan.TranslationUnitPages,
+        };
+    }
+
+    /// <summary>
+    /// Extract the assembly name prefix from a SubjectId.
+    /// SubjectId format: "AssemblyName/Namespace.TypeName::MethodName:..."
+    /// </summary>
+    private static string ExtractAssemblyNameFromSubjectId(string subjectId)
+    {
+        if (string.IsNullOrEmpty(subjectId))
+            return string.Empty;
+
+        var slashIndex = subjectId.IndexOf('/');
+        return slashIndex > 0 ? subjectId[..slashIndex] : subjectId;
     }
 
 

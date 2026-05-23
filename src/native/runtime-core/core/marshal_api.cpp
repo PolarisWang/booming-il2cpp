@@ -7,6 +7,8 @@
 
 // CHAOS_SPIN_HINT is defined in runtime_core.cpp when compiled as Unity build.
 // Provide a local fallback for standalone TU compilation.
+#include "com_platform.h"
+
 #ifndef CHAOS_SPIN_HINT
 #if defined(_M_ARM64) || defined(__aarch64__)
 #define CHAOS_SPIN_HINT() __yield()
@@ -423,40 +425,11 @@ CHAOS_IL2CPP_INTPTR ChaosDestroyStructureByType(CHAOS_IL2CPP_INTPTR struct_ptr, 
     return 0;
 }
 
-// ── BStr helper (P/Invoke — oleaut32.dll on Win32) ──────────────
-
-#if defined(_WIN32)
-// Resolve SysAllocString/SysFreeString/SysStringLen from oleaut32 at runtime
-// to avoid link-time dependency on oleaut32.lib.
-static void* ResolveOleAut32Proc(const char* name) noexcept {
-    static std::atomic<HMODULE> s_oleaut32{nullptr};
-    HMODULE mod = s_oleaut32.load(std::memory_order_acquire);
-    if (mod == nullptr) {
-        mod = ::LoadLibraryA("oleaut32.dll");
-        s_oleaut32.store(mod, std::memory_order_release);
-    }
-    if (mod == nullptr) return nullptr;
-    return reinterpret_cast<void*>(::GetProcAddress(mod, name));
-}
-
-static CHAOS_IL2CPP_INTPTR SysAllocStringThunk(const CHAOS_IL2CPP_UINT16* str) noexcept {
-    using FuncPtr = CHAOS_IL2CPP_INTPTR(__stdcall*)(const CHAOS_IL2CPP_UINT16*);
-    static FuncPtr s_fn = reinterpret_cast<FuncPtr>(ResolveOleAut32Proc("SysAllocString"));
-    return s_fn ? s_fn(str) : 0;
-}
-
-static CHAOS_IL2CPP_INT32 SysStringLenThunk(CHAOS_IL2CPP_INTPTR bstr) noexcept {
-    using FuncPtr = CHAOS_IL2CPP_INT32(__stdcall*)(CHAOS_IL2CPP_INTPTR);
-    static FuncPtr s_fn = reinterpret_cast<FuncPtr>(ResolveOleAut32Proc("SysStringLen"));
-    return s_fn ? s_fn(bstr) : 0;
-}
-
-static void SysFreeStringThunk(CHAOS_IL2CPP_INTPTR bstr) noexcept {
-    using FuncPtr = void(__stdcall*)(CHAOS_IL2CPP_INTPTR);
-    static FuncPtr s_fn = reinterpret_cast<FuncPtr>(ResolveOleAut32Proc("SysFreeString"));
-    if (s_fn) s_fn(bstr);
-}
-#endif
+// ── BStr helper (P/Invoke — delegates to com_platform for Win32) ────
+// BSTR functions resolved via com_platform::PlatformSysAllocString /
+// PlatformSysStringLen / PlatformSysFreeString (oleaut32.dll on Win32,
+// stubs on non-Win32).
+//
 
 // ICALL: Marshal.StringToBSTR(string) → IntPtr
 CHAOS_IL2CPP_INTPTR CHAOS_RUNTIME_ABI_CALL MarshalStringToBSTR(void* managed_string) noexcept {
@@ -471,9 +444,9 @@ CHAOS_IL2CPP_INTPTR CHAOS_RUNTIME_ABI_CALL MarshalStringToBSTR(void* managed_str
     auto* wide_buf = static_cast<CHAOS_IL2CPP_UINT16*>(std::malloc(static_cast<CHAOS_IL2CPP_SIZE>(wide_needed + 1) * sizeof(CHAOS_IL2CPP_UINT16)));
     ::MultiByteToWideChar(CP_UTF8, 0, utf8_data, byte_count, reinterpret_cast<wchar_t*>(wide_buf), wide_needed);
     wide_buf[wide_needed] = 0;
-    auto result = SysAllocStringThunk(wide_buf);
+    auto result = com_platform::PlatformSysAllocString(wide_buf);
     std::free(wide_buf);
-    return result;
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(result);
 #else
     (void)managed_string;
     return 0;
@@ -484,7 +457,8 @@ CHAOS_IL2CPP_INTPTR CHAOS_RUNTIME_ABI_CALL MarshalStringToBSTR(void* managed_str
 void* CHAOS_RUNTIME_ABI_CALL MarshalPtrToStringBSTR(CHAOS_IL2CPP_INTPTR bstr_ptr) noexcept {
     if (bstr_ptr == 0) return nullptr;
 #if defined(_WIN32)
-    auto length_chars = SysStringLenThunk(bstr_ptr);
+    auto length_chars = com_platform::PlatformSysStringLen(
+        reinterpret_cast<void*>(bstr_ptr));
     if (length_chars <= 0) return nullptr;
     auto* wide_chars = reinterpret_cast<const CHAOS_IL2CPP_UINT16*>(bstr_ptr);
     auto* ts = GetCurrentThreadState();
@@ -500,7 +474,7 @@ void* CHAOS_RUNTIME_ABI_CALL MarshalPtrToStringBSTR(CHAOS_IL2CPP_INTPTR bstr_ptr
 void CHAOS_RUNTIME_ABI_CALL MarshalFreeBSTR(CHAOS_IL2CPP_INTPTR bstr_ptr) noexcept {
     if (bstr_ptr == 0) return;
 #if defined(_WIN32)
-    SysFreeStringThunk(bstr_ptr);
+    com_platform::PlatformSysFreeString(reinterpret_cast<void*>(bstr_ptr));
 #else
     (void)bstr_ptr;
 #endif
@@ -511,46 +485,18 @@ void CHAOS_RUNTIME_ABI_CALL MarshalFreeBSTR(CHAOS_IL2CPP_INTPTR bstr_ptr) noexce
 CHAOS_IL2CPP_INTPTR CoCreateComInstance(
     const CHAOS_IL2CPP_UINT8* clsid_bytes,
     const CHAOS_IL2CPP_UINT8* iid_bytes) noexcept {
-#if defined(_WIN32)
-    if (clsid_bytes == nullptr || iid_bytes == nullptr) return 0;
-    GUID clsid;
-    GUID iid;
-    std::memcpy(&clsid, clsid_bytes, sizeof(GUID));
-    std::memcpy(&iid, iid_bytes, sizeof(GUID));
-    IUnknown* p_unknown = nullptr;
-    HRESULT hr = ::CoCreateInstance(
-        clsid, nullptr, CLSCTX_INPROC_SERVER | CLSCTX_LOCAL_SERVER,
-        iid, reinterpret_cast<void**>(&p_unknown));
-    return SUCCEEDED(hr) ? reinterpret_cast<CHAOS_IL2CPP_INTPTR>(p_unknown) : 0;
-#else
-    (void)clsid_bytes;
-    (void)iid_bytes;
-    return 0;
-#endif
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+        com_platform::PlatformCoCreateInstance(
+            clsid_bytes, iid_bytes));
 }
 
 CHAOS_IL2CPP_INTPTR CoCreateComInstanceAggregated(
     const CHAOS_IL2CPP_UINT8* clsid_bytes,
     const CHAOS_IL2CPP_UINT8* iid_bytes,
     CHAOS_IL2CPP_INTPTR outer_unknown) noexcept {
-#if defined(_WIN32)
-    if (clsid_bytes == nullptr || iid_bytes == nullptr) return 0;
-    GUID clsid;
-    GUID iid;
-    std::memcpy(&clsid, clsid_bytes, sizeof(GUID));
-    std::memcpy(&iid, iid_bytes, sizeof(GUID));
-    IUnknown* p_unknown = nullptr;
-    HRESULT hr = ::CoCreateInstance(
-        clsid, reinterpret_cast<IUnknown*>(outer_unknown),
-        CLSCTX_INPROC_SERVER | CLSCTX_LOCAL_SERVER,
-        iid, reinterpret_cast<void**>(&p_unknown));
-    return SUCCEEDED(hr) ? reinterpret_cast<CHAOS_IL2CPP_INTPTR>(p_unknown) : 0;
-#else
-    (void)clsid_bytes;
-    (void)iid_bytes;
-    (void)outer_unknown;
-    return 0;
-#endif
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+        com_platform::PlatformCoCreateInstanceAggregated(
+            clsid_bytes, iid_bytes, reinterpret_cast<void*>(outer_unknown)));
 }
 
 // ── RCW (Runtime Callable Wrapper) ─────────────────────────────────

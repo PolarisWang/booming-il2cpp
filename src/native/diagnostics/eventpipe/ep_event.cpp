@@ -158,6 +158,30 @@ struct EpPayloadDomainUsageLimitExceeded {
     int64_t  usage_limit;
 };
 
+// COM payloads.
+struct EpPayloadComRcwEvent {
+    uint64_t rcw_ptr;
+};
+
+struct EpPayloadComCcwCreated {
+    uint64_t ccw_ptr;
+    uint64_t gc_handle;
+};
+
+struct EpPayloadComCcwReleased {
+    uint64_t ccw_ptr;
+};
+
+struct EpPayloadComConnectionPointEvent {
+    uint64_t cp_ptr;
+    uint32_t cookie;
+};
+
+struct EpPayloadComDispatchInvoke {
+    int32_t  disp_id;
+    int32_t  result_code;
+};
+
 #pragma pack(pop)
 
 // ── Core emit function ─────────────────────────────────────────────────
@@ -448,6 +472,43 @@ void EpEmitDomainUsageLimitExceeded(uint32_t domain_id, int64_t current_usage,
                                      int64_t usage_limit) noexcept {
     EpPayloadDomainUsageLimitExceeded payload{ domain_id, current_usage, usage_limit };
     EpEmitEvent(EpEventType::DomainUsageLimitExceeded, &payload, sizeof(payload));
+}
+
+// ── COM event helpers ───────────────────────────────────────────────────
+
+void EpEmitComRcwCreated(uint64_t rcw_ptr) noexcept {
+    EpPayloadComRcwEvent payload{ rcw_ptr };
+    EpEmitEvent(EpEventType::ComRcwCreated, &payload, sizeof(payload));
+}
+
+void EpEmitComRcwReleased(uint64_t rcw_ptr) noexcept {
+    EpPayloadComRcwEvent payload{ rcw_ptr };
+    EpEmitEvent(EpEventType::ComRcwReleased, &payload, sizeof(payload));
+}
+
+void EpEmitComCcwCreated(uint64_t ccw_ptr, uint64_t gc_handle) noexcept {
+    EpPayloadComCcwCreated payload{ ccw_ptr, gc_handle };
+    EpEmitEvent(EpEventType::ComCcwCreated, &payload, sizeof(payload));
+}
+
+void EpEmitComCcwReleased(uint64_t ccw_ptr) noexcept {
+    EpPayloadComCcwReleased payload{ ccw_ptr };
+    EpEmitEvent(EpEventType::ComCcwReleased, &payload, sizeof(payload));
+}
+
+void EpEmitComConnectionPointAdvise(uint64_t cp_ptr, uint32_t cookie) noexcept {
+    EpPayloadComConnectionPointEvent payload{ cp_ptr, cookie };
+    EpEmitEvent(EpEventType::ComConnectionPointAdvise, &payload, sizeof(payload));
+}
+
+void EpEmitComConnectionPointUnadvise(uint64_t cp_ptr, uint32_t cookie) noexcept {
+    EpPayloadComConnectionPointEvent payload{ cp_ptr, cookie };
+    EpEmitEvent(EpEventType::ComConnectionPointUnadvise, &payload, sizeof(payload));
+}
+
+void EpEmitComDispatchInvoke(int32_t disp_id, int32_t result_code) noexcept {
+    EpPayloadComDispatchInvoke payload{ disp_id, result_code };
+    EpEmitEvent(EpEventType::ComDispatchInvoke, &payload, sizeof(payload));
 }
 
 }  // namespace chaos::il2cpp::diagnostics

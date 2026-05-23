@@ -2,18 +2,18 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/garbage/collection",
-  "capturedAt": "2026-05-22T08:38:46",
+  "capturedAt": "2026-05-23T15:11:51",
   "batchMode": true,
   "summary": {
-    "totalMethods": 7,
+    "totalMethods": 12,
     "okCount": 7,
-    "failedCount": 0,
+    "failedCount": 5,
     "skippedCount": 0,
     "jitInstructionCount": {
       "min": 44,
-      "max": 74,
-      "avg": 48.3,
-      "total": 338
+      "max": 85,
+      "avg": 49.9,
+      "total": 349
     },
     "aotInstructionCount": {
       "min": 2,
@@ -27,10 +27,10 @@
     "topInstructionCategories": {
       "external_runtime_call": 9
     },
-    "overallIrExpansionRatio": 0.18,
-    "averageExpansionRatio": 0.2,
+    "overallIrExpansionRatio": 0.17,
+    "averageExpansionRatio": 0.18,
     "maxExpansionRatio": 0.34,
-    "minExpansionRatio": 0.03
+    "minExpansionRatio": 0.05
   },
   "methodResults": [
     {
@@ -39,15 +39,15 @@
       "shortName": "Subject_0",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 74,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 2,
-        "ratio": 0.03,
+        "ratio": 0.05,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 74
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -209,15 +209,15 @@
       "shortName": "Subject_5",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 85,
         "aotInstructionCount": 13,
-        "ratio": 0.3,
+        "ratio": 0.15,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 85
       },
       "aot": {
         "status": "ok",
@@ -266,6 +266,41 @@
       "instructionCategories": {
         "external_runtime_call": 1
       }
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Private.CoreLib/System.GC::Collect(System.Int32,System.GCCollectionMode):System.Void()",
+      "shortName": "Subject_7",
+      "status": "error",
+      "error": "Method not found in IL2CPP pipeline output"
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "System.Private.CoreLib/System.GC::get_LatencyMode:System.GCLatencyMode()",
+      "shortName": "Subject_8",
+      "status": "error",
+      "error": "Method not found in IL2CPP pipeline output"
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "System.Private.CoreLib/System.GC::set_LatencyMode(System.GCLatencyMode):System.Void()",
+      "shortName": "Subject_9",
+      "status": "error",
+      "error": "Method not found in IL2CPP pipeline output"
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "System.Private.CoreLib/System.GC::CollectionCount(System.Int32):System.Int64()",
+      "shortName": "Subject_10",
+      "status": "error",
+      "error": "Method not found in IL2CPP pipeline output"
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "System.Private.CoreLib/System.GC::GetTotalPauseDuration:System.TimeSpan()",
+      "shortName": "Subject_11",
+      "status": "error",
+      "error": "Method not found in IL2CPP pipeline output"
     }
   ]
 }

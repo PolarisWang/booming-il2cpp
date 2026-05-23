@@ -69,6 +69,7 @@ static const CHAOS_IL2CPP_UINT32 s_reverse_pinvoke_registered = []()
 
 {{~ if ccw_interface_count > 0 ~}}
 // ── CCW interface vtable + forwarding thunks (V3) ────────
+#include "com_typelib.h"
 {{~ for ccw in ccw_interfaces ~}}
 // {{ ccw.type_namespace }}.{{ ccw.type_name }}
 static constexpr CHAOS_IL2CPP_UINT8 s_ccw_guid_{{ ccw.guid_symbol_suffix }}[16] = { {{ ccw.guid_bytes }} };
@@ -144,14 +145,8 @@ extern "C" CHAOS_IL2CPP_INT32 CcwThunk_{{ ccw.guid_symbol_suffix }}_Invoke(
     auto* entry_ccw = ::chaos::il2cpp::com_ccw::CcwFromInterface(self);
     if (entry_ccw == nullptr) return ::chaos::il2cpp::com_ccw::kE_POINTER;
 
-    // DISPID 0..N-1 maps to interface method slots
-    if (dispIdMember < 0 || static_cast<CHAOS_IL2CPP_UINT32>(dispIdMember) >= {{ ccw.method_slot_count }})
-        return ::chaos::il2cpp::com_ccw::kDISP_E_MEMBERNOTFOUND;
-
-    ::chaos::il2cpp::com_ccw::CcwDispatchMethod(
-        entry_ccw, {{ ccw.stable_id }}, static_cast<CHAOS_IL2CPP_UINT32>(dispIdMember));
-
-    return ::chaos::il2cpp::com_ccw::kS_OK;
+    return ::chaos::il2cpp::com_ccw::CcwDispatchMethodInvoke(
+        entry_ccw, {{ ccw.stable_id }}, dispIdMember, pDispParams, pVarResult);
 }
 
 // Vtable: 3 IUnknown slots + {{ ccw.method_slot_count }} interface method slots
@@ -166,6 +161,26 @@ static void* s_ccw_vtable_{{ ccw.guid_symbol_suffix }}[{{ 3 + ccw.method_slot_co
 };
 {{~ end ~}}
 
+{{~ if ccw.is_idispatch ~}}
+// TypeLib: method descriptors for ITypeInfo/ITypeLib support
+static constexpr ComMethodData s_ccw_methoddata_{{ ccw.guid_symbol_suffix }}[] = {
+{{~ for method in ccw.methods ~}}
+    { "{{ ccw.method_names[for.index0] }}", {{ method.slot_index }}, {{ method.param_count }}, {{ 3 + method.slot_index }}, {{ method.token }}, nullptr },
+{{~ end ~}}
+};
+
+// TypeLib: static TypeLib descriptor
+static constexpr ComTypeLibData s_ccw_typelib_{{ ccw.guid_symbol_suffix }} = {
+    s_ccw_guid_{{ ccw.guid_symbol_suffix }},
+    {{ ccw.stable_id }},
+    "{{ ccw.type_name }}",
+    "{{ ccw.type_namespace }}",
+    {{ ccw.method_slot_count }},
+    1,  // is_idispatch
+    s_ccw_methoddata_{{ ccw.guid_symbol_suffix }},
+};
+{{~ end ~}}
+
 // Factory: create CCW and register this interface vtable
 extern "C" CHAOS_IL2CPP_INTPTR CreateCcwFor_{{ ccw.guid_symbol_suffix }}(void* obj, void* state) {
     auto* ccw = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
@@ -175,10 +190,25 @@ extern "C" CHAOS_IL2CPP_INTPTR CreateCcwFor_{{ ccw.guid_symbol_suffix }}(void* o
             reinterpret_cast<void*>(ccw),
             s_ccw_guid_{{ ccw.guid_symbol_suffix }},
             const_cast<void**>(s_ccw_vtable_{{ ccw.guid_symbol_suffix }}));
+{{~ if ccw.is_idispatch ~}}
+        // Set TypeLib data for IDispatch support (enables ITypeInfo/ITypeLib QI)
+        reinterpret_cast<::chaos::il2cpp::com_ccw::ComCcw*>(ccw)->typelib_data
+            = &s_ccw_typelib_{{ ccw.guid_symbol_suffix }};
+{{~ end ~}}
     }
     return ccw;
 }
 
 {{~ end ~}}
+// Static factory registration: register each factory into the runtime registry.
+static const CHAOS_IL2CPP_UINT32 s_ccw_factory_registered = []()
+{
+{{~ for ccw in ccw_interfaces ~}}
+    ::chaos::il2cpp::runtime_core::RegisterCcwFactory(
+        {{ ccw.stable_id }},
+        CreateCcwFor_{{ ccw.guid_symbol_suffix }});
+{{~ end ~}}
+    return 1u;
+}();
 {{~ end ~}}
 {{~ end ~}}

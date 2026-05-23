@@ -1,0 +1,50 @@
+﻿{
+  "schemaVersion": 2,
+  "assemblyName": "CodegenEdgeCasesSubjects",
+  "methodCount": 4,
+  "defaultStringId": 0,
+  "methods": [
+    {
+      "index": 0,
+      "nativeSymbol": "CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_0",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 0
+    },
+    {
+      "index": 1,
+      "nativeSymbol": "CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_1_System_Int32",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": false,
+      "subjectIndex": 1
+    },
+    {
+      "index": 2,
+      "nativeSymbol": "CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_2",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 2
+    },
+    {
+      "index": 3,
+      "nativeSymbol": "CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_3_System_Int32",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": false,
+      "subjectIndex": 3
+    }
+  ]
+}

@@ -3,12 +3,14 @@
 // exception_stubs.cpp — Exception helper stub implementations
 #include <chaos/native_types.h>
 #include "generated_code_compat.h"
+#include <chaos/log.h>
 
 namespace chaos::il2cpp::runtime_core {
 extern "C" {
 
 CHAOS_IL2CPP_INTPTR ChaosExceptionGetBaseException(CHAOS_IL2CPP_INTPTR exc) noexcept
 {
+    CHAOS_IL2CPP_LOG_WARN("Stub", "exception_stubs called");
     return exc;
 }
 

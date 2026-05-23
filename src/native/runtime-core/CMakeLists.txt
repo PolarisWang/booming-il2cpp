@@ -157,6 +157,12 @@ add_library(chaos_runtime_core STATIC
     com_ccw.cpp
     com_connection_point.h
     com_connection_point.cpp
+    com_platform.h
+    com_platform.cpp
+    com_factory.h
+    com_factory.cpp
+    com_typelib.h
+    com_typelib.cpp
     domain_unloader.h
     domain_unloader.cpp
     native_library.h

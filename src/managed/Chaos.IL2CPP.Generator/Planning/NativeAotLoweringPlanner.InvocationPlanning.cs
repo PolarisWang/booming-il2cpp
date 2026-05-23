@@ -247,6 +247,120 @@ public sealed partial class NativeAotLoweringPlanner
         }
     }
 
+    /// <summary>
+    /// Identifies call sites that need explicit bridge/import thunks — C++ wrapper
+    /// functions that adapt managed calling conventions to native targets.
+    ///
+    /// These are callees currently routed through the external runtime dispatch
+    /// table (<see cref="_externalRuntimeSubjects"/>) that are NOT handled by
+    /// <see cref="TryCreateExternalRuntimeHelperDefinition"/> (which produces
+    /// inline C++ expressions or SimpleForward stubs). For such callees, a
+    /// bridge thunk provides proper GC transition and calling convention handling
+    /// instead of relying on the interpreter-populated dispatch table.
+    /// </summary>
+    private void CollectBridgeImportThunks(
+        IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods)
+    {
+        _bridgeImportThunks ??= new Dictionary<string, BridgeImportThunkDefinition>(StringComparer.Ordinal);
+
+        foreach (var method in reachableMethods)
+        {
+            foreach (var instruction in method.Instructions)
+            {
+                string? callee = instruction.Callee ?? instruction.TargetReference?.SubjectId;
+                if (string.IsNullOrEmpty(callee))
+                    continue;
+
+                // Only consider callees in the external runtime dispatch table.
+                if (!_externalRuntimeSubjects.ContainsKey(callee))
+                    continue;
+
+                // ExternalRuntimeHelper definitions have their own inline/shape
+                // dispatch — no bridge thunk needed.
+                if (TryCreateExternalRuntimeHelperDefinition(callee, out _))
+                    continue;
+
+                // Already have a bridge thunk for this callee.
+                if (_bridgeImportThunks.ContainsKey(callee))
+                    continue;
+
+                // Already in the method dictionary → direct call, no bridge needed.
+                if (_methodsBySubjectId.ContainsKey(callee))
+                    continue;
+
+                // Determine if this is an InternalCall (native runtime method)
+                // vs a generic external call. InternalCalls are runtime methods
+                // with managed signatures that need GC cooperative mode.
+                bool isInternalCall = IsInternalCallSubjectId(callee);
+
+                // For now, bridge thunks use the external runtime helper symbol
+                // as the target (resolved at startup by the interpreter's table).
+                // Future enhancement: resolve the actual native symbol at compile
+                // time for InternalCall methods.
+                var targetSymbol = GetExternalRuntimeHelperSymbol(callee);
+                int paramCount = InferParameterCountFromSubjectId(callee);
+                var paramAbis = new AotCoreIrAbiSlotArtifact[paramCount];
+                for (int i = 0; i < paramCount; i++)
+                    paramAbis[i] = CreateNativeIntAbiSlot();
+                var returnType = InferReturnTypeFromSubjectId(callee);
+                var returnAbi = returnType != null
+                    ? CreateLegacyReturnAbiSlot(returnType)
+                    : CreateVoidAbiSlot();
+
+                _bridgeImportThunks[callee] = new BridgeImportThunkDefinition(
+                    SubjectId: callee,
+                    ThunkSymbol: $"chaos_bridge_thunk_{_bridgeImportThunks.Count}",
+                    TargetSymbol: targetSymbol,
+                    ParameterAbis: paramAbis,
+                    ReturnAbi: returnAbi,
+                    RequiresGcTransition: isInternalCall,
+                    HasMarshalling: false,
+                    IsInternalCall: isInternalCall,
+                    IsPInvokeImport: false);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Heuristic: determines if a subject ID refers to an InternalCall method.
+    /// InternalCall methods are runtime-internal native implementations with
+    /// managed signatures (e.g., RuntimeHelpers::InitializeArray,
+    /// Buffer::Memmove). They require GC cooperative mode.
+    ///
+    /// Detection is based on well-known patterns rather than explicit metadata,
+    /// since the AOT Core IR does not carry an explicit IsInternalCall flag.
+    /// </summary>
+    private static bool IsInternalCallSubjectId(string subjectId)
+    {
+        // InternalCalls typically come from System.Private.CoreLib and have
+        // well-known method names that are implemented natively in the runtime.
+        if (!subjectId.StartsWith("System.Private.CoreLib/", StringComparison.Ordinal))
+            return false;
+
+        // Common InternalCall patterns in the CHAOS runtime:
+        // RuntimeHelpers.*, Buffer.*, Environment.*, etc.
+        if (subjectId.Contains("::RuntimeHelpers::", StringComparison.Ordinal) ||
+            subjectId.Contains("::Buffer::", StringComparison.Ordinal) ||
+            subjectId.Contains("::Environment::", StringComparison.Ordinal) ||
+            subjectId.Contains("::Thread::", StringComparison.Ordinal) ||
+            subjectId.Contains("::Monitor::", StringComparison.Ordinal) ||
+            subjectId.Contains("::Interlocked::", StringComparison.Ordinal) ||
+            subjectId.Contains("::Volatile::", StringComparison.Ordinal) ||
+            subjectId.Contains("::JitHelpers::", StringComparison.Ordinal) ||
+            subjectId.Contains("::RuntimeImports::", StringComparison.Ordinal) ||
+            subjectId.Contains("::GC::", StringComparison.Ordinal) ||
+            subjectId.Contains("::Array::", StringComparison.Ordinal) ||
+            subjectId.Contains("::String::", StringComparison.Ordinal) ||
+            subjectId.Contains("::MemoryMarshal::", StringComparison.Ordinal) ||
+            subjectId.Contains("::SpanHelpers::", StringComparison.Ordinal) ||
+            subjectId.Contains("::Unsafe::", StringComparison.Ordinal))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     private IReadOnlyList<ExternalRuntimeHelperDefinition> CollectExternalRuntimeHelpers(
         IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods,
         StaticInitializationSupportModel staticInitializationSupport)

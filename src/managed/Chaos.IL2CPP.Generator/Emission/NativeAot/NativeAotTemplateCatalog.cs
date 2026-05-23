@@ -48,6 +48,7 @@ internal static class NativeAotTemplateCatalog
     public const string DelegateThunksTemplateRelativePath = "Templates/NativeAot.DelegateThunks.cpp.scriban";
     public const string GeneratedModuleHeaderTemplateRelativePath = "Templates/NativeAot.GeneratedModule.h.scriban";
     public const string GeneratedModuleSourceTemplateRelativePath = "Templates/NativeAot.GeneratedModule.cpp.scriban";
+    public const string CrossAssemblyExportsTemplateRelativePath = "Templates/NativeAot.CrossAssemblyExports.cpp.scriban";
 
     public static Template GetTypeDeclarationsTemplate()
     {

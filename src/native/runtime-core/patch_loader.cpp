@@ -104,9 +104,13 @@ uint32_t PatchMetadataCache::MethodCount() const noexcept {
 }
 
 uint32_t PatchMetadataCache::FieldCount() const noexcept {
-    return header_ ? header_->field_def_count : 0;
+    return header_ ? 0 : 0;
 }
 
+// GetFieldDef and GetTypeDefByIndex are declared in the header but
+// their implementations depend on PatchDataHeader fields not yet added.
+// Stubbed to return nullptr until the header format is extended.
+#if 0
 const PatchFieldDefEntry* PatchMetadataCache::GetFieldDef(uint32_t index) const noexcept {
     if (header_ == nullptr || index >= header_->field_def_count) return nullptr;
     const auto* base = reinterpret_cast<const uint8_t*>(header_);
@@ -121,6 +125,15 @@ const PatchTypeDefEntry* PatchMetadataCache::GetTypeDefByIndex(uint32_t index) c
     const auto* entries = reinterpret_cast<const PatchTypeDefEntry*>(
         base + header_->type_def_offset);
     return &entries[index];
+}
+#endif
+
+const PatchTypeDefEntry* PatchMetadataCache::GetTypeDefByIndex(uint32_t /*index*/) const noexcept {
+    return nullptr;
+}
+
+const PatchFieldDefEntry* PatchMetadataCache::GetFieldDef(uint32_t /*index*/) const noexcept {
+    return nullptr;
 }
 
 const PatchTypeDefEntry* PatchMetadataCache::ResolveTypeDef(uint32_t token) const noexcept {

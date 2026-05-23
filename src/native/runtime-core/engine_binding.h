@@ -8,6 +8,9 @@
 
 namespace chaos::il2cpp::runtime_core {
 
+// Import kernel backend enum types used by functions declared below.
+using namespace chaos::il2cpp::runtime_capability;
+
 CHAOS_IL2CPP_INT32 EngineLogWrite(
     const char* category_utf8,
     const char* message_utf8);

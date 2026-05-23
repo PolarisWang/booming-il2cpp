@@ -8,7 +8,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.Buffer::BlockCopy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 31256.3,
+      "postPatchNsPerOp": 12775.0,
       "slowdownPercent": 0.0
     },
     {
@@ -21,7 +21,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.Buffer::ByteLength:System.Int32(System.Array)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 28080.3,
+      "postPatchNsPerOp": 12839.6,
       "slowdownPercent": 0.0
     },
     {
@@ -29,7 +29,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.Buffer::GetByte:System.Byte(System.Array,System.Int32)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 34017.3,
+      "postPatchNsPerOp": 12219.6,
       "slowdownPercent": 0.0
     },
     {
@@ -62,7 +62,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.Buffer::SetByte:System.Void(System.Array,System.Int32,System.Byte)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 15648.7,
+      "postPatchNsPerOp": 11869.0,
       "slowdownPercent": 0.0
     }
   ],

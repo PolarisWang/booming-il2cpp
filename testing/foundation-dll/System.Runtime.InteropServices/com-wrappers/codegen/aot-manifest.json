@@ -75,12 +75,6 @@
       "reason": "external-call"
     },
     {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "type",
-      "subjectId": "System.Private.CoreLib/System.Int32",
-      "reason": "boxed-value-type"
-    },
-    {
       "assemblyName": "System.Runtime.InteropServices",
       "subjectKind": "method",
       "subjectId": "System.Runtime.InteropServices/ComWrappers::GetOrCreateComInterfaceForObject:System.IntPtr(System.Object,CreateComInterfaceFlags)",
@@ -133,6 +127,12 @@
       "subjectKind": "method",
       "subjectId": "System.Runtime.InteropServices/ComWrappers::RegisterForTrackerSupport:System.Void(ComWrappers)",
       "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Int32",
+      "reason": "boxed-value-type"
     },
     {
       "assemblyName": "System.Runtime.InteropServices",

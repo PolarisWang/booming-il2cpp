@@ -348,6 +348,104 @@ public sealed partial class NativeAotLoweringPlanner
         return true;
     }
 
+    private static bool TryCreateGenericExceptionMethodShape(
+        AotCoreIrMethodArtifact method,
+        out GenericExceptionMethodShape? genericShape)
+    {
+        genericShape = null;
+
+        if (method.ExceptionRegions.Count == 0)
+            return false;
+
+        // Sort by nesting depth: innermost first (smallest try range first).
+        // Regions are expected to be cleanly nested (one try range fully contained
+        // within another) or disjoint.  The IL spec prohibits partial overlap.
+        var sorted = method.ExceptionRegions
+            .OrderBy(r => r.TryLength)
+            .ThenBy(r => r.TryOffset)
+            .ToList();
+
+        // Determine outermost try bounds for prefix/tail extraction
+        int outerTryStart = sorted.Min(r => r.TryOffset);
+        int outerTryEnd = sorted.Max(r => r.TryOffset + r.TryLength);
+        int outerHandlerEnd = sorted.Max(r => r.HandlerOffset + r.HandlerLength);
+        int outermostEnd = Math.Max(outerTryEnd, outerHandlerEnd);
+
+        // Prefix: instructions before the outermost try range
+        var prefix = method.Instructions
+            .Where(i => i.IlOffset < outerTryStart)
+            .ToList();
+        if (!ValidatePartitionStackBalance(prefix, 0))
+            return false;
+
+        // Tail: instructions after all handler ranges
+        var tail = method.Instructions
+            .Where(i => i.IlOffset >= outermostEnd)
+            .ToList();
+        if (!ValidatePartitionStackBalance(tail, 0))
+            return false;
+
+        // Build region entries from innermost to outermost.
+        // Track IL offset ranges consumed by inner regions' try + handler
+        // so each outer region's try body excludes already-covered instructions.
+        var entries = new List<GenericExceptionRegionEntry>();
+        var consumedRanges = new List<(int start, int end)>();
+        int maxHandlerPushes = 0;
+
+        foreach (var region in sorted)
+        {
+            int tryStart = region.TryOffset;
+            int tryEnd = tryStart + region.TryLength;
+            int handlerStart = region.HandlerOffset;
+            int handlerEnd = handlerStart + region.HandlerLength;
+
+            // Try instructions: in try range, not in any consumed range
+            var tryInstructions = method.Instructions
+                .Where(i => i.IlOffset >= tryStart && i.IlOffset < tryEnd &&
+                            !consumedRanges.Any(c => i.IlOffset >= c.start && i.IlOffset < c.end))
+                .ToList();
+            StripTrailingLeaveInstructions(tryInstructions);
+
+            // Handler instructions
+            var handlerInstructions = new List<AotCoreIrInstructionArtifact>(
+                method.Instructions.Where(i => i.IlOffset >= handlerStart && i.IlOffset < handlerEnd));
+            StripTrailingLeaveInstructions(handlerInstructions);
+
+            // Filter instructions (only for filter regions)
+            IReadOnlyList<AotCoreIrInstructionArtifact>? filterInstructions = null;
+            if (region.HandlingKindCode == AotCoreIrExceptionRegionKind.Filter && region.FilterOffset != null)
+            {
+                filterInstructions = method.Instructions
+                    .Where(i => i.IlOffset >= region.FilterOffset.Value && i.IlOffset < region.HandlerOffset)
+                    .ToList();
+            }
+
+            // Validate stack balance: catch/filter handlers start with exception object (depth=1)
+            bool handlerHasExceptionPush = region.HandlingKindCode != AotCoreIrExceptionRegionKind.Finally;
+            if (!ValidatePartitionStackBalance(tryInstructions, 0) ||
+                !ValidatePartitionStackBalance(handlerInstructions, handlerHasExceptionPush ? 1 : 0))
+                return false;
+
+            // Mark this region's ranges as consumed so outer regions skip them
+            consumedRanges.Add((tryStart, tryEnd));
+            consumedRanges.Add((handlerStart, handlerEnd));
+
+            entries.Add(new GenericExceptionRegionEntry(
+                region, tryInstructions, handlerInstructions, filterInstructions));
+
+            int pushes = region.HandlingKindCode switch
+            {
+                AotCoreIrExceptionRegionKind.Catch => 1,
+                AotCoreIrExceptionRegionKind.Filter => 2,
+                _ => 0
+            };
+            if (pushes > maxHandlerPushes) maxHandlerPushes = pushes;
+        }
+
+        genericShape = new GenericExceptionMethodShape(prefix, tail, entries, maxHandlerPushes);
+        return true;
+    }
+
     // ── Instruction partitioning helpers ──
 
     /// <summary>

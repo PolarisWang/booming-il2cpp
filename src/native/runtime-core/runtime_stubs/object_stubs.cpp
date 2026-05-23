@@ -2,6 +2,7 @@
 
 // object_stubs.cpp — Object / RuntimeHelpers stub implementations
 #include <chaos/native_types.h>
+#include <chaos/log.h>
 #include "generated_code_compat.h"
 
 namespace chaos::il2cpp::runtime_core {
@@ -9,6 +10,7 @@ extern "C" {
 
 CHAOS_IL2CPP_INTPTR ChaosObjectEqualsStatic(CHAOS_IL2CPP_INTPTR /*left*/, CHAOS_IL2CPP_INTPTR /*right*/) noexcept
 {
+    CHAOS_IL2CPP_LOG_WARN("Stub", "object_stubs called");
     return 0;
 }
 

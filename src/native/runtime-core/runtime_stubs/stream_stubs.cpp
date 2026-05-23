@@ -7,7 +7,10 @@
 namespace chaos::il2cpp::runtime_core {
 extern "C" {
 
-void ChaosStreamFlush(CHAOS_IL2CPP_INTPTR stream) noexcept { (void)stream; }
+void ChaosStreamFlush(CHAOS_IL2CPP_INTPTR stream) noexcept {
+    CHAOS_IL2CPP_LOG_WARN("Stub", "stream_stubs called");
+    (void)stream;
+}
 CHAOS_IL2CPP_INT64 ChaosStreamSeek(CHAOS_IL2CPP_INTPTR stream, CHAOS_IL2CPP_INT64 offset, CHAOS_IL2CPP_INT32 origin) noexcept { (void)stream; (void)offset; (void)origin; return 0; }
 void ChaosStreamSetLength(CHAOS_IL2CPP_INTPTR stream, CHAOS_IL2CPP_INT64 value) noexcept { (void)stream; (void)value; }
 CHAOS_IL2CPP_INT64 ChaosStreamGetLength(CHAOS_IL2CPP_INTPTR stream) noexcept { (void)stream; return 0; }

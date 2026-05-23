@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ObjectiveCInteropSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Runtime.InteropServices/objective-c-interop/managed/subjects/build-output/ObjectiveCInteropSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Runtime.InteropServices/objective-c-interop/managed/subjects/build-output/ObjectiveCInteropSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "ObjectiveCInteropSubjects",
-      "path": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Runtime.InteropServices/objective-c-interop/managed/subjects/build-output/ObjectiveCInteropSubjects.dll"
+      "path": "testing/foundation-dll/System.Runtime.InteropServices/objective-c-interop/managed/subjects/build-output/ObjectiveCInteropSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "9b366140-5c38-4d5b-a5f0-586421c345c2",
+  "inputModuleVersionId": "8f8c3f82-be56-4af6-880f-79e1d245cf35",
   "artifacts": [
     {
       "kind": "typedIlIr",

@@ -72,7 +72,7 @@ public static partial class RuntimeInteropServicesSubjects
     // [8] System.Runtime.InteropServices/System.Runtime.InteropServices.OSPlatform::Equals:System.Boolean(System.Object)
     public static void Subject_8()
     {
-        try { if (((default(OSPlatform).Equals(42)) ? 1 : 0) != ((default(OSPlatform).Equals(42)) ? 1 : 0)) _exitCode = 1; }
+        try { if (((default(OSPlatform).Equals(null!)) ? 1 : 0) != ((default(OSPlatform).Equals(null!)) ? 1 : 0)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 

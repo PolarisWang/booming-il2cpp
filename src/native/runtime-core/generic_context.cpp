@@ -211,13 +211,16 @@ static void DoLazyResolveOpenType(Registry& registry, ModuleShard* shard,
         inst.closed_type = closed_handle;
         inst.module_id   = shard->module_id;
         inst.type_args   = CHAOS_IL2CPP_MOVE(arg_handles);
+
+        // Save type_args before move — after push_back, inst.type_args is moved-from.
+        const auto saved_type_args = inst.type_args;
         type_entry.closed_types.push_back(CHAOS_IL2CPP_MOVE(inst));
 
         // Populate reverse index for O(1) GetClosedTypeGenericArgs.
         Registry::ClosedTypeArgs rev;
         rev.open_type = open_type;
         rev.module_id = shard->module_id;
-        rev.type_args = inst.type_args;
+        rev.type_args = saved_type_args;
         registry.by_closed_type[closed_handle] = CHAOS_IL2CPP_MOVE(rev);
     }
 
@@ -417,12 +420,13 @@ TypeInfoHandle TryResolveClosedType(
                     if (!type_entry.owner_shard->resolve_state[i]) {
                         DoLazyResolveOpenType(registry, type_entry.owner_shard, open_type, i);
                     }
+                    // Clear owner under the same shard lock so concurrent readers
+                    // holding a shared_lock on global_mutex don't race with the write.
+                    type_entry.owner_shard = nullptr;
                 }
                 break;
             }
         }
-        // After resolution, the shard owner is no longer needed for this open type.
-        type_entry.owner_shard = nullptr;
     }
 
     // Linear scan of now-populated (or previously populated) entries.

@@ -2,22 +2,22 @@
   "schemaVersion": 1,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/buffer/memory",
-  "capturedAt": "2026-05-22T08:39:27",
+  "capturedAt": "2026-05-23T15:08:33",
   "metrics": {
     "framePool": {
-      "acquireReleaseNsPerOp": 5.1,
+      "acquireReleaseNsPerOp": 2.7,
       "batchCount": 1000,
       "framesPerBatch": 32
     },
     "fastExecute": {
       "runCount": 100000,
-      "nsPerCall": 679.3
+      "nsPerCall": 462.6
     },
     "callVirt": {
-      "handlerDispatchNs": 877.3,
-      "emptyStackNs": 965.0
+      "handlerDispatchNs": 503.1,
+      "emptyStackNs": 553.4
     },
     "poolSize": 32
   },
-  "rawOutput": "[2026-05-22T08:39:27][DEBUG][codegen] T4 VEH handler registered\n[2026-05-22T08:39:27][DEBUG][GcEvents] registered callback 0x7ff6e1d75220 at slot 0\n[2026-05-22T08:39:27][WARN][CRAG] young_collection_no_region\n[2026-05-22T08:39:27][INFO][NUMA] numa_init count=%d\n[2026-05-22T08:39:27][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-22T08:39:27][INFO][OldGen] init done base=0x2537316941824 pages=8\n[2026-05-22T08:39:27][DEBUG][codegen] T4 VEH handler registered\n[2026-05-22T08:39:27][DEBUG][GcEvents] registered callback 0x7ff6e1d75220 at slot 1\nBenchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 5.1 ns/op (1000 batches x 32 frames)\n[2026-05-22T08:39:27][DEBUG][BGC] thread_started\n[2026-05-22T08:39:27][DEBUG][Finalizer] thread_started id={0}\n[2026-05-22T08:39:27][WARN][CRAG] young_collection_no_region\n[2026-05-22T08:39:27][DEBUG][BGC] start_cycle\n[2026-05-22T08:39:27][DEBUG][BGC] root_scan heap=978 oldgen=10 valid=0 marked=0\n[2026-05-22T08:39:27][DEBUG][BGC] root_set_populated\n[2026-05-22T08:39:27][DEBUG][BGC] concurrent_mark_begin\n[2026-05-22T08:39:27][DEBUG][BGC] parallel_workers spawned=8\n[2026-05-22T08:39:27][DEBUG][BGC] concurrent_mark_started\n[2026-05-22T08:39:27][DEBUG][BGC] concurrent_mark_complete\nBenchmark 2: FastExecute (Subject_0): 100000 runs: 679.3 ns/op\n[2026-05-22T08:39:27][WARN][CRAG] young_collection_no_region\n[2026-05-22T08:39:27][DEBUG][BGC] stw_remark_start\n[2026-05-22T08:39:27][DEBUG][BGC] stw_remark_done marked=0 cards=0\n[2026-05-22T08:39:27][DEBUG][BGC] concurrent_sweep_started\n[2026-05-22T08:39:27][DEBUG][BGC] concurrent_sweep_begin\n[2026-05-22T08:39:27][INFO][BGC] remark_done pause_us=273\n[2026-05-22T08:39:27][DEBUG][BGC] concurrent_sweep_complete\n[2026-05-22T08:39:27][DEBUG][BGC] compact_needed_waiting\nHandler dispatch overhead (LdcI4): 877.3 ns/call\nCallVirt empty-stack: 965.0 ns/call\n"
+  "rawOutput": "[2026-05-23T15:08:33][DEBUG][codegen] T4 VEH handler registered\n[2026-05-23T15:08:33][DEBUG][GcEvents] registered callback 0x7ff6d5a305f0 at slot 0\n[2026-05-23T15:08:33][WARN][CRAG] young_collection_no_region\n[2026-05-23T15:08:33][INFO][NUMA] numa_init count=%d\n[2026-05-23T15:08:33][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-23T15:08:33][INFO][OldGen] emergency_reserve_allocated base=0x2408156954624 size=65536\n[2026-05-23T15:08:33][INFO][OldGen] init done base=0x2408127528960 pages=8\n[2026-05-23T15:08:33][DEBUG][codegen] T4 VEH handler registered\n[2026-05-23T15:08:33][DEBUG][GcEvents] registered callback 0x7ff6d5a305f0 at slot 1\nBenchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 2.7 ns/op (1000 batches x 32 frames)\n[2026-05-23T15:08:33][DEBUG][BGC] thread_started\n[2026-05-23T15:08:33][DEBUG][Finalizer] thread_started id={0}\nBenchmark 2: FastExecute (Subject_0): 100000 runs: 462.6 ns/op\n[2026-05-23T15:08:33][WARN][CRAG] young_collection_no_region\n[2026-05-23T15:08:33][DEBUG][BGC] start_cycle\n[2026-05-23T15:08:33][DEBUG][BGC] root_scan heap=910 oldgen=8 valid=0 marked=0\n[2026-05-23T15:08:33][DEBUG][BGC] root_set_populated\n[2026-05-23T15:08:33][DEBUG][BGC] concurrent_mark_started\n[2026-05-23T15:08:33][DEBUG][BGC] concurrent_mark_begin\n[2026-05-23T15:08:33][DEBUG][BGC] parallel_workers spawned=8\n[2026-05-23T15:08:33][DEBUG][BGC] concurrent_mark_complete\nHandler dispatch overhead (LdcI4): 503.1 ns/call\nCallVirt empty-stack: 553.4 ns/call\n"
 }

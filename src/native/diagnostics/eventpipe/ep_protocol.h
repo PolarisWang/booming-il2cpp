@@ -75,6 +75,15 @@ enum class EpEventType : uint32_t {
     DomainRegistered          = 0x0601,
     DomainUnloaded            = 0x0602,
     DomainUsageLimitExceeded  = 0x0603,
+
+    // COM events (range 0x0700-0x07FF)
+    ComRcwCreated           = 0x0701,
+    ComRcwReleased          = 0x0702,
+    ComCcwCreated           = 0x0703,
+    ComCcwReleased          = 0x0704,
+    ComConnectionPointAdvise  = 0x0705,
+    ComConnectionPointUnadvise= 0x0706,
+    ComDispatchInvoke        = 0x0707,
 };
 
 // ── Wire header ─────────────────────────────────────────────────────────

@@ -169,6 +169,7 @@ private:
 
     // ── Alignment helpers ───────────────────────────────────────────────
 
+public:
     static CHAOS_IL2CPP_UINT32 AlignUp(
         CHAOS_IL2CPP_UINT32 offset,
         CHAOS_IL2CPP_UINT32 alignment);

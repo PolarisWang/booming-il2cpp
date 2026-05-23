@@ -64,7 +64,7 @@ public static partial class GarbageCollectionSubjects
     // [7] System.Private.CoreLib/System.GC::Collect(System.Int32,System.GCCollectionMode):System.Void()
     public static void Subject_7()
     {
-        try { if (((GC.Collect(42, default)).GetHashCode()) != ((GC.Collect(42, default)).GetHashCode())) _exitCode = 1; }
+        try { GC.Collect(42, default); }
         catch { _exitCode = 1; }
     }
 
@@ -78,14 +78,14 @@ public static partial class GarbageCollectionSubjects
     // [9] System.Private.CoreLib/System.GC::set_LatencyMode(System.GCLatencyMode):System.Void()
     public static void Subject_9()
     {
-        try { if (((GC.LatencyMode = default).GetHashCode()) != ((GC.LatencyMode = default).GetHashCode())) _exitCode = 1; }
+        try { GC.LatencyMode = default; }
         catch { _exitCode = 1; }
     }
 
     // [10] System.Private.CoreLib/System.GC::CollectionCount(System.Int32):System.Int64()
     public static void Subject_10()
     {
-        try { if (((GC.CollectionCount(42)).GetHashCode()) != ((GC.CollectionCount(42)).GetHashCode())) _exitCode = 1; }
+        try { if ((int)(GC.CollectionCount(42)) != (int)(GC.CollectionCount(42))) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 

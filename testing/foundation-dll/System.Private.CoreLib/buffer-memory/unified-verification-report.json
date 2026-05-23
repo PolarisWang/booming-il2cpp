@@ -2,8 +2,8 @@
   "family": "buffer-memory",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-22T08:39:34",
-  "duration_ms": 90192,
+  "timestamp": "2026-05-23T15:08:36",
+  "duration_ms": 27862,
   "overall_status": "failed",
   "stages": {
     "preflight": {
@@ -28,7 +28,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\buffer-memory\\managed\\subjects\\build-output\\BufferMemorySubjects.dll"
       },
       "errors": [],
-      "duration_ms": 79399
+      "duration_ms": 23017
     },
     "jit_codegen": {
       "stage": "jit_codegen",
@@ -50,7 +50,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 558
+      "duration_ms": 370
     },
     "fact_jit": {
       "stage": "fact_jit",
@@ -65,7 +65,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 82
+      "duration_ms": 356
     },
     "audit": {
       "stage": "audit",
@@ -79,7 +79,7 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 2536
+      "duration_ms": 862
     },
     "asm_compare": {
       "stage": "asm_compare",
@@ -92,25 +92,25 @@
     "microbench": {
       "stage": "microbench",
       "status": "passed",
-      "summary": "FramePool=5.1ns/op | FastExecute=679.3ns/op | CallVirt dispatch=877.3ns",
+      "summary": "FramePool=2.7ns/op | FastExecute=462.6ns/op | CallVirt dispatch=503.1ns",
       "details": {
         "framePool": {
-          "acquireReleaseNsPerOp": 5.1,
+          "acquireReleaseNsPerOp": 2.7,
           "batchCount": 1000,
           "framesPerBatch": 32
         },
         "fastExecute": {
           "runCount": 100000,
-          "nsPerCall": 679.3
+          "nsPerCall": 462.6
         },
         "callVirt": {
-          "handlerDispatchNs": 877.3,
-          "emptyStackNs": 965.0
+          "handlerDispatchNs": 503.1,
+          "emptyStackNs": 553.4
         },
         "poolSize": 32
       },
       "errors": [],
-      "duration_ms": 220
+      "duration_ms": 134
     },
     "benchmark": {
       "stage": "benchmark",
@@ -118,7 +118,7 @@
       "summary": "All 10 non-stub methods are invalid (no managed harness)",
       "details": {},
       "errors": [],
-      "duration_ms": 5183
+      "duration_ms": 2249
     },
     "hotupdate": {
       "stage": "hotupdate",
@@ -132,20 +132,20 @@
         "stubMethods": 6
       },
       "errors": [],
-      "duration_ms": 71
+      "duration_ms": 28
     },
     "hotupdate_aot_benchmark": {
       "stage": "hotupdate_aot_benchmark",
       "status": "passed",
-      "summary": "avg_slowdown=-8.72% (0.9x) over 4 methods (AOT patched path)",
+      "summary": "avg_slowdown=-0.77% (1.0x) over 4 methods (AOT patched path)",
       "details": {
-        "averageSlowdownPercent": -8.72,
-        "slowdownFactor": 0.9128000000000001,
+        "averageSlowdownPercent": -0.77,
+        "slowdownFactor": 0.9923000000000001,
         "threshold": 50.0,
         "nonStubMethods": 4
       },
       "errors": [],
-      "duration_ms": 431
+      "duration_ms": 104
     },
     "hotupdate_jit_fact": {
       "stage": "hotupdate_jit_fact",
@@ -157,7 +157,7 @@
         "total": 13
       },
       "errors": [],
-      "duration_ms": 76
+      "duration_ms": 27
     },
     "hotupdate_jit_benchmark": {
       "stage": "hotupdate_jit_benchmark",
@@ -170,7 +170,7 @@
         "nonStubMethods": 0
       },
       "errors": [],
-      "duration_ms": 1588
+      "duration_ms": 670
     }
   },
   "coverage": {
@@ -180,9 +180,9 @@
   },
   "dashboard": {
     "interpreter": {
-      "fastFramePoolNsPerOp": 5.1,
+      "fastFramePoolNsPerOp": 2.7,
       "fastExecuteNsPerInstr": 0,
-      "callVirtHandlerDispatchNs": 877.3,
+      "callVirtHandlerDispatchNs": 503.1,
       "callVirtMicHitNs": 0,
       "callVirtRawFallbackNs": 0,
       "poolSize": 32
@@ -211,8 +211,8 @@
         "totalMethods": 13
       },
       "aotOverhead": {
-        "averageSlowdownPercent": -8.72,
-        "slowdownFactor": 0.9128000000000001,
+        "averageSlowdownPercent": -0.77,
+        "slowdownFactor": 0.9923000000000001,
         "nonStubMethods": 4
       },
       "jitFunctional": {
@@ -229,7 +229,7 @@
     "keyRatios": {
       "nativeFasterRatio": 0,
       "irExpansionRatio": 0.16,
-      "interpreterSlowdownFactor": 0.9128000000000001,
+      "interpreterSlowdownFactor": 0.9923000000000001,
       "asmPassRate": 100.0
     }
   },

@@ -95,6 +95,9 @@ struct Int128Layout {
     CHAOS_IL2CPP_INT64 upper;
 };
 
+#ifndef CHAOS_IL2CPP_MARSHAL_ALLOC_HEADER_ALREADY_DEFINED
+#define CHAOS_IL2CPP_MARSHAL_ALLOC_HEADER_ALREADY_DEFINED
+
 struct MarshalAllocationHeader {
     CHAOS_IL2CPP_UINT64 magic;
     memory_domain::DomainId domain_id;
@@ -103,6 +106,7 @@ struct MarshalAllocationHeader {
 };
 
 constexpr CHAOS_IL2CPP_UINT64 kMarshalAllocationMagic = 0x43484D4152534841ull;
+#endif
 
 constexpr ValueTypeKernelBackendKind DetectCharClassificationKernelBackend() {
     return ValueTypeKernelBackendKind::Intrinsic;

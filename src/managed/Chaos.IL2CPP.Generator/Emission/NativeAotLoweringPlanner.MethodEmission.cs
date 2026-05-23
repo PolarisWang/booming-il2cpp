@@ -196,23 +196,7 @@ public sealed partial class NativeAotLoweringPlanner
 		handler.AppendFormatted(Math.Max(method.LocalCount, 1));
 		handler.AppendLiteral(") chaos_locals{};");
 		stringBuilder5.AppendLine(ref handler);
-		if (body is IRFlatRegion)
-		{
-			// Flat-goto fallback: body uses chaos_eval_stack / chaos_stack_top
-			// but caller sees usesStructuredSlots=true (TryBuildStructuredMethodBody
-			// returns true for IRFlatRegion) and structuredSlotCount=0, so the
-			// downstream branches would skip declarations entirely.  Fix by
-			// detecting IRFlatRegion and emitting eval stack unconditionally.
-			int flatEvalDepth = Math.Max(ComputeMaxEvalStackDepth(instructions), 1);
-			stringBuilder = builder;
-			handler = new StringBuilder.AppendInterpolatedStringHandler(51, 1, stringBuilder);
-			handler.AppendLiteral("    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, ");
-			handler.AppendFormatted(flatEvalDepth);
-			handler.AppendLiteral(") chaos_eval_stack{};");
-			stringBuilder.AppendLine(ref handler);
-			builder.AppendLine("    CHAOS_IL2CPP_SIZE chaos_stack_top = 0;");
-		}
-		else if (usesStructuredSlots && structuredSlotCount > 0)
+		if (usesStructuredSlots && structuredSlotCount > 0)
 		{
 			EmitStructuredSlotDeclarations(builder, structuredSlotCount, "    ");
 		}

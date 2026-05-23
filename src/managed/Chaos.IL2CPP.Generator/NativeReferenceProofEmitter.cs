@@ -241,130 +241,6 @@ public sealed partial class NativeReferenceProofEmitter
     private delegate RuntimeSkeletonFamilyHandlerResult RuntimeSkeletonFamilyHandler(
         RuntimeSkeletonStubBuildContext buildContext);
 
-    private delegate RuntimeSkeletonFamilyHandlerResult RuntimeSkeletonConvertLikeFamilyHandler(
-        RuntimeSkeletonStubBuildContext buildContext);
-
-    private delegate RuntimeSkeletonFamilyHandlerResult RuntimeSkeletonBindingFamilyHandler(
-        RuntimeSkeletonStubBuildContext buildContext);
-
-    private delegate RuntimeSkeletonFamilyHandlerResult RuntimeSkeletonUtilityFamilyHandler(
-        RuntimeSkeletonStubBuildContext buildContext);
-
-    private delegate RuntimeSkeletonFamilyHandlerResult RuntimeSkeletonPlatformFamilyHandler(
-        RuntimeSkeletonStubBuildContext buildContext);
-
-    private delegate RuntimeSkeletonFamilyHandlerResult RuntimeSkeletonInteropFamilyHandler(
-        RuntimeSkeletonStubBuildContext buildContext);
-
-    private delegate RuntimeSkeletonFamilyHandlerResult RuntimeSkeletonAsyncFamilyHandler(
-        RuntimeSkeletonStubBuildContext buildContext);
-
-    private delegate RuntimeSkeletonFamilyHandlerResult RuntimeSkeletonArrayFamilyHandler(
-        RuntimeSkeletonStubBuildContext buildContext);
-
-    private delegate RuntimeSkeletonFamilyHandlerResult RuntimeSkeletonExceptionFamilyHandler(
-        RuntimeSkeletonStubBuildContext buildContext);
-
-    private delegate RuntimeSkeletonFamilyHandlerResult RuntimeSkeletonStringFamilyHandler(
-        RuntimeSkeletonStubBuildContext buildContext);
-
-    private static readonly RuntimeSkeletonConvertLikeFamilyHandler[] RuntimeSkeletonConvertLikeFamilyHandlers =
-    [
-        TryBuildRuntimeSkeletonConvertLikeIntForwarderHandler,
-        TryBuildRuntimeSkeletonConvertLikeBoolIdentityForwarderHandler,
-        TryBuildRuntimeSkeletonConvertLikeBoolProducerForwarderHandler,
-        TryBuildRuntimeSkeletonConvertLikeStringProviderPassthroughHandler,
-        TryBuildRuntimeSkeletonConvertLikeStringCharProviderHandler,
-        TryBuildRuntimeSkeletonConvertLikeObjectCharProviderHandler,
-        TryBuildRuntimeSkeletonConvertLikeBoxedValueTypeStringInstanceCallHandler,
-        TryBuildRuntimeSkeletonConvertLikeStaticStringCallForwarderHandler,
-        TryBuildRuntimeSkeletonConvertLikePrimitiveHandler,
-        TryBuildRuntimeSkeletonConvertLikeBoxedValueTypeCharInvalidCastHandler,
-        TryBuildRuntimeSkeletonConvertLikeBoxedIConvertibleCharInvalidCastHandler,
-        TryBuildRuntimeSkeletonConvertLikeCheckedPrimitiveHandler,
-        TryBuildRuntimeSkeletonConvertLikeByteForwarderHandler,
-        TryBuildRuntimeSkeletonConvertLikeBoxedValueTypeInstanceCallHandler,
-        TryBuildRuntimeSkeletonConvertLikeStaticValueTypeCallForwarderHandler,
-        TryBuildRuntimeSkeletonConvertLikeInstanceValueTypeCallForwarderHandler,
-        TryBuildRuntimeSkeletonConvertLikeValueTypeIdentityForwarderHandler,
-    ];
-
-    private static readonly RuntimeSkeletonBindingFamilyHandler[] RuntimeSkeletonBindingFamilyHandlers =
-    [
-        TryBuildRuntimeSkeletonConstructorFieldSetterHandler,
-        TryBuildRuntimeSkeletonFieldBackedStringReturnHandler,
-        TryBuildRuntimeSkeletonFieldArgumentStringReturnHandler,
-        TryBuildRuntimeSkeletonFieldGetterStringReturnHandler,
-        TryBuildRuntimeSkeletonDelegateClosedTargetRelayHandler,
-    ];
-
-    private static readonly RuntimeSkeletonUtilityFamilyHandler[] RuntimeSkeletonUtilityFamilyHandlers =
-    [
-        TryBuildRuntimeSkeletonStaticVoidObjectSinkNoOpHandler,
-        TryBuildRuntimeSkeletonStaticBoolForwarderHandler,
-        TryBuildRuntimeSkeletonConsoleWriteLineHandler,
-    ];
-
-    private static readonly RuntimeSkeletonPlatformFamilyHandler[] RuntimeSkeletonPlatformFamilyHandlers =
-    [
-        TryBuildRuntimeSkeletonInterfaceDispatchMessageHandler,
-        TryBuildRuntimeSkeletonThreadingThreadStaticMonitorHandler,
-    ];
-
-    private static readonly RuntimeSkeletonInteropFamilyHandler[] RuntimeSkeletonInteropFamilyHandlers =
-    [
-        TryBuildRuntimeSkeletonMarshalingUtf8ExportHandler,
-        TryBuildRuntimeSkeletonReflectionInteropClosureHandler,
-        TryBuildRuntimeSkeletonPInvokeDirectCallHandler,
-    ];
-
-    private static readonly RuntimeSkeletonAsyncFamilyHandler[] RuntimeSkeletonAsyncFamilyHandlers =
-    [
-        TryBuildRuntimeSkeletonAsyncTaskFactoryHandler,
-        TryBuildRuntimeSkeletonAsyncGetResultHandler,
-        TryBuildRuntimeSkeletonAsyncStateMachineNoOpHandler,
-    ];
-
-    private static readonly RuntimeSkeletonArrayFamilyHandler[] RuntimeSkeletonArrayFamilyHandlers =
-    [
-        TryBuildRuntimeSkeletonArrayBoxingReferenceArrayHandler,
-        TryBuildRuntimeSkeletonArrayClearReferenceArrayHandler,
-        TryBuildRuntimeSkeletonArrayReverseReferenceArrayHandler,
-        TryBuildRuntimeSkeletonArrayCopyReferenceArrayHandler,
-    ];
-
-    private static readonly RuntimeSkeletonExceptionFamilyHandler[] RuntimeSkeletonExceptionFamilyHandlers =
-    [
-        TryBuildRuntimeSkeletonStaticExceptionThrowLiteralHandler,
-        TryBuildRuntimeSkeletonStaticExceptionThrowStringProducerHandler,
-        TryBuildRuntimeSkeletonStaticExceptionCatchStringReturnHandler,
-        TryBuildRuntimeSkeletonExceptionThrowCatchFinallyHandler,
-        TryBuildRuntimeSkeletonNestedExceptionThrowCatchFinallyHandler,
-    ];
-
-    private static readonly RuntimeSkeletonStringFamilyHandler[] RuntimeSkeletonStringFamilyHandlers =
-    [
-        TryBuildRuntimeSkeletonStaticStringReturnForwarderHandler,
-        TryBuildRuntimeSkeletonStaticStringForwarderHandler,
-        TryBuildRuntimeSkeletonStaticStringLiteralAppendHandler,
-        TryBuildRuntimeSkeletonStaticStringForwarderConsoleWriteLineHandler,
-        TryBuildRuntimeSkeletonStaticStringProducerForwarderConsoleWriteLineHandler,
-        TryBuildRuntimeSkeletonStaticStringProducerCtorGetterConsoleWriteLineHandler,
-        TryBuildRuntimeSkeletonStaticStringProducerCtorRenderConsoleWriteLineHandler,
-        TryBuildRuntimeSkeletonStaticStringProducerCtorInstanceCallForwarderConsoleWriteLineHandler,
-        TryBuildRuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallConsoleWriteLineHandler,
-        TryBuildRuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallForwarderConsoleWriteLineHandler,
-        TryBuildRuntimeSkeletonStaticStringProducerCtorInstanceCallForwarderForwarderConsoleWriteLineHandler,
-        TryBuildRuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallForwarderForwarderConsoleWriteLineHandler,
-        TryBuildRuntimeSkeletonStaticStringProducerCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineHandler,
-        TryBuildRuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineHandler,
-        TryBuildRuntimeSkeletonStaticLiteralStringReturnHandler,
-        TryBuildRuntimeSkeletonStaticResourceKeyStringReturnHandler,
-        TryBuildRuntimeSkeletonStaticStringProducerConsoleWriteLineHandler,
-        TryBuildRuntimeSkeletonStaticCallCtorGetterExecutableHandler,
-        TryBuildRuntimeSkeletonConstructorThenInstanceCallExecutableHandler,
-    ];
-
     private const string RuntimeSkeletonConvertStringCharProviderCoreLibSubjectId =
         "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)";
 
@@ -1782,178 +1658,6 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonConvertFamilyCore(buildContext);
 
-    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonBindingFamilyHandler(
-        RuntimeSkeletonStubBuildContext buildContext)
-    {
-        foreach (var bindingFamilyHandler in RuntimeSkeletonBindingFamilyHandlers)
-        {
-            var result = bindingFamilyHandler(buildContext);
-            if (result.MatchKind == RuntimeSkeletonFamilyHandlerMatchKind.Match)
-            {
-                return result;
-            }
-        }
-
-        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
-    }
-
-    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonUtilityFamilyHandler(
-        RuntimeSkeletonStubBuildContext buildContext)
-    {
-        foreach (var utilityFamilyHandler in RuntimeSkeletonUtilityFamilyHandlers)
-        {
-            var result = utilityFamilyHandler(buildContext);
-            if (result.MatchKind == RuntimeSkeletonFamilyHandlerMatchKind.Match)
-            {
-                return result;
-            }
-        }
-
-        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
-    }
-
-    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonPlatformFamilyHandler(
-        RuntimeSkeletonStubBuildContext buildContext)
-    {
-        foreach (var platformFamilyHandler in RuntimeSkeletonPlatformFamilyHandlers)
-        {
-            var result = platformFamilyHandler(buildContext);
-            if (result.MatchKind == RuntimeSkeletonFamilyHandlerMatchKind.Match)
-            {
-                return result;
-            }
-        }
-
-        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
-    }
-
-    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonInteropKernel32PlatformCapabilityFamilyHandler(
-        RuntimeSkeletonStubBuildContext buildContext) =>
-        TryBuildRuntimeSkeletonInteropKernel32PlatformCapabilityFamilyCore(buildContext);
-
-    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonInteropFamilyHandler(
-        RuntimeSkeletonStubBuildContext buildContext)
-    {
-        foreach (var interopFamilyHandler in RuntimeSkeletonInteropFamilyHandlers)
-        {
-            var result = interopFamilyHandler(buildContext);
-            if (result.MatchKind == RuntimeSkeletonFamilyHandlerMatchKind.Match)
-            {
-                return result;
-            }
-        }
-
-        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
-    }
-
-    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonAsyncFamilyHandler(
-        RuntimeSkeletonStubBuildContext buildContext)
-    {
-        foreach (var asyncFamilyHandler in RuntimeSkeletonAsyncFamilyHandlers)
-        {
-            var result = asyncFamilyHandler(buildContext);
-            if (result.MatchKind == RuntimeSkeletonFamilyHandlerMatchKind.Match)
-            {
-                return result;
-            }
-        }
-
-        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
-    }
-
-    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonArrayFamilyHandler(
-        RuntimeSkeletonStubBuildContext buildContext)
-    {
-        foreach (var arrayFamilyHandler in RuntimeSkeletonArrayFamilyHandlers)
-        {
-            var result = arrayFamilyHandler(buildContext);
-            if (result.MatchKind == RuntimeSkeletonFamilyHandlerMatchKind.Match)
-            {
-                return result;
-            }
-        }
-
-        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
-    }
-
-    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonExceptionFamilyHandler(
-        RuntimeSkeletonStubBuildContext buildContext)
-    {
-        if (!buildContext.SubjectId.Contains("Exception", StringComparison.Ordinal))
-        {
-            return RuntimeSkeletonFamilyHandlerResult.NoMatch;
-        }
-
-        foreach (var exceptionFamilyHandler in RuntimeSkeletonExceptionFamilyHandlers)
-        {
-            var result = exceptionFamilyHandler(buildContext);
-            if (result.MatchKind == RuntimeSkeletonFamilyHandlerMatchKind.Match)
-            {
-                return result;
-            }
-        }
-
-        return RuntimeSkeletonFamilyHandlerResult.CreateUnsupported("exception-family-owned-unsupported-shape");
-    }
-
-    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertLikeFamilyHandler(
-        RuntimeSkeletonStubBuildContext buildContext)
-    {
-        return TryBuildRuntimeSkeletonConvertLikeHandlers(buildContext, RuntimeSkeletonFamilyHandlerResult.NoMatch);
-    }
-
-    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonThreadingAtomicKernelFamilyHandler(
-        RuntimeSkeletonStubBuildContext buildContext) =>
-        TryBuildRuntimeSkeletonThreadingAtomicKernelFamilyCore(buildContext);
-
-    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonThreadingTaskManagedInvokeFamilyHandler(
-        RuntimeSkeletonStubBuildContext buildContext) =>
-        TryBuildRuntimeSkeletonThreadingTaskManagedInvokeFamilyCore(buildContext);
-
-    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonThreadingSyncManagedInvokeFamilyHandler(
-        RuntimeSkeletonStubBuildContext buildContext) =>
-        TryBuildRuntimeSkeletonThreadingSyncManagedInvokeFamilyCore(buildContext);
-
-    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonThreadingThreadManagedInvokeFamilyHandler(
-        RuntimeSkeletonStubBuildContext buildContext) =>
-        TryBuildRuntimeSkeletonThreadingThreadManagedInvokeFamilyCore(buildContext);
-
-    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertLikeHandlers(
-        RuntimeSkeletonStubBuildContext buildContext,
-        RuntimeSkeletonFamilyHandlerResult missResult)
-    {
-        foreach (var convertLikeFamilyHandler in RuntimeSkeletonConvertLikeFamilyHandlers)
-        {
-            var result = convertLikeFamilyHandler(buildContext);
-            if (result.MatchKind == RuntimeSkeletonFamilyHandlerMatchKind.Match)
-            {
-                return result;
-            }
-        }
-
-        return missResult;
-    }
-
-    private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStringFamilyHandler(
-        RuntimeSkeletonStubBuildContext buildContext)
-    {
-        if (buildContext.SubjectId.Contains("/System.String::", StringComparison.Ordinal))
-        {
-            return RuntimeSkeletonFamilyHandlerResult.NoMatch;
-        }
-
-        foreach (var stringFamilyHandler in RuntimeSkeletonStringFamilyHandlers)
-        {
-            var result = stringFamilyHandler(buildContext);
-            if (result.MatchKind == RuntimeSkeletonFamilyHandlerMatchKind.Match)
-            {
-                return result;
-            }
-        }
-
-        return RuntimeSkeletonFamilyHandlerResult.NoMatch;
-    }
-
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonTaskContinuationFamilyHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonTaskContinuationFamilyCore(buildContext);
@@ -2150,74 +1854,92 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonConvertRuntimeHelperCore(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("convert-like-int-forwarder", CodeGenPluginProductLine.NativeReference, 0, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertLikeIntForwarderHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonConvertLikeIntForwarderCore(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("convert-like-bool-identity-forwarder", CodeGenPluginProductLine.NativeReference, 1, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertLikeBoolIdentityForwarderHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonConvertLikeBoolIdentityForwarderCore(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("convert-like-bool-producer-forwarder", CodeGenPluginProductLine.NativeReference, 2, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertLikeBoolProducerForwarderHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonConvertLikeBoolProducerForwarderCore(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("convert-like-primitive", CodeGenPluginProductLine.NativeReference, 8, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertLikePrimitiveHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonConvertLikePrimitiveCore(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("convert-like-string-char-provider", CodeGenPluginProductLine.NativeReference, 4, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertLikeStringCharProviderHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonConvertLikeStringCharProviderCore(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("convert-like-string-provider-passthrough", CodeGenPluginProductLine.NativeReference, 3, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertLikeStringProviderPassthroughHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonConvertLikeStringProviderPassthroughCore(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("convert-like-object-char-provider", CodeGenPluginProductLine.NativeReference, 5, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertLikeObjectCharProviderHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonConvertLikeObjectCharProviderCore(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("convert-like-boxed-value-type-string-instance-call", CodeGenPluginProductLine.NativeReference, 6, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertLikeBoxedValueTypeStringInstanceCallHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonConvertLikeBoxedValueTypeStringInstanceCallCore(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("convert-like-boxed-value-type-instance-call", CodeGenPluginProductLine.NativeReference, 13, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertLikeBoxedValueTypeInstanceCallHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonConvertLikeBoxedValueTypeInstanceCallCore(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("convert-like-static-string-call-forwarder", CodeGenPluginProductLine.NativeReference, 7, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertLikeStaticStringCallForwarderHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonConvertLikeStaticStringCallForwarderCore(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("convert-like-static-value-type-call-forwarder", CodeGenPluginProductLine.NativeReference, 14, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertLikeStaticValueTypeCallForwarderHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonConvertLikeStaticValueTypeCallForwarderCore(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("convert-like-instance-value-type-call-forwarder", CodeGenPluginProductLine.NativeReference, 15, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertLikeInstanceValueTypeCallForwarderHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonConvertLikeInstanceValueTypeCallForwarderCore(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("convert-like-value-type-identity-forwarder", CodeGenPluginProductLine.NativeReference, 16, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertLikeValueTypeIdentityForwarderHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonConvertLikeValueTypeIdentityForwarderCore(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("convert-like-boxed-value-type-char-invalid-cast", CodeGenPluginProductLine.NativeReference, 9, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertLikeBoxedValueTypeCharInvalidCastHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonConvertLikeBoxedValueTypeCharInvalidCastCore(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("convert-like-boxed-iconvertible-char-invalid-cast", CodeGenPluginProductLine.NativeReference, 10, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertLikeBoxedIConvertibleCharInvalidCastHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonConvertLikeBoxedIConvertibleCharInvalidCastCore(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("convert-like-checked-primitive", CodeGenPluginProductLine.NativeReference, 11, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertLikeCheckedPrimitiveHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonConvertLikeCheckedPrimitiveCore(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("convert-like-byte-forwarder", CodeGenPluginProductLine.NativeReference, 12, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConvertLikeByteForwarderHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonConvertLikeByteForwarderCore(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("constructor-field-setter", CodeGenPluginProductLine.NativeReference, 17, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConstructorFieldSetterHandler(
         RuntimeSkeletonStubBuildContext buildContext)
     {
@@ -2236,6 +1958,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         return RuntimeSkeletonFamilyHandlerResult.NoMatch;
     }
 
+    [RuntimeSkeletonFamilyPlugin("field-backed-string-return", CodeGenPluginProductLine.NativeReference, 18, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonFieldBackedStringReturnHandler(
         RuntimeSkeletonStubBuildContext buildContext)
     {
@@ -2254,6 +1977,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         return RuntimeSkeletonFamilyHandlerResult.NoMatch;
     }
 
+    [RuntimeSkeletonFamilyPlugin("field-argument-string-return", CodeGenPluginProductLine.NativeReference, 19, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonFieldArgumentStringReturnHandler(
         RuntimeSkeletonStubBuildContext buildContext)
     {
@@ -2272,6 +1996,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         return RuntimeSkeletonFamilyHandlerResult.NoMatch;
     }
 
+    [RuntimeSkeletonFamilyPlugin("field-getter-string-return", CodeGenPluginProductLine.NativeReference, 20, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonFieldGetterStringReturnHandler(
         RuntimeSkeletonStubBuildContext buildContext)
     {
@@ -2290,6 +2015,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         return RuntimeSkeletonFamilyHandlerResult.NoMatch;
     }
 
+    [RuntimeSkeletonFamilyPlugin("delegate-closed-target-relay", CodeGenPluginProductLine.NativeReference, 21, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonDelegateClosedTargetRelayHandler(
         RuntimeSkeletonStubBuildContext buildContext)
     {
@@ -2311,6 +2037,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         return RuntimeSkeletonFamilyHandlerResult.NoMatch;
     }
 
+    [RuntimeSkeletonFamilyPlugin("static-void-object-sink-no-op", CodeGenPluginProductLine.NativeReference, 22, RuntimeSkeletonFamilyPluginKind.Kernel)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticVoidObjectSinkNoOpHandler(
         RuntimeSkeletonStubBuildContext buildContext)
     {
@@ -2326,6 +2053,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         return RuntimeSkeletonFamilyHandlerResult.NoMatch;
     }
 
+    [RuntimeSkeletonFamilyPlugin("static-bool-forwarder", CodeGenPluginProductLine.NativeReference, 23, RuntimeSkeletonFamilyPluginKind.Kernel)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticBoolForwarderHandler(
         RuntimeSkeletonStubBuildContext buildContext)
     {
@@ -2342,6 +2070,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         return RuntimeSkeletonFamilyHandlerResult.NoMatch;
     }
 
+    [RuntimeSkeletonFamilyPlugin("console-write-line", CodeGenPluginProductLine.NativeReference, 24, RuntimeSkeletonFamilyPluginKind.Kernel)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConsoleWriteLineHandler(
         RuntimeSkeletonStubBuildContext buildContext)
     {
@@ -2357,6 +2086,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         return RuntimeSkeletonFamilyHandlerResult.NoMatch;
     }
 
+    [RuntimeSkeletonFamilyPlugin("interface-dispatch-message", CodeGenPluginProductLine.NativeReference, 25, RuntimeSkeletonFamilyPluginKind.PlatformCapability)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonInterfaceDispatchMessageHandler(
         RuntimeSkeletonStubBuildContext buildContext)
     {
@@ -2375,6 +2105,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         return RuntimeSkeletonFamilyHandlerResult.NoMatch;
     }
 
+    [RuntimeSkeletonFamilyPlugin("threading-thread-static-monitor", CodeGenPluginProductLine.NativeReference, 26, RuntimeSkeletonFamilyPluginKind.PlatformCapability)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonThreadingThreadStaticMonitorHandler(
         RuntimeSkeletonStubBuildContext buildContext)
     {
@@ -2392,6 +2123,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         return RuntimeSkeletonFamilyHandlerResult.NoMatch;
     }
 
+    [RuntimeSkeletonFamilyPlugin("marshaling-utf8-export", CodeGenPluginProductLine.NativeReference, 27, RuntimeSkeletonFamilyPluginKind.ImportedBridge)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonMarshalingUtf8ExportHandler(
         RuntimeSkeletonStubBuildContext buildContext)
     {
@@ -2409,6 +2141,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         return RuntimeSkeletonFamilyHandlerResult.NoMatch;
     }
 
+    [RuntimeSkeletonFamilyPlugin("reflection-interop-closure", CodeGenPluginProductLine.NativeReference, 28, RuntimeSkeletonFamilyPluginKind.ImportedBridge)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonReflectionInteropClosureHandler(
         RuntimeSkeletonStubBuildContext buildContext)
     {
@@ -2426,6 +2159,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         return RuntimeSkeletonFamilyHandlerResult.NoMatch;
     }
 
+    [RuntimeSkeletonFamilyPlugin("pinvoke-direct-call", CodeGenPluginProductLine.NativeReference, 29, RuntimeSkeletonFamilyPluginKind.ImportedBridge)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonPInvokeDirectCallHandler(
         RuntimeSkeletonStubBuildContext buildContext)
     {
@@ -2444,6 +2178,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         return RuntimeSkeletonFamilyHandlerResult.NoMatch;
     }
 
+    [RuntimeSkeletonFamilyPlugin("async-task-factory", CodeGenPluginProductLine.NativeReference, 30, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonAsyncTaskFactoryHandler(
         RuntimeSkeletonStubBuildContext buildContext)
     {
@@ -2461,6 +2196,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         return RuntimeSkeletonFamilyHandlerResult.NoMatch;
     }
 
+    [RuntimeSkeletonFamilyPlugin("async-get-result", CodeGenPluginProductLine.NativeReference, 31, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonAsyncGetResultHandler(
         RuntimeSkeletonStubBuildContext buildContext)
     {
@@ -2478,6 +2214,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         return RuntimeSkeletonFamilyHandlerResult.NoMatch;
     }
 
+    [RuntimeSkeletonFamilyPlugin("async-state-machine-no-op", CodeGenPluginProductLine.NativeReference, 32, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonAsyncStateMachineNoOpHandler(
         RuntimeSkeletonStubBuildContext buildContext)
     {
@@ -2493,6 +2230,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         return RuntimeSkeletonFamilyHandlerResult.NoMatch;
     }
 
+    [RuntimeSkeletonFamilyPlugin("array-boxing-reference-array", CodeGenPluginProductLine.NativeReference, 33, RuntimeSkeletonFamilyPluginKind.Kernel)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonArrayBoxingReferenceArrayHandler(
         RuntimeSkeletonStubBuildContext buildContext)
     {
@@ -2514,6 +2252,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         return RuntimeSkeletonFamilyHandlerResult.NoMatch;
     }
 
+    [RuntimeSkeletonFamilyPlugin("array-clear-reference-array", CodeGenPluginProductLine.NativeReference, 34, RuntimeSkeletonFamilyPluginKind.Kernel)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonArrayClearReferenceArrayHandler(
         RuntimeSkeletonStubBuildContext buildContext)
     {
@@ -2535,6 +2274,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         return RuntimeSkeletonFamilyHandlerResult.NoMatch;
     }
 
+    [RuntimeSkeletonFamilyPlugin("array-reverse-reference-array", CodeGenPluginProductLine.NativeReference, 35, RuntimeSkeletonFamilyPluginKind.Kernel)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonArrayReverseReferenceArrayHandler(
         RuntimeSkeletonStubBuildContext buildContext)
     {
@@ -2556,6 +2296,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         return RuntimeSkeletonFamilyHandlerResult.NoMatch;
     }
 
+    [RuntimeSkeletonFamilyPlugin("array-copy-reference-array", CodeGenPluginProductLine.NativeReference, 36, RuntimeSkeletonFamilyPluginKind.Kernel)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonArrayCopyReferenceArrayHandler(
         RuntimeSkeletonStubBuildContext buildContext)
     {
@@ -2577,6 +2318,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         return RuntimeSkeletonFamilyHandlerResult.NoMatch;
     }
 
+    [RuntimeSkeletonFamilyPlugin("static-exception-throw-literal", CodeGenPluginProductLine.NativeReference, 37, RuntimeSkeletonFamilyPluginKind.Kernel)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticExceptionThrowLiteralHandler(
         RuntimeSkeletonStubBuildContext buildContext)
     {
@@ -2594,6 +2336,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         return RuntimeSkeletonFamilyHandlerResult.NoMatch;
     }
 
+    [RuntimeSkeletonFamilyPlugin("static-exception-throw-string-producer", CodeGenPluginProductLine.NativeReference, 38, RuntimeSkeletonFamilyPluginKind.Kernel)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticExceptionThrowStringProducerHandler(
         RuntimeSkeletonStubBuildContext buildContext)
     {
@@ -2612,6 +2355,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         return RuntimeSkeletonFamilyHandlerResult.NoMatch;
     }
 
+    [RuntimeSkeletonFamilyPlugin("static-exception-catch-string-return", CodeGenPluginProductLine.NativeReference, 39, RuntimeSkeletonFamilyPluginKind.Kernel)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticExceptionCatchStringReturnHandler(
         RuntimeSkeletonStubBuildContext buildContext)
     {
@@ -2628,6 +2372,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         return RuntimeSkeletonFamilyHandlerResult.NoMatch;
     }
 
+    [RuntimeSkeletonFamilyPlugin("exception-throw-catch-finally", CodeGenPluginProductLine.NativeReference, 40, RuntimeSkeletonFamilyPluginKind.Kernel)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonExceptionThrowCatchFinallyHandler(
         RuntimeSkeletonStubBuildContext buildContext)
     {
@@ -2645,6 +2390,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         return RuntimeSkeletonFamilyHandlerResult.NoMatch;
     }
 
+    [RuntimeSkeletonFamilyPlugin("nested-exception-throw-catch-finally", CodeGenPluginProductLine.NativeReference, 41, RuntimeSkeletonFamilyPluginKind.Kernel)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonNestedExceptionThrowCatchFinallyHandler(
         RuntimeSkeletonStubBuildContext buildContext)
     {
@@ -2662,78 +2408,97 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {pageDispatchName}(
         return RuntimeSkeletonFamilyHandlerResult.NoMatch;
     }
 
+    [RuntimeSkeletonFamilyPlugin("static-string-return-forwarder", CodeGenPluginProductLine.NativeReference, 42, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticStringReturnForwarderHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonStaticStringReturnForwarderCore(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("static-string-forwarder", CodeGenPluginProductLine.NativeReference, 43, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticStringForwarderHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonStaticStringForwarderCore(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("static-string-literal-append", CodeGenPluginProductLine.NativeReference, 44, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticStringLiteralAppendHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonStaticStringLiteralAppendCore(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("static-string-forwarder-console-write-line", CodeGenPluginProductLine.NativeReference, 45, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticStringForwarderConsoleWriteLineHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonStaticStringForwarderConsoleWriteLineCore(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("static-string-producer-forwarder-console-write-line", CodeGenPluginProductLine.NativeReference, 46, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticStringProducerForwarderConsoleWriteLineHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonStaticStringProducerForwarderConsoleWriteLineCore(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("static-string-producer-ctor-getter-console-write-line", CodeGenPluginProductLine.NativeReference, 47, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticStringProducerCtorGetterConsoleWriteLineHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonStaticStringProducerCtorGetterConsoleWriteLineCore(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("static-string-producer-ctor-render-console-write-line", CodeGenPluginProductLine.NativeReference, 48, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticStringProducerCtorRenderConsoleWriteLineHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonStaticStringProducerCtorRenderConsoleWriteLineCore(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("static-string-producer-ctor-instance-call-forwarder-console-write-line", CodeGenPluginProductLine.NativeReference, 49, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticStringProducerCtorInstanceCallForwarderConsoleWriteLineHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonStaticStringProducerCtorInstanceCallForwarderConsoleWriteLineCore(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("static-string-producer-forwarder-ctor-instance-call-console-write-line", CodeGenPluginProductLine.NativeReference, 50, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallConsoleWriteLineHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallConsoleWriteLineCore(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("static-string-producer-forwarder-ctor-instance-call-forwarder-console-write-line", CodeGenPluginProductLine.NativeReference, 51, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallForwarderConsoleWriteLineHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallForwarderConsoleWriteLineCore(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("static-string-producer-ctor-instance-call-forwarder-forwarder-console-write-line", CodeGenPluginProductLine.NativeReference, 52, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticStringProducerCtorInstanceCallForwarderForwarderConsoleWriteLineHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonStaticStringProducerCtorInstanceCallForwarderForwarderConsoleWriteLineCore(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("static-string-producer-forwarder-ctor-instance-call-forwarder-forwarder-console-write-line", CodeGenPluginProductLine.NativeReference, 53, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallForwarderForwarderConsoleWriteLineHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallForwarderForwarderConsoleWriteLineCore(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("static-string-producer-ctor-instance-call-forwarder-forwarder-forwarder-console-write-line", CodeGenPluginProductLine.NativeReference, 54, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticStringProducerCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonStaticStringProducerCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineCore(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("static-string-producer-forwarder-ctor-instance-call-forwarder-forwarder-forwarder-console-write-line", CodeGenPluginProductLine.NativeReference, 55, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonStaticStringProducerForwarderCtorInstanceCallForwarderForwarderForwarderConsoleWriteLineCore(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("static-literal-string-return", CodeGenPluginProductLine.NativeReference, 56, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticLiteralStringReturnHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonStaticLiteralStringReturnCore(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("static-resource-key-string-return", CodeGenPluginProductLine.NativeReference, 57, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticResourceKeyStringReturnHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonStaticResourceKeyStringReturnCore(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("static-string-producer-console-write-line", CodeGenPluginProductLine.NativeReference, 58, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticStringProducerConsoleWriteLineHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonStaticStringProducerConsoleWriteLineCore(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("static-call-ctor-getter-executable", CodeGenPluginProductLine.NativeReference, 59, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonStaticCallCtorGetterExecutableHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonStaticCallCtorGetterExecutableCore(buildContext);
 
+    [RuntimeSkeletonFamilyPlugin("constructor-then-instance-call-executable", CodeGenPluginProductLine.NativeReference, 60, RuntimeSkeletonFamilyPluginKind.ManagedInvoke)]
     private static RuntimeSkeletonFamilyHandlerResult TryBuildRuntimeSkeletonConstructorThenInstanceCallExecutableHandler(
         RuntimeSkeletonStubBuildContext buildContext) =>
         TryBuildRuntimeSkeletonConstructorThenInstanceCallExecutableCore(buildContext);

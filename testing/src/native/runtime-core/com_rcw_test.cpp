@@ -205,3 +205,88 @@ TEST_F(ComRcwTest, IsComRcwHandleRandomPointer) {
     EXPECT_FALSE(IsComRcwHandle(
         static_cast<CHAOS_IL2CPP_INTPTR>(reinterpret_cast<uintptr_t>(&val))));
 }
+
+// ── QueryInterfaceCached cache hit / full-cache paths ────────────────────
+
+TEST_F(ComRcwTest, QueryInterfaceCachedCacheFullNoAdd) {
+#if defined(_WIN32)
+    GTEST_SKIP() << "Skipping on Win32 (needs real COM pointer)";
+#else
+    // Use FindOrCreateRcw to get a properly allocated RCW, then manually
+    // fill the cache to capacity. This avoids malloc-only struct issues.
+    void* fake_com_ptr = reinterpret_cast<void*>(static_cast<uintptr_t>(0xCAFE));
+    auto* rcw = FindOrCreateRcw(fake_com_ptr);
+    ASSERT_NE(rcw, nullptr);
+
+    // Fill all kMaxInterfaceCache entries with distinct IID data.
+    // Each entry points to a local array that is valid for the call.
+    CHAOS_IL2CPP_UINT8 iid_data[kMaxInterfaceCache][16];
+    std::memset(iid_data, 0, sizeof(iid_data));
+    for (CHAOS_IL2CPP_SIZE i = 0; i < kMaxInterfaceCache; ++i) {
+        iid_data[i][0] = static_cast<CHAOS_IL2CPP_UINT8>(i + 1);
+        rcw->interface_cache[i].iid = iid_data[i];
+        rcw->interface_cache[i].interface_ptr =
+            reinterpret_cast<void*>(static_cast<uintptr_t>(0x7000 + i));
+        rcw->interface_cache[i].refcount = 1;
+    }
+    rcw->cache_count = kMaxInterfaceCache;
+
+    // Non-matching IID — cache is full, so returns nullptr on non-Win32.
+    const CHAOS_IL2CPP_UINT8 query_iid[16] = {0xFF, 0, 0, 0};
+    void* result = QueryInterfaceCached(rcw, query_iid);
+    EXPECT_EQ(result, nullptr);
+
+    // Verify no entry was overwritten.
+    for (CHAOS_IL2CPP_SIZE i = 0; i < kMaxInterfaceCache; ++i) {
+        EXPECT_EQ(rcw->interface_cache[i].refcount, 1u);
+    }
+
+    rcw->wrapper_refcount = 1;
+    ReleaseRcw(rcw);
+#endif
+}
+
+TEST_F(ComRcwTest, QueryInterfaceCachedCacheHit) {
+    // Populate cache manually, verify cache hit returns the pointer.
+    auto* rcw = CreateMinimalRcwBuffer();
+    ASSERT_NE(rcw, nullptr);
+
+    const CHAOS_IL2CPP_UINT8 iid0[16] = {1, 0, 0, 0};
+    void* fake_iface = reinterpret_cast<void*>(static_cast<uintptr_t>(0x7000));
+
+    rcw->cache_count = 1;
+    rcw->interface_cache[0].iid = iid0;
+    rcw->interface_cache[0].interface_ptr = fake_iface;
+    rcw->interface_cache[0].refcount = 1;
+
+    void* result = QueryInterfaceCached(rcw, iid0);
+    EXPECT_EQ(result, fake_iface);
+    EXPECT_EQ(rcw->interface_cache[0].refcount, 2u);
+
+    std::free(rcw);
+}
+
+TEST_F(ComRcwTest, QueryInterfaceCachedCacheHitSecondEntry) {
+    // Verify cache hit works for the second cache entry.
+    auto* rcw = CreateMinimalRcwBuffer();
+    ASSERT_NE(rcw, nullptr);
+
+    const CHAOS_IL2CPP_UINT8 iid0[16] = {1, 0, 0, 0};
+    const CHAOS_IL2CPP_UINT8 iid1[16] = {2, 0, 0, 0};
+    void* fake_iface0 = reinterpret_cast<void*>(static_cast<uintptr_t>(0x7000));
+    void* fake_iface1 = reinterpret_cast<void*>(static_cast<uintptr_t>(0x8000));
+
+    rcw->cache_count = 2;
+    rcw->interface_cache[0].iid = iid0;
+    rcw->interface_cache[0].interface_ptr = fake_iface0;
+    rcw->interface_cache[0].refcount = 1;
+    rcw->interface_cache[1].iid = iid1;
+    rcw->interface_cache[1].interface_ptr = fake_iface1;
+    rcw->interface_cache[1].refcount = 1;
+
+    void* result = QueryInterfaceCached(rcw, iid1);
+    EXPECT_EQ(result, fake_iface1);
+    EXPECT_EQ(rcw->interface_cache[1].refcount, 2u);
+
+    std::free(rcw);
+}

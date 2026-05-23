@@ -155,7 +155,7 @@ public sealed partial class NativeAotLoweringPlanner
     // Key: type subject ID, Value: COM interface vtable info with GUID and method count.
     private Dictionary<string, ComInterfaceVtableInfo> _comInterfaceVtableData = new(StringComparer.Ordinal);
 
-    internal sealed record ComInterfaceMethodSlot(uint Token, string NativeSymbol, string MethodName);
+    internal sealed record ComInterfaceMethodSlot(uint Token, string NativeSymbol, string MethodName, int ParamCount);
     internal sealed record ComInterfaceVtableInfo(
         string Guid,
         ulong StableId,
@@ -299,7 +299,6 @@ public sealed partial class NativeAotLoweringPlanner
 
     internal int StructuredMethodCount;
     internal int StructuredExceptionBodyCount;
-    internal int FlatFallbackCount;
     internal int TotalMethodCount;
 
     /// <summary>Number of methods reachable from the entry point via AOT call graph.</summary>
@@ -309,10 +308,23 @@ public sealed partial class NativeAotLoweringPlanner
     internal int AotUnreachableMethodCount;
 
     /// <summary>
+    /// Number of methods that required pc-dispatch state machine emission
+    /// due to irreducible CFG (after interval analysis + node splitting).
+    /// </summary>
+    internal int PcDispatchCount;
+
+    /// <summary>
     /// Maps unresolvable cross-assembly subjectId → index in kChaosExternalRuntimeFnTable.
     /// Populated by <see cref="PrebuildExternalRuntimeDispatchTable"/> before method body emission.
     /// </summary>
     private readonly Dictionary<string, int> _externalRuntimeSubjects = new(StringComparer.Ordinal);
+
+    /// <summary>
+    /// Bridge/import thunks: C++ wrapper functions for calls crossing the managed/native
+    /// boundary. Populated by <see cref="CollectBridgeImportThunks"/> and emitted after
+    /// all method bodies in Create.
+    /// </summary>
+    private Dictionary<string, BridgeImportThunkDefinition>? _bridgeImportThunks;
 
     public NativeAotTemplateModel Create(
         NativeAotLoweringPlanArtifact loweringPlan,
@@ -573,6 +585,7 @@ public sealed partial class NativeAotLoweringPlanner
             closureManifest);
         var externalRuntimeHelpers = CollectExternalRuntimeHelpers(methodsForLowering, _staticInitializationSupport);
         CollectExternalRuntimeDispatchEntries(methodsForLowering);
+        CollectBridgeImportThunks(methodsForLowering);
         var objectModelBuilder = new StringBuilder(65536);
         EmitRuntimePrelude(objectModelBuilder, externalRuntimeHelpers, _staticFieldDataSupport);
         EmitObjectModelDeclarations(objectModelBuilder, methodsForLowering, externalRuntimeHelpers, metadataRegistration);
@@ -617,6 +630,25 @@ public sealed partial class NativeAotLoweringPlanner
                 };
             })
             .ToList();
+
+        // Capture pc-dispatch count from the static counter.
+        // Incremented during BuildMethodSourceSafe → EmitViaStructuredIR → EmitPcDispatch.
+        PcDispatchCount = (int)Interlocked.Read(ref s_pcDispatchCount);
+
+        // Emit bridge/import thunks after all method bodies.
+        // These C++ wrapper functions handle GC transition and calling
+        // convention adaptation for calls crossing the managed/native boundary.
+        if (_bridgeImportThunks is { Count: > 0 })
+        {
+            objectModelBuilder.AppendLine();
+            objectModelBuilder.AppendLine("// ── Bridge/import thunks ──");
+            foreach (var thunk in _bridgeImportThunks.Values
+                .OrderBy(t => t.ThunkSymbol, StringComparer.Ordinal))
+            {
+                EmitBridgeImportThunk(objectModelBuilder, thunk);
+            }
+        }
+
         var entryBridgeArguments = fullAssemblyMode ? "" : BuildEntryBridgeArguments(entryMethod);
 
         var abiManifestCode = BuildAbiManifest(methodsForLowering);

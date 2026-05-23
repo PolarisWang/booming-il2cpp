@@ -3288,215 +3288,88 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		throw new InvalidOperationException("opcode '" + instruction.Op + "' requires a Double operand for native-aot lowering");
 	}
 
-		private void EmitFlatGotoBody(
-			StringBuilder builder,
-			AotCoreIrMethodArtifact method,
-			IReadOnlyList<AotCoreIrInstructionArtifact> instructions,
-			IReadOnlySet<int> branchTargetOffsets)
+	/// <summary>
+	/// Emits a C++ bridge/import thunk function for a call crossing the managed/native
+	/// boundary. The thunk handles GC transition, calls the target runtime function,
+	/// and returns the result via the native ABI.
+	/// </summary>
+	private void EmitBridgeImportThunk(StringBuilder builder, BridgeImportThunkDefinition thunk)
+	{
+		string returnType = MapAbiSlotReturnType(thunk.ReturnAbi);
+		string paramSig = FormatAbiSlotParameterSignature(thunk.ParameterAbis);
+		string paramNames = BuildBridgeParamPassing(thunk.ParameterAbis);
+
+		builder.AppendLine();
+		builder.AppendLine("// Bridge/import thunk for: " + thunk.SubjectId);
+		if (thunk.IsInternalCall)
+			builder.AppendLine("// InternalCall: requires GC cooperative mode");
+		if (thunk.IsPInvokeImport)
+			builder.AppendLine("// P/Invoke import: LoadLibrary + GetProcAddress wrapper");
+
+		builder.AppendLine("extern \"C\" " + returnType + " " + thunk.ThunkSymbol + "(" + paramSig + ")");
+		builder.AppendLine("{");
+
+		if (thunk.RequiresGcTransition)
 		{
-			// Some branch target offsets may fall in gaps with no instructions
-			// (e.g. nops stripped by the IL reader before AOT IR was built).
-			// Map each branch target to the nearest real instruction offset.
-			var realOffsets = instructions.Select(GetRequiredIlOffset).OrderBy(o => o).ToArray();
-			var targetFixup = new Dictionary<int, int>();
-			foreach (int target in branchTargetOffsets)
+			builder.AppendLine("    // Switch to GC preemptive mode for native call");
+			builder.AppendLine("    GC_TRANSITION_TO_PREEMPTIVE();");
+			builder.AppendLine();
+		}
+
+		if (thunk.IsPInvokeImport && !string.IsNullOrEmpty(thunk.ModuleName) && !string.IsNullOrEmpty(thunk.EntryPointName))
+		{
+			// P/Invoke: LoadLibrary + GetProcAddress (static cache via function-scope static)
+			builder.AppendLine("    // P/Invoke: " + thunk.ModuleName + "!" + thunk.EntryPointName);
+			builder.AppendLine("    static auto s_nativeFn = []() {");
+			builder.AppendLine("        auto mod = ::LoadLibraryA(\"" + thunk.ModuleName + "\");");
+			builder.AppendLine("        return reinterpret_cast<decltype(&" + thunk.EntryPointName + ")>(");
+			builder.AppendLine("            ::GetProcAddress(mod, \"" + thunk.EntryPointName + "\"));");
+			builder.AppendLine("    }}();");
+			builder.AppendLine("    auto result = s_nativeFn(" + paramNames + ");");
+		}
+		else
+		{
+			// Direct call to target symbol (InternalCall or generic external)
+			bool isVoid = thunk.ReturnAbi.CarrierKindCode == AotCoreIrAbiCarrierKind.Void;
+			if (!isVoid)
 			{
-				int idx = Array.BinarySearch(realOffsets, target);
-				if (idx < 0)
-				{
-					int nextIdx = ~idx;
-					if (nextIdx < realOffsets.Length)
-						targetFixup[target] = realOffsets[nextIdx];
-				}
+				builder.AppendLine("    auto result = " + thunk.TargetSymbol + "(" + paramNames + ");");
 			}
-
-			int Resolve(int rawTarget) =>
-				targetFixup.TryGetValue(rawTarget, out int fixedTarget) ? fixedTarget : rawTarget;
-
-			var filtered = FilterRedundantStoreReloadPairs(instructions, branchTargetOffsets);
-			foreach (var instruction in filtered)
+			else
 			{
-				int offset = GetRequiredIlOffset(instruction);
-				int effectiveOffset = Resolve(offset);
-				if (branchTargetOffsets.Contains(offset) || effectiveOffset != offset)
-				{
-					builder.AppendLine($"chaos_label_{effectiveOffset}:");
-				}
-
-				switch (instruction.Op)
-				{
-					case "br":
-					case "leave":
-					{
-						int target = Resolve(GetRequiredIntOperand(instruction));
-						builder.AppendLine($"    goto chaos_label_{target};");
-						break;
-					}
-				case "brfalse":
-				{
-					builder.AppendLine($"    if ({ConsumeEvalStackValueExpression()} == 0)");
-					builder.AppendLine($"        goto chaos_label_{Resolve(GetRequiredIntOperand(instruction))};");
-					break;
-				}
-				case "brtrue":
-				{
-					builder.AppendLine($"    if ({ConsumeEvalStackValueExpression()} != 0)");
-					builder.AppendLine($"        goto chaos_label_{Resolve(GetRequiredIntOperand(instruction))};");
-					break;
-				}
-				case "beq":
-				{
-					builder.AppendLine($"    {{");
-					builder.AppendLine($"        const auto chaos_right = {ConsumeEvalStackValueExpression()};");
-					builder.AppendLine($"        const auto chaos_left = {ConsumeEvalStackValueExpression()};");
-					builder.AppendLine($"        if (chaos_left == chaos_right)");
-					builder.AppendLine($"            goto chaos_label_{Resolve(GetRequiredIntOperand(instruction))};");
-					builder.AppendLine($"    }}");
-					break;
-				}
-				case "bne.un":
-				{
-					builder.AppendLine($"    {{");
-					builder.AppendLine($"        const auto chaos_right = {ConsumeEvalStackValueExpression()};");
-					builder.AppendLine($"        const auto chaos_left = {ConsumeEvalStackValueExpression()};");
-					builder.AppendLine($"        if (chaos_left != chaos_right)");
-					builder.AppendLine($"            goto chaos_label_{Resolve(GetRequiredIntOperand(instruction))};");
-					builder.AppendLine($"    }}");
-					break;
-				}
-				case "bge":
-				{
-					builder.AppendLine($"    {{");
-					builder.AppendLine($"        const auto chaos_right = static_cast<CHAOS_IL2CPP_INT32>({ConsumeEvalStackValueExpression()});");
-					builder.AppendLine($"        const auto chaos_left = static_cast<CHAOS_IL2CPP_INT32>({ConsumeEvalStackValueExpression()});");
-					builder.AppendLine($"        if (chaos_left >= chaos_right)");
-					builder.AppendLine($"            goto chaos_label_{Resolve(GetRequiredIntOperand(instruction))};");
-					builder.AppendLine($"    }}");
-					break;
-				}
-				case "bge.un":
-				{
-					builder.AppendLine($"    {{");
-					builder.AppendLine($"        const auto chaos_right = static_cast<CHAOS_IL2CPP_UINT32>({ConsumeEvalStackValueExpression()});");
-					builder.AppendLine($"        const auto chaos_left = static_cast<CHAOS_IL2CPP_UINT32>({ConsumeEvalStackValueExpression()});");
-					builder.AppendLine($"        if (chaos_left >= chaos_right)");
-					builder.AppendLine($"            goto chaos_label_{Resolve(GetRequiredIntOperand(instruction))};");
-					builder.AppendLine($"    }}");
-					break;
-				}
-				case "bgt":
-				{
-					builder.AppendLine($"    {{");
-					builder.AppendLine($"        const auto chaos_right = static_cast<CHAOS_IL2CPP_INT32>({ConsumeEvalStackValueExpression()});");
-					builder.AppendLine($"        const auto chaos_left = static_cast<CHAOS_IL2CPP_INT32>({ConsumeEvalStackValueExpression()});");
-					builder.AppendLine($"        if (chaos_left > chaos_right)");
-					builder.AppendLine($"            goto chaos_label_{Resolve(GetRequiredIntOperand(instruction))};");
-					builder.AppendLine($"    }}");
-					break;
-				}
-				case "bgt.un":
-				{
-					builder.AppendLine($"    {{");
-					builder.AppendLine($"        const auto chaos_right = static_cast<CHAOS_IL2CPP_UINT32>({ConsumeEvalStackValueExpression()});");
-					builder.AppendLine($"        const auto chaos_left = static_cast<CHAOS_IL2CPP_UINT32>({ConsumeEvalStackValueExpression()});");
-					builder.AppendLine($"        if (chaos_left > chaos_right)");
-					builder.AppendLine($"            goto chaos_label_{Resolve(GetRequiredIntOperand(instruction))};");
-					builder.AppendLine($"    }}");
-					break;
-				}
-				case "ble":
-				{
-					builder.AppendLine($"    {{");
-					builder.AppendLine($"        const auto chaos_right = static_cast<CHAOS_IL2CPP_INT32>({ConsumeEvalStackValueExpression()});");
-					builder.AppendLine($"        const auto chaos_left = static_cast<CHAOS_IL2CPP_INT32>({ConsumeEvalStackValueExpression()});");
-					builder.AppendLine($"        if (chaos_left <= chaos_right)");
-					builder.AppendLine($"            goto chaos_label_{Resolve(GetRequiredIntOperand(instruction))};");
-					builder.AppendLine($"    }}");
-					break;
-				}
-				case "ble.un":
-				{
-					builder.AppendLine($"    {{");
-					builder.AppendLine($"        const auto chaos_right = static_cast<CHAOS_IL2CPP_UINT32>({ConsumeEvalStackValueExpression()});");
-					builder.AppendLine($"        const auto chaos_left = static_cast<CHAOS_IL2CPP_UINT32>({ConsumeEvalStackValueExpression()});");
-					builder.AppendLine($"        if (chaos_left <= chaos_right)");
-					builder.AppendLine($"            goto chaos_label_{Resolve(GetRequiredIntOperand(instruction))};");
-					builder.AppendLine($"    }}");
-					break;
-				}
-				case "blt":
-				{
-					builder.AppendLine($"    {{");
-					builder.AppendLine($"        const auto chaos_right = static_cast<CHAOS_IL2CPP_INT32>({ConsumeEvalStackValueExpression()});");
-					builder.AppendLine($"        const auto chaos_left = static_cast<CHAOS_IL2CPP_INT32>({ConsumeEvalStackValueExpression()});");
-					builder.AppendLine($"        if (chaos_left < chaos_right)");
-					builder.AppendLine($"            goto chaos_label_{Resolve(GetRequiredIntOperand(instruction))};");
-					builder.AppendLine($"    }}");
-					break;
-				}
-				case "blt.un":
-				{
-					builder.AppendLine($"    {{");
-					builder.AppendLine($"        const auto chaos_right = static_cast<CHAOS_IL2CPP_UINT32>({ConsumeEvalStackValueExpression()});");
-					builder.AppendLine($"        const auto chaos_left = static_cast<CHAOS_IL2CPP_UINT32>({ConsumeEvalStackValueExpression()});");
-					builder.AppendLine($"        if (chaos_left < chaos_right)");
-					builder.AppendLine($"            goto chaos_label_{Resolve(GetRequiredIntOperand(instruction))};");
-					builder.AppendLine($"    }}");
-					break;
-				}
-				case "switch":
-				{
-					var targets = GetRequiredSwitchTargets(instruction, branchTargetOffsets);
-					builder.AppendLine($"    {{");
-					builder.AppendLine($"        const auto chaos_switch_val = static_cast<CHAOS_IL2CPP_UINT32>({ConsumeEvalStackValueExpression()});");
-					builder.AppendLine($"        switch (chaos_switch_val)");
-					builder.AppendLine($"        {{");
-					for (int i = 0; i < targets.Count; i++)
-					{
-						builder.AppendLine($"        case {i}: goto chaos_label_{Resolve(targets[i])};");
-					}
-					builder.AppendLine($"        default: break;");
-					builder.AppendLine($"        }}");
-					builder.AppendLine($"    }}");
-					break;
-				}
-				case "ret":
-				{
-					EmitStructuredMethodReturn(builder, method.ReturnAbi, "    ");
-					break;
-				}
-				case "throw":
-				{
-					ResetArrayCheckCache();
-					string throwVal = ConsumeEvalStackValueExpression();
-					EmitThrowCpp(builder, throwVal, "    ");
-					break;
-				}
-				case "rethrow":
-				{
-					EmitRethrowCpp(builder, "    ");
-					break;
-				}
-				case "endfilter":
-				{
-					builder.AppendLine($"    if ({ConsumeEvalStackValueExpression()} == 0)");
-					builder.AppendLine("    {");
-					EmitRethrowCpp(builder, "        ");
-					builder.AppendLine("    }");
-					break;
-				}
-				case "endfinally":
-				case "endcatch":
-				{
-					break;
-				}
-				default:
-				{
-					EmitInstruction(builder, instruction, "    ");
-					break;
-				}
-				}
+				builder.AppendLine("    " + thunk.TargetSymbol + "(" + paramNames + ");");
 			}
 		}
+
+		if (thunk.RequiresGcTransition)
+		{
+			builder.AppendLine();
+			builder.AppendLine("    // Switch back to GC cooperative mode after native call");
+			builder.AppendLine("    GC_TRANSITION_TO_COOPERATIVE();");
+		}
+
+		// Return the result (if non-void)
+		if (thunk.ReturnAbi.CarrierKindCode != AotCoreIrAbiCarrierKind.Void)
+		{
+			builder.AppendLine("    return result;");
+		}
+
+		builder.AppendLine("}");
+	}
+
+	/// <summary>
+	/// Builds a comma-separated list of parameter names for forwarding arguments
+	/// in a bridge thunk call. Parameters are named "p0", "p1", ..., "pN".
+	/// </summary>
+	private static string BuildBridgeParamPassing(IReadOnlyList<AotCoreIrAbiSlotArtifact> paramAbis)
+	{
+		if (paramAbis.Count == 0)
+			return string.Empty;
+
+		var names = new string[paramAbis.Count];
+		for (int i = 0; i < paramAbis.Count; i++)
+			names[i] = "p" + i.ToString();
+		return string.Join(", ", names);
+	}
 
 }

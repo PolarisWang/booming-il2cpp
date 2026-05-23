@@ -1,4 +1,4 @@
-#include <chaos/common.h>
+﻿#include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
 #include <chaos/eh.h>
@@ -16,6 +16,7 @@
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 #include "enum_metadata.generated.h"
+#include "runtime_stubs/enum_stubs.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -260,11 +261,18 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
 		/* .type_count        = */ 2u,
-	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
+	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 -- deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
 	/* .custom_attribute_materializer = */ nullptr,
-
+	/* .custom_attribute_method_offset   = */ nullptr,
+	/* .custom_attribute_field_offset    = */ nullptr,
+	/* .custom_attribute_property_offset = */ nullptr,
+	/* .custom_attribute_param_offset    = */ nullptr,
+	/* .custom_attribute_method_count    = */ 0u,
+	/* .custom_attribute_field_count     = */ 0u,
+	/* .custom_attribute_property_count  = */ 0u,
+	/* .custom_attribute_param_count   = */ 0u,
 		/* .abi_manifest      = */ s_abi_manifest,
 	};
 	static const CHAOS_IL2CPP_UINT32 s_native_aot_module_id =
@@ -335,7 +343,6 @@ extern "C" void* kChaosExternalRuntimeFnTable[5] = {
 };
 
 extern "C" int32_t kChaosExternalRuntimeCount = 5;
-// (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
 static void (*kAotMethods[4])() = {
@@ -592,25 +599,26 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // matching during IR lowering of patched methods.
 
 static constexpr ReflectionQueryFieldDescriptor kReflFields_SecureStringMarshalSubjects_SecureStringMarshalSubjects[1] = {
-	{ 0u, "SecureStringMarshalSubjects/SecureStringMarshalSubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
+	{ 0x04000001u, "SecureStringMarshalSubjects/SecureStringMarshalSubjects::_exitCode", "_exitCode", "System.Int32", 0LL, 3u },
 };
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_SecureStringMarshalSubjects_SecureStringMarshalSubjects[4] = {
-	{ 0u, "SecureStringMarshalSubjects/SecureStringMarshalSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "SecureStringMarshalSubjects/SecureStringMarshalSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u },
-	{ 0u, "SecureStringMarshalSubjects/SecureStringMarshalSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u },
-	{ 0u, "SecureStringMarshalSubjects/SecureStringMarshalSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u },
+	{ 0x00000003u, "SecureStringMarshalSubjects/SecureStringMarshalSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000004u, "SecureStringMarshalSubjects/SecureStringMarshalSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000005u, "SecureStringMarshalSubjects/SecureStringMarshalSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000006u, "SecureStringMarshalSubjects/SecureStringMarshalSubjects::Subject_3:System.Void()", "Subject_3", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
-	{ 0u, "SecureStringMarshalSubjects/SecureStringMarshalSubjects", "SecureStringMarshalSubjects/SecureStringMarshalSubjects", "", "SecureStringMarshalSubjects", "SecureStringMarshalSubjects", nullptr, kReflFields_SecureStringMarshalSubjects_SecureStringMarshalSubjects, 1u, nullptr, 0u,
-	kReflMethods_SecureStringMarshalSubjects_SecureStringMarshalSubjects, 4u },
+	{ 0x00000001u, "SecureStringMarshalSubjects/SecureStringMarshalSubjects", "SecureStringMarshalSubjects/SecureStringMarshalSubjects", "", "SecureStringMarshalSubjects", "SecureStringMarshalSubjects", nullptr, kReflFields_SecureStringMarshalSubjects_SecureStringMarshalSubjects, 1u, nullptr, 0u,
+/* EVENT_SECTION_START */
+nullptr, 0u,    kReflMethods_SecureStringMarshalSubjects_SecureStringMarshalSubjects, 4u, nullptr, 0u, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static const ReflectionQueryImageDescriptor kReflImage = { "SecureStringMarshalSubjects", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "SecureStringMarshalSubjects", kReflTypePtrs, 1u, 1, 0, 0, 0 };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via

@@ -1,6 +1,7 @@
 #include "layout_engine.h"
 #include "instantiation_engine.h"
 
+#include <chaos/log.h>
 #include <chaos/native_types.h>
 #include <chaos/trace.h>
 
@@ -182,7 +183,7 @@ RecursionGuard::ScopedEnter::ScopedEnter(RecursionGuard& g, TypeInfoHandle t)
 
 RecursionGuard::ScopedEnter::~ScopedEnter()
 {
-    guard.Leave();
+    if (ok) { guard.Leave(); }
 }
 
 // ════════════════════════════════════════════════════════════════════════════
@@ -857,6 +858,7 @@ CHAOS_IL2CPP_UINT32 LayoutEngine::ComputeStructAlignment(
 
 void VerifyModuleLayouts(const runtime_core::ModuleDescriptor* /*module*/)
 {
+    CHAOS_IL2CPP_LOG_WARN_M("Layout", "VerifyModuleLayouts called — stub (no-op until codegen emits LayoutExpectation data)");
     // Step 5: iterate module->layout_expectations and assert each match.
     // For now, this is a no-op.
 }

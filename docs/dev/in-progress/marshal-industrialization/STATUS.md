@@ -14,8 +14,8 @@ clearance_source: brainstorm-design-confirmed
 blocking_questions: []
 question_clearance: cleared
 clearance_confirmed_by_user: true
-recommended_next_child: h1-architecture-doc
-latest_stop_point: g1-managed-tests (已完成)
+recommended_next_child: h3-structural-review-merge
+latest_stop_point: h2-wiki-update (已完成)
 ---
 
 # P/Invoke & Marshal 工业化完善
@@ -83,10 +83,13 @@ f3-connection-point-test (已完成): com_connection_point_test.cpp 创建，10/
   - d4: struct_marshal.cpp/.h 独立 TU，3 文件留在 Unity build
 - **Phase E**: custom_marshaler:18/18 通过
 - **Phase F**: com_rcw:14(9+5skip), com_ccw:25, com_connection_point:15 — 49/54 通过
-- **Phase G1**: foundation-dll pipeline 验证 — 11 个 interop 测试族，181/181 fact tests 通过
+- **Phase G1**: foundation-dll pipeline 验证 — 12/12 families 通过 (181 fact tests)
+- **Phase G2**: foundation-dll pipeline 修复 — 增加 2 新增家族 (custom-marshaller-contracts, objective-c-interop)，14/14 families 通过 (185 fact tests)
+- **Phase H1** (h1-architecture-doc): 架构文档 docs/architecture/il2cpp-marshal-architecture.md (299 行)
+- **Phase H2** (h2-wiki-update): wiki 更新 — COM 测试页和 interop 模块页更新为 14 家族 185 facts
 
 **Native test total**: 119 passed, 5 skipped (Win32 RCW)
-**Managed test total**: 181 fact tests passed across 11 families
+**Managed test total**: 185 fact tests passed across 14 families
 
 ### foundation-dll pipeline 详情
 
@@ -104,16 +107,18 @@ f3-connection-point-test (已完成): com_connection_point_test.cpp 创建，10/
 | System.Runtime.InteropServices | marshalling-attributes | 10/10 | 10/10 | Marshal 属性 |
 | System.Runtime.InteropServices | runtime-interop-services | 17/17 | 17/17 | Runtime Interop |
 | System.Runtime.InteropServices | secure-string-marshal | 4/4 | 4/4 | SecureString |
+| System.Runtime.InteropServices | custom-marshaller-contracts | 0/0 (contract-only) | 0/0 (contract-only) | ICustomMarshaler 契约 |
+| System.Runtime.InteropServices | objective-c-interop | 4/4 | 4/4 | Objective-C interop |
 
 **遗留 TODO 项（非本 roadmap 范围）：** com-types (10 TODOs, ref-param COM 接口方法)、generated-marshalling (52 TODOs)、native-memory-pointers (18 TODOs)、handles-safehandle-gchandle (4 TODOs)、objective-c-interop (1 TODO) — 这些是 auto-generator 无法处理的复杂参数模式，需要独立 COM 基础设施，不影响当前 marshal 代码验证。
 
 ## 剩余阶段
 
-- **Phase H1** (h1-architecture-doc): 架构文档 docs/architecture/il2cpp-marshal-architecture.md
-- **Phase H2** (h2-wiki-update): wiki 更新
+- **Phase H1** (h1-architecture-doc): ✅ 已完成 — docs/architecture/il2cpp-marshal-architecture.md
+- **Phase H2** (h2-wiki-update): ✅ 已完成 — COM 测试页 + interop 模块页更新
 - **Phase H3** (h3-structural-review-merge): 结构告警 + 回归测试 + 合并到 main
 
 ## 下一步
 
-启动 h3-structural-review-merge：结构告警 + 回归测试 + 合并到 main。
+启动 h3-structural-review-merge：结构告警检查 + 回归测试 + 合并到 main。
 

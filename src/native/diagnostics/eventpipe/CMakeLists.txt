@@ -32,6 +32,8 @@ add_library(chaos_eventpipe STATIC
     ep_reflection_bridge.cpp
     ep_memorydomain_bridge.h
     ep_memorydomain_bridge.cpp
+    ep_com_bridge.h
+    ep_com_bridge.cpp
     ep_instance.h
     ep_instance.cpp
 )

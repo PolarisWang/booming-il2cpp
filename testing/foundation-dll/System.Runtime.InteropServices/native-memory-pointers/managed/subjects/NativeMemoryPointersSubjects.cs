@@ -62,7 +62,7 @@ public static partial class NativeMemoryPointersSubjects
     // [6] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::ChangeWrapperHandleStrength:System.Void(System.Object,System.Boolean)
     public static void Subject_6()
     {
-        try { Marshal.ChangeWrapperHandleStrength(42, true); }
+        try { Marshal.ChangeWrapperHandleStrength(null!, true); }
         catch { _exitCode = 1; }
     }
 
@@ -76,103 +76,103 @@ public static partial class NativeMemoryPointersSubjects
     // [8] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.Int32{},System.Int32,System.IntPtr,System.Int32)
     public static void Subject_8()
     {
-        // TODO: System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.Int32{},System.Int32,System.IntPtr,System.Int32) could not be auto-generated
+        // needs-manual — Copy with 4 params requires manual implementation: System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.Int32{},System.Int32,System.IntPtr,System.Int32)
     }
 
     // [9] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.Char{},System.Int32,System.IntPtr,System.Int32)
     public static void Subject_9()
     {
-        // TODO: System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.Char{},System.Int32,System.IntPtr,System.Int32) could not be auto-generated
+        // needs-manual — Copy with 4 params requires manual implementation: System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.Char{},System.Int32,System.IntPtr,System.Int32)
     }
 
     // [10] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.Int16{},System.Int32,System.IntPtr,System.Int32)
     public static void Subject_10()
     {
-        // TODO: System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.Int16{},System.Int32,System.IntPtr,System.Int32) could not be auto-generated
+        // needs-manual — Copy with 4 params requires manual implementation: System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.Int16{},System.Int32,System.IntPtr,System.Int32)
     }
 
     // [11] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.Int64{},System.Int32,System.IntPtr,System.Int32)
     public static void Subject_11()
     {
-        // TODO: System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.Int64{},System.Int32,System.IntPtr,System.Int32) could not be auto-generated
+        // needs-manual — Copy with 4 params requires manual implementation: System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.Int64{},System.Int32,System.IntPtr,System.Int32)
     }
 
     // [12] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.Single{},System.Int32,System.IntPtr,System.Int32)
     public static void Subject_12()
     {
-        // TODO: System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.Single{},System.Int32,System.IntPtr,System.Int32) could not be auto-generated
+        // needs-manual — Copy with 4 params requires manual implementation: System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.Single{},System.Int32,System.IntPtr,System.Int32)
     }
 
     // [13] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.Double{},System.Int32,System.IntPtr,System.Int32)
     public static void Subject_13()
     {
-        // TODO: System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.Double{},System.Int32,System.IntPtr,System.Int32) could not be auto-generated
+        // needs-manual — Copy with 4 params requires manual implementation: System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.Double{},System.Int32,System.IntPtr,System.Int32)
     }
 
     // [14] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.Byte{},System.Int32,System.IntPtr,System.Int32)
     public static void Subject_14()
     {
-        // TODO: System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.Byte{},System.Int32,System.IntPtr,System.Int32) could not be auto-generated
+        // needs-manual — Copy with 4 params requires manual implementation: System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.Byte{},System.Int32,System.IntPtr,System.Int32)
     }
 
     // [15] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.IntPtr{},System.Int32,System.IntPtr,System.Int32)
     public static void Subject_15()
     {
-        // TODO: System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.IntPtr{},System.Int32,System.IntPtr,System.Int32) could not be auto-generated
+        // needs-manual — Copy with 4 params requires manual implementation: System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.IntPtr{},System.Int32,System.IntPtr,System.Int32)
     }
 
     // [16] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.IntPtr,System.Int32{},System.Int32,System.Int32)
     public static void Subject_16()
     {
-        // TODO: System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.IntPtr,System.Int32{},System.Int32,System.Int32) could not be auto-generated
+        // needs-manual — Copy with 4 params requires manual implementation: System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.IntPtr,System.Int32{},System.Int32,System.Int32)
     }
 
     // [17] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.IntPtr,System.Char{},System.Int32,System.Int32)
     public static void Subject_17()
     {
-        // TODO: System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.IntPtr,System.Char{},System.Int32,System.Int32) could not be auto-generated
+        // needs-manual — Copy with 4 params requires manual implementation: System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.IntPtr,System.Char{},System.Int32,System.Int32)
     }
 
     // [18] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.IntPtr,System.Int16{},System.Int32,System.Int32)
     public static void Subject_18()
     {
-        // TODO: System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.IntPtr,System.Int16{},System.Int32,System.Int32) could not be auto-generated
+        // needs-manual — Copy with 4 params requires manual implementation: System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.IntPtr,System.Int16{},System.Int32,System.Int32)
     }
 
     // [19] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.IntPtr,System.Int64{},System.Int32,System.Int32)
     public static void Subject_19()
     {
-        // TODO: System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.IntPtr,System.Int64{},System.Int32,System.Int32) could not be auto-generated
+        // needs-manual — Copy with 4 params requires manual implementation: System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.IntPtr,System.Int64{},System.Int32,System.Int32)
     }
 
     // [20] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.IntPtr,System.Single{},System.Int32,System.Int32)
     public static void Subject_20()
     {
-        // TODO: System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.IntPtr,System.Single{},System.Int32,System.Int32) could not be auto-generated
+        // needs-manual — Copy with 4 params requires manual implementation: System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.IntPtr,System.Single{},System.Int32,System.Int32)
     }
 
     // [21] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.IntPtr,System.Double{},System.Int32,System.Int32)
     public static void Subject_21()
     {
-        // TODO: System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.IntPtr,System.Double{},System.Int32,System.Int32) could not be auto-generated
+        // needs-manual — Copy with 4 params requires manual implementation: System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.IntPtr,System.Double{},System.Int32,System.Int32)
     }
 
     // [22] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.IntPtr,System.Byte{},System.Int32,System.Int32)
     public static void Subject_22()
     {
-        // TODO: System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.IntPtr,System.Byte{},System.Int32,System.Int32) could not be auto-generated
+        // needs-manual — Copy with 4 params requires manual implementation: System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.IntPtr,System.Byte{},System.Int32,System.Int32)
     }
 
     // [23] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.IntPtr,System.IntPtr{},System.Int32,System.Int32)
     public static void Subject_23()
     {
-        // TODO: System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.IntPtr,System.IntPtr{},System.Int32,System.Int32) could not be auto-generated
+        // needs-manual — Copy with 4 params requires manual implementation: System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Copy:System.Void(System.IntPtr,System.IntPtr{},System.Int32,System.Int32)
     }
 
     // [24] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::CreateAggregatedObject:System.IntPtr(System.IntPtr,System.Object)
     public static void Subject_24()
     {
-        try { if ((int)(Marshal.CreateAggregatedObject(IntPtr.Zero, 42)) != (int)(Marshal.CreateAggregatedObject(IntPtr.Zero, 42))) _exitCode = 1; }
+        try { if ((int)(Marshal.CreateAggregatedObject(IntPtr.Zero, null!)) != (int)(Marshal.CreateAggregatedObject(IntPtr.Zero, null!))) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
@@ -184,7 +184,7 @@ public static partial class NativeMemoryPointersSubjects
     // [26] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::CreateWrapperOfType:System.Object(System.Object,System.Type)
     public static void Subject_26()
     {
-        try { if (((Marshal.CreateWrapperOfType(42, typeof(byte))).GetHashCode()) != ((Marshal.CreateWrapperOfType(42, typeof(byte))).GetHashCode())) _exitCode = 1; }
+        try { if (((Marshal.CreateWrapperOfType(null!, typeof(byte))).GetHashCode()) != ((Marshal.CreateWrapperOfType(null!, typeof(byte))).GetHashCode())) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
@@ -208,7 +208,7 @@ public static partial class NativeMemoryPointersSubjects
     // [30] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::FinalReleaseComObject:System.Int32(System.Object)
     public static void Subject_30()
     {
-        try { if (Marshal.FinalReleaseComObject(42) != Marshal.FinalReleaseComObject(42)) _exitCode = 1; }
+        try { if (Marshal.FinalReleaseComObject(null!) != Marshal.FinalReleaseComObject(null!)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
@@ -250,7 +250,7 @@ public static partial class NativeMemoryPointersSubjects
     // [36] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetComInterfaceForObject:System.IntPtr(System.Object,System.Type)
     public static void Subject_36()
     {
-        try { if ((int)(Marshal.GetComInterfaceForObject(42, typeof(byte))) != (int)(Marshal.GetComInterfaceForObject(42, typeof(byte)))) _exitCode = 1; }
+        try { if ((int)(Marshal.GetComInterfaceForObject(null!, typeof(byte))) != (int)(Marshal.GetComInterfaceForObject(null!, typeof(byte)))) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
@@ -262,14 +262,14 @@ public static partial class NativeMemoryPointersSubjects
     // [38] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetComInterfaceForObject:System.IntPtr(System.Object,System.Type,System.Runtime.InteropServices.CustomQueryInterfaceMode)
     public static void Subject_38()
     {
-        try { if ((int)(Marshal.GetComInterfaceForObject(42, typeof(byte), default)) != (int)(Marshal.GetComInterfaceForObject(42, typeof(byte), default))) _exitCode = 1; }
+        try { if ((int)(Marshal.GetComInterfaceForObject(null!, typeof(byte), default)) != (int)(Marshal.GetComInterfaceForObject(null!, typeof(byte), default))) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [39] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetComObjectData:System.Object(System.Object,System.Object)
     public static void Subject_39()
     {
-        try { if (((Marshal.GetComObjectData(42, 42)).GetHashCode()) != ((Marshal.GetComObjectData(42, 42)).GetHashCode())) _exitCode = 1; }
+        try { if (((Marshal.GetComObjectData(null!, null!)).GetHashCode()) != ((Marshal.GetComObjectData(null!, null!)).GetHashCode())) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
@@ -363,14 +363,14 @@ public static partial class NativeMemoryPointersSubjects
     // [53] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetIDispatchForObject:System.IntPtr(System.Object)
     public static void Subject_53()
     {
-        try { if ((int)(Marshal.GetIDispatchForObject(42)) != (int)(Marshal.GetIDispatchForObject(42))) _exitCode = 1; }
+        try { if ((int)(Marshal.GetIDispatchForObject(null!)) != (int)(Marshal.GetIDispatchForObject(null!))) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [54] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetIUnknownForObject:System.IntPtr(System.Object)
     public static void Subject_54()
     {
-        try { if ((int)(Marshal.GetIUnknownForObject(42)) != (int)(Marshal.GetIUnknownForObject(42))) _exitCode = 1; }
+        try { if ((int)(Marshal.GetIUnknownForObject(null!)) != (int)(Marshal.GetIUnknownForObject(null!))) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
@@ -405,7 +405,7 @@ public static partial class NativeMemoryPointersSubjects
     // [59] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetNativeVariantForObject:System.Void(System.Object,System.IntPtr)
     public static void Subject_59()
     {
-        try { Marshal.GetNativeVariantForObject(42, IntPtr.Zero); }
+        try { Marshal.GetNativeVariantForObject(null!, IntPtr.Zero); }
         catch { _exitCode = 1; }
     }
 
@@ -497,7 +497,7 @@ public static partial class NativeMemoryPointersSubjects
     // [73] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::IsComObject:System.Boolean(System.Object)
     public static void Subject_73()
     {
-        try { if (((Marshal.IsComObject(42)) ? 1 : 0) != ((Marshal.IsComObject(42)) ? 1 : 0)) _exitCode = 1; }
+        try { if (((Marshal.IsComObject(null!)) ? 1 : 0) != ((Marshal.IsComObject(null!)) ? 1 : 0)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
@@ -607,7 +607,7 @@ public static partial class NativeMemoryPointersSubjects
     // [89] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::PtrToStructure:System.Void(System.IntPtr,System.Object)
     public static void Subject_89()
     {
-        try { Marshal.PtrToStructure(IntPtr.Zero, 42); }
+        try { Marshal.PtrToStructure(IntPtr.Zero, null!); }
         catch { _exitCode = 1; }
     }
 
@@ -624,13 +624,13 @@ public static partial class NativeMemoryPointersSubjects
     // [92] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::QueryInterface:System.Int32(System.IntPtr,System.Guid&,System.IntPtr&)
     public static void Subject_92()
     {
-        // TODO: System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::QueryInterface:System.Int32(System.IntPtr,System.Guid&,System.IntPtr&) could not be auto-generated
+        // needs-manual — QueryInterface with 3 params requires manual implementation: System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::QueryInterface:System.Int32(System.IntPtr,System.Guid&,System.IntPtr&)
     }
 
     // [93] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::ReadByte:System.Byte(System.Object,System.Int32)
     public static void Subject_93()
     {
-        try { if ((int)(Marshal.ReadByte(42, 42)) != (int)(Marshal.ReadByte(42, 42))) _exitCode = 1; }
+        try { if ((int)(Marshal.ReadByte(null!, 42)) != (int)(Marshal.ReadByte(null!, 42))) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
@@ -651,7 +651,7 @@ public static partial class NativeMemoryPointersSubjects
     // [96] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::ReadInt16:System.Int16(System.Object,System.Int32)
     public static void Subject_96()
     {
-        try { if ((int)(Marshal.ReadInt16(42, 42)) != (int)(Marshal.ReadInt16(42, 42))) _exitCode = 1; }
+        try { if ((int)(Marshal.ReadInt16(null!, 42)) != (int)(Marshal.ReadInt16(null!, 42))) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
@@ -672,7 +672,7 @@ public static partial class NativeMemoryPointersSubjects
     // [99] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::ReadInt32:System.Int32(System.Object,System.Int32)
     public static void Subject_99()
     {
-        try { if (Marshal.ReadInt32(42, 42) != Marshal.ReadInt32(42, 42)) _exitCode = 1; }
+        try { if (Marshal.ReadInt32(null!, 42) != Marshal.ReadInt32(null!, 42)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
@@ -693,7 +693,7 @@ public static partial class NativeMemoryPointersSubjects
     // [102] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::ReadInt64:System.Int64(System.Object,System.Int32)
     public static void Subject_102()
     {
-        try { if ((int)(Marshal.ReadInt64(42, 42)) != (int)(Marshal.ReadInt64(42, 42))) _exitCode = 1; }
+        try { if ((int)(Marshal.ReadInt64(null!, 42)) != (int)(Marshal.ReadInt64(null!, 42))) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
@@ -714,7 +714,7 @@ public static partial class NativeMemoryPointersSubjects
     // [105] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::ReadIntPtr:System.IntPtr(System.Object,System.Int32)
     public static void Subject_105()
     {
-        try { if ((int)(Marshal.ReadIntPtr(42, 42)) != (int)(Marshal.ReadIntPtr(42, 42))) _exitCode = 1; }
+        try { if ((int)(Marshal.ReadIntPtr(null!, 42)) != (int)(Marshal.ReadIntPtr(null!, 42))) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
@@ -756,7 +756,7 @@ public static partial class NativeMemoryPointersSubjects
     // [111] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::ReleaseComObject:System.Int32(System.Object)
     public static void Subject_111()
     {
-        try { if (Marshal.ReleaseComObject(42) != Marshal.ReleaseComObject(42)) _exitCode = 1; }
+        try { if (Marshal.ReleaseComObject(null!) != Marshal.ReleaseComObject(null!)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
@@ -798,7 +798,7 @@ public static partial class NativeMemoryPointersSubjects
     // [117] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::SetComObjectData:System.Boolean(System.Object,System.Object,System.Object)
     public static void Subject_117()
     {
-        try { if (((Marshal.SetComObjectData(42, 42, 42)) ? 1 : 0) != ((Marshal.SetComObjectData(42, 42, 42)) ? 1 : 0)) _exitCode = 1; }
+        try { if (((Marshal.SetComObjectData(null!, null!, null!)) ? 1 : 0) != ((Marshal.SetComObjectData(null!, null!, null!)) ? 1 : 0)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
@@ -819,7 +819,7 @@ public static partial class NativeMemoryPointersSubjects
     // [120] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::SizeOf:System.Int32(System.Object)
     public static void Subject_120()
     {
-        try { if (Marshal.SizeOf(42) != Marshal.SizeOf(42)) _exitCode = 1; }
+        try { if (Marshal.SizeOf(null!) != Marshal.SizeOf(null!)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
@@ -899,7 +899,7 @@ public static partial class NativeMemoryPointersSubjects
     // [132] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::StructureToPtr:System.Void(System.Object,System.IntPtr,System.Boolean)
     public static void Subject_132()
     {
-        try { Marshal.StructureToPtr(42, IntPtr.Zero, true); }
+        try { Marshal.StructureToPtr(null!, IntPtr.Zero, true); }
         catch { _exitCode = 1; }
     }
 
@@ -925,7 +925,7 @@ public static partial class NativeMemoryPointersSubjects
     // [136] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::ThrowExceptionForHR:System.Void(System.Int32,System.Guid&,System.IntPtr)
     public static void Subject_136()
     {
-        // TODO: System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::ThrowExceptionForHR:System.Void(System.Int32,System.Guid&,System.IntPtr) could not be auto-generated
+        // needs-manual — ThrowExceptionForHR with 3 params requires manual implementation: System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::ThrowExceptionForHR:System.Void(System.Int32,System.Guid&,System.IntPtr)
     }
 
     // [137] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::UnsafeAddrOfPinnedArrayElement:System.IntPtr(System.Array,System.Int32)
@@ -943,7 +943,7 @@ public static partial class NativeMemoryPointersSubjects
     // [139] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::WriteByte:System.Void(System.Object,System.Int32,System.Byte)
     public static void Subject_139()
     {
-        try { Marshal.WriteByte(42, 42, (byte)42); }
+        try { Marshal.WriteByte(null!, 42, (byte)42); }
         catch { _exitCode = 1; }
     }
 
@@ -964,7 +964,7 @@ public static partial class NativeMemoryPointersSubjects
     // [142] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::WriteInt16:System.Void(System.Object,System.Int32,System.Int16)
     public static void Subject_142()
     {
-        try { Marshal.WriteInt16(42, 42, (short)42); }
+        try { Marshal.WriteInt16(null!, 42, (short)42); }
         catch { _exitCode = 1; }
     }
 
@@ -992,7 +992,7 @@ public static partial class NativeMemoryPointersSubjects
     // [146] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::WriteInt16:System.Void(System.Object,System.Int32,System.Char)
     public static void Subject_146()
     {
-        try { Marshal.WriteInt16(42, 42, 'A'); }
+        try { Marshal.WriteInt16(null!, 42, 'A'); }
         catch { _exitCode = 1; }
     }
 
@@ -1006,7 +1006,7 @@ public static partial class NativeMemoryPointersSubjects
     // [148] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::WriteInt32:System.Void(System.Object,System.Int32,System.Int32)
     public static void Subject_148()
     {
-        try { Marshal.WriteInt32(42, 42, 42); }
+        try { Marshal.WriteInt32(null!, 42, 42); }
         catch { _exitCode = 1; }
     }
 
@@ -1027,7 +1027,7 @@ public static partial class NativeMemoryPointersSubjects
     // [151] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::WriteInt64:System.Void(System.Object,System.Int32,System.Int64)
     public static void Subject_151()
     {
-        try { Marshal.WriteInt64(42, 42, 42L); }
+        try { Marshal.WriteInt64(null!, 42, 42L); }
         catch { _exitCode = 1; }
     }
 
@@ -1055,7 +1055,7 @@ public static partial class NativeMemoryPointersSubjects
     // [155] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::WriteIntPtr:System.Void(System.Object,System.Int32,System.IntPtr)
     public static void Subject_155()
     {
-        try { Marshal.WriteIntPtr(42, 42, IntPtr.Zero); }
+        try { Marshal.WriteIntPtr(null!, 42, IntPtr.Zero); }
         catch { _exitCode = 1; }
     }
 

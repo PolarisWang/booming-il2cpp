@@ -1,0 +1,17 @@
+// ── Cross-assembly export declarations ──
+// This file is auto-generated. Do not edit.
+//
+// These extern "C" functions are called by other assemblies in the
+// multi-assembly compilation closure. Each export provides a stable
+// C-linkage symbol that the caller's assembly can reference.
+
+{{~ if exports ~}}
+{{~ for export in exports ~}}
+extern "C" void {{ export.symbol }}({{ export.parameter_types | array.join ", " }});
+{{~ end ~}}
+
+{{~ else ~}}
+// No cross-assembly exports required for this assembly.
+// All methods called from other assemblies are already covered
+// by the global dispatch table or inlined.
+{{~ end ~}}
