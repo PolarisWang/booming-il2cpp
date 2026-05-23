@@ -4,7 +4,6 @@ using Chaos.IL2CPP.Generator;
 using Chaos.IL2CPP.Contracts;
 using Chaos.IL2CPP.Diagnostics;
 using Chaos.IL2CPP.Pipeline;
-
 namespace Chaos.IL2CPP.Driver;
 
 /// <summary>
@@ -85,16 +84,22 @@ internal static class ConvertToCppHandler
                 FullAssemblyClosure: config.FullClosure);
 
             var closureResult = pipeline.Execute(request);
-            Console.WriteLine($" {closureResult.AotCoreIr.Methods.Count} methods lowered");
+            if (closureResult.IsFailure)
+            {
+                Console.Error.WriteLine($"Pipeline failed: [{closureResult.Error!.Code}] {closureResult.Error.Message}");
+                return 1;
+            }
+            var result = closureResult.Value!;
+            Console.WriteLine($" {result.AotCoreIr.Methods.Count} methods lowered");
 
             Console.Write("  [2/3] Emitting C++ (NativeAot, direct)...");
             var emitter = new FullAssemblyEmitter();
-            var emitResult = emitter.Emit(closureResult, outputRoot, config.Mode);
+            var emitResult = emitter.Emit(result, outputRoot, config.Mode);
             Console.WriteLine($" done ({emitResult.GeneratedSources.Count} files)");
 
             // Write closure artifacts for debugging/reproducibility
             Console.Write("  [3/3] Writing closure artifacts...");
-            WriteArtifacts(outputRoot, closureResult);
+            WriteArtifacts(outputRoot, result);
             Console.WriteLine(" done");
 
             // Generate CMakeLists.txt
@@ -122,7 +127,13 @@ internal static class ConvertToCppHandler
                 EntryPointSubjectIdOverride: config.EntryPoint,
                 AdditionalAssemblyPaths: additionalPaths);
 
-            var results = pipeline.ExecuteMulti(multiRequest);
+            var resultsResult = pipeline.ExecuteMulti(multiRequest);
+            if (resultsResult.IsFailure)
+            {
+                Console.Error.WriteLine($"Pipeline failed: [{resultsResult.Error!.Code}] {resultsResult.Error.Message}");
+                return 1;
+            }
+            var results = resultsResult.Value!;
             Console.WriteLine($" {results.Sum(r => r.AotCoreIr?.Methods.Count ?? 0)} methods across {results.Count} assemblies");
 
             // Emit C++ per assembly (direct, no JSON round-trip)

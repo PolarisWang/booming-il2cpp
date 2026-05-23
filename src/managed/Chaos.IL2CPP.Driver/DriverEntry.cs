@@ -3,7 +3,6 @@ using System.Text.Json.Serialization;
 using Chaos.IL2CPP.Generator;
 using Chaos.IL2CPP.Contracts;
 using Chaos.IL2CPP.Diagnostics;
-using Chaos.IL2CPP.Pipeline;
 using Chaos.IL2CPP.ProjectGraph;
 
 namespace Chaos.IL2CPP.Driver;
@@ -20,66 +19,13 @@ public sealed class DriverEntry
 
     public string Name => "Chaos.IL2CPP.Driver";
 
-    public int Run(ManagedClosureRequest request)
-    {
-        var pipeline = new PipelinePlan();
-        var result = pipeline.Execute(request);
+    private readonly PipelineOrchestrator _orchestrator = new();
 
-        Directory.CreateDirectory(result.OutputRootPath);
-        WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.TypedIlIr), result.TypedIlIr);
-        WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.AotCoreIr), result.AotCoreIr);
-        WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.AotManifest), result.AotManifest);
-        WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.MetadataRegistration), result.MetadataRegistration);
-        WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.SupplementalMetadataTemplate), result.SupplementalMetadataTemplate);
-        WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.CodeRegistration), result.CodeRegistration);
-        WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.GenericInstantiationDemandGraph), result.GenericInstantiationDemandGraph);
-        WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.GenericCapabilityMatrix), result.GenericCapabilityMatrix);
-        WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.OptimizationFacts), result.OptimizationFacts);
-        WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.PreserveDescriptor), result.PreserveDescriptor);
-        WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.NativeReferenceLoweringPlan), result.NativeReferenceLoweringPlan);
-        WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.NativeAotLoweringPlan), result.NativeAotLoweringPlan);
-        WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.ClosureManifest), result.ClosureManifest);
+    public int Run(ManagedClosureRequest request) => _orchestrator.RunPipeline(request);
 
-        return 0;
-    }
+    public int Run(NativeReferenceProofRequest request) => _orchestrator.RunNativeReference(request);
 
-    public int Run(NativeReferenceProofRequest request)
-    {
-        var emitter = new NativeReferenceProofEmitter();
-        var result = emitter.Generate(request);
-
-        Directory.CreateDirectory(result.OutputRootPath);
-        foreach (var generatedSource in result.GeneratedSources)
-        {
-            var targetPath = Path.Combine(result.OutputRootPath, generatedSource.RelativePath.Replace('/', Path.DirectorySeparatorChar));
-            Directory.CreateDirectory(Path.GetDirectoryName(targetPath)!);
-            File.WriteAllText(targetPath, generatedSource.Contents);
-        }
-
-        WriteJson(Path.Combine(result.OutputRootPath, NativeReferenceArtifactNames.LoweringPlan), result.LoweringPlan);
-        WriteJson(Path.Combine(result.OutputRootPath, NativeReferenceArtifactNames.Manifest), result.Manifest);
-        WriteJson(Path.Combine(result.OutputRootPath, NativeReferenceArtifactNames.CodegenMetrics), result.CodegenMetrics);
-        return 0;
-    }
-
-    public int Run(NativeAotRequest request)
-    {
-        var emitter = new NativeAotEmitter();
-        var result = emitter.Generate(request);
-
-        Directory.CreateDirectory(result.OutputRootPath);
-        foreach (var generatedSource in result.GeneratedSources)
-        {
-            var targetPath = Path.Combine(result.OutputRootPath, generatedSource.RelativePath.Replace('/', Path.DirectorySeparatorChar));
-            Directory.CreateDirectory(Path.GetDirectoryName(targetPath)!);
-            File.WriteAllText(targetPath, generatedSource.Contents);
-        }
-
-        WriteJson(Path.Combine(result.OutputRootPath, NativeAotArtifactNames.LoweringPlan), result.LoweringPlan);
-        WriteJson(Path.Combine(result.OutputRootPath, NativeAotArtifactNames.Manifest), result.Manifest);
-        WriteJson(Path.Combine(result.OutputRootPath, NativeAotArtifactNames.CodegenMetrics), result.CodegenMetrics);
-        return 0;
-    }
+    public int Run(NativeAotRequest request) => _orchestrator.RunNativeAot(request);
 
     public static int Main(string[] args)
     {
@@ -376,19 +322,23 @@ public sealed class DriverEntry
 
         targetId ??= "windows-x64-reference";
 
-        var convertManifestPath = Path.Combine(convertDir, "convert.manifest.json");
-        if (!File.Exists(convertManifestPath))
+        Console.WriteLine($"[1/2] Configuring native build for target: {targetId}");
+
+        var result = BuildService.RunBuild(convertDir, targetId);
+
+        if (!string.IsNullOrWhiteSpace(result.Output))
+            Console.Write(result.Output);
+        if (!string.IsNullOrWhiteSpace(result.Error))
+            Console.Error.Write(result.Error);
+
+        if (result.Success)
         {
-            Console.Error.WriteLine($"Error: convert.manifest.json not found at: {convertManifestPath}");
-            Console.Error.WriteLine("Run 'chaos-il2cpp convert' first.");
-            return 1;
+            Console.WriteLine($"[2/2] Build completed (target: {targetId})");
+            return 0;
         }
 
-        Console.WriteLine($"[1/2] Configuring native build for target: {targetId}");
-        Console.WriteLine($"[2/2] Building native target: {targetId}");
-        Console.WriteLine($"Build completed (target: {targetId})");
-        Console.WriteLine("Note: CMake build integration is planned for a future update.");
-        return 0;
+        Console.Error.WriteLine($"Build failed (target: {targetId}, exit code: {result.ExitCode})");
+        return 1;
     }
 
     private static int RunPublish(string[] args)
@@ -631,13 +581,13 @@ public sealed class DriverEntry
                 AdditionalAssemblyPaths: null,
                 FullAssemblyClosure: true);
 
-            var pipeline = new PipelinePlan();
-            var result = pipeline.Execute(request);
+            var orchestrator = new PipelineOrchestrator();
+            var result = orchestrator.RunPipelineAndGetResult(request);
+            if (result is null)
+                return 1;
 
-            // Serialize AotCoreIr to JSON for embedding
-            var aotCoreIrJson = JsonSerializer.Serialize(result.AotCoreIr, JsonOptions);
+            // AotCoreIr was already written to irDir by PipelineOrchestrator
             var irPath = Path.Combine(irDir, ManagedClosureArtifactNames.AotCoreIr);
-            File.WriteAllText(irPath, aotCoreIrJson);
 
             Console.WriteLine($"[2/2] Generating patch data: {outputPath}");
             ChaosTrace.Point("driver.emit_patch_data_full", "codegen");

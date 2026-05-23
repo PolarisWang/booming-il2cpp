@@ -5,7 +5,6 @@ using Chaos.IL2CPP.Generator;
 using Chaos.IL2CPP.Contracts;
 using Chaos.IL2CPP.Diagnostics;
 using Chaos.IL2CPP.Pipeline;
-
 namespace Chaos.IL2CPP.Driver;
 
 internal static class AsmCompareHandler
@@ -47,12 +46,18 @@ internal static class AsmCompareHandler
             ChaosTrace.Point("asm-compare.pipeline", "codegen");
 
             var pipeline = new PipelinePlan();
-            var closureResult = pipeline.Execute(new ManagedClosureRequest(
+            var closureResultResult = pipeline.Execute(new ManagedClosureRequest(
                 config.AssemblyPath,
                 tempDir,
                 EntryPointSubjectIdOverride: null,
                 AdditionalAssemblyPaths: null,
                 FullAssemblyClosure: true));
+            if (closureResultResult.IsFailure)
+            {
+                Console.Error.WriteLine($"Pipeline failed: [{closureResultResult.Error!.Code}] {closureResultResult.Error.Message}");
+                return 1;
+            }
+            var closureResult = closureResultResult.Value!;
 
             Console.Error.WriteLine($" {closureResult.AotCoreIr.Methods.Count} methods lowered");
 
