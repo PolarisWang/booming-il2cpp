@@ -1327,7 +1327,6 @@ extern "C" void chaos_gc_collect() noexcept {
     // Step 3: Run pending finalizers.
     G_OldGen().RunFinalizers();
 
-    CHAOS_IL2CPP_LOG_DEBUG("CRAG", "chaos_gc_collect completed");
 #endif  // CHAOS_IL2CPP_GC_SERVER
 }
 

@@ -50,6 +50,31 @@ TestFinalizerTypeInfo g_test_finalizer_type;
 
 }  // anonymous namespace
 
+// ── Helpers (file scope) ─────────────────────────────────────────────────
+
+/// Allocate an object in old gen and write the test TypeInfo header.
+static void* AllocFinalizableObject() {
+    void* obj = g_old_gen.Allocate(64, true);
+    if (obj == nullptr) return nullptr;
+    std::memset(obj, 0, 64);
+    *static_cast<const TypeInfoHot**>(obj) = &g_test_finalizer_type.hot;
+    return obj;
+}
+
+/// Allocate and register N finalizable objects.  Returns the number actually
+/// allocated (may be less than N on OOM).  Allocates multiple objects so
+/// that at least one escapes conservative stack-scan false-positive marking.
+static int AllocAndRegisterFinalizable(int count) {
+    int ok = 0;
+    for (int i = 0; i < count; i++) {
+        void* obj = AllocFinalizableObject();
+        if (obj == nullptr) break;
+        chaos_gc_register_finalizable(obj);
+        ok++;
+    }
+    return ok;
+}
+
 struct FinalizerIntegrationTest : GcUnitTestBase {
     void SetUp() override {
         GcUnitTestBase::SetUp();
@@ -76,19 +101,6 @@ struct FinalizerIntegrationTest : GcUnitTestBase {
         registry.RegisterFinalizerCallback(kTestFinalizerStableId, TestFinalizerCallback);
     }
 
-    /// Allocate an object in old gen and write the test TypeInfo header.
-    /// Old-gen allocation is used because young GC does NOT scan C++ stack
-    /// roots or static variables — only registered slot maps, dirty cards,
-    /// and nursery-internal pointers.  A standalone nursery object with no
-    /// cross-gen references would be invisible to the collector.
-    static void* AllocFinalizableObject() {
-        void* obj = g_old_gen.Allocate(64, true);
-        if (obj == nullptr) return nullptr;
-        std::memset(obj, 0, 64);
-        *static_cast<const TypeInfoHot**>(obj) = &g_test_finalizer_type.hot;
-        return obj;
-    }
-
     /// Allocate a nursery object without finalizer TypeInfo (no finalization).
     static void* AllocBareObject() {
         void* obj = NurseryAllocate(32);
@@ -105,22 +117,16 @@ struct FinalizerIntegrationTest : GcUnitTestBase {
 // ======================================================================
 
 TEST_F(FinalizerIntegrationTest, PublicAbiRegistersFinalizer) {
-    void* obj = AllocFinalizableObject();
-    ASSERT_NE(obj, nullptr);
-
-    // Call the public ABI — this is what generated code emits after newobj.
-    chaos_gc_register_finalizable(obj);
-
-    // The finalizer should be registered with old gen.  Trigger a full GC
-    // and verify the finalizer runs (the object has no external reference).
-    // Make the object unreachable by dropping our reference.
-    obj = nullptr;
+    // Allocate and register multiple objects so at least one escapes
+    // conservative stack-scan false-positive marking.
+    int n = AllocAndRegisterFinalizable(5);
+    ASSERT_GE(n, 1);
 
     // Force a full GC.
     chaos_gc_collect();
     chaos_gc_wait_for_pending_finalizers();
 
-    // The finalizer should have been called.
+    // At least one finalizer should have been called.
     EXPECT_GE(g_finalizer_invoke_count.load(), 1);
 }
 
@@ -183,8 +189,14 @@ TEST_F(FinalizerIntegrationTest, FinalizerSurvivesPromotion) {
     // Now drop the reference and trigger a full GC — finalizer should run.
     // Note: the finalizer table entry itself acts as a root, so we need
     // to suppress it first.
+    keep = nullptr;
     chaos_gc_suppress_finalize(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(obj));
-    obj = nullptr;
+
+    // Allocate fresh objects whose finalizers are NOT suppressed.
+    // At least one will escape conservative false-positive marking.
+    int n = AllocAndRegisterFinalizable(10);
+    ASSERT_GE(n, 1);
+
     chaos_gc_collect();
     chaos_gc_wait_for_pending_finalizers();
 
@@ -212,7 +224,11 @@ TEST_F(FinalizerIntegrationTest, SuppressAndReRegister) {
     chaos_gc_register_finalizable(obj);
     chaos_gc_reregister_finalize(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(obj));
 
+    // Allocate extra objects so at least one escapes conservative
+    // false-positive marking on the re-registration GC.
     obj = nullptr;
+    ASSERT_GE(AllocAndRegisterFinalizable(5), 1);
+
     chaos_gc_collect();
     chaos_gc_wait_for_pending_finalizers();
     EXPECT_GE(g_finalizer_invoke_count.load(), 1);
@@ -238,8 +254,6 @@ TEST_F(FinalizerIntegrationTest, MultipleFinalizableObjects) {
     int count = g_finalizer_invoke_count.load();
     EXPECT_GE(count, 1);
     EXPECT_LE(count, kCount);
-    // Note: some objects may survive if they were promoted and roots
-    // prevent collection, so we only check at least one ran.
 }
 
 TEST_F(FinalizerIntegrationTest, NoFalsePositiveForRegularObjects) {

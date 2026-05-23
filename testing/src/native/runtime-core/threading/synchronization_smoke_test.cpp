@@ -9,6 +9,7 @@
 #include <synchronization.h>
 #include <wait_handle.h>
 #include <timer_queue.h>
+#include <thread_pool.h>
 #include <thread_state.h>
 
 #include <atomic>
@@ -326,6 +327,7 @@ static void timer_callback(void* ctx) {
 
 TEST(SynchronizationSmoke, TimerOneShot)
 {
+    threading::ThreadPoolInitialize();
     threading::TimerQueueInitialize();
 
     s_timer_fired.store(0, std::memory_order_relaxed);
@@ -341,6 +343,7 @@ TEST(SynchronizationSmoke, TimerOneShot)
         threading::TimerQueueOnTick();
     }
 
+    threading::ThreadPoolShutdown();
     threading::TimerQueueShutdown();
 
     EXPECT_EQ(s_timer_fired.load(), 1);
@@ -348,6 +351,7 @@ TEST(SynchronizationSmoke, TimerOneShot)
 
 TEST(SynchronizationSmoke, TimerPeriodic)
 {
+    threading::ThreadPoolInitialize();
     threading::TimerQueueInitialize();
 
     s_timer_fired.store(0, std::memory_order_relaxed);
@@ -363,6 +367,9 @@ TEST(SynchronizationSmoke, TimerPeriodic)
         threading::TimerQueueOnTick();
     }
 
+    // Drain ThreadPool work items first to ensure timer callbacks
+    // have been invoked before reading the counter.
+    threading::ThreadPoolShutdown();
     int fired = s_timer_fired.load();
     threading::TimerQueueShutdown();
 

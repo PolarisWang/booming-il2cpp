@@ -62,7 +62,7 @@ set(CHAOS_RUNTIME_LIBS
     chaos_bootstrap
     chaos_common
     chaos_interpreter
-    chaos_codegen
+    chaos_jit
     chaos_support
     chaos_hot_update
     chaos_fmt

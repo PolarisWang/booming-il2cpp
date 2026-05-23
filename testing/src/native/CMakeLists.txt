@@ -39,7 +39,7 @@ set(CHAOS_INCLUDE_DIRS
     "${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/threading"
     "${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/tiering"
     "${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/gc"
-    "${CHAOS_PROJECT_ROOT}/../src/native/codegen"
+    "${CHAOS_PROJECT_ROOT}/../src/native/jit"
     "${CHAOS_PROJECT_ROOT}/../src/native/engine-bridge"
     "${CHAOS_PROJECT_ROOT}/../contracts/native/v0"
     "${CHAOS_PROJECT_ROOT}/../contracts/engine/v0"
@@ -62,7 +62,7 @@ macro(add_chaos_imported_lib name subdir)
 endmacro()
 
 add_chaos_imported_lib(chaos_interpreter    interpreter)
-add_chaos_imported_lib(chaos_codegen        codegen)
+add_chaos_imported_lib(chaos_jit        jit)
 add_chaos_imported_lib(chaos_runtime_core   runtime-core)
 add_chaos_imported_lib(chaos_bootstrap      bootstrap)
 add_chaos_imported_lib(chaos_common         common)
@@ -161,7 +161,7 @@ add_subdirectory(support)
 add_subdirectory(abi)
 add_subdirectory(common)
 add_subdirectory(bootstrap)
-add_subdirectory(codegen)
+add_subdirectory(jit)
 add_subdirectory(engine-bridge)
 add_subdirectory(hot-update)
 add_subdirectory(runtime-core)

@@ -1,18 +1,28 @@
-// -- JIT Mode Method Registration -------------------------------------------
+// -- (DEPRECATED) JIT Mode Method Registration -------------------------------
 //
-// RegisterJitMethods is called once at program startup (from runtime-entry.cpp)
-// when the codegen was run with --mode jit.  It receives an array of
-// JitMethodEntry structs emitted by the codegen (each containing the AotCoreIr
-// JSON for one method) and activates interpreter dispatch for every entry.
+// DEPRECATED: This file supports the old interpreter-only --mode jit path.
+// New --mode jit codegen runs produce JitT4Entry + RegisterT4JitMethods()
+// (see jit_precode.cpp) which routes through the Precode Stub -> JIT compile
+// pipeline instead of the interpreter.
 //
-// The function:
-//   1. Heap-allocates PatchMethod objects (one per entry)
-//   2. Populates aot_core_ir_json, token, and module_id
-//   3. Calls SetPatchedBySlot() to flag the dispatch entry as active
+// This file is kept for backward compatibility with pre-existing generated
+// test files that still call RegisterJitMethods(). It will be removed once
+// all generated test files are regenerated with the new codegen path.
 //
-// After this, all methods execute through the interpreter's tiered pipeline
-// (InterpreterEntryDirect -> FastExecute -> InterpreterVM) instead of native
-// AOT C++ code.
+// Old behavior:
+//   RegisterJitMethods is called once at program startup (from runtime-entry.cpp)
+//   when the codegen was run with --mode jit (old path).  It receives an array of
+//   JitMethodEntry structs emitted by the codegen (each containing the AotCoreIr
+//   JSON for one method) and activates interpreter dispatch for every entry.
+//
+//   The function:
+//     1. Heap-allocates PatchMethod objects (one per entry)
+//     2. Populates aot_core_ir_json, token, and module_id
+//     3. Calls SetPatchedBySlot() to flag the dispatch entry as active
+//
+//   After this, all methods execute through the interpreter's tiered pipeline
+//   (InterpreterEntryDirect -> FastExecute -> InterpreterVM) instead of native
+//   AOT C++ code.
 
 #include "jit_registration.h"
 

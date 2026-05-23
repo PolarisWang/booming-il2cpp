@@ -33,6 +33,15 @@ extern "C" { int32_t kChaosExternalRuntimeCount = 0; }
 // for a static AOT type with 1 method, 1 field, 1 property.
 // ═══════════════════════════════════════════════════════════════════
 
+static constexpr ReflectionQueryEventDescriptor kMockEvents[] = {
+    {
+        "MockType:TestEvent:0x20000001",        // subject_id_utf8
+        "TestEvent",                            // name_utf8
+        "System.EventHandler",                  // member_type_utf8
+        0                                       // flags
+    }
+};
+
 static constexpr ReflectionQueryMethodDescriptor kMockMethods[] = {
     {
         0x10000001,                         // metadata_token
@@ -76,8 +85,8 @@ static constexpr ReflectionQueryTypeDescriptor kMockTypeDesc = {
     1,                                      // field_count
     kMockProperties,                        // properties
     1,                                      // property_count
-    nullptr,                                // events
-    0,                                      // event_count
+    kMockEvents,                            // events
+    1,                                      // event_count
     kMockMethods,                           // methods
     1,                                      // method_count
     nullptr,                                // generic_parameters
@@ -376,4 +385,124 @@ TEST_F(EEClassTest, EnsureFilledNullEEClass)
     EnsurePropertiesFilled(nullptr);
     EnsureEventsFilled(nullptr);
     // 没有崩溃就是通过
+}
+
+/// AOT 路径: 验证 events 数据从 constexpr ReflectionQueryTypeDescriptor 正确填充。
+TEST_F(EEClassTest, AOTPathEvents)
+{
+    auto* mt = g_aot_mt;
+    ASSERT_NE(mt, nullptr);
+    ASSERT_NE(mt->cold_delta, 0u);  // filled by AOTPath test
+
+    auto* ee = GetEEClass(mt);
+    ASSERT_NE(ee, nullptr);
+
+    ASSERT_TRUE(ee->events.filled);
+    ASSERT_EQ(ee->events.count, 1u);
+    ASSERT_NE(ee->events.data, nullptr);
+    EXPECT_STREQ(ee->events.data[0].name_utf8, "TestEvent");
+    EXPECT_STREQ(ee->events.data[0].subject_id_utf8, "MockType:TestEvent:0x20000001");
+}
+
+/// AOT 路径: 验证 EnsureEEClass 不为 null 的 getter。
+TEST_F(EEClassTest, GetEEClassNonNull)
+{
+    auto* mt = g_aot_mt;
+    ASSERT_NE(mt, nullptr);
+    ASSERT_NE(mt->cold_delta, 0u);
+
+    auto* ee = GetEEClass(mt);
+    ASSERT_NE(ee, nullptr);
+    EXPECT_EQ(ee->mt, mt);
+}
+
+/// AOT 路径: generic_type_def 为空时(非泛型类型)→ nullptr。
+/// 验证 reinterpret_cast 路径在 nullptr 时安全跳过。
+TEST_F(EEClassTest, GenericTypeDefNull)
+{
+    auto* mt = g_aot_mt;
+    ASSERT_NE(mt, nullptr);
+
+    auto* ee = GetEEClass(mt);
+    ASSERT_NE(ee, nullptr);
+    EXPECT_EQ(ee->generic_type_def, nullptr);
+    EXPECT_EQ(ee->generic_param_count, 0u);
+}
+
+/// generic_type_def reinterpret_cast 安全性与正确性。
+/// EnsureEEClass 将 constexpr ReflectionQueryTypeDescriptor::generic_type_definition
+/// 通过 reinterpret_cast<const MethodTable*> 转换成 MethodTable*。
+/// 本测试验证该转换不会崩溃且结果指向正确的地址。
+TEST_F(EEClassTest, GenericTypeDefReinterpretCast)
+{
+    // 注册第二个类型，其 generic_type_definition 指向第一个类型(kMockTypeDesc)。
+    // reinterpret_cast<const MethodTable*>(&kMockTypeDesc) 在此上下文中安全，
+    // 因为 constexpr descriptor 的起始位置与 MethodTable 兼容(TypeInfoHot 在偏移 0)。
+
+    // ── 第二个类型 descriptor: generic_type_definition = &kMockTypeDesc ──
+    // Use 'static' (not 'constexpr') because reinterpret_cast is not valid
+    // in constexpr context on MSVC.
+    static ReflectionQueryTypeDescriptor kGenericMockType;
+    kGenericMockType.metadata_token = 0x02000002;
+    kGenericMockType.subject_id_utf8 = "GenericMockType:0x02000002";
+    kGenericMockType.definition_subject_id_utf8 = nullptr;
+    kGenericMockType.namespace_name_utf8 = "TestNamespace";
+    kGenericMockType.name_utf8 = "GenericMockType";
+    kGenericMockType.display_name_utf8 = "GenericMockType";
+    kGenericMockType.generic_type_definition = &kMockTypeDesc;
+    kGenericMockType.fields = nullptr;
+    kGenericMockType.field_count = 0;
+    kGenericMockType.properties = nullptr;
+    kGenericMockType.property_count = 0;
+    kGenericMockType.events = nullptr;
+    kGenericMockType.event_count = 0;
+    kGenericMockType.methods = nullptr;
+    kGenericMockType.method_count = 0;
+    kGenericMockType.generic_parameters = nullptr;
+    kGenericMockType.generic_param_count = 0;
+    kGenericMockType.reserved_flags = 0;
+
+    static constexpr const ReflectionQueryTypeDescriptor* kGenericMockPtrs[] = { &kGenericMockType };
+    static constexpr ReflectionQueryImageDescriptor kGenericMockImage = {
+        "GenericMockModule",
+        kGenericMockPtrs,
+        1
+    };
+
+    // ── 分配第二个 MethodTable (domain heap) ──
+    auto* mt2 = CHAOS_IL2CPP_DOMAIN_CURRENT_NEW(MethodTable);
+    ASSERT_NE(mt2, nullptr);
+    std::memset(mt2, 0, sizeof(MethodTable));
+    mt2->parent_mt     = nullptr;
+    mt2->vtable_array  = nullptr;
+    mt2->stable_id     = chaos_compute_type_stable_id("GenericMockType");
+    mt2->vtable_length = 0;
+    mt2->warm_delta    = sizeof(TypeInfoHot);
+    mt2->type_shape    = chaos_type_shape_reference;
+    mt2->flags         = 0;
+
+    // ── 注册第二个模块 ──
+    static const TypeInfoHot* g_generic_type_info_ptrs[1] = { mt2->AsTypeInfoHot() };
+    ModuleDescriptor mod_desc{};
+    mod_desc.name_utf8       = "GenericMockModule";
+    mod_desc.image           = &kGenericMockImage;
+    mod_desc.type_info_ptrs  = g_generic_type_info_ptrs;
+    mod_desc.type_count      = 1;
+    uint32_t mod2_id = RegisterModule("GenericMockModule", &mod_desc);
+    ASSERT_NE(mod2_id, kInvalidModuleId);
+
+    // ── EnsureEEClass ──
+    ASSERT_EQ(mt2->cold_delta, 0u);
+    bool ok = EnsureEEClass(mt2);
+    ASSERT_TRUE(ok);
+    ASSERT_NE(mt2->cold_delta, 0u);
+
+    auto* ee = GetEEClass(mt2);
+    ASSERT_NE(ee, nullptr);
+
+    // generic_type_def 应指向 kMockTypeDesc 的 reinterpret_cast 版本
+    ASSERT_NE(ee->generic_type_def, nullptr);
+    EXPECT_EQ(ee->generic_type_def,
+              reinterpret_cast<const MethodTable*>(&kMockTypeDesc));
+    EXPECT_EQ(ee->generic_param_count, 0u);
 }

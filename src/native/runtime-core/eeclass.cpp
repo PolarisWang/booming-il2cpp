@@ -73,6 +73,11 @@ bool EnsureEEClass(MethodTable* mt) noexcept {
             ee->properties.count  = desc->property_count;
             ee->properties.filled = true;
         }
+        if (desc->events != nullptr && desc->event_count > 0) {
+            ee->events.data   = reinterpret_cast<const ReflectionEventEntry*>(desc->events);
+            ee->events.count  = desc->event_count;
+            ee->events.filled = true;
+        }
 
         // Generic metadata
         if (desc->generic_type_definition != nullptr) {

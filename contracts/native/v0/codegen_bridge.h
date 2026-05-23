@@ -26,7 +26,7 @@ enum {
     CHAOS_BRIDGE_STATUS_RUNTIME_CALL_FAILED = 9
 };
 
-/* ── VTable descriptor (codegen-emitted, registered during BootstrapRuntime) ──
+/* ── VTable descriptor (jit-emitted, registered during BootstrapRuntime) ──
  *
  * One per reference/interface type with virtual methods.  The slots array
  * contains only the method slots that THIS type declares or overrides;
@@ -62,7 +62,7 @@ typedef struct CodeRegistrationV0 {
     uint32_t       vtable_descriptor_count;
 
     /// Pointers to the .gc_slot_maps section for batch registration of GC slot maps.
-    /// AOT codegen emits one GcSlotMapSectionEntryHdrV0 per method into this section.
+    /// AOT jit emits one GcSlotMapSectionEntryHdrV0 per method into this section.
     /// Null if the module has no AOT-compiled methods with GC refs.
     const void* slot_map_section_begin;
     const void* slot_map_section_end;
@@ -219,13 +219,13 @@ typedef struct GcSlotMapSectionEntryHdrV0 {
  *   if (entry.flags & kHotpatchActive) call InterpreterEntryDirect
  *   else                               call direct_ptr directly.
  *
- * The dispatch table is an extern "C" symbol emitted by codegen and consumed
+ * The dispatch table is an extern "C" symbol emitted by jit and consumed
  * by both generated code and the runtime PatchLoader.                           */
 #define kHotpatchActive      (1u << 0)
 #define kHotpatchKeepNative  (1u << 1)
 
 typedef struct HotpatchEntryV0 {
-    void*       direct_ptr;        /* AOT function pointer (set by codegen)   */
+    void*       direct_ptr;        /* AOT function pointer (set by jit)   */
     void*       interrupt_ptr;     /* = &InterpreterEntryDirect              */
     uintptr_t   method_key;        /* = PatchMethod* (0 when not patched)   */
     uint32_t    flags;             /* bit 0: kHotpatchActive                 */
@@ -348,7 +348,7 @@ typedef struct CodegenBridgeV0 {
         size_t out_return_value_size,
         ExceptionHandle* out_exception);
 
-    /* Virtual dispatch helpers (token-based, for AOT codegen). */
+    /* Virtual dispatch helpers (token-based, for AOT jit). */
     MethodInfoHandle (CHAOS_RUNTIME_ABI_CALL* resolve_virtual_method_by_token)(
         uint32_t instance_type_token,
         uint32_t declared_method_token);

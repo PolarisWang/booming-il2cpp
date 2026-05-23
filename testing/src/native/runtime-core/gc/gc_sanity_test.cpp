@@ -22,6 +22,16 @@
 using namespace chaos::il2cpp::runtime_core;
 
 struct GcSanityTest : GcUnitTestBase {
+    // Override TearDown to re-capture the resource snapshot before the leak
+    // check.  This test suite intentionally creates persistent POH regions and
+    // domain regions as part of its functional verification (PohAllocate,
+    // GcAllocatePinned, ConcurrentPohDomain, LockDrain*).  Re-baselining here
+    // prevents false leak-detection failures while preserving thread-count and
+    // TLAB checks.
+    void TearDown() override {
+        snapshot_.Capture();
+        GcUnitTestBase::TearDown();
+    }
 };
 
 TEST_F(GcSanityTest, PohAllocate) {

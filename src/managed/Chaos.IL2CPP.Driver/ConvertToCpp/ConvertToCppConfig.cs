@@ -73,6 +73,7 @@ internal sealed class ConvertToCppConfig
                     {
                         "aot" => CodegenMode.Aot,
                         "jit" => CodegenMode.Jit,
+                        "hybrid" => CodegenMode.Hybrid,
                         _ => CodegenMode.Aot,
                     };
                     break;
@@ -114,7 +115,7 @@ internal sealed class ConvertToCppConfig
         Console.WriteLine("  --assembly-dir <dir>          Additional dependency search path (repeatable)");
         Console.WriteLine("  --entry-point <subject-id>    Explicit entry point (default: auto-detect Main)");
         Console.WriteLine("  --full-closure                Compile full closure (all reachable methods)");
-        Console.WriteLine("  --mode aot|jit                Codegen mode: aot (native C++, default) or jit (interpreter)");
+        Console.WriteLine("  --mode aot|jit|hybrid          Codegen mode: aot (native C++, default), jit (T4 JIT compile), or hybrid (AOT→JIT upgrade)");
         Console.WriteLine("  --verbose, -v                 Enable verbose diagnostics");
         Console.WriteLine("  --help, -h                    Show this help");
     }

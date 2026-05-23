@@ -47,3 +47,4 @@
 | [`28-MetadataWriter架构.md`](./28-MetadataWriter%E6%9E%B6%E6%9E%84.md) | MetadataWriter 模型与增量/全量 emit 流程 |
 | [`29-ModuleRegistry运行时参考.md`](./29-ModuleRegistry%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8F%82%E8%80%83.md) | 模块注册/查找/墓碑/回收、TypeInfoHandle、并发安全 |
 | [`30-PatchLoader运行时参考.md`](./30-PatchLoader%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8F%82%E8%80%83.md) | .patchdata 加载验证、PatchContext/PatchMetadataCache 生命周期、溢出保护 |
+| [`27-T4原生代码生成器架构.md#附录aotjithybrid-三模式编译体系`](./27-T4%E5%8E%9F%E7%94%9F%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8%E6%9E%B6%E6%9E%84.md) | JIT/Hybrid 编译模式架构、Precode Stub 分派、PGO 重编译 |

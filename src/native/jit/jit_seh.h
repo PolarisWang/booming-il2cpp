@@ -13,7 +13,7 @@
 //      with the managed exception object in RCX
 //   2. ChaosT4RaiseException stores the exception object + frame state in
 //      TLS and calls RaiseException(kManagedSehExceptionCode)
-//   3. VEH handler fires on 0xE0000001 → finds NativeMethod via TLS-stored
+//   3. VEH handler fires on 0xE0000001 → finds JitMethod via TLS-stored
 //      return address (g_t4_throw_ret_addr)
 //   4. Walks SEH clause table → finds matching try block → writes exception
 //      object into all GPR register file slots → redirects RIP to handler
@@ -21,7 +21,7 @@
 //
 // Flow (hardware exception):
 //   1. CPU fault (AV, div-by-zero, etc.) triggers VEH
-//   2. VEH handler finds NativeMethod via ExceptionAddress
+//   2. VEH handler finds JitMethod via ExceptionAddress
 //   3. Walks SEH clause table → finds matching try block → redirects RIP
 //      to the handler code embedded in the T4-generated instruction stream
 //   4. Returns EXCEPTION_CONTINUE_EXECUTION to resume at handler
@@ -38,18 +38,18 @@
 
 #include <cstdint>
 
-namespace chaos::il2cpp::codegen {
+namespace chaos::il2cpp::jit {
 
-struct NativeMethod;
+struct JitMethod;
 
 /// Register a range of T4-generated code for VEH lookup.
-/// Called after GenerateNativeCode() succeeds during T3→T4 promotion.
+/// Called after Compile() succeeds during T3→T4 promotion.
 /// @param code_start  Entry point of the generated code (RX memory)
 /// @param code_size   Size of generated code in bytes
-/// @param nm          NativeMethod containing SEH clause table metadata
+/// @param nm          JitMethod containing SEH clause table metadata
 /// @param patch_method_token  AOT metadata token of the owning PatchMethod (for hotpatch demotion)
 void RegisterT4Code(void* code_start, uint32_t code_size,
-                    const NativeMethod* nm,
+                    const JitMethod* nm,
                     uint32_t patch_method_token = 0) noexcept;
 
 /// Unregister a T4 code range.  Called during T4 demotion.
@@ -58,11 +58,11 @@ void UnregisterT4Code(void* code_start) noexcept;
 
 /// Register the global VEH handler for T4 SEH dispatch.
 /// Must be called once at startup (from RuntimeInit).
-void RegisterT4SehHandler() noexcept;
+void RegisterJitSehHandler() noexcept;
 
-/// Find the NativeMethod covering a given code address.
+/// Find the JitMethod covering a given code address.
 /// Returns nullptr if not found.  Exported for deoptimization trampoline.
-const NativeMethod* FindT4CodeByAddress(const void* address) noexcept;
+const JitMethod* FindT4CodeByAddress(const void* address) noexcept;
 
 /// Raise a managed exception from T4-generated code.
 /// Stores the exception object in TLS, captures the T4 frame's stack pointer,
@@ -116,7 +116,7 @@ extern "C" void* T4LeaveHelper(uint32_t target_instr_idx,
                                 uint32_t current_instr_idx) noexcept;
 
 /// Demote all T4 code entries matching the given method_token.
-/// Clears their NativeMethod reference so the VEH handler stops dispatching
+/// Clears their JitMethod reference so the VEH handler stops dispatching
 /// to them.  Returns the number of entries demoted.
 /// Called by method_replacement::Register() when a hotpatch is applied.
 uint32_t DemoteT4ByToken(uint32_t method_token) noexcept;
@@ -128,9 +128,9 @@ uint32_t DemoteT4ByCallSiteToken(uint32_t method_token) noexcept;
 
 /// Free all demoted T4 code regions whose VirtualFree was deferred to the
 /// next GC safepoint.  Called from the GC event callback registered in
-/// RegisterT4SehHandler.  Exposed for testing and explicit reclamation.
+/// RegisterJitSehHandler.  Exposed for testing and explicit reclamation.
 void ReclaimDemotedCode() noexcept;
 
-}  // namespace chaos::il2cpp::codegen
+}  // namespace chaos::il2cpp::jit
 
 #endif  // CHAOS_IL2CPP_T4_SEH_HANDLER_H_

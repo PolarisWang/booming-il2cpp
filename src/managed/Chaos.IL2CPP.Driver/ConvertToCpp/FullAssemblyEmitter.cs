@@ -20,7 +20,7 @@ internal sealed class FullAssemblyEmitter
     /// </summary>
     /// <param name="closureResult">The pipeline result with all artifacts in memory.</param>
     /// <param name="outputRoot">Root output directory for generated C++ files.</param>
-    /// <param name="mode">Codegen mode (AOT or JIT).</param>
+    /// <param name="mode">Codegen mode (AOT, JIT, or Hybrid).</param>
     /// <returns>The NativeAotResult with all generated sources and artifacts.</returns>
     public NativeAotResult Emit(
         ManagedClosureResult closureResult,

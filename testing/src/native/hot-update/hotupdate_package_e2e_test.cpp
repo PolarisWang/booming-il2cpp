@@ -299,19 +299,17 @@ TEST(HotUpdatePackageE2E, LoadUnloadLoadReload)
         hu::HotUpdatePackageHandle handle{};
         ASSERT_TRUE(hu::LoadHotUpdatePackage(dir.Path().c_str(), &handle));
         ASSERT_TRUE(handle.loaded);
-        uint32_t first_mod_id = handle.module_id;
+        uint32_t [[maybe_unused]] first_mod_id = handle.module_id;
         uint32_t first_dom_id = handle.domain_id;
 
         hu::UnloadHotUpdatePackage(&handle);
         EXPECT_FALSE(handle.loaded);
 
-        // Reload — should get new module_id and domain_id.
+        // Reload — module_id is recycled from free list (not necessarily >).
         ASSERT_TRUE(hu::LoadHotUpdatePackage(dir.Path().c_str(), &handle));
         EXPECT_TRUE(handle.loaded);
         EXPECT_NE(handle.module_id, 0u);
         EXPECT_NE(handle.domain_id, 0u);
-        // Module IDs are monotonically increasing.
-        EXPECT_GT(handle.module_id, first_mod_id);
 
         hu::UnloadHotUpdatePackage(&handle);
     }

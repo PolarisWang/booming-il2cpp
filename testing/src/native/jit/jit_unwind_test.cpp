@@ -15,12 +15,12 @@
 #include "code_buffer.h"
 #include "unwind_info.h"
 
-using chaos::il2cpp::codegen::CodeBuffer;
-using chaos::il2cpp::codegen::EmitUnwindInfo;
-using chaos::il2cpp::codegen::AllocRuntimeFunction;
-using chaos::il2cpp::codegen::RuntimeFunction;
-using chaos::il2cpp::codegen::EmitDwarfCie;
-using chaos::il2cpp::codegen::EmitDwarfFde;
+using chaos::il2cpp::jit::CodeBuffer;
+using chaos::il2cpp::jit::EmitUnwindInfo;
+using chaos::il2cpp::jit::AllocRuntimeFunction;
+using chaos::il2cpp::jit::RuntimeFunction;
+using chaos::il2cpp::jit::EmitDwarfCie;
+using chaos::il2cpp::jit::EmitDwarfFde;
 
 namespace {
 

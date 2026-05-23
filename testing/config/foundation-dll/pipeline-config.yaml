@@ -1,27 +1,47 @@
 # Foundation DLL Verification Pipeline Configuration
 # Controls which stages run, resource limits, and runtime behavior.
+#
+# NOTE: This config is currently a reference document. The orchestrator
+# (family_verification_orchestrator.py) manages stages programmatically.
+# Future: load this config at orchestrator startup for dynamic control.
 
 pipeline:
   defaultMode: standard  # "standard" | "strict"
-  defaultStages: [preflight, codegen, jit_codegen, fact, fact_jit, audit]
+
+  # Full 13-stage verification pipeline
+  defaultStages:
+    - preflight
+    - codegen_aot
+    - jit_codegen
+    - fact_aot
+    - fact_jit
+    - audit
+    - asm_compare
+    - microbench
+    - benchmark
+    - hotupdate_aot
+    - hotupdate_jit_fact
+    - hotupdate_jit_benchmark
+    - hotupdate_aot_benchmark
 
   # Timeout per stage in seconds (0 = no timeout)
   timeouts:
-    codegen: 600
-    fact: 120
+    preflight: 30
+    codegen_aot: 600
+    jit_codegen: 600
+    fact_aot: 120
+    fact_jit: 120
     audit: 300
+    asm_compare: 120
+    microbench: 300
     benchmark: 600
-    hotupdate: 300
+    hotupdate_aot: 300
+    hotupdate_jit_fact: 300
+    hotupdate_jit_benchmark: 300
+    hotupdate_aot_benchmark: 300
 
-  # Skip stages not yet migrated (will be removed as migration progresses)
-  migrationSkips:
-    asm_compare: true
-    microbench: true
-    benchmark: true
-    hotupdate: true
-    hotupdate_aot_benchmark: true
-    hotupdate_jit_fact: true
-    hotupdate_jit_benchmark: true
+  # All stages are active (migration complete)
+  migrationSkips: {}
 
   # Results storage
   resultsDir: results/foundation-dll

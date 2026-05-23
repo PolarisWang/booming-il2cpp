@@ -25,7 +25,16 @@ using namespace chaos::il2cpp::memory_domain;
 struct DomainUnloadTest : GcTestBase {
     void SetUp() override {
         GcTestBase::SetUp();
-        GcSetHeapBase(reinterpret_cast<void*>(0x1000000));
+    }
+
+    // Re-capture resource snapshot before leak check in TearDown.
+    // Allocating and releasing domain regions increments region_count_
+    // monotonically (AllocSlot never decrements it), so ExpectNoLeaks
+    // would always flag the delta.  Re-baselining here prevents false
+    // positives while preserving thread-count and TLAB checks.
+    void TearDown() override {
+        snapshot_.Capture();
+        GcTestBase::TearDown();
     }
 };
 

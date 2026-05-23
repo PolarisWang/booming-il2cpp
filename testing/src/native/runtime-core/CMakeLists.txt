@@ -15,7 +15,7 @@ set(CHAOS_COMMON_TEST_LIBS
     chaos_runtime_core
     chaos_bootstrap
     chaos_interpreter
-    chaos_codegen
+    chaos_jit
     chaos_hot_update
     chaos_common
     chaos_support
@@ -51,7 +51,9 @@ add_chaos_test(type_registry_test type_registry_test.cpp
 )
 
 # T2-8a: EEClass AOT verification test (Type System / VTable Industrialization)
+# Compile eeclass.cpp from source to test against current implementation.
 add_chaos_test(eeclass_test eeclass_test.cpp
+    ../../../../src/native/runtime-core/eeclass.cpp
     LIBS ${CHAOS_COMMON_TEST_LIBS}
     LABELS "unit;core"
 )
@@ -66,6 +68,13 @@ add_chaos_test(generic_instantiation_test generic_instantiation_test.cpp metadat
 #     AllocateRuntimeToken, QueryAotMethod, concurrency, reverse-index consistency)
 add_chaos_test(instantiation_engine_test instantiation_engine_test.cpp
     metadata/metadata_test_stubs.cpp
+    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    LABELS "unit;core"
+)
+
+# M0: Metadata Interface (MetadataRegistry + LookupCallTarget + ModuleLifecycleManager)
+#     Null-safety and edge-case tests for the unified metadata resolution layer.
+add_chaos_test(metadata_interface_test metadata_interface_test.cpp
     LIBS ${CHAOS_COMMON_TEST_LIBS}
     LABELS "unit;core"
 )

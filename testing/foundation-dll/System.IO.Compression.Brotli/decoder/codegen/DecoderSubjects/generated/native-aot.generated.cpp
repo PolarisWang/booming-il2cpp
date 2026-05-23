@@ -1,4 +1,4 @@
-#include <chaos/common.h>
+﻿#include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
 #include <chaos/eh.h>
@@ -16,6 +16,7 @@
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
 #include "enum_metadata.generated.h"
+#include "enum_stubs.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -25,6 +26,11 @@ extern "C" void InterpreterEntryDirect(
 
 #pragma warning(push)
 #pragma warning(disable: 4065 4244)
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void DecoderSubjects_DecoderSubjects_Subject_0(void);
+extern "C" void DecoderSubjects_DecoderSubjects_Subject_1(void);
+extern "C" void DecoderSubjects_DecoderSubjects_Subject_2(void);
 
 namespace chaos::il2cpp::codegen::DecoderSubjects {
 
@@ -145,6 +151,37 @@ struct chaos_type_System_Private_CoreLib_System_String
 	CHAOS_IL2CPP_UINT64 string_id = 0u;  // stable StringId, 0 = not yet materialized
 };
 
+
+// ── GcTypeLayout pointer offset arrays (computed via offsetof) ──
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly, runtime_assembly_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, runtime_name_value))};
+static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo[] = {static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, declaring_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_definition_method_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, generic_argument_type_handle)), static_cast<uint16_t>(offsetof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, runtime_name_value))};
+
+extern "C" void ChaosRegisterGcLayouts() {
+	auto& registry = chaos::il2cpp::runtime_core::GcLayoutRegistry::Instance();
+
+	registry.Register(8626598445074149408ULL, sizeof(chaos_type_DecoderSubjects_DecoderSubjects), nullptr, 0);
+	registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
+	registry.Register(5474029880995115448ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly, 1);
+	registry.Register(17082367815459723707ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, 1);
+	registry.Register(4137207361503509124ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, 5);
+	registry.Register(17040031516751226236ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, 2);
+	registry.Register(10748947813473285525ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, 5);
+	registry.Register(1782325859292956794ULL, sizeof(chaos_type_System_Private_CoreLib_System_String), nullptr, 0);
+
+	// Register TypeInfoV0 address ranges for IsValidTypeInfoPointer.
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_DecoderSubjects_DecoderSubjects), reinterpret_cast<uintptr_t>(&chaos_mt_DecoderSubjects_DecoderSubjects) + sizeof(chaos_mt_DecoderSubjects_DecoderSubjects));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object) + sizeof(chaos_mt_System_Private_CoreLib_System_Object));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_Assembly));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_String), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_String) + sizeof(chaos_mt_System_Private_CoreLib_System_String));
+}
+
 CHAOS_IL2CPP_INT32 chaos_static_DecoderSubjects_DecoderSubjects___exitCode = 0;
 
 static constexpr CHAOS_IL2CPP_UINT32 kGenericTypeArgTokens[1] = { 0 };
@@ -157,6 +194,61 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
+
+
+// ── Bridge/import thunks ──
+extern "C" void* kChaosExternalRuntimeFnTable[];
+
+// Bridge/import thunk for: System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder
+extern "C" void chaos_bridge_thunk_0(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[0])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.ReadOnlySpan<System.Byte>
+extern "C" void chaos_bridge_thunk_1(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[1])();
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Span<System.Byte>
+extern "C" void chaos_bridge_thunk_2(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[2])();
+}
+
+// Bridge/import thunk for: System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Decompress:System.Buffers.OperationStatus(System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>,System.Int32&,System.Int32&)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_3(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[3])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2, chaos_fn_arg_3);
+	return result;
+}
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Buffers.OperationStatus::GetHashCode:System.Int32()
+extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_4(void)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)()>(kChaosExternalRuntimeFnTable[4])();
+	return result;
+}
+
+// Bridge/import thunk for: DecoderSubjects/DecoderSubjects::_exitCode
+extern "C" void chaos_bridge_thunk_5(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[5])();
+}
+
+// Bridge/import thunk for: System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Dispose:System.Void()
+extern "C" void chaos_bridge_thunk_6(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[6])();
+}
+
+// Bridge/import thunk for: System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::TryDecompress:System.Boolean(System.ReadOnlySpan<System.Byte>,System.Span<System.Byte>,System.Int32&)
+extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_7(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+{
+	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[7])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
+	return result;
+}
 
 extern "C" void DecoderSubjects_DecoderSubjects_Subject_0(void);
 extern "C" void DecoderSubjects_DecoderSubjects_Subject_1(void);
@@ -257,11 +349,18 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 		/* .generic_param_constraint_data= */ nullptr,
 		/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
 		/* .type_count        = */ 2u,
-	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 — deferred
+	/* .custom_attribute_blob       = */ nullptr,  // Tier 1 -- deferred
 	/* .custom_attribute_offset     = */ nullptr,
 	/* .custom_attribute_entity_count = */ 0u,
 	/* .custom_attribute_materializer = */ nullptr,
-
+	/* .custom_attribute_method_offset   = */ nullptr,
+	/* .custom_attribute_field_offset    = */ nullptr,
+	/* .custom_attribute_property_offset = */ nullptr,
+	/* .custom_attribute_param_offset    = */ nullptr,
+	/* .custom_attribute_method_count    = */ 0u,
+	/* .custom_attribute_field_count     = */ 0u,
+	/* .custom_attribute_property_count  = */ 0u,
+	/* .custom_attribute_param_count   = */ 0u,
 		/* .abi_manifest      = */ s_abi_manifest,
 	};
 	static const CHAOS_IL2CPP_UINT32 s_native_aot_module_id =
@@ -288,9 +387,9 @@ static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[3] = {
 
 // Dispatch table (function pointers)
 static HotpatchEntryV0 s_hotpatch_entries[3] = {
-	{ reinterpret_cast<void*>(&DecoderSubjects_DecoderSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // DecoderSubjects::Subject_0
-	{ reinterpret_cast<void*>(&DecoderSubjects_DecoderSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // DecoderSubjects::Subject_1
-	{ reinterpret_cast<void*>(&DecoderSubjects_DecoderSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchActive },  // DecoderSubjects::Subject_2
+	{ reinterpret_cast<void*>(&DecoderSubjects_DecoderSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // DecoderSubjects::Subject_0
+	{ reinterpret_cast<void*>(&DecoderSubjects_DecoderSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // DecoderSubjects::Subject_1
+	{ reinterpret_cast<void*>(&DecoderSubjects_DecoderSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // DecoderSubjects::Subject_2
 };
 
 // Module hotpatch bundle
@@ -459,7 +558,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[17];
+		CHAOS_IL2CPP_UINT32 slots[15];
 	} entry0;
 	/* ── Entry 1: DecoderSubjects_DecoderSubjects_Subject_1 ── */
 	struct {
@@ -480,11 +579,11 @@ static const struct {
 } kChaosGcSlotMapsSection = {
 	/* entry0 = DecoderSubjects_DecoderSubjects_Subject_0 */
 	.entry0 = {
-		/* entry_total_size = 88 */ 88u,
+		/* entry_total_size = 80 */ 80u,
 		/* code_address */ reinterpret_cast<const void*>(&DecoderSubjects_DecoderSubjects_Subject_0),
-		/* frame_size = 136 */ 136u,
-		/* num_gc_slots = 17 */ 17u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u, 72u, 80u, 88u, 96u, 104u, 112u, 120u, 128u }
+		/* frame_size = 120 */ 120u,
+		/* num_gc_slots = 15 */ 15u,
+		/* slots */ { 0u, 8u, 16u, 24u, 32u, 40u, 48u, 56u, 64u, 72u, 80u, 88u, 96u, 104u, 112u }
 	},
 	/* entry1 = DecoderSubjects_DecoderSubjects_Subject_1 */
 	.entry1 = {
@@ -507,7 +606,7 @@ static const struct {
 #pragma pack(pop)
 #endif
 
-static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 172u;
+static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 164u;
 
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
@@ -572,24 +671,24 @@ extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options
 // matching during IR lowering of patched methods.
 
 static constexpr ReflectionQueryFieldDescriptor kReflFields_DecoderSubjects_DecoderSubjects[1] = {
-	{ 0u, "DecoderSubjects/DecoderSubjects::_exitCode", "_exitCode", "System.Int32", 0LL },
+	{ 0x04000001u, "DecoderSubjects/DecoderSubjects::_exitCode", "_exitCode", "System.Int32", 0LL, 3u },
 };
 static constexpr ReflectionQueryMethodDescriptor kReflMethods_DecoderSubjects_DecoderSubjects[3] = {
-	{ 0u, "DecoderSubjects/DecoderSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u },
-	{ 0u, "DecoderSubjects/DecoderSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u },
-	{ 0u, "DecoderSubjects/DecoderSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u },
+	{ 0x00000003u, "DecoderSubjects/DecoderSubjects::Subject_0:System.Void()", "Subject_0", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000004u, "DecoderSubjects/DecoderSubjects::Subject_1:System.Void()", "Subject_1", "System.Void", 0, nullptr, 0u, nullptr, 0u },
+	{ 0x00000005u, "DecoderSubjects/DecoderSubjects::Subject_2:System.Void()", "Subject_2", "System.Void", 0, nullptr, 0u, nullptr, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor kReflTypes[1] = {
-	{ 0u, "DecoderSubjects/DecoderSubjects", "DecoderSubjects/DecoderSubjects", "", "DecoderSubjects", "DecoderSubjects", nullptr, kReflFields_DecoderSubjects_DecoderSubjects, 1u, nullptr, 0u,
-	kReflMethods_DecoderSubjects_DecoderSubjects, 3u },
+	{ 0x00000001u, "DecoderSubjects/DecoderSubjects", "DecoderSubjects/DecoderSubjects", "", "DecoderSubjects", "DecoderSubjects", nullptr, kReflFields_DecoderSubjects_DecoderSubjects, 1u, nullptr, 0u,
+nullptr, 0u,    kReflMethods_DecoderSubjects_DecoderSubjects, 3u, nullptr, 0u, 0u },
 };
 
 static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static const ReflectionQueryImageDescriptor kReflImage = { "DecoderSubjects", kReflTypePtrs, 1u };
+static const ReflectionQueryImageDescriptor kReflImage = { "DecoderSubjects", kReflTypePtrs, 1u, 1, 0, 0, 0 };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -632,7 +731,7 @@ struct ChaosGenericRegistrationInit {
 extern "C" void DecoderSubjects_DecoderSubjects_Subject_0(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 9) chaos_locals{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 7) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
@@ -662,8 +761,14 @@ extern "C" void DecoderSubjects_DecoderSubjects_Subject_0(void)
 	CHAOS_IL2CPP_INTPTR _s26{};
 	CHAOS_IL2CPP_INTPTR _s27{};
 	CHAOS_IL2CPP_INTPTR _s28{};
+	CHAOS_IL2CPP_INTPTR _s29{};
+	CHAOS_IL2CPP_INTPTR _s30{};
 
 
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	chaos_locals[0] = _s0;
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+	chaos_locals[1] = _s0;
 	CHAOS_EH_TRY
 			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[3]);
 			_s1 = _s0;
@@ -707,8 +812,8 @@ extern "C" void DecoderSubjects_DecoderSubjects_Subject_0(void)
 				}
 			}
 			_s2 = chaos_locals[5];
-			_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
-			_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[2]);
+			_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+			_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
 			{
 				const auto chaos_arg_3 = _s4;
 				const auto chaos_arg_2 = _s3;
@@ -765,8 +870,8 @@ extern "C" void DecoderSubjects_DecoderSubjects_Subject_0(void)
 				}
 			}
 			_s5 = chaos_locals[5];
-			_s6 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[7]);
-			_s7 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[8]);
+			_s6 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
+			_s7 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
 			{
 				const auto chaos_arg_3 = _s7;
 				const auto chaos_arg_2 = _s6;
@@ -784,8 +889,8 @@ extern "C" void DecoderSubjects_DecoderSubjects_Subject_0(void)
 			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
 			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s4) == static_cast<CHAOS_IL2CPP_INTPTR>(_s5) ? 1 : 0);
-			chaos_locals[0] = _s4;
-			_s4 = chaos_locals[0];
+			chaos_locals[2] = _s4;
+			_s4 = chaos_locals[2];
 			// brfalse (structured EH branch)
 			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -1005,24 +1110,4 @@ extern "C" void DecoderSubjects_DecoderSubjects_Subject_2(void)
 // extern "C" definition for link-time visibility from runtime-entry.cpp
 extern "C" const int kAotMethodCount = 3;
 
-// ── JIT Method Entry Table ───────────────────────────────────────────
-// Auto-generated by chaos-il2cpp codegen for --mode jit.
-#include <cstdint>
-#include "jit_registration.h"
-
-static const char kMethodJson_0[] = "{\"methodId\":\"decoder-subjects.decoder-subjects.subject-0\",\"subjectId\":\"DecoderSubjects/DecoderSubjects::Subject_0:System.Void()\",\"signature\":\"System.Void DecoderSubjects::Subject_0()\",\"identity\":{\"assemblyName\":\"DecoderSubjects\",\"declaringTypeSubjectId\":\"DecoderSubjects/DecoderSubjects\",\"definitionSubjectId\":\"DecoderSubjects/DecoderSubjects::Subject_0:System.Void()\",\"subjectId\":\"DecoderSubjects/DecoderSubjects::Subject_0:System.Void()\",\"methodId\":\"decoder-subjects.decoder-subjects.subject-0\",\"signature\":\"System.Void DecoderSubjects::Subject_0()\"},\"nativeSymbol\":\"DecoderSubjects_DecoderSubjects_Subject_0\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":9,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":125,\"handlerOffset\":126,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldloca\",\"opCode\":76,\"operand\":3,\"ilOffset\":2,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"dup\",\"opCode\":54,\"ilOffset\":4,\"isPreserveSig\":false},{\"op\":\"initobj\",\"opCode\":71,\"operand\":\"System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder\",\"ilOffset\":5,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"System.IO.Compression.Brotli\",\"subjectKind\":\"type\",\"subjectId\":\"System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.IO.Compression.Brotli\",\"subjectId\":\"System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":14,\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":4,\"ilOffset\":11,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"initobj\",\"opCode\":71,\"operand\":\"System.Private.CoreLib/System.ReadOnlySpan\\u003CSystem.Byte\\u003E\",\"ilOffset\":13,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.ReadOnlySpan\\u003CSystem.Byte\\u003E\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.ReadOnlySpan\\u003CSystem.Byte\\u003E\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":14,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":4,\"ilOffset\":19,\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":5,\"ilOffset\":21,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"initobj\",\"opCode\":71,\"operand\":\"System.Private.CoreLib/System.Span\\u003CSystem.Byte\\u003E\",\"ilOffset\":23,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Span\\u003CSystem.Byte\\u003E\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Span\\u003CSystem.Byte\\u003E\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":14,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":5,\"ilOffset\":29,\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":1,\"ilOffset\":31,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":2,\"ilOffset\":33,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":35,\"resultType\":\"System.Buffers.OperationStatus\",\"callee\":\"System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Decompress:System.Buffers.OperationStatus(System.ReadOnlySpan\\u003CSystem.Byte\\u003E,System.Span\\u003CSystem.Byte\\u003E,System.Int32\\u0026,System.Int32\\u0026)\",\"reference\":{\"assemblyName\":\"System.IO.Compression.Brotli\",\"subjectKind\":\"method\",\"subjectId\":\"System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Decompress:System.Buffers.OperationStatus(System.ReadOnlySpan\\u003CSystem.Byte\\u003E,System.Span\\u003CSystem.Byte\\u003E,System.Int32\\u0026,System.Int32\\u0026)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.IO.Compression.Brotli\",\"subjectId\":\"System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Decompress:System.Buffers.OperationStatus(System.ReadOnlySpan\\u003CSystem.Byte\\u003E,System.Span\\u003CSystem.Byte\\u003E,System.Int32\\u0026,System.Int32\\u0026)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":6,\"ilOffset\":40,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":6,\"ilOffset\":42,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":50,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Buffers.OperationStatus::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":1,\"constrainedTypeSubjectId\":\"System.Private.CoreLib/System.Buffers.OperationStatus\",\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":3,\"ilOffset\":55,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"dup\",\"opCode\":54,\"ilOffset\":57,\"isPreserveSig\":false},{\"op\":\"initobj\",\"opCode\":71,\"operand\":\"System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder\",\"ilOffset\":58,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"System.IO.Compression.Brotli\",\"subjectKind\":\"type\",\"subjectId\":\"System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.IO.Compression.Brotli\",\"subjectId\":\"System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":14,\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":4,\"ilOffset\":64,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"initobj\",\"opCode\":71,\"operand\":\"System.Private.CoreLib/System.ReadOnlySpan\\u003CSystem.Byte\\u003E\",\"ilOffset\":66,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.ReadOnlySpan\\u003CSystem.Byte\\u003E\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.ReadOnlySpan\\u003CSystem.Byte\\u003E\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":14,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":4,\"ilOffset\":72,\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":5,\"ilOffset\":74,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"initobj\",\"opCode\":71,\"operand\":\"System.Private.CoreLib/System.Span\\u003CSystem.Byte\\u003E\",\"ilOffset\":76,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Span\\u003CSystem.Byte\\u003E\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Span\\u003CSystem.Byte\\u003E\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":14,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":5,\"ilOffset\":82,\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":7,\"ilOffset\":84,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":8,\"ilOffset\":86,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":88,\"resultType\":\"System.Buffers.OperationStatus\",\"callee\":\"System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Decompress:System.Buffers.OperationStatus(System.ReadOnlySpan\\u003CSystem.Byte\\u003E,System.Span\\u003CSystem.Byte\\u003E,System.Int32\\u0026,System.Int32\\u0026)\",\"reference\":{\"assemblyName\":\"System.IO.Compression.Brotli\",\"subjectKind\":\"method\",\"subjectId\":\"System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Decompress:System.Buffers.OperationStatus(System.ReadOnlySpan\\u003CSystem.Byte\\u003E,System.Span\\u003CSystem.Byte\\u003E,System.Int32\\u0026,System.Int32\\u0026)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.IO.Compression.Brotli\",\"subjectId\":\"System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Decompress:System.Buffers.OperationStatus(System.ReadOnlySpan\\u003CSystem.Byte\\u003E,System.Span\\u003CSystem.Byte\\u003E,System.Int32\\u0026,System.Int32\\u0026)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":6,\"ilOffset\":93,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":6,\"ilOffset\":95,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":103,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Buffers.OperationStatus::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":1,\"constrainedTypeSubjectId\":\"System.Private.CoreLib/System.Buffers.OperationStatus\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":108,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":110,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":111,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":113,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":114,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":123,\"ilOffset\":115,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":117,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"DecoderSubjects/DecoderSubjects::_exitCode\",\"ilOffset\":118,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"DecoderSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"DecoderSubjects/DecoderSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"DecoderSubjects\",\"subjectId\":\"DecoderSubjects/DecoderSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"DecoderSubjects/DecoderSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":137,\"ilOffset\":124,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":126,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":128,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"DecoderSubjects/DecoderSubjects::_exitCode\",\"ilOffset\":129,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"DecoderSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"DecoderSubjects/DecoderSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"DecoderSubjects\",\"subjectId\":\"DecoderSubjects/DecoderSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"DecoderSubjects/DecoderSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":137,\"ilOffset\":135,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":137,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"DecoderSubjects\"}";
-static const char kMethodJson_1[] = "{\"methodId\":\"decoder-subjects.decoder-subjects.subject-1\",\"subjectId\":\"DecoderSubjects/DecoderSubjects::Subject_1:System.Void()\",\"signature\":\"System.Void DecoderSubjects::Subject_1()\",\"identity\":{\"assemblyName\":\"DecoderSubjects\",\"declaringTypeSubjectId\":\"DecoderSubjects/DecoderSubjects\",\"definitionSubjectId\":\"DecoderSubjects/DecoderSubjects::Subject_1:System.Void()\",\"subjectId\":\"DecoderSubjects/DecoderSubjects::Subject_1:System.Void()\",\"methodId\":\"decoder-subjects.decoder-subjects.subject-1\",\"signature\":\"System.Void DecoderSubjects::Subject_1()\"},\"nativeSymbol\":\"DecoderSubjects_DecoderSubjects_Subject_1\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":19,\"handlerOffset\":20,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldloca\",\"opCode\":76,\"operand\":0,\"ilOffset\":2,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"dup\",\"opCode\":54,\"ilOffset\":4,\"isPreserveSig\":false},{\"op\":\"initobj\",\"opCode\":71,\"operand\":\"System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder\",\"ilOffset\":5,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"System.IO.Compression.Brotli\",\"subjectKind\":\"type\",\"subjectId\":\"System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.IO.Compression.Brotli\",\"subjectId\":\"System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":14,\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":11,\"resultType\":\"System.Void\",\"callee\":\"System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Dispose:System.Void()\",\"reference\":{\"assemblyName\":\"System.IO.Compression.Brotli\",\"subjectKind\":\"method\",\"subjectId\":\"System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Dispose:System.Void()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.IO.Compression.Brotli\",\"subjectId\":\"System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Dispose:System.Void()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":31,\"ilOffset\":18,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":20,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":22,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"DecoderSubjects/DecoderSubjects::_exitCode\",\"ilOffset\":23,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"DecoderSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"DecoderSubjects/DecoderSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"DecoderSubjects\",\"subjectId\":\"DecoderSubjects/DecoderSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"DecoderSubjects/DecoderSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":31,\"ilOffset\":29,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":31,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"DecoderSubjects\"}";
-static const char kMethodJson_2[] = "{\"methodId\":\"decoder-subjects.decoder-subjects.subject-2\",\"subjectId\":\"DecoderSubjects/DecoderSubjects::Subject_2:System.Void()\",\"signature\":\"System.Void DecoderSubjects::Subject_2()\",\"identity\":{\"assemblyName\":\"DecoderSubjects\",\"declaringTypeSubjectId\":\"DecoderSubjects/DecoderSubjects\",\"definitionSubjectId\":\"DecoderSubjects/DecoderSubjects::Subject_2:System.Void()\",\"subjectId\":\"DecoderSubjects/DecoderSubjects::Subject_2:System.Void()\",\"methodId\":\"decoder-subjects.decoder-subjects.subject-2\",\"signature\":\"System.Void DecoderSubjects::Subject_2()\"},\"nativeSymbol\":\"DecoderSubjects_DecoderSubjects_Subject_2\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":4,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":81,\"handlerOffset\":82,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldloca\",\"opCode\":76,\"operand\":2,\"ilOffset\":2,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"initobj\",\"opCode\":71,\"operand\":\"System.Private.CoreLib/System.ReadOnlySpan\\u003CSystem.Byte\\u003E\",\"ilOffset\":4,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.ReadOnlySpan\\u003CSystem.Byte\\u003E\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.ReadOnlySpan\\u003CSystem.Byte\\u003E\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":14,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":2,\"ilOffset\":10,\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":3,\"ilOffset\":11,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"initobj\",\"opCode\":71,\"operand\":\"System.Private.CoreLib/System.Span\\u003CSystem.Byte\\u003E\",\"ilOffset\":13,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Span\\u003CSystem.Byte\\u003E\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Span\\u003CSystem.Byte\\u003E\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":14,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":3,\"ilOffset\":19,\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":1,\"ilOffset\":20,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":22,\"resultType\":\"System.Boolean\",\"callee\":\"System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::TryDecompress:System.Boolean(System.ReadOnlySpan\\u003CSystem.Byte\\u003E,System.Span\\u003CSystem.Byte\\u003E,System.Int32\\u0026)\",\"reference\":{\"assemblyName\":\"System.IO.Compression.Brotli\",\"subjectKind\":\"method\",\"subjectId\":\"System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::TryDecompress:System.Boolean(System.ReadOnlySpan\\u003CSystem.Byte\\u003E,System.Span\\u003CSystem.Byte\\u003E,System.Int32\\u0026)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.IO.Compression.Brotli\",\"subjectId\":\"System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::TryDecompress:System.Boolean(System.ReadOnlySpan\\u003CSystem.Byte\\u003E,System.Span\\u003CSystem.Byte\\u003E,System.Int32\\u0026)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":32,\"ilOffset\":27,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":29,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":33,\"ilOffset\":30,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":32,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":2,\"ilOffset\":33,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"initobj\",\"opCode\":71,\"operand\":\"System.Private.CoreLib/System.ReadOnlySpan\\u003CSystem.Byte\\u003E\",\"ilOffset\":35,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.ReadOnlySpan\\u003CSystem.Byte\\u003E\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.ReadOnlySpan\\u003CSystem.Byte\\u003E\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":14,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":2,\"ilOffset\":41,\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":3,\"ilOffset\":42,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"initobj\",\"opCode\":71,\"operand\":\"System.Private.CoreLib/System.Span\\u003CSystem.Byte\\u003E\",\"ilOffset\":44,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Span\\u003CSystem.Byte\\u003E\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Span\\u003CSystem.Byte\\u003E\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":14,\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":3,\"ilOffset\":50,\"isPreserveSig\":false},{\"op\":\"ldloca\",\"opCode\":76,\"operand\":1,\"ilOffset\":51,\"resultType\":\"System.IntPtr\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":53,\"resultType\":\"System.Boolean\",\"callee\":\"System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::TryDecompress:System.Boolean(System.ReadOnlySpan\\u003CSystem.Byte\\u003E,System.Span\\u003CSystem.Byte\\u003E,System.Int32\\u0026)\",\"reference\":{\"assemblyName\":\"System.IO.Compression.Brotli\",\"subjectKind\":\"method\",\"subjectId\":\"System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::TryDecompress:System.Boolean(System.ReadOnlySpan\\u003CSystem.Byte\\u003E,System.Span\\u003CSystem.Byte\\u003E,System.Int32\\u0026)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.IO.Compression.Brotli\",\"subjectId\":\"System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::TryDecompress:System.Boolean(System.ReadOnlySpan\\u003CSystem.Byte\\u003E,System.Span\\u003CSystem.Byte\\u003E,System.Int32\\u0026)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"brtrue\",\"opCode\":18,\"operand\":63,\"ilOffset\":58,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":60,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"br\",\"opCode\":17,\"operand\":64,\"ilOffset\":61,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":63,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":64,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":66,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":67,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":69,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":70,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":79,\"ilOffset\":71,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":73,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"DecoderSubjects/DecoderSubjects::_exitCode\",\"ilOffset\":74,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"DecoderSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"DecoderSubjects/DecoderSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"DecoderSubjects\",\"subjectId\":\"DecoderSubjects/DecoderSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"DecoderSubjects/DecoderSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":93,\"ilOffset\":80,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":82,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":84,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"DecoderSubjects/DecoderSubjects::_exitCode\",\"ilOffset\":85,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"DecoderSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"DecoderSubjects/DecoderSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"DecoderSubjects\",\"subjectId\":\"DecoderSubjects/DecoderSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"DecoderSubjects/DecoderSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":93,\"ilOffset\":91,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":93,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"DecoderSubjects\"}";
-
-extern "C" const JitMethodEntry kChaosJitMethodEntries[3] =
-{
-    { kMethodJson_0, 12880u, 0x00000003u, 0u },
-    { kMethodJson_1, 3776u, 0x00000004u, 0u },
-    { kMethodJson_2, 9799u, 0x00000005u, 0u }
-};
-
-extern "C" const uint32_t kChaosJitMethodEntryCount = 3u;
-
-extern "C" void ChaosJitRegisterAll() {
-    RegisterJitMethods(kChaosJitMethodEntries, kChaosJitMethodEntryCount);
-}
+extern "C" void ChaosJitRegisterAll() {}

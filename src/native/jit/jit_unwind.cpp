@@ -1,10 +1,10 @@
-#include "unwind_info.h"
+#include "jit_unwind.h"
 #include "code_buffer.h"
 
 #include <cstddef>
 #include <cstdlib>
 
-namespace chaos::il2cpp::codegen {
+namespace chaos::il2cpp::jit {
 
 // ── Cross-platform layout assertions ──────────────────────────────────
 // These static_asserts verify that the compiler's struct layout matches
@@ -264,4 +264,4 @@ uint32_t EmitDwarfFde(CodeBuffer& buf, uint32_t cie_offset,
 
 #endif  // __linux__
 
-}  // namespace chaos::il2cpp::codegen
+}  // namespace chaos::il2cpp::jit

@@ -5,7 +5,7 @@ on:
     paths:
       - 'src/managed/Chaos.IL2CPP.Generator/**'
       - 'src/managed/Chaos.IL2CPP.MetadataWriter/**'
-      - 'src/native/codegen/**'
+      - 'src/native/jit/**'
       - 'src/native/interpreter/**'
       - 'src/native/common/**'
       - 'testing/snapshots/**'
@@ -18,7 +18,7 @@ on:
     paths:
       - 'src/managed/Chaos.IL2CPP.Generator/**'
       - 'src/managed/Chaos.IL2CPP.MetadataWriter/**'
-      - 'src/native/codegen/**'
+      - 'src/native/jit/**'
       - 'src/native/interpreter/**'
       - 'src/native/common/**'
       - 'testing/snapshots/**'
@@ -28,7 +28,7 @@ on:
       - 'contracts/native/v0/**'
 
 jobs:
-  codegen-regression:
+  jit-regression:
     runs-on: windows-latest
 
     steps:
@@ -96,7 +96,7 @@ jobs:
       - name: Upload Coverage Report
         uses: actions/upload-artifact@v4
         with:
-          name: codegen-coverage-report
+          name: jit-coverage-report
           path: coverage-results/
 
       - name: Configure CMake (windows-x64-reference)
@@ -117,7 +117,7 @@ jobs:
         run: cmake --build testing/artifacts/run/native-test-build --config RelWithDebInfo
 
       - name: Run Codegen Native Tests
-        run: ctest --test-dir testing/artifacts/run/native-test-build -R "test_codegen_native|test_codegen_abi|test_codegen_il_smoke" --output-on-failure -V
+        run: ctest --test-dir testing/artifacts/run/native-test-build -R "test_jit_native|test_jit_abi|test_jit_il_smoke|test_jit_gc_slot_map|test_jit_osr|test_jit_seh|test_jit_unwind|test_jit_binary_ir|test_jit_mode|test_jit_hybrid_mode|test_jit_pgo" --output-on-failure -V
 
       - name: Run Common Native Tests
         run: ctest --test-dir testing/artifacts/run/native-test-build -R "test_common" --output-on-failure

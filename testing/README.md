@@ -26,7 +26,7 @@ foundation-dll/
 │   ├── models.py               # 数据模型
 │   ├── orchestrator.py         # 管线编排
 │   ├── preflight.py            # Stage 0: 合约校验
-│   ├── codegen_runner.py       # Stage 1-2: Codegen
+│   ├── jit_runner.py       # Stage 1-2: Codegen
 │   ├── fact_verifier.py        # Stage 3-4: Fact 验证
 │   ├── audit_runner.py         # Stage 5: 审计
 │   └── ...                      # 其他 stage runner
@@ -91,5 +91,5 @@ bash scripts/run-all.sh
 ## 添加测试
 
 - **IL Parsing**: 在 `data/il/` 下添加 JSON 指令描述，在相应 test class 中添加 Fact
-- **CodeGen Translation**: 在 `data/cpp-expected/` 下添加预期输出，验证 codegen 输出匹配
+- **CodeGen Translation**: 在 `data/cpp-expected/` 下添加预期输出，验证 jit 输出匹配
 - **Native**: 在 `src/native/` 相应子目录下添加 `*_test.cpp`，使用 `add_chaos_test()` 注册

@@ -2,9 +2,9 @@
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-22T08:37:19",
-  "duration_ms": 69553,
-  "overall_status": "passed",
+  "timestamp": "2026-05-23T22:39:52",
+  "duration_ms": 92691,
+  "overall_status": "failed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -21,14 +21,17 @@
     },
     "codegen": {
       "stage": "codegen",
-      "status": "passed",
-      "summary": "Entrypoint built and IL2CPP compile OK",
+      "status": "failed",
+      "summary": "entry.exe build failed",
       "details": {
-        "methodCount": 18,
-        "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\convert-char\\managed\\subjects\\build-output\\ConvertCharSubjects.dll"
+        "steps": {
+          "build_subjects": "OK",
+          "convert_to_cpp": "OK",
+          "build_entry_exe": "FAILED"
+        }
       },
       "errors": [],
-      "duration_ms": 28315
+      "duration_ms": 29233
     },
     "jit_codegen": {
       "stage": "jit_codegen",
@@ -50,7 +53,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 368
+      "duration_ms": 32
     },
     "fact_jit": {
       "stage": "fact_jit",
@@ -65,12 +68,12 @@
         }
       },
       "errors": [],
-      "duration_ms": 28
+      "duration_ms": 27
     },
     "audit": {
       "stage": "audit",
       "status": "passed",
-      "summary": "false_passing=0, principle=CONCERN",
+      "summary": "false_passing=0, principle=CONCERN (mech_passed=True, strict_on_CONCERN=False)",
       "details": {
         "falsePassing": 0,
         "stubsFound": 0,
@@ -79,7 +82,7 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 1272
+      "duration_ms": 1547
     },
     "asm_compare": {
       "stage": "asm_compare",
@@ -114,38 +117,58 @@
         "minExpansionRatio": 0.2
       },
       "errors": [],
-      "duration_ms": 3706
+      "duration_ms": 13864
     },
     "microbench": {
       "stage": "microbench",
       "status": "passed",
-      "summary": "FramePool=2.9ns/op | FastExecute=857.3ns/op | CallVirt dispatch=869.0ns",
+      "summary": "FramePool=4.6ns/op | FastExecute=0.0ns/op | CallVirt dispatch=0.0ns",
       "details": {
         "framePool": {
-          "acquireReleaseNsPerOp": 2.9,
+          "acquireReleaseNsPerOp": 4.6,
           "batchCount": 1000,
           "framesPerBatch": 32
-        },
-        "fastExecute": {
-          "runCount": 100000,
-          "nsPerCall": 857.3
-        },
-        "callVirt": {
-          "handlerDispatchNs": 869.0,
-          "emptyStackNs": 955.9
         },
         "poolSize": 32
       },
       "errors": [],
-      "duration_ms": 202
+      "duration_ms": 64
     },
     "benchmark": {
       "stage": "benchmark",
-      "status": "skipped",
-      "summary": "All 18 non-stub methods are invalid (no managed harness)",
-      "details": {},
+      "status": "passed",
+      "summary": "avg_aot_speedup=-49.66%, avg_jit_speedup=-325020.39%, native_aot_faster=2/11, managed_faster=9",
+      "details": {
+        "averageSpeedupPercent": -49.66,
+        "averageNativeAotSpeedupPercent": -49.66,
+        "averageNativeJitSpeedupPercent": -325020.39,
+        "nativeAotFasterCount": 2,
+        "nativeJitFasterCount": 0,
+        "managedFasterCount": 9,
+        "matchedCount": 11,
+        "totalMethods": 18,
+        "invalidCount": 7,
+        "benchmarkQuality": "ok",
+        "runtimesAvailable": [
+          "net8-jit",
+          "chaos-aot",
+          "net10-jit"
+        ],
+        "runtimesUnavailable": [],
+        "multiRunReportPath": "multi-run/multi-run-report.json",
+        "chaosClassification": {
+          "chaos_faster_than_all": 6,
+          "chaos_faster_than_jit": 1,
+          "chaos_midfield": 8,
+          "chaos_slower_than_jit": 1,
+          "not_benchmarked": 2
+        },
+        "multiRuntimeSpeedup": 2.84979263165842,
+        "multiRuntimeFasterCount": 6,
+        "multiRuntimeSlowerCount": 6
+      },
       "errors": [],
-      "duration_ms": 32638
+      "duration_ms": 44431
     },
     "hotupdate": {
       "stage": "hotupdate",
@@ -159,17 +182,17 @@
         "stubMethods": 0
       },
       "errors": [],
-      "duration_ms": 28
+      "duration_ms": 26
     },
     "hotupdate_aot_benchmark": {
       "stage": "hotupdate_aot_benchmark",
       "status": "passed",
-      "summary": "avg_slowdown=9.19% (1.1x) over 18 methods (AOT patched path)",
+      "summary": "avg_slowdown=-25.76% (0.7x) over 13 methods (AOT patched path)",
       "details": {
-        "averageSlowdownPercent": 9.19,
-        "slowdownFactor": 1.0918999999999999,
+        "averageSlowdownPercent": -25.76,
+        "slowdownFactor": 0.7424,
         "threshold": 50.0,
-        "nonStubMethods": 18
+        "nonStubMethods": 13
       },
       "errors": [],
       "duration_ms": 484
@@ -189,15 +212,15 @@
     "hotupdate_jit_benchmark": {
       "stage": "hotupdate_jit_benchmark",
       "status": "passed",
-      "summary": "avg_slowdown=7.28% (1.1x) over 18 methods (JIT patched path)",
+      "summary": "avg_slowdown=5.83% (1.1x) over 13 methods (JIT patched path)",
       "details": {
-        "averageSlowdownPercent": 7.28,
-        "slowdownFactor": 1.0728,
+        "averageSlowdownPercent": 5.83,
+        "slowdownFactor": 1.0583,
         "threshold": 50.0,
-        "nonStubMethods": 18
+        "nonStubMethods": 13
       },
       "errors": [],
-      "duration_ms": 2475
+      "duration_ms": 2947
     }
   },
   "coverage": {
@@ -207,9 +230,9 @@
   },
   "dashboard": {
     "interpreter": {
-      "fastFramePoolNsPerOp": 2.9,
+      "fastFramePoolNsPerOp": 4.6,
       "fastExecuteNsPerInstr": 0,
-      "callVirtHandlerDispatchNs": 869.0,
+      "callVirtHandlerDispatchNs": 0,
       "callVirtMicHitNs": 0,
       "callVirtRawFallbackNs": 0,
       "poolSize": 32
@@ -220,9 +243,9 @@
       "failedCount": 0,
       "overallIrExpansionRatio": 0.42,
       "averageExpansionRatio": 0.42,
-      "maxExpansionRatio": 0.5,
+      "maxExpansionRatio": 0.45,
       "jitInstructionAvg": 44.0,
-      "aotInstructionAvg": 18.7,
+      "aotInstructionAvg": 18.6,
       "totalExternalRuntimeCalls": 0,
       "totalVirtualDispatches": 0,
       "totalBoxingOps": 0,
@@ -230,7 +253,16 @@
         "external_runtime_call": 38
       }
     },
-    "performance": {},
+    "performance": {
+      "averageSpeedupPercent": -49.66,
+      "nativeFasterCount": 2,
+      "managedFasterCount": 9,
+      "matchedCount": 11,
+      "totalMethods": 18,
+      "invalidCount": 7,
+      "averageNativeJitSpeedupPercent": -325020.39,
+      "nativeJitFasterCount": 0
+    },
     "hotupdate": {
       "aotFunctional": {
         "passedMethods": 18,
@@ -238,9 +270,9 @@
         "totalMethods": 18
       },
       "aotOverhead": {
-        "averageSlowdownPercent": 9.19,
-        "slowdownFactor": 1.0918999999999999,
-        "nonStubMethods": 18
+        "averageSlowdownPercent": -25.76,
+        "slowdownFactor": 0.7424,
+        "nonStubMethods": 13
       },
       "jitFunctional": {
         "passedMethods": 20,
@@ -248,21 +280,21 @@
         "totalMethods": 20
       },
       "jitOverhead": {
-        "averageSlowdownPercent": 7.28,
-        "slowdownFactor": 1.0728,
-        "nonStubMethods": 18
+        "averageSlowdownPercent": 5.83,
+        "slowdownFactor": 1.0583,
+        "nonStubMethods": 13
       }
     },
     "keyRatios": {
-      "nativeFasterRatio": 0,
+      "nativeFasterRatio": 0.18,
       "irExpansionRatio": 0.42,
-      "interpreterSlowdownFactor": 1.0918999999999999,
+      "interpreterSlowdownFactor": 0.7424,
       "asmPassRate": 100.0
     }
   },
   "regression": {
     "benchmark": {
-      "status": "matched",
+      "status": "regressed",
       "baselineMetrics": {
         "totalMethods": 18,
         "matchedCount": 0,
@@ -272,13 +304,15 @@
       },
       "currentMetrics": {
         "totalMethods": 18,
-        "matchedCount": 0,
+        "matchedCount": 11,
         "nativeFasterCount": 0,
-        "managedFasterCount": 0,
-        "averageSpeedupPercent": 0.0
+        "managedFasterCount": 9,
+        "averageSpeedupPercent": -49.66
       }
     },
-    "hasRegression": false,
-    "regressions": []
+    "hasRegression": true,
+    "regressions": [
+      "Managed-faster ratio 82% exceeds native-faster ratio 0% (9/11 methods)"
+    ]
   }
 }

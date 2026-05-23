@@ -51,8 +51,20 @@ struct OptimizationEntry {
     PatchMethod* method = nullptr;
 };
 
+// ── JitRecompilationEntry ─────────────────────────────────────────────────
+// Single entry in the JIT background recompilation queue.
+// When a Tier 0 method's PGO call count exceeds kPgoTier1Threshold, it is
+// enqueued for background Tier 1 recompilation via the TierManager thread.
+struct JitRecompilationEntry {
+    void* precode;      // JitPrecode* or HybridPrecode* (type determined by is_hybrid)
+    bool  is_hybrid;    // true = HybridPrecode, false = JitPrecode
+};
+
 // Queue depth limit to prevent unbounded memory growth.
 static constexpr uint32_t kMaxOptimizationQueueSize = 1024;
+
+// JIT recompilation queue depth limit.
+static constexpr uint32_t kMaxJitRecompQueueSize = 256;
 
 // Memory budget for T2/T3 optimized RegisterMethod IR.
 static constexpr uint32_t kTierMemoryBudgetMB = 64;
@@ -95,6 +107,15 @@ public:
     // The background thread must be running (StartBackgroundThread).
     bool EnqueueOptimization(PatchMethod* method) noexcept;
 
+    // ── JIT recompilation queue ───────────────────────────────────────────
+    // Enqueue a Tier 0 method for background Tier 1 recompilation.
+    // Called from JitStubDispatchImpl / HybridStubDispatchImpl when
+    // enable_pgo is true and pgo_call_count exceeds kPgoTier1Threshold.
+    // @param precode   Pointer to JitPrecode* (is_hybrid=false) or HybridPrecode*
+    // @param is_hybrid True if precode is a HybridPrecode, false for JitPrecode
+    // @return true if enqueued, false if queue is full
+    bool EnqueueJitRecompilation(void* precode, bool is_hybrid) noexcept;
+
     // Start/stop the background optimization thread.
     void StartBackgroundThread() noexcept;
     void StopBackgroundThread() noexcept;
@@ -134,6 +155,7 @@ private:
     std::thread                background_thread_;
     std::atomic<bool>          running_{false};
     CHAOS_IL2CPP_VECTOR(OptimizationEntry) queue_;
+    CHAOS_IL2CPP_VECTOR(JitRecompilationEntry) jit_queue_;
     std::condition_variable    cv_;
 };
 

@@ -10,7 +10,7 @@
   #include <unistd.h>
 #endif
 
-namespace chaos::il2cpp::codegen {
+namespace chaos::il2cpp::jit {
 
 CodeBuffer::CodeBuffer() noexcept {
     AllocPlatform(kCodeBufferInitSize);
@@ -173,4 +173,4 @@ bool CodeBuffer::ProtectPlatform(bool executable) noexcept {
 #endif
 }
 
-}  // namespace chaos::il2cpp::codegen
+}  // namespace chaos::il2cpp::jit

@@ -10,7 +10,7 @@ set(CHAOS_FULL_LIBS
     chaos_runtime_core
     chaos_bootstrap
     chaos_interpreter
-    chaos_codegen
+    chaos_jit
     chaos_hot_update
     chaos_common
     chaos_support
@@ -22,7 +22,7 @@ set(CHAOS_CORE_LIBS
     chaos_runtime_core
     chaos_bootstrap
     chaos_interpreter
-    chaos_codegen
+    chaos_jit
     chaos_hot_update
     chaos_common
     chaos_support

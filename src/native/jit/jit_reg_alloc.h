@@ -24,7 +24,7 @@
 #include <cstdint>
 #include <cstring>
 
-namespace chaos::il2cpp::codegen {
+namespace chaos::il2cpp::jit {
 
 // ── Portable bit manipulation helpers (MSVC/GCC/Clang) ─────────────────────
 namespace detail {
@@ -650,6 +650,6 @@ inline GraphColoringResult AllocateRegistersGraphColoring(
     return result;
 }
 
-}  // namespace chaos::il2cpp::codegen
+}  // namespace chaos::il2cpp::jit
 
 #endif  // CHAOS_IL2CPP_CODEGEN_REG_ALLOC_GRAPH_COLORING_H_

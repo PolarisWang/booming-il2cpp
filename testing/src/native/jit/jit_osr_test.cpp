@@ -7,8 +7,8 @@
 // When called directly from test code (not from within registered T4 code),
 // it returns nullptr — this validates the null-guard path.
 //
-// IMPORTANT: All NativeMethod objects are heap-allocated to avoid the real
-// ~NativeMethod() destructor (in chaos_codegen.lib) from freeing stack
+// IMPORTANT: All JitMethod objects are heap-allocated to avoid the real
+// ~JitMethod() destructor (in chaos_codegen.lib) from freeing stack
 // pointers via CHAOS_IL2CPP_FREE.
 
 #include <gtest/gtest.h>
@@ -16,34 +16,34 @@
 #include <cstdint>
 #include <cstring>
 
-#include "codegen_helpers.h"
-#include "native_method.h"
-#include "t4_seh_handler.h"
+#include "jit_helpers.h"
+#include "jit_method.h"
+#include "jit_seh.h"
 
 // OsrResolveLoopHeader is extern "C" — declare it here for direct calls.
 extern "C" void* OsrResolveLoopHeader() noexcept;
 
-using chaos::il2cpp::codegen::t_deopt_state;
-using chaos::il2cpp::codegen::DeoptTlsState;
-using chaos::il2cpp::codegen::RegisterT4Code;
-using chaos::il2cpp::codegen::UnregisterT4Code;
-using chaos::il2cpp::codegen::FindT4CodeByAddress;
-using chaos::il2cpp::codegen::NativeMethod;
+using chaos::il2cpp::jit::t_deopt_state;
+using chaos::il2cpp::jit::DeoptTlsState;
+using chaos::il2cpp::jit::RegisterT4Code;
+using chaos::il2cpp::jit::UnregisterT4Code;
+using chaos::il2cpp::jit::FindT4CodeByAddress;
+using chaos::il2cpp::jit::JitMethod;
 
 namespace {
 
-// ── Heap-allocated NativeMethod guard ─────────────────────────────────────
-// Creates a zero-initialized NativeMethod on the heap, registers with
+// ── Heap-allocated JitMethod guard ─────────────────────────────────────
+// Creates a zero-initialized JitMethod on the heap, registers with
 // RegisterT4Code.  On destruction, unregisters and clears all pointer fields
-// so ~NativeMethod() won't free stack/heap pointers twice.
+// so ~JitMethod() won't free stack/heap pointers twice.
 class NativeMethodGuard {
 public:
     NativeMethodGuard(void* code, uint32_t code_size,
                       uint32_t* instr_offsets = nullptr,
                       uint32_t instr_count = 0)
-        : nm_(new NativeMethod())
+        : nm_(new JitMethod())
         , code_(code) {
-        std::memset(nm_, 0, sizeof(NativeMethod));
+        std::memset(nm_, 0, sizeof(JitMethod));
         nm_->code = code;
         nm_->code_size = code_size;
         nm_->instr_offsets = instr_offsets;
@@ -51,16 +51,16 @@ public:
     }
     ~NativeMethodGuard() {
         UnregisterT4Code(code_);
-        // Clear all heap pointers so ~NativeMethod() doesn't free them.
-        std::memset(nm_, 0, sizeof(NativeMethod));
+        // Clear all heap pointers so ~JitMethod() doesn't free them.
+        std::memset(nm_, 0, sizeof(JitMethod));
         delete nm_;
     }
-    NativeMethod* get() { return nm_; }
+    JitMethod* get() { return nm_; }
     void register_t4(uint32_t token = 0) {
         RegisterT4Code(code_, nm_->code_size, nm_, token);
     }
 private:
-    NativeMethod* nm_;
+    JitMethod* nm_;
     void* code_;
 };
 
@@ -91,7 +91,7 @@ TEST(CodegenOsr, DeoptTlsStateSetAndClear) {
 }
 
 TEST(CodegenOsr, RegisterThenUnregisterEntry) {
-    // Stack-allocate code (NativeMethod is heap-allocated via guard).
+    // Stack-allocate code (JitMethod is heap-allocated via guard).
     uint8_t fake_code[128] = {};
     NativeMethodGuard nmg(fake_code, sizeof(fake_code));
 

@@ -13,7 +13,8 @@
       "subjectId": "DecoderSubjects/DecoderSubjects",
       "name": "DecoderSubjects",
       "displayName": "DecoderSubjects",
-      "definitionSubjectId": "DecoderSubjects/DecoderSubjects"
+      "definitionSubjectId": "DecoderSubjects/DecoderSubjects",
+      "metadataToken": 33554434
     },
     {
       "registrationKind": "field",
@@ -33,7 +34,8 @@
       "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663297
     },
     {
       "registrationKind": "method",
@@ -44,7 +46,8 @@
       "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663298
     },
     {
       "registrationKind": "method",
@@ -55,7 +58,8 @@
       "declaringTypeSubjectId": "DecoderSubjects/DecoderSubjects",
       "memberType": "System.Void",
       "parameterCount": 0,
-      "isImported": false
+      "isImported": false,
+      "metadataToken": 100663299
     }
   ]
 }

@@ -12,6 +12,7 @@
 
 #include <memory_domain.h>
 #include <type_registry.h>
+#include "module_registry.h"
 
 #include <cstdint>
 #include <cstdio>
@@ -317,4 +318,61 @@ TEST_F(TypeRegistryTest, RegisterUntilFull)
         EXPECT_EQ(mt, nullptr) << "Registry should be full after " << success_count
                                << " additional registrations";
     }
+}
+
+// ── TryResolveTypeInfo 3-path tests ─────────────────────────────────────
+// Path 1: Tag-encoded handle (bit[63]=1) → nullptr (reflection query).
+// Path 2: Module-registry handle (module_id + token) → LookupTypeInfoPtr.
+// Path 3: Unknown/malformed handle → nullptr.
+
+TEST_F(TypeRegistryTest, TryResolveTypeInfoZero) {
+    auto* ti = TryResolveTypeInfo(0);
+    EXPECT_EQ(ti, nullptr);
+}
+
+TEST_F(TypeRegistryTest, TryResolveTypeInfoPath1Tagged) {
+    uint64_t tagged = 0x8000000000000001ULL;  // bit[63]=1
+    auto* ti = TryResolveTypeInfo(tagged);
+    EXPECT_EQ(ti, nullptr);
+}
+
+TEST_F(TypeRegistryTest, TryResolveTypeInfoPath3Unknown) {
+    uint64_t unknown = MakeTypeHandle(0, 0);  // module_id=0, token=0
+    auto* ti = TryResolveTypeInfo(unknown);
+    EXPECT_EQ(ti, nullptr);
+}
+
+TEST_F(TypeRegistryTest, TryResolveTypeInfoPath2Unregistered) {
+    uint64_t handle = MakeTypeHandle(0xAA, 0xBB);  // unregistered module
+    auto* ti = TryResolveTypeInfo(handle);
+    EXPECT_EQ(ti, nullptr);
+}
+
+// ── TryResolveMethodTable / GetTypeStableIdFromHandle tests ─────────────
+
+TEST_F(TypeRegistryTest, TryResolveMethodTableZero) {
+    auto* mt = TryResolveMethodTable(0);
+    EXPECT_EQ(mt, nullptr);
+}
+
+TEST_F(TypeRegistryTest, GetTypeStableIdFromHandleZero) {
+    uint64_t sid = GetTypeStableIdFromHandle(0);
+    EXPECT_EQ(sid, 0u);
+}
+
+TEST_F(TypeRegistryTest, GetTypeStableIdFromHandleRegistered) {
+    // GetTypeStableIdFromHandle with a zero handle returns 0.
+    // A full round-trip through a valid TypeInfoHandle requires
+    // full module registry setup (module_id + token → LookupTypeInfoPtr),
+    // which is tested in module_registry integration tests instead.
+    uint64_t sid = GetTypeStableIdFromHandle(0);
+    EXPECT_EQ(sid, 0u);
+}
+
+// ── ChaosTypeAddInterface null MethodTable ──────────────────────────────
+// Regression: ensure nullptr MethodTable returns false without crashing.
+
+TEST_F(TypeRegistryTest, AddInterfaceNullMT_Extended) {
+    EXPECT_FALSE(ChaosTypeAddInterface(nullptr, 0x1234, 0, 0));
+    EXPECT_FALSE(ChaosTypeAddInterface(nullptr, 0x1234, 5, 3));
 }

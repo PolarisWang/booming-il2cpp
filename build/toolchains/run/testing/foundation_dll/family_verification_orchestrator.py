@@ -1154,7 +1154,8 @@ def _stage_audit(family_slug: str, assembly: str, skip_stages: set[str] | None =
 
     return StageResult(
         stage="audit", status=status,
-        summary=f"false_passing={false_passing}, principle={principle_status}",
+        summary=f"false_passing={false_passing}, principle={principle_status}"
+                 f" (mech_passed={mechanism_passed}, strict_on_CONCERN=False)",
         details={
             "falsePassing": false_passing,
             "stubsFound": mechanism.get("stubs_found", 0),

@@ -1,9 +1,9 @@
 #ifndef CHAOS_IL2CPP_CODEGEN_NATIVE_METHOD_H_
 #define CHAOS_IL2CPP_CODEGEN_NATIVE_METHOD_H_
 
-// ── NativeMethod: metadata for a generated native code method ──────────────
+// ── JitMethod: metadata for a generated native code method ──────────────
 //
-// Produced by GenerateNativeCode() and stored in PatchMethod for dispatch
+// Produced by Compile() and stored in PatchMethod for dispatch
 // via InterpreterEntryDirect when tier_state reaches T4_ready.
 //
 // Layout:
@@ -12,12 +12,13 @@
 
 #include <cstdint>
 #include <cstddef>
+#include <cstddef>
 
 // Forward declaration: GcSlotMapV0 is defined in codegen_bridge.h
 // We use a pointer member only, so no full definition is needed here.
 struct GcSlotMapV0;
 
-namespace chaos::il2cpp::codegen {
+namespace chaos::il2cpp::jit {
 
 /// A single call site in the generated code — used by deoptimization
 /// to map a native return address back to the RegisterInstruction pc.
@@ -26,6 +27,21 @@ struct CallSiteInfo {
     uint32_t    native_offset;      // byte offset from code entry
     uint32_t    method_token = 0;   // AOT metadata token of the called method
     uint32_t    module_id    = 0;   // module owning the called method
+};
+
+/// Debug info header — appended to the end of the code buffer.
+/// External debugger tooling (e.g., a WinDbg/natvis plugin) can locate this
+/// by scanning backwards for the magic number.
+struct JitDebugInfo {
+    static constexpr uint32_t kMagic = 0x544A4442u;  // "BJDT" (Booming JIT Debug)
+    static constexpr uint32_t kVersion = 1u;
+
+    uint32_t magic;                  // kMagic — identity marker
+    uint32_t version;                // kVersion
+    uint32_t code_size;              // total code buffer size (bytes)
+    uint32_t instr_offset_count;     // number of instr_offsets entries
+    uint32_t instr_offsets_off;      // offset from code start to instr_offsets array
+                                     // (0 = not embedded, use JitMethod::instr_offsets)
 };
 
 /// GC slot descriptor for a single stack/register location at a safepoint.
@@ -66,7 +82,7 @@ struct DeoptValue {
 };
 
 /// Complete metadata for a generated native method.
-struct NativeMethod {
+struct JitMethod {
     void*      code         = nullptr;  // Entry point (executable RX memory)
     uint32_t   code_size    = 0;         // Size of generated code in bytes
     uint32_t   instr_count  = 0;         // Number of RegisterInstructions
@@ -91,7 +107,7 @@ struct NativeMethod {
 
 #if defined(_WIN64)
     // Win64 RUNTIME_FUNCTION for .pdata/.xdata unwind info.
-    // Allocated by GenerateNativeCode, freed by ~NativeMethod.
+    // Allocated by Compile, freed by ~JitMethod.
     void* runtime_function = nullptr;
 #else
     // Linux x64 .eh_frame DWARF CFI offset from code start.
@@ -100,7 +116,7 @@ struct NativeMethod {
 #endif
 
     // Precise GC slot map for root scanning during collection.
-    // Allocated by GenerateNativeCode, freed by ~NativeMethod.
+    // Allocated by Compile, freed by ~JitMethod.
     // When non-null, the GC can use this instead of conservative scanning.
     GcSlotMapV0* gc_slot_map = nullptr;
 
@@ -115,9 +131,12 @@ struct NativeMethod {
     uint32_t      osr_entry_offset = 0;
 
     // Instruction offset table: instr_offsets[pc] = native byte offset.
-    // Used by OsrResolveLoopHeader to find the native address of a loop
-    // header instruction for OSR resume.  Allocated by GenerateNativeCode,
-    // freed by ~NativeMethod.  Populated only when osr_entry_offset != 0.
+    // Maps RegisterInstruction index → byte offset from code entry.
+    // Always populated by Compile() for all JIT-compiled methods.
+    // Used by deoptimization (OsrResolveLoopHeader), SEH clause emission,
+    // branch resolution, and debugger line-number mapping.
+    // The last entry is a sentinel whose offset equals code_size (useful
+    // for range checks in SEH clause dispatch).
     uint32_t*     instr_offsets      = nullptr;
     uint32_t      instr_offset_count = 0;
 
@@ -126,16 +145,22 @@ struct NativeMethod {
     // for T4 frames.  Varies per-method with register caching.
     uint32_t      rbp_to_rsp_offset = 0;
 
-    // Destructor: frees all allocations.
-    ~NativeMethod() noexcept;
+    // Hybrid mode: AOT function entry point for deoptimization fallback.
+    // When non-null and a deoptimization occurs (T4 code signals kDeoptMagic),
+    // the runtime redirects to this AOT entry instead of falling through to
+    // the interpreter.  Null for pure JIT mode or AOT mode methods.
+    void*         aot_entry = nullptr;
 
-    NativeMethod() = default;
-    NativeMethod(const NativeMethod&) = delete;
-    NativeMethod& operator=(const NativeMethod&) = delete;
-    NativeMethod(NativeMethod&& other) noexcept;
-    NativeMethod& operator=(NativeMethod&& other) noexcept;
+    // Destructor: frees all allocations.
+    ~JitMethod() noexcept;
+
+    JitMethod() = default;
+    JitMethod(const JitMethod&) = delete;
+    JitMethod& operator=(const JitMethod&) = delete;
+    JitMethod(JitMethod&& other) noexcept;
+    JitMethod& operator=(JitMethod&& other) noexcept;
 };
 
-}  // namespace chaos::il2cpp::codegen
+}  // namespace chaos::il2cpp::jit
 
 #endif  // CHAOS_IL2CPP_CODEGEN_NATIVE_METHOD_H_

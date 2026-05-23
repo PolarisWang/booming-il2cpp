@@ -18,3 +18,4 @@
 | [`10-解释器调用分发翻译表.md`](./10-%E8%A7%A3%E9%87%8A%E5%99%A8%E8%B0%83%E7%94%A8%E5%88%86%E5%8F%91%E7%BF%BB%E8%AF%91%E8%A1%A8.md) | Interpreter → AOT bridge 架构、DispatchCallback、尾调用优化、Depth Guard、异常穿越 |
 | [`11-热更新HotpatchDispatch翻译表.md`](./11-%E7%83%AD%E6%9B%B4%E6%96%B0HotpatchDispatch%E7%BF%BB%E8%AF%91%E8%A1%A8.md) | Hotpatch 双层分派验证：HotpatchEntryV0、HotpatchNameRegistry、PATCHDATA、ApplyPatchFromMemory、InterpreterEntryDirect |
 | [`12-PInvoke翻译路径.md`](./12-PInvoke%E7%BF%BB%E8%AF%91%E8%B7%AF%E5%BE%84.md) | DllImport 完整翻译路径：metadata → IR → codegen，含 __Internal / GC_TRANSITION / SuppressGCTransition |
+| [JIT/Hybrid 编译模式架构](../01-%E7%BF%BB%E8%AF%91%E7%AE%A1%E7%BA%BF/27-T4%E5%8E%9F%E7%94%9F%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8%E6%9E%B6%E6%9E%84.md#%E9%99%84%E5%BD%95aotjithybrid-%E4%B8%89%E6%A8%A1%E5%BC%8F%E7%BC%96%E8%AF%91%E4%BD%93%E7%B3%BB) | AOT/JIT/Hybrid 三模式编译、Precode Stub 分派、PGO Tier 0→Tier 1 重编译 |

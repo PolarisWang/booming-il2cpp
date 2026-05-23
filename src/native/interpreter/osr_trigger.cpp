@@ -9,8 +9,8 @@
 
 #include "ir_reg_alloc.h"
 #include "patch_loader.h"
-#include "code_generator.h"
-#include "t4_seh_handler.h"
+#include "jit_engine.h"
+#include "jit_seh.h"
 
 #include <chaos/log.h>
 
@@ -25,16 +25,16 @@ void TryOsrPromotion(RegisterFrame& frame,
 
     // Don't re-promote if already at T4 (another thread got there first).
     if (pm->tier_state.load(std::memory_order_acquire) >= PM::kT4Ready) {
-        // If the method already has a cached NativeMethod with an OSR entry,
+        // If the method already has a cached JitMethod with an OSR entry,
         // re-enter T4 via OSR directly.  This handles the deopt→T4
         // re-promotion loop: after deoptimization, the tier_state is still
-        // kT4Ready and the cached NativeMethod is still valid.
-        auto* existing_nm = static_cast<chaos::il2cpp::codegen::NativeMethod*>(
+        // kT4Ready and the cached JitMethod is still valid.
+        auto* existing_nm = static_cast<chaos::il2cpp::jit::JitMethod*>(
             pm->cached_native_method);
         if (existing_nm != nullptr && existing_nm->osr_entry_offset != 0) {
             // Set OSR resume PC to loop header (frame.pc is the backward branch
             // target after the branch handler executed).
-            chaos::il2cpp::codegen::t_deopt_state.osr_resume_pc = frame.pc;
+            chaos::il2cpp::jit::t_deopt_state.osr_resume_pc = frame.pc;
 
             using OsrEntry = void (*)(void*, void*);
             auto osr_entry = reinterpret_cast<OsrEntry>(
@@ -55,12 +55,12 @@ void TryOsrPromotion(RegisterFrame& frame,
     if (rm == nullptr) return;
 
     // Generate native code with full deopt support.
-    chaos::il2cpp::codegen::CodeGenConfig cfg;
+    chaos::il2cpp::jit::CompileConfig cfg;
     cfg.enable_deopt = true;
     cfg.enable_liveness = true;
     cfg.safepoint_fn = nullptr;
 
-    auto* nm = chaos::il2cpp::codegen::GenerateNativeCode(*rm, cfg);
+    auto* nm = chaos::il2cpp::jit::Compile(*rm, cfg);
     if (nm == nullptr) return;
 
     // OSR V2: if the generated code has an OSR entry, transfer execution
@@ -69,10 +69,10 @@ void TryOsrPromotion(RegisterFrame& frame,
         // Set tier state BEFORE calling OSR entry so future calls also hit T4.
         pm->cached_native_method = nm;
         pm->tier_state.store(PM::kT4Ready, std::memory_order_release);
-        chaos::il2cpp::codegen::RegisterT4Code(nm->code, nm->code_size, nm);
+        chaos::il2cpp::jit::RegisterT4Code(nm->code, nm->code_size, nm);
 
         // Set OSR resume PC to loop header before calling OSR entry.
-        chaos::il2cpp::codegen::t_deopt_state.osr_resume_pc = frame.pc;
+        chaos::il2cpp::jit::t_deopt_state.osr_resume_pc = frame.pc;
 
         using OsrEntry = void (*)(void*, void*);
         auto osr_entry = reinterpret_cast<OsrEntry>(
@@ -92,7 +92,7 @@ void TryOsrPromotion(RegisterFrame& frame,
     // V1 fallback: cache for re-entry on next call
     pm->cached_native_method = nm;
     pm->tier_state.store(PM::kT4Ready, std::memory_order_release);
-    chaos::il2cpp::codegen::RegisterT4Code(nm->code, nm->code_size, nm);
+    chaos::il2cpp::jit::RegisterT4Code(nm->code, nm->code_size, nm);
 }
 
 }  // namespace chaos::il2cpp::interpreter

@@ -13,7 +13,8 @@ set(CHAOS_GC_LIBS
     chaos_runtime_core
     chaos_bootstrap
     chaos_interpreter
-    chaos_codegen
+    chaos_jit
+    chaos_debugger
     chaos_hot_update
     chaos_common
     chaos_support

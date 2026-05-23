@@ -6,8 +6,9 @@ set(CHAOS_HOTUPDATE_LIBS
     chaos_hot_update
     chaos_bootstrap
     chaos_runtime_core
-    chaos_codegen
+    chaos_jit
     chaos_interpreter
+    chaos_debugger
     chaos_common
     chaos_support
     chaos_fmt
@@ -18,7 +19,8 @@ set(CHAOS_HOTUPDATE_SMOKE_LIBS
     chaos_runtime_core
     chaos_bootstrap
     chaos_interpreter
-    chaos_codegen
+    chaos_jit
+    chaos_debugger
     chaos_common
     chaos_support
     chaos_fmt

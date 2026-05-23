@@ -17,7 +17,9 @@ public static partial class DecoderSubjects
     // [0] System.IO.Compression.Brotli/System.IO.Compression.BrotliDecoder::Decompress:System.Buffers.OperationStatus(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32&,System.Int32&)
     public static void Subject_0()
     {
-        try { if (((default(BrotliDecoder).Decompress(default(ReadOnlySpan<byte>), default(Span<byte>), out _, out _)).GetHashCode()) != ((default(BrotliDecoder).Decompress(default(ReadOnlySpan<byte>), default(Span<byte>), out _, out _)).GetHashCode())) _exitCode = 1; }
+            System.Int32 refLocal_2 = 42;
+            System.Int32 refLocal_3 = 42;
+        try { if (((default(BrotliDecoder).Decompress(default(ReadOnlySpan<byte>), default(Span<byte>), out refLocal_2, out refLocal_3)).GetHashCode()) != ((default(BrotliDecoder).Decompress(default(ReadOnlySpan<byte>), default(Span<byte>), out refLocal_2, out refLocal_3)).GetHashCode())) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 

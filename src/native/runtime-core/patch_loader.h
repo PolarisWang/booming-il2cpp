@@ -29,7 +29,7 @@
 #include <string>
 #include <vector>
 
-namespace chaos::il2cpp { namespace codegen { struct NativeMethod; } }
+namespace chaos::il2cpp::jit { struct JitMethod; }
 namespace chaos::il2cpp::runtime_core {
 
 // ── PatchMethod ─────────────────────────────────────────────────────────
@@ -80,8 +80,8 @@ struct PatchMethod {
     void*           cached_optimized_reg_method = nullptr;   // RegisterMethod*
 
     // ── Native code generation (T4 tier, Phase 3c) ───────────────────────
-    // Populated during T3→T4 promotion. Set by GenerateNativeCode().
-    mutable class chaos::il2cpp::codegen::NativeMethod* cached_native_method = nullptr;
+    // Populated during T3→T4 promotion. Set by Compile().
+    mutable class chaos::il2cpp::jit::JitMethod* cached_native_method = nullptr;
 
     // ── T3→T4 codegen failure backoff ─────────────────────────────────
     mutable uint32_t    codegen_fail_count = 0;

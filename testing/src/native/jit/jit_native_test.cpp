@@ -1,7 +1,7 @@
 // ── Native code generation integration tests (Phase 3d) ───────────────────
 //
 // Each test constructs a RegisterMethod directly, generates native x64 code
-// via GenerateNativeCode(), executes the native entry point, and verifies
+// via Compile(), executes the native entry point, and verifies
 // the results match expected values.
 //
 // These tests validate:
@@ -13,10 +13,10 @@
 
 #include <gtest/gtest.h>
 
-#include "code_generator.h"
-#include "native_method.h"
-#include "codegen_helpers.h"
-#include "t4_seh_handler.h"
+#include "jit_engine.h"
+#include "jit_method.h"
+#include "jit_helpers.h"
+#include "jit_seh.h"
 #include "ir_reg_alloc.h"
 #include "gc_root_scanner.h"
 #include "patch_loader.h"
@@ -50,15 +50,15 @@ using chaos::il2cpp::interpreter::kRegIsCall;
 using chaos::il2cpp::interpreter::kRegIsStore;
 using chaos::il2cpp::interpreter::SEHClause;
 using chaos::il2cpp::interpreter::SEHFlags;
-using chaos::il2cpp::codegen::GenerateNativeCode;
-using chaos::il2cpp::codegen::CanGenerateNativeCode;
-using chaos::il2cpp::codegen::NativeMethod;
-using chaos::il2cpp::codegen::CodeGenConfig;
-using chaos::il2cpp::codegen::kDeoptMagic;
-using chaos::il2cpp::codegen::t_deopt_state;
-using chaos::il2cpp::codegen::RegisterT4Code;
-using chaos::il2cpp::codegen::UnregisterT4Code;
-using chaos::il2cpp::codegen::FindT4CodeByAddress;
+using chaos::il2cpp::jit::Compile;
+using chaos::il2cpp::jit::CanCompile;
+using chaos::il2cpp::jit::JitMethod;
+using chaos::il2cpp::jit::CompileConfig;
+using chaos::il2cpp::jit::kDeoptMagic;
+using chaos::il2cpp::jit::t_deopt_state;
+using chaos::il2cpp::jit::RegisterT4Code;
+using chaos::il2cpp::jit::UnregisterT4Code;
+using chaos::il2cpp::jit::FindT4CodeByAddress;
 using chaos::il2cpp::interpreter::RegisterFrame;
 using chaos::il2cpp::interpreter::RegisterFile;
 using chaos::il2cpp::interpreter::RegisterExecute;
@@ -330,7 +330,7 @@ static RegisterInstruction InstrLdInd(uint8_t dst, uint8_t addr) noexcept {
     return ri;
 }
 
-static void* SealAndGetEntry(NativeMethod* nm) {
+static void* SealAndGetEntry(JitMethod* nm) {
     if (nm == nullptr || nm->code == nullptr) return nullptr;
     return nm->code;
 }
@@ -384,8 +384,8 @@ static bool Test_LdcI4_Ret() {
     RegisterMethod rm;
     rm.instructions = { InstrI4(IROpCode::LdcI4, 42, 0), InstrRet(0) };
     rm.max_regs = 1;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm);
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm);
     if (nm == nullptr) return false;
     void* entry = SealAndGetEntry(nm);
     if (entry == nullptr) return false;
@@ -402,8 +402,8 @@ static bool Test_Add_Ret() {
     RegisterMethod rm;
     rm.instructions = { InstrI4(IROpCode::LdcI4, 12, 0), InstrI4(IROpCode::LdcI4, 30, 1), InstrBinary(IROpCode::Add, 2, 0, 1), InstrRet(2) };
     rm.max_regs = 3;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm);
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm);
     if (nm == nullptr) return false;
     void* entry = SealAndGetEntry(nm);
     if (entry == nullptr) return false;
@@ -422,8 +422,8 @@ static bool Test_ArithmeticChain() {
         InstrBinary(IROpCode::Sub, 6, 4, 5), InstrRet(6),
     };
     rm.max_regs = 7;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm);
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm);
     if (nm == nullptr) return false;
     void* entry = SealAndGetEntry(nm);
     if (entry == nullptr) return false;
@@ -438,8 +438,8 @@ static bool Test_BranchUncond() {
     RegisterMethod rm;
     rm.instructions = { InstrI4(IROpCode::LdcI4, 42, 0), InstrBranch(IROpCode::Br, 3), InstrI4(IROpCode::LdcI4, 0, 0), InstrRet(0) };
     rm.max_regs = 1;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm);
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm);
     if (nm == nullptr) return false;
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
     return ExecuteNative(entry) == 42;
@@ -453,8 +453,8 @@ static bool Test_BranchTaken() {
     RegisterMethod rm;
     rm.instructions = { InstrI4(IROpCode::LdcI4, 1, 0), InstrBranch(IROpCode::BrFalse, 4, 0), InstrI4(IROpCode::LdcI4, 42, 1), InstrBranch(IROpCode::Br, 5), InstrI4(IROpCode::LdcI4, 0, 1), InstrRet(1) };
     rm.max_regs = 2;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm); if (nm == nullptr) return false;
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm); if (nm == nullptr) return false;
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
     uint64_t result = ExecuteNative(entry);
     return result != UINT64_MAX && result == 42;
@@ -468,15 +468,15 @@ static bool Test_BranchNotTaken() {
     RegisterMethod rm;
     rm.instructions = { InstrI4(IROpCode::LdcI4, 0, 0), InstrBranch(IROpCode::BrFalse, 4, 0), InstrI4(IROpCode::LdcI4, 42, 1), InstrBranch(IROpCode::Br, 5), InstrI4(IROpCode::LdcI4, 0, 1), InstrRet(1) };
     rm.max_regs = 2;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm); if (nm == nullptr) return false;
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm); if (nm == nullptr) return false;
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
     uint64_t result = ExecuteNative(entry);
     return result != UINT64_MAX && result == 0;
 }
 
 // ═══════════════════════════════════════════════════════════════════════
-// Test: CanGenerateNativeCode (relaxed — all opcodes accepted)
+// Test: CanCompile (relaxed — all opcodes accepted)
 // ═══════════════════════════════════════════════════════════════════════
 static bool Test_CanGenerate_Unsupported() {
     RegisterMethod rm;
@@ -485,7 +485,7 @@ static bool Test_CanGenerate_Unsupported() {
     ri.imm.field_offset = 0;
     rm.instructions = { ri, InstrRet(0) };
     rm.max_regs = 1;
-    return CanGenerateNativeCode(rm);
+    return CanCompile(rm);
 }
 
 // ═══════════════════════════════════════════════════════════════════════
@@ -496,9 +496,9 @@ static bool Test_DeoptMetadata_Call() {
     RegisterMethod rm;
     rm.instructions = { InstrI4(IROpCode::LdcI4, 42, 0), InstrRet(0) };
     rm.max_regs = 1;
-    CodeGenConfig cfg;
+    CompileConfig cfg;
     cfg.enable_deopt = true;
-    auto* nm = GenerateNativeCode(rm, cfg);
+    auto* nm = Compile(rm, cfg);
     if (nm == nullptr) { std::printf("    FAIL: null\n"); return false; }
     std::printf("    deopt_entry_count=%u\n", nm->deopt_entry_count);
     return nm->code != nullptr && nm->code_size > 0;
@@ -512,9 +512,9 @@ static bool Test_DeoptSequence_Generated() {
     RegisterMethod rm;
     rm.instructions = { InstrI4(IROpCode::LdcI4, 7, 0), InstrRet(0) };
     rm.max_regs = 1;
-    CodeGenConfig cfg;
+    CompileConfig cfg;
     cfg.enable_deopt = true;
-    auto* nm = GenerateNativeCode(rm, cfg);
+    auto* nm = Compile(rm, cfg);
     if (nm == nullptr) { std::printf("    FAIL: null\n"); return false; }
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
     uint64_t result = ExecuteNative(entry);
@@ -530,21 +530,21 @@ static bool Test_DeoptEntry_Registration() {
     RegisterMethod rm;
     rm.instructions = { InstrI4(IROpCode::LdcI4, 99, 0), InstrRet(0) };
     rm.max_regs = 1;
-    auto* nm = GenerateNativeCode(rm);
+    auto* nm = Compile(rm);
     if (nm == nullptr) { std::printf("    FAIL: null\n"); return false; }
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
 
-    chaos::il2cpp::codegen::RegisterT4Code(entry, nm->code_size, nm);
+    chaos::il2cpp::jit::RegisterT4Code(entry, nm->code_size, nm);
 
-    const auto* found = chaos::il2cpp::codegen::FindT4CodeByAddress(entry);
+    const auto* found = chaos::il2cpp::jit::FindT4CodeByAddress(entry);
     if (found != nm) { std::printf("    FAIL: entry point lookup\n"); return false; }
 
     auto* mid = static_cast<uint8_t*>(entry) + (nm->code_size > 4 ? 4 : 0);
-    found = chaos::il2cpp::codegen::FindT4CodeByAddress(mid);
+    found = chaos::il2cpp::jit::FindT4CodeByAddress(mid);
     if (found != nm) { std::printf("    FAIL: mid-range lookup\n"); return false; }
 
     auto* out_of_range = static_cast<uint8_t*>(entry) + nm->code_size + 256;
-    found = chaos::il2cpp::codegen::FindT4CodeByAddress(out_of_range);
+    found = chaos::il2cpp::jit::FindT4CodeByAddress(out_of_range);
     if (found != nullptr) { std::printf("    FAIL: out-of-range should be null\n"); return false; }
 
     std::printf("    nm=%p entry=%p code_size=%u\n", static_cast<const void*>(nm), entry, nm->code_size);
@@ -563,8 +563,8 @@ static bool Test_NewObj() {
         InstrRet(1),
     };
     rm.max_regs = 2;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm); if (nm == nullptr) return false;
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm); if (nm == nullptr) return false;
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
     uint64_t result = ExecuteNative(entry);
     std::printf("    result=%llu (expected 0)\n", (unsigned long long)result);
@@ -585,8 +585,8 @@ static bool Test_LdFld_StFld() {
         InstrRet(2),
     };
     rm.max_regs = 3;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm); if (nm == nullptr) return false;
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm); if (nm == nullptr) return false;
     DumpInstrs(rm.instructions);
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
     uint64_t result = ExecuteNative(entry);
@@ -606,8 +606,8 @@ static bool Test_Box() {
         InstrRet(1),                         // return boxed pointer (should be non-null)
     };
     rm.max_regs = 2;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm); if (nm == nullptr) return false;
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm); if (nm == nullptr) return false;
     DumpInstrs(rm.instructions);
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
     uint64_t result = ExecuteNative(entry);
@@ -629,8 +629,8 @@ static bool Test_Unbox() {
         InstrRet(2),
     };
     rm.max_regs = 3;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm); if (nm == nullptr) return false;
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm); if (nm == nullptr) return false;
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
     uint64_t result = ExecuteNative(entry);
     std::printf("    result=%llu (expected 42)\n", (unsigned long long)result);
@@ -650,8 +650,8 @@ static bool Test_TlabNewObj() {
         InstrRet(1),
     };
     rm.max_regs = 2;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm); if (nm == nullptr) return false;
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm); if (nm == nullptr) return false;
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
     uint64_t result = ExecuteNative(entry);
     std::printf("    result=%llu (expected 0)\n", (unsigned long long)result);
@@ -671,8 +671,8 @@ static bool Test_TlabBox() {
         InstrRet(1),
     };
     rm.max_regs = 2;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm); if (nm == nullptr) return false;
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm); if (nm == nullptr) return false;
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
     uint64_t result = ExecuteNative(entry);
     std::printf("    result=%llu (expected non-null pointer)\n", (unsigned long long)result);
@@ -694,8 +694,8 @@ static bool Test_TlabNewObjBox() {
         InstrRet(2),
     };
     rm.max_regs = 3;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm); if (nm == nullptr) return false;
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm); if (nm == nullptr) return false;
     DumpInstrs(rm.instructions);
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
     uint64_t result = ExecuteNative(entry);
@@ -716,8 +716,8 @@ static bool Test_LdLen() {
         InstrRet(2),
     };
     rm.max_regs = 3;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm); if (nm == nullptr) return false;
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm); if (nm == nullptr) return false;
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
     uint64_t result = ExecuteNative(entry);
     std::printf("    result=%llu (expected 5)\n", (unsigned long long)result);
@@ -736,8 +736,8 @@ static bool Test_NewArr() {
         InstrRet(1),                         // return array pointer (non-null)
     };
     rm.max_regs = 2;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm); if (nm == nullptr) return false;
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm); if (nm == nullptr) return false;
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
     uint64_t result = ExecuteNative(entry);
     std::printf("    result=%llu (expected non-null)\n", (unsigned long long)result);
@@ -758,8 +758,8 @@ static bool Test_NewArrTlab() {
         InstrRet(2),                        // return length
     };
     rm.max_regs = 3;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm); if (nm == nullptr) return false;
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm); if (nm == nullptr) return false;
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
     uint64_t result = ExecuteNative(entry);
     std::printf("    result=%llu (expected 42)\n", (unsigned long long)result);
@@ -783,8 +783,8 @@ static bool Test_LdElem_StElem() {
         InstrRet(4),
     };
     rm.max_regs = 5;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm); if (nm == nullptr) return false;
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm); if (nm == nullptr) return false;
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
     uint64_t result = ExecuteNative(entry);
     std::printf("    result=%llu (expected 42)\n", (unsigned long long)result);
@@ -811,8 +811,8 @@ static bool Test_StElemFix() {
         InstrRet(4),
     };
     rm.max_regs = 5;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm); if (nm == nullptr) return false;
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm); if (nm == nullptr) return false;
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
     uint64_t result = ExecuteNative(entry);
     std::printf("    result=%llu (expected 42)\n", (unsigned long long)result);
@@ -832,8 +832,8 @@ static bool Test_Dup() {
         InstrRet(2),
     };
     rm.max_regs = 3;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm); if (nm == nullptr) return false;
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm); if (nm == nullptr) return false;
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
     uint64_t result = ExecuteNative(entry);
     std::printf("    result=%llu (expected 84)\n", (unsigned long long)result);
@@ -854,7 +854,7 @@ static bool Test_GcSlotMap() {
         InstrRet(2),
     };
     rm.max_regs = 3;
-    auto* nm = GenerateNativeCode(rm); if (nm == nullptr) return false;
+    auto* nm = Compile(rm); if (nm == nullptr) return false;
     std::printf("    gc_point_count=%u, slot_map_data=%p, slot_map_size=%u\n",
                 nm->gc_point_count, nm->slot_map_data, nm->slot_map_size);
 
@@ -900,7 +900,7 @@ static bool Test_GcSlotMapRegistration() {
         InstrRet(1),
     };
     rm.max_regs = 2;
-    auto* nm = GenerateNativeCode(rm); if (nm == nullptr) return false;
+    auto* nm = Compile(rm); if (nm == nullptr) return false;
     void* entry = nm->code; if (entry == nullptr) return false;
     std::printf("    slot_map_data=%p, slot_map_size=%u\n", nm->slot_map_data, nm->slot_map_size);
 
@@ -945,8 +945,8 @@ static bool Test_SehTable() {
         0                      // class_token
     } };
 
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm); if (nm == nullptr) return false;
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm); if (nm == nullptr) return false;
     std::printf("    seh_table_offset=%u\n", nm->seh_table_offset);
     if (nm->seh_table_offset == 0) { std::printf("    FAIL: no SEH table\n"); return false; }
 
@@ -973,7 +973,7 @@ static bool Test_SehTable() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════
-// Test: SehCanGenerate — method with SEH clauses passes CanGenerateNativeCode
+// Test: SehCanGenerate — method with SEH clauses passes CanCompile
 // ═══════════════════════════════════════════════════════════════════════
 static bool Test_SehCanGenerate() {
     std::printf("  Test_SehCanGenerate...\n");
@@ -986,11 +986,11 @@ static bool Test_SehCanGenerate() {
     rm.seh_clauses = { SEHClause{
         SEHFlags::Exception, 0, 1, 0, 0
     } };
-    if (!CanGenerateNativeCode(rm)) {
-        std::printf("    FAIL: CanGenerateNativeCode returned false\n");
+    if (!CanCompile(rm)) {
+        std::printf("    FAIL: CanCompile returned false\n");
         return false;
     }
-    std::printf("    CanGenerateNativeCode returned true (OK)\n");
+    std::printf("    CanCompile returned true (OK)\n");
     return true;
 }
 
@@ -1071,11 +1071,11 @@ static bool Test_OsrEntry() {
     rm.max_regs = 2;
 
     // Generate native code (with OSR entry since method has a loop).
-    CodeGenConfig cfg;
+    CompileConfig cfg;
     cfg.enable_deopt = true;
     cfg.safepoint_fn = nullptr;
-    auto* nm = GenerateNativeCode(rm, cfg);
-    if (nm == nullptr) { std::printf("    FAIL: GenerateNativeCode returned null\n"); return false; }
+    auto* nm = Compile(rm, cfg);
+    if (nm == nullptr) { std::printf("    FAIL: Compile returned null\n"); return false; }
 
     // Verify OSR entry exists.
     if (nm->osr_entry_offset == 0) { std::printf("    FAIL: osr_entry_offset is 0 (expected != 0)\n"); return false; }
@@ -1089,7 +1089,7 @@ static bool Test_OsrEntry() {
     RegisterMethod rm_simple;
     rm_simple.instructions = { InstrI4(IROpCode::LdcI4, 42, 0), InstrRet(0) };
     rm_simple.max_regs = 1;
-    auto* nm_simple = GenerateNativeCode(rm_simple, cfg);
+    auto* nm_simple = Compile(rm_simple, cfg);
     if (nm_simple == nullptr) { std::printf("    FAIL: simple method generation failed\n"); return false; }
     if (nm_simple->osr_entry_offset != 0) {
         std::printf("    FAIL: simple method has osr_entry_offset=%u (expected 0)\n", nm_simple->osr_entry_offset);
@@ -1139,13 +1139,13 @@ static bool Test_DeoptOvfArithmetic() {
     };
     rm.max_regs = 3;
 
-    CodeGenConfig cfg;
+    CompileConfig cfg;
     cfg.enable_deopt = true;
     cfg.safepoint_fn = nullptr;
-    auto* nm = GenerateNativeCode(rm, cfg);
+    auto* nm = Compile(rm, cfg);
     if (nm == nullptr) { std::printf("    FAIL: null\n"); return false; }
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
-    chaos::il2cpp::codegen::RegisterT4Code(entry, nm->code_size, nm);
+    chaos::il2cpp::jit::RegisterT4Code(entry, nm->code_size, nm);
 
     uint64_t result = ExecuteNative(entry);
     std::printf("    ret_buf[0]=0x%llX (expected 0x%llX = kDeoptMagic)\n",
@@ -1177,11 +1177,11 @@ static bool Test_DeoptThenRegisterExecute() {
     rm_ovf.max_regs = 3;
 
     // Generate native T4 code with deopt support.
-    CodeGenConfig cfg;
+    CompileConfig cfg;
     cfg.enable_deopt = true;
     cfg.safepoint_fn = nullptr;
-    auto* nm = GenerateNativeCode(rm_ovf, cfg);
-    if (nm == nullptr) { std::printf("    FAIL: GenerateNativeCode null\n"); return false; }
+    auto* nm = Compile(rm_ovf, cfg);
+    if (nm == nullptr) { std::printf("    FAIL: Compile null\n"); return false; }
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
 
     // Execute T4 native — should deopt and return kDeoptMagic.
@@ -1324,10 +1324,10 @@ static bool Test_Benchmark() {
     }
 
     // ── T4 Native (cold) benchmark ─────────────────────────────────
-    CodeGenConfig cfg;
+    CompileConfig cfg;
     cfg.enable_deopt = true;
     cfg.safepoint_fn = nullptr;
-    auto* nm = GenerateNativeCode(rm, cfg);
+    auto* nm = Compile(rm, cfg);
     if (nm == nullptr) { std::printf("  T4 Native:          FAIL (null)\n"); return false; }
     void* entry = SealAndGetEntry(nm);
     if (entry == nullptr) { std::printf("  T4 Native:          FAIL (null entry)\n"); return false; }
@@ -1438,15 +1438,15 @@ static bool Test_Benchmark() {
         for (auto& wl : workloads) {
             std::printf("\n    ── %s ──\n", wl.name);
 
-            CodeGenConfig cfg_on;
+            CompileConfig cfg_on;
             cfg_on.enable_deopt = true; cfg_on.safepoint_fn = nullptr; cfg_on.enable_register_caching = true;
-            auto* nm_on = GenerateNativeCode(wl.rm, cfg_on);
+            auto* nm_on = Compile(wl.rm, cfg_on);
             if (nm_on == nullptr) { std::printf("    FAIL: on=null\n"); continue; }
             void* entry_on = SealAndGetEntry(nm_on); if (entry_on == nullptr) continue;
 
-            CodeGenConfig cfg_off;
+            CompileConfig cfg_off;
             cfg_off.enable_deopt = true; cfg_off.safepoint_fn = nullptr; cfg_off.enable_register_caching = false;
-            auto* nm_off = GenerateNativeCode(wl.rm, cfg_off);
+            auto* nm_off = Compile(wl.rm, cfg_off);
             if (nm_off == nullptr) { std::printf("    FAIL: off=null\n"); continue; }
             void* entry_off = SealAndGetEntry(nm_off); if (entry_off == nullptr) continue;
 
@@ -1501,11 +1501,11 @@ static bool Test_BenchmarkExtended() {
         };
         rm_deopt.max_regs = 1;
 
-        CodeGenConfig cfg;
+        CompileConfig cfg;
         cfg.enable_deopt = true;
         cfg.safepoint_fn = nullptr;
-        auto* nm = GenerateNativeCode(rm_deopt, cfg);
-        if (nm == nullptr) { std::printf("    FAIL: GenerateNativeCode null\n"); return false; }
+        auto* nm = Compile(rm_deopt, cfg);
+        if (nm == nullptr) { std::printf("    FAIL: Compile null\n"); return false; }
         void* entry = SealAndGetEntry(nm);
 
         // Cold call (first T4 execution)
@@ -1579,11 +1579,11 @@ static bool Test_BenchmarkExtended() {
         }
 
         // T4 Native
-        CodeGenConfig cfg;
+        CompileConfig cfg;
         cfg.enable_deopt = true;
         cfg.safepoint_fn = nullptr;
-        auto* nm = GenerateNativeCode(rm, cfg);
-        if (nm == nullptr) { std::printf("    FAIL: GenerateNativeCode null\n"); return false; }
+        auto* nm = Compile(rm, cfg);
+        if (nm == nullptr) { std::printf("    FAIL: Compile null\n"); return false; }
         void* entry = SealAndGetEntry(nm);
 
         // T4 cold
@@ -1687,9 +1687,9 @@ static bool Test_BrToSwitch() {
 
     // Verify T4 codegen produces correct result for case 1 (r0=1 → 200)
     rm.instructions[0].imm.i4 = 1;  // set switch value to 1
-    if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL: CanGenerateNativeCode false\n"); return false; }
-    auto* nm = GenerateNativeCode(rm);
-    if (nm == nullptr) { std::printf("    FAIL: GenerateNativeCode null\n"); return false; }
+    if (!CanCompile(rm)) { std::printf("    FAIL: CanCompile false\n"); return false; }
+    auto* nm = Compile(rm);
+    if (nm == nullptr) { std::printf("    FAIL: Compile null\n"); return false; }
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
     RegisterT4Code(entry, nm->code_size, nm);
 
@@ -1770,9 +1770,9 @@ static bool Test_Switch_Dispatch() {
     if (!check(99, 0)) return false;  // default
 
     // Test via T4 native codegen — verify code generation and execution
-    if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL: CanGenerateNativeCode false\n"); return false; }
-    auto* nm = GenerateNativeCode(rm);
-    if (nm == nullptr) { std::printf("    FAIL: GenerateNativeCode null\n"); return false; }
+    if (!CanCompile(rm)) { std::printf("    FAIL: CanCompile false\n"); return false; }
+    auto* nm = Compile(rm);
+    if (nm == nullptr) { std::printf("    FAIL: Compile null\n"); return false; }
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
     RegisterT4Code(entry, nm->code_size, nm);
 
@@ -1822,9 +1822,9 @@ static bool Test_Calli() {
     if (!ok) { std::printf("    FAIL: RegisterExecute failed\n"); return false; }
 
     // Step 2: Verify T4 codegen generates code (even if func_ptr is runtime-dynamic)
-    if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL: CanGenerateNativeCode false\n"); return false; }
-    auto* nm = GenerateNativeCode(rm);
-    if (nm == nullptr) { std::printf("    FAIL: GenerateNativeCode null\n"); return false; }
+    if (!CanCompile(rm)) { std::printf("    FAIL: CanCompile false\n"); return false; }
+    auto* nm = Compile(rm);
+    if (nm == nullptr) { std::printf("    FAIL: Compile null\n"); return false; }
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
 
     // Execute — with null func_ptr in r0, T4 code will test rax/jne/deopt or skip
@@ -1854,9 +1854,9 @@ static bool Test_SehTryCatch() {
         /* class_token= */     0
     } };
 
-    if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL: CanGenerateNativeCode false\n"); return false; }
-    auto* nm = GenerateNativeCode(rm);
-    if (nm == nullptr) { std::printf("    FAIL: GenerateNativeCode null\n"); return false; }
+    if (!CanCompile(rm)) { std::printf("    FAIL: CanCompile false\n"); return false; }
+    auto* nm = Compile(rm);
+    if (nm == nullptr) { std::printf("    FAIL: Compile null\n"); return false; }
 
     if (nm->seh_table_offset == 0) {
         std::printf("    FAIL: no SEH table emitted\n");
@@ -1890,18 +1890,18 @@ static bool Test_CallVirt_PICData() {
     };
     rm.max_regs = 1;
 
-    CodeGenConfig cfg;
+    CompileConfig cfg;
     cfg.enable_deopt = true;
     cfg.pic_dispatch_data = reinterpret_cast<const void*>(0x1234);
     cfg.dispatch_ctx = reinterpret_cast<void*>(0x5678);
 
-    auto* nm = GenerateNativeCode(rm, cfg);
-    if (nm == nullptr) { std::printf("    FAIL: null NativeMethod\n"); return false; }
+    auto* nm = Compile(rm, cfg);
+    if (nm == nullptr) { std::printf("    FAIL: null JitMethod\n"); return false; }
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
 
     uint64_t result = ExecuteNative(entry);
     if (result == 0) { std::printf("    FAIL: null result from NewObj\n"); return false; }
-    std::printf("    PIC data fields in CodeGenConfig OK ✓\n");
+    std::printf("    PIC data fields in CompileConfig OK ✓\n");
     return true;
 }
 
@@ -1937,9 +1937,9 @@ static bool Test_LdVirtFtn() {
     std::printf("    RegisterExecute ret=0x%llx\n", (unsigned long long)rf.ret_val);
 
     // Step 2: T4 codegen
-    if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL: CanGenerateNativeCode false\n"); return false; }
-    auto* nm = GenerateNativeCode(rm);
-    if (nm == nullptr) { std::printf("    FAIL: null NativeMethod\n"); return false; }
+    if (!CanCompile(rm)) { std::printf("    FAIL: CanCompile false\n"); return false; }
+    auto* nm = Compile(rm);
+    if (nm == nullptr) { std::printf("    FAIL: null JitMethod\n"); return false; }
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
     RegisterT4Code(entry, nm->code_size, nm);
 
@@ -1970,8 +1970,8 @@ static bool Test_Ceq_ZeroExt() {
         InstrRet(2),
     };
     rm.max_regs = 3;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm);
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm);
     if (nm == nullptr) return false;
     void* entry = SealAndGetEntry(nm);
     if (entry == nullptr) return false;
@@ -2030,9 +2030,9 @@ static bool Test_ConvR4() {
         }
 
         // Verify T4 codegen doesn't crash
-        if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL: val=%d CanGenerateNativeCode false\n", tc.val); return false; }
-        auto* nm = GenerateNativeCode(rm);
-        if (nm == nullptr) { std::printf("    FAIL: val=%d GenerateNativeCode null\n", tc.val); return false; }
+        if (!CanCompile(rm)) { std::printf("    FAIL: val=%d CanCompile false\n", tc.val); return false; }
+        auto* nm = Compile(rm);
+        if (nm == nullptr) { std::printf("    FAIL: val=%d Compile null\n", tc.val); return false; }
         void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
         bool crashed = false;
         ExecuteNativeSafe(entry, crashed);
@@ -2071,9 +2071,9 @@ static bool Test_ConvR8() {
             return false;
         }
 
-        if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL: val=%d CanGenerateNativeCode false\n", tc.val); return false; }
-        auto* nm = GenerateNativeCode(rm);
-        if (nm == nullptr) { std::printf("    FAIL: val=%d GenerateNativeCode null\n", tc.val); return false; }
+        if (!CanCompile(rm)) { std::printf("    FAIL: val=%d CanCompile false\n", tc.val); return false; }
+        auto* nm = Compile(rm);
+        if (nm == nullptr) { std::printf("    FAIL: val=%d Compile null\n", tc.val); return false; }
         void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
         bool crashed = false;
         ExecuteNativeSafe(entry, crashed);
@@ -2314,9 +2314,9 @@ static bool Test_Fuzz() {
                                       static_cast<uint32_t>(rm.instructions.size()));
 
         // Run via T4 if eligible
-        if (CanGenerateNativeCode(rm)) {
+        if (CanCompile(rm)) {
             t4_eligible++;
-            auto* nm = GenerateNativeCode(rm);
+            auto* nm = Compile(rm);
             if (nm == nullptr) continue;
             void* entry = SealAndGetEntry(nm);
             if (entry == nullptr) continue;
@@ -2374,11 +2374,11 @@ static bool Test_Fuzz() {
                     }
                     // Diagnostic: re-generate without register caching to isolate graph coloring bug
                     {
-                        CodeGenConfig cfg_no_cache;
+                        CompileConfig cfg_no_cache;
                         cfg_no_cache.enable_deopt = true;
                         cfg_no_cache.safepoint_fn = nullptr;
                         cfg_no_cache.enable_register_caching = false;
-                        auto* nm_nc = GenerateNativeCode(rm, cfg_no_cache);
+                        auto* nm_nc = Compile(rm, cfg_no_cache);
                         if (nm_nc != nullptr) {
                             void* entry_nc = SealAndGetEntry(nm_nc);
                             if (entry_nc != nullptr) {
@@ -2391,12 +2391,12 @@ static bool Test_Fuzz() {
                     }
                     // Diagnostic: re-generate with neither caching nor optimization
                     {
-                        CodeGenConfig cfg_raw;
+                        CompileConfig cfg_raw;
                         cfg_raw.enable_deopt = true;
                         cfg_raw.safepoint_fn = nullptr;
                         cfg_raw.enable_register_caching = false;
                         cfg_raw.enable_optimizer = false;
-                        auto* nm_raw = GenerateNativeCode(rm, cfg_raw);
+                        auto* nm_raw = Compile(rm, cfg_raw);
                         if (nm_raw != nullptr) {
                             void* entry_raw = SealAndGetEntry(nm_raw);
                             if (entry_raw != nullptr) {
@@ -2454,8 +2454,8 @@ static bool Test_FoldAdd() {
         InstrRet(2),
     };
     rm.max_regs = 3;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm);
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm);
     if (nm == nullptr) return false;
     void* entry = SealAndGetEntry(nm);
     if (entry == nullptr) return false;
@@ -2474,8 +2474,8 @@ static bool Test_FoldMul() {
         InstrRet(2),
     };
     rm.max_regs = 3;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm);
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm);
     if (nm == nullptr) return false;
     void* entry = SealAndGetEntry(nm);
     if (entry == nullptr) return false;
@@ -2498,8 +2498,8 @@ static bool Test_FoldChain() {
         InstrRet(6),
     };
     rm.max_regs = 7;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm);
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm);
     if (nm == nullptr) return false;
     void* entry = SealAndGetEntry(nm);
     if (entry == nullptr) return false;
@@ -2522,8 +2522,8 @@ static bool Test_FoldBrFalse() {
         InstrRet(1),
     };
     rm.max_regs = 2;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm);
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm);
     if (nm == nullptr) return false;
     void* entry = SealAndGetEntry(nm);
     if (entry == nullptr) return false;
@@ -2547,8 +2547,8 @@ static bool Test_FoldBrFalseNonZero() {
         InstrRet(1),
     };
     rm.max_regs = 2;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm);
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm);
     if (nm == nullptr) return false;
     void* entry = SealAndGetEntry(nm);
     if (entry == nullptr) return false;
@@ -2571,8 +2571,8 @@ static bool Test_UnboxElim() {
         InstrRet(2),                      // ret r2
     };
     rm.max_regs = 3;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm);
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm);
     if (nm == nullptr) return false;
     void* entry = SealAndGetEntry(nm);
     if (entry == nullptr) return false;
@@ -2598,8 +2598,8 @@ static bool Test_DeadStLoc() {
         InstrRet(2),                        // ret r2
     };
     rm.max_regs = 10;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm);
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm);
     if (nm == nullptr) return false;
     void* entry = SealAndGetEntry(nm);
     if (entry == nullptr) return false;
@@ -2622,8 +2622,8 @@ static bool Test_DeadDup() {
         InstrRet(0),                       // ret r0
     };
     rm.max_regs = 2;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm);
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm);
     if (nm == nullptr) return false;
     void* entry = SealAndGetEntry(nm);
     if (entry == nullptr) return false;
@@ -2646,8 +2646,8 @@ static bool Test_CopyProp() {
         InstrRet(1),                       // ret r1 → becomes ret r0
     };
     rm.max_regs = 2;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm);
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm);
     if (nm == nullptr) return false;
     void* entry = SealAndGetEntry(nm);
     if (entry == nullptr) return false;
@@ -2669,8 +2669,8 @@ static bool Test_DeadLdLoc() {
         InstrRet(2),                       // ret r2
     };
     rm.max_regs = 3;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm);
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm);
     if (nm == nullptr) return false;
     void* entry = SealAndGetEntry(nm);
     if (entry == nullptr) return false;
@@ -2691,8 +2691,8 @@ static bool Test_RedundantLdLoc() {
         InstrRet(1),                       // ret r1 → becomes ret r0
     };
     rm.max_regs = 2;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm);
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm);
     if (nm == nullptr) return false;
     void* entry = SealAndGetEntry(nm);
     if (entry == nullptr) return false;
@@ -2712,8 +2712,8 @@ static bool Test_DeadBr() {
         InstrRet(0),                       // ret r0
     };
     rm.max_regs = 1;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm);
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm);
     if (nm == nullptr) return false;
     void* entry = SealAndGetEntry(nm);
     if (entry == nullptr) return false;
@@ -2737,8 +2737,8 @@ static bool Test_BrChain() {
         InstrRet(0),                       // [5] ret r0
     };
     rm.max_regs = 1;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm);
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm);
     if (nm == nullptr) return false;
     void* entry = SealAndGetEntry(nm);
     if (entry == nullptr) return false;
@@ -2777,8 +2777,8 @@ static bool Test_BrChainConditional() {
         InstrRet(1),                       // [5] ret r1
     };
     rm.max_regs = 2;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm);
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm);
     if (nm == nullptr) return false;
     void* entry = SealAndGetEntry(nm);
     if (entry == nullptr) return false;
@@ -2804,8 +2804,8 @@ static bool Test_ArithIdentity() {
         InstrRet(2),
     };
     rm.max_regs = 3;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm);
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm);
     if (nm == nullptr) return false;
     void* entry = SealAndGetEntry(nm);
     if (entry == nullptr) return false;
@@ -2825,8 +2825,8 @@ static bool Test_MulOneIntrinsic() {
         InstrRet(2),
     };
     rm.max_regs = 3;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm);
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm);
     if (nm == nullptr) return false;
     void* entry = SealAndGetEntry(nm);
     if (entry == nullptr) return false;
@@ -2846,8 +2846,8 @@ static bool Test_MulZeroIntrinsic() {
         InstrRet(2),
     };
     rm.max_regs = 3;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm);
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm);
     if (nm == nullptr) return false;
     void* entry = SealAndGetEntry(nm);
     if (entry == nullptr) return false;
@@ -2866,8 +2866,8 @@ static bool Test_AndSelfIntrinsic() {
         InstrRet(1),
     };
     rm.max_regs = 2;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm);
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm);
     if (nm == nullptr) return false;
     void* entry = SealAndGetEntry(nm);
     if (entry == nullptr) return false;
@@ -2886,8 +2886,8 @@ static bool Test_SubSelfIntrinsic() {
         InstrRet(1),
     };
     rm.max_regs = 2;
-    if (!CanGenerateNativeCode(rm)) return false;
-    auto* nm = GenerateNativeCode(rm);
+    if (!CanCompile(rm)) return false;
+    auto* nm = Compile(rm);
     if (nm == nullptr) return false;
     void* entry = SealAndGetEntry(nm);
     if (entry == nullptr) return false;
@@ -2914,9 +2914,9 @@ static bool Test_CastClass() {
             InstrRet(1),
         };
         rm.max_regs = 2;
-        if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL case1: CanGenerateNativeCode false\n"); return false; }
-        auto* nm = GenerateNativeCode(rm);
-        if (nm == nullptr) { std::printf("    FAIL case1: GenerateNativeCode null\n"); return false; }
+        if (!CanCompile(rm)) { std::printf("    FAIL case1: CanCompile false\n"); return false; }
+        auto* nm = Compile(rm);
+        if (nm == nullptr) { std::printf("    FAIL case1: Compile null\n"); return false; }
         void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
         uint64_t result = ExecuteNative(entry);
         if (result == 0) { std::printf("    FAIL case1: result=0 (expected non-null pointer)\n"); return false; }
@@ -2932,9 +2932,9 @@ static bool Test_CastClass() {
             InstrRet(1),
         };
         rm.max_regs = 2;
-        if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL case2: CanGenerateNativeCode false\n"); return false; }
-        auto* nm = GenerateNativeCode(rm);
-        if (nm == nullptr) { std::printf("    FAIL case2: GenerateNativeCode null\n"); return false; }
+        if (!CanCompile(rm)) { std::printf("    FAIL case2: CanCompile false\n"); return false; }
+        auto* nm = Compile(rm);
+        if (nm == nullptr) { std::printf("    FAIL case2: Compile null\n"); return false; }
         void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
         uint64_t result = ExecuteNative(entry);
         if (result != 0) { std::printf("    FAIL case2: result=%llu (expected 0)\n", (unsigned long long)result); return false; }
@@ -2950,9 +2950,9 @@ static bool Test_CastClass() {
             InstrRet(1),
         };
         rm.max_regs = 2;
-        if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL case3: CanGenerateNativeCode false\n"); return false; }
-        auto* nm = GenerateNativeCode(rm);
-        if (nm == nullptr) { std::printf("    FAIL case3: GenerateNativeCode null\n"); return false; }
+        if (!CanCompile(rm)) { std::printf("    FAIL case3: CanCompile false\n"); return false; }
+        auto* nm = Compile(rm);
+        if (nm == nullptr) { std::printf("    FAIL case3: Compile null\n"); return false; }
         void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
         uint64_t result = ExecuteNative(entry);
         if (result != 0) { std::printf("    FAIL case3: result=%llu (expected 0)\n", (unsigned long long)result); return false; }
@@ -2978,9 +2978,9 @@ static bool Test_IsInst() {
             InstrRet(1),
         };
         rm.max_regs = 2;
-        if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL case1: CanGenerateNativeCode false\n"); return false; }
-        auto* nm = GenerateNativeCode(rm);
-        if (nm == nullptr) { std::printf("    FAIL case1: GenerateNativeCode null\n"); return false; }
+        if (!CanCompile(rm)) { std::printf("    FAIL case1: CanCompile false\n"); return false; }
+        auto* nm = Compile(rm);
+        if (nm == nullptr) { std::printf("    FAIL case1: Compile null\n"); return false; }
         void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
         uint64_t result = ExecuteNative(entry);
         if (result == 0) { std::printf("    FAIL case1: result=0 (expected non-null)\n"); return false; }
@@ -2996,9 +2996,9 @@ static bool Test_IsInst() {
             InstrRet(1),
         };
         rm.max_regs = 2;
-        if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL case2: CanGenerateNativeCode false\n"); return false; }
-        auto* nm = GenerateNativeCode(rm);
-        if (nm == nullptr) { std::printf("    FAIL case2: GenerateNativeCode null\n"); return false; }
+        if (!CanCompile(rm)) { std::printf("    FAIL case2: CanCompile false\n"); return false; }
+        auto* nm = Compile(rm);
+        if (nm == nullptr) { std::printf("    FAIL case2: Compile null\n"); return false; }
         void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
         uint64_t result = ExecuteNative(entry);
         if (result != 0) { std::printf("    FAIL case2: result=%llu (expected 0)\n", (unsigned long long)result); return false; }
@@ -3014,9 +3014,9 @@ static bool Test_IsInst() {
             InstrRet(1),
         };
         rm.max_regs = 2;
-        if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL case3: CanGenerateNativeCode false\n"); return false; }
-        auto* nm = GenerateNativeCode(rm);
-        if (nm == nullptr) { std::printf("    FAIL case3: GenerateNativeCode null\n"); return false; }
+        if (!CanCompile(rm)) { std::printf("    FAIL case3: CanCompile false\n"); return false; }
+        auto* nm = Compile(rm);
+        if (nm == nullptr) { std::printf("    FAIL case3: Compile null\n"); return false; }
         void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
         uint64_t result = ExecuteNative(entry);
         if (result != 0) { std::printf("    FAIL case3: result=%llu (expected 0)\n", (unsigned long long)result); return false; }
@@ -3044,9 +3044,9 @@ static bool Test_LdSFld_StSFld() {
             InstrRet(1),
         };
         rm.max_regs = 2;
-        if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL case1: CanGenerateNativeCode false\n"); return false; }
-        auto* nm = GenerateNativeCode(rm);
-        if (nm == nullptr) { std::printf("    FAIL case1: GenerateNativeCode null\n"); return false; }
+        if (!CanCompile(rm)) { std::printf("    FAIL case1: CanCompile false\n"); return false; }
+        auto* nm = Compile(rm);
+        if (nm == nullptr) { std::printf("    FAIL case1: Compile null\n"); return false; }
         void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
         uint64_t result = ExecuteNative(entry);
         if (result != 42) { std::printf("    FAIL case1: result=%llu (expected 42)\n", (unsigned long long)result); return false; }
@@ -3061,9 +3061,9 @@ static bool Test_LdSFld_StSFld() {
             InstrRet(0),
         };
         rm.max_regs = 1;
-        if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL case2: CanGenerateNativeCode false\n"); return false; }
-        auto* nm = GenerateNativeCode(rm);
-        if (nm == nullptr) { std::printf("    FAIL case2: GenerateNativeCode null\n"); return false; }
+        if (!CanCompile(rm)) { std::printf("    FAIL case2: CanCompile false\n"); return false; }
+        auto* nm = Compile(rm);
+        if (nm == nullptr) { std::printf("    FAIL case2: Compile null\n"); return false; }
         void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
         uint64_t result = ExecuteNative(entry);
         if (result != 0) { std::printf("    FAIL case2: result=%llu (expected 0)\n", (unsigned long long)result); return false; }
@@ -3109,9 +3109,9 @@ static bool Test_ConvRUn() {
         }
 
         // Verify T4 codegen doesn't crash
-        if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL: val=%d CanGenerateNativeCode false\n", tc.val); return false; }
-        auto* nm = GenerateNativeCode(rm);
-        if (nm == nullptr) { std::printf("    FAIL: val=%d GenerateNativeCode null\n", tc.val); return false; }
+        if (!CanCompile(rm)) { std::printf("    FAIL: val=%d CanCompile false\n", tc.val); return false; }
+        auto* nm = Compile(rm);
+        if (nm == nullptr) { std::printf("    FAIL: val=%d Compile null\n", tc.val); return false; }
         void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
         bool crashed = false;
         ExecuteNativeSafe(entry, crashed);
@@ -3142,9 +3142,9 @@ static bool Test_Blt() {
             InstrRet(2),
         };
         rm.max_regs = 3;
-        if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL case1: CanGenerateNativeCode false\n"); return false; }
-        auto* nm = GenerateNativeCode(rm);
-        if (nm == nullptr) { std::printf("    FAIL case1: GenerateNativeCode null\n"); return false; }
+        if (!CanCompile(rm)) { std::printf("    FAIL case1: CanCompile false\n"); return false; }
+        auto* nm = Compile(rm);
+        if (nm == nullptr) { std::printf("    FAIL case1: Compile null\n"); return false; }
         void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
         uint64_t result = ExecuteNative(entry);
         if (result != 42) { std::printf("    FAIL case1 (1 < 200): result=%llu (expected 42)\n", (unsigned long long)result); return false; }
@@ -3164,9 +3164,9 @@ static bool Test_Blt() {
             InstrRet(2),
         };
         rm.max_regs = 3;
-        if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL case2: CanGenerateNativeCode false\n"); return false; }
-        auto* nm = GenerateNativeCode(rm);
-        if (nm == nullptr) { std::printf("    FAIL case2: GenerateNativeCode null\n"); return false; }
+        if (!CanCompile(rm)) { std::printf("    FAIL case2: CanCompile false\n"); return false; }
+        auto* nm = Compile(rm);
+        if (nm == nullptr) { std::printf("    FAIL case2: Compile null\n"); return false; }
         void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
         uint64_t result = ExecuteNative(entry);
         if (result != 99) { std::printf("    FAIL case2 (200 < 1): result=%llu (expected 99)\n", (unsigned long long)result); return false; }
@@ -3186,9 +3186,9 @@ static bool Test_Blt() {
             InstrRet(2),
         };
         rm.max_regs = 3;
-        if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL case3: CanGenerateNativeCode false\n"); return false; }
-        auto* nm = GenerateNativeCode(rm);
-        if (nm == nullptr) { std::printf("    FAIL case3: GenerateNativeCode null\n"); return false; }
+        if (!CanCompile(rm)) { std::printf("    FAIL case3: CanCompile false\n"); return false; }
+        auto* nm = Compile(rm);
+        if (nm == nullptr) { std::printf("    FAIL case3: Compile null\n"); return false; }
         void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
         uint64_t result = ExecuteNative(entry);
         if (result != 77) { std::printf("    FAIL case3 (-5 < 0): result=%llu (expected 77)\n", (unsigned long long)result); return false; }
@@ -3223,9 +3223,9 @@ static bool Test_LdInd_StInd() {
             InstrRet(2),
         };
         rm.max_regs = 3;
-        if (!CanGenerateNativeCode(rm)) { std::printf("    FAIL: CanGenerateNativeCode false\n"); return false; }
-        auto* nm = GenerateNativeCode(rm);
-        if (nm == nullptr) { std::printf("    FAIL: GenerateNativeCode null\n"); return false; }
+        if (!CanCompile(rm)) { std::printf("    FAIL: CanCompile false\n"); return false; }
+        auto* nm = Compile(rm);
+        if (nm == nullptr) { std::printf("    FAIL: Compile null\n"); return false; }
         void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
         uint64_t result = ExecuteNative(entry);
         if (result != 42) { std::printf("    FAIL: result=%llu (expected 42)\n", (unsigned long long)result); return false; }

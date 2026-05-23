@@ -10,9 +10,9 @@ changes = 0
 # The pattern is [](){ ... chaos_eval_stack ... } or [](){ ... _s1 ... }
 # Replace []() with [&]() only when followed by { and captures local vars
 
-# Fix: replace all []() that appear to be codegen invocation lambdas
+# Fix: replace all []() that appear to be jit invocation lambdas
 # The pattern is [](){ with the body referencing local variables
-# Safer approach: replace [](){ with [&]() { in codegen context
+# Safer approach: replace [](){ with [&]() { in jit context
 # But we need to be careful not to break real stateless lambdas
 
 # Count []() occurrences

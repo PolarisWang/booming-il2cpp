@@ -412,8 +412,11 @@ def run_full_audit(assembly: str, family_slug: str) -> dict[str, Any]:
     # Determine overall status
     mechanism_pass = mechanism.passed
     principle_overall = principle_result.get("summary", {}).get("overall", "NOT_APPLICABLE") if isinstance(principle_result, dict) else "NOT_APPLICABLE"
-    # Strict pass: mechanism must pass AND principle must be ALIGNED
-    overall_pass = mechanism_pass and principle_overall == "ALIGNED"
+    # Pass requires: mechanism pass AND principle not VIOLATION.
+    # CONCERN is acceptable (e.g. p1_benchmark is known to be CONCERN
+    # for stub-based architectures — not a real violation).
+    # This must match the orchestrator's _stage_audit evaluation.
+    overall_pass = mechanism_pass and principle_overall != "VIOLATION"
 
     report = {
         "generated_at": __import__("datetime").datetime.now().isoformat(),

@@ -33,14 +33,14 @@
 
 // Stub destructor: required because the test includes t4_seh_handler.cpp directly
 // without linking chaos_codegen.lib (avoids duplicate symbols from the direct
-// #include).  ~NativeMethod() is normally defined in code_generator.cpp.
+// #include).  ~JitMethod() is normally defined in code_generator.cpp.
 // In tests, all pointer fields are nullptr (default-initialized), so the stub
 // is safe — no real resources are freed.
-namespace chaos::il2cpp::codegen {
-NativeMethod::~NativeMethod() noexcept {}
+namespace chaos::il2cpp::jit {
+JitMethod::~JitMethod() noexcept {}
 }
 
-namespace chaos::il2cpp::codegen {
+namespace chaos::il2cpp::jit {
 namespace {
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -58,12 +58,12 @@ namespace {
 ///     uint32_t  handler_start_offset
 ///     uint32_t  class_token      (0=catch-all, non-zero=typed catch)
 ///
-/// Returns a NativeMethod whose `code` and `seh_table_offset` reference
+/// Returns a JitMethod whose `code` and `seh_table_offset` reference
 /// the returned buffer.  The caller must keep the buffer alive for the
-/// lifetime of any test using the returned NativeMethod.
+/// lifetime of any test using the returned JitMethod.
 struct FakeCodeWithSeh {
     std::vector<uint8_t> buffer;
-    NativeMethod         nm;
+    JitMethod         nm;
 
     /// Each clause is (flags, try_start, try_end, handler_start, class_token).
     explicit FakeCodeWithSeh(
@@ -159,17 +159,17 @@ protected:
     }
 
     /// Register a minimal T4 code entry and return the registered code
-    /// pointer (for use with FindT4CodeByAddress) and NativeMethod pointer.
-    std::pair<void*, const NativeMethod*>
+    /// pointer (for use with FindT4CodeByAddress) and JitMethod pointer.
+    std::pair<void*, const JitMethod*>
     RegisterFakeEntry(uint32_t code_size = 64) {
         auto* buf = new std::vector<uint8_t>(code_size, 0xCC);
-        auto* nm  = new NativeMethod();
+        auto* nm  = new JitMethod();
         nm->code      = buf->data();
         nm->code_size = code_size;
         // Store on heap so pointers remain valid for the test duration.
         // Leaks are acceptable in short-lived unit tests.
         static std::vector<std::unique_ptr<std::vector<uint8_t>>> s_bufs;
-        static std::vector<std::unique_ptr<NativeMethod>> s_nms;
+        static std::vector<std::unique_ptr<JitMethod>> s_nms;
         s_bufs.emplace_back(buf);
         s_nms.emplace_back(nm);
 
@@ -252,7 +252,7 @@ TEST_F(T4SehHandlerTest,
 
 TEST_F(T4SehHandlerTest, RegisterT4Code_SetsUpValidEntry) {
     uint8_t fake_code[128] = {};
-    NativeMethod nm;
+    JitMethod nm;
     nm.code      = fake_code;
     nm.code_size = sizeof(fake_code);
 
@@ -265,7 +265,7 @@ TEST_F(T4SehHandlerTest, RegisterT4Code_SetsUpValidEntry) {
 
 TEST_F(T4SehHandlerTest, RegisterT4Code_RejectsNullParameters) {
     uint8_t fake_code[64] = {};
-    NativeMethod nm;
+    JitMethod nm;
     nm.code      = fake_code;
     nm.code_size = 64;
 
@@ -277,7 +277,7 @@ TEST_F(T4SehHandlerTest, RegisterT4Code_RejectsNullParameters) {
     RegisterT4Code(fake_code, 0, &nm);
     EXPECT_EQ(g_t4_code_count, 0u);
 
-    // nullptr NativeMethod.
+    // nullptr JitMethod.
     RegisterT4Code(fake_code, 64, nullptr);
     EXPECT_EQ(g_t4_code_count, 0u);
 }
@@ -285,7 +285,7 @@ TEST_F(T4SehHandlerTest, RegisterT4Code_RejectsNullParameters) {
 TEST_F(T4SehHandlerTest,
        UnregisterT4Code_ClearsEntryAndEnqueuesDemotedCode) {
     uint8_t fake_code[64] = {};
-    NativeMethod nm;
+    JitMethod nm;
     nm.code      = fake_code;
     nm.code_size = sizeof(fake_code);
 
@@ -332,7 +332,7 @@ TEST_F(T4SehHandlerTest, UnregisterT4Code_UnknownAddressReturnsSafely) {
 
 TEST_F(T4SehHandlerTest, DoubleRegisterSameAddressDoesNotCrash) {
     uint8_t fake_code[64] = {};
-    NativeMethod nm1, nm2;
+    JitMethod nm1, nm2;
     nm1.code = nm2.code = fake_code;
     nm1.code_size = nm2.code_size = 64;
 
@@ -351,7 +351,7 @@ TEST_F(T4SehHandlerTest, DoubleRegisterSameAddressDoesNotCrash) {
 TEST_F(T4SehHandlerTest,
        EnqueueDemotedCode_DeduplicatesSameAddressEnqueuedTwice) {
     uint8_t fake_code[64] = {};
-    NativeMethod nm;
+    JitMethod nm;
     nm.code      = fake_code;
     nm.code_size = sizeof(fake_code);
 
@@ -423,7 +423,7 @@ TEST_F(T4SehHandlerTest, EnqueueDemotedCode_RejectsZeroSize) {
 TEST_F(T4SehHandlerTest, DemoteT4ByToken_DemotesMatchingEntries) {
     uint8_t fake_a[64] = {};
     uint8_t fake_b[64] = {};
-    NativeMethod nm_a, nm_b;
+    JitMethod nm_a, nm_b;
     nm_a.code = fake_a; nm_a.code_size = 64;
     nm_b.code = fake_b; nm_b.code_size = 64;
 
@@ -459,7 +459,7 @@ TEST_F(T4SehHandlerTest, DemoteT4ByToken_NoMatchReturnsZero) {
 
 TEST_F(T4SehHandlerTest,
        BuildSehExceptionDispatch_ReturnsFalseWhenSehTableOffsetIsZero) {
-    NativeMethod nm;
+    JitMethod nm;
     nm.code             = reinterpret_cast<void*>(0x1000);
     nm.code_size        = 64;
     nm.seh_table_offset = 0;  // No SEH table.
@@ -597,7 +597,7 @@ TEST_F(T4SehHandlerTest,
 
 TEST_F(T4SehHandlerTest,
        FindSehHandlerForOffset_ReturnsFFFFFFFFWhenNoSehTable) {
-    NativeMethod nm;
+    JitMethod nm;
     nm.code             = reinterpret_cast<void*>(0x1000);
     nm.code_size        = 64;
     nm.seh_table_offset = 0;
@@ -669,7 +669,7 @@ TEST_F(T4SehHandlerTest, DemoteT4ByCallSiteToken_ZeroTokenReturnsZero) {
 TEST_F(T4SehHandlerTest,
        DemoteT4ByCallSiteToken_NoMatchingCallSiteReturnsZero) {
     uint8_t fake_code[64] = {};
-    NativeMethod nm;
+    JitMethod nm;
     nm.code      = fake_code;
     nm.code_size = 64;
     // Set up a call site with a different token.
@@ -691,7 +691,7 @@ TEST_F(T4SehHandlerTest,
 TEST_F(T4SehHandlerTest, RegistryFull_LogsWarningAndRejectsEntry) {
     // Fill the registry to capacity.
     uint8_t dummy = 0;
-    NativeMethod dummy_nm;
+    JitMethod dummy_nm;
     dummy_nm.code      = &dummy;
     dummy_nm.code_size = 1;
 
@@ -704,7 +704,7 @@ TEST_F(T4SehHandlerTest, RegistryFull_LogsWarningAndRejectsEntry) {
 
     // One more should be rejected.
     uint8_t extra = 0xFF;
-    NativeMethod extra_nm;
+    JitMethod extra_nm;
     extra_nm.code      = &extra;
     extra_nm.code_size = 1;
     RegisterT4Code(&extra, 1, &extra_nm);
@@ -736,7 +736,7 @@ TEST_F(T4SehHandlerTest,
 
 TEST_F(T4SehHandlerTest, UnregisterT4Code_InvalidatesLookupCache) {
     uint8_t fake_code[64] = {};
-    NativeMethod nm;
+    JitMethod nm;
     nm.code      = fake_code;
     nm.code_size = sizeof(fake_code);
 
@@ -755,4 +755,4 @@ TEST_F(T4SehHandlerTest, UnregisterT4Code_InvalidatesLookupCache) {
 }
 
 }  // namespace
-}  // namespace chaos::il2cpp::codegen
+}  // namespace chaos::il2cpp::jit

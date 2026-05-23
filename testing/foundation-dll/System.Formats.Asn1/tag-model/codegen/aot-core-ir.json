@@ -2419,8 +2419,8 @@
         {
           "handlingKindCode": 1,
           "tryOffset": 1,
-          "tryLength": 85,
-          "handlerOffset": 86,
+          "tryLength": 73,
+          "handlerOffset": 74,
           "handlerLength": 11,
           "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
@@ -2466,42 +2466,16 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 42,
+          "op": "ldnull",
+          "opCode": 5,
           "ilOffset": 11,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "box",
-          "opCode": 35,
-          "operand": "System.Private.CoreLib/System.Int32",
-          "ilOffset": 13,
           "resultType": "System.Object",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "type",
-            "subjectId": "System.Private.CoreLib/System.Int32"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Int32",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 9,
           "isPreserveSig": false
         },
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 24,
+          "ilOffset": 18,
           "resultType": "System.Boolean",
           "callee": "System.Formats.Asn1/Asn1Tag::Equals:System.Boolean(System.Object)",
           "reference": {
@@ -2527,8 +2501,8 @@
         {
           "op": "brtrue",
           "opCode": 18,
-          "operand": 34,
-          "ilOffset": 29,
+          "operand": 28,
+          "ilOffset": 23,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -2536,15 +2510,15 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 31,
+          "ilOffset": 25,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
-          "operand": 35,
-          "ilOffset": 32,
+          "operand": 29,
+          "ilOffset": 26,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -2552,7 +2526,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 34,
+          "ilOffset": 28,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -2560,21 +2534,21 @@
           "op": "ldloca",
           "opCode": 76,
           "operand": 1,
-          "ilOffset": 35,
+          "ilOffset": 29,
           "resultType": "System.IntPtr",
           "isPreserveSig": false
         },
         {
           "op": "dup",
           "opCode": 54,
-          "ilOffset": 37,
+          "ilOffset": 31,
           "isPreserveSig": false
         },
         {
           "op": "initobj",
           "opCode": 71,
           "operand": "System.Formats.Asn1/Asn1Tag",
-          "ilOffset": 38,
+          "ilOffset": 32,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "System.Formats.Asn1",
@@ -2596,42 +2570,16 @@
           "isPreserveSig": false
         },
         {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 42,
-          "ilOffset": 44,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "box",
-          "opCode": 35,
-          "operand": "System.Private.CoreLib/System.Int32",
-          "ilOffset": 46,
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 38,
           "resultType": "System.Object",
-          "reference": {
-            "assemblyName": "System.Private.CoreLib",
-            "subjectKind": "type",
-            "subjectId": "System.Private.CoreLib/System.Int32"
-          },
-          "targetReference": {
-            "kind": 1,
-            "assemblyName": "System.Private.CoreLib",
-            "subjectId": "System.Private.CoreLib/System.Int32",
-            "typeShape": 1,
-            "arrayElementTypeShape": 0,
-            "isSealed": false,
-            "isComImport": false,
-            "comInterfaceTypeKind": 0,
-            "declaringTypeShape": 0
-          },
-          "runtimeServiceKind": 9,
           "isPreserveSig": false
         },
         {
           "op": "callvirt",
           "opCode": 15,
-          "ilOffset": 57,
+          "ilOffset": 45,
           "resultType": "System.Boolean",
           "callee": "System.Formats.Asn1/Asn1Tag::Equals:System.Boolean(System.Object)",
           "reference": {
@@ -2657,8 +2605,8 @@
         {
           "op": "brtrue",
           "opCode": 18,
-          "operand": 67,
-          "ilOffset": 62,
+          "operand": 55,
+          "ilOffset": 50,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -2666,15 +2614,15 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 64,
+          "ilOffset": 52,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "br",
           "opCode": 17,
-          "operand": 68,
-          "ilOffset": 65,
+          "operand": 56,
+          "ilOffset": 53,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -2682,14 +2630,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 67,
+          "ilOffset": 55,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 68,
+          "ilOffset": 56,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -2697,14 +2645,14 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 0,
-          "ilOffset": 70,
+          "ilOffset": 58,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
           "op": "ceq",
           "opCode": 31,
-          "ilOffset": 71,
+          "ilOffset": 59,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -2712,7 +2660,7 @@
           "op": "stloc",
           "opCode": 8,
           "operand": 0,
-          "ilOffset": 73,
+          "ilOffset": 61,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -2720,14 +2668,14 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 0,
-          "ilOffset": 74,
+          "ilOffset": 62,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 83,
-          "ilOffset": 75,
+          "operand": 71,
+          "ilOffset": 63,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -2735,7 +2683,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 77,
+          "ilOffset": 65,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -2743,7 +2691,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "TagModelSubjects/TagModelSubjects::_exitCode",
-          "ilOffset": 78,
+          "ilOffset": 66,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "TagModelSubjects",
@@ -2769,22 +2717,22 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 97,
-          "ilOffset": 84,
+          "operand": 85,
+          "ilOffset": 72,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 86,
+          "ilOffset": 74,
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 88,
+          "ilOffset": 76,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -2792,7 +2740,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "TagModelSubjects/TagModelSubjects::_exitCode",
-          "ilOffset": 89,
+          "ilOffset": 77,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "TagModelSubjects",
@@ -2818,15 +2766,15 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 97,
-          "ilOffset": 95,
+          "operand": 85,
+          "ilOffset": 83,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 97,
+          "ilOffset": 85,
           "isPreserveSig": false
         }
       ],
@@ -6446,33 +6394,49 @@
       "exceptionRegions": [
         {
           "handlingKindCode": 1,
-          "tryOffset": 1,
+          "tryOffset": 4,
           "tryLength": 81,
-          "handlerOffset": 82,
+          "handlerOffset": 85,
           "handlerLength": 11,
           "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
         }
       ],
       "instructions": [
         {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 42,
+          "ilOffset": 1,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 3,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
           "op": "ldloca",
           "opCode": 76,
           "operand": 2,
-          "ilOffset": 2,
+          "ilOffset": 5,
           "resultType": "System.IntPtr",
           "isPreserveSig": false
         },
         {
           "op": "dup",
           "opCode": 54,
-          "ilOffset": 4,
+          "ilOffset": 7,
           "isPreserveSig": false
         },
         {
           "op": "initobj",
           "opCode": 71,
           "operand": "System.Formats.Asn1/Asn1Tag",
-          "ilOffset": 5,
+          "ilOffset": 8,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "System.Formats.Asn1",
@@ -6497,7 +6461,7 @@
           "op": "ldloca",
           "opCode": 76,
           "operand": 3,
-          "ilOffset": 11,
+          "ilOffset": 14,
           "resultType": "System.IntPtr",
           "isPreserveSig": false
         },
@@ -6505,7 +6469,7 @@
           "op": "initobj",
           "opCode": 71,
           "operand": "System.Private.CoreLib/System.Span\u003CSystem.Byte\u003E",
-          "ilOffset": 13,
+          "ilOffset": 16,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "System.Private.CoreLib",
@@ -6530,21 +6494,21 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 3,
-          "ilOffset": 19,
+          "ilOffset": 22,
           "isPreserveSig": false
         },
         {
           "op": "ldloca",
           "opCode": 76,
-          "operand": 1,
-          "ilOffset": 20,
+          "operand": 0,
+          "ilOffset": 23,
           "resultType": "System.IntPtr",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 22,
+          "ilOffset": 25,
           "resultType": "System.Boolean",
           "callee": "System.Formats.Asn1/Asn1Tag::TryEncode:System.Boolean(System.Span\u003CSystem.Byte\u003E,System.Int32\u0026)",
           "reference": {
@@ -6569,23 +6533,7 @@
         {
           "op": "brtrue",
           "opCode": 18,
-          "operand": 32,
-          "ilOffset": 27,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 29,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 33,
+          "operand": 35,
           "ilOffset": 30,
           "resultType": "System.Void",
           "isPreserveSig": false
@@ -6593,8 +6541,24 @@
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 1,
+          "operand": 0,
           "ilOffset": 32,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 36,
+          "ilOffset": 33,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 35,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -6602,21 +6566,21 @@
           "op": "ldloca",
           "opCode": 76,
           "operand": 2,
-          "ilOffset": 33,
+          "ilOffset": 36,
           "resultType": "System.IntPtr",
           "isPreserveSig": false
         },
         {
           "op": "dup",
           "opCode": 54,
-          "ilOffset": 35,
+          "ilOffset": 38,
           "isPreserveSig": false
         },
         {
           "op": "initobj",
           "opCode": 71,
           "operand": "System.Formats.Asn1/Asn1Tag",
-          "ilOffset": 36,
+          "ilOffset": 39,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "System.Formats.Asn1",
@@ -6641,7 +6605,7 @@
           "op": "ldloca",
           "opCode": 76,
           "operand": 3,
-          "ilOffset": 42,
+          "ilOffset": 45,
           "resultType": "System.IntPtr",
           "isPreserveSig": false
         },
@@ -6649,7 +6613,7 @@
           "op": "initobj",
           "opCode": 71,
           "operand": "System.Private.CoreLib/System.Span\u003CSystem.Byte\u003E",
-          "ilOffset": 44,
+          "ilOffset": 47,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "System.Private.CoreLib",
@@ -6674,21 +6638,21 @@
           "op": "ldloc",
           "opCode": 7,
           "operand": 3,
-          "ilOffset": 50,
+          "ilOffset": 53,
           "isPreserveSig": false
         },
         {
           "op": "ldloca",
           "opCode": 76,
-          "operand": 1,
-          "ilOffset": 51,
+          "operand": 0,
+          "ilOffset": 54,
           "resultType": "System.IntPtr",
           "isPreserveSig": false
         },
         {
           "op": "call",
           "opCode": 14,
-          "ilOffset": 53,
+          "ilOffset": 56,
           "resultType": "System.Boolean",
           "callee": "System.Formats.Asn1/Asn1Tag::TryEncode:System.Boolean(System.Span\u003CSystem.Byte\u003E,System.Int32\u0026)",
           "reference": {
@@ -6713,23 +6677,7 @@
         {
           "op": "brtrue",
           "opCode": 18,
-          "operand": 63,
-          "ilOffset": 58,
-          "resultType": "System.Void",
-          "isPreserveSig": false
-        },
-        {
-          "op": "ldc.i4",
-          "opCode": 0,
-          "operand": 0,
-          "ilOffset": 60,
-          "resultType": "System.Int32",
-          "isPreserveSig": false
-        },
-        {
-          "op": "br",
-          "opCode": 17,
-          "operand": 64,
+          "operand": 66,
           "ilOffset": 61,
           "resultType": "System.Void",
           "isPreserveSig": false
@@ -6737,22 +6685,23 @@
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 1,
+          "operand": 0,
           "ilOffset": 63,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
         {
-          "op": "ceq",
-          "opCode": 31,
+          "op": "br",
+          "opCode": 17,
+          "operand": 67,
           "ilOffset": 64,
-          "resultType": "System.Int32",
+          "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
-          "operand": 0,
+          "operand": 1,
           "ilOffset": 66,
           "resultType": "System.Int32",
           "isPreserveSig": false
@@ -6765,25 +6714,40 @@
           "isPreserveSig": false
         },
         {
-          "op": "stloc",
-          "opCode": 8,
+          "op": "ldc.i4",
+          "opCode": 0,
           "operand": 0,
           "ilOffset": 69,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 70,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 1,
+          "ilOffset": 72,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ldloc",
           "opCode": 7,
-          "operand": 0,
-          "ilOffset": 70,
+          "operand": 1,
+          "ilOffset": 73,
           "isPreserveSig": false
         },
         {
           "op": "brfalse",
           "opCode": 19,
-          "operand": 79,
-          "ilOffset": 71,
+          "operand": 82,
+          "ilOffset": 74,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
@@ -6791,7 +6755,7 @@
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 73,
+          "ilOffset": 76,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -6799,7 +6763,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "TagModelSubjects/TagModelSubjects::_exitCode",
-          "ilOffset": 74,
+          "ilOffset": 77,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "TagModelSubjects",
@@ -6825,22 +6789,22 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 93,
-          "ilOffset": 80,
+          "operand": 96,
+          "ilOffset": 83,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "pop",
           "opCode": 47,
-          "ilOffset": 82,
+          "ilOffset": 85,
           "isPreserveSig": false
         },
         {
           "op": "ldc.i4",
           "opCode": 0,
           "operand": 1,
-          "ilOffset": 84,
+          "ilOffset": 87,
           "resultType": "System.Int32",
           "isPreserveSig": false
         },
@@ -6848,7 +6812,7 @@
           "op": "stsfld",
           "opCode": 13,
           "operand": "TagModelSubjects/TagModelSubjects::_exitCode",
-          "ilOffset": 85,
+          "ilOffset": 88,
           "resultType": "System.Void",
           "reference": {
             "assemblyName": "TagModelSubjects",
@@ -6874,15 +6838,15 @@
         {
           "op": "leave",
           "opCode": 50,
-          "operand": 93,
-          "ilOffset": 91,
+          "operand": 96,
+          "ilOffset": 94,
           "resultType": "System.Void",
           "isPreserveSig": false
         },
         {
           "op": "ret",
           "opCode": 53,
-          "ilOffset": 93,
+          "ilOffset": 96,
           "isPreserveSig": false
         }
       ],

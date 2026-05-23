@@ -1128,6 +1128,115 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateVoidAbiSlot(),
                 new HashSet<int> { 0, 1 });
 
+            // ── Stream.Read/Write/CopyTo ──
+            registry.Register("System.IO.Stream", "Read", ["System.Byte[]", "System.Int32", "System.Int32"],
+                ShapeKind.SimpleForward, "ChaosStreamRead",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[4]
+                {
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Byte[]", AotCoreIrTypeShapeKind.ReferenceType),
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int32, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int32, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                }),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int32, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0, 1, 2, 3 });
+
+            registry.Register("System.IO.Stream", "Write", ["System.Byte[]", "System.Int32", "System.Int32"],
+                ShapeKind.SimpleForward, "ChaosStreamWrite",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[4]
+                {
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Byte[]", AotCoreIrTypeShapeKind.ReferenceType),
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int32, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int32, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                }),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0, 1, 2, 3 });
+
+            registry.Register("System.IO.Stream", "CopyTo", ["System.IO.Stream"],
+                ShapeKind.SimpleForward, "ChaosStreamCopyTo",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                }),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0, 1 });
+
+            // ── MemoryStream(byte[]) ──
+            registry.Register("System.IO.MemoryStream", ".ctor", ["System.Byte[]"],
+                ShapeKind.SimpleForward, "ChaosMemoryStreamCtorWithBuffer",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.Byte[]", AotCoreIrTypeShapeKind.ReferenceType),
+                }),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0, 1 });
+
+            // ── BinaryReader ──
+            registry.Register("System.IO.BinaryReader", ".ctor", ["System.IO.Stream"],
+                ShapeKind.SimpleForward, "ChaosBinaryReaderCtor",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                }),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0, 1 });
+
+            registry.Register("System.IO.BinaryReader", "ReadInt32", [],
+                ShapeKind.SimpleForward, "ChaosBinaryReaderReadInt32",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int32, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0 });
+
+            registry.Register("System.IO.BinaryReader", "ReadString", [],
+                ShapeKind.SimpleForward, "ChaosBinaryReaderReadString",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
+
+            registry.Register("System.IO.BinaryReader", "ReadDouble", [],
+                ShapeKind.SimpleForward, "ChaosBinaryReaderReadDouble",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
+                new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                new HashSet<int> { 0 });
+
+            // ── BinaryWriter ──
+            registry.Register("System.IO.BinaryWriter", ".ctor", ["System.IO.Stream"],
+                ShapeKind.SimpleForward, "ChaosBinaryWriterCtor",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                }),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0, 1 });
+
+            registry.Register("System.IO.BinaryWriter", "Write", ["System.Int32"],
+                ShapeKind.SimpleForward, "ChaosBinaryWriterWriteInt32",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                    new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Int32, TypeShape = AotCoreIrTypeShapeKind.ValueType },
+                }),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0, 1 });
+
+            registry.Register("System.IO.BinaryWriter", "Write", ["System.String"],
+                ShapeKind.SimpleForward, "ChaosBinaryWriterWriteString",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                {
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                }),
+                CreateVoidAbiSlot(),
+                new HashSet<int> { 0, 1 });
+
             // === Array.Empty<T> (SimpleForward — returns null stub) ===
             registry.Register("System.Array", "Empty", [],
                 ShapeKind.SimpleForward, "ChaosArrayEmpty",

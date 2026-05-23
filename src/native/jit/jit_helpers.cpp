@@ -1,8 +1,8 @@
 // codegen_helpers.cpp — Runtime helper implementations for T4 generated code
 
-#include "codegen_helpers.h"
-#include "deopt_runtime.h"
-#include "t4_seh_handler.h"
+#include "jit_helpers.h"
+#include "jit_deopt.h"
+#include "jit_seh.h"
 
 #include <cstdint>
 #include <cstring>
@@ -17,7 +17,7 @@
 #include <intrin.h>  // _ReturnAddress()
 
 // ── Thread-local deoptimization state ───────────────────────────────────────
-namespace chaos::il2cpp::codegen {
+namespace chaos::il2cpp::jit {
 thread_local DeoptTlsState t_deopt_state;
 }
 
@@ -187,7 +187,7 @@ extern "C" uint64_t CodegenCallVirt(const CodegenCallVirtArgs* args) noexcept {
     // The call site (code_generator) checks ret_buf[0] and jumps to
     // deopt_return, which unwinds the frame back to entry_direct.
     if (args->ret_buf != nullptr) {
-        using namespace chaos::il2cpp::codegen;
+        using namespace chaos::il2cpp::jit;
 
         // Copy all 64 GPR values from the register file directly.
         std::memcpy(t_deopt_state.gpr_file, gpr_base,
@@ -200,9 +200,9 @@ extern "C" uint64_t CodegenCallVirt(const CodegenCallVirtArgs* args) noexcept {
         // Extract type tags from the DeoptEntry for this call site.
         // The return address points to the instruction after the call to
         // CodegenCallVirt in the generated code.  Use it to find the
-        // NativeMethod and its DeoptEntry, then copy per-register tags.
+        // JitMethod and its DeoptEntry, then copy per-register tags.
         void* ret_addr = _ReturnAddress();
-        const NativeMethod* nm = FindT4CodeByAddress(ret_addr);
+        const JitMethod* nm = FindT4CodeByAddress(ret_addr);
         if (nm != nullptr && nm->deopt_values != nullptr) {
             uint64_t code_base = reinterpret_cast<uint64_t>(nm->code);
             uint32_t native_off = static_cast<uint32_t>(
@@ -557,7 +557,7 @@ extern "C" void* CodegenLocAlloc(uint32_t size, void* base, uint32_t* bump) noex
 
 extern "C" void DeoptSaveFrameState(uint64_t codegen_rsp) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::DeoptSaveFrameState");
-    using namespace chaos::il2cpp::codegen;
+    using namespace chaos::il2cpp::jit;
     using namespace chaos::il2cpp::interpreter;
 
     if (codegen_rsp == 0) return;
@@ -566,8 +566,8 @@ extern "C" void DeoptSaveFrameState(uint64_t codegen_rsp) noexcept {
     // to DeoptSaveFrameState in the generated code.
     void* ret_addr = _ReturnAddress();
 
-    // Find the NativeMethod covering this code address.
-    const NativeMethod* nm = FindT4CodeByAddress(ret_addr);
+    // Find the JitMethod covering this code address.
+    const JitMethod* nm = FindT4CodeByAddress(ret_addr);
     if (nm == nullptr) return;
 
     uint64_t code_base = reinterpret_cast<uint64_t>(nm->code);
@@ -613,9 +613,9 @@ extern "C" void DeoptSaveFrameState(uint64_t codegen_rsp) noexcept {
 // ── OSR loop header resolver ─────────────────────────────────────────────────
 
 extern "C" void* OsrResolveLoopHeader() noexcept {
-    using namespace chaos::il2cpp::codegen;
+    using namespace chaos::il2cpp::jit;
     void* ret_addr = _ReturnAddress();
-    const NativeMethod* nm = FindT4CodeByAddress(ret_addr);
+    const JitMethod* nm = FindT4CodeByAddress(ret_addr);
     if (nm == nullptr) return nullptr;
 
     uint32_t resume_pc = t_deopt_state.osr_resume_pc;
@@ -630,7 +630,7 @@ extern "C" void* OsrResolveLoopHeader() noexcept {
 
 extern "C" void DeoptTrapEntry(const void* ctx, uint64_t codegen_rsp) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::DeoptTrapEntry");
-    using namespace chaos::il2cpp::codegen;
+    using namespace chaos::il2cpp::jit;
 
     if (ctx == nullptr) return;
 
@@ -638,8 +638,8 @@ extern "C" void DeoptTrapEntry(const void* ctx, uint64_t codegen_rsp) noexcept {
     //    that the CALL to DeoptTrapEntry pushed.
     void* ret_addr = _ReturnAddress();
 
-    // 2. Find the NativeMethod covering this code address.
-    const NativeMethod* nm = FindT4CodeByAddress(ret_addr);
+    // 2. Find the JitMethod covering this code address.
+    const JitMethod* nm = FindT4CodeByAddress(ret_addr);
     if (nm == nullptr) {
         return;
     }
@@ -652,7 +652,7 @@ extern "C" void DeoptTrapEntry(const void* ctx, uint64_t codegen_rsp) noexcept {
     // 4. Deoptimize: reconstruct register file from stack frame spill slots.
     const NativeContext* nctx = static_cast<const NativeContext*>(ctx);
     DeoptRuntime::DeoptTrap(
-        const_cast<NativeMethod*>(nm),
+        const_cast<JitMethod*>(nm),
         native_offset,
         *nctx,
         codegen_rsp,

@@ -13,12 +13,12 @@
 // to reconstruct the register file from spilled frame slots.  Full OsrState
 // reconstruction with RegStackMap is deferred to later.
 
-#include "native_method.h"
+#include "jit_method.h"
 
 #include <cstdint>
 #include <cstddef>
 
-namespace chaos::il2cpp::codegen {
+namespace chaos::il2cpp::jit {
 
 /// Saved native register context at a deoptimization point.
 /// Captures all caller-saved registers that might hold live values.
@@ -40,7 +40,7 @@ public:
     /// Binary search over entries sorted by native_offset.
     /// Returns nullptr if no matching entry is found.
     static const DeoptEntry* FindEntry(
-        const NativeMethod* nm,
+        const JitMethod* nm,
         uint32_t native_offset) noexcept;
 
     /// Reconstruct the register file from a NativeContext + DeoptEntry.
@@ -61,7 +61,7 @@ public:
     /// This is the entry point that generated code calls via a thunk.
     ///
     /// Parameters:
-    ///   nm            — NativeMethod for the generated code
+    ///   nm            — JitMethod for the generated code
     ///   return_address — native offset within the generated code
     ///   ctx           — saved NativeContext (16 GPRs + 16 FPRs)
     ///   codegen_rsp   — RSP at function entry (after prologue), or 0 to
@@ -71,7 +71,7 @@ public:
     ///   out_gpr_tags  — if non-null, filled with per-register ValueTag (size 64)
     ///   out_fpr_tags  — if non-null, filled with per-register ValueTag (size 32)
     static void DeoptTrap(
-        NativeMethod* nm,
+        JitMethod* nm,
         uint32_t      return_address,
         NativeContext ctx,
         uint64_t      codegen_rsp = 0,
@@ -81,6 +81,6 @@ public:
         uint8_t*      out_fpr_tags = nullptr) noexcept;
 };
 
-}  // namespace chaos::il2cpp::codegen
+}  // namespace chaos::il2cpp::jit
 
 #endif  // CHAOS_IL2CPP_CODEGEN_DEOPT_RUNTIME_H_

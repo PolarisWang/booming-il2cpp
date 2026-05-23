@@ -2,22 +2,22 @@
   "schemaVersion": 1,
   "assemblyName": "System.IO.Compression.Brotli",
   "familyId": "family/System.IO.Compression.Brotli/decoder",
-  "capturedAt": "2026-05-22T06:41:24",
+  "capturedAt": "2026-05-23T20:43:17",
   "metrics": {
     "framePool": {
-      "acquireReleaseNsPerOp": 3.2,
+      "acquireReleaseNsPerOp": 2.6,
       "batchCount": 1000,
       "framesPerBatch": 32
     },
     "fastExecute": {
       "runCount": 100000,
-      "nsPerCall": 10.1
+      "nsPerCall": 6.5
     },
     "callVirt": {
-      "handlerDispatchNs": 7.6,
-      "emptyStackNs": 8.4
+      "handlerDispatchNs": 6.3,
+      "emptyStackNs": 7.0
     },
     "poolSize": 32
   },
-  "rawOutput": "[2026-05-22T06:41:24][DEBUG][codegen] T4 VEH handler registered\n[2026-05-22T06:41:24][DEBUG][GcEvents] registered callback 0x7ff7a9e53fe0 at slot 0\n[2026-05-22T06:41:24][WARN][CRAG] young_collection_no_region\n[2026-05-22T06:41:24][INFO][NUMA] numa_init count=%d\n[2026-05-22T06:41:24][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-22T06:41:24][INFO][OldGen] init done base=0x2276767236096 pages=8\n[2026-05-22T06:41:24][DEBUG][codegen] T4 VEH handler registered\n[2026-05-22T06:41:24][DEBUG][GcEvents] registered callback 0x7ff7a9e53fe0 at slot 1\nBenchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 3.2 ns/op (1000 batches x 32 frames)\n[2026-05-22T06:41:24][DEBUG][BGC] thread_started\n[2026-05-22T06:41:24][DEBUG][Finalizer] thread_started id={0}\nBenchmark 2: FastExecute (Subject_0): 100000 runs: 10.1 ns/op\nHandler dispatch overhead (LdcI4): 7.6 ns/call\nCallVirt empty-stack: 8.4 ns/call\n"
+  "rawOutput": "[2026-05-23T20:43:17][DEBUG][codegen] T4 VEH handler registered\n[2026-05-23T20:43:17][DEBUG][GcEvents] registered callback 0x7ff68298d5b0 at slot 0\n[2026-05-23T20:43:17][WARN][CRAG] young_collection_no_region\n[2026-05-23T20:43:17][INFO][NUMA] numa_init count=%d\n[2026-05-23T20:43:17][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-23T20:43:17][INFO][OldGen] emergency_reserve_allocated base=0x2660243210240 size=65536\n[2026-05-23T20:43:17][INFO][OldGen] init done base=0x2660218896384 pages=8\n[2026-05-23T20:43:17][DEBUG][codegen] T4 VEH handler registered\n[2026-05-23T20:43:17][DEBUG][GcEvents] registered callback 0x7ff68298d5b0 at slot 1\nBenchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 2.6 ns/op (1000 batches x 32 frames)\n[2026-05-23T20:43:17][DEBUG][BGC] thread_started\n[2026-05-23T20:43:17][DEBUG][Finalizer] thread_started id={0}\nBenchmark 2: FastExecute (Subject_0): 100000 runs: 6.5 ns/op\nHandler dispatch overhead (LdcI4): 6.3 ns/call\nCallVirt empty-stack: 7.0 ns/call\n"
 }

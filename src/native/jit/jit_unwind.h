@@ -16,7 +16,7 @@
 #include <cstdint>
 #include <cstddef>
 
-namespace chaos::il2cpp::codegen {
+namespace chaos::il2cpp::jit {
 
 class CodeBuffer;
 
@@ -75,7 +75,7 @@ struct RuntimeFunction {
 ///                         to T4PersonalityRoutine after the unwind codes (V2).
 ///
 /// @return The byte offset from the start of the code buffer where UNWIND_INFO begins.
-///         The caller stores this in NativeMethod for RUNTIME_FUNCTION.UnwindInfoAddress.
+///         The caller stores this in JitMethod for RUNTIME_FUNCTION.UnwindInfoAddress.
 uint32_t EmitUnwindInfo(
     CodeBuffer& buf,
     uint32_t prologue_size,
@@ -138,6 +138,6 @@ uint32_t EmitDwarfFde(CodeBuffer& buf, uint32_t cie_offset,
                       uint32_t num_push_regs,
                       const uint8_t* push_reg_nums) noexcept;
 
-}  // namespace chaos::il2cpp::codegen
+}  // namespace chaos::il2cpp::jit
 
 #endif  // CHAOS_IL2CPP_CODEGEN_UNWIND_INFO_H_
