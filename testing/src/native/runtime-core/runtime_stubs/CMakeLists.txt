@@ -15,6 +15,17 @@ add_chaos_test(string_stubs_test
     LABELS "unit;core"
 )
 
+# T0-3: enum_stubs unit tests
+# NOTE: enum_stubs.cpp is compiled directly because the prebuilt lib
+# uses GNU ar format which MSVC cannot reliably resolve even with
+# extern "C" linkage.  GC stubs from gc_stubs_for_string_tests.cpp.
+add_chaos_test(enum_stubs_test
+    enum_stubs_test.cpp
+    gc_stubs_for_string_tests.cpp
+    "${CHAOS_PROJECT_ROOT}/../src/native/runtime-core/runtime_stubs/enum_stubs.cpp"
+    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    LABELS "unit;core"
+)
 # T0-2: collection_stubs unit tests (all 14 public API functions)
 # NOTE: collection_stubs.cpp is compiled directly (same GNU ar issue as
 # string_stubs).  GC stubs from gc_stubs_for_string_tests.cpp are reused
