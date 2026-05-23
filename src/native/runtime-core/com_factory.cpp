@@ -1,50 +1,63 @@
 #include <mutex>
 #include <chaos/native_types.h>
-#include <chaos/unordered_dense.h>
-#include <chaos/log.h>
 #include "com_factory.h"
 
 namespace chaos::il2cpp::runtime_core {
 namespace {
 
-CHAOS_IL2CPP_MUTEX& GetFactoryMutex() {
-    static CHAOS_IL2CPP_MUTEX s_mutex;
-    return s_mutex;
-}
+// Simple static registry using a fixed-size array to avoid any
+// static initialization ordering issues with complex containers.
+constexpr CHAOS_IL2CPP_SIZE kMaxFactoryEntries = 64;
 
-CHAOS_IL2CPP_UNORDERED_DENSE_MAP_IDENTITY(CHAOS_IL2CPP_UINT64, CcwFactoryFn)& GetFactoryTable() {
-    static CHAOS_IL2CPP_UNORDERED_DENSE_MAP_IDENTITY(CHAOS_IL2CPP_UINT64, CcwFactoryFn) s_table;
-    return s_table;
-}
+struct FactoryEntry {
+    CHAOS_IL2CPP_UINT64 stable_id;
+    CcwFactoryFn factory;
+};
+
+FactoryEntry s_factory_table[kMaxFactoryEntries] = {};
+CHAOS_IL2CPP_SIZE s_factory_count = 0;
+CHAOS_IL2CPP_MUTEX s_factory_mutex;
 
 }  // anonymous namespace
 
 void RegisterCcwFactory(CHAOS_IL2CPP_UINT64 stable_id, CcwFactoryFn factory) noexcept {
     if (factory == nullptr) return;
-    auto& table = GetFactoryTable();
-    auto& mtx = GetFactoryMutex();
-    std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(mtx);
-    table[stable_id] = factory;
-    CHAOS_IL2CPP_LOG_DEBUG_M("COM", "Registered CCW factory for stable_id=0x{0:X16}",
-                              static_cast<CHAOS_IL2CPP_UINT64>(stable_id));
+    std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(s_factory_mutex);
+
+    // Replace existing or add new.
+    for (CHAOS_IL2CPP_SIZE i = 0; i < s_factory_count; ++i) {
+        if (s_factory_table[i].stable_id == stable_id) {
+            s_factory_table[i].factory = factory;
+            return;
+        }
+    }
+
+    // Add new entry if space available.
+    if (s_factory_count < kMaxFactoryEntries) {
+        s_factory_table[s_factory_count].stable_id = stable_id;
+        s_factory_table[s_factory_count].factory = factory;
+        ++s_factory_count;
+    }
 }
 
 void UnregisterCcwFactory(CHAOS_IL2CPP_UINT64 stable_id) noexcept {
-    auto& table = GetFactoryTable();
-    auto& mtx = GetFactoryMutex();
-    std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(mtx);
-    table.erase(stable_id);
-    CHAOS_IL2CPP_LOG_DEBUG_M("COM", "Unregistered CCW factory for stable_id=0x{0:X16}",
-                              static_cast<CHAOS_IL2CPP_UINT64>(stable_id));
+    std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(s_factory_mutex);
+    for (CHAOS_IL2CPP_SIZE i = 0; i < s_factory_count; ++i) {
+        if (s_factory_table[i].stable_id == stable_id) {
+            // Swap with last and decrement.
+            s_factory_table[i] = s_factory_table[s_factory_count - 1];
+            --s_factory_count;
+            return;
+        }
+    }
 }
 
 CcwFactoryFn FindCcwFactory(CHAOS_IL2CPP_UINT64 stable_id) noexcept {
-    auto& table = GetFactoryTable();
-    auto& mtx = GetFactoryMutex();
-    std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(mtx);
-    auto it = table.find(stable_id);
-    if (it != table.end()) {
-        return it->second;
+    std::lock_guard<CHAOS_IL2CPP_MUTEX> lock(s_factory_mutex);
+    for (CHAOS_IL2CPP_SIZE i = 0; i < s_factory_count; ++i) {
+        if (s_factory_table[i].stable_id == stable_id) {
+            return s_factory_table[i].factory;
+        }
     }
     return nullptr;
 }
@@ -52,11 +65,8 @@ CcwFactoryFn FindCcwFactory(CHAOS_IL2CPP_UINT64 stable_id) noexcept {
 CHAOS_IL2CPP_INTPTR CreateCcwForStableId(CHAOS_IL2CPP_UINT64 stable_id,
                                            void* managed_object,
                                            void* runtime_state) noexcept {
-    auto& table = GetFactoryTable();
-    auto& mtx = GetFactoryMutex();
+    auto factory = FindCcwFactory(stable_id);
     if (factory == nullptr) {
-        CHAOS_IL2CPP_LOG_DEBUG_M("COM", "No CCW factory found for stable_id=0x{0:X16}",
-                                  static_cast<CHAOS_IL2CPP_UINT64>(stable_id));
         return 0;
     }
     return factory(managed_object, runtime_state);

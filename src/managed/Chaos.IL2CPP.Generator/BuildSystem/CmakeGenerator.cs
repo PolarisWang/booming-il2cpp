@@ -41,6 +41,8 @@ public sealed class CmakeGenerator
             "src/native/interpreter/${CFG}/chaos_interpreter.lib",
             "src/native/hot-update/${CFG}/chaos_hot_update.lib",
             "src/native/codegen/${CFG}/chaos_codegen.lib",
+            "src/native/diagnostics/debugger/${CFG}/chaos_debugger.lib",
+            "src/native/diagnostics/eventpipe/${CFG}/chaos_eventpipe.lib",
             "fmt_build/${CFG}/chaos_fmt.lib",
         };
 
@@ -51,7 +53,13 @@ public sealed class CmakeGenerator
             "src/native/common",
             "src/native/runtime-core",
             "src/native/runtime-core/gc",
+            "src/native/runtime-core/runtime_stubs",
+            "src/native/bootstrap",
             "src/native/interpreter",
+            "src/native/codegen",
+            "src/native/support",
+            "src/native/hot-update",
+            "src/native",
             "third_party/fmt/include",
             "third_party/unordered_dense/include",
         };
@@ -63,7 +71,7 @@ public sealed class CmakeGenerator
         {
             var assemblyName = SanitizeTargetName(result.Manifest.AssemblyName);
             var sourceFiles = result.GeneratedSources
-                .Select(s => $"${{CHAOS_GEN_DIR}}/{result.Manifest.AssemblyName}/{s.RelativePath.Replace('\\', '/')}")
+                .Select(s => $"${{CHAOS_GEN_DIR}}/{s.RelativePath.Replace('\\', '/')}")
                 .Where(p => p.EndsWith(".cpp", StringComparison.OrdinalIgnoreCase))
                 .ToList();
 

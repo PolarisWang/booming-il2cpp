@@ -316,7 +316,8 @@ public sealed partial class NativeAotLoweringPlanner
                     RequiresGcTransition: isInternalCall,
                     HasMarshalling: false,
                     IsInternalCall: isInternalCall,
-                    IsPInvokeImport: false);
+                    IsPInvokeImport: false,
+                    ExternalRuntimeTableIndex: _externalRuntimeSubjects.TryGetValue(callee, out var tableIdx) ? tableIdx : -1);
             }
         }
     }

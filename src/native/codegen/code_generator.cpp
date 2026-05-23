@@ -5,6 +5,8 @@
 #include "t4_seh_handler.h"
 #include "unwind_info.h"
 
+#include <gc_root_scanner.h>
+
 #include "../interpreter/ir_reg_alloc.h"
 #include "../interpreter/interpreter_vm.h"
 #include "reg_alloc_graph_coloring.h"
@@ -3612,6 +3614,7 @@ NativeMethod* NativeCodeGenerator::Generate() noexcept {
             std::memcpy(sm->slots, slot_map_entries_.data(), num_slots * sizeof(uint32_t));
             nm->slot_map_data = map_data;
             nm->slot_map_size = map_size;
+            nm->gc_slot_map = reinterpret_cast<GcSlotMapV0*>(map_data);
         }
     }
 
@@ -3662,6 +3665,10 @@ NativeMethod::~NativeMethod() noexcept {
     CHAOS_IL2CPP_FREE(deopt_entries);
     CHAOS_IL2CPP_FREE(deopt_values);
     CHAOS_IL2CPP_FREE(gc_points);
+    // Unregister GC slot map before freeing the backing data.
+    if (code != nullptr && gc_slot_map != nullptr) {
+        chaos::il2cpp::runtime_core::GcUnregisterSlotMap(code);
+    }
     CHAOS_IL2CPP_FREE(slot_map_data);
     CHAOS_IL2CPP_FREE(instr_offsets);
     // Free GcPoint.slots arrays (each allocated independently by RecordGcPoint)

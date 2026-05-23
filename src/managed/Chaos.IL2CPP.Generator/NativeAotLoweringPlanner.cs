@@ -642,6 +642,15 @@ public sealed partial class NativeAotLoweringPlanner
         {
             objectModelBuilder.AppendLine();
             objectModelBuilder.AppendLine("// ── Bridge/import thunks ──");
+            // Forward-declare the external runtime dispatch table for bridge thunks
+            // that route through kChaosExternalRuntimeFnTable[idx] instead of calling
+            // chaos_external_runtime_* symbols directly (those symbols don't exist at
+            // link time for callees without shape-matching ExternalRuntimeHelper definitions).
+            // The actual definition is emitted later in the module registration section.
+            if (_bridgeImportThunks.Values.Any(t => t.ExternalRuntimeTableIndex >= 0))
+            {
+                objectModelBuilder.AppendLine("extern \"C\" void* kChaosExternalRuntimeFnTable[];");
+            }
             foreach (var thunk in _bridgeImportThunks.Values
                 .OrderBy(t => t.ThunkSymbol, StringComparer.Ordinal))
             {

@@ -27,6 +27,8 @@ protected:
     static constexpr uint64_t kBenchIters = 100000;
 
     // Test CCW matching the committed ComCcw layout (x64).
+using InterfaceEntry = chaos::il2cpp::com_ccw::ComCcwInterfaceEntry;
+
     struct ComCcwOld {
         void* vtable;
         std::atomic<CHAOS_IL2CPP_UINT32> refcount;
@@ -36,10 +38,22 @@ protected:
         CHAOS_IL2CPP_SIZE interface_capacity;
         void* outer_unknown;
         bool  is_aggregated;
-        void* interfaces_ptr;           // ComCcwInterfaceEntry*
-        void* inline_interfaces[4];     // ComCcwInterfaceEntry[4]
+        InterfaceEntry* interfaces;
+        InterfaceEntry inline_interfaces[4];
+        const void* typelib_data;
         void* cp_container;
     };
+
+    // Helper: initialize a stack-local CCW for benchmarking.
+    void InitCcw(ComCcwOld& ccw) noexcept {
+        std::memset(&ccw, 0, sizeof(ccw));
+        ccw.refcount = 1;  // prevent free on Release
+        ccw.interface_count = 1;
+        ccw.interface_capacity = 4;
+        ccw.interfaces = &ccw.inline_interfaces[0];
+        ccw.inline_interfaces[0].guid = kZeroGuid;
+        ccw.inline_interfaces[0].ccw_ptr = &ccw;
+    }
 
     static const CHAOS_IL2CPP_UINT8 kZeroGuid[16];
 };
@@ -72,12 +86,8 @@ TEST_F(ComBenchmarkTest, RcwFindOrCreate) {
 
 TEST_F(ComBenchmarkTest, CcwQueryInterface) {
     ComCcwOld ccw{};
-    std::memset(&ccw, 0, sizeof(ccw));
-    // Use pre-built CCW API functions directly — they handle their own vtable.
-    // We test the IUnknown path via the public com_ccw API.
-    // Just bench QI on a well-known GUID.
+    InitCcw(ccw);
     void* s = &ccw;
-    ccw.interface_count = 1;
 
     auto start = std::chrono::high_resolution_clock::now();
     for (uint64_t i = 0; i < kBenchIters; ++i) {
@@ -94,7 +104,7 @@ TEST_F(ComBenchmarkTest, CcwQueryInterface) {
 
 TEST_F(ComBenchmarkTest, CcwAddRefRelease) {
     ComCcwOld ccw{};
-    std::memset(&ccw, 0, sizeof(ccw));
+    InitCcw(ccw);
     void* s = &ccw;
 
     auto start = std::chrono::high_resolution_clock::now();

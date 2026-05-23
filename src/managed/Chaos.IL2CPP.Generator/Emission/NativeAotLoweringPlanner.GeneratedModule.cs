@@ -78,10 +78,12 @@ public sealed partial class NativeAotLoweringPlanner
                 }
 
                 var rawMethodName = GetMethodName(method.SubjectId);
-                // C++ member names cannot start with '.' (e.g. ".ctor", ".cctor").
-                var safeMethodName = rawMethodName.Length > 0 && rawMethodName[0] == '.'
-                    ? rawMethodName.Substring(1)
-                    : rawMethodName;
+                // C++ member names cannot start with '.' (e.g. ".ctor", ".cctor")
+                // and must not contain special characters (e.g. '<', '>', '$', '|'
+                // from compiler-generated names like "<<Main>$>g__Add|0_0").
+                if (rawMethodName.Length > 0 && rawMethodName[0] == '.')
+                    rawMethodName = rawMethodName.Substring(1);
+                var safeMethodName = SanitizeCppIdentifier(rawMethodName);
 
                 methodModels[mi] = new ScriptObject
                 {

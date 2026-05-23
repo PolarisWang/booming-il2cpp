@@ -56,10 +56,13 @@ internal static class EnumMetadataExtractor
         sb.AppendLine("    const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor* type_desc) noexcept;");
         sb.AppendLine();
         sb.AppendLine("// ── Enum dispatch entry struct (file scope for extern \"C\" access) ──");
+        sb.AppendLine("#ifndef CHAOS_IL2CPP_ENUM_DISPATCH_ENTRY_DEFINED");
+        sb.AppendLine("#define CHAOS_IL2CPP_ENUM_DISPATCH_ENTRY_DEFINED");
         sb.AppendLine("struct EnumDispatchEntry {");
         sb.AppendLine("    CHAOS_IL2CPP_UINT32 fnv24;");
         sb.AppendLine("    const EnumMetadataTable* table;");
         sb.AppendLine("};");
+        sb.AppendLine("#endif");
         sb.AppendLine();
         sb.AppendLine("// Dispatch table registration defined in enum_stubs.cpp.");
         sb.AppendLine("// Registers a sorted FNV-24 dispatch table for fast metadata lookup.");

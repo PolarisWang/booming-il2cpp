@@ -14,8 +14,41 @@ public sealed class MetadataWriterStage
     {
         try
         {
-            var aotEntries = new List<AotManifestEntry>();
-        var genericDemandLookup = BuildGenericDemandLookup(linkedWorld.GenericInstantiationDemandGraph);
+            var genericDemandLookup = BuildGenericDemandLookup(linkedWorld.GenericInstantiationDemandGraph);
+            var aotManifest = BuildAotManifest(linkedWorld);
+            var registrations = BuildMetadataRegistration(linkedWorld);
+            var supplementalMetadataTemplate = BuildSupplementalTemplate(linkedWorld, genericDemandLookup);
+
+            return PipelineResult<MetadataWriterOutput>.Ok(new MetadataWriterOutput
+            {
+                AotManifest = aotManifest,
+                MetadataRegistration = new MetadataRegistrationArtifact
+                {
+                    Registrations = registrations,
+                },
+                SupplementalMetadataTemplate = supplementalMetadataTemplate,
+            });
+        }
+        catch (InvalidOperationException ex) when (ex.Message.Contains("conflicting generic instantiation"))
+        {
+            return PipelineResult<MetadataWriterOutput>.Fail("METADATA_WRITER_DEMAND_CONFLICT",
+                $"Generic instantiation demand conflict: {ex.Message}", ex);
+        }
+        catch (ArgumentNullException ex)
+        {
+            return PipelineResult<MetadataWriterOutput>.Fail("METADATA_WRITER_INVALID_INPUT",
+                $"Null or invalid input in LinkedWorldModel: {ex.Message}", ex);
+        }
+        catch (Exception ex)
+        {
+            return PipelineResult<MetadataWriterOutput>.Fail("METADATA_WRITER_INTERNAL_ERROR",
+                $"Metadata writer stage failed: {ex.Message}", ex);
+        }
+    }
+
+    private static AotManifestArtifact BuildAotManifest(LinkedWorldModel linkedWorld)
+    {
+        var aotEntries = new List<AotManifestEntry>();
 
         foreach (var method in linkedWorld.Methods)
         {
@@ -52,6 +85,14 @@ public sealed class MetadataWriterStage
             });
         }
 
+        return new AotManifestArtifact
+        {
+            Entries = aotEntries,
+        };
+    }
+
+    private static List<MetadataRegistrationEntry> BuildMetadataRegistration(LinkedWorldModel linkedWorld)
+    {
         var registrations = new List<MetadataRegistrationEntry>();
 
         var slot = 0;
@@ -144,7 +185,14 @@ public sealed class MetadataWriterStage
             }
         }
 
-        var supplementalMetadataTemplate = new SupplementalMetadataTemplateArtifact
+        return registrations;
+    }
+
+    private static SupplementalMetadataTemplateArtifact BuildSupplementalTemplate(
+        LinkedWorldModel linkedWorld,
+        IReadOnlyDictionary<string, GenericInstantiationDemandModel> genericDemandLookup)
+    {
+        return new SupplementalMetadataTemplateArtifact
         {
             RegisteredTypes = linkedWorld.Types
                 .Select(type => new SupplementalMetadataTypeTemplateEntry
@@ -189,25 +237,6 @@ public sealed class MetadataWriterStage
                 GenericInstantiationCount = DefaultReservedGenericInstantiationSlots,
             },
         };
-
-        return PipelineResult<MetadataWriterOutput>.Ok(new MetadataWriterOutput
-        {
-            AotManifest = new AotManifestArtifact
-            {
-                Entries = aotEntries,
-            },
-            MetadataRegistration = new MetadataRegistrationArtifact
-            {
-                Registrations = registrations,
-            },
-            SupplementalMetadataTemplate = supplementalMetadataTemplate,
-        });
-        }
-        catch (Exception ex)
-        {
-            return PipelineResult<MetadataWriterOutput>.Fail("METADATA_WRITER_FAILED",
-                $"Metadata writer stage failed: {ex.Message}", ex);
-        }
     }
 
     private static IReadOnlyDictionary<string, GenericInstantiationDemandModel> BuildGenericDemandLookup(

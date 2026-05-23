@@ -230,6 +230,29 @@ add_chaos_test(assembly_manager_test assembly_manager_test.cpp
     LABELS "unit;core"
 )
 
+# L0 — DomainUnloader pressure tests (Loader 工业化 Phase 1)
+# Compile domain_unloader.cpp from source alongside the test.
+add_chaos_test(domain_unloader_stress_test domain_unloader_stress_test.cpp
+    ../../../../src/native/runtime-core/domain_unloader.cpp
+    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    LABELS "stress;core;loader"
+)
+
+# L1 — AssemblyManager 并发压力测试 (Loader 工业化 Phase 1)
+# 验证锁粒度、并发只读查询、NextAlcId 单调性和边界安全
+add_chaos_test(assembly_manager_stress_test assembly_manager_stress_test.cpp
+    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    LABELS "stress;core;loader"
+)
+
+# L2 — ModuleRegistry 单元 + 并发测试 (Loader 工业化 Phase 1)
+# 所有 module_registry API 使用 shared_mutex，编译 module_registry.cpp 从源码以确保测试当前版本
+add_chaos_test(module_registry_test module_registry_test.cpp
+    ../../../../src/native/runtime-core/module_registry.cpp
+    LIBS ${CHAOS_COMMON_TEST_LIBS}
+    LABELS "unit;stress;core;loader"
+)
+
 # T3-5: convert + parse_convert audit tests
 # Prebuilt lib is up-to-date (no uncommitted changes); link via CHAOS_COMMON_TEST_LIBS.
 add_chaos_test(convert_parse_test convert_parse_test.cpp

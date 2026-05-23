@@ -11,29 +11,25 @@
 #include <thread>
 #include <vector>
 
-#include <cstdio>
-
-#include <com_factory.h>
-
-#include <atomic>
-#include <thread>
-#include <vector>
-
 using namespace chaos::il2cpp::runtime_core;
 
-// Simple test without fixture to isolate the hanging issue.
-TEST(ComFactoryRawTest, RegisterAndFind) {
-    std::printf("DEBUG: before RegisterCcwFactory\n");
-    RegisterCcwFactory(0x123456789ABCDEF0ull, [](void*, void*) -> CHAOS_IL2CPP_INTPTR {
+// ════════════════════════════════════════════════════════════════════════════
+// F1 — Factory registry tests
+// ════════════════════════════════════════════════════════════════════════════
+
+class ComFactoryTest : public MarshalTestFixture {
+protected:
+    // A factory that returns a distinctive value based on stable_id for verification.
+    static CHAOS_IL2CPP_INTPTR TestFactoryOne(void* /*obj*/, void* /*rs*/) noexcept {
         return static_cast<CHAOS_IL2CPP_INTPTR>(0xCAFE0001);
-    });
-    std::printf("DEBUG: after RegisterCcwFactory\n");
-    auto factory = FindCcwFactory(0x123456789ABCDEF0ull);
-    std::printf("DEBUG: after FindCcwFactory\n");
-    EXPECT_NE(factory, nullptr);
-    UnregisterCcwFactory(0x123456789ABCDEF0ull);
-    std::printf("DEBUG: done\n");
-}
+    }
+
+    static CHAOS_IL2CPP_INTPTR TestFactoryTwo(void* /*obj*/, void* /*rs*/) noexcept {
+        return static_cast<CHAOS_IL2CPP_INTPTR>(0xCAFE0002);
+    }
+};
+
+TEST_F(ComFactoryTest, RegisterAndFind) {
     constexpr CHAOS_IL2CPP_UINT64 kTestId = 0x123456789ABCDEF0ull;
 
     RegisterCcwFactory(kTestId, TestFactoryOne);
