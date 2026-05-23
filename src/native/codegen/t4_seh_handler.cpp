@@ -1057,7 +1057,7 @@ void RegisterT4SehHandler() noexcept {
 
 void RegisterT4SehHandler() noexcept {
     // VEH is Windows-specific. On POSIX, signal handlers would be used instead.
-    CHAOS_IL2CPP_LOG_DEBUG_M("codegen", "T4 SEH handler: not implemented for this platform");
+    CHAOS_IL2CPP_FAIL("Linux SEH not implemented");
 
     // Register GC event callback for deferred T4 code memory reclamation.
     chaos::il2cpp::runtime_core::GcRegisterEventCallback(OnGcSafepoint, nullptr);
