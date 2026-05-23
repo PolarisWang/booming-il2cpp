@@ -156,7 +156,7 @@
 |---------|-------|--------|---------|------------|--------------|-----------------|
 | t0-1-string-stubs-test | Phase 0 | completed | string_stubs 15 函数单元测试（实际 19 API，77 测试） | — | string_stubs_test.cpp | 3d |
 | t0-2-collection-stubs-test | Phase 0 | completed | collection_stubs List/Dict/HashSet 测试（14 API，34 测试） | — | collection_stubs_test.cpp | 2d |
-| t0-3-enum-stubs-test | Phase 0 | planned | enum_stubs 全 API 测试 | — | enum_stubs_test.cpp | 2d |
+| t0-3-enum-stubs-test | Phase 0 | completed | enum_stubs 全 API 测试（实际 12 API，16 测试） | — | enum_stubs_test.cpp | 2d |
 | t0-4-datetime-guid-math-test | Phase 0 | planned | datetime/guid/math stubs 测试 | — | datetime_guid_math_test.cpp | 2d |
 | t0-5-misc-stubs-test | Phase 0 | planned | misc_stubs Array/Culture/Console/Delegate/Gc 测试 | — | misc_stubs_test.cpp | 2d |
 | t0-6-interlocked-mutex-hash-random-test | Phase 0 | planned | interlocked/mutex/hashcode/random stubs 测试 | — | interlocked_mutex_hash_random_test.cpp | 2d |
