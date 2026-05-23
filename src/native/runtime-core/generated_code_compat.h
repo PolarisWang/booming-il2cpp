@@ -13,22 +13,18 @@
 // V5: <gc.h> removed — CRAG uses its own write barriers.
 
 // ═══════════════════════════════════════════════════════════════════
-// A5-Trinity Object Header Architecture (Dual-Variant)
+// Type System Phase 1 Object Header Architecture (8B Unified)
 // ═══════════════════════════════════════════════════════════════════
-// Two header variants discriminated by TypeInfo.flags[1:0]:
+// Two header variants discriminated by TypeInfo.flags[1:0],
+// both exactly 8 bytes — PureType (value-type boxes, sealed 0-virt)
+// and ThinLockable (all reference types with sync via ThinLockTable):
 //
 //   PureType (00):    8B  {TypeInfo* type_info}
-//                       — no sync, no vtable
-//   ThinLockable (01): 16B {TypeInfo* type_info, uint64_t sync_state}
-//                       — thin-lock capable, dispatch via type_info->vtable_array
+//   ThinLockable (01): 8B  {TypeInfo* type_info}
+//                       — sync state in global ThinLockTable (stripe hash)
 //
 // Both store TypeInfo* at offset [0], so chaos_object_get_type_info()
-// is a single *(MethodTable**)obj read — no bit magic needed.
-//
-// PureType: value-type boxes, sealed types with 0 virtual methods,
-//           compiler-verified no-sync.
-// ThinLockable: all reference types (virtual dispatch via type_info->vtable_array,
-//               sync via thin-lock / SyncBlock inflation).
+// is a single *(MethodTable**)obj read — no bit magic, no branch.
 // ═══════════════════════════════════════════════════════════════════
 
 // ── PureType header (8B) ──────────────────────────────────────────
@@ -38,12 +34,13 @@ struct PureTypeHeader {
     const TypeInfoHot* type_info = nullptr;
 };
 
-// ── ThinLockable header (16B) ─────────────────────────────────────
-// Used for all reference types. sync_state at [8] for thin locking.
-// Virtual dispatch goes through type_info->vtable_array.
+// ── ThinLockable header (8B) ─────────────────────────────────────
+// Used for all reference types. No separate sync_state field — thin-lock
+// state is managed by ThinLockTable (global stripe hash table).
+// TypeInfo* at [0] for unified chaos_object_get_type_info() access.
 struct ThinLockableHeader {
     const TypeInfoHot* type_info   = nullptr;  // [0]
-    uint64_t        sync_state  = 0;        // [8] — thin lock / sync block index
+    // sync_state removed — moved to ThinLockTable (8B saved per object)
 };
 
 

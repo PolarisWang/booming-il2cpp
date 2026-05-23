@@ -14,6 +14,7 @@
 
 #include <method_replacement.h>
 #include <osr_state.h>
+#include "register_vm_profiler.h"
 
 #include <chaos/log.h>
 
@@ -431,6 +432,9 @@ void InterpreterEntryDirect(
     {
         void* replacement = method_replacement::Resolve(patch_method->token);
         if (replacement != nullptr) {
+            CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterEntryDirect.MethodReplace");
+            chaos::il2cpp::interpreter::VmProfileScope profiler_scope(
+                static_cast<uintptr_t>(patch_method->token));
             using ReplacementFn = void (*)(void*, void*);
             auto repl_fn = reinterpret_cast<ReplacementFn>(replacement);
             repl_fn(args_buf, ret_buf);

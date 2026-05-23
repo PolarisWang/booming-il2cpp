@@ -16,6 +16,8 @@ add_library(chaos_interpreter STATIC
     osr_state.cpp
     osr_state.h
     register_vm.h
+    register_vm_profiler.cpp
+    register_vm_profiler.h
     )
 
 target_compile_features(chaos_interpreter PUBLIC cxx_std_17)

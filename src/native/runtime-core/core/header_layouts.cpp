@@ -38,34 +38,37 @@ namespace chaos::il2cpp::runtime_core {
 using namespace chaos::il2cpp::runtime_capability;
 using namespace chaos::il2cpp::marshal_abi;
 
-// ── A5-Trinity Object Header Layouts ────────────────────────────
-// Three header kinds discriminated by TypeInfoHot.flags[1:0]:
+// ── Type System Phase 1 Object Header Layouts ────────────────────
+// Two header kinds discriminated by TypeInfoHot.flags[1:0],
+// both exactly 8 bytes:
 //   PureType (00):  8B  {TypeInfoHot* type_info}
-//   ThinLockable (01): 16B {TypeInfoHot* type_info, uint64_t sync_state}
-//   Fat (10):          24B {TypeInfoHot* type_info, void** vtable, uint64_t sync_state} [removed — all non-PureType use ThinLockable]
+//   ThinLockable (01): 8B  {TypeInfoHot* type_info} — sync via ThinLockTable
+//
+// sync_state removed from ThinLockable — ThinLockTable handles lock state.
+// GC reads TypeInfo* from [0] — unchanged, no branch.
 
 namespace {
 
 constexpr CHAOS_IL2CPP_UINT64 kDateTimeTicksMask = 0x3FFFFFFFFFFFFFFFull;
 
 
-struct ObjectHeaderThin {  // 16B — sync only, no vtable
+struct ObjectHeaderThin {  // 8B — no sync_state
     const TypeInfoHot* type_info   = nullptr;  // [0]
-    uint64_t           sync_state  = 0;        // [8]
 };
 
 // FatHeader removed — all non-PureType use ThinLockable (16B).
 
 // ── Header size helpers ──────────────────────────────────────────
-inline CHAOS_IL2CPP_SIZE HeaderSizeFromFlags(CHAOS_IL2CPP_UINT8 flags) noexcept {
-    return (flags & kTypeInfoHeaderKindMask) == kTypeInfoHeaderKindPure ? 8 : 16;
+// After Type System Phase 1, ALL headers are 8 bytes (Pure and ThinLockable).
+inline CHAOS_IL2CPP_SIZE HeaderSizeFromFlags(CHAOS_IL2CPP_UINT8) noexcept {
+    return 8;
 }
 
-inline uint64_t* GetSyncStatePtr(void* obj) noexcept {
-    const auto* ti = *static_cast<const TypeInfoHot* const*>(obj);
-    const auto kind = ti->flags & kTypeInfoHeaderKindMask;
-    if (kind == kTypeInfoHeaderKindPure) return nullptr;
-    return &static_cast<ObjectHeaderThin*>(obj)->sync_state;
+// GetSyncStatePtr is no longer valid — sync state moved to ThinLockTable.
+// Callers must use ThinLockTable::Instance() for sync operations.
+// Returns nullptr unconditionally to catch stale callers at runtime.
+inline uint64_t* GetSyncStatePtr(void*) noexcept {
+    return nullptr;
 }
 
 struct StringObjectHeader {
