@@ -14,9 +14,17 @@
   #define NOMINMAX
   #include <windows.h>
   #include <intrin.h>   // _ReturnAddress(), _AddressOfReturnAddress()
+  #if defined(_MSC_VER)
+    #include <intrin.h> // _mm_pause()
+  #endif
 #elif defined(__linux__)
   #include <sys/mman.h> // munmap
+  #include <sched.h>    // sched_yield
 #endif
+
+// ── kSpinLimitHard — If the spinlock spins this many iterations without
+//     acquiring the lock, emit a warning so we can diagnose contention.
+static constexpr uint32_t kSpinLimitHard = 1024 * 1024;  // ~1M spins ~ O(10ms on 2GHz)
 
 namespace chaos::il2cpp::codegen {
 
@@ -39,23 +47,82 @@ struct T4CodeEntry {
 static T4CodeEntry    g_t4_code_entries[kMaxT4CodeEntries];
 static uint32_t       g_t4_code_count = 0;
 static long           g_t4_code_lock  = 0;    // 0=free, 1=locked (spinlock)
+#if defined(_MSC_VER)
+static thread_local uint32_t g_t4_lock_owner_tid = 0;
+#endif
+
+/// RAII guard for g_t4_code_lock.
+/// Spins with pause/yield, emits a warning if kSpinLimitHard is exceeded,
+/// and always releases on scope exit.
+class T4RegistryLockGuard {
+public:
+    T4RegistryLockGuard() noexcept {
+        Acquire();
+    }
+    ~T4RegistryLockGuard() noexcept {
+        Release();
+    }
+    // Non-copyable, non-movable.
+    T4RegistryLockGuard(const T4RegistryLockGuard&) = delete;
+    T4RegistryLockGuard& operator=(const T4RegistryLockGuard&) = delete;
+
+private:
+    void Acquire() noexcept {
+#if defined(_MSC_VER)
+        uint32_t tid = GetCurrentThreadId();
+#endif
+        uint32_t spins = 0;
+        while (InterlockedExchange(&g_t4_code_lock, 1) != 0) {
+#if defined(_MSC_VER)
+            _mm_pause();
+#elif defined(__linux__)
+            if (++spins % 64 == 0) sched_yield();
+#endif
+            if (++spins > kSpinLimitHard) {
+                CHAOS_IL2CPP_LOG_WARN_M("codegen",
+                    "T4RegistryLockGuard: spinning for {} iterations -- possible deadlock?",
+                    spins);
+                spins = 0;  // reset so we get periodic warnings, not just one
+            }
+        }
+#if defined(_MSC_VER)
+        g_t4_lock_owner_tid = tid;
+#endif
+    }
+
+    void Release() noexcept {
+#if defined(_MSC_VER)
+        g_t4_lock_owner_tid = 0;
+#endif
+        InterlockedExchange(&g_t4_code_lock, 0);
+    }
+};
+
+// Global generation counter for TLS lookup cache invalidation.
+// Each time T4 code is demoted/unregistered, this counter is incremented.
+// Thread-local caches that hold a stale generation will automatically
+// fall back to linear scan on their next lookup.  This avoids the
+// cross-thread stale-NativeMethod* problem that existed with the old
+// brute-force approach (which only cleared the current thread's cache).
+static uint32_t g_t4_lookup_generation = 1;  // 0 is reserved for "not initialized"
 
 // Thread-local lookup cache: stores the NativeMethod for the most recently
 // accessed code page.  VEH handler / personality routine / EndFinallyHelper
 // call FindT4CodeByAddress frequently, and consecutive calls often fall
 // within the same method's code range, making this cache highly effective.
 static thread_local struct {
-    uintptr_t         page_base = 0;  // address >> 12 (page-aligned)
-    const NativeMethod* nm      = nullptr;
+    uintptr_t         page_base   = 0;  // address >> 12 (page-aligned)
+    const NativeMethod* nm        = nullptr;
+    uint32_t          generation = 0;   // g_t4_lookup_generation at cache fill time
 } g_t4_lookup_cache;
 
-// Invalidate the TLS lookup cache for all threads by bumping a generation
-// counter.  Currently uses a brute-force approach: when an entry is demoted,
-// all threads re-linear-scan on their next lookup.  A generation check would
-// be more precise but adds overhead to the fast path.
+// Invalidate the TLS lookup cache for all threads by bumping the global
+// generation counter.  Threads that hold stale caches will see the mismatch
+// in FindT4CodeByAddress and automatically re-scan.  This avoids the old
+// approach of clearing only the current thread's TLS cache, which left
+// other threads holding stale NativeMethod pointers.
 static void InvalidateLookupCache() noexcept {
-    g_t4_lookup_cache.page_base = 0;
-    g_t4_lookup_cache.nm = nullptr;
+    InterlockedIncrement(reinterpret_cast<long*>(&g_t4_lookup_generation));
 }
 
 // ── Demoted Code Reclamation (C1) ──────────────────────────────────────────
@@ -135,33 +202,23 @@ static void OnGcSafepoint(chaos::il2cpp::runtime_core::GcEvent /*event*/,
     ReclaimDemotedCode();
 }
 
-static void LockT4Registry() noexcept {
-    while (InterlockedExchange(&g_t4_code_lock, 1) != 0) {
-        // spin
-    }
-}
-
-static void UnlockT4Registry() noexcept {
-    InterlockedExchange(&g_t4_code_lock, 0);
-}
-
 void RegisterT4Code(void* code_start, uint32_t code_size,
                     const NativeMethod* nm,
                     uint32_t patch_method_token) noexcept {
     if (code_start == nullptr || code_size == 0 || nm == nullptr) return;
 
-    LockT4Registry();
-    if (g_t4_code_count >= kMaxT4CodeEntries) {
-        CHAOS_IL2CPP_LOG_WARN_M("codegen", "RegisterT4Code: registry full ({} entries)", kMaxT4CodeEntries);
-        UnlockT4Registry();
-        return;
-    }
-    g_t4_code_entries[g_t4_code_count].code_start = code_start;
-    g_t4_code_entries[g_t4_code_count].code_size  = code_size;
-    g_t4_code_entries[g_t4_code_count].nm         = nm;
-    g_t4_code_entries[g_t4_code_count].patch_method_token = patch_method_token;
-    g_t4_code_count++;
-    UnlockT4Registry();
+    {
+        T4RegistryLockGuard lock;
+        if (g_t4_code_count >= kMaxT4CodeEntries) {
+            CHAOS_IL2CPP_LOG_WARN_M("codegen", "RegisterT4Code: registry full ({} entries)", kMaxT4CodeEntries);
+            return;
+        }
+        g_t4_code_entries[g_t4_code_count].code_start = code_start;
+        g_t4_code_entries[g_t4_code_count].code_size  = code_size;
+        g_t4_code_entries[g_t4_code_count].nm         = nm;
+        g_t4_code_entries[g_t4_code_count].patch_method_token = patch_method_token;
+        g_t4_code_count++;
+    }  // lock released here
 
     CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
         "RegisterT4Code: code={} size={} seh_offset={} token={}",
@@ -191,37 +248,37 @@ void RegisterT4Code(void* code_start, uint32_t code_size,
 
 void UnregisterT4Code(void* code_start) noexcept {
     if (code_start == nullptr) return;
-    LockT4Registry();
-    for (uint32_t i = 0; i < g_t4_code_count; i++) {
-        if (g_t4_code_entries[i].code_start == code_start) {
-            // Enqueue for deferred free before clearing nm reference.
-            EnqueueDemotedCode(
-                const_cast<void*>(g_t4_code_entries[i].code_start),
-                g_t4_code_entries[i].code_size);
-            g_t4_code_entries[i].nm = nullptr;
-            InvalidateLookupCache();
-            break;
+    {
+        T4RegistryLockGuard lock;
+        for (uint32_t i = 0; i < g_t4_code_count; i++) {
+            if (g_t4_code_entries[i].code_start == code_start) {
+                EnqueueDemotedCode(
+                    const_cast<void*>(g_t4_code_entries[i].code_start),
+                    g_t4_code_entries[i].code_size);
+                g_t4_code_entries[i].nm = nullptr;
+                break;
+            }
         }
-    }
-    UnlockT4Registry();
+    }  // lock released here
+    InvalidateLookupCache();
 }
 
 uint32_t DemoteT4ByToken(uint32_t method_token) noexcept {
     if (method_token == 0) return 0;
     uint32_t count = 0;
-    LockT4Registry();
-    for (uint32_t i = 0; i < g_t4_code_count; i++) {
-        if (g_t4_code_entries[i].patch_method_token == method_token &&
-            g_t4_code_entries[i].nm != nullptr) {
-            // Enqueue for deferred free before clearing nm reference.
-            EnqueueDemotedCode(
-                const_cast<void*>(g_t4_code_entries[i].code_start),
-                g_t4_code_entries[i].code_size);
-            g_t4_code_entries[i].nm = nullptr;
-            count++;
+    {
+        T4RegistryLockGuard lock;
+        for (uint32_t i = 0; i < g_t4_code_count; i++) {
+            if (g_t4_code_entries[i].patch_method_token == method_token &&
+                g_t4_code_entries[i].nm != nullptr) {
+                EnqueueDemotedCode(
+                    const_cast<void*>(g_t4_code_entries[i].code_start),
+                    g_t4_code_entries[i].code_size);
+                g_t4_code_entries[i].nm = nullptr;
+                count++;
+            }
         }
-    }
-    UnlockT4Registry();
+    }  // lock released here
     if (count > 0) {
         InvalidateLookupCache();
         CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
@@ -233,24 +290,23 @@ uint32_t DemoteT4ByToken(uint32_t method_token) noexcept {
 uint32_t DemoteT4ByCallSiteToken(uint32_t method_token) noexcept {
     if (method_token == 0) return 0;
     uint32_t count = 0;
-    LockT4Registry();
-    for (uint32_t i = 0; i < g_t4_code_count; i++) {
-        const auto* nm = g_t4_code_entries[i].nm;
-        if (nm == nullptr) continue;
-        // Scan call sites for matching method_token
-        for (uint32_t j = 0; j < nm->call_site_count; j++) {
-            if (nm->call_sites[j].method_token == method_token) {
-                // Enqueue for deferred free before clearing nm reference.
-                EnqueueDemotedCode(
-                    const_cast<void*>(g_t4_code_entries[i].code_start),
-                    g_t4_code_entries[i].code_size);
-                g_t4_code_entries[i].nm = nullptr;
-                count++;
-                break;
+    {
+        T4RegistryLockGuard lock;
+        for (uint32_t i = 0; i < g_t4_code_count; i++) {
+            const auto* nm = g_t4_code_entries[i].nm;
+            if (nm == nullptr) continue;
+            for (uint32_t j = 0; j < nm->call_site_count; j++) {
+                if (nm->call_sites[j].method_token == method_token) {
+                    EnqueueDemotedCode(
+                        const_cast<void*>(g_t4_code_entries[i].code_start),
+                        g_t4_code_entries[i].code_size);
+                    g_t4_code_entries[i].nm = nullptr;
+                    count++;
+                    break;
+                }
             }
         }
-    }
-    UnlockT4Registry();
+    }  // lock released here
     if (count > 0) {
         InvalidateLookupCache();
         CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
@@ -268,8 +324,11 @@ const NativeMethod* FindT4CodeByAddress(const void* address) noexcept {
     uintptr_t page = addr_val >> 12;
 
     // Fast path: check the thread-local page-aligned cache.
+    // Generation check ensures we don't return a stale NativeMethod*
+    // after a concurrent demotion on another thread invalidated the cache.
     if (g_t4_lookup_cache.nm != nullptr &&
-        g_t4_lookup_cache.page_base == page) {
+        g_t4_lookup_cache.page_base == page &&
+        g_t4_lookup_cache.generation == g_t4_lookup_generation) {
         return g_t4_lookup_cache.nm;
     }
 

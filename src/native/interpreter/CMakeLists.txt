@@ -19,7 +19,7 @@ add_library(chaos_interpreter STATIC
     )
 
 target_compile_features(chaos_interpreter PUBLIC cxx_std_17)
-target_compile_options(chaos_interpreter PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
+target_compile_options(chaos_interpreter PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8 /D_SILENCE_ALL_CXX17_C99_MATH_MACROS>)
 target_include_directories(
     chaos_interpreter
     PUBLIC

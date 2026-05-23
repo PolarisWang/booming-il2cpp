@@ -58,6 +58,11 @@
 // code that includes runtime_core.h.
 #include "interpreter_entry.h"
 
+// ── Static variable indirect access for hot-update assemblies ──
+// AOT codegen emits static_var_store_read/write_field calls for hot-update
+// assembly static fields instead of direct global variable access.
+#include "static_var_store.h"
+
 // Engine lifecycle declarations (extern globals, handle table, GC handle state)
 // Must precede core/*.cpp inclusion so all unity sub-files see the symbols.
 #include "core/engine_lifecycle.h"

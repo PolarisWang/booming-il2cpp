@@ -115,6 +115,7 @@ struct SEHClause {
 struct IRMethod {
     CHAOS_IL2CPP_VECTOR(IRInstruction) instructions = {};
     CHAOS_IL2CPP_VECTOR(SEHClause)     seh_clauses  = {};
+    CHAOS_IL2CPP_VECTOR(CHAOS_IL2CPP_UINT32) il_offsets = {};  // IL offset per instruction
 };
 
 /// Result of an external dispatch operation (DispatchCallback).

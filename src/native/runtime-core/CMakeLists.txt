@@ -94,6 +94,8 @@ add_library(chaos_runtime_core STATIC
     metadata_interface.cpp
     assembly_manager.h
     assembly_manager.cpp
+    static_var_store.h
+    static_var_store.cpp
     gc/gc_bump_cache.h
     gc/gc_bit_utils.h
     gc/gc_features.h
@@ -226,6 +228,8 @@ target_include_directories(
 
 target_link_libraries(chaos_runtime_core PUBLIC chaos_fmt chaos_common)
 if(WIN32)
+    target_link_libraries(chaos_runtime_core PUBLIC chaos_eventpipe)
+    target_link_libraries(chaos_runtime_core PUBLIC chaos_debugger)
     target_link_libraries(chaos_runtime_core PRIVATE bcrypt)
 elseif(UNIX AND NOT APPLE AND NOT ANDROID)
     target_link_libraries(chaos_runtime_core PRIVATE numa)

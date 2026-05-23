@@ -156,6 +156,7 @@ struct RegisterFrame {
 
     // PIC dispatch data (PatchMethod* for T3 PIC lookup)
     void*         patch_method;
+    void*         prev_frame;
 
     // OSR re-enable flag: set after deoptimization from T4 to trigger
     // immediate OSR re-promotion on the first backward branch.
@@ -249,6 +250,7 @@ struct RegisterMethod {
     CHAOS_IL2CPP_VECTOR(RegisterInstruction) instructions = {};
     CHAOS_IL2CPP_VECTOR(SEHClause)           seh_clauses  = {};
     CHAOS_IL2CPP_VECTOR(CatchHandlerEntry)   catch_handler_entries = {};
+    CHAOS_IL2CPP_VECTOR(CHAOS_IL2CPP_UINT32) il_offsets = {};  // IL offset per instruction
     RegStackMap                              stack_map     = {};
     uint32_t                                  max_regs     = 0;  // highest register used
 };
