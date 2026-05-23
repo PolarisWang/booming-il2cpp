@@ -1,5 +1,5 @@
-using Chaos.IL2CPP.Pipeline;
 using Chaos.IL2CPP.Contracts;
+using Chaos.IL2CPP.Pipeline;
 using Xunit;
 
 namespace Chaos.IL2CPP.Generator.Tests;
@@ -54,7 +54,7 @@ public sealed class PipelineIntegrationTests
             FullAssemblyClosure: true);
 
         var pipeline = new PipelinePlan();
-        var result = pipeline.Execute(request);
+        var result = pipeline.Execute(request).Value!;
 
         Assert.NotNull(result.TypedIlIr);
         Assert.NotNull(result.AotCoreIr);
@@ -79,7 +79,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             FullAssemblyClosure: true);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
 
         var subjectIds = result.TypedIlIr.Methods
             .Select(m => m.SubjectId)
@@ -122,7 +122,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             FullAssemblyClosure: true);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
 
         var returnZero = result.AotCoreIr.Methods
             .FirstOrDefault(m => m.SubjectId.Contains("ReturnZero"));
@@ -139,7 +139,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             FullAssemblyClosure: true);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         var plan = result.NativeAotLoweringPlan;
 
         Assert.Equal("full-assembly-entry", plan.PlanKind);
@@ -156,7 +156,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             FullAssemblyClosure: true);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
 
         Assert.NotEmpty(result.CodeRegistration.Modules);
         Assert.Contains(result.CodeRegistration.Modules, m =>
@@ -172,7 +172,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             FullAssemblyClosure: true);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
 
         Assert.NotEmpty(result.MetadataRegistration.Registrations);
         Assert.Contains(result.MetadataRegistration.Registrations, r =>
@@ -192,7 +192,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             FullAssemblyClosure: true);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         var plan = result.NativeReferenceLoweringPlan;
 
         Assert.Equal("assembly-full-closure-runtime-skeleton", plan.PlanKind);
@@ -208,7 +208,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             FullAssemblyClosure: true);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
 
         Assert.NotNull(result.GenericCapabilityMatrix);
     }
@@ -229,7 +229,7 @@ public sealed class PipelineIntegrationTests
             FullAssemblyClosure: false);
 
         var pipeline = new PipelinePlan();
-        var result = pipeline.Execute(request);
+        var result = pipeline.Execute(request).Value!;
 
         Assert.NotNull(result);
         Assert.NotNull(result.AotCoreIr);
@@ -246,7 +246,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::ReturnZero:System.Int32()",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         var plan = result.NativeAotLoweringPlan;
 
         Assert.Equal("generic-managed-entry", plan.PlanKind);
@@ -262,7 +262,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::ReturnZero:System.Int32()",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         var plan = result.NativeReferenceLoweringPlan;
 
         Assert.Equal("generic-analysis-only", plan.PlanKind);
@@ -284,7 +284,7 @@ public sealed class PipelineIntegrationTests
             AdditionalAssemblyPaths: null);
 
         var pipeline = new PipelinePlan();
-        var results = pipeline.ExecuteMulti(request);
+        var results = pipeline.ExecuteMulti(request).Value!;
 
         Assert.NotEmpty(results);
         Assert.Single(results);
@@ -305,7 +305,7 @@ public sealed class PipelineIntegrationTests
             AdditionalAssemblyPaths: null);
 
         var pipeline = new PipelinePlan();
-        var results = pipeline.ExecuteMulti(request);
+        var results = pipeline.ExecuteMulti(request).Value!;
 
         Assert.NotEmpty(results);
         Assert.NotNull(results[0].AotCoreIr);
@@ -324,7 +324,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             FullAssemblyClosure: true);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
 
         Assert.Equal(ctx.OutputRoot, result.OutputRootPath);
     }
@@ -338,7 +338,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             FullAssemblyClosure: true);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
 
         Assert.Equal("StubAssembly", result.ClosureManifest.AssemblyName);
         Assert.True(result.ClosureManifest.FullAssemblyClosure);
@@ -353,7 +353,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             FullAssemblyClosure: true);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
 
         Assert.NotEmpty(result.ClosureManifest.ResolvedAssemblies);
         Assert.Contains(result.ClosureManifest.ResolvedAssemblies, r =>
@@ -369,7 +369,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             FullAssemblyClosure: true);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
 
         Assert.NotNull(result.OptimizationFacts);
         Assert.NotNull(result.PreserveDescriptor);
@@ -389,7 +389,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::UseCalculator:System.Int32(ICalculator,System.Int32,System.Int32)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -404,7 +404,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::TryCatchDivide:System.Int32(System.Int32,System.Int32)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -419,7 +419,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::DayName:System.String(System.Int32)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -434,7 +434,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::Identity`1:!!0(!!0)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -449,7 +449,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::Sum:System.Int32(System.Int32[])",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -464,7 +464,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::SafeDivide:System.Int32(System.Int32,System.Int32)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -480,7 +480,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::Coalesce:System.String(System.String,System.String)",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -494,7 +494,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::IntToString:System.String(System.Int32)",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -508,7 +508,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::IsNullOrEmpty:System.Boolean(System.String)",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -522,7 +522,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::UseArrayEmpty:System.Boolean()",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -536,7 +536,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::GetFiveElements:System.Int32[]()",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -550,7 +550,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::UseMathMax:System.Int32(System.Int32,System.Int32)",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -564,7 +564,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::UseList:System.Int32(System.Int32,System.Int32)",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -578,7 +578,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::DayToString:System.String(System.DayOfWeek)",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -592,7 +592,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::Concat:System.String(System.String,System.String)",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -606,7 +606,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::UseDelegate:System.Int32(System.Func<System.Int32,System.Int32>,System.Int32)",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -620,7 +620,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::BoxInt32:System.Object(System.Int32)",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -634,7 +634,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::SumEnumerable:System.Int32(System.Collections.Generic.IEnumerable<System.Int32>)",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -648,7 +648,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::UnwrapNullable:System.Int32(System.Nullable<System.Int32>)",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -662,7 +662,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::BitwiseAndOr:System.Int32(System.Int32,System.Int32)",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -676,7 +676,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::DivideUnsigned:System.UInt32(System.UInt32,System.UInt32)",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -690,7 +690,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::IntToDouble:System.Double(System.Int32)",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -704,7 +704,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::IncrementCounter:System.Int32()",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -718,7 +718,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::TryParseInt:System.Boolean(System.String,System.Int32&)",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -732,7 +732,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::CountTo:System.Int32(System.Int32)",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -746,7 +746,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::OverflowAdd:System.Int32(System.Int32,System.Int32)",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -760,7 +760,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::UseDouble:System.Double(System.Double,System.Double)",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -774,7 +774,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::CastAndCheck:System.String(System.Object)",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -790,7 +790,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::UseStringFormat:System.String(System.String,System.Int32)",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -804,7 +804,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::NewGuidToString:System.String()",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -818,7 +818,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::UseTimeSpan:System.Double(System.Double)",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -832,7 +832,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::StringContains:System.Boolean(System.String,System.String)",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -846,7 +846,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::BuildString:System.String(System.String,System.String,System.String)",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -860,7 +860,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::StringToInt32:System.Int32(System.String)",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -874,7 +874,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::CombinePaths:System.String(System.String,System.String)",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -888,7 +888,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::StartsWithHello:System.Boolean(System.String)",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -902,7 +902,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::DateTimeToBinary:System.Int64(System.DateTime)",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -916,7 +916,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::EscapeDataString:System.String(System.String)",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -930,7 +930,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::TryParseDayName:System.Boolean(System.String)",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -944,7 +944,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::NullableGetValueOrDefault:System.Int32(System.Nullable<System.Int32>)",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -958,7 +958,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::InvokeTwoDelegates:System.Int32(System.Func<System.Int32,System.Int32>,System.Func<System.Int32,System.Int32>,System.Int32)",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -977,7 +977,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::Add:System.Int32(System.Int32,System.Int32)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -992,7 +992,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::AddOne:System.Void(System.Int32&)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1007,7 +1007,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::ArrayLength:System.Int32(System.Int32[])",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1022,7 +1022,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::Divide:System.Int32(System.Int32,System.Int32)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1037,7 +1037,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::DoubleAdd:System.Int32(System.Int32,System.Int32)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1052,7 +1052,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::FirstElement:System.Int32(System.Int32[])",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1067,7 +1067,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::GetAgeInHours:System.Double(System.DateTime)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1082,7 +1082,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::GetCurrentThreadId:System.Int32()",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1097,7 +1097,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::GetHello:System.String()",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1112,7 +1112,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::GetObjHash:System.Int32(System.Object)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1127,7 +1127,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::GetStringType:System.Type()",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1142,7 +1142,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::HasNullableValue:System.Boolean(System.Nullable<System.Int32>)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1157,7 +1157,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::IntToByte:System.Byte(System.Int32)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1172,7 +1172,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::IntToFloat:System.Single(System.Int32)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1187,7 +1187,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::IntToLong:System.Int64(System.Int32)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1202,7 +1202,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::IntToShort:System.Int16(System.Int32)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1217,7 +1217,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::IsGreaterThan:System.Boolean(System.Int32,System.Int32)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1232,7 +1232,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::IsLessThan:System.Boolean(System.Int32,System.Int32)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1247,7 +1247,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::IsNull:System.Boolean(System.Object)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1262,7 +1262,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::IsWeekend:System.Boolean(System.DayOfWeek)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1277,7 +1277,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::JoinStrings:System.String(System.String[],System.String)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1292,7 +1292,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::LockAndIncrement:System.Int32()",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1307,7 +1307,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::MakeArray:System.Int32[](System.Int32,System.Int32)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1322,7 +1322,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::Max:System.Int32(System.Int32,System.Int32)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1337,7 +1337,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::Modulo:System.Int32(System.Int32,System.Int32)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1352,7 +1352,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::ModUnsigned:System.UInt32(System.UInt32,System.UInt32)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1367,7 +1367,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::Multiply:System.Int32(System.Int32,System.Int32)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1382,7 +1382,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::NegateValue:System.Int32(System.Int32)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1397,7 +1397,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::NoOp:System.Void()",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1412,7 +1412,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::ObjEquals:System.Boolean(System.Object,System.Object)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1427,7 +1427,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::ObjToString:System.String(System.Object)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1442,7 +1442,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::OverflowSub:System.Int32(System.Int32,System.Int32)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1457,7 +1457,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::ReadCounter:System.Int32()",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1472,7 +1472,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::ReadFileFirstLine:System.String(System.String)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1487,7 +1487,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::ShiftBits:System.Int32(System.Int32,System.Int32)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1502,7 +1502,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::ShortSleep:System.Void()",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1517,7 +1517,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::SplitComma:System.String[](System.String)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1532,7 +1532,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::Subtract:System.Int32(System.Int32,System.Int32)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1547,7 +1547,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::TryCatchFinally:System.Int32(System.Int32,System.Int32)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1562,7 +1562,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::UnboxToInt32:System.Int32(System.Object)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1577,7 +1577,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::UseFloat:System.Single(System.Single,System.Single)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1592,7 +1592,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::UseGcKeepAlive:System.Void(System.Object)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1607,7 +1607,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::UseGcSuppressFinalize:System.Void(System.Object)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1622,7 +1622,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::UseLong:System.Int64(System.Int64,System.Int64)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1637,7 +1637,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::UseMathAbs:System.Double(System.Double)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1652,7 +1652,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::UseMathMin:System.Int32(System.Int32,System.Int32)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1667,7 +1667,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::WriteError:System.Void(System.String)",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1682,7 +1682,7 @@ public sealed class PipelineIntegrationTests
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::YieldOnce:System.Boolean()",
             FullAssemblyClosure: false);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1742,7 +1742,7 @@ public sealed class PipelineIntegrationTests
                 EntryPointSubjectIdOverride: subjectId,
                 FullAssemblyClosure: false);
 
-            var result = new PipelinePlan().Execute(request);
+            var result = new PipelinePlan().Execute(request).Value!;
             Assert.NotNull(result.AotCoreIr);
             Assert.NotEmpty(result.AotCoreIr.Methods);
         }
@@ -1766,7 +1766,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::CallToStringOnInt32:System.String(System.Int32)",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1780,7 +1780,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::GetDefaultDateTime:System.DateTime()",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1794,7 +1794,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::SizeOfInt32:System.Int32()",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1808,7 +1808,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::ReadVolatileCounter:System.Int32()",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1822,7 +1822,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::GenericToString`1:System.String(!!0)",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1836,7 +1836,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: "StubAssembly/StubMethods::ComplexProcessing`1:System.String(System.Nullable<!!0>,System.Int32)",
             FullAssemblyClosure: false);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.AotCoreIr);
         Assert.NotEmpty(result.AotCoreIr.Methods);
     }
@@ -1855,7 +1855,7 @@ public sealed class PipelineIntegrationTests
             OutputRootPath: ctx.OutputRoot,
             EntryPointSubjectIdOverride: null,
             FullAssemblyClosure: true);
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
         Assert.NotNull(result.NativeAotLoweringPlan);
         Assert.NotNull(result.CodeRegistration);
         Assert.NotEmpty(result.AotCoreIr.Methods);

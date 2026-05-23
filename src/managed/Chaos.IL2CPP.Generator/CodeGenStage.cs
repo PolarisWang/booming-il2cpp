@@ -10,12 +10,14 @@ public sealed class CodeGenStage
 
     public string Name => "CodeGen";
 
-    public ManagedClosureResult Generate(
+    public PipelineResult<ManagedClosureResult> Generate(
         ManagedClosureRequest request,
         LinkedWorldModel linkedWorld,
         MetadataWriterOutput metadataWriterOutput)
     {
-        var lookups = BuildStageLookups(linkedWorld);
+        try
+        {
+            var lookups = BuildStageLookups(linkedWorld);
         var methodShapes = lookups.MethodShapes;
         var methodCapabilities = lookups.MethodCapabilities;
         var internalAssemblyNames = lookups.InternalAssemblyNames;
@@ -120,7 +122,7 @@ public sealed class CodeGenStage
             ],
         };
 
-        return new ManagedClosureResult
+        return PipelineResult<ManagedClosureResult>.Ok(new ManagedClosureResult
         {
             OutputRootPath = request.OutputRootPath,
             TypedIlIr = typedIl,
@@ -136,7 +138,13 @@ public sealed class CodeGenStage
             NativeReferenceLoweringPlan = nativeReferenceLoweringPlan,
             NativeAotLoweringPlan = nativeAotLoweringPlan,
             ClosureManifest = closureManifest,
-        };
+        });
+        }
+        catch (Exception ex)
+        {
+            return PipelineResult<ManagedClosureResult>.Fail("CODEGEN_GENERATE_FAILED",
+                $"Code generation failed: {ex.Message}", ex);
+        }
     }
 
     /// <summary>

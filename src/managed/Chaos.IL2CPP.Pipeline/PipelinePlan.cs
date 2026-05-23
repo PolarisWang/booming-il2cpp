@@ -24,14 +24,29 @@ public sealed class PipelinePlan
             "CodeGen",
         ];
 
-    public ManagedClosureResult Execute(ManagedClosureRequest request)
+    public PipelineResult<ManagedClosureResult> Execute(ManagedClosureRequest request)
     {
-        var loadedWorld = _loader.LoadMultiple(request);
-        var semanticWorld = _semanticWorld.Build(loadedWorld);
-        var linkedWorld = _linker.Link(semanticWorld);
-        var metadataWriterOutput = _metadataWriter.Write(linkedWorld);
+        var loadedWorldResult = _loader.LoadMultiple(request);
+        if (loadedWorldResult.IsFailure)
+            return PipelineResult<ManagedClosureResult>.Fail(
+                loadedWorldResult.Error!);
 
-        return _codeGen.Generate(request, linkedWorld, metadataWriterOutput);
+        var semanticWorldResult = _semanticWorld.Build(loadedWorldResult.Value!);
+        if (semanticWorldResult.IsFailure)
+            return PipelineResult<ManagedClosureResult>.Fail(
+                semanticWorldResult.Error!);
+
+        var linkedWorldResult = _linker.Link(semanticWorldResult.Value!);
+        if (linkedWorldResult.IsFailure)
+            return PipelineResult<ManagedClosureResult>.Fail(
+                linkedWorldResult.Error!);
+
+        var metadataWriterResult = _metadataWriter.Write(linkedWorldResult.Value!);
+        if (metadataWriterResult.IsFailure)
+            return PipelineResult<ManagedClosureResult>.Fail(
+                metadataWriterResult.Error!);
+
+        return _codeGen.Generate(request, linkedWorldResult.Value!, metadataWriterResult.Value!);
     }
 
     /// <summary>
@@ -39,33 +54,52 @@ public sealed class PipelinePlan
     /// All assemblies are loaded into a unified world, linked together,
     /// and produce per-assembly codegen results.
     /// </summary>
-    public IReadOnlyList<ManagedClosureResult> ExecuteMulti(MultiAssemblyClosureRequest request)
+    public PipelineResult<IReadOnlyList<ManagedClosureResult>> ExecuteMulti(MultiAssemblyClosureRequest request)
     {
-        var loadedWorld = _loader.LoadMultiple(new ManagedClosureRequest(
+        var loadRequest = new ManagedClosureRequest(
             request.InputAssemblyPaths[0],
             request.OutputRootPath,
             EntryPointSubjectIdOverride: request.EntryPointSubjectIdOverride,
             AdditionalAssemblyPaths: request.InputAssemblyPaths.Skip(1)
                 .Concat(request.AdditionalAssemblyPaths ?? [])
                 .ToList(),
-            FullAssemblyClosure: string.IsNullOrWhiteSpace(request.EntryPointSubjectIdOverride)));
+            FullAssemblyClosure: string.IsNullOrWhiteSpace(request.EntryPointSubjectIdOverride));
 
-        var semanticWorld = _semanticWorld.Build(loadedWorld);
-        var linkedWorld = _linker.Link(semanticWorld);
-        var metadataWriterOutput = _metadataWriter.Write(linkedWorld);
+        var loadedWorldResult = _loader.LoadMultiple(loadRequest);
+        if (loadedWorldResult.IsFailure)
+            return PipelineResult<IReadOnlyList<ManagedClosureResult>>.Fail(
+                loadedWorldResult.Error!);
 
-        var fullResult = _codeGen.Generate(
-            new ManagedClosureRequest(
-                request.InputAssemblyPaths[0],
-                request.OutputRootPath,
-                EntryPointSubjectIdOverride: request.EntryPointSubjectIdOverride,
-                AdditionalAssemblyPaths: request.InputAssemblyPaths.Skip(1)
-                    .Concat(request.AdditionalAssemblyPaths ?? [])
-                    .ToList(),
-                FullAssemblyClosure: true),
-            linkedWorld,
-            metadataWriterOutput);
+        var semanticWorldResult = _semanticWorld.Build(loadedWorldResult.Value!);
+        if (semanticWorldResult.IsFailure)
+            return PipelineResult<IReadOnlyList<ManagedClosureResult>>.Fail(
+                semanticWorldResult.Error!);
 
-        return _codeGen.FilterResultPerAssembly(fullResult, request.InputAssemblyPaths);
+        var linkedWorldResult = _linker.Link(semanticWorldResult.Value!);
+        if (linkedWorldResult.IsFailure)
+            return PipelineResult<IReadOnlyList<ManagedClosureResult>>.Fail(
+                linkedWorldResult.Error!);
+
+        var metadataWriterResult = _metadataWriter.Write(linkedWorldResult.Value!);
+        if (metadataWriterResult.IsFailure)
+            return PipelineResult<IReadOnlyList<ManagedClosureResult>>.Fail(
+                metadataWriterResult.Error!);
+
+        var generateRequest = new ManagedClosureRequest(
+            request.InputAssemblyPaths[0],
+            request.OutputRootPath,
+            EntryPointSubjectIdOverride: request.EntryPointSubjectIdOverride,
+            AdditionalAssemblyPaths: request.InputAssemblyPaths.Skip(1)
+                .Concat(request.AdditionalAssemblyPaths ?? [])
+                .ToList(),
+            FullAssemblyClosure: true);
+
+        var fullResult = _codeGen.Generate(generateRequest, linkedWorldResult.Value!, metadataWriterResult.Value!);
+        if (fullResult.IsFailure)
+            return PipelineResult<IReadOnlyList<ManagedClosureResult>>.Fail(
+                fullResult.Error!);
+
+        return PipelineResult<IReadOnlyList<ManagedClosureResult>>.Ok(
+            _codeGen.FilterResultPerAssembly(fullResult.Value!, request.InputAssemblyPaths));
     }
 }

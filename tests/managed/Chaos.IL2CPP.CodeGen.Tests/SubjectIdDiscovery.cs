@@ -1,7 +1,7 @@
 using System.IO;
 using System.Linq;
-using Chaos.IL2CPP.Pipeline;
 using Chaos.IL2CPP.Contracts;
+using Chaos.IL2CPP.Pipeline;
 using Xunit;
 
 namespace Chaos.IL2CPP.Generator.Tests;
@@ -34,7 +34,7 @@ public sealed class SubjectIdDiscovery
             OutputRootPath: Path.GetTempPath(),
             FullAssemblyClosure: true);
 
-        var result = new PipelinePlan().Execute(request);
+        var result = new PipelinePlan().Execute(request).Value!;
 
         var lines = result.TypedIlIr.Methods.OrderBy(x => x.SubjectId)
             .Select(m => m.SubjectId).ToList();

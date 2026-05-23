@@ -10,9 +10,11 @@ public sealed class MetadataWriterStage
 
     public string Name => "MetadataWriter";
 
-    public MetadataWriterOutput Write(LinkedWorldModel linkedWorld)
+    public PipelineResult<MetadataWriterOutput> Write(LinkedWorldModel linkedWorld)
     {
-        var aotEntries = new List<AotManifestEntry>();
+        try
+        {
+            var aotEntries = new List<AotManifestEntry>();
         var genericDemandLookup = BuildGenericDemandLookup(linkedWorld.GenericInstantiationDemandGraph);
 
         foreach (var method in linkedWorld.Methods)
@@ -188,7 +190,7 @@ public sealed class MetadataWriterStage
             },
         };
 
-        return new MetadataWriterOutput
+        return PipelineResult<MetadataWriterOutput>.Ok(new MetadataWriterOutput
         {
             AotManifest = new AotManifestArtifact
             {
@@ -199,7 +201,13 @@ public sealed class MetadataWriterStage
                 Registrations = registrations,
             },
             SupplementalMetadataTemplate = supplementalMetadataTemplate,
-        };
+        });
+        }
+        catch (Exception ex)
+        {
+            return PipelineResult<MetadataWriterOutput>.Fail("METADATA_WRITER_FAILED",
+                $"Metadata writer stage failed: {ex.Message}", ex);
+        }
     }
 
     private static IReadOnlyDictionary<string, GenericInstantiationDemandModel> BuildGenericDemandLookup(

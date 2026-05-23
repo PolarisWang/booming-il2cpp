@@ -66,12 +66,15 @@ public sealed partial class NativeAotLoweringPlanner
             return StaticInitializationSupportModel.Empty;
         }
 
-        var loadedWorld = new LoaderStage().LoadMultiple(new ManagedClosureRequest(
+        var loadedWorldResult = new LoaderStage().LoadMultiple(new ManagedClosureRequest(
             closureManifest.InputAssemblyPath,
             Path.GetDirectoryName(closureManifest.InputAssemblyPath) ?? closureManifest.InputAssemblyPath,
             closureManifest.EntrySubjectId,
             GetResolvedAdditionalAssemblyPaths(closureManifest),
             FullAssemblyClosure: closureManifest.FullAssemblyClosure));
+        if (loadedWorldResult.IsFailure)
+            return StaticInitializationSupportModel.Empty;
+        var loadedWorld = loadedWorldResult.Value!;
         var loadedMethodsBySubjectId = loadedWorld.Methods
             .GroupBy(method => method.SubjectId, StringComparer.Ordinal)
             .ToDictionary(group => group.Key, group => group.First(), StringComparer.Ordinal);

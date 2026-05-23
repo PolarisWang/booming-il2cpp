@@ -33,35 +33,43 @@ public sealed class SemanticWorldStage
 
     public string Name => "SemanticWorld";
 
-    public SemanticWorldModel Build(LoadedWorldModel loadedWorld)
+    public PipelineResult<SemanticWorldModel> Build(LoadedWorldModel loadedWorld)
     {
-        var canonicalMethods = loadedWorld.Methods
-            .Select(CanonicalizeMethodBody)
-            .ToList();
-        var canonicalSubjects = BuildCanonicalSubjects(loadedWorld);
-        var semanticShapes = BuildSemanticShapes(loadedWorld, canonicalMethods);
-        var capabilityBundles = BuildCapabilityBundles(
-            loadedWorld.Assemblies.Select(assembly => assembly.Assembly.Name).ToHashSet(StringComparer.Ordinal),
-            loadedWorld.Types.ToDictionary(type => type.SubjectId, StringComparer.Ordinal),
-            loadedWorld.Fields.ToDictionary(field => field.SubjectId, StringComparer.Ordinal),
-            canonicalMethods);
-
-        return new SemanticWorldModel
+        try
         {
-            InputAssemblyPath = loadedWorld.InputAssemblyPath,
-            FullAssemblyClosure = loadedWorld.FullAssemblyClosure,
-            Assembly = loadedWorld.Assembly,
-            Assemblies = loadedWorld.Assemblies.Select(assembly => assembly.Assembly).ToList(),
-            EntryPointSubjectId = loadedWorld.EntryPointSubjectId,
-            GenericInstantiationDemandGraph = loadedWorld.GenericInstantiationDemandGraph,
-            Types = loadedWorld.Types,
-            Fields = loadedWorld.Fields,
-            Properties = loadedWorld.Properties,
-            Methods = canonicalMethods,
-            CanonicalSubjects = canonicalSubjects,
-            SemanticShapes = semanticShapes,
-            CapabilityBundles = capabilityBundles,
-        };
+            var canonicalMethods = loadedWorld.Methods
+                .Select(CanonicalizeMethodBody)
+                .ToList();
+            var canonicalSubjects = BuildCanonicalSubjects(loadedWorld);
+            var semanticShapes = BuildSemanticShapes(loadedWorld, canonicalMethods);
+            var capabilityBundles = BuildCapabilityBundles(
+                loadedWorld.Assemblies.Select(assembly => assembly.Assembly.Name).ToHashSet(StringComparer.Ordinal),
+                loadedWorld.Types.ToDictionary(type => type.SubjectId, StringComparer.Ordinal),
+                loadedWorld.Fields.ToDictionary(field => field.SubjectId, StringComparer.Ordinal),
+                canonicalMethods);
+
+            return PipelineResult<SemanticWorldModel>.Ok(new SemanticWorldModel
+            {
+                InputAssemblyPath = loadedWorld.InputAssemblyPath,
+                FullAssemblyClosure = loadedWorld.FullAssemblyClosure,
+                Assembly = loadedWorld.Assembly,
+                Assemblies = loadedWorld.Assemblies.Select(assembly => assembly.Assembly).ToList(),
+                EntryPointSubjectId = loadedWorld.EntryPointSubjectId,
+                GenericInstantiationDemandGraph = loadedWorld.GenericInstantiationDemandGraph,
+                Types = loadedWorld.Types,
+                Fields = loadedWorld.Fields,
+                Properties = loadedWorld.Properties,
+                Methods = canonicalMethods,
+                CanonicalSubjects = canonicalSubjects,
+                SemanticShapes = semanticShapes,
+                CapabilityBundles = capabilityBundles,
+            });
+        }
+        catch (Exception ex)
+        {
+            return PipelineResult<SemanticWorldModel>.Fail("SEMANTIC_WORLD_BUILD_FAILED",
+                $"Semantic world build failed: {ex.Message}", ex);
+        }
     }
 
     private static CanonicalSubjectsModel BuildCanonicalSubjects(LoadedWorldModel loadedWorld)

@@ -85,7 +85,7 @@ internal sealed class ConvertToCppConfig
         {
             Console.Error.WriteLine("Error: at least one --assembly is required.");
             Console.Error.WriteLine("Usage: chaos-il2cpp convert-to-cpp --assembly <path> [--assembly <path> ...] --output <dir>");
-            Environment.Exit(1);
+            return new ConvertToCppConfig { AssemblyPaths = [], OutputDir = "" };
         }
 
         return new ConvertToCppConfig

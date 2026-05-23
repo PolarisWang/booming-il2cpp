@@ -3,6 +3,9 @@
     <OutputType>Exe</OutputType>
   </PropertyGroup>
   <ItemGroup>
+    <InternalsVisibleTo Include="Chaos.IL2CPP.Driver.Tests" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Chaos.IL2CPP.Generator\Chaos.IL2CPP.Generator.csproj" />
     <ProjectReference Include="..\Chaos.IL2CPP.Contracts\Chaos.IL2CPP.Contracts.csproj" />
     <ProjectReference Include="..\Chaos.IL2CPP.Diagnostics\Chaos.IL2CPP.Diagnostics.csproj" />

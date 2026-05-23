@@ -22,7 +22,7 @@ public sealed partial class LoaderStage
             requireEntryPoint: true);
     }
 
-    public LoadedWorldModel LoadMultiple(ManagedClosureRequest request)
+    public PipelineResult<LoadedWorldModel> LoadMultiple(ManagedClosureRequest request)
     {
         var assemblyPaths = new List<string> { request.InputAssemblyPath };
         if (request.AdditionalAssemblyPaths is not null)
@@ -41,14 +41,36 @@ public sealed partial class LoaderStage
             }
         }
 
-        var loadedAssemblies = assemblyPaths
-            .Select(assemblyPath => LoadAssembly(
-                assemblyPath,
-                entryPointSubjectIdOverride: null,
-                requireEntryPoint: false))
-            .ToList();
+        List<LoadedAssemblyModel> loadedAssemblies;
+        try
+        {
+            loadedAssemblies = assemblyPaths
+                .Select(assemblyPath => LoadAssembly(
+                    assemblyPath,
+                    entryPointSubjectIdOverride: null,
+                    requireEntryPoint: false))
+                .ToList();
+        }
+        catch (Exception ex)
+        {
+            return PipelineResult<LoadedWorldModel>.Fail("LOADER_LOAD_FAILED",
+                $"Failed to load assemblies: {ex.Message}", ex);
+        }
+
         loadedAssemblies = ProjectCrossAssemblyMethodInstantiations(assemblyPaths, loadedAssemblies);
-        var resolvedEntryPointSubjectIdOverride = ResolveEntryPointSubjectIdOverride(loadedAssemblies, request.EntryPointSubjectIdOverride);
+
+        string? resolvedEntryPointSubjectIdOverride;
+        try
+        {
+            resolvedEntryPointSubjectIdOverride = ResolveEntryPointSubjectIdOverride(
+                loadedAssemblies, request.EntryPointSubjectIdOverride);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return PipelineResult<LoadedWorldModel>.Fail("LOADER_ENTRY_POINT_NOT_FOUND",
+                ex.Message, ex);
+        }
+
         var entryAssembly = ResolveEntryAssembly(loadedAssemblies, resolvedEntryPointSubjectIdOverride, request.FullAssemblyClosure);
         var entryPointSubjectId = !string.IsNullOrWhiteSpace(resolvedEntryPointSubjectIdOverride)
             ? resolvedEntryPointSubjectIdOverride!
@@ -56,7 +78,7 @@ public sealed partial class LoaderStage
                 ? string.Empty
                 : entryAssembly.EntryPointSubjectId;
 
-        return new LoadedWorldModel
+        return PipelineResult<LoadedWorldModel>.Ok(new LoadedWorldModel
         {
             InputAssemblyPath = request.InputAssemblyPath,
             FullAssemblyClosure = request.FullAssemblyClosure,
@@ -68,7 +90,7 @@ public sealed partial class LoaderStage
             Fields = loadedAssemblies.SelectMany(assembly => assembly.Fields).OrderBy(model => model.MetadataToken).ToList(),
             Properties = loadedAssemblies.SelectMany(assembly => assembly.Properties).OrderBy(model => model.MetadataToken).ToList(),
             Methods = loadedAssemblies.SelectMany(assembly => assembly.Methods).OrderBy(model => model.MetadataToken).ToList(),
-        };
+        });
     }
 
     private static string? ResolveEntryPointSubjectIdOverride(
