@@ -22,3 +22,4 @@
 | [15-hotupdate-final](15-hotupdate-final/MILESTONE.md) | 4 | 05/04–05/19 | Hotupdate dispatch, CRAG GC, misc |
 | [hotupdate-industrialization](hotupdate-industrialization/STATUS.md) | 11 | 05/23 | HotUpdate 工业化补齐 — 11 项全部完成: C1 寄存器 VM, C3 MetadataRegistry, C4 工具链, C5 测试覆盖, C9-C11 收尾 |
 | [reflection-industrialization](reflection-industrialization/STATUS.md) | 17 | 05/23 | Reflection 工业化补齐 — 4 阶段 17 项全部完成: Phase 1 API 核心矫正, Phase 2 API 表面全覆盖, Phase 3 热更新兼容, Phase 4 测试+工具链工业化 |
+| [memory-domain-industrialization](memory-domain-industrialization/STATUS.md) | 6 | 05/23 | Memory Domain 工业化补齐 — 6 项全部完成: M1 EventPipe, M2 压力测试, M3 基准测试, M4 Proof, M5 泄漏修复, M6 域修复 |

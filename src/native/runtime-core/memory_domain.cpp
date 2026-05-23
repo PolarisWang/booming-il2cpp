@@ -163,8 +163,11 @@ public:
         // track individual bump-allocated blocks, use region total as
         // a conservative estimate).
         if (owner_ != nullptr) {
-            owner_->current_usage -= total;
-            if (owner_->current_usage < 0) owner_->current_usage = 0;
+            owner_->current_usage.fetch_sub(total, std::memory_order_relaxed);
+            // Saturating: if negative after subtract, reset to 0.
+            if (owner_->current_usage.load(std::memory_order_relaxed) < 0) {
+                owner_->current_usage.store(0, std::memory_order_relaxed);
+            }
         }
         regions_.clear();
         current_ = nullptr;
@@ -433,8 +436,8 @@ DomainId RegisterMemoryDomain(const DomainInit& init) {
     domain->module_name  = init.module_name;
     domain->module_kind  = init.module_kind;
     domain->heap         = nullptr;
-    domain->current_usage = 0;
-    domain->peak_usage   = 0;
+    domain->current_usage.store(0, std::memory_order_relaxed);
+    domain->peak_usage.store(0, std::memory_order_relaxed);
     domain->usage_limit  = init.usage_limit;
 
     {
@@ -453,6 +456,15 @@ DomainId RegisterMemoryDomain(const DomainInit& init) {
         domain->heap->SetOwner(domain);
 
         g_domains.push_back(domain);
+    }
+
+    // Fire domain-registered event after successful registration.
+    {
+        MemoryDomainEventData ev_data{};
+        ev_data.domain_id = domain->domain_id;
+        ev_data.module_name = domain->module_name;
+        ev_data.module_kind = domain->module_kind;
+        MemoryDomainFireEvent(MemoryDomainEvent::DOMAIN_REGISTERED, ev_data);
     }
 
     return domain->domain_id;
@@ -494,25 +506,49 @@ bool UnregisterMemoryDomain(DomainId domain_id) {
     }
 
     CHAOS_IL2CPP_LOCK_GUARD(CHAOS_IL2CPP_MUTEX) lock(g_registry_mutex);
-    for (size_t i = 0; i < g_domains.size(); ) {
+    for (size_t i = 0; i < g_domains.size(); ++i) {
         auto* domain = g_domains[i];
         if (domain != nullptr && domain->domain_id == domain_id) {
+            // Fire domain-unloaded event before destroying the domain.
+            {
+                MemoryDomainEventData ev_data{};
+                ev_data.domain_id = domain->domain_id;
+                MemoryDomainFireEvent(MemoryDomainEvent::DOMAIN_UNLOADED, ev_data);
+            }
+
             if (domain->heap != nullptr) {
                 domain->heap->Destroy();
                 delete domain->heap;
                 domain->heap = nullptr;
             }
 
+            // Tombstone marking: set is_unloaded = true instead of erasing,
+            // avoiding O(n) compaction on every unregister. FindDomainById
+            // and FindDomainByName already skip is_unloaded domains.
             domain->is_unloaded = true;
             delete domain;
-            // Compress: replace with last element and pop to avoid
-            // accumulating nullptr tombstones that bloat the vector
-            // and slow down linear scans.
-            g_domains[i] = g_domains.back();
-            g_domains.pop_back();
+            g_domains[i] = nullptr;
+
+            // Lazy compaction: when tombstone ratio exceeds 50% and vector
+            // is larger than 1024 entries, compact by removing all nullptrs.
+            if (g_domains.size() > 1024) {
+                size_t tombstone_count = 0;
+                for (auto* d : g_domains) {
+                    if (d == nullptr) ++tombstone_count;
+                }
+                if (tombstone_count > g_domains.size() / 2) {
+                    size_t write = 0;
+                    for (size_t r = 0; r < g_domains.size(); ++r) {
+                        if (g_domains[r] != nullptr) {
+                            g_domains[write++] = g_domains[r];
+                        }
+                    }
+                    g_domains.resize(write);
+                }
+            }
+
             return true;
         }
-        i++;
     }
     return false;
 }
@@ -525,10 +561,11 @@ int PushDomain(MemoryDomain* domain) {
     auto& stack = g_tls_domain_stack;
     if (stack.top < 63) {
         stack.domains[++stack.top] = domain;
+        return stack.top;
     } else {
         CHAOS_IL2CPP_LOG_ERROR("MemoryDomain", "PushDomain: thread-local stack overflow (max 64), domain push ignored");
+        return 64;  // sentinel: no domain was pushed, keeps PopDomain balance
     }
-    return stack.top;
 }
 
 void PopDomain(int depth_before_push) {

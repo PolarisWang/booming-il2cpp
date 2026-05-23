@@ -125,9 +125,6 @@ RawDispatchResult InterpreterDispatchRaw(
 
     CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterDispatchRaw");
 
-    std::fprintf(stderr, "[diag:IDR_ENTER] ct=%p ac=%u inst=%d\n", call_target, arg_count, is_instance_call);
-    std::fflush(stderr);
-
     RawDispatchResult result = {};
     auto* ctx = static_cast<InterpreterDispatchContext*>(dispatch_context);
     if (ctx == nullptr || ctx->runtime_state == nullptr) {
@@ -254,10 +251,6 @@ RawDispatchResult InterpreterDispatchRaw(
             static_cast<ValueTag>(arg_tags[0]) != ValueTag::ObjectRef &&
             static_cast<ValueTag>(arg_tags[0]) != ValueTag::Null &&
             static_cast<ValueTag>(arg_tags[0]) != ValueTag::ManagedPtr;
-        std::fprintf(stderr, "[diag:MIC_CHECK] vt=%d inst=%d ac=%u tag0=%d dp=%p\n",
-            value_type_this, is_instance_call, arg_count,
-            arg_count > 0 ? static_cast<int>(arg_tags[0]) : -1,
-            cache_info->direct_ptr);
         if (!value_type_this) {
             auto fn = reinterpret_cast<DirectFn>(cache_info->direct_ptr);
             uint64_t a0 = (arg_count > 0) ? raw_args[0] : 0;
@@ -282,21 +275,12 @@ RawDispatchResult InterpreterDispatchRaw(
     }
 
     // ── Call MethodInvoke ──
-    std::fprintf(stderr, "[diag:IDR_MI] use_cache=%d direct_ptr=%p is_patched=%d value_type_this=%d ac=%u pc=%u\n",
-        use_cache, cache_info ? cache_info->direct_ptr : nullptr,
-        cache_info ? cache_info->is_patched : 0,
-        (is_instance_call && arg_count > 0 &&
-         static_cast<ValueTag>(arg_tags[0]) != ValueTag::ObjectRef &&
-         static_cast<ValueTag>(arg_tags[0]) != ValueTag::Null &&
-         static_cast<ValueTag>(arg_tags[0]) != ValueTag::ManagedPtr),
-        arg_count,
-        ctx->recursion_depth);
     uint64_t ret_scalar = 0;
     void*    ret_buf = &ret_scalar;
     size_t   ret_size = sizeof(ret_scalar);
 
     if (is_struct_ret && struct_size > 0u) {
-        result.struct_data = CHAOS_IL2CPP_MALLOC(struct_size);
+        result.struct_data = CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE(struct_size);
         if (result.struct_data != nullptr) {
             void* buf_ptr = result.struct_data;
             ret_buf = &buf_ptr;

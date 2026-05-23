@@ -100,6 +100,31 @@ add_chaos_test(test_gc_memory_domain
 )
 
 # ═══════════════════════════════════════════════════════════════════════════
+# Batch B2 — Memory Domain stress, benchmark, proof tests
+# ═══════════════════════════════════════════════════════════════════════════
+
+# gc_memory_domain_stress — MemoryDomain stress/soak test (1000-10000 iterations)
+add_chaos_test(test_gc_memory_domain_stress
+    memory_domain_stress_test.cpp ${CHAOS_GC_STUBS}
+    LIBS ${CHAOS_GC_LIBS}
+    LABELS "stress;core"
+)
+
+# gc_memory_domain_benchmark — MemoryDomain benchmark (PushPop, Alloc, Find, etc.)
+add_chaos_test(test_gc_memory_domain_benchmark
+    memory_domain_benchmark.cpp ${CHAOS_GC_STUBS}
+    LIBS ${CHAOS_GC_LIBS}
+    LABELS "benchmark;core"
+)
+
+# gc_memory_domain_proof — MemoryDomain proof/capability tests (R5-R7 fixes)
+add_chaos_test(test_gc_memory_domain_proof
+    memory_domain_proof_test.cpp ${CHAOS_GC_STUBS}
+    LIBS ${CHAOS_GC_LIBS}
+    LABELS "unit;core"
+)
+
+# ═══════════════════════════════════════════════════════════════════════════
 # Batch C — GC functional tests (need stubs + young gen init)
 # ═══════════════════════════════════════════════════════════════════════════
 
