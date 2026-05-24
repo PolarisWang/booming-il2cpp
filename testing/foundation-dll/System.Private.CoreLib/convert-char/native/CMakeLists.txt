@@ -34,7 +34,6 @@ list(REMOVE_ITEM CHAOS_NATIVE_STUBS
     "${CMAKE_CURRENT_SOURCE_DIR}/runtime-patchdata.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/verification_dispatch.generated.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/jit_stubs.cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/jit_simd_tests.cpp"
 )
 set(CHAOS_ENTRY_SOURCES
     "runtime-entry.cpp"
@@ -57,7 +56,6 @@ set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_PROJECT_ROOT}/src/native/interpreter/generated"
     "${CHAOS_PROJECT_ROOT}/src/native/support"
     "${CHAOS_PROJECT_ROOT}/src/native/hot-update"
-    "${CHAOS_PROJECT_ROOT}/src/native/jit"
     "${CHAOS_PROJECT_ROOT}/third_party/unordered_dense/include"
     "${CHAOS_CODEGEN_DIR}/NumericAggregationSubjects/generated"
     "${CMAKE_CURRENT_SOURCE_DIR}"

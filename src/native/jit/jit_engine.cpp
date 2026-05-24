@@ -250,11 +250,11 @@ private:
     // ── Prologue tracking (for .pdata/.xdata unwind info) ──────────────────
     // Byte offsets from function entry for each prologue instruction.
     // Set during prologue emission (lines ~2825-2833).
-    uint32_t prologue_push_offsets_[8]{};  // Offsets of push rbp/rbx/rsi up to 5 cached regs
+    uint32_t prologue_push_offsets_[9]{};  // Offsets of push rbp/rbx/rsi/rdi up to 5 cached regs
     uint32_t prologue_sub_rsp_offset_ = 0; // Offset of sub rsp, K
     uint32_t prologue_set_fpreg_offset_ = 0; // Offset of mov rbp, rsp
     uint32_t prologue_total_bytes_ = 0;    // Total prologue size in bytes
-    uint8_t push_reg_nums_[8]{};           // x64 register numbers in push order
+    uint8_t push_reg_nums_[9]{};           // x64 register numbers in push order
     uint32_t num_push_regs_ = 0;           // Number of push regs (3 + num_cache_regs_)
     uint32_t prologue_sub_rsp_size_ = 0;   // K value in sub rsp, K
 
@@ -1188,7 +1188,7 @@ void NativeCodeGenerator::EmitInlineDirtyCard(uint8_t obj_reg) noexcept {
         enc_.EmitAddRI(kRSP, static_cast<int32_t>(kFrameSize + frame_align_adj_ + xmm_save_size_ + localloc_extra_));
         for (uint32_t slot = num_cache_regs_; slot > 0; --slot)
             enc_.EmitPop(callee_saved_regs_[slot - 1]);
-        enc_.EmitPop(kRSI); enc_.EmitPop(kRBX); enc_.EmitPop(kRBP); enc_.EmitRet();
+        enc_.EmitPop(kRDI); enc_.EmitPop(kRSI); enc_.EmitPop(kRBX); enc_.EmitPop(kRBP); enc_.EmitRet();
         return true;
     }
 
@@ -2707,6 +2707,7 @@ static void OptimizeInstructions(
     std::vector<uint8_t>& removed_mask,
     bool has_seh) noexcept
 {
+    using namespace chaos::il2cpp::interpreter;
     uint32_t n = static_cast<uint32_t>(instrs.size());
     if (n == 0) return;
 
@@ -3526,7 +3527,7 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
     } else {
         SelectCacheableRegs();
     }
-    frame_align_adj_ = (num_cache_regs_ % 2) * 8;  // 16-byte alignment for Win64 ABI
+    frame_align_adj_ = ((num_cache_regs_ + 1) % 2) * 8;  // 16-byte alignment for Win64 ABI
 
     // Prologue — push callee-saved regs, establish frame pointer
     prologue_push_offsets_[0] = buf_.pos();
@@ -3537,9 +3538,11 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
     enc_.EmitPush(kRBX);
     prologue_push_offsets_[2] = buf_.pos();
     enc_.EmitPush(kRSI);
+    prologue_push_offsets_[3] = buf_.pos();
+    enc_.EmitPush(kRDI);  // x64 ABI: RDI is callee-saved; used by REP STOSQ below
     // Push additional callee-saved regs used for register caching
     for (uint32_t slot = 0; slot < num_cache_regs_; ++slot)
-        prologue_push_offsets_[3 + slot] = buf_.pos(),
+        prologue_push_offsets_[4 + slot] = buf_.pos(),
         enc_.EmitPush(callee_saved_regs_[slot]);
     enc_.EmitMovRR(kRBX, kRCX); enc_.EmitMovRR(kRSI, kRDX);
     prologue_sub_rsp_offset_ = buf_.pos();
@@ -3547,13 +3550,14 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
     enc_.EmitSubRI(kRSP, static_cast<int32_t>(prologue_sub_rsp_size_));
     prologue_total_bytes_ = buf_.pos() - prologue_push_offsets_[0];
 
-    // Build push register list for unwind info: rbp, rbx, rsi, cached regs
+    // Build push register list for unwind info: rbp, rbx, rsi, rdi, cached regs
     push_reg_nums_[0] = kRBP;
     push_reg_nums_[1] = kRBX;
     push_reg_nums_[2] = kRSI;
+    push_reg_nums_[3] = kRDI;
     for (uint32_t slot = 0; slot < num_cache_regs_; ++slot)
-        push_reg_nums_[3 + slot] = callee_saved_regs_[slot];
-    num_push_regs_ = 3 + num_cache_regs_;
+        push_reg_nums_[4 + slot] = callee_saved_regs_[slot];
+    num_push_regs_ = 4 + num_cache_regs_;
 
     // Save callee-saved XMM registers (used by graph coloring)
     // Stored in the area just below the regular frame (at RSP + kFrameSize + frame_align_adj_).
@@ -3809,7 +3813,7 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
     enc_.EmitAddRI(kRSP, static_cast<int32_t>(kFrameSize + frame_align_adj_ + xmm_save_size_ + localloc_extra_));
     for (uint32_t slot = num_cache_regs_; slot > 0; --slot)
         enc_.EmitPop(callee_saved_regs_[slot - 1]);
-    enc_.EmitPop(kRSI); enc_.EmitPop(kRBX); enc_.EmitPop(kRBP);
+    enc_.EmitPop(kRDI); enc_.EmitPop(kRSI); enc_.EmitPop(kRBX); enc_.EmitPop(kRBP);
     enc_.EmitRet();
 
     // Sentinel entry for instr_offsets_ — SEH clause end indices may point
@@ -3938,7 +3942,7 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
             enc_.EmitMovRR(kRBP, kRSP);  // frame pointer chain
             enc_.EmitPush(kRBX);
             enc_.EmitPush(kRSI);
-            // Push cached/colored regs (matches main prologue layout for correct epilogue)
+            enc_.EmitPush(kRDI);  // x64 ABI: RDI is callee-saved; matches main prologue
             for (uint32_t slot = 0; slot < num_cache_regs_; ++slot)
                 enc_.EmitPush(callee_saved_regs_[slot]);
             enc_.EmitSubRI(kRSP, static_cast<int32_t>(kFrameSize + frame_align_adj_ + xmm_save_size_ + localloc_extra_));
