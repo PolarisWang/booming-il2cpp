@@ -6,7 +6,7 @@
 //
 // Trigger criteria (from roadmap):
 //   - Loop backward branches: promoted after kOsrLoopThreshold iterations
-//   - Re-entry: promoted on kT3NativeThreshold call count
+//   - Re-entry: promoted on kJitThreshold call count
 
 #ifndef CHAOS_IL2CPP_OSR_TRIGGER_H_
 #define CHAOS_IL2CPP_OSR_TRIGGER_H_

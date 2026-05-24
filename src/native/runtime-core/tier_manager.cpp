@@ -304,7 +304,7 @@ void TierManager::BackgroundLoop() noexcept {
         // Run T3 promotion via callback.
         fn(entry.method);
 
-        // Set T3 ready (only if still kT3Lowering — someone may have unloaded).
+        // Set T3 ready (only if still kOptimizeLowering — someone may have unloaded).
         uint32_t expected = PatchMethod::kOptimizeLowering;
         entry.method->tier_state.compare_exchange_strong(
             expected, PatchMethod::kOptimizedRegister, std::memory_order_release);

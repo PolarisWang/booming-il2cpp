@@ -2244,7 +2244,7 @@ static void TryOsrPromotion(RegisterFrame& frame,
         // If the method already has a cached JitMethod with an OSR entry,
         // re-enter T4 via OSR directly.  This handles the deopt→T4
         // re-promotion loop: after deoptimization, the tier_state is still
-        // kT4Ready and the cached JitMethod is still valid.
+        // kJitted and the cached JitMethod is still valid.
         auto* existing_nm = static_cast<chaos::il2cpp::jit::JitMethod*>(
             pm->cached_native_method);
         if (existing_nm != nullptr && existing_nm->osr_entry_offset != 0) {
