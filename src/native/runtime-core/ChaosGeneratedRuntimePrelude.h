@@ -211,6 +211,7 @@ inline bool chaos_is_array_type_compatible(
 // chaos::il2cpp::common (via type_info.h) and bringing the jit copies
 // to file scope creates ambiguity.
 using chaos::il2cpp::jit::chaos_managed_pointer_local_slot_tag;
+using chaos::il2cpp::jit::chaos_managed_array;
 using chaos::il2cpp::jit::chaos_is_type_compatible;
 using chaos::il2cpp::jit::chaos_does_type_implement_interface;
 
