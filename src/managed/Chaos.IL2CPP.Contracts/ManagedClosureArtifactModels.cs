@@ -1,15 +1,12 @@
 ﻿namespace Chaos.IL2CPP.Contracts;
 
-/// <summary>Code generation mode for the AOT/JIT/Hybrid switch.</summary>
+/// <summary>Code generation mode for the AOT/JIT switch.</summary>
 public enum CodegenMode
 {
     /// <summary>Generate native AOT code (default). All methods compiled to C++.</summary>
     Aot,
     /// <summary>Generate JIT-friendly entries. All methods routed through JIT dispatch.</summary>
     Jit,
-    /// <summary>Generate Hybrid entries. AOT C++ body emitted, plus JIT IR for on-demand
-    /// upgrade from AOT to JIT-compiled code when call count threshold is reached.</summary>
-    Hybrid,
 }
 
 public sealed record AotManifestArtifact

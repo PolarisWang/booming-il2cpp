@@ -118,7 +118,7 @@ jobs:
 
       - name: Run Codegen Native Tests
         run: |
-          ctest --test-dir testing/artifacts/run/native-test-build -R "test_jit_native|test_jit_abi|test_jit_il_smoke|test_jit_gc_slot_map|test_jit_osr|test_jit_seh|test_jit_unwind|test_jit_binary_ir|test_jit_mode|test_jit_hybrid_mode|test_jit_pgo" --output-on-failure -V 2>&1 | tee jit-native-output.txt
+          ctest --test-dir testing/artifacts/run/native-test-build -R "test_jit_native|test_jit_abi|test_jit_il_smoke|test_jit_gc_slot_map|test_jit_osr|test_jit_seh|test_jit_unwind|test_jit_binary_ir|test_jit_mode|test_jit_pgo" --output-on-failure -V 2>&1 | tee jit-native-output.txt
 
       - name: Run Common Native Tests
         run: ctest --test-dir testing/artifacts/run/native-test-build -R "test_common" --output-on-failure

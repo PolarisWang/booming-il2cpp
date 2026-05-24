@@ -159,7 +159,7 @@ bool TierManager::EnqueueOptimization(PatchMethod* method) noexcept {
     return true;
 }
 
-bool TierManager::EnqueueJitRecompilation(void* precode, bool is_hybrid) noexcept {
+bool TierManager::EnqueueJitRecompilation(JitPrecode* precode) noexcept {
     if (precode == nullptr) return false;
 
     // Ensure background thread is running.
@@ -175,7 +175,7 @@ bool TierManager::EnqueueJitRecompilation(void* precode, bool is_hybrid) noexcep
                 "JIT recomp queue full (max={})", kMaxJitRecompQueueSize);
             return false;
         }
-        jit_queue_.push_back({precode, is_hybrid});
+        jit_queue_.push_back({precode});
     }
     cv_.notify_one();
     return true;
@@ -230,21 +230,15 @@ void TierManager::BackgroundLoop() noexcept {
                 lock.unlock();  // Compilation must not hold the lock
 
                 CHAOS_IL2CPP_LOG_DEBUG_M("tier",
-                    "background JIT Tier0->Tier1 for %s precode=%p",
-                    je.is_hybrid ? "hybrid" : "jit", je.precode);
+                    "background JIT Tier0->Tier1 for precode=%p", je.precode);
 
-                void* new_code = jit::JitRecompileToTier1(je.precode, je.is_hybrid);
+                void* new_code = jit::JitRecompileToTier1(je.precode);
 
                 lock.lock();
                 if (new_code != nullptr) {
                     // Patch direct_ptr to Tier 1 code so future calls bypass
                     // the trampoline and go directly to the optimized code.
-                    HotpatchEntryV0* entry = nullptr;
-                    if (je.is_hybrid) {
-                        entry = static_cast<jit::HybridPrecode*>(je.precode)->entry;
-                    } else {
-                        entry = static_cast<jit::JitPrecode*>(je.precode)->entry;
-                    }
+                    HotpatchEntryV0* entry = static_cast<jit::JitPrecode*>(je.precode)->entry;
                     if (entry != nullptr) {
                         entry->direct_ptr = new_code;
                         CHAOS_IL2CPP_LOG_DEBUG_M("tier",

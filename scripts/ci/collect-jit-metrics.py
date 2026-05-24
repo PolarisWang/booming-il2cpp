@@ -12,7 +12,6 @@ Usage:
     python collect-jit-metrics.py --benchmark=<path> --native=<path> --output=<path>
 
     # From captured output (CI use):
-    ctest -R bench_hybrid ... > bench_output.txt
     ctest -R test_jit_native ... > native_output.txt
     python collect-jit-metrics.py --benchmark-output=bench_output.txt \\
                                   --native-output=native_output.txt \\
