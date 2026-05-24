@@ -7,7 +7,7 @@
 //   1. Module lifecycle tracking — register/unregister PatchMethod arrays
 //      so that DestroyPatchContext can safely free tier data.
 //   2. Background T2→T3 optimization queue — methods that exceed
-//      kT2HotThreshold (500 calls) are enqueued for background promotion
+//      kRegisterMappedThreshold (500 calls) are enqueued for background promotion
 //      instead of blocking the calling thread.
 //   3. Memory budget enforcement — 64 MB cap on optimized IR.
 //   4. Statistics for diagnostics/benchmarking.

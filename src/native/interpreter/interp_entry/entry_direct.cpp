@@ -447,7 +447,7 @@ void InterpreterEntryDirect(
     // ── Step A: Native code path (T4) ────────────────────────────────
     {
         auto t4_tier = patch_method->tier_state.load(std::memory_order_acquire);
-        if (t4_tier >= PatchMethod::kT4Ready) {
+        if (t4_tier >= PatchMethod::kJitted) {
             auto* nm = patch_method->cached_native_method;
             if (nm != nullptr && nm->code != nullptr) {
                 GetTierCounters().step_native.fetch_add(1, std::memory_order_relaxed);
@@ -465,7 +465,7 @@ void InterpreterEntryDirect(
                         chaos::il2cpp::jit::UnregisterT4Code(nm->code);
                         chaos::il2cpp::runtime_core::GcUnregisterSlotMap(nm->code);
                         patch_method->cached_native_method = nullptr;
-                        patch_method->tier_state.store(PatchMethod::kT4Skip, std::memory_order_release);
+                        patch_method->tier_state.store(PatchMethod::kJitSkip, std::memory_order_release);
                         patch_method->deopt_count = 0;
                         auto* entry = GetHotpatchNameRegistry().GetDispatchEntry(
                             patch_method->module_id, patch_method->token);
@@ -477,7 +477,7 @@ void InterpreterEntryDirect(
 
                     if (patch_method->deopt_count > PatchMethod::kMaxDeoptBeforeDemote) {
                         // Permanently skip T4: overflow/OSR deopts would recur on re-promotion.
-                        patch_method->tier_state.store(PatchMethod::kT4Skip, std::memory_order_release);
+                        patch_method->tier_state.store(PatchMethod::kJitSkip, std::memory_order_release);
                         auto* nm = patch_method->cached_native_method;
                         if (nm != nullptr) {
                             chaos::il2cpp::jit::UnregisterT4Code(nm->code);
@@ -628,13 +628,13 @@ void InterpreterEntryDirect(
         std::fprintf(stderr, "[diag:StepB] data=%p size=%llu\n", (void*)exec_instrs, (unsigned long long)reg_method->instructions.size());
         uint32_t exec_instr_count = static_cast<uint32_t>(reg_method->instructions.size());
 
-        if (tier == PatchMethod::kT1Cold && call_count >= TierManager::Get().GetAdaptiveT1Threshold()) {
-            uint32_t expected = PatchMethod::kT1Cold;
-            if (patch_method->tier_state.compare_exchange_strong(expected, PatchMethod::kT2Lowering, std::memory_order_acq_rel)) {
+        if (tier == PatchMethod::kStackInterpreted && call_count >= TierManager::Get().GetAdaptiveT1Threshold()) {
+            uint32_t expected = PatchMethod::kStackInterpreted;
+            if (patch_method->tier_state.compare_exchange_strong(expected, PatchMethod::kRegisterLowering, std::memory_order_acq_rel)) {
                 OptimizeToTier2(patch_method);
-                patch_method->tier_state.store(PatchMethod::kT2Ready, std::memory_order_release);
+                patch_method->tier_state.store(PatchMethod::kRegisterMapped, std::memory_order_release);
             }
-        } else if (tier == PatchMethod::kT2Ready && patch_method->cached_optimized_reg_method != nullptr) {
+        } else if (tier == PatchMethod::kRegisterMapped && patch_method->cached_optimized_reg_method != nullptr) {
             auto* opt = static_cast<interpreter::RegisterMethod*>(patch_method->cached_optimized_reg_method);
             exec_instrs = opt->instructions.data();
             exec_instr_count = static_cast<uint32_t>(opt->instructions.size());
@@ -642,24 +642,24 @@ void InterpreterEntryDirect(
         }
 
         tier = patch_method->tier_state.load(std::memory_order_acquire);
-        if (tier == PatchMethod::kT2Ready && call_count >= TierManager::Get().GetAdaptiveT2Threshold()) {
-            uint32_t expected = PatchMethod::kT2Ready;
-            if (patch_method->tier_state.compare_exchange_strong(expected, PatchMethod::kT3Lowering, std::memory_order_acq_rel)) {
+        if (tier == PatchMethod::kRegisterMapped && call_count >= TierManager::Get().GetAdaptiveT2Threshold()) {
+            uint32_t expected = PatchMethod::kRegisterMapped;
+            if (patch_method->tier_state.compare_exchange_strong(expected, PatchMethod::kOptimizeLowering, std::memory_order_acq_rel)) {
                 if (!TierManager::Get().EnqueueOptimization(patch_method)) {
-                    patch_method->tier_state.store(PatchMethod::kT2Ready, std::memory_order_release);
+                    patch_method->tier_state.store(PatchMethod::kRegisterMapped, std::memory_order_release);
                 }
             }
         }
 
         {   auto t4_tier = patch_method->tier_state.load(std::memory_order_acquire);
-            if (t4_tier == PatchMethod::kT4Skip) {
+            if (t4_tier == PatchMethod::kJitSkip) {
                 // Permanently skipped — never retry codegen
-            } else if (t4_tier == PatchMethod::kT3Ready) {
-                uint32_t backoff_base = PatchMethod::kT3NativeThreshold +
+            } else if (t4_tier == PatchMethod::kOptimizedRegister) {
+                uint32_t backoff_base = PatchMethod::kJitThreshold +
                     patch_method->codegen_fail_count * 1000;
                 if (call_count >= backoff_base) {
-                    uint32_t t4_expected = PatchMethod::kT3Ready;
-                    if (patch_method->tier_state.compare_exchange_strong(t4_expected, PatchMethod::kT4Ready, std::memory_order_acq_rel)) {
+                    uint32_t t4_expected = PatchMethod::kOptimizedRegister;
+                    if (patch_method->tier_state.compare_exchange_strong(t4_expected, PatchMethod::kJitted, std::memory_order_acq_rel)) {
                         auto* reg_m = static_cast<interpreter::RegisterMethod*>(patch_method->cached_optimized_reg_method);
                         if (reg_m == nullptr) reg_m = static_cast<interpreter::RegisterMethod*>(patch_method->cached_reg_method);
                         if (reg_m != nullptr && jit::CanCompile(*reg_m)) {
@@ -685,22 +685,22 @@ void InterpreterEntryDirect(
                                         static_cast<const GcSlotMapV0*>(nm->slot_map_data));
                                 }
                                 // Register T4 code range for VEH handler (SEH + deopt)
-                                chaos::il2cpp::jit::RegisterT4Code(
+                                chaos::il2cpp::jit::RegisterNativeCodeSection(
                                     nm->code, nm->code_size, nm, patch_method->token);
                             } else {
                                 ++patch_method->codegen_fail_count;
                                 if (patch_method->codegen_fail_count >= PatchMethod::kMaxCodegenFailures) {
-                                    patch_method->tier_state.store(PatchMethod::kT4Skip, std::memory_order_release);
+                                    patch_method->tier_state.store(PatchMethod::kJitSkip, std::memory_order_release);
                                 } else {
-                                    patch_method->tier_state.store(PatchMethod::kT3Ready, std::memory_order_release);
+                                    patch_method->tier_state.store(PatchMethod::kOptimizedRegister, std::memory_order_release);
                                 }
                             }
                         } else {
                             ++patch_method->codegen_fail_count;
                             if (patch_method->codegen_fail_count >= PatchMethod::kMaxCodegenFailures) {
-                                patch_method->tier_state.store(PatchMethod::kT4Skip, std::memory_order_release);
+                                patch_method->tier_state.store(PatchMethod::kJitSkip, std::memory_order_release);
                             } else {
-                                patch_method->tier_state.store(PatchMethod::kT3Ready, std::memory_order_release);
+                                patch_method->tier_state.store(PatchMethod::kOptimizedRegister, std::memory_order_release);
                             }
                         }
                     }
@@ -753,31 +753,31 @@ void InterpreterEntryDirect(
           auto call_count = patch_method->call_count.fetch_add(1, std::memory_order_relaxed) + 1;
           auto tier = patch_method->tier_state.load(std::memory_order_acquire);
 
-          if (tier == PatchMethod::kT1Cold && call_count >= TierManager::Get().GetAdaptiveT1Threshold()) {
-              uint32_t expected = PatchMethod::kT1Cold;
-              if (patch_method->tier_state.compare_exchange_strong(expected, PatchMethod::kT2Lowering, std::memory_order_acq_rel)) {
+          if (tier == PatchMethod::kStackInterpreted && call_count >= TierManager::Get().GetAdaptiveT1Threshold()) {
+              uint32_t expected = PatchMethod::kStackInterpreted;
+              if (patch_method->tier_state.compare_exchange_strong(expected, PatchMethod::kRegisterLowering, std::memory_order_acq_rel)) {
                   OptimizeToTier2(patch_method);
-                  patch_method->tier_state.store(PatchMethod::kT2Ready, std::memory_order_release);
+                  patch_method->tier_state.store(PatchMethod::kRegisterMapped, std::memory_order_release);
               }
           }
 
           tier = patch_method->tier_state.load(std::memory_order_acquire);
-          if (tier == PatchMethod::kT2Ready && call_count >= TierManager::Get().GetAdaptiveT2Threshold()) {
-              uint32_t expected = PatchMethod::kT2Ready;
-              if (patch_method->tier_state.compare_exchange_strong(expected, PatchMethod::kT3Lowering, std::memory_order_acq_rel)) {
+          if (tier == PatchMethod::kRegisterMapped && call_count >= TierManager::Get().GetAdaptiveT2Threshold()) {
+              uint32_t expected = PatchMethod::kRegisterMapped;
+              if (patch_method->tier_state.compare_exchange_strong(expected, PatchMethod::kOptimizeLowering, std::memory_order_acq_rel)) {
                   if (!TierManager::Get().EnqueueOptimization(patch_method)) {
-                      patch_method->tier_state.store(PatchMethod::kT2Ready, std::memory_order_release);
+                      patch_method->tier_state.store(PatchMethod::kRegisterMapped, std::memory_order_release);
                   }
               }
           }
 
           {   auto t4_tier = patch_method->tier_state.load(std::memory_order_acquire);
-              if (t4_tier != PatchMethod::kT4Skip && t4_tier == PatchMethod::kT3Ready) {
-                  uint32_t backoff_base = PatchMethod::kT3NativeThreshold +
+              if (t4_tier != PatchMethod::kJitSkip && t4_tier == PatchMethod::kOptimizedRegister) {
+                  uint32_t backoff_base = PatchMethod::kJitThreshold +
                       patch_method->codegen_fail_count * 1000;
                   if (call_count >= backoff_base) {
-                      uint32_t t4_expected = PatchMethod::kT3Ready;
-                      if (patch_method->tier_state.compare_exchange_strong(t4_expected, PatchMethod::kT4Ready, std::memory_order_acq_rel)) {
+                      uint32_t t4_expected = PatchMethod::kOptimizedRegister;
+                      if (patch_method->tier_state.compare_exchange_strong(t4_expected, PatchMethod::kJitted, std::memory_order_acq_rel)) {
                           auto* reg_m = static_cast<interpreter::RegisterMethod*>(patch_method->cached_optimized_reg_method);
                           if (reg_m == nullptr) reg_m = static_cast<interpreter::RegisterMethod*>(patch_method->cached_reg_method);
                           if (reg_m != nullptr && jit::CanCompile(*reg_m)) {
@@ -849,22 +849,22 @@ void InterpreterEntryDirect(
                                           nm->code,
                                           static_cast<const GcSlotMapV0*>(nm->slot_map_data));
                                   }
-                                  chaos::il2cpp::jit::RegisterT4Code(
+                                  chaos::il2cpp::jit::RegisterNativeCodeSection(
                                       nm->code, nm->code_size, nm, patch_method->token);
                               } else {
                                   ++patch_method->codegen_fail_count;
                                   if (patch_method->codegen_fail_count >= PatchMethod::kMaxCodegenFailures) {
-                                      patch_method->tier_state.store(PatchMethod::kT4Skip, std::memory_order_release);
+                                      patch_method->tier_state.store(PatchMethod::kJitSkip, std::memory_order_release);
                                   } else {
-                                      patch_method->tier_state.store(PatchMethod::kT3Ready, std::memory_order_release);
+                                      patch_method->tier_state.store(PatchMethod::kOptimizedRegister, std::memory_order_release);
                                   }
                               }
                           } else {
                               ++patch_method->codegen_fail_count;
                               if (patch_method->codegen_fail_count >= PatchMethod::kMaxCodegenFailures) {
-                                  patch_method->tier_state.store(PatchMethod::kT4Skip, std::memory_order_release);
+                                  patch_method->tier_state.store(PatchMethod::kJitSkip, std::memory_order_release);
                               } else {
-                                  patch_method->tier_state.store(PatchMethod::kT3Ready, std::memory_order_release);
+                                  patch_method->tier_state.store(PatchMethod::kOptimizedRegister, std::memory_order_release);
                               }
                           }
                       }

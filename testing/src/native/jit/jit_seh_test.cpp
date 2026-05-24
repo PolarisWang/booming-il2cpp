@@ -18,9 +18,9 @@
 #include "jit_method.h"
 
 using chaos::il2cpp::jit::RegisterJitSehHandler;
-using chaos::il2cpp::jit::RegisterT4Code;
+using chaos::il2cpp::jit::RegisterNativeCodeSection;
 using chaos::il2cpp::jit::UnregisterT4Code;
-using chaos::il2cpp::jit::FindT4CodeByAddress;
+using chaos::il2cpp::jit::FindNativeCodeByAddress;
 using chaos::il2cpp::jit::JitMethod;
 
 namespace {
@@ -37,7 +37,7 @@ public:
         std::memset(nm_, 0, sizeof(JitMethod));
         nm_->code = code_.data();
         nm_->code_size = static_cast<uint32_t>(code_.size());
-        RegisterT4Code(nm_->code, nm_->code_size, nm_, token);
+        RegisterNativeCodeSection(nm_->code, nm_->code_size, nm_, token);
     }
     ~RegisteredMethod() {
         UnregisterT4Code(nm_->code);
@@ -58,22 +58,22 @@ TEST(CodegenSeh, RegisterHandlerSmoke) {
 
 TEST(CodegenSeh, RegisterAndFindCode) {
     RegisteredMethod reg(64);
-    ASSERT_NE(FindT4CodeByAddress(reg.code()), nullptr);
+    ASSERT_NE(FindNativeCodeByAddress(reg.code()), nullptr);
 }
 
 TEST(CodegenSeh, FindCodeReturnsNullForUnknownAddress) {
     int unknown = 0;
-    EXPECT_EQ(FindT4CodeByAddress(&unknown), nullptr);
+    EXPECT_EQ(FindNativeCodeByAddress(&unknown), nullptr);
 }
 
 TEST(CodegenSeh, FindCodeReturnsNullForNullAddress) {
-    EXPECT_EQ(FindT4CodeByAddress(nullptr), nullptr);
+    EXPECT_EQ(FindNativeCodeByAddress(nullptr), nullptr);
 }
 
 TEST(CodegenSeh, UnregisterThenLookupReturnsNull) {
     {
         RegisteredMethod reg(64);
-        ASSERT_NE(FindT4CodeByAddress(reg.code()), nullptr);
+        ASSERT_NE(FindNativeCodeByAddress(reg.code()), nullptr);
     }  // reg destroyed here → unregistered.
     // The code address is no longer valid — lookup should return nullptr.
     // Note: depends on no other test reusing the same address.
@@ -87,8 +87,8 @@ TEST(CodegenSeh, MultipleRegistrationsDistinct) {
     RegisteredMethod reg_a(32);
     RegisteredMethod reg_b(64);
 
-    const JitMethod* found_a = FindT4CodeByAddress(reg_a.code());
-    const JitMethod* found_b = FindT4CodeByAddress(reg_b.code());
+    const JitMethod* found_a = FindNativeCodeByAddress(reg_a.code());
+    const JitMethod* found_b = FindNativeCodeByAddress(reg_b.code());
 
     // Both should be found.
     ASSERT_NE(found_a, nullptr);

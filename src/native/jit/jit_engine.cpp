@@ -85,7 +85,7 @@ public:
                         const CompileConfig& config,
                         ISehHandler& seh)
         : rm_(rm), config_(config), encoder_(buf_), enc_(encoder_), seh_(seh) {
-        is_tier0_ = (config_.compile_tier == CompileTier::kTier0);
+        is_tier0_ = (config_.compile_tier == CompileTier::kQuick);
     }
 
     JitMethod* Generate() noexcept;
@@ -1269,7 +1269,7 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         uint32_t target = instr.imm.branch_target;
 
         // SEH V3: Check if any finally/fault clause covers the current
-        // instruction.  If so, emit T4LeaveHelper call to set up pending_leave
+        // instruction.  If so, emit JitLeaveHelper call to set up pending_leave
         // and redirect to the innermost finally handler.
         bool has_finally_covering = false;
         for (const auto& clause : rm_.seh_clauses) {
@@ -1285,11 +1285,11 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         }
 
         if (has_finally_covering) {
-            // Leave crossing a finally/fault boundary: call T4LeaveHelper
+            // Leave crossing a finally/fault boundary: call JitLeaveHelper
             // to resolve byte offsets at runtime and find the innermost handler.
             enc_.EmitMovRIImm32(kRCX, target);              // arg1: target_instr_idx
             enc_.EmitMovRIImm32(kRDX, current_instr_index_); // arg2: current_instr_idx
-            enc_.EmitMovImm64(kRAX, reinterpret_cast<uint64_t>(T4LeaveHelper));
+            enc_.EmitMovImm64(kRAX, reinterpret_cast<uint64_t>(JitLeaveHelper));
             EmitCallWithSpill(kRAX);                          // RAX = handler addr or 0
             enc_.EmitTestRR(kRAX, kRAX);                     // test rax, rax
             uint32_t jz_pos = buf_.pos();
@@ -1299,7 +1299,7 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
             uint32_t normal_pos = buf_.pos();
             int32_t jz_disp = static_cast<int32_t>(normal_pos - (jz_pos + 6));
             buf_.Patch32(jz_pos + 2, static_cast<uint32_t>(jz_disp));
-            // Normal JMP to leave target (T4LeaveHelper returned 0 or
+            // Normal JMP to leave target (JitLeaveHelper returned 0 or
             // finally chain completed and returned to leave path).
             uint32_t patch_off = buf_.pos() + 1;
             enc_.EmitJmpRel32(0);
@@ -1315,10 +1315,10 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
     }
 
     case IROpCode::EndFinally: {
-        // SEH V3: call T4EndFinallyHelper to advance the finally/fault
+        // SEH V3: call JitEndFinallyHelper to advance the finally/fault
         // unwind chain.  Returns next handler address (non-zero) or 0
         // (continue normally).
-        enc_.EmitMovImm64(kRAX, reinterpret_cast<uint64_t>(T4EndFinallyHelper));
+        enc_.EmitMovImm64(kRAX, reinterpret_cast<uint64_t>(JitEndFinallyHelper));
         EmitCallWithSpill(kRAX);
         enc_.EmitTestRR(kRAX, kRAX);
         uint32_t jz_pos = buf_.pos();
@@ -1335,7 +1335,7 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         // EndFilter: pop the filter result from src1_reg and decide.
         //   non-zero (accept) → fall through to the handler (which is emitted
         //                       sequentially right after the filter)
-        //   zero    (reject)  → call T4EndFinallyHelper to continue exception
+        //   zero    (reject)  → call JitEndFinallyHelper to continue exception
         //                       search outward; jmp rax to the next handler
         //
         // Per the SEH layout convention used by code_generator.cpp:
@@ -1351,8 +1351,8 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         // jne .accept  (filter result != 0 → fall through to handler)
         uint32_t jne_pos = buf_.pos();
         enc_.EmitJccRel32(kCC_NE, 0);
-        // Reject path: dispatch via T4EndFinallyHelper.
-        enc_.EmitMovImm64(kRAX, reinterpret_cast<uint64_t>(T4EndFinallyHelper));
+        // Reject path: dispatch via JitEndFinallyHelper.
+        enc_.EmitMovImm64(kRAX, reinterpret_cast<uint64_t>(JitEndFinallyHelper));
         EmitCallWithSpill(kRAX);
         enc_.EmitTestRR(kRAX, kRAX);
         uint32_t jz_pos = buf_.pos();
@@ -1375,7 +1375,7 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         if (!instr.has_src1()) return false;
         LoadGpr(kRCX, instr.src1_reg());  // RCX = exception object
         // JMP to cold section (patched after epilogue emission).
-        // Cold section contains ChaosT4RaiseException call + INT3 safety net.
+        // Cold section contains ChaosJitRaiseException call + INT3 safety net.
         // This keeps hot-path code contiguous for better icache behavior.
         uint32_t jmp_off = buf_.pos();
         enc_.EmitJmpRel32(0);
@@ -3433,7 +3433,7 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
     // ── Cold section (Throw/Rethrow handlers) ────────────────────────────
     // Emitted after the epilogue so hot-path instructions stay contiguous
     // (better icache utilization).  Each cold patch emits a short call to
-    // ChaosT4RaiseException + INT3.  The VEH handler redirects RIP on
+    // ChaosJitRaiseException + INT3.  The VEH handler redirects RIP on
     // success, so we don't need register spill/reload (EmitCallReg is safe).
     //
     // NOTE: Do NOT use EmitCallWithSpill here — the cold path never returns
@@ -3441,7 +3441,7 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
     // needed and would introduce unnecessary code in the hot section.
     for (auto& cp : cold_patches_) {
         uint32_t cold_target = buf_.pos();
-        enc_.EmitMovImm64(kRAX, reinterpret_cast<uint64_t>(ChaosT4RaiseException));
+        enc_.EmitMovImm64(kRAX, reinterpret_cast<uint64_t>(ChaosJitRaiseException));
         enc_.EmitCallReg(kRAX);
         buf_.EmitByte(0xCC);  // INT3 safety net
         int32_t disp = static_cast<int32_t>(cold_target - (cp.patch_offset + 4));
@@ -3621,7 +3621,15 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
             EmitCallWithSpill(kRAX);
             enc_.EmitAddRI(kRSP, 32);                // restore shadow space
 
-            // RAX now holds the target native address.
+            // RAX now holds the target native address (or nullptr if resolution failed).
+            // Null-check RAX before jumping: if null, return to caller (fall back to
+            // interpreter).  The caller initialized ret_buf[0]=0, so a bare ret here
+            // signals "OSR failed — continue interpreting".
+            EmitTestRR(buf_, kRAX, kRAX);
+            buf_.EmitByte(0x75);  // JNE rel8
+            buf_.EmitByte(0x01);  // skip 1 byte (the RET)
+            buf_.EmitByte(0xC3);  // RET
+            // RAX non-null: jump to resolved loop header address.
             // Re-zero caller-colored regs (R8-R11) clobbered by the call.
             if (caller_colored_mask_) {
                 for (uint32_t x64r = kR8; x64r <= kR11; ++x64r)
@@ -3712,10 +3720,13 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
             unwind_data_offset, code_body_size);
     }
 #elif defined(__linux__)
-    // Store .eh_frame DWARF CFI offset for __register_frame in RegisterT4Code.
+    // Store .eh_frame DWARF CFI offset for __register_frame in RegisterNativeCodeSection.
     nm->eh_frame_offset = eh_frame_offset_;
 #endif
 
+    CHAOS_IL2CPP_LOG_INFO_M("codegen",
+        "Generate: method compiled, code_size=%u, code=%p",
+        nm ? nm->code_size : 0, nm ? nm->code : nullptr);
     return nm;
 }
 

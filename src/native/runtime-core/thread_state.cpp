@@ -20,7 +20,7 @@
     #include <pthread.h>
 #endif
 
-#include "../jit/jit_seh.h"    // FindT4CodeByAddress for hybrid GC scanning
+#include "../jit/jit_seh.h"    // FindNativeCodeByAddress for hybrid GC scanning
 #include "../jit/jit_method.h"     // JitMethod (slot_map_data for GcSlotMapV0)
 
 #include <atomic>
@@ -44,8 +44,8 @@ namespace chaos::il2cpp::runtime_core::threading {
 // RSP after prologue = entry_rsp - 32 - 864.
 // RBP = entry_rsp - 16.
 // For GC scanning: frame_ptr (base of GcSlotMap offsets) = RSP = RBP - 880.
-static constexpr uint32_t kT4FrameSize = 864;
-static constexpr uint32_t kT4RbpToFramePtr = 16 + 32 + kT4FrameSize;  // 880
+static constexpr uint32_t kJitFrameSize = 864;
+static constexpr uint32_t kJitRbpToFramePtr = 16 + 32 + kJitFrameSize;  // 880
 
 // ── TLS definitions ──────────────────────────────────────────────────
 
@@ -714,7 +714,7 @@ void GcScanAllThreadRoots(void (*callback)(void* root_addr, bool is_interior, vo
             void* val = static_cast<void*>(
                 chaos::il2cpp::common::AsanReadPtrNoCheck(
                     reinterpret_cast<void*>(slot)));
-            const auto* nm = chaos::il2cpp::jit::FindT4CodeByAddress(val);
+            const auto* nm = chaos::il2cpp::jit::FindNativeCodeByAddress(val);
             if (nm == nullptr) continue;
             if (nm->slot_map_data == nullptr) continue;
 
@@ -729,7 +729,7 @@ void GcScanAllThreadRoots(void (*callback)(void* root_addr, bool is_interior, vo
             // Use per-method RBP-to-RSP offset (register caching changes the
             // distance between RBP and the stack frame base).
             uint32_t rbpoff = nm->rbp_to_rsp_offset;
-            if (rbpoff == 0) rbpoff = kT4RbpToFramePtr;  // legacy fallback
+            if (rbpoff == 0) rbpoff = kJitRbpToFramePtr;  // legacy fallback
             void* frame_ptr = reinterpret_cast<uint8_t*>(t4_rbp) - rbpoff;
             auto* sm = static_cast<const GcSlotMapV0*>(nm->slot_map_data);
 

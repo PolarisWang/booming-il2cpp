@@ -1,7 +1,7 @@
 // -- (DEPRECATED) JIT Mode Method Registration -------------------------------
 //
 // DEPRECATED: This file supports the old interpreter-only --mode jit path.
-// New --mode jit codegen runs produce JitT4Entry + RegisterT4JitMethods()
+// New --mode jit codegen runs produce JitMethodEntry + RegisterJitMethods()
 // (see jit_precode.cpp) which routes through the Precode Stub -> JIT compile
 // pipeline instead of the interpreter.
 //

@@ -358,10 +358,9 @@ static PatchContext* CreatePatchContext(const PatchDataHeader* header, size_t to
     }
     total_alloc += methods_size;
 
-    uint8_t* block = static_cast<uint8_t*>(
+    auto* block = static_cast<uint8_t*>(
         memory_domain::DomainCurrentAllocateTagged(total_alloc));
     if (block == nullptr) return nullptr;
-
     auto* ctx = new (block) PatchContext();
     auto* cache = new (block + ctx_size) PatchMetadataCache(header);
     auto* methods = reinterpret_cast<PatchMethod*>(block + ctx_size + cache_size);

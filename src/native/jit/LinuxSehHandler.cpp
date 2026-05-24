@@ -4,7 +4,7 @@
 
 #include <chaos/log.h>
 
-#include <t4_demotion.h>
+#include <jit_demotion.h>
 #include <gc_events.h>
 
 #include <atomic>
@@ -27,7 +27,7 @@ static thread_local struct {
     uintptr_t         page_base   = 0;
     const JitMethod*  nm          = nullptr;
     uint32_t          generation  = 0;
-} g_t4_lookup_cache;
+} g_jit_lookup_cache;
 
 // ── TLS Exception State ────────────────────────────────────────────────────
 // Mirrors the Windows TLS state used by the SEH clause dispatcher.
@@ -35,14 +35,14 @@ static thread_local struct {
 // declarations here for Linux.  The actual instances live at the same
 // symbol names so the T4 personality/endfinally/leave helpers can find them.
 // On Linux these are provided here.
-thread_local void* g_t4_exception_obj = nullptr;
-thread_local void* g_t4_throw_ret_addr = nullptr;
-thread_local void* g_t4_frame_rsp = nullptr;
-thread_local T4UnwindState g_t4_unwind = {};
+thread_local void* g_jit_exception_obj = nullptr;
+thread_local void* g_jit_throw_ret_addr = nullptr;
+thread_local void* g_jit_frame_rsp = nullptr;
+thread_local JitUnwindState g_jit_unwind = {};
 
 // ── SEH Clause Table Constants ─────────────────────────────────────────────
 static constexpr uint32_t kSehClauseEntrySize = 5 * sizeof(uint32_t);
-static constexpr uint32_t kT4GprFileOff = 32;
+static constexpr uint32_t kJitGprFileOffset = 32;
 
 // ═══════════════════════════════════════════════════════════════════════════
 // Spinlock
@@ -103,8 +103,8 @@ void LinuxSehHandler::RegisterCode(void* code_start, uint32_t code_size,
 
     {
         AcquireLock();
-        if (count_ >= kMaxT4CodeEntries) {
-            CHAOS_IL2CPP_LOG_WARN_M("codegen", "RegisterCode: registry full ({})", kMaxT4CodeEntries);
+        if (count_ >= kMaxJitCodeEntries) {
+            CHAOS_IL2CPP_LOG_WARN_M("codegen", "RegisterCode: registry full ({})", kMaxJitCodeEntries);
             ReleaseLock();
             return;
         }
@@ -152,10 +152,10 @@ const JitMethod* LinuxSehHandler::FindCodeByAddress(const void* address) noexcep
     uintptr_t page = addr_val >> 12;
 
     uint32_t gen = lookup_generation_.load(std::memory_order_acquire);
-    if (g_t4_lookup_cache.nm != nullptr &&
-        g_t4_lookup_cache.page_base == page &&
-        g_t4_lookup_cache.generation == gen) {
-        return g_t4_lookup_cache.nm;
+    if (g_jit_lookup_cache.nm != nullptr &&
+        g_jit_lookup_cache.page_base == page &&
+        g_jit_lookup_cache.generation == gen) {
+        return g_jit_lookup_cache.nm;
     }
 
     for (uint32_t i = 0; i < count_; i++) {
@@ -165,9 +165,9 @@ const JitMethod* LinuxSehHandler::FindCodeByAddress(const void* address) noexcep
         const uint8_t* end = start + entry.code_size;
         const uint8_t* addr = static_cast<const uint8_t*>(address);
         if (addr >= start && addr < end) {
-            g_t4_lookup_cache.page_base = page;
-            g_t4_lookup_cache.nm = entry.nm;
-            g_t4_lookup_cache.generation = gen;
+            g_jit_lookup_cache.page_base = page;
+            g_jit_lookup_cache.nm = entry.nm;
+            g_jit_lookup_cache.generation = gen;
             return entry.nm;
         }
     }
@@ -310,12 +310,12 @@ static void BuildUnwindList(const JitMethod* nm,
         if (ctry_start >= catch_try_end) continue;
         if (ctry_start > throw_offset) continue;
 
-        if (g_t4_unwind.unwind_count < kMaxUnwindDepth) {
-            for (uint32_t j = g_t4_unwind.unwind_count; j > 0; --j) {
-                g_t4_unwind.unwind_list[j] = g_t4_unwind.unwind_list[j - 1];
+        if (g_jit_unwind.unwind_count < kMaxUnwindDepth) {
+            for (uint32_t j = g_jit_unwind.unwind_count; j > 0; --j) {
+                g_jit_unwind.unwind_list[j] = g_jit_unwind.unwind_list[j - 1];
             }
-            g_t4_unwind.unwind_list[0] = i;
-            g_t4_unwind.unwind_count++;
+            g_jit_unwind.unwind_list[0] = i;
+            g_jit_unwind.unwind_count++;
         }
     }
 }
@@ -360,13 +360,13 @@ static uint32_t GetClauseHandlerOffset(const JitMethod* nm,
 
 /// Reset SEH V3 unwind state to defaults.
 static void ResetUnwindState() noexcept {
-    g_t4_unwind.unwind_count = 0;
-    g_t4_unwind.unwind_index = 0;
-    g_t4_unwind.exception_in_flight = false;
-    g_t4_unwind.pending_leave = false;
-    g_t4_unwind.leave_target_offset = 0;
-    g_t4_unwind.has_catch = false;
-    g_t4_unwind.catch_handler_offset = 0;
+    g_jit_unwind.unwind_count = 0;
+    g_jit_unwind.unwind_index = 0;
+    g_jit_unwind.exception_in_flight = false;
+    g_jit_unwind.pending_leave = false;
+    g_jit_unwind.leave_target_offset = 0;
+    g_jit_unwind.has_catch = false;
+    g_jit_unwind.catch_handler_offset = 0;
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -384,8 +384,8 @@ static thread_local int g_current_signal = 0;
 ///
 /// Handles two categories:
 ///   1. Hardware exceptions (SIGSEGV, SIGBUS) — from AV, null deref, etc.
-///   2. Managed exceptions (SIGUSR1) — from ChaosT4RaiseException
-static void T4SignalHandler(int sig, siginfo_t* info, void* ucontext) noexcept {
+///   2. Managed exceptions (SIGUSR1) — from ChaosJitRaiseException
+static void JitSignalHandler(int sig, siginfo_t* info, void* ucontext) noexcept {
     auto& self = GetLinuxSehHandler();
     auto* ctx = static_cast<ucontext_t*>(ucontext);
 
@@ -400,7 +400,7 @@ static void T4SignalHandler(int sig, siginfo_t* info, void* ucontext) noexcept {
     // For managed exceptions, the return address is in TLS.
     // For hardware exceptions, use the instruction pointer from the context.
     void* code_addr = (sig == kManagedExceptionSignal)
-        ? g_t4_throw_ret_addr
+        ? g_jit_throw_ret_addr
         : reinterpret_cast<void*>(ctx->uc_mcontext.gregs[REG_RIP]);
 
     if (code_addr == nullptr) return;
@@ -422,8 +422,8 @@ static void T4SignalHandler(int sig, siginfo_t* info, void* ucontext) noexcept {
     // Build finally/fault unwind list.
     ResetUnwindState();
     if (has_catch) {
-        g_t4_unwind.has_catch = true;
-        g_t4_unwind.catch_handler_offset = catch_handler_offset_val;
+        g_jit_unwind.has_catch = true;
+        g_jit_unwind.catch_handler_offset = catch_handler_offset_val;
         BuildUnwindList(nm, catch_clause_idx, code_offset);
     } else {
         const uint8_t* tbl = code_base + nm->seh_table_offset;
@@ -438,37 +438,37 @@ static void T4SignalHandler(int sig, siginfo_t* info, void* ucontext) noexcept {
             std::memcpy(&te, ent + 8, sizeof(te));
             if ((cf == 2 || cf == 4) &&
                 code_offset >= ts && code_offset < te &&
-                g_t4_unwind.unwind_count < kMaxUnwindDepth) {
-                g_t4_unwind.unwind_list[g_t4_unwind.unwind_count++] = i;
+                g_jit_unwind.unwind_count < kMaxUnwindDepth) {
+                g_jit_unwind.unwind_list[g_jit_unwind.unwind_count++] = i;
             }
         }
     }
-    g_t4_unwind.exception_in_flight = g_t4_unwind.has_catch || g_t4_unwind.unwind_count > 0;
+    g_jit_unwind.exception_in_flight = g_jit_unwind.has_catch || g_jit_unwind.unwind_count > 0;
 
-    if (!g_t4_unwind.has_catch && g_t4_unwind.unwind_count == 0) {
+    if (!g_jit_unwind.has_catch && g_jit_unwind.unwind_count == 0) {
         if (sig == kManagedExceptionSignal) {
-            g_t4_throw_ret_addr = nullptr;
-            g_t4_frame_rsp = nullptr;
+            g_jit_throw_ret_addr = nullptr;
+            g_jit_frame_rsp = nullptr;
             ResetUnwindState();
         }
         return;  // No handler found — let the default handler deal with it.
     }
 
     // Write exception object into all GPR register file slots (for managed throws).
-    if (sig == kManagedExceptionSignal && g_t4_frame_rsp != nullptr) {
+    if (sig == kManagedExceptionSignal && g_jit_frame_rsp != nullptr) {
         uint64_t* regfile = reinterpret_cast<uint64_t*>(
-            reinterpret_cast<uint8_t*>(g_t4_frame_rsp) + kT4GprFileOff);
-        uint64_t ex_val = reinterpret_cast<uint64_t>(g_t4_exception_obj);
-        for (uint32_t i = 0; i < kT4GprFileOff / sizeof(uint64_t); i++) {
+            reinterpret_cast<uint8_t*>(g_jit_frame_rsp) + kJitGprFileOffset);
+        uint64_t ex_val = reinterpret_cast<uint64_t>(g_jit_exception_obj);
+        for (uint32_t i = 0; i < kJitGprFileOffset / sizeof(uint64_t); i++) {
             regfile[i] = ex_val;
         }
     }
 
     // Set up return state for the handler.
     uint32_t target_handler_offset;
-    if (g_t4_unwind.unwind_count > 0) {
-        g_t4_unwind.unwind_index = 0;
-        target_handler_offset = GetClauseHandlerOffset(nm, g_t4_unwind.unwind_list[0]);
+    if (g_jit_unwind.unwind_count > 0) {
+        g_jit_unwind.unwind_index = 0;
+        target_handler_offset = GetClauseHandlerOffset(nm, g_jit_unwind.unwind_list[0]);
     } else {
         target_handler_offset = catch_handler_offset_val;
     }
@@ -477,26 +477,26 @@ static void T4SignalHandler(int sig, siginfo_t* info, void* ucontext) noexcept {
 
     // Modify the context to redirect execution to the handler.
     ctx->uc_mcontext.gregs[REG_RIP] = reinterpret_cast<greg_t>(handler_addr);
-    if (sig == kManagedExceptionSignal && g_t4_frame_rsp != nullptr) {
-        ctx->uc_mcontext.gregs[REG_RSP] = reinterpret_cast<greg_t>(g_t4_frame_rsp);
-        ctx->uc_mcontext.gregs[REG_RCX] = reinterpret_cast<greg_t>(g_t4_exception_obj);
+    if (sig == kManagedExceptionSignal && g_jit_frame_rsp != nullptr) {
+        ctx->uc_mcontext.gregs[REG_RSP] = reinterpret_cast<greg_t>(g_jit_frame_rsp);
+        ctx->uc_mcontext.gregs[REG_RCX] = reinterpret_cast<greg_t>(g_jit_exception_obj);
     }
 
     // Clear TLS throw state.
     if (sig == kManagedExceptionSignal) {
-        g_t4_throw_ret_addr = nullptr;
-        g_t4_frame_rsp = nullptr;
+        g_jit_throw_ret_addr = nullptr;
+        g_jit_frame_rsp = nullptr;
     }
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// ChaosT4RaiseException (Linux implementation)
+// ChaosJitRaiseException (Linux implementation)
 // ═══════════════════════════════════════════════════════════════════════════
 
-extern "C" void ChaosT4RaiseException(void* exception_obj) noexcept {
-    g_t4_exception_obj = exception_obj;
-    g_t4_throw_ret_addr = __builtin_return_address(0);
-    g_t4_frame_rsp = reinterpret_cast<void*>(
+extern "C" void ChaosJitRaiseException(void* exception_obj) noexcept {
+    g_jit_exception_obj = exception_obj;
+    g_jit_throw_ret_addr = __builtin_return_address(0);
+    g_jit_frame_rsp = reinterpret_cast<void*>(
         reinterpret_cast<uintptr_t>(__builtin_frame_address(0)) + 16);
 
     // Send ourselves SIGUSR1 — the signal handler will process the exception.
@@ -504,25 +504,25 @@ extern "C" void ChaosT4RaiseException(void* exception_obj) noexcept {
     pthread_kill(self, kManagedExceptionSignal);
 
     CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
-        "ChaosT4RaiseException: no handler found, returning to INT3");
+        "ChaosJitRaiseException: no handler found, returning to INT3");
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// T4EndFinallyHelper (Linux implementation)
+// JitEndFinallyHelper (Linux implementation)
 // ═══════════════════════════════════════════════════════════════════════════
 
-extern "C" void* T4EndFinallyHelper() noexcept {
+extern "C" void* JitEndFinallyHelper() noexcept {
     auto& self = GetLinuxSehHandler();
 
-    if (!g_t4_unwind.exception_in_flight && !g_t4_unwind.pending_leave) {
+    if (!g_jit_unwind.exception_in_flight && !g_jit_unwind.pending_leave) {
         return nullptr;
     }
 
-    if (g_t4_unwind.exception_in_flight) {
-        g_t4_unwind.unwind_index++;
+    if (g_jit_unwind.exception_in_flight) {
+        g_jit_unwind.unwind_index++;
 
-        if (g_t4_unwind.unwind_index < g_t4_unwind.unwind_count) {
-            uint32_t fi = g_t4_unwind.unwind_list[g_t4_unwind.unwind_index];
+        if (g_jit_unwind.unwind_index < g_jit_unwind.unwind_count) {
+            uint32_t fi = g_jit_unwind.unwind_list[g_jit_unwind.unwind_index];
             void* ret_addr = __builtin_return_address(0);
             const JitMethod* nm = self.FindCodeByAddress(ret_addr);
             if (nm != nullptr) {
@@ -531,8 +531,8 @@ extern "C" void* T4EndFinallyHelper() noexcept {
             return nullptr;
         }
 
-        if (g_t4_unwind.has_catch) {
-            uint32_t catch_off = g_t4_unwind.catch_handler_offset;
+        if (g_jit_unwind.has_catch) {
+            uint32_t catch_off = g_jit_unwind.catch_handler_offset;
             void* ret_addr = __builtin_return_address(0);
             const JitMethod* nm = self.FindCodeByAddress(ret_addr);
             ResetUnwindState();
@@ -543,13 +543,13 @@ extern "C" void* T4EndFinallyHelper() noexcept {
         }
 
         ResetUnwindState();
-        void* ex_obj = g_t4_exception_obj;
-        ChaosT4RaiseException(ex_obj);
+        void* ex_obj = g_jit_exception_obj;
+        ChaosJitRaiseException(ex_obj);
         return nullptr;
     }
 
-    if (g_t4_unwind.pending_leave) {
-        uint32_t leave_target = g_t4_unwind.leave_target_offset;
+    if (g_jit_unwind.pending_leave) {
+        uint32_t leave_target = g_jit_unwind.leave_target_offset;
         ResetUnwindState();
         void* ret_addr = __builtin_return_address(0);
         const JitMethod* nm = self.FindCodeByAddress(ret_addr);
@@ -563,10 +563,10 @@ extern "C" void* T4EndFinallyHelper() noexcept {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// T4LeaveHelper (Linux implementation)
+// JitLeaveHelper (Linux implementation)
 // ═══════════════════════════════════════════════════════════════════════════
 
-extern "C" void* T4LeaveHelper(uint32_t target_instr_idx,
+extern "C" void* JitLeaveHelper(uint32_t target_instr_idx,
                                 uint32_t current_instr_idx) noexcept {
     auto& self = GetLinuxSehHandler();
 
@@ -588,8 +588,8 @@ extern "C" void* T4LeaveHelper(uint32_t target_instr_idx,
         ? nm->instr_offsets[target_instr_idx] : 0;
 
     ResetUnwindState();
-    g_t4_unwind.pending_leave = true;
-    g_t4_unwind.leave_target_offset = target_offset;
+    g_jit_unwind.pending_leave = true;
+    g_jit_unwind.leave_target_offset = target_offset;
 
     return static_cast<uint8_t*>(nm->code) + GetClauseHandlerOffset(nm, finally_idx);
 }
@@ -608,14 +608,14 @@ void LinuxSehHandler::Initialize() noexcept {
     // Register signal handlers for T4 exception dispatch.
     struct sigaction sa;
     std::memset(&sa, 0, sizeof(sa));
-    sa.sa_sigaction = T4SignalHandler;
+    sa.sa_sigaction = JitSignalHandler;
     sa.sa_flags = SA_SIGINFO | SA_ONSTACK;
 
     // Hardware exceptions that may occur in T4 code.
     sigaction(SIGSEGV, &sa, nullptr);
     sigaction(SIGBUS,  &sa, nullptr);
 
-    // Managed exceptions raised by T4 code (ChaosT4RaiseException).
+    // Managed exceptions raised by T4 code (ChaosJitRaiseException).
     sigaction(kManagedExceptionSignal, &sa, nullptr);
 
     CHAOS_IL2CPP_LOG_DEBUG_M("codegen", "T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)");
@@ -624,8 +624,8 @@ void LinuxSehHandler::Initialize() noexcept {
     chaos::il2cpp::runtime_core::GcRegisterEventCallback(OnGcSafepoint, nullptr);
 
     // Register T4 demotion callbacks.
-    chaos::il2cpp::runtime_core::RegisterT4DemotionCallbacks(
-        DemoteT4ByToken, DemoteT4ByCallSiteToken);
+    chaos::il2cpp::runtime_core::RegisterJitDemotionCallbacks(
+        DemoteJittedMethod, DemoteJittedCallSite);
 }
 
 // ═══════════════════════════════════════════════════════════════════════════

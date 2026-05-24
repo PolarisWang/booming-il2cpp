@@ -63,8 +63,8 @@ const ModuleDescriptor* LookupModule(uint32_t module_id);
 
 | 层级 | 内容 | 生成条件 | 每类型开销 |
 |------|------|---------|-----------|
-| Tier 1 | `type_flags[]`, `type_names[]`, `type_namespaces[]`, `type_parent_tokens[]` | **总是生成** | ~16 bytes |
-| Tier 2 | `ReflectionQueryMethodDescriptor[]`, `ReflectionQueryFieldDescriptor[]`, 完整 `ReflectionQueryTypeDescriptor` | **仅当 family 使用 GetMethods/GetFields/Invoke 等冷路径** | ~100-500 bytes |
+| StackInterpreted | `type_flags[]`, `type_names[]`, `type_namespaces[]`, `type_parent_tokens[]` | **总是生成** | ~16 bytes |
+| RegisterMapped | `ReflectionQueryMethodDescriptor[]`, `ReflectionQueryFieldDescriptor[]`, 完整 `ReflectionQueryTypeDescriptor` | **仅当 family 使用 GetMethods/GetFields/Invoke 等冷路径** | ~100-500 bytes |
 
 类型属性位标志（`type_flags`）包含所有 .NET 类型 boolean 属性的位编码：
 

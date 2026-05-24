@@ -25,16 +25,16 @@ extern "C" void* OsrResolveLoopHeader() noexcept;
 
 using chaos::il2cpp::jit::t_deopt_state;
 using chaos::il2cpp::jit::DeoptTlsState;
-using chaos::il2cpp::jit::RegisterT4Code;
+using chaos::il2cpp::jit::RegisterNativeCodeSection;
 using chaos::il2cpp::jit::UnregisterT4Code;
-using chaos::il2cpp::jit::FindT4CodeByAddress;
+using chaos::il2cpp::jit::FindNativeCodeByAddress;
 using chaos::il2cpp::jit::JitMethod;
 
 namespace {
 
 // ── Heap-allocated JitMethod guard ─────────────────────────────────────
 // Creates a zero-initialized JitMethod on the heap, registers with
-// RegisterT4Code.  On destruction, unregisters and clears all pointer fields
+// RegisterNativeCodeSection.  On destruction, unregisters and clears all pointer fields
 // so ~JitMethod() won't free stack/heap pointers twice.
 class NativeMethodGuard {
 public:
@@ -57,7 +57,7 @@ public:
     }
     JitMethod* get() { return nm_; }
     void register_t4(uint32_t token = 0) {
-        RegisterT4Code(code_, nm_->code_size, nm_, token);
+        RegisterNativeCodeSection(code_, nm_->code_size, nm_, token);
     }
 private:
     JitMethod* nm_;
@@ -95,11 +95,11 @@ TEST(CodegenOsr, RegisterThenUnregisterEntry) {
     uint8_t fake_code[128] = {};
     NativeMethodGuard nmg(fake_code, sizeof(fake_code));
 
-    RegisterT4Code(fake_code, sizeof(fake_code), nmg.get(), /*token=*/0);
-    EXPECT_NE(FindT4CodeByAddress(fake_code), nullptr);
+    RegisterNativeCodeSection(fake_code, sizeof(fake_code), nmg.get(), /*token=*/0);
+    EXPECT_NE(FindNativeCodeByAddress(fake_code), nullptr);
 
     UnregisterT4Code(fake_code);
-    EXPECT_EQ(FindT4CodeByAddress(fake_code), nullptr);
+    EXPECT_EQ(FindNativeCodeByAddress(fake_code), nullptr);
 }
 
 TEST(CodegenOsr, OsrResumePcBoundsCheckUt) {
@@ -108,7 +108,7 @@ TEST(CodegenOsr, OsrResumePcBoundsCheckUt) {
     NativeMethodGuard nmg(fake_code, sizeof(fake_code), offsets, 4);
 
     nmg.register_t4(/*token=*/0);
-    EXPECT_NE(FindT4CodeByAddress(fake_code), nullptr);
+    EXPECT_NE(FindNativeCodeByAddress(fake_code), nullptr);
 
     t_deopt_state = DeoptTlsState{};
 }
