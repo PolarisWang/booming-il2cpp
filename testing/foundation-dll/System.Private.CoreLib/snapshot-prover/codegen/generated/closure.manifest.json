@@ -1,0 +1,70 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "managedClosureManifest",
+  "assemblyName": "SnapshotProverSubjects",
+  "entrySubjectId": "",
+  "inputAssemblyPath": "System.Private.CoreLib/snapshot-prover/codegen/_subjects_input/SnapshotProverSubjects.dll",
+  "additionalAssemblyPaths": [],
+  "resolvedAssemblies": [
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "path": "System.Private.CoreLib/snapshot-prover/codegen/_subjects_input/SnapshotProverSubjects.dll"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Private.CoreLib.dll"
+    }
+  ],
+  "fullAssemblyClosure": true,
+  "inputModuleVersionId": "1bfabe16-ae8d-49f0-a9b5-27991014ddea",
+  "artifacts": [
+    {
+      "kind": "typedIlIr",
+      "path": "typed-il-ir.json"
+    },
+    {
+      "kind": "aotCoreIr",
+      "path": "aot-core-ir.json"
+    },
+    {
+      "kind": "aotManifest",
+      "path": "aot-manifest.json"
+    },
+    {
+      "kind": "metadataRegistration",
+      "path": "metadata-registration.json"
+    },
+    {
+      "kind": "supplementalMetadataTemplate",
+      "path": "hot-update/supplemental-metadata-template.json"
+    },
+    {
+      "kind": "codeRegistration",
+      "path": "code-registration.json"
+    },
+    {
+      "kind": "genericInstantiationDemandGraph",
+      "path": "generic-instantiation-demand-graph.json"
+    },
+    {
+      "kind": "genericCapabilityMatrix",
+      "path": "generic-capability-matrix.json"
+    },
+    {
+      "kind": "optimizationFacts",
+      "path": "optimization-facts.json"
+    },
+    {
+      "kind": "preserveDescriptor",
+      "path": "preserve-descriptor.json"
+    },
+    {
+      "kind": "nativeReferenceLoweringPlan",
+      "path": "native-reference.lowering-plan.json"
+    },
+    {
+      "kind": "nativeAotLoweringPlan",
+      "path": "native-aot.lowering-plan.json"
+    }
+  ]
+}

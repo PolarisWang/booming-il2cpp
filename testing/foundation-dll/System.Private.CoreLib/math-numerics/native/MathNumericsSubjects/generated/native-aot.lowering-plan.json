@@ -1,0 +1,11 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeAotLoweringPlan",
+  "planKind": "full-assembly-entry",
+  "assemblyName": "MathNumericsSubjects",
+  "entrySubjectId": "MathNumericsSubjects/MathNumericsSubjects::Subject_0:System.Void()",
+  "nativeEntryFunctionName": "",
+  "entrySymbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_0",
+  "entryMethodToken": "0u",
+  "workloadAbi": "full-assembly"
+}

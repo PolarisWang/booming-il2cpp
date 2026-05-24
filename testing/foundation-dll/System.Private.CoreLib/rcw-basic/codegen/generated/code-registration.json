@@ -1,0 +1,204 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "RcwBasicSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "RcwBasicSubjects_RcwBasicSubjects_Subject_0",
+          "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "RcwBasicSubjects_RcwBasicSubjects_Subject_1",
+          "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "RcwBasicSubjects_RcwBasicSubjects_Subject_2",
+          "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "RcwBasicSubjects_RcwBasicSubjects_Subject_3",
+          "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "RcwBasicSubjects_RcwBasicSubjects_Subject_4",
+          "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "RcwBasicSubjects_RcwBasicSubjects_Subject_5",
+          "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "RcwBasicSubjects_RcwBasicSubjects_Subject_6",
+          "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "RcwBasicSubjects_ISimpleMath_Add_System_Int32_System_Int32",
+          "subjectId": "RcwBasicSubjects/ISimpleMath::Add:System.Int32(System.Int32,System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "RcwBasicSubjects_ISimpleMath_Multiply_System_Int32_System_Int32",
+          "subjectId": "RcwBasicSubjects/ISimpleMath::Multiply:System.Int32(System.Int32,System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "RcwBasicSubjects_IConstantValue_GetValue",
+          "subjectId": "RcwBasicSubjects/IConstantValue::GetValue:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "RcwBasicSubjects_SimpleMath_Add_System_Int32_System_Int32",
+          "subjectId": "RcwBasicSubjects/SimpleMath::Add:System.Int32(System.Int32,System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "RcwBasicSubjects_SimpleMath_Multiply_System_Int32_System_Int32",
+          "subjectId": "RcwBasicSubjects/SimpleMath::Multiply:System.Int32(System.Int32,System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "RcwBasicSubjects_SimpleMath__ctor",
+          "subjectId": "RcwBasicSubjects/SimpleMath::.ctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "RcwBasicSubjects_ConstantFortyTwo_GetValue",
+          "subjectId": "RcwBasicSubjects/ConstantFortyTwo::GetValue:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "RcwBasicSubjects_ConstantFortyTwo__ctor",
+          "subjectId": "RcwBasicSubjects/ConstantFortyTwo::.ctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "RcwBasicSubjects_RcwBasicNativeEntry_Run_System_Int32",
+          "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "RcwBasicSubjects_RcwBasicNativeEntry_TestRcwRoundTripIdentity",
+          "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwRoundTripIdentity:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "RcwBasicSubjects_RcwBasicNativeEntry_TestRcwRoundTripQi",
+          "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwRoundTripQi:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "RcwBasicSubjects_RcwBasicNativeEntry_TestRcwVtableMethodCall",
+          "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwVtableMethodCall:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 19,
+          "symbol": "RcwBasicSubjects_RcwBasicNativeEntry_TestRcwDirectVtable",
+          "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwDirectVtable:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 20,
+          "symbol": "RcwBasicSubjects_RcwBasicNativeEntry_TestRcwMultipleWrappers",
+          "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwMultipleWrappers:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 21,
+          "symbol": "RcwBasicSubjects_RcwBasicNativeEntry_TestRcwQiUnknownInterface",
+          "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwQiUnknownInterface:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 22,
+          "symbol": "RcwBasicSubjects_RcwBasicNativeEntry_CreateCcwForSimpleMath_System_IntPtr",
+          "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::CreateCcwForSimpleMath:System.IntPtr(System.IntPtr)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 23,
+          "symbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalCreateCcw_System_IntPtr_System_IntPtr",
+          "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalCreateCcw:System.IntPtr(System.IntPtr,System.IntPtr)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 24,
+          "symbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalCreateRcw_System_IntPtr",
+          "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalCreateRcw:System.IntPtr(System.IntPtr)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 25,
+          "symbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalReleaseRcw_System_IntPtr",
+          "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalReleaseRcw:System.Void(System.IntPtr)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 26,
+          "symbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalGetRcwUnknown_System_IntPtr",
+          "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalGetRcwUnknown:System.IntPtr(System.IntPtr)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 27,
+          "symbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalRcwQueryInterface_System_IntPtr_System_IntPtr",
+          "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalRcwQueryInterface:System.IntPtr(System.IntPtr,System.IntPtr)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 28,
+          "symbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalCallComMethod_System_IntPtr_System_Int32_System_Int32_System_Int32",
+          "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalCallComMethod:System.Int32(System.IntPtr,System.Int32,System.Int32,System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 29,
+          "symbol": "RcwBasicSubjects_RcwBasicNativeEntry_MarshalCallDirectComMethod_System_IntPtr_System_Int32_System_Int32_System_Int32",
+          "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalCallDirectComMethod:System.Int32(System.IntPtr,System.Int32,System.Int32,System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 30,
+          "symbol": "RcwBasicSubjects_RuntimeState_Get",
+          "subjectId": "RcwBasicSubjects/RuntimeState::Get:System.IntPtr()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 31,
+          "symbol": "RcwBasicSubjects_RuntimeState_Set_System_IntPtr",
+          "subjectId": "RcwBasicSubjects/RuntimeState::Set:System.Void(System.IntPtr)"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

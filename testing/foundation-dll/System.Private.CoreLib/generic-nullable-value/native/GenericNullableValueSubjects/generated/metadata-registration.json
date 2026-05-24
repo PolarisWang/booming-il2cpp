@@ -1,0 +1,149 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "GenericNullableValueSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects",
+      "name": "GenericNullableValueSubjects",
+      "displayName": "GenericNullableValueSubjects",
+      "definitionSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects",
+      "metadataToken": 33554434
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::_exitCode",
+      "declaringTypeSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_0:System.Void()",
+      "name": "Subject_0",
+      "definitionSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663297
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_1:System.Void()",
+      "name": "Subject_1",
+      "definitionSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663298
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_2:System.Void()",
+      "name": "Subject_2",
+      "definitionSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663299
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_3:System.Void()",
+      "name": "Subject_3",
+      "definitionSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663300
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_4:System.Void()",
+      "name": "Subject_4",
+      "definitionSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663301
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_5:System.Void()",
+      "name": "Subject_5",
+      "definitionSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663302
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_6:System.Void()",
+      "name": "Subject_6",
+      "definitionSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663303
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_7:System.Void()",
+      "name": "Subject_7",
+      "definitionSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_7:System.Void()",
+      "declaringTypeSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663304
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_8:System.Void()",
+      "name": "Subject_8",
+      "definitionSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_8:System.Void()",
+      "declaringTypeSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663305
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_9:System.Void()",
+      "name": "Subject_9",
+      "definitionSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_9:System.Void()",
+      "declaringTypeSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663306
+    }
+  ]
+}

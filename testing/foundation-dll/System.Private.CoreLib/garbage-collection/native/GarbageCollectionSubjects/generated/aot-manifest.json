@@ -1,0 +1,162 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "GarbageCollectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GarbageCollectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GarbageCollectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GarbageCollectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GarbageCollectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GarbageCollectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GarbageCollectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_6:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GarbageCollectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_7:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GarbageCollectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_8:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GarbageCollectionSubjects",
+      "subjectKind": "method",
+      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_9:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GarbageCollectionSubjects",
+      "subjectKind": "field",
+      "subjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.GC::Collect:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.GC::WaitForPendingFinalizers:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.GC::KeepAlive:System.Void(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.GC::GetGeneration:System.Int32(System.WeakReference)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Byte",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Array::get_Length:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.GC::GetTotalMemory:System.Int64(System.Boolean)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.GC::GetGCMemoryInfo:System.GCMemoryInfo()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.GCMemoryInfo::get_TotalCommittedBytes:System.Int64()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.GC::Collect:System.Void(System.Int32,System.GCCollectionMode)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.GC::CollectionCount:System.Int32(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.GC::GetTotalPauseDuration:System.TimeSpan()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()",
+      "reason": "external-call"
+    }
+  ]
+}

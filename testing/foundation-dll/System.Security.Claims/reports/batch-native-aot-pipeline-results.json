@@ -1,0 +1,17 @@
+{
+  "assembly": "System.Security.Claims",
+  "mode": "family-entrypoint",
+  "total": 1,
+  "passed": 1,
+  "failed": 0,
+  "results": [
+    {
+      "family": "windows-identity",
+      "config_tier": "CHECK",
+      "steps": {},
+      "success": true,
+      "error": null
+    }
+  ],
+  "timestamp": "2026-05-24T14:08:27"
+}

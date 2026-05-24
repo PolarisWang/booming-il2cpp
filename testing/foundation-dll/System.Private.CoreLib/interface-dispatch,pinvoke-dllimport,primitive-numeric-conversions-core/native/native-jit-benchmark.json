@@ -1,0 +1,216 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/interface/dispatch,pinvoke/dllimport,primitive/numeric/conversions/core",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::Run:System.Int32(System.Int32)",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestSingleImplSimple:System.Int32()",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestSingleImplDefault:System.Int32()",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestMultiImplCalc:System.Int32()",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestIsCheck:System.Int32()",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestAsCheck:System.Int32()",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestDiamondBase:System.Int32()",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestDiamondDerived:System.Int32()",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestDiamondMulti:System.Int32()",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestGetCurrentProcess:System.Int32()",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestGetCurrentThread:System.Int32()",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestGetProcessId:System.Int32()",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestGetModuleHandle:System.Int32()",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 13,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestByteToInt:System.Int32()",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 14,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestIntToLong:System.Int32()",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 15,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestIntToShort:System.Int32()",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 16,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestIntToByte:System.Int32()",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 17,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestFloatToDouble:System.Int32()",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 18,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestDoubleToFloat:System.Int32()",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 19,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestIntToDouble:System.Int32()",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 20,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestDoubleToInt:System.Int32()",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 21,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestUintToLong:System.Int32()",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 22,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestLongToInt:System.Int32()",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    }
+  ]
+}

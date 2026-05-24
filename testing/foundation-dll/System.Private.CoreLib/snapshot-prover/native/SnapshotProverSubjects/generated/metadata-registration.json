@@ -1,0 +1,149 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "SnapshotProverSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+      "name": "SnapshotProverSubjects",
+      "displayName": "SnapshotProverSubjects",
+      "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+      "metadataToken": 33554434
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_0:System.Void()",
+      "name": "Subject_0",
+      "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663297
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_1:System.Void()",
+      "name": "Subject_1",
+      "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663298
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_2:System.Void()",
+      "name": "Subject_2",
+      "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663299
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_3:System.Void()",
+      "name": "Subject_3",
+      "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663300
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_4:System.Void()",
+      "name": "Subject_4",
+      "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663301
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_5:System.Void()",
+      "name": "Subject_5",
+      "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663302
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_6:System.Void()",
+      "name": "Subject_6",
+      "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663303
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_7:System.Void()",
+      "name": "Subject_7",
+      "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_7:System.Void()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663304
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::CustomEntrySubject_8:System.Void()",
+      "name": "CustomEntrySubject_8",
+      "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::CustomEntrySubject_8:System.Void()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663305
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()",
+      "name": "Subject_9",
+      "definitionSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()",
+      "declaringTypeSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663306
+    }
+  ]
+}

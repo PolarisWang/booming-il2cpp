@@ -111,6 +111,12 @@ enum class IROpCode : std::int32_t {
     Min = 101,
     Max = 102,
     StFldBarrier = 103,
+    LdElemNoChk  = 104,  // ldelem without bounds/null check
+    StElemNoChk  = 105,  // stelem without bounds/null check
+    LdElemANoChk = 106,  // ldelema without bounds/null check
+    Simd         = 107,  // SIMD operation (sub-op + element type + imm in imm field)
+    Popcnt       = 108,  // population count
+    Lzcnt        = 109,  // leading zero count
 };
 
 }  // namespace chaos::il2cpp::interpreter

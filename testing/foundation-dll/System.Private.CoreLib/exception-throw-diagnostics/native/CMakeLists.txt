@@ -8,10 +8,14 @@ add_compile_options(/utf-8 /GS-)
 add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
 add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
 
+# Find chaos SDK (prebuilt runtime libs + flags via chaos::runtime)
+# The SDK is the codegen output root from --sdk-out.
+set(CHAOS_SDK_DIR "D:/agent/booming-il2cpp/testing/foundation-dll/System.Private.CoreLib/exception-throw-diagnostics/codegen")
+find_package(chaos REQUIRED PATHS "${CHAOS_SDK_DIR}")
+
 # Paths
 set(CHAOS_PROJECT_ROOT "D:/agent/booming-il2cpp")
 set(CHAOS_CODEGEN_DIR "D:/agent/booming-il2cpp/testing/foundation-dll/System.Private.CoreLib/exception-throw-diagnostics/codegen")
-set(CHAOS_NATIVE_BUILD "D:/agent/booming-il2cpp/artifacts/presets/windows-x64-reference")
 
 # Source files — codegen outputs to codegen/<AssemblyName>/generated/
 file(GLOB CHAOS_CODEGEN_CPP "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.generated.cpp")
@@ -28,6 +32,7 @@ list(REMOVE_ITEM CHAOS_NATIVE_STUBS
     "${CMAKE_CURRENT_SOURCE_DIR}/runtime-entry.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/runtime-patchdata.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/verification_dispatch.generated.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/jit_stubs.cpp"
 )
 set(CHAOS_ENTRY_SOURCES
     "runtime-entry.cpp"
@@ -37,7 +42,7 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_AOT_GENERATED_CPP}
 )
 
-# Include directories
+# Include directories (repo tree — SDK include/ is not yet fully self-contained)
 set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_PROJECT_ROOT}/src/native/common"
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core"
@@ -52,40 +57,14 @@ set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_PROJECT_ROOT}/src/native"
     "${CHAOS_PROJECT_ROOT}/contracts/native/v0"
     "${CHAOS_PROJECT_ROOT}/third_party/fmt/include"
-    "${CHAOS_PROJECT_ROOT}/third_party/fmt/include"
     "${CHAOS_PROJECT_ROOT}/third_party/unordered_dense/include"
     "${CHAOS_CODEGEN_DIR}/NumericAggregationSubjects/generated"
     "${CMAKE_CURRENT_SOURCE_DIR}"
 )
 
-# Library link directories
-set(CHAOS_LIB_DIRS
-    "${CHAOS_NATIVE_BUILD}/src/native/runtime-core"
-    "${CHAOS_NATIVE_BUILD}/src/native/bootstrap"
-    "${CHAOS_NATIVE_BUILD}/src/native/common"
-    "${CHAOS_NATIVE_BUILD}/src/native/interpreter"
-    "${CHAOS_NATIVE_BUILD}/src/native/codegen"
-    "${CHAOS_NATIVE_BUILD}/src/native/support"
-    "${CHAOS_NATIVE_BUILD}/src/native/hot-update"
-    "${CHAOS_NATIVE_BUILD}/src/native/diagnostics/eventpipe"
-    "${CHAOS_NATIVE_BUILD}/fmt_build"
-)
-
-# Runtime libs to link
-set(CHAOS_RUNTIME_LIBS
-    chaos_runtime_core
-    chaos_bootstrap
-    chaos_common
-    chaos_interpreter
-    chaos_codegen
-    chaos_support
-    chaos_hot_update
-    chaos_eventpipe
-    chaos_fmt
-)
-
 add_executable(entry ${CHAOS_ENTRY_SOURCES})
 target_include_directories(entry PRIVATE ${CHAOS_ENTRY_INCLUDES})
-target_link_directories(entry PRIVATE ${CHAOS_LIB_DIRS})
 target_compile_options(entry PRIVATE /EHa)
-target_link_libraries(entry PRIVATE ${CHAOS_RUNTIME_LIBS})
+target_link_libraries(entry PRIVATE
+    chaos::runtime
+)

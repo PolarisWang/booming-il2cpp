@@ -1,0 +1,88 @@
+﻿{
+  "schemaVersion": 2,
+  "assemblyName": "GarbageCollectionSubjects",
+  "methodCount": 10,
+  "defaultStringId": 0,
+  "methods": [
+    {
+      "index": 0,
+      "nativeSymbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 0
+    },
+    {
+      "index": 1,
+      "nativeSymbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_1",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 1
+    },
+    {
+      "index": 2,
+      "nativeSymbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_2",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 2
+    },
+    {
+      "index": 3,
+      "nativeSymbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_3",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 3
+    },
+    {
+      "index": 4,
+      "nativeSymbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_4",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 4
+    },
+    {
+      "index": 5,
+      "nativeSymbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 5
+    },
+    {
+      "index": 6,
+      "nativeSymbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_6",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 6
+    },
+    {
+      "index": 7,
+      "nativeSymbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_7",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 7
+    },
+    {
+      "index": 8,
+      "nativeSymbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_8",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 8
+    },
+    {
+      "index": 9,
+      "nativeSymbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_9",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 9
+    }
+  ]
+}

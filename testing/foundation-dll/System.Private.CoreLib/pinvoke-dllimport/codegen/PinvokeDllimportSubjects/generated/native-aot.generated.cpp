@@ -41,6 +41,48 @@ extern "C" void PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_1(void
 extern "C" void PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_2(void);
 extern "C" void PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_3(void);
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" CHAOS_IL2CPP_INTPTR PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_GetCurrentProcess(void);
+extern "C" CHAOS_IL2CPP_INTPTR PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_GetCurrentThread(void);
+extern "C" CHAOS_IL2CPP_INTPTR PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_GetModuleHandle_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INTPTR PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_GetProcessId_System_IntPtr(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_TestGetCurrentProcess(void);
+extern "C" CHAOS_IL2CPP_INT32 PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_TestGetCurrentThread(void);
+extern "C" CHAOS_IL2CPP_INT32 PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_TestGetModuleHandle(void);
+extern "C" CHAOS_IL2CPP_INT32 PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_TestGetProcessId(void);
+extern "C" void PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_0(void);
+extern "C" void PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_1(void);
+extern "C" void PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_2(void);
+extern "C" void PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_3(void);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" CHAOS_IL2CPP_INTPTR PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_GetCurrentProcess(void);
+extern "C" CHAOS_IL2CPP_INTPTR PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_GetCurrentThread(void);
+extern "C" CHAOS_IL2CPP_INTPTR PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_GetModuleHandle_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INTPTR PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_GetProcessId_System_IntPtr(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_TestGetCurrentProcess(void);
+extern "C" CHAOS_IL2CPP_INT32 PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_TestGetCurrentThread(void);
+extern "C" CHAOS_IL2CPP_INT32 PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_TestGetModuleHandle(void);
+extern "C" CHAOS_IL2CPP_INT32 PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_TestGetProcessId(void);
+extern "C" void PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_0(void);
+extern "C" void PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_1(void);
+extern "C" void PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_2(void);
+extern "C" void PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_3(void);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" CHAOS_IL2CPP_INTPTR PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_GetCurrentProcess(void);
+extern "C" CHAOS_IL2CPP_INTPTR PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_GetCurrentThread(void);
+extern "C" CHAOS_IL2CPP_INTPTR PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_GetModuleHandle_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INTPTR PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_GetProcessId_System_IntPtr(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_TestGetCurrentProcess(void);
+extern "C" CHAOS_IL2CPP_INT32 PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_TestGetCurrentThread(void);
+extern "C" CHAOS_IL2CPP_INT32 PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_TestGetModuleHandle(void);
+extern "C" CHAOS_IL2CPP_INT32 PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_TestGetProcessId(void);
+extern "C" void PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_0(void);
+extern "C" void PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_1(void);
+extern "C" void PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_2(void);
+extern "C" void PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_3(void);
+
 namespace chaos::il2cpp::codegen::PinvokeDllimportSubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup

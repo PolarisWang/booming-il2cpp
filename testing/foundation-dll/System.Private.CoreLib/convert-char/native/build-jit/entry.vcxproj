@@ -326,7 +326,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\convert-char\native\verification_dispatch.generated.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\convert-char\native\enum_stubs.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\convert-char\native\microbench.cpp" />
-    <ClCompile Include="D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\convert-char\codegen\ConvertCharSubjects\generated\native-aot.generated.cpp" />
+    <ClCompile Include="D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\convert-char\native\ConvertCharSubjects\generated\native-aot.generated.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\convert-char\native\build-jit\ZERO_CHECK.vcxproj">

@@ -1,0 +1,31 @@
+#ifndef CHAOS_IL2CPP_CONVERT_H_
+#define CHAOS_IL2CPP_CONVERT_H_
+
+#include <chaos/native_types.h>
+
+extern "C" {
+
+CHAOS_IL2CPP_UINT16 chaos_convert_tochar_byte(CHAOS_IL2CPP_INTPTR value);
+CHAOS_IL2CPP_UINT16 chaos_convert_tochar_char(CHAOS_IL2CPP_INTPTR value);
+CHAOS_IL2CPP_UINT16 chaos_convert_tochar_int16(CHAOS_IL2CPP_INTPTR value);
+CHAOS_IL2CPP_UINT16 chaos_convert_tochar_int32(CHAOS_IL2CPP_INTPTR value);
+CHAOS_IL2CPP_UINT16 chaos_convert_tochar_int64(CHAOS_IL2CPP_INTPTR value);
+CHAOS_IL2CPP_UINT16 chaos_convert_tochar_sbyte(CHAOS_IL2CPP_INTPTR value);
+CHAOS_IL2CPP_UINT16 chaos_convert_tochar_uint16(CHAOS_IL2CPP_INTPTR value);
+CHAOS_IL2CPP_UINT16 chaos_convert_tochar_uint32(CHAOS_IL2CPP_INTPTR value);
+CHAOS_IL2CPP_UINT16 chaos_convert_tochar_uint64(CHAOS_IL2CPP_INTPTR value);
+
+CHAOS_IL2CPP_UINT16 chaos_convert_tochar_boolean(CHAOS_IL2CPP_INTPTR value);
+CHAOS_IL2CPP_UINT16 chaos_convert_tochar_datetime(CHAOS_IL2CPP_INTPTR value);
+CHAOS_IL2CPP_UINT16 chaos_convert_tochar_decimal(CHAOS_IL2CPP_INTPTR value);
+CHAOS_IL2CPP_UINT16 chaos_convert_tochar_double(CHAOS_IL2CPP_INTPTR value);
+CHAOS_IL2CPP_UINT16 chaos_convert_tochar_single(CHAOS_IL2CPP_INTPTR value);
+
+CHAOS_IL2CPP_UINT16 chaos_convert_tochar_object(CHAOS_IL2CPP_INTPTR value);
+CHAOS_IL2CPP_UINT16 chaos_convert_tochar_object_provider(CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INTPTR provider);
+CHAOS_IL2CPP_UINT16 chaos_convert_tochar_string(CHAOS_IL2CPP_INTPTR value);
+CHAOS_IL2CPP_UINT16 chaos_convert_tochar_string_provider(CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INTPTR provider);
+
+}
+
+#endif

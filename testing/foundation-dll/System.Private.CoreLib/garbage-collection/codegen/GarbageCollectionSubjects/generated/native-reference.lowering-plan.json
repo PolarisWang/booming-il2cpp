@@ -1,0 +1,42 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeReferenceLoweringPlan",
+  "planKind": "assembly-full-closure-runtime-skeleton",
+  "assemblyName": "GarbageCollectionSubjects",
+  "entrySubjectId": "",
+  "includeHeader": "codegen_bridge.h",
+  "nativeEntryFunctionName": "RunNativeReferenceAssembly",
+  "entrySymbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0",
+  "runtimeExecutionKind": "assembly-bound-native-reference-skeleton",
+  "translationUnitMode": "runtime-skeleton",
+  "translationUnitMethodSubjectIds": [
+    "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_0:System.Void()",
+    "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_1:System.Void()",
+    "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_2:System.Void()",
+    "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_3:System.Void()",
+    "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_4:System.Void()",
+    "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_5:System.Void()",
+    "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_6:System.Void()",
+    "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_7:System.Void()",
+    "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_8:System.Void()",
+    "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_9:System.Void()"
+  ],
+  "translationUnitMethodCount": 10,
+  "translationUnitPageSize": 1024,
+  "translationUnitPageCount": 1,
+  "translationUnitPages": [
+    {
+      "pageNumber": 1,
+      "methodCount": 10,
+      "path": "generated/runtime/native-reference.runtime-skeleton.page-0001.cpp",
+      "firstMethodSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_0:System.Void()",
+      "lastMethodSubjectId": "GarbageCollectionSubjects/GarbageCollectionSubjects::Subject_9:System.Void()"
+    }
+  ],
+  "auditStatus": "runtime-skeleton",
+  "auditMessage": "assembly-bound full-closure native-reference runtime skeleton emits covered executable methods only; uncovered methods are reported separately",
+  "referenceTypeToken": "0u",
+  "capturedFieldToken": "0u",
+  "entryMethodToken": "0u",
+  "consoleWriteLineStringIcall": "System.Console/System.Console::WriteLine(System.String)"
+}

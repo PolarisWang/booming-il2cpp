@@ -1,0 +1,269 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "RcwBasicSubjects/RcwBasicSubjects",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "RcwBasicSubjects/ISimpleMath",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "RcwBasicSubjects/IConstantValue",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "RcwBasicSubjects/SimpleMath",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "RcwBasicSubjects/ConstantFortyTwo",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "RcwBasicSubjects/RuntimeState",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "RcwBasicSubjects/\u003CPrivateImplementationDetails\u003E",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "RcwBasicSubjects/\u003CPrivateImplementationDetails\u003E\u002B__StaticArrayInitTypeSize=16",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_0:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_1:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_2:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_3:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_4:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_5:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_6:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/ISimpleMath::Add:System.Int32(System.Int32,System.Int32)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/ISimpleMath::Multiply:System.Int32(System.Int32,System.Int32)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/IConstantValue::GetValue:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/SimpleMath::Add:System.Int32(System.Int32,System.Int32)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/SimpleMath::Multiply:System.Int32(System.Int32,System.Int32)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/SimpleMath::.ctor:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/ConstantFortyTwo::GetValue:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/ConstantFortyTwo::.ctor:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::Run:System.Int32(System.Int32)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwRoundTripIdentity:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwRoundTripQi:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwVtableMethodCall:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwDirectVtable:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwMultipleWrappers:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::TestRcwQiUnknownInterface:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::CreateCcwForSimpleMath:System.IntPtr(System.IntPtr)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalCreateCcw:System.IntPtr(System.IntPtr,System.IntPtr)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalCreateRcw:System.IntPtr(System.IntPtr)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalReleaseRcw:System.Void(System.IntPtr)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalGetRcwUnknown:System.IntPtr(System.IntPtr)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalRcwQueryInterface:System.IntPtr(System.IntPtr,System.IntPtr)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalCallComMethod:System.Int32(System.IntPtr,System.Int32,System.Int32,System.Int32)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RcwBasicNativeEntry::MarshalCallDirectComMethod:System.Int32(System.IntPtr,System.Int32,System.Int32,System.Int32)",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RuntimeState::Get:System.IntPtr()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "RcwBasicSubjects/RuntimeState::Set:System.Void(System.IntPtr)",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [],
+  "layoutFacts": [
+    {
+      "subjectKind": "field",
+      "subjectId": "RcwBasicSubjects/RcwBasicSubjects::_exitCode",
+      "dataKind": "value",
+      "requiresBoxing": true
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "RcwBasicSubjects/RuntimeState::_state",
+      "dataKind": "reference",
+      "requiresBoxing": false
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "RcwBasicSubjects/\u003CPrivateImplementationDetails\u003E::DA5979D52E989A03770DCD85298CC184B885A2D2AF51AEB79151BB6630C1D46E",
+      "dataKind": "reference",
+      "requiresBoxing": false
+    }
+  ],
+  "exceptionFacts": [
+    {
+      "methodSubjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_0:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_1:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_2:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_3:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_4:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_5:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "RcwBasicSubjects/RcwBasicSubjects::Subject_6:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    }
+  ]
+}

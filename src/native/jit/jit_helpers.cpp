@@ -9,12 +9,15 @@
 
 #include <chaos/profile.h>
 
-#include <gc/gc_bgc_inline.h>
 #include <gc/gc_root_change.h>
 #include <gc/gc_api.h>
 #include <gc/gc_helpers.h>
 
 #include <intrin.h>  // _ReturnAddress()
+
+// SATB pre-write barrier — provided by gc_bgc.cpp (compiled directly in test
+// targets as MSVC-format .obj to avoid __tls_index issues with GNU ar archives).
+extern "C" void JitSatbPreWriteBarrier(void** slot) noexcept;
 
 // ── Thread-local deoptimization state ───────────────────────────────────────
 namespace chaos::il2cpp::jit {
@@ -73,13 +76,19 @@ extern "C" void CodegenStFld(void* obj, uint32_t field_idx, uint64_t value) noex
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::StFld");
     using namespace chaos::il2cpp::interpreter;
     using namespace chaos::il2cpp::runtime_core;
+    std::fprintf(stderr, "    [STDERR] CodegenStFld: obj=%p field=%u val=%llu\n",
+                 obj, field_idx, (unsigned long long)value);
+    std::fflush(stderr);
     if (obj == nullptr) return;
     auto* io = static_cast<InterpreterObject*>(obj);
+    std::fprintf(stderr, "    [STDERR] CodegenStFld: field_count=%u field_capacity=%u fields_ptr=%p inline=%p\n",
+                 io->fields.field_count_, io->fields.field_capacity_, io->fields.fields_ptr_, io->fields.inline_);
+    std::fflush(stderr);
     if (field_idx >= io->fields.size()) {
         io->fields.resize(field_idx + 1u);
     } else {
         // SATB pre-write barrier: record old value before overwriting.
-        BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&io->fields[field_idx].obj));
+        JitSatbPreWriteBarrier(reinterpret_cast<void**>(&io->fields[field_idx].obj));
     }
     io->fields[field_idx] = InterpreterValue::from_i64(static_cast<int64_t>(value));
     if (chaos_is_gc_pointer(obj)) {
@@ -367,9 +376,15 @@ extern "C" void* CodegenNewObj(uint32_t type_token, uint32_t field_count) noexce
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::NewObj");
     using namespace chaos::il2cpp::interpreter;
     using namespace chaos::il2cpp::runtime_core;
+    std::fprintf(stderr, "    [STDERR] CodegenNewObj: sizeof(IO)=%zu type=%u fields=%u tlab=[%p,%p) cur=%p\n",
+                 sizeof(InterpreterObject), type_token, field_count,
+                 tls_tlab.start, tls_tlab.end, tls_tlab.current);
+    std::fflush(stderr);
     // Allocate through the GC heap so the object is tracked for GC scanning
     // and compaction.  GcAllocate returns zeroed memory.
     auto* obj = static_cast<InterpreterObject*>(GcAllocate(sizeof(InterpreterObject)));
+    std::fprintf(stderr, "    [STDERR] CodegenNewObj: obj=%p\n", obj);
+    std::fflush(stderr);
     if (obj == nullptr) return nullptr;
     // Manual init: GcAllocate zeroes everything, so we only need to point
     // fields_ptr_ to the inline buffer and set type_token.
@@ -430,8 +445,7 @@ extern "C" void CodegenStSFld(uint32_t field_offset, uint64_t value) noexcept {
     if (field_offset >= g_static_fields.size()) {
         g_static_fields.resize(field_offset + 1u);
     }
-    using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
-    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&g_static_fields[field_offset].obj));
+    JitSatbPreWriteBarrier(reinterpret_cast<void**>(&g_static_fields[field_offset].obj));
     chaos::il2cpp::runtime_core::BgcRecordRootChange(
         reinterpret_cast<void**>(&g_static_fields[field_offset].obj),
         g_static_fields[field_offset].obj);
@@ -503,10 +517,50 @@ extern "C" void CodegenStElem(void* arr, int32_t index, uint64_t value) noexcept
     if (idx >= as->elements.size()) {
         as->elements.resize(idx + 1u);
     }
-    using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
-    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&as->elements[idx].obj));
+    JitSatbPreWriteBarrier(reinterpret_cast<void**>(&as->elements[idx].obj));
     as->elements[idx] = InterpreterValue::from_i64(static_cast<int64_t>(value));
     if (chaos::il2cpp::runtime_core::chaos_is_gc_pointer(as)) {
+        chaos_gc_dirty_card(as);
+    }
+}
+
+extern "C" uint64_t CodegenLdElemNoCheck(void* arr, int32_t index) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::LdElemNoCheck");
+    using namespace chaos::il2cpp::interpreter;
+    // Skip NULL check and bounds check — BCE has proven safety
+    auto* as = static_cast<ArrayStorage*>(arr);
+    auto idx = static_cast<size_t>(index >= 0 ? index : 0);
+    const auto& iv = as->elements[idx];
+    switch (iv.tag) {
+    case ValueTag::Int32:
+        return static_cast<uint64_t>(iv.i32);
+    case ValueTag::Int64:
+        return static_cast<uint64_t>(iv.i64);
+    case ValueTag::Float32: {
+        uint64_t val;
+        std::memcpy(&val, &iv.f32, sizeof(float));
+        return val;
+    }
+    case ValueTag::Float64: {
+        uint64_t val;
+        std::memcpy(&val, &iv.f64, sizeof(double));
+        return val;
+    }
+    default:
+        return reinterpret_cast<uint64_t>(iv.obj);
+    }
+}
+
+extern "C" void CodegenStElemNoCheck(void* arr, int32_t index, uint64_t value) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::StElemNoCheck");
+    using namespace chaos::il2cpp::interpreter;
+    using namespace chaos::il2cpp::runtime_core;
+    // Skip NULL check and bounds check — BCE has proven safety
+    auto* as = static_cast<ArrayStorage*>(arr);
+    auto idx = static_cast<size_t>(index >= 0 ? index : 0);
+    JitSatbPreWriteBarrier(reinterpret_cast<void**>(&as->elements[idx].obj));
+    as->elements[idx] = InterpreterValue::from_i64(static_cast<int64_t>(value));
+    if (chaos_is_gc_pointer(as)) {
         chaos_gc_dirty_card(as);
     }
 }
@@ -535,9 +589,10 @@ extern "C" uint64_t CodegenUnbox(void* obj) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::Unbox");
     using namespace chaos::il2cpp::interpreter;
     if (obj == nullptr) return 0;
-    auto* io = static_cast<InterpreterObject*>(obj);
-    if (io->fields.empty()) return 0;
-    const auto& iv = io->fields[0];
+    // BoxedValue layout: single InterpreterValue (ECMA Box/Unbox semantics).
+    // Both the TLAB inline path and CodegenBox create BoxedValue, not
+    // InterpreterObject, so we must read the value field directly.
+    const auto& iv = static_cast<BoxedValue*>(obj)->value;
     switch (iv.tag) {
     case ValueTag::Int32:
         return static_cast<uint64_t>(iv.i32);
@@ -591,7 +646,7 @@ extern "C" void CodegenStObj(void* ptr, uint64_t value) noexcept {
     using namespace chaos::il2cpp::runtime_core;
     if (ptr == nullptr) return;
     auto* iv = static_cast<InterpreterValue*>(ptr);
-    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&iv->obj));
+    JitSatbPreWriteBarrier(reinterpret_cast<void**>(&iv->obj));
     *iv = InterpreterValue::from_i64(static_cast<int64_t>(value));
     if (chaos_is_gc_pointer(ptr)) {
         chaos_gc_dirty_card(ptr);

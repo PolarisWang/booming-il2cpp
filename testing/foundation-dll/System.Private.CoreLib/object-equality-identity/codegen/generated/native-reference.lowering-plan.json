@@ -1,0 +1,39 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeReferenceLoweringPlan",
+  "planKind": "assembly-full-closure-runtime-skeleton",
+  "assemblyName": "ObjectEqualityIdentitySubjects",
+  "entrySubjectId": "",
+  "includeHeader": "codegen_bridge.h",
+  "nativeEntryFunctionName": "RunNativeReferenceAssembly",
+  "entrySymbol": "ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_0",
+  "runtimeExecutionKind": "assembly-bound-native-reference-skeleton",
+  "translationUnitMode": "runtime-skeleton",
+  "translationUnitMethodSubjectIds": [
+    "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_0:System.Void()",
+    "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_1:System.Void()",
+    "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_2:System.Void()",
+    "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_3:System.Void()",
+    "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_4:System.Void()",
+    "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_5:System.Void()",
+    "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_6:System.Void()"
+  ],
+  "translationUnitMethodCount": 7,
+  "translationUnitPageSize": 1024,
+  "translationUnitPageCount": 1,
+  "translationUnitPages": [
+    {
+      "pageNumber": 1,
+      "methodCount": 7,
+      "path": "generated/runtime/native-reference.runtime-skeleton.page-0001.cpp",
+      "firstMethodSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_0:System.Void()",
+      "lastMethodSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_6:System.Void()"
+    }
+  ],
+  "auditStatus": "runtime-skeleton",
+  "auditMessage": "assembly-bound full-closure native-reference runtime skeleton emits covered executable methods only; uncovered methods are reported separately",
+  "referenceTypeToken": "0u",
+  "capturedFieldToken": "0u",
+  "entryMethodToken": "0u",
+  "consoleWriteLineStringIcall": "System.Console/System.Console::WriteLine(System.String)"
+}

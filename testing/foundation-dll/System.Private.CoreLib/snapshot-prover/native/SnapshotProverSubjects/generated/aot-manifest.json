@@ -1,0 +1,126 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_6:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_7:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::CustomEntrySubject_8:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "method",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SnapshotProverSubjects",
+      "subjectKind": "field",
+      "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/ArithmeticOps::RunAdd:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/MathHelper::RunSquare:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/FlowControl::IsPositive:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/CallVirtHelper::CreateAndUse:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/BoxingHelper::BoxAndUnbox:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/ConversionHelper::ConvertToInt:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/LoopHelper::SumToFive:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "SnapshotTestFixtures",
+      "subjectKind": "method",
+      "subjectId": "SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()",
+      "reason": "external-call"
+    }
+  ]
+}

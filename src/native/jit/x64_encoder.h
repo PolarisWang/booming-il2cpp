@@ -880,6 +880,455 @@ inline void EmitXorpsRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
     buf.EmitByte(ModRM(3, dst, src));
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// SSE2 packed integer arithmetic (Padd*, Psub*, Pmul*)
+// ═══════════════════════════════════════════════════════════════════════════
+
+/// paddb xmm1, xmm2 (packed byte add)
+inline void EmitPaddbRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0xFC);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// paddw xmm1, xmm2 (packed 16-bit add)
+inline void EmitPaddwRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0xFD);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// paddd xmm1, xmm2 (packed 32-bit add)
+inline void EmitPadddRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0xFE);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// paddq xmm1, xmm2 (packed 64-bit add)
+inline void EmitPaddqRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0xD4);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// psubb xmm1, xmm2 (packed byte subtract)
+inline void EmitPsubbRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0xF8);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// psubw xmm1, xmm2 (packed 16-bit subtract)
+inline void EmitPsubwRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0xF9);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// psubd xmm1, xmm2 (packed 32-bit subtract)
+inline void EmitPsubdRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0xFA);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// psubq xmm1, xmm2 (packed 64-bit subtract)
+inline void EmitPsubqRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0xFB);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// pmullw xmm1, xmm2 (packed 16-bit multiply, low)
+inline void EmitPmullwRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0xD5);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// pmuludq xmm1, xmm2 (packed 32-bit → 64-bit unsigned multiply)
+inline void EmitPmuludqRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0xF4);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// pmaddwd xmm1, xmm2 (packed multiply-add, word→dword)
+inline void EmitPmaddwdRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0xF5);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// SSE2 packed bitwise (Pand, Por, Pandn)
+// ═══════════════════════════════════════════════════════════════════════════
+
+/// pand xmm1, xmm2 (packed bitwise AND)
+inline void EmitPandRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0xDB);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// por xmm1, xmm2 (packed bitwise OR)
+inline void EmitPorRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0xEB);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// pandn xmm1, xmm2 (packed AND NOT: dst = ~dst & src)
+inline void EmitPandnRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0xDF);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// SSE2/SSE4.1 packed compare (Pcmpeq*, Pcmpgt*)
+// ═══════════════════════════════════════════════════════════════════════════
+
+/// pcmpeqb xmm1, xmm2 (packed byte compare equal)
+inline void EmitPcmpeqbRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0x74);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// pcmpeqw xmm1, xmm2 (packed 16-bit compare equal)
+inline void EmitPcmpeqwRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0x75);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// pcmpeqd xmm1, xmm2 (packed 32-bit compare equal)
+inline void EmitPcmpeqdRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0x76);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// pcmpeqq xmm1, xmm2 (packed 64-bit compare equal, SSE4.1)
+inline void EmitPcmpeqqRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0x38); buf.EmitByte(0x29);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// pcmpgtb xmm1, xmm2 (packed byte signed compare greater)
+inline void EmitPcmpgtbRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0x64);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// pcmpgtw xmm1, xmm2 (packed 16-bit signed compare greater)
+inline void EmitPcmpgtwRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0x65);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// pcmpgtd xmm1, xmm2 (packed 32-bit signed compare greater)
+inline void EmitPcmpgtdRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0x66);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// pcmpgtq xmm1, xmm2 (packed 64-bit signed compare greater, SSE4.1)
+inline void EmitPcmpgtqRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0x38); buf.EmitByte(0x37);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// SSE2/SSSE3 packed shift
+// ═══════════════════════════════════════════════════════════════════════════
+
+/// psllw xmm1, xmm2 (packed 16-bit shift left logical, by count in xmm2)
+inline void EmitPsllwRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0xF1);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// pslld xmm1, xmm2 (packed 32-bit shift left logical)
+inline void EmitPslldRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0xF2);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// psllq xmm1, xmm2 (packed 64-bit shift left logical)
+inline void EmitPsllqRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0xF3);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// psrlw xmm1, xmm2 (packed 16-bit shift right logical)
+inline void EmitPsrlwRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0xD1);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// psrld xmm1, xmm2 (packed 32-bit shift right logical)
+inline void EmitPsrldRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0xD2);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// psrlq xmm1, xmm2 (packed 64-bit shift right logical)
+inline void EmitPsrlqRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0xD3);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// psraw xmm1, xmm2 (packed 16-bit shift right arithmetic)
+inline void EmitPsrawRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0xE1);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// psrad xmm1, xmm2 (packed 32-bit shift right arithmetic)
+inline void EmitPsradRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0xE2);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// SSE2/SSSE3/SSE4.1 unpack & pack
+// ═══════════════════════════════════════════════════════════════════════════
+
+/// punpcklbw xmm1, xmm2 (unpack low bytes)
+inline void EmitPunpcklbwRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0x60);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// punpcklwd xmm1, xmm2 (unpack low 16-bit)
+inline void EmitPunpcklwdRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0x61);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// punpckldq xmm1, xmm2 (unpack low 32-bit)
+inline void EmitPunpckldqRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0x62);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// punpcklqdq xmm1, xmm2 (unpack low 64-bit)
+inline void EmitPunpcklqdqRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0x6C);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// punpckhbw xmm1, xmm2 (unpack high bytes)
+inline void EmitPunpckhbwRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0x68);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// punpckhwd xmm1, xmm2 (unpack high 16-bit)
+inline void EmitPunpckhwdRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0x69);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// punpckhdq xmm1, xmm2 (unpack high 32-bit)
+inline void EmitPunpckhdqRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0x6A);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// punpckhqdq xmm1, xmm2 (unpack high 64-bit)
+inline void EmitPunpckhqdqRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0x6D);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// packsswb xmm1, xmm2 (pack signed 16-bit → byte with signed saturation)
+inline void EmitPacksswbRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0x63);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// packssdw xmm1, xmm2 (pack signed 32-bit → 16-bit with signed saturation)
+inline void EmitPackssdwRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0x6B);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// packuswb xmm1, xmm2 (pack signed 16-bit → byte with unsigned saturation)
+inline void EmitPackuswbRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0x67);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// SSE2/SSSE3/SSE4.1 shuffle & absolute value
+// ═══════════════════════════════════════════════════════════════════════════
+
+/// pshufd xmm1, xmm2, imm8 (packed 32-bit shuffle)
+inline void EmitPshufdRR(CodeBuffer& buf, uint8_t dst, uint8_t src, uint8_t imm) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0x70);
+    buf.EmitByte(ModRM(3, dst, src));
+    buf.EmitByte(imm);
+}
+
+/// pshufb xmm1, xmm2 (packed shuffle bytes, SSSE3)
+inline void EmitPshufbRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0x38); buf.EmitByte(0x00);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// pabsb xmm1, xmm2 (packed byte absolute value, SSSE3)
+inline void EmitPabsbRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0x38); buf.EmitByte(0x1C);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// pabsw xmm1, xmm2 (packed 16-bit absolute value, SSSE3)
+inline void EmitPabswRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0x38); buf.EmitByte(0x1D);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// pabsd xmm1, xmm2 (packed 32-bit absolute value, SSSE3)
+inline void EmitPabsdRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0x38); buf.EmitByte(0x1E);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// SSE2/SSE4.1 insert & extract (GPR ↔ XMM)
+// ═══════════════════════════════════════════════════════════════════════════
+
+/// pinsrw xmm, r32, imm8 (insert 16-bit from GPR, SSE2)
+inline void EmitPinsrwRR(CodeBuffer& buf, uint8_t xmm, uint8_t reg, uint8_t imm) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, xmm, reg);
+    buf.EmitByte(0x0F); buf.EmitByte(0xC4);
+    buf.EmitByte(ModRM(3, xmm, reg));
+    buf.EmitByte(imm);
+}
+
+/// pextrw r32, xmm, imm8 (extract 16-bit to GPR, SSE2)
+inline void EmitPextrwRR(CodeBuffer& buf, uint8_t reg, uint8_t xmm, uint8_t imm) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, reg, xmm);
+    buf.EmitByte(0x0F); buf.EmitByte(0xC5);
+    buf.EmitByte(ModRM(3, reg, xmm));
+    buf.EmitByte(imm);
+}
+
+/// pinsrb xmm, r32, imm8 (insert byte from GPR, SSE4.1)
+inline void EmitPinsrbRR(CodeBuffer& buf, uint8_t xmm, uint8_t reg, uint8_t imm) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, xmm, reg);
+    buf.EmitByte(0x0F); buf.EmitByte(0x3A); buf.EmitByte(0x20);
+    buf.EmitByte(ModRM(3, xmm, reg));
+    buf.EmitByte(imm);
+}
+
+/// pinsrd xmm, r32, imm8 (insert 32-bit from GPR, SSE4.1)
+inline void EmitPinsrdRR(CodeBuffer& buf, uint8_t xmm, uint8_t reg, uint8_t imm) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, xmm, reg);
+    buf.EmitByte(0x0F); buf.EmitByte(0x3A); buf.EmitByte(0x22);
+    buf.EmitByte(ModRM(3, xmm, reg));
+    buf.EmitByte(imm);
+}
+
+/// pextrb r32, xmm, imm8 (extract byte to GPR, SSE4.1)
+inline void EmitPextrbRR(CodeBuffer& buf, uint8_t reg, uint8_t xmm, uint8_t imm) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, reg, xmm);
+    buf.EmitByte(0x0F); buf.EmitByte(0x3A); buf.EmitByte(0x14);
+    buf.EmitByte(ModRM(3, reg, xmm));
+    buf.EmitByte(imm);
+}
+
+/// pextrd r32, xmm, imm8 (extract 32-bit to GPR, SSE4.1)
+inline void EmitPextrdRR(CodeBuffer& buf, uint8_t reg, uint8_t xmm, uint8_t imm) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, reg, xmm);
+    buf.EmitByte(0x0F); buf.EmitByte(0x3A); buf.EmitByte(0x16);
+    buf.EmitByte(ModRM(3, reg, xmm));
+    buf.EmitByte(imm);
+}
+
+/// pmovmskb r32, xmm (move byte mask to GPR, SSE2)
+inline void EmitPmovmskbRR(CodeBuffer& buf, uint8_t reg, uint8_t xmm) noexcept {
+    EmitREX(buf, false, reg, xmm);
+    buf.EmitByte(0x0F); buf.EmitByte(0xD7);
+    buf.EmitByte(ModRM(3, reg, xmm));
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// SSE2 aligned 128-bit moves (Movdqa) — for explicit alignment scenarios
+// ═══════════════════════════════════════════════════════════════════════════
+
+/// movdqa xmm1, xmm2 (aligned 128-bit register-to-register)
+inline void EmitMovdqaRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0x6F);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// movdqa [mem], xmm (aligned 128-bit store)
+inline void EmitMovdqaMR(CodeBuffer& buf, uint8_t base, int32_t disp, uint8_t src) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, src, base);
+    buf.EmitByte(0x0F); buf.EmitByte(0x7F);
+    EmitMR(buf, src, base, disp);
+}
+
+/// movdqa xmm, [mem] (aligned 128-bit load)
+inline void EmitMovdqaRM(CodeBuffer& buf, uint8_t dst, uint8_t base, int32_t disp) noexcept {
+    buf.EmitByte(0x66); EmitREX(buf, false, dst, base);
+    buf.EmitByte(0x0F); buf.EmitByte(0x6F);
+    EmitMR(buf, dst, base, disp);
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// POPCNT / LZCNT (bit manipulation)
+// ═══════════════════════════════════════════════════════════════════════════
+
+/// popcnt r64, r/m64 (population count)
+inline void EmitPopcntRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0xF3); EmitREX(buf, true, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0xB8);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// lzcnt r64, r/m64 (leading zero count)
+inline void EmitLzcntRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitByte(0xF3); EmitREX(buf, true, dst, src);
+    buf.EmitByte(0x0F); buf.EmitByte(0xBD);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
 }  // namespace chaos::il2cpp::jit
 
 #endif  // CHAOS_IL2CPP_CODEGEN_X64_ENCODER_H_

@@ -53,6 +53,8 @@ static interpreter::IROpCode MapToIROpCode(NodeKind kind) noexcept {
         case kClt:      return interpreter::IROpCode::Clt;
         case kCgt:      return interpreter::IROpCode::Cgt;
         case kLdLen:    return interpreter::IROpCode::LdLen;
+        case kLdElem:   return interpreter::IROpCode::LdElem;
+        case kLdElemA:  return interpreter::IROpCode::LdElemA;
         case kAbs:      return interpreter::IROpCode::Abs;
         case kMin:      return interpreter::IROpCode::Min;
         case kMax:      return interpreter::IROpCode::Max;
@@ -226,6 +228,35 @@ uint32_t Linearizer::LinearizeNode(
         return dst;
     }
 
+    // ── LdElem / LdElemA (array element load/address) ─────────────────────
+    if (k == kLdElem || k == kLdElemA) {
+        uint32_t arr_vreg = LinearizeNode(node->child0, out);
+        uint32_t idx_vreg = LinearizeNode(node->child1, out);
+        if (arr_vreg == 0 || idx_vreg == 0) return 0;
+
+        interpreter::IROpCode opc = (node->flags & kFlagNoBoundsCheck)
+            ? ((k == kLdElem)
+                ? interpreter::IROpCode::LdElemNoChk
+                : interpreter::IROpCode::LdElemANoChk)
+            : MapToIROpCode(k);
+
+        uint32_t dst = NextVReg();
+        interpreter::RegisterInstruction ri;
+        ri.header = MakeHdr(opc, dst,
+                             static_cast<uint8_t>(arr_vreg),
+                             static_cast<uint8_t>(idx_vreg),
+                             interpreter::kRegHasDst |
+                             interpreter::kRegHasSrc1 |
+                             interpreter::kRegHasSrc2);
+        ri.imm.i4 = 0;
+        out.push_back(ri);
+
+        if (node->vn_id() > 0 && node->vn_id() < kMaxVN)
+            emitted_vn_[node->vn_id()] = true;
+
+        return dst;
+    }
+
     // ── Side-effect / root nodes ───────────────────────────────────────
     if (k == kStLoc) {
         uint32_t val_vreg = LinearizeNode(node->child0, out);
@@ -237,6 +268,31 @@ uint32_t Linearizer::LinearizeNode(
                              interpreter::kRegHasSrc1 | interpreter::kRegHasImm |
                              interpreter::kRegIsStore);
         ri.imm.operand_index = node->operand_index;
+        out.push_back(ri);
+        return 0;
+    }
+
+    if (k == kStElem) {
+        uint32_t arr_vreg = LinearizeNode(node->child0, out);
+        uint32_t val_vreg = (node->child1) ? LinearizeNode(node->child1, out) : 0;
+        uint32_t idx_vreg = node->operand_index;
+        if (arr_vreg == 0) return 0;
+
+        interpreter::IROpCode opc = (node->flags & kFlagNoBoundsCheck)
+            ? interpreter::IROpCode::StElemNoChk
+            : interpreter::IROpCode::StElem;
+
+        interpreter::RegisterInstruction ri;
+        ri.header = MakeHdr(opc, 0,
+                             static_cast<uint8_t>(arr_vreg),
+                             static_cast<uint8_t>(idx_vreg),
+                             interpreter::kRegHasSrc1 |
+                             interpreter::kRegHasSrc2 |
+                             interpreter::kRegHasSrc3 |
+                             interpreter::kRegIsStore);
+        // src3 = value vreg in reserved header bits [55:48]
+        ri.header |= (static_cast<uint64_t>(val_vreg & 0xFF) << 48);
+        ri.imm.i4 = 0;
         out.push_back(ri);
         return 0;
     }

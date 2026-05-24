@@ -158,9 +158,10 @@ wf2-linux (Linux SEH+DWARF) | planned | **✅ 代码已完成** — LinuxSehHand
 
 | Batch | 内容 | 状态 | 阻塞 |
 |-------|------|------|------|
+| batch-1 | wf1-ci (JIT CI 基线) | ⏳ 设计完成 | [design-wf1-ci.md](20260523-jit-industrialization-finale/design-wf1-ci.md) 已创建，待实现 GitHub Actions workflow |
 | batch-2 | wf2-linux (Linux SEH+DWARF) | ✅ **代码完成** 🇰 | LinuxSehHandler.cpp 637 行完整实现 + DWARF .eh_frame 已发出；仅缺 Linux CI 集成 |
 | batch-2 | wf4-debug (调试信息+SOS) | 🔲 未启动 | 零代码，独立大任务 |
-| batch-3 | wf3-tlab (TLAB 内联分配) | ⏳ 部分完成 | 三条 TLAB bump 路径已实现但仍有 1 次 CodegenGetTlab helper call |
+| batch-3 | wf3-tlab (TLAB 内联分配) | ✅ **已完成** | EmitLoadTlsTlab 替换 3 处 CodegenGetTlab CALL，全 199 JIT 测试通过，零 helper call |
 | batch-4 | wf5-arm64 (ARM64 完整支持) | ⏳ 未启动 | 编码器头文件已存在（Arm64Encoder.h + arm64_encoder.h），缺 frame/SEH/测试 |
 
 ---
@@ -311,7 +312,8 @@ wf2-linux (Linux SEH+DWARF) | planned | **✅ 代码已完成** — LinuxSehHand
 
 有剩余差距:
   ├─ Foundation-DLL 工业化         评分 2.65/5 → Phase 2+3 未启动
-  ├─ JIT 工业化收官                 wf2-linux 代码完成 ✅, batch-2~4 其余待办
+  ├─ JIT 工业化收官                 batch-3 ✅ (TLAB), batch-1 wf1-ci 设计完成,
+  │                                 batch-2 wf2-linux 代码完成 ✅, 其余待办
   ├─ Full IL2CPP 翻译              端到端验证未完成, InternalCall 未实现
 
 未启动:

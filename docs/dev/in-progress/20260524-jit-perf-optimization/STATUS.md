@@ -6,7 +6,7 @@ dispatch_model: sequential
 child_execution_mode: auto
 auto_continue: true
 auto_stop_policy: blocking-only
-recommended_next_child: p4-bounds-check
+recommended_next_child: p6-simd
 source: brainstorm
 created: 2026-05-24
 blocking_questions: []
@@ -38,12 +38,12 @@ clearance_confirmed_by_user: true
 
 | task_id | phase | status | owner | purpose | depends_on | estimated_effort |
 |---------|-------|--------|-------|---------|------------|-------------------|
-| p0-call-site-slot | P0 | **ready** | main | Slot 间接化 + Version + ReverseSlotMap | — | 3-4w |
+| p0-call-site-slot | P0 | completed | main | Slot 间接化 + Version + ReverseSlotMap | — | 3-4w |
 | p1-tree-ir | P1 | completed | main | 轻量树 IR 框架 + VN + CSE | p0-call-site-slot | 4-5w |
 | p2-inliner | P2 | completed | main | 热更感知内联器 | p1-tree-ir | 3-4w |
 | p3-intrinsic | P3 | completed | main | Intrinsic 识别 | p2-inliner | 2-3w |
-| p4-bounds-check | P4 | planned | main | 边界检查消除 | p1-tree-ir | 2-3w |
-| p5-loop-opt | P5 | planned | main | 循环优化 | p4-bounds-check | 3-4w |
+| p4-bounds-check | P4 | completed | main | 边界检查消除 | p1-tree-ir | 2-3w |
+| p5-loop-opt | P5 | completed | main | 循环优化 | p4-bounds-check | 3-4w |
 | p6-simd | P6 | planned | main | SIMD / HW intrinsics | p3-intrinsic + p4-bounds-check | 4-6w |
 
 ## 边界拍板
@@ -59,9 +59,14 @@ clearance_confirmed_by_user: true
 
 ## 最新摘要
 
-- P3 Intrinsic 已完成：Math.Abs/Min/Max、Array.Length、StFldBarrier 内联；build + 18/18 fact + benchmark 通过
-- P1/P2/P3 均已归档，P4 边界消除待启动
+- P5 循环优化已完成：CFG + Lengauer-Tarjan 支配树 + 自然循环检测 + LICM(后处理) + IV(检测) + Unrolling(分析框架)
+- P1/P2/P3/P4/P5 均已归档
+- 当前最新完成阶段：P5（循环优化）
+- 阶段完成时间：2026-05-24
 
 ## 下一步
 
-建议自动启动 p4-bounds-check 子任务（边界检查消除）。
+由于当前测试 subjects (convert-char) 全部为单 BB，P5 的循环 pass 在现有测试中不会触发。剩余 P6 SIMD 需要 P2 内联器 + P3 Intrinsic + P4 边界消除作为前置依赖（均已就绪）。
+
+下一推荐子任务：p6-simd（SIMD / HW intrinsics）。
+建议启动 P6 SIMD 子任务（Vector128/256 生成 + SSE/AVX 指令）。

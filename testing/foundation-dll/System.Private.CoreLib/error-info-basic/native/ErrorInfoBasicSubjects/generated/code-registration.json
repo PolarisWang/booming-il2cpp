@@ -1,0 +1,72 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ErrorInfoBasicSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ErrorInfoBasicSubjects_ErrorInfoBasicSubjects_Subject_0",
+          "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ErrorInfoBasicSubjects_ErrorInfoBasicSubjects_Subject_1",
+          "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ErrorInfoBasicSubjects_ErrorInfoBasicSubjects_Subject_2",
+          "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ErrorInfoBasicSubjects_ErrorInfoBasicSubjects_Subject_3",
+          "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ErrorInfoBasicSubjects_ErrorInfoBasicSubjects_Subject_4",
+          "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicSubjects::Subject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ErrorInfoBasicSubjects_ErrorInfoBasicNativeEntry_Run_System_Int32",
+          "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::Run:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ErrorInfoBasicSubjects_ErrorInfoBasicNativeEntry_TestGetExceptionForHR",
+          "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::TestGetExceptionForHR:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "ErrorInfoBasicSubjects_ErrorInfoBasicNativeEntry_TestGetHRForException",
+          "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::TestGetHRForException:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "ErrorInfoBasicSubjects_ErrorInfoBasicNativeEntry_TestThrowExceptionForHR_S_OK",
+          "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::TestThrowExceptionForHR_S_OK:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "ErrorInfoBasicSubjects_ErrorInfoBasicNativeEntry_TestGetExceptionForHR_Zero",
+          "subjectId": "ErrorInfoBasicSubjects/ErrorInfoBasicNativeEntry::TestGetExceptionForHR_Zero:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

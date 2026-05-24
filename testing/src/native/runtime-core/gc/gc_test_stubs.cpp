@@ -5,6 +5,19 @@
 #include <cstdint>
 #include <cstddef>
 
+// MSVC TLS workaround: MinGW-built .o files inside GNU ar archives reference
+// __tls_index (from MinGW's TLS model), but MSVC's linker cannot generate the
+// TLS directory from GNU ar format.  Providing a dummy definition lets the
+// MSVC link.exe resolve the symbol and proceed.
+//
+// This is safe because thread_local variables from MinGW archives are always
+// overridden by MSVC-compiled .obj files (either directly-compiled sources or
+// gc_test_stubs.cpp itself), so the MinGW TLS is never actually executed.
+// The /FORCE:MULTIPLE linker flag (set by add_chaos_test) allows the override.
+#ifdef _MSC_VER
+extern "C" unsigned int __tls_index = 0;
+#endif
+
 extern "C" {
 
 // chaos_il2cpp_aot_hotpatch_module — normally provided by codegen output

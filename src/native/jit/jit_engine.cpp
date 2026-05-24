@@ -502,6 +502,8 @@ void NativeCodeGenerator::PropagateTypes(
     case IROpCode::LdArgA: case IROpCode::LdLocA:
     case IROpCode::SizeOf: case IROpCode::LdToken:
     case IROpCode::LocAlloc:
+    case IROpCode::LdElem: case IROpCode::LdElemA:
+    case IROpCode::LdElemNoChk: case IROpCode::LdElemANoChk:
         SetVregType(dst, kTypeInt64); break;
 
     // Float immediates and conversions
@@ -1934,6 +1936,28 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         return true;
     }
 
+    case IROpCode::LdElemNoChk: case IROpCode::LdElemANoChk: {
+        if (!instr.has_src1() || !instr.has_src2() || !instr.has_dst()) return false;
+        LoadGpr(kRCX, instr.src1_reg());
+        LoadGpr(kRDX, instr.src2_reg());
+        enc_.EmitMovImm64(kRAX, reinterpret_cast<uint64_t>(::CodegenLdElemNoCheck));
+        uint32_t call_pos = buf_.pos();
+        EmitCallWithSpill(kRAX);
+        RecordGcPoint(call_pos);
+        StoreGpr(kRAX, instr.dst_reg());
+        return true;
+    }
+
+    case IROpCode::StElemNoChk: {
+        if (!instr.has_src1() || !instr.has_src2()) return false;
+        LoadGpr(kRCX, instr.src1_reg());
+        LoadGpr(kRDX, instr.src2_reg());
+        if (instr.flags() & interpreter::kRegHasSrc3) LoadGpr(kR8, instr.src3_reg());
+        enc_.EmitMovImm64(kRAX, reinterpret_cast<uint64_t>(::CodegenStElemNoCheck));
+        EmitCallWithSpill(kRAX);
+        return true;
+    }
+
     case IROpCode::LdSFld: {
         if (!instr.has_dst()) return false;
         enc_.EmitMovRIImm32(kRCX, instr.imm.field_offset);
@@ -3210,6 +3234,7 @@ static void OptimizeInstructions(
 }
 
 JitMethod* NativeCodeGenerator::Generate() noexcept {
+    std::fprintf(stderr, "    [STDERR] Generate: entered, n_instrs=%u\n", static_cast<uint32_t>(rm_.instructions.size())); std::fflush(stderr);
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::Generate");
     uint32_t n_instrs = static_cast<uint32_t>(rm_.instructions.size());
     if (n_instrs == 0) return nullptr;
@@ -3426,6 +3451,8 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
     // Bail out early if any emit above hit an OOM
     if (CheckFailed()) return nullptr;
 
+    std::fprintf(stderr, "    [STDERR] Generate: before opt\n"); std::fflush(stderr);
+
     // ── Optimize instructions (tree IR pipeline + linear fallback) ──────
     // Creates a mutable copy of rm_.instructions for the optimizer.
     // Non-SEH methods: tree IR pipeline (Inliner → ConstFold → CSE → linearize).
@@ -3441,9 +3468,11 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
             // Non-SEH methods: tree IR pipeline with optional inlining.
             // Produces a clean instruction sequence (no removed_mask needed).
             std::vector<interpreter::RegisterInstruction> tree_opt;
+            std::fprintf(stderr, "    [STDERR] Generate: calling OptimizeWithTreeIR\n"); std::fflush(stderr);
             if (tree::OptimizeWithTreeIR(opt_instrs, tree_opt, false,
                                           rm_.max_regs, config_.enable_inlining,
                                           &inline_results)) {
+                std::fprintf(stderr, "    [STDERR] Generate: OptimizeWithTreeIR succeeded\n"); std::fflush(stderr);
                 opt_instrs = std::move(tree_opt);
                 n_instrs = static_cast<uint32_t>(opt_instrs.size());
                 // Re-count call slots: inlining may have removed call instructions.
@@ -3460,10 +3489,14 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
                 slot_count_used_ = 0;
             } else {
                 // Fallback: linear optimizer (tree IR build failed or empty BBs)
+                std::fprintf(stderr, "    [STDERR] Generate: tree IR failed, calling linear OptimizeInstructions\n"); std::fflush(stderr);
                 OptimizeInstructions(opt_instrs, removed_mask, false);
+                std::fprintf(stderr, "    [STDERR] Generate: linear optimizer done\n"); std::fflush(stderr);
             }
         }
     }
+
+    std::fprintf(stderr, "    [STDERR] Generate: after opt block\n"); std::fflush(stderr);
 
     // ── Liveness analysis for precise GC slot maps ─────────────────────────
     // Computes per-instruction live-in bitmasks used by RecordGcPoint() to
@@ -3568,6 +3601,8 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
             "Liveness computed for %u instructions, use_liveness=%d",
             n_instrs, (int)use_liveness_);
     }
+
+    std::fprintf(stderr, "    [STDERR] Generate: before emit loop, n_instrs=%u\n", n_instrs); std::fflush(stderr);
 
     // Emit instructions
     for (uint32_t i = 0; i < n_instrs; ++i) {
@@ -3996,6 +4031,7 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
         "Generate: method compiled, code_size=%u, code=%p, slots=%u",
         nm ? nm->code_size : 0, nm ? nm->code : nullptr,
         slot_count_used_);
+    std::fprintf(stderr, "    [STDERR] Generate: returning\n"); std::fflush(stderr);
     return nm;
 }
 

@@ -1,0 +1,11 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeAotLoweringPlan",
+  "planKind": "full-assembly-entry",
+  "assemblyName": "ReflectionActivationSubjects",
+  "entrySubjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_0:System.Void()",
+  "nativeEntryFunctionName": "",
+  "entrySymbol": "ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_0",
+  "entryMethodToken": "0u",
+  "workloadAbi": "full-assembly"
+}

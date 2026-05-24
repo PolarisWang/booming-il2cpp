@@ -8,8 +8,9 @@ add_compile_options(/utf-8 /GS-)
 add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
 add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
 
-# Find chaos SDK (prebuilt runtime libs + flags via chaos::runtime)
-# The SDK is the codegen output root from --sdk-out.
+# Find chaos SDK — provides chaos::runtime (prebuilt libs + flags) and
+# chaos::codegen (precompiled generated code) via find_package(chaos).
+# The SDK root is the codegen output directory from --sdk-out.
 set(CHAOS_SDK_DIR "D:/agent/booming-il2cpp/testing/foundation-dll/System.Private.CoreLib/convert-char/codegen")
 find_package(chaos REQUIRED PATHS "${CHAOS_SDK_DIR}")
 
@@ -42,21 +43,18 @@ set(CHAOS_ENTRY_SOURCES
     ${CHAOS_AOT_GENERATED_CPP}
 )
 
-# Include directories (repo tree — SDK include/ is not yet fully self-contained)
+# Include directories
+# SDK include/ (via chaos::runtime) provides most headers. runtime-core/ is
+# retained because runtime_core.h uses quoted includes for ~20 sibling headers
+# (exception_jmp.h, marshal_abi.h, etc.) not distributed in the SDK.
 set(CHAOS_ENTRY_INCLUDES
-    "${CHAOS_PROJECT_ROOT}/src/native/common"
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core"
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/gc"
-    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs"
     "${CHAOS_PROJECT_ROOT}/src/native/bootstrap"
     "${CHAOS_PROJECT_ROOT}/src/native/interpreter"
     "${CHAOS_PROJECT_ROOT}/src/native/interpreter/generated"
-    "${CHAOS_PROJECT_ROOT}/src/native/codegen"
     "${CHAOS_PROJECT_ROOT}/src/native/support"
     "${CHAOS_PROJECT_ROOT}/src/native/hot-update"
-    "${CHAOS_PROJECT_ROOT}/src/native"
-    "${CHAOS_PROJECT_ROOT}/contracts/native/v0"
-    "${CHAOS_PROJECT_ROOT}/third_party/fmt/include"
     "${CHAOS_PROJECT_ROOT}/third_party/unordered_dense/include"
     "${CHAOS_CODEGEN_DIR}/NumericAggregationSubjects/generated"
     "${CMAKE_CURRENT_SOURCE_DIR}"

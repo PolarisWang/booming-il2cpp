@@ -1,0 +1,152 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/interface/dispatch,pinvoke/dllimport,primitive/numeric/conversions/core",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::Run:System.Int32(System.Int32)",
+      "status": "failed",
+      "error": "[2026-05-24T14:33:14][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:14][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 0\n[2026-05-24T14:33:14][WARN][CRAG] young_collection_no_region\n[2026-05-24T14:33:14][INFO][NUMA] numa_init count=%d\n[2026-05-24T14:33:14][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T14:33:14][INFO][OldGen] emergency_reserve_allocated base=0x1799442399232 size=65536\n[2026-05-24T14:33:14][INFO][OldGen] init done base=0x1799413104640 pages=8\n[2026-05-24T14:33:14][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T14:33:14][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:14][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 1\n[2026-05-24T14:33:14][DEBUG][Finalizer] thread_started id={0}\n[2026-05-24T14:33:14][DEBUG][BGC] thread_started\n"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestSingleImplSimple:System.Int32()",
+      "status": "failed",
+      "error": "[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 0\n[2026-05-24T14:33:15][WARN][CRAG] young_collection_no_region\n[2026-05-24T14:33:15][INFO][NUMA] numa_init count=%d\n[2026-05-24T14:33:15][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T14:33:15][INFO][OldGen] emergency_reserve_allocated base=0x2905634766848 size=65536\n[2026-05-24T14:33:15][INFO][OldGen] init done base=0x2905609535488 pages=8\n[2026-05-24T14:33:15][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 1\n[2026-05-24T14:33:15][DEBUG][BGC] thread_started\n"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestSingleImplDefault:System.Int32()",
+      "status": "failed",
+      "error": "[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 0\n[2026-05-24T14:33:15][WARN][CRAG] young_collection_no_region\n[2026-05-24T14:33:15][INFO][NUMA] numa_init count=%d\n[2026-05-24T14:33:15][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T14:33:15][INFO][OldGen] emergency_reserve_allocated base=0x2452111360000 size=65536\n[2026-05-24T14:33:15][INFO][OldGen] init done base=0x2452086063104 pages=8\n[2026-05-24T14:33:15][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 1\n[2026-05-24T14:33:15][DEBUG][BGC] thread_started\n[2026-05-24T14:33:15][DEBUG][Finalizer] thread_started id={0"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestMultiImplCalc:System.Int32()",
+      "status": "failed",
+      "error": "[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 0\n[2026-05-24T14:33:15][WARN][CRAG] young_collection_no_region\n[2026-05-24T14:33:15][INFO][NUMA] numa_init count=%d\n[2026-05-24T14:33:15][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T14:33:15][INFO][OldGen] emergency_reserve_allocated base=0x2894326071296 size=65536\n[2026-05-24T14:33:15][INFO][OldGen] init done base=0x2894300708864 pages=8\n[2026-05-24T14:33:15][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 1\n[2026-05-24T14:33:15][DEBUG][Finalizer] thread_started id={0}\n[2026-05-24T14:33:15][DEBUG][BGC] thread_started"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestIsCheck:System.Int32()",
+      "status": "failed",
+      "error": "[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 0\n[2026-05-24T14:33:15][WARN][CRAG] young_collection_no_region\n[2026-05-24T14:33:15][INFO][NUMA] numa_init count=%d\n[2026-05-24T14:33:15][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T14:33:15][INFO][OldGen] emergency_reserve_allocated base=0x2721574158336 size=65536\n[2026-05-24T14:33:15][INFO][OldGen] init done base=0x2721544798208 pages=8\n[2026-05-24T14:33:15][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 1\n[2026-05-24T14:33:15][DEBUG][BGC] thread_started\n[2026-05-24T14:33:15][DEBUG][Finalizer] thread_started id={0}\n"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestAsCheck:System.Int32()",
+      "status": "failed",
+      "error": "[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 0\n[2026-05-24T14:33:15][WARN][CRAG] young_collection_no_region\n[2026-05-24T14:33:15][INFO][NUMA] numa_init count=%d\n[2026-05-24T14:33:15][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T14:33:15][INFO][OldGen] emergency_reserve_allocated base=0x1705225814016 size=65536\n[2026-05-24T14:33:15][INFO][OldGen] init done base=0x1705196388352 pages=8\n[2026-05-24T14:33:15][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 1\n[2026-05-24T14:33:15][DEBUG][BGC] thread_started\n[2026-05-24T14:33:15][DEBUG][Finalizer] thread_started id={0}\n"
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestDiamondBase:System.Int32()",
+      "status": "failed",
+      "error": "[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 0\n[2026-05-24T14:33:15][WARN][CRAG] young_collection_no_region\n[2026-05-24T14:33:15][INFO][NUMA] numa_init count=%d\n[2026-05-24T14:33:15][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T14:33:15][INFO][OldGen] emergency_reserve_allocated base=0x1799297695744 size=65536\n[2026-05-24T14:33:15][INFO][OldGen] init done base=0x1799274037248 pages=8\n[2026-05-24T14:33:15][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 1\n[2026-05-24T14:33:15][DEBUG][Finalizer] thread_started id={0}\n[2026-05-24T14:33:15][DEBUG][BGC] thread_started\n"
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestDiamondDerived:System.Int32()",
+      "status": "failed",
+      "error": "[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 0\n[2026-05-24T14:33:15][WARN][CRAG] young_collection_no_region\n[2026-05-24T14:33:15][INFO][NUMA] numa_init count=%d\n[2026-05-24T14:33:15][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T14:33:15][INFO][OldGen] emergency_reserve_allocated base=0x2257530060800 size=65536\n[2026-05-24T14:33:15][INFO][OldGen] init done base=0x2257500700672 pages=8\n[2026-05-24T14:33:15][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 1\n[2026-05-24T14:33:15][DEBUG][BGC] thread_started\n[2026-05-24T14:33:15][DEBUG][Finalizer] thread_started id={0}\n"
+    },
+    {
+      "methodIndex": 8,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestDiamondMulti:System.Int32()",
+      "status": "failed",
+      "error": "[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 0\n[2026-05-24T14:33:15][WARN][CRAG] young_collection_no_region\n[2026-05-24T14:33:15][INFO][NUMA] numa_init count=%d\n[2026-05-24T14:33:15][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T14:33:15][INFO][OldGen] emergency_reserve_allocated base=0x2406400786432 size=65536\n[2026-05-24T14:33:15][INFO][OldGen] init done base=0x2406377062400 pages=8\n[2026-05-24T14:33:15][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 1\n[2026-05-24T14:33:15][DEBUG][Finalizer] thread_started id={0}\n[2026-05-24T14:33:15][DEBUG][BGC] thread_started\n"
+    },
+    {
+      "methodIndex": 9,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestGetCurrentProcess:System.Int32()",
+      "status": "failed",
+      "error": "[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 0\n[2026-05-24T14:33:15][WARN][CRAG] young_collection_no_region\n[2026-05-24T14:33:15][INFO][NUMA] numa_init count=%d\n[2026-05-24T14:33:15][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T14:33:15][INFO][OldGen] emergency_reserve_allocated base=0x1937731747840 size=65536\n[2026-05-24T14:33:15][INFO][OldGen] init done base=0x1937707433984 pages=8\n[2026-05-24T14:33:15][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 1\n[2026-05-24T14:33:15][DEBUG][BGC] thread_started\n[2026-05-24T14:33:15][DEBUG][Finalizer] thread_started id={0}\n"
+    },
+    {
+      "methodIndex": 10,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestGetCurrentThread:System.Int32()",
+      "status": "failed",
+      "error": "[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 0\n[2026-05-24T14:33:15][WARN][CRAG] young_collection_no_region\n[2026-05-24T14:33:15][INFO][NUMA] numa_init count=%d\n[2026-05-24T14:33:15][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T14:33:15][INFO][OldGen] emergency_reserve_allocated base=0x2073085476864 size=65536\n[2026-05-24T14:33:15][INFO][OldGen] init done base=0x2073060966400 pages=8\n[2026-05-24T14:33:15][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 1\n[2026-05-24T14:33:15][DEBUG][BGC] thread_started\n"
+    },
+    {
+      "methodIndex": 11,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestGetProcessId:System.Int32()",
+      "status": "failed",
+      "error": "[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 0\n[2026-05-24T14:33:15][WARN][CRAG] young_collection_no_region\n[2026-05-24T14:33:15][INFO][NUMA] numa_init count=%d\n[2026-05-24T14:33:15][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T14:33:15][INFO][OldGen] emergency_reserve_allocated base=0x2260123975680 size=65536\n[2026-05-24T14:33:15][INFO][OldGen] init done base=0x2260094615552 pages=8\n[2026-05-24T14:33:15][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 1\n[2026-05-24T14:33:15][DEBUG][BGC] thread_started\n[2026-05-24T14:33:15][DEBUG][Finalizer] thread_started id={0}\n"
+    },
+    {
+      "methodIndex": 12,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestGetModuleHandle:System.Int32()",
+      "status": "failed",
+      "error": "[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 0\n[2026-05-24T14:33:15][WARN][CRAG] young_collection_no_region\n[2026-05-24T14:33:15][INFO][NUMA] numa_init count=%d\n[2026-05-24T14:33:15][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T14:33:15][INFO][OldGen] emergency_reserve_allocated base=0x1769934422016 size=65536\n[2026-05-24T14:33:15][INFO][OldGen] init done base=0x1769905061888 pages=8\n[2026-05-24T14:33:15][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 1\n[2026-05-24T14:33:15][DEBUG][BGC] thread_started\n[2026-05-24T14:33:15][DEBUG][Finalizer] thread_started id={0}\n"
+    },
+    {
+      "methodIndex": 13,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestByteToInt:System.Int32()",
+      "status": "failed",
+      "error": "[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 0\n[2026-05-24T14:33:15][WARN][CRAG] young_collection_no_region\n[2026-05-24T14:33:15][INFO][NUMA] numa_init count=%d\n[2026-05-24T14:33:15][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T14:33:15][INFO][OldGen] emergency_reserve_allocated base=0x1915868610560 size=65536\n[2026-05-24T14:33:15][INFO][OldGen] init done base=0x1915839184896 pages=8\n[2026-05-24T14:33:15][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 1\n[2026-05-24T14:33:15][DEBUG][BGC] thread_started\n[2026-05-24T14:33:15][DEBUG][Finalizer] thread_started id={0}\n"
+    },
+    {
+      "methodIndex": 14,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestIntToLong:System.Int32()",
+      "status": "failed",
+      "error": "[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 0\n[2026-05-24T14:33:15][WARN][CRAG] young_collection_no_region\n[2026-05-24T14:33:15][INFO][NUMA] numa_init count=%d\n[2026-05-24T14:33:15][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T14:33:15][INFO][OldGen] emergency_reserve_allocated base=0x2615364026368 size=65536\n[2026-05-24T14:33:15][INFO][OldGen] init done base=0x2615339712512 pages=8\n[2026-05-24T14:33:15][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 1\n[2026-05-24T14:33:15][DEBUG][BGC] thread_started\n"
+    },
+    {
+      "methodIndex": 15,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestIntToShort:System.Int32()",
+      "status": "failed",
+      "error": "[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 0\n[2026-05-24T14:33:15][WARN][CRAG] young_collection_no_region\n[2026-05-24T14:33:15][INFO][NUMA] numa_init count=%d\n[2026-05-24T14:33:15][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T14:33:15][INFO][OldGen] emergency_reserve_allocated base=0x2151656062976 size=65536\n[2026-05-24T14:33:15][INFO][OldGen] init done base=0x2151630831616 pages=8\n[2026-05-24T14:33:15][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 1\n[2026-05-24T14:33:15][DEBUG][Finalizer] thread_started id={0}\n[2026-05-24T14:33:15][DEBUG][BGC] thread_started\n"
+    },
+    {
+      "methodIndex": 16,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestIntToByte:System.Int32()",
+      "status": "failed",
+      "error": "[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 0\n[2026-05-24T14:33:15][WARN][CRAG] young_collection_no_region\n[2026-05-24T14:33:15][INFO][NUMA] numa_init count=%d\n[2026-05-24T14:33:15][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T14:33:15][INFO][OldGen] emergency_reserve_allocated base=0x1752949981184 size=65536\n[2026-05-24T14:33:15][INFO][OldGen] init done base=0x1752919441408 pages=8\n[2026-05-24T14:33:15][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 1\n[2026-05-24T14:33:15][DEBUG][BGC] thread_started\n[2026-05-24T14:33:15][DEBUG][Finalizer] thread_started id={0}\n"
+    },
+    {
+      "methodIndex": 17,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestFloatToDouble:System.Int32()",
+      "status": "failed",
+      "error": "[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 0\n[2026-05-24T14:33:15][WARN][CRAG] young_collection_no_region\n[2026-05-24T14:33:15][INFO][NUMA] numa_init count=%d\n[2026-05-24T14:33:15][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T14:33:15][INFO][OldGen] emergency_reserve_allocated base=0x2520533237760 size=65536\n[2026-05-24T14:33:15][INFO][OldGen] init done base=0x2520503812096 pages=8\n[2026-05-24T14:33:15][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 1\n[2026-05-24T14:33:15][DEBUG][BGC] thread_started\n[2026-05-24T14:33:15][DEBUG][Finalizer] thread_started id={0}\n"
+    },
+    {
+      "methodIndex": 18,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestDoubleToFloat:System.Int32()",
+      "status": "failed",
+      "error": "[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 0\n[2026-05-24T14:33:15][WARN][CRAG] young_collection_no_region\n[2026-05-24T14:33:15][INFO][NUMA] numa_init count=%d\n[2026-05-24T14:33:15][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T14:33:15][INFO][OldGen] emergency_reserve_allocated base=0x1593790234624 size=65536\n[2026-05-24T14:33:15][INFO][OldGen] init done base=0x1593766641664 pages=8\n[2026-05-24T14:33:15][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 1\n[2026-05-24T14:33:15][DEBUG][Finalizer] thread_started id={0}\n"
+    },
+    {
+      "methodIndex": 19,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestIntToDouble:System.Int32()",
+      "status": "failed",
+      "error": "[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 0\n[2026-05-24T14:33:15][WARN][CRAG] young_collection_no_region\n[2026-05-24T14:33:15][INFO][NUMA] numa_init count=%d\n[2026-05-24T14:33:15][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T14:33:15][INFO][OldGen] emergency_reserve_allocated base=0x1734862831616 size=65536\n[2026-05-24T14:33:15][INFO][OldGen] init done base=0x1734861127680 pages=8\n[2026-05-24T14:33:15][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 1\n[2026-05-24T14:33:15][DEBUG][BGC] thread_started\n[2026-05-24T14:33:15][DEBUG][Finalizer] thread_started id={0}\n"
+    },
+    {
+      "methodIndex": 20,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestDoubleToInt:System.Int32()",
+      "status": "failed",
+      "error": "[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 0\n[2026-05-24T14:33:15][WARN][CRAG] young_collection_no_region\n[2026-05-24T14:33:15][INFO][NUMA] numa_init count=%d\n[2026-05-24T14:33:15][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T14:33:15][INFO][OldGen] emergency_reserve_allocated base=0x1351171506176 size=65536\n[2026-05-24T14:33:15][INFO][OldGen] init done base=0x1351142342656 pages=8\n[2026-05-24T14:33:15][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 1\n[2026-05-24T14:33:15][DEBUG][Finalizer] thread_started id={0}\n[2026-05-24T14:33:15][DEBUG][BGC] thread_started\n"
+    },
+    {
+      "methodIndex": 21,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestUintToLong:System.Int32()",
+      "status": "failed",
+      "error": "[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 0\n[2026-05-24T14:33:15][WARN][CRAG] young_collection_no_region\n[2026-05-24T14:33:15][INFO][NUMA] numa_init count=%d\n[2026-05-24T14:33:15][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T14:33:15][INFO][OldGen] emergency_reserve_allocated base=0x2811885387776 size=65536\n[2026-05-24T14:33:15][INFO][OldGen] init done base=0x2811860156416 pages=8\n[2026-05-24T14:33:15][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 1\n[2026-05-24T14:33:15][DEBUG][BGC] thread_started\n[2026-05-24T14:33:15][DEBUG][Finalizer] thread_started id={0}\n"
+    },
+    {
+      "methodIndex": 22,
+      "methodSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestLongToInt:System.Int32()",
+      "status": "failed",
+      "error": "[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 0\n[2026-05-24T14:33:15][WARN][CRAG] young_collection_no_region\n[2026-05-24T14:33:15][INFO][NUMA] numa_init count=%d\n[2026-05-24T14:33:15][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T14:33:15][INFO][OldGen] emergency_reserve_allocated base=0x1758165073920 size=65536\n[2026-05-24T14:33:15][INFO][OldGen] init done base=0x1758134861824 pages=8\n[2026-05-24T14:33:15][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T14:33:15][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:15][DEBUG][GcEvents] registered callback 0x7ff791f63200 at slot 1\n[2026-05-24T14:33:15][DEBUG][BGC] thread_started\n[2026-05-24T14:33:15][DEBUG][Finalizer] thread_started id={0}\n"
+    }
+  ],
+  "summary": {
+    "totalMethods": 23,
+    "nonStubMethods": 0,
+    "averageSlowdownPercent": 0.0,
+    "slowdownFactor": 1.0,
+    "slowdownThresholdX": 50.0
+  }
+}

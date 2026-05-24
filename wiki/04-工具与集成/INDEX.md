@@ -41,6 +41,7 @@
 | [`统一入口脚本.md`](./统一入口脚本.md) | 统一入口脚本 `run.*` | 固化 bootstrap、TUI、prepare / clean、`--json` 与 harness 接线规则。 |
 | [`unified-project-workspaces-and-deploy-core.md`](./unified-project-workspaces-and-deploy-core.md) | project workspaces and deploy core | 固化 `generate/build project`、`deploy core`、`subject-exec` 与 `artifacts/projects/**` / `deploy/core/**` 边界。 |
 | [`asm-compare-diagnostic-tool.md`](./asm-compare-diagnostic-tool.md) | ASM-COMPARE 诊断工具 | JIT vs IL2CPP AOT 方法级汇编对比工具，支持分段报告和 IL offset 对齐的 side-by-side 对比。 |
+| [`chaos-sdk-usage.md`](./chaos-sdk-usage.md) | Chaos SDK 使用指南 | `find_package(chaos)` CMake 集成方式、SDK 目录结构、`chaos::runtime` / `chaos::codegen` target 说明、Foundation-DLL 管线集成说明。 |
 
 ## 维护约定
 

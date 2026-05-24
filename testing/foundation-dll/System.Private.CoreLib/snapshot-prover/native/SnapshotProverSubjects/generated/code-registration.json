@@ -1,0 +1,72 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "SnapshotProverSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_0",
+          "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_1",
+          "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_2",
+          "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_3",
+          "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_4",
+          "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_5",
+          "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_6",
+          "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_7",
+          "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "SnapshotProverSubjects_SnapshotProverSubjects_CustomEntrySubject_8",
+          "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::CustomEntrySubject_8:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_9",
+          "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

@@ -1,0 +1,11 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeAotLoweringPlan",
+  "planKind": "full-assembly-entry",
+  "assemblyName": "EnumParsingSubjects",
+  "entrySubjectId": "EnumParsingSubjects/EnumParsingSubjects::CustomEntrySubject_10:System.Void()",
+  "nativeEntryFunctionName": "",
+  "entrySymbol": "EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_10",
+  "entryMethodToken": "0u",
+  "workloadAbi": "full-assembly"
+}

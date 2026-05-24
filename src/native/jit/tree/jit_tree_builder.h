@@ -79,6 +79,11 @@ public:
         return (vreg < 64) ? vreg_to_node_[vreg] : nullptr;
     }
 
+    /// Get the constant size of a NewArr-defined vreg (0 = unknown/variable-size).
+    uint32_t GetNewArrConstantSize(uint32_t vreg) const noexcept {
+        return (vreg < 64) ? newarr_constant_size_[vreg] : 0;
+    }
+
 private:
     /// Ensure arena has at least `bytes` free.
     bool EnsureArena(uint32_t bytes) noexcept;
@@ -100,6 +105,9 @@ private:
 
     // vreg → defining ExprNode (kGPRegisters = 64 entries)
     ExprNode* vreg_to_node_[64] = {};
+
+    // NewArr constant-size tracking: vreg → known array size (0 = unknown)
+    uint32_t newarr_constant_size_[64] = {};
 
     // VN table for the current BB
     VNTable vn_;

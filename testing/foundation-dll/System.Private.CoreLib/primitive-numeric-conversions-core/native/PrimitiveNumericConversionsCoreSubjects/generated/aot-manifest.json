@@ -1,0 +1,132 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "PrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects::Subject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects::Subject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects::Subject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects::Subject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects::Subject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects::Subject_6:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects::Subject_7:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects::Subject_8:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects::Subject_9:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreNativeEntry::TestByteToInt:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreNativeEntry::TestIntToLong:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreNativeEntry::TestIntToShort:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreNativeEntry::TestIntToByte:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreNativeEntry::TestFloatToDouble:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreNativeEntry::TestDoubleToFloat:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreNativeEntry::TestIntToDouble:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreNativeEntry::TestDoubleToInt:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreNativeEntry::TestUintToLong:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreNativeEntry::TestLongToInt:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "field",
+      "subjectId": "PrimitiveNumericConversionsCoreSubjects/PrimitiveNumericConversionsCoreSubjects::_exitCode",
+      "reason": "instance-field-state"
+    }
+  ]
+}

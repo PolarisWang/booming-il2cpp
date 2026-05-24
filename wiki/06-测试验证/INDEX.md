@@ -47,6 +47,7 @@
 | [`../04-工具与集成/scriban-usage-and-codegen-rules.md`](../04-%E5%B7%A5%E5%85%B7%E4%B8%8E%E9%9B%86%E6%88%90/scriban-usage-and-codegen-rules.md) | Scriban 使用与 codegen 规范 | 说明 IL2CPP / Python codegen 默认优先 Scriban，以及能力不足时的扩展顺序 |
 | [`subject-public-entry-and-reporting-cutover.md`](./subject-public-entry-and-reporting-cutover.md) | subject 统一入口 | 说明 subject 入口、public command 和结果落点 |
 | [`subject-perf-and-smoke-baselines.md`](./subject-perf-and-smoke-baselines.md) | perf / smoke baseline | 说明 subject 的 perf baseline、smoke 验证与报告路径 |
+| [`foundation-dll-verification-chain-authenticity.md`](./foundation-dll-verification-chain-authenticity.md) | 验证链路真实性分析 | 追溯 foundation-dll AOT/JIT fact/benchmark 整条链路，确认是否真实测试对应代码路径 |
 
 ## 子类别
 
@@ -81,6 +82,7 @@
 
 ## 最近更新
 
+- `2026-05-24`：新增 [`foundation-dll-verification-chain-authenticity.md`](./foundation-dll-verification-chain-authenticity.md)，追溯 AOT/JIT 验证链路真实性，确认 codegen→构建→运行时整条链路为真实 il2cpp/JIT 路径；JitEntry 新接口迁移状态已确认完成。
 - `2026-05-20`：Native C++ 单元测试全部迁移到 GoogleTest（`testing/` 目录，28 个 ctest 目标）。更新 [`测试方法清单.md`](./测试方法清单.md)，新增第九章 Native C++ 单元测试。
 - `2026-05-09`：更新 [`FactStatic-Native验证Gate流程.md`](./FactStatic-Native验证Gate流程.md)，补充 handwrite partial class 集成模式、`handwritten/` 覆盖保护规则、`_exitCode` 模式说明
 - `2026-05-09`：更新 [`AOT新Feature接入自测规范.md`](./AOT新Feature接入自测规范.md)，补充 `handwritten/` 目录 contract 和覆盖保护规则

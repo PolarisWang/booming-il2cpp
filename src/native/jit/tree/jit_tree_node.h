@@ -75,6 +75,15 @@ enum NodeKind : uint8_t {
     kMin       = 53,  // minimum (binary, int32)
     kMax       = 54,  // maximum (binary, int32)
 
+    // Array access nodes
+    kLdElem    = 55,  // array element load: (array, index) → value
+    kLdElemA   = 56,  // array element address: (array, index) → managed_ptr
+
+    // SIMD + bit manipulation nodes
+    kSimd      = 57,  // SIMD operation (sub-op + element type in operand_index)
+    kPopcnt    = 58,  // population count (unary, GPR)
+    kLzcnt     = 59,  // leading zero count (unary, GPR)
+
     // Store / side-effect nodes (roots in the DAG)
     kStLoc     = 64,  // local store: (value, local_vreg)
     kStFld     = 65,  // field store: (object, value, field_offset)
@@ -91,6 +100,47 @@ enum TypeTag : uint8_t {
     kFloat64  = 4,
     kObjectRef = 5,
     kManagedPtr = 6,
+};
+
+// ── SIMD sub-operation identifiers ─────────────────────────────────────
+// Encoded in ExprNode::operand_index for kSimd nodes (bits [0..7]).
+enum SimdSubOperation : uint8_t {
+    kSimdInvalid   = 0,
+    kSimdAdd       = 1,   // paddb/w/d/q (element type distinguishes width)
+    kSimdSub       = 2,   // psubb/w/d/q
+    kSimdMul       = 3,   // pmullw / pmuludq
+    kSimdAnd       = 4,   // pand
+    kSimdOr        = 5,   // por
+    kSimdXor       = 6,   // pxor
+    kSimdAndNot    = 7,   // pandn
+    kSimdEq        = 8,   // pcmpeqb/w/d/q
+    kSimdGt        = 9,   // pcmpgtb/w/d/q
+    kSimdShuffle   = 10,  // pshufd (imm8 in simd_imm)
+    kSimdShuffleB  = 11,  // pshufb
+    kSimdUnpackLo  = 12,  // punpckl*
+    kSimdUnpackHi  = 13,  // punpckh*
+    kSimdPackS     = 14,  // packss* / packus*
+    kSimdAbs       = 15,  // pabsb/w/d
+    kSimdShl       = 16,  // psllw/d/q
+    kSimdShr       = 17,  // psrlw/d/q (logical)
+    kSimdSar       = 18,  // psraw/d (arithmetic)
+    kSimdExtract   = 19,  // pextrb/w/d (extract element to GPR)
+    kSimdInsert    = 20,  // pinsrb/w/d (insert scalar from GPR)
+    kSimdMoveMask  = 21,  // pmovmskb
+    kSimdLoad      = 22,  // movdqa/movdqu from memory
+    kSimdStore     = 23,  // movdqa/movdqu to memory
+    kSimdZero      = 24,  // pxor-self (zero XMM)
+};
+
+// ── SIMD element type ──────────────────────────────────────────────────
+// Encoded in ExprNode::operand_index for kSimd nodes (bits [8..15]).
+enum SimdElementType : uint8_t {
+    kElemInt8    = 0,
+    kElemInt16   = 1,
+    kElemInt32   = 2,
+    kElemInt64   = 3,
+    kElemFloat32 = 4,
+    kElemFloat64 = 5,
 };
 
 // ── Node structure — tagged union via kind discriminator ────────────────
@@ -160,6 +210,10 @@ static_assert(sizeof(ExprNode) <= 24,
 
 static_assert(sizeof(ExprNode::call_method_token) + sizeof(ExprNode::call_arg0_vreg) <= 8,
     "call_method_token + call_arg0_vreg should fit in the 8-byte child0 union slot");
+
+// ── Node flags (ExprNode::flags) ──────────────────────────────────────────
+static constexpr uint8_t kFlagNoBoundsCheck = 0x01;  // BCE determined check is safe to skip
+static constexpr uint8_t kFlagNonNullArray  = 0x02;  // array ref proven non-null
 
 // ── Factory helpers (used by TreeBuilder) ──────────────────────────────
 
