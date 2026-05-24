@@ -29,20 +29,25 @@
 #include <aot_core_ir_reader.h>  // DeserializeAotCoreIrMethod
 #include <hotpatch_table.h>      // GetHotpatchNameRegistry
 #include <ir_reg_alloc.h>        // AllocateRegisters
-#include <jit_registration.h>    // JitT4Entry
+#include <jit_registration.h>    // JitEntry
 #include <tier_manager.h>        // TierManager::EnqueueJitRecompilation
+#include <slot_map.h>            // ReverseSlotMap, g_reverse_slot_map
 #include <chaos/log.h>           // CHAOS_IL2CPP_LOG_ERROR_M
+
+#if defined(_WIN32) || defined(_WIN64)
+  #define NOMINMAX
+  #include <windows.h>
+  #include <intrin.h>
+  #include <exception_jmp.h>     // CHAOS_SEH_FILTER_ALL (needs DWORD from windows.h)
+#endif
+
 #include <chaos/eh.h>            // CHAOS_EH_TRY / CHAOS_EH_CATCH_BEGIN
 
 #include <cstdlib>
 #include <cstring>
 #include <thread>
 
-#if defined(_WIN32) || defined(_WIN64)
-  #define NOMINMAX
-  #include <windows.h>
-  #include <intrin.h>
-#else
+#if !defined(_WIN32) && !defined(_WIN64)
   #include <sys/mman.h>
   #include <unistd.h>
   #include <immintrin.h>
@@ -280,6 +285,21 @@ void* PrecodeArena::AllocateHybridTrampoline(HybridPrecode* precode) noexcept {
     return pg.base + offset;
 }
 
+// ── CompileWithCatch ───────────────────────────────────────────────────
+// Wraps Compile() in SEH __try/__except so callers don't need C++ object
+// unwinding in their SEH blocks (avoids MSVC C2712).
+// Returns nullptr on managed exception during compilation.
+static JitMethod* CompileWithCatch(const interpreter::RegisterMethod& ir,
+                                    const CompileConfig& config) noexcept {
+    JitMethod* jit = nullptr;
+    CHAOS_EH_TRY
+        jit = Compile(ir, config);
+    CHAOS_EH_CATCH_BEGIN
+        jit = nullptr;
+    CHAOS_EH_END
+    return jit;
+}
+
 // ── JitStubDispatchImpl ───────────────────────────────────────────────
 //
 // State machine:
@@ -308,14 +328,7 @@ extern "C" void* JitStubDispatchImpl(JitPrecode* precode) noexcept {
     if (precode->state.compare_exchange_strong(expected, kPrecodeCompiling,
                                                 std::memory_order_acq_rel)) {
         // Winner — compile the method
-        JitMethod* jit = nullptr;
-        CHAOS_EH_TRY
-            jit = Compile(precode->ir, precode->config);
-        CHAOS_EH_CATCH_BEGIN
-            CHAOS_IL2CPP_LOG_ERROR_M("jit",
-                "JitStubDispatchImpl: Compile() threw managed exception");
-            jit = nullptr;
-        CHAOS_EH_END
+        JitMethod* jit = CompileWithCatch(precode->ir, precode->config);
         if (!jit) {
             // Compilation failed — reset state so we can retry
             precode->state.store(kPrecodeUncompiled, std::memory_order_release);
@@ -362,9 +375,9 @@ extern "C" void* JitStubDispatchImpl(JitPrecode* precode) noexcept {
     return precode->compiled->code;
 }
 
-// ── RegisterT4JitMethods ─────────────────────────────────────────────────
+// ── RegisterJitEntryMethods ───────────────────────────────────────────────
 // Called once at startup (from runtime-entry.cpp) to register all methods
-// for T4 JIT compilation.  For each entry:
+// for JIT compilation via precode dispatch.  For each entry:
 //   1. Deserialize AotCoreIr JSON → IRMethod
 //   2. AllocateRegisters → RegisterMethod
 //   3. Heap-allocate JitPrecode with the RegisterMethod + CompileConfig
@@ -373,7 +386,7 @@ extern "C" void* JitStubDispatchImpl(JitPrecode* precode) noexcept {
 //
 // After this call, first invocation of each method triggers JitStubDispatchImpl
 // which calls Compile() and atomically replaces direct_ptr with compiled code.
-extern "C" void RegisterT4JitMethods(const JitT4Entry* entries, uint32_t count) noexcept {
+extern "C" void RegisterJitEntryMethods(const JitEntry* entries, uint32_t count) noexcept {
     using namespace chaos::il2cpp::interpreter;
     using namespace chaos::il2cpp::runtime_core;
 
@@ -384,7 +397,7 @@ extern "C" void RegisterT4JitMethods(const JitT4Entry* entries, uint32_t count) 
         const auto& entry = entries[i];
 
         // Step 1: Deserialize AotCoreIr JSON → IRMethod
-        // resolve_fn=nullptr: subject IDs won't be resolved here; T4 JIT
+        // resolve_fn=nullptr: subject IDs won't be resolved here; JIT
         // compilation handles call target resolution during Compile().
         auto ir = DeserializeAotCoreIrMethod(
             entry.json, entry.json_len, nullptr, nullptr, nullptr, nullptr);
@@ -412,10 +425,17 @@ extern "C" void RegisterT4JitMethods(const JitT4Entry* entries, uint32_t count) 
             precode->entry->direct_ptr = precode->trampoline;
         } else {
             CHAOS_IL2CPP_LOG_ERROR_M("jit",
-                "RegisterT4JitMethods: failed for token 0x%x module %u",
+                "RegisterJitEntryMethods: failed for token 0x%x module %u",
                 entry.token, entry.module_id);
         }
     }
+
+    // Register the slot update callback (idempotent — only sets once).
+    // When SetPatchedBySlot bumps version and fires the callback, this
+    // updates all JIT slot tables to point at the new direct_ptr.
+    RegisterSlotUpdateCallback([](uint32_t callee_token, void* new_direct_ptr) {
+        g_reverse_slot_map.UpdateAll(callee_token, new_direct_ptr);
+    });
 }
 
 // ── HybridStubDispatchImpl ────────────────────────────────────────────
@@ -457,14 +477,7 @@ extern "C" void* HybridStubDispatchImpl(HybridPrecode* precode) noexcept {
         if (precode->state.compare_exchange_strong(expected, kPrecodeCompiling,
                                                     std::memory_order_acq_rel)) {
             // Winner — compile the method
-            JitMethod* jit = nullptr;
-            CHAOS_EH_TRY
-                jit = Compile(precode->ir, precode->config);
-            CHAOS_EH_CATCH_BEGIN
-                CHAOS_IL2CPP_LOG_ERROR_M("jit",
-                    "HybridStubDispatchImpl: Compile() threw managed exception");
-                jit = nullptr;
-            CHAOS_EH_END
+            JitMethod* jit = CompileWithCatch(precode->ir, precode->config);
             if (jit) {
                 // Store the AOT entry for deoptimization fallback.
                 // When JIT-compiled code deopts (kDeoptMagic), the runtime
@@ -512,7 +525,7 @@ extern "C" void* HybridStubDispatchImpl(HybridPrecode* precode) noexcept {
 // After this call, cold invocations execute AOT via the trampoline's
 // return of aot_entry.  When counter reaches 0, JIT compilation triggers
 // and subsequent calls go directly to the JIT-compiled code.
-extern "C" void RegisterHybridMethods(const HybridT4Entry* entries, uint32_t count) noexcept {
+extern "C" void RegisterHybridMethods(const HybridEntry* entries, uint32_t count) noexcept {
     using namespace chaos::il2cpp::interpreter;
     using namespace chaos::il2cpp::runtime_core;
 
@@ -558,6 +571,11 @@ extern "C" void RegisterHybridMethods(const HybridT4Entry* entries, uint32_t cou
                 entry.token, entry.module_id);
         }
     }
+
+    // Register the slot update callback (idempotent — only sets once).
+    RegisterSlotUpdateCallback([](uint32_t callee_token, void* new_direct_ptr) {
+        g_reverse_slot_map.UpdateAll(callee_token, new_direct_ptr);
+    });
 }
 
 // ── JitRecompileToTier1 ─────────────────────────────────────────────────

@@ -50,6 +50,7 @@ set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_PROJECT_ROOT}/src/native/support"
     "${CHAOS_PROJECT_ROOT}/src/native/hot-update"
     "${CHAOS_PROJECT_ROOT}/src/native"
+    "${CHAOS_PROJECT_ROOT}/src/native/jit"
     "${CHAOS_PROJECT_ROOT}/contracts/native/v0"
     "${CHAOS_PROJECT_ROOT}/third_party/fmt/include"
     "${CHAOS_PROJECT_ROOT}/third_party/fmt/include"

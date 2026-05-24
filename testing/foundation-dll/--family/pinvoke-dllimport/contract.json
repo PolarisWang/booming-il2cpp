@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "--family",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/--family/pinvoke-dllimport",
+  "displayName": "P/Invoke DllImport",
+  "methodSubjectIds": []
+}

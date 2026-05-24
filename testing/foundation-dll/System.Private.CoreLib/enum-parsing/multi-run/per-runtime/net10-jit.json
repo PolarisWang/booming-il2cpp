@@ -1,0 +1,106 @@
+{
+  "System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)": {
+    "runtime": "net10-jit",
+    "mean_ns": 29.733,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::GetName:System.String(System.RuntimeType,System.UInt64)": {
+    "runtime": "net10-jit",
+    "mean_ns": 30.556,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::GetName:System.String(System.Type,System.Object)": {
+    "runtime": "net10-jit",
+    "mean_ns": 42.188,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::GetNames:System.String[](System.Type)": {
+    "runtime": "net10-jit",
+    "mean_ns": 19.035,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::GetValues:System.Array(System.Type)": {
+    "runtime": "net10-jit",
+    "mean_ns": 75.233,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::IsDefined:System.Boolean(System.Type,System.Object)": {
+    "runtime": "net10-jit",
+    "mean_ns": 37.718,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String)": {
+    "runtime": "net10-jit",
+    "mean_ns": 39.746,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String,System.Boolean)": {
+    "runtime": "net10-jit",
+    "mean_ns": 51.045,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::ToString:System.String()": {
+    "runtime": "net10-jit",
+    "mean_ns": 13.602,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::ToString:System.String(System.String)": {
+    "runtime": "net10-jit",
+    "mean_ns": 19.041,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Boolean,System.Object&)": {
+    "runtime": "net10-jit",
+    "mean_ns": 42.243,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Object&)": {
+    "runtime": "net10-jit",
+    "mean_ns": 39.846,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::BoxToString:System.String()": {
+    "runtime": "net10-jit",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "stub",
+    "error": ""
+  }
+}

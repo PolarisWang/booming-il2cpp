@@ -24,10 +24,23 @@
 
 namespace chaos::il2cpp::runtime_core {
 
+// ── Frame type discriminators for GC scanner ─────────────────────
+// Placed at offset 0 of both FastFrame and RegisterFrame so the GC
+// scanner can identify frame types by reading the first 4 bytes.
+// Values chosen to be recognizable in memory dumps: ASCII "FAST" / "REG\0"
+// in little-endian uint32_t.
+enum InterpFrameType : uint32_t {
+    kInterpFrameType_FastFrame     = 0x54534146u,  // "FAST" in LE
+    kInterpFrameType_RegisterFrame = 0x00474552u,  // "REG\0" in LE
+};
+
 // ── FastFrame ──────────────────────────────────────────────────────────
 // Fixed-size value stack and local variables. All values stored as uint64_t
 // with a separate tag byte. No heap allocation during execution.
 struct FastFrame {
+    // Must be first field — read by GC scanner to identify frame type.
+    InterpFrameType  frame_type    = kInterpFrameType_FastFrame;
+
     static constexpr uint32_t kMaxStack  = 64;
     static constexpr uint32_t kMaxLocals = 32;
 

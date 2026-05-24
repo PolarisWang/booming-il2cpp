@@ -29,11 +29,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "chaos_bootstrap", "..\boots
 		{237C1DB5-5B7C-390D-BEC9-8857B17B932B} = {237C1DB5-5B7C-390D-BEC9-8857B17B932B}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "chaos_codegen", "..\codegen\chaos_codegen.vcxproj", "{64D22CB5-6748-303C-B6F3-FC9F2E35B434}"
-	ProjectSection(ProjectDependencies) = postProject
-		{B1832CB4-F09B-3B92-A367-E8875FE35FE1} = {B1832CB4-F09B-3B92-A367-E8875FE35FE1}
-	EndProjectSection
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "chaos_common", "..\common\chaos_common.vcxproj", "{9E8CE054-3831-387A-88CD-8D4B9D09F82D}"
 	ProjectSection(ProjectDependencies) = postProject
 		{6F87BB35-D72A-3554-81D6-B174B77587EC} = {6F87BB35-D72A-3554-81D6-B174B77587EC}
@@ -67,7 +62,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "chaos_hot_update", "..\hot-
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "chaos_interpreter", "..\interpreter\chaos_interpreter.vcxproj", "{284E8D3F-2827-3BDE-AD17-E3519A24045E}"
 	ProjectSection(ProjectDependencies) = postProject
-		{64D22CB5-6748-303C-B6F3-FC9F2E35B434} = {64D22CB5-6748-303C-B6F3-FC9F2E35B434}
+		{C84FDDC4-18E7-3CEB-BC4D-67B5BE12D771} = {C84FDDC4-18E7-3CEB-BC4D-67B5BE12D771}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "chaos_jit", "..\jit\chaos_jit.vcxproj", "{C84FDDC4-18E7-3CEB-BC4D-67B5BE12D771}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B1832CB4-F09B-3B92-A367-E8875FE35FE1} = {B1832CB4-F09B-3B92-A367-E8875FE35FE1}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "chaos_proof_host", "chaos_proof_host.vcxproj", "{E2893A23-BEE6-3F65-BB92-5852F2C3D85C}"
@@ -138,14 +138,6 @@ Global
 		{B1832CB4-F09B-3B92-A367-E8875FE35FE1}.MinSizeRel|x64.Build.0 = MinSizeRel|x64
 		{B1832CB4-F09B-3B92-A367-E8875FE35FE1}.RelWithDebInfo|x64.ActiveCfg = RelWithDebInfo|x64
 		{B1832CB4-F09B-3B92-A367-E8875FE35FE1}.RelWithDebInfo|x64.Build.0 = RelWithDebInfo|x64
-		{64D22CB5-6748-303C-B6F3-FC9F2E35B434}.Debug|x64.ActiveCfg = Debug|x64
-		{64D22CB5-6748-303C-B6F3-FC9F2E35B434}.Debug|x64.Build.0 = Debug|x64
-		{64D22CB5-6748-303C-B6F3-FC9F2E35B434}.Release|x64.ActiveCfg = Release|x64
-		{64D22CB5-6748-303C-B6F3-FC9F2E35B434}.Release|x64.Build.0 = Release|x64
-		{64D22CB5-6748-303C-B6F3-FC9F2E35B434}.MinSizeRel|x64.ActiveCfg = MinSizeRel|x64
-		{64D22CB5-6748-303C-B6F3-FC9F2E35B434}.MinSizeRel|x64.Build.0 = MinSizeRel|x64
-		{64D22CB5-6748-303C-B6F3-FC9F2E35B434}.RelWithDebInfo|x64.ActiveCfg = RelWithDebInfo|x64
-		{64D22CB5-6748-303C-B6F3-FC9F2E35B434}.RelWithDebInfo|x64.Build.0 = RelWithDebInfo|x64
 		{9E8CE054-3831-387A-88CD-8D4B9D09F82D}.Debug|x64.ActiveCfg = Debug|x64
 		{9E8CE054-3831-387A-88CD-8D4B9D09F82D}.Debug|x64.Build.0 = Debug|x64
 		{9E8CE054-3831-387A-88CD-8D4B9D09F82D}.Release|x64.ActiveCfg = Release|x64
@@ -194,6 +186,14 @@ Global
 		{284E8D3F-2827-3BDE-AD17-E3519A24045E}.MinSizeRel|x64.Build.0 = MinSizeRel|x64
 		{284E8D3F-2827-3BDE-AD17-E3519A24045E}.RelWithDebInfo|x64.ActiveCfg = RelWithDebInfo|x64
 		{284E8D3F-2827-3BDE-AD17-E3519A24045E}.RelWithDebInfo|x64.Build.0 = RelWithDebInfo|x64
+		{C84FDDC4-18E7-3CEB-BC4D-67B5BE12D771}.Debug|x64.ActiveCfg = Debug|x64
+		{C84FDDC4-18E7-3CEB-BC4D-67B5BE12D771}.Debug|x64.Build.0 = Debug|x64
+		{C84FDDC4-18E7-3CEB-BC4D-67B5BE12D771}.Release|x64.ActiveCfg = Release|x64
+		{C84FDDC4-18E7-3CEB-BC4D-67B5BE12D771}.Release|x64.Build.0 = Release|x64
+		{C84FDDC4-18E7-3CEB-BC4D-67B5BE12D771}.MinSizeRel|x64.ActiveCfg = MinSizeRel|x64
+		{C84FDDC4-18E7-3CEB-BC4D-67B5BE12D771}.MinSizeRel|x64.Build.0 = MinSizeRel|x64
+		{C84FDDC4-18E7-3CEB-BC4D-67B5BE12D771}.RelWithDebInfo|x64.ActiveCfg = RelWithDebInfo|x64
+		{C84FDDC4-18E7-3CEB-BC4D-67B5BE12D771}.RelWithDebInfo|x64.Build.0 = RelWithDebInfo|x64
 		{E2893A23-BEE6-3F65-BB92-5852F2C3D85C}.Debug|x64.ActiveCfg = Debug|x64
 		{E2893A23-BEE6-3F65-BB92-5852F2C3D85C}.Debug|x64.Build.0 = Debug|x64
 		{E2893A23-BEE6-3F65-BB92-5852F2C3D85C}.Release|x64.ActiveCfg = Release|x64

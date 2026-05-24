@@ -4,6 +4,7 @@
 #include "jit_helpers.h"
 #include "jit_seh.h"
 #include "jit_unwind.h"
+#include "slot_map.h"
 #include "IEncoder.h"
 #include "ISehHandler.h"
 #include "X64Encoder.h"
@@ -78,6 +79,10 @@ inline uint32_t FprOff(uint32_t vreg) noexcept {
 static constexpr uint32_t kArgRegCount   = 8;
 static constexpr uint32_t kLocalRegBase  = 8;
 
+// Global reverse slot map: callee token → (JitMethod*, slot_index).
+// Used by the hotpatch callback to update RX slot tables when a method is patched.
+ReverseSlotMap g_reverse_slot_map;
+
 // Internal class that drives code generation.
 class NativeCodeGenerator {
 public:
@@ -127,6 +132,18 @@ private:
         uint32_t patch_offset;  // offset of JMP rel32 displacement field
     };
     std::vector<ColdPatch> cold_patches_;
+
+    // Slot-based call tracking for call-site indirection.
+    // Records which call instructions should use slot-based (call [rip+off])
+    // emission instead of mov rax, imm64; call rax.
+    struct SlotPatch {
+        uint32_t patch_offset;       // buffer offset of the disp32 in call [rip+disp32]
+        uint32_t call_site_index;    // index in call_sites_ for this call
+        void*    target_fn;          // target function pointer to write into slot
+    };
+    std::vector<SlotPatch> slot_patches_;
+    uint32_t slot_count_ = 0;       // total number of slots reserved
+    uint32_t slot_count_used_ = 0;  // number of slots actually used (≤ slot_count_)
 
     // Jump table patch records (for Switch with >=4 cases).
     struct JumpTablePatch {
@@ -2031,9 +2048,36 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         uint32_t max_scratch = arg_count < 4 ? arg_count : 4;
         for (uint32_t i = 0; i < max_scratch; ++i) LoadGpr(kArgRegs[i], first_arg_reg + i);
         for (uint32_t i = 4; i < arg_count; ++i) { LoadGpr(kRAX, first_arg_reg + i); enc_.EmitMovMR(kRSP, static_cast<int32_t>((i - 4) * 8), kRAX); }
-        enc_.EmitMovImm64(kRAX, reinterpret_cast<uint64_t>(target_fn));
-        uint32_t call_pos = buf_.pos();
-        EmitCallWithSpill(kRAX);
+        // Spill cached/colored registers before call (same as EmitCallWithSpill preamble)
+        if (config_.enable_register_caching && cached_slots_used_) SpillCachedRegs();
+        if (has_graph_coloring_) {
+            for (uint32_t vr = 0; vr < kGprCount; ++vr) {
+                uint8_t colored_x64 = gcr_.gpr_color[vr];
+                if (colored_x64 != 0xFF) {
+                    if (caller_colored_mask_ & (1ULL << vr)) continue;
+                    enc_.EmitMovMR(kRSP, static_cast<int32_t>(GprOff(vr)), colored_x64);
+                }
+            }
+        }
+        // Slot-based call: emit call [rip+0] placeholder, record SlotPatch.
+        // The slot table is emitted after all instructions, before buf_.Seal().
+        uint32_t call_start = buf_.pos();
+        enc_.EmitCallRel32(0);  // 6 bytes: FF 15 00 00 00 00
+        uint32_t call_pos = call_start;
+        uint32_t slot_patch_offset = call_start + 2;  // disp32 starts at byte 2 of call [rip+disp32]
+        slot_patches_.push_back({slot_patch_offset, static_cast<uint32_t>(call_sites_.size()), target_fn});
+        slot_count_used_++;
+        // Post-call reload (same as EmitCallWithSpill postamble)
+        if (has_graph_coloring_ && caller_colored_mask_) {
+            uint64_t mask = caller_colored_mask_;
+            for (uint32_t vr = 0; mask; ++vr) {
+                if (mask & 1) {
+                    uint8_t colored_x64 = gcr_.gpr_color[vr];
+                    enc_.EmitMovRM(colored_x64, kRSP, static_cast<int32_t>(GprOff(vr)));
+                }
+                mask >>= 1;
+            }
+        }
         {
             uint32_t call_token = 0, call_module = 0;
             if (config_.call_cache != nullptr && current_instr_index_ < config_.call_cache_count) {
@@ -3111,6 +3155,19 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
         }
     }
 
+    // Pre-scan: count managed call instructions to reserve slot table entries.
+    // slot_count_ = number of Call/CallBridge instructions (not Calli, not CallVirt).
+    slot_count_ = 0;
+    for (const auto& instr : rm_.instructions) {
+        auto opc = instr.op_code();
+        if (opc == interpreter::IROpCode::Call ||
+            opc == interpreter::IROpCode::CallBridge) {
+            slot_count_++;
+        }
+    }
+    slot_patches_.reserve(slot_count_);
+    slot_count_used_ = 0;
+
     // ── Register allocation: Tier 0 skips entirely (stack-only) ───────────
     if (is_tier0_) {
         num_cache_regs_ = 0;
@@ -3641,6 +3698,26 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
 
     if (CheckFailed()) return nullptr;
 
+    // ── Emit call-site slot table ─────────────────────────────────────────
+    // Slot table embedded in the RX code buffer for call [rip+off] indirection.
+    // Each entry is a void* pointer to the target function.  Patch all call
+    // instruction RIP-relative displacements now that we know the slot table
+    // position.  The table is in RX memory; ReverseSlotMap::UpdateAll uses
+    // VirtualProtect to write to it during hotpatch.
+    uint32_t slot_table_offset = 0;
+    if (slot_count_used_ > 0) {
+        slot_table_offset = buf_.pos();
+        for (uint32_t si = 0; si < slot_patches_.size(); ++si) {
+            auto& sp = slot_patches_[si];
+            buf_.Emit64(reinterpret_cast<uint64_t>(sp.target_fn));
+            // Patch the RIP-relative displacement: slot_entry - (call_next_addr)
+            uint32_t call_next = sp.patch_offset + 4;  // FF 15 <disp32> = 6 bytes
+            int32_t disp = static_cast<int32_t>(
+                (slot_table_offset + si * 8) - call_next);
+            buf_.Patch32(sp.patch_offset, static_cast<uint32_t>(disp));
+        }
+    }
+
     // Seal code buffer — returns nullptr on OOM or failure
     if (CheckFailed()) return nullptr;
     uint32_t code_bytes = buf_.pos();
@@ -3661,6 +3738,28 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
     nm->instr_count = n_instrs;
     nm->seh_table_offset = seh_offset;
     nm->osr_entry_offset = osr_entry;
+
+    // Wire up call-site slot table (embedded in the RX code buffer).
+    // call_site_slots points into the sealed buffer after buf_.Seal().
+    // Slot entries are written with VirtualProtect during hotpatch.
+    if (slot_count_used_ > 0) {
+        nm->call_site_slots = reinterpret_cast<void**>(
+            static_cast<uint8_t*>(code) + slot_table_offset);
+        nm->call_site_slot_count = slot_count_used_;
+        nm->call_site_capacity = slot_count_;
+
+        // Register each slot in the reverse map for hotpatch updates.
+        for (uint32_t si = 0; si < slot_patches_.size(); ++si) {
+            auto& sp = slot_patches_[si];
+            uint32_t callee_token = 0;
+            if (sp.call_site_index < call_sites_.size()) {
+                callee_token = call_sites_[sp.call_site_index].method_token;
+            }
+            if (callee_token != 0) {
+                g_reverse_slot_map.Add(callee_token, nm, si);
+            }
+        }
+    }
 
     // Persist instruction offset table for OSR loop header resolution.
     if (!instr_offsets_.empty()) {
@@ -3725,8 +3824,9 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
 #endif
 
     CHAOS_IL2CPP_LOG_INFO_M("codegen",
-        "Generate: method compiled, code_size=%u, code=%p",
-        nm ? nm->code_size : 0, nm ? nm->code : nullptr);
+        "Generate: method compiled, code_size=%u, code=%p, slots=%u",
+        nm ? nm->code_size : 0, nm ? nm->code : nullptr,
+        slot_count_used_);
     return nm;
 }
 
@@ -3758,6 +3858,10 @@ bool CanCompile(const interpreter::RegisterMethod& rm) noexcept {
 
 JitMethod::~JitMethod() noexcept {
     CHAOS_IL2CPP_FREE(call_sites);
+
+    // Remove this method's slots from the reverse map (so hotpatch updates
+    // don't try to write to freed JitMethod pointers).
+    g_reverse_slot_map.RemoveAll(this);
     CHAOS_IL2CPP_FREE(deopt_entries);
     CHAOS_IL2CPP_FREE(deopt_values);
     CHAOS_IL2CPP_FREE(gc_points);

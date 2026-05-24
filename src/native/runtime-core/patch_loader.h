@@ -79,15 +79,15 @@ struct PatchMethod {
     // Set during T3 promotion. Used by RebuildCallCacheForT3.
     void*           cached_optimized_reg_method = nullptr;   // RegisterMethod*
 
-    // ── Native code generation (T4 tier, Phase 3c) ───────────────────────
-    // Populated during T3→T4 promotion. Set by Compile().
+    // ── Native code generation (JIT tier) ─────────────────────────────────────
+    // Populated during OptimizedRegister→JIT promotion. Set by Compile().
     mutable class chaos::il2cpp::jit::JitMethod* cached_native_method = nullptr;
 
-    // ── T3→T4 codegen failure backoff ─────────────────────────────────
+    // ── OptimizedRegister→JIT codegen failure backoff ────────────────────
     mutable uint32_t    codegen_fail_count = 0;
     static constexpr uint32_t kMaxCodegenFailures = 5;
 
-    // ── T4 deoptimization counter (demotion trigger) ───────────────────
+    // ── JIT deoptimization counter (demotion trigger) ───────────────────
     mutable uint32_t    deopt_count = 0;
     static constexpr uint32_t kMaxDeoptBeforeDemote = 10;
 
@@ -104,8 +104,8 @@ struct PatchMethod {
     mutable std::atomic<uint32_t> ir_state{0};
 
     // ── Tiered compilation state (Phase 1+) ──────────────────────────────
-    // Tier state machine: 0=T1_cold, 1=T2_lowering, 2=T2_ready,
-    //                     3=T3_lowering, 4=T3_ready, 5=T5_unloaded.
+    // Tier state machine: 0=kStackInterpreted, 1=kRegisterLowering, 2=kRegisterMapped,
+    //                     3=kOptimizeLowering, 4=kOptimizedRegister, 5=kT5Unloaded.
     // CAS-based transition, atomic with acquire/release ordering.
     mutable std::atomic<uint32_t> tier_state{0};
     static constexpr uint32_t kStackInterpreted        = 0;

@@ -128,13 +128,13 @@ static void SetupPatchMethod(PatchMethod* pm, const char* json,
 // ── Tier state helper ─────────────────────────────────────────────────────
 static const char* TierName(uint32_t state) {
     switch (state) {
-        case PatchMethod::kT1Cold:     return "T1_COLD";
-        case PatchMethod::kT2Lowering: return "T2_LOWERING";
-        case PatchMethod::kT2Ready:    return "T2_READY";
-        case PatchMethod::kT3Lowering: return "T3_LOWERING";
-        case PatchMethod::kT3Ready:    return "T3_READY";
-        case PatchMethod::kT4Ready:    return "T4_READY";
-        case PatchMethod::kT5Unloaded: return "T5_UNLOADED";
+        case PatchMethod::kStackInterpreted:     return "StackInterpreted";
+        case PatchMethod::kRegisterLowering: return "RegisterLowering";
+        case PatchMethod::kRegisterMapped:    return "RegisterMapped";
+        case PatchMethod::kOptimizeLowering: return "OptimizeLowering";
+        case PatchMethod::kOptimizedRegister:    return "OptimizedRegister";
+        case PatchMethod::kJitted:    return "Jitted";
+        case PatchMethod::kT5Unloaded: return "Unloaded";
         default:                       return "UNKNOWN";
     }
 }
@@ -168,7 +168,7 @@ static bool WaitForT3(PatchMethod* pm, int timeout_ms = 3000) {
     auto deadline = Clock::now() + std::chrono::milliseconds(timeout_ms);
     while (Clock::now() < deadline) {
         auto tier = pm->tier_state.load(std::memory_order_acquire);
-        if (tier == PatchMethod::kT3Ready) return true;
+        if (tier == PatchMethod::kOptimizedRegister) return true;
         std::this_thread::sleep_for(std::chrono::milliseconds(50));
     }
     return false;
@@ -236,12 +236,12 @@ static bool bench_arithmetic() {
             int32_t ret_val = -1;
             InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm), args_buf, &ret_val);
             auto s = pm.tier_state.load(std::memory_order_acquire);
-            if (s == PatchMethod::kT2Ready) break;
+            if (s == PatchMethod::kRegisterMapped) break;
         }
         tier = pm.tier_state.load(std::memory_order_acquire);
         std::printf("  T2 transition: tier=%s, call_count=%u\n",
                     TierName(tier), pm.call_count.load(std::memory_order_relaxed));
-        if (tier != PatchMethod::kT2Ready) {
+        if (tier != PatchMethod::kRegisterMapped) {
             std::fprintf(stderr, "  FAIL: expected T2_ready after transition\n");
             return false;
         }
@@ -359,7 +359,7 @@ static bool bench_register_10() {
         int32_t ret_val = -1;
         InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm), args_buf, &ret_val);
         if (ret_val != expected) return false;
-        if (pm.tier_state.load(std::memory_order_acquire) == PatchMethod::kT2Ready) break;
+        if (pm.tier_state.load(std::memory_order_acquire) == PatchMethod::kRegisterMapped) break;
     }
 
     // Measure T2: 300 calls
@@ -1099,7 +1099,7 @@ static void SetupT4DirectBenchmark(PatchMethod* pm, RegisterMethod&& rm) noexcep
     pm->call_site_profile_count = 0;
     pm->pic_dispatch_data = nullptr;
     pm->call_count.store(2500, std::memory_order_release);
-    pm->tier_state.store(PatchMethod::kT3Ready, std::memory_order_release);
+    pm->tier_state.store(PatchMethod::kOptimizedRegister, std::memory_order_release);
     pm->ir_state.store(2, std::memory_order_release);
 }
 
@@ -1522,7 +1522,7 @@ static bool bench_ldstr() {
         int64_t ret_val = -1;
         InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm), args_buf, &ret_val);
         if (static_cast<int32_t>(ret_val) != expected) return false;
-        if (pm.tier_state.load(std::memory_order_acquire) == PatchMethod::kT2Ready) break;
+        if (pm.tier_state.load(std::memory_order_acquire) == PatchMethod::kRegisterMapped) break;
     }
 
     // Measure T2
@@ -1610,7 +1610,7 @@ static bool bench_static_fields() {
             int64_t ret_val = -1;
             InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm_t2), args_buf, &ret_val);
             if (static_cast<int32_t>(ret_val) != expected) return false;
-            if (pm_t2.tier_state.load(std::memory_order_acquire) == PatchMethod::kT2Ready) break;
+            if (pm_t2.tier_state.load(std::memory_order_acquire) == PatchMethod::kRegisterMapped) break;
         }
         double t2_ns = MeasureTier(&pm_t2, 300, args_buf, 0, &expected);
         std::printf("  T2: %.0f ns/op\n", t2_ns);
@@ -1702,7 +1702,7 @@ static bool bench_newobj_fields() {
         int64_t ret_val = -1;
         InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm), args_buf, &ret_val);
         if (static_cast<int32_t>(ret_val) != expected) return false;
-        if (pm.tier_state.load(std::memory_order_acquire) == PatchMethod::kT2Ready) break;
+        if (pm.tier_state.load(std::memory_order_acquire) == PatchMethod::kRegisterMapped) break;
     }
 
     double t2_ns = MeasureTier(&pm, 300, args_buf, 0, &expected);
@@ -1792,7 +1792,7 @@ static bool bench_newarr_elem() {
         int64_t ret_val = -1;
         InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm), args_buf, &ret_val);
         if (static_cast<int32_t>(ret_val) != expected) return false;
-        if (pm.tier_state.load(std::memory_order_acquire) == PatchMethod::kT2Ready) break;
+        if (pm.tier_state.load(std::memory_order_acquire) == PatchMethod::kRegisterMapped) break;
     }
 
     double t2_ns = MeasureTier(&pm, 300, args_buf, 0, &expected);
@@ -1872,7 +1872,7 @@ static bool bench_branch_combo() {
         int64_t ret_val = -1;
         InterpreterEntryDirect(reinterpret_cast<uintptr_t>(&pm), args_buf, &ret_val);
         if (static_cast<int32_t>(ret_val) != expected) return false;
-        if (pm.tier_state.load(std::memory_order_acquire) == PatchMethod::kT2Ready) break;
+        if (pm.tier_state.load(std::memory_order_acquire) == PatchMethod::kRegisterMapped) break;
     }
 
     double t2_ns = MeasureTier(&pm, 300, args_buf, 0, &expected);

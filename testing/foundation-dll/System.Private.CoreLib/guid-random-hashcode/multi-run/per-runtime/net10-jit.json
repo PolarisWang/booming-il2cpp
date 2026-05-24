@@ -1,0 +1,114 @@
+{
+  "System.Private.CoreLib/System.Guid::.ctor:System.Void(System.String)": {
+    "runtime": "net10-jit",
+    "mean_ns": 17.181,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Guid::.ctor:System.Void(System.Byte[])": {
+    "runtime": "net10-jit",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "stub",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Guid::NewGuid:System.Guid()": {
+    "runtime": "net10-jit",
+    "mean_ns": 40.952,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Guid::Parse:System.Guid(System.String)": {
+    "runtime": "net10-jit",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "stub",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Guid::TryParse:System.Boolean(System.String,System.Guid&)": {
+    "runtime": "net10-jit",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "stub",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Guid::ToString:System.String()": {
+    "runtime": "net10-jit",
+    "mean_ns": 76.562,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Random::.ctor:System.Void()": {
+    "runtime": "net10-jit",
+    "mean_ns": 75.065,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Random::Next:System.Int32()": {
+    "runtime": "net10-jit",
+    "mean_ns": 76.635,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Random::Next:System.Int32(System.Int32)": {
+    "runtime": "net10-jit",
+    "mean_ns": 76.751,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Random::NextDouble:System.Double()": {
+    "runtime": "net10-jit",
+    "mean_ns": 77.001,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Random::NextBytes:System.Void(System.Byte[])": {
+    "runtime": "net10-jit",
+    "mean_ns": 79.827,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.HashCode::Add:System.Void(System.Object)": {
+    "runtime": "net10-jit",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "stub",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.HashCode::ToHashCode:System.Int32()": {
+    "runtime": "net10-jit",
+    "mean_ns": 4.873,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.HashCode::Combine:System.Int32(System.Int32,System.Int32)": {
+    "runtime": "net10-jit",
+    "mean_ns": 4.677,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  }
+}

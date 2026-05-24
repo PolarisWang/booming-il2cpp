@@ -570,6 +570,15 @@ inline void EmitCallReg(CodeBuffer& buf, uint8_t reg) noexcept {
     buf.EmitByte(ModRM(3, 2, reg));
 }
 
+/// call [rip+disp32] — indirect call via slot table entry (6 bytes)
+/// ModRM.mod=00 with ModRM.rm=101 encodes RIP-relative addressing in x64.
+/// reg field = 2 (opcode extension for call).
+inline void EmitCallRipRel(CodeBuffer& buf, int32_t disp) noexcept {
+    buf.EmitByte(0xFF);               // opcode for call r/m64
+    buf.EmitByte(ModRM(0, 2, 5));     // mod=00, reg=2(call), rm=101(RIP-rel)
+    buf.Emit32(static_cast<uint32_t>(disp));
+}
+
 /// ret
 inline void EmitRet(CodeBuffer& buf) noexcept {
     buf.EmitByte(0xC3);

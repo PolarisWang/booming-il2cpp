@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Runtime.Serialization",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.Runtime.Serialization/surrogates-selection",
+  "displayName": "Serialization Surrogates Selection",
+  "methodSubjectIds": []
+}

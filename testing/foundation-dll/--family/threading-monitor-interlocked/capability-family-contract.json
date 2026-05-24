@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "--family",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/--family/threading-monitor-interlocked",
+  "displayName": "Threading Monitor Interlocked",
+  "methodSubjectIds": []
+}

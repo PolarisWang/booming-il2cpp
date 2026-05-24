@@ -19,7 +19,7 @@
 
 using chaos::il2cpp::jit::RegisterJitSehHandler;
 using chaos::il2cpp::jit::RegisterNativeCodeSection;
-using chaos::il2cpp::jit::UnregisterT4Code;
+using chaos::il2cpp::jit::UnregisterNativeCodeSection;
 using chaos::il2cpp::jit::FindNativeCodeByAddress;
 using chaos::il2cpp::jit::JitMethod;
 
@@ -40,7 +40,7 @@ public:
         RegisterNativeCodeSection(nm_->code, nm_->code_size, nm_, token);
     }
     ~RegisteredMethod() {
-        UnregisterT4Code(nm_->code);
+        UnregisterNativeCodeSection(nm_->code);
         std::memset(nm_, 0, sizeof(JitMethod));
         delete nm_;
     }
@@ -80,7 +80,7 @@ TEST(CodegenSeh, UnregisterThenLookupReturnsNull) {
 }
 
 TEST(CodegenSeh, UnregisterNullDoesNotCrash) {
-    UnregisterT4Code(nullptr);
+    UnregisterNativeCodeSection(nullptr);
 }
 
 TEST(CodegenSeh, MultipleRegistrationsDistinct) {

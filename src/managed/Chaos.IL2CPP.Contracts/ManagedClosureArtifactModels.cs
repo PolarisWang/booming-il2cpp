@@ -5,7 +5,7 @@ public enum CodegenMode
 {
     /// <summary>Generate native AOT code (default). All methods compiled to C++.</summary>
     Aot,
-    /// <summary>Generate JIT-friendly entries. All methods routed through T4 JIT dispatch.</summary>
+    /// <summary>Generate JIT-friendly entries. All methods routed through JIT dispatch.</summary>
     Jit,
     /// <summary>Generate Hybrid entries. AOT C++ body emitted, plus JIT IR for on-demand
     /// upgrade from AOT to JIT-compiled code when call count threshold is reached.</summary>

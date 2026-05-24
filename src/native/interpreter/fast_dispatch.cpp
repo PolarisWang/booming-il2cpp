@@ -2201,7 +2201,7 @@ static bool TryFastOsrPromotion(FastFrame& frame) noexcept {
 
                             // Set OSR resume PC to trigger OSR entry on
                             // the next backward branch check in RegisterExecute.
-                            chaos::il2cpp::jit::t_deopt_state.osr_resume_pc = frame.pc;
+                            chaos::il2cpp::jit::g_jit_deopt_state.osr_resume_pc = frame.pc;
 
                             // Transfer tracked objects from OsrState to RegisterFrame.
                             for (uint32_t i = 0; i < osr.tracked_cnt && i < interpreter::RegisterFrame::kMaxTracked; ++i) {

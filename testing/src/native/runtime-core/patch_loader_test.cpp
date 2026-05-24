@@ -174,14 +174,14 @@ TEST(patch_loader_test, PatchMethod_DefaultInit) {
 }
 
 TEST(patch_loader_test, PatchMethod_TierConstants) {
-    EXPECT_EQ(PatchMethod::kT1Cold, 0u);
-    EXPECT_EQ(PatchMethod::kT2Lowering, 1u);
-    EXPECT_EQ(PatchMethod::kT2Ready, 2u);
-    EXPECT_EQ(PatchMethod::kT3Lowering, 3u);
-    EXPECT_EQ(PatchMethod::kT3Ready, 4u);
+    EXPECT_EQ(PatchMethod::kStackInterpreted, 0u);
+    EXPECT_EQ(PatchMethod::kRegisterLowering, 1u);
+    EXPECT_EQ(PatchMethod::kRegisterMapped, 2u);
+    EXPECT_EQ(PatchMethod::kOptimizeLowering, 3u);
+    EXPECT_EQ(PatchMethod::kOptimizedRegister, 4u);
     EXPECT_EQ(PatchMethod::kT5Unloaded, 5u);
-    EXPECT_EQ(PatchMethod::kT4Ready, 6u);
-    EXPECT_EQ(PatchMethod::kT4Skip, 7u);
+    EXPECT_EQ(PatchMethod::kJitted, 6u);
+    EXPECT_EQ(PatchMethod::kJitSkip, 7u);
     EXPECT_EQ(PatchMethod::kHotCallThreshold, 100u);
     EXPECT_EQ(PatchMethod::kT1HotThreshold, 100u);
     EXPECT_EQ(PatchMethod::kT2HotThreshold, 500u);

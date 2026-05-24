@@ -131,6 +131,10 @@ struct CatchHandlerEntry;  // forward decl (defined below, used in RegisterFrame
 using TypedCatchCheckFn = bool (*)(void* exc_obj, uint32_t class_token);
 
 struct RegisterFrame {
+    // Must be first field — read by GC scanner to identify frame type.
+    // Value: kInterpFrameType_RegisterFrame (0x00474552 = "REG\0" in LE).
+    uint32_t      frame_type = 0x00474552u;
+
     RegisterFile  regs;           // unified register file
 
     // Frame-level metadata

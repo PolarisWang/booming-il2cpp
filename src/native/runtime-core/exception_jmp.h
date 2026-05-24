@@ -97,12 +97,12 @@ static constexpr DWORD kChaosManagedExceptionCode = 0xE0000001;
 // directly in the generated .cpp file where chaos_is_type_compatible()
 // is already defined.  This header provides only the catch-all macro.
 #define CHAOS_SEH_FILTER_ALL()                                              \
-    (GetExceptionCode() == kChaosManagedExceptionCode ?                     \
-        (g_chaos_exception_obj = reinterpret_cast<void*>(                   \
+    (GetExceptionCode() == chaos::il2cpp::runtime_core::kChaosManagedExceptionCode ? \
+        (chaos::il2cpp::runtime_core::g_chaos_exception_obj = reinterpret_cast<void*>( \
             GetExceptionInformation()->ExceptionRecord->ExceptionInformation[0]), \
          EXCEPTION_EXECUTE_HANDLER) :                                       \
         GetExceptionCode() == EXCEPTION_INT_DIVIDE_BY_ZERO ?                \
-        (g_chaos_exception_obj = nullptr,                                   \
+        (chaos::il2cpp::runtime_core::g_chaos_exception_obj = nullptr,       \
          EXCEPTION_EXECUTE_HANDLER) :                                       \
         EXCEPTION_CONTINUE_SEARCH)
 

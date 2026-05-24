@@ -4,6 +4,7 @@
 #include <chaos/native_types.h>
 #include <chaos/log.h>
 
+#include <atomic>
 #include <cstddef>
 #include <cstdint>
 
@@ -97,6 +98,24 @@ void GcScanFrameHybrid(
     GcRootCallback precise_callback,
     GcConservativeRootCallback conservative_callback,
     void* user_data);
+
+// ── Interpreter frame scanner (cross-module callback) ─────────────
+
+/// Callback type for interpreter frame chain scanning.
+/// root_frame: the head of the interpreter frame chain (FastFrame or RegisterFrame).
+/// callback: GcRootCallback to report each precise root.
+/// user_data: opaque pointer passed through to callback.
+using GcScanInterpFramesFn = void (*)(void* root_frame,
+                                      GcRootCallback callback,
+                                      void* user_data);
+
+/// Register the interpreter frame scanner callback.
+/// Called during interpreter module initialization.  Only one scanner
+/// can be registered at a time.  Passing nullptr clears the registration.
+void GcSetInterpFrameScanner(GcScanInterpFramesFn fn) noexcept;
+
+/// Get the registered interpreter frame scanner, or nullptr.
+GcScanInterpFramesFn GcGetInterpFrameScanner() noexcept;
 
 }  // namespace chaos::il2cpp::runtime_core
 

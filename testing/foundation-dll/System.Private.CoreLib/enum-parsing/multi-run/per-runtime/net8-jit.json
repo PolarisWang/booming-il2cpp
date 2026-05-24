@@ -1,0 +1,106 @@
+{
+  "System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)": {
+    "runtime": "net8-jit",
+    "mean_ns": 20.173999999999996,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::GetName:System.String(System.RuntimeType,System.UInt64)": {
+    "runtime": "net8-jit",
+    "mean_ns": 18.281,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::GetName:System.String(System.Type,System.Object)": {
+    "runtime": "net8-jit",
+    "mean_ns": 18.235,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::GetNames:System.String[](System.Type)": {
+    "runtime": "net8-jit",
+    "mean_ns": 11.436,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::GetValues:System.Array(System.Type)": {
+    "runtime": "net8-jit",
+    "mean_ns": 47.746,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::IsDefined:System.Boolean(System.Type,System.Object)": {
+    "runtime": "net8-jit",
+    "mean_ns": 22.694,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String)": {
+    "runtime": "net8-jit",
+    "mean_ns": 39.65,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String,System.Boolean)": {
+    "runtime": "net8-jit",
+    "mean_ns": 40.542,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::ToString:System.String()": {
+    "runtime": "net8-jit",
+    "mean_ns": 6.441,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::ToString:System.String(System.String)": {
+    "runtime": "net8-jit",
+    "mean_ns": 6.528,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Boolean,System.Object&)": {
+    "runtime": "net8-jit",
+    "mean_ns": 39.844,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Object&)": {
+    "runtime": "net8-jit",
+    "mean_ns": 39.091,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::BoxToString:System.String()": {
+    "runtime": "net8-jit",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "stub",
+    "error": ""
+  }
+}

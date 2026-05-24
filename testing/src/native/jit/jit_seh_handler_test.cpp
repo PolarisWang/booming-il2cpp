@@ -283,7 +283,7 @@ TEST_F(T4SehHandlerTest, RegisterT4Code_RejectsNullParameters) {
 }
 
 TEST_F(T4SehHandlerTest,
-       UnregisterT4Code_ClearsEntryAndEnqueuesDemotedCode) {
+       UnregisterNativeCodeSection_ClearsEntryAndEnqueuesDemotedCode) {
     uint8_t fake_code[64] = {};
     JitMethod nm;
     nm.code      = fake_code;
@@ -310,14 +310,14 @@ TEST_F(T4SehHandlerTest,
     EXPECT_TRUE(found) << "Demoted code should be in pending-free table";
 }
 
-TEST_F(T4SehHandlerTest, UnregisterT4Code_NullCodeStartReturnsSafely) {
+TEST_F(T4SehHandlerTest, UnregisterNativeCodeSection_NullCodeStartReturnsSafely) {
     // Should not crash or modify state.
     uint32_t count_before = g_t4_code_count;
     UnregisterNativeCodeSection(nullptr);
     EXPECT_EQ(g_t4_code_count, count_before);
 }
 
-TEST_F(T4SehHandlerTest, UnregisterT4Code_UnknownAddressReturnsSafely) {
+TEST_F(T4SehHandlerTest, UnregisterNativeCodeSection_UnknownAddressReturnsSafely) {
     auto [code, nm] = RegisterFakeEntry(64);
     (void)nm;
     uint32_t count_before = g_t4_code_count;
@@ -734,7 +734,7 @@ TEST_F(T4SehHandlerTest,
     EXPECT_FALSE(result);
 }
 
-TEST_F(T4SehHandlerTest, UnregisterT4Code_InvalidatesLookupCache) {
+TEST_F(T4SehHandlerTest, UnregisterNativeCodeSection_InvalidatesLookupCache) {
     uint8_t fake_code[64] = {};
     JitMethod nm;
     nm.code      = fake_code;

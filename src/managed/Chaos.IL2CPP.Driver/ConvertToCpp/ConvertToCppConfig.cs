@@ -115,7 +115,7 @@ internal sealed class ConvertToCppConfig
         Console.WriteLine("  --assembly-dir <dir>          Additional dependency search path (repeatable)");
         Console.WriteLine("  --entry-point <subject-id>    Explicit entry point (default: auto-detect Main)");
         Console.WriteLine("  --full-closure                Compile full closure (all reachable methods)");
-        Console.WriteLine("  --mode aot|jit|hybrid          Codegen mode: aot (native C++, default), jit (T4 JIT compile), or hybrid (AOT→JIT upgrade)");
+        Console.WriteLine("  --mode aot|jit|hybrid          Codegen mode: aot (native C++, default), jit (JIT compile), or hybrid (AOT→JIT upgrade)");
         Console.WriteLine("  --verbose, -v                 Enable verbose diagnostics");
         Console.WriteLine("  --help, -h                    Show this help");
     }

@@ -1,0 +1,106 @@
+{
+  "System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 96576.45,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::GetName:System.String(System.RuntimeType,System.UInt64)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 92821.21,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::GetName:System.String(System.Type,System.Object)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 86712.03,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::GetNames:System.String[](System.Type)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 79829.89,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::GetValues:System.Array(System.Type)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 77327.09,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::IsDefined:System.Boolean(System.Type,System.Object)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 83324.84,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 53956.25,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String,System.Boolean)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 56111.15,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::ToString:System.String()": {
+    "runtime": "chaos-jit",
+    "mean_ns": 90061.87,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::ToString:System.String(System.String)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 90104.78,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Boolean,System.Object&)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 57759.57,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Object&)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 56577.37,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Enum::BoxToString:System.String()": {
+    "runtime": "chaos-jit",
+    "mean_ns": 61140.52,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  }
+}

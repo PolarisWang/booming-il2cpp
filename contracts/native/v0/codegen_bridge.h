@@ -229,6 +229,7 @@ typedef struct HotpatchEntryV0 {
     void*       interrupt_ptr;     /* = &InterpreterEntryDirect              */
     uintptr_t   method_key;        /* = PatchMethod* (0 when not patched)   */
     uint32_t    flags;             /* bit 0: kHotpatchActive                 */
+    uint32_t    version;           /* bumped on every patch/unpatch          */
 } HotpatchEntryV0;
 
 /* ── Hotpatch type name index entries ────────────────────────────

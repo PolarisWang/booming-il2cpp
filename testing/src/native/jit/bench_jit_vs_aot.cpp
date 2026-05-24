@@ -124,7 +124,7 @@ static CompileConfig MakeTier0Config() noexcept {
     cfg.enable_optimizer = false;
     cfg.enable_liveness = false;
     cfg.enable_deopt = false;
-    cfg.compile_tier = CompileTier::kTier0;
+    cfg.compile_tier = CompileTier::kQuick;
     return cfg;
 }
 
@@ -134,7 +134,7 @@ static CompileConfig MakeTier1Config() noexcept {
     cfg.enable_optimizer = true;
     cfg.enable_liveness = true;
     cfg.enable_deopt = false;   // disable deopt metadata to reduce Tier 1 overhead
-    cfg.compile_tier = CompileTier::kTier1;
+    cfg.compile_tier = CompileTier::kFull;
     return cfg;
 }
 
