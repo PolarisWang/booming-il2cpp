@@ -4,11 +4,9 @@
 #include <chaos/native_types.h>
 #include <chaos/type_info.h>
 #include <runtime_abi.h>
-#include "runtime_core.h"
-#include "runtime_capability.h"
-#include "engine_binding.h"
 #include "generated_code_compat.h"
 #include "com_ccw.h"
+#include "com_platform.h"
 #include "com_typelib.h"
 #include "memory_domain.h"
 
@@ -24,26 +22,13 @@ static const CHAOS_IL2CPP_UINT8 kIidIUnknown[16] = {0};
 
 /// Recover ComCcw* from either a direct CCW pointer or an interface identity pointer.
 /// Identity pointers are &ComCcwInterfaceEntry::vtable (the address of the vtable field).
-/// Uses address-distance sanity check to avoid dereferencing garbage memory when
-/// self is the CCW base pointer (not an interface identity pointer).
+/// Uses the back-pointer stored in entry->ccw_ptr at registration time.
 inline ComCcw* ResolveCcw(void* self) noexcept {
-    // Try interface-identity path: self is &interfaces[i].vtable.
-    // Compute the presumed ComCcwInterfaceEntry address and verify ccw_ptr.
     auto* entry = reinterpret_cast<ComCcwInterfaceEntry*>(
         static_cast<char*>(self) - offsetof(ComCcwInterfaceEntry, vtable));
-    void* raw_ccw = entry->ccw_ptr;
-    if (raw_ccw != nullptr) {
-        // Integer-only sanity check before casting: ccw must own entry.
-        // A valid ComCcw starts before its interfaces[] array (ccw < entry)
-        // and the span is well under 1024 bytes.
-        auto e_addr = reinterpret_cast<uintptr_t>(entry);
-        auto c_addr = reinterpret_cast<uintptr_t>(raw_ccw);
-        constexpr uintptr_t kMaxCcwSpan = 1024u;
-        if (c_addr < e_addr && (e_addr - c_addr) < kMaxCcwSpan) {
-            return static_cast<ComCcw*>(raw_ccw);
-        }
+    if (entry->ccw_ptr != nullptr) {
+        return static_cast<ComCcw*>(entry->ccw_ptr);
     }
-    // Fallback: self is the ComCcw pointer directly.
     return static_cast<ComCcw*>(self);
 }
 
@@ -59,8 +44,7 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL CcwQueryInterface(
     if (ccw->is_aggregated && ccw->outer_unknown != nullptr) {
         // COM identity rule: QI for IUnknown returns the outer.
         // Non-IUnknown QI is delegated entirely — the outer controls identity.
-        auto* outer_vtbl = *static_cast<ComCcwVtbl**>(ccw->outer_unknown);
-        return outer_vtbl->QueryInterface(ccw->outer_unknown, iid, ppv);
+        return runtime_core::com_platform::PlatformQueryInterface(ccw->outer_unknown, iid, ppv);
     }
 
     // Check for ITypeInfo/ITypeLib QI on IDispatch CCWs.
@@ -106,8 +90,7 @@ CHAOS_IL2CPP_UINT32 CHAOS_RUNTIME_ABI_CALL CcwAddRef(void* self) noexcept {
     if (self == nullptr) return 0;
     auto* ccw = ResolveCcw(self);
     if (ccw->is_aggregated && ccw->outer_unknown != nullptr) {
-        auto* outer_vtbl = *static_cast<ComCcwVtbl**>(ccw->outer_unknown);
-        return outer_vtbl->AddRef(ccw->outer_unknown);
+        return runtime_core::com_platform::PlatformAddRef(ccw->outer_unknown);
     }
     return ccw->refcount.fetch_add(1, std::memory_order_relaxed) + 1;
 }
@@ -116,8 +99,7 @@ CHAOS_IL2CPP_UINT32 CHAOS_RUNTIME_ABI_CALL CcwRelease(void* self) noexcept {
     if (self == nullptr) return 0;
     auto* ccw = ResolveCcw(self);
     if (ccw->is_aggregated && ccw->outer_unknown != nullptr) {
-        auto* outer_vtbl = *static_cast<ComCcwVtbl**>(ccw->outer_unknown);
-        return outer_vtbl->Release(ccw->outer_unknown);
+        return runtime_core::com_platform::PlatformRelease(ccw->outer_unknown);
     }
     CHAOS_IL2CPP_UINT32 remaining = ccw->refcount.fetch_sub(1, std::memory_order_acq_rel) - 1;
     if (remaining == 0) {
@@ -131,6 +113,11 @@ CHAOS_IL2CPP_UINT32 CHAOS_RUNTIME_ABI_CALL CcwRelease(void* self) noexcept {
                     static_cast<RuntimeState*>(ccw->runtime_state),
                     static_cast<GCHandle>(ccw->gc_handle));
             }
+        }
+
+        // Free dynamic interface storage if allocated.
+        if (ccw->interfaces != ccw->inline_interfaces) {
+            memory_domain::DomainFreeTagged(ccw->interfaces);
         }
 
         memory_domain::DomainFreeTagged(ccw);
@@ -195,18 +182,19 @@ CHAOS_IL2CPP_INTPTR CreateCcw(void* managed_object, void* runtime_state) noexcep
     ccw->gc_handle = gc_handle;
     ccw->runtime_state = runtime_state;
 
+    // SmallVector: inline storage by default.
+    ccw->interfaces = ccw->inline_interfaces;
+    ccw->interface_capacity = kInlineCcwInterfaces;
+
     // Initialise interface table: slot 0 = IUnknown.
     ccw->interface_count = 1;
     ccw->interfaces[0].guid = kIidIUnknown;
     ccw->interfaces[0].vtable = &s_ccw_vtbl;
     ccw->interfaces[0].ccw_ptr = ccw;
 
-    // Zero out remaining slots.
-    for (CHAOS_IL2CPP_SIZE i = 1; i < kMaxCcwInterfaces; ++i) {
-        ccw->interfaces[i].guid = nullptr;
-        ccw->interfaces[i].vtable = nullptr;
-        ccw->interfaces[i].ccw_ptr = nullptr;
-    }
+    // TypeLib data initialised to nullptr (set by codegen if IDispatch).
+    ccw->typelib_data = nullptr;
+    ccw->cp_container = nullptr;
 
     CHAOS_IL2CPP_LOG_DEBUG_M("COM", "Created CCW {0} for managed object {1} (gc_handle={2})",
                               static_cast<void*>(ccw), managed_object, gc_handle);
@@ -235,6 +223,11 @@ CHAOS_IL2CPP_INTPTR CreateCcwAggregated(void* managed_object, void* runtime_stat
     ccw->refcount = 1;                      // Inner refcount (not controlling)
     ccw->gc_handle = gc_handle;
     ccw->runtime_state = runtime_state;
+
+    // SmallVector: inline storage by default.
+    ccw->interfaces = ccw->inline_interfaces;
+    ccw->interface_capacity = kInlineCcwInterfaces;
+
     ccw->interface_count = 1;
     ccw->outer_unknown = outer_unknown;
     ccw->is_aggregated = true;
@@ -244,15 +237,17 @@ CHAOS_IL2CPP_INTPTR CreateCcwAggregated(void* managed_object, void* runtime_stat
     ccw->interfaces[0].vtable = &s_ccw_vtbl;
     ccw->interfaces[0].ccw_ptr = ccw;
 
-    for (CHAOS_IL2CPP_SIZE i = 1; i < kMaxCcwInterfaces; ++i) {
-        ccw->interfaces[i].guid = nullptr;
-        ccw->interfaces[i].vtable = nullptr;
-        ccw->interfaces[i].ccw_ptr = nullptr;
+    for (CHAOS_IL2CPP_SIZE i = 1; i < kInlineCcwInterfaces; ++i) {
+        ccw->inline_interfaces[i].guid = nullptr;
+        ccw->inline_interfaces[i].vtable = nullptr;
+        ccw->inline_interfaces[i].ccw_ptr = nullptr;
     }
 
+    ccw->typelib_data = nullptr;
+    ccw->cp_container = nullptr;
+
     // Hold a reference on the outer to keep it alive.
-    auto* outer_vtbl = *static_cast<ComCcwVtbl**>(outer_unknown);
-    outer_vtbl->AddRef(outer_unknown);
+    runtime_core::com_platform::PlatformAddRef(outer_unknown);
 
     CHAOS_IL2CPP_LOG_DEBUG_M("COM",
         "Created aggregated CCW {0} for managed object {1}, outer={2}",
@@ -268,8 +263,7 @@ void DestroyCcw(void* ccw_ptr) noexcept {
 
     // Release the outer_unknown reference held since creation.
     if (ccw->is_aggregated && ccw->outer_unknown != nullptr) {
-        auto* outer_vtbl = *static_cast<ComCcwVtbl**>(ccw->outer_unknown);
-        outer_vtbl->Release(ccw->outer_unknown);
+        runtime_core::com_platform::PlatformRelease(ccw->outer_unknown);
     }
 
     // Release the GCHandle so the GC can collect the managed object.
@@ -282,6 +276,11 @@ void DestroyCcw(void* ccw_ptr) noexcept {
         }
     }
 
+    // Free dynamic interface storage if allocated.
+    if (ccw->interfaces != ccw->inline_interfaces) {
+        memory_domain::DomainFreeTagged(ccw->interfaces);
+    }
+
     memory_domain::DomainFreeTagged(ccw);
 }
 
@@ -290,6 +289,34 @@ bool RegisterCcwInterface(void* ccw_ptr, const CHAOS_IL2CPP_UINT8* guid, void* v
     auto* ccw = static_cast<ComCcw*>(ccw_ptr);
 
     if (ccw->interface_count >= kMaxCcwInterfaces) return false;
+
+    // SmallVector: grow dynamically when inline storage is exhausted.
+    if (ccw->interface_count >= ccw->interface_capacity) {
+        CHAOS_IL2CPP_SIZE new_capacity = ccw->interface_capacity * 2;
+        if (new_capacity > kMaxCcwInterfaces) new_capacity = kMaxCcwInterfaces;
+        if (new_capacity <= ccw->interface_count) return false;
+
+        auto* new_block = static_cast<ComCcwInterfaceEntry*>(
+            memory_domain::DomainCurrentAllocateTagged(
+                new_capacity * sizeof(ComCcwInterfaceEntry)));
+        if (new_block == nullptr) return false;
+
+        CHAOS_IL2CPP_MEMCPY(new_block, ccw->interfaces,
+                             ccw->interface_count * sizeof(ComCcwInterfaceEntry));
+
+        // Update ccw_ptr back-pointers in the new block.
+        for (CHAOS_IL2CPP_SIZE i = 0; i < ccw->interface_count; ++i) {
+            new_block[i].ccw_ptr = ccw;
+        }
+
+        // Free old dynamic block (but not inline storage).
+        if (ccw->interfaces != ccw->inline_interfaces) {
+            memory_domain::DomainFreeTagged(ccw->interfaces);
+        }
+
+        ccw->interfaces = new_block;
+        ccw->interface_capacity = new_capacity;
+    }
 
     CHAOS_IL2CPP_SIZE slot = ccw->interface_count++;
     ccw->interfaces[slot].guid = guid;
@@ -338,95 +365,4 @@ void CcwDispatchMethod(void* ccw_ptr, CHAOS_IL2CPP_UINT64 iface_stable_id, CHAOS
     }
 }
 
-CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL CcwDispatchMethodInvoke(
-    void* ccw_ptr, CHAOS_IL2CPP_UINT64 iface_stable_id,
-    CHAOS_IL2CPP_INT32 dispIdMember, void* pDispParams, void* pVarResult) noexcept
-{
-    if (ccw_ptr == nullptr) return ::chaos::il2cpp::com_ccw::kE_POINTER;
-    auto* ccw = static_cast<ComCcw*>(ccw_ptr);
-
-    // Validate: TypeLib data must have method info.
-    if (ccw->typelib_data == nullptr || dispIdMember < 0 ||
-        dispIdMember >= ccw->typelib_data->method_count)
-        return ::chaos::il2cpp::com_ccw::kDISP_E_MEMBERNOTFOUND;
-
-    const auto& md = ccw->typelib_data->methods[dispIdMember];
-
-    // Get managed object from GCHandle.
-    const auto* abi = static_cast<const RuntimeAbiV0*>(chaos_runtime_get_abi_v0());
-    if (abi == nullptr || abi->gc_handle_get == nullptr || abi->method_invoke == nullptr)
-        return ::chaos::il2cpp::com_ccw::kE_NOTIMPL;
-    void* obj = abi->gc_handle_get(
-        static_cast<RuntimeState*>(ccw->runtime_state),
-        static_cast<GCHandle>(ccw->gc_handle));
-    if (obj == nullptr) return ::chaos::il2cpp::com_ccw::kE_NOTIMPL;
-
-    auto* rs = static_cast<RuntimeState*>(ccw->runtime_state);
-    auto* ts = runtime_core::GetCurrentThreadState();
-    auto* params = static_cast<com_abi::DISPPARAMS*>(pDispParams);
-    uint32_t argc = (params != nullptr) ? params->cArgs : 0;
-
-    // Fast path: no args — use existing CcwDispatchMethod.
-    if (argc == 0) {
-        CcwDispatchMethod(ccw_ptr, iface_stable_id, static_cast<uint32_t>(dispIdMember));
-        return ::chaos::il2cpp::com_ccw::kS_OK;
-    }
-
-    // Convert DISPPARAMS to managed object array.
-    // Stack-allocate for small arg counts (up to 8).
-    void* arg_buffer[8];
-    void** managed_args = arg_buffer;
-    if (argc > 8) {
-        managed_args = static_cast<void**>(std::malloc(argc * sizeof(void*)));
-        if (managed_args == nullptr) return static_cast<int32_t>(0x8007000Eu); // E_OUTOFMEMORY
-    }
-
-    // DISPPARAMS.rgvarg is in REVERSE order: rgvarg[0] = last parameter.
-    // Each VARIANT is 16 bytes (sizeof(VariantLayout)).
-    auto* variant_base = static_cast<const char*>(params->rgvarg);
-    constexpr uint32_t kVariantSize = 16;
-    for (uint32_t i = 0; i < argc; i++) {
-        void* variant_ptr = const_cast<char*>(variant_base + (argc - 1 - i) * kVariantSize);
-        managed_args[i] = runtime_core::ChaosGetObjectForNativeVariant(
-            reinterpret_cast<CHAOS_IL2CPP_INTPTR>(variant_ptr));
-    }
-
-    // Call method via method_invoke using metadata token as handle.
-    MethodInfoHandle method_handle = static_cast<MethodInfoHandle>(md.method_token);
-    uint64_t ret_buf[8] = {};  // 64-byte return buffer (covers SIMD types)
-    ExceptionHandle ex = nullptr;
-
-    RuntimeStatus status = abi->method_invoke(
-        rs, ts, method_handle, obj,
-        const_cast<void* const*>(managed_args), argc,
-        ret_buf, sizeof(ret_buf), &ex);
-
-    if (managed_args != arg_buffer) {
-        std::free(managed_args);
-    }
-
-    // Set return value as VARIANT.
-    if (pVarResult != nullptr && status == CHAOS_RUNTIME_STATUS_OK) {
-        runtime_core::ChaosGetNativeVariantForObject(
-            reinterpret_cast<void*>(ret_buf[0]),
-            reinterpret_cast<CHAOS_IL2CPP_INTPTR>(pVarResult),
-            1); // destroy_old = true
-    }
-
-    if (status == CHAOS_RUNTIME_STATUS_MANAGED_EXCEPTION) {
-        // Store exception info in pVarResult as VT_ERROR + scode if available.
-        if (pVarResult != nullptr) {
-            // Zero out the 16-byte VARIANT, then write vt=VT_ERROR(0x0A) at [0]
-            // and scode=DISP_E_EXCEPTION(0x80020009) at [8].
-            CHAOS_IL2CPP_MEMSET(pVarResult, 0, kVariantSize);
-            uint16_t vt_error = 0x0Au;
-            CHAOS_IL2CPP_MEMCPY(pVarResult, &vt_error, sizeof(uint16_t));
-            int32_t scode = 0x80020009;
-            CHAOS_IL2CPP_MEMCPY(static_cast<char*>(pVarResult) + 8, &scode, sizeof(scode));
-        }
-        return 0x80020009; // DISP_E_EXCEPTION
-    }
-
-    return ::chaos::il2cpp::com_ccw::kS_OK;
-}
 }  // namespace chaos::il2cpp::com_ccw
