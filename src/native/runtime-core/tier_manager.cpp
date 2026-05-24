@@ -159,7 +159,7 @@ bool TierManager::EnqueueOptimization(PatchMethod* method) noexcept {
     return true;
 }
 
-bool TierManager::EnqueueJitRecompilation(JitPrecode* precode) noexcept {
+bool TierManager::EnqueueJitRecompilation(jit::JitPrecode* precode) noexcept {
     if (precode == nullptr) return false;
 
     // Ensure background thread is running.
@@ -230,7 +230,7 @@ void TierManager::BackgroundLoop() noexcept {
                 lock.unlock();  // Compilation must not hold the lock
 
                 CHAOS_IL2CPP_LOG_DEBUG_M("tier",
-                    "background JIT Tier0->Tier1 for precode=%p", je.precode);
+                    "background JIT Tier0->Tier1 for precode=%p", static_cast<void*>(je.precode));
 
                 void* new_code = jit::JitRecompileToTier1(je.precode);
 
@@ -238,7 +238,7 @@ void TierManager::BackgroundLoop() noexcept {
                 if (new_code != nullptr) {
                     // Patch direct_ptr to Tier 1 code so future calls bypass
                     // the trampoline and go directly to the optimized code.
-                    HotpatchEntryV0* entry = static_cast<jit::JitPrecode*>(je.precode)->entry;
+                    HotpatchEntryV0* entry = je.precode->entry;
                     if (entry != nullptr) {
                         entry->direct_ptr = new_code;
                         CHAOS_IL2CPP_LOG_DEBUG_M("tier",

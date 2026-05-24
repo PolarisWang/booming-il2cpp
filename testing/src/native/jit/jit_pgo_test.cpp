@@ -197,7 +197,7 @@ TEST_F(PgoTest, Tier1CodeCorrectness) {
     precode.compiled = tier0_jm;
 
     // Call JitRecompileToTier1 — this deletes the old tier0_jm and creates Tier 1
-    void* tier1_code = JitRecompileToTier1(&precode, false);
+    void* tier1_code = JitRecompileToTier1(&precode);
     ASSERT_NE(tier1_code, nullptr);
 
     // Tier 1 code should return the correct value
@@ -217,7 +217,7 @@ TEST_F(PgoTest, Tier1CodeForAddMethod) {
     precode.config = cfg;
     precode.compiled = tier0_jm;
 
-    void* tier1_code = JitRecompileToTier1(&precode, false);
+    void* tier1_code = JitRecompileToTier1(&precode);
     ASSERT_NE(tier1_code, nullptr);
     EXPECT_EQ(ExecuteNative(tier1_code), 30ULL);
 }
@@ -249,7 +249,7 @@ TEST_F(PgoTest, DirectPtrPatchedByTierManager) {
     EXPECT_EQ(entry.direct_ptr, precode.trampoline);
 
     // Tier 1 recompilation (background thread simulation)
-    void* tier1_code = JitRecompileToTier1(&precode, false);
+    void* tier1_code = JitRecompileToTier1(&precode);
     ASSERT_NE(tier1_code, nullptr);
     EXPECT_EQ(ExecuteNative(tier1_code), 99ULL);
 
