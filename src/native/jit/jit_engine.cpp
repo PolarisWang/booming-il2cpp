@@ -5,6 +5,7 @@
 #include "jit_seh.h"
 #include "jit_unwind.h"
 #include "slot_map.h"
+#include "tree/jit_optimizer.h"
 #include "IEncoder.h"
 #include "ISehHandler.h"
 #include "X64Encoder.h"
@@ -3334,12 +3335,28 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
     // Bail out early if any emit above hit an OOM
     if (CheckFailed()) return nullptr;
 
-    // ── Optimize instructions (constant folding + DCE) ───────────────────
+    // ── Optimize instructions (tree IR pipeline + linear fallback) ──────
     // Creates a mutable copy of rm_.instructions for the optimizer.
+    // Non-SEH methods: tree IR pipeline (ConstFold + CSE + linearize).
+    // SEH methods: existing linear OptimizeInstructions fallback.
     auto opt_instrs = rm_.instructions;
     std::vector<uint8_t> removed_mask;
-    if (!is_tier0_ && config_.enable_optimizer)
-        OptimizeInstructions(opt_instrs, removed_mask, !rm_.seh_clauses.empty());
+    bool tree_ir_applied = false;
+    if (!is_tier0_ && config_.enable_optimizer) {
+        if (rm_.seh_clauses.empty()) {
+            std::vector<interpreter::RegisterInstruction> tree_opt;
+            if (tree::OptimizeWithTreeIR(opt_instrs, tree_opt, false)) {
+                opt_instrs = std::move(tree_opt);
+                removed_mask.assign(opt_instrs.size(), 0);
+                tree_ir_applied = true;
+                n_instrs = static_cast<uint32_t>(opt_instrs.size());
+                instr_offsets_.resize(n_instrs, 0);
+            }
+        }
+        if (!tree_ir_applied) {
+            OptimizeInstructions(opt_instrs, removed_mask, !rm_.seh_clauses.empty());
+        }
+    }
 
     // ── Liveness analysis for precise GC slot maps ─────────────────────────
     // Computes per-instruction live-in bitmasks used by RecordGcPoint() to

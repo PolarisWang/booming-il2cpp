@@ -17,6 +17,10 @@ add_library(chaos_jit STATIC
     jit_precode.cpp
     WinSehHandler.cpp
     $<$<PLATFORM_ID:Linux>:LinuxSehHandler.cpp>
+    tree/jit_tree_builder.cpp
+    tree/jit_tree_mutator.cpp
+    tree/jit_linearizer.cpp
+    tree/jit_optimizer.cpp
     )
 
 target_compile_features(chaos_jit PUBLIC cxx_std_17)
