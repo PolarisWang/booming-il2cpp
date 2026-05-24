@@ -1,6 +1,6 @@
 {
   "assemblyName": "System.Private.CoreLib",
   "displayName": "System.Private.CoreLib",
-  "familyCount": 1,
-  "migratedFamilies": ["convert-char"]
+  "familyCount": 3,
+  "migratedFamilies": ["convert-char", "ccw-basic", "rcw-basic"]
 }

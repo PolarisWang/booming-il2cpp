@@ -61,5 +61,9 @@ ctest --test-dir build/testing -C RelWithDebInfo -R "com_"
   - 132 个测试用例（含 9 个 DISABLED）：CCW(28) + RCW(17) + ConnectionPoint(22) + Platform(13) + Factory(10) + TypeLib(8) + Dispatch(8) + Benchmark(5) + CCW Stress(4) + RCW Stress(4) + Integration(13)
   - 9 个 DISABLED connection point 测试需要 MemoryDomain 基础设施
   - com_integration_test 需要 chaos_codegen.lib（主构建系统补齐）
+- Phase 3: Managed COM AOT 集成测试 ✅ — ccw-basic / rcw-basic foundation-dll 测试族已存在并通过验证
+  - ccw-basic: AOT fact 19/19 ✅, entry.exe 已构建 ✅
+  - rcw-basic: overall_status=passed ✅, entry.exe 已构建 ✅
+  - 已加入 `_assembly.json` migratedFamilies，批次管线集成完成
 - Wiki 已更新：版本号 V3→V4，测试计数刷新，运行方法统一
 - P0 差距（G1 malloc/free、G2 LOG_WARN stubs）已在 phase2 中自然解决
