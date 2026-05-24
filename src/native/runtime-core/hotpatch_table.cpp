@@ -193,6 +193,18 @@ uint32_t SlotToToken(uint32_t module_id, uint32_t slot) noexcept {
     return GetHotpatchNameRegistry().SlotToToken(module_id, slot);
 }
 
+const char* HotpatchNameRegistry::GetMethodName(uint32_t module_id, uint32_t method_token) const noexcept {
+    if (method_token == 0 || module_id >= modules_.size()) return nullptr;
+    const auto* mod = modules_[module_id];
+    if (mod == nullptr || mod->method_entries == nullptr) return nullptr;
+    for (uint32_t i = 0; i < mod->method_entry_count; ++i) {
+        if (mod->method_entries[i].method_token == method_token) {
+            return mod->method_entries[i].method_name;
+        }
+    }
+    return nullptr;
+}
+
 // ── Dispatch entry access ─────────────────────────────────────────────
 
 HotpatchEntryV0* HotpatchNameRegistry::GetDispatchEntry(uint32_t module_id, uint32_t token) const noexcept {

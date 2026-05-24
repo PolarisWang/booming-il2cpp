@@ -35,7 +35,7 @@ struct CallSiteInfo {
 /// by scanning backwards for the magic number.
 struct JitDebugInfo {
     static constexpr uint32_t kMagic = 0x544A4442u;  // "BJDT" (Booming JIT Debug)
-    static constexpr uint32_t kVersion = 1u;
+    static constexpr uint32_t kVersion = 2u;         // v2: added method_name_off/len
 
     uint32_t magic;                  // kMagic — identity marker
     uint32_t version;                // kVersion
@@ -43,6 +43,8 @@ struct JitDebugInfo {
     uint32_t instr_offset_count;     // number of instr_offsets entries
     uint32_t instr_offsets_off;      // offset from code start to instr_offsets array
                                      // (0 = not embedded, use JitMethod::instr_offsets)
+    uint32_t method_name_off;        // offset from code start to UTF-8 method name (0 = none)
+    uint32_t method_name_len;        // length of method name in bytes (excluding null)
 };
 
 /// GC slot descriptor for a single stack/register location at a safepoint.
@@ -130,6 +132,10 @@ struct JitMethod {
     // instruction 0, enabling true mid-execution on-stack replacement.
     // 0 = no OSR entry (no loop headers in this method).
     uint32_t      osr_entry_offset = 0;
+
+    // JitDebugInfo byte offset from code start. 0 = not emitted.
+    // SOS extension uses this to locate the debug info footer.
+    uint32_t      debug_info_offset = 0;
 
     // Instruction offset table: instr_offsets[pc] = native byte offset.
     // Maps RegisterInstruction index → byte offset from code entry.

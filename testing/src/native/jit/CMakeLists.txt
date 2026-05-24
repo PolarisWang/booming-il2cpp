@@ -199,3 +199,17 @@ target_compile_definitions(test_jit_bench PRIVATE
     CHAOS_IL2CPP_JIT_TEST_ACTIVE=1
 )
 set_tests_properties(test_jit_bench PROPERTIES TIMEOUT 120)
+
+# wf4-debug — JIT debug info / SOS contract tests
+# Validates JitDebugInfo emission in code buffer, MetadataRegistry::GetMethodName,
+# and debug contract sync via RegisterNativeCodeSection.
+add_chaos_test(test_jit_debug_info
+    jit_debug_info_test.cpp
+    ../runtime-core/gc/gc_test_stubs.cpp
+    LIBS ${CHAOS_CODEGEN_LIBS}
+    LABELS "unit;jit"
+)
+target_compile_definitions(test_jit_debug_info PRIVATE
+    CHAOS_IL2CPP_JIT_TEST_ACTIVE=1
+)
+set_tests_properties(test_jit_debug_info PROPERTIES TIMEOUT 30)

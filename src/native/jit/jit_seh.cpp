@@ -17,6 +17,12 @@
 // GC event callbacks for deferred T4 code memory reclamation.
 #include <gc_events.h>
 
+// JIT debug contract (for SOS extension — no-op if contract not linked).
+#include "jit/jit_debug_contract.h"
+
+// MetadataRegistry for debug contract.
+#include "metadata_interface.h"
+
 // ── Forwarding functions ───────────────────────────────────────────────────
 //
 // These free functions are the public API for jit_seh.h.  Existing callers
@@ -40,6 +46,10 @@ void RegisterNativeCodeSection(void* code_start, uint32_t code_size,
                     const JitMethod* nm,
                     uint32_t patch_method_token) noexcept {
     GetSehHandler().RegisterCode(code_start, code_size, nm, patch_method_token);
+
+    // Sync debug mirror for SOS extension.
+    // Must follow the real registration so the mirror matches runtime state.
+    JitDebugContractAddEntry(code_start, code_size, nm, patch_method_token);
 }
 
 void UnregisterNativeCodeSection(void* code_start) noexcept {
@@ -64,6 +74,11 @@ void ReclaimDemotedCode() noexcept {
 
 void RegisterJitSehHandler() noexcept {
     GetSehHandler().Initialize();
+
+    // Prime the debug contract metadata registry pointer so SOS extension
+    // can resolve method names via the unified registry interface.
+    JitDebugContractInitMetadataRegistry(
+        runtime_core::MetadataRegistry::Get().GetUnifiedRegistry());
 }
 
 }  // namespace chaos::il2cpp::jit

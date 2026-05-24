@@ -24,12 +24,17 @@ endif()
 get_filename_component(REPO_ROOT "${CMAKE_CURRENT_LIST_DIR}/../../.." ABSOLUTE)
 
 # ── Shared library ────────────────────────────────────────────────
-add_library(chaos_gc_sos SHARED gc_sos.cpp)
+add_library(chaos_gc_sos SHARED
+    gc_sos.cpp
+    jit_sos.cpp
+)
 
 target_include_directories(chaos_gc_sos PRIVATE
     "${DBGENG_TOOLS_ROOT}/inc"                   # dbgeng.h
+    "${CMAKE_CURRENT_SOURCE_DIR}"                 # sos_common.h
     "${REPO_ROOT}/src/native/runtime-core"       # gc/gc_stats.h, gc/gc_debug_contract.h
     "${REPO_ROOT}/src/native/common"             # chaos/native_types.h
+    "${REPO_ROOT}/src/native/jit"                # jit_method.h (JitDebugInfoPod)
     "${REPO_ROOT}/contracts/native/v0"            # contracts headers
 )
 
