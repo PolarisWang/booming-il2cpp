@@ -10,6 +10,7 @@ set(CHAOS_CODEGEN_LIBS
     chaos_common
     chaos_support
     chaos_fmt
+    chaos_debugger
 )
 
 # N2 — Codegen native test (x64)
