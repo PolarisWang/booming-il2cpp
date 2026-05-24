@@ -40,10 +40,31 @@ extern "C" const int kSubjectEntryCount;
 extern "C" const int kSubjectEntryIndices[];
 extern "C" const int kSubjectEntryCount;
 extern "C" const int kSubjectEntryIndices[];
+extern "C" const int kSubjectEntryCount;
+extern "C" const int kSubjectEntryIndices[];
+extern "C" const int kSubjectEntryCount;
+extern "C" const int kSubjectEntryIndices[];
+extern "C" const int kSubjectEntryCount;
+extern "C" const int kSubjectEntryIndices[];
+extern "C" const int kSubjectEntryCount;
+extern "C" const int kSubjectEntryIndices[];
+extern "C" const int kSubjectEntryCount;
+extern "C" const int kSubjectEntryIndices[];
+extern "C" const int kSubjectEntryCount;
+extern "C" const int kSubjectEntryIndices[];
+extern "C" const int kSubjectEntryCount;
+extern "C" const int kSubjectEntryIndices[];
+extern "C" const int kSubjectEntryCount;
+extern "C" const int kSubjectEntryIndices[];
+extern "C" const int kSubjectEntryCount;
+extern "C" const int kSubjectEntryIndices[];
 extern "C" int32_t kChaosExternalRuntimeCount;
 
 // ChaosJitRegisterAll is defined in native-aot.generated.cpp (no-op in AOT mode).
 extern "C" void ChaosJitRegisterAll();
+// SEH-guarded wrapper for ChaosJitRegisterAll (defined in jit_seh_guard.cpp).
+// Catches AV from background threads racing with PrecodeArena during startup.
+extern "C" void RegisterJitEntriesWithSehGuard();
 
 extern "C" std::int32_t RunNativeAot(std::int32_t);
 extern "C" double RunBenchmark(int, int);
@@ -195,6 +216,14 @@ int main(int argc, char** argv) {
         return -1;
     }
     chaos::il2cpp::runtime_core::SetCurrentRuntimeState(runtime_state);
+    std::fprintf(stderr, "DIAG: after runtime_init\n");
+
+    // BGC and Finalizer threads were started during runtime_init.  Let them
+    // finish their initialization (RegisterThread, CreateEvent, etc.) before
+    // the main thread proceeds to ChaosJitRegisterAll, which allocates RWX
+    // PrecodeArena pages.  Without this brief yield, the background threads'
+    // startup race with JIT registration causes non-deterministic segfaults.
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
     ThreadState* thread_state = nullptr;
     status = abi->thread_attach(runtime_state, &thread_state);
@@ -203,42 +232,20 @@ int main(int argc, char** argv) {
         return -1;
     }
 
+    std::fprintf(stderr, "DIAG: before FillExternalRuntimeStubs\n");
     // Fill unresolved external runtime table entries with safe stubs.
     FillExternalRuntimeStubs();
+    std::fprintf(stderr, "DIAG: after FillExternalRuntimeStubs\n");
 
     // Register JIT methods for interpreter dispatch (no-op in AOT mode).
     ChaosJitRegisterAll();
-
-    // DIAG: Check JIT registration state
-    auto& hp_registry = chaos::il2cpp::runtime_core::GetHotpatchNameRegistry();
-    std::fprintf(stderr, "DIAG: hotpatch modules=%zu\n", hp_registry.ModuleCount());
-    for (uint32_t di = 0; di < hp_registry.ModuleCount(); ++di) {
-        auto* e0 = hp_registry.GetDispatchEntryBySlot(di, 0);
-        std::fprintf(stderr, "DIAG: module[%u] entry_table=%p entry0=%p direct_ptr=%p\n",
-                     di, static_cast<const void*>(e0),
-                     static_cast<const void*>(e0),
-                     e0 ? static_cast<const void*>(e0->direct_ptr) : nullptr);
-    }
+    std::fprintf(stderr, "DIAG: after ChaosJitRegisterAll\n");
 
     RunMode mode = RunMode::Fact;
     int entry_index = 0;
     int iterations = 10000;
 
     // Simple argv parsing (self-contained, no getopt dependency).
-    // Two-pass: first scan for --no-bgc, then parse mode.
-    // JIT-compiled code lacks GC stack maps, so BGC collections crash.
-    bool no_bgc = false;
-    for (int ai = 1; ai < argc; ai++) {
-        if (std::strcmp(argv[ai], "--no-bgc") == 0) {
-            no_bgc = true;
-            break;
-        }
-    }
-    if (no_bgc) {
-        chaos::il2cpp::runtime_core::BgcController::Instance().Stop();
-        std::fprintf(stderr, "DIAG: BGC disabled\n");
-    }
-
     if (argc >= 3 && std::strcmp(argv[1], "--benchmark") == 0) {
         mode = RunMode::Benchmark;
         entry_index = std::atoi(argv[2]);

@@ -1010,7 +1010,7 @@ extern ""C"" void ChaosJitRegisterAll() {}
 
                 // Check if this type has a TypeInfo emitted (reachable types only)
                 string? typeInfoSymbol = _allEmittedTypeSubjectIds?.Contains(subjectId) == true
-                    ? "&" + GetNativeTypeInfoSymbol(subjectId)
+                    ? GetNativeTypeInfoSymbol(subjectId)
                     : null;
 
                 // Nested type relationship: record parent → child token
@@ -1263,14 +1263,57 @@ extern ""C"" void ChaosJitRegisterAll() {}
         return index;
     }
 
+    /// <summary>
+    /// Build symbol → dispatch slot map for ALL methods with IL bodies,
+    /// not just reachable ones. This ensures hotpatch can target any method
+    /// in the module, regardless of reachability from the AOT entry point.
+    ///
+    /// Methods without ECMA metadata tokens receive synthetic tokens
+    /// (0x80000000 | syntheticIndex) so they still occupy dispatch table
+    /// slots reachable by name-based lookup.
+    /// </summary>
+    /// <summary>
+    /// Returns all methods that should get hotpatch dispatch slots:
+    /// all non-abstract methods with IL bodies, deduplicated by NativeSymbol
+    /// (shared generics share the same native symbol), sorted for deterministic
+    /// slot assignment.
+    /// </summary>
+    private IReadOnlyList<AotCoreIrMethodArtifact> GetHotpatchableMethods()
+    {
+        var seenSymbols = new HashSet<string>(StringComparer.Ordinal);
+        return _methodsBySubjectId.Values
+            .Where(m => m.Instructions.Count > 0) // has IL body — excludes abstract/interface stubs
+            .OrderBy(m => ExtractNumericSortKey(m.SubjectId))
+            .ThenBy(m => m.SubjectId, StringComparer.Ordinal)
+            .Where(m => seenSymbols.Add(m.NativeSymbol)) // deduplicate by NativeSymbol
+            .ToList();
+    }
+
+    /// <summary>
+    /// Build symbol → dispatch slot map for ALL methods with IL bodies,
+    /// not just reachable ones. This ensures hotpatch can target any method
+    /// in the module, regardless of reachability from the AOT entry point.
+    ///
+    /// Methods without ECMA metadata tokens receive synthetic tokens
+    /// (0x80000000 | syntheticIndex) so they still occupy dispatch table
+    /// slots reachable by name-based lookup.
+    ///
+    /// The return value maps NativeSymbol → slot index, matching the
+    /// s_hotpatch_entries[] array order from BuildHotpatchTable.
+    /// </summary>
     private Dictionary<string, int> BuildDispatchSlotMap(
         IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods,
         MetadataRegistrationArtifact metadataRegistration)
     {
         var tokenLookup = new MetadataTokenLookup(metadataRegistration.Registrations);
 
+        // Use ALL hotpatchable methods, not just reachableMethods, so
+        // unreachable methods also get dispatch slots for hotpatch.
+        var allMethods = GetHotpatchableMethods();
+        int syntheticTokenCounter = 1;
+
         var entries = new List<(string TypeName, string TypeNamespace, string NativeSymbol, uint Token)>();
-        foreach (var method in reachableMethods)
+        foreach (var method in allMethods)
         {
             string typeSubjectId;
             try
@@ -1286,14 +1329,16 @@ extern ""C"" void ChaosJitRegisterAll() {}
             var typeNamespace = GetTypeNamespace(typeSubjectId);
             uint token = tokenLookup.TryGetMethodToken(method.SubjectId);
             if (token == 0)
-                continue;
+            {
+                // Assign synthetic token: high bit set to avoid collision with ECMA tokens.
+                token = 0x80000000u | (uint)(syntheticTokenCounter++);
+            }
 
             entries.Add((typeName, typeNamespace, method.NativeSymbol, token));
         }
 
         // Assign slots in entries iteration order, matching the s_hotpatch_entries[]
-        // array order (also entries iteration order). Both BuildHotpatchTable and this
-        // function iterate entries in reachableMethods order, so indices are identical.
+        // array order from BuildHotpatchTable.
         var result = new Dictionary<string, int>(entries.Count, StringComparer.Ordinal);
         for (int slot = 0; slot < entries.Count; slot++)
         {
@@ -2974,6 +3019,7 @@ public sealed partial class NativeAotLoweringPlanner
 
         var model = new ScriptObject
         {
+            ["is_jit_mode"] = _codegenMode == CodegenMode.Jit,
             ["methods"] = methodEntries,
             ["methods_count"] = methods.Count,
             ["default_string_id"] = (long)defaultStringId,

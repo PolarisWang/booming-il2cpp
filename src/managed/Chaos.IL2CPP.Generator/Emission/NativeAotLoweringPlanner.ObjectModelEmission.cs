@@ -845,7 +845,7 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 		builder.Append("        return chaos_array->element_type_shape == chaos_type_shape_reference");
 		builder.Append("            && chaos_is_type_compatible(");
 		string stringTypeInfoSymbol = GetNativeTypeInfoSymbol("System.Private.CoreLib/System.String");
-		builder.Append("&" + stringTypeInfoSymbol);
+		builder.Append(stringTypeInfoSymbol);
 		builder.AppendLine(", chaos_array->element_type_info);");
 		builder.AppendLine("    }");
 		builder.AppendLine();

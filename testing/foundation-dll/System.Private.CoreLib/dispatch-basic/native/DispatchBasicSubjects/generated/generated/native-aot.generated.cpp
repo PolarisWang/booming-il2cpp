@@ -10,7 +10,6 @@
 #include "runtime_vtable.h"
 #include "runtime_instantiation.h"
 #include "reflection_query_model.h"
-#include "eeclass.h"
 #include "load_store_chaos_bridge.h"
 #include "interpreter_entry.h"
 #include <gc/gc_bgc_inline.h>
@@ -48,246 +47,6 @@ extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_StatusProvider_GetStatusCode
 extern "C" void DispatchBasicSubjects_StatusProvider__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" void DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute__ctor_ComInterfaceType(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
 
-// Forward declarations (pipeline fix: used before extern "C" decl)
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_BasicImpl_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void DispatchBasicSubjects_BasicImpl__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
-extern "C" void DispatchBasicSubjects_Calculator__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_Run_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_0(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_1(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_2(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_3(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_4(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_StatusProvider_GetStatusCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void DispatchBasicSubjects_StatusProvider__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute__ctor_ComInterfaceType(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-
-// Forward declarations (pipeline fix: used before extern "C" decl)
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_BasicImpl_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void DispatchBasicSubjects_BasicImpl__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
-extern "C" void DispatchBasicSubjects_Calculator__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_Run_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_0(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_1(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_2(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_3(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_4(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_StatusProvider_GetStatusCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void DispatchBasicSubjects_StatusProvider__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute__ctor_ComInterfaceType(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-
-// Forward declarations (pipeline fix: used before extern "C" decl)
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_BasicImpl_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void DispatchBasicSubjects_BasicImpl__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
-extern "C" void DispatchBasicSubjects_Calculator__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_Run_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_0(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_1(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_2(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_3(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_4(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_StatusProvider_GetStatusCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void DispatchBasicSubjects_StatusProvider__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute__ctor_ComInterfaceType(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-
-// Forward declarations (pipeline fix: used before extern "C" decl)
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_BasicImpl_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void DispatchBasicSubjects_BasicImpl__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
-extern "C" void DispatchBasicSubjects_Calculator__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_Run_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_0(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_1(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_2(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_3(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_4(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_StatusProvider_GetStatusCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void DispatchBasicSubjects_StatusProvider__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute__ctor_ComInterfaceType(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-
-// Forward declarations (pipeline fix: used before extern "C" decl)
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_BasicImpl_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void DispatchBasicSubjects_BasicImpl__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
-extern "C" void DispatchBasicSubjects_Calculator__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_Run_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_0(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_1(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_2(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_3(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_4(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_StatusProvider_GetStatusCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void DispatchBasicSubjects_StatusProvider__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute__ctor_ComInterfaceType(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-
-// Forward declarations (pipeline fix: used before extern "C" decl)
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_BasicImpl_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void DispatchBasicSubjects_BasicImpl__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
-extern "C" void DispatchBasicSubjects_Calculator__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_Run_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_0(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_1(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_2(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_3(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_4(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_StatusProvider_GetStatusCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void DispatchBasicSubjects_StatusProvider__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute__ctor_ComInterfaceType(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-
-// Forward declarations (pipeline fix: used before extern "C" decl)
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_BasicImpl_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void DispatchBasicSubjects_BasicImpl__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
-extern "C" void DispatchBasicSubjects_Calculator__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_Run_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_0(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_1(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_2(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_3(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_4(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_StatusProvider_GetStatusCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void DispatchBasicSubjects_StatusProvider__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute__ctor_ComInterfaceType(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-
-// Forward declarations (pipeline fix: used before extern "C" decl)
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_BasicImpl_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void DispatchBasicSubjects_BasicImpl__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
-extern "C" void DispatchBasicSubjects_Calculator__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_Run_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_0(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_1(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_2(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_3(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_4(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_StatusProvider_GetStatusCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void DispatchBasicSubjects_StatusProvider__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute__ctor_ComInterfaceType(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-
-// Forward declarations (pipeline fix: used before extern "C" decl)
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_BasicImpl_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void DispatchBasicSubjects_BasicImpl__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
-extern "C" void DispatchBasicSubjects_Calculator__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_Run_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_0(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_1(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_2(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_3(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_4(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_StatusProvider_GetStatusCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void DispatchBasicSubjects_StatusProvider__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute__ctor_ComInterfaceType(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-
-// Forward declarations (pipeline fix: used before extern "C" decl)
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_BasicImpl_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void DispatchBasicSubjects_BasicImpl__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
-extern "C" void DispatchBasicSubjects_Calculator__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_Run_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_0(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_1(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_2(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_3(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_4(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_StatusProvider_GetStatusCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void DispatchBasicSubjects_StatusProvider__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute__ctor_ComInterfaceType(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-
-// Forward declarations (pipeline fix: used before extern "C" decl)
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_BasicImpl_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void DispatchBasicSubjects_BasicImpl__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
-extern "C" void DispatchBasicSubjects_Calculator__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_Run_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_0(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_1(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_2(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_3(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_4(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_StatusProvider_GetStatusCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void DispatchBasicSubjects_StatusProvider__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute__ctor_ComInterfaceType(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-
-// Forward declarations (pipeline fix: used before extern "C" decl)
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_BasicImpl_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void DispatchBasicSubjects_BasicImpl__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
-extern "C" void DispatchBasicSubjects_Calculator__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_Run_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_0(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_1(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_2(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_3(void);
-extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_4(void);
-extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_StatusProvider_GetStatusCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void DispatchBasicSubjects_StatusProvider__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
-extern "C" void DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute__ctor_ComInterfaceType(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
-
 namespace chaos::il2cpp::codegen::DispatchBasicSubjects {
 
 // Bring runtime_core and jit declarations into scope for unqualified lookup
@@ -297,15 +56,18 @@ using namespace chaos::il2cpp::jit;
 // Runtime prelude dependencies included at translation unit level
 
 
+const void* chaos_vtable_DispatchBasicSubjects_BasicImpl[];
+const void* chaos_vtable_DispatchBasicSubjects_Calculator[];
+const void* chaos_vtable_DispatchBasicSubjects_StatusProvider[];
 inline MethodTable chaos_mt_System_Private_CoreLib_System_Object = {nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0, 0};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_INTPTR>(15228727185366376748ULL);
-inline TypeInfoV2 chaos_mt_DispatchBasicSubjects_BasicImpl = {{&chaos_mt_System_Private_CoreLib_System_Object, reinterpret_cast<const void**>(reinterpret_cast<const char*>(&chaos_mt_DispatchBasicSubjects_BasicImpl) + 64), 5722114412902280165ULL, 2u, 80, 1}, {nullptr, nullptr, 0, 0, 0, 0}, {DispatchBasicSubjects_BasicImpl__ctor, DispatchBasicSubjects_BasicImpl_GetValue, nullptr, nullptr, nullptr, nullptr}};
+inline MethodTable chaos_mt_DispatchBasicSubjects_BasicImpl = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Object), chaos_vtable_DispatchBasicSubjects_BasicImpl, 5722114412902280165ULL, 2u, 32, 1, 1, nullptr, nullptr, 0, 0, 0, 0};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_DispatchBasicSubjects_BasicImpl = static_cast<CHAOS_IL2CPP_INTPTR>(5722114412902280165ULL);
-inline TypeInfoV2 chaos_mt_DispatchBasicSubjects_Calculator = {{&chaos_mt_System_Private_CoreLib_System_Object, reinterpret_cast<const void**>(reinterpret_cast<const char*>(&chaos_mt_DispatchBasicSubjects_Calculator) + 64), 5786799786101565947ULL, 4u, 80, 1}, {nullptr, nullptr, 0, 0, 0, 0}, {DispatchBasicSubjects_Calculator__ctor, nullptr, DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32, DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32, nullptr, nullptr}};
+inline MethodTable chaos_mt_DispatchBasicSubjects_Calculator = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Object), chaos_vtable_DispatchBasicSubjects_Calculator, 5786799786101565947ULL, 4u, 32, 1, 1, nullptr, nullptr, 0, 0, 0, 0};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_DispatchBasicSubjects_Calculator = static_cast<CHAOS_IL2CPP_INTPTR>(5786799786101565947ULL);
 inline MethodTable chaos_mt_DispatchBasicSubjects_DispatchBasicSubjects = {nullptr, nullptr, 13619514316044602496ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0, 0};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_DispatchBasicSubjects_DispatchBasicSubjects = static_cast<CHAOS_IL2CPP_INTPTR>(13619514316044602496ULL);
-inline TypeInfoV2 chaos_mt_DispatchBasicSubjects_StatusProvider = {{&chaos_mt_System_Private_CoreLib_System_Object, reinterpret_cast<const void**>(reinterpret_cast<const char*>(&chaos_mt_DispatchBasicSubjects_StatusProvider) + 64), 11732973143578276300ULL, 5u, 80, 1}, {nullptr, nullptr, 0, 0, 0, 0}, {DispatchBasicSubjects_StatusProvider__ctor, nullptr, nullptr, nullptr, DispatchBasicSubjects_StatusProvider_GetStatusCode, nullptr}};
+inline MethodTable chaos_mt_DispatchBasicSubjects_StatusProvider = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Object), chaos_vtable_DispatchBasicSubjects_StatusProvider, 11732973143578276300ULL, 5u, 32, 1, 1, nullptr, nullptr, 0, 0, 0, 0};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_DispatchBasicSubjects_StatusProvider = static_cast<CHAOS_IL2CPP_INTPTR>(11732973143578276300ULL);
 inline MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0, 0};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);
@@ -321,6 +83,56 @@ inline MethodTable chaos_mt_System_Private_CoreLib_System_String = {nullptr, nul
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);
 
 // ── Virtual method table arrays ──
+extern "C" void DispatchBasicSubjects_BasicImpl__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_BasicImpl_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+const void* chaos_vtable_DispatchBasicSubjects_BasicImpl[] =
+{
+	reinterpret_cast<void*>(DispatchBasicSubjects_BasicImpl__ctor),
+	reinterpret_cast<void*>(DispatchBasicSubjects_BasicImpl_GetValue),
+};
+extern "C" void DispatchBasicSubjects_Calculator__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+const void* chaos_vtable_DispatchBasicSubjects_Calculator[] =
+{
+	reinterpret_cast<void*>(DispatchBasicSubjects_Calculator__ctor),
+	nullptr,
+	reinterpret_cast<void*>(DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32),
+	reinterpret_cast<void*>(DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32),
+};
+extern "C" void DispatchBasicSubjects_StatusProvider__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_StatusProvider_GetStatusCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+const void* chaos_vtable_DispatchBasicSubjects_StatusProvider[] =
+{
+	reinterpret_cast<void*>(DispatchBasicSubjects_StatusProvider__ctor),
+	nullptr,
+	nullptr,
+	nullptr,
+	reinterpret_cast<void*>(DispatchBasicSubjects_StatusProvider_GetStatusCode),
+};
+static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_DispatchBasicSubjects_BasicImpl[] =
+{
+	{ 0x0000001Au, reinterpret_cast<void*>(&DispatchBasicSubjects_BasicImpl__ctor) },
+	{ 0x00000019u, reinterpret_cast<void*>(&DispatchBasicSubjects_BasicImpl_GetValue) },
+};
+
+static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_DispatchBasicSubjects_Calculator[] =
+{
+	{ 0x00000016u, reinterpret_cast<void*>(&DispatchBasicSubjects_Calculator__ctor) },
+	{ 0u, nullptr },
+	{ 0x00000014u, reinterpret_cast<void*>(&DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32) },
+	{ 0x00000015u, reinterpret_cast<void*>(&DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32) },
+};
+
+static const ::chaos::il2cpp::vtable_registry::VTableSlot kSlots_DispatchBasicSubjects_StatusProvider[] =
+{
+	{ 0x00000018u, reinterpret_cast<void*>(&DispatchBasicSubjects_StatusProvider__ctor) },
+	{ 0u, nullptr },
+	{ 0u, nullptr },
+	{ 0u, nullptr },
+	{ 0x00000017u, reinterpret_cast<void*>(&DispatchBasicSubjects_StatusProvider_GetStatusCode) },
+};
+
 bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept
 {
 	if (chaos_array == nullptr)
@@ -337,7 +149,7 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 	// this line is reached only if caller skipped materialization.
 	if (chaos_is_string_id(chaos_value))
 	{
-		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(&chaos_mt_System_Private_CoreLib_System_String, chaos_array->element_type_info);
+		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(chaos_mt_System_Private_CoreLib_System_String.AsTypeInfoHot(), chaos_array->element_type_info);
 	}
 
 	auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
@@ -449,7 +261,7 @@ extern "C" void ChaosRegisterGcLayouts() {
 	registry.Register(10748947813473285525ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, 5);
 	registry.Register(1782325859292956794ULL, sizeof(chaos_type_System_Private_CoreLib_System_String), nullptr, 0);
 
-	// Register TypeInfoV0 address ranges for IsValidTypeInfoPointer.
+	// Register MethodTable address ranges for IsValidTypeInfoPointer.
 	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object) + sizeof(chaos_mt_System_Private_CoreLib_System_Object));
 	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_DispatchBasicSubjects_BasicImpl), reinterpret_cast<uintptr_t>(&chaos_mt_DispatchBasicSubjects_BasicImpl) + sizeof(chaos_mt_DispatchBasicSubjects_BasicImpl));
 	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_DispatchBasicSubjects_Calculator), reinterpret_cast<uintptr_t>(&chaos_mt_DispatchBasicSubjects_Calculator) + sizeof(chaos_mt_DispatchBasicSubjects_Calculator));
@@ -649,13 +461,13 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 
 	static const TypeInfoHot* const s_type_info_ptrs[10] = {
 		nullptr,
-		&chaos_mt_DispatchBasicSubjects_DispatchBasicSubjects,
+		chaos_mt_DispatchBasicSubjects_DispatchBasicSubjects.AsTypeInfoHot(),
 		nullptr,
 		nullptr,
 		nullptr,
-		&chaos_mt_DispatchBasicSubjects_Calculator,
-		&chaos_mt_DispatchBasicSubjects_StatusProvider,
-		&chaos_mt_DispatchBasicSubjects_BasicImpl,
+		chaos_mt_DispatchBasicSubjects_Calculator.AsTypeInfoHot(),
+		chaos_mt_DispatchBasicSubjects_StatusProvider.AsTypeInfoHot(),
+		chaos_mt_DispatchBasicSubjects_BasicImpl.AsTypeInfoHot(),
 		nullptr,
 		nullptr,
 	};
@@ -831,6 +643,9 @@ extern "C" int32_t kChaosExternalRuntimeCount = 3;
 // (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
+// NOTE: JIT mode skips kAotMethods/kBenchmarkWrappers — dispatch goes
+// through direct_ptr (precode trampoline → JIT compilation).
+
 static void (*kAotMethods[18])() = {
 	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_0),
 	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_1),
@@ -893,7 +708,7 @@ extern "C" const int kSubjectEntryIndices[5] = {
 };
 
 // Single-method dispatch via hotpatch dispatch table.
-// NOTE: Uses kBenchmarkWrappers (not raw kAotMethods) to ensure instance
+// AOT mode: uses kBenchmarkWrappers (not raw kAotMethods) to ensure instance
 // methods receive a valid this-pointer sentinel and default argument values.
 extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(
 	CHAOS_IL2CPP_INT32 chaos_entry_index)
@@ -1298,6 +1113,48 @@ static void* const kMethodPointers[18] = {
 };
 
 // CodeRegistrationV0 struct (invoker_pointers = nullptr for native-aot path)
+// ── VTable descriptors (for BootstrapRuntime TypeVTable registration) ──
+static const VTableDescriptorV0 kChaosVTableDescriptors[] = {
+	{
+		CHAOS_IL2CPP_UINT64_C(0x4F6908BDD12EEBE5),
+		0x00000007u,
+		0u,
+		2u,
+		reinterpret_cast<const void*>(kSlots_DispatchBasicSubjects_BasicImpl),
+		reinterpret_cast<const void**>(chaos_vtable_DispatchBasicSubjects_BasicImpl),
+		2u,
+		1,
+		{0, 0, 0},
+		nullptr,
+		0u,
+	},
+	{
+		CHAOS_IL2CPP_UINT64_C(0x504ED7BEE4E3E9FB),
+		0x00000005u,
+		0u,
+		4u,
+		reinterpret_cast<const void*>(kSlots_DispatchBasicSubjects_Calculator),
+		reinterpret_cast<const void**>(chaos_vtable_DispatchBasicSubjects_Calculator),
+		4u,
+		1,
+		{0, 0, 0},
+		nullptr,
+		0u,
+	},
+	{
+		CHAOS_IL2CPP_UINT64_C(0xA2D3E4E8FE2E71CC),
+		0x00000006u,
+		0u,
+		5u,
+		reinterpret_cast<const void*>(kSlots_DispatchBasicSubjects_StatusProvider),
+		reinterpret_cast<const void**>(chaos_vtable_DispatchBasicSubjects_StatusProvider),
+		5u,
+		1,
+		{0, 0, 0},
+		nullptr,
+		0u,
+	},
+};
 extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	= {
 	.struct_size               = sizeof(CodeRegistrationV0),
@@ -1311,8 +1168,8 @@ extern "C" const CodeRegistrationV0 chaos_codegen_code_registration
 	.unresolved_virtual_call_count = 0u,
 	.type_capabilities       = nullptr,
 	.type_capability_count   = 0u,
-	.vtable_descriptors = nullptr,
-	.vtable_descriptor_count = 0u,
+	.vtable_descriptors = kChaosVTableDescriptors,
+	.vtable_descriptor_count = 3u,
 	.slot_map_section_begin = reinterpret_cast<const void*>(&kChaosGcSlotMapsSection),
 	.slot_map_section_end   = reinterpret_cast<const void*>(
 		reinterpret_cast<CHAOS_IL2CPP_UINTPTR>(&kChaosGcSlotMapsSection) + kChaosGcSlotMapsSize),
@@ -1419,257 +1276,6 @@ static const ReflectionQueryImageDescriptor kReflImage = { "DispatchBasicSubject
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
 // LookupModule(mid)->image at lines 311-321 of bootstrap.cpp.
-
-// ── AOT constexpr EEClass instances (Phase 2b) ──
-// Each EEClass aliases the constexpr ReflectionQuery*Descriptor arrays
-// emitted above, providing zero-copy reflection metadata without
-// the O(n) reverse lookup + domain heap allocation in EnsureEEClass().
-
-inline EEClass kEEClass_DispatchBasicSubjects_DispatchBasicSubjects = {
-	/*name_utf8=*/       "DispatchBasicSubjects",
-	/*namespace_utf8=*/  "",
-	/*mt=*/              nullptr,
-	/*methods=*/         {kReflMethods_DispatchBasicSubjects_DispatchBasicSubjects, 5u, true},
-	/*fields=*/          {kReflFields_DispatchBasicSubjects_DispatchBasicSubjects, 1u, true},
-	/*properties=*/      {nullptr, 0u, true},
-	/*events=*/          {nullptr, 0u, true},
-	/*generic_type_def=*/ nullptr,
-	/*generic_param_count=*/ 0u,
-};
-
-inline EEClass kEEClass_DispatchBasicSubjects_BasicImpl = {
-	/*name_utf8=*/       "BasicImpl",
-	/*namespace_utf8=*/  "",
-	/*mt=*/              nullptr,
-	/*methods=*/         {kReflMethods_DispatchBasicSubjects_BasicImpl, 2u, true},
-	/*fields=*/          {nullptr, 0u, true},
-	/*properties=*/      {nullptr, 0u, true},
-	/*events=*/          {nullptr, 0u, true},
-	/*generic_type_def=*/ nullptr,
-	/*generic_param_count=*/ 0u,
-};
-
-inline EEClass kEEClass_DispatchBasicSubjects_Calculator = {
-	/*name_utf8=*/       "Calculator",
-	/*namespace_utf8=*/  "",
-	/*mt=*/              nullptr,
-	/*methods=*/         {kReflMethods_DispatchBasicSubjects_Calculator, 3u, true},
-	/*fields=*/          {nullptr, 0u, true},
-	/*properties=*/      {nullptr, 0u, true},
-	/*events=*/          {nullptr, 0u, true},
-	/*generic_type_def=*/ nullptr,
-	/*generic_param_count=*/ 0u,
-};
-
-inline EEClass kEEClass_DispatchBasicSubjects_DispatchBasicNativeEntry = {
-	/*name_utf8=*/       "DispatchBasicNativeEntry",
-	/*namespace_utf8=*/  "",
-	/*mt=*/              nullptr,
-	/*methods=*/         {kReflMethods_DispatchBasicSubjects_DispatchBasicNativeEntry, 5u, true},
-	/*fields=*/          {nullptr, 0u, true},
-	/*properties=*/      {nullptr, 0u, true},
-	/*events=*/          {nullptr, 0u, true},
-	/*generic_type_def=*/ nullptr,
-	/*generic_param_count=*/ 0u,
-};
-
-inline EEClass kEEClass_DispatchBasicSubjects_StatusProvider = {
-	/*name_utf8=*/       "StatusProvider",
-	/*namespace_utf8=*/  "",
-	/*mt=*/              nullptr,
-	/*methods=*/         {kReflMethods_DispatchBasicSubjects_StatusProvider, 2u, true},
-	/*fields=*/          {nullptr, 0u, true},
-	/*properties=*/      {nullptr, 0u, true},
-	/*events=*/          {nullptr, 0u, true},
-	/*generic_type_def=*/ nullptr,
-	/*generic_param_count=*/ 0u,
-};
-
-inline EEClass kEEClass_DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute = {
-	/*name_utf8=*/       "System.Runtime.InteropServices.ComInterfaceTypeAttribute",
-	/*namespace_utf8=*/  "System.Runtime.InteropServices",
-	/*mt=*/              nullptr,
-	/*methods=*/         {kReflMethods_DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute, 1u, true},
-	/*fields=*/          {nullptr, 0u, true},
-	/*properties=*/      {nullptr, 0u, true},
-	/*events=*/          {nullptr, 0u, true},
-	/*generic_type_def=*/ nullptr,
-	/*generic_param_count=*/ 0u,
-};
-
-inline EEClass kEEClass_System_Private_CoreLib_System_Object = {
-	/*name_utf8=*/       "System.Object",
-	/*namespace_utf8=*/  "System",
-	/*mt=*/              nullptr,
-	/*methods=*/         {nullptr, 0u, true},
-	/*fields=*/          {nullptr, 0u, true},
-	/*properties=*/      {nullptr, 0u, true},
-	/*events=*/          {nullptr, 0u, true},
-	/*generic_type_def=*/ nullptr,
-	/*generic_param_count=*/ 0u,
-};
-
-inline EEClass kEEClass_System_Private_CoreLib_System_String = {
-	/*name_utf8=*/       "System.String",
-	/*namespace_utf8=*/  "System",
-	/*mt=*/              nullptr,
-	/*methods=*/         {nullptr, 0u, true},
-	/*fields=*/          {nullptr, 0u, true},
-	/*properties=*/      {nullptr, 0u, true},
-	/*events=*/          {nullptr, 0u, true},
-	/*generic_type_def=*/ nullptr,
-	/*generic_param_count=*/ 0u,
-};
-
-inline EEClass kEEClass_System_Private_CoreLib_System_Reflection_MethodInfo = {
-	/*name_utf8=*/       "System.Reflection.MethodInfo",
-	/*namespace_utf8=*/  "System.Reflection",
-	/*mt=*/              nullptr,
-	/*methods=*/         {nullptr, 0u, true},
-	/*fields=*/          {nullptr, 0u, true},
-	/*properties=*/      {nullptr, 0u, true},
-	/*events=*/          {nullptr, 0u, true},
-	/*generic_type_def=*/ nullptr,
-	/*generic_param_count=*/ 0u,
-};
-
-inline EEClass kEEClass_System_Private_CoreLib_System_Reflection_ConstructorInfo = {
-	/*name_utf8=*/       "System.Reflection.ConstructorInfo",
-	/*namespace_utf8=*/  "System.Reflection",
-	/*mt=*/              nullptr,
-	/*methods=*/         {nullptr, 0u, true},
-	/*fields=*/          {nullptr, 0u, true},
-	/*properties=*/      {nullptr, 0u, true},
-	/*events=*/          {nullptr, 0u, true},
-	/*generic_type_def=*/ nullptr,
-	/*generic_param_count=*/ 0u,
-};
-
-inline EEClass kEEClass_System_Private_CoreLib_System_Reflection_FieldInfo = {
-	/*name_utf8=*/       "System.Reflection.FieldInfo",
-	/*namespace_utf8=*/  "System.Reflection",
-	/*mt=*/              nullptr,
-	/*methods=*/         {nullptr, 0u, true},
-	/*fields=*/          {nullptr, 0u, true},
-	/*properties=*/      {nullptr, 0u, true},
-	/*events=*/          {nullptr, 0u, true},
-	/*generic_type_def=*/ nullptr,
-	/*generic_param_count=*/ 0u,
-};
-
-inline EEClass kEEClass_System_Private_CoreLib_System_Reflection_Assembly = {
-	/*name_utf8=*/       "System.Reflection.Assembly",
-	/*namespace_utf8=*/  "System.Reflection",
-	/*mt=*/              nullptr,
-	/*methods=*/         {nullptr, 0u, true},
-	/*fields=*/          {nullptr, 0u, true},
-	/*properties=*/      {nullptr, 0u, true},
-	/*events=*/          {nullptr, 0u, true},
-	/*generic_type_def=*/ nullptr,
-	/*generic_param_count=*/ 0u,
-};
-
-inline EEClass kEEClass_System_Private_CoreLib_System_Reflection_AssemblyName = {
-	/*name_utf8=*/       "System.Reflection.AssemblyName",
-	/*namespace_utf8=*/  "System.Reflection",
-	/*mt=*/              nullptr,
-	/*methods=*/         {nullptr, 0u, true},
-	/*fields=*/          {nullptr, 0u, true},
-	/*properties=*/      {nullptr, 0u, true},
-	/*events=*/          {nullptr, 0u, true},
-	/*generic_type_def=*/ nullptr,
-	/*generic_param_count=*/ 0u,
-};
-
-
-inline MethodTable chaos_mt_DispatchBasicSubjects_BasicImpl = {0};
-inline MethodTable chaos_mt_DispatchBasicSubjects_Calculator = {0};
-inline MethodTable chaos_mt_DispatchBasicSubjects_DispatchBasicNativeEntry = {0};
-inline MethodTable chaos_mt_DispatchBasicSubjects_StatusProvider = {0};
-inline MethodTable chaos_mt_DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute = {0};
-
-inline TypeInfoV0 chaos_mt_DispatchBasicSubjects_BasicImpl = {};
-inline TypeInfoV0 chaos_mt_DispatchBasicSubjects_Calculator = {};
-inline TypeInfoV0 chaos_mt_DispatchBasicSubjects_DispatchBasicNativeEntry = {};
-inline TypeInfoV0 chaos_mt_DispatchBasicSubjects_DispatchBasicSubjects = {};
-inline TypeInfoV0 chaos_mt_DispatchBasicSubjects_StatusProvider = {};
-inline TypeInfoV0 chaos_mt_DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute = {};
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Object = {};
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {};
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {};
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo = {};
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo = {};
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo = {};
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_String = {};
-extern "C" void ChaosRegisterAotEEClasses() {
-	// DispatchBasicSubjects/DispatchBasicSubjects
-	chaos_mt_DispatchBasicSubjects_DispatchBasicSubjects.warm.cold_delta = static_cast<uint32_t>(
-		reinterpret_cast<uint8_t*>(&kEEClass_DispatchBasicSubjects_DispatchBasicSubjects) - reinterpret_cast<uint8_t*>(&chaos_mt_DispatchBasicSubjects_DispatchBasicSubjects));
-	kEEClass_DispatchBasicSubjects_DispatchBasicSubjects.mt = reinterpret_cast<MethodTable*>(&chaos_mt_DispatchBasicSubjects_DispatchBasicSubjects);
-
-	// DispatchBasicSubjects/BasicImpl
-	chaos_mt_DispatchBasicSubjects_BasicImpl.warm.cold_delta = static_cast<uint32_t>(
-		reinterpret_cast<uint8_t*>(&kEEClass_DispatchBasicSubjects_BasicImpl) - reinterpret_cast<uint8_t*>(&chaos_mt_DispatchBasicSubjects_BasicImpl));
-	kEEClass_DispatchBasicSubjects_BasicImpl.mt = reinterpret_cast<MethodTable*>(&chaos_mt_DispatchBasicSubjects_BasicImpl);
-
-	// DispatchBasicSubjects/Calculator
-	chaos_mt_DispatchBasicSubjects_Calculator.warm.cold_delta = static_cast<uint32_t>(
-		reinterpret_cast<uint8_t*>(&kEEClass_DispatchBasicSubjects_Calculator) - reinterpret_cast<uint8_t*>(&chaos_mt_DispatchBasicSubjects_Calculator));
-	kEEClass_DispatchBasicSubjects_Calculator.mt = reinterpret_cast<MethodTable*>(&chaos_mt_DispatchBasicSubjects_Calculator);
-
-	// DispatchBasicSubjects/DispatchBasicNativeEntry
-	chaos_mt_DispatchBasicSubjects_DispatchBasicNativeEntry.warm.cold_delta = static_cast<uint32_t>(
-		reinterpret_cast<uint8_t*>(&kEEClass_DispatchBasicSubjects_DispatchBasicNativeEntry) - reinterpret_cast<uint8_t*>(&chaos_mt_DispatchBasicSubjects_DispatchBasicNativeEntry));
-	kEEClass_DispatchBasicSubjects_DispatchBasicNativeEntry.mt = reinterpret_cast<MethodTable*>(&chaos_mt_DispatchBasicSubjects_DispatchBasicNativeEntry);
-
-	// DispatchBasicSubjects/StatusProvider
-	chaos_mt_DispatchBasicSubjects_StatusProvider.warm.cold_delta = static_cast<uint32_t>(
-		reinterpret_cast<uint8_t*>(&kEEClass_DispatchBasicSubjects_StatusProvider) - reinterpret_cast<uint8_t*>(&chaos_mt_DispatchBasicSubjects_StatusProvider));
-	kEEClass_DispatchBasicSubjects_StatusProvider.mt = reinterpret_cast<MethodTable*>(&chaos_mt_DispatchBasicSubjects_StatusProvider);
-
-	// DispatchBasicSubjects/System.Runtime.InteropServices.ComInterfaceTypeAttribute
-	chaos_mt_DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute.warm.cold_delta = static_cast<uint32_t>(
-		reinterpret_cast<uint8_t*>(&kEEClass_DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute) - reinterpret_cast<uint8_t*>(&chaos_mt_DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute));
-	kEEClass_DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute.mt = reinterpret_cast<MethodTable*>(&chaos_mt_DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute);
-
-	// System.Private.CoreLib/System.Object
-	chaos_mt_System_Private_CoreLib_System_Object.warm.cold_delta = static_cast<uint32_t>(
-		reinterpret_cast<uint8_t*>(&kEEClass_System_Private_CoreLib_System_Object) - reinterpret_cast<uint8_t*>(&chaos_mt_System_Private_CoreLib_System_Object));
-	kEEClass_System_Private_CoreLib_System_Object.mt = reinterpret_cast<MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Object);
-
-	// System.Private.CoreLib/System.String
-	chaos_mt_System_Private_CoreLib_System_String.warm.cold_delta = static_cast<uint32_t>(
-		reinterpret_cast<uint8_t*>(&kEEClass_System_Private_CoreLib_System_String) - reinterpret_cast<uint8_t*>(&chaos_mt_System_Private_CoreLib_System_String));
-	kEEClass_System_Private_CoreLib_System_String.mt = reinterpret_cast<MethodTable*>(&chaos_mt_System_Private_CoreLib_System_String);
-
-	// System.Private.CoreLib/System.Reflection.MethodInfo
-	chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo.warm.cold_delta = static_cast<uint32_t>(
-		reinterpret_cast<uint8_t*>(&kEEClass_System_Private_CoreLib_System_Reflection_MethodInfo) - reinterpret_cast<uint8_t*>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo));
-	kEEClass_System_Private_CoreLib_System_Reflection_MethodInfo.mt = reinterpret_cast<MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo);
-
-	// System.Private.CoreLib/System.Reflection.ConstructorInfo
-	chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo.warm.cold_delta = static_cast<uint32_t>(
-		reinterpret_cast<uint8_t*>(&kEEClass_System_Private_CoreLib_System_Reflection_ConstructorInfo) - reinterpret_cast<uint8_t*>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo));
-	kEEClass_System_Private_CoreLib_System_Reflection_ConstructorInfo.mt = reinterpret_cast<MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo);
-
-	// System.Private.CoreLib/System.Reflection.FieldInfo
-	chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo.warm.cold_delta = static_cast<uint32_t>(
-		reinterpret_cast<uint8_t*>(&kEEClass_System_Private_CoreLib_System_Reflection_FieldInfo) - reinterpret_cast<uint8_t*>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo));
-	kEEClass_System_Private_CoreLib_System_Reflection_FieldInfo.mt = reinterpret_cast<MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo);
-
-	// System.Private.CoreLib/System.Reflection.Assembly
-	chaos_mt_System_Private_CoreLib_System_Reflection_Assembly.warm.cold_delta = static_cast<uint32_t>(
-		reinterpret_cast<uint8_t*>(&kEEClass_System_Private_CoreLib_System_Reflection_Assembly) - reinterpret_cast<uint8_t*>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly));
-	kEEClass_System_Private_CoreLib_System_Reflection_Assembly.mt = reinterpret_cast<MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly);
-
-	// System.Private.CoreLib/System.Reflection.AssemblyName
-	chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName.warm.cold_delta = static_cast<uint32_t>(
-		reinterpret_cast<uint8_t*>(&kEEClass_System_Private_CoreLib_System_Reflection_AssemblyName) - reinterpret_cast<uint8_t*>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName));
-	kEEClass_System_Private_CoreLib_System_Reflection_AssemblyName.mt = reinterpret_cast<MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName);
-
-}
-
-
 // ── Generic registration proof-host helper ─────────────────
 // Populate generic registration arrays from this TU.
 static void ChaosDoPopulateGenericRegistration(
@@ -1779,7 +1385,7 @@ extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_0(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1855,7 +1461,7 @@ extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_1(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1931,7 +1537,7 @@ extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_2(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -2007,7 +1613,7 @@ extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_3(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -2083,7 +1689,7 @@ extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_4(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -2293,7 +1899,7 @@ extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_Tes
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_DispatchBasicSubjects_StatusProvider, {});
-		chaos_object->header.type_info = &chaos_mt_DispatchBasicSubjects_StatusProvider;
+		chaos_object->header.type_info = chaos_mt_DispatchBasicSubjects_StatusProvider.AsTypeInfoHot();
 		DispatchBasicSubjects_StatusProvider__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
@@ -2324,7 +1930,7 @@ extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_Tes
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_DispatchBasicSubjects_Calculator, {});
-		chaos_object->header.type_info = &chaos_mt_DispatchBasicSubjects_Calculator;
+		chaos_object->header.type_info = chaos_mt_DispatchBasicSubjects_Calculator.AsTypeInfoHot();
 		DispatchBasicSubjects_Calculator__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
@@ -2333,28 +1939,13 @@ extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_Tes
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(20);
 	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(7);
 	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s0);
-		auto& _d8 = s_hotpatch_entries[8];
-		CHAOS_IL2CPP_INT32 _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d8)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d8))
-		{
-			alignas(16) uint8_t _d_ab[16];
-			ArgBuffer _d_bw(_d_ab);
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
-			_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
-			_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2));
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d8.method_key, _d_ab, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = DispatchBasicSubjects_Calculator_Add_System_Int32_System_Int32(chaos_arg_0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2));
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+		// Inlined: DispatchBasicSubjects/Calculator::Add:System.Int32(System.Int32,System.Int32)
+		auto chaos_inline_arg_2 = _s2;
+		auto chaos_inline_arg_1 = _s1;
+		auto chaos_inline_arg_0 = _s0;
+		_s0 = chaos_inline_arg_1;
+		_s1 = chaos_inline_arg_2;
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
 	}
 	chaos_locals[1] = _s0;
 	_s0 = chaos_locals[1];
@@ -2376,7 +1967,7 @@ extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_Tes
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_DispatchBasicSubjects_Calculator, {});
-		chaos_object->header.type_info = &chaos_mt_DispatchBasicSubjects_Calculator;
+		chaos_object->header.type_info = chaos_mt_DispatchBasicSubjects_Calculator.AsTypeInfoHot();
 		DispatchBasicSubjects_Calculator__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
@@ -2385,28 +1976,13 @@ extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_Tes
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(50);
 	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(8);
 	{
-		const auto chaos_arg_2 = _s2;
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s0);
-		auto& _d9 = s_hotpatch_entries[9];
-		CHAOS_IL2CPP_INT32 _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d9)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d9))
-		{
-			alignas(16) uint8_t _d_ab[16];
-			ArgBuffer _d_bw(_d_ab);
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
-			_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
-			_d_bw.WriteI32(static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2));
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d9.method_key, _d_ab, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = DispatchBasicSubjects_Calculator_Subtract_System_Int32_System_Int32(chaos_arg_0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2));
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+		// Inlined: DispatchBasicSubjects/Calculator::Subtract:System.Int32(System.Int32,System.Int32)
+		auto chaos_inline_arg_2 = _s2;
+		auto chaos_inline_arg_1 = _s1;
+		auto chaos_inline_arg_0 = _s0;
+		_s0 = chaos_inline_arg_1;
+		_s1 = chaos_inline_arg_2;
+		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapSub(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
 	}
 	chaos_locals[1] = _s0;
 	_s0 = chaos_locals[1];
@@ -2426,7 +2002,7 @@ extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_Tes
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_DispatchBasicSubjects_BasicImpl, {});
-		chaos_object->header.type_info = &chaos_mt_DispatchBasicSubjects_BasicImpl;
+		chaos_object->header.type_info = chaos_mt_DispatchBasicSubjects_BasicImpl.AsTypeInfoHot();
 		DispatchBasicSubjects_BasicImpl__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}

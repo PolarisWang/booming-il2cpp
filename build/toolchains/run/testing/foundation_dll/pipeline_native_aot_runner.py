@@ -892,8 +892,9 @@ def _ensure_cmakelists(cmakelists: Path, family_slug: str, verification: Path, *
     Uses find_package(chaos) to discover the chaos SDK (prebuilt runtime libs,
     compile flags). The SDK is at codegen/ output directory (--sdk-out).
 
-    When is_jit=True, adds JIT-mode libs (chaos_jit, chaos_debugger) and
-    /FORCE:MULTIPLE linker flag.
+    When is_jit=True, adds JIT include path (src/native/jit) and
+    /FORCE:MULTIPLE linker flag. JIT libs (chaos_jit, chaos_debugger) are
+    already part of chaos::runtime from the SDK.
     """
 
     repo_root_str = str(_REPO_ROOT).replace("\\", "/")
@@ -901,6 +902,9 @@ def _ensure_cmakelists(cmakelists: Path, family_slug: str, verification: Path, *
 
     # ── Conditional JIT-mode additions ──────────────────────────────────
     force_multiple = '\ntarget_link_options(entry PRIVATE /FORCE:MULTIPLE)' if is_jit else ''
+    jit_include = (
+        f'    "${{CHAOS_PROJECT_ROOT}}/src/native/jit"\n'
+    ) if is_jit else ''
 
     cmake_content = (
         f'cmake_minimum_required(VERSION 3.20)\n'
@@ -924,14 +928,26 @@ def _ensure_cmakelists(cmakelists: Path, family_slug: str, verification: Path, *
         f'set(CHAOS_CODEGEN_DIR "{codegen_rel}")\n'
         f'\n'
         f'# Source files — codegen outputs to codegen/<AssemblyName>/generated/\n'
-        f'file(GLOB CHAOS_CODEGEN_CPP "${{CHAOS_CODEGEN_DIR}}/*Subjects/generated/native-aot.generated.cpp")\n'
+        f'# Flat layout (single file): *Subjects/generated/native-aot.generated.cpp\n'
+        f'# Paged layout (large families): *Subjects/generated/generated/ (page files + module)\n'
+        f'file(GLOB CHAOS_CODEGEN_CPP\n'
+        f'    "${{CHAOS_CODEGEN_DIR}}/*Subjects/generated/native-aot.generated.cpp"\n'
+        f'    "${{CHAOS_CODEGEN_DIR}}/*Subjects/generated/generated/native-aot.generated.cpp"\n'
+        f'    "${{CHAOS_CODEGEN_DIR}}/*Subjects/generated/generated/native-aot.page-*.cpp"\n'
+        f'    "${{CHAOS_CODEGEN_DIR}}/*Subjects/generated/generated/chaos_generated_module.cpp"\n'
+        f')\n'
         f'# Also search native/ (pipeline syncs codegen output there after convert-to-cpp)\n'
-        f'file(GLOB CHAOS_CODEGEN_NATIVE_CPP "${{CMAKE_CURRENT_SOURCE_DIR}}/*Subjects/generated/native-aot.generated.cpp")\n'
-        f'# Use codegen path if available, fall back to native path (avoids compiling both)\n'
-        f'if(CHAOS_CODEGEN_CPP)\n'
-        f'  set(CHAOS_AOT_GENERATED_CPP ${{CHAOS_CODEGEN_CPP}})\n'
-        f'else()\n'
+        f'file(GLOB CHAOS_CODEGEN_NATIVE_CPP\n'
+        f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/*Subjects/generated/native-aot.generated.cpp"\n'
+        f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/*Subjects/generated/generated/native-aot.generated.cpp"\n'
+        f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/*Subjects/generated/generated/native-aot.page-*.cpp"\n'
+        f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/*Subjects/generated/generated/chaos_generated_module.cpp"\n'
+        f')\n'
+        f'# Prefer native (pipeline post-processed) copies over codegen originals\n'
+        f'if(CHAOS_CODEGEN_NATIVE_CPP)\n'
         f'  set(CHAOS_AOT_GENERATED_CPP ${{CHAOS_CODEGEN_NATIVE_CPP}})\n'
+        f'else()\n'
+        f'  set(CHAOS_AOT_GENERATED_CPP ${{CHAOS_CODEGEN_CPP}})\n'
         f'endif()\n'
         f'file(GLOB CHAOS_NATIVE_STUBS "*.cpp")\n'
         f'list(REMOVE_ITEM CHAOS_NATIVE_STUBS\n'
@@ -964,7 +980,7 @@ def _ensure_cmakelists(cmakelists: Path, family_slug: str, verification: Path, *
         f'    "${{CHAOS_PROJECT_ROOT}}/third_party/unordered_dense/include"\n'
         f'    "${{CHAOS_CODEGEN_DIR}}/NumericAggregationSubjects/generated"\n'
         f'    "${{CMAKE_CURRENT_SOURCE_DIR}}"\n'
-        f')\n'
+        f'{jit_include})\n'
         f'\n'
         f'add_executable(entry ${{CHAOS_ENTRY_SOURCES}})\n'
         f'target_include_directories(entry PRIVATE ${{CHAOS_ENTRY_INCLUDES}})\n'
@@ -1805,6 +1821,262 @@ def _fix_forward_declarations(native_dir: Path) -> None:
             print(f"    [build_entry] added forward declarations in {gen_cpp.name}")
 
 
+def _fix_page_file_decls(native_dir: Path) -> None:
+    """Fix page file includes and add forward declarations for page-split codegen.
+
+    The converter may emit large families as page-split TUs (native-aot.page-*.cpp).
+    These page files have two issues:
+    1. Include path for native-aot.generated.header.h uses wrong relative path
+       (page files are in generated/generated/ but include says generated/xxx.h)
+    2. Calls to extern "C" functions from other assemblies need forward declarations.
+
+    Fix by:
+    1. Correcting the include path in page files
+    2. Adding extern "C" forward declarations to native-aot.generated.header.h
+       (included by all page files)
+    3. Adding the same include to page-0001.cpp if missing
+    """
+    import re as _re
+    for page_file in sorted(native_dir.rglob("native-aot.page-*.cpp")):
+        text = page_file.read_text(encoding="utf-8")
+        changed = False
+
+        # Step 1: Fix include path — page files are in generated/generated/
+        # but the include says "generated/native-aot.generated.header.h"
+        new_text = text.replace(
+            '#include "generated/native-aot.generated.header.h"',
+            '#include "native-aot.generated.header.h"')
+        if new_text != text:
+            changed = True
+            text = new_text
+            print(f"    [fix_page] fixed include path in {page_file.name}")
+
+        # Step 2: Add header include if missing (page-0001 may not have it)
+        header_include = '#include "native-aot.generated.header.h"'
+        if header_include not in text:
+            # Insert after the last #include line
+            include_end = -1
+            for m in _re.finditer(r'^#include.*$', text, _re.MULTILINE):
+                include_end = m.end()
+            if include_end != -1:
+                text = text[:include_end] + '\n' + header_include + text[include_end:]
+                changed = True
+                print(f"    [fix_page] added header include in {page_file.name}")
+
+        if changed:
+            page_file.write_text(text, encoding="utf-8")
+
+    # Step 3: Add forward declarations to native-aot.generated.header.h
+    for header_file in native_dir.rglob("native-aot.generated.header.h"):
+        text = header_file.read_text(encoding="utf-8")
+
+        # Check if we already added forward decls
+        if "// Forward declarations (pipeline fix" in text:
+            continue
+
+        # Find all extern "C" function calls in page files that need declarations
+        # These are functions like Chaos_IL2CPP_HotUpdate_RuntimeManager_*
+        # that are called but never declared in the page file TUs.
+        fwd_decls: set[str] = set()
+        for page_file in sorted(native_dir.rglob("native-aot.page-*.cpp")):
+            page_text = page_file.read_text(encoding="utf-8")
+            # Find function calls: Identifier(args) pattern where the identifier
+            # starts with an uppercase prefix (Chaos_IL2CPP_* or similar)
+            for m in _re.finditer(
+                    r'\b(Chaos_IL2CPP_\w+)\s*\(',
+                    page_text):
+                fn_name = m.group(1)
+                # Check if it has a declaration in this file
+                if _re.search(
+                        r'(?:extern\s+"C"\s+)?\b' + _re.escape(fn_name) + r'\s*\(',
+                        page_text[:m.start()]):
+                    continue
+                # Check if already in the header
+                if _re.search(
+                        r'\b' + _re.escape(fn_name) + r'\s*\(',
+                        text):
+                    continue
+                fwd_decls.add(fn_name)
+
+        if fwd_decls:
+            # Add forward declarations after the last #include in the header
+            decl_lines = ["", "// Forward declarations (pipeline fix: page-file extern \"C\" functions)"]
+            for fn_name in sorted(fwd_decls):
+                decl_lines.append(f'extern "C" void {fn_name}();')
+            text += "\n".join(decl_lines) + "\n"
+            header_file.write_text(text, encoding="utf-8")
+            print(f"    [fix_page] added {len(fwd_decls)} forward decls in {header_file.name}")
+
+        # Step 3b: Fix ambiguous TypeInfoV0 — the header declares bare `struct TypeInfoV0;`
+        # and `extern TypeInfoV0 ...` which causes C2872 when included from within a
+        # namespace block (page files live in `chaos::il2cpp::codegen::<Family>`).
+        # Qualify with the full namespace to avoid ambiguity with
+        # `chaos::il2cpp::common::TypeInfoV0` from type_info.h.
+        for header_file in native_dir.rglob("native-aot.generated.header.h"):
+            text = header_file.read_text(encoding="utf-8")
+            fixed = text.replace(
+                'struct TypeInfoV0;',
+                'struct chaos::il2cpp::common::TypeInfoV0;')
+            fixed = fixed.replace(
+                'extern TypeInfoV0 ',
+                'extern chaos::il2cpp::common::TypeInfoV0 ')
+            if fixed != text:
+                header_file.write_text(fixed, encoding="utf-8")
+                count = fixed.count('chaos::il2cpp::common::TypeInfoV0')
+                print(f"    [fix_page] qualified {count}x TypeInfoV0 to "
+                      f"chaos::il2cpp::common::TypeInfoV0 in {header_file.name}")
+
+        # Step 3c: Generate missing chaos_valuetype_* typedefs for external
+        # assembly value types. The converter emits these in function signatures
+        # (e.g. chaos_valuetype_Chaos_IL2CPP_Contracts_SubjectId) but does not
+        # emit the corresponding typedef. Scan chaos_generated_module.h and
+        # the page files, collect all unique chaos_valuetype_* identifiers,
+        # and add typedef CHAOS_IL2CPP_INT32 for each one not yet defined.
+        module_h_files = list(native_dir.rglob("chaos_generated_module.h"))
+        if module_h_files:
+            # Find all unique chaos_valuetype_* identifiers in generated output
+            all_vt: set[str] = set()
+            for pattern in ("chaos_generated_module.h", "chaos_generated_module.cpp",
+                            "native-aot.page-*.cpp", "native-aot.generated.cpp",
+                            "native-aot.generated.header.h"):
+                for f in native_dir.rglob(pattern):
+                    try:
+                        content = f.read_text(encoding="utf-8")
+                    except Exception:
+                        continue
+                    for m in _re.finditer(r'\bchaos_valuetype_\w+', content):
+                        all_vt.add(m.group())
+            if all_vt:
+                module_h = module_h_files[0]
+                text = module_h.read_text(encoding="utf-8")
+                # Check if already fixed
+                if "// chaos_valuetype typedefs (pipeline fix)" in text:
+                    pass  # already fixed
+                else:
+                    # Find which ones already have typedefs
+                    defined_vt: set[str] = set()
+                    for m in _re.finditer(
+                            r'typedef\s+\w+\s+(chaos_valuetype_\w+)', text):
+                        defined_vt.add(m.group(1))
+                    # Filter out already-defined ones and known type_info types
+                    missing = sorted(all_vt - defined_vt)
+                    if missing:
+                        typefix_lines = [
+                            "",
+                            "// chaos_valuetype typedefs (pipeline fix: missing value type aliases)",
+                            "// These are generated extern \"C\" value type names for which the",
+                            "// converter did not emit underlying typedefs. All are opaque 32-bit",
+                            "// value types in the managed ABI surface."]
+                        for vt_name in missing:
+                            typefix_lines.append(
+                                f"typedef CHAOS_IL2CPP_INT32 {vt_name};")
+                        insert_pos = text.find("#pragma once")
+                        if insert_pos == -1:
+                            insert_pos = 0
+                        else:
+                            # Insert after the includes following #pragma once
+                            rest = text[insert_pos:]
+                            include_end = rest.rfind("\n\n")
+                            if include_end == -1:
+                                include_end = len(rest)
+                            # Find a good insertion point: after last include in the header
+                            last_include = -1
+                            for m in _re.finditer(r'^#include.*$', text, _re.MULTILINE):
+                                last_include = max(last_include, m.end())
+                            insert_pos = last_include if last_include != -1 else len(text)
+                            # Make sure insert_pos is at a line boundary
+                            while insert_pos < len(text) and text[insert_pos] == '\n':
+                                insert_pos += 1
+                        text = (text[:insert_pos] + "\n".join(typefix_lines) +
+                                "\n" + text[insert_pos:])
+                        module_h.write_text(text, encoding="utf-8")
+                        print(f"    [fix_page] added {len(missing)} chaos_valuetype"
+                              f" typedefs in {module_h.name}")
+
+        # Step 3d: Rename duplicate function-pointer member names in
+        # chaos_generated_module.h. C++ structs disallow overloaded members
+        # (e.g. two `ctor` or two `Equals` with the same signature). The
+        # converter emits positional aggregate initializers in the .cpp, so
+        # uniquifying the .h member names is sufficient.
+        for module_h_file in module_h_files:
+            text = module_h_file.read_text(encoding="utf-8")
+            if "// overload rename (pipeline fix)" in text:
+                continue
+            # Find all struct X_t { ... } member blocks
+            # Pattern: `struct <name>_t { ... } <member>;`
+            fixed_text = text
+            seen_names: set[str] = set()
+            rename_map: dict[str, str] = {}
+            # Process each struct block
+            def _uniquify_block(block: str) -> str:
+                nonlocal seen_names, rename_map
+                lines = block.split("\n")
+                new_lines: list[str] = []
+                for line in lines:
+                    if "//" in line:
+                        new_lines.append(line)
+                        continue
+                    # Match function pointer member:  `type (*name)(params);`
+                    m = _re.match(
+                        r'^(\s*(?:\w+(?:\s*::\s*\w+)?(?:\s*\*)?)\s*\(\*)'
+                        r'(\w+)\)(.*)$', line)
+                    if m:
+                        name = m.group(2)
+                        if name in seen_names:
+                            # Rename duplicate
+                            counter = 1
+                            while f"{name}_{counter}" in seen_names:
+                                counter += 1
+                            new_name = f"{name}_{counter}"
+                            rename_map[name] = new_name
+                            line = (m.group(1) + new_name + ")" +
+                                    m.group(3))
+                            seen_names.add(new_name)
+                        else:
+                            seen_names.add(name)
+                    new_lines.append(line)
+                return "\n".join(new_lines)
+            # Process each struct block: struct X_t { ... } var;
+            block_pattern = _re.compile(
+                r'(struct\s+(\w+)_t\s*\{)(.*?)\}\s*(\w+)\s*;',
+                _re.DOTALL)
+            def _fix_block(m: _re.Match) -> str:
+                nonlocal seen_names
+                seen_names.clear()
+                rename_map.clear()
+                body = m.group(3)
+                fixed_body = _uniquify_block(body)
+                if rename_map:
+                    marker = ("\n    // overload rename (pipeline fix): "
+                              + ", ".join(f"{k}→{v}"
+                                          for k, v in rename_map.items()))
+                    fixed_body += marker
+                return m.group(1) + fixed_body + "} " + m.group(4) + ";"
+            fixed_text = block_pattern.sub(_fix_block, fixed_text)
+            if fixed_text != text:
+                module_h_file.write_text(fixed_text, encoding="utf-8")
+                print(f"    [fix_page] deduplicated overloaded members in"
+                      f" {module_h_file.name}")
+
+    # Step 4: Also update the codegen copy of the header (if exists)
+    codegen_dir = native_dir.parent / "codegen"
+    if codegen_dir.exists():
+        for header_file in codegen_dir.rglob("native-aot.generated.header.h"):
+            text = header_file.read_text(encoding="utf-8")
+            if "// Forward declarations (pipeline fix" in text:
+                continue
+            # Copy same forward decls from native version
+            native_headers = list(native_dir.rglob("native-aot.generated.header.h"))
+            if native_headers:
+                native_text = native_headers[0].read_text(encoding="utf-8")
+                fwd_marker = "// Forward declarations (pipeline fix"
+                fwd_start = native_text.find(fwd_marker)
+                if fwd_start != -1:
+                    text += "\n" + native_text[fwd_start:] + "\n"
+                    header_file.write_text(text, encoding="utf-8")
+                    print(f"    [fix_page] synced forward decls to codegen {header_file.name}")
+
+
 def _write_sentinel_dispatch(dispatch_cpp: Path) -> None:
     """Write a sentinel verification_dispatch.generated.cpp for cmake configure.
 
@@ -2025,6 +2297,7 @@ def _build_entry_exe(family_slug: str, *, verification: Path | None = None, conf
     _fix_eeclass_strings(native_dir)
     _fix_eeclass_registration(native_dir)
     _fix_forward_declarations(native_dir)
+    _fix_page_file_decls(native_dir)
     codegen_native_dir = v / family_slug / "codegen"
     if codegen_native_dir.exists():
         _fix_eeclass_strings(codegen_native_dir)
@@ -2248,8 +2521,9 @@ def run_family(family_slug: str, *, assembly_name: str = "System.Private.CoreLib
     _generate_supplemental_metadata(family_slug, mids, verification=verification)
 
     # Step 2: Build entry.exe from codegen/native-aot.generated.cpp → native/
-    print(f"  [2/3] Building entry.exe from codegen...")
-    if not _build_entry_exe(family_slug, verification=verification, config_tier=config_tier):
+    is_jit_build = (codegen_mode == "jit")
+    print(f"  [2/3] Building entry.exe from codegen (jit={is_jit_build})...")
+    if not _build_entry_exe(family_slug, verification=verification, config_tier=config_tier, is_jit=is_jit_build):
         result["steps"]["build_entry_exe"] = "FAILED"
         result["error"] = "entry.exe build failed"
         trace("family_entry_build_failed", family=family_slug)

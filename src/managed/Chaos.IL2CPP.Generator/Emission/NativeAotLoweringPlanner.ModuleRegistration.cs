@@ -80,6 +80,13 @@ public sealed partial class NativeAotLoweringPlanner
     /// Generates flat .rodata arrays: type index, method index, token->slot map,
     /// dispatch table, and a HotpatchModuleV0 bundle with a static init caller.
     ///
+    /// Uses ALL hotpatchable methods (not just reachable) so that hotpatch can
+    /// target any method in the module. Methods without ECMA tokens get
+    /// synthetic tokens (0x80000000 | syntheticIndex).
+    ///
+    /// The slot order MUST match BuildDispatchSlotMap (both use
+    /// GetHotpatchableMethods() with the same ordering).
+    ///
     /// Generated C++ pattern:
     /// <code>
     /// static constexpr HotpatchMethodEntryV0 s_hotpatch_methods[] = { ... };
@@ -97,7 +104,8 @@ public sealed partial class NativeAotLoweringPlanner
         IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods,
         MetadataRegistrationArtifact metadataRegistration)
     {
-        if (reachableMethods == null || reachableMethods.Count == 0)
+        var allMethods = GetHotpatchableMethods();
+        if (allMethods.Count == 0)
         {
             // No methods — emit nullptr so the linker always resolves the symbol.
             var emptyModel = new ScriptObject
@@ -111,8 +119,9 @@ public sealed partial class NativeAotLoweringPlanner
         var tokenLookup = new MetadataTokenLookup(metadataRegistration.Registrations);
 
         // Collect (type_name, type_namespace, method_name, token, native_symbol, param_count, subject_id) tuples.
+        int syntheticTokenCounter = 1;
         var entries = new List<(string TypeName, string TypeNamespace, string MethodName, uint Token, string NativeSymbol, int ParamCount, string SubjectId)>();
-        foreach (var method in reachableMethods)
+        foreach (var method in allMethods)
         {
             string typeSubjectId;
             try
@@ -121,7 +130,7 @@ public sealed partial class NativeAotLoweringPlanner
             }
             catch
             {
-                continue; // skip methods without declaring type
+                continue;
             }
 
             var typeName = GetTypeDisplayName(typeSubjectId);
@@ -129,7 +138,10 @@ public sealed partial class NativeAotLoweringPlanner
             var methodName = GetMethodName(method.SubjectId);
             uint token = tokenLookup.TryGetMethodToken(method.SubjectId);
             if (token == 0)
-                continue; // skip methods without metadata tokens
+            {
+                // Assign synthetic token matching BuildDispatchSlotMap allocation.
+                token = 0x80000000u | (uint)(syntheticTokenCounter++);
+            }
 
             entries.Add((typeName, typeNamespace, methodName, token, method.NativeSymbol, method.ParameterCount, method.SubjectId));
         }
@@ -146,7 +158,7 @@ public sealed partial class NativeAotLoweringPlanner
 
         // Determine kHotpatchKeepNative flag per-method.
         var methodsCallingExternal = new HashSet<string>(StringComparer.Ordinal);
-        foreach (var method in reachableMethods)
+        foreach (var method in allMethods)
         {
             foreach (var instruction in method.Instructions)
             {
@@ -242,7 +254,7 @@ public sealed partial class NativeAotLoweringPlanner
         if (_comInterfaceVtableData.Count > 0)
         {
             var seenTypes = new HashSet<string>(StringComparer.Ordinal);
-            foreach (var method in reachableMethods)
+            foreach (var method in allMethods)
             {
                 string declaringTypeSubjectId;
                 try { declaringTypeSubjectId = GetMethodDeclaringTypeSubjectId(method.SubjectId); }
@@ -539,7 +551,7 @@ public sealed partial class NativeAotLoweringPlanner
             sb.AppendLine("        {");
             sb.Append("            auto* attr = CHAOS_IL2CPP_NEW_GC(")
                 .Append(GetNativeTypeSymbol(attrSubjectId)).AppendLine(");");
-            sb.Append("            attr->header.type_info = &")
+            sb.Append("            attr->header.type_info = ")
                 .Append(GetNativeTypeInfoSymbol(attrSubjectId)).AppendLine(";");
 
             if (_vtableTypes?.Contains(attrSubjectId) == true)
@@ -763,7 +775,7 @@ public sealed partial class NativeAotLoweringPlanner
                 $"{{ CHAOS_IL2CPP_UINT16 __len; std::memcpy(&__len, p, 2); p += 2; auto* __rt = chaos::il2cpp::runtime_core::GetCurrentRuntimeState(); auto* __th = chaos::il2cpp::runtime_core::GetCurrentThreadState(); auto* __abi = chaos::il2cpp::runtime_core::GetRuntimeAbiV0(); attr->{fieldName} = (__abi != nullptr && __abi->string_new_utf8 != nullptr) ? reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__abi->string_new_utf8(__rt, __th, reinterpret_cast<const char*>(p), __len)) : 0; p += __len; }}",
 
             CustomAttributeLiteralKind.Type when value.Value is string typeSubjectId =>
-                $"{{ p += 4; attr->{fieldName} = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&{GetNativeTypeInfoSymbol(typeSubjectId)}); }}",
+                $"{{ p += 4; attr->{fieldName} = reinterpret_cast<CHAOS_IL2CPP_INTPTR>({GetNativeTypeInfoSymbol(typeSubjectId)}); }}",
 
             CustomAttributeLiteralKind.Type =>
                 $"{{ p += 4; attr->{fieldName} = 0; }}",

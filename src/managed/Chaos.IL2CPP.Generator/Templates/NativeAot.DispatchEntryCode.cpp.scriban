@@ -1,5 +1,8 @@
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
+// NOTE: JIT mode skips kAotMethods/kBenchmarkWrappers — dispatch goes
+// through direct_ptr (precode trampoline → JIT compilation).
+{{ if !is_jit_mode }}
 static void (*kAotMethods[{{ methods_count }}])() = {
 {{~ for method in methods ~}}
     reinterpret_cast<void(*)()>(&{{ method.native_symbol }}),
@@ -16,6 +19,7 @@ extern "C" void (*kBenchmarkWrappers[{{ methods_count }}])() = {
     []() { {{~ if method.param_count == 0 ~}}kAotMethods[{{ method.index }}]();{{~ else ~}}reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR{{~ for param in method.params offset:1 ~}}, CHAOS_IL2CPP_INTPTR{{~ end ~}})>(kAotMethods[{{ method.index }}])({{~ for param in method.params ~}}{{~ if param.is_string && default_string_id != 0 ~}}chaos_make_string_id_value({{ default_string_id }}ULL){{~ else if param.is_this ~}}reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_benchmark_this_sentinel){{~ else if param.is_byref ~}}([](){ static CHAOS_IL2CPP_UINT8 __b[sizeof(CHAOS_IL2CPP_INTPTR)] = {}; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__b); })(){{~ else ~}}0{{~ end ~}}{{~ if !for.last ~}}, {{~ end ~}}{{~ end ~}});{{~ end ~}} },
 {{~ end ~}}
 };
+{{~ end ~}}
 
 {{~ if subject_entries.size > 0 ~}}
 // ── Subject entry index mapping ─────────────────────────────────
@@ -32,7 +36,62 @@ extern "C" const int kSubjectEntryIndices[{{ subject_entries.size }}] = {
 {{~ end ~}}
 
 // Single-method dispatch via hotpatch dispatch table.
-// NOTE: Uses kBenchmarkWrappers (not raw kAotMethods) to ensure instance
+{{~ if is_jit_mode ~}}
+// JIT mode: calls entry.direct_ptr (precode trampoline → JIT compilation).
+// No hotpatch flag checks needed — direct_ptr is always valid.
+extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(
+    CHAOS_IL2CPP_INT32 chaos_entry_index)
+{
+    if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)
+        return -1;
+    auto& entry = s_hotpatch_entries[chaos_entry_index];
+    reinterpret_cast<void(*)()>(entry.direct_ptr)();
+    return 0;
+}
+
+// All-methods loop: run every method via direct_ptr.
+extern "C" CHAOS_IL2CPP_INT32 RunNativeAotAll()
+{
+    CHAOS_IL2CPP_INT32 result = 0;
+    for (int i = 0; i < kAotMethodCount; i++) {
+        auto& entry = s_hotpatch_entries[i];
+        reinterpret_cast<void(*)()>(entry.direct_ptr)();
+    }
+    return result;
+}
+
+// Fast benchmark dispatch: no setjmp, inline slot access.
+extern "C" CHAOS_IL2CPP_INT32 RunNativeAotBench(
+    CHAOS_IL2CPP_INT32 chaos_entry_index)
+{
+    if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)
+        return -1;
+    auto& entry = s_hotpatch_entries[chaos_entry_index];
+    reinterpret_cast<void(*)()>(entry.direct_ptr)();
+    return 0;
+}
+
+// Pure JIT benchmark: calls direct_ptr directly.
+extern "C" double BenchmarkMethod(
+    int chaos_entry_index, int iterations) {
+    if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)
+        return -1.0;
+    // One warmup call to trigger JIT compilation
+    {
+        auto& entry = s_hotpatch_entries[chaos_entry_index];
+        reinterpret_cast<void(*)()>(entry.direct_ptr)();
+    }
+    auto start = std::chrono::steady_clock::now();
+    for (int i = 0; i < iterations; i++) {
+        auto& entry = s_hotpatch_entries[chaos_entry_index];
+        reinterpret_cast<void(*)()>(entry.direct_ptr)();
+    }
+    auto end = std::chrono::steady_clock::now();
+    return std::chrono::duration<double, std::milli>(
+        end - start).count();
+}
+{{~ else ~}}
+// AOT mode: uses kBenchmarkWrappers (not raw kAotMethods) to ensure instance
 // methods receive a valid this-pointer sentinel and default argument values.
 extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(
     CHAOS_IL2CPP_INT32 chaos_entry_index)
@@ -103,3 +162,4 @@ extern "C" double BenchmarkMethod(
     return std::chrono::duration<double, std::milli>(
         end - start).count();
 }
+{{~ end ~}}

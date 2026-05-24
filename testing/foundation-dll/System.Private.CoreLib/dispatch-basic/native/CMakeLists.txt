@@ -19,14 +19,26 @@ set(CHAOS_PROJECT_ROOT "D:/agent/booming-il2cpp")
 set(CHAOS_CODEGEN_DIR "D:/agent/booming-il2cpp/testing/foundation-dll/System.Private.CoreLib/dispatch-basic/codegen")
 
 # Source files — codegen outputs to codegen/<AssemblyName>/generated/
-file(GLOB CHAOS_CODEGEN_CPP "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.generated.cpp")
+# Flat layout (single file): *Subjects/generated/native-aot.generated.cpp
+# Paged layout (large families): *Subjects/generated/generated/ (page files + module)
+file(GLOB CHAOS_CODEGEN_CPP
+    "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.generated.cpp"
+    "${CHAOS_CODEGEN_DIR}/*Subjects/generated/generated/native-aot.generated.cpp"
+    "${CHAOS_CODEGEN_DIR}/*Subjects/generated/generated/native-aot.page-*.cpp"
+    "${CHAOS_CODEGEN_DIR}/*Subjects/generated/generated/chaos_generated_module.cpp"
+)
 # Also search native/ (pipeline syncs codegen output there after convert-to-cpp)
-file(GLOB CHAOS_CODEGEN_NATIVE_CPP "${CMAKE_CURRENT_SOURCE_DIR}/*Subjects/generated/native-aot.generated.cpp")
-# Use codegen path if available, fall back to native path (avoids compiling both)
-if(CHAOS_CODEGEN_CPP)
-  set(CHAOS_AOT_GENERATED_CPP ${CHAOS_CODEGEN_CPP})
-else()
+file(GLOB CHAOS_CODEGEN_NATIVE_CPP
+    "${CMAKE_CURRENT_SOURCE_DIR}/*Subjects/generated/native-aot.generated.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/*Subjects/generated/generated/native-aot.generated.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/*Subjects/generated/generated/native-aot.page-*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/*Subjects/generated/generated/chaos_generated_module.cpp"
+)
+# Prefer native (pipeline post-processed) copies over codegen originals
+if(CHAOS_CODEGEN_NATIVE_CPP)
   set(CHAOS_AOT_GENERATED_CPP ${CHAOS_CODEGEN_NATIVE_CPP})
+else()
+  set(CHAOS_AOT_GENERATED_CPP ${CHAOS_CODEGEN_CPP})
 endif()
 file(GLOB CHAOS_NATIVE_STUBS "*.cpp")
 list(REMOVE_ITEM CHAOS_NATIVE_STUBS
