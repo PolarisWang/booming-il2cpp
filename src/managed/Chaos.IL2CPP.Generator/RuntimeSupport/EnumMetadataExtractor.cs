@@ -191,7 +191,7 @@ internal static class EnumMetadataExtractor
         }
 
         // ── Emit lookup function (by subject_id string) ────────────────────
-        sb.AppendLine("/// Lookup enum metadata by subject_id FNV-1a 32-bit hash.");
+        sb.AppendLine("/// Lookup enum metadata by subject_id FNV-1a 32-bit hash via dispatch table binary search.");
         sb.AppendLine("/// Returns nullptr if the type is unknown (fallback to reflection API).");
         sb.AppendLine("inline static const EnumMetadataTable* chaos_find_enum_metadata(");
         sb.AppendLine("    const char* subject_id) noexcept");
@@ -206,22 +206,8 @@ internal static class EnumMetadataExtractor
         sb.AppendLine("        h *= 16777619u;");
         sb.AppendLine("    }");
         sb.AppendLine();
-        sb.AppendLine("    switch (h) {");
-
-        // Sort by hash for deterministic output
-        foreach (var kv in hashToIdentifier.OrderBy(kv => kv.Key))
-        {
-            var subjectId = enumTypes.First(e => typeIds[e.SubjectId] == kv.Value).SubjectId;
-            sb.AppendLine($"        case 0x{kv.Key:X8}u: {{");
-            sb.AppendLine($"            // Verify: {EscapeCppString(subjectId)}");
-            sb.AppendLine($"            if (std::strcmp(subject_id, \"{EscapeCppString(subjectId)}\") != 0) break;");
-            sb.AppendLine($"            return &kEnumTable_{kv.Value};");
-            sb.AppendLine($"        }}");
-        }
-
-        sb.AppendLine("        default:");
-        sb.AppendLine("            return nullptr;");
-        sb.AppendLine("    }");
+        sb.AppendLine("    // Dispatch via FNV-24 hash binary search (sorted dispatch table)");
+        sb.AppendLine("    return chaos_dispatch_lookup(h & 0xFFFFFFu);");
         sb.AppendLine("}");
         sb.AppendLine();
 
