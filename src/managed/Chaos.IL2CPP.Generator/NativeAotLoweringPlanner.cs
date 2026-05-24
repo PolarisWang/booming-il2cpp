@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Globalization;
 using System.Linq;
@@ -810,51 +811,55 @@ extern ""C"" void ChaosJitRegisterAll() {}
         var moduleHeader = BuildGeneratedModuleHeader(methodsForLowering);
         var moduleSource = BuildGeneratedModuleSource(methodsForLowering);
 
+        // Build include list — most are unconditional; enum_metadata.generated.h
+        // is only included when there are enum types in the closure.
+        var includes_ = new List<string>
+        {
+            "<chaos/common.h>",
+            "<chaos/type_info.h>",
+            "\"runtime_core.h\"",
+            // Unified exception-handling macros (CHAOS_EH_TRY / CHAOS_EH_CATCH_BEGIN / etc.)
+            // Must appear after runtime_core.h which provides the EH backend type definitions.
+            "<chaos/eh.h>",
+            "\"com_ccw.h\"",
+            "\"codegen_bridge.h\"",
+            "\"module_registry.h\"",
+            "\"abi_manifest.h\"",
+            "\"hotpatch_table.h\"",
+            "\"runtime_vtable.h\"",
+            "\"runtime_instantiation.h\"",
+            "\"reflection_query_model.h\"",
+            "\"load_store_chaos_bridge.h\"",
+            // Interpreter dispatch for hotpatch-kept-native & flat-goto fallback
+            "\"interpreter_entry.h\"",
+            // GC write barrier (SATB pre-write barrier for reference-type field stores).
+            "<gc/gc_bgc_inline.h>",
+            // GC card table (post-write dirty card marking for generational GC).
+            "<gc/gc_card_table.h>",
+            // Common generated runtime prelude (shared header, ~200 lines
+            // of helper functions previously emitted inline in every file).
+            "<ChaosGeneratedRuntimePrelude.h>",
+            // Enum runtime stubs: lookup_cached_enum_name and ChaosEnum*
+            // extern "C" declarations — required by InlineShapeDescriptor
+            // expansions for enum.ToString/HasFlag/Format.
+            "\"enum_stubs.h\"",
+        };
+        // Only include enum_metadata.generated.h when there are enum types to serve.
+        // Saves ~500 KB of C++ parsing per translation unit when no enums are present.
+        if (!string.IsNullOrEmpty(enumMetaHeader))
+            includes_.Add("\"enum_metadata.generated.h\"");
+        // Native bridge headers (e.g., "convert.h") from external runtime
+        // helpers that map to direct native function calls.
+        includes_.AddRange(
+            externalRuntimeHelpers
+                .Select(h => h.DirectNativeHeader)
+                .Where(h => !string.IsNullOrEmpty(h))
+                .Distinct(StringComparer.Ordinal)
+                .Select(h => h!));
+
         return new NativeAotTemplateModel
         {
-            Includes =
-            [
-                "<chaos/common.h>",
-                "<chaos/type_info.h>",
-                "\"runtime_core.h\"",
-                // Unified exception-handling macros (CHAOS_EH_TRY / CHAOS_EH_CATCH_BEGIN / etc.)
-                // Must appear after runtime_core.h which provides the EH backend type definitions.
-                "<chaos/eh.h>",
-                "\"com_ccw.h\"",
-                "\"codegen_bridge.h\"",
-                "\"module_registry.h\"",
-                "\"abi_manifest.h\"",
-                "\"hotpatch_table.h\"",
-                "\"runtime_vtable.h\"",
-                "\"runtime_instantiation.h\"",
-                "\"reflection_query_model.h\"",
-                "\"load_store_chaos_bridge.h\"",
-                // Interpreter dispatch for hotpatch-kept-native & flat-goto fallback
-                "\"interpreter_entry.h\"",
-                // GC write barrier (SATB pre-write barrier for reference-type field stores).
-                "<gc/gc_bgc_inline.h>",
-                // GC card table (post-write dirty card marking for generational GC).
-                "<gc/gc_card_table.h>",
-                // Common generated runtime prelude (shared header, ~200 lines
-                // of helper functions previously emitted inline in every file).
-                "<ChaosGeneratedRuntimePrelude.h>",
-                // Pre-computed enum metadata tables for fast path in enum stubs.
-                // Always included when the file exists on disk — the old header
-                // survives rebuilds even when the codegen extractor has no data.
-                "\"enum_metadata.generated.h\"",
-                // Enum runtime stubs: lookup_cached_enum_name and ChaosEnum*
-                // extern "C" declarations — required by InlineShapeDescriptor
-                // expansions for enum.ToString/HasFlag/Format.
-                "\"enum_stubs.h\"",
-                // Native bridge headers (e.g., "convert.h") from external runtime
-                // helpers that map to direct native function calls.
-                ..externalRuntimeHelpers
-                    .Select(h => h.DirectNativeHeader)
-                    .Where(h => !string.IsNullOrEmpty(h))
-                    .Distinct(StringComparer.Ordinal)
-                    .Select(h => h!)
-                    .ToArray()
-            ],
+            Includes = includes_,
             ObjectModelCode = objectModelBuilder.ToString().TrimEnd(),
             TypeDeclarationsCode = BuildTypeDeclarationsCode(),
             GenericRegistrationCode = genericRegistrationHelperCode,

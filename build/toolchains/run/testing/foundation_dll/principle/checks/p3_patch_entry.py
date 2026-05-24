@@ -25,7 +25,7 @@ class P3PatchEntryCheck(PrincipleCheck):
             )
 
         dispatch_match = re.search(
-            r'static HotpatchEntryV0\s+\w+\[(\d+)\]\s*=\s*\{(.*?)\};',
+            r'(?:static|extern\s+"C")\s+HotpatchEntryV0\s+\w+\[(\d+)\]\s*=\s*\{(.*?)\};',
             cpp, re.DOTALL,
         )
         if not dispatch_match:
