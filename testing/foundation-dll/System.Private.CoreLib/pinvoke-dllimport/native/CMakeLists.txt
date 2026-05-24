@@ -4,7 +4,7 @@ set(CMAKE_CXX_STANDARD 20)
 
 # Compiler settings — /EHa needed for catch(...) to intercept C++ exceptions
 # thrown by generated code (throw chaos_managed_exception from unresolved calls).
-add_compile_options(/utf-8 /GS-)
+add_compile_options(/utf-8 /GS- /FS)
 add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
 add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
 
@@ -44,25 +44,19 @@ set(CHAOS_ENTRY_SOURCES
 )
 
 # Include directories
-# SDK include/ (via chaos::runtime) provides runtime headers for generated code.
-# Native stubs additionally need repo tree paths for internal headers
-# (abi_manifest, codegen_bridge, fast_frame_pool, string_table, reflection_api)
-# and third-party dependencies (fmt, unordered_dense).
+# SDK include/ (via chaos::runtime) provides most headers. runtime-core/ is
+# retained because runtime_core.h uses quoted includes for ~20 sibling headers
+# (exception_jmp.h, marshal_abi.h, etc.) not distributed in the SDK.
 set(CHAOS_ENTRY_INCLUDES
-    "${CHAOS_PROJECT_ROOT}/src/native/common"
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core"
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/gc"
-    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs"
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs"  # runtime_stubs for enum_stubs.h
     "${CHAOS_PROJECT_ROOT}/src/native/bootstrap"
     "${CHAOS_PROJECT_ROOT}/src/native/interpreter"
     "${CHAOS_PROJECT_ROOT}/src/native/interpreter/generated"
-    "${CHAOS_PROJECT_ROOT}/src/native/codegen"
     "${CHAOS_PROJECT_ROOT}/src/native/support"
     "${CHAOS_PROJECT_ROOT}/src/native/hot-update"
-    "${CHAOS_PROJECT_ROOT}/src/native"
-    "${CHAOS_PROJECT_ROOT}/third_party/fmt/include"
     "${CHAOS_PROJECT_ROOT}/third_party/unordered_dense/include"
-    "${CHAOS_PROJECT_ROOT}/contracts/native/v0"
     "${CHAOS_CODEGEN_DIR}/NumericAggregationSubjects/generated"
     "${CMAKE_CURRENT_SOURCE_DIR}"
 )

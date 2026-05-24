@@ -1,43 +1,10 @@
 {
   "assembly": "System.Text.Json",
   "mode": "family-entrypoint",
-  "total": 13,
-  "passed": 12,
-  "failed": 1,
+  "total": 1,
+  "passed": 1,
+  "failed": 0,
   "results": [
-    {
-      "family": "attributes",
-      "config_tier": "CHECK",
-      "steps": {},
-      "success": false,
-      "error": "no method subject IDs"
-    },
-    {
-      "family": "converter-factory",
-      "config_tier": "CHECK",
-      "steps": {
-        "build_subjects": "OK",
-        "convert_to_cpp": "OK",
-        "build_entry_exe": "OK"
-      },
-      "success": true,
-      "methodCount": 2,
-      "entryPointSubjectId": "",
-      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Text.Json\\converter-factory\\managed\\subjects\\build-output\\ConverterFactorySubjects.dll"
-    },
-    {
-      "family": "converters",
-      "config_tier": "CHECK",
-      "steps": {
-        "build_subjects": "OK",
-        "convert_to_cpp": "OK",
-        "build_entry_exe": "OK"
-      },
-      "success": true,
-      "methodCount": 9,
-      "entryPointSubjectId": "",
-      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Text.Json\\converters\\managed\\subjects\\build-output\\ConvertersSubjects.dll"
-    },
     {
       "family": "document-element",
       "config_tier": "CHECK",
@@ -50,124 +17,7 @@
       "methodCount": 69,
       "entryPointSubjectId": "",
       "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Text.Json\\document-element\\managed\\subjects\\build-output\\DocumentElementSubjects.dll"
-    },
-    {
-      "family": "metadata-typeinfo",
-      "config_tier": "CHECK",
-      "steps": {
-        "build_subjects": "OK",
-        "convert_to_cpp": "OK",
-        "build_entry_exe": "OK"
-      },
-      "success": true,
-      "methodCount": 39,
-      "entryPointSubjectId": "",
-      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Text.Json\\metadata-typeinfo\\managed\\subjects\\build-output\\MetadataTypeinfoSubjects.dll"
-    },
-    {
-      "family": "nodes",
-      "config_tier": "CHECK",
-      "steps": {
-        "build_subjects": "OK",
-        "convert_to_cpp": "OK",
-        "build_entry_exe": "OK"
-      },
-      "success": true,
-      "methodCount": 174,
-      "entryPointSubjectId": "",
-      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Text.Json\\nodes\\managed\\subjects\\build-output\\NodesSubjects.dll"
-    },
-    {
-      "family": "polymorphism-reference",
-      "config_tier": "CHECK",
-      "steps": {
-        "build_subjects": "OK",
-        "convert_to_cpp": "OK",
-        "build_entry_exe": "OK"
-      },
-      "success": true,
-      "methodCount": 8,
-      "entryPointSubjectId": "",
-      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Text.Json\\polymorphism-reference\\managed\\subjects\\build-output\\PolymorphismReferenceSubjects.dll"
-    },
-    {
-      "family": "reader",
-      "config_tier": "CHECK",
-      "steps": {
-        "build_subjects": "OK",
-        "convert_to_cpp": "OK",
-        "build_entry_exe": "OK"
-      },
-      "success": true,
-      "methodCount": 61,
-      "entryPointSubjectId": "",
-      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Text.Json\\reader\\managed\\subjects\\build-output\\ReaderSubjects.dll"
-    },
-    {
-      "family": "schema",
-      "config_tier": "CHECK",
-      "steps": {
-        "build_subjects": "OK",
-        "convert_to_cpp": "OK",
-        "build_entry_exe": "OK"
-      },
-      "success": true,
-      "methodCount": 2,
-      "entryPointSubjectId": "",
-      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Text.Json\\schema\\managed\\subjects\\build-output\\SchemaSubjects.dll"
-    },
-    {
-      "family": "serializer",
-      "config_tier": "CHECK",
-      "steps": {
-        "build_subjects": "OK",
-        "convert_to_cpp": "OK",
-        "build_entry_exe": "OK"
-      },
-      "success": true,
-      "methodCount": 104,
-      "entryPointSubjectId": "",
-      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Text.Json\\serializer\\managed\\subjects\\build-output\\SerializerSubjects.dll"
-    },
-    {
-      "family": "serializer-options",
-      "config_tier": "CHECK",
-      "steps": {
-        "build_subjects": "OK",
-        "convert_to_cpp": "OK",
-        "build_entry_exe": "OK"
-      },
-      "success": true,
-      "methodCount": 75,
-      "entryPointSubjectId": "",
-      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Text.Json\\serializer-options\\managed\\subjects\\build-output\\SerializerOptionsSubjects.dll"
-    },
-    {
-      "family": "source-generation-context",
-      "config_tier": "CHECK",
-      "steps": {
-        "build_subjects": "OK",
-        "convert_to_cpp": "OK",
-        "build_entry_exe": "OK"
-      },
-      "success": true,
-      "methodCount": 2,
-      "entryPointSubjectId": "",
-      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Text.Json\\source-generation-context\\managed\\subjects\\build-output\\SourceGenerationContextSubjects.dll"
-    },
-    {
-      "family": "writer",
-      "config_tier": "CHECK",
-      "steps": {
-        "build_subjects": "OK",
-        "convert_to_cpp": "OK",
-        "build_entry_exe": "OK"
-      },
-      "success": true,
-      "methodCount": 126,
-      "entryPointSubjectId": "",
-      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Text.Json\\writer\\managed\\subjects\\build-output\\WriterSubjects.dll"
     }
   ],
-  "timestamp": "2026-05-22T06:35:49"
+  "timestamp": "2026-05-24T17:57:56"
 }

@@ -76,14 +76,8 @@ extern "C" void CodegenStFld(void* obj, uint32_t field_idx, uint64_t value) noex
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::StFld");
     using namespace chaos::il2cpp::interpreter;
     using namespace chaos::il2cpp::runtime_core;
-    std::fprintf(stderr, "    [STDERR] CodegenStFld: obj=%p field=%u val=%llu\n",
-                 obj, field_idx, (unsigned long long)value);
-    std::fflush(stderr);
     if (obj == nullptr) return;
     auto* io = static_cast<InterpreterObject*>(obj);
-    std::fprintf(stderr, "    [STDERR] CodegenStFld: field_count=%u field_capacity=%u fields_ptr=%p inline=%p\n",
-                 io->fields.field_count_, io->fields.field_capacity_, io->fields.fields_ptr_, io->fields.inline_);
-    std::fflush(stderr);
     if (field_idx >= io->fields.size()) {
         io->fields.resize(field_idx + 1u);
     } else {
@@ -277,9 +271,13 @@ extern "C" void* CodegenGetTlab() noexcept {
 // We cache both __tls_index and tls_tlab's TLS-block offset at startup so
 // the JIT can emit the inline sequence without external symbol references.
 
-// __tls_index is defined by the MSVC linker/CRT.  Declared here for access
-// from the JIT library; resolved at link time against the CRT.
-extern "C" uint32_t __tls_index;
+// __tls_index is normally defined by the MSVC linker when it encounters .tls$
+// sections in linked objects.  However, in static-lib-heavy configurations the
+// linker may fail to extract TLS-section objects from static libraries and
+// therefore not synthesize __tls_index.  Define it explicitly as a fallback.
+// This is safe because InitTlsTlabInfo() caches __tls_index at startup and if
+// no JIT codegen ever emits inline TLS access, the value is never used.
+extern "C" uint32_t __tls_index = 0;
 
 namespace {
     // Cached values, computed once during InitTlsTlabInfo().
@@ -376,15 +374,9 @@ extern "C" void* CodegenNewObj(uint32_t type_token, uint32_t field_count) noexce
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::NewObj");
     using namespace chaos::il2cpp::interpreter;
     using namespace chaos::il2cpp::runtime_core;
-    std::fprintf(stderr, "    [STDERR] CodegenNewObj: sizeof(IO)=%zu type=%u fields=%u tlab=[%p,%p) cur=%p\n",
-                 sizeof(InterpreterObject), type_token, field_count,
-                 tls_tlab.start, tls_tlab.end, tls_tlab.current);
-    std::fflush(stderr);
     // Allocate through the GC heap so the object is tracked for GC scanning
     // and compaction.  GcAllocate returns zeroed memory.
     auto* obj = static_cast<InterpreterObject*>(GcAllocate(sizeof(InterpreterObject)));
-    std::fprintf(stderr, "    [STDERR] CodegenNewObj: obj=%p\n", obj);
-    std::fflush(stderr);
     if (obj == nullptr) return nullptr;
     // Manual init: GcAllocate zeroes everything, so we only need to point
     // fields_ptr_ to the inline buffer and set type_token.

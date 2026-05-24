@@ -123,6 +123,29 @@ public:
         return data_[offset];
     }
 
+    // ── VEX prefix encodings (x64 AVX/SSE 3-operand instructions) ────────
+
+    /// Emit VEX.66.0F 3-byte prefix (map=0x01, pp=01, 128-bit).
+    void EmitVEX_66_0F(uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+        EmitByte(0xC4);
+        EmitByte((~(dest >> 3) << 7) | (1 << 6) | (~(src2 >> 3) << 5) | 0x01);
+        EmitByte((0 << 7) | ((~src1 & 0xF) << 3) | (0 << 2) | 0x01);
+    }
+
+    /// Emit VEX.66.0F38 3-byte prefix (map=0x02, pp=01, 128-bit).
+    void EmitVEX_66_0F38(uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+        EmitByte(0xC4);
+        EmitByte((~(dest >> 3) << 7) | (1 << 6) | (~(src2 >> 3) << 5) | 0x02);
+        EmitByte((0 << 7) | ((~src1 & 0xF) << 3) | (0 << 2) | 0x01);
+    }
+
+    /// Emit VEX.66.0F3A 3-byte prefix (map=0x03, pp=01, 128-bit).
+    void EmitVEX_66_0F3A(uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+        EmitByte(0xC4);
+        EmitByte((~(dest >> 3) << 7) | (1 << 6) | (~(src2 >> 3) << 5) | 0x03);
+        EmitByte((0 << 7) | ((~src1 & 0xF) << 3) | (0 << 2) | 0x01);
+    }
+
     /// Get read-only pointer to the buffer contents (for testing).
     const uint8_t* Data() const noexcept { return data_; }
 

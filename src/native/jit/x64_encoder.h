@@ -881,6 +881,194 @@ inline void EmitXorpsRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
+// VEX / AVX prefix encoding — 3-byte VEX prefix (C4 + 2 payload bytes)
+// ═══════════════════════════════════════════════════════════════════════════
+//
+// VEX.66.0F → pp=01, mmmmm=00001   VEX.66.0F38 → pp=01, mmmmm=00010
+// VEX.66.0F3A → pp=01, mmmmm=00011
+// L=0 → 128-bit (XMM), L=1 → 256-bit (YMM)
+// W=0 → 32-bit operand, W=1 → 64-bit operand
+// vvvv encodes src1 (inverted) for 3-operand forms
+//
+// Encoding: C4 + [~R:1][~X:1][~B:1][mmmmm:5] + [W:1][~vvvv:4][L:1][pp:2]
+
+/// Emit 3-byte VEX prefix. For the common VEX.66.0F.WIG (pp=01, mmmmm=1, W=0).
+inline void EmitVEX(CodeBuffer& buf, uint8_t pp, uint8_t mmmmm, bool L,
+                    uint8_t r, uint8_t x, uint8_t b,
+                    uint8_t vvvv, bool W) noexcept {
+    buf.EmitByte(0xC4);
+    // Byte 2: [~R(1)][~X(1)][~B(1)][0(1)][mmmmm(4)] → top 3 bits inverted, bottom 5 = mmmmm
+    uint8_t nr = static_cast<uint8_t>(~((r >> 3) & 1) & 1);
+    uint8_t nx = static_cast<uint8_t>(~((x >> 3) & 1) & 1);
+    uint8_t nb = static_cast<uint8_t>(~((b >> 3) & 1) & 1);
+    buf.EmitByte(static_cast<uint8_t>(nr << 7 | nx << 6 | nb << 5 | (mmmmm & 0x1F)));
+    // Byte 3: [W(1)][~vvvv(4)][L(1)][pp(2)]
+    uint8_t nvvvv = static_cast<uint8_t>(~vvvv & 15);
+    buf.EmitByte(static_cast<uint8_t>((W ? 0x80 : 0) | (nvvvv << 3) | (L ? 4 : 0) | (pp & 3)));
+}
+
+/// Emit 3-byte VEX with VEX.66.0F (SSE2 map), WIG (W=0), 128-bit (L=0).
+inline void EmitVEX_66_0F(CodeBuffer& buf, uint8_t r, uint8_t b,
+                           uint8_t vvvv) noexcept {
+    EmitVEX(buf, 1, 0x01, false, r, 0, b, vvvv, false);
+}
+
+/// Emit 3-byte VEX with VEX.66.0F38 (SSSE3/SSE4.1 map), WIG, 128-bit.
+inline void EmitVEX_66_0F38(CodeBuffer& buf, uint8_t r, uint8_t b,
+                             uint8_t vvvv) noexcept {
+    EmitVEX(buf, 1, 0x02, false, r, 0, b, vvvv, false);
+}
+
+/// Emit 3-byte VEX with VEX.66.0F3A (SSE4.1 imm8 map), WIG, 128-bit.
+inline void EmitVEX_66_0F3A(CodeBuffer& buf, uint8_t r, uint8_t b,
+                             uint8_t vvvv) noexcept {
+    EmitVEX(buf, 1, 0x03, false, r, 0, b, vvvv, false);
+}
+
+// ── VEX 3-operand wrappers: vp<op> dest, src1, src2 —────────────────────
+// These match the SSE2 packed integer ops but with AVX 3-operand encoding.
+// ModRM.reg = dest, ModRM.rm = src2, VEX.vvvv = src1.
+
+#define CHAOS_VEX3_0F(name, opcode) \
+    buf.EmitVEX_66_0F(dest, src2, src1); \
+    buf.EmitByte(opcode); \
+    buf.EmitByte(ModRM(3, dest, src2))
+
+#define CHAOS_VEX3_0F38(name, opcode) \
+    buf.EmitVEX_66_0F38(dest, src2, src1); \
+    buf.EmitByte(opcode); \
+    buf.EmitByte(ModRM(3, dest, src2))
+
+#define CHAOS_VEX3_0F3A(name, opcode, imm) \
+    buf.EmitVEX_66_0F3A(dest, src2, src1); \
+    buf.EmitByte(opcode); \
+    buf.EmitByte(ModRM(3, dest, src2)); \
+    buf.EmitByte(imm)
+
+/// vpaddb xmm_dest, xmm_src1, xmm_src2 (packed byte add, 3-operand)
+inline void EmitVPaddbRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_VEX3_0F(paddb, 0xFC);
+}
+/// vpaddw xmm_dest, xmm_src1, xmm_src2
+inline void EmitVPaddwRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_VEX3_0F(paddw, 0xFD);
+}
+/// vpaddd xmm_dest, xmm_src1, xmm_src2
+inline void EmitVPadddRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_VEX3_0F(paddd, 0xFE);
+}
+/// vpaddq xmm_dest, xmm_src1, xmm_src2
+inline void EmitVPaddqRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_VEX3_0F(paddq, 0xD4);
+}
+/// vpsubb xmm_dest, xmm_src1, xmm_src2
+inline void EmitVPsubbRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_VEX3_0F(psubb, 0xF8);
+}
+/// vpsubw xmm_dest, xmm_src1, xmm_src2
+inline void EmitVPsubwRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_VEX3_0F(psubw, 0xF9);
+}
+/// vpsubd xmm_dest, xmm_src1, xmm_src2
+inline void EmitVPsubdRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_VEX3_0F(psubd, 0xFA);
+}
+/// vpsubq xmm_dest, xmm_src1, xmm_src2
+inline void EmitVPsubqRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_VEX3_0F(psubq, 0xFB);
+}
+/// vpmullw xmm_dest, xmm_src1, xmm_src2
+inline void EmitVPmullwRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_VEX3_0F(pmullw, 0xD5);
+}
+/// vpmuludq xmm_dest, xmm_src1, xmm_src2
+inline void EmitVPmuludqRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_VEX3_0F(pmuludq, 0xF4);
+}
+
+/// vpand xmm_dest, xmm_src1, xmm_src2
+inline void EmitVPandRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_VEX3_0F(pand, 0xDB);
+}
+/// vpor xmm_dest, xmm_src1, xmm_src2
+inline void EmitVPorRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_VEX3_0F(por, 0xEB);
+}
+/// vpxor xmm_dest, xmm_src1, xmm_src2
+inline void EmitVPxorRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_VEX3_0F(pxor, 0xEF);
+}
+/// vpandn xmm_dest, xmm_src1, xmm_src2
+inline void EmitVPandnRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_VEX3_0F(pandn, 0xDF);
+}
+
+/// vpcmpeqb xmm_dest, xmm_src1, xmm_src2
+inline void EmitVPcmpeqbRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_VEX3_0F(pcmpeqb, 0x74);
+}
+/// vpcmpeqw xmm_dest, xmm_src1, xmm_src2
+inline void EmitVPcmpeqwRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_VEX3_0F(pcmpeqw, 0x75);
+}
+/// vpcmpeqd xmm_dest, xmm_src1, xmm_src2
+inline void EmitVPcmpeqdRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_VEX3_0F(pcmpeqd, 0x76);
+}
+/// vpcmpeqq xmm_dest, xmm_src1, xmm_src2
+inline void EmitVPcmpeqqRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_VEX3_0F38(pcmpeqq, 0x29);
+}
+/// vpcmpgtb xmm_dest, xmm_src1, xmm_src2
+inline void EmitVPcmpgtbRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_VEX3_0F(pcmpgtb, 0x64);
+}
+/// vpcmpgtw xmm_dest, xmm_src1, xmm_src2
+inline void EmitVPcmpgtwRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_VEX3_0F(pcmpgtw, 0x65);
+}
+/// vpcmpgtd xmm_dest, xmm_src1, xmm_src2
+inline void EmitVPcmpgtdRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_VEX3_0F(pcmpgtd, 0x66);
+}
+/// vpcmpgtq xmm_dest, xmm_src1, xmm_src2
+inline void EmitVPcmpgtqRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_VEX3_0F38(pcmpgtq, 0x37);
+}
+
+/// vpshufd xmm_dest, xmm_src, imm8 (src2 = src for 3-operand form, src1 ignored)
+inline void EmitVPshufdRR(CodeBuffer& buf, uint8_t dest, uint8_t src, uint8_t imm) noexcept {
+    // VEX.66.0F.WIG + 0x70 + ModRM + imm8; vvvv encodes src1 (treated as don't-care here)
+    buf.EmitVEX_66_0F(dest, src, 0);
+    buf.EmitByte(0x70);
+    buf.EmitByte(ModRM(3, dest, src));
+    buf.EmitByte(imm);
+}
+
+/// vpabsb xmm_dest, xmm_src (2-operand, but uses VEX encoding)
+inline void EmitVPabsbRR(CodeBuffer& buf, uint8_t dest, uint8_t src) noexcept {
+    buf.EmitVEX_66_0F38(dest, src, dest);  // vvvv = dest (src1 = dest for 2-op form)
+    buf.EmitByte(0x1C);
+    buf.EmitByte(ModRM(3, dest, src));
+}
+/// vpabsw xmm_dest, xmm_src
+inline void EmitVPabswRR(CodeBuffer& buf, uint8_t dest, uint8_t src) noexcept {
+    buf.EmitVEX_66_0F38(dest, src, dest);
+    buf.EmitByte(0x1D);
+    buf.EmitByte(ModRM(3, dest, src));
+}
+/// vpabsd xmm_dest, xmm_src
+inline void EmitVPabsdRR(CodeBuffer& buf, uint8_t dest, uint8_t src) noexcept {
+    buf.EmitVEX_66_0F38(dest, src, dest);
+    buf.EmitByte(0x1E);
+    buf.EmitByte(ModRM(3, dest, src));
+}
+
+#undef CHAOS_VEX3_0F
+#undef CHAOS_VEX3_0F38
+#undef CHAOS_VEX3_0F3A
+
+// ═══════════════════════════════════════════════════════════════════════════
 // SSE2 packed integer arithmetic (Padd*, Psub*, Pmul*)
 // ═══════════════════════════════════════════════════════════════════════════
 

@@ -2,8 +2,8 @@
   "family": "boxing-unboxing-casts",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-24T17:15:25",
-  "duration_ms": 23669,
+  "timestamp": "2026-05-24T17:55:13",
+  "duration_ms": 28651,
   "overall_status": "passed",
   "stages": {
     "codegen": {
@@ -15,7 +15,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\boxing-unboxing-casts\\managed\\subjects\\build-output\\BoxingUnboxingCastsSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 23254
+      "duration_ms": 28138
     },
     "jit_codegen": {
       "stage": "jit_codegen",
@@ -37,7 +37,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 379
+      "duration_ms": 438
     },
     "fact_jit": {
       "stage": "fact_jit",
@@ -52,7 +52,21 @@
         }
       },
       "errors": [],
-      "duration_ms": 33
+      "duration_ms": 34
+    },
+    "hotupdate": {
+      "stage": "hotupdate",
+      "status": "passed",
+      "summary": "11/11 passed, 0 failed (stub=1)",
+      "details": {
+        "passedMethods": 11,
+        "failedMethods": 0,
+        "totalMethods": 11,
+        "realMethods": 11,
+        "stubMethods": 1
+      },
+      "errors": [],
+      "duration_ms": 37
     }
   },
   "coverage": {
@@ -79,7 +93,13 @@
       }
     },
     "performance": {},
-    "hotupdate": {},
+    "hotupdate": {
+      "aotFunctional": {
+        "passedMethods": 11,
+        "failedMethods": 0,
+        "totalMethods": 11
+      }
+    },
     "keyRatios": {
       "nativeFasterRatio": 0,
       "irExpansionRatio": 0.57,

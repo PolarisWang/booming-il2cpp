@@ -2,8 +2,8 @@
   "family": "delegate-core-invocation",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-24T17:15:49",
-  "duration_ms": 23626,
+  "timestamp": "2026-05-24T17:55:42",
+  "duration_ms": 28725,
   "overall_status": "passed",
   "stages": {
     "codegen": {
@@ -15,7 +15,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\delegate-core-invocation\\managed\\subjects\\build-output\\DelegateCoreInvocationSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 23229
+      "duration_ms": 28194
     },
     "jit_codegen": {
       "stage": "jit_codegen",
@@ -37,7 +37,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 366
+      "duration_ms": 451
     },
     "fact_jit": {
       "stage": "fact_jit",
@@ -52,7 +52,21 @@
         }
       },
       "errors": [],
-      "duration_ms": 28
+      "duration_ms": 40
+    },
+    "hotupdate": {
+      "stage": "hotupdate",
+      "status": "passed",
+      "summary": "20/20 passed, 0 failed (stub=4)",
+      "details": {
+        "passedMethods": 20,
+        "failedMethods": 0,
+        "totalMethods": 20,
+        "realMethods": 20,
+        "stubMethods": 4
+      },
+      "errors": [],
+      "duration_ms": 36
     }
   },
   "coverage": {
@@ -79,7 +93,13 @@
       }
     },
     "performance": {},
-    "hotupdate": {},
+    "hotupdate": {
+      "aotFunctional": {
+        "passedMethods": 20,
+        "failedMethods": 0,
+        "totalMethods": 20
+      }
+    },
     "keyRatios": {
       "nativeFasterRatio": 0,
       "irExpansionRatio": 0.45,

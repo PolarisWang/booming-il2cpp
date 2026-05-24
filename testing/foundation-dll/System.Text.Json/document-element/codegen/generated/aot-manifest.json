@@ -1,0 +1,426 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_6:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_7:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_8:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_9:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_10:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_11:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_12:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_13:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_14:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_15:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_16:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_17:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_18:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_19:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_20:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_21:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_22:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_23:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_24:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_25:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_26:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_27:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_28:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_29:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_30:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_31:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_32:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_33:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_34:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_35:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_36:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_37:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_38:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_39:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_40:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_41:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_42:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_43:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_44:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_45:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_46:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_47:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_48:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_49:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_50:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_51:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_52:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_53:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_54:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_55:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_56:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_57:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_58:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_59:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_60:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_61:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_62:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_63:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_64:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_65:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_66:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_67:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "method",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_68:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "DocumentElementSubjects",
+      "subjectKind": "field",
+      "subjectId": "DocumentElementSubjects/DocumentElementSubjects::_exitCode",
+      "reason": "instance-field-state"
+    }
+  ]
+}

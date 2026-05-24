@@ -24,6 +24,28 @@ enum class IntrinsicId : uint8_t {
     kMathMinInt32,
     kMathMaxInt32,
     kArrayLength,
+    // Vector128<T> operations
+    kVector128Add,
+    kVector128Sub,
+    kVector128Mul,
+    kVector128And,
+    kVector128Or,
+    kVector128Xor,
+    kVector128AndNot,
+    kVector128Equals,
+    kVector128Shuffle,
+    kVector128Abs,
+    kVector128Negate,
+    kVector128Zero,
+    kVector128Create,
+    kVector128CreateScalar,
+    kVector128Extract,
+    kVector128Insert,
+    kVector128Load,
+    kVector128Store,
+    // BitOperations
+    kBitOpsPopCount,
+    kBitOpsLeadingZeroCount,
 };
 
 // ── Intrinsic table entry ──────────────────────────────────────────────
