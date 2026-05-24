@@ -1,0 +1,36 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "EhStressSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "EhStressSubjects_EhStressSubjects_Subject_0",
+          "subjectId": "EhStressSubjects/EhStressSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "EhStressSubjects_EhStressSubjects_Subject_1",
+          "subjectId": "EhStressSubjects/EhStressSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "EhStressSubjects_EhStressSubjects_Subject_2",
+          "subjectId": "EhStressSubjects/EhStressSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "EhStressSubjects_EhStressSubjects_Subject_3",
+          "subjectId": "EhStressSubjects/EhStressSubjects::Subject_3:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

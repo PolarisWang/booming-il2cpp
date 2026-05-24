@@ -149,7 +149,7 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 	// this line is reached only if caller skipped materialization.
 	if (chaos_is_string_id(chaos_value))
 	{
-		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(&chaos_mt_System_Private_CoreLib_System_String.hot, chaos_array->element_type_info);
+		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(chaos_mt_System_Private_CoreLib_System_String.AsTypeInfoHot(), chaos_array->element_type_info);
 	}
 
 	auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
@@ -461,13 +461,13 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 
 	static const TypeInfoHot* const s_type_info_ptrs[10] = {
 		nullptr,
-		&chaos_mt_DispatchBasicSubjects_DispatchBasicSubjects.hot,
+		chaos_mt_DispatchBasicSubjects_DispatchBasicSubjects.AsTypeInfoHot(),
 		nullptr,
 		nullptr,
 		nullptr,
-		&chaos_mt_DispatchBasicSubjects_Calculator.hot,
-		&chaos_mt_DispatchBasicSubjects_StatusProvider.hot,
-		&chaos_mt_DispatchBasicSubjects_BasicImpl.hot,
+		chaos_mt_DispatchBasicSubjects_Calculator.AsTypeInfoHot(),
+		chaos_mt_DispatchBasicSubjects_StatusProvider.AsTypeInfoHot(),
+		chaos_mt_DispatchBasicSubjects_BasicImpl.AsTypeInfoHot(),
 		nullptr,
 		nullptr,
 	};
@@ -643,6 +643,9 @@ extern "C" int32_t kChaosExternalRuntimeCount = 3;
 // (no method AOT entries for this module)
 // ── Dispatch table (kAotMethods[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
+// NOTE: JIT mode skips kAotMethods/kBenchmarkWrappers — dispatch goes
+// through direct_ptr (precode trampoline → JIT compilation).
+
 static void (*kAotMethods[18])() = {
 	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_0),
 	reinterpret_cast<void(*)()>(&DispatchBasicSubjects_DispatchBasicSubjects_Subject_1),
@@ -705,7 +708,7 @@ extern "C" const int kSubjectEntryIndices[5] = {
 };
 
 // Single-method dispatch via hotpatch dispatch table.
-// NOTE: Uses kBenchmarkWrappers (not raw kAotMethods) to ensure instance
+// AOT mode: uses kBenchmarkWrappers (not raw kAotMethods) to ensure instance
 // methods receive a valid this-pointer sentinel and default argument values.
 extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(
 	CHAOS_IL2CPP_INT32 chaos_entry_index)
@@ -1382,7 +1385,7 @@ extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_0(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1413,54 +1416,34 @@ extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_1(void)
 
 	CHAOS_EH_TRY
 			{
-				// Inlined: DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchAdd:System.Int32()
+				auto& _d12 = s_hotpatch_entries[12];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d12)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d12))
 				{
-					auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_DispatchBasicSubjects_Calculator, {});
-					chaos_object->header.type_info = &chaos_mt_DispatchBasicSubjects_Calculator.hot;
-					DispatchBasicSubjects_Calculator__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-					_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d12.method_key, nullptr, &_d_hpresult);
 				}
-				chaos_locals[1] = _s0;
-				_s0 = chaos_locals[1];
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(20);
-				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(7);
+				else
 				{
-					// Inlined: DispatchBasicSubjects/Calculator::Add:System.Int32(System.Int32,System.Int32)
-					auto chaos_inline_arg_2 = _s2;
-					auto chaos_inline_arg_1 = _s1;
-					auto chaos_inline_arg_0 = _s0;
-					_s0 = chaos_inline_arg_1;
-					_s1 = chaos_inline_arg_2;
-					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
+					_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd();
 				}
-				chaos_locals[2] = _s0;
-				// br (handled via structured EH branches)
-				_s0 = chaos_locals[2];
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 			}
 			{
-				// Inlined: DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchAdd:System.Int32()
+				auto& _d12 = s_hotpatch_entries[12];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d12)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d12))
 				{
-					auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_DispatchBasicSubjects_Calculator, {});
-					chaos_object->header.type_info = &chaos_mt_DispatchBasicSubjects_Calculator.hot;
-					DispatchBasicSubjects_Calculator__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-					_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d12.method_key, nullptr, &_d_hpresult);
 				}
-				chaos_locals[1] = _s1;
-				_s1 = chaos_locals[1];
-				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(20);
-				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(7);
+				else
 				{
-					// Inlined: DispatchBasicSubjects/Calculator::Add:System.Int32(System.Int32,System.Int32)
-					auto chaos_inline_arg_2 = _s3;
-					auto chaos_inline_arg_1 = _s2;
-					auto chaos_inline_arg_0 = _s1;
-					_s1 = chaos_inline_arg_1;
-					_s2 = chaos_inline_arg_2;
-					_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s1), static_cast<CHAOS_IL2CPP_INT32>(_s2)));
+					_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd();
 				}
-				chaos_locals[2] = _s1;
-				// br (handled via structured EH branches)
-				_s1 = chaos_locals[2];
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
@@ -1478,7 +1461,7 @@ extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_1(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1509,54 +1492,34 @@ extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_2(void)
 
 	CHAOS_EH_TRY
 			{
-				// Inlined: DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchSub:System.Int32()
+				auto& _d13 = s_hotpatch_entries[13];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d13)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d13))
 				{
-					auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_DispatchBasicSubjects_Calculator, {});
-					chaos_object->header.type_info = &chaos_mt_DispatchBasicSubjects_Calculator.hot;
-					DispatchBasicSubjects_Calculator__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-					_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d13.method_key, nullptr, &_d_hpresult);
 				}
-				chaos_locals[1] = _s0;
-				_s0 = chaos_locals[1];
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(50);
-				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(8);
+				else
 				{
-					// Inlined: DispatchBasicSubjects/Calculator::Subtract:System.Int32(System.Int32,System.Int32)
-					auto chaos_inline_arg_2 = _s2;
-					auto chaos_inline_arg_1 = _s1;
-					auto chaos_inline_arg_0 = _s0;
-					_s0 = chaos_inline_arg_1;
-					_s1 = chaos_inline_arg_2;
-					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapSub(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
+					_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub();
 				}
-				chaos_locals[2] = _s0;
-				// br (handled via structured EH branches)
-				_s0 = chaos_locals[2];
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 			}
 			{
-				// Inlined: DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchSub:System.Int32()
+				auto& _d13 = s_hotpatch_entries[13];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d13)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d13))
 				{
-					auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_DispatchBasicSubjects_Calculator, {});
-					chaos_object->header.type_info = &chaos_mt_DispatchBasicSubjects_Calculator.hot;
-					DispatchBasicSubjects_Calculator__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-					_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d13.method_key, nullptr, &_d_hpresult);
 				}
-				chaos_locals[1] = _s1;
-				_s1 = chaos_locals[1];
-				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(50);
-				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(8);
+				else
 				{
-					// Inlined: DispatchBasicSubjects/Calculator::Subtract:System.Int32(System.Int32,System.Int32)
-					auto chaos_inline_arg_2 = _s3;
-					auto chaos_inline_arg_1 = _s2;
-					auto chaos_inline_arg_0 = _s1;
-					_s1 = chaos_inline_arg_1;
-					_s2 = chaos_inline_arg_2;
-					_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapSub(static_cast<CHAOS_IL2CPP_INT32>(_s1), static_cast<CHAOS_IL2CPP_INT32>(_s2)));
+					_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub();
 				}
-				chaos_locals[2] = _s1;
-				// br (handled via structured EH branches)
-				_s1 = chaos_locals[2];
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
@@ -1574,7 +1537,7 @@ extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_2(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1605,42 +1568,34 @@ extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_3(void)
 
 	CHAOS_EH_TRY
 			{
-				// Inlined: DispatchBasicSubjects/DispatchBasicNativeEntry::TestDualGetStatus:System.Int32()
+				auto& _d11 = s_hotpatch_entries[11];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d11)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d11))
 				{
-					auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_DispatchBasicSubjects_StatusProvider, {});
-					chaos_object->header.type_info = &chaos_mt_DispatchBasicSubjects_StatusProvider.hot;
-					DispatchBasicSubjects_StatusProvider__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-					_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d11.method_key, nullptr, &_d_hpresult);
 				}
-				chaos_locals[1] = _s0;
-				_s0 = chaos_locals[1];
+				else
 				{
-					// Inlined: DispatchBasicSubjects/StatusProvider::GetStatusCode:System.Int32()
-					auto chaos_inline_arg_0 = _s0;
-					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(200);
+					_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus();
 				}
-				chaos_locals[2] = _s0;
-				// br (handled via structured EH branches)
-				_s0 = chaos_locals[2];
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 			}
 			{
-				// Inlined: DispatchBasicSubjects/DispatchBasicNativeEntry::TestDualGetStatus:System.Int32()
+				auto& _d11 = s_hotpatch_entries[11];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d11)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d11))
 				{
-					auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_DispatchBasicSubjects_StatusProvider, {});
-					chaos_object->header.type_info = &chaos_mt_DispatchBasicSubjects_StatusProvider.hot;
-					DispatchBasicSubjects_StatusProvider__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-					_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d11.method_key, nullptr, &_d_hpresult);
 				}
-				chaos_locals[1] = _s1;
-				_s1 = chaos_locals[1];
+				else
 				{
-					// Inlined: DispatchBasicSubjects/StatusProvider::GetStatusCode:System.Int32()
-					auto chaos_inline_arg_0 = _s1;
-					_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(200);
+					_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus();
 				}
-				chaos_locals[2] = _s1;
-				// br (handled via structured EH branches)
-				_s1 = chaos_locals[2];
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
@@ -1658,7 +1613,7 @@ extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_3(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1689,42 +1644,34 @@ extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_4(void)
 
 	CHAOS_EH_TRY
 			{
-				// Inlined: DispatchBasicSubjects/DispatchBasicNativeEntry::TestIUnknownGetValue:System.Int32()
+				auto& _d14 = s_hotpatch_entries[14];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d14)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d14))
 				{
-					auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_DispatchBasicSubjects_BasicImpl, {});
-					chaos_object->header.type_info = &chaos_mt_DispatchBasicSubjects_BasicImpl.hot;
-					DispatchBasicSubjects_BasicImpl__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-					_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d14.method_key, nullptr, &_d_hpresult);
 				}
-				chaos_locals[1] = _s0;
-				_s0 = chaos_locals[1];
+				else
 				{
-					// Inlined: DispatchBasicSubjects/BasicImpl::GetValue:System.Int32()
-					auto chaos_inline_arg_0 = _s0;
-					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+					_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue();
 				}
-				chaos_locals[2] = _s0;
-				// br (handled via structured EH branches)
-				_s0 = chaos_locals[2];
+				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 			}
 			{
-				// Inlined: DispatchBasicSubjects/DispatchBasicNativeEntry::TestIUnknownGetValue:System.Int32()
+				auto& _d14 = s_hotpatch_entries[14];
+				CHAOS_IL2CPP_INT32 _d_hpresult{};
+				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d14)
+					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d14))
 				{
-					auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_DispatchBasicSubjects_BasicImpl, {});
-					chaos_object->header.type_info = &chaos_mt_DispatchBasicSubjects_BasicImpl.hot;
-					DispatchBasicSubjects_BasicImpl__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-					_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+						_d14.method_key, nullptr, &_d_hpresult);
 				}
-				chaos_locals[1] = _s1;
-				_s1 = chaos_locals[1];
+				else
 				{
-					// Inlined: DispatchBasicSubjects/BasicImpl::GetValue:System.Int32()
-					auto chaos_inline_arg_0 = _s1;
-					_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+					_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue();
 				}
-				chaos_locals[2] = _s1;
-				// br (handled via structured EH branches)
-				_s1 = chaos_locals[2];
+				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
@@ -1742,7 +1689,7 @@ extern "C" void DispatchBasicSubjects_DispatchBasicSubjects_Subject_4(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1858,99 +1805,71 @@ extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_Run
 		{
 			case 0:
 				{
-					// Inlined: DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchAdd:System.Int32()
+					auto& _d12 = s_hotpatch_entries[12];
+					CHAOS_IL2CPP_INT32 _d_hpresult{};
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d12)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d12))
 					{
-						auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_DispatchBasicSubjects_Calculator, {});
-						chaos_object->header.type_info = &chaos_mt_DispatchBasicSubjects_Calculator.hot;
-						DispatchBasicSubjects_Calculator__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-						_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d12.method_key, nullptr, &_d_hpresult);
 					}
-					chaos_locals[3] = _s0;
-					_s0 = chaos_locals[3];
-					_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(20);
-					_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(7);
+					else
 					{
-						// Inlined: DispatchBasicSubjects/Calculator::Add:System.Int32(System.Int32,System.Int32)
-						auto chaos_inline_arg_2 = _s2;
-						auto chaos_inline_arg_1 = _s1;
-						auto chaos_inline_arg_0 = _s0;
-						_s0 = chaos_inline_arg_1;
-						_s1 = chaos_inline_arg_2;
-						_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
+						_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchAdd();
 					}
-					chaos_locals[4] = _s0;
-					// br (handled via structured EH branches)
-					_s0 = chaos_locals[4];
+					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 				}
 				chaos_locals[2] = _s0;
 			case 1:
 				{
-					// Inlined: DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchSub:System.Int32()
+					auto& _d13 = s_hotpatch_entries[13];
+					CHAOS_IL2CPP_INT32 _d_hpresult{};
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d13)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d13))
 					{
-						auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_DispatchBasicSubjects_Calculator, {});
-						chaos_object->header.type_info = &chaos_mt_DispatchBasicSubjects_Calculator.hot;
-						DispatchBasicSubjects_Calculator__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-						_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d13.method_key, nullptr, &_d_hpresult);
 					}
-					chaos_locals[3] = _s0;
-					_s0 = chaos_locals[3];
-					_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(50);
-					_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(8);
+					else
 					{
-						// Inlined: DispatchBasicSubjects/Calculator::Subtract:System.Int32(System.Int32,System.Int32)
-						auto chaos_inline_arg_2 = _s2;
-						auto chaos_inline_arg_1 = _s1;
-						auto chaos_inline_arg_0 = _s0;
-						_s0 = chaos_inline_arg_1;
-						_s1 = chaos_inline_arg_2;
-						_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapSub(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
+						_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_TestIDispatchSub();
 					}
-					chaos_locals[4] = _s0;
-					// br (handled via structured EH branches)
-					_s0 = chaos_locals[4];
+					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 				}
 				chaos_locals[2] = _s0;
 			case 2:
 				{
-					// Inlined: DispatchBasicSubjects/DispatchBasicNativeEntry::TestDualGetStatus:System.Int32()
+					auto& _d11 = s_hotpatch_entries[11];
+					CHAOS_IL2CPP_INT32 _d_hpresult{};
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d11)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d11))
 					{
-						auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_DispatchBasicSubjects_StatusProvider, {});
-						chaos_object->header.type_info = &chaos_mt_DispatchBasicSubjects_StatusProvider.hot;
-						DispatchBasicSubjects_StatusProvider__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-						_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d11.method_key, nullptr, &_d_hpresult);
 					}
-					chaos_locals[3] = _s0;
-					_s0 = chaos_locals[3];
+					else
 					{
-						// Inlined: DispatchBasicSubjects/StatusProvider::GetStatusCode:System.Int32()
-						auto chaos_inline_arg_0 = _s0;
-						_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(200);
+						_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_TestDualGetStatus();
 					}
-					chaos_locals[4] = _s0;
-					// br (handled via structured EH branches)
-					_s0 = chaos_locals[4];
+					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 				}
 				chaos_locals[2] = _s0;
 			case 3:
 			{
 				{
-					// Inlined: DispatchBasicSubjects/DispatchBasicNativeEntry::TestIUnknownGetValue:System.Int32()
+					auto& _d14 = s_hotpatch_entries[14];
+					CHAOS_IL2CPP_INT32 _d_hpresult{};
+					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d14)
+						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d14))
 					{
-						auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_DispatchBasicSubjects_BasicImpl, {});
-						chaos_object->header.type_info = &chaos_mt_DispatchBasicSubjects_BasicImpl.hot;
-						DispatchBasicSubjects_BasicImpl__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
-						_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+							_d14.method_key, nullptr, &_d_hpresult);
 					}
-					chaos_locals[3] = _s0;
-					_s0 = chaos_locals[3];
+					else
 					{
-						// Inlined: DispatchBasicSubjects/BasicImpl::GetValue:System.Int32()
-						auto chaos_inline_arg_0 = _s0;
-						_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
+						_d_hpresult = DispatchBasicSubjects_DispatchBasicNativeEntry_TestIUnknownGetValue();
 					}
-					chaos_locals[4] = _s0;
-					// br (handled via structured EH branches)
-					_s0 = chaos_locals[4];
+					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 				}
 				chaos_locals[2] = _s0;
 				break;
@@ -1980,7 +1899,7 @@ extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_Tes
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_DispatchBasicSubjects_StatusProvider, {});
-		chaos_object->header.type_info = &chaos_mt_DispatchBasicSubjects_StatusProvider.hot;
+		chaos_object->header.type_info = chaos_mt_DispatchBasicSubjects_StatusProvider.AsTypeInfoHot();
 		DispatchBasicSubjects_StatusProvider__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
@@ -2011,7 +1930,7 @@ extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_Tes
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_DispatchBasicSubjects_Calculator, {});
-		chaos_object->header.type_info = &chaos_mt_DispatchBasicSubjects_Calculator.hot;
+		chaos_object->header.type_info = chaos_mt_DispatchBasicSubjects_Calculator.AsTypeInfoHot();
 		DispatchBasicSubjects_Calculator__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
@@ -2048,7 +1967,7 @@ extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_Tes
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_DispatchBasicSubjects_Calculator, {});
-		chaos_object->header.type_info = &chaos_mt_DispatchBasicSubjects_Calculator.hot;
+		chaos_object->header.type_info = chaos_mt_DispatchBasicSubjects_Calculator.AsTypeInfoHot();
 		DispatchBasicSubjects_Calculator__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
@@ -2083,7 +2002,7 @@ extern "C" CHAOS_IL2CPP_INT32 DispatchBasicSubjects_DispatchBasicNativeEntry_Tes
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_DispatchBasicSubjects_BasicImpl, {});
-		chaos_object->header.type_info = &chaos_mt_DispatchBasicSubjects_BasicImpl.hot;
+		chaos_object->header.type_info = chaos_mt_DispatchBasicSubjects_BasicImpl.AsTypeInfoHot();
 		DispatchBasicSubjects_BasicImpl__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}

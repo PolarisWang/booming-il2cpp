@@ -272,6 +272,12 @@ void HotpatchNameRegistry::SetPatchedBySlot(uint32_t module_id, uint32_t slot, b
 
 // ── Global singleton ──────────────────────────────────────────────────
 
+static ModuleRegisteredCallback g_module_registered_cb = nullptr;
+
+void SetModuleRegisteredCallback(ModuleRegisteredCallback cb) noexcept {
+    g_module_registered_cb = cb;
+}
+
 HotpatchNameRegistry& GetHotpatchNameRegistry() noexcept {
     static HotpatchNameRegistry g_hotpatch_name_registry;
     return g_hotpatch_name_registry;
@@ -279,6 +285,11 @@ HotpatchNameRegistry& GetHotpatchNameRegistry() noexcept {
 
 void RegisterHotpatchModule(const HotpatchModuleV0* module) noexcept {
     GetHotpatchNameRegistry().RegisterModule(module);
+
+    // Notify PatchLoader to retry deferred patches.
+    if (g_module_registered_cb != nullptr) {
+        g_module_registered_cb();
+    }
 }
 
 // P0.1: Reverse P/Invoke wrapper registry.

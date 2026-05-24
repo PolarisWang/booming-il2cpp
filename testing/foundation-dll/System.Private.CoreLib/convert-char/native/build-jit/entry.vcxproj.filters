@@ -25,7 +25,10 @@
     <ClCompile Include="D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\convert-char\native\simd_tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\convert-char\native\ConvertCharSubjects\generated\native-aot.generated.cpp">
+    <ClCompile Include="D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\convert-char\native\ConvertCharSubjects\generated\generated\chaos_generated_module.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\convert-char\native\ConvertCharSubjects\generated\generated\native-aot.generated.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

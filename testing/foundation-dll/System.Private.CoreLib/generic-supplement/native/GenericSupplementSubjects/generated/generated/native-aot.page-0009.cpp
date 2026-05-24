@@ -18,7 +18,7 @@
 #include <ChaosGeneratedRuntimePrelude.h>
 #include "enum_metadata.generated.h"
 #include "enum_stubs.h"
-#include "generated/native-aot.generated.header.h"
+#include "native-aot.generated.header.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(

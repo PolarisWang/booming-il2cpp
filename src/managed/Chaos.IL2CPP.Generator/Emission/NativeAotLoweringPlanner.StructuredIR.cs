@@ -1185,7 +1185,7 @@ public sealed partial class NativeAotLoweringPlanner
                     builder.AppendLine(inner + "if (chaos_header != nullptr)");
                     builder.AppendLine(inner + "{");
                     builder.AppendLine(inner +
-                        "    if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &" +
+                        "    if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), " +
                         typeInfoSym + "))");
                     builder.AppendLine(inner + "    { CHAOS_EH_RETHROW; }");
                     builder.AppendLine(inner + "}");

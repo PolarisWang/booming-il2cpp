@@ -1659,7 +1659,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine($"{indentation}{{");
 		builder.AppendLine($"{indentation}    const auto chaos_value = {ConsumeEvalStackValueExpression()};");
 		builder.AppendLine($"{indentation}    auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC({GetNativeBoxTypeSymbol(requiredTargetReference.SubjectId)}, {{}});");
-		builder.AppendLine($"{indentation}    chaos_boxed->header.type_info = &{GetNativeBoxTypeInfoSymbol(requiredTargetReference.SubjectId)};");
+		builder.AppendLine($"{indentation}    chaos_boxed->header.type_info = {GetNativeBoxTypeInfoSymbol(requiredTargetReference.SubjectId)};");
 		if (RequiresStructuredValueTypePayload(requiredTargetReference))
 		{
 			builder.AppendLine($"{indentation}    auto* chaos_payload = chaos_resolve_managed_value_pointer<{GetNativeValueTypeSymbol(requiredTargetReference.SubjectId)}>(chaos_value);");
@@ -1749,15 +1749,15 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 		else if (requiredTargetReference.TypeShape == AotCoreIrTypeShapeKind.InterfaceType)
 		{
-			builder.AppendLine($"{indentation}        if (!chaos_does_type_implement_interface(chaos_object_get_type_info(chaos_header), &{GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)}))");
+			builder.AppendLine($"{indentation}        if (!chaos_does_type_implement_interface(chaos_object_get_type_info(chaos_header), {GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)}))");
 		}
 		else if (requiredTargetReference.TypeShape == AotCoreIrTypeShapeKind.ReferenceType)
 		{
-			builder.AppendLine($"{indentation}        if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &{GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)}))");
+			builder.AppendLine($"{indentation}        if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), {GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)}))");
 		}
 		else
 		{
-			builder.AppendLine($"{indentation}        if (chaos_object_get_type_info(chaos_header) != &{GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)} && chaos_object_get_type_info(chaos_header)->stable_id != (&{GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)})->stable_id)");
+			builder.AppendLine($"{indentation}        if (chaos_object_get_type_info(chaos_header) != {GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)} && chaos_object_get_type_info(chaos_header)->stable_id != ({GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)})->stable_id)");
 		}
 		builder.AppendLine($"{indentation}        {{");
 		builder.AppendLine($"{indentation}            CHAOS_IL2CPP_FAIL();");
@@ -1790,15 +1790,15 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 		else if (requiredTargetReference.TypeShape == AotCoreIrTypeShapeKind.InterfaceType)
 		{
-			builder.AppendLine($"{indentation}        chaos_matches = chaos_does_type_implement_interface(chaos_object_get_type_info(chaos_header), &{GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)});");
+			builder.AppendLine($"{indentation}        chaos_matches = chaos_does_type_implement_interface(chaos_object_get_type_info(chaos_header), {GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)});");
 		}
 		else if (requiredTargetReference.TypeShape == AotCoreIrTypeShapeKind.ReferenceType)
 		{
-			builder.AppendLine($"{indentation}        chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &{GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)});");
+			builder.AppendLine($"{indentation}        chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), {GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)});");
 		}
 		else
 		{
-			builder.AppendLine($"{indentation}        chaos_matches = chaos_object_get_type_info(chaos_header) == &{GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)} || chaos_object_get_type_info(chaos_header)->stable_id == (&{GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)})->stable_id;");
+			builder.AppendLine($"{indentation}        chaos_matches = chaos_object_get_type_info(chaos_header) == {GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)} || chaos_object_get_type_info(chaos_header)->stable_id == ({GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)})->stable_id;");
 		}
 		builder.AppendLine($"{indentation}    }}");
 		EmitEvalStackPush(builder, indentation + "    ", "chaos_matches ? chaos_value : 0");
@@ -2552,7 +2552,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 			builder.AppendLine(indentation + $"    const auto chaos_method_ptr = {ConsumeEvalStackValueExpression()};");
 			builder.AppendLine(indentation + $"    const auto chaos_target = {ConsumeEvalStackValueExpression()};");
 			builder.AppendLine($"{indentation}    auto* chaos_object = CHAOS_IL2CPP_NEW_GC({GetNativeTypeSymbol(requiredTargetReference.SubjectId)}, {{}});");
-			builder.AppendLine($"{indentation}    chaos_object->header.type_info = &{GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)};");
+			builder.AppendLine($"{indentation}    chaos_object->header.type_info = {GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)};");
 			builder.AppendLine(indentation + "    chaos_object->chaos_delegate_target = chaos_target;");
 			builder.AppendLine(indentation + "    chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;");
 			EmitEvalStackPush(builder, indentation + "    ", "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object)");
@@ -2625,7 +2625,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 				}
 			}
 			builder.AppendLine($"{indentation}    auto* chaos_object = CHAOS_IL2CPP_NEW_GC({GetNativeTypeSymbol(requiredTargetReference.SubjectId)}, {{}});");
-			builder.AppendLine($"{indentation}    chaos_object->header.type_info = &{GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)};");
+			builder.AppendLine($"{indentation}    chaos_object->header.type_info = {GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)};");
 			var ctorArgs2 = FormatAbiInvocationArgumentList(constructorTarget.ParameterAbis);
 			if (ctorArgs2.StartsWith("chaos_arg_0", StringComparison.Ordinal))
 				ctorArgs2 = "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object)" + ctorArgs2.Substring(11);
@@ -2655,7 +2655,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		for (int _i = 0; _i < fallbackArgCount; _i++)
 		    ConsumeEvalStackValueExpression();
 		builder.AppendLine($"{indentation}    auto* chaos_object = CHAOS_IL2CPP_NEW_GC({GetNativeTypeSymbol(requiredTargetReference.SubjectId)}, {{}});");
-		builder.AppendLine($"{indentation}    chaos_object->header.type_info = &{GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)};");
+		builder.AppendLine($"{indentation}    chaos_object->header.type_info = {GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)};");
 		if (TypeHasFinalizer(requiredTargetReference.SubjectId))
 		{
 		    builder.AppendLine($"{indentation}    chaos::il2cpp::runtime_core::chaos_gc_register_finalizable(chaos_object);");
@@ -3161,7 +3161,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		StringBuilder stringBuilder4 = stringBuilder;
 		handler = new StringBuilder.AppendInterpolatedStringHandler(36, 2, stringBuilder);
 		handler.AppendFormatted(indentation);
-		handler.AppendLiteral("    chaos_string->header.type_info = &");
+		handler.AppendLiteral("    chaos_string->header.type_info = ");
 		handler.AppendFormatted(GetNativeTypeInfoSymbol("System.Private.CoreLib/System.String"));
 		handler.AppendLiteral(";");
 		stringBuilder4.AppendLine(ref handler);

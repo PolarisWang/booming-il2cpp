@@ -157,6 +157,46 @@ extern "C" void GenericSupplementSubjects_GenericSupplementSubjects_Subject_1(vo
 extern "C" void GenericSupplementSubjects_GenericSupplementSubjects_Subject_2(void);
 extern "C" void GenericSupplementSubjects_GenericSupplementSubjects_Subject_3(void);
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" CHAOS_IL2CPP_INT32 GenericSupplementSubjects_GenericSupplementNativeEntry_TestGenericInstantiation(void);
+extern "C" CHAOS_IL2CPP_INT32 GenericSupplementSubjects_GenericSupplementNativeEntry_TestSupplementalMetadataRoundtrip(void);
+extern "C" CHAOS_IL2CPP_INT32 GenericSupplementSubjects_GenericSupplementNativeEntry_TestTypeLookupBySubjectId(void);
+extern "C" CHAOS_IL2CPP_INT32 GenericSupplementSubjects_GenericSupplementNativeEntry_TestTypeLookupByToken(void);
+extern "C" void GenericSupplementSubjects_GenericSupplementSubjects_Subject_0(void);
+extern "C" void GenericSupplementSubjects_GenericSupplementSubjects_Subject_1(void);
+extern "C" void GenericSupplementSubjects_GenericSupplementSubjects_Subject_2(void);
+extern "C" void GenericSupplementSubjects_GenericSupplementSubjects_Subject_3(void);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" CHAOS_IL2CPP_INT32 GenericSupplementSubjects_GenericSupplementNativeEntry_TestGenericInstantiation(void);
+extern "C" CHAOS_IL2CPP_INT32 GenericSupplementSubjects_GenericSupplementNativeEntry_TestSupplementalMetadataRoundtrip(void);
+extern "C" CHAOS_IL2CPP_INT32 GenericSupplementSubjects_GenericSupplementNativeEntry_TestTypeLookupBySubjectId(void);
+extern "C" CHAOS_IL2CPP_INT32 GenericSupplementSubjects_GenericSupplementNativeEntry_TestTypeLookupByToken(void);
+extern "C" void GenericSupplementSubjects_GenericSupplementSubjects_Subject_0(void);
+extern "C" void GenericSupplementSubjects_GenericSupplementSubjects_Subject_1(void);
+extern "C" void GenericSupplementSubjects_GenericSupplementSubjects_Subject_2(void);
+extern "C" void GenericSupplementSubjects_GenericSupplementSubjects_Subject_3(void);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" CHAOS_IL2CPP_INT32 GenericSupplementSubjects_GenericSupplementNativeEntry_TestGenericInstantiation(void);
+extern "C" CHAOS_IL2CPP_INT32 GenericSupplementSubjects_GenericSupplementNativeEntry_TestSupplementalMetadataRoundtrip(void);
+extern "C" CHAOS_IL2CPP_INT32 GenericSupplementSubjects_GenericSupplementNativeEntry_TestTypeLookupBySubjectId(void);
+extern "C" CHAOS_IL2CPP_INT32 GenericSupplementSubjects_GenericSupplementNativeEntry_TestTypeLookupByToken(void);
+extern "C" void GenericSupplementSubjects_GenericSupplementSubjects_Subject_0(void);
+extern "C" void GenericSupplementSubjects_GenericSupplementSubjects_Subject_1(void);
+extern "C" void GenericSupplementSubjects_GenericSupplementSubjects_Subject_2(void);
+extern "C" void GenericSupplementSubjects_GenericSupplementSubjects_Subject_3(void);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" CHAOS_IL2CPP_INT32 GenericSupplementSubjects_GenericSupplementNativeEntry_TestGenericInstantiation(void);
+extern "C" CHAOS_IL2CPP_INT32 GenericSupplementSubjects_GenericSupplementNativeEntry_TestSupplementalMetadataRoundtrip(void);
+extern "C" CHAOS_IL2CPP_INT32 GenericSupplementSubjects_GenericSupplementNativeEntry_TestTypeLookupBySubjectId(void);
+extern "C" CHAOS_IL2CPP_INT32 GenericSupplementSubjects_GenericSupplementNativeEntry_TestTypeLookupByToken(void);
+extern "C" void GenericSupplementSubjects_GenericSupplementSubjects_Subject_0(void);
+extern "C" void GenericSupplementSubjects_GenericSupplementSubjects_Subject_1(void);
+extern "C" void GenericSupplementSubjects_GenericSupplementSubjects_Subject_2(void);
+extern "C" void GenericSupplementSubjects_GenericSupplementSubjects_Subject_3(void);
+
 namespace chaos::il2cpp::codegen::GenericSupplementSubjects {
 
 // Bring runtime_core and jit declarations into scope for unqualified lookup

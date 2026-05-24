@@ -424,7 +424,124 @@ static void DestroyPatchContext(PatchContext* ctx) {
     memory_domain::DomainFreeTagged(ctx);
 }
 
-// ── Public API ──────────────────────────────────────────────────────────
+// ── Global deferred patch queue ──────────────────────────────────────────
+// Patches with unsatisfied dependencies (multi-module scenario) are stored
+// here and retried when a new module registers in HotpatchNameRegistry.
+
+namespace {
+
+struct DeferredPatchEntry {
+    const void*     data;               // copy of patch data
+    size_t          size;               // data size
+    const char*     host_type_name;     // optional host type name override
+    const char* const* host_method_names; // optional host method name overrides
+    uint32_t        retry_count;        // number of retry attempts
+    bool            applied;            // true when successfully applied
+};
+
+static CHAOS_IL2CPP_UNORDERED_DENSE_MAP_IDENTITY(uintptr_t, DeferredPatchEntry) g_deferred_patches;
+
+// Address of RegisterHotpatchModule used as a callback trigger.
+// Set in TryApplyDeferredPatches to detect new module registrations.
+static uint32_t g_last_module_count = 0;
+
+} // anonymous namespace
+
+// Retry all deferred patches. Called after each RegisterHotpatchModule.
+// Returns the number of patches successfully applied.
+uint32_t TryApplyDeferredPatches() noexcept
+{
+    auto& registry = GetHotpatchNameRegistry();
+    uint32_t current_count = static_cast<uint32_t>(registry.ModuleCount());
+    if (current_count == g_last_module_count)
+        return 0; // no new modules registered
+
+    g_last_module_count = current_count;
+    uint32_t applied_count = 0;
+
+    for (auto& [key, entry] : g_deferred_patches)
+    {
+        if (entry.applied)
+            continue;
+
+        // Re-validate dependencies: check if all dependency modules are now registered.
+        const auto* header = static_cast<const PatchDataHeader*>(entry.data);
+        bool all_deps_satisfied = true;
+
+        if (header->version >= 3 && header->dependency_count > 0)
+        {
+            const auto* dep_entries = reinterpret_cast<const PatchDataDependency*>(
+                reinterpret_cast<const uint8_t*>(header) + header->dependency_offset);
+
+            for (uint32_t di = 0; di < header->dependency_count; ++di)
+            {
+                const char* dep_name = PatchData_String(header, dep_entries[di].assembly_name_offset);
+                if (dep_name == nullptr || dep_name[0] == '\0')
+                    continue;
+
+                bool found = false;
+                for (size_t mi = 0; mi < registry.ModuleCount(); ++mi)
+                {
+                    const auto* mod = registry.GetModuleByIndex(mi);
+                    if (mod != nullptr && mod->module_name != nullptr &&
+                        std::strcmp(mod->module_name, dep_name) == 0)
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found)
+                {
+                    // Optional dependency: skip without blocking.
+                    if (dep_entries[di].min_version == 0)
+                        continue;
+
+                    all_deps_satisfied = false;
+                    break;
+                }
+            }
+        }
+
+        if (!all_deps_satisfied)
+        {
+            entry.retry_count++;
+            continue;
+        }
+
+        // Dependencies satisfied — apply the patch now.
+        // We can't recursively call ApplyPatchFromMemory since that would
+        // create a new PatchContext. Instead, inline the patching logic
+        // for the deferred entry.
+        auto* ctx = ApplyPatchFromMemory(entry.data, entry.size,
+                                          entry.host_type_name,
+                                          entry.host_method_names);
+        if (ctx != nullptr)
+        {
+            entry.applied = true;
+            applied_count++;
+            HOTPATCH_DIAG("DIAG[DEFERRED]: applied deferred patch (retries=%u)\n",
+                static_cast<unsigned>(entry.retry_count));
+        }
+        else
+        {
+            entry.retry_count++;
+        }
+    }
+
+    return applied_count;
+}
+
+void InitializeMultiModulePatchSupport() noexcept
+{
+    static bool initialized = false;
+    if (initialized) return;
+    initialized = true;
+
+    SetModuleRegisteredCallback([]() noexcept {
+        TryApplyDeferredPatches();
+    });
+}
 
 PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
                                     const char* host_type_name,
@@ -434,11 +551,12 @@ PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
     auto* header = static_cast<const PatchDataHeader*>(data);
     HOTPATCH_DIAG("DIAG[APFM]: magic=%x ver=%u\n", header->magic, header->version);
 
-    // Validate magic and version (accept v1 or v2).
+    // Validate magic and version (accept v1, v2, or v3).
     if (header->magic != PATCH_DATA_MAGIC) return nullptr;
-    if (header->version != 1 && header->version != 2) return nullptr;
-    // v1 header: 112 bytes, v2 header: 124 bytes
-    uint32_t min_header = (header->version == 1) ? 112 : sizeof(PatchDataHeader);
+    if (header->version != 1 && header->version != 2 && header->version != 3) return nullptr;
+    // v1 header: 112 bytes, v2 header: 124 bytes, v3 header: 132 bytes
+    uint32_t min_header = (header->version == 1) ? 112 :
+                          (header->version == 2) ? 124 : sizeof(PatchDataHeader);
     if (header->header_size < min_header) return nullptr;
     HOTPATCH_DIAG("DIAG[APFM]: validation OK (v%u header_size=%u)\n", header->version, header->header_size);
 
@@ -449,6 +567,86 @@ PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
         expected_size = ir_section_end;
     if (size < expected_size) return nullptr;
     HOTPATCH_DIAG("DIAG[APFM]: size OK\n");
+
+    // ── Multi-module dependency validation (v3+) ───────────────────────
+    // Check that all declared dependencies have a registered module in the
+    // HotpatchNameRegistry. If a required dependency (min_version > 0) is
+    // missing, queue this patch for deferred application.
+    // Optional dependencies (min_version == 0) are informational — the
+    // PatchDataExtractor emits all AssemblyRef entries as dependencies,
+    // and system/framework references won't have a matching module in the
+    // registry. Only hotpatch module dependencies need to be verified.
+    if (header->version >= 3 && header->dependency_count > 0)
+    {
+        auto& registry = GetHotpatchNameRegistry();
+        const auto* dep_entries = reinterpret_cast<const PatchDataDependency*>(
+            reinterpret_cast<const uint8_t*>(header) + header->dependency_offset);
+        bool all_deps_satisfied = true;
+
+        for (uint32_t di = 0; di < header->dependency_count; ++di)
+        {
+            const char* dep_name = PatchData_String(header, dep_entries[di].assembly_name_offset);
+            if (dep_name == nullptr || dep_name[0] == '\0')
+            {
+                HOTPATCH_DIAG("DIAG[APFM]: dependency %u has empty name, skipping\n",
+                    static_cast<unsigned>(di));
+                continue;
+            }
+
+            // Verify that a registered module matches this dependency.
+            // We check by scanning registered module assembly names (module_name field).
+            bool found = false;
+            for (size_t mi = 0; mi < registry.ModuleCount(); ++mi)
+            {
+                const auto* mod = registry.GetModuleByIndex(mi);
+                if (mod != nullptr && mod->module_name != nullptr &&
+                    std::strcmp(mod->module_name, dep_name) == 0)
+                {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found)
+            {
+                // Optional dependency (min_version == 0): not found in registry,
+                // likely a system/framework reference — skip without blocking.
+                if (dep_entries[di].min_version == 0)
+                {
+                    HOTPATCH_DIAG("DIAG[APFM]: optional dependency '%s' not in registry, skipping\n",
+                        dep_name);
+                    continue;
+                }
+
+                // Required dependency — must be satisfied or we defer.
+                HOTPATCH_DIAG("DIAG[APFM]: missing required dependency '%s' for multi-module patch\n",
+                    dep_name);
+                all_deps_satisfied = false;
+                break;
+            }
+        }
+
+        if (!all_deps_satisfied)
+        {
+            // Queue this patch for deferred application.
+            // Store a copy of the patch data so it survives if the original
+            // mapping is unmapped before the dependency arrives.
+            HOTPATCH_DIAG("DIAG[APFM]: deferred patch queued (dependencies not yet loaded)\n");
+
+            auto* data_copy = static_cast<uint8_t*>(
+                memory_domain::DomainCurrentAllocateTagged(size));
+            if (data_copy == nullptr)
+                return nullptr;
+
+            std::memcpy(data_copy, data, size);
+
+            uintptr_t key = reinterpret_cast<uintptr_t>(data_copy);
+            g_deferred_patches[key] = DeferredPatchEntry{
+                data_copy, size, host_type_name, host_method_names, 0, false
+            };
+            return nullptr;
+        }
+    }
 
     // Create context.
     auto* ctx = CreatePatchContext(header, size);

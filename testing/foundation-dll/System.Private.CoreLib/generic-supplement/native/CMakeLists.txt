@@ -34,11 +34,11 @@ file(GLOB CHAOS_CODEGEN_NATIVE_CPP
     "${CMAKE_CURRENT_SOURCE_DIR}/*Subjects/generated/generated/native-aot.page-*.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/*Subjects/generated/generated/chaos_generated_module.cpp"
 )
-# Use codegen path if available, fall back to native path (avoids compiling both)
-if(CHAOS_CODEGEN_CPP)
-  set(CHAOS_AOT_GENERATED_CPP ${CHAOS_CODEGEN_CPP})
-else()
+# Prefer native (pipeline post-processed) copies over codegen originals
+if(CHAOS_CODEGEN_NATIVE_CPP)
   set(CHAOS_AOT_GENERATED_CPP ${CHAOS_CODEGEN_NATIVE_CPP})
+else()
+  set(CHAOS_AOT_GENERATED_CPP ${CHAOS_CODEGEN_CPP})
 endif()
 file(GLOB CHAOS_NATIVE_STUBS "*.cpp")
 list(REMOVE_ITEM CHAOS_NATIVE_STUBS

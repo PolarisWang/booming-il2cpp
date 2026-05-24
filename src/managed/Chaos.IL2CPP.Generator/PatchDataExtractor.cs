@@ -450,6 +450,14 @@ public sealed class PatchDataExtractor
         var bodyOff = Align4(off); off = bodyOff + Pad4((uint)bodyData.Length);
         var irOff = off;           off = irOff + Pad4((uint)(aotCoreIrSection?.Length ?? 0));
         var regIrOff = off;        // reg_ir section always comes after IR (empty for now, runtime falls back to JSON)
+        var depOff = Align4(off);  // dependency section after reg_ir (empty for now)
+
+        // Build dependency entries from AssemblyRef entries.
+        // Each dependency uses the same assembly name string already in the string heap.
+        // min_version = 0 means optional/informational — PatchLoader skips missing deps.
+        var deps = new PatchDataDependency[asmRefs.Length];
+        for (int i = 0; i < asmRefs.Length; i++)
+            deps[i] = new PatchDataDependency { assembly_name_offset = asmRefs[i].name_offset, min_version = 0 };
 
         var blobOffsets = ComputeBlobOffsets(blobHeap);
         RemapBlobOffsets(fieldDefs, blobOffsets);
@@ -458,7 +466,7 @@ public sealed class PatchDataExtractor
 
         var hdr = new FileHeader
         {
-            magic = Magic, version = 2, header_size = hdrSize,
+            magic = Magic, version = 3, header_size = hdrSize,
             string_heap_offset = strOff, string_heap_size = (uint)stringHeap.Length,
             blob_heap_offset = blbOff, blob_heap_size = (uint)blobHeap.Length,
             user_string_heap_offset = usOff, user_string_heap_size = (uint)userStrings.Length,
@@ -473,6 +481,7 @@ public sealed class PatchDataExtractor
             aot_core_ir_offset = irOff, aot_core_ir_size = (uint)(aotCoreIrSection?.Length ?? 0),
             aot_core_ir_count = aotCoreIrCount,
             reg_ir_offset = 0, reg_ir_size = 0, reg_ir_count = 0,
+            dependency_offset = depOff, dependency_count = (uint)deps.Length,
         };
         WriteStruct(bw, hdr);
 
@@ -489,6 +498,8 @@ public sealed class PatchDataExtractor
         AlignStream(bw, (uint)bodyData.Length);
         if (aotCoreIrSection != null)
             bw.Write(aotCoreIrSection);
+        if (deps.Length > 0)
+            WriteStructArray(bw, deps);
     }
 
     private static uint[] ComputeBlobOffsets(byte[] blobHeap)
@@ -596,7 +607,11 @@ public sealed class PatchDataExtractor
         public uint body_data_offset, body_data_size;
         public uint aot_core_ir_offset, aot_core_ir_size, aot_core_ir_count;
         public uint reg_ir_offset, reg_ir_size, reg_ir_count;
+        public uint dependency_offset, dependency_count;
     }
+
+    [StructLayout(LayoutKind.Sequential)]
+    private struct PatchDataDependency { public uint assembly_name_offset, min_version; }
 
     [StructLayout(LayoutKind.Sequential)]
     private struct PatchAssemblyRefEntry { public uint name_offset, token; }

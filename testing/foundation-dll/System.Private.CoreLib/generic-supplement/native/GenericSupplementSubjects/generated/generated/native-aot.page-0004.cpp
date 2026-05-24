@@ -17,7 +17,7 @@
 #include <ChaosGeneratedRuntimePrelude.h>
 #include "enum_metadata.generated.h"
 #include "enum_stubs.h"
-#include "generated/native-aot.generated.header.h"
+#include "native-aot.generated.header.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -5388,7 +5388,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_ManagedTypeModel_ToString(
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Text_StringBuilder, {});
-		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.hot;
+		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.AsTypeInfoHot();
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	chaos_locals[0] = _s0;
@@ -5607,7 +5607,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationArtifa
 		const auto chaos_raw_arg_1 = _s0;
 		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s0);
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact, {});
-		chaos_object->header.type_info = &chaos_mt_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact.hot;
+		chaos_object->header.type_info = chaos_mt_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact.AsTypeInfoHot();
 		Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact__ctor_MetadataRegistrationArtifact(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
@@ -5641,7 +5641,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationArtifa
 		if (chaos_value != 0)
 		{
 			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact.hot);
+			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact.AsTypeInfoHot());
 		}
 		_s1 = chaos_matches ? chaos_value : 0;
 	}
@@ -6118,7 +6118,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationArtifa
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Text_StringBuilder, {});
-		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.hot;
+		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.AsTypeInfoHot();
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	chaos_locals[0] = _s0;
@@ -6700,7 +6700,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_
 		const auto chaos_raw_arg_1 = _s0;
 		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s0);
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry, {});
-		chaos_object->header.type_info = &chaos_mt_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry.hot;
+		chaos_object->header.type_info = chaos_mt_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry.AsTypeInfoHot();
 		Chaos_IL2CPP_Contracts_MetadataRegistrationEntry__ctor_MetadataRegistrationEntry(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
@@ -6734,7 +6734,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_
 		if (chaos_value != 0)
 		{
 			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry.hot);
+			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry.AsTypeInfoHot());
 		}
 		_s1 = chaos_matches ? chaos_value : 0;
 	}
@@ -8896,7 +8896,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Text_StringBuilder, {});
-		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.hot;
+		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.AsTypeInfoHot();
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	chaos_locals[0] = _s0;
@@ -9081,7 +9081,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataWriterOutput_Clone
 		const auto chaos_raw_arg_1 = _s0;
 		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s0);
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_Chaos_IL2CPP_Contracts_MetadataWriterOutput, {});
-		chaos_object->header.type_info = &chaos_mt_Chaos_IL2CPP_Contracts_MetadataWriterOutput.hot;
+		chaos_object->header.type_info = chaos_mt_Chaos_IL2CPP_Contracts_MetadataWriterOutput.AsTypeInfoHot();
 		Chaos_IL2CPP_Contracts_MetadataWriterOutput__ctor_MetadataWriterOutput(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
@@ -9115,7 +9115,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataWriterOutput_Equal
 		if (chaos_value != 0)
 		{
 			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_Chaos_IL2CPP_Contracts_MetadataWriterOutput.hot);
+			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_Chaos_IL2CPP_Contracts_MetadataWriterOutput.AsTypeInfoHot());
 		}
 		_s1 = chaos_matches ? chaos_value : 0;
 	}
@@ -9592,7 +9592,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataWriterOutput_ToStr
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Text_StringBuilder, {});
-		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.hot;
+		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.AsTypeInfoHot();
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	chaos_locals[0] = _s0;
@@ -9817,7 +9817,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MethodCapabilityBundleMode
 		const auto chaos_raw_arg_1 = _s0;
 		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s0);
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel, {});
-		chaos_object->header.type_info = &chaos_mt_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel.hot;
+		chaos_object->header.type_info = chaos_mt_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel.AsTypeInfoHot();
 		Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel__ctor_MethodCapabilityBundleModel(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
@@ -9851,7 +9851,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MethodCapabilityBundleMode
 		if (chaos_value != 0)
 		{
 			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel.hot);
+			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel.AsTypeInfoHot());
 		}
 		_s1 = chaos_matches ? chaos_value : 0;
 	}
@@ -10227,7 +10227,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MethodCapabilityBundleMode
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Text_StringBuilder, {});
-		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.hot;
+		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.AsTypeInfoHot();
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	chaos_locals[0] = _s0;
@@ -10469,7 +10469,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MethodShapeModel_Clone(CHA
 		const auto chaos_raw_arg_1 = _s0;
 		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s0);
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_Chaos_IL2CPP_Contracts_MethodShapeModel, {});
-		chaos_object->header.type_info = &chaos_mt_Chaos_IL2CPP_Contracts_MethodShapeModel.hot;
+		chaos_object->header.type_info = chaos_mt_Chaos_IL2CPP_Contracts_MethodShapeModel.AsTypeInfoHot();
 		Chaos_IL2CPP_Contracts_MethodShapeModel__ctor_MethodShapeModel(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
@@ -10503,7 +10503,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MethodShapeModel_Equals_Sy
 		if (chaos_value != 0)
 		{
 			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_Chaos_IL2CPP_Contracts_MethodShapeModel.hot);
+			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_Chaos_IL2CPP_Contracts_MethodShapeModel.AsTypeInfoHot());
 		}
 		_s1 = chaos_matches ? chaos_value : 0;
 	}
@@ -11090,7 +11090,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MethodShapeModel_ToString(
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Text_StringBuilder, {});
-		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.hot;
+		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.AsTypeInfoHot();
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	chaos_locals[0] = _s0;
@@ -11360,7 +11360,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MultiAssemblyClosureReques
 		const auto chaos_raw_arg_1 = _s0;
 		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s0);
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest, {});
-		chaos_object->header.type_info = &chaos_mt_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest.hot;
+		chaos_object->header.type_info = chaos_mt_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest.AsTypeInfoHot();
 		Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest__ctor_MultiAssemblyClosureRequest(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
@@ -11512,7 +11512,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MultiAssemblyClosureReques
 		if (chaos_value != 0)
 		{
 			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest.hot);
+			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest.AsTypeInfoHot());
 		}
 		_s1 = chaos_matches ? chaos_value : 0;
 	}
@@ -12090,7 +12090,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MultiAssemblyClosureReques
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Text_StringBuilder, {});
-		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.hot;
+		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.AsTypeInfoHot();
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	chaos_locals[0] = _s0;
@@ -12340,7 +12340,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifact
 		const auto chaos_raw_arg_1 = _s0;
 		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s0);
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef, {});
-		chaos_object->header.type_info = &chaos_mt_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef.hot;
+		chaos_object->header.type_info = chaos_mt_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef.AsTypeInfoHot();
 		Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef__ctor_NativeAotGeneratedArtifactRef(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
@@ -12374,7 +12374,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifact
 		if (chaos_value != 0)
 		{
 			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef.hot);
+			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef.AsTypeInfoHot());
 		}
 		_s1 = chaos_matches ? chaos_value : 0;
 	}
@@ -12750,7 +12750,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifact
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Text_StringBuilder, {});
-		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.hot;
+		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.AsTypeInfoHot();
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	chaos_locals[0] = _s0;
@@ -12950,7 +12950,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotGeneratedSource_C
 		const auto chaos_raw_arg_1 = _s0;
 		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s0);
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource, {});
-		chaos_object->header.type_info = &chaos_mt_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource.hot;
+		chaos_object->header.type_info = chaos_mt_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource.AsTypeInfoHot();
 		Chaos_IL2CPP_Contracts_NativeAotGeneratedSource__ctor_NativeAotGeneratedSource(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
@@ -12984,7 +12984,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotGeneratedSource_E
 		if (chaos_value != 0)
 		{
 			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource.hot);
+			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource.AsTypeInfoHot());
 		}
 		_s1 = chaos_matches ? chaos_value : 0;
 	}
@@ -13360,7 +13360,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotGeneratedSource_T
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Text_StringBuilder, {});
-		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.hot;
+		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.AsTypeInfoHot();
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	chaos_locals[0] = _s0;
@@ -13930,7 +13930,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtif
 		const auto chaos_raw_arg_1 = _s0;
 		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s0);
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact, {});
-		chaos_object->header.type_info = &chaos_mt_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact.hot;
+		chaos_object->header.type_info = chaos_mt_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact.AsTypeInfoHot();
 		Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact__ctor_NativeAotLoweringPlanArtifact(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
@@ -13964,7 +13964,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtif
 		if (chaos_value != 0)
 		{
 			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact.hot);
+			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact.AsTypeInfoHot());
 		}
 		_s1 = chaos_matches ? chaos_value : 0;
 	}
@@ -15980,7 +15980,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtif
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Text_StringBuilder, {});
-		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.hot;
+		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.AsTypeInfoHot();
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	chaos_locals[0] = _s0;
@@ -16346,7 +16346,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotManifestArtifact_
 		const auto chaos_raw_arg_1 = _s0;
 		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s0);
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact, {});
-		chaos_object->header.type_info = &chaos_mt_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact.hot;
+		chaos_object->header.type_info = chaos_mt_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact.AsTypeInfoHot();
 		Chaos_IL2CPP_Contracts_NativeAotManifestArtifact__ctor_NativeAotManifestArtifact(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
@@ -16380,7 +16380,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotManifestArtifact_
 		if (chaos_value != 0)
 		{
 			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact.hot);
+			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact.AsTypeInfoHot());
 		}
 		_s1 = chaos_matches ? chaos_value : 0;
 	}
@@ -17580,7 +17580,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotManifestArtifact_
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Text_StringBuilder, {});
-		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.hot;
+		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.AsTypeInfoHot();
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	chaos_locals[0] = _s0;
@@ -17814,7 +17814,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotRequest_Clone(CHA
 		const auto chaos_raw_arg_1 = _s0;
 		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s0);
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_Chaos_IL2CPP_Contracts_NativeAotRequest, {});
-		chaos_object->header.type_info = &chaos_mt_Chaos_IL2CPP_Contracts_NativeAotRequest.hot;
+		chaos_object->header.type_info = chaos_mt_Chaos_IL2CPP_Contracts_NativeAotRequest.AsTypeInfoHot();
 		Chaos_IL2CPP_Contracts_NativeAotRequest__ctor_NativeAotRequest(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
@@ -17933,7 +17933,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotRequest_Equals_Sy
 		if (chaos_value != 0)
 		{
 			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_Chaos_IL2CPP_Contracts_NativeAotRequest.hot);
+			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_Chaos_IL2CPP_Contracts_NativeAotRequest.AsTypeInfoHot());
 		}
 		_s1 = chaos_matches ? chaos_value : 0;
 	}
@@ -18419,7 +18419,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotRequest_ToString(
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Text_StringBuilder, {});
-		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.hot;
+		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.AsTypeInfoHot();
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	chaos_locals[0] = _s0;
@@ -18646,7 +18646,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotResult_Clone(CHAO
 		const auto chaos_raw_arg_1 = _s0;
 		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s0);
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_Chaos_IL2CPP_Contracts_NativeAotResult, {});
-		chaos_object->header.type_info = &chaos_mt_Chaos_IL2CPP_Contracts_NativeAotResult.hot;
+		chaos_object->header.type_info = chaos_mt_Chaos_IL2CPP_Contracts_NativeAotResult.AsTypeInfoHot();
 		Chaos_IL2CPP_Contracts_NativeAotResult__ctor_NativeAotResult(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
@@ -18680,7 +18680,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotResult_Equals_Sys
 		if (chaos_value != 0)
 		{
 			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_Chaos_IL2CPP_Contracts_NativeAotResult.hot);
+			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_Chaos_IL2CPP_Contracts_NativeAotResult.AsTypeInfoHot());
 		}
 		_s1 = chaos_matches ? chaos_value : 0;
 	}
@@ -19359,7 +19359,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotResult_ToString(C
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Text_StringBuilder, {});
-		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.hot;
+		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.AsTypeInfoHot();
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	chaos_locals[0] = _s0;
@@ -19983,7 +19983,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifa
 		const auto chaos_raw_arg_1 = _s0;
 		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s0);
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact, {});
-		chaos_object->header.type_info = &chaos_mt_Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact.hot;
+		chaos_object->header.type_info = chaos_mt_Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact.AsTypeInfoHot();
 		Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact__ctor_NativeCodegenMetricsArtifact(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
@@ -20017,7 +20017,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifa
 		if (chaos_value != 0)
 		{
 			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact.hot);
+			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact.AsTypeInfoHot());
 		}
 		_s1 = chaos_matches ? chaos_value : 0;
 	}
@@ -22044,7 +22044,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifa
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Text_StringBuilder, {});
-		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.hot;
+		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.AsTypeInfoHot();
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	chaos_locals[0] = _s0;
@@ -22208,7 +22208,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeReferenceGeneratedAr
 		const auto chaos_raw_arg_1 = _s0;
 		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s0);
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceGeneratedArtifactRef, {});
-		chaos_object->header.type_info = &chaos_mt_Chaos_IL2CPP_Contracts_NativeReferenceGeneratedArtifactRef.hot;
+		chaos_object->header.type_info = chaos_mt_Chaos_IL2CPP_Contracts_NativeReferenceGeneratedArtifactRef.AsTypeInfoHot();
 		Chaos_IL2CPP_Contracts_NativeReferenceGeneratedArtifactRef__ctor_NativeReferenceGeneratedArtifactRef(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
@@ -22242,7 +22242,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeReferenceGeneratedAr
 		if (chaos_value != 0)
 		{
 			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_Chaos_IL2CPP_Contracts_NativeReferenceGeneratedArtifactRef.hot);
+			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_Chaos_IL2CPP_Contracts_NativeReferenceGeneratedArtifactRef.AsTypeInfoHot());
 		}
 		_s1 = chaos_matches ? chaos_value : 0;
 	}
@@ -22618,7 +22618,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeReferenceGeneratedAr
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Text_StringBuilder, {});
-		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.hot;
+		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.AsTypeInfoHot();
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	chaos_locals[0] = _s0;
@@ -22818,7 +22818,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeReferenceGeneratedSo
 		const auto chaos_raw_arg_1 = _s0;
 		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s0);
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceGeneratedSource, {});
-		chaos_object->header.type_info = &chaos_mt_Chaos_IL2CPP_Contracts_NativeReferenceGeneratedSource.hot;
+		chaos_object->header.type_info = chaos_mt_Chaos_IL2CPP_Contracts_NativeReferenceGeneratedSource.AsTypeInfoHot();
 		Chaos_IL2CPP_Contracts_NativeReferenceGeneratedSource__ctor_NativeReferenceGeneratedSource(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
@@ -22852,7 +22852,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeReferenceGeneratedSo
 		if (chaos_value != 0)
 		{
 			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_Chaos_IL2CPP_Contracts_NativeReferenceGeneratedSource.hot);
+			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_Chaos_IL2CPP_Contracts_NativeReferenceGeneratedSource.AsTypeInfoHot());
 		}
 		_s1 = chaos_matches ? chaos_value : 0;
 	}
@@ -23228,7 +23228,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeReferenceGeneratedSo
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Text_StringBuilder, {});
-		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.hot;
+		chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.AsTypeInfoHot();
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	chaos_locals[0] = _s0;
@@ -25415,7 +25415,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeReferenceLoweringPla
 		const auto chaos_raw_arg_1 = _s0;
 		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s0);
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact, {});
-		chaos_object->header.type_info = &chaos_mt_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact.hot;
+		chaos_object->header.type_info = chaos_mt_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact.AsTypeInfoHot();
 		Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact__ctor_NativeReferenceLoweringPlanArtifact(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
@@ -25449,7 +25449,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeReferenceLoweringPla
 		if (chaos_value != 0)
 		{
 			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact.hot);
+			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact.AsTypeInfoHot());
 		}
 		_s1 = chaos_matches ? chaos_value : 0;
 	}

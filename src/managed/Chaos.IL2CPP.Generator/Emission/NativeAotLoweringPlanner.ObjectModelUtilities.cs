@@ -384,8 +384,8 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static string GetNativeTypeInfoSymbol(string subjectId)
 	{
-	    // Phase 4: TypeInfoV0 (.hot member) emitted as chaos_mt_X, no cast needed.
-	    return GetNativeMethodTableSymbol(subjectId) + ".hot";
+		    // MethodTable has no .hot member; use AsTypeInfoHot() which does reinterpret_cast.
+	    return GetNativeMethodTableSymbol(subjectId) + ".AsTypeInfoHot()";
 	}
 
 	private static string GetNativeTypeInfoV0Symbol(string subjectId)
@@ -697,7 +697,7 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			return "nullptr";
 		}
-		return "&" + GetNativeTypeInfoSymbol(subjectId);
+		return GetNativeTypeInfoSymbol(subjectId);
 	}
 
 	[Obsolete("Use GetRuntimeTypeInfoExpression instead")]
