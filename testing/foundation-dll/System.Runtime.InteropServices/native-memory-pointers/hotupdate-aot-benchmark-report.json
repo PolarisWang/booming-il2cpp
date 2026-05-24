@@ -6,50 +6,66 @@
     {
       "methodIndex": 0,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::AddRef:System.Int32(System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 3.09,
+      "postPatchNsPerOp": 3.0,
+      "slowdownPercent": -2.91
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::AllocCoTaskMem:System.IntPtr(System.Int32)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 3.98,
+      "postPatchNsPerOp": 2.6,
+      "slowdownPercent": -34.67
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::AllocHGlobal:System.IntPtr(System.Int32)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.69,
+      "postPatchNsPerOp": 2.7,
+      "slowdownPercent": 0.37
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::AllocHGlobal:System.IntPtr(System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.74,
+      "postPatchNsPerOp": 2.7,
+      "slowdownPercent": -1.46
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::AreComObjectsAvailableForCleanup:System.Boolean()",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.68,
+      "postPatchNsPerOp": 2.8,
+      "slowdownPercent": 4.48
     },
     {
       "methodIndex": 5,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::BindToMoniker:System.Object(System.String)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 3.9,
+      "postPatchNsPerOp": 4.0,
+      "slowdownPercent": 2.56
     },
     {
       "methodIndex": 6,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::ChangeWrapperHandleStrength:System.Void(System.Object,System.Boolean)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 95.65,
+      "postPatchNsPerOp": 92.1,
+      "slowdownPercent": -3.71
     },
     {
       "methodIndex": 7,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::CleanupUnusedObjectsInCurrentContext:System.Void()",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.14,
+      "postPatchNsPerOp": 3.1,
+      "slowdownPercent": 44.86
     },
     {
       "methodIndex": 8,
@@ -134,410 +150,510 @@
     {
       "methodIndex": 24,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::CreateAggregatedObject:System.IntPtr(System.IntPtr,System.Object)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.68,
+      "postPatchNsPerOp": 4.7,
+      "slowdownPercent": 75.37
     },
     {
       "methodIndex": 25,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::CreateAggregatedObject{T}:System.IntPtr(System.IntPtr,T)",
-      "status": "failed",
-      "error": ""
+      "status": "stub"
     },
     {
       "methodIndex": 26,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::CreateWrapperOfType:System.Object(System.Object,System.Type)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 200.26,
+      "postPatchNsPerOp": 198.1,
+      "slowdownPercent": -1.08
     },
     {
       "methodIndex": 27,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::CreateWrapperOfType{T,TWrapper}:TWrapper(T)",
-      "status": "failed",
-      "error": ""
+      "status": "stub"
     },
     {
       "methodIndex": 28,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::DestroyStructure:System.Void(System.IntPtr,System.Type)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 116.87,
+      "postPatchNsPerOp": 97.7,
+      "slowdownPercent": -16.4
     },
     {
       "methodIndex": 29,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::DestroyStructure{T}:System.Void(System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "stub"
     },
     {
       "methodIndex": 30,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::FinalReleaseComObject:System.Int32(System.Object)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 104.91,
+      "postPatchNsPerOp": 89.9,
+      "slowdownPercent": -14.31
     },
     {
       "methodIndex": 31,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::FreeBSTR:System.Void(System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.48,
+      "postPatchNsPerOp": 2.3,
+      "slowdownPercent": -7.26
     },
     {
       "methodIndex": 32,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::FreeCoTaskMem:System.Void(System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.13,
+      "postPatchNsPerOp": 8.2,
+      "slowdownPercent": 284.98
     },
     {
       "methodIndex": 33,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::FreeHGlobal:System.Void(System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.29,
+      "postPatchNsPerOp": 2.3,
+      "slowdownPercent": 0.44
     },
     {
       "methodIndex": 34,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GenerateGuidForType:System.Guid(System.Type)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 107.1,
+      "postPatchNsPerOp": 99.3,
+      "slowdownPercent": -7.28
     },
     {
       "methodIndex": 35,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GenerateProgIdForType:System.String(System.Type)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 107.75,
+      "postPatchNsPerOp": 113.5,
+      "slowdownPercent": 5.34
     },
     {
       "methodIndex": 36,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetComInterfaceForObject:System.IntPtr(System.Object,System.Type)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 201.77,
+      "postPatchNsPerOp": 191.2,
+      "slowdownPercent": -5.24
     },
     {
       "methodIndex": 37,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetComInterfaceForObject{T,TInterface}:System.IntPtr(T)",
-      "status": "failed",
-      "error": ""
+      "status": "stub"
     },
     {
       "methodIndex": 38,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetComInterfaceForObject:System.IntPtr(System.Object,System.Type,System.Runtime.InteropServices.CustomQueryInterfaceMode)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 208.97,
+      "postPatchNsPerOp": 183.6,
+      "slowdownPercent": -12.14
     },
     {
       "methodIndex": 39,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetComObjectData:System.Object(System.Object,System.Object)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 174.74,
+      "postPatchNsPerOp": 183.7,
+      "slowdownPercent": 5.13
     },
     {
       "methodIndex": 40,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetDelegateForFunctionPointer:System.Delegate(System.IntPtr,System.Type)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 101.41,
+      "postPatchNsPerOp": 133.8,
+      "slowdownPercent": 31.94
     },
     {
       "methodIndex": 41,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetDelegateForFunctionPointer{TDelegate}:TDelegate(System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "stub"
     },
     {
       "methodIndex": 42,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetEndComSlot:System.Int32(System.Type)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 98.03,
+      "postPatchNsPerOp": 101.3,
+      "slowdownPercent": 3.34
     },
     {
       "methodIndex": 43,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetExceptionCode:System.Int32()",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 3.11,
+      "postPatchNsPerOp": 3.0,
+      "slowdownPercent": -3.54
     },
     {
       "methodIndex": 44,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetExceptionForHR:System.Exception(System.Int32)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 3.6,
+      "postPatchNsPerOp": 2.6,
+      "slowdownPercent": -27.78
     },
     {
       "methodIndex": 45,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetExceptionForHR:System.Exception(System.Int32,System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.84,
+      "postPatchNsPerOp": 2.6,
+      "slowdownPercent": -8.45
     },
     {
       "methodIndex": 46,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetExceptionForHR:System.Exception(System.Int32,System.Guid&,System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.84,
+      "postPatchNsPerOp": 2.8,
+      "slowdownPercent": -1.41
     },
     {
       "methodIndex": 47,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetExceptionPointers:System.IntPtr()",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.66,
+      "postPatchNsPerOp": 2.6,
+      "slowdownPercent": -2.26
     },
     {
       "methodIndex": 48,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetFunctionPointerForDelegate:System.IntPtr(System.Delegate)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 5.51,
+      "postPatchNsPerOp": 2.6,
+      "slowdownPercent": -52.81
     },
     {
       "methodIndex": 49,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetFunctionPointerForDelegate{TDelegate}:System.IntPtr(TDelegate)",
-      "status": "failed",
-      "error": ""
+      "status": "stub"
     },
     {
       "methodIndex": 50,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetHINSTANCE:System.IntPtr(System.Reflection.Module)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.69,
+      "postPatchNsPerOp": 2.6,
+      "slowdownPercent": -3.35
     },
     {
       "methodIndex": 51,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetHRForException:System.Int32(System.Exception)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.69,
+      "postPatchNsPerOp": 2.6,
+      "slowdownPercent": -3.35
     },
     {
       "methodIndex": 52,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetHRForLastWin32Error:System.Int32()",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 4.8,
+      "postPatchNsPerOp": 2.7,
+      "slowdownPercent": -43.75
     },
     {
       "methodIndex": 53,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetIDispatchForObject:System.IntPtr(System.Object)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 90.01,
+      "postPatchNsPerOp": 91.2,
+      "slowdownPercent": 1.32
     },
     {
       "methodIndex": 54,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetIUnknownForObject:System.IntPtr(System.Object)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 95.66,
+      "postPatchNsPerOp": 89.3,
+      "slowdownPercent": -6.65
     },
     {
       "methodIndex": 55,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetLastPInvokeError:System.Int32()",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.7,
+      "postPatchNsPerOp": 2.7,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 56,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetLastPInvokeErrorMessage:System.String()",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 10.51,
+      "postPatchNsPerOp": 5.1,
+      "slowdownPercent": -51.47
     },
     {
       "methodIndex": 57,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetLastSystemError:System.Int32()",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.68,
+      "postPatchNsPerOp": 3.1,
+      "slowdownPercent": 15.67
     },
     {
       "methodIndex": 58,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetLastWin32Error:System.Int32()",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.96,
+      "postPatchNsPerOp": 2.6,
+      "slowdownPercent": -12.16
     },
     {
       "methodIndex": 59,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetNativeVariantForObject:System.Void(System.Object,System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.9,
+      "postPatchNsPerOp": 6.6,
+      "slowdownPercent": 127.59
     },
     {
       "methodIndex": 60,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetNativeVariantForObject{T}:System.Void(T,System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "stub"
     },
     {
       "methodIndex": 61,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetObjectForIUnknown:System.Object(System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.85,
+      "postPatchNsPerOp": 2.6,
+      "slowdownPercent": -8.77
     },
     {
       "methodIndex": 62,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetObjectForNativeVariant:System.Object(System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 3.03,
+      "postPatchNsPerOp": 5.0,
+      "slowdownPercent": 65.02
     },
     {
       "methodIndex": 63,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetObjectForNativeVariant{T}:T(System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "stub"
     },
     {
       "methodIndex": 64,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetObjectsForNativeVariants:System.Object{}(System.IntPtr,System.Int32)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.8,
+      "postPatchNsPerOp": 4.6,
+      "slowdownPercent": 64.29
     },
     {
       "methodIndex": 65,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetObjectsForNativeVariants{T}:T{}(System.IntPtr,System.Int32)",
-      "status": "failed",
-      "error": ""
+      "status": "stub"
     },
     {
       "methodIndex": 66,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetPInvokeErrorMessage:System.String(System.Int32)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 3.64,
+      "postPatchNsPerOp": 3.6,
+      "slowdownPercent": -1.1
     },
     {
       "methodIndex": 67,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetStartComSlot:System.Int32(System.Type)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 114.3,
+      "postPatchNsPerOp": 97.1,
+      "slowdownPercent": -15.05
     },
     {
       "methodIndex": 68,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetTypedObjectForIUnknown:System.Object(System.IntPtr,System.Type)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 104.74,
+      "postPatchNsPerOp": 102.1,
+      "slowdownPercent": -2.52
     },
     {
       "methodIndex": 69,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetTypeFromCLSID:System.Type(System.Guid)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 4.62,
+      "postPatchNsPerOp": 3.8,
+      "slowdownPercent": -17.75
     },
     {
       "methodIndex": 70,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetTypeInfoName:System.String(System.Runtime.InteropServices.ComTypes.ITypeInfo)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 3.69,
+      "postPatchNsPerOp": 2.6,
+      "slowdownPercent": -29.54
     },
     {
       "methodIndex": 71,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::GetUniqueObjectForIUnknown:System.Object(System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.71,
+      "postPatchNsPerOp": 3.6,
+      "slowdownPercent": 32.84
     },
     {
       "methodIndex": 72,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::InitHandle:System.Void(System.Runtime.InteropServices.SafeHandle,System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.95,
+      "postPatchNsPerOp": 2.9,
+      "slowdownPercent": -1.69
     },
     {
       "methodIndex": 73,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::IsComObject:System.Boolean(System.Object)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 91.15,
+      "postPatchNsPerOp": 91.7,
+      "slowdownPercent": 0.6
     },
     {
       "methodIndex": 74,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::IsTypeVisibleFromCom:System.Boolean(System.Type)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 99.09,
+      "postPatchNsPerOp": 99.2,
+      "slowdownPercent": 0.11
     },
     {
       "methodIndex": 75,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::OffsetOf:System.IntPtr(System.Type,System.String)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 102.63,
+      "postPatchNsPerOp": 128.8,
+      "slowdownPercent": 25.5
     },
     {
       "methodIndex": 76,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::OffsetOf{T}:System.IntPtr(System.String)",
-      "status": "failed",
-      "error": ""
+      "status": "stub"
     },
     {
       "methodIndex": 77,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Prelink:System.Void(System.Reflection.MethodInfo)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.94,
+      "postPatchNsPerOp": 4.3,
+      "slowdownPercent": 46.26
     },
     {
       "methodIndex": 78,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::PrelinkAll:System.Void(System.Type)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 104.36,
+      "postPatchNsPerOp": 115.0,
+      "slowdownPercent": 10.2
     },
     {
       "methodIndex": 79,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::PtrToStringAnsi:System.String(System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.68,
+      "postPatchNsPerOp": 2.7,
+      "slowdownPercent": 0.75
     },
     {
       "methodIndex": 80,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::PtrToStringAnsi:System.String(System.IntPtr,System.Int32)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 4.48,
+      "postPatchNsPerOp": 4.0,
+      "slowdownPercent": -10.71
     },
     {
       "methodIndex": 81,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::PtrToStringAuto:System.String(System.IntPtr,System.Int32)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.76,
+      "postPatchNsPerOp": 4.7,
+      "slowdownPercent": 70.29
     },
     {
       "methodIndex": 82,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::PtrToStringAuto:System.String(System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.66,
+      "postPatchNsPerOp": 2.6,
+      "slowdownPercent": -2.26
     },
     {
       "methodIndex": 83,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::PtrToStringBSTR:System.String(System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.71,
+      "postPatchNsPerOp": 2.6,
+      "slowdownPercent": -4.06
     },
     {
       "methodIndex": 84,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::PtrToStringUni:System.String(System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.7,
+      "postPatchNsPerOp": 2.7,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 85,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::PtrToStringUni:System.String(System.IntPtr,System.Int32)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 5.03,
+      "postPatchNsPerOp": 2.6,
+      "slowdownPercent": -48.31
     },
     {
       "methodIndex": 86,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::PtrToStringUTF8:System.String(System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 4.53,
+      "postPatchNsPerOp": 2.6,
+      "slowdownPercent": -42.6
     },
     {
       "methodIndex": 87,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::PtrToStringUTF8:System.String(System.IntPtr,System.Int32)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.98,
+      "postPatchNsPerOp": 2.6,
+      "slowdownPercent": -12.75
     },
     {
       "methodIndex": 88,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::PtrToStructure:System.Object(System.IntPtr,System.Type)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 111.62,
+      "postPatchNsPerOp": 101.9,
+      "slowdownPercent": -8.71
     },
     {
       "methodIndex": 89,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::PtrToStructure:System.Void(System.IntPtr,System.Object)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 3.07,
+      "postPatchNsPerOp": 3.0,
+      "slowdownPercent": -2.28
     },
     {
       "methodIndex": 90,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::PtrToStructure{T}:System.Void(System.IntPtr,T)",
-      "status": "failed",
-      "error": ""
+      "status": "stub"
     },
     {
       "methodIndex": 91,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::PtrToStructure{T}:T(System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "stub"
     },
     {
       "methodIndex": 92,
@@ -547,260 +663,337 @@
     {
       "methodIndex": 93,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::ReadByte:System.Byte(System.Object,System.Int32)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.69,
+      "postPatchNsPerOp": 2.7,
+      "slowdownPercent": 0.37
     },
     {
       "methodIndex": 94,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::ReadByte:System.Byte(System.IntPtr,System.Int32)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.69,
+      "postPatchNsPerOp": 2.6,
+      "slowdownPercent": -3.35
     },
     {
       "methodIndex": 95,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::ReadByte:System.Byte(System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.73,
+      "postPatchNsPerOp": 2.7,
+      "slowdownPercent": -1.1
     },
     {
       "methodIndex": 96,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::ReadInt16:System.Int16(System.Object,System.Int32)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.77,
+      "postPatchNsPerOp": 2.7,
+      "slowdownPercent": -2.53
     },
     {
       "methodIndex": 97,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::ReadInt16:System.Int16(System.IntPtr,System.Int32)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.79,
+      "postPatchNsPerOp": 4.3,
+      "slowdownPercent": 54.12
     },
     {
       "methodIndex": 98,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::ReadInt16:System.Int16(System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 4.36,
+      "postPatchNsPerOp": 2.6,
+      "slowdownPercent": -40.37
     },
     {
       "methodIndex": 99,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::ReadInt32:System.Int32(System.Object,System.Int32)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.69,
+      "postPatchNsPerOp": 2.7,
+      "slowdownPercent": 0.37
     },
     {
       "methodIndex": 100,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::ReadInt32:System.Int32(System.IntPtr,System.Int32)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 4.39,
+      "postPatchNsPerOp": 2.7,
+      "slowdownPercent": -38.5
     },
     {
       "methodIndex": 101,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::ReadInt32:System.Int32(System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 4.15,
+      "postPatchNsPerOp": 4.6,
+      "slowdownPercent": 10.84
     },
     {
       "methodIndex": 102,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::ReadInt64:System.Int64(System.Object,System.Int32)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 5.04,
+      "postPatchNsPerOp": 5.0,
+      "slowdownPercent": -0.79
     },
     {
       "methodIndex": 103,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::ReadInt64:System.Int64(System.IntPtr,System.Int32)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 3.45,
+      "postPatchNsPerOp": 5.1,
+      "slowdownPercent": 47.83
     },
     {
       "methodIndex": 104,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::ReadInt64:System.Int64(System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 5.72,
+      "postPatchNsPerOp": 4.4,
+      "slowdownPercent": -23.08
     },
     {
       "methodIndex": 105,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::ReadIntPtr:System.IntPtr(System.Object,System.Int32)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.88,
+      "postPatchNsPerOp": 4.8,
+      "slowdownPercent": 66.67
     },
     {
       "methodIndex": 106,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::ReadIntPtr:System.IntPtr(System.IntPtr,System.Int32)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 4.21,
+      "postPatchNsPerOp": 2.6,
+      "slowdownPercent": -38.24
     },
     {
       "methodIndex": 107,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::ReadIntPtr:System.IntPtr(System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 3.02,
+      "postPatchNsPerOp": 3.0,
+      "slowdownPercent": -0.66
     },
     {
       "methodIndex": 108,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::ReAllocCoTaskMem:System.IntPtr(System.IntPtr,System.Int32)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.68,
+      "postPatchNsPerOp": 2.7,
+      "slowdownPercent": 0.75
     },
     {
       "methodIndex": 109,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::ReAllocHGlobal:System.IntPtr(System.IntPtr,System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.68,
+      "postPatchNsPerOp": 2.7,
+      "slowdownPercent": 0.75
     },
     {
       "methodIndex": 110,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::Release:System.Int32(System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.69,
+      "postPatchNsPerOp": 2.7,
+      "slowdownPercent": 0.37
     },
     {
       "methodIndex": 111,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::ReleaseComObject:System.Int32(System.Object)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 85.85,
+      "postPatchNsPerOp": 92.4,
+      "slowdownPercent": 7.63
     },
     {
       "methodIndex": 112,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::SecureStringToBSTR:System.IntPtr(System.Security.SecureString)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.67,
+      "postPatchNsPerOp": 2.7,
+      "slowdownPercent": 1.12
     },
     {
       "methodIndex": 113,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::SecureStringToCoTaskMemAnsi:System.IntPtr(System.Security.SecureString)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 4.08,
+      "postPatchNsPerOp": 2.7,
+      "slowdownPercent": -33.82
     },
     {
       "methodIndex": 114,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::SecureStringToCoTaskMemUnicode:System.IntPtr(System.Security.SecureString)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.69,
+      "postPatchNsPerOp": 2.7,
+      "slowdownPercent": 0.37
     },
     {
       "methodIndex": 115,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::SecureStringToGlobalAllocAnsi:System.IntPtr(System.Security.SecureString)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.84,
+      "postPatchNsPerOp": 2.6,
+      "slowdownPercent": -8.45
     },
     {
       "methodIndex": 116,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::SecureStringToGlobalAllocUnicode:System.IntPtr(System.Security.SecureString)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.66,
+      "postPatchNsPerOp": 2.6,
+      "slowdownPercent": -2.26
     },
     {
       "methodIndex": 117,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::SetComObjectData:System.Boolean(System.Object,System.Object,System.Object)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 266.64,
+      "postPatchNsPerOp": 262.6,
+      "slowdownPercent": -1.52
     },
     {
       "methodIndex": 118,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::SetLastPInvokeError:System.Void(System.Int32)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.09,
+      "postPatchNsPerOp": 3.6,
+      "slowdownPercent": 72.25
     },
     {
       "methodIndex": 119,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::SetLastSystemError:System.Void(System.Int32)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.28,
+      "postPatchNsPerOp": 2.1,
+      "slowdownPercent": -7.89
     },
     {
       "methodIndex": 120,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::SizeOf:System.Int32(System.Object)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.69,
+      "postPatchNsPerOp": 2.7,
+      "slowdownPercent": 0.37
     },
     {
       "methodIndex": 121,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::SizeOf{T}:System.Int32(T)",
-      "status": "failed",
-      "error": ""
+      "status": "stub"
     },
     {
       "methodIndex": 122,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::SizeOf:System.Int32(System.Type)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 98.21,
+      "postPatchNsPerOp": 123.6,
+      "slowdownPercent": 25.85
     },
     {
       "methodIndex": 123,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::SizeOf{T}:System.Int32()",
-      "status": "failed",
-      "error": ""
+      "status": "stub"
     },
     {
       "methodIndex": 124,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::StringToBSTR:System.IntPtr(System.String)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 4.8,
+      "postPatchNsPerOp": 2.9,
+      "slowdownPercent": -39.58
     },
     {
       "methodIndex": 125,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::StringToCoTaskMemAnsi:System.IntPtr(System.String)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.87,
+      "postPatchNsPerOp": 4.4,
+      "slowdownPercent": 53.31
     },
     {
       "methodIndex": 126,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::StringToCoTaskMemAuto:System.IntPtr(System.String)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.88,
+      "postPatchNsPerOp": 2.8,
+      "slowdownPercent": -2.78
     },
     {
       "methodIndex": 127,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::StringToCoTaskMemUni:System.IntPtr(System.String)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.88,
+      "postPatchNsPerOp": 2.9,
+      "slowdownPercent": 0.69
     },
     {
       "methodIndex": 128,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::StringToCoTaskMemUTF8:System.IntPtr(System.String)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.88,
+      "postPatchNsPerOp": 3.5,
+      "slowdownPercent": 21.53
     },
     {
       "methodIndex": 129,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::StringToHGlobalAnsi:System.IntPtr(System.String)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.86,
+      "postPatchNsPerOp": 2.8,
+      "slowdownPercent": -2.1
     },
     {
       "methodIndex": 130,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::StringToHGlobalAuto:System.IntPtr(System.String)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.87,
+      "postPatchNsPerOp": 2.8,
+      "slowdownPercent": -2.44
     },
     {
       "methodIndex": 131,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::StringToHGlobalUni:System.IntPtr(System.String)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.87,
+      "postPatchNsPerOp": 4.3,
+      "slowdownPercent": 49.83
     },
     {
       "methodIndex": 132,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::StructureToPtr:System.Void(System.Object,System.IntPtr,System.Boolean)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.89,
+      "postPatchNsPerOp": 2.9,
+      "slowdownPercent": 0.35
     },
     {
       "methodIndex": 133,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::StructureToPtr{T}:System.Void(T,System.IntPtr,System.Boolean)",
-      "status": "failed",
-      "error": ""
+      "status": "stub"
     },
     {
       "methodIndex": 134,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::ThrowExceptionForHR:System.Void(System.Int32)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 3.69,
+      "postPatchNsPerOp": 2.1,
+      "slowdownPercent": -43.09
     },
     {
       "methodIndex": 135,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::ThrowExceptionForHR:System.Void(System.Int32,System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.12,
+      "postPatchNsPerOp": 3.3,
+      "slowdownPercent": 55.66
     },
     {
       "methodIndex": 136,
@@ -810,381 +1003,490 @@
     {
       "methodIndex": 137,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::UnsafeAddrOfPinnedArrayElement:System.IntPtr(System.Array,System.Int32)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 3.43,
+      "postPatchNsPerOp": 3.4,
+      "slowdownPercent": -0.87
     },
     {
       "methodIndex": 138,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::UnsafeAddrOfPinnedArrayElement{T}:System.IntPtr(T{},System.Int32)",
-      "status": "failed",
-      "error": ""
+      "status": "stub"
     },
     {
       "methodIndex": 139,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::WriteByte:System.Void(System.Object,System.Int32,System.Byte)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.99,
+      "postPatchNsPerOp": 2.9,
+      "slowdownPercent": -3.01
     },
     {
       "methodIndex": 140,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::WriteByte:System.Void(System.IntPtr,System.Int32,System.Byte)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.9,
+      "postPatchNsPerOp": 2.9,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 141,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::WriteByte:System.Void(System.IntPtr,System.Byte)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 4.45,
+      "postPatchNsPerOp": 2.9,
+      "slowdownPercent": -34.83
     },
     {
       "methodIndex": 142,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::WriteInt16:System.Void(System.Object,System.Int32,System.Int16)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.85,
+      "postPatchNsPerOp": 2.9,
+      "slowdownPercent": 1.75
     },
     {
       "methodIndex": 143,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::WriteInt16:System.Void(System.IntPtr,System.Int32,System.Int16)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.89,
+      "postPatchNsPerOp": 2.9,
+      "slowdownPercent": 0.35
     },
     {
       "methodIndex": 144,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::WriteInt16:System.Void(System.IntPtr,System.Int16)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.89,
+      "postPatchNsPerOp": 4.8,
+      "slowdownPercent": 66.09
     },
     {
       "methodIndex": 145,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::WriteInt16:System.Void(System.IntPtr,System.Int32,System.Char)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.85,
+      "postPatchNsPerOp": 4.4,
+      "slowdownPercent": 54.39
     },
     {
       "methodIndex": 146,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::WriteInt16:System.Void(System.Object,System.Int32,System.Char)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.9,
+      "postPatchNsPerOp": 3.7,
+      "slowdownPercent": 27.59
     },
     {
       "methodIndex": 147,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::WriteInt16:System.Void(System.IntPtr,System.Char)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 3.02,
+      "postPatchNsPerOp": 4.3,
+      "slowdownPercent": 42.38
     },
     {
       "methodIndex": 148,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::WriteInt32:System.Void(System.Object,System.Int32,System.Int32)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.93,
+      "postPatchNsPerOp": 4.3,
+      "slowdownPercent": 46.76
     },
     {
       "methodIndex": 149,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::WriteInt32:System.Void(System.IntPtr,System.Int32,System.Int32)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.9,
+      "postPatchNsPerOp": 4.2,
+      "slowdownPercent": 44.83
     },
     {
       "methodIndex": 150,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::WriteInt32:System.Void(System.IntPtr,System.Int32)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.9,
+      "postPatchNsPerOp": 4.0,
+      "slowdownPercent": 37.93
     },
     {
       "methodIndex": 151,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::WriteInt64:System.Void(System.Object,System.Int32,System.Int64)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 3.61,
+      "postPatchNsPerOp": 5.4,
+      "slowdownPercent": 49.58
     },
     {
       "methodIndex": 152,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::WriteInt64:System.Void(System.IntPtr,System.Int32,System.Int64)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 3.59,
+      "postPatchNsPerOp": 6.8,
+      "slowdownPercent": 89.42
     },
     {
       "methodIndex": 153,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::WriteInt64:System.Void(System.IntPtr,System.Int64)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 3.45,
+      "postPatchNsPerOp": 4.9,
+      "slowdownPercent": 42.03
     },
     {
       "methodIndex": 154,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::WriteIntPtr:System.Void(System.IntPtr,System.Int32,System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.9,
+      "postPatchNsPerOp": 4.2,
+      "slowdownPercent": 44.83
     },
     {
       "methodIndex": 155,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::WriteIntPtr:System.Void(System.Object,System.Int32,System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.93,
+      "postPatchNsPerOp": 4.8,
+      "slowdownPercent": 63.82
     },
     {
       "methodIndex": 156,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::WriteIntPtr:System.Void(System.IntPtr,System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 3.03,
+      "postPatchNsPerOp": 4.9,
+      "slowdownPercent": 61.72
     },
     {
       "methodIndex": 157,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::ZeroFreeBSTR:System.Void(System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.12,
+      "postPatchNsPerOp": 3.2,
+      "slowdownPercent": 50.94
     },
     {
       "methodIndex": 158,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::ZeroFreeCoTaskMemAnsi:System.Void(System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.11,
+      "postPatchNsPerOp": 3.4,
+      "slowdownPercent": 61.14
     },
     {
       "methodIndex": 159,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::ZeroFreeCoTaskMemUnicode:System.Void(System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.12,
+      "postPatchNsPerOp": 3.4,
+      "slowdownPercent": 60.38
     },
     {
       "methodIndex": 160,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::ZeroFreeCoTaskMemUTF8:System.Void(System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 3.61,
+      "postPatchNsPerOp": 3.5,
+      "slowdownPercent": -3.05
     },
     {
       "methodIndex": 161,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::ZeroFreeGlobalAllocAnsi:System.Void(System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.14,
+      "postPatchNsPerOp": 3.7,
+      "slowdownPercent": 72.9
     },
     {
       "methodIndex": 162,
       "methodSubjectId": "System.Runtime.InteropServices/System.Runtime.InteropServices.Marshal::ZeroFreeGlobalAllocUnicode:System.Void(System.IntPtr)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.12,
+      "postPatchNsPerOp": 3.3,
+      "slowdownPercent": 55.66
     },
     {
       "methodIndex": 163,
       "methodSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Dispose:System.Void()",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 2.9,
+      "postPatchNsPerOp": 6.5,
+      "slowdownPercent": 124.14
     },
     {
       "methodIndex": 164,
       "methodSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::get_CanRead:System.Boolean()",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 4.46,
+      "postPatchNsPerOp": 4.1,
+      "slowdownPercent": -8.07
     },
     {
       "methodIndex": 165,
       "methodSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::get_CanWrite:System.Boolean()",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 4.46,
+      "postPatchNsPerOp": 4.1,
+      "slowdownPercent": -8.07
     },
     {
       "methodIndex": 166,
       "methodSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::get_Capacity:System.Int64()",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 3.43,
+      "postPatchNsPerOp": 9.1,
+      "slowdownPercent": 165.31
     },
     {
       "methodIndex": 167,
       "methodSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Read{T}:System.Void(System.Int64,T&)",
-      "status": "failed",
-      "error": ""
+      "status": "stub"
     },
     {
       "methodIndex": 168,
       "methodSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadArray{T}:System.Int32(System.Int64,T{},System.Int32,System.Int32)",
-      "status": "failed",
-      "error": ""
+      "status": "stub"
     },
     {
       "methodIndex": 169,
       "methodSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadBoolean:System.Boolean(System.Int64)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 3.44,
+      "postPatchNsPerOp": 4.9,
+      "slowdownPercent": 42.44
     },
     {
       "methodIndex": 170,
       "methodSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadByte:System.Byte(System.Int64)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 3.52,
+      "postPatchNsPerOp": 5.2,
+      "slowdownPercent": 47.73
     },
     {
       "methodIndex": 171,
       "methodSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadChar:System.Char(System.Int64)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 3.42,
+      "postPatchNsPerOp": 5.5,
+      "slowdownPercent": 60.82
     },
     {
       "methodIndex": 172,
       "methodSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadDecimal:System.Decimal(System.Int64)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 3.53,
+      "postPatchNsPerOp": 5.0,
+      "slowdownPercent": 41.64
     },
     {
       "methodIndex": 173,
       "methodSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadDouble:System.Double(System.Int64)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 3.42,
+      "postPatchNsPerOp": 5.2,
+      "slowdownPercent": 52.05
     },
     {
       "methodIndex": 174,
       "methodSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadInt16:System.Int16(System.Int64)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 3.69,
+      "postPatchNsPerOp": 5.1,
+      "slowdownPercent": 38.21
     },
     {
       "methodIndex": 175,
       "methodSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadInt32:System.Int32(System.Int64)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 5.48,
+      "postPatchNsPerOp": 5.0,
+      "slowdownPercent": -8.76
     },
     {
       "methodIndex": 176,
       "methodSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadInt64:System.Int64(System.Int64)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 4.18,
+      "postPatchNsPerOp": 5.9,
+      "slowdownPercent": 41.15
     },
     {
       "methodIndex": 177,
       "methodSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadSByte:System.SByte(System.Int64)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 3.42,
+      "postPatchNsPerOp": 5.6,
+      "slowdownPercent": 63.74
     },
     {
       "methodIndex": 178,
       "methodSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadSingle:System.Single(System.Int64)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 4.25,
+      "postPatchNsPerOp": 5.8,
+      "slowdownPercent": 36.47
     },
     {
       "methodIndex": 179,
       "methodSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadUInt16:System.UInt16(System.Int64)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 3.68,
+      "postPatchNsPerOp": 5.2,
+      "slowdownPercent": 41.3
     },
     {
       "methodIndex": 180,
       "methodSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadUInt32:System.UInt32(System.Int64)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 3.68,
+      "postPatchNsPerOp": 5.4,
+      "slowdownPercent": 46.74
     },
     {
       "methodIndex": 181,
       "methodSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadUInt64:System.UInt64(System.Int64)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 3.72,
+      "postPatchNsPerOp": 5.3,
+      "slowdownPercent": 42.47
     },
     {
       "methodIndex": 182,
       "methodSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.Boolean)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 3.42,
+      "postPatchNsPerOp": 5.1,
+      "slowdownPercent": 49.12
     },
     {
       "methodIndex": 183,
       "methodSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.Byte)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 3.5,
+      "postPatchNsPerOp": 5.4,
+      "slowdownPercent": 54.29
     },
     {
       "methodIndex": 184,
       "methodSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.Char)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 3.44,
+      "postPatchNsPerOp": 4.8,
+      "slowdownPercent": 39.53
     },
     {
       "methodIndex": 185,
       "methodSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.Int16)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 3.48,
+      "postPatchNsPerOp": 3.4,
+      "slowdownPercent": -2.3
     },
     {
       "methodIndex": 186,
       "methodSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.Int32)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 5.85,
+      "postPatchNsPerOp": 5.5,
+      "slowdownPercent": -5.98
     },
     {
       "methodIndex": 187,
       "methodSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.Int64)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 4.26,
+      "postPatchNsPerOp": 5.3,
+      "slowdownPercent": 24.41
     },
     {
       "methodIndex": 188,
       "methodSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.Decimal)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 99.6,
+      "postPatchNsPerOp": 109.5,
+      "slowdownPercent": 9.94
     },
     {
       "methodIndex": 189,
       "methodSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.Single)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 4.18,
+      "postPatchNsPerOp": 4.2,
+      "slowdownPercent": 0.48
     },
     {
       "methodIndex": 190,
       "methodSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.Double)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 4.81,
+      "postPatchNsPerOp": 5.8,
+      "slowdownPercent": 20.58
     },
     {
       "methodIndex": 191,
       "methodSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.SByte)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 3.49,
+      "postPatchNsPerOp": 5.0,
+      "slowdownPercent": 43.27
     },
     {
       "methodIndex": 192,
       "methodSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.UInt16)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 3.44,
+      "postPatchNsPerOp": 3.4,
+      "slowdownPercent": -1.16
     },
     {
       "methodIndex": 193,
       "methodSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.UInt32)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 3.47,
+      "postPatchNsPerOp": 5.0,
+      "slowdownPercent": 44.09
     },
     {
       "methodIndex": 194,
       "methodSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.UInt64)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 4.4,
+      "postPatchNsPerOp": 4.3,
+      "slowdownPercent": -2.27
     },
     {
       "methodIndex": 195,
       "methodSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write{T}:System.Void(System.Int64,T&)",
-      "status": "failed",
-      "error": ""
+      "status": "stub"
     },
     {
       "methodIndex": 196,
       "methodSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::WriteArray{T}:System.Void(System.Int64,T{},System.Int32,System.Int32)",
-      "status": "failed",
-      "error": ""
+      "status": "stub"
     },
     {
       "methodIndex": 197,
       "methodSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::.ctor:System.Void(System.Runtime.InteropServices.SafeBuffer,System.Int64,System.Int64)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 97.06,
+      "postPatchNsPerOp": 93.0,
+      "slowdownPercent": -4.18
     },
     {
       "methodIndex": 198,
       "methodSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::.ctor:System.Void(System.Runtime.InteropServices.SafeBuffer,System.Int64,System.Int64,System.IO.FileAccess)",
-      "status": "failed",
-      "error": ""
+      "status": "passed",
+      "prePatchNsPerOp": 91.82,
+      "postPatchNsPerOp": 90.6,
+      "slowdownPercent": -1.33
     }
   ],
   "summary": {
     "totalMethods": 199,
-    "nonStubMethods": 0,
-    "averageSlowdownPercent": 0.0,
-    "slowdownFactor": 1.0,
+    "nonStubMethods": 161,
+    "averageSlowdownPercent": 16.07,
+    "slowdownFactor": 1.1606999999999998,
     "slowdownThresholdX": 50.0
   }
 }

@@ -2,22 +2,14 @@
   "schemaVersion": 1,
   "assemblyName": "System.Runtime.InteropServices",
   "familyId": "family/System.Runtime.InteropServices/native/memory/pointers",
-  "capturedAt": "2026-05-21T23:44:49",
+  "capturedAt": "2026-05-24T18:03:55",
   "metrics": {
     "framePool": {
-      "acquireReleaseNsPerOp": 5.2,
+      "acquireReleaseNsPerOp": 5.7,
       "batchCount": 1000,
       "framesPerBatch": 32
     },
-    "fastExecute": {
-      "runCount": 100000,
-      "nsPerCall": 4.6
-    },
-    "callVirt": {
-      "handlerDispatchNs": 4.5,
-      "emptyStackNs": 5.0
-    },
     "poolSize": 32
   },
-  "rawOutput": "[2026-05-21T23:44:49][DEBUG][codegen] T4 VEH handler registered\n[2026-05-21T23:44:49][WARN][CRAG] young_collection_no_region\n[2026-05-21T23:44:49][INFO][NUMA] numa_init count=%d\n[2026-05-21T23:44:49][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-21T23:44:49][INFO][OldGen] init done base=0x1989710446592 pages=8\n[2026-05-21T23:44:49][DEBUG][codegen] T4 VEH handler registered\nBenchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 5.2 ns/op (1000 batches x 32 frames)\nBenchmark 2: FastExecute (Subject_0): 100000 runs: 4.6 ns/op\n[2026-05-21T23:44:49][DEBUG][BGC] thread_started\n[2026-05-21T23:44:49][DEBUG][Finalizer] thread_started id={0}\nHandler dispatch overhead (LdcI4): 4.5 ns/call\nCallVirt empty-stack: 5.0 ns/call\n"
+  "rawOutput": "[2026-05-24T18:03:55][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T18:03:55][DEBUG][GcEvents] registered callback 0x7ff779d2ba30 at slot 0\n[2026-05-24T18:03:55][WARN][CRAG] young_collection_no_region\n[2026-05-24T18:03:55][INFO][NUMA] numa_init count=%d\n[2026-05-24T18:03:55][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T18:03:55][INFO][OldGen] emergency_reserve_allocated base=0x1273447776256 size=65536\n[2026-05-24T18:03:55][INFO][OldGen] init done base=0x1273424117760 pages=8\n[2026-05-24T18:03:55][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T18:03:55][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T18:03:55][DEBUG][GcEvents] registered callback 0x7ff779d2ba30 at slot 1\nBenchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 5.7 ns/op (1000 batches x 32 frames)\n[2026-05-24T18:03:55][DEBUG][BGC] thread_started\nBenchmark 2: FastExecute (Subject_0"
 }

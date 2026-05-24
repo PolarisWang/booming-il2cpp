@@ -8,171 +8,171 @@
     {
       "methodIndex": 0,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::AsConstructed:System.Formats.Asn1.Asn1Tag()",
-      "elapsedMilliseconds": 7503.015,
-      "calibratedMs": 7503.015,
-      "opsPerSecond": 13328.0,
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
       "iterations": 100000,
-      "status": "completed"
+      "status": "failed"
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::AsPrimitive:System.Formats.Asn1.Asn1Tag()",
-      "elapsedMilliseconds": 7393.12,
-      "calibratedMs": 7393.12,
-      "opsPerSecond": 13526.1,
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
       "iterations": 100000,
-      "status": "completed"
+      "status": "failed"
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::CalculateEncodedSize:System.Int32()",
-      "elapsedMilliseconds": 5482.724,
-      "calibratedMs": 5482.724,
-      "opsPerSecond": 18239.1,
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
       "iterations": 100000,
-      "status": "completed"
+      "status": "failed"
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::Decode:System.Formats.Asn1.Asn1Tag(System.ReadOnlySpan{System.Byte},System.Int32&)",
-      "elapsedMilliseconds": 7859.243,
-      "calibratedMs": 7859.243,
-      "opsPerSecond": 12723.9,
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
       "iterations": 100000,
-      "status": "completed"
+      "status": "failed"
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::Encode:System.Int32(System.Span{System.Byte})",
-      "elapsedMilliseconds": 6624.678,
-      "calibratedMs": 6624.678,
-      "opsPerSecond": 15095.1,
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
       "iterations": 100000,
-      "status": "completed"
+      "status": "failed"
     },
     {
       "methodIndex": 5,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::Equals:System.Boolean(System.Formats.Asn1.Asn1Tag)",
-      "elapsedMilliseconds": 7655.783,
-      "calibratedMs": 7655.783,
-      "opsPerSecond": 13062.0,
+      "elapsedMilliseconds": 0.599,
+      "calibratedMs": 0.599,
+      "opsPerSecond": 166972783.4,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 6,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::Equals:System.Boolean(System.Object)",
-      "elapsedMilliseconds": 7283.113,
-      "calibratedMs": 7283.113,
-      "opsPerSecond": 13730.4,
+      "elapsedMilliseconds": 1.071,
+      "calibratedMs": 1.071,
+      "opsPerSecond": 93396843.2,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 7,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::get_IsConstructed:System.Boolean()",
-      "elapsedMilliseconds": 6709.373,
-      "calibratedMs": 6709.373,
-      "opsPerSecond": 14904.5,
+      "elapsedMilliseconds": 0.6,
+      "calibratedMs": 0.6,
+      "opsPerSecond": 166777851.9,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 8,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::get_TagClass:System.Formats.Asn1.TagClass()",
-      "elapsedMilliseconds": 7376.189,
-      "calibratedMs": 7376.189,
-      "opsPerSecond": 13557.1,
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
       "iterations": 100000,
-      "status": "completed"
+      "status": "failed"
     },
     {
       "methodIndex": 9,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::get_TagValue:System.Int32()",
-      "elapsedMilliseconds": 5597.26,
-      "calibratedMs": 5597.26,
-      "opsPerSecond": 17865.9,
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
       "iterations": 100000,
-      "status": "completed"
+      "status": "failed"
     },
     {
       "methodIndex": 10,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::GetHashCode:System.Int32()",
-      "elapsedMilliseconds": 5570.793,
-      "calibratedMs": 5570.793,
-      "opsPerSecond": 17950.8,
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
       "iterations": 100000,
-      "status": "completed"
+      "status": "failed"
     },
     {
       "methodIndex": 11,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::HasSameClassAndValue:System.Boolean(System.Formats.Asn1.Asn1Tag)",
-      "elapsedMilliseconds": 7775.673,
-      "calibratedMs": 7775.673,
-      "opsPerSecond": 12860.6,
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
       "iterations": 100000,
-      "status": "completed"
+      "status": "failed"
     },
     {
       "methodIndex": 12,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::op_Equality:System.Boolean(System.Formats.Asn1.Asn1Tag,System.Formats.Asn1.Asn1Tag)",
-      "elapsedMilliseconds": 7781.111,
-      "calibratedMs": 7781.111,
-      "opsPerSecond": 12851.6,
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
       "iterations": 100000,
-      "status": "completed"
+      "status": "failed"
     },
     {
       "methodIndex": 13,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::op_Inequality:System.Boolean(System.Formats.Asn1.Asn1Tag,System.Formats.Asn1.Asn1Tag)",
-      "elapsedMilliseconds": 7741.74,
-      "calibratedMs": 7741.74,
-      "opsPerSecond": 12917.0,
+      "elapsedMilliseconds": 0.612,
+      "calibratedMs": 0.612,
+      "opsPerSecond": 163478829.5,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 14,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::ToString:System.String()",
-      "elapsedMilliseconds": 6733.463,
-      "calibratedMs": 6733.463,
-      "opsPerSecond": 14851.2,
+      "elapsedMilliseconds": 0.6,
+      "calibratedMs": 0.6,
+      "opsPerSecond": 166777851.9,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 15,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::TryDecode:System.Boolean(System.ReadOnlySpan{System.Byte},System.Formats.Asn1.Asn1Tag&,System.Int32&)",
-      "elapsedMilliseconds": 7256.773,
-      "calibratedMs": 7256.773,
-      "opsPerSecond": 13780.2,
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
       "iterations": 100000,
-      "status": "completed"
+      "status": "failed"
     },
     {
       "methodIndex": 16,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::TryEncode:System.Boolean(System.Span{System.Byte},System.Int32&)",
-      "elapsedMilliseconds": 8234.482,
-      "calibratedMs": 8234.482,
-      "opsPerSecond": 12144.1,
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
       "iterations": 100000,
-      "status": "completed"
+      "status": "failed"
     },
     {
       "methodIndex": 17,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::.ctor:System.Void(System.Formats.Asn1.UniversalTagNumber,System.Boolean)",
-      "elapsedMilliseconds": 822.309,
-      "calibratedMs": 822.309,
-      "opsPerSecond": 121608.7,
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
       "iterations": 100000,
-      "status": "completed"
+      "status": "failed"
     },
     {
       "methodIndex": 18,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::.ctor:System.Void(System.Formats.Asn1.TagClass,System.Int32,System.Boolean)",
-      "elapsedMilliseconds": 807.961,
-      "calibratedMs": 807.961,
-      "opsPerSecond": 123768.4,
+      "elapsedMilliseconds": 0.62,
+      "calibratedMs": 0.62,
+      "opsPerSecond": 161368404.1,
       "iterations": 100000,
       "status": "completed"
     }

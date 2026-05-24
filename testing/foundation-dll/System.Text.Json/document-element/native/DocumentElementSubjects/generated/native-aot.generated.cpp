@@ -240,6 +240,77 @@ extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubje
 extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_8(void);
 extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_9(void);
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_0(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_1(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_10(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_11(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_12(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_13(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_14(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_15(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_16(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_17(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_18(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_19(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_2(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_20(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_21(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_22(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_23(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_24(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_25(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_26(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_27(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_28(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_29(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_3(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_30(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_31(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_32(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_33(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_34(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_35(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_36(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_37(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_38(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_39(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_4(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_40(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_41(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_42(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_43(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_44(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_45(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_46(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_47(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_48(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_49(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_5(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_50(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_51(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_52(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_53(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_54(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_55(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_56(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_57(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_58(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_59(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_6(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_60(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_61(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_62(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_63(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_64(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_65(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_66(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_67(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_68(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_7(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_8(void);
+extern "C" void DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_9(void);
+
 namespace chaos::il2cpp::codegen::DocumentElementSubjects {
 
 // Bring runtime_core and jit declarations into scope for unqualified lookup

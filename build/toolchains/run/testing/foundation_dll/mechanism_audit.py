@@ -71,6 +71,23 @@ class MethodAuditRecord:
 
 
 @dataclass
+class HotpatchCoverageReport:
+    family: str
+    assembly: str
+    aot_method_count: int = 0
+    hotpatch_entry_count: int = 0
+    coverage_ratio: float = 0.0
+    covered_methods: list[str] = field(default_factory=list)
+    uncovered_methods: list[str] = field(default_factory=list)
+    legitimate_uncovered: list[str] = field(default_factory=list)
+    gap_uncovered: list[str] = field(default_factory=list)
+    passed: bool = False
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass
 class MechanismAuditReport:
     family: str
     assembly: str
@@ -141,10 +158,18 @@ def _class_name_from_slug(family_slug: str) -> str:
 def _detect_class_name(cpp_content: str, family_slug: str, family_dir: Path) -> str:
     """Detect the native entry class name from generated C++.
 
-    Prefers the codegen subdirectory name (source of truth).
-    Falls back to deriving from family_slug, then to generic patterns.
+    Prefers the native subdirectory name (source of truth for AOT-compiled
+    class name).  Falls back to codegen subdirectory, then to deriving from
+    family_slug, then to generic patterns.
     """
-    # Method 1: read from codegen subdirectory
+    # Method 1: read from native subdirectory (primary AOT output path)
+    native_candidates = sorted(family_dir.glob("native/*/generated/native-aot.generated.cpp"))
+    if native_candidates:
+        cn = native_candidates[0].parent.parent.name
+        if cn:
+            return cn
+
+    # Method 2: read from codegen subdirectory
     cpp_candidates = sorted(family_dir.glob("codegen/*/generated/native-aot.generated.cpp"))
     if cpp_candidates:
         cn = cpp_candidates[0].parent.parent.name
@@ -504,6 +529,125 @@ def write_reports(assembly: str, family_slug: str, output_dir: Path | None = Non
     }
 
 
+# ── Hotpatch coverage audit ─────────────────────────────────────────────
+
+def _extract_hotpatch_entry_symbols(cpp_content: str) -> list[str]:
+    """Extract AOT function symbols referenced in s_hotpatch_entries[].
+
+    Each entry has the form:
+      { reinterpret_cast<void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_0), ... },
+    Returns the first reinterpret_cast<void*>(&Symbol) symbol per entry
+    (the direct_ptr, not the interrupt_ptr).
+    """
+    symbols: list[str] = []
+    in_array = False
+    brace_depth = 0
+    for line in cpp_content.splitlines():
+        stripped = line.strip()
+        if 's_hotpatch_entries[' in stripped:
+            in_array = True
+            brace_depth = 0
+            continue
+        if in_array:
+            brace_depth += stripped.count('{') - stripped.count('}')
+            if brace_depth < 0:
+                break
+            # Match: reinterpret_cast<void*>(&Symbol)
+            m = re.search(r'reinterpret_cast<void\*>\(&(\w+)\)', stripped)
+            if m:
+                symbols.append(m.group(1))
+    return symbols
+
+
+def _derive_expected_subject_symbols(class_name: str, count: int) -> list[str]:
+    """Derive expected Subject_N symbols for a class with N AOT methods.
+
+    Example: class_name='ConvertCharSubjects', count=18
+    Returns: ['ConvertCharSubjects_ConvertCharSubjects_Subject_0', ...]
+    """
+    return [f'{class_name}_{class_name}_Subject_{i}' for i in range(count)]
+
+
+def _extract_native_aot_path(assembly: str, family_slug: str) -> Path | None:
+    """Locate the primary native-aot.generated.cpp for a family."""
+    family_dir = _VERIFICATION_BASE / assembly / family_slug
+    # Prefer native/<ClassName>/generated/ (multi-assembly native path)
+    candidates = sorted(family_dir.glob("native/*/generated/native-aot.generated.cpp"))
+    if candidates:
+        return candidates[0]
+    # Fallback: codegen/generated/ (legacy flat path)
+    fallback = family_dir / "codegen" / "generated" / "native-aot.generated.cpp"
+    return fallback if fallback.exists() else None
+
+
+def audit_hotpatch_coverage(assembly: str, family_slug: str) -> HotpatchCoverageReport:
+    """Audit hotpatch dispatch table coverage vs. AOT-compiled methods.
+
+    Scans native-aot.generated.cpp to cross-reference:
+      - s_hotpatch_entries[N] dispatch table count and symbols
+      - kAotMethodCount = M (expected AOT method count)
+    """
+    trace("hotpatch_audit.run", stage="audit", family=family_slug, assembly=assembly)
+    report = HotpatchCoverageReport(family=family_slug, assembly=assembly)
+
+    cpp_path = _extract_native_aot_path(assembly, family_slug)
+    if cpp_path is None or not cpp_path.exists():
+        trace("hotpatch_audit.skip", stage="audit", family=family_slug,
+              reason="native-aot.generated.cpp not found")
+        return report
+
+    cpp_content = cpp_path.read_text(encoding="utf-8")
+
+    # Extract kAotMethodCount = M
+    aot_count_m = re.search(r'kAotMethodCount\s*=\s*(\d+)', cpp_content)
+    if aot_count_m:
+        report.aot_method_count = int(aot_count_m.group(1))
+
+    # Extract s_hotpatch_entries[N] count
+    hp_count_m = re.search(r's_hotpatch_entries\[(\d+)\]', cpp_content)
+    if hp_count_m:
+        report.hotpatch_entry_count = int(hp_count_m.group(1))
+
+    # Extract symbol-level details from hotpatch entries
+    hp_symbols = _extract_hotpatch_entry_symbols(cpp_content)
+
+    if hp_symbols:
+        report.hotpatch_entry_count = len(hp_symbols)
+
+    # Derive expected AOT subject symbols from class name and method count
+    class_name = _detect_class_name(cpp_content, family_slug,
+                                    _VERIFICATION_BASE / assembly / family_slug)
+    expected_symbols: list[str] = []
+    if report.aot_method_count > 0 and class_name:
+        expected_symbols = _derive_expected_subject_symbols(
+            class_name, report.aot_method_count)
+
+    # Cross-reference: which expected symbols are covered by hotpatch entries?
+    if expected_symbols and hp_symbols:
+        report.covered_methods = sorted(set(expected_symbols) & set(hp_symbols))
+        report.uncovered_methods = sorted(set(expected_symbols) - set(hp_symbols))
+
+        # Categorize uncovered methods
+        for sym in report.uncovered_methods:
+            report.gap_uncovered.append(sym)
+
+    # Compute coverage ratio
+    if report.aot_method_count > 0:
+        report.coverage_ratio = report.hotpatch_entry_count / report.aot_method_count
+
+    # Pass if coverage >= 99% and no gaps
+    report.passed = (report.coverage_ratio >= 0.99 and len(report.gap_uncovered) == 0)
+
+    trace("hotpatch_audit.complete", stage="audit", family=family_slug,
+          aot_count=report.aot_method_count,
+          hp_count=report.hotpatch_entry_count,
+          ratio=round(report.coverage_ratio, 4),
+          gaps=len(report.gap_uncovered),
+          passed=report.passed)
+
+    return report
+
+
 def main() -> None:
     import argparse
     parser = argparse.ArgumentParser(description="Mechanism + Principle Audit: Mechanism + Principle Verification")
@@ -512,7 +656,42 @@ def main() -> None:
     parser.add_argument("--verbose", "-v", action="store_true")
     parser.add_argument("--output", "-o", type=Path, help="Output directory (default: family dir)")
     parser.add_argument("--write", action="store_true", help="Write reports to disk")
+    parser.add_argument("--hotpatch-coverage", action="store_true",
+                        help="Run hotpatch coverage audit (cross-ref s_hotpatch_entries vs kAotMethods)")
     args = parser.parse_args()
+
+    if args.hotpatch_coverage:
+        if args.family:
+            result = audit_hotpatch_coverage(args.assembly, args.family)
+            print(json.dumps(result.to_dict(), indent=2, ensure_ascii=False))
+            sys.exit(0 if result.passed else 1)
+        else:
+            # Run hotpatch coverage for all families
+            asm_dir = _VERIFICATION_BASE / args.assembly
+            if not asm_dir.exists():
+                print(json.dumps({"error": f"Assembly directory not found: {asm_dir}"}))
+                sys.exit(1)
+            results: dict[str, Any] = {}
+            for item in sorted(asm_dir.iterdir()):
+                if not item.is_dir() or item.name.startswith("_"):
+                    continue
+                cpp_path = _extract_native_aot_path(args.assembly, item.name)
+                if cpp_path is None or not cpp_path.exists():
+                    continue
+                results[item.name] = audit_hotpatch_coverage(args.assembly, item.name).to_dict()
+            total = len(results)
+            passed = sum(1 for r in results.values() if r.get("passed"))
+            summary = {
+                "generated_at": __import__("datetime").datetime.now().isoformat(),
+                "assembly": args.assembly,
+                "total_families": total,
+                "passed_families": passed,
+                "failed_families": total - passed,
+                "families": results,
+            }
+            print(json.dumps(summary, indent=2, ensure_ascii=False))
+            sys.exit(0 if passed == total else 1)
+        return
 
     if args.family:
         if args.write:

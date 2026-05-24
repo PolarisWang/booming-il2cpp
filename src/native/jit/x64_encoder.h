@@ -1069,6 +1069,43 @@ inline void EmitVPabsdRR(CodeBuffer& buf, uint8_t dest, uint8_t src) noexcept {
 #undef CHAOS_VEX3_0F3A
 
 // ═══════════════════════════════════════════════════════════════════════════
+// FMA (Fused Multiply-Add) — VEX.66.0F38.W0, 3-operand
+// ═══════════════════════════════════════════════════════════════════════════
+// VEX.3-operand mapping: ModRM.reg=acc, VEX.vvvv=src1, ModRM.rm=src2
+// Semantics (231 form): acc = src1 * src2 + acc (or -/+ variants)
+#define CHAOS_FMA3_0F38(name, opcode) \
+    buf.EmitVEX_66_0F38(acc, src2, src1); \
+    buf.EmitByte(opcode); \
+    buf.EmitByte(ModRM(3, acc, src2))
+
+inline void EmitVfmadd231psRR(CodeBuffer& buf, uint8_t acc, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_FMA3_0F38(Vfmadd231ps, 0xB8);
+}
+inline void EmitVfmadd231pdRR(CodeBuffer& buf, uint8_t acc, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_FMA3_0F38(Vfmadd231pd, 0xB9);
+}
+inline void EmitVfmsub231psRR(CodeBuffer& buf, uint8_t acc, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_FMA3_0F38(Vfmsub231ps, 0xBA);
+}
+inline void EmitVfmsub231pdRR(CodeBuffer& buf, uint8_t acc, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_FMA3_0F38(Vfmsub231pd, 0xBB);
+}
+inline void EmitVfnmadd231psRR(CodeBuffer& buf, uint8_t acc, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_FMA3_0F38(Vfnmadd231ps, 0xBC);
+}
+inline void EmitVfnmadd231pdRR(CodeBuffer& buf, uint8_t acc, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_FMA3_0F38(Vfnmadd231pd, 0xBD);
+}
+inline void EmitVfnmsub231psRR(CodeBuffer& buf, uint8_t acc, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_FMA3_0F38(Vfnmsub231ps, 0xBE);
+}
+inline void EmitVfnmsub231pdRR(CodeBuffer& buf, uint8_t acc, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_FMA3_0F38(Vfnmsub231pd, 0xBF);
+}
+
+#undef CHAOS_FMA3_0F38
+
+// ═══════════════════════════════════════════════════════════════════════════
 // SSE2 packed integer arithmetic (Padd*, Psub*, Pmul*)
 // ═══════════════════════════════════════════════════════════════════════════
 
@@ -1515,6 +1552,213 @@ inline void EmitLzcntRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
     buf.EmitByte(0xF3); EmitREX(buf, true, dst, src);
     buf.EmitByte(0x0F); buf.EmitByte(0xBD);
     buf.EmitByte(ModRM(3, dst, src));
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// VEX 256-bit (YMM, L=1) — AVX2 packed integer operations
+// ═══════════════════════════════════════════════════════════════════════════
+// All functions below use VEX.L=1 (256-bit YMM registers).
+// They mirror the 128-bit VP* functions above but operate on 256-bit lanes.
+
+/// Emit 3-byte VEX with VEX.66.0F (SSE2 map), WIG (W=0), 256-bit (L=1).
+inline void EmitVEX_66_0F_256(CodeBuffer& buf, uint8_t r, uint8_t b,
+                               uint8_t vvvv) noexcept {
+    EmitVEX(buf, 1, 0x01, false, r, 0, b, vvvv, true);
+}
+
+/// Emit 3-byte VEX with VEX.66.0F38 (SSSE3/SSE4.1 map), WIG, 256-bit (L=1).
+inline void EmitVEX_66_0F38_256(CodeBuffer& buf, uint8_t r, uint8_t b,
+                                 uint8_t vvvv) noexcept {
+    EmitVEX(buf, 1, 0x02, false, r, 0, b, vvvv, true);
+}
+
+/// Emit 3-byte VEX with VEX.66.0F3A (SSE4.1 imm8 map), WIG, 256-bit (L=1).
+inline void EmitVEX_66_0F3A_256(CodeBuffer& buf, uint8_t r, uint8_t b,
+                                 uint8_t vvvv) noexcept {
+    EmitVEX(buf, 1, 0x03, false, r, 0, b, vvvv, true);
+}
+
+// ── YMM VEX 3-operand macros (L=1) ─────────────────────────────────────
+#define CHAOS_YMM_VEX3_0F(name, opcode) \
+    buf.EmitVEX_66_0F_256(dest, src2, src1); \
+    buf.EmitByte(opcode); \
+    buf.EmitByte(ModRM(3, dest, src2))
+
+#define CHAOS_YMM_VEX3_0F38(name, opcode) \
+    buf.EmitVEX_66_0F38_256(dest, src2, src1); \
+    buf.EmitByte(opcode); \
+    buf.EmitByte(ModRM(3, dest, src2))
+
+#define CHAOS_YMM_VEX3_0F3A(name, opcode, imm) \
+    buf.EmitVEX_66_0F3A_256(dest, src2, src1); \
+    buf.EmitByte(opcode); \
+    buf.EmitByte(ModRM(3, dest, src2)); \
+    buf.EmitByte(imm)
+
+// ── YMM packed arithmetic (VEX.66.0F, L=1) ─────────────────────────────
+
+#define CHAOS_YMM_VEX3_OP(name, opcode) \
+    inline void EmitVYmm##name##RR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept { \
+        CHAOS_YMM_VEX3_0F(name, opcode); \
+    }
+
+CHAOS_YMM_VEX3_OP(Paddb,  0xFC)
+CHAOS_YMM_VEX3_OP(Paddw,  0xFD)
+CHAOS_YMM_VEX3_OP(Paddd,  0xFE)
+CHAOS_YMM_VEX3_OP(Paddq,  0xD4)
+CHAOS_YMM_VEX3_OP(Psubb,  0xF8)
+CHAOS_YMM_VEX3_OP(Psubw,  0xF9)
+CHAOS_YMM_VEX3_OP(Psubd,  0xFA)
+CHAOS_YMM_VEX3_OP(Psubq,  0xFB)
+CHAOS_YMM_VEX3_OP(Pmullw, 0xD5)
+CHAOS_YMM_VEX3_OP(Pmuludq,0xF4)
+CHAOS_YMM_VEX3_OP(Pand,   0xDB)
+CHAOS_YMM_VEX3_OP(Por,    0xEB)
+CHAOS_YMM_VEX3_OP(Pxor,   0xEF)
+CHAOS_YMM_VEX3_OP(Pandn,  0xDF)
+
+// ── YMM packed compare (VEX.66.0F, L=1) ───────────────────────────────
+
+CHAOS_YMM_VEX3_OP(Pcmpeqb,  0x74)
+CHAOS_YMM_VEX3_OP(Pcmpeqw,  0x75)
+CHAOS_YMM_VEX3_OP(Pcmpeqd,  0x76)
+CHAOS_YMM_VEX3_OP(Pcmpgtb,  0x64)
+CHAOS_YMM_VEX3_OP(Pcmpgtw,  0x65)
+CHAOS_YMM_VEX3_OP(Pcmpgtd,  0x66)
+
+// pcmpgtq (SSE4.1, requires 0F38 map)
+inline void EmitVYmmPcmpgtqRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_YMM_VEX3_0F38(pcmpgtq, 0x37);
+}
+
+// ── YMM shift (VEX.66.0F, L=1, 3-operand shift by xmm) ───────────────
+
+CHAOS_YMM_VEX3_OP(Psllw, 0xF1)
+CHAOS_YMM_VEX3_OP(Pslld, 0xF2)
+CHAOS_YMM_VEX3_OP(Psllq, 0xF3)
+CHAOS_YMM_VEX3_OP(Psrlw, 0xD1)
+CHAOS_YMM_VEX3_OP(Psrld, 0xD2)
+CHAOS_YMM_VEX3_OP(Psrlq, 0xD3)
+CHAOS_YMM_VEX3_OP(Psraw, 0xE1)
+CHAOS_YMM_VEX3_OP(Psrad, 0xE2)
+
+// ── YMM unpack & pack (VEX.66.0F, L=1) ───────────────────────────────
+
+CHAOS_YMM_VEX3_OP(Punpcklbw,  0x60)
+CHAOS_YMM_VEX3_OP(Punpcklwd,  0x61)
+CHAOS_YMM_VEX3_OP(Punpckldq,  0x62)
+CHAOS_YMM_VEX3_OP(Punpcklqdq, 0x6C)
+CHAOS_YMM_VEX3_OP(Punpckhbw,  0x68)
+CHAOS_YMM_VEX3_OP(Punpckhwd,  0x69)
+CHAOS_YMM_VEX3_OP(Punpckhdq,  0x6A)
+CHAOS_YMM_VEX3_OP(Punpckhqdq, 0x6D)
+CHAOS_YMM_VEX3_OP(Packsswb,   0x63)
+CHAOS_YMM_VEX3_OP(Packssdw,   0x6B)
+CHAOS_YMM_VEX3_OP(Packuswb,   0x67)
+
+// ── YMM shuffle (VEX.66.0F, L=1, with imm8) ──────────────────────────
+
+/// vpshufd ymm_dest, ymm_src, imm8 (vvvv unused)
+inline void EmitVYmmPshufdRR(CodeBuffer& buf, uint8_t dest, uint8_t src, uint8_t imm) noexcept {
+    buf.EmitVEX_66_0F_256(dest, src, 0);
+    buf.EmitByte(0x70);
+    buf.EmitByte(ModRM(3, dest, src));
+    buf.EmitByte(imm);
+}
+
+// pcmpeqq (SSE4.1, 0F38 map)
+inline void EmitVYmmPcmpeqqRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_YMM_VEX3_0F38(pcmpeqq, 0x29);
+}
+
+// ── YMM absolute value (VEX.66.0F38, L=1, 2-operand form) ────────────
+
+// For 2-operand YMM abs: ModRM.reg = dest = src1, VEX.vvvv = dest (tied)
+#define CHAOS_YMM_ABS_0F38(name, opcode) \
+    buf.EmitVEX_66_0F38_256(dest, src, dest); \
+    buf.EmitByte(opcode); \
+    buf.EmitByte(ModRM(3, dest, src))
+
+inline void EmitVYmmPabsbRR(CodeBuffer& buf, uint8_t dest, uint8_t src) noexcept {
+    CHAOS_YMM_ABS_0F38(pabsb, 0x1C);
+}
+inline void EmitVYmmPabswRR(CodeBuffer& buf, uint8_t dest, uint8_t src) noexcept {
+    CHAOS_YMM_ABS_0F38(pabsw, 0x1D);
+}
+inline void EmitVYmmPabsdRR(CodeBuffer& buf, uint8_t dest, uint8_t src) noexcept {
+    CHAOS_YMM_ABS_0F38(pabsd, 0x1E);
+}
+#undef CHAOS_YMM_ABS_0F38
+
+// ── YMM pshufb (VEX.66.0F38, L=1, 2-operand form: dest = src1) ───────
+
+inline void EmitVYmmPshufbRR(CodeBuffer& buf, uint8_t dest, uint8_t src) noexcept {
+    buf.EmitVEX_66_0F38_256(dest, src, dest);
+    buf.EmitByte(0x00);
+    buf.EmitByte(ModRM(3, dest, src));
+}
+
+// ── YMM FMA (VEX.66.0F38, L=1, 3-operand 231 form) ───────────────────
+// Semantics (231 form): dst = src1 * src2 + dst (acc = src1 * src2 + acc)
+
+#define CHAOS_YMM_FMA_0F38(name, opcode) \
+    buf.EmitVEX_66_0F38_256(acc, src2, src1); \
+    buf.EmitByte(opcode); \
+    buf.EmitByte(ModRM(3, acc, src2))
+
+inline void EmitVYmmVfmadd231psRR(CodeBuffer& buf, uint8_t acc, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_YMM_FMA_0F38(Vfmadd231ps, 0xB8);
+}
+inline void EmitVYmmVfmadd231pdRR(CodeBuffer& buf, uint8_t acc, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_YMM_FMA_0F38(Vfmadd231pd, 0xB9);
+}
+inline void EmitVYmmVfmsub231psRR(CodeBuffer& buf, uint8_t acc, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_YMM_FMA_0F38(Vfmsub231ps, 0xBA);
+}
+inline void EmitVYmmVfmsub231pdRR(CodeBuffer& buf, uint8_t acc, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_YMM_FMA_0F38(Vfmsub231pd, 0xBB);
+}
+inline void EmitVYmmVfnmadd231psRR(CodeBuffer& buf, uint8_t acc, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_YMM_FMA_0F38(Vfnmadd231ps, 0xBC);
+}
+inline void EmitVYmmVfnmadd231pdRR(CodeBuffer& buf, uint8_t acc, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_YMM_FMA_0F38(Vfnmadd231pd, 0xBD);
+}
+inline void EmitVYmmVfnmsub231psRR(CodeBuffer& buf, uint8_t acc, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_YMM_FMA_0F38(Vfnmsub231ps, 0xBE);
+}
+inline void EmitVYmmVfnmsub231pdRR(CodeBuffer& buf, uint8_t acc, uint8_t src1, uint8_t src2) noexcept {
+    CHAOS_YMM_FMA_0F38(Vfnmsub231pd, 0xBF);
+}
+#undef CHAOS_YMM_FMA_0F38
+
+// ── YMM 256-bit vpcmpeqq and remaining 0F38 ops ───────────────────────
+#undef CHAOS_YMM_VEX3_0F38
+#undef CHAOS_YMM_VEX3_0F3A
+
+// ═══════════════════════════════════════════════════════════════════════════
+// AVX 256-bit load/store (VMovdqa YMM)
+// ═══════════════════════════════════════════════════════════════════════════
+
+/// vmovdqa ymm1, ymm2 (aligned 256-bit register-to-register)
+inline void EmitVYmmMovdqaRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
+    buf.EmitVEX_66_0F_256(dst, src, 0);  // vvvv=0 (unused for 2-operand)
+    buf.EmitByte(0x6F);
+    buf.EmitByte(ModRM(3, dst, src));
+}
+
+/// vmovdqa [mem], ymm (aligned 256-bit store)
+inline void EmitVYmmMovdqaMR(CodeBuffer& buf, uint8_t base, int32_t disp, uint8_t src) noexcept {
+    buf.EmitVEX_66_0F_256(src, base, 0);  // vvvv=0
+    buf.EmitByte(0x7F);
+    EmitMR(buf, src, base, disp);
+}
+
+/// vmovdqa ymm, [mem] (aligned 256-bit load)
+inline void EmitVYmmMovdqaRM(CodeBuffer& buf, uint8_t dst, uint8_t base, int32_t disp) noexcept {
+    buf.EmitVEX_66_0F_256(dst, base, 0);
+    buf.EmitByte(0x6F);
+    EmitMR(buf, dst, base, disp);
 }
 
 }  // namespace chaos::il2cpp::jit

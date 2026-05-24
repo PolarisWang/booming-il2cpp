@@ -28,10 +28,13 @@ extern "C" void ChaosRegisterExternalType(
 
 // ── Enum dispatch entry struct (file scope for extern "C" access) ──
 #ifndef CHAOS_IL2CPP_GENERATED_CODE_COMPAT_H_
+#ifndef CHAOS_IL2CPP_ENUM_DISPATCH_ENTRY_DEFINED
+#define CHAOS_IL2CPP_ENUM_DISPATCH_ENTRY_DEFINED
 struct EnumDispatchEntry {
     CHAOS_IL2CPP_UINT32 fnv24;
     const EnumMetadataTable* table;
 };
+#endif
 #endif
 
 // Dispatch table registration defined in enum_stubs.cpp.

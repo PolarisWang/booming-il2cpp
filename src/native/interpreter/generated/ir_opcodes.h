@@ -117,6 +117,7 @@ enum class IROpCode : std::int32_t {
     Simd         = 107,  // SIMD operation (sub-op + element type + imm in imm field)
     Popcnt       = 108,  // population count
     Lzcnt        = 109,  // leading zero count
+    SimdFma      = 110,  // FMA 3-operand fused multiply-add (src3 via kRegHasSrc3)
 };
 
 }  // namespace chaos::il2cpp::interpreter

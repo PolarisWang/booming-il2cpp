@@ -401,6 +401,32 @@ public:
         ::chaos::il2cpp::jit::EmitLzcntRR(buf_, dst, src);
     }
 
+    // ── FMA ──────────────────────────────────────────────────────────
+    void EmitVfmadd231psRR(uint8_t acc, uint8_t src1, uint8_t src2) override {
+        ::chaos::il2cpp::jit::EmitVfmadd231psRR(buf_, acc, src1, src2);
+    }
+    void EmitVfmadd231pdRR(uint8_t acc, uint8_t src1, uint8_t src2) override {
+        ::chaos::il2cpp::jit::EmitVfmadd231pdRR(buf_, acc, src1, src2);
+    }
+    void EmitVfmsub231psRR(uint8_t acc, uint8_t src1, uint8_t src2) override {
+        ::chaos::il2cpp::jit::EmitVfmsub231psRR(buf_, acc, src1, src2);
+    }
+    void EmitVfmsub231pdRR(uint8_t acc, uint8_t src1, uint8_t src2) override {
+        ::chaos::il2cpp::jit::EmitVfmsub231pdRR(buf_, acc, src1, src2);
+    }
+    void EmitVfnmadd231psRR(uint8_t acc, uint8_t src1, uint8_t src2) override {
+        ::chaos::il2cpp::jit::EmitVfnmadd231psRR(buf_, acc, src1, src2);
+    }
+    void EmitVfnmadd231pdRR(uint8_t acc, uint8_t src1, uint8_t src2) override {
+        ::chaos::il2cpp::jit::EmitVfnmadd231pdRR(buf_, acc, src1, src2);
+    }
+    void EmitVfnmsub231psRR(uint8_t acc, uint8_t src1, uint8_t src2) override {
+        ::chaos::il2cpp::jit::EmitVfnmsub231psRR(buf_, acc, src1, src2);
+    }
+    void EmitVfnmsub231pdRR(uint8_t acc, uint8_t src1, uint8_t src2) override {
+        ::chaos::il2cpp::jit::EmitVfnmsub231pdRR(buf_, acc, src1, src2);
+    }
+
 private:
     CodeBuffer& buf_;
 };

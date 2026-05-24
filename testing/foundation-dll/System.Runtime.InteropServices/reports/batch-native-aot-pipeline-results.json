@@ -1,108 +1,10 @@
 {
   "assembly": "System.Runtime.InteropServices",
   "mode": "family-entrypoint",
-  "total": 14,
-  "passed": 14,
+  "total": 1,
+  "passed": 1,
   "failed": 0,
   "results": [
-    {
-      "family": "com-types",
-      "config_tier": "CHECK",
-      "steps": {
-        "build_subjects": "OK",
-        "convert_to_cpp": "OK",
-        "build_entry_exe": "OK"
-      },
-      "success": true,
-      "methodCount": 22,
-      "entryPointSubjectId": "",
-      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Runtime.InteropServices\\com-types\\managed\\subjects\\build-output\\ComTypesSubjects.dll"
-    },
-    {
-      "family": "com-wrappers",
-      "config_tier": "CHECK",
-      "steps": {
-        "build_subjects": "OK",
-        "convert_to_cpp": "OK",
-        "build_entry_exe": "OK"
-      },
-      "success": true,
-      "methodCount": 10,
-      "entryPointSubjectId": "",
-      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Runtime.InteropServices\\com-wrappers\\managed\\subjects\\build-output\\ComWrappersSubjects.dll"
-    },
-    {
-      "family": "custom-marshaller-contracts",
-      "config_tier": "CHECK",
-      "steps": {},
-      "success": true,
-      "error": null
-    },
-    {
-      "family": "exception-errors",
-      "config_tier": "CHECK",
-      "steps": {
-        "build_subjects": "OK",
-        "convert_to_cpp": "OK",
-        "build_entry_exe": "OK"
-      },
-      "success": true,
-      "methodCount": 18,
-      "entryPointSubjectId": "",
-      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Runtime.InteropServices\\exception-errors\\managed\\subjects\\build-output\\ExceptionErrorsSubjects.dll"
-    },
-    {
-      "family": "function-pointers",
-      "config_tier": "CHECK",
-      "steps": {
-        "build_subjects": "OK",
-        "convert_to_cpp": "OK",
-        "build_entry_exe": "OK"
-      },
-      "success": true,
-      "methodCount": 1,
-      "entryPointSubjectId": "",
-      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Runtime.InteropServices\\function-pointers\\managed\\subjects\\build-output\\FunctionPointersSubjects.dll"
-    },
-    {
-      "family": "generated-marshalling",
-      "config_tier": "CHECK",
-      "steps": {
-        "build_subjects": "OK",
-        "convert_to_cpp": "OK",
-        "build_entry_exe": "OK"
-      },
-      "success": true,
-      "methodCount": 69,
-      "entryPointSubjectId": "",
-      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Runtime.InteropServices\\generated-marshalling\\managed\\subjects\\build-output\\GeneratedMarshallingSubjects.dll"
-    },
-    {
-      "family": "handles-safehandle-gchandle",
-      "config_tier": "CHECK",
-      "steps": {
-        "build_subjects": "OK",
-        "convert_to_cpp": "OK",
-        "build_entry_exe": "OK"
-      },
-      "success": true,
-      "methodCount": 29,
-      "entryPointSubjectId": "",
-      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Runtime.InteropServices\\handles-safehandle-gchandle\\managed\\subjects\\build-output\\HandlesSafehandleGchandleSubjects.dll"
-    },
-    {
-      "family": "marshalling-attributes",
-      "config_tier": "CHECK",
-      "steps": {
-        "build_subjects": "OK",
-        "convert_to_cpp": "OK",
-        "build_entry_exe": "OK"
-      },
-      "success": true,
-      "methodCount": 10,
-      "entryPointSubjectId": "",
-      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Runtime.InteropServices\\marshalling-attributes\\managed\\subjects\\build-output\\MarshallingAttributesSubjects.dll"
-    },
     {
       "family": "native-memory-pointers",
       "config_tier": "CHECK",
@@ -115,72 +17,7 @@
       "methodCount": 199,
       "entryPointSubjectId": "",
       "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Runtime.InteropServices\\native-memory-pointers\\managed\\subjects\\build-output\\NativeMemoryPointersSubjects.dll"
-    },
-    {
-      "family": "objective-c-interop",
-      "config_tier": "CHECK",
-      "steps": {
-        "build_subjects": "OK",
-        "convert_to_cpp": "OK",
-        "build_entry_exe": "OK"
-      },
-      "success": true,
-      "methodCount": 4,
-      "entryPointSubjectId": "",
-      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Runtime.InteropServices\\objective-c-interop\\managed\\subjects\\build-output\\ObjectiveCInteropSubjects.dll"
-    },
-    {
-      "family": "pinvoke-dllimport",
-      "config_tier": "CHECK",
-      "steps": {
-        "build_subjects": "OK",
-        "convert_to_cpp": "OK",
-        "build_entry_exe": "OK"
-      },
-      "success": true,
-      "methodCount": 12,
-      "entryPointSubjectId": "",
-      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Runtime.InteropServices\\pinvoke-dllimport\\managed\\subjects\\build-output\\PinvokeDllimportSubjects.dll"
-    },
-    {
-      "family": "runtime-interop-services",
-      "config_tier": "CHECK",
-      "steps": {
-        "build_subjects": "OK",
-        "convert_to_cpp": "OK",
-        "build_entry_exe": "OK"
-      },
-      "success": true,
-      "methodCount": 17,
-      "entryPointSubjectId": "",
-      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Runtime.InteropServices\\runtime-interop-services\\managed\\subjects\\build-output\\RuntimeInteropServicesSubjects.dll"
-    },
-    {
-      "family": "secure-string-marshal",
-      "config_tier": "CHECK",
-      "steps": {
-        "build_subjects": "OK",
-        "convert_to_cpp": "OK",
-        "build_entry_exe": "OK"
-      },
-      "success": true,
-      "methodCount": 4,
-      "entryPointSubjectId": "",
-      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Runtime.InteropServices\\secure-string-marshal\\managed\\subjects\\build-output\\SecureStringMarshalSubjects.dll"
-    },
-    {
-      "family": "unmanaged-calling-conventions",
-      "config_tier": "CHECK",
-      "steps": {
-        "build_subjects": "OK",
-        "convert_to_cpp": "OK",
-        "build_entry_exe": "OK"
-      },
-      "success": true,
-      "methodCount": 1,
-      "entryPointSubjectId": "",
-      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Runtime.InteropServices\\unmanaged-calling-conventions\\managed\\subjects\\build-output\\UnmanagedCallingConventionsSubjects.dll"
     }
   ],
-  "timestamp": "2026-05-23T14:54:04"
+  "timestamp": "2026-05-24T18:03:02"
 }

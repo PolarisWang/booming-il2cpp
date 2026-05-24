@@ -26,6 +26,39 @@ extern "C" void InterpreterEntryDirect(
 #pragma warning(push)
 #pragma warning(disable: 4065 4244)
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void WindowsIdentitySubjects_WindowsIdentitySubjects_CustomEntrySubject_21(void);
+extern "C" void WindowsIdentitySubjects_WindowsIdentitySubjects_CustomEntrySubject_22(void);
+extern "C" void WindowsIdentitySubjects_WindowsIdentitySubjects_CustomEntrySubject_23(void);
+extern "C" void WindowsIdentitySubjects_WindowsIdentitySubjects_CustomEntrySubject_24(void);
+extern "C" void WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_0(void);
+extern "C" void WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_1(void);
+extern "C" void WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_10(void);
+extern "C" void WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_11(void);
+extern "C" void WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_12(void);
+extern "C" void WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_13(void);
+extern "C" void WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_14(void);
+extern "C" void WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_15(void);
+extern "C" void WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_16(void);
+extern "C" void WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_17(void);
+extern "C" void WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_18(void);
+extern "C" void WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_19(void);
+extern "C" void WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_2(void);
+extern "C" void WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_20(void);
+extern "C" void WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_25(void);
+extern "C" void WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_26(void);
+extern "C" void WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_27(void);
+extern "C" void WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_28(void);
+extern "C" void WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_29(void);
+extern "C" void WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_3(void);
+extern "C" void WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_30(void);
+extern "C" void WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_4(void);
+extern "C" void WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_5(void);
+extern "C" void WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_6(void);
+extern "C" void WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_7(void);
+extern "C" void WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_8(void);
+extern "C" void WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_9(void);
+
 namespace chaos::il2cpp::codegen::WindowsIdentitySubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup
