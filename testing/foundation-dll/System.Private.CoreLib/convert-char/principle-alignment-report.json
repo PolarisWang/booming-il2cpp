@@ -1,31 +1,30 @@
 {
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-24T20:34:14.905591",
+  "generated_at": "2026-05-24T22:29:16.684884",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
-      "status": "CONCERN",
-      "summary": "avg_aot_speedup=3.4%, avg_jit_speedup=-714.09% (2/11 methods where native is slower than managed (18%); JIT speedup -714.09% (interpreter significantly slower than managed JIT))",
+      "status": "NOT_APPLICABLE",
+      "summary": "18/18 methods are stubs — benchmark data not meaningful",
       "details": [],
       "evidence": {
-        "average_speedup_percent": 3.4,
-        "average_native_jit_speedup_percent": -714.09,
-        "managed_faster_count": 2,
-        "native_aot_faster_count": 6,
-        "native_jit_faster_count": 7,
-        "matched_count": 11,
-        "regression_ratio": 0.182
+        "average_speedup_percent": 0.0,
+        "average_native_jit_speedup_percent": null,
+        "managed_faster_count": 0,
+        "native_aot_faster_count": 0,
+        "native_jit_faster_count": 0,
+        "invalid_count": 18,
+        "total_methods": 18
       }
     },
     "p1_lowering": {
       "check_id": "p1_lowering",
-      "status": "VIOLATION",
-      "summary": "0/0 methods with lowering",
+      "status": "ALIGNED",
+      "summary": "All methods have lowering [OK]",
       "details": [],
       "evidence": {
-        "has_lowering": false,
-        "file_has_lowering": false,
+        "has_lowering": true,
         "stub_count": 0,
         "simple_forward_count": 0,
         "methods_with_lowering": 0,
@@ -55,11 +54,11 @@
       "details": [
         {
           "function": "ChaosDatetimeGetUtcNow",
-          "call_count": 1
+          "call_count": 3
         }
       ],
       "evidence": {
-        "stub_call_count": 1
+        "stub_call_count": 3
       }
     },
     "p2_abstraction_balance": {
@@ -72,18 +71,18 @@
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "7 of 11 changed source files are outside expected architecture layers",
+      "summary": "8 of 12 changed source files are outside expected architecture layers",
       "details": [
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ExceptionEmission.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.MethodEmission.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
           "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.DispatchEntryCode.cpp.scriban",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.HotpatchTable.cpp.scriban",
           "reason": "outside expected architecture layers"
         },
         {
@@ -91,35 +90,39 @@
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/native/jit/jit_method.h",
-          "reason": "outside expected architecture layers"
-        },
-        {
           "file": "src/native/jit/jit_precode.cpp",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/native/jit/jit_seh.cpp",
+          "file": "wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/24-全量IL2CPP编译器架构.md",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/27-T4原生代码生成器架构.md",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/INDEX.md",
           "reason": "outside expected architecture layers"
         }
       ],
       "evidence": {
-        "changed_source_count": 11,
+        "changed_source_count": 12,
         "layer_distribution": {
-          "TestInfra": 1,
-          "RuntimeCore": 3
+          "TestInfra": 3,
+          "Driver": 1
         },
         "violations": [
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ExceptionEmission.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.MethodEmission.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
             "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.DispatchEntryCode.cpp.scriban",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.HotpatchTable.cpp.scriban",
             "reason": "outside expected architecture layers"
           },
           {
@@ -127,15 +130,19 @@
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/native/jit/jit_method.h",
-            "reason": "outside expected architecture layers"
-          },
-          {
             "file": "src/native/jit/jit_precode.cpp",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/native/jit/jit_seh.cpp",
+            "file": "wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/24-全量IL2CPP编译器架构.md",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/27-T4原生代码生成器架构.md",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/INDEX.md",
             "reason": "outside expected architecture layers"
           }
         ]
@@ -171,14 +178,10 @@
     },
     "p3_patch_entry": {
       "check_id": "p3_patch_entry",
-      "status": "ALIGNED",
-      "summary": "Dispatch table: 18 entries, all with interrupt_ptr [OK]",
+      "status": "VIOLATION",
+      "summary": "No dispatch table found in generated code",
       "details": [],
-      "evidence": {
-        "table_size": 18,
-        "entries_with_interrupt_ptr": 18,
-        "has_hotpatch_module": true
-      }
+      "evidence": {}
     },
     "p3_patchdata": {
       "check_id": "p3_patchdata",
@@ -198,9 +201,9 @@
   "summary": {
     "total": 12,
     "aligned": 6,
-    "concern": 3,
+    "concern": 2,
     "violation": 1,
-    "not_applicable": 2,
+    "not_applicable": 3,
     "overall": "VIOLATION"
   }
 }

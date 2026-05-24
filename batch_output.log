@@ -1,7 +1,0 @@
-Total families: 135
-Already passed: 107
-Need verification: 28
-  START [System.Private.CoreLib/boxing-unboxing-casts] (27 remaining)
-  START [System.Private.CoreLib/enum-parsing] (26 remaining)
-  [1/28] PASS [System.Private.CoreLib/boxing-unboxing-casts] (4850.4s)
-  [2/28] FAIL [System.Private.CoreLib/enum-parsing] (4850.4s) stages: ['fact']

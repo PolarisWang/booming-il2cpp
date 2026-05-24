@@ -292,10 +292,14 @@ void* PrecodeArena::AllocateHybridTrampoline(HybridPrecode* precode) noexcept {
 // Returns nullptr on managed exception during compilation.
 static JitMethod* CompileWithCatch(const interpreter::RegisterMethod& ir,
                                     const CompileConfig& config) noexcept {
+    std::fprintf(stderr, "DIAG: CompileWithCatch enter\n"); std::fflush(stderr);
     JitMethod* jit = nullptr;
     CHAOS_EH_TRY
+        std::fprintf(stderr, "DIAG: CompileWithCatch about to call Compile\n"); std::fflush(stderr);
         jit = Compile(ir, config);
+        std::fprintf(stderr, "DIAG: CompileWithCatch Compile returned %p\n", (void*)jit); std::fflush(stderr);
     CHAOS_EH_CATCH_BEGIN
+        std::fprintf(stderr, "DIAG: CompileWithCatch caught exception\n"); std::fflush(stderr);
         jit = nullptr;
     CHAOS_EH_END
     return jit;
@@ -404,27 +408,35 @@ extern "C" void RegisterJitEntryMethods(const JitEntry* entries, uint32_t count)
     using namespace chaos::il2cpp::interpreter;
     using namespace chaos::il2cpp::runtime_core;
 
+    std::fprintf(stderr, "DIAG: RegisterJitEntryMethods enter entries=%p count=%u\n", (void*)entries, count); std::fflush(stderr);
+
     // Function-local static arena — lives for program lifetime
     static PrecodeArena arena;
+
+    std::fprintf(stderr, "DIAG: after static PrecodeArena init\n"); std::fflush(stderr);
 
     for (uint32_t i = 0; i < count; ++i) {
         const auto& entry = entries[i];
         std::fprintf(stderr, "DIAG: JIT entry %u/%u token=0x%x module=%u json_len=%u\n",
                      i, count, entry.token, entry.module_id, entry.json_len);
+        std::fflush(stderr);
 
         // Step 1: Deserialize AotCoreIr JSON → IRMethod
         auto ir = DeserializeAotCoreIrMethod(
             entry.json, entry.json_len, nullptr, nullptr, nullptr, nullptr);
         std::fprintf(stderr, "DIAG: entry %u deserialize OK\n", i);
+        std::fflush(stderr);
 
         // Step 2: Allocate registers → RegisterMethod (independent copy)
         auto rm = AllocateRegisters(ir);
         std::fprintf(stderr, "DIAG: entry %u alloc_regs OK\n", i);
+        std::fflush(stderr);
         // ir goes out of scope — vectors auto-clean
 
         // Step 3: Heap-allocate JitPrecode (lives for program lifetime)
         auto* precode = new JitPrecode();
         std::fprintf(stderr, "DIAG: entry %u new JitPrecode OK precode=%p\n", i, (void*)precode);
+        std::fflush(stderr);
         precode->ir = std::move(rm);
         precode->config = CompileConfig{};
 
@@ -432,10 +444,12 @@ extern "C" void RegisterJitEntryMethods(const JitEntry* entries, uint32_t count)
         precode->entry = GetHotpatchNameRegistry().GetDispatchEntry(
             entry.module_id, entry.token);
         std::fprintf(stderr, "DIAG: entry %u GetDispatchEntry OK entry=%p\n", i, (void*)precode->entry);
+        std::fflush(stderr);
 
         // Step 5: Allocate trampoline from the RWX arena
         precode->trampoline = arena.AllocateJitTrampoline(precode);
         std::fprintf(stderr, "DIAG: entry %u AllocateJitTrampoline OK trampoline=%p\n", i, (void*)precode->trampoline);
+        std::fflush(stderr);
 
         // Step 6: Point direct_ptr at the trampoline.
         // First call goes trampoline → JitStubEntry → JitStubDispatchImpl

@@ -1,9 +1,0 @@
-T4LeaveHelper: ret_addr=000001D1289C004C nm=000001D126A70A20 current_off=49 seh_off=160
-  FindInnermostFinally: MATCH idx=0 flags=2 try=[39,92) off=49
-T4LeaveHelper: returning handler=000001D1289C005C (code=000001D1289C0000 + off=92)
-T4LeaveHelper: ret_addr=000001D1289D0067 nm=000001D126A70420 current_off=76 seh_off=193
-  FindInnermostFinally: MATCH idx=1 flags=2 try=[51,124) off=76
-T4LeaveHelper: returning handler=000001D1289D008B (code=000001D1289D0000 + off=139)
-T4LeaveHelper: ret_addr=000001D1289E004C nm=000001D126A6FCA0 current_off=49 seh_off=132
-  FindInnermostFinally: MATCH idx=0 flags=4 try=[39,92) off=49
-T4LeaveHelper: returning handler=000001D1289E005C (code=000001D1289E0000 + off=92)
