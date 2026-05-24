@@ -857,13 +857,13 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{2C7962F8-D495-38DA-BE3D-08E5EF9C3977}</Project>
       <Name>test_jit_binary_ir</Name>
     </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\testing\src\native\jit\test_jit_debug_info.vcxproj">
+      <Project>{D8C27BF0-D5B5-33FC-AEED-7A39B75EA312}</Project>
+      <Name>test_jit_debug_info</Name>
+    </ProjectReference>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\testing\src\native\jit\test_jit_gc_slot_map.vcxproj">
       <Project>{39328D97-6949-34D3-946E-0755F71557C3}</Project>
       <Name>test_jit_gc_slot_map</Name>
-    </ProjectReference>
-    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\testing\src\native\jit\test_jit_hybrid_mode.vcxproj">
-      <Project>{123E99AD-9B3F-3EE8-9203-96B740120002}</Project>
-      <Name>test_jit_hybrid_mode</Name>
     </ProjectReference>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\testing\src\native\jit\test_jit_il_smoke.vcxproj">
       <Project>{22DA2103-366E-3186-B24A-25FDCC4BA297}</Project>

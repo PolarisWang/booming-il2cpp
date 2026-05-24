@@ -386,7 +386,7 @@ _NEEDS_MANUAL_METHODS: set[tuple[str, str]] = {
 }
 
 # Method overrides keyed by (type_name, method_name, param_count) → "skip" or custom expression
-_METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
+METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     ("Span", "ToArray", 1): "new byte[1].AsSpan().ToArray()",  # Span.ToArray() is 0-param; contract has erroneous count
     ("Span", "get_Empty", 0): "Span<byte>.Empty",
     ("ReadOnlySpan", "get_Empty", 0): "ReadOnlySpan<byte>.Empty",
@@ -943,7 +943,7 @@ _GENERIC_ARGS_MAP: dict[int, str] = {
 _ACRONYMS = frozenset({"io", "id", "db", "ui", "os", "ip"})
 
 # Comprehensive usings emitted into every generated source file.
-_BASE_USINGS = "\n".join([
+BASE_USINGS = "\n".join([
     "using System;",
     "using System.IO;",
     "using System.Threading;",
@@ -1065,7 +1065,7 @@ TYPE_ALTERNATIVE_MAP: dict[str, str] = {
 
 
 
-def _parse_method_subject_id(method_subject_id: str) -> dict[str, Any]:
+def parse_method_subject_id(method_subject_id: str) -> dict[str, Any]:
     """Parse a methodSubjectId into its components.
 
     Format: ``Assembly/Namespace.Type::MethodName:ReturnType(ParamType1,ParamType2)``
@@ -1160,7 +1160,7 @@ def _parse_method_subject_id(method_subject_id: str) -> dict[str, Any]:
         return_type = return_type[:-2]
 
     # Parse parameter types (handle nested generics carefully)
-    param_types = _split_param_types(params_part)
+    param_types = split_param_types(params_part)
 
     return {
         "type_path": type_path,
@@ -1172,7 +1172,7 @@ def _parse_method_subject_id(method_subject_id: str) -> dict[str, Any]:
     }
 
 
-def _split_param_types(params_part: str) -> list[str]:
+def split_param_types(params_part: str) -> list[str]:
     """Split comma-separated parameter types, respecting generic angle brackets."""
     if not params_part.strip():
         return []
@@ -1196,7 +1196,7 @@ def _split_param_types(params_part: str) -> list[str]:
     return types
 
 
-def _is_primitive_type(csharp_type: str) -> bool:
+def is_primitive_type(csharp_type: str) -> bool:
     """Check if a type string is in the primitive set."""
     # Normalize: strip trailing & (ref), * (pointer), ? (nullable), [] (array)
     bare = csharp_type.rstrip("&*?").rstrip("[]").strip()
@@ -1205,7 +1205,7 @@ def _is_primitive_type(csharp_type: str) -> bool:
     return bare in PRIMITIVE_SET
 
 
-def _has_unsafe_param(param_types: list[str]) -> bool:
+def has_unsafe_param(param_types: list[str]) -> bool:
     """Check if any parameter is ref, pointer, or generic type param."""
     for pt in param_types:
         pt = pt.strip()
@@ -1228,21 +1228,21 @@ def _has_unsafe_param(param_types: list[str]) -> bool:
     return False
 
 
-def _is_simple_method(parsed: dict[str, Any]) -> bool:
+def is_simple_method(parsed: dict[str, Any]) -> bool:
     """All parameters + return type are primitive, and no ref/pointer/generic."""
-    if _has_unsafe_param(parsed["param_types"]):
+    if has_unsafe_param(parsed["param_types"]):
         return False
     for pt in parsed["param_types"]:
-        if not _is_primitive_type(pt):
+        if not is_primitive_type(pt):
             return False
     # Return type can be void — still simple if all params are primitive
     ret = parsed["return_type"]
-    if ret and ret != "System.Void" and not _is_primitive_type(ret):
+    if ret and ret != "System.Void" and not is_primitive_type(ret):
         return False
     return True
 
 
-def _default_expr(csharp_type: str) -> str:
+def default_expr(csharp_type: str) -> str:
     """Generate a default C# expression for a type."""
     bare = csharp_type.rstrip("&*?").strip()
     if bare in TYPE_DEFAULT_MAP:
@@ -1252,7 +1252,7 @@ def _default_expr(csharp_type: str) -> str:
     return "null!"
 
 
-def _has_blocked_param(param_types: list[str]) -> bool:
+def has_blocked_param(param_types: list[str]) -> bool:
     """Check if any parameter type is blocked from auto-generation in entrypoint context."""
     for pt in param_types:
         pt = pt.strip()
@@ -1268,12 +1268,12 @@ def _has_blocked_param(param_types: list[str]) -> bool:
     return False
 
 
-def _has_ref_param(param_types: list[str]) -> bool:
+def has_ref_param(param_types: list[str]) -> bool:
     """Check if any parameter is a ref parameter."""
     return any(pt.strip().endswith("&") for pt in param_types)
 
 
-def _default_expr_for_type(csharp_type: str, type_map: dict[str, str] | None = None) -> str:
+def default_expr_for_type(csharp_type: str, type_map: dict[str, str] | None = None) -> str:
     """Generate default expression using an alternative type map.
 
     Handles out/ref parameters (types ending with &) by prepending 'out '.
@@ -1297,21 +1297,21 @@ def _default_expr_for_type(csharp_type: str, type_map: dict[str, str] | None = N
     return prefix + "default"
 
 
-def _build_call_expr_with_args(parsed: dict[str, Any], args: str, instance_map: dict[str, str] | None = None) -> str:
+def build_call_expr_with_args(parsed: dict[str, Any], args: str, instance_map: dict[str, str] | None = None) -> str:
     """Build call expression from pre-computed args (shared by ref and non-ref paths)."""
     type_name = parsed["type_name"]
     method_name = parsed["method_name"]
     param_count = len(parsed["param_types"])
     im = instance_map or INSTANCE_EXPR_MAP
 
-    override = _METHOD_OVERRIDES.get((type_name, method_name, param_count))
+    override = METHOD_OVERRIDES.get((type_name, method_name, param_count))
     if override is not None and override != "skip":
         return override
 
     if method_name in (".ctor", ".cctor"):
-        return _build_ctor_expr(type_name, args)
+        return build_ctor_expr(type_name, args)
 
-    expr = _try_property_access(type_name, method_name, args)
+    expr = try_property_access(type_name, method_name, args)
     if expr is not None:
         return expr
 
@@ -1332,7 +1332,7 @@ def _build_call_expr_with_args(parsed: dict[str, Any], args: str, instance_map: 
     return f"{type_name}.{method_name}({args})"
 
 
-def _build_call_expr_with_refs(
+def build_call_expr_with_refs(
     parsed: dict[str, Any],
     type_map: dict[str, str] | None = None,
     instance_map: dict[str, str] | None = None,
@@ -1349,7 +1349,7 @@ def _build_call_expr_with_refs(
     im = instance_map or INSTANCE_EXPR_MAP
 
     param_count = len(param_types)
-    override = _METHOD_OVERRIDES.get((type_name, method_name, param_count))
+    override = METHOD_OVERRIDES.get((type_name, method_name, param_count))
     if override is not None and override != "skip":
         return ("", override)
 
@@ -1361,17 +1361,17 @@ def _build_call_expr_with_refs(
         if pt.endswith("&"):
             # Use out _ (discard) for all & params.
             # The CLR signature doesn't distinguish out from ref, but most & params
-            # are out in practice. Methods with true ref params get _METHOD_OVERRIDES.
+            # are out in practice. Methods with true ref params get METHOD_OVERRIDES.
             call_args.append("out _")
         else:
-            call_args.append(_default_expr_for_type(pt, tm))
+            call_args.append(default_expr_for_type(pt, tm))
 
     prelude = "\n".join(prelude_lines)
-    call_expr = _build_call_expr_with_args(parsed, ", ".join(call_args), im)
+    call_expr = build_call_expr_with_args(parsed, ", ".join(call_args), im)
     return (prelude, call_expr)
 
 
-def _build_call_expr_with_ref_locals(
+def build_call_expr_with_ref_locals(
     parsed: dict[str, Any],
     type_map: dict[str, str] | None = None,
     instance_map: dict[str, str] | None = None,
@@ -1391,7 +1391,7 @@ def _build_call_expr_with_ref_locals(
     im = instance_map or INSTANCE_EXPR_MAP
 
     param_count = len(param_types)
-    override = _METHOD_OVERRIDES.get((type_name, method_name, param_count))
+    override = METHOD_OVERRIDES.get((type_name, method_name, param_count))
     if override is not None and override != "skip":
         return ("", override)
 
@@ -1405,19 +1405,19 @@ def _build_call_expr_with_ref_locals(
             # Convert CLR metadata generics ({}) to C# generics (<>)
             # e.g. System.Span{System.IntPtr} -> System.Span<System.IntPtr>
             base_type = base_type.replace("{", "<").replace("}", ">")
-            default_val = _default_expr_for_type(base_type, tm)
+            default_val = default_expr_for_type(base_type, tm)
             var_name = f"refLocal_{i}"
             prelude_lines.append(f"            {base_type} {var_name} = {default_val};")
             call_args.append(f"out {var_name}")
         else:
-            call_args.append(_default_expr_for_type(pt, tm))
+            call_args.append(default_expr_for_type(pt, tm))
 
     prelude = "\n".join(prelude_lines)
-    call_expr = _build_call_expr_with_args(parsed, ", ".join(call_args), im)
+    call_expr = build_call_expr_with_args(parsed, ", ".join(call_args), im)
     return (prelude, call_expr)
 
 
-def _cast_return_to_int(ret: str, call_expr: str) -> str:
+def cast_return_to_int(ret: str, call_expr: str) -> str:
     """Wrap a call expression so it produces an int for exit code comparison.
 
     For void returns, wraps in a statement and appends ; return 0;.
@@ -1444,7 +1444,7 @@ def _cast_return_to_int(ret: str, call_expr: str) -> str:
     return f"(int)({call_expr})"
 
 
-def _ref_return_expr(parsed: dict[str, Any]) -> str:
+def ref_return_expr(parsed: dict[str, Any]) -> str:
     """Build a checksum expression from ref parameter values for void return methods."""
     param_types = parsed["param_types"]
     ref_locals = [
@@ -1457,7 +1457,7 @@ def _ref_return_expr(parsed: dict[str, Any]) -> str:
     return " ^ ".join(ref_locals)
 
 
-def _normalize_clr_type(ret: str) -> str:
+def normalize_clr_type(ret: str) -> str:
     """Normalize a CLR type string to a canonical form for matching.
 
     Strips generic/array curly braces to match against the type maps:
@@ -1473,7 +1473,7 @@ def _normalize_clr_type(ret: str) -> str:
     return ret
 
 
-def _is_generic_task(ret: str) -> bool:
+def is_generic_task(ret: str) -> bool:
     """Check if the return type is System.Threading.Tasks.Task<T> in CLR format."""
     return (
         ret == "System.Threading.Tasks.Task"
@@ -1481,7 +1481,7 @@ def _is_generic_task(ret: str) -> bool:
     )
 
 
-def _cast_return_to_int(ret: str, call_expr: str) -> str:
+def cast_return_to_int(ret: str, call_expr: str) -> str:
     """Cast a method's return value to int for checksum return."""
     ret = ret.strip()
     if ret == "System.Void" or not ret:
@@ -1535,14 +1535,14 @@ def _cast_return_to_int(ret: str, call_expr: str) -> str:
         "System.Delegate", "System.MulticastDelegate",
         "System.Threading.Tasks.Task", "System.Threading.Thread",
     })
-    normal = _normalize_clr_type(ret)
+    normal = normalize_clr_type(ret)
     if normal in _HASHCODE_TYPES:
         return f"(({call_expr}).GetHashCode())"
 
     # Generic/complex type handling by normalization prefix
     if normal.startswith("System.Span") or normal.startswith("System.ReadOnlySpan"):
         return f"(({call_expr}).GetHashCode())"
-    if _is_generic_task(ret):
+    if is_generic_task(ret):
         return f"(({call_expr}).GetHashCode())"
 
     # Array types in both CLR format (System.Byte{}) and C# format (byte[])
@@ -1555,7 +1555,7 @@ def _cast_return_to_int(ret: str, call_expr: str) -> str:
     return f"(({call_expr}).GetHashCode())"
 
 
-def _is_auto_callable(parsed: dict[str, Any]) -> bool:
+def is_auto_callable(parsed: dict[str, Any]) -> bool:
     """Check whether a method can be auto-generated (not needs-manual).
 
     Returns False for operators, protected methods, and other patterns that
@@ -1566,29 +1566,29 @@ def _is_auto_callable(parsed: dict[str, Any]) -> bool:
     if (type_name, method_name) in _NEEDS_MANUAL_METHODS:
         return False
     param_count = len(parsed["param_types"])
-    override = _METHOD_OVERRIDES.get((type_name, method_name, param_count))
+    override = METHOD_OVERRIDES.get((type_name, method_name, param_count))
     if override == "skip":
         return False
     return True
 
 
-def _method_skip_reason(parsed: dict[str, Any]) -> str:
+def method_skip_reason(parsed: dict[str, Any]) -> str:
     """Return a human-readable skip reason, or empty string if auto-callable."""
     type_name = parsed["type_name"]
     method_name = parsed["method_name"]
     if (type_name, method_name) in _NEEDS_MANUAL_METHODS:
         return f"needs-manual — {method_name} requires manual implementation"
     param_count = len(parsed["param_types"])
-    override = _METHOD_OVERRIDES.get((type_name, method_name, param_count))
+    override = METHOD_OVERRIDES.get((type_name, method_name, param_count))
     if override == "skip":
         return f"needs-manual — {method_name} with {param_count} params requires manual implementation"
     return ""
 
 
-_get_skip_reason = _method_skip_reason
+get_skip_reason = method_skip_reason
 
 
-def _build_call_expr(
+def build_call_expr(
     parsed: dict[str, Any],
     type_map: dict[str, str] | None = None,
     instance_map: dict[str, str] | None = None,
@@ -1608,11 +1608,11 @@ def _build_call_expr(
     type_name = parsed["type_name"]
     method_name = parsed["method_name"]
     tm = type_map or TYPE_DEFAULT_MAP
-    args = ", ".join(_default_expr_for_type(pt, tm) for pt in parsed["param_types"])
+    args = ", ".join(default_expr_for_type(pt, tm) for pt in parsed["param_types"])
 
     # Check override map first (for known problematic signatures)
     param_count = len(parsed["param_types"])
-    override = _METHOD_OVERRIDES.get((type_name, method_name, param_count))
+    override = METHOD_OVERRIDES.get((type_name, method_name, param_count))
     if override is not None and override != "skip":
         # Convert.ToXxx(String) and Guid..ctor(String) overrides at
         # (type, method, paramCount=1) apply to ALL 1-param overloads,
@@ -1642,10 +1642,10 @@ def _build_call_expr(
 
     # Constructor: Type..ctor(...) → new Type(...)
     if method_name in (".ctor", ".cctor"):
-        return _build_ctor_expr(type_name, args, parsed.get("type_arity", 0))
+        return build_ctor_expr(type_name, args, parsed.get("type_arity", 0))
 
     # Property accessor (get_Xxx / set_Xxx) → use property/indexer syntax
-    expr = _try_property_access(type_name, method_name, args)
+    expr = try_property_access(type_name, method_name, args)
     if expr is not None:
         return expr
 
@@ -1680,7 +1680,7 @@ _GENERIC_ARGS_MAP: dict[int, str] = {
 }
 
 
-def _build_ctor_expr(type_name: str, args: str, type_arity: int = 0) -> str:
+def build_ctor_expr(type_name: str, args: str, type_arity: int = 0) -> str:
     """Build constructor expression, handling generic types.
 
     e.g. ``Span`1`` → ``new Span<byte>(42)``
@@ -1697,7 +1697,7 @@ def _build_ctor_expr(type_name: str, args: str, type_arity: int = 0) -> str:
     return f"new {type_name}({args})"
 
 
-def _concrete_type(csharp_type: str) -> str:
+def concrete_type(csharp_type: str) -> str:
     """Replace CLR backtick generics with concrete C# type arguments.
 
     e.g. ``Span`1`` → ``Span<byte>``, ``Dictionary`2`` → ``Dictionary<string,int>``
@@ -1712,7 +1712,7 @@ def _concrete_type(csharp_type: str) -> str:
     return csharp_type
 
 
-def _try_property_access(type_name: str, method_name: str, args: str) -> str | None:
+def try_property_access(type_name: str, method_name: str, args: str) -> str | None:
     """If method_name is a property accessor, rewrite to property syntax.
 
     Handles:
@@ -1755,29 +1755,29 @@ def _try_property_access(type_name: str, method_name: str, args: str) -> str | N
     return None
 
 
-def _has_non_skip_override(parsed: dict[str, Any]) -> bool:
+def has_non_skip_override(parsed: dict[str, Any]) -> bool:
     """Check if there's a non-skip override expression for this method."""
-    override = _METHOD_OVERRIDES.get(
+    override = METHOD_OVERRIDES.get(
         (parsed["type_name"], parsed["method_name"], len(parsed["param_types"])))
     return override is not None and override != "skip"
 
 
-def _test_body(parsed: dict[str, Any]) -> str:
+def test_body(parsed: dict[str, Any]) -> str:
     """Generate the body of a test method.
 
     Returns (body_lines, is_simple, skip_reason).
     """
-    if not _is_auto_callable(parsed):
-        reason = _method_skip_reason(parsed)
+    if not is_auto_callable(parsed):
+        reason = method_skip_reason(parsed)
         return (
             f"    // TODO: {reason}",
             False,
             reason,
         )
 
-    if _has_unsafe_param(parsed["param_types"]) and not _has_non_skip_override(parsed):
+    if has_unsafe_param(parsed["param_types"]) and not has_non_skip_override(parsed):
         # Auto-generate via ref-aware builder
-        prelude, call_expr = _build_call_expr_with_refs(parsed)
+        prelude, call_expr = build_call_expr_with_refs(parsed)
         ret = parsed["return_type"]
         if ret == "System.Void" or not ret:
             if prelude:
@@ -1787,8 +1787,8 @@ def _test_body(parsed: dict[str, Any]) -> str:
             return (f"{prelude}\n    var result = {call_expr};", False, "")
         return (f"    var result = {call_expr};", False, "")
 
-    if _is_simple_method(parsed):
-        call_expr = _build_call_expr(parsed)
+    if is_simple_method(parsed):
+        call_expr = build_call_expr(parsed)
         ret = parsed["return_type"]
         if ret == "System.Void" or not ret:
             # void method — just call it
@@ -1804,7 +1804,7 @@ def _test_body(parsed: dict[str, Any]) -> str:
         )
 
     # Mixed method — smoke (at least one complex parameter)
-    call_expr = _build_call_expr(parsed)
+    call_expr = build_call_expr(parsed)
     ret = parsed["return_type"]
     if ret == "System.Void" or not ret:
         return (
@@ -1819,33 +1819,33 @@ def _test_body(parsed: dict[str, Any]) -> str:
     )
 
 
-def _family_slug(family_id: str) -> str:
+def family_slug(family_id: str) -> str:
     parts = [part for part in str(family_id).split("/") if part]
     if len(parts) < 4:
         return str(family_id).replace("/", "-")
     return "-".join(parts[2:])
 
 
-def _production_class_name(family_id: str) -> str:
+def production_class_name(family_id: str) -> str:
     """Derive production class name (no suffix).
     e.g. convert-char -> ConvertChar
     """
-    tail = _family_slug(family_id).split("-")
+    tail = family_slug(family_id).split("-")
     return "".join(part.capitalize() for part in tail)
 
 
-def _class_name(family_id: str) -> str:
+def class_name(family_id: str) -> str:
     """Derive test class name.
     e.g. convert-char -> ConvertCharTests
     """
-    return _production_class_name(family_id) + "Tests"
+    return production_class_name(family_id) + "Tests"
 
 
-def _relative(repo_root: Path, path: Path) -> str:
+def relative(repo_root: Path, path: Path) -> str:
     return path.resolve().relative_to(repo_root.resolve()).as_posix()
 
 
-def _enum_name(family: dict[str, Any]) -> str:
+def enum_name(family: dict[str, Any]) -> str:
     explicit = str(family.get("capabilityFamilyEnum") or "").strip()
     if explicit:
         return explicit
@@ -1861,18 +1861,18 @@ def _enum_name(family: dict[str, Any]) -> str:
     # Handle acronyms: each segment is PascalCased individually, then joined.
     # If a segment is a known acronym (e.g. "io"), uppercase it.
     family_part = "".join(
-        _pascalcase_segment(segment)
+        pascalcase_segment(segment)
         for segment in parts[2:]
         if segment
     )
     # Post-processing: fix known acronym patterns across the combined string
     # "Io" at word boundary -> "IO"
-    family_part = _fix_acronyms(family_part)
+    family_part = remediate_acronyms(family_part)
     candidate = f"{assembly_part}_{family_part}".strip("_")
     return candidate or "None"
 
 
-def _pascalcase_segment(segment: str) -> str:
+def pascalcase_segment(segment: str) -> str:
     """Convert a hyphen-separated segment to PascalCase, handling acronyms."""
     tokens = segment.split("-")
     result = []
@@ -1886,7 +1886,7 @@ def _pascalcase_segment(segment: str) -> str:
     return "".join(result)
 
 
-def _fix_acronyms(s: str) -> str:
+def remediate_acronyms(s: str) -> str:
     """Fix known patterns where a PascalCased acronym needs adjustment."""
     # "Io" followed by uppercase -> "IO"
     # e.g. "IoStreamsBasics" -> "IOStreamsBasics"
@@ -1896,7 +1896,7 @@ def _fix_acronyms(s: str) -> str:
     return s
 
 
-def _namespace_from_type_path(type_path: str) -> str | None:
+def namespace_from_type_path(type_path: str) -> str | None:
     """Extract the C# namespace from a CLR type_path (format: AssemblyName/Namespace.TypeName).
 
     Example: "System.Formats.Asn1/System.Formats.Asn1.AsnDecoder" -> "System.Formats.Asn1"
@@ -1918,17 +1918,17 @@ _BASE_USING_NAMESPACES = frozenset({
 })
 
 
-def _member_name(prefix: str, method_subject_id: str) -> str:
+def member_name(prefix: str, method_subject_id: str) -> str:
     sanitized = re.sub(r"[^A-Za-z0-9]+", "_", method_subject_id).strip("_")
     sanitized = sanitized[:120] if sanitized else "Placeholder"
     return f"{prefix}_{sanitized}"
 
 
-def _handwritten_source(family_id: str, class_name: str) -> str:
+def handwritten_source(family_id: str, class_name: str) -> str:
     """Generate handwritten partial class source (no test dependencies)."""
     prod_name = class_name.replace("Tests", "")
     return (
-        f"{_BASE_USINGS}\n"
+        f"{BASE_USINGS}\n"
         "using Chaos.TestFramework;\n"
         "\n"
         f"public partial class {prod_name}\n"
@@ -1937,7 +1937,7 @@ def _handwritten_source(family_id: str, class_name: str) -> str:
     )
 
 
-def _generated_source(
+def generated_source(
     family_id: str,
     display_name: str,
     class_name: str,
@@ -1963,13 +1963,13 @@ def _generated_source(
     else:
         parts: list[str] = []
         for method_subject_id in method_subject_ids:
-            parsed = _parse_method_subject_id(method_subject_id)
+            parsed = parse_method_subject_id(method_subject_id)
             type_name = parsed["type_name"]
             method_name = parsed["method_name"]
-            body, is_simple, skip_reason = _test_body(parsed)
+            body, is_simple, skip_reason = test_body(parsed)
 
             # --- Test method ([MethodSubjectId], no [Fact] — discovered via reflection) ---
-            mname = _member_name("Method", method_subject_id)
+            mname = member_name("Method", method_subject_id)
             test_code = (
                 f'    [MethodSubjectId("{method_subject_id}")]'
                 f'\n    [CapabilityFamilyId(CapabilityFamilyId.{capability_family_enum})]'
@@ -1981,9 +1981,9 @@ def _generated_source(
             )
 
             # --- Benchmark method ([BenchmarkSubjectId], static void) ---
-            bname = _member_name("Benchmark", method_subject_id)
-            if _is_auto_callable(parsed) and not _has_unsafe_param(parsed["param_types"]):
-                call_expr = _build_call_expr(parsed)
+            bname = member_name("Benchmark", method_subject_id)
+            if is_auto_callable(parsed) and not has_unsafe_param(parsed["param_types"]):
+                call_expr = build_call_expr(parsed)
                 ret = parsed["return_type"]
                 bench_body = f"_ = {call_expr}" if ret not in ("System.Void", "") else f"{call_expr}"
                 bench_code = (
@@ -2001,9 +2001,9 @@ def _generated_source(
                 )
 
             # --- HotUpdate method ([HotUpdateSubjectId], static void, HostToPath) ---
-            hname = _member_name("HotUpdate", method_subject_id)
-            if _is_auto_callable(parsed) and not _has_unsafe_param(parsed["param_types"]):
-                call_expr = _build_call_expr(parsed)
+            hname = member_name("HotUpdate", method_subject_id)
+            if is_auto_callable(parsed) and not has_unsafe_param(parsed["param_types"]):
+                call_expr = build_call_expr(parsed)
                 ret = parsed["return_type"]
                 hu_body = f"_ = {call_expr}" if ret not in ("System.Void", "") else f"{call_expr}"
                 hu_code = (
@@ -2027,8 +2027,8 @@ def _generated_source(
         # Collect per-DLL namespaces from method subject IDs, minus already-covered base usings
         extra_ns: set[str] = set()
         for method_subject_id in method_subject_ids:
-            parsed = _parse_method_subject_id(method_subject_id)
-            ns = _namespace_from_type_path(parsed["type_path"])
+            parsed = parse_method_subject_id(method_subject_id)
+            ns = namespace_from_type_path(parsed["type_path"])
             if ns and ns not in _BASE_USING_NAMESPACES:
                 extra_ns.add(ns)
         extra_usings = "\n".join(f"using {ns};" for ns in sorted(extra_ns))
@@ -2036,7 +2036,7 @@ def _generated_source(
             extra_usings += "\n"
 
     return (
-        f"{_BASE_USINGS}\n"
+        f"{BASE_USINGS}\n"
         f"{extra_usings}"
         "using Chaos.TestFramework;\n"
         "\n"
@@ -2050,7 +2050,7 @@ def _generated_source(
     )
 
 
-def _patch_generated_source(
+def patch_generated_source(
     class_name: str,
     *,
     method_subject_ids: list[str],
@@ -2067,11 +2067,11 @@ def _patch_generated_source(
     else:
         parts: list[str] = []
         for method_subject_id in method_subject_ids:
-            parsed = _parse_method_subject_id(method_subject_id)
-            call_expr = _build_call_expr(parsed)
-            member_name = _member_name("Patch", method_subject_id)
+            parsed = parse_method_subject_id(method_subject_id)
+            call_expr = build_call_expr(parsed)
+            member_name = member_name("Patch", method_subject_id)
             purpose_comment = f"// Purpose: Verify {parsed['type_name']}.{parsed['method_name']} executes correctly from patch side back to host"
-            if not _is_auto_callable(parsed) or _has_unsafe_param(parsed["param_types"]):
+            if not is_auto_callable(parsed) or has_unsafe_param(parsed["param_types"]):
                 parts.append(
                     f"    {purpose_comment}\n"
                     f'    [HotUpdateSubjectId("{method_subject_id}")]\n'
@@ -2091,7 +2091,7 @@ def _patch_generated_source(
                 )
         members = "\n".join(parts)
     return (
-        f"{_BASE_USINGS}\n"
+        f"{BASE_USINGS}\n"
         "using Chaos.TestFramework;\n\n"
         f"// Auto-generated patch-side skeletons for {patch_class_name}.\n"
         f"// Each method exercises a method from the patch side back to the host after hot-update.\n"
@@ -2102,10 +2102,10 @@ def _patch_generated_source(
     )
 
 
-def _patch_handwritten_source(patch_class_name: str) -> str:
+def patch_handwritten_source(patch_class_name: str) -> str:
     """Generate handwritten patch partial class source."""
     return (
-        f"{_BASE_USINGS}\n"
+        f"{BASE_USINGS}\n"
         "using Chaos.TestFramework;\n"
         "\n"
         f"public static partial class {patch_class_name}\n"
@@ -2114,11 +2114,11 @@ def _patch_handwritten_source(patch_class_name: str) -> str:
     )
 
 
-def _test_exe_source(class_name: str, *, method_subject_ids: list[str]) -> str:
+def test_exe_source(class_name: str, *, method_subject_ids: list[str]) -> str:
     """Generate test executable source (managed_test/tests/)."""
     prod_name = class_name.replace("Tests", "")
     return (
-        f"{_BASE_USINGS}\n"
+        f"{BASE_USINGS}\n"
         "using Xunit;\n"
         "\n"
         f"public class {class_name}\n"
@@ -2134,15 +2134,15 @@ def _test_exe_source(class_name: str, *, method_subject_ids: list[str]) -> str:
     )
 
 
-def _benchmark_exe_source(class_name: str, *, method_subject_ids: list[str]) -> str:
+def benchmark_exe_source(class_name: str, *, method_subject_ids: list[str]) -> str:
     """Generate benchmark executable source (managed_test/benchmarks/)."""
     if method_subject_ids:
         call_exprs = []
         for mid in method_subject_ids[:10]:
-            parsed = _parse_method_subject_id(mid)
-            if _is_auto_callable(parsed) and not _has_unsafe_param(parsed["param_types"]):
+            parsed = parse_method_subject_id(mid)
+            if is_auto_callable(parsed) and not has_unsafe_param(parsed["param_types"]):
                 try:
-                    call_exprs.append((_member_name("Benchmark", mid), _build_call_expr(parsed)))
+                    call_exprs.append((member_name("Benchmark", mid), build_call_expr(parsed)))
                 except Exception:
                     pass
         if call_exprs:
@@ -2179,7 +2179,7 @@ def _benchmark_exe_source(class_name: str, *, method_subject_ids: list[str]) -> 
     )
 
 
-def _readme_source(family_id: str, display_name: str) -> str:
+def readme_source(family_id: str, display_name: str) -> str:
     return (
         f"# {display_name}\n\n"
         f"- familyId: `{family_id}`\n"
@@ -2191,13 +2191,13 @@ def _readme_source(family_id: str, display_name: str) -> str:
 def generate_family_skeleton(repo_root: Path, *, assembly_name: str, family: dict[str, Any]) -> dict[str, Any]:
     family_id = str(family.get("familyId") or "")
     display_name = str(family.get("displayName") or family_id)
-    family_root = repo_root / "verification" / "foundation-dll" / assembly_name / _family_slug(family_id)
+    family_root = repo_root / "verification" / "foundation-dll" / assembly_name / family_slug(family_id)
 
-    prod_name = _production_class_name(family_id)
-    class_name = _class_name(family_id)
+    prod_name = production_class_name(family_id)
+    class_name = class_name(family_id)
     patch_class_name = class_name.replace("Tests", "Patch")
     method_subject_ids = [str(item) for item in list(family.get("methodSubjectIds") or []) if str(item)]
-    capability_family_enum = _enum_name(family)
+    capability_family_enum = enum_name(family)
 
     # --- src/ directory (handwrite + auto-generated merged) ---
     src_dir = family_root / "src"
@@ -2221,10 +2221,10 @@ def generate_family_skeleton(repo_root: Path, *, assembly_name: str, family: dic
     # Write handwritten src (only if not exists)
     src_dir.mkdir(parents=True, exist_ok=True)
     if not handwritten_path.exists():
-        handwritten_path.write_text(_handwritten_source(family_id, class_name), encoding="utf-8")
+        handwritten_path.write_text(handwritten_source(family_id, class_name), encoding="utf-8")
 
     # Write auto-generated src (merged test/benchmark/hotupdate)
-    generated_source = _generated_source(
+    generated_source = generated_source(
         family_id,
         display_name,
         class_name,
@@ -2236,12 +2236,12 @@ def generate_family_skeleton(repo_root: Path, *, assembly_name: str, family: dic
     # Write patch handwritten (only if not exists)
     patch_dir.mkdir(parents=True, exist_ok=True)
     if not patch_handwritten_path.exists():
-        patch_handwritten_path.write_text(_patch_handwritten_source(patch_class_name), encoding="utf-8")
+        patch_handwritten_path.write_text(patch_handwritten_source(patch_class_name), encoding="utf-8")
 
     # Write patch auto-generated
     patch_generated_path.parent.mkdir(parents=True, exist_ok=True)
     patch_generated_path.write_text(
-        _patch_generated_source(
+        patch_generated_source(
             class_name,
             method_subject_ids=method_subject_ids,
             capability_family_enum=capability_family_enum,
@@ -2251,27 +2251,27 @@ def generate_family_skeleton(repo_root: Path, *, assembly_name: str, family: dic
 
     # Write test exe source
     test_exe_dir.mkdir(parents=True, exist_ok=True)
-    test_exe_path.write_text(_test_exe_source(class_name, method_subject_ids=method_subject_ids), encoding="utf-8")
+    test_exe_path.write_text(test_exe_source(class_name, method_subject_ids=method_subject_ids), encoding="utf-8")
 
     # Write benchmark exe source
     benchmark_exe_dir.mkdir(parents=True, exist_ok=True)
     benchmark_exe_path.write_text(
-        _benchmark_exe_source(class_name, method_subject_ids=method_subject_ids),
+        benchmark_exe_source(class_name, method_subject_ids=method_subject_ids),
         encoding="utf-8",
     )
 
-    readme_path.write_text(_readme_source(family_id, display_name), encoding="utf-8")
+    readme_path.write_text(readme_source(family_id, display_name), encoding="utf-8")
 
     return {
         "familyId": family_id,
-        "outputRoot": _relative(repo_root, src_dir),
+        "outputRoot": relative(repo_root, src_dir),
         "artifacts": [
-            _relative(repo_root, handwritten_path),
-            _relative(repo_root, generated_path),
-            _relative(repo_root, patch_handwritten_path),
-            _relative(repo_root, patch_generated_path),
-            _relative(repo_root, test_exe_path),
-            _relative(repo_root, benchmark_exe_path),
-            _relative(repo_root, readme_path),
+            relative(repo_root, handwritten_path),
+            relative(repo_root, generated_path),
+            relative(repo_root, patch_handwritten_path),
+            relative(repo_root, patch_generated_path),
+            relative(repo_root, test_exe_path),
+            relative(repo_root, benchmark_exe_path),
+            relative(repo_root, readme_path),
         ],
     }

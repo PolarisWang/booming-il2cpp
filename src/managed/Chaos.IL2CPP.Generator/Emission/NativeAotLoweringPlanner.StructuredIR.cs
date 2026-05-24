@@ -1654,12 +1654,9 @@ public sealed partial class NativeAotLoweringPlanner
             LogStructuredMethod(method, "stack-depth-fixup", instructions.Count,
                 cfg.Blocks.Count, cfg.LoopHeaders.Count, method.ExceptionRegionCount);
         }
-        else
-        {
-            // Use monotonic computation to match StructuredSlotEmissionContext
-            // which never reuses slot IDs across branch boundaries.
-            maxDepth = ComputeMaxEvalStackDepth(instructions, monotonic: true);
-        }
+        // else: non-monotonic (peak concurrent depth) matches
+        // StructuredSlotEmissionContext._maxDepth which tracks the maximum
+        // concurrently-live slot count via RestoreDepth at merge points.
         return true;
     }
 
@@ -1775,7 +1772,8 @@ public sealed partial class NativeAotLoweringPlanner
         //   - TryCatch: 1 push (caught exception object_value)
         //   - TryFilter: 2 pushes (caught exception + filter body re-push)
         //   - finally-only: 0 pushes
-        maxDepth = ComputeMaxEvalStackDepth(instructions, monotonic: true) + extraHandlerPushes;
+        int peakDepth = ComputeMaxEvalStackDepth(instructions, monotonic: false);
+        maxDepth = peakDepth + extraHandlerPushes;
         return true;
     }
 

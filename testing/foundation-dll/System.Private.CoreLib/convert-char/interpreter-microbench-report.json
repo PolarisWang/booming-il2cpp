@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/convert/char",
-  "capturedAt": "2026-05-24T22:29:18",
+  "capturedAt": "2026-05-24T23:07:05",
   "metrics": {
     "framePool": {
       "acquireReleaseNsPerOp": 2.5,

@@ -109,6 +109,9 @@
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\jit_demotion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\jit\jit_debug_contract.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\thread_pool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

@@ -320,6 +320,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\thread_state.h" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\jit_demotion.cpp" />
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\jit_demotion.h" />
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\jit\jit_debug_contract.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\thread_pool.cpp" />
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\thread_pool.h" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\timer_queue.cpp" />

@@ -67,26 +67,6 @@ public sealed partial class NativeAotLoweringPlanner
 		return declarations;
 	}
 
-	private static void EmitReachableMethodForwardDeclarations(StringBuilder builder, IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods,
-		IReadOnlySet<string>? sharedContextSymbols = null)
-	{
-		foreach (AotCoreIrMethodArtifact reachableMethod in reachableMethods)
-		{
-			builder.AppendLine(FormatMethodDeclaration(reachableMethod, sharedContextSymbols));
-			string? text = TryGetInstantiationStubSymbol(reachableMethod);
-			if (!string.IsNullOrEmpty(text))
-			{
-				builder.AppendLine(FormatMethodDeclaration(text, reachableMethod.ReturnAbi, GetMethodAbiParameterSlots(reachableMethod),
-					sharedContextSymbols?.Contains(reachableMethod.NativeSymbol) == true));
-			}
-		}
-
-		if (reachableMethods.Count > 0)
-		{
-			builder.AppendLine();
-		}
-	}
-
 	private void EmitGenericInstantiationStub(StringBuilder builder, AotCoreIrMethodArtifact method)
 	{
 		string? text = TryGetInstantiationStubSymbol(method);

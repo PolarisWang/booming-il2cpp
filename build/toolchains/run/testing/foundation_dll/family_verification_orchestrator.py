@@ -104,7 +104,7 @@ class UnifiedReport:
 
 # ── Stage runners ─────────────────────────────────────────────────
 
-def _parse_stub_mask(family_slug: str, assembly: str) -> int:
+def parse_stub_mask(family_slug: str, assembly: str) -> int:
     """Parse stub methods from generated C# source in managed/subjects/.
 
     Detects stubs by checking method bodies in generated .cs files in managed/subjects/.
@@ -164,7 +164,7 @@ def _parse_stub_mask(family_slug: str, assembly: str) -> int:
     return stub_mask
 
 
-def _load_contract_methods(family_slug: str, assembly: str) -> list[str]:
+def load_contract_methods(family_slug: str, assembly: str) -> list[str]:
     """Load method subject IDs from capability-family-contract.json."""
     family_dir = _VERIFICATION_BASE / assembly / family_slug
     contract_path = family_dir / "capability-family-contract.json"
@@ -181,7 +181,7 @@ def _load_contract_methods(family_slug: str, assembly: str) -> list[str]:
         return []
 
 
-def _locate_entry_exe(family_slug: str, assembly: str) -> Path | None:
+def locate_entry_executable(family_slug: str, assembly: str) -> Path | None:
     """Find the native entry EXE in native/ directory.
 
     Checks paths in priority order:
@@ -199,14 +199,14 @@ def _locate_entry_exe(family_slug: str, assembly: str) -> Path | None:
     return None
 
 
-def _locate_managed_harness(family_slug: str, assembly: str) -> Path | None:
+def locate_managed_harness(family_slug: str, assembly: str) -> Path | None:
     """Find the managed benchmark harness csproj in managed/ directory."""
     family_dir = _VERIFICATION_BASE / assembly / family_slug
     csproj = family_dir / "managed" / "ConvertChar.csproj"
     return csproj if csproj.exists() else None
 
 
-def _auto_generate_managed_benchmark(family_slug: str, assembly: str,
+def auto_generate_managed_benchmark(family_slug: str, assembly: str,
                                       method_subject_ids: list[str]) -> Path | None:
     """Auto-generate and run a managed benchmark harness.
 
@@ -711,7 +711,7 @@ def _auto_generate_managed_benchmark(family_slug: str, assembly: str,
         return None
 
 
-def _run_native_benchmarks(family_slug: str, assembly: str,
+def run_native_benchmarks(family_slug: str, assembly: str,
                            method_subject_ids: list[str],
                            stub_mask: int, throwing_mask: int = 0,
                            iterations: int = 10000,
@@ -721,7 +721,7 @@ def _run_native_benchmarks(family_slug: str, assembly: str,
     """Run native benchmark for each non-stub, non-throwing method.
 
     Args:
-        exe_path: Optional explicit path to entry.exe. If None, uses _locate_entry_exe().
+        exe_path: Optional explicit path to entry.exe. If None, uses locate_entry_executable().
         output_name: Output filename (e.g. native-aot-benchmark.json).
     """
     from fact_verifier import verify_benchmark
@@ -775,7 +775,7 @@ def _run_native_benchmarks(family_slug: str, assembly: str,
     return results, native_path
 
 
-def _stage_preflight(family_slug: str, assembly: str) -> StageResult:
+def stage_preflight(family_slug: str, assembly: str) -> StageResult:
     """Stage 0: Verify contract integrity, discover custom entries."""
     start = time.perf_counter()
     family_dir = _VERIFICATION_BASE / assembly / family_slug
@@ -834,7 +834,7 @@ def _stage_preflight(family_slug: str, assembly: str) -> StageResult:
     )
 
 
-def _stage_codegen(family_slug: str, assembly: str, preflight: StageResult, *, codegen_mode: str | None = None) -> StageResult:
+def stage_code_generation(family_slug: str, assembly: str, preflight: StageResult, *, codegen_mode: str | None = None) -> StageResult:
     """Stage 1: Entrypoint generation + IL2CPP compile.
 
     Delegates to pipeline_native_aot_runner.run_family() for the heavy lifting,
@@ -843,7 +843,7 @@ def _stage_codegen(family_slug: str, assembly: str, preflight: StageResult, *, c
     """
     start = time.perf_counter()
     try:
-        from pipeline_native_aot_runner import run_family, _build_entry_exe
+        from pipeline_native_aot_runner import run_family, build_entry_executable
     except ImportError:
         import traceback as _tb
         _tb.print_exc()
@@ -859,7 +859,7 @@ def _stage_codegen(family_slug: str, assembly: str, preflight: StageResult, *, c
     # After codegen succeeds, generate verification dispatch code from manifest
     if ok:
         try:
-            from generate_verification_dispatch import generate_verification_dispatch
+            from verification_dispatch_generator import generate_verification_dispatch
 
             family_dir = _VERIFICATION_BASE / assembly / family_slug
             codegen_dir = family_dir / "codegen"
@@ -876,7 +876,7 @@ def _stage_codegen(family_slug: str, assembly: str, preflight: StageResult, *, c
             if manifest_path is not None:
                 generate_verification_dispatch(str(manifest_path), str(dispatch_output))
                 # Rebuild entry.exe with the new dispatch file
-                rebuild_ok = _build_entry_exe(family_slug, verification=family_dir.parent)
+                rebuild_ok = build_entry_executable(family_slug, verification=family_dir.parent)
                 if not rebuild_ok:
                     print(f"    [codegen] WARNING: entry.exe rebuild with dispatch code FAILED")
             else:
@@ -916,7 +916,7 @@ def _stage_codegen(family_slug: str, assembly: str, preflight: StageResult, *, c
         )
 
 
-def _stage_jit_codegen(family_slug: str, assembly: str) -> StageResult:
+def stage_jit_code_generation(family_slug: str, assembly: str) -> StageResult:
     """Stage 1b: JIT entrypoint generation + entry-jit.exe build.
 
     Builds JIT-mode entry-jit.exe, then restores AOT-mode entry.exe
@@ -935,7 +935,7 @@ def _stage_jit_codegen(family_slug: str, assembly: str) -> StageResult:
 
     print(f"  [jit_codegen] Building JIT mode entry-jit.exe...")
     try:
-        from pipeline_native_aot_runner import run_family, _build_entry_exe
+        from pipeline_native_aot_runner import run_family, build_entry_executable
         jit_result = run_family(family_slug, assembly_name=assembly, codegen_mode="jit")
         if not jit_result.get("success"):
             return StageResult(stage="jit_codegen", status="failed",
@@ -945,7 +945,7 @@ def _stage_jit_codegen(family_slug: str, assembly: str) -> StageResult:
         # Regenerate verification dispatch from JIT codegen manifest to avoid
         # stale dispatch files that define kSubjectEntryCount (causing LNK2005).
         try:
-            from generate_verification_dispatch import generate_verification_dispatch
+            from verification_dispatch_generator import generate_verification_dispatch
             codegen_dir = family_dir / "codegen"
             manifest_path = None
             for d in codegen_dir.iterdir():
@@ -961,7 +961,7 @@ def _stage_jit_codegen(family_slug: str, assembly: str) -> StageResult:
         except ImportError:
             print(f"  [jit_codegen] generate_verification_dispatch not available (skip)")
 
-        build_ok = _build_entry_exe(family_slug, verification=family_dir.parent,
+        build_ok = build_entry_executable(family_slug, verification=family_dir.parent,
                                     output_name="entry-jit.exe", is_jit=True)
         if not build_ok:
             return StageResult(stage="jit_codegen", status="failed",
@@ -986,7 +986,7 @@ def _stage_jit_codegen(family_slug: str, assembly: str) -> StageResult:
                            duration_ms=int((time.perf_counter() - start) * 1000))
 
 
-def _stage_fact(family_slug: str, assembly: str) -> StageResult:
+def stage_fact_verification(family_slug: str, assembly: str) -> StageResult:
     """Stage 2: Fact semantic verification — run il2cpp-translated native entry EXE.
 
     Delegates to fact_verifier.verify_fact().
@@ -1017,7 +1017,7 @@ def _stage_fact(family_slug: str, assembly: str) -> StageResult:
     )
 
 
-def _stage_fact_jit(family_slug: str, assembly: str) -> StageResult:
+def stage_jit_fact_verification(family_slug: str, assembly: str) -> StageResult:
     """Stage 2b: Fact JIT — run entry-jit.exe through interpreter dispatch.
 
     Verifies all methods produce correct results via the JIT/interpreter path.
@@ -1049,7 +1049,7 @@ def _stage_fact_jit(family_slug: str, assembly: str) -> StageResult:
                            duration_ms=int((time.perf_counter() - start) * 1000))
 
 
-def _stage_audit(family_slug: str, assembly: str, skip_stages: set[str] | None = None, *, codegen_mode: str | None = None) -> StageResult:
+def stage_principle_audit(family_slug: str, assembly: str, skip_stages: set[str] | None = None, *, codegen_mode: str | None = None) -> StageResult:
     """Stage 3: Mechanism + Principle audit + principle alignment.
 
     Delegates to mechanism_audit.run_full_audit(), writes reports to disk.
@@ -1167,7 +1167,7 @@ def _stage_audit(family_slug: str, assembly: str, skip_stages: set[str] | None =
     )
 
 
-def _stage_asm_compare(family_slug: str, assembly: str) -> StageResult:
+def stage_assembly_comparison(family_slug: str, assembly: str) -> StageResult:
     """Stage 4: JIT vs AOT instruction-level analysis via asm-compare.
 
     Runs asm-compare for each subject method with --format json --sections metrics,
@@ -1204,7 +1204,7 @@ def _stage_asm_compare(family_slug: str, assembly: str) -> StageResult:
     )
 
 
-def _stage_microbench(family_slug: str, assembly: str) -> StageResult:
+def stage_micro_benchmark(family_slug: str, assembly: str) -> StageResult:
     """Stage 4.5: Interpreter microbenchmark — measures internal interpreter efficiency.
 
     Runs entry.exe --microbench and captures:
@@ -1217,7 +1217,7 @@ def _stage_microbench(family_slug: str, assembly: str) -> StageResult:
     start = time.perf_counter()
     import re
 
-    exe_path = _locate_entry_exe(family_slug, assembly)
+    exe_path = locate_entry_executable(family_slug, assembly)
     if exe_path is None:
         return StageResult(
             stage="microbench", status="skipped",
@@ -1319,7 +1319,7 @@ def _stage_microbench(family_slug: str, assembly: str) -> StageResult:
     )
 
 
-def _stage_benchmark(family_slug: str, assembly: str) -> StageResult:
+def stage_performance_benchmark(family_slug: str, assembly: str) -> StageResult:
     """Stage 5: 3-way benchmark — managed (.NET JIT) vs native-aot vs native-jit.
 
     Self-contained: runs managed harness, builds JIT entry if needed, runs AOT
@@ -1328,12 +1328,12 @@ def _stage_benchmark(family_slug: str, assembly: str) -> StageResult:
     start = time.perf_counter()
     from benchmark_comparator import compare
 
-    stub_mask = _parse_stub_mask(family_slug, assembly)
+    stub_mask = parse_stub_mask(family_slug, assembly)
     stub_total = stub_mask.bit_count() if stub_mask else 0
     family_dir = _VERIFICATION_BASE / assembly / family_slug
     report_path = family_dir / "benchmark-comparison-report.json"
 
-    mids = _load_contract_methods(family_slug, assembly)
+    mids = load_contract_methods(family_slug, assembly)
     if not mids:
         return StageResult(
             stage="benchmark", status="skipped",
@@ -1357,7 +1357,7 @@ def _stage_benchmark(family_slug: str, assembly: str) -> StageResult:
     # ── Step 1: Auto-generate managed benchmark harness ────────────────
     managed_path = None
     if mids:
-        managed_path = _auto_generate_managed_benchmark(family_slug, assembly, mids)
+        managed_path = auto_generate_managed_benchmark(family_slug, assembly, mids)
 
     # Build throwing_mask from managed results
     throwing_mask = 0
@@ -1375,7 +1375,7 @@ def _stage_benchmark(family_slug: str, assembly: str) -> StageResult:
     # ── Step 2a: Run native-AOT benchmarks ─────────────────────────────
     aot_available = aot_exe.exists()
     if aot_available:
-        aot_results, aot_path = _run_native_benchmarks(
+        aot_results, aot_path = run_native_benchmarks(
             family_slug, assembly, mids, stub_mask, throwing_mask,
             iterations=100000, exe_path=aot_exe, output_name="native-aot-benchmark.json")
     else:
@@ -1385,7 +1385,7 @@ def _stage_benchmark(family_slug: str, assembly: str) -> StageResult:
     # ── Step 2b: Run native-JIT (interpreter) benchmarks ───────────────
     jit_available = jit_exe.exists()
     if jit_available:
-        jit_results, jit_path = _run_native_benchmarks(
+        jit_results, jit_path = run_native_benchmarks(
             family_slug, assembly, mids, stub_mask, throwing_mask,
             iterations=100000, exe_path=jit_exe, output_name="native-jit-benchmark.json")
     else:
@@ -1551,7 +1551,7 @@ def _stage_benchmark(family_slug: str, assembly: str) -> StageResult:
     )
 
 
-def _stage_hotupdate(family_slug: str, assembly: str) -> StageResult:
+def stage_hot_update_fact(family_slug: str, assembly: str) -> StageResult:
     """Stage 5: Hotpatch verification.
 
     Self-contained: runs entry.exe --hotupdate, writes hotupdate-verification-report.json.
@@ -1559,11 +1559,11 @@ def _stage_hotupdate(family_slug: str, assembly: str) -> StageResult:
     start = time.perf_counter()
     from fact_verifier import verify_hotupdate
 
-    stub_mask = _parse_stub_mask(family_slug, assembly)
+    stub_mask = parse_stub_mask(family_slug, assembly)
     family_dir = _VERIFICATION_BASE / assembly / family_slug
     report_path = family_dir / "hotupdate-verification-report.json"
 
-    mids = _load_contract_methods(family_slug, assembly)
+    mids = load_contract_methods(family_slug, assembly)
     method_count = len(mids) if mids else 0
     stub_total = stub_mask.bit_count() if stub_mask else 0
 
@@ -1646,7 +1646,7 @@ def _stage_hotupdate(family_slug: str, assembly: str) -> StageResult:
     )
 
 
-def _stage_hotupdate_aot_benchmark(family_slug: str, assembly: str) -> StageResult:
+def stage_hot_update_aot_benchmark(family_slug: str, assembly: str) -> StageResult:
     """Stage 9b: Post-patch AOT benchmark — entry-aot.exe --hotupdate-and-benchmark.
 
     Reads pre-patch AOT baseline from native-aot-benchmark.json, applies patches,
@@ -1654,13 +1654,13 @@ def _stage_hotupdate_aot_benchmark(family_slug: str, assembly: str) -> StageResu
     """
     start = time.perf_counter()
 
-    stub_mask = _parse_stub_mask(family_slug, assembly)
+    stub_mask = parse_stub_mask(family_slug, assembly)
     stub_total = stub_mask.bit_count() if stub_mask else 0
     family_dir = _VERIFICATION_BASE / assembly / family_slug
     report_path = family_dir / "hotupdate-aot-benchmark-report.json"
     exe_path = family_dir / "native" / "entry-aot.exe"
 
-    mids = _load_contract_methods(family_slug, assembly)
+    mids = load_contract_methods(family_slug, assembly)
     if not mids:
         return StageResult(
             stage="hotupdate_aot_benchmark", status="skipped",
@@ -1801,7 +1801,7 @@ def _stage_hotupdate_aot_benchmark(family_slug: str, assembly: str) -> StageResu
     )
 
 
-def _stage_hotupdate_jit_fact(family_slug: str, assembly: str) -> StageResult:
+def stage_hot_update_jit_fact(family_slug: str, assembly: str) -> StageResult:
     """Stage 10: HotUpdate JIT fact — apply patches and verify through JIT dispatch."""
     start = time.perf_counter()
     family_dir = _VERIFICATION_BASE / assembly / family_slug
@@ -1833,7 +1833,7 @@ def _stage_hotupdate_jit_fact(family_slug: str, assembly: str) -> StageResult:
                            duration_ms=int((time.perf_counter() - start) * 1000))
 
 
-def _stage_hotupdate_jit_benchmark(family_slug: str, assembly: str) -> StageResult:
+def stage_hot_update_jit_benchmark(family_slug: str, assembly: str) -> StageResult:
     """Stage 11: Post-patch JIT benchmark — entry-jit.exe --hotupdate-and-benchmark.
 
     Reads pre-patch JIT baseline from native-jit-benchmark.json and measures
@@ -1841,13 +1841,13 @@ def _stage_hotupdate_jit_benchmark(family_slug: str, assembly: str) -> StageResu
     """
     start = time.perf_counter()
 
-    stub_mask = _parse_stub_mask(family_slug, assembly)
+    stub_mask = parse_stub_mask(family_slug, assembly)
     stub_total = stub_mask.bit_count() if stub_mask else 0
     family_dir = _VERIFICATION_BASE / assembly / family_slug
     report_path = family_dir / "hotupdate-jit-benchmark-report.json"
     exe_path = family_dir / "native" / "entry-jit.exe"
 
-    mids = _load_contract_methods(family_slug, assembly)
+    mids = load_contract_methods(family_slug, assembly)
     if not mids:
         return StageResult(
             stage="hotupdate_jit_benchmark", status="skipped",
@@ -1990,7 +1990,7 @@ def _stage_hotupdate_jit_benchmark(family_slug: str, assembly: str) -> StageResu
 
 # ── Dashboard Builder ──────────────────────────────────────────────
 
-def _build_dashboard(family_slug: str, assembly: str,
+def build_dashboard(family_slug: str, assembly: str,
                      stages: dict[str, StageResult]) -> dict[str, Any]:
     """Build a cross-stage dashboard summarizing all metrics from the verification run.
 
@@ -2121,7 +2121,7 @@ def _build_dashboard(family_slug: str, assembly: str,
     return dashboard
 
 
-def _compute_coverage(stages: dict[str, StageResult]) -> dict[str, float]:
+def compute_coverage(stages: dict[str, StageResult]) -> dict[str, float]:
     """Compute coverage score from stage results."""
     scores: dict[str, float] = {}
 
@@ -2157,7 +2157,7 @@ def _compute_coverage(stages: dict[str, StageResult]) -> dict[str, float]:
     return scores
 
 
-def _aggregate(family_slug: str, assembly: str,
+def aggregate_stage_results(family_slug: str, assembly: str,
                stage_results: list[StageResult],
                mode: str,
                total_duration_ms: int) -> UnifiedReport:
@@ -2166,16 +2166,16 @@ def _aggregate(family_slug: str, assembly: str,
     for sr in stage_results:
         stages_map[sr.stage] = sr.to_dict()
 
-    coverage = _compute_coverage({sr.stage: sr for sr in stage_results})
+    coverage = compute_coverage({sr.stage: sr for sr in stage_results})
 
     # ── Build comprehensive dashboard ─────────────────────────────────
-    dashboard = _build_dashboard(
+    dashboard = build_dashboard(
         family_slug, assembly,
         {sr.stage: sr for sr in stage_results},
     )
 
     # Run baseline regression detection
-    regression = _detect_regression(family_slug, assembly, stage_results)
+    regression = detect_regression(family_slug, assembly, stage_results)
 
     # Determine overall pass/fail
     required_stages = {"preflight", "codegen", "jit_codegen", "fact", "audit"}
@@ -2211,7 +2211,7 @@ def _aggregate(family_slug: str, assembly: str,
     )
 
 
-def _detect_regression(family_slug: str, assembly: str,
+def detect_regression(family_slug: str, assembly: str,
                         stage_results: list[StageResult]) -> dict[str, Any]:
     """Run regression detection on benchmark metrics vs stored baseline.
 
@@ -2313,7 +2313,7 @@ def _detect_regression(family_slug: str, assembly: str,
     return result
 
 
-def _write_report(report: UnifiedReport, family_slug: str, assembly: str) -> Path:
+def write_report(report: UnifiedReport, family_slug: str, assembly: str) -> Path:
     """Write the unified report JSON to the family directory."""
     family_dir = _VERIFICATION_BASE / assembly / family_slug
     report_path = family_dir / "unified-verification-report.json"
@@ -2373,22 +2373,22 @@ def verify_family(family_slug: str,
     # Stage 0: Preflight
     if "preflight" not in skip:
         print(f"[0/13] Preflight...")
-        sr = _stage_preflight(family_slug, assembly)
+        sr = stage_preflight(family_slug, assembly)
         stage_results.append(sr)
         print(f"  {sr.status}: {sr.summary}")
         if sr.status == "failed":
             print(f"  Cannot continue — preflight failed")
-            report = _aggregate(family_slug, assembly, stage_results, mode,
+            report = aggregate_stage_results(family_slug, assembly, stage_results, mode,
                                 int((time.perf_counter() - overall_start) * 1000))
             report.overall_status = "failed"
-            _write_report(report, family_slug, assembly)
+            write_report(report, family_slug, assembly)
             return report.to_dict()
         if "empty family" in sr.summary:
             print(f"  Empty family — skipping remaining stages")
-            report = _aggregate(family_slug, assembly, stage_results, mode,
+            report = aggregate_stage_results(family_slug, assembly, stage_results, mode,
                                 int((time.perf_counter() - overall_start) * 1000))
             report.overall_status = "passed"
-            _write_report(report, family_slug, assembly)
+            write_report(report, family_slug, assembly)
             return report.to_dict()
     else:
         print(f"[0/13] Preflight... skipped")
@@ -2396,14 +2396,14 @@ def verify_family(family_slug: str,
     # Stage 1: Codegen (AOT)
     if "codegen" not in skip:
         print(f"[1/13] Codegen (AOT)...")
-        sr = _stage_codegen(family_slug, assembly, stage_results[0] if stage_results else StageResult("preflight", "passed"), codegen_mode=codegen_mode)
+        sr = stage_code_generation(family_slug, assembly, stage_results[0] if stage_results else StageResult("preflight", "passed"), codegen_mode=codegen_mode)
         stage_results.append(sr)
         print(f"  {sr.status}: {sr.summary}")
         if sr.status == "failed" and mode == "strict":
             print(f"  Stopping — codegen failed in strict mode")
-            report = _aggregate(family_slug, assembly, stage_results, mode,
+            report = aggregate_stage_results(family_slug, assembly, stage_results, mode,
                                 int((time.perf_counter() - overall_start) * 1000))
-            _write_report(report, family_slug, assembly)
+            write_report(report, family_slug, assembly)
             return report.to_dict()
     else:
         print(f"[1/13] Codegen... skipped")
@@ -2411,7 +2411,7 @@ def verify_family(family_slug: str,
     # Stage 2: JitCodegen (build entry-jit.exe)
     if "jit_codegen" not in skip:
         print(f"[2/13] JitCodegen...")
-        sr = _stage_jit_codegen(family_slug, assembly)
+        sr = stage_jit_code_generation(family_slug, assembly)
         stage_results.append(sr)
         print(f"  {sr.status}: {sr.summary}")
     else:
@@ -2421,7 +2421,7 @@ def verify_family(family_slug: str,
     if "fact" not in skip:
         print(f"[3/13] Fact AOT...")
         try:
-            sr = _stage_fact(family_slug, assembly)
+            sr = stage_fact_verification(family_slug, assembly)
         except Exception as e:
             trace("fact", family=family_slug, error=str(e))
             sr = StageResult(stage="fact", status="failed",
@@ -2435,7 +2435,7 @@ def verify_family(family_slug: str,
     if "fact_jit" not in skip:
         print(f"[4/13] Fact JIT...")
         try:
-            sr = _stage_fact_jit(family_slug, assembly)
+            sr = stage_jit_fact_verification(family_slug, assembly)
         except Exception as e:
             trace("fact_jit", family=family_slug, error=str(e))
             sr = StageResult(stage="fact_jit", status="failed",
@@ -2449,7 +2449,7 @@ def verify_family(family_slug: str,
     if "audit" not in skip:
         print(f"[5/13] Mechanism + Principle Audit...")
         try:
-            sr = _stage_audit(family_slug, assembly, skip, codegen_mode=codegen_mode)
+            sr = stage_principle_audit(family_slug, assembly, skip, codegen_mode=codegen_mode)
         except Exception as e:
             trace("audit", family=family_slug, error=str(e))
             sr = StageResult(stage="audit", status="failed",
@@ -2463,7 +2463,7 @@ def verify_family(family_slug: str,
     if "asm_compare" not in skip:
         print(f"[6/13] AsmCompare (JIT vs AOT instruction-level)...")
         try:
-            sr = _stage_asm_compare(family_slug, assembly)
+            sr = stage_assembly_comparison(family_slug, assembly)
         except Exception as e:
             trace("asm_compare", family=family_slug, error=str(e))
             sr = StageResult(stage="asm_compare", status="failed",
@@ -2477,7 +2477,7 @@ def verify_family(family_slug: str,
     if "microbench" not in skip:
         print(f"[7/13] Microbench (interpreter internal metrics)...")
         try:
-            sr = _stage_microbench(family_slug, assembly)
+            sr = stage_micro_benchmark(family_slug, assembly)
         except Exception as e:
             trace("microbench", family=family_slug, error=str(e))
             sr = StageResult(stage="microbench", status="failed",
@@ -2491,7 +2491,7 @@ def verify_family(family_slug: str,
     if "benchmark" not in skip:
         print(f"[8/13] Benchmark (3-way)...")
         try:
-            sr = _stage_benchmark(family_slug, assembly)
+            sr = stage_performance_benchmark(family_slug, assembly)
         except Exception as e:
             trace("benchmark", family=family_slug, error=str(e))
             sr = StageResult(stage="benchmark", status="failed",
@@ -2505,7 +2505,7 @@ def verify_family(family_slug: str,
     if "hotupdate" not in skip:
         print(f"[9/13] HotUpdate AOT Fact...")
         try:
-            sr = _stage_hotupdate(family_slug, assembly)
+            sr = stage_hot_update_fact(family_slug, assembly)
         except Exception as e:
             trace("hotupdate", family=family_slug, error=str(e))
             sr = StageResult(stage="hotupdate", status="failed",
@@ -2519,7 +2519,7 @@ def verify_family(family_slug: str,
     if "hotupdate_aot_benchmark" not in skip:
         print(f"[10/13] HotUpdate AOT Bench...")
         try:
-            sr = _stage_hotupdate_aot_benchmark(family_slug, assembly)
+            sr = stage_hot_update_aot_benchmark(family_slug, assembly)
         except Exception as e:
             trace("hotupdate_aot_benchmark", family=family_slug, error=str(e))
             sr = StageResult(stage="hotupdate_aot_benchmark", status="failed",
@@ -2533,7 +2533,7 @@ def verify_family(family_slug: str,
     if "hotupdate_jit_fact" not in skip:
         print(f"[11/13] HotUpdate JIT Fact...")
         try:
-            sr = _stage_hotupdate_jit_fact(family_slug, assembly)
+            sr = stage_hot_update_jit_fact(family_slug, assembly)
         except Exception as e:
             trace("hotupdate_jit_fact", family=family_slug, error=str(e))
             sr = StageResult(stage="hotupdate_jit_fact", status="failed",
@@ -2547,7 +2547,7 @@ def verify_family(family_slug: str,
     if "hotupdate_jit_benchmark" not in skip:
         print(f"[12/13] HotUpdate JIT Bench...")
         try:
-            sr = _stage_hotupdate_jit_benchmark(family_slug, assembly)
+            sr = stage_hot_update_jit_benchmark(family_slug, assembly)
         except Exception as e:
             trace("hotupdate_jit_benchmark", family=family_slug, error=str(e))
             sr = StageResult(stage="hotupdate_jit_benchmark", status="failed",
@@ -2559,9 +2559,9 @@ def verify_family(family_slug: str,
 
     # Stage 13: Aggregate
     print(f"[13/13] Aggregating...")
-    report = _aggregate(family_slug, assembly, stage_results, mode,
+    report = aggregate_stage_results(family_slug, assembly, stage_results, mode,
                         int((time.perf_counter() - overall_start) * 1000))
-    report_path = _write_report(report, family_slug, assembly)
+    report_path = write_report(report, family_slug, assembly)
 
     print(f"\n{'='*60}")
     print(f"Result: {report.overall_status}")

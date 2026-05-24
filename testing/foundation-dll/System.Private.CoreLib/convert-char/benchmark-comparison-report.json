@@ -4,90 +4,201 @@
   "familyId": "family/System.Private.CoreLib/convert/char",
   "summary": {
     "totalMethods": 18,
-    "matchedCount": 0,
+    "matchedCount": 8,
     "unmatchedCount": 0,
-    "invalidCount": 18,
-    "nativeAotFasterCount": 0,
+    "invalidCount": 10,
+    "jitElidedCount": 0,
+    "nativeAotFasterCount": 4,
     "nativeJitFasterCount": 0,
-    "managedFasterCount": 0,
+    "managedFasterCount": 2,
     "equalCount": 0,
-    "averageSpeedupPercent": 0.0,
-    "averageNativeAotSpeedupPercent": 0.0,
-    "averageNativeJitSpeedupPercent": null,
+    "averageSpeedupPercent": -5.92,
+    "averageNativeAotSpeedupPercent": -5.92,
+    "averageNativeJitSpeedupPercent": 0.0,
     "nativeJitSlowdownFactor": null
   },
   "methodResults": [
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)",
-      "status": "managed_harness_unavailable"
+      "status": "invalid",
+      "managedElapsedMs": 125.1382,
+      "nativeAotElapsedMs": null,
+      "nativeJitElapsedMs": null,
+      "nativeAotStatus": "throws",
+      "nativeJitStatus": "throws",
+      "nativeAotSpeedupPercent": null,
+      "nativeJitSpeedupPercent": null
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Byte)",
-      "status": "managed_harness_unavailable"
+      "status": "matched",
+      "managedElapsedMs": 0.3013,
+      "nativeAotElapsedMs": 0.284,
+      "nativeJitElapsedMs": null,
+      "nativeAotSpeedupPercent": 5.74,
+      "nativeJitSpeedupPercent": null
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Char)",
-      "status": "managed_harness_unavailable"
+      "status": "invalid",
+      "managedElapsedMs": 0.3013,
+      "nativeAotElapsedMs": null,
+      "nativeJitElapsedMs": null,
+      "nativeAotStatus": "failed",
+      "nativeJitStatus": "failed",
+      "nativeAotSpeedupPercent": null,
+      "nativeJitSpeedupPercent": null
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.DateTime)",
-      "status": "managed_harness_unavailable"
+      "status": "invalid",
+      "managedElapsedMs": 120.9193,
+      "nativeAotElapsedMs": null,
+      "nativeJitElapsedMs": null,
+      "nativeAotStatus": "throws",
+      "nativeJitStatus": "throws",
+      "nativeAotSpeedupPercent": null,
+      "nativeJitSpeedupPercent": null
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Decimal)",
-      "status": "managed_harness_unavailable"
+      "status": "invalid",
+      "managedElapsedMs": 132.9743,
+      "nativeAotElapsedMs": null,
+      "nativeJitElapsedMs": null,
+      "nativeAotStatus": "throws",
+      "nativeJitStatus": "throws",
+      "nativeAotSpeedupPercent": null,
+      "nativeJitSpeedupPercent": null
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Double)",
-      "status": "managed_harness_unavailable"
+      "status": "invalid",
+      "managedElapsedMs": 124.9511,
+      "nativeAotElapsedMs": null,
+      "nativeJitElapsedMs": null,
+      "nativeAotStatus": "throws",
+      "nativeJitStatus": "throws",
+      "nativeAotSpeedupPercent": null,
+      "nativeJitSpeedupPercent": null
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int16)",
-      "status": "managed_harness_unavailable"
+      "status": "matched",
+      "managedElapsedMs": 0.2999,
+      "nativeAotElapsedMs": 0.284,
+      "nativeJitElapsedMs": null,
+      "nativeAotSpeedupPercent": 5.3,
+      "nativeJitSpeedupPercent": null
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int32)",
-      "status": "managed_harness_unavailable"
+      "status": "matched",
+      "managedElapsedMs": 0.3006,
+      "nativeAotElapsedMs": 0.3,
+      "nativeJitElapsedMs": null,
+      "nativeAotSpeedupPercent": 0.2,
+      "nativeJitSpeedupPercent": null
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int64)",
-      "status": "managed_harness_unavailable"
+      "status": "matched",
+      "managedElapsedMs": 0.3008,
+      "nativeAotElapsedMs": 0.418,
+      "nativeJitElapsedMs": null,
+      "nativeAotSpeedupPercent": -38.96,
+      "nativeJitSpeedupPercent": null
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object)",
-      "status": "managed_harness_unavailable"
+      "status": "invalid",
+      "managedElapsedMs": 0.7312,
+      "nativeAotElapsedMs": null,
+      "nativeJitElapsedMs": null,
+      "nativeAotStatus": "failed",
+      "nativeJitStatus": "failed",
+      "nativeAotSpeedupPercent": null,
+      "nativeJitSpeedupPercent": null
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object,System.IFormatProvider)",
-      "status": "managed_harness_unavailable"
+      "status": "invalid",
+      "managedElapsedMs": 0,
+      "nativeAotElapsedMs": null,
+      "nativeJitElapsedMs": null,
+      "nativeAotStatus": "failed",
+      "nativeJitStatus": "failed",
+      "nativeAotSpeedupPercent": null,
+      "nativeJitSpeedupPercent": null
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.SByte)",
-      "status": "managed_harness_unavailable"
+      "status": "matched",
+      "managedElapsedMs": 0.3015,
+      "nativeAotElapsedMs": 0.289,
+      "nativeJitElapsedMs": null,
+      "nativeAotSpeedupPercent": 4.15,
+      "nativeJitSpeedupPercent": null
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Single)",
-      "status": "managed_harness_unavailable"
+      "status": "invalid",
+      "managedElapsedMs": 128.3894,
+      "nativeAotElapsedMs": null,
+      "nativeJitElapsedMs": null,
+      "nativeAotStatus": "throws",
+      "nativeJitStatus": "throws",
+      "nativeAotSpeedupPercent": null,
+      "nativeJitSpeedupPercent": null
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String)",
-      "status": "managed_harness_unavailable"
+      "status": "invalid",
+      "managedElapsedMs": 0.3227,
+      "nativeAotElapsedMs": null,
+      "nativeJitElapsedMs": null,
+      "nativeAotStatus": "failed",
+      "nativeJitStatus": "failed",
+      "nativeAotSpeedupPercent": null,
+      "nativeJitSpeedupPercent": null
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)",
-      "status": "managed_harness_unavailable"
+      "status": "invalid",
+      "managedElapsedMs": 0,
+      "nativeAotElapsedMs": null,
+      "nativeJitElapsedMs": null,
+      "nativeAotStatus": "failed",
+      "nativeJitStatus": "failed",
+      "nativeAotSpeedupPercent": null,
+      "nativeJitSpeedupPercent": null
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt16)",
-      "status": "managed_harness_unavailable"
+      "status": "matched",
+      "managedElapsedMs": 0.3033,
+      "nativeAotElapsedMs": 0.283,
+      "nativeJitElapsedMs": null,
+      "nativeAotSpeedupPercent": 6.69,
+      "nativeJitSpeedupPercent": null
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt32)",
-      "status": "managed_harness_unavailable"
+      "status": "matched",
+      "managedElapsedMs": 0.3032,
+      "nativeAotElapsedMs": 0.302,
+      "nativeJitElapsedMs": null,
+      "nativeAotSpeedupPercent": 0.4,
+      "nativeJitSpeedupPercent": null
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt64)",
-      "status": "managed_harness_unavailable"
+      "status": "matched",
+      "managedElapsedMs": 0.3216,
+      "nativeAotElapsedMs": 0.421,
+      "nativeJitElapsedMs": null,
+      "nativeAotSpeedupPercent": -30.91,
+      "nativeJitSpeedupPercent": null
     }
   ]
 }

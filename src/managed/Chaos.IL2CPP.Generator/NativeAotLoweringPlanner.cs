@@ -811,8 +811,9 @@ extern ""C"" void ChaosJitRegisterAll() {}
         var moduleHeader = BuildGeneratedModuleHeader(methodsForLowering);
         var moduleSource = BuildGeneratedModuleSource(methodsForLowering);
 
-        // Build include list — most are unconditional; enum_metadata.generated.h
-        // is only included when there are enum types in the closure.
+        // Build include list — most are unconditional; feature-specific headers
+        // (com_ccw.h, enum_stubs.h, enum_metadata.generated.h) are included only
+        // when the generated code actually references those features.
         var includes_ = new List<string>
         {
             "<chaos/common.h>",
@@ -821,7 +822,6 @@ extern ""C"" void ChaosJitRegisterAll() {}
             // Unified exception-handling macros (CHAOS_EH_TRY / CHAOS_EH_CATCH_BEGIN / etc.)
             // Must appear after runtime_core.h which provides the EH backend type definitions.
             "<chaos/eh.h>",
-            "\"com_ccw.h\"",
             "\"codegen_bridge.h\"",
             "\"module_registry.h\"",
             "\"abi_manifest.h\"",
@@ -839,12 +839,14 @@ extern ""C"" void ChaosJitRegisterAll() {}
             // Common generated runtime prelude (shared header, ~200 lines
             // of helper functions previously emitted inline in every file).
             "<ChaosGeneratedRuntimePrelude.h>",
-            // Enum runtime stubs: lookup_cached_enum_name and ChaosEnum*
-            // extern "C" declarations — required by InlineShapeDescriptor
-            // expansions for enum.ToString/HasFlag/Format.
-            "\"enum_stubs.h\"",
         };
-        // Only include enum_metadata.generated.h when there are enum types to serve.
+        // com_ccw.h — only needed when COM interface vtable data is present.
+        if (_comInterfaceVtableData is { Count: > 0 })
+            includes_.Add("\"com_ccw.h\"");
+        // Enum runtime stubs — only needed when there are enum types in the closure.
+        if (_enumTypeSubjectIds is { Count: > 0 })
+            includes_.Add("\"enum_stubs.h\"");
+        // Enum metadata header — only included when there are enum types in the closure.
         // Saves ~500 KB of C++ parsing per translation unit when no enums are present.
         if (!string.IsNullOrEmpty(enumMetaHeader))
             includes_.Add("\"enum_metadata.generated.h\"");

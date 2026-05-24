@@ -1,14 +1,22 @@
 {
   "family": "math-numerics",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-22T08:39:41.663571",
+  "generated_at": "2026-05-24T23:02:19.417650",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
       "status": "NOT_APPLICABLE",
-      "summary": "No benchmark data available — benchmarks not run for this family",
+      "summary": "18/18 methods are stubs — benchmark data not meaningful",
       "details": [],
-      "evidence": {}
+      "evidence": {
+        "average_speedup_percent": 0.0,
+        "average_native_jit_speedup_percent": null,
+        "managed_faster_count": 0,
+        "native_aot_faster_count": 0,
+        "native_jit_faster_count": 0,
+        "invalid_count": 18,
+        "total_methods": 18
+      }
     },
     "p1_lowering": {
       "check_id": "p1_lowering",
@@ -19,155 +27,10 @@
         "has_lowering": true,
         "stub_count": 0,
         "simple_forward_count": 0,
-        "methods_with_lowering": 36,
-        "methods_total": 36
+        "methods_with_lowering": 0,
+        "methods_total": 0
       },
-      "per_method": [
-        {
-          "name": "MathNumericsSubjects_MathNumericsSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "MathNumericsSubjects_MathNumericsSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "MathNumericsSubjects_MathNumericsSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "MathNumericsSubjects_MathNumericsSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "MathNumericsSubjects_MathNumericsSubjects_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "MathNumericsSubjects_MathNumericsSubjects_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "MathNumericsSubjects_MathNumericsSubjects_Subject_6",
-          "has_lowering": true
-        },
-        {
-          "name": "MathNumericsSubjects_MathNumericsSubjects_Subject_7",
-          "has_lowering": true
-        },
-        {
-          "name": "MathNumericsSubjects_MathNumericsSubjects_Subject_8",
-          "has_lowering": true
-        },
-        {
-          "name": "MathNumericsSubjects_MathNumericsSubjects_Subject_9",
-          "has_lowering": true
-        },
-        {
-          "name": "MathNumericsSubjects_MathNumericsSubjects_Subject_10",
-          "has_lowering": true
-        },
-        {
-          "name": "MathNumericsSubjects_MathNumericsSubjects_Subject_11",
-          "has_lowering": true
-        },
-        {
-          "name": "MathNumericsSubjects_MathNumericsSubjects_Subject_12",
-          "has_lowering": true
-        },
-        {
-          "name": "MathNumericsSubjects_MathNumericsSubjects_Subject_13",
-          "has_lowering": true
-        },
-        {
-          "name": "MathNumericsSubjects_MathNumericsSubjects_Subject_14",
-          "has_lowering": true
-        },
-        {
-          "name": "MathNumericsSubjects_MathNumericsSubjects_Subject_15",
-          "has_lowering": true
-        },
-        {
-          "name": "MathNumericsSubjects_MathNumericsSubjects_Subject_16",
-          "has_lowering": true
-        },
-        {
-          "name": "MathNumericsSubjects_MathNumericsSubjects_Subject_17",
-          "has_lowering": true
-        },
-        {
-          "name": "MathNumericsSubjects_MathNumericsSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "MathNumericsSubjects_MathNumericsSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "MathNumericsSubjects_MathNumericsSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "MathNumericsSubjects_MathNumericsSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "MathNumericsSubjects_MathNumericsSubjects_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "MathNumericsSubjects_MathNumericsSubjects_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "MathNumericsSubjects_MathNumericsSubjects_Subject_6",
-          "has_lowering": true
-        },
-        {
-          "name": "MathNumericsSubjects_MathNumericsSubjects_Subject_7",
-          "has_lowering": true
-        },
-        {
-          "name": "MathNumericsSubjects_MathNumericsSubjects_Subject_8",
-          "has_lowering": true
-        },
-        {
-          "name": "MathNumericsSubjects_MathNumericsSubjects_Subject_9",
-          "has_lowering": true
-        },
-        {
-          "name": "MathNumericsSubjects_MathNumericsSubjects_Subject_10",
-          "has_lowering": true
-        },
-        {
-          "name": "MathNumericsSubjects_MathNumericsSubjects_Subject_11",
-          "has_lowering": true
-        },
-        {
-          "name": "MathNumericsSubjects_MathNumericsSubjects_Subject_12",
-          "has_lowering": true
-        },
-        {
-          "name": "MathNumericsSubjects_MathNumericsSubjects_Subject_13",
-          "has_lowering": true
-        },
-        {
-          "name": "MathNumericsSubjects_MathNumericsSubjects_Subject_14",
-          "has_lowering": true
-        },
-        {
-          "name": "MathNumericsSubjects_MathNumericsSubjects_Subject_15",
-          "has_lowering": true
-        },
-        {
-          "name": "MathNumericsSubjects_MathNumericsSubjects_Subject_16",
-          "has_lowering": true
-        },
-        {
-          "name": "MathNumericsSubjects_MathNumericsSubjects_Subject_17",
-          "has_lowering": true
-        }
-      ]
+      "per_method": []
     },
     "p1_no_redundant_branch": {
       "check_id": "p1_no_redundant_branch",
@@ -208,196 +71,19 @@
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "22 of 57 changed source files are outside expected architecture layers",
+      "summary": "1 of 1 changed source files are outside expected architecture layers",
       "details": [
         {
-          "file": "build/vs2022/testing/Temporary/LastTest.log",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/AotCoreIrLowering.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ExceptionEmission.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.StructuredControlFlow.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Planning/NativeAotLoweringPlanner.StaticInitializationPlanning.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Properties/AssemblyInfo.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.MetadataWriter/MetadataWriterStage.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/project-test/_core/python/project_pipeline_adapter.py",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/project-test/runtime-self-test/codegen/RuntimeSelfTest/native-aot.methods.json",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/project-test/runtime-self-test/codegen/_input/RuntimeSelfTest.dll",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/project-test/runtime-self-test/codegen/aot-core-ir.json",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/project-test/runtime-self-test/codegen/aot-manifest.json",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/project-test/runtime-self-test/codegen/metadata-registration.json",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/project-test/runtime-self-test/codegen/optimization-facts.json",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/project-test/runtime-self-test/codegen/preserve-descriptor.json",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/project-test/runtime-self-test/codegen/runtime-entry.cpp",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/project-test/runtime-self-test/managed/src/IntegrationProof.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/project-test/runtime-self-test/native/entry-aot.exe",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/project-test/runtime-self-test/native/entry-jit.exe",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/project-test/runtime-self-test/native/entry.exe",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/project-test/runtime-self-test/native/runtime-entry.cpp",
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ModuleRegistration.cs",
           "reason": "outside expected architecture layers"
         }
       ],
       "evidence": {
-        "changed_source_count": 57,
-        "layer_distribution": {
-          "TestInfra": 5,
-          "Codegen": 4,
-          "HotUpdate": 1,
-          "Interpreter": 5,
-          "RuntimeCore": 12,
-          "BuildConfig": 1,
-          "Contracts": 1,
-          "Tests": 6
-        },
+        "changed_source_count": 1,
+        "layer_distribution": {},
         "violations": [
           {
-            "file": "build/vs2022/testing/Temporary/LastTest.log",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/AotCoreIrLowering.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ExceptionEmission.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.StructuredControlFlow.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Planning/NativeAotLoweringPlanner.StaticInitializationPlanning.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Properties/AssemblyInfo.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.MetadataWriter/MetadataWriterStage.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/project-test/_core/python/project_pipeline_adapter.py",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/project-test/runtime-self-test/codegen/RuntimeSelfTest/native-aot.methods.json",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/project-test/runtime-self-test/codegen/_input/RuntimeSelfTest.dll",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/project-test/runtime-self-test/codegen/aot-core-ir.json",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/project-test/runtime-self-test/codegen/aot-manifest.json",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/project-test/runtime-self-test/codegen/metadata-registration.json",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/project-test/runtime-self-test/codegen/optimization-facts.json",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/project-test/runtime-self-test/codegen/preserve-descriptor.json",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/project-test/runtime-self-test/codegen/runtime-entry.cpp",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/project-test/runtime-self-test/managed/src/IntegrationProof.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/project-test/runtime-self-test/native/entry-aot.exe",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/project-test/runtime-self-test/native/entry-jit.exe",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/project-test/runtime-self-test/native/entry.exe",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/project-test/runtime-self-test/native/runtime-entry.cpp",
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ModuleRegistration.cs",
             "reason": "outside expected architecture layers"
           }
         ]
@@ -433,14 +119,10 @@
     },
     "p3_patch_entry": {
       "check_id": "p3_patch_entry",
-      "status": "ALIGNED",
-      "summary": "Dispatch table: 18 entries, all with interrupt_ptr [OK]",
+      "status": "VIOLATION",
+      "summary": "No dispatch table found in generated code",
       "details": [],
-      "evidence": {
-        "table_size": 18,
-        "entries_with_interrupt_ptr": 18,
-        "has_hotpatch_module": true
-      }
+      "evidence": {}
     },
     "p3_patchdata": {
       "check_id": "p3_patchdata",
@@ -459,10 +141,10 @@
   },
   "summary": {
     "total": 12,
-    "aligned": 7,
+    "aligned": 6,
     "concern": 2,
-    "violation": 0,
+    "violation": 1,
     "not_applicable": 3,
-    "overall": "CONCERN"
+    "overall": "VIOLATION"
   }
 }

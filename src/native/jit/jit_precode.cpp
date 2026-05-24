@@ -308,6 +308,11 @@ extern "C" void* JitStubDispatchImpl(JitPrecode* precode) noexcept {
     return precode->compiled->code;
 }
 
+// ── PrecodeArena (file-level static, no MSVC thread-safe init guard) ──────
+// Function-local static would trigger _Init_thread_header TLS access (crash).
+// File-level static initializes during CRT static init (single-threaded).
+static PrecodeArena s_precode_arena;
+
 // ── RegisterJitEntryMethods ───────────────────────────────────────────────
 // Called once at startup (from runtime-entry.cpp) to register all methods
 // for JIT compilation via precode dispatch.  For each entry:
@@ -324,11 +329,6 @@ extern "C" void RegisterJitEntryMethods(const JitEntry* entries, uint32_t count)
     using namespace chaos::il2cpp::runtime_core;
 
     std::fprintf(stderr, "DIAG: RegisterJitEntryMethods enter entries=%p count=%u\n", (void*)entries, count); std::fflush(stderr);
-
-    // Function-local static arena — lives for program lifetime
-    static PrecodeArena arena;
-
-    std::fprintf(stderr, "DIAG: after static PrecodeArena init\n"); std::fflush(stderr);
 
     for (uint32_t i = 0; i < count; ++i) {
         const auto& entry = entries[i];
@@ -362,7 +362,7 @@ extern "C" void RegisterJitEntryMethods(const JitEntry* entries, uint32_t count)
         std::fflush(stderr);
 
         // Step 5: Allocate trampoline from the RWX arena
-        precode->trampoline = arena.AllocateJitTrampoline(precode);
+        precode->trampoline = s_precode_arena.AllocateJitTrampoline(precode);
         std::fprintf(stderr, "DIAG: entry %u AllocateJitTrampoline OK trampoline=%p\n", i, (void*)precode->trampoline);
         std::fflush(stderr);
 
