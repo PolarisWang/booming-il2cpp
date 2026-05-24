@@ -11,13 +11,15 @@ COM 互操作模块实现了托管代码与原生 COM 组件之间的双向调�
 
 | 组件 | 状态 | 版本 |
 |------|------|------|
-| CCW 基础 (IUnknown) | ✅ 完成 | V3 |
-| CCW 多接口 QI | ✅ 完成 | V3 |
-| CCW 方法分发 (thunks) | ✅ 完成 | V3 |
-| CCW 代码生成 (vtable+fatory) | ✅ 完成 | V3 |
-| RCW 基础 (IUnknown) | ✅ 完成 | V1 |
-| RCW QI 缓存 | ✅ 完成 | V1 |
-| RCW 线程安全缓存表 | ✅ 完成 | V1 |
+| CCW 基础 (IUnknown) | ✅ 完成 | V4 |
+| CCW 多接口 QI | ✅ 完成 | V4 |
+| CCW 方法分发 (thunks) | ✅ 完成 | V4 |
+| CCW 代码生成 (vtable+fatory) | ✅ 完成 | V4 |
+| CCW ITypeInfo/ITypeLib | ✅ 完成 | V2 |
+| CCW ResolveCcw 地址距离检查 | ✅ 完成 | V2 |
+| RCW 基础 (IUnknown) | ✅ 完成 | V2 |
+| RCW QI 缓存 | ✅ 完成 | V2 |
+| RCW 线程安全缓存表 | ✅ 完成 | V2 |
 | RCW 方法分发 | ✅ 完成 | V2 |
 | IDispatch | ✅ 完成 | V2 |
 | ICustomMarshaler | ✅ 完成 | V4 |

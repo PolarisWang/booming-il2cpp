@@ -53,3 +53,13 @@ cmake -S testing -B build/testing
 cmake --build build/testing --config RelWithDebInfo
 ctest --test-dir build/testing -C RelWithDebInfo -R "com_"
 ```
+
+## 最新摘要
+
+- Phase 1: CCW Phase2 升级 ✅ — 用 `com_ccw.cpp.phase2` 替换当前版本，新增 ResolveCcw 地址距离检查 + ITypeInfo/ITypeLib QI 真实实现（原为 stub）
+- Phase 2: 测试构建 & 验证 ✅ — 全部 11 个 COM 测试构建通过，ctest 10/10 通过（100%）
+  - 132 个测试用例（含 9 个 DISABLED）：CCW(28) + RCW(17) + ConnectionPoint(22) + Platform(13) + Factory(10) + TypeLib(8) + Dispatch(8) + Benchmark(5) + CCW Stress(4) + RCW Stress(4) + Integration(13)
+  - 9 个 DISABLED connection point 测试需要 MemoryDomain 基础设施
+  - com_integration_test 需要 chaos_codegen.lib（主构建系统补齐）
+- Wiki 已更新：版本号 V3→V4，测试计数刷新，运行方法统一
+- P0 差距（G1 malloc/free、G2 LOG_WARN stubs）已在 phase2 中自然解决
