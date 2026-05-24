@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Text;
 using System.Text.Json;
 using Chaos.IL2CPP.Contracts;
@@ -67,7 +68,9 @@ public sealed class NativeAotEmitter
             planner.StructuredExceptionBodyCount,
             planner.TotalMethodCount,
             planner.AotReachableMethodCount,
-            planner?.AotUnreachableMethodCount ?? 0);
+            planner?.AotUnreachableMethodCount ?? 0,
+            planner.HotpatchEntryCount,
+            planner.HotpatchEligibleMethodCount);
 
         // Validate generated C++ code against project coding conventions.
         var validator = new Validation.NativeCodegenValidator();
@@ -349,9 +352,28 @@ public sealed class NativeAotEmitter
 
         if (pages is { Count: > 0 } && pageSize is > 0)
         {
-            // Paged output: split methods across multiple translation units
-            int pageSize = loweringPlan.TranslationUnitPageSize!.Value;
+            // Paged output: split methods across multiple translation units.
+            // Uses estimated output size (based on MethodSource.Length) rather than
+            // method count to keep each generated .cpp file within reasonable limits.
             var allMethods = templateModel.Methods;
+            int totalMethods = allMethods.Count;
+
+            // ── Estimate page 0 overhead ──────────────────────────────
+            // Page 0 carries object model (TypeInfoV0 inline defs), method
+            // declarations, module registration, and generic registration.
+            // Each entry is optional — use empty string length when null.
+            int page0Overhead = (templateModel.ObjectModelCode?.Length ?? 0)
+                              + (templateModel.MethodDeclarations?.Sum(d => d.Length) ?? 0)
+                              + (templateModel.ModuleRegistrationCode?.Length ?? 0)
+                              + (templateModel.GenericRegistrationCode?.Length ?? 0)
+                              + 500; // Scriban template structural overhead
+
+            // Threshold: ~2 MB of C++ output. MethodSource.Length is a close
+            // upper-bound estimate of each method's contribution to the final
+            // rendered output (Scriban wrapping adds ~200 chars per method).
+            const int sizeThresholdChars = 1_500_000;
+            const int perMethodOverhead = 200;
+            const int perPageOverhead = 500;
 
             // Emit shared header with extern TypeInfoV0 declarations + shape dispatch header
             bool hasTypeDeclarations = !string.IsNullOrEmpty(templateModel.TypeDeclarationsCode);
@@ -370,18 +392,60 @@ public sealed class NativeAotEmitter
                 });
             }
 
-            for (int i = 0; i < pages.Count; i++)
+            // ── Size-based partitioning ────────────────────────────
+            // Accumulate estimated method sizes into pages. Each page gets at
+            // least one method (no empty pages). Page 0 accounts for overhead
+            // from object model / registration code.
+            int methodIdx = 0;
+            int actualPageIdx = 0;
+            while (methodIdx < totalMethods)
             {
-                var page = pages[i];
+                bool isFirstPage = (actualPageIdx == 0);
+                int accumulated = isFirstPage ? page0Overhead : perPageOverhead;
+                int pageStart = methodIdx;
+
+                while (methodIdx < totalMethods)
+                {
+                    int methodSize = (allMethods[methodIdx].MethodSource?.Length ?? 0) + perMethodOverhead;
+                    if (accumulated + methodSize > sizeThresholdChars && methodIdx > pageStart)
+                        break;
+                    accumulated += methodSize;
+                    methodIdx++;
+                }
+
+                // Ensure at least one method on this page
+                if (methodIdx == pageStart)
+                    methodIdx = pageStart + 1;
+
                 var pageMethods = allMethods
-                    .Skip(i * pageSize)
-                    .Take(pageSize)
+                    .Skip(pageStart)
+                    .Take(methodIdx - pageStart)
                     .ToArray();
+
+                // Pick page artifact or create on-the-fly for overflow pages
+                AuditTranslationUnitPageArtifact page;
+                if (actualPageIdx < pages.Count)
+                {
+                    page = pages[actualPageIdx];
+                }
+                else
+                {
+                    // Overflow page beyond the originally planned page count.
+                    string suffix = actualPageIdx == 0
+                        ? ""
+                        : $".page{actualPageIdx + 1}";
+                    page = new AuditTranslationUnitPageArtifact
+                    {
+                        PageNumber = actualPageIdx + 1,
+                        MethodCount = methodIdx - pageStart,
+                        Path = $"generated/native-aot.generated{suffix}.cpp",
+                    };
+                }
 
                 string content = BuildGeneratedPage(
                     templateModel, pageMethods,
-                    includeRegistration: i == 0,
-                    includeObjectModel: i == 0 || !hasTypeDeclarations);
+                    includeRegistration: isFirstPage,
+                    includeObjectModel: isFirstPage || !hasTypeDeclarations);
 
                 sources.Add(new NativeAotGeneratedSource
                 {
@@ -393,6 +457,8 @@ public sealed class NativeAotEmitter
                     Kind = "generatedTranslationUnit",
                     Path = page.Path,
                 });
+
+                actualPageIdx++;
             }
         }
         else
