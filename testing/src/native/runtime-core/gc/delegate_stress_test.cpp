@@ -57,7 +57,7 @@ static constexpr int    kExhaustionAllocCount = 100000;
 
 static constexpr int    kVerifyStep           = 16;
 static constexpr size_t kDelegateSize         = sizeof(DelegateObject);
-static_assert(kDelegateSize == 56, "DelegateObject must be 56 bytes");
+static_assert(kDelegateSize == 48, "DelegateObject must be 48 bytes");
 
 // ── Fake delegate TypeInfo ───────────────────────────────────────────────
 //
@@ -134,7 +134,7 @@ static CHAOS_IL2CPP_INTPTR AllocateSingleDelegate(
     auto* obj = static_cast<DelegateObject*>(
         g_old_gen.Allocate(kDelegateSize, true));
     obj->type_info                     = type_info;
-    obj->sync_state                    = 0;
+    // sync_state removed — moved to ThinLockTable
     obj->chaos_delegate_target         = target;
     obj->chaos_delegate_method_ptr     = method_ptr;
     obj->chaos_delegate_invocation_list = 0;
@@ -537,7 +537,7 @@ TEST_F(DelegateStressTest, E3_VectorPointerCompaction) {
         auto* delegate = static_cast<DelegateObject*>(
             g_old_gen.Allocate(kDelegateSize, true));
         delegate->type_info                     = &g_delegate_type_a;
-        delegate->sync_state                    = 0;
+        // sync_state removed — moved to ThinLockTable
         delegate->chaos_delegate_target         = static_cast<CHAOS_IL2CPP_INTPTR>(i);
         delegate->chaos_delegate_method_ptr     = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&g_delegate_type_a);
         delegate->chaos_delegate_invocation_list = 0;

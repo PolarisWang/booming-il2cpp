@@ -3341,21 +3341,8 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
     // SEH methods: existing linear OptimizeInstructions fallback.
     auto opt_instrs = rm_.instructions;
     std::vector<uint8_t> removed_mask;
-    bool tree_ir_applied = false;
     if (!is_tier0_ && config_.enable_optimizer) {
-        if (rm_.seh_clauses.empty()) {
-            std::vector<interpreter::RegisterInstruction> tree_opt;
-            if (tree::OptimizeWithTreeIR(opt_instrs, tree_opt, false)) {
-                opt_instrs = std::move(tree_opt);
-                removed_mask.assign(opt_instrs.size(), 0);
-                tree_ir_applied = true;
-                n_instrs = static_cast<uint32_t>(opt_instrs.size());
-                instr_offsets_.resize(n_instrs, 0);
-            }
-        }
-        if (!tree_ir_applied) {
-            OptimizeInstructions(opt_instrs, removed_mask, !rm_.seh_clauses.empty());
-        }
+        OptimizeInstructions(opt_instrs, removed_mask, !rm_.seh_clauses.empty());
     }
 
     // ── Liveness analysis for precise GC slot maps ─────────────────────────
