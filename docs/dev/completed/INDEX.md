@@ -30,3 +30,4 @@
 | [child-fd-p0-precheck](child-fd-p0-precheck/STATUS.md) | 8 | 05/23 | Foundation DLL Phase 0 Pipeline 预检 — 5 项修复 (microbench SEH, audit 口径, subject IDs ×2, pipeline-config) |
 | [child-fd-p1-baseline](child-fd-p1-baseline/STATUS.md) | 2 | 05/23 | Foundation DLL Phase 1 基线扫描 — 138/164 通过, 10 失败分类, 4 systemic issues |
 | [child-fd-p15-risk-ranking](child-fd-p15-risk-ranking/STATUS.md) | 3 | 05/23 | Foundation DLL Phase 1.5 风险排序 — 12 families 排序 P0(6)+P1(2)+P3(4), 4 SYS |
+| [foundation-dll-sdk-cleanup](foundation-dll-sdk-cleanup/STATUS.md) | 7 | 05/24 | SDK 输出清理 — 分发逻辑下沉到 runtime header, Python 生成 entry, pipeline 简化 |

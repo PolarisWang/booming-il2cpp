@@ -123,12 +123,13 @@ internal static class ConvertToCppHandler
             var singleCmakeContent = cmakeGen.Generate(
                 new[] { emitResult }.ToList(),
                 nativeLibDir: nativeLibDir,
-                extraSources: new List<string> { "runtime-entry.cpp" },
+                extraSources: new List<string>(),
                 targetName: "entry");
             File.WriteAllText(Path.Combine(outputRoot, "CMakeLists.txt"), singleCmakeContent);
 
-            var runtimeEntryCpp = GenerateRuntimeEntryCpp(config.EntryPoint is not null ? "RunNativeAot" : null, config.Mode);
-            File.WriteAllText(Path.Combine(outputRoot, "runtime-entry.cpp"), runtimeEntryCpp);
+            // NOTE: runtime-entry.cpp is NOT generated here anymore.
+            // Python verification scripts generate it directly in native/
+            // with all test logic (Fact/Benchmark/HotUpdate/Microbench).
 
             // Emit SDK if --sdk-out specified
             if (config.SdkOutDir != null)
@@ -201,13 +202,12 @@ internal static class ConvertToCppHandler
                     GeneratedSources = r.GeneratedSources,
                 }).ToList(),
                 nativeLibDir: nativeLibDir,
-                extraSources: new List<string> { "runtime-entry.cpp" },
+                extraSources: new List<string>(),
                 targetName: "entry");
             File.WriteAllText(Path.Combine(outputRoot, "CMakeLists.txt"), cmakeContent);
 
-            // Generate runtime entry point (simple text, no Scriban dependency)
-            var runtimeEntryContent = GenerateRuntimeEntryCpp(config.EntryPoint is not null ? "RunNativeAot" : null, config.Mode);
-            File.WriteAllText(Path.Combine(outputRoot, "runtime-entry.cpp"), runtimeEntryContent);
+            // NOTE: runtime-entry.cpp is NOT generated here anymore.
+            // Python verification scripts generate it directly in native/.
 
             // Emit SDK if --sdk-out specified
             if (config.SdkOutDir != null)
