@@ -444,7 +444,7 @@ void InterpreterEntryDirect(
     }
 
 
-    CHAOS_IL2CPP_LOG_DEBUG("diag", "Step A (T4) entering");
+
     // ── Step A: Native code path (T4) ────────────────────────────────
     {
         auto t4_tier = patch_method->tier_state.load(std::memory_order_acquire);
@@ -729,8 +729,8 @@ void InterpreterEntryDirect(
     }
 
     CHAOS_IL2CPP_LOG_DEBUG("diag", "Step C (FastExecute) entering");
-    // ── Step C: FastExecute path ──────────────────────────────────────
-    if (ir->seh_clauses.empty() && instr_count > 2) {
+    // ── Step C: FastExecute path (SEH fully supported) ──────────────
+    if (instr_count > 2) {
         GetTierCounters().step_fast.fetch_add(1, std::memory_order_relaxed);
         CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterEntryDirect.FastExecute");
         if (!patch_method->cached_sig_valid) CacheSignature(patch_method);
