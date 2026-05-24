@@ -1,0 +1,60 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "ReflectionActivationSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_0",
+          "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_1",
+          "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_2",
+          "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_3",
+          "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_4",
+          "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_5",
+          "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_6",
+          "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_7",
+          "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_7:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/System.Private.CoreLib/text/ebcdic",
+  "displayName": "Text EBCDIC Encoding",
+  "methodSubjectIds": []
+}

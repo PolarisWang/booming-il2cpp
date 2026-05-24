@@ -1,0 +1,3827 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-0",
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_0:System.Void()",
+      "signature": "System.Void DelegateCoreInvocationSubjects::Subject_0()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationSubjects",
+        "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+        "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_0:System.Void()",
+        "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_0:System.Void()",
+        "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-0",
+        "signature": "System.Void DelegateCoreInvocationSubjects::Subject_0()"
+      },
+      "nativeSymbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_0",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 43,
+          "handlerOffset": 44,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 3,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 4,
+          "resultType": "System.Delegate",
+          "callee": "System.Private.CoreLib/System.Delegate::Combine:System.Delegate(System.Delegate,System.Delegate)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Delegate::Combine:System.Delegate(System.Delegate,System.Delegate)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Delegate::Combine:System.Delegate(System.Delegate,System.Delegate)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 14,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 15,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 16,
+          "resultType": "System.Delegate",
+          "callee": "System.Private.CoreLib/System.Delegate::Combine:System.Delegate(System.Delegate,System.Delegate)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Delegate::Combine:System.Delegate(System.Delegate,System.Delegate)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Delegate::Combine:System.Delegate(System.Delegate,System.Delegate)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 21,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 26,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 28,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 29,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 31,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 32,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 41,
+          "ilOffset": 33,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 35,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode",
+          "ilOffset": 36,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "field",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 55,
+          "ilOffset": 42,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 44,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 46,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode",
+          "ilOffset": 47,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "field",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 55,
+          "ilOffset": 53,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 55,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "DelegateCoreInvocationSubjects"
+    },
+    {
+      "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-1",
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_1:System.Void()",
+      "signature": "System.Void DelegateCoreInvocationSubjects::Subject_1()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationSubjects",
+        "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+        "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_1:System.Void()",
+        "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_1:System.Void()",
+        "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-1",
+        "signature": "System.Void DelegateCoreInvocationSubjects::Subject_1()"
+      },
+      "nativeSymbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_1",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 43,
+          "handlerOffset": 44,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 2,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 3,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 4,
+          "resultType": "System.Delegate",
+          "callee": "System.Private.CoreLib/System.Delegate::Remove:System.Delegate(System.Delegate,System.Delegate)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Delegate::Remove:System.Delegate(System.Delegate,System.Delegate)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Delegate::Remove:System.Delegate(System.Delegate,System.Delegate)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 9,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 14,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldnull",
+          "opCode": 5,
+          "ilOffset": 15,
+          "resultType": "System.Object",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 16,
+          "resultType": "System.Delegate",
+          "callee": "System.Private.CoreLib/System.Delegate::Remove:System.Delegate(System.Delegate,System.Delegate)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Delegate::Remove:System.Delegate(System.Delegate,System.Delegate)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Delegate::Remove:System.Delegate(System.Delegate,System.Delegate)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 21,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 26,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 28,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 29,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 31,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 32,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 41,
+          "ilOffset": 33,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 35,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode",
+          "ilOffset": 36,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "field",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 55,
+          "ilOffset": 42,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 44,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 46,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode",
+          "ilOffset": 47,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "field",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 55,
+          "ilOffset": 53,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 55,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "DelegateCoreInvocationSubjects"
+    },
+    {
+      "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-2",
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_2:System.Void()",
+      "signature": "System.Void DelegateCoreInvocationSubjects::Subject_2()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationSubjects",
+        "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+        "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_2:System.Void()",
+        "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_2:System.Void()",
+        "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-2",
+        "signature": "System.Void DelegateCoreInvocationSubjects::Subject_2()"
+      },
+      "nativeSymbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_2",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 111,
+          "handlerOffset": 112,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_0",
+          "ilOffset": 2,
+          "resultType": "System.Action",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "field",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_0"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_0",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Action"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 7,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 33,
+          "ilOffset": 8,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+          "ilOffset": 11,
+          "resultType": "DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "field",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "DelegateCoreInvocationSubjects\u002B\u003C\u003Ec"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldftn",
+          "opCode": 73,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_0:System.Void()",
+          "ilOffset": 16,
+          "resultType": "System.IntPtr",
+          "callee": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_0:System.Void()",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "method",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_0:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_0:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "isPreserveSig": false
+        },
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 22,
+          "resultType": "System.Private.CoreLib/System.Action",
+          "callee": "System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Action",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 27,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_0",
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "field",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_0"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_0",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Action"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 33,
+          "resultType": "System.Object[]",
+          "callee": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Object\u003E:System.Object[]()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Object\u003E:System.Object[]()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Object\u003E:System.Object[]()",
+            "openDefinitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Object]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Object]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Object"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Object]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Object]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 1,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Object\u003E:System.Object[]()",
+              "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+              "displaySubjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Object\u003E()",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Object"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 38,
+          "resultType": "System.Object",
+          "callee": "System.Private.CoreLib/System.Delegate::DynamicInvoke:System.Object(System.Object[])",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Delegate::DynamicInvoke:System.Object(System.Object[])"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Delegate::DynamicInvoke:System.Object(System.Object[])",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 43,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_1",
+          "ilOffset": 48,
+          "resultType": "System.Action",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "field",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_1"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_1",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Action"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 53,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 79,
+          "ilOffset": 54,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 56,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+          "ilOffset": 57,
+          "resultType": "DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "field",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "DelegateCoreInvocationSubjects\u002B\u003C\u003Ec"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldftn",
+          "opCode": 73,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_1:System.Void()",
+          "ilOffset": 62,
+          "resultType": "System.IntPtr",
+          "callee": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_1:System.Void()",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "method",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_1:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_1:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "isPreserveSig": false
+        },
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 68,
+          "resultType": "System.Private.CoreLib/System.Action",
+          "callee": "System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Action",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 73,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_1",
+          "ilOffset": 74,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "field",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_1"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__3_1",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Action"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 79,
+          "resultType": "System.Object[]",
+          "callee": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Object\u003E:System.Object[]()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Object\u003E:System.Object[]()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Object\u003E:System.Object[]()",
+            "openDefinitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+            "sharedGenericBodyId": {
+              "value": "body:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Object]"
+            },
+            "instantiationStubId": {
+              "value": "stub:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Object]"
+            },
+            "runtimeGenericContext": {
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Object"
+                ]
+              },
+              "sharedGenericBodyId": {
+                "value": "body:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Object]"
+              },
+              "instantiationStubId": {
+                "value": "stub:definition=System.Private.CoreLib/System.Array::Empty:!!0[]();type=[];method=[System.Object]"
+              },
+              "supportKindCode": 3,
+              "specializationKindCode": 1,
+              "statusReasonCode": "loader-demand:methodSpec"
+            },
+            "genericDiagnostic": {
+              "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Object\u003E:System.Object[]()",
+              "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+              "displaySubjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Object\u003E()",
+              "instantiationKey": {
+                "contextKind": 2,
+                "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+                "typeArguments": [],
+                "methodArguments": [
+                  "System.Object"
+                ]
+              }
+            },
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 84,
+          "resultType": "System.Object",
+          "callee": "System.Private.CoreLib/System.Delegate::DynamicInvoke:System.Object(System.Object[])",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Delegate::DynamicInvoke:System.Object(System.Object[])"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Delegate::DynamicInvoke:System.Object(System.Object[])",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 89,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 94,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 96,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 97,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 99,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 100,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 109,
+          "ilOffset": 101,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 103,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode",
+          "ilOffset": 104,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "field",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 123,
+          "ilOffset": 110,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 112,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 114,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode",
+          "ilOffset": 115,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "field",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 123,
+          "ilOffset": 121,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 123,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "DelegateCoreInvocationSubjects"
+    },
+    {
+      "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-3",
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_3:System.Void()",
+      "signature": "System.Void DelegateCoreInvocationSubjects::Subject_3()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationSubjects",
+        "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+        "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_3:System.Void()",
+        "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_3:System.Void()",
+        "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-3",
+        "signature": "System.Void DelegateCoreInvocationSubjects::Subject_3()"
+      },
+      "nativeSymbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_3",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 101,
+          "handlerOffset": 102,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_0",
+          "ilOffset": 2,
+          "resultType": "System.Action",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "field",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_0"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_0",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Action"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 7,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 33,
+          "ilOffset": 8,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+          "ilOffset": 11,
+          "resultType": "DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "field",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "DelegateCoreInvocationSubjects\u002B\u003C\u003Ec"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldftn",
+          "opCode": 73,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_0:System.Void()",
+          "ilOffset": 16,
+          "resultType": "System.IntPtr",
+          "callee": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_0:System.Void()",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "method",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_0:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_0:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "isPreserveSig": false
+        },
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 22,
+          "resultType": "System.Private.CoreLib/System.Action",
+          "callee": "System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Action",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 27,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_0",
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "field",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_0"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_0",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Action"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 33,
+          "resultType": "System.Reflection.MethodInfo",
+          "callee": "System.Private.CoreLib/System.Delegate::get_Method:System.Reflection.MethodInfo()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Delegate::get_Method:System.Reflection.MethodInfo()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Delegate::get_Method:System.Reflection.MethodInfo()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 38,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_1",
+          "ilOffset": 43,
+          "resultType": "System.Action",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "field",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_1"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_1",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Action"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 48,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 74,
+          "ilOffset": 49,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 51,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+          "ilOffset": 52,
+          "resultType": "DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "field",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "DelegateCoreInvocationSubjects\u002B\u003C\u003Ec"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldftn",
+          "opCode": 73,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_1:System.Void()",
+          "ilOffset": 57,
+          "resultType": "System.IntPtr",
+          "callee": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_1:System.Void()",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "method",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_1:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_1:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "isPreserveSig": false
+        },
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 63,
+          "resultType": "System.Private.CoreLib/System.Action",
+          "callee": "System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Action",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 68,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_1",
+          "ilOffset": 69,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "field",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_1"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_1",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Action"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 74,
+          "resultType": "System.Reflection.MethodInfo",
+          "callee": "System.Private.CoreLib/System.Delegate::get_Method:System.Reflection.MethodInfo()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Delegate::get_Method:System.Reflection.MethodInfo()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Delegate::get_Method:System.Reflection.MethodInfo()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 79,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 84,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 86,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 87,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 89,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 90,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 99,
+          "ilOffset": 91,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 93,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode",
+          "ilOffset": 94,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "field",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 113,
+          "ilOffset": 100,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 102,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 104,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode",
+          "ilOffset": 105,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "field",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 113,
+          "ilOffset": 111,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 113,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "DelegateCoreInvocationSubjects"
+    },
+    {
+      "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-4",
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_4:System.Void()",
+      "signature": "System.Void DelegateCoreInvocationSubjects::Subject_4()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationSubjects",
+        "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+        "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_4:System.Void()",
+        "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_4:System.Void()",
+        "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-4",
+        "signature": "System.Void DelegateCoreInvocationSubjects::Subject_4()"
+      },
+      "nativeSymbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_4",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 101,
+          "handlerOffset": 102,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_0",
+          "ilOffset": 2,
+          "resultType": "System.Action",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "field",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_0"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_0",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Action"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 7,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 33,
+          "ilOffset": 8,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+          "ilOffset": 11,
+          "resultType": "DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "field",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "DelegateCoreInvocationSubjects\u002B\u003C\u003Ec"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldftn",
+          "opCode": 73,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_0:System.Void()",
+          "ilOffset": 16,
+          "resultType": "System.IntPtr",
+          "callee": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_0:System.Void()",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "method",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_0:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_0:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "isPreserveSig": false
+        },
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 22,
+          "resultType": "System.Private.CoreLib/System.Action",
+          "callee": "System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Action",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 27,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_0",
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "field",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_0"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_0",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Action"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 33,
+          "resultType": "System.Object",
+          "callee": "System.Private.CoreLib/System.Delegate::get_Target:System.Object()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Delegate::get_Target:System.Object()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Delegate::get_Target:System.Object()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 38,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_1",
+          "ilOffset": 43,
+          "resultType": "System.Action",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "field",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_1"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_1",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Action"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 48,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 74,
+          "ilOffset": 49,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 51,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+          "ilOffset": 52,
+          "resultType": "DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "field",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "DelegateCoreInvocationSubjects\u002B\u003C\u003Ec"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldftn",
+          "opCode": 73,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_1:System.Void()",
+          "ilOffset": 57,
+          "resultType": "System.IntPtr",
+          "callee": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_1:System.Void()",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "method",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_1:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_1:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "isPreserveSig": false
+        },
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 63,
+          "resultType": "System.Private.CoreLib/System.Action",
+          "callee": "System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Action",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 68,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_1",
+          "ilOffset": 69,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "field",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_1"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__5_1",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Action"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 74,
+          "resultType": "System.Object",
+          "callee": "System.Private.CoreLib/System.Delegate::get_Target:System.Object()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Delegate::get_Target:System.Object()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Delegate::get_Target:System.Object()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 79,
+          "resultType": "System.Int32",
+          "callee": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 84,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 86,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 87,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 89,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 90,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 99,
+          "ilOffset": 91,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 93,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode",
+          "ilOffset": 94,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "field",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 113,
+          "ilOffset": 100,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 102,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 104,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode",
+          "ilOffset": 105,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "field",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 113,
+          "ilOffset": 111,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 113,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "DelegateCoreInvocationSubjects"
+    },
+    {
+      "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-5",
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_5:System.Void()",
+      "signature": "System.Void DelegateCoreInvocationSubjects::Subject_5()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationSubjects",
+        "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+        "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_5:System.Void()",
+        "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_5:System.Void()",
+        "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-5",
+        "signature": "System.Void DelegateCoreInvocationSubjects::Subject_5()"
+      },
+      "nativeSymbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_5",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "DelegateCoreInvocationSubjects"
+    },
+    {
+      "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-6",
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_6:System.Void()",
+      "signature": "System.Void DelegateCoreInvocationSubjects::Subject_6()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationSubjects",
+        "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+        "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_6:System.Void()",
+        "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_6:System.Void()",
+        "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-6",
+        "signature": "System.Void DelegateCoreInvocationSubjects::Subject_6()"
+      },
+      "nativeSymbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_6",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "DelegateCoreInvocationSubjects"
+    },
+    {
+      "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-7",
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_7:System.Void()",
+      "signature": "System.Void DelegateCoreInvocationSubjects::Subject_7()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationSubjects",
+        "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+        "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_7:System.Void()",
+        "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_7:System.Void()",
+        "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-7",
+        "signature": "System.Void DelegateCoreInvocationSubjects::Subject_7()"
+      },
+      "nativeSymbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_7",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 95,
+          "handlerOffset": 96,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_0",
+          "ilOffset": 2,
+          "resultType": "System.Action",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "field",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_0"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_0",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Action"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 7,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 33,
+          "ilOffset": 8,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+          "ilOffset": 11,
+          "resultType": "DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "field",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "DelegateCoreInvocationSubjects\u002B\u003C\u003Ec"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldftn",
+          "opCode": 73,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_0:System.Void()",
+          "ilOffset": 16,
+          "resultType": "System.IntPtr",
+          "callee": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_0:System.Void()",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "method",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_0:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_0:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "isPreserveSig": false
+        },
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 22,
+          "resultType": "System.Private.CoreLib/System.Action",
+          "callee": "System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Action",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 27,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_0",
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "field",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_0"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_0",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Action"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 33,
+          "resultType": "System.Delegate[]",
+          "callee": "System.Private.CoreLib/System.Delegate::GetInvocationList:System.Delegate[]()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Delegate::GetInvocationList:System.Delegate[]()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Delegate::GetInvocationList:System.Delegate[]()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldlen",
+          "opCode": 46,
+          "ilOffset": 38,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "conv.i4",
+          "opCode": 39,
+          "ilOffset": 39,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_1",
+          "ilOffset": 40,
+          "resultType": "System.Action",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "field",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_1"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_1",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Action"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 45,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brtrue",
+          "opCode": 18,
+          "operand": 71,
+          "ilOffset": 46,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 48,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldsfld",
+          "opCode": 12,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+          "ilOffset": 49,
+          "resultType": "DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "field",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "DelegateCoreInvocationSubjects\u002B\u003C\u003Ec"
+          },
+          "runtimeServiceKind": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldftn",
+          "opCode": 73,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_1:System.Void()",
+          "ilOffset": 54,
+          "resultType": "System.IntPtr",
+          "callee": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_1:System.Void()",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "method",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_1:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_1:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "isPreserveSig": false
+        },
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 60,
+          "resultType": "System.Private.CoreLib/System.Action",
+          "callee": "System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Action",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "dup",
+          "opCode": 54,
+          "ilOffset": 65,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_1",
+          "ilOffset": 66,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "field",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_1"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9__8_1",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Action"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "callvirt",
+          "opCode": 15,
+          "ilOffset": 71,
+          "resultType": "System.Delegate[]",
+          "callee": "System.Private.CoreLib/System.Delegate::GetInvocationList:System.Delegate[]()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Delegate::GetInvocationList:System.Delegate[]()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Delegate::GetInvocationList:System.Delegate[]()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldlen",
+          "opCode": 46,
+          "ilOffset": 76,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "conv.i4",
+          "opCode": 39,
+          "ilOffset": 77,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 78,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 80,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 81,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 83,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 84,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 93,
+          "ilOffset": 85,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 87,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode",
+          "ilOffset": 88,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "field",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 107,
+          "ilOffset": 94,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 96,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 98,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode",
+          "ilOffset": 99,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "field",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 107,
+          "ilOffset": 105,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 107,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "DelegateCoreInvocationSubjects"
+    },
+    {
+      "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-8",
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_8:System.Void()",
+      "signature": "System.Void DelegateCoreInvocationSubjects::Subject_8()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationSubjects",
+        "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+        "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_8:System.Void()",
+        "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_8:System.Void()",
+        "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-8",
+        "signature": "System.Void DelegateCoreInvocationSubjects::Subject_8()"
+      },
+      "nativeSymbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_8",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "DelegateCoreInvocationSubjects"
+    },
+    {
+      "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-9",
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_9:System.Void()",
+      "signature": "System.Void DelegateCoreInvocationSubjects::Subject_9()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationSubjects",
+        "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects",
+        "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_9:System.Void()",
+        "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects::Subject_9:System.Void()",
+        "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects.subject-9",
+        "signature": "System.Void DelegateCoreInvocationSubjects::Subject_9()"
+      },
+      "nativeSymbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_9",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "DelegateCoreInvocationSubjects"
+    },
+    {
+      "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects-c.cctor",
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+      "signature": "System.Void DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::.cctor()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationSubjects",
+        "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+        "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+        "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+        "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects-c.cctor",
+        "signature": "System.Void DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::.cctor()"
+      },
+      "nativeSymbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_cctor",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 0,
+          "resultType": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+          "callee": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "method",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": true,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "baseTypeSubjectId": "System.Private.CoreLib/System.Object",
+            "implementedInterfaceSubjectIds": [],
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+          "ilOffset": 5,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectKind": "field",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "DelegateCoreInvocationSubjects",
+            "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "DelegateCoreInvocationSubjects\u002B\u003C\u003Ec"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 10,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "DelegateCoreInvocationSubjects"
+    },
+    {
+      "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects-c.ctor",
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+      "signature": "System.Void DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::.ctor()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationSubjects",
+        "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+        "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+        "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+        "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects-c.ctor",
+        "signature": "System.Void DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::.ctor()"
+      },
+      "nativeSymbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c__ctor",
+      "isStatic": false,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 1,
+          "resultType": "System.Void",
+          "callee": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "dispatchKindCode": 4,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 7,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "DelegateCoreInvocationSubjects"
+    },
+    {
+      "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects-c.subject-2-b-3-0",
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_0:System.Void()",
+      "signature": "System.Void DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_0()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationSubjects",
+        "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+        "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_0:System.Void()",
+        "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_0:System.Void()",
+        "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects-c.subject-2-b-3-0",
+        "signature": "System.Void DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_0()"
+      },
+      "nativeSymbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_2_b__3_0",
+      "isStatic": false,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "DelegateCoreInvocationSubjects"
+    },
+    {
+      "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects-c.subject-2-b-3-1",
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_1:System.Void()",
+      "signature": "System.Void DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_1()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationSubjects",
+        "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+        "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_1:System.Void()",
+        "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_1:System.Void()",
+        "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects-c.subject-2-b-3-1",
+        "signature": "System.Void DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_2\u003Eb__3_1()"
+      },
+      "nativeSymbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_2_b__3_1",
+      "isStatic": false,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "DelegateCoreInvocationSubjects"
+    },
+    {
+      "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects-c.subject-3-b-4-0",
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_0:System.Void()",
+      "signature": "System.Void DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_0()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationSubjects",
+        "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+        "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_0:System.Void()",
+        "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_0:System.Void()",
+        "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects-c.subject-3-b-4-0",
+        "signature": "System.Void DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_0()"
+      },
+      "nativeSymbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_3_b__4_0",
+      "isStatic": false,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "DelegateCoreInvocationSubjects"
+    },
+    {
+      "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects-c.subject-3-b-4-1",
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_1:System.Void()",
+      "signature": "System.Void DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_1()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationSubjects",
+        "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+        "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_1:System.Void()",
+        "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_1:System.Void()",
+        "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects-c.subject-3-b-4-1",
+        "signature": "System.Void DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_1()"
+      },
+      "nativeSymbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_3_b__4_1",
+      "isStatic": false,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "DelegateCoreInvocationSubjects"
+    },
+    {
+      "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects-c.subject-4-b-5-0",
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_0:System.Void()",
+      "signature": "System.Void DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_0()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationSubjects",
+        "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+        "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_0:System.Void()",
+        "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_0:System.Void()",
+        "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects-c.subject-4-b-5-0",
+        "signature": "System.Void DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_0()"
+      },
+      "nativeSymbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_4_b__5_0",
+      "isStatic": false,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "DelegateCoreInvocationSubjects"
+    },
+    {
+      "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects-c.subject-4-b-5-1",
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_1:System.Void()",
+      "signature": "System.Void DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_1()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationSubjects",
+        "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+        "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_1:System.Void()",
+        "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_1:System.Void()",
+        "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects-c.subject-4-b-5-1",
+        "signature": "System.Void DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_4\u003Eb__5_1()"
+      },
+      "nativeSymbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_4_b__5_1",
+      "isStatic": false,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "DelegateCoreInvocationSubjects"
+    },
+    {
+      "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects-c.subject-7-b-8-0",
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_0:System.Void()",
+      "signature": "System.Void DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_0()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationSubjects",
+        "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+        "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_0:System.Void()",
+        "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_0:System.Void()",
+        "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects-c.subject-7-b-8-0",
+        "signature": "System.Void DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_0()"
+      },
+      "nativeSymbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_7_b__8_0",
+      "isStatic": false,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "DelegateCoreInvocationSubjects"
+    },
+    {
+      "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects-c.subject-7-b-8-1",
+      "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_1:System.Void()",
+      "signature": "System.Void DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_1()",
+      "identity": {
+        "assemblyName": "DelegateCoreInvocationSubjects",
+        "declaringTypeSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec",
+        "definitionSubjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_1:System.Void()",
+        "subjectId": "DelegateCoreInvocationSubjects/DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_1:System.Void()",
+        "methodId": "delegate-core-invocation-subjects.delegate-core-invocation-subjects-c.subject-7-b-8-1",
+        "signature": "System.Void DelegateCoreInvocationSubjects\u002B\u003C\u003Ec::\u003CSubject_7\u003Eb__8_1()"
+      },
+      "nativeSymbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_7_b__8_1",
+      "isStatic": false,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "DelegateCoreInvocationSubjects"
+    }
+  ]
+}

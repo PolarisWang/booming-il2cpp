@@ -1,0 +1,956 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ResolveNugetPackages>false</ResolveNugetPackages>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{9F8ADEBE-B1BC-30DD-8CCE-44A6391430FE}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>ALL_BUILD</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\agent\booming-il2cpp\testing\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/agent/booming-il2cpp/testing/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/agent/booming-il2cpp/testing -BD:/agent/booming-il2cpp/build/testing_fresh --check-stamp-file D:/agent/booming-il2cpp/build/testing_fresh/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeCXXCompiler.cmake.in;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeCXXCompilerABI.cpp;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeCompilerIdDetection.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeDetermineCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeDetermineCompileFeatures.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeDetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeDetermineCompilerABI.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeDetermineCompilerId.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeDetermineRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeFindBinUtils.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeParseImplicitIncludeInfo.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeParseLibraryArchitecture.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeRCCompiler.cmake.in;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeSystem.cmake.in;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeTestCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeTestCompilerCommon.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeTestRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\ADSP-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\ARMCC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\ARMClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\AppleClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Borland-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Clang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Cray-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\GHS-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\IAR-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\IBMClang-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Intel-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\LCC-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\MSVC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\NVHPC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\PGI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\PathScale-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\SCO-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\TI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Tasking-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Watcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CompilerId\VS-10.vcxproj.in;C:\Program Files\CMake\share\cmake-3.25\Modules\Internal\FeatureTesting.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Platform\Windows-Determine-CXX.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Platform\WindowsPaths.cmake;D:\agent\booming-il2cpp\build\testing_fresh\CMakeFiles\3.25.3\CMakeCXXCompiler.cmake;D:\agent\booming-il2cpp\build\testing_fresh\CMakeFiles\3.25.3\CMakeRCCompiler.cmake;D:\agent\booming-il2cpp\build\testing_fresh\CMakeFiles\3.25.3\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\agent\booming-il2cpp\build\testing_fresh\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/agent/booming-il2cpp/testing/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/agent/booming-il2cpp/testing -BD:/agent/booming-il2cpp/build/testing_fresh --check-stamp-file D:/agent/booming-il2cpp/build/testing_fresh/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeCXXCompiler.cmake.in;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeCXXCompilerABI.cpp;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeCompilerIdDetection.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeDetermineCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeDetermineCompileFeatures.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeDetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeDetermineCompilerABI.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeDetermineCompilerId.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeDetermineRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeFindBinUtils.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeParseImplicitIncludeInfo.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeParseLibraryArchitecture.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeRCCompiler.cmake.in;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeSystem.cmake.in;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeTestCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeTestCompilerCommon.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeTestRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\ADSP-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\ARMCC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\ARMClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\AppleClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Borland-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Clang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Cray-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\GHS-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\IAR-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\IBMClang-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Intel-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\LCC-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\MSVC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\NVHPC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\PGI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\PathScale-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\SCO-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\TI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Tasking-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Watcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CompilerId\VS-10.vcxproj.in;C:\Program Files\CMake\share\cmake-3.25\Modules\Internal\FeatureTesting.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Platform\Windows-Determine-CXX.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Platform\WindowsPaths.cmake;D:\agent\booming-il2cpp\build\testing_fresh\CMakeFiles\3.25.3\CMakeCXXCompiler.cmake;D:\agent\booming-il2cpp\build\testing_fresh\CMakeFiles\3.25.3\CMakeRCCompiler.cmake;D:\agent\booming-il2cpp\build\testing_fresh\CMakeFiles\3.25.3\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\agent\booming-il2cpp\build\testing_fresh\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/agent/booming-il2cpp/testing/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/agent/booming-il2cpp/testing -BD:/agent/booming-il2cpp/build/testing_fresh --check-stamp-file D:/agent/booming-il2cpp/build/testing_fresh/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeCXXCompiler.cmake.in;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeCXXCompilerABI.cpp;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeCompilerIdDetection.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeDetermineCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeDetermineCompileFeatures.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeDetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeDetermineCompilerABI.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeDetermineCompilerId.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeDetermineRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeFindBinUtils.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeParseImplicitIncludeInfo.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeParseLibraryArchitecture.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeRCCompiler.cmake.in;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeSystem.cmake.in;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeTestCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeTestCompilerCommon.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeTestRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\ADSP-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\ARMCC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\ARMClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\AppleClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Borland-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Clang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Cray-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\GHS-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\IAR-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\IBMClang-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Intel-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\LCC-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\MSVC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\NVHPC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\PGI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\PathScale-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\SCO-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\TI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Tasking-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Watcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CompilerId\VS-10.vcxproj.in;C:\Program Files\CMake\share\cmake-3.25\Modules\Internal\FeatureTesting.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Platform\Windows-Determine-CXX.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Platform\WindowsPaths.cmake;D:\agent\booming-il2cpp\build\testing_fresh\CMakeFiles\3.25.3\CMakeCXXCompiler.cmake;D:\agent\booming-il2cpp\build\testing_fresh\CMakeFiles\3.25.3\CMakeRCCompiler.cmake;D:\agent\booming-il2cpp\build\testing_fresh\CMakeFiles\3.25.3\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\agent\booming-il2cpp\build\testing_fresh\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/agent/booming-il2cpp/testing/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/agent/booming-il2cpp/testing -BD:/agent/booming-il2cpp/build/testing_fresh --check-stamp-file D:/agent/booming-il2cpp/build/testing_fresh/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeCXXCompiler.cmake.in;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeCXXCompilerABI.cpp;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeCompilerIdDetection.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeDetermineCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeDetermineCompileFeatures.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeDetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeDetermineCompilerABI.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeDetermineCompilerId.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeDetermineRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeDetermineSystem.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeFindBinUtils.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeParseImplicitIncludeInfo.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeParseImplicitLinkInfo.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeParseLibraryArchitecture.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeRCCompiler.cmake.in;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeSystem.cmake.in;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeTestCXXCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeTestCompilerCommon.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CMakeTestRCCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\ADSP-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\ARMCC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\ARMClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\AppleClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Borland-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Clang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Clang-DetermineCompilerInternal.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Comeau-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Compaq-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Cray-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Embarcadero-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Fujitsu-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\FujitsuClang-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\GHS-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\GNU-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\HP-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\IAR-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\IBMCPP-CXX-DetermineVersionInternal.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\IBMClang-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Intel-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\IntelLLVM-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\LCC-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\MSVC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\NVHPC-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\NVIDIA-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\OpenWatcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\PGI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\PathScale-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\SCO-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\SunPro-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\TI-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Tasking-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\VisualAge-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\Watcom-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\XL-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\XLClang-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Compiler\zOS-CXX-DetermineCompiler.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\CompilerId\VS-10.vcxproj.in;C:\Program Files\CMake\share\cmake-3.25\Modules\Internal\FeatureTesting.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Platform\Windows-Determine-CXX.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.25\Modules\Platform\WindowsPaths.cmake;D:\agent\booming-il2cpp\build\testing_fresh\CMakeFiles\3.25.3\CMakeCXXCompiler.cmake;D:\agent\booming-il2cpp\build\testing_fresh\CMakeFiles\3.25.3\CMakeRCCompiler.cmake;D:\agent\booming-il2cpp\build\testing_fresh\CMakeFiles\3.25.3\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\agent\booming-il2cpp\build\testing_fresh\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\ZERO_CHECK.vcxproj">
+      <Project>{86E8B7A8-4939-3B76-9C9C-5F5D5C6AF379}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\aot_core_ir_reader_test.vcxproj">
+      <Project>{D4C7E788-5B8B-34C9-8EA4-0365A45B53F2}</Project>
+      <Name>aot_core_ir_reader_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\assembly_manager_stress_test.vcxproj">
+      <Project>{8FC83FF2-5F5C-33A4-8DB9-3D0A6BC8F6FE}</Project>
+      <Name>assembly_manager_stress_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\assembly_manager_test.vcxproj">
+      <Project>{3F11C161-29AC-396A-97B5-E1D79C93097D}</Project>
+      <Name>assembly_manager_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\blittable_benchmark.vcxproj">
+      <Project>{FE446ECA-0EBA-3E65-852C-009D0889C41D}</Project>
+      <Name>blittable_benchmark</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\capacity_stress_test.vcxproj">
+      <Project>{415963A2-AB47-3723-94C7-6F1CCCB1616D}</Project>
+      <Name>capacity_stress_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\runtime_stubs\collection_stubs_test.vcxproj">
+      <Project>{68452469-51A6-3DC0-8436-DC58E0003C7A}</Project>
+      <Name>collection_stubs_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\com_benchmark.vcxproj">
+      <Project>{FFB78304-B2A5-3899-8F1D-90E762E1DCFB}</Project>
+      <Name>com_benchmark</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\com_ccw.vcxproj">
+      <Project>{B3AFDFA0-E348-30F0-9602-C60DC8B9B203}</Project>
+      <Name>com_ccw</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\com_ccw_stress.vcxproj">
+      <Project>{C47EC886-4091-3872-A14D-3275F260DECB}</Project>
+      <Name>com_ccw_stress</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\com_connection_point.vcxproj">
+      <Project>{70E9EC26-D526-3CF9-8908-64001488F34B}</Project>
+      <Name>com_connection_point</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\com_dispatch.vcxproj">
+      <Project>{6743717E-98CA-3DD6-80FC-68D3F023AFCA}</Project>
+      <Name>com_dispatch</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\com_factory.vcxproj">
+      <Project>{AF633B8E-3559-3204-B7F4-3F0FCBADA2CE}</Project>
+      <Name>com_factory</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\com_platform.vcxproj">
+      <Project>{E84981DC-C396-3372-966D-54D1B80BFFFE}</Project>
+      <Name>com_platform</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\com_rcw.vcxproj">
+      <Project>{2BC29CBD-3DD8-307A-8547-5F1CABDC333C}</Project>
+      <Name>com_rcw</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\com_rcw_stress.vcxproj">
+      <Project>{983ECE3A-DCDA-37BC-8C1F-661F000C0BD0}</Project>
+      <Name>com_rcw_stress</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\com_typelib.vcxproj">
+      <Project>{4D1D2600-96A6-3640-B557-394EB65688D8}</Project>
+      <Name>com_typelib</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\convert_benchmark.vcxproj">
+      <Project>{62DB4C97-3D11-33D8-92E4-A9282B66509A}</Project>
+      <Name>convert_benchmark</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\convert_parse_test.vcxproj">
+      <Project>{A8897948-15B5-3A81-BB13-1F0C60C9F905}</Project>
+      <Name>convert_parse_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\runtime_stubs\convert_stubs_test.vcxproj">
+      <Project>{7EDB30D5-328F-36C1-9F3C-C99533589736}</Project>
+      <Name>convert_stubs_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\custom_marshaler.vcxproj">
+      <Project>{5FC19031-695E-374A-8C1A-549F8662DE9C}</Project>
+      <Name>custom_marshaler</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\runtime_stubs\datetime_guid_math_test.vcxproj">
+      <Project>{A9435031-725C-31C0-90BB-7B71A1C6B40A}</Project>
+      <Name>datetime_guid_math_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\domain_unloader_stress_test.vcxproj">
+      <Project>{ECBA964E-01A7-3397-AC95-9E20E041A98D}</Project>
+      <Name>domain_unloader_stress_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\eeclass_test.vcxproj">
+      <Project>{19BCFF2A-EFC5-36EA-8EA0-83D0966FA029}</Project>
+      <Name>eeclass_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\runtime_stubs\enum_stubs_test.vcxproj">
+      <Project>{A6584FCE-0785-38DC-8640-DF6434C2E46E}</Project>
+      <Name>enum_stubs_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\exception_negative_test.vcxproj">
+      <Project>{69820FD4-99E3-3285-BB15-3A1C069ACB11}</Project>
+      <Name>exception_negative_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\exception_sentinel_all_modes_test.vcxproj">
+      <Project>{6CFBDF95-2FAB-3D94-B35B-920677917B7B}</Project>
+      <Name>exception_sentinel_all_modes_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\exception_sentinel_test.vcxproj">
+      <Project>{16A1A31B-16B7-30C9-90FD-86341D5A6281}</Project>
+      <Name>exception_sentinel_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\gc_test.vcxproj">
+      <Project>{6FB2D8E3-9AB1-3CC7-A2B0-C073F653D5A9}</Project>
+      <Name>gc_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\generic_instantiation_test.vcxproj">
+      <Project>{D49FFE44-91AD-345A-A04D-8F2CFF1E036C}</Project>
+      <Name>generic_instantiation_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\_deps\googletest-build\googlemock\gmock.vcxproj">
+      <Project>{0179BA70-56EA-34D8-A104-12B9F0097E0C}</Project>
+      <Name>gmock</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\_deps\googletest-build\googlemock\gmock_main.vcxproj">
+      <Project>{D400A125-58BE-3450-A53F-11930253CCFC}</Project>
+      <Name>gmock_main</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\_deps\googletest-build\googletest\gtest.vcxproj">
+      <Project>{ABCB4984-7244-365E-9BE3-ACE6F1D51CCC}</Project>
+      <Name>gtest</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\_deps\googletest-build\googletest\gtest_main.vcxproj">
+      <Project>{154E87E2-6B27-3479-8F48-8F485438FB67}</Project>
+      <Name>gtest_main</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\instantiation_engine_test.vcxproj">
+      <Project>{86DC35C0-9A00-3E7F-B39C-7AAE5F02ED41}</Project>
+      <Name>instantiation_engine_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\marshal_alloc.vcxproj">
+      <Project>{028AA8EF-53DD-3489-999E-D2048BA3486F}</Project>
+      <Name>marshal_alloc</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\marshal_api_basic.vcxproj">
+      <Project>{BFADD87D-E767-36F2-BE2C-5CC32EAA52BF}</Project>
+      <Name>marshal_api_basic</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\marshal_smoke.vcxproj">
+      <Project>{5597C273-1899-32A8-A5FB-2FA49A0F3D80}</Project>
+      <Name>marshal_smoke</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\marshal_string.vcxproj">
+      <Project>{FB8E8FA5-1DA4-3959-A635-58123692B5B7}</Project>
+      <Name>marshal_string</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\metadata_interface_test.vcxproj">
+      <Project>{D3D1A78A-F04E-3F90-BD61-74A07180CDC2}</Project>
+      <Name>metadata_interface_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\metadata\metadata_registry_test.vcxproj">
+      <Project>{C8643427-EBD0-338D-B4BC-210F45D43AA7}</Project>
+      <Name>metadata_registry_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\method_aot_map_test.vcxproj">
+      <Project>{3510623B-6686-3FCF-B155-B9CFE21B513B}</Project>
+      <Name>method_aot_map_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\module_registry_test.vcxproj">
+      <Project>{DEDBCD53-5F5E-3B08-987F-A6E386FCDD0D}</Project>
+      <Name>module_registry_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\native_static_var_test.vcxproj">
+      <Project>{A3FD34D7-B6EA-3E3A-B221-92F77EC1B6D8}</Project>
+      <Name>native_static_var_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\reflection_benchmark.vcxproj">
+      <Project>{C7376FC8-E1FE-339D-94D7-D802AA22C15D}</Project>
+      <Name>reflection_benchmark</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\reflection_stress_test.vcxproj">
+      <Project>{E1782C83-CE59-3C86-8F6D-17E737E2EBB7}</Project>
+      <Name>reflection_stress_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\runtime_stubs\runtime_stubs_benchmark.vcxproj">
+      <Project>{0AAFC8C8-4843-3676-94C3-CF95422190A1}</Project>
+      <Name>runtime_stubs_benchmark</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\smoke_test.vcxproj">
+      <Project>{852C6751-38C4-39CF-A0EB-0351A05D4108}</Project>
+      <Name>smoke_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\runtime_stubs\string_stubs_test.vcxproj">
+      <Project>{970A1CF7-C2AC-3494-B5DB-8EABF1C662D1}</Project>
+      <Name>string_stubs_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\struct_marshal.vcxproj">
+      <Project>{405D551A-5D5A-3493-9ADC-4B770621EE15}</Project>
+      <Name>struct_marshal</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\abi\test_abi_method_table.vcxproj">
+      <Project>{AB403E8E-E32C-34D4-8BA1-3274EEE80BF7}</Project>
+      <Name>test_abi_method_table</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\threading\test_async_integration_smoke.vcxproj">
+      <Project>{BB87508C-86D9-3A4C-B51D-A5B5A8987F65}</Project>
+      <Name>test_async_integration_smoke</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\bootstrap\test_bootstrap_bootstrap.vcxproj">
+      <Project>{F940DFD1-6EDA-3772-9905-9A305804A89D}</Project>
+      <Name>test_bootstrap_bootstrap</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\bootstrap\test_bootstrap_delegate.vcxproj">
+      <Project>{B7935298-EC2A-365D-99F7-F36C1D56E159}</Project>
+      <Name>test_bootstrap_delegate</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\bootstrap\test_bootstrap_icall.vcxproj">
+      <Project>{A36AA61F-1DB4-3B18-9408-914118B5BDE1}</Project>
+      <Name>test_bootstrap_icall</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\bootstrap\test_bootstrap_register.vcxproj">
+      <Project>{7E97B8D8-4147-3224-9960-8077FA2E9AEC}</Project>
+      <Name>test_bootstrap_register</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\bootstrap\test_bootstrap_resolve.vcxproj">
+      <Project>{20D4685E-3F39-3759-B4F0-4FC454C93B52}</Project>
+      <Name>test_bootstrap_resolve</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\bootstrap\test_bootstrap_smoke.vcxproj">
+      <Project>{9272E05B-CAFB-3824-B09D-E366C1603D24}</Project>
+      <Name>test_bootstrap_smoke</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\bootstrap\test_bootstrap_stress.vcxproj">
+      <Project>{160438FD-2948-3965-AE46-C8327D055440}</Project>
+      <Name>test_bootstrap_stress</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\common\test_common_arithmetic.vcxproj">
+      <Project>{89F31866-A119-33DC-A221-F9F4FCE5EB8D}</Project>
+      <Name>test_common_arithmetic</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\common\test_common_asan.vcxproj">
+      <Project>{55AE1A0E-9745-3C5A-8E1E-D4A727733C29}</Project>
+      <Name>test_common_asan</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\common\test_common_async.vcxproj">
+      <Project>{2E77C49D-F283-3BA6-9A4E-A8E388B67F68}</Project>
+      <Name>test_common_async</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\common\test_common_async_extended.vcxproj">
+      <Project>{97FEF5AD-5441-3BFD-BF75-796BC8AA8887}</Project>
+      <Name>test_common_async_extended</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\common\test_common_async_stress.vcxproj">
+      <Project>{C5102C16-49E6-373B-ACCA-82CF77BF60F0}</Project>
+      <Name>test_common_async_stress</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\common\test_common_checked_conv.vcxproj">
+      <Project>{B1AABFCC-55A4-38F6-A54F-3BE54DC774DE}</Project>
+      <Name>test_common_checked_conv</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\common\test_common_checked_conv_ext.vcxproj">
+      <Project>{87FF99E3-D1D4-3A2E-902B-2B498DEA2960}</Project>
+      <Name>test_common_checked_conv_ext</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\common\test_common_collection.vcxproj">
+      <Project>{C4EFC9CF-9701-3068-B493-0E1D96B5BB82}</Project>
+      <Name>test_common_collection</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\common\test_common_compiler_hints.vcxproj">
+      <Project>{9295A8B9-FB30-3712-A75E-E109F8668A51}</Project>
+      <Name>test_common_compiler_hints</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\common\test_common_config.vcxproj">
+      <Project>{AAEBBA34-FC50-3A88-B0D4-9F21D74924BE}</Project>
+      <Name>test_common_config</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\common\test_common_eh.vcxproj">
+      <Project>{D4A73406-7AE8-3F61-91CD-5F22EB201D5E}</Project>
+      <Name>test_common_eh</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\common\test_common_finally.vcxproj">
+      <Project>{8CAB7B6B-CEEB-3496-8B40-3EABF14D9DD1}</Project>
+      <Name>test_common_finally</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\common\test_common_format.vcxproj">
+      <Project>{1139CED2-2014-3FF2-8882-CFC860F90A69}</Project>
+      <Name>test_common_format</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\common\test_common_json_reader.vcxproj">
+      <Project>{18CE47A0-9AC2-3692-9CC9-9E2889D0F664}</Project>
+      <Name>test_common_json_reader</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\common\test_common_json_reader_fuzz.vcxproj">
+      <Project>{CC33572F-F6C1-31FE-B186-0963CA47B30A}</Project>
+      <Name>test_common_json_reader_fuzz</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\common\test_common_load_store.vcxproj">
+      <Project>{FD190300-EBF6-3B55-A179-658A4E15E763}</Project>
+      <Name>test_common_load_store</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\common\test_common_log.vcxproj">
+      <Project>{99FBEADB-879E-32F5-94C0-5EE2B5BF25FA}</Project>
+      <Name>test_common_log</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\common\test_common_log_stress.vcxproj">
+      <Project>{209F1A95-D2B6-3D96-8228-A2E93BE160FE}</Project>
+      <Name>test_common_log_stress</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\common\test_common_monitor.vcxproj">
+      <Project>{D51585BA-8456-357B-B2EC-6ECB9F71E4AF}</Project>
+      <Name>test_common_monitor</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\common\test_common_monitor_stress.vcxproj">
+      <Project>{00D3EA53-AB2C-305A-91B6-DB7688E19205}</Project>
+      <Name>test_common_monitor_stress</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\common\test_common_native_types.vcxproj">
+      <Project>{50FB4DA2-8841-3849-88E7-39F6A264386C}</Project>
+      <Name>test_common_native_types</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\common\test_common_profile.vcxproj">
+      <Project>{C43A8442-BD3F-30EA-AED6-4D0B524FC1B9}</Project>
+      <Name>test_common_profile</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\common\test_common_profile_enabled.vcxproj">
+      <Project>{0CB9B4B6-19E4-325B-9FED-B51BE25A0F68}</Project>
+      <Name>test_common_profile_enabled</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\common\test_common_ptr_tag.vcxproj">
+      <Project>{707B184C-AADC-3929-9EE4-ABD825859ECD}</Project>
+      <Name>test_common_ptr_tag</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\common\test_common_span.vcxproj">
+      <Project>{24E6AACC-D01C-3721-A7BA-BE6E169A2459}</Project>
+      <Name>test_common_span</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\common\test_common_static_init.vcxproj">
+      <Project>{347D097F-085B-3540-AC02-92DB52CA6399}</Project>
+      <Name>test_common_static_init</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\common\test_common_status.vcxproj">
+      <Project>{C0E35E26-1D59-3E9B-B14D-27F08835115E}</Project>
+      <Name>test_common_status</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\common\test_common_thread.vcxproj">
+      <Project>{F9D5CC2F-68E3-3A53-A381-D2A0448345A1}</Project>
+      <Name>test_common_thread</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\common\test_common_tls_buffer.vcxproj">
+      <Project>{F803CC78-6D2C-3FC4-B32D-D243BD28EAEA}</Project>
+      <Name>test_common_tls_buffer</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\common\test_common_trace.vcxproj">
+      <Project>{3372D0F2-C3C7-38F6-A89F-A2F12B1B547E}</Project>
+      <Name>test_common_trace</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\common\test_common_trace_stress.vcxproj">
+      <Project>{23927187-3E00-3816-9C13-663453347CD7}</Project>
+      <Name>test_common_trace_stress</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\common\test_common_type_info.vcxproj">
+      <Project>{B0936BF3-D2A7-3DB6-950C-C6549D83827F}</Project>
+      <Name>test_common_type_info</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\common\test_common_unordered_dense.vcxproj">
+      <Project>{49584E5C-02AD-3E13-B3D1-87C3DEF2AFA6}</Project>
+      <Name>test_common_unordered_dense</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\engine-bridge\test_engine_bridge_smoke.vcxproj">
+      <Project>{3B05F53C-703E-3B1A-B72C-F6096277E1F1}</Project>
+      <Name>test_engine_bridge_smoke</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\engine-bridge\test_engine_bridge_stress.vcxproj">
+      <Project>{5FC8A1DC-A9CC-3200-9F1F-2D2BD55388CB}</Project>
+      <Name>test_engine_bridge_stress</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\threading\test_execution_context_smoke.vcxproj">
+      <Project>{44F8198B-5890-377D-8235-0C0B02A014A7}</Project>
+      <Name>test_execution_context_smoke</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\fuzz\test_fuzz_gc.vcxproj">
+      <Project>{48F3E4E4-3D5B-3DC1-B1CB-CC71B5F2A981}</Project>
+      <Name>test_fuzz_gc</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\fuzz\test_fuzz_il.vcxproj">
+      <Project>{221900F8-656E-33B1-BD6B-2F682663B306}</Project>
+      <Name>test_fuzz_il</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_atomic_alloc.vcxproj">
+      <Project>{4DEFAFD9-0EF3-3899-9BD8-BBBA8E38B84E}</Project>
+      <Name>test_gc_atomic_alloc</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_bgc_root_scan.vcxproj">
+      <Project>{1E09F3D4-9F76-3815-AEF8-C75DC33859EF}</Project>
+      <Name>test_gc_bgc_root_scan</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_bgc_smoke.vcxproj">
+      <Project>{18DC87C2-69AA-3708-B247-BF186B860F35}</Project>
+      <Name>test_gc_bgc_smoke</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_bgc_stress.vcxproj">
+      <Project>{EB032FE4-6105-3A2C-87C1-81B7E5EB500E}</Project>
+      <Name>test_gc_bgc_stress</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_bgc_unit.vcxproj">
+      <Project>{89320A07-4375-39C6-9708-BF722885ED43}</Project>
+      <Name>test_gc_bgc_unit</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_bit_utils.vcxproj">
+      <Project>{813D0485-EFEE-3920-93F0-05E393A493B8}</Project>
+      <Name>test_gc_bit_utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_bump_cache.vcxproj">
+      <Project>{903D6F19-5649-3E80-9DC1-A93CC07472CC}</Project>
+      <Name>test_gc_bump_cache</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_card_table_ext.vcxproj">
+      <Project>{D7AF56EF-1828-359C-B83D-500A24D4C087}</Project>
+      <Name>test_gc_card_table_ext</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_coordinator.vcxproj">
+      <Project>{F380F3C9-CDF9-3911-B887-49ECDB1D1C09}</Project>
+      <Name>test_gc_coordinator</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_debug_contract.vcxproj">
+      <Project>{C7129858-8F27-305F-800C-9F8A60E7C6A8}</Project>
+      <Name>test_gc_debug_contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_delegate_stress.vcxproj">
+      <Project>{49F3B186-EA43-351F-9280-0574E62A8AD7}</Project>
+      <Name>test_gc_delegate_stress</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_demotion.vcxproj">
+      <Project>{BEA9EA02-B4BE-391F-B010-A337E1D94A90}</Project>
+      <Name>test_gc_demotion</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_domain_unload.vcxproj">
+      <Project>{2257166E-FD19-3B0A-B620-E53FC1D3FEED}</Project>
+      <Name>test_gc_domain_unload</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_events.vcxproj">
+      <Project>{FB997951-D79D-33C5-BD97-67D30799F6A3}</Project>
+      <Name>test_gc_events</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_finalizer.vcxproj">
+      <Project>{7593212C-ECDD-35AB-A3EF-40A0A00E40D9}</Project>
+      <Name>test_gc_finalizer</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_finalizer_integration.vcxproj">
+      <Project>{E857F161-99E7-34EE-97E7-31605ACDB556}</Project>
+      <Name>test_gc_finalizer_integration</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_finalizer_stress.vcxproj">
+      <Project>{CE0847E3-20AF-3D58-85FE-D6D89F11D2A8}</Project>
+      <Name>test_gc_finalizer_stress</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_full_gc.vcxproj">
+      <Project>{D3951A56-8209-3016-9FF0-4414126891EF}</Project>
+      <Name>test_gc_full_gc</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_gen1.vcxproj">
+      <Project>{F600A51E-3AF9-394A-A4FC-8026FF02AA32}</Project>
+      <Name>test_gc_gen1</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_gen1_benchmark.vcxproj">
+      <Project>{4998E204-7FAB-3873-8CB1-3C58DCFC343E}</Project>
+      <Name>test_gc_gen1_benchmark</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_general_stress.vcxproj">
+      <Project>{805880F3-6E6E-39C4-9AC9-23277E2CF3AF}</Project>
+      <Name>test_gc_general_stress</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_handle.vcxproj">
+      <Project>{D8722CE0-A8B8-3705-812A-E8D11891B7DD}</Project>
+      <Name>test_gc_handle</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_heap_limit.vcxproj">
+      <Project>{D4306713-6082-37A1-8DAC-62922023AAAF}</Project>
+      <Name>test_gc_heap_limit</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_heap_manager.vcxproj">
+      <Project>{0F1EFCE6-3813-3FB9-9EC2-F79E26CE1DA9}</Project>
+      <Name>test_gc_heap_manager</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_layout.vcxproj">
+      <Project>{7F3C0C9D-7B3E-3D3C-9882-34282441537D}</Project>
+      <Name>test_gc_layout</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_loh.vcxproj">
+      <Project>{EF01BE02-0ED5-31A6-8129-B44655696E6C}</Project>
+      <Name>test_gc_loh</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_loh_stress.vcxproj">
+      <Project>{339EC40C-679F-3C2E-A6E4-7B537FE1ECE4}</Project>
+      <Name>test_gc_loh_stress</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_managed_api.vcxproj">
+      <Project>{22A11A05-27BC-30C3-ABA3-9C9DD4A42F34}</Project>
+      <Name>test_gc_managed_api</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_mark_bitmap.vcxproj">
+      <Project>{C6DC1F2D-2890-3CB2-8164-6732EC65C22D}</Project>
+      <Name>test_gc_mark_bitmap</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_max_promote.vcxproj">
+      <Project>{AE6F18EA-8F4D-3F61-808F-A84065D4A121}</Project>
+      <Name>test_gc_max_promote</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_memory_domain.vcxproj">
+      <Project>{CECF3C0C-93F2-3828-A134-2866B4AA4254}</Project>
+      <Name>test_gc_memory_domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_memory_domain_benchmark.vcxproj">
+      <Project>{DB2FAD2B-1184-31F7-837F-0BB82191ABD5}</Project>
+      <Name>test_gc_memory_domain_benchmark</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_memory_domain_proof.vcxproj">
+      <Project>{45FB9565-133C-33BE-B8E8-068D94BDBCA6}</Project>
+      <Name>test_gc_memory_domain_proof</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_memory_domain_stress.vcxproj">
+      <Project>{823FC241-D2CB-3E6D-9F23-2BEEDF84B4E8}</Project>
+      <Name>test_gc_memory_domain_stress</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_mini_stress.vcxproj">
+      <Project>{20694EA1-7F66-392F-AADC-5395CACF05EC}</Project>
+      <Name>test_gc_mini_stress</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_monitor_stress.vcxproj">
+      <Project>{0F3CD09D-4933-3CD0-9A14-38877FD4C7AB}</Project>
+      <Name>test_gc_monitor_stress</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_old_gen.vcxproj">
+      <Project>{4DD514E2-C02A-3C9B-9101-A2BD8C4FDA6F}</Project>
+      <Name>test_gc_old_gen</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_oversized_stress.vcxproj">
+      <Project>{4FF7273E-B7B1-3F46-967C-36F0E2D665B1}</Project>
+      <Name>test_gc_oversized_stress</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_parallel_mark.vcxproj">
+      <Project>{E3FD83D4-89EC-3918-9CCD-5F08916DFFC6}</Project>
+      <Name>test_gc_parallel_mark</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_poh.vcxproj">
+      <Project>{58FBAC50-A8F2-3715-B04A-AC4E2E47B33D}</Project>
+      <Name>test_gc_poh</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_region.vcxproj">
+      <Project>{9A4D3CA6-A633-32AF-AB98-836CB45FA58C}</Project>
+      <Name>test_gc_region</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_regression_benchmark.vcxproj">
+      <Project>{6F0176EB-EB35-3789-B483-F18C5117BD2B}</Project>
+      <Name>test_gc_regression_benchmark</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_root_change.vcxproj">
+      <Project>{5267803C-E9F2-3D76-9EEA-ECDC3FB54DAB}</Project>
+      <Name>test_gc_root_change</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_root_scanner.vcxproj">
+      <Project>{F8F74F9C-8E65-3231-8F88-E06A45BB8B8C}</Project>
+      <Name>test_gc_root_scanner</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_safepoint.vcxproj">
+      <Project>{6FD9944E-50B3-3C69-B9BA-7F1E873815BD}</Project>
+      <Name>test_gc_safepoint</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_sanity.vcxproj">
+      <Project>{7C886ACF-2CA1-338F-9EF9-37FAB33D7107}</Project>
+      <Name>test_gc_sanity</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_satb_stress.vcxproj">
+      <Project>{9376DD89-5222-34B5-B6AA-BBD642ED1D23}</Project>
+      <Name>test_gc_satb_stress</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_scheduler.vcxproj">
+      <Project>{3C7A8B50-6CBA-3F1F-B6A4-D7EE6E37247E}</Project>
+      <Name>test_gc_scheduler</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_soak.vcxproj">
+      <Project>{941AB0E8-6162-3A17-841C-15BA20359A00}</Project>
+      <Name>test_gc_soak</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_stats.vcxproj">
+      <Project>{826C89C5-0D39-3F8E-B2D1-F4E4DB742122}</Project>
+      <Name>test_gc_stats</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_stress.vcxproj">
+      <Project>{EEA129E2-AEA6-3AA5-BC81-1D101CC8EBCA}</Project>
+      <Name>test_gc_stress</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_throughput_benchmark.vcxproj">
+      <Project>{74DD2A34-BD92-3135-A767-6287B81380FE}</Project>
+      <Name>test_gc_throughput_benchmark</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_tlab.vcxproj">
+      <Project>{C181881D-7E90-381C-AF39-65BA953F38A2}</Project>
+      <Name>test_gc_tlab</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_worker_pool.vcxproj">
+      <Project>{F2FF9519-6945-3EC7-9468-84109643B626}</Project>
+      <Name>test_gc_worker_pool</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\gc\test_gc_young_collector.vcxproj">
+      <Project>{A2C8D871-0BE4-3C75-80AE-B63AF6FEA825}</Project>
+      <Name>test_gc_young_collector</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\threading\test_hc_cpu_feedback.vcxproj">
+      <Project>{08C24C19-9E96-3E07-BB7E-B723A7144E58}</Project>
+      <Name>test_hc_cpu_feedback</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\hot-update\test_hotupdate_generics.vcxproj">
+      <Project>{1DE96130-437B-3584-BC1C-09C63F010EC4}</Project>
+      <Name>test_hotupdate_generics</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\hot-update\test_hotupdate_package_e2e.vcxproj">
+      <Project>{9C594B56-7B7F-3A09-994D-6D084E8CF7F5}</Project>
+      <Name>test_hotupdate_package_e2e</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\hot-update\test_hotupdate_replacement_benchmark.vcxproj">
+      <Project>{263B0B19-4242-3559-8A18-B78CBD95EB37}</Project>
+      <Name>test_hotupdate_replacement_benchmark</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\hot-update\test_hotupdate_verification.vcxproj">
+      <Project>{8770F24E-13BD-3004-B6AF-3B1742793776}</Project>
+      <Name>test_hotupdate_verification</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\hot-update\test_hotupdate_vtable_sync.vcxproj">
+      <Project>{13D0BCC6-06BF-33BF-A132-22CD861C3767}</Project>
+      <Name>test_hotupdate_vtable_sync</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\interpreter\test_interpreter_bridge.vcxproj">
+      <Project>{1ECA9611-2496-32C1-80A6-65EEEE054391}</Project>
+      <Name>test_interpreter_bridge</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\interpreter\test_interpreter_entry.vcxproj">
+      <Project>{E49F1D51-B237-36C8-8407-DAFC761495CC}</Project>
+      <Name>test_interpreter_entry</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\interpreter\test_interpreter_integration.vcxproj">
+      <Project>{F22AA818-10C8-377B-B629-6B5DAA97146D}</Project>
+      <Name>test_interpreter_integration</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\interpreter\test_interpreter_mini_smoke.vcxproj">
+      <Project>{4C39825D-C7B7-3511-B118-96320C245309}</Project>
+      <Name>test_interpreter_mini_smoke</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\hot-update\test_interpreter_mixed_execution.vcxproj">
+      <Project>{1BFA4C03-91C3-3860-B402-B65185BD73A3}</Project>
+      <Name>test_interpreter_mixed_execution</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\interpreter\test_interpreter_new_features.vcxproj">
+      <Project>{7DE8E680-81B0-3A1B-B77D-73B873911D4F}</Project>
+      <Name>test_interpreter_new_features</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\interpreter\test_interpreter_profile.vcxproj">
+      <Project>{8869DCD4-BC06-3117-B977-1465EC9B1D5E}</Project>
+      <Name>test_interpreter_profile</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\interpreter\test_interpreter_smoke.vcxproj">
+      <Project>{E33FDDE1-A6D3-3F2F-9CF6-2D81A0A583ED}</Project>
+      <Name>test_interpreter_smoke</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\interpreter\test_interpreter_smoke_isolated.vcxproj">
+      <Project>{58536E1A-3C90-37A4-B8AA-8BC85334F295}</Project>
+      <Name>test_interpreter_smoke_isolated</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\interpreter\test_interpreter_stress.vcxproj">
+      <Project>{4716CA6E-2B20-3961-AF90-9F3AF150309B}</Project>
+      <Name>test_interpreter_stress</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\interpreter\test_interpreter_tiering_benchmark.vcxproj">
+      <Project>{33323AAF-0E60-3E89-AC61-5159427F6FF0}</Project>
+      <Name>test_interpreter_tiering_benchmark</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\jit\test_jit_abi.vcxproj">
+      <Project>{CB102FCE-BDD8-3307-82C4-2CBAAB128B39}</Project>
+      <Name>test_jit_abi</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\jit\test_jit_bench.vcxproj">
+      <Project>{CF7060CA-1395-39DB-886B-153DDB95BCD9}</Project>
+      <Name>test_jit_bench</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\jit\test_jit_binary_ir.vcxproj">
+      <Project>{93F42758-F2E8-3B0A-9933-888292721001}</Project>
+      <Name>test_jit_binary_ir</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\jit\test_jit_gc_slot_map.vcxproj">
+      <Project>{FD37535D-FC25-3647-B3E5-39AFEA903867}</Project>
+      <Name>test_jit_gc_slot_map</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\jit\test_jit_hybrid_mode.vcxproj">
+      <Project>{42EF999D-0CFD-3FDD-A604-4B61684DDF64}</Project>
+      <Name>test_jit_hybrid_mode</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\jit\test_jit_il_smoke.vcxproj">
+      <Project>{72AA9BDF-8F8E-3875-8AA0-B80EDCBC95D1}</Project>
+      <Name>test_jit_il_smoke</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\jit\test_jit_mode.vcxproj">
+      <Project>{1983E285-37FD-35C2-85B5-A978DF6AA3D0}</Project>
+      <Name>test_jit_mode</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\jit\test_jit_native.vcxproj">
+      <Project>{A64F88EC-61D5-34D2-91C2-96B862050AF1}</Project>
+      <Name>test_jit_native</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\jit\test_jit_osr.vcxproj">
+      <Project>{69B49610-2EA6-392A-B311-0EE4F1C0E27C}</Project>
+      <Name>test_jit_osr</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\jit\test_jit_pgo.vcxproj">
+      <Project>{8D72B4FB-DA3B-3737-AB28-289EB548D692}</Project>
+      <Name>test_jit_pgo</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\jit\test_jit_seh.vcxproj">
+      <Project>{F20D0DE1-BAB2-3039-82FF-A35639F80320}</Project>
+      <Name>test_jit_seh</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\jit\test_jit_unwind.vcxproj">
+      <Project>{5B8B571C-BD6A-3390-9E77-D5DE91719B58}</Project>
+      <Name>test_jit_unwind</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\support\test_log_system.vcxproj">
+      <Project>{04499417-9F39-31E8-9DB4-C6A90E5DF1A1}</Project>
+      <Name>test_log_system</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\hot-update\test_method_replacement_smoke.vcxproj">
+      <Project>{BD473F69-0972-3828-9EA2-DB67CC43E4B3}</Project>
+      <Name>test_method_replacement_smoke</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\threading\test_object_header_benchmark.vcxproj">
+      <Project>{B433AEA9-F44F-35B5-867E-99987B9B51D0}</Project>
+      <Name>test_object_header_benchmark</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\threading\test_object_header_stress.vcxproj">
+      <Project>{0765092E-65C5-3C66-A3D3-8BA7C56C9884}</Project>
+      <Name>test_object_header_stress</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\threading\test_phase3_industrialization.vcxproj">
+      <Project>{B9E23DEA-E621-3B40-9C9F-3C9956F1077F}</Project>
+      <Name>test_phase3_industrialization</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\threading\test_queue_backpressure.vcxproj">
+      <Project>{65728962-334E-3F93-9094-100F64F9B827}</Project>
+      <Name>test_queue_backpressure</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\threading\test_rwlock_upgrade.vcxproj">
+      <Project>{C5655191-B8E7-36B5-A810-5A0F79F10E07}</Project>
+      <Name>test_rwlock_upgrade</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\threading\test_synchronization_smoke.vcxproj">
+      <Project>{E04298A2-4D25-3987-91F3-B21F67545559}</Project>
+      <Name>test_synchronization_smoke</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\jit\test_t4_seh_handler.vcxproj">
+      <Project>{CEAEF3E9-1DF2-3FB6-B305-5BA902595491}</Project>
+      <Name>test_t4_seh_handler</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\threading\test_threading_benchmark.vcxproj">
+      <Project>{9B768E0F-6258-391A-874B-B31A5BE162A7}</Project>
+      <Name>test_threading_benchmark</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\threading\test_threading_smoke.vcxproj">
+      <Project>{BD62418A-717E-334A-9008-094308698630}</Project>
+      <Name>test_threading_smoke</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\threading\test_threading_stress.vcxproj">
+      <Project>{7B9E75AF-A429-368F-9619-AEC6256731D2}</Project>
+      <Name>test_threading_stress</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\interpreter\test_tiering_benchmark.vcxproj">
+      <Project>{24604367-0DD3-312F-9E30-469A5FA60658}</Project>
+      <Name>test_tiering_benchmark</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\testing_fresh\src\native\runtime-core\type_registry_test.vcxproj">
+      <Project>{98D70860-59B6-3119-9FF6-A6CEC37B7D90}</Project>
+      <Name>type_registry_test</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

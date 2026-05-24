@@ -1,0 +1,48 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeReferenceLoweringPlan",
+  "planKind": "assembly-full-closure-runtime-skeleton",
+  "assemblyName": "CollectionsGenericCoreSubjects",
+  "entrySubjectId": "",
+  "includeHeader": "codegen_bridge.h",
+  "nativeEntryFunctionName": "RunNativeReferenceAssembly",
+  "entrySymbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_0",
+  "runtimeExecutionKind": "assembly-bound-native-reference-skeleton",
+  "translationUnitMode": "runtime-skeleton",
+  "translationUnitMethodSubjectIds": [
+    "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_0:System.Void()",
+    "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_10:System.Void()",
+    "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_11:System.Void()",
+    "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_12:System.Void()",
+    "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_13:System.Void()",
+    "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_14:System.Void()",
+    "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_15:System.Void()",
+    "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_1:System.Void()",
+    "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_2:System.Void()",
+    "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_3:System.Void()",
+    "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_4:System.Void()",
+    "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_5:System.Void()",
+    "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_6:System.Void()",
+    "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_7:System.Void()",
+    "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_8:System.Void()",
+    "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_9:System.Void()"
+  ],
+  "translationUnitMethodCount": 16,
+  "translationUnitPageSize": 1024,
+  "translationUnitPageCount": 1,
+  "translationUnitPages": [
+    {
+      "pageNumber": 1,
+      "methodCount": 16,
+      "path": "generated/runtime/native-reference.runtime-skeleton.page-0001.cpp",
+      "firstMethodSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_0:System.Void()",
+      "lastMethodSubjectId": "CollectionsGenericCoreSubjects/CollectionsGenericCoreSubjects::Subject_9:System.Void()"
+    }
+  ],
+  "auditStatus": "runtime-skeleton",
+  "auditMessage": "assembly-bound full-closure native-reference runtime skeleton emits covered executable methods only; uncovered methods are reported separately",
+  "referenceTypeToken": "0u",
+  "capturedFieldToken": "0u",
+  "entryMethodToken": "0u",
+  "consoleWriteLineStringIcall": "System.Console/System.Console::WriteLine(System.String)"
+}

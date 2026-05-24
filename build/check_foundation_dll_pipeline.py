@@ -21,7 +21,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 
-LEDGER = REPO / "testing" / "verification-catalog" / "projections" / "foundation-dll-audit" / "capability-family-ledger.json"
+LEDGER = REPO / "verification" / "projections" / "foundation-dll-audit" / "capability-family-ledger.json"
 PHASE2 = REPO / "build" / "toolchains" / "run" / "testing" / "foundation_dll" / "run_phase2.py"
 REFRESH_CMD = [sys.executable, str(REPO / "build" / "toolchains" / "run" / "run.py"),
                "test", "inventory", "--json"]
@@ -181,12 +181,12 @@ def _get_verifyable_families(dlls, lookup):
     return candidates
 
 
-def step_verify_families(families, *, mode, skip_stages, verbose, jit_mode=None):
+def step_verify_families(families, *, mode, skip_stages, verbose, codegen_mode=None):
     """Run verify_family() for each family.
 
     Returns dict mapping (assembly, slug) -> unified_report dict.
     """
-    _print_header(f"Step 3: Per-Family Verification (mode={mode})")
+    _print_header(f"Step 3: Per-Family Verification (mode={mode}, codegen_mode={codegen_mode})")
 
     verify_family = _import_verify_family()
     results = {}
@@ -210,7 +210,7 @@ def step_verify_families(families, *, mode, skip_stages, verbose, jit_mode=None)
                 mode=mode,
                 skip_stages=skip_stages,
                 verbose=verbose,
-                jit_mode=jit_mode,
+                codegen_mode=codegen_mode,
             )
         except Exception as e:
             print(f"\n  FAMILY CRASHED: {e}")
@@ -408,7 +408,7 @@ def main():
     verify_results = step_verify_families(families, mode=args.mode,
                                           skip_stages=skip_stages,
                                           verbose=args.verbose,
-                                          jit_mode=args.jit_mode)
+                                          codegen_mode=args.jit_mode)
 
     # Check for failures
     for (aname, slug), report in verify_results.items():

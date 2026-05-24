@@ -1,21 +1,21 @@
 {
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-24T15:42:11.497219",
+  "generated_at": "2026-05-24T16:17:35.438402",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
-      "status": "CONCERN",
-      "summary": "avg_aot_speedup=3.66%, avg_jit_speedup=0.0% (4/11 methods where native is slower than managed (36%))",
+      "status": "NOT_APPLICABLE",
+      "summary": "avg_aot_speedup=3.4%, avg_jit_speedup=-714.09% (2/11 methods where native is slower than managed (18%); JIT speedup -714.09% (interpreter significantly slower than managed JIT)) [overridden — benchmark stage was skipped]",
       "details": [],
       "evidence": {
-        "average_speedup_percent": 3.66,
-        "average_native_jit_speedup_percent": 0.0,
-        "managed_faster_count": 4,
-        "native_aot_faster_count": 7,
-        "native_jit_faster_count": 0,
+        "average_speedup_percent": 3.4,
+        "average_native_jit_speedup_percent": -714.09,
+        "managed_faster_count": 2,
+        "native_aot_faster_count": 6,
+        "native_jit_faster_count": 7,
         "matched_count": 11,
-        "regression_ratio": 0.364
+        "regression_ratio": 0.182
       }
     },
     "p1_lowering": {
@@ -27,659 +27,10 @@
         "has_lowering": true,
         "stub_count": 0,
         "simple_forward_count": 0,
-        "methods_with_lowering": 162,
-        "methods_total": 162
+        "methods_with_lowering": 0,
+        "methods_total": 0
       },
-      "per_method": [
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_10",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_11",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_12",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_13",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_14",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_15",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_16",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_17",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_6",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_7",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_8",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_9",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_10",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_11",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_12",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_13",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_14",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_15",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_16",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_17",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_6",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_7",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_8",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_9",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_10",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_11",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_12",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_13",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_14",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_15",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_16",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_17",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_6",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_7",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_8",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_9",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_10",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_11",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_12",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_13",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_14",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_15",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_16",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_17",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_6",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_7",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_8",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_9",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_10",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_11",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_12",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_13",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_14",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_15",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_16",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_17",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_6",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_7",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_8",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_9",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_10",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_11",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_12",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_13",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_14",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_15",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_16",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_17",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_6",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_7",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_8",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_9",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_10",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_11",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_12",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_13",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_14",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_15",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_16",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_17",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_6",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_7",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_8",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_9",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_6",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_7",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_8",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_9",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_10",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_11",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_12",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_13",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_14",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_15",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_16",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_17",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_6",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_7",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_8",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_9",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_10",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_11",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_12",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_13",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_14",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_15",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_16",
-          "has_lowering": true
-        },
-        {
-          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_17",
-          "has_lowering": true
-        }
-      ]
+      "per_method": []
     },
     "p1_no_redundant_branch": {
       "check_id": "p1_no_redundant_branch",
@@ -720,34 +71,18 @@
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "21 of 35 changed source files are outside expected architecture layers",
+      "summary": "10 of 15 changed source files are outside expected architecture layers",
       "details": [
         {
-          "file": "schemas/ir_opcodes.yaml",
+          "file": ".github/workflows/codegen-regression.yml",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/native/jit/LinuxSehHandler.cpp",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/native/jit/LinuxSehHandler.h",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/native/jit/WinSehHandler.cpp",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/native/jit/WinSehHandler.h",
+          "file": "build/check_foundation_dll_pipeline.py",
           "reason": "outside expected architecture layers"
         },
         {
           "file": "src/native/jit/jit_engine.cpp",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/native/jit/jit_engine.h",
           "reason": "outside expected architecture layers"
         },
         {
@@ -759,27 +94,11 @@
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/native/jit/jit_method.h",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/native/jit/jit_precode.cpp",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/native/jit/jit_unwind.h",
-          "reason": "outside expected architecture layers"
-        },
-        {
           "file": "src/native/jit/tree/jit_linearizer.cpp",
           "reason": "outside expected architecture layers"
         },
         {
           "file": "src/native/jit/tree/jit_optimizer.cpp",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/native/jit/tree/jit_optimizer.h",
           "reason": "outside expected architecture layers"
         },
         {
@@ -793,58 +112,28 @@
         {
           "file": "src/native/jit/tree/jit_tree_node.h",
           "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/src/native/jit/jit_seh_handler_test.cpp",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/src/native/jit/jit_seh_test.cpp",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "wiki/04-工具与集成/codegen-troubleshooting-guide.md",
-          "reason": "outside expected architecture layers"
         }
       ],
       "evidence": {
-        "changed_source_count": 35,
+        "changed_source_count": 15,
         "layer_distribution": {
           "TestInfra": 1,
-          "ManagedContracts": 1,
-          "Driver": 2,
-          "Interpreter": 3,
-          "BuildConfig": 2,
-          "RuntimeCore": 4,
-          "Contracts": 1
+          "Driver": 1,
+          "Interpreter": 1,
+          "BuildConfig": 1,
+          "RuntimeCore": 1
         },
         "violations": [
           {
-            "file": "schemas/ir_opcodes.yaml",
+            "file": ".github/workflows/codegen-regression.yml",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/native/jit/LinuxSehHandler.cpp",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/native/jit/LinuxSehHandler.h",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/native/jit/WinSehHandler.cpp",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/native/jit/WinSehHandler.h",
+            "file": "build/check_foundation_dll_pipeline.py",
             "reason": "outside expected architecture layers"
           },
           {
             "file": "src/native/jit/jit_engine.cpp",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/native/jit/jit_engine.h",
             "reason": "outside expected architecture layers"
           },
           {
@@ -856,27 +145,11 @@
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/native/jit/jit_method.h",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/native/jit/jit_precode.cpp",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/native/jit/jit_unwind.h",
-            "reason": "outside expected architecture layers"
-          },
-          {
             "file": "src/native/jit/tree/jit_linearizer.cpp",
             "reason": "outside expected architecture layers"
           },
           {
             "file": "src/native/jit/tree/jit_optimizer.cpp",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/native/jit/tree/jit_optimizer.h",
             "reason": "outside expected architecture layers"
           },
           {
@@ -889,18 +162,6 @@
           },
           {
             "file": "src/native/jit/tree/jit_tree_node.h",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/src/native/jit/jit_seh_handler_test.cpp",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/src/native/jit/jit_seh_test.cpp",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "wiki/04-工具与集成/codegen-troubleshooting-guide.md",
             "reason": "outside expected architecture layers"
           }
         ]

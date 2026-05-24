@@ -20,6 +20,8 @@ set(CHAOS_CODEGEN_LIBS
 # gc_test_stubs.cpp is referenced via relative path from runtime-core/gc/
 add_chaos_test(test_jit_native
     jit_native_test.cpp
+    ../../../../src/native/runtime-core/gc/gc_bgc.cpp
+    ../../../../src/native/jit/jit_helpers.cpp
     ../runtime-core/gc/gc_test_stubs.cpp
     LIBS ${CHAOS_CODEGEN_LIBS}
     LABELS "unit;jit"
@@ -27,6 +29,8 @@ add_chaos_test(test_jit_native
 target_compile_definitions(test_jit_native PRIVATE
     CHAOS_IL2CPP_JIT_TEST_ACTIVE=1
 )
+target_include_directories(test_jit_native PRIVATE
+    ../../../../src/native/runtime-core/gc)
 set_tests_properties(test_jit_native PROPERTIES TIMEOUT 120)
 
 # B-1 — Codegen IL smoke test

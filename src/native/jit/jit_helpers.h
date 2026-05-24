@@ -135,6 +135,10 @@ extern "C" void*    CodegenNewArrTlab(void* mem, int32_t length) noexcept;
 extern "C" uint64_t CodegenLdElem(void* arr, int32_t index) noexcept;
 extern "C" void     CodegenStElem(void* arr, int32_t index, uint64_t value) noexcept;
 
+// Bounds-check-free variants (used by BCE when safety is proven at compile time)
+extern "C" uint64_t CodegenLdElemNoCheck(void* arr, int32_t index) noexcept;
+extern "C" void     CodegenStElemNoCheck(void* arr, int32_t index, uint64_t value) noexcept;
+
 // ── Type check helpers ─────────────────────────────────────────────────────
 // These follow the same convention as FastExecute (no-op cast, no type check):
 // CastClass returns obj unchanged, IsInst returns obj unchanged.

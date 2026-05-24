@@ -43,7 +43,7 @@ public static partial class EnumParsingSubjects
     // [4] System.Private.CoreLib/System.Enum::GetValues:System.Array(System.Type)
     public static void Subject_4()
     {
-        try { if (((Enum.GetValues(typeof(byte))).GetHashCode()) != ((Enum.GetValues(typeof(byte))).GetHashCode())) _exitCode = 1; }
+        try { if ((int)(((Array)(Enum.GetValues(typeof(byte)))).Length) != (int)(((Array)(Enum.GetValues(typeof(byte)))).Length)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 

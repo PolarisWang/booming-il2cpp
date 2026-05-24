@@ -1,0 +1,248 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "ArrayIndexingCopySubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
+      "name": "ArrayIndexingCopySubjects",
+      "displayName": "ArrayIndexingCopySubjects",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
+      "metadataToken": 33554434
+    },
+    {
+      "registrationKind": "type",
+      "slot": 2,
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec",
+      "name": "\u003C\u003Ec",
+      "displayName": "ArrayIndexingCopySubjects\u002B\u003C\u003Ec",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec",
+      "metadataToken": 33554435
+    },
+    {
+      "registrationKind": "field",
+      "slot": 3,
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::_exitCode",
+      "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 4,
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+      "name": "\u003C\u003E9",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec::\u003C\u003E9",
+      "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec",
+      "memberType": "ArrayIndexingCopySubjects\u002B\u003C\u003Ec"
+    },
+    {
+      "registrationKind": "field",
+      "slot": 5,
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_0",
+      "name": "\u003C\u003E9__4_0",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec::\u003C\u003E9__4_0",
+      "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Func\u003CSystem.Int32\u003E"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_0:System.Void()",
+      "name": "Subject_0",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663297
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_1:System.Void()",
+      "name": "Subject_1",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663298
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_2:System.Void()",
+      "name": "Subject_2",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663299
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_3:System.Void()",
+      "name": "Subject_3",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663300
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_4:System.Void()",
+      "name": "Subject_4",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663301
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_5:System.Void()",
+      "name": "Subject_5",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663302
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_6:System.Void()",
+      "name": "Subject_6",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663303
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_7:System.Void()",
+      "name": "Subject_7",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_7:System.Void()",
+      "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663304
+    },
+    {
+      "registrationKind": "method",
+      "slot": 14,
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_8:System.Void()",
+      "name": "Subject_8",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_8:System.Void()",
+      "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663305
+    },
+    {
+      "registrationKind": "method",
+      "slot": 15,
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_9:System.Void()",
+      "name": "Subject_9",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_9:System.Void()",
+      "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663306
+    },
+    {
+      "registrationKind": "method",
+      "slot": 16,
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_10:System.Void()",
+      "name": "Subject_10",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_10:System.Void()",
+      "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663307
+    },
+    {
+      "registrationKind": "method",
+      "slot": 17,
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_11:System.Void()",
+      "name": "Subject_11",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_11:System.Void()",
+      "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663308
+    },
+    {
+      "registrationKind": "method",
+      "slot": 18,
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_12:System.Void()",
+      "name": "Subject_12",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects::Subject_12:System.Void()",
+      "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663309
+    },
+    {
+      "registrationKind": "method",
+      "slot": 19,
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+      "name": ".cctor",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec::.cctor:System.Void()",
+      "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663310
+    },
+    {
+      "registrationKind": "method",
+      "slot": 20,
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+      "name": ".ctor",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec::.ctor:System.Void()",
+      "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663311
+    },
+    {
+      "registrationKind": "method",
+      "slot": 21,
+      "subjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_0:System.Int32()",
+      "name": "\u003CSubject_3\u003Eb__4_0",
+      "definitionSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec::\u003CSubject_3\u003Eb__4_0:System.Int32()",
+      "declaringTypeSubjectId": "ArrayIndexingCopySubjects/ArrayIndexingCopySubjects\u002B\u003C\u003Ec",
+      "memberType": "System.Int32",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663312
+    }
+  ]
+}

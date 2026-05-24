@@ -178,6 +178,10 @@ internal sealed class SdkEmitter
             "forbid_suspend.h", "memory_domain.h", "convert.h",
             "enum_stubs.h", "patch_loader.h", "jit_registration.h",
             "ChaosGeneratedRuntimePrelude.h",
+            // Transitive deps of runtime_core.h and generated_code_compat.h:
+            "generated_code_compat.h", "string_table.h",
+            "reflection_api.h", "reflection_metadata_impl.h",
+            "arithmetic_chaos_bridge.h",
         };
         foreach (var h in runtimeCoreHeaders)
         {
@@ -206,18 +210,15 @@ internal sealed class SdkEmitter
             }
         }
 
-        // ── Copy runtime_stubs/*.h ────────────────────────────────────────
-        // Needed by: chaos_runtime_host.h
-        var stubsHeaders = new[]
+        // ── Copy ALL runtime_stubs/*.h ────────────────────────────────────
+        // Needed by: generated_code_compat.h (via stubs.h), chaos_runtime_host.h
+        // Use glob instead of maintainable-explicit-list (20+ files with transitive deps).
+        if (Directory.Exists(srcRuntimeStubs))
         {
-            "misc_stubs.h", "array_stubs.h", "stub_common.h",
-        };
-        foreach (var h in stubsHeaders)
-        {
-            var src = Path.Combine(srcRuntimeStubs, h);
-            if (File.Exists(src))
+            foreach (var f in Directory.GetFiles(srcRuntimeStubs, "*.h"))
             {
-                File.Copy(src, Path.Combine(dstRuntimeStubs, h), overwrite: true);
+                var name = Path.GetFileName(f);
+                File.Copy(f, Path.Combine(dstRuntimeStubs, name), overwrite: true);
                 count++;
             }
         }
@@ -239,10 +240,16 @@ internal sealed class SdkEmitter
         }
 
         // ── Copy contracts/*.h ────────────────────────────────────────────
-        // Needed by: runtime_core.h / runtime_abi.h
+        // Needed by: runtime_core.h, runtime_abi.h, module_registry.h
         var contractHeaders = new[]
         {
+            "abi_manifest.h",
+            "codegen_bridge.h",
+            "patch_data.h",
+            "register_ir.h",
             "runtime_abi.h",
+            "runtime_instantiation.h",
+            "unified_metadata.h",
         };
         foreach (var h in contractHeaders)
         {
@@ -250,6 +257,20 @@ internal sealed class SdkEmitter
             if (File.Exists(src))
             {
                 File.Copy(src, Path.Combine(includeDir, h), overwrite: true);
+                count++;
+            }
+        }
+
+        // ── Copy third_party/fmt/include/fmt/ ────────────────────────────
+        // Needed by: chaos/log.h, chaos/format.h, chaos/trace.h — all include <fmt/format.h>
+        var srcFmt = Path.Combine(repoRoot, "third_party", "fmt", "include", "fmt");
+        var dstFmt = Path.Combine(includeDir, "fmt");
+        Directory.CreateDirectory(dstFmt);
+        if (Directory.Exists(srcFmt))
+        {
+            foreach (var f in Directory.GetFiles(srcFmt, "*.h"))
+            {
+                File.Copy(f, Path.Combine(dstFmt, Path.GetFileName(f)), overwrite: true);
                 count++;
             }
         }

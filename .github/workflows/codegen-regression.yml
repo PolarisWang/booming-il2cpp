@@ -117,7 +117,8 @@ jobs:
         run: cmake --build testing/artifacts/run/native-test-build --config RelWithDebInfo
 
       - name: Run Codegen Native Tests
-        run: ctest --test-dir testing/artifacts/run/native-test-build -R "test_jit_native|test_jit_abi|test_jit_il_smoke|test_jit_gc_slot_map|test_jit_osr|test_jit_seh|test_jit_unwind|test_jit_binary_ir|test_jit_mode|test_jit_hybrid_mode|test_jit_pgo" --output-on-failure -V
+        run: |
+          ctest --test-dir testing/artifacts/run/native-test-build -R "test_jit_native|test_jit_abi|test_jit_il_smoke|test_jit_gc_slot_map|test_jit_osr|test_jit_seh|test_jit_unwind|test_jit_binary_ir|test_jit_mode|test_jit_hybrid_mode|test_jit_pgo" --output-on-failure -V 2>&1 | tee jit-native-output.txt
 
       - name: Run Common Native Tests
         run: ctest --test-dir testing/artifacts/run/native-test-build -R "test_common" --output-on-failure
@@ -126,3 +127,49 @@ jobs:
         run: |
           cd testing/foundation-dll
           python _core/python/ci_smoke.py
+
+      # ── JIT Performance Baseline ─────────────────────────────────────
+      - name: Run JIT Benchmarks
+        continue-on-error: true
+        run: |
+          ctest --test-dir testing/artifacts/run/native-test-build -R "bench_hybrid" -C RelWithDebInfo --output-on-failure > jit-bench-output.txt 2>&1
+
+      - name: Collect JIT Metrics
+        continue-on-error: true
+        run: |
+          python scripts/ci/collect-jit-metrics.py `
+            --benchmark-output="jit-bench-output.txt" `
+            --native-output="jit-native-output.txt" `
+            --output="jit-metrics-current.json"
+
+      - name: Compare Against Baseline
+        continue-on-error: true
+        id: baseline-check
+        run: |
+          python scripts/ci/compare-baseline.py `
+            --baseline=".github/baselines/jit-metrics.json" `
+            --current="jit-metrics-current.json"
+
+      - name: Upload Current Metrics
+        uses: actions/upload-artifact@v4
+        with:
+          name: jit-metrics-current
+          path: jit-metrics-current.json
+
+      - name: Upload Current Metrics
+        uses: actions/upload-artifact@v4
+        with:
+          name: jit-metrics-current
+          path: jit-metrics-current.json
+
+      - name: Upload Current Metrics
+        uses: actions/upload-artifact@v4
+        with:
+          name: jit-metrics-current
+          path: jit-metrics-current.json
+
+      - name: Upload Current Metrics
+        uses: actions/upload-artifact@v4
+        with:
+          name: jit-metrics-current
+          path: jit-metrics-current.json

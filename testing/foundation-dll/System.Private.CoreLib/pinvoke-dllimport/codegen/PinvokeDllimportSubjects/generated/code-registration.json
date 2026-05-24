@@ -1,0 +1,84 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "PinvokeDllimportSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_0",
+          "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_1",
+          "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_2",
+          "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_3",
+          "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_GetCurrentProcess",
+          "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportNativeEntry::GetCurrentProcess:System.IntPtr()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_TestGetCurrentProcess",
+          "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportNativeEntry::TestGetCurrentProcess:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_GetCurrentThread",
+          "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportNativeEntry::GetCurrentThread:System.IntPtr()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_TestGetCurrentThread",
+          "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportNativeEntry::TestGetCurrentThread:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_GetProcessId_System_IntPtr",
+          "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportNativeEntry::GetProcessId:System.UInt32(System.IntPtr)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_TestGetProcessId",
+          "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportNativeEntry::TestGetProcessId:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_GetModuleHandle_System_String",
+          "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportNativeEntry::GetModuleHandle:System.IntPtr(System.String)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_TestGetModuleHandle",
+          "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportNativeEntry::TestGetModuleHandle:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

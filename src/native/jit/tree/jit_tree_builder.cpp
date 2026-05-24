@@ -44,6 +44,8 @@ static NodeKind MapOpcode(interpreter::IROpCode opc) noexcept {
         case interpreter::IROpCode::Clt:      return kClt;
         case interpreter::IROpCode::Cgt:      return kCgt;
         case interpreter::IROpCode::LdLen:    return kLdLen;
+        case interpreter::IROpCode::LdElem:   return kLdElem;
+        case interpreter::IROpCode::LdElemA:  return kLdElemA;
         case interpreter::IROpCode::Call:     return kCall;
         case interpreter::IROpCode::CallVirt: return kCallVirt;
         default: return kNop;
@@ -135,6 +137,7 @@ TreeBuildResult TreeBuilder::Build(const interpreter::RegisterInstruction* instr
     root_count_ = 0;
     vn_.Clear();
     std::memset(vreg_to_node_, 0, sizeof(vreg_to_node_));
+    std::memset(newarr_constant_size_, 0, sizeof(newarr_constant_size_));
 
     uint32_t count = hi - lo;
     if (count == 0) return {};
@@ -154,6 +157,37 @@ TreeBuildResult TreeBuilder::Build(const interpreter::RegisterInstruction* instr
         ExprNode* node = nullptr;
         ExprNode* s1 = nullptr;
         ExprNode* s2 = nullptr;
+
+        // Track NewArr with constant size for LdLen folding
+        if (opc == interpreter::IROpCode::NewArr && dst < 64) {
+            int32_t const_size = -1;
+            // Look backward in the same BB for LdcI4 defining src1_reg
+            if (ri.has_src1()) {
+                for (int32_t j = static_cast<int32_t>(i) - 1; j >= static_cast<int32_t>(lo); --j) {
+                    const auto& prev = instrs[j];
+                    if (prev.has_dst() && prev.dst_reg() == ri.src1_reg() &&
+                        prev.op_code() == interpreter::IROpCode::LdcI4) {
+                        const_size = prev.imm.i4;
+                        break;
+                    }
+                }
+            }
+            if (const_size > 0 && const_size < 65536) {
+                newarr_constant_size_[dst] = static_cast<uint32_t>(const_size);
+            }
+            // Register dst as a LdLoc leaf (NewArr itself doesn't produce a tree node)
+            if (!vreg_to_node_[dst]) {
+                auto* leaf = AllocNode(kLdLoc, kObjectRef);
+                if (leaf) {
+                    leaf->operand_index = dst;
+                    uint32_t id = vn_.GetOrCreate(VNKey::Leaf(kLdLoc, dst));
+                    leaf->set_vn_id(id);
+                    vn_.SetComputed(id);
+                    vreg_to_node_[dst] = leaf;
+                }
+            }
+            continue;  // NewArr has no expression node in the DAG
+        }
 
         if (opc == interpreter::IROpCode::StLoc) {
             // Store local: root with value child
@@ -177,6 +211,16 @@ TreeBuildResult TreeBuilder::Build(const interpreter::RegisterInstruction* instr
             // Return: root with optional value child
             ExprNode* val = ri.has_src1() ? ResolveVReg(ri.src1_reg(), 0) : nullptr;
             node = AllocNode(kReturn, kVoid, val);
+            is_root = true;
+        }
+        else if (opc == interpreter::IROpCode::StElem) {
+            // Store array element: root with array, index, value
+            ExprNode* arr = ri.has_src1() ? ResolveVReg(ri.src1_reg(), 5) : nullptr;
+            ExprNode* val = ri.src3_reg() ? ResolveVReg(ri.src3_reg(), 0) : nullptr;
+            node = AllocNode(kStElem, kVoid, arr, val);
+            if (node) {
+                node->operand_index = ri.has_src2() ? ri.src2_reg() : 0;
+            }
             is_root = true;
         }
         else if (nk == kCall || nk == kCallVirt) {
@@ -247,6 +291,22 @@ TreeBuildResult TreeBuilder::Build(const interpreter::RegisterInstruction* instr
         if (node && dst < 64) {
             vreg_to_node_[dst] = node;
 
+            // ── LdLen constant folding ─────────────────────────────
+            // If LdLen's array ref is a known NewArr with constant size,
+            // fold LdLen → LdcI4 at compile time.
+            if (nk == kLdLen && s1 && s1->kind() == kLdLoc) {
+                uint32_t arr_vreg = s1->operand_index;
+                if (arr_vreg < 64 && newarr_constant_size_[arr_vreg] > 0) {
+                    int32_t const_len = static_cast<int32_t>(newarr_constant_size_[arr_vreg]);
+                    node->set_kind(kLdcI4);
+                    node->type_tag = kInt32;
+                    node->child0 = nullptr;
+                    node->child_count = 0;
+                    node->i4 = const_len;
+                    nk = kLdcI4;
+                }
+            }
+
             // Assign VN (calls get unique VNs — never CSE'd)
             if (nk == kCall || nk == kCallVirt) {
                 node->set_vn_id(vn_.GetOrCreate(
@@ -265,6 +325,11 @@ TreeBuildResult TreeBuilder::Build(const interpreter::RegisterInstruction* instr
                 node->set_vn_id(vn_.GetOrCreate(VNKey::Unary(nk, svn)));
             } else if (nk >= kAdd && nk <= kCgtUn) {
                 // Binary: include both src VNs
+                uint32_t sv1 = s1 ? s1->vn_id() : 0;
+                uint32_t sv2 = s2 ? s2->vn_id() : 0;
+                node->set_vn_id(vn_.GetOrCreate(VNKey::Binary(nk, sv1, sv2)));
+            } else if (nk == kLdElem || nk == kLdElemA) {
+                // LdElem/LdElemA: binary with array VN + index VN
                 uint32_t sv1 = s1 ? s1->vn_id() : 0;
                 uint32_t sv2 = s2 ? s2->vn_id() : 0;
                 node->set_vn_id(vn_.GetOrCreate(VNKey::Binary(nk, sv1, sv2)));

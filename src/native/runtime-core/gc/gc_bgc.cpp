@@ -1,4 +1,5 @@
 #include "gc_bgc.h"
+#include "gc_bgc_inline.h"
 
 #include <chaos/log.h>
 #include <chaos/native_types.h>
@@ -29,6 +30,13 @@ namespace chaos::il2cpp::runtime_core {
 thread_local int tls_satb_buffer_index = -1;
 thread_local bool tls_satb_registered = false;
 std::atomic<bool> g_bgc_is_marking{false};
+
+/// Non-inline SATB write barrier wrapper for jit_helpers.cpp.
+/// Compiled directly into test targets (MSVC-format .obj) to avoid
+/// __tls_index issues with MSVC link.exe resolving TLS from GNU ar archives.
+extern "C" void JitSatbPreWriteBarrier(void** slot) noexcept {
+    BgcSatbPreWriteBarrier(slot);
+}
 
 void BgcFlushSatbBuffer(const SatbEntry* entries, uint32_t count) {
     BgcController::Instance().FlushSatbBuffer(entries, count);

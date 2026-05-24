@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\agent\booming-il2cpp\build\testing_fresh\_deps\googletest-subbuild\CMakeFiles\d17ffd3edf458aea2a39e5d70c64ab70\googletest-populate-mkdir.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\agent\booming-il2cpp\build\testing_fresh\_deps\googletest-subbuild\CMakeFiles\d17ffd3edf458aea2a39e5d70c64ab70\googletest-populate-download.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\agent\booming-il2cpp\build\testing_fresh\_deps\googletest-subbuild\CMakeFiles\d17ffd3edf458aea2a39e5d70c64ab70\googletest-populate-update.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\agent\booming-il2cpp\build\testing_fresh\_deps\googletest-subbuild\CMakeFiles\d17ffd3edf458aea2a39e5d70c64ab70\googletest-populate-patch.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\agent\booming-il2cpp\build\testing_fresh\_deps\googletest-subbuild\CMakeFiles\d17ffd3edf458aea2a39e5d70c64ab70\googletest-populate-configure.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\agent\booming-il2cpp\build\testing_fresh\_deps\googletest-subbuild\CMakeFiles\d17ffd3edf458aea2a39e5d70c64ab70\googletest-populate-build.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\agent\booming-il2cpp\build\testing_fresh\_deps\googletest-subbuild\CMakeFiles\d17ffd3edf458aea2a39e5d70c64ab70\googletest-populate-install.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\agent\booming-il2cpp\build\testing_fresh\_deps\googletest-subbuild\CMakeFiles\d17ffd3edf458aea2a39e5d70c64ab70\googletest-populate-test.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\agent\booming-il2cpp\build\testing_fresh\_deps\googletest-subbuild\CMakeFiles\2db402bdc8b7ede6c54e81c2c972f2f0\googletest-populate-complete.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\agent\booming-il2cpp\build\testing_fresh\_deps\googletest-subbuild\CMakeFiles\8a48cffb9338cc125f6ac8a0a07fe822\googletest-populate.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="D:\agent\booming-il2cpp\build\testing_fresh\_deps\googletest-subbuild\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="D:\agent\booming-il2cpp\build\testing_fresh\_deps\googletest-subbuild\CMakeFiles\googletest-populate" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{56F6FA06-3837-39CC-B512-C5EF0F4E3C81}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

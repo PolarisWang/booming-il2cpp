@@ -1,0 +1,57 @@
+{
+  "benchmarks": {
+    "upgrade-latency": {
+      "P50": 15.3,
+      "P99": 1091.3,
+      "MIN": 14.8,
+      "MAX": 1091.3,
+      "AVG": 38.5,
+      "N": 50.0
+    },
+    "compile-time-only": {
+      "P50": 15.8,
+      "P99": 27.7,
+      "MIN": 15.5,
+      "MAX": 27.7,
+      "AVG": 16.7,
+      "N": 30.0
+    },
+    "aot-dispatch-overhead": {
+      "PER_CALL_US": 0.02,
+      "TOTAL_US": 19.5,
+      "N": 1000.0
+    },
+    "compiled-dispatch-overhead": {
+      "PER_CALL_US": 0.013,
+      "TOTAL_US": 129.1,
+      "N": 10000.0
+    },
+    "trampoline-alloc": {
+      "P50": 0.0,
+      "P99": 2.5,
+      "MIN": 0.0,
+      "MAX": 2.5,
+      "AVG": 0.1,
+      "N": 100.0
+    },
+    "multi-method-upgrade": {
+      "BATCH": 50.0,
+      "TOTAL_US": 826.1,
+      "PER_METHOD_US": 16.5
+    }
+  },
+  "code_size": {
+    "samples": 1089,
+    "min": 93,
+    "max": 1216,
+    "p50": 557,
+    "p95": 941,
+    "p99": 1110,
+    "avg": 556.791551882461,
+    "total_instrs": 24764
+  },
+  "test_counts": {
+    "passed": 1,
+    "failed": 0
+  }
+}

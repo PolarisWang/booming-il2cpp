@@ -19,6 +19,8 @@ add_library(chaos_jit STATIC
     WinSehHandler.cpp
     $<$<PLATFORM_ID:Linux>:LinuxSehHandler.cpp>
     tree/jit_intrinsics.cpp
+    tree/jit_bounds_check.cpp
+    tree/jit_cfg.cpp
     tree/jit_tree_builder.cpp
     tree/jit_tree_mutator.cpp
     tree/jit_linearizer.cpp

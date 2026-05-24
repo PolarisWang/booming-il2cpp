@@ -212,6 +212,10 @@ inline bool chaos_is_array_type_compatible(
 // to file scope creates ambiguity.
 using chaos::il2cpp::jit::chaos_managed_pointer_local_slot_tag;
 using chaos::il2cpp::jit::chaos_managed_array;
+using chaos::il2cpp::jit::chaos_type_info_managed_array;
+using chaos::il2cpp::jit::chaos_normalize_native_int_argument;
+using chaos::il2cpp::jit::chaos_resolve_managed_value_pointer;
+using chaos::il2cpp::jit::chaos_vtable_resolve;
 using chaos::il2cpp::jit::chaos_is_type_compatible;
 using chaos::il2cpp::jit::chaos_does_type_implement_interface;
 

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\agent\booming-il2cpp\build\vs2022\_deps\googletest-subbuild\CMakeFiles\735424563c490090dbff83d899ae40e5\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{1186B9A9-4999-3DFB-ACF6-5E324A0596FA}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

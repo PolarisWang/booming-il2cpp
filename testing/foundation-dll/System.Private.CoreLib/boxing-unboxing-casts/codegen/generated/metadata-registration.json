@@ -1,0 +1,161 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "BoxingUnboxingCastsSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects",
+      "name": "BoxingUnboxingCastsSubjects",
+      "displayName": "BoxingUnboxingCastsSubjects",
+      "definitionSubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects",
+      "metadataToken": 33554434
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::_exitCode",
+      "declaringTypeSubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_0:System.Void()",
+      "name": "Subject_0",
+      "definitionSubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663297
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_1:System.Void()",
+      "name": "Subject_1",
+      "definitionSubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663298
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_2:System.Void()",
+      "name": "Subject_2",
+      "definitionSubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663299
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_3:System.Void()",
+      "name": "Subject_3",
+      "definitionSubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663300
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_4:System.Void()",
+      "name": "Subject_4",
+      "definitionSubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663301
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_5:System.Void()",
+      "name": "Subject_5",
+      "definitionSubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663302
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_6:System.Void()",
+      "name": "Subject_6",
+      "definitionSubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663303
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_7:System.Void()",
+      "name": "Subject_7",
+      "definitionSubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_7:System.Void()",
+      "declaringTypeSubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663304
+    },
+    {
+      "registrationKind": "method",
+      "slot": 11,
+      "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_8:System.Void()",
+      "name": "Subject_8",
+      "definitionSubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_8:System.Void()",
+      "declaringTypeSubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663305
+    },
+    {
+      "registrationKind": "method",
+      "slot": 12,
+      "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_9:System.Void()",
+      "name": "Subject_9",
+      "definitionSubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_9:System.Void()",
+      "declaringTypeSubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663306
+    },
+    {
+      "registrationKind": "method",
+      "slot": 13,
+      "subjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_10:System.Void()",
+      "name": "Subject_10",
+      "definitionSubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects::Subject_10:System.Void()",
+      "declaringTypeSubjectId": "BoxingUnboxingCastsSubjects/BoxingUnboxingCastsSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663307
+    }
+  ]
+}

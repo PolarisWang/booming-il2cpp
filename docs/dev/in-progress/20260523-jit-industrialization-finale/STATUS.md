@@ -35,20 +35,21 @@ created: 2026-05-23
 
 | batch | status | tasks | 备注 |
 |-------|--------|-------|------|
-| batch-1 | in-progress | wf1-arch → wf1-gc → wf1-liveness → wf1-osr → wf1-unwind → wf1-tests → wf1-ci | 核心管线补全（串行） |
+| batch-1 | completed | wf1-arch → wf1-gc → wf1-liveness → wf1-osr → wf1-unwind → wf1-tests → wf1-ci ✅ | CI baseline workflow + Python scripts 已实现 |
 | batch-2 | partial | wf2-linux ✅（代码完成）, wf4-debug 🔲（未启动） | wf2-linux 代码已验证完成（LinuxSehHandler.cpp 637行 + DWARF .eh_frame），仅缺 Linux CI 集成 |
-| batch-3 | pending | wf3-tlab | 等待 batch-1 |
-| batch-4 | pending | wf5-arm64 | 等待 batch-2 + batch-3 |
+| batch-3 | completed | wf3-tlab ✅ | TLAB inline TLS access 已实现：EmitLoadTlsTlab 替换 3 处 CodegenGetTlab CALL，全 199 JIT 测试通过 |
+| batch-4 | pending | wf5-arm64 | 等待 batch-2 + batch-3
 
 ## 调度状态
 
 ```yaml
 dispatch_doc: DISPATCH.md
 dispatch_model: hybrid
-active_batches: [batch-1]
-completed_batches: []
-pending_batches: [batch-3, batch-4]
+active_batches: [batch-1 (wf1-ci)]
+completed_batches: [batch-3]
+pending_batches: [batch-4]
 # batch-2: wf2-linux 代码已完成（LinuxSehHandler.cpp + DWARF），仅缺 CI 集成
+# batch-1: wf1-arch~wf1-tests 均已完成，wf1-ci 设计完成待实现
 ```
 
 ## 子任务映射
@@ -61,19 +62,22 @@ pending_batches: [batch-3, batch-4]
 | wf1-osr | 1d | planned | main | OSR segfault 修复 | wf1-liveness | batch-1 | jit_helpers.cpp, jit_engine.cpp | Test_OsrEntry 不 segfault | src/native/jit/ | 小 |
 | wf1-unwind | 1e | planned | main | Unwind 编译守卫 | wf1-osr | batch-1 | jit_unwind.cpp | static_assert 就位 | src/native/jit/ | 极小 |
 | wf1-tests | 1f | planned | main | 模块级测试套件补齐 | wf1-unwind | batch-1 | testing/jit 扩展 | 全回归通过，新测试通过 | testing/src/native/jit/ | 大 |
-| wf1-ci | 1g | planned | main | CI 性能基线建立 | wf1-tests | batch-1 | CI pipeline | 基线数据入库，构建时自动对比 | .github/workflows/ | 中 |
+| wf1-ci | 1g | design | main | CI 性能基线建立 | wf1-tests | batch-1 | design-wf1-ci.md | 基线设计文档完成，待实现 workflow | .github/workflows/ | 中 |
 | wf2-linux | 2 | completed | main | Linux SEH + DWARF + CI | — | batch-2 | jit_seh.cpp Linux handler, jit_unwind.cpp | Linux x64 T4 JIT 可用（代码完成，CI pending） | src/native/jit/ | 大 |
-| wf3-tlab | 3 | planned | main | TLAB 内联分配 | wf1-arch, wf1-tests | batch-3 | jit_engine.cpp, jit_helpers.cpp | NewObj/Box TLAB bump path | src/native/jit/ | 大 |
+| wf3-tlab | 3 | completed | main | TLAB 内联分配 | wf1-arch, wf1-tests | batch-3 | jit_engine.cpp, jit_helpers.cpp | NewObj/Box/NewArr TLAB bump path 无 helper call | src/native/jit/ | 大 |
 | wf4-debug | 4 | planned | main | 调试信息 + SOS | — | batch-2 | jit_engine.cpp, jit_unwind.cpp | T4 代码可调试 | src/native/jit/ | 大 |
 | wf5-arm64 | 5 | planned | main | ARM64 完整支持 | wf1-arch | batch-4 | arm64_encoder.h | ARM64 回归通过 | src/native/jit/ | 极大 |
 
 ## 最新摘要
 
-Roadmap 已创建，5 个工作流已定义。当前准备启动 batch-1（核心管线补全）的第一个子任务 wf1-arch（IEncoder/ISehHandler 接口抽象 + jit_engine.cpp 重构）。
+batch-3 (wf3-tlab) ✅ 已完成：EmitLoadTlsTlab 替换 3 处 CodegenGetTlab CALL，全 199 JIT 测试通过。
+batch-1 wf1-ci 设计文档已完成（design-wf1-ci.md），待实现 GitHub Actions workflow。
+batch-2 wf2-linux 代码已完成，仅缺 Linux CI 集成。
+剩余待办：wf4-debug（调试信息）、wf5-arm64（ARM64）。
 
 ## 下一步
 
-自动启动 wf1-arch 子任务。
+实现 wf1-ci GitHub Actions workflow：在 codegen-regression.yml 中新增 jit-baseline job。
 
 ## 风险评估
 

@@ -1,0 +1,125 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "ReflectionActivationSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects",
+      "name": "ReflectionActivationSubjects",
+      "displayName": "ReflectionActivationSubjects",
+      "definitionSubjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects",
+      "metadataToken": 33554434
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::_exitCode",
+      "declaringTypeSubjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_0:System.Void()",
+      "name": "Subject_0",
+      "definitionSubjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663297
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_1:System.Void()",
+      "name": "Subject_1",
+      "definitionSubjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663298
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_2:System.Void()",
+      "name": "Subject_2",
+      "definitionSubjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663299
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_3:System.Void()",
+      "name": "Subject_3",
+      "definitionSubjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663300
+    },
+    {
+      "registrationKind": "method",
+      "slot": 7,
+      "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_4:System.Void()",
+      "name": "Subject_4",
+      "definitionSubjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663301
+    },
+    {
+      "registrationKind": "method",
+      "slot": 8,
+      "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_5:System.Void()",
+      "name": "Subject_5",
+      "definitionSubjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663302
+    },
+    {
+      "registrationKind": "method",
+      "slot": 9,
+      "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_6:System.Void()",
+      "name": "Subject_6",
+      "definitionSubjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663303
+    },
+    {
+      "registrationKind": "method",
+      "slot": 10,
+      "subjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_7:System.Void()",
+      "name": "Subject_7",
+      "definitionSubjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects::Subject_7:System.Void()",
+      "declaringTypeSubjectId": "ReflectionActivationSubjects/ReflectionActivationSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663304
+    }
+  ]
+}

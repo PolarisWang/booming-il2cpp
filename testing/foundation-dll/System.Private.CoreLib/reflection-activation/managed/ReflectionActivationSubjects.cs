@@ -31,7 +31,7 @@ public static partial class ReflectionActivationSubjects
     // [2] System.Private.CoreLib/System.Activator::CreateInstance:T()
     public static void Subject_2()
     {
-        // TODO: System.Private.CoreLib/System.Activator::CreateInstance:T() could not be auto-generated
+        // needs-manual — CreateInstance with 0 params requires manual implementation: System.Private.CoreLib/System.Activator::CreateInstance:T()
     }
 
     // [3] System.Private.CoreLib/System.Activator::CreateInstance:System.Object(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)
@@ -44,21 +44,21 @@ public static partial class ReflectionActivationSubjects
     // [4] System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)
     public static void Subject_4()
     {
-        try { if (((Array.CreateInstance(typeof(byte), 42)).GetHashCode()) != ((Array.CreateInstance(typeof(byte), 42)).GetHashCode())) _exitCode = 1; }
+        try { if ((int)(((Array)(Array.CreateInstance(typeof(byte), 42))).Length) != (int)(((Array)(Array.CreateInstance(typeof(byte), 42))).Length)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [5] System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32,System.Int32)
     public static void Subject_5()
     {
-        try { if (((Array.CreateInstance(typeof(byte), 42, 42)).GetHashCode()) != ((Array.CreateInstance(typeof(byte), 42, 42)).GetHashCode())) _exitCode = 1; }
+        try { if ((int)(((Array)(Array.CreateInstance(typeof(byte), 42, 42))).Length) != (int)(((Array)(Array.CreateInstance(typeof(byte), 42, 42))).Length)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [6] System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32[])
     public static void Subject_6()
     {
-        try { if (((Array.CreateInstance(typeof(byte), Array.Empty<System.Int32>())).GetHashCode()) != ((Array.CreateInstance(typeof(byte), Array.Empty<System.Int32>())).GetHashCode())) _exitCode = 1; }
+        try { if ((int)(((Array)(Array.CreateInstance(typeof(byte), Array.Empty<System.Int32>()))).Length) != (int)(((Array)(Array.CreateInstance(typeof(byte), Array.Empty<System.Int32>()))).Length)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 

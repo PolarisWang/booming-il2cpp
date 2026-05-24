@@ -1,0 +1,84 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "PinvokeDllimportSubjects",
+      "subjectKind": "method",
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PinvokeDllimportSubjects",
+      "subjectKind": "method",
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PinvokeDllimportSubjects",
+      "subjectKind": "method",
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PinvokeDllimportSubjects",
+      "subjectKind": "method",
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::Subject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PinvokeDllimportSubjects",
+      "subjectKind": "method",
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportNativeEntry::GetCurrentProcess:System.IntPtr()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PinvokeDllimportSubjects",
+      "subjectKind": "method",
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportNativeEntry::TestGetCurrentProcess:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PinvokeDllimportSubjects",
+      "subjectKind": "method",
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportNativeEntry::GetCurrentThread:System.IntPtr()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PinvokeDllimportSubjects",
+      "subjectKind": "method",
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportNativeEntry::TestGetCurrentThread:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PinvokeDllimportSubjects",
+      "subjectKind": "method",
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportNativeEntry::GetProcessId:System.UInt32(System.IntPtr)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PinvokeDllimportSubjects",
+      "subjectKind": "method",
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportNativeEntry::TestGetProcessId:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PinvokeDllimportSubjects",
+      "subjectKind": "method",
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportNativeEntry::GetModuleHandle:System.IntPtr(System.String)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PinvokeDllimportSubjects",
+      "subjectKind": "method",
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportNativeEntry::TestGetModuleHandle:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "PinvokeDllimportSubjects",
+      "subjectKind": "field",
+      "subjectId": "PinvokeDllimportSubjects/PinvokeDllimportSubjects::_exitCode",
+      "reason": "instance-field-state"
+    }
+  ]
+}
