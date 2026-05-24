@@ -132,7 +132,7 @@ jobs:
       - name: Run JIT Benchmarks
         continue-on-error: true
         run: |
-          ctest --test-dir testing/artifacts/run/native-test-build -R "bench_hybrid" -C RelWithDebInfo --output-on-failure > jit-bench-output.txt 2>&1
+          ctest --test-dir testing/artifacts/run/native-test-build -R "test_jit_bench" -C RelWithDebInfo --output-on-failure > jit-bench-output.txt 2>&1
 
       - name: Collect JIT Metrics
         continue-on-error: true
@@ -149,24 +149,6 @@ jobs:
           python scripts/ci/compare-baseline.py `
             --baseline=".github/baselines/jit-metrics.json" `
             --current="jit-metrics-current.json"
-
-      - name: Upload Current Metrics
-        uses: actions/upload-artifact@v4
-        with:
-          name: jit-metrics-current
-          path: jit-metrics-current.json
-
-      - name: Upload Current Metrics
-        uses: actions/upload-artifact@v4
-        with:
-          name: jit-metrics-current
-          path: jit-metrics-current.json
-
-      - name: Upload Current Metrics
-        uses: actions/upload-artifact@v4
-        with:
-          name: jit-metrics-current
-          path: jit-metrics-current.json
 
       - name: Upload Current Metrics
         uses: actions/upload-artifact@v4
