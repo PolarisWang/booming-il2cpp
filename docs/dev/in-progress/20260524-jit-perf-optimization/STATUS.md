@@ -6,7 +6,7 @@ dispatch_model: sequential
 child_execution_mode: auto
 auto_continue: true
 auto_stop_policy: blocking-only
-recommended_next_child: p1-tree-ir
+recommended_next_child: p4-bounds-check
 source: brainstorm
 created: 2026-05-24
 blocking_questions: []
@@ -39,9 +39,9 @@ clearance_confirmed_by_user: true
 | task_id | phase | status | owner | purpose | depends_on | estimated_effort |
 |---------|-------|--------|-------|---------|------------|-------------------|
 | p0-call-site-slot | P0 | **ready** | main | Slot 间接化 + Version + ReverseSlotMap | — | 3-4w |
-| p1-tree-ir | P1 | planned | main | 轻量树 IR 框架 + VN + CSE | p0-call-site-slot | 4-5w |
-| p2-inliner | P2 | planned | main | 热更感知内联器 | p1-tree-ir | 3-4w |
-| p3-intrinsic | P3 | planned | main | Intrinsic 识别 | p2-inliner | 2-3w |
+| p1-tree-ir | P1 | completed | main | 轻量树 IR 框架 + VN + CSE | p0-call-site-slot | 4-5w |
+| p2-inliner | P2 | completed | main | 热更感知内联器 | p1-tree-ir | 3-4w |
+| p3-intrinsic | P3 | completed | main | Intrinsic 识别 | p2-inliner | 2-3w |
 | p4-bounds-check | P4 | planned | main | 边界检查消除 | p1-tree-ir | 2-3w |
 | p5-loop-opt | P5 | planned | main | 循环优化 | p4-bounds-check | 3-4w |
 | p6-simd | P6 | planned | main | SIMD / HW intrinsics | p3-intrinsic + p4-bounds-check | 4-6w |
@@ -59,8 +59,9 @@ clearance_confirmed_by_user: true
 
 ## 最新摘要
 
-Roadmap 已创建。所有 7 个阶段串行推进。P0 子任务 p0-call-site-slot 已准备就绪（ready）。
+- P3 Intrinsic 已完成：Math.Abs/Min/Max、Array.Length、StFldBarrier 内联；build + 18/18 fact + benchmark 通过
+- P1/P2/P3 均已归档，P4 边界消除待启动
 
 ## 下一步
 
-自动启动 p0-call-site-slot 子任务。
+建议自动启动 p4-bounds-check 子任务（边界检查消除）。

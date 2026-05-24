@@ -104,6 +104,10 @@ public enum InstructionOpCode : int
     InitBlk = 97,
     CallVirtConstrained = 98,
     Calli = 99,
+    Abs = 100,
+    Min = 101,
+    Max = 102,
+    StFldBarrier = 103,
 }
 #pragma warning restore CS1591
 

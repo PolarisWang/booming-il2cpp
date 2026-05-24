@@ -57,6 +57,10 @@ private:
     uint32_t    count_ = 0;
     std::atomic<long> lock_{0};  // spinlock: 0=free, 1=locked
 
+    // RAII guard is a friend so it can call AcquireLock/ReleaseLock.
+    template <typename T>
+    friend class JitRegistryLockGuard;
+
     // ── Pending Free Regions ────────────────────────────────────────────
     // When T4 code is demoted, we defer VirtualFree to the next GC safepoint.
     static constexpr uint32_t kMaxPendingFreeRegions = 64;

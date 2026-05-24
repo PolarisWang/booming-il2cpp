@@ -112,6 +112,18 @@ target_compile_definitions(test_jit_seh PRIVATE
 )
 set_tests_properties(test_jit_seh PROPERTIES TIMEOUT 30)
 
+# E-5 — JIT SEH handler internal logic tests (38 tests)
+# This test includes jit_seh_handler_internal.cpp directly to access static/internal
+# functions (BuildSehExceptionDispatch, FindSehHandlerForOffset, etc.) that
+# are private members of WinSehHandler in the production code path.
+# Does NOT link chaos_jit.lib (which provides the production ISehHandler
+# forwarding layer) to avoid duplicate symbol conflicts.
+add_chaos_test(test_jit_seh_handler_internal
+    jit_seh_handler_test.cpp
+    LIBS
+    LABELS "unit;jit"
+)
+
 # P-1 — Binary IR serialization roundtrip test
 # Tests SerializeBinaryIr + DeserializeBinaryIr + ValidateBinaryIr
 # for single-method RegisterMethod data.

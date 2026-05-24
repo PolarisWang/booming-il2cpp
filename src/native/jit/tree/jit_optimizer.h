@@ -5,12 +5,10 @@
 //
 // Pipeline per BB:
 //   1. TreeBuilder::Build() — RegisterMethod → expression DAG
-//   2. ConstFoldMutator — fold constant arithmetic
-//   3. CSEMutator — eliminate redundant sub-expressions
-//   4. Linearizer — optimized DAG → RegisterInstruction sequence
-//
-// For SEH methods, the optimizer falls back to the existing linear
-// OptimizeInstructions (preserving SEH clause correctness).
+//   2. Inliner::InlineRoots — inline eligible kCall nodes (optional)
+//   3. ConstFoldMutator — fold constant arithmetic
+//   4. CSEMutator — eliminate redundant sub-expressions
+//   5. Linearizer — optimized DAG → RegisterInstruction sequence
 
 #ifndef CHAOS_IL2CPP_JIT_OPTIMIZER_H_
 #define CHAOS_IL2CPP_JIT_OPTIMIZER_H_
@@ -18,27 +16,45 @@
 #include <cstdint>
 #include <vector>
 
-// Forward declarations
 namespace chaos::il2cpp::interpreter {
 struct RegisterInstruction;
-}  // namespace chaos::il2cpp::interpreter
+}
 
-namespace chaos::il2cpp::jit::tree {
+namespace chaos::il2cpp::jit {
 
-/// Optimize a RegisterInstruction sequence using tree IR passes.
-/// For non-SEH methods: per-BB tree IR (ConstFold + CSE).
-/// For SEH methods: result is empty (caller should use linear optimizer).
-///
-/// @param instrs     Input instruction sequence.
-/// @param out_instrs Output: optimized instruction sequence.
-/// @param has_seh    True if method contains SEH clauses.
-/// @returns true if tree IR optimization was applied, false if caller
-///          should fall back to linear optimizer.
+// Forward declaration for inlined callee info
+struct InlineDecision;
+
+/// Accumulated inline results from OptimizeWithTreeIR.
+/// Holds a fixed-size snapshot of all inlined decisions across all BBs.
+struct InlineResultBuffer {
+    static constexpr uint32_t kMaxInlines = 32;
+
+    uint32_t      count = 0;
+    uint32_t      callee_tokens[kMaxInlines];
+    uint32_t      snapshot_versions[kMaxInlines];
+
+    void Add(uint32_t token, uint32_t version) noexcept {
+        if (count < kMaxInlines) {
+            callee_tokens[count] = token;
+            snapshot_versions[count] = version;
+            count++;
+        }
+    }
+};
+
+namespace tree {
+
 bool OptimizeWithTreeIR(
     const std::vector<interpreter::RegisterInstruction>& instrs,
     std::vector<interpreter::RegisterInstruction>& out_instrs,
-    bool has_seh) noexcept;
+    bool has_seh,
+    uint32_t max_vreg = 40,
+    bool enable_inlining = false,
+    InlineResultBuffer* inline_results = nullptr) noexcept;
 
-}  // namespace chaos::il2cpp::jit::tree
+}
 
-#endif  // CHAOS_IL2CPP_JIT_OPTIMIZER_H_
+}
+
+#endif

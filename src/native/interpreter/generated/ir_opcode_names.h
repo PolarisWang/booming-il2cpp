@@ -106,9 +106,14 @@ static constexpr const char* kIROpCodeNames[] = {
     "Cpblk",
     "InitBlk",
     "CallVirtConstrained",
+    "Calli",
+    "Abs",
+    "Min",
+    "Max",
+    "StFldBarrier",
 };
 
-static_assert(sizeof(kIROpCodeNames) / sizeof(kIROpCodeNames[0]) == 99,
+static_assert(sizeof(kIROpCodeNames) / sizeof(kIROpCodeNames[0]) == 103,
               "kIROpCodeNames must cover all 99 opcodes");
 
 }  // namespace chaos::il2cpp::interpreter

@@ -248,11 +248,12 @@ void HotpatchNameRegistry::SetPatchedBySlot(uint32_t module_id, uint32_t slot, b
     _InterlockedIncrement(reinterpret_cast<volatile long*>(&entry->version));
 
     // Notify the JIT slot update callback so ReverseSlotMap can patch RX slot tables.
+    // Also enables inline version-staleness checks via HotpatchEntryV0*.
     if (g_slot_update_cb && entry->direct_ptr) {
         // Find the callee token for this slot.
         uint32_t token = SlotToToken(module_id, slot);
         if (token != ~0u) {
-            g_slot_update_cb(token, entry->direct_ptr);
+            g_slot_update_cb(token, entry->direct_ptr, entry);
         }
     }
 }

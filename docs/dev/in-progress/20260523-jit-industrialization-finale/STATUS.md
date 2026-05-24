@@ -36,7 +36,7 @@ created: 2026-05-23
 | batch | status | tasks | 备注 |
 |-------|--------|-------|------|
 | batch-1 | in-progress | wf1-arch → wf1-gc → wf1-liveness → wf1-osr → wf1-unwind → wf1-tests → wf1-ci | 核心管线补全（串行） |
-| batch-2 | pending | wf2-linux, wf4-debug | 等待 batch-1 |
+| batch-2 | partial | wf2-linux ✅（代码完成）, wf4-debug 🔲（未启动） | wf2-linux 代码已验证完成（LinuxSehHandler.cpp 637行 + DWARF .eh_frame），仅缺 Linux CI 集成 |
 | batch-3 | pending | wf3-tlab | 等待 batch-1 |
 | batch-4 | pending | wf5-arm64 | 等待 batch-2 + batch-3 |
 
@@ -47,7 +47,8 @@ dispatch_doc: DISPATCH.md
 dispatch_model: hybrid
 active_batches: [batch-1]
 completed_batches: []
-pending_batches: [batch-2, batch-3, batch-4]
+pending_batches: [batch-3, batch-4]
+# batch-2: wf2-linux 代码已完成（LinuxSehHandler.cpp + DWARF），仅缺 CI 集成
 ```
 
 ## 子任务映射
@@ -61,7 +62,7 @@ pending_batches: [batch-2, batch-3, batch-4]
 | wf1-unwind | 1e | planned | main | Unwind 编译守卫 | wf1-osr | batch-1 | jit_unwind.cpp | static_assert 就位 | src/native/jit/ | 极小 |
 | wf1-tests | 1f | planned | main | 模块级测试套件补齐 | wf1-unwind | batch-1 | testing/jit 扩展 | 全回归通过，新测试通过 | testing/src/native/jit/ | 大 |
 | wf1-ci | 1g | planned | main | CI 性能基线建立 | wf1-tests | batch-1 | CI pipeline | 基线数据入库，构建时自动对比 | .github/workflows/ | 中 |
-| wf2-linux | 2 | planned | main | Linux SEH + DWARF + CI | — | batch-2 | jit_seh.cpp Linux handler | Linux x64 T4 JIT 可用 | src/native/jit/ | 大 |
+| wf2-linux | 2 | completed | main | Linux SEH + DWARF + CI | — | batch-2 | jit_seh.cpp Linux handler, jit_unwind.cpp | Linux x64 T4 JIT 可用（代码完成，CI pending） | src/native/jit/ | 大 |
 | wf3-tlab | 3 | planned | main | TLAB 内联分配 | wf1-arch, wf1-tests | batch-3 | jit_engine.cpp, jit_helpers.cpp | NewObj/Box TLAB bump path | src/native/jit/ | 大 |
 | wf4-debug | 4 | planned | main | 调试信息 + SOS | — | batch-2 | jit_engine.cpp, jit_unwind.cpp | T4 代码可调试 | src/native/jit/ | 大 |
 | wf5-arm64 | 5 | planned | main | ARM64 完整支持 | wf1-arch | batch-4 | arm64_encoder.h | ARM64 回归通过 | src/native/jit/ | 极大 |

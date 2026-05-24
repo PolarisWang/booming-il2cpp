@@ -87,6 +87,26 @@ extern "C" void CodegenStFld(void* obj, uint32_t field_idx, uint64_t value) noex
     }
 }
 
+// Lightweight StFld without SATB pre-write barrier.
+// Called when g_bgc_is_marking is false (the common case during steady-state).
+// The SATB barrier is only needed during concurrent BGC marking, which is a
+// small fraction of total runtime.  Skipping the barrier in the common case
+// eliminates SATB buffer management overhead on every StFld.
+extern "C" void CodegenStFldNoBarrier(void* obj, uint32_t field_idx, uint64_t value) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::StFldNoBarrier");
+    using namespace chaos::il2cpp::interpreter;
+    using namespace chaos::il2cpp::runtime_core;
+    if (obj == nullptr) return;
+    auto* io = static_cast<InterpreterObject*>(obj);
+    if (field_idx >= io->fields.size()) {
+        io->fields.resize(field_idx + 1u);
+    }
+    io->fields[field_idx] = InterpreterValue::from_i64(static_cast<int64_t>(value));
+    if (chaos_is_gc_pointer(obj)) {
+        chaos_gc_dirty_card(obj);
+    }
+}
+
 extern "C" uint64_t CodegenCallVirt(const CodegenCallVirtArgs* args) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::CallVirt");
     using namespace chaos::il2cpp::interpreter;
@@ -238,12 +258,91 @@ extern "C" void* CodegenGetTlab() noexcept {
     return &chaos::il2cpp::runtime_core::tls_tlab;
 }
 
+// ── Inline TLS TLAB access (eliminates helper call) ────────────────────────
+//
+// On Windows x64, __declspec(thread) variables are accessed via the GS segment:
+//   TEB (gs:[0]) → ThreadLocalStoragePointer at gs:[0x58] → TLS slot array
+//   __tls_index indexes into this array to find the module's TLS block base.
+//   Each __declspec(thread) variable is at a fixed offset within that block.
+//
+// We cache both __tls_index and tls_tlab's TLS-block offset at startup so
+// the JIT can emit the inline sequence without external symbol references.
+
+// __tls_index is defined by the MSVC linker/CRT.  Declared here for access
+// from the JIT library; resolved at link time against the CRT.
+extern "C" uint32_t __tls_index;
+
+namespace {
+    // Cached values, computed once during InitTlsTlabInfo().
+    uint32_t g_cached_tls_index = 0;
+    uint32_t g_cached_tls_tlab_offset = 0;
+}
+
+void chaos::il2cpp::jit::InitTlsTlabInfo() noexcept {
+    if (g_cached_tls_index != 0) return;  // already initialized
+
+    g_cached_tls_index = __tls_index;
+
+    // Compute tls_tlab offset within the TLS block.
+    // TLS base = TLS_array[__tls_index]
+    uintptr_t tls_array = __readgsqword(0x58);
+    uintptr_t tls_base = reinterpret_cast<uintptr_t*>(tls_array)[g_cached_tls_index];
+
+    uintptr_t tls_tlab_addr = reinterpret_cast<uintptr_t>(
+        &chaos::il2cpp::runtime_core::tls_tlab);
+    g_cached_tls_tlab_offset = static_cast<uint32_t>(
+        tls_tlab_addr - tls_base);
+}
+
+void chaos::il2cpp::jit::EmitLoadTlsTlab(CodeBuffer& buf) noexcept {
+    // mov rax, gs:[58h] — ThreadLocalStoragePointer from TEB (x64)
+    // Encoding: GS prefix (0x65) + REX.W (0x48) + MOV (0x8B) + ModRM/SIB/disp32
+    // ModRM = 00 000 100 (mod=00, reg=0/RAX, r/m=100/SIB)
+    // SIB   = 00 100 101 (scale=0, index=100/none, base=101/disp32)
+    // disp32 = 0x00000058
+    buf.EmitByte(0x65);
+    buf.EmitByte(0x48);
+    buf.EmitByte(0x8B);
+    buf.EmitByte(0x04);  // ModRM
+    buf.EmitByte(0x25);  // SIB
+    buf.Emit32(0x58);
+
+    // mov ecx, g_cached_tls_index — load module TLS slot index
+    // Encoding: B9 <imm32>
+    buf.EmitByte(0xB9);
+    buf.Emit32(g_cached_tls_index);
+
+    // mov rax, [rax + rcx*8] — dereference TLS array slot → TLS block base
+    // Encoding: REX.W (0x48) + MOV (0x8B) + ModRM/SIB
+    // ModRM = 00 000 100 (mod=00, reg=0/RAX, r/m=100/SIB)
+    // SIB   = 11 001 000 (scale=3/x8, index=1/RCX, base=0/RAX)
+    buf.EmitByte(0x48);
+    buf.EmitByte(0x8B);
+    buf.EmitByte(0x04);
+    buf.EmitByte(0xC8);
+
+    // add rax, g_cached_tls_tlab_offset — adjust to &tls_tlab
+    // Only emit if non-zero (common case: tls_tlab is usually first or near-first
+    // in the TLS block, but we don't assume).
+    // Encoding: REX.W (0x48) + ADD eAX, imm32 (0x05) + <imm32>
+    if (g_cached_tls_tlab_offset != 0) {
+        buf.EmitByte(0x48);
+        buf.EmitByte(0x05);
+        buf.Emit32(g_cached_tls_tlab_offset);
+    }
+}
+
 extern "C" void* CodegenBox(uint64_t value, uint8_t tag, uint32_t type_token) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::Box");
     using namespace chaos::il2cpp::interpreter;
-    auto* boxed = static_cast<BoxedValue*>(CHAOS_IL2CPP_MALLOC(sizeof(BoxedValue)));
+    using namespace chaos::il2cpp::runtime_core;
+    // Use GcAllocateAtomic: BoxedValue has no interior pointers (just an
+    // InterpreterValue union), so the GC does not need to scan it.
+    auto* boxed = static_cast<BoxedValue*>(GcAllocateAtomic(sizeof(BoxedValue)));
     if (boxed == nullptr) return nullptr;
-    ::new (boxed) BoxedValue();
+    // GcAllocateAtomic already zeroes memory — InterpreterValue tag defaults
+    // to Void (0), which is correct.  No placement new needed.
+    // Manually init the value from the raw bits.
     ValueTag vt = static_cast<ValueTag>(tag);
     switch (vt) {
     case ValueTag::Int32:
@@ -267,12 +366,20 @@ extern "C" void* CodegenBox(uint64_t value, uint8_t tag, uint32_t type_token) no
 extern "C" void* CodegenNewObj(uint32_t type_token, uint32_t field_count) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::NewObj");
     using namespace chaos::il2cpp::interpreter;
-    auto* obj = static_cast<InterpreterObject*>(CHAOS_IL2CPP_MALLOC(sizeof(InterpreterObject)));
+    using namespace chaos::il2cpp::runtime_core;
+    // Allocate through the GC heap so the object is tracked for GC scanning
+    // and compaction.  GcAllocate returns zeroed memory.
+    auto* obj = static_cast<InterpreterObject*>(GcAllocate(sizeof(InterpreterObject)));
     if (obj == nullptr) return nullptr;
-    ::new (obj) InterpreterObject();
+    // Manual init: GcAllocate zeroes everything, so we only need to point
+    // fields_ptr_ to the inline buffer and set type_token.
+    // Do NOT call placement new (no vector construction on GC memory).
+    // Do NOT call fields.resize() — field vector starts empty; the
+    // first LdFld/StFld access lazily grows via SmallFieldArray::resize().
+    obj->fields.fields_ptr_ = obj->fields.inline_;
+    obj->fields.field_count_ = 0;
+    obj->fields.field_capacity_ = SmallFieldArray::kInlineCapacity;
     obj->type_token = type_token;
-    if (field_count == 0) field_count = 1;
-    obj->fields.resize(field_count);
     return obj;
 }
 
@@ -336,9 +443,16 @@ extern "C" void CodegenStSFld(uint32_t field_offset, uint64_t value) noexcept {
 extern "C" void* CodegenNewArr(int32_t length) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::NewArr");
     using namespace chaos::il2cpp::interpreter;
-    auto* arr = static_cast<ArrayStorage*>(CHAOS_IL2CPP_MALLOC(sizeof(ArrayStorage)));
+    using namespace chaos::il2cpp::runtime_core;
+    // Allocate through GC heap.  GcAllocate returns zeroed memory; on MSVC
+    // this is equivalent to a default-constructed empty std::vector (all
+    // internal pointers null).  The subsequent resize allocates the vector's
+    // internal buffer on C++ heap.
+    // TODO(Phase 3.4): Replace std::vector with GC-allocated buffer to
+    // eliminate the hidden C++ heap allocation and enable full GC tracking.
+    auto* arr = static_cast<ArrayStorage*>(GcAllocate(sizeof(ArrayStorage)));
     if (arr == nullptr) return nullptr;
-    ::new (arr) ArrayStorage();
+    // GcAllocate zeroes memory — vector is empty.  No placement new needed.
     arr->elements.resize(static_cast<size_t>(length > 0 ? length : 0));
     return arr;
 }
@@ -546,10 +660,12 @@ extern "C" void* CodegenLocAlloc(uint32_t size, void* base, uint32_t* bump) noex
         }
     }
 
-    // Heap fallback (no stack reserve, or reserve exhausted).
-    void* mem = CHAOS_IL2CPP_MALLOC(size);
+    // Heap fallback: allocate through GC heap (atomic — raw memory, no GC scanning).
+    // GcAllocateAtomic returns zeroed memory.
+    using namespace chaos::il2cpp::runtime_core;
+    void* mem = GcAllocateAtomic(size);
     if (mem == nullptr) return nullptr;
-    std::memset(mem, 0, size);
+    // GcAllocateAtomic already zeroes memory.
     return mem;
 }
 

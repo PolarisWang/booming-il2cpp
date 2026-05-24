@@ -31,6 +31,9 @@ internal sealed class ConvertToCppConfig
     /// <summary>Code generation mode: AOT (default) or JIT</summary>
     public CodegenMode Mode { get; init; } = CodegenMode.Aot;
 
+    /// <summary>Optional SDK output directory for self-contained CMake package</summary>
+    public string? SdkOutDir { get; init; }
+
     /// <summary>
     /// Parse CLI arguments.
     /// Expected: --assembly &lt;path&gt; [--assembly &lt;path&gt; ...] --output &lt;dir&gt; [options]
@@ -44,6 +47,7 @@ internal sealed class ConvertToCppConfig
         bool fullClosure = true;  // convert-to-cpp defaults to full assembly translation
         string? entryPoint = null;
         var mode = CodegenMode.Aot;
+        string? sdkOutDir = null;
 
         for (int i = 0; i < args.Length; i++)
         {
@@ -80,6 +84,9 @@ internal sealed class ConvertToCppConfig
                 case "--help" or "-h":
                     PrintHelp();
                     return new ConvertToCppConfig { AssemblyPaths = [], OutputDir = "" };
+                case "--sdk-out" when i + 1 < args.Length:
+                    sdkOutDir = Path.GetFullPath(args[++i]);
+                    break;
             }
         }
 
@@ -99,6 +106,7 @@ internal sealed class ConvertToCppConfig
             FullClosure = fullClosure,
             EntryPoint = entryPoint,
             Mode = mode,
+            SdkOutDir = sdkOutDir,
         };
     }
 
@@ -116,6 +124,7 @@ internal sealed class ConvertToCppConfig
         Console.WriteLine("  --entry-point <subject-id>    Explicit entry point (default: auto-detect Main)");
         Console.WriteLine("  --full-closure                Compile full closure (all reachable methods)");
         Console.WriteLine("  --mode aot|jit|hybrid          Codegen mode: aot (native C++, default), jit (JIT compile), or hybrid (AOT→JIT upgrade)");
+        Console.WriteLine("  --sdk-out <dir>               Output self-contained chaos-sdk/ CMake package (replaces --output)");
         Console.WriteLine("  --verbose, -v                 Enable verbose diagnostics");
         Console.WriteLine("  --help, -h                    Show this help");
     }

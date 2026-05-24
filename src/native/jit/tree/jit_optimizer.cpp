@@ -4,6 +4,8 @@
 #include "tree/jit_tree_builder.h"
 #include "tree/jit_tree_mutator.h"
 #include "tree/jit_linearizer.h"
+#include "tree/jit_intrinsics.h"
+#include "jit_inline.h"
 
 #include "interpreter/ir_reg_alloc.h"
 #include "interpreter/generated/ir_opcodes.h"
@@ -15,72 +17,93 @@
 
 namespace chaos::il2cpp::jit::tree {
 
-// ── Arena allocation for per-BB optimization ──────────────────────────
-// Each BB gets a fresh TreeBuilder with its own arena and VNTable.
-// The arena is reset per-BB (TreeBuilder dtor frees memory).
-
 bool OptimizeWithTreeIR(
     const std::vector<interpreter::RegisterInstruction>& instrs,
     std::vector<interpreter::RegisterInstruction>& out_instrs,
-    bool has_seh) noexcept
+    bool has_seh,
+    uint32_t max_vreg,
+    bool enable_inlining,
+    InlineResultBuffer* inline_results) noexcept
 {
     uint32_t n = static_cast<uint32_t>(instrs.size());
     if (n == 0) return false;
 
-    // SEH methods: tree IR can't handle non-contiguous BB layout yet
     if (has_seh) return false;
 
-    // Find basic block boundaries
+    if (max_vreg == 0) {
+        for (const auto& ri : instrs) {
+            if (ri.has_dst() && ri.dst_reg() > max_vreg)
+                max_vreg = ri.dst_reg();
+        }
+        max_vreg += 1;
+    }
+
     auto bbs = FindBasicBlocks(instrs.data(), n);
     if (bbs.empty()) return false;
 
-    // Process each BB independently
     bool any_optimized = false;
 
     for (const auto& bb : bbs) {
         uint32_t bb_len = bb.hi - bb.lo;
 
-        // Trivial BB (0-2 instructions): copy as-is, no tree overhead
         if (bb_len <= 2) {
             for (uint32_t i = bb.lo; i < bb.hi; ++i)
                 out_instrs.push_back(instrs[i]);
             continue;
         }
 
-        // Build tree for this BB
         TreeBuilder builder;
         auto result = builder.Build(instrs.data(), bb.lo, bb.hi);
 
         if (!result.first_node || result.root_count == 0) {
-            // Tree build failed — fall back to original instructions
             for (uint32_t i = bb.lo; i < bb.hi; ++i)
                 out_instrs.push_back(instrs[i]);
             continue;
         }
 
-        // Apply constant folding
+        // Inline eligible kCall nodes
+        if (enable_inlining) {
+            Inliner inliner(InlineConfig{}, 0, max_vreg);
+            inliner.InlineRoots(result.roots, result.root_count, 128u);
+            if (inliner.new_max_vreg() > max_vreg)
+                max_vreg = inliner.new_max_vreg();
+
+            // Accumulate inlined callee info for JitMethod population
+            if (inline_results) {
+                for (uint32_t ri = 0; ri < inliner.inlined_count(); ++ri) {
+                    const auto& d = inliner.inlined_decisions()[ri];
+                    inline_results->Add(d.callee_token, d.snapshot_version);
+                }
+            }
+        }
+
+        // Constant folding
         uint8_t* arena_pos = reinterpret_cast<uint8_t*>(result.first_node);
-        uint8_t* arena_end = arena_pos + builder.kArenaSize;  // approximate
+        uint8_t* arena_end = arena_pos + builder.kArenaSize;
+
+        // Intrinsic expansion (after inlining, before const-folding)
+        IntrinsicMutator intrinsic_mut(arena_pos, arena_end,
+                                        kIntrinsicTable, kIntrinsicTableSize,
+                                        &builder);
+        for (uint32_t ri = 0; ri < result.root_count; ++ri)
+            result.roots[ri] = intrinsic_mut.Mutate(result.roots[ri]);
+
         ConstFoldMutator fold_mut(arena_pos, arena_end);
-        for (uint32_t ri = 0; ri < result.root_count; ++ri) {
+        for (uint32_t ri = 0; ri < result.root_count; ++ri)
             result.roots[ri] = fold_mut.Mutate(result.roots[ri]);
-        }
 
-        // Apply CSE
+        // CSE
         CSEMutator cse_mut(builder.VN());
-        for (uint32_t ri = 0; ri < result.root_count; ++ri) {
+        for (uint32_t ri = 0; ri < result.root_count; ++ri)
             result.roots[ri] = cse_mut.Mutate(result.roots[ri]);
-        }
 
-        // Linearize optimized tree back to RegisterInstructions
+        // Linearize
         Linearizer linearizer;
         linearizer.LinearizeRoots(result.roots, result.root_count, out_instrs);
 
         any_optimized = true;
     }
 
-    // If optimization didn't actually change anything, we still use the
-    // optimized output (it should be semantically equivalent).
     return any_optimized;
 }
 

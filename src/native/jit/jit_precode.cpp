@@ -24,6 +24,7 @@
 //   0xFF 0xE0             jmp  rax              ; tail-call to compiled entry
 
 #include "jit_precode.h"
+#include "jit_inline.h"            // g_inline_reverse_map
 
 #include <codegen_bridge.h>   // HotpatchEntryV0
 #include <aot_core_ir_reader.h>  // DeserializeAotCoreIrMethod
@@ -312,15 +313,28 @@ extern "C" void* JitStubDispatchImpl(JitPrecode* precode) noexcept {
     // Fast relaxed check: already compiled?
     uint32_t s = precode->state.load(std::memory_order_relaxed);
     if (s == kPrecodeCompiled) {
-        // PGO: increment call counter when profiling is enabled
-        if (precode->config.enable_pgo) {
-            uint32_t count = precode->pgo_call_count.fetch_add(1, std::memory_order_relaxed);
-            if (count > kPgoFullJitThreshold && !precode->tier1_enqueued) {
-                precode->tier1_enqueued = true;
-                runtime_core::TierManager::Get().EnqueueJitRecompilation(precode, false);
+        // Hot-update stale check: if a callee was hotpatched after being inlined
+        // into this method, the stale flag is set by InlineReverseMap.  Trigger
+        // recompilation by resetting state to kPrecodeUncompiled.
+        if (precode->compiled && precode->compiled->stale.exchange(false)) {
+            // CAS: Compiled → Uncompiled.  If another thread already grabbed
+            // the recompilation slot, this CAS fails and we just re-read state.
+            uint32_t expected_compiled = kPrecodeCompiled;
+            precode->state.compare_exchange_strong(expected_compiled, kPrecodeUncompiled,
+                                                    std::memory_order_acq_rel);
+            s = precode->state.load(std::memory_order_relaxed);
+            // Fall through to the compile path below
+        } else {
+            // PGO: increment call counter when profiling is enabled
+            if (precode->config.enable_pgo) {
+                uint32_t count = precode->pgo_call_count.fetch_add(1, std::memory_order_relaxed);
+                if (count > kPgoFullJitThreshold && !precode->tier1_enqueued) {
+                    precode->tier1_enqueued = true;
+                    runtime_core::TierManager::Get().EnqueueJitRecompilation(precode, false);
+                }
             }
+            return precode->compiled->code;
         }
-        return precode->compiled->code;
     }
 
     // Attempt to become the compiler: Uncompiled → Compiling
@@ -432,9 +446,14 @@ extern "C" void RegisterJitEntryMethods(const JitEntry* entries, uint32_t count)
 
     // Register the slot update callback (idempotent — only sets once).
     // When SetPatchedBySlot bumps version and fires the callback, this
-    // updates all JIT slot tables to point at the new direct_ptr.
-    RegisterSlotUpdateCallback([](uint32_t callee_token, void* new_direct_ptr) {
+    // updates all JIT slot tables to point at the new direct_ptr and
+    // invalidates any callers that inlined the patched method.
+    RegisterSlotUpdateCallback([](uint32_t callee_token, void* new_direct_ptr,
+                                   HotpatchEntryV0* callee_entry) {
+        // Update non-inlined call-site slots
         g_reverse_slot_map.UpdateAll(callee_token, new_direct_ptr);
+        // Invalidate callers that inlined this method (version mismatch → stale)
+        g_inline_reverse_map.InvalidateCallers(callee_token, callee_entry);
     });
 }
 
@@ -573,8 +592,10 @@ extern "C" void RegisterHybridMethods(const HybridEntry* entries, uint32_t count
     }
 
     // Register the slot update callback (idempotent — only sets once).
-    RegisterSlotUpdateCallback([](uint32_t callee_token, void* new_direct_ptr) {
+    RegisterSlotUpdateCallback([](uint32_t callee_token, void* new_direct_ptr,
+                                   HotpatchEntryV0* callee_entry) {
         g_reverse_slot_map.UpdateAll(callee_token, new_direct_ptr);
+        g_inline_reverse_map.InvalidateCallers(callee_token, callee_entry);
     });
 }
 

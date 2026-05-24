@@ -53,6 +53,9 @@ static interpreter::IROpCode MapToIROpCode(NodeKind kind) noexcept {
         case kClt:      return interpreter::IROpCode::Clt;
         case kCgt:      return interpreter::IROpCode::Cgt;
         case kLdLen:    return interpreter::IROpCode::LdLen;
+        case kAbs:      return interpreter::IROpCode::Abs;
+        case kMin:      return interpreter::IROpCode::Min;
+        case kMax:      return interpreter::IROpCode::Max;
         case kLdFld:    return interpreter::IROpCode::LdFld;
         case kStLoc:    return interpreter::IROpCode::StLoc;
         case kReturn:   return interpreter::IROpCode::Ret;
@@ -160,14 +163,15 @@ uint32_t Linearizer::LinearizeNode(
     }
 
     // ── CSE: if already computed, emit Dup instead of recomputing ──────
-    if (IsCseDuplicate(node) && k >= kNeg && k <= kCgtUn) {
+    if (IsCseDuplicate(node) &&
+        ((k >= kNeg && k <= kCgtUn) || k == kAbs || k == kMin || k == kMax)) {
         // Node's VN was already emitted — emit a copy via Dup
         // (the vreg from the earlier computation is tracked separately)
         return 0;  // caller handles CSE by not emitting
     }
 
     // ── Unary nodes ────────────────────────────────────────────────────
-    if (k >= kNeg && k <= kLdLen) {
+    if ((k >= kNeg && k <= kLdLen) || k == kAbs) {
         uint32_t src_vreg = LinearizeNode(node->child0, out);
         if (src_vreg == 0) return 0;
 
@@ -197,7 +201,7 @@ uint32_t Linearizer::LinearizeNode(
     }
 
     // ── Binary nodes ───────────────────────────────────────────────────
-    if (k >= kAdd && k <= kCgtUn) {
+    if ((k >= kAdd && k <= kCgtUn) || k == kMin || k == kMax) {
         uint32_t src1_vreg = LinearizeNode(node->child0, out);
         uint32_t src2_vreg = LinearizeNode(node->child1, out);
         if (src1_vreg == 0 && node->child0) return 0;

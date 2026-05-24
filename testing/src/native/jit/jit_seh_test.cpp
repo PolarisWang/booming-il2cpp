@@ -1,7 +1,7 @@
 // ── Codegen SEH public API tests ────────────────────────────────────────────
 //
-// Tests the public API surface of t4_seh_handler through normal library linkage,
-// complementing the existing t4_seh_handler_test.cpp which includes the source
+// Tests the public API surface of the JIT SEH handler through normal library linkage,
+// complementing the existing jit_seh_handler_test.cpp which includes the source
 // directly for access to static/internal functions.
 //
 // IMPORTANT: All JitMethod objects are heap-allocated/zeroed to avoid the

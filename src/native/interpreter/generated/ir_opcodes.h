@@ -107,6 +107,10 @@ enum class IROpCode : std::int32_t {
     InitBlk = 97,
     CallVirtConstrained = 98,
     Calli = 99,
+    Abs = 100,
+    Min = 101,
+    Max = 102,
+    StFldBarrier = 103,
 };
 
 }  // namespace chaos::il2cpp::interpreter

@@ -70,6 +70,11 @@ enum NodeKind : uint8_t {
     kCall      = 50,  // method call: (method_token, args[])
     kCallVirt  = 51,  // virtual call: (method_token, this, args[])
 
+    // Intrinsic nodes (Gap 3)
+    kAbs       = 52,  // absolute value (unary, int32)
+    kMin       = 53,  // minimum (binary, int32)
+    kMax       = 54,  // maximum (binary, int32)
+
     // Store / side-effect nodes (roots in the DAG)
     kStLoc     = 64,  // local store: (value, local_vreg)
     kStFld     = 65,  // field store: (object, value, field_offset)
@@ -121,6 +126,13 @@ struct ExprNode {
 
         // For nodes with children
         ExprNode* child0;
+
+        // Call payload: method_token + first arg vreg packed in 8 bytes
+        // (method_token [8-11], call_arg0_vreg [12-15])
+        struct {
+            uint32_t call_method_token;
+            uint32_t call_arg0_vreg;
+        };
     };
 
     union {
@@ -145,6 +157,9 @@ struct ExprNode {
 
 static_assert(sizeof(ExprNode) <= 24,
     "ExprNode should fit in 24 bytes for cache efficiency");
+
+static_assert(sizeof(ExprNode::call_method_token) + sizeof(ExprNode::call_arg0_vreg) <= 8,
+    "call_method_token + call_arg0_vreg should fit in the 8-byte child0 union slot");
 
 // ── Factory helpers (used by TreeBuilder) ──────────────────────────────
 

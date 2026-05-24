@@ -1,5 +1,6 @@
 #include "WinSehHandler.h"
 #include "jit_seh.h"  // for kMaxUnwindDepth, JitUnwindState, etc.
+#include "jit_registry_lock_guard.h"
 
 #include <chaos/log.h>
 #include <chaos/native_types.h>
@@ -131,10 +132,9 @@ void WinSehHandler::RegisterCode(void* code_start, uint32_t code_size,
     if (code_start == nullptr || code_size == 0 || nm == nullptr) return;
 
     {
-        AcquireLock();
+        JitRegistryLockGuard lock(this);
         if (count_ >= kMaxJitCodeEntries) {
             CHAOS_IL2CPP_LOG_WARN_M("codegen", "RegisterCode: registry full ({} entries)", kMaxJitCodeEntries);
-            ReleaseLock();
             return;
         }
         entries_[count_].code_start = code_start;
@@ -142,7 +142,6 @@ void WinSehHandler::RegisterCode(void* code_start, uint32_t code_size,
         entries_[count_].nm         = nm;
         entries_[count_].patch_method_token = patch_method_token;
         count_++;
-        ReleaseLock();
     }
 
     CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
@@ -174,7 +173,7 @@ void WinSehHandler::RegisterCode(void* code_start, uint32_t code_size,
 void WinSehHandler::UnregisterCode(void* code_start) noexcept {
     if (code_start == nullptr) return;
     {
-        AcquireLock();
+        JitRegistryLockGuard lock(this);
         for (uint32_t i = 0; i < count_; i++) {
             if (entries_[i].code_start == code_start) {
                 EnqueueDemotedCode(
@@ -185,7 +184,6 @@ void WinSehHandler::UnregisterCode(void* code_start) noexcept {
                 break;
             }
         }
-        ReleaseLock();
     }
     InvalidateLookupCache();
 }
@@ -234,7 +232,7 @@ uint32_t WinSehHandler::DemoteByToken(uint32_t method_token) noexcept {
     if (method_token == 0) return 0;
     uint32_t count = 0;
     {
-        AcquireLock();
+        JitRegistryLockGuard lock(this);
         for (uint32_t i = 0; i < count_; i++) {
             if (entries_[i].patch_method_token == method_token &&
                 entries_[i].nm != nullptr) {
@@ -246,7 +244,6 @@ uint32_t WinSehHandler::DemoteByToken(uint32_t method_token) noexcept {
                 count++;
             }
         }
-        ReleaseLock();
     }
     if (count > 0) {
         InvalidateLookupCache();
@@ -260,7 +257,7 @@ uint32_t WinSehHandler::DemoteByCallSiteToken(uint32_t method_token) noexcept {
     if (method_token == 0) return 0;
     uint32_t count = 0;
     {
-        AcquireLock();
+        JitRegistryLockGuard lock(this);
         for (uint32_t i = 0; i < count_; i++) {
             const auto* nm = entries_[i].nm;
             if (nm == nullptr) continue;
@@ -276,7 +273,6 @@ uint32_t WinSehHandler::DemoteByCallSiteToken(uint32_t method_token) noexcept {
                 }
             }
         }
-        ReleaseLock();
     }
     if (count > 0) {
         InvalidateLookupCache();

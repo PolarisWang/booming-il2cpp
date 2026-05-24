@@ -49,6 +49,10 @@ private:
     uint32_t    count_ = 0;
     std::atomic<long> lock_{0};
 
+    // RAII guard is a friend so it can call AcquireLock/ReleaseLock.
+    template <typename T>
+    friend class JitRegistryLockGuard;
+
     // ── Pending Free Regions ────────────────────────────────────────────
     static constexpr uint32_t kMaxPendingFreeRegions = 64;
 

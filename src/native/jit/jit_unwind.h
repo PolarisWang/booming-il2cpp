@@ -8,7 +8,7 @@
 // SetUnhandledExceptionFilter).
 //
 // V1: Stack walking only (no UNW_FLAG_EHANDLER).  Exception dispatch still
-// goes through the existing VEH handler (t4_seh_handler.cpp).  Personality
+// goes through the existing VEH handler (WinSehHandler.cpp).  Personality
 // routine integration is deferred to V2.
 //
 // Reference: https://learn.microsoft.com/en-us/cpp/build/exception-handling-x64
@@ -99,7 +99,7 @@ RuntimeFunction* AllocRuntimeFunction(uint32_t unwind_info_offset,
                                       uint32_t code_size) noexcept;
 
 /// Personality routine for managed exception dispatch across T4 frames (V2).
-/// Declared extern "C" for stable ABI. Defined in t4_seh_handler.cpp.
+/// Declared extern "C" for stable ABI. Defined in WinSehHandler.cpp.
 extern "C" void JitPersonalityRoutine();
 
 /// Size of the JMP thunk emitted after UNWIND_INFO when has_seh=true.

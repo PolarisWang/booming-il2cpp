@@ -29,7 +29,21 @@ internal static class ConvertToCppHandler
         if (config.AssemblyPaths.Count == 0)
             return 1;
 
-        var outputRoot = Path.GetFullPath(config.OutputDir);
+        // Determine effective output root:
+        //   --sdk-out → raw codegen goes to sdkRoot/generated/
+        //   --output  → raw codegen goes to outputDir/
+        string sdkRoot;
+        string outputRoot;
+        if (config.SdkOutDir != null)
+        {
+            sdkRoot = Path.GetFullPath(config.SdkOutDir);
+            outputRoot = Path.Combine(sdkRoot, "generated");
+        }
+        else
+        {
+            sdkRoot = null!;
+            outputRoot = Path.GetFullPath(config.OutputDir);
+        }
         Directory.CreateDirectory(outputRoot);
 
         Console.WriteLine($"chaos-il2cpp convert-to-cpp");
@@ -102,9 +116,9 @@ internal static class ConvertToCppHandler
             WriteArtifacts(outputRoot, result);
             Console.WriteLine(" done");
 
-            // Generate CMakeLists.txt
+            // Generate CMakeLists.txt (always, even in SDK mode — lives in generated/)
             var repoRoot = ResolveRepoRoot();
-            var nativeLibDir = Path.Combine(repoRoot, "build", "native");
+            var nativeLibDir = Path.Combine(repoRoot, "artifacts", "presets", "windows-x64-reference");
             var cmakeGen = new Chaos.IL2CPP.Generator.BuildSystem.CmakeGenerator(repoRoot);
             var singleCmakeContent = cmakeGen.Generate(
                 new[] { emitResult }.ToList(),
@@ -116,7 +130,17 @@ internal static class ConvertToCppHandler
             var runtimeEntryCpp = GenerateRuntimeEntryCpp(config.EntryPoint is not null ? "RunNativeAot" : null, config.Mode);
             File.WriteAllText(Path.Combine(outputRoot, "runtime-entry.cpp"), runtimeEntryCpp);
 
-            Console.WriteLine($"Convert completed: {outputRoot}");
+            // Emit SDK if --sdk-out specified
+            if (config.SdkOutDir != null)
+            {
+                Console.Write("  Emitting chaos-sdk...");
+                var assemblyName = result.ClosureManifest?.AssemblyName ?? "unknown";
+                var sdkEmitter = new SdkEmitter();
+                sdkEmitter.EmitSdk(sdkRoot, outputRoot, repoRoot, nativeLibDir, "RelWithDebInfo", assemblyName);
+                Console.WriteLine(" done");
+            }
+
+            Console.WriteLine($"Convert completed: {sdkRoot ?? outputRoot}");
         }
         else
         {
@@ -165,7 +189,7 @@ internal static class ConvertToCppHandler
 
             // Generate CMakeLists.txt using real emit results
             var repoRoot = ResolveRepoRoot();
-            var nativeLibDir = Path.Combine(repoRoot, "build", "native");
+            var nativeLibDir = Path.Combine(repoRoot, "artifacts", "presets", "windows-x64-reference");
             var cmakeGen = new Chaos.IL2CPP.Generator.BuildSystem.CmakeGenerator(repoRoot);
             var cmakeContent = cmakeGen.Generate(
                 emitResults.Select(r => new NativeAotResult
@@ -185,9 +209,18 @@ internal static class ConvertToCppHandler
             var runtimeEntryContent = GenerateRuntimeEntryCpp(config.EntryPoint is not null ? "RunNativeAot" : null, config.Mode);
             File.WriteAllText(Path.Combine(outputRoot, "runtime-entry.cpp"), runtimeEntryContent);
 
+            // Emit SDK if --sdk-out specified
+            if (config.SdkOutDir != null)
+            {
+                Console.Write("  Emitting chaos-sdk...");
+                var assemblyName = results.FirstOrDefault()?.ClosureManifest?.AssemblyName ?? "combined";
+                var sdkEmitter = new SdkEmitter();
+                sdkEmitter.EmitSdk(sdkRoot, outputRoot, repoRoot, nativeLibDir, "RelWithDebInfo", assemblyName);
+                Console.WriteLine(" done");
+            }
+
             Console.WriteLine($" {totalFiles} files across {results.Count} assemblies");
-            Console.WriteLine($"  CMakeLists.txt — build with: cmake -S {outputRoot} -B {outputRoot}/build");
-            Console.WriteLine($"Convert completed: {outputRoot}");
+            Console.WriteLine($"Convert completed: {sdkRoot ?? outputRoot}");
         }
 
         return 0;

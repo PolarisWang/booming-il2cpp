@@ -273,7 +273,7 @@ def _run_convert_to_cpp(
     # Keep _subjects_input directory (created by pipeline_adapter before calling
     # this function, containing the clean subjects DLL for convert-to-cpp).
     for d in sorted(codegen_out.iterdir()):
-        if d.is_dir() and d.name not in ("build", "generated", "_subjects_input"):
+        if d.is_dir() and d.name not in ("build", "generated", "_subjects_input", "include", "lib", "cmake"):
             shutil.rmtree(d)
             print(f"    [clean] removed stale codegen subdirectory: {d.name}")
 
@@ -287,7 +287,7 @@ def _run_convert_to_cpp(
         "dotnet", "exec", str(driver_dll), "convert-to-cpp",
         "--assembly", dll_path,
         "--assembly-dir", str(Path(dll_path).parent),
-        "--output", str(codegen_out),
+        "--sdk-out", str(codegen_out),
     ]
     if entry_point_subject_id:
         cmd.extend(["--entry-point", entry_point_subject_id])
@@ -800,28 +800,20 @@ def _inject_eha_directive(cmakelists: Path) -> None:
 
 
 def _ensure_cmakelists(cmakelists: Path, family_slug: str, verification: Path, *, is_jit: bool = False) -> None:
-    """Auto-generate or update native/CMakeLists.txt with the latest template.
+    """Auto-generate or update native/CMakeLists.txt with SDK-based template.
 
-    Uses the same template pattern as convert-char's verified CMakeLists.txt.
-    The generated file references codegen/ and native/runtime-entry.cpp,
-    plus verification_dispatch.generated.cpp (sentinel or real).
-    Always regenerates to pick up template updates (e.g. new library dependencies).
+    Uses find_package(chaos) to discover the chaos SDK (prebuilt runtime libs,
+    compile flags). The SDK is at codegen/ output directory (--sdk-out).
 
-    When is_jit=True, generates a JIT-mode template that links chaos_jit instead
-    of chaos_codegen, adds jit include/lib dirs, and sets /FORCE:MULTIPLE.
+    When is_jit=True, adds JIT-mode libs (chaos_jit, chaos_debugger) and
+    /FORCE:MULTIPLE linker flag.
     """
 
     repo_root_str = str(_REPO_ROOT).replace("\\", "/")
     codegen_rel = str((verification / family_slug / "codegen").resolve()).replace("\\", "/")
-    native_build = str((_REPO_ROOT / "artifacts" / "presets" / "windows-x64-reference").resolve()).replace("\\", "/")
 
     # ── Conditional JIT-mode additions ──────────────────────────────────
     jit_include  = '    "${CHAOS_PROJECT_ROOT}/src/native/jit"\n' if is_jit else ''
-    jit_lib      = '    "${CHAOS_NATIVE_BUILD}/src/native/jit"\n' if is_jit else ''
-    debugger_lib = '    "${CHAOS_NATIVE_BUILD}/src/native/diagnostics/debugger"\n' if is_jit else ''
-    jit_remove   = '    "${CMAKE_CURRENT_SOURCE_DIR}/jit_stubs.cpp"\n' if is_jit else ''
-    jit_lib_name = 'chaos_jit' if is_jit else 'chaos_codegen'
-    debugger_name = '\n    chaos_debugger' if is_jit else ''
     force_multiple = '\ntarget_link_options(entry PRIVATE /FORCE:MULTIPLE)' if is_jit else ''
 
     cmake_content = (
@@ -835,10 +827,14 @@ def _ensure_cmakelists(cmakelists: Path, family_slug: str, verification: Path, *
         f'add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)\n'
         f'add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)\n'
         f'\n'
+        f'# Find chaos SDK (prebuilt runtime libs + flags via chaos::runtime)\n'
+        f'# The SDK is the codegen output root from --sdk-out.\n'
+        f'set(CHAOS_SDK_DIR "{codegen_rel}")\n'
+        f'find_package(chaos REQUIRED PATHS "${{CHAOS_SDK_DIR}}")\n'
+        f'\n'
         f'# Paths\n'
         f'set(CHAOS_PROJECT_ROOT "{repo_root_str}")\n'
         f'set(CHAOS_CODEGEN_DIR "{codegen_rel}")\n'
-        f'set(CHAOS_NATIVE_BUILD "{native_build}")\n'
         f'\n'
         f'# Source files — codegen outputs to codegen/<AssemblyName>/generated/\n'
         f'file(GLOB CHAOS_CODEGEN_CPP "${{CHAOS_CODEGEN_DIR}}/*Subjects/generated/native-aot.generated.cpp")\n'
@@ -855,7 +851,7 @@ def _ensure_cmakelists(cmakelists: Path, family_slug: str, verification: Path, *
         f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/runtime-entry.cpp"\n'
         f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/runtime-patchdata.cpp"\n'
         f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/verification_dispatch.generated.cpp"\n'
-        f'{jit_remove}'
+        f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/jit_stubs.cpp"\n'
         f')\n'
         f'set(CHAOS_ENTRY_SOURCES\n'
         f'    "runtime-entry.cpp"\n'
@@ -865,7 +861,7 @@ def _ensure_cmakelists(cmakelists: Path, family_slug: str, verification: Path, *
         f'    ${{CHAOS_AOT_GENERATED_CPP}}\n'
         f')\n'
         f'\n'
-        f'# Include directories\n'
+        f'# Include directories (repo tree — SDK include/ is not yet fully self-contained)\n'
         f'set(CHAOS_ENTRY_INCLUDES\n'
         f'    "${{CHAOS_PROJECT_ROOT}}/src/native/common"\n'
         f'    "${{CHAOS_PROJECT_ROOT}}/src/native/runtime-core"\n'
@@ -881,49 +877,21 @@ def _ensure_cmakelists(cmakelists: Path, family_slug: str, verification: Path, *
         f'    "${{CHAOS_PROJECT_ROOT}}/src/native"\n'
         f'    "${{CHAOS_PROJECT_ROOT}}/contracts/native/v0"\n'
         f'    "${{CHAOS_PROJECT_ROOT}}/third_party/fmt/include"\n'
-        f'    "${{CHAOS_PROJECT_ROOT}}/third_party/fmt/include"\n'
         f'    "${{CHAOS_PROJECT_ROOT}}/third_party/unordered_dense/include"\n'
         f'    "${{CHAOS_CODEGEN_DIR}}/NumericAggregationSubjects/generated"\n'
         f'    "${{CMAKE_CURRENT_SOURCE_DIR}}"\n'
         f')\n'
         f'\n'
-        f'# Library link directories\n'
-        f'set(CHAOS_LIB_DIRS\n'
-        f'    "${{CHAOS_NATIVE_BUILD}}/src/native/runtime-core"\n'
-        f'    "${{CHAOS_NATIVE_BUILD}}/src/native/bootstrap"\n'
-        f'    "${{CHAOS_NATIVE_BUILD}}/src/native/common"\n'
-        f'    "${{CHAOS_NATIVE_BUILD}}/src/native/interpreter"\n'
-        f'    "${{CHAOS_NATIVE_BUILD}}/src/native/codegen"\n'
-        f'{jit_lib}'
-        f'    "${{CHAOS_NATIVE_BUILD}}/src/native/support"\n'
-        f'    "${{CHAOS_NATIVE_BUILD}}/src/native/hot-update"\n'
-        f'    "${{CHAOS_NATIVE_BUILD}}/src/native/diagnostics/eventpipe"\n'
-        f'{debugger_lib}'
-        f'    "${{CHAOS_NATIVE_BUILD}}/fmt_build"\n'
-        f')\n'
-        f'\n'
-        f'# Runtime libs to link\n'
-        f'set(CHAOS_RUNTIME_LIBS\n'
-        f'    chaos_runtime_core\n'
-        f'    chaos_bootstrap\n'
-        f'    chaos_common\n'
-        f'    chaos_interpreter\n'
-        f'    {jit_lib_name}\n'
-        f'    chaos_support\n'
-        f'    chaos_hot_update\n'
-        f'    chaos_eventpipe\n'
-        f'    chaos_fmt{debugger_name}\n'
-        f')\n'
-        f'\n'
         f'add_executable(entry ${{CHAOS_ENTRY_SOURCES}})\n'
         f'target_include_directories(entry PRIVATE ${{CHAOS_ENTRY_INCLUDES}})\n'
-        f'target_link_directories(entry PRIVATE ${{CHAOS_LIB_DIRS}})\n'
         f'target_compile_options(entry PRIVATE /EHa)\n'
-        f'target_link_libraries(entry PRIVATE ${{CHAOS_RUNTIME_LIBS}}){force_multiple}\n'
+        f'target_link_libraries(entry PRIVATE\n'
+        f'    chaos::runtime\n'
+        f'){force_multiple}\n'
     )
     cmakelists.parent.mkdir(parents=True, exist_ok=True)
     cmakelists.write_text(cmake_content, encoding="utf-8")
-    print(f"    [build_entry] auto-generated CMakeLists.txt at {cmakelists}")
+    print(f"    [build_entry] auto-generated CMakeLists.txt (chaos-sdk mode) at {cmakelists}")
 
 
 
@@ -1569,6 +1537,13 @@ def _build_entry_exe(family_slug: str, *, verification: Path | None = None, conf
     v = verification or _VERIFICATION
     native_dir = v / family_slug / "native"
     cmakelists = native_dir / "CMakeLists.txt"
+
+    # Clean stale jit_stubs.cpp from previous JIT runs (replaced by chaos_jit.lib in SDK)
+    stale_jit_stubs = native_dir / "jit_stubs.cpp"
+    if stale_jit_stubs.exists():
+        stale_jit_stubs.unlink()
+        print(f"    [build_entry] cleaned stale jit_stubs.cpp")
+
     # Auto-generate CMakeLists.txt if missing (e.g. after clean delete)
     _ensure_cmakelists(cmakelists, family_slug, v, is_jit=is_jit)
 
