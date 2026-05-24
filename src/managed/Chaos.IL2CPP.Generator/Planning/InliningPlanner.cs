@@ -33,13 +33,13 @@ internal sealed class InliningPlanner
     // beyond 16 without profiling risks code-bloat regressions.
 
     /// <summary>Max callee IR instructions for inlining (hard cap).</summary>
-    internal const int kMaxInlineInstructionCount = 64;
+    internal const int kMaxInlineInstructionCount = 32;
 
     /// <summary>
-    /// Max callee size as a fraction of caller size (e.g., 0.80f means
-    /// callee must be ≤ 80% of caller's IR instruction count).
+    /// Max callee size as a fraction of caller size (e.g., 0.50f means
+    /// callee must be ≤ 50% of caller's IR instruction count).
     /// </summary>
-    internal const float kMaxInlineCallerFraction = 0.80f;
+    internal const float kMaxInlineCallerFraction = 0.50f;
 
     // ── Hot/cold thresholds ────────────────────────────────────────────
     // Methods with estimated call count exceeding these thresholds are
