@@ -1,0 +1,129 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadata",
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  },
+  "types": [
+    {
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "metadataToken": 33554434,
+      "sourceKind": "ReferencedAot"
+    }
+  ],
+  "methods": [
+    {
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_0:System.Void()",
+      "metadataToken": 100663297,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_1:System.Void()",
+      "metadataToken": 100663298,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_2:System.Void()",
+      "metadataToken": 100663299,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_3:System.Void()",
+      "metadataToken": 100663300,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_4:System.Void()",
+      "metadataToken": 100663301,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_5:System.Void()",
+      "metadataToken": 100663302,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_6:System.Void()",
+      "metadataToken": 100663303,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_7:System.Void()",
+      "metadataToken": 100663304,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_8:System.Void()",
+      "metadataToken": 100663305,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_9:System.Void()",
+      "metadataToken": 100663306,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_10:System.Void()",
+      "metadataToken": 100663307,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_11:System.Void()",
+      "metadataToken": 100663308,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_12:System.Void()",
+      "metadataToken": 100663309,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_13:System.Void()",
+      "metadataToken": 100663310,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_14:System.Void()",
+      "metadataToken": 100663311,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_15:System.Void()",
+      "metadataToken": 100663312,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_16:System.Void()",
+      "metadataToken": 100663313,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_17:System.Void()",
+      "metadataToken": 100663314,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_18:System.Void()",
+      "metadataToken": 100663315,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_19:System.Void()",
+      "metadataToken": 100663316,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_20:System.Void()",
+      "metadataToken": 100663317,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::CustomEntrySubject_21:System.Void()",
+      "metadataToken": 100663318,
+      "sourceKind": "ReferencedAot"
+    }
+  ],
+  "genericInstantiations": []
+}

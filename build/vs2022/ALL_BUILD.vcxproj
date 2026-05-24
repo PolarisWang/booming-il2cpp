@@ -1205,6 +1205,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{130EA421-1E8C-3F47-BF31-EB5451F8A6B8}</Project>
       <Name>test_jit_seh</Name>
     </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\testing\src\native\jit\test_jit_seh_handler_internal.vcxproj">
+      <Project>{B7F4C1E1-EE1F-3BD4-85A0-A10F3D15D9B1}</Project>
+      <Name>test_jit_seh_handler_internal</Name>
+    </ProjectReference>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\testing\src\native\jit\test_jit_unwind.vcxproj">
       <Project>{2664511D-A817-3DDC-AD25-00F79EC2CF88}</Project>
       <Name>test_jit_unwind</Name>

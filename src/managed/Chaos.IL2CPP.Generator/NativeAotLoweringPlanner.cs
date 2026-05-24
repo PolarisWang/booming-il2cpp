@@ -283,6 +283,9 @@ public sealed partial class NativeAotLoweringPlanner
     /// </summary>
     private string? _currentMethodNativeSymbol;
 
+    /// <summary>Current method artifact, used by inlining budget checks.</summary>
+    private AotCoreIrMethodArtifact? _currentMethodArtifact;
+
     /// <summary>
     /// Module-local symbol table: subjectId → nativeSymbol for all methods in the
     /// current codegen output.  Enables <see cref="EmitLinearCall"/> to detect
@@ -291,6 +294,15 @@ public sealed partial class NativeAotLoweringPlanner
     /// Populated from <see cref="_methodsBySubjectId"/> during Create.
     /// </summary>
     private Dictionary<string, string> _moduleSymbolTable =
+        new(StringComparer.Ordinal);
+
+    /// <summary>
+    /// Reverse of <see cref="_moduleSymbolTable"/>: nativeSymbol → subjectId.
+    /// Used by inlining to resolve the callee SubjectId from InvocationTarget.TargetSymbol
+    /// when the instruction-level metadata (Callee, TargetReference) is null due to
+    /// lowering-time devirtualization consuming the original callee reference.
+    /// </summary>
+    private Dictionary<string, string> _nativeSymbolToSubjectId =
         new(StringComparer.Ordinal);
 
     // ══════════════════════════════════════════════════════════════════════════════════════════
@@ -390,6 +402,10 @@ public sealed partial class NativeAotLoweringPlanner
         _moduleSymbolTable = _methodsBySubjectId
             .Where(kvp => IsSameModuleMethod(kvp.Key))
             .ToDictionary(kvp => kvp.Key, kvp => kvp.Value.NativeSymbol, StringComparer.Ordinal);
+
+        // Build reverse symbol table for inlining SubjectId resolution.
+        _nativeSymbolToSubjectId = _moduleSymbolTable
+            .ToDictionary(kvp => kvp.Value, kvp => kvp.Key, StringComparer.Ordinal);
 
         _attributeStorageFieldIndex = BuildAttributeStorageFieldIndex(_methodsBySubjectId);
         _referenceTypeBaseSubjectIds = CollectReferenceTypeBaseSubjectIds(aotCoreIr);

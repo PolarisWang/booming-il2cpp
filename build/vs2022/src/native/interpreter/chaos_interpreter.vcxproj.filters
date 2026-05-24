@@ -19,6 +19,9 @@
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\interpreter\ir_reg_alloc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\interpreter\interp_frame_scanner.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\interpreter\osr_state.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

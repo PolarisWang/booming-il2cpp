@@ -56,6 +56,7 @@ set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_PROJECT_ROOT}/src/native/interpreter/generated"
     "${CHAOS_PROJECT_ROOT}/src/native/support"
     "${CHAOS_PROJECT_ROOT}/src/native/hot-update"
+    "${CHAOS_PROJECT_ROOT}/src/native/jit"
     "${CHAOS_PROJECT_ROOT}/third_party/unordered_dense/include"
     "${CHAOS_CODEGEN_DIR}/NumericAggregationSubjects/generated"
     "${CMAKE_CURRENT_SOURCE_DIR}"
@@ -67,3 +68,4 @@ target_compile_options(entry PRIVATE /EHa)
 target_link_libraries(entry PRIVATE
     chaos::runtime
 )
+target_link_options(entry PRIVATE /FORCE:MULTIPLE)

@@ -1,0 +1,169 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadata",
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  },
+  "types": [
+    {
+      "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects",
+      "metadataToken": 33554434,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "DispatchBasicSubjects/ICalculator",
+      "metadataToken": 33554435,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "DispatchBasicSubjects/IStatusProvider",
+      "metadataToken": 33554436,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "DispatchBasicSubjects/IBasicOp",
+      "metadataToken": 33554437,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "DispatchBasicSubjects/Calculator",
+      "metadataToken": 33554438,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "DispatchBasicSubjects/StatusProvider",
+      "metadataToken": 33554439,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "DispatchBasicSubjects/BasicImpl",
+      "metadataToken": 33554440,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry",
+      "metadataToken": 33554441,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "DispatchBasicSubjects/System.Runtime.InteropServices.ComInterfaceTypeAttribute",
+      "metadataToken": 33554442,
+      "sourceKind": "ReferencedAot"
+    }
+  ],
+  "methods": [
+    {
+      "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_0:System.Void()",
+      "metadataToken": 100663297,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_1:System.Void()",
+      "metadataToken": 100663298,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_2:System.Void()",
+      "metadataToken": 100663299,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_3:System.Void()",
+      "metadataToken": 100663300,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "DispatchBasicSubjects/DispatchBasicSubjects::Subject_4:System.Void()",
+      "metadataToken": 100663301,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "DispatchBasicSubjects/ICalculator::Add:System.Int32(System.Int32,System.Int32)",
+      "metadataToken": 100663302,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "DispatchBasicSubjects/ICalculator::Subtract:System.Int32(System.Int32,System.Int32)",
+      "metadataToken": 100663303,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "DispatchBasicSubjects/IStatusProvider::GetStatusCode:System.Int32()",
+      "metadataToken": 100663304,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "DispatchBasicSubjects/IBasicOp::GetValue:System.Int32()",
+      "metadataToken": 100663305,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "DispatchBasicSubjects/Calculator::Add:System.Int32(System.Int32,System.Int32)",
+      "metadataToken": 100663306,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "DispatchBasicSubjects/Calculator::Subtract:System.Int32(System.Int32,System.Int32)",
+      "metadataToken": 100663307,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "DispatchBasicSubjects/Calculator::.ctor:System.Void()",
+      "metadataToken": 100663308,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "DispatchBasicSubjects/StatusProvider::GetStatusCode:System.Int32()",
+      "metadataToken": 100663309,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "DispatchBasicSubjects/StatusProvider::.ctor:System.Void()",
+      "metadataToken": 100663310,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "DispatchBasicSubjects/BasicImpl::GetValue:System.Int32()",
+      "metadataToken": 100663311,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "DispatchBasicSubjects/BasicImpl::.ctor:System.Void()",
+      "metadataToken": 100663312,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::Run:System.Int32(System.Int32)",
+      "metadataToken": 100663313,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchAdd:System.Int32()",
+      "metadataToken": 100663314,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIDispatchSub:System.Int32()",
+      "metadataToken": 100663315,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestDualGetStatus:System.Int32()",
+      "metadataToken": 100663316,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "DispatchBasicSubjects/DispatchBasicNativeEntry::TestIUnknownGetValue:System.Int32()",
+      "metadataToken": 100663317,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "DispatchBasicSubjects/System.Runtime.InteropServices.ComInterfaceTypeAttribute::.ctor:System.Void(ComInterfaceType)",
+      "metadataToken": 100663318,
+      "sourceKind": "ReferencedAot"
+    }
+  ],
+  "genericInstantiations": []
+}

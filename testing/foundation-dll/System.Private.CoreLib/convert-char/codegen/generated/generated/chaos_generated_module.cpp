@@ -138,6 +138,7 @@ bool ChaosGeneratedModuleActivate(ChaosRuntimeHost* host) {
     );
     if (ok) {
         ChaosRegisterGcLayouts();
+        ChaosRegisterAotEEClasses();
     }
     return ok;
 }

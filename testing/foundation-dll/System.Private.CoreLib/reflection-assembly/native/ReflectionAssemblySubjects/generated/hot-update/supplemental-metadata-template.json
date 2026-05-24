@@ -1,0 +1,195 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "ReflectionAssemblySubjects",
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "ReflectionAssemblySubjects",
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_0:System.Void()",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "metadataToken": 100663297,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionAssemblySubjects",
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_1:System.Void()",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionAssemblySubjects",
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_2:System.Void()",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionAssemblySubjects",
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_3:System.Void()",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionAssemblySubjects",
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_4:System.Void()",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionAssemblySubjects",
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_5:System.Void()",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionAssemblySubjects",
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_6:System.Void()",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionAssemblySubjects",
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_7:System.Void()",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_7:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionAssemblySubjects",
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_8:System.Void()",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_8:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionAssemblySubjects",
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_9:System.Void()",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_9:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionAssemblySubjects",
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_10:System.Void()",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_10:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionAssemblySubjects",
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_11:System.Void()",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_11:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "metadataToken": 100663308,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionAssemblySubjects",
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_12:System.Void()",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_12:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "metadataToken": 100663309,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionAssemblySubjects",
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_13:System.Void()",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_13:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "metadataToken": 100663310,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionAssemblySubjects",
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_14:System.Void()",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_14:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "metadataToken": 100663311,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionAssemblySubjects",
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_15:System.Void()",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_15:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "metadataToken": 100663312,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionAssemblySubjects",
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_16:System.Void()",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_16:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "metadataToken": 100663313,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionAssemblySubjects",
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_17:System.Void()",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_17:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "metadataToken": 100663314,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionAssemblySubjects",
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_18:System.Void()",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_18:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "metadataToken": 100663315,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionAssemblySubjects",
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_19:System.Void()",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_19:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "metadataToken": 100663316,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionAssemblySubjects",
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_20:System.Void()",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::Subject_20:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "metadataToken": 100663317,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionAssemblySubjects",
+      "subjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::CustomEntrySubject_21:System.Void()",
+      "definitionSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects::CustomEntrySubject_21:System.Void()",
+      "declaringTypeSubjectId": "ReflectionAssemblySubjects/ReflectionAssemblySubjects",
+      "metadataToken": 100663318,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

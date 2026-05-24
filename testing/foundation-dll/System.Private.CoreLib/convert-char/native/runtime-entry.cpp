@@ -36,6 +36,10 @@ extern "C" const int kSubjectEntryCount;
 extern "C" const int kSubjectEntryIndices[];
 extern "C" const int kSubjectEntryCount;
 extern "C" const int kSubjectEntryIndices[];
+extern "C" const int kSubjectEntryCount;
+extern "C" const int kSubjectEntryIndices[];
+extern "C" const int kSubjectEntryCount;
+extern "C" const int kSubjectEntryIndices[];
 extern "C" int32_t kChaosExternalRuntimeCount;
 
 // ChaosJitRegisterAll is defined in native-aot.generated.cpp (no-op in AOT mode).
@@ -205,11 +209,36 @@ int main(int argc, char** argv) {
     // Register JIT methods for interpreter dispatch (no-op in AOT mode).
     ChaosJitRegisterAll();
 
+    // DIAG: Check JIT registration state
+    auto& hp_registry = chaos::il2cpp::runtime_core::GetHotpatchNameRegistry();
+    std::fprintf(stderr, "DIAG: hotpatch modules=%zu\n", hp_registry.ModuleCount());
+    for (uint32_t di = 0; di < hp_registry.ModuleCount(); ++di) {
+        auto* e0 = hp_registry.GetDispatchEntryBySlot(di, 0);
+        std::fprintf(stderr, "DIAG: module[%u] entry_table=%p entry0=%p direct_ptr=%p\n",
+                     di, static_cast<const void*>(e0),
+                     static_cast<const void*>(e0),
+                     e0 ? static_cast<const void*>(e0->direct_ptr) : nullptr);
+    }
+
     RunMode mode = RunMode::Fact;
     int entry_index = 0;
     int iterations = 10000;
 
-    // Simple argv parsing (self-contained, no getopt dependency)
+    // Simple argv parsing (self-contained, no getopt dependency).
+    // Two-pass: first scan for --no-bgc, then parse mode.
+    // JIT-compiled code lacks GC stack maps, so BGC collections crash.
+    bool no_bgc = false;
+    for (int ai = 1; ai < argc; ai++) {
+        if (std::strcmp(argv[ai], "--no-bgc") == 0) {
+            no_bgc = true;
+            break;
+        }
+    }
+    if (no_bgc) {
+        chaos::il2cpp::runtime_core::BgcController::Instance().Stop();
+        std::fprintf(stderr, "DIAG: BGC disabled\n");
+    }
+
     if (argc >= 3 && std::strcmp(argv[1], "--benchmark") == 0) {
         mode = RunMode::Benchmark;
         entry_index = std::atoi(argv[2]);

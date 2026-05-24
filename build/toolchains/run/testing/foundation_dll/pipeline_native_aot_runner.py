@@ -1595,6 +1595,126 @@ def _fix_aot_chaos_jit_register_all(native_dir: Path) -> None:
         print(f"    [build_entry] stripped ChaosJitRegisterAll() body in {gen_cpp.name}")
 
 
+def _fix_eeclass_strings(native_dir: Path) -> None:
+    """Fix unquoted string fields in EEClass initializers.
+
+    The converter emits `/*name_utf8=*/       System.Object,` instead of
+    `/*name_utf8=*/       "System.Object",` for certain type patterns.
+    """
+    import re
+    for gen_cpp in native_dir.glob("**/native-aot.generated.cpp"):
+        text = gen_cpp.read_text(encoding="utf-8")
+        changed = False
+
+        def _mark_changed() -> None:
+            nonlocal changed
+            changed = True
+
+        # Pattern 1: /*name_utf8=*/       UnquotedName,
+        text = re.sub(
+            r'(/\*\s*name_utf8\s*\*/\s+)([^"\s][^,]*),',
+            lambda m: (_mark_changed(), m.group(1) + '"' + m.group(2) + '",')[1], text)
+
+        # Pattern 2: /*namespace_utf8=*/  ,  (empty — no value at all)
+        text = re.sub(
+            r'(/\*\s*namespace_utf8\s*\*/\s+),',
+            lambda m: (_mark_changed(), m.group(1) + '"",')[1], text)
+
+        # Pattern 3: /*namespace_utf8=*/  UnquotedNamespace,
+        text = re.sub(
+            r'(/\*\s*namespace_utf8\s*\*/\s+)([^",][^,]*),',
+            lambda m: (_mark_changed(), m.group(1) + '"' + m.group(2) + '",')[1], text)
+
+        if changed:
+            gen_cpp.write_text(text, encoding="utf-8")
+            print(f"    [fix_eeclass] patched unquoted EEClass strings in {gen_cpp.relative_to(native_dir)}")
+
+
+def _fix_eeclass_registration(native_dir: Path) -> None:
+    """Fix TypeInfoV0<->MethodTable type mismatches in ChaosRegisterAotEEClasses().
+
+    The converter may emit either inline MethodTable or TypeInfoV0 for chaos_mt_*
+    variables depending on generator version.  ChaosRegisterAotEEClasses() accesses
+    `.cold_delta` and `.mt` on these variables; the fix depends on the actual type:
+
+    - MethodTable has flat layout (.cold_delta directly, no .hot/.warm nesting)
+    - TypeInfoV0 has nested layout (.warm.cold_delta)
+
+    Fix by:
+    1. Only converting .cold_delta -> .warm.cold_delta for TypeInfoV0-declared vars
+    2. Adding reinterpret_cast<MethodTable*> for .mt assignments
+    3. Adding missing declarations for types referenced in ChaosRegisterAotEEClasses()
+       but not declared anywhere in the TU (e.g. static types with no instance data).
+    """
+    import re as _re
+    for gen_cpp in native_dir.glob("**/native-aot.generated.cpp"):
+        text = gen_cpp.read_text(encoding="utf-8")
+        changed = False
+
+        # Collect type info for each chaos_mt_* variable
+        # declared_type[varname] = 'MethodTable' | 'TypeInfoV0' | None
+        declared_type: dict[str, str] = {}
+        for m in _re.finditer(r'\b(?:inline\s+)?(MethodTable|TypeInfoV0)\s+(chaos_mt_\w+)', text):
+            declared_type[m.group(2)] = m.group(1)
+
+        # Step 1: Fix .cold_delta -> .warm.cold_delta ONLY for TypeInfoV0 variables
+        def _fix_cold_delta(m: _re.Match) -> str:
+            varname = m.group(1)
+            if declared_type.get(varname) == 'TypeInfoV0':
+                return f'{varname}.warm.cold_delta'
+            return m.group(0)  # Keep as-is for MethodTable
+
+        text2 = _re.sub(
+            r'(chaos_mt_\w+)\.cold_delta',
+            _fix_cold_delta, text)
+        if text2 != text:
+            changed = True
+            text = text2
+
+        # Step 2: Fix .mt = &chaos_mt_* to reinterpret_cast (safe for both types)
+        text2 = _re.sub(
+            r'(kEEClass_\w+)\.mt\s*=\s*&(chaos_mt_\w+)',
+            r'\1.mt = reinterpret_cast<MethodTable*>(&\2)', text)
+        if text2 != text:
+            changed = True
+            text = text2
+
+        # Step 3: Add missing declarations for types referenced in
+        # ChaosRegisterAotEEClasses() but not declared in this TU.
+        if 'ChaosRegisterAotEEClasses' in text:
+            # Find ChaosRegisterAotEEClasses function body
+            fn_match = _re.search(r'extern\s+"C"\s+void\s+ChaosRegisterAotEEClasses\s*\(\s*\)', text)
+            if fn_match:
+                fn_body_start = text.find('{', fn_match.end())
+                if fn_body_start != -1:
+                    depth = 0
+                    fn_body_end = -1
+                    for ci in range(fn_body_start, len(text)):
+                        c = text[ci]
+                        if c == '{':
+                            depth += 1
+                        elif c == '}':
+                            depth -= 1
+                            if depth == 0:
+                                fn_body_end = ci
+                                break
+                    if fn_body_end != -1:
+                        fn_body = text[fn_body_start:fn_body_end]
+                        referenced = set(_re.findall(r'\b(chaos_mt_\w+)\b', fn_body))
+                        missing = referenced - declared_type.keys()
+                        if missing:
+                            insert_pos = text.rfind('\n', 0, fn_match.start()) + 1
+                            decls = [f'inline MethodTable {name} = {{}};' for name in sorted(missing)]
+                            dummy_block = '\n' + '\n'.join(decls) + '\n'
+                            text = text[:insert_pos] + dummy_block + text[insert_pos:]
+                            changed = True
+                            print(f"    [fix_eeclass_reg] added {len(missing)} MethodTable decls in {gen_cpp.relative_to(native_dir)}: {', '.join(sorted(missing))}")
+
+        if changed:
+            gen_cpp.write_text(text, encoding="utf-8")
+            print(f"    [fix_eeclass_reg] patched {gen_cpp.relative_to(native_dir)}")
+
+
 def _fix_forward_declarations(native_dir: Path) -> None:
     """Add forward declarations for extern \"C\" functions referenced before
     their declaration in generated native-aot.generated.cpp.
@@ -1805,11 +1925,20 @@ def _build_entry_exe(family_slug: str, *, verification: Path | None = None, conf
             if not src.exists():
                 continue
             dst = native_dir / subdir.name / "generated"
+            # Clean stale native files before sync — the converter may change
+            # output layout (e.g. switched to page-split output), and stale files
+            # from previous runs cause build errors.
+            if dst.exists():
+                shutil.rmtree(dst)
             dst.mkdir(parents=True, exist_ok=True)
-            for f in src.iterdir():
-                if not f.is_file():
-                    continue
-                (dst / f.name).write_bytes(f.read_bytes())
+            # Use copytree for recursive sync — converter may emit page files
+            # (native-aot.page-*) in inner generated/generated/ subdirs.
+            for src_file in src.rglob("*"):
+                if src_file.is_file():
+                    rel = src_file.relative_to(src)
+                    target = dst / rel
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    target.write_bytes(src_file.read_bytes())
             synced_names.add(subdir.name)
             print(f"    [build_entry] synced {src.relative_to(codegen_dir)} to native/")
 
@@ -1893,9 +2022,13 @@ def _build_entry_exe(family_slug: str, *, verification: Path | None = None, conf
     # Add forward declarations for functions referenced before their extern "C" decl.
     # This happens when generic dispatch wrappers call instantiated function bodies
     # declared later in the file.
+    _fix_eeclass_strings(native_dir)
+    _fix_eeclass_registration(native_dir)
     _fix_forward_declarations(native_dir)
     codegen_native_dir = v / family_slug / "codegen"
     if codegen_native_dir.exists():
+        _fix_eeclass_strings(codegen_native_dir)
+        _fix_eeclass_registration(codegen_native_dir)
         _fix_native_aot_bridge_thunks(codegen_native_dir)
         _fix_t4_jit_include(codegen_native_dir)
         if not is_jit:
