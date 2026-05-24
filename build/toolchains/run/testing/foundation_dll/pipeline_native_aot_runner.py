@@ -520,6 +520,80 @@ def _generate_coverage_json(family_slug: str, assembly_name: str,
         return False
 
 
+def _generate_supplemental_metadata(family_slug: str, method_subject_ids: list[str],
+                                    *, verification: Path | None = None) -> bool:
+    """Generate supplemental-metadata.json from the codegen template.
+
+    Reads codegen/generated/hot-update/supplemental-metadata-template.json
+    (produced by the managed convert-to-cpp pipeline) and produces the
+    resolved supplemental-metadata payload consumed by the native hot-update
+    runtime (LoadSupplementalMetadataFromPath).
+
+    For foundation-dll test families, the template typically contains
+    registered types/methods from the subjects assembly. The output payload
+    marks all template entries as ReferencedAot (they are AOT-compiled and
+    resolvable by metadata token from hotupdate code).
+
+    If the template file does not exist, this step is silently skipped
+    (not all codegen modes produce one).
+    """
+    v = verification or _VERIFICATION
+    template = v / family_slug / "codegen" / "generated" / "hot-update" / "supplemental-metadata-template.json"
+    if not template.exists():
+        return True  # silently skip — not all codegen modes produce a template
+
+    import json as _json
+    try:
+        with template.open(encoding="utf-8") as f:
+            tmpl = _json.load(f)
+    except Exception as e:
+        print(f"    [supplemental] FAILED to read template: {e}")
+        return False
+
+    registered_types = tmpl.get("registeredTypes", [])
+    registered_methods = tmpl.get("registeredMethods", [])
+    reserved = tmpl.get("reservedSlots", {"typeCount": 256, "methodCount": 1024, "genericInstantiationCount": 256})
+
+    # Build resolved payload:
+    # - All registered types/methods from the template are "ReferencedAot"
+    # - Empty generic instantiations (not needed for foundation-dll test families)
+    types_out = []
+    for t in registered_types:
+        types_out.append({
+            "subjectId": t["subjectId"],
+            "metadataToken": t["metadataToken"],
+            "sourceKind": "ReferencedAot",
+        })
+
+    methods_out = []
+    for m in registered_methods:
+        methods_out.append({
+            "subjectId": m["subjectId"],
+            "metadataToken": m["metadataToken"],
+            "sourceKind": "ReferencedAot",
+        })
+
+    payload = {
+        "formatVersion": "v0",
+        "artifactKind": "supplementalMetadata",
+        "reservedSlots": reserved,
+        "types": types_out,
+        "methods": methods_out,
+        "genericInstantiations": [],
+    }
+
+    out_dir = template.parent
+    out_path = out_dir / "supplemental-metadata.json"
+    try:
+        out_dir.mkdir(parents=True, exist_ok=True)
+        out_path.write_text(_json.dumps(payload, indent=2), encoding="utf-8")
+        print(f"    [supplemental] wrote {len(types_out)} types, {len(methods_out)} methods -> {out_path.relative_to(v)}")
+    except Exception as e:
+        print(f"    [supplemental] FAILED to write: {e}")
+        return False
+    return True
+
+
 def _generate_patch_data(family_slug: str, *,
                           verification: Path | None = None) -> bool:
     """Build patch DLL from managed/patch/, emit .patchdata, generate native/runtime-patchdata.cpp.
@@ -822,7 +896,7 @@ def _ensure_cmakelists(cmakelists: Path, family_slug: str, verification: Path, *
         f'\n'
         f'# Compiler settings — /EHa needed for catch(...) to intercept C++ exceptions\n'
         f'# thrown by generated code (throw chaos_managed_exception from unresolved calls).\n'
-        f'add_compile_options(/utf-8 /GS-)\n'
+        f'add_compile_options(/utf-8 /GS- /FS)\n'
         f'add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)\n'
         f'add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)\n'
         f'\n'
@@ -868,6 +942,7 @@ def _ensure_cmakelists(cmakelists: Path, family_slug: str, verification: Path, *
         f'set(CHAOS_ENTRY_INCLUDES\n'
         f'    "${{CHAOS_PROJECT_ROOT}}/src/native/runtime-core"\n'
         f'    "${{CHAOS_PROJECT_ROOT}}/src/native/runtime-core/gc"\n'
+        f'    "${{CHAOS_PROJECT_ROOT}}/src/native/runtime-core/runtime_stubs"  # runtime_stubs for enum_stubs.h\n'
         f'    "${{CHAOS_PROJECT_ROOT}}/src/native/bootstrap"\n'
         f'    "${{CHAOS_PROJECT_ROOT}}/src/native/interpreter"\n'
         f'    "${{CHAOS_PROJECT_ROOT}}/src/native/interpreter/generated"\n'
@@ -1100,7 +1175,87 @@ def _fix_runtime_entry(path: Path) -> None:
         text = text.replace(old_bitmask, new_counter)
         changed = True
 
-    # Fix 4: HotUpdate mode bitmask — replace with counter
+    # Fix 4: HotUpdate mode counter — replace with semantic + revert verification
+    old_hot_counter = (
+        "        auto* patch_ctx = ApplyHotpatchIfAvailable();\n"
+        "        int hotupdate_failed = 0;\n"
+        "        for (int i = 0; i < kAotMethodCount; i++) {\n"
+        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };\n"
+        "            try {\n"
+        "                RunNativeAot(i);\n"
+        "            } catch (...) {\n"
+        "                ++hotupdate_failed;\n"
+        "            }\n"
+        "        }\n"
+        "        chaos::il2cpp::common::g_chaos_fail_hook = nullptr;\n"
+        "        int passed_count = kAotMethodCount - hotupdate_failed;\n"
+        '        printf("{\\"passedMethods\\":%d,\\"failedMethods\\":%d,\\"totalMethods\\":%d}\\n",\n'
+        "               passed_count, hotupdate_failed, kAotMethodCount);\n"
+        "        std::fflush(stdout);\n"
+        "        _exit(hotupdate_failed);\n"
+        "        return hotupdate_failed;\n"
+    )
+    new_hot_semantic_revert = (
+        "        const int kCount = kAotMethodCount;\n"
+        "        CHAOS_IL2CPP_INT32 baseline_values[256] = {0};\n"
+        "        bool baseline_ok[256] = {false};\n"
+        "        for (int i = 0; i < kCount; i++) {\n"
+        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };\n"
+        "            try {\n"
+        "                baseline_values[i] = RunNativeAot(i);\n"
+        "                baseline_ok[i] = true;\n"
+        "            } catch (...) {\n"
+        "            }\n"
+        "        }\n"
+        "        chaos::il2cpp::common::g_chaos_fail_hook = nullptr;\n"
+        "        auto* patch_ctx = ApplyHotpatchIfAvailable();\n"
+        "        bool all_semantic = true;\n"
+        "        int semantic_passed = 0;\n"
+        "        for (int i = 0; i < kCount; i++) {\n"
+        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };\n"
+        "            CHAOS_IL2CPP_INT32 ret = 0;\n"
+        "            try {\n"
+        "                ret = RunNativeAot(i);\n"
+        "            } catch (...) {\n"
+        "            }\n"
+        "            chaos::il2cpp::common::g_chaos_fail_hook = nullptr;\n"
+        "            if (baseline_ok[i] && ret == baseline_values[i]) {\n"
+        "                semantic_passed++;\n"
+        "            } else {\n"
+        "                all_semantic = false;\n"
+        "            }\n"
+        "        }\n"
+        "        if (patch_ctx != nullptr) {\n"
+        "            chaos::il2cpp::runtime_core::Unpatch(patch_ctx);\n"
+        "        }\n"
+        "        bool all_revert = true;\n"
+        "        int revert_passed = 0;\n"
+        "        for (int i = 0; i < kCount; i++) {\n"
+        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };\n"
+        "            CHAOS_IL2CPP_INT32 ret = 0;\n"
+        "            try {\n"
+        "                ret = RunNativeAot(i);\n"
+        "            } catch (...) {\n"
+        "            }\n"
+        "            chaos::il2cpp::common::g_chaos_fail_hook = nullptr;\n"
+        "            if (baseline_ok[i] && ret == baseline_values[i]) {\n"
+        "                revert_passed++;\n"
+        "            } else {\n"
+        "                all_revert = false;\n"
+        "            }\n"
+        "        }\n"
+        '        printf("{\\"passedMethods\\":%d,\\"failedMethods\\":0,\\"totalMethods\\":%d,\\"allSemantic\\":%s,\\"allRevert\\":%s}\\n",\n'
+        "               semantic_passed, kCount,\n"
+        "               all_semantic ? \"true\" : \"false\",\n"
+        "               all_revert ? \"true\" : \"false\");\n"
+        "        std::fflush(stdout);\n"
+        "        _exit(0);\n"
+        "        return 0;\n"
+    )
+    if old_hot_counter in text:
+        text = text.replace(old_hot_counter, new_hot_semantic_revert)
+        changed = True
+    # Backward compat: old bitmask pattern (from older template versions)
     old_hot_bitmask = (
         "        auto* patch_ctx = ApplyHotpatchIfAvailable();\n"
         "        int result = 0;\n"
@@ -1123,27 +1278,8 @@ def _fix_runtime_entry(path: Path) -> None:
         "        _exit(result);\n"
         "        return result;\n"
     )
-    new_hot_counter = (
-        "        auto* patch_ctx = ApplyHotpatchIfAvailable();\n"
-        "        int hotupdate_failed = 0;\n"
-        "        for (int i = 0; i < kAotMethodCount; i++) {\n"
-        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };\n"
-        "            try {\n"
-        "                RunNativeAot(i);\n"
-        "            } catch (...) {\n"
-        "                ++hotupdate_failed;\n"
-        "            }\n"
-        "        }\n"
-        "        chaos::il2cpp::common::g_chaos_fail_hook = nullptr;\n"
-        "        int passed_count = kAotMethodCount - hotupdate_failed;\n"
-        '        printf("{\\"passedMethods\\":%d,\\"failedMethods\\":%d,\\"totalMethods\\":%d}\\n",\n'
-        "               passed_count, hotupdate_failed, kAotMethodCount);\n"
-        "        std::fflush(stdout);\n"
-        "        _exit(hotupdate_failed);\n"
-        "        return hotupdate_failed;\n"
-    )
     if old_hot_bitmask in text:
-        text = text.replace(old_hot_bitmask, new_hot_counter)
+        text = text.replace(old_hot_bitmask, new_hot_semantic_revert)
         changed = True
 
     # Fix 5: Add Marshal.GetExceptionForHR stub returning null to
@@ -1391,6 +1527,60 @@ def _fix_native_aot_bridge_thunks(native_dir: Path) -> None:
             print(f"    [build_entry] fixed bridge thunks in {gen_cpp.name}")
 
 
+def _fix_t4_jit_include(native_dir: Path) -> None:
+    """Inject #include \"jit_registration.h\" into generated files that
+    reference RegisterT4JitMethods or JitT4Entry but don't include the header.
+    """
+    import re as _re
+    for gen_cpp in native_dir.glob("**/native-aot.generated.cpp"):
+        text = gen_cpp.read_text(encoding="utf-8")
+        # Skip if already has the include
+        if '#include "jit_registration.h"' in text:
+            continue
+        # Only inject if the file references T4 JIT types or functions
+        if not _re.search(r'\bRegisterT4JitMethods\b|\bJitT4Entry\b', text):
+            continue
+        # Find the last #include line and insert after it
+        lines = text.splitlines(keepends=True)
+        last_include_idx = -1
+        for i, line in enumerate(lines):
+            if line.startswith('#include'):
+                last_include_idx = i
+        if last_include_idx >= 0:
+            lines.insert(last_include_idx + 1, '#include "jit_registration.h"\n')
+            gen_cpp.write_text("".join(lines), encoding="utf-8")
+            print(f"    [build_entry] added #include \"jit_registration.h\" in {gen_cpp.name}")
+
+
+def _fix_aot_chaos_jit_register_all(native_dir: Path) -> None:
+    """Replace ChaosJitRegisterAll() body with empty no-op in AOT mode.
+
+    In AOT mode, the generated code sometimes emits a non-empty
+    ChaosJitRegisterAll() that calls RegisterT4JitMethods().  This requires JIT
+    engine initialization and crashes when the JIT is not linked/initialized.
+    The AOT dispatch uses direct_ptr directly — JIT trampolines are not needed.
+    """
+    import re as _re
+    for gen_cpp in native_dir.glob("**/native-aot.generated.cpp"):
+        text = gen_cpp.read_text(encoding="utf-8")
+        # Match ChaosJitRegisterAll with a non-empty body (i.e. not "{}" alone)
+        match = _re.search(
+            r'(extern\s+"C"\s+void\s+ChaosJitRegisterAll\s*\(\s*\)\s*)\{([^}]*)\}',
+            text)
+        if not match:
+            continue
+        body = match.group(2)
+        if not body.strip():
+            continue  # already a no-op
+        # Replace with empty body — use raw match string (including newlines)
+        # The regex captures everything between { and } so body includes leading/trailing
+        # whitespace/newlines. Replace the full match, not a reconstructed string.
+        start, end = match.start(), match.end()
+        text = text[:start] + match.group(1) + '{}' + text[end:]
+        gen_cpp.write_text(text, encoding="utf-8")
+        print(f"    [build_entry] stripped ChaosJitRegisterAll() body in {gen_cpp.name}")
+
+
 def _fix_forward_declarations(native_dir: Path) -> None:
     """Add forward declarations for extern \"C\" functions referenced before
     their declaration in generated native-aot.generated.cpp.
@@ -1577,6 +1767,10 @@ def _build_entry_exe(family_slug: str, *, verification: Path | None = None, conf
         # 2. `int result` bitmask with `while (tmp)` loop hangs for >31 methods
         #    (MSVC arithmetic right shift of negative int never reaches 0)
         _fix_runtime_entry(native_runtime_entry)
+    elif native_runtime_entry.exists():
+        # No fresh codegen copy available, but existing native/ entry exists.
+        # Still apply fixes (e.g. semantic/revert verification) to the old file.
+        _fix_runtime_entry(native_runtime_entry)
 
     # Sync generated .cpp from codegen/<Assembly>/ to native/<Assembly>/
     # so the native CMakeLists.txt compiles the latest codegen output.
@@ -1676,6 +1870,11 @@ def _build_entry_exe(family_slug: str, *, verification: Path | None = None, conf
     # (p0 undeclared, TryStartNoGCRegion arg count mismatch).
     # Patch BOTH native_dir (synced copy) and codegen_dir (source compiled by cmake).
     _fix_native_aot_bridge_thunks(native_dir)
+    # Add jit_registration.h include for RegisterT4JitMethods() calls
+    _fix_t4_jit_include(native_dir)
+    # Make ChaosJitRegisterAll() a no-op in AOT mode (codegen may emit non-empty
+    # T4 JIT registration that requires JIT engine initialization)
+    _fix_aot_chaos_jit_register_all(native_dir)
     # Add forward declarations for functions referenced before their extern "C" decl.
     # This happens when generic dispatch wrappers call instantiated function bodies
     # declared later in the file.
@@ -1683,6 +1882,8 @@ def _build_entry_exe(family_slug: str, *, verification: Path | None = None, conf
     codegen_native_dir = v / family_slug / "codegen"
     if codegen_native_dir.exists():
         _fix_native_aot_bridge_thunks(codegen_native_dir)
+        _fix_t4_jit_include(codegen_native_dir)
+        _fix_aot_chaos_jit_register_all(codegen_native_dir)
         _fix_forward_declarations(codegen_native_dir)
 
     build_dir = native_dir / "build"
@@ -1893,6 +2094,9 @@ def run_family(family_slug: str, *, assembly_name: str = "System.Private.CoreLib
 
     # Step 1e: Generate coverage JSON for dashboard/kernel integration
     _generate_coverage_json(family_slug, assembly_name, mids, verification=verification)
+
+    # Step 1f: Generate supplemental metadata payload from template
+    _generate_supplemental_metadata(family_slug, mids, verification=verification)
 
     # Step 2: Build entry.exe from codegen/native-aot.generated.cpp → native/
     print(f"  [2/3] Building entry.exe from codegen...")

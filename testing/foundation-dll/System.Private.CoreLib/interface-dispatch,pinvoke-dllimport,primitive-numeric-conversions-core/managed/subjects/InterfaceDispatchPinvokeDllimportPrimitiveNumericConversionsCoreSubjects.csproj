@@ -13,6 +13,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs" />
+    <Compile Include="InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Remove="Microsoft.NET.Test.Sdk" />

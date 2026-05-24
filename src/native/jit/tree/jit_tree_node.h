@@ -203,6 +203,26 @@ struct ExprNode {
     inline void set_vn_id(uint32_t id) noexcept {
         kind_vn = (kind_vn & 0xFF) | (id << 8);
     }
+
+    // ── SIMD accessors (for kSimd nodes only) ────────────────────────
+    /// SIMD sub-operation encoded in operand_index bits [0..7].
+    inline uint8_t simd_op() const noexcept {
+        return static_cast<uint8_t>(operand_index & 0xFF);
+    }
+    /// SIMD element type encoded in operand_index bits [8..15].
+    inline uint8_t simd_elem_type() const noexcept {
+        return static_cast<uint8_t>((operand_index >> 8) & 0xFF);
+    }
+    /// SIMD immediate (shuffle mask, insert/extract index) in bits [16..31].
+    inline uint16_t simd_imm() const noexcept {
+        return static_cast<uint16_t>((operand_index >> 16) & 0xFFFF);
+    }
+    /// Set all SIMD metadata in operand_index at once.
+    inline void set_simd_meta(uint8_t op, uint8_t elem, uint16_t imm) noexcept {
+        operand_index = static_cast<uint32_t>(op) |
+                       (static_cast<uint32_t>(elem) << 8) |
+                       (static_cast<uint32_t>(imm) << 16);
+    }
 };
 
 static_assert(sizeof(ExprNode) <= 24,

@@ -1,0 +1,450 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_3:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_4:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_5:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_6:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_7:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_8:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_9:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_10:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_11:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_12:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_13:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_14:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_15:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_16:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_17:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_18:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_19:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_20:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_21:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_22:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::Run:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestSingleImplSimple:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestSingleImplDefault:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestMultiImplCalc:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestIsCheck:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestAsCheck:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestDiamondBase:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestDiamondDerived:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestDiamondMulti:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::GetCurrentProcess:System.IntPtr()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestGetCurrentProcess:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::GetCurrentThread:System.IntPtr()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestGetCurrentThread:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::GetProcessId:System.UInt32(System.IntPtr)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestGetProcessId:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::GetModuleHandle:System.IntPtr(System.String)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestGetModuleHandle:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestByteToInt:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestIntToLong:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestIntToShort:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestIntToByte:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestFloatToDouble:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestDoubleToFloat:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestIntToDouble:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestDoubleToInt:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestUintToLong:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestLongToInt:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BISimple::GetValue:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BIWithDefault::GetValue:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BICalculator::Add:System.Int32(System.Int32,System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BICalculator::Multiply:System.Int32(System.Int32,System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BIBase::BaseMethod:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BIDerived::DerivedMethod:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplSimple::GetValue:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplSimple::.ctor:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplWithDefault::GetValue:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplWithDefault::.ctor:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BCalcAdd::Add:System.Int32(System.Int32,System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BCalcAdd::Multiply:System.Int32(System.Int32,System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BCalcAdd::.ctor:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BCalcMul::Add:System.Int32(System.Int32,System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BCalcMul::Multiply:System.Int32(System.Int32,System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BCalcMul::.ctor:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplDiamond::BaseMethod:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplDiamond::DerivedMethod:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplDiamond::.ctor:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplDiamond2::BaseMethod:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplDiamond2::DerivedMethod:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "method",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplDiamond2::.ctor:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectKind": "field",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+      "reason": "external-call"
+    }
+  ]
+}

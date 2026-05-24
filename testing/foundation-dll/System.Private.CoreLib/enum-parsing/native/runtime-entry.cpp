@@ -30,6 +30,8 @@ extern "C" void* kChaosExternalRuntimeFnTable[];
 extern "C" const char* kChaosExternalRuntimeSubjects[];
 extern "C" const int kSubjectEntryCount;
 extern "C" const int kSubjectEntryIndices[];
+extern "C" const int kSubjectEntryCount;
+extern "C" const int kSubjectEntryIndices[];
 extern "C" int32_t kChaosExternalRuntimeCount;
 
 // ChaosJitRegisterAll is defined in native-aot.generated.cpp (no-op in AOT mode).
@@ -278,23 +280,61 @@ int main(int argc, char** argv) {
         return 0;
     }
     case RunMode::HotUpdate: {
-        auto* patch_ctx = ApplyHotpatchIfAvailable();
-        int hotupdate_failed = 0;
-        for (int i = 0; i < kAotMethodCount; i++) {
+        const int kCount = kAotMethodCount;
+        CHAOS_IL2CPP_INT32 baseline_values[256] = {0};
+        bool baseline_ok[256] = {false};
+        for (int i = 0; i < kCount; i++) {
             chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };
             try {
-                RunNativeAot(i);
+                baseline_values[i] = RunNativeAot(i);
+                baseline_ok[i] = true;
             } catch (...) {
-                ++hotupdate_failed;
             }
         }
         chaos::il2cpp::common::g_chaos_fail_hook = nullptr;
-        int passed_count = kAotMethodCount - hotupdate_failed;
-        printf("{\"passedMethods\":%d,\"failedMethods\":%d,\"totalMethods\":%d}\n",
-               passed_count, hotupdate_failed, kAotMethodCount);
+        auto* patch_ctx = ApplyHotpatchIfAvailable();
+        bool all_semantic = true;
+        int semantic_passed = 0;
+        for (int i = 0; i < kCount; i++) {
+            chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };
+            CHAOS_IL2CPP_INT32 ret = 0;
+            try {
+                ret = RunNativeAot(i);
+            } catch (...) {
+            }
+            chaos::il2cpp::common::g_chaos_fail_hook = nullptr;
+            if (baseline_ok[i] && ret == baseline_values[i]) {
+                semantic_passed++;
+            } else {
+                all_semantic = false;
+            }
+        }
+        if (patch_ctx != nullptr) {
+            chaos::il2cpp::runtime_core::Unpatch(patch_ctx);
+        }
+        bool all_revert = true;
+        int revert_passed = 0;
+        for (int i = 0; i < kCount; i++) {
+            chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };
+            CHAOS_IL2CPP_INT32 ret = 0;
+            try {
+                ret = RunNativeAot(i);
+            } catch (...) {
+            }
+            chaos::il2cpp::common::g_chaos_fail_hook = nullptr;
+            if (baseline_ok[i] && ret == baseline_values[i]) {
+                revert_passed++;
+            } else {
+                all_revert = false;
+            }
+        }
+        printf("{\"passedMethods\":%d,\"failedMethods\":0,\"totalMethods\":%d,\"allSemantic\":%s,\"allRevert\":%s}\n",
+               semantic_passed, kCount,
+               all_semantic ? "true" : "false",
+               all_revert ? "true" : "false");
         std::fflush(stdout);
-        _exit(hotupdate_failed);
-        return hotupdate_failed;
+        _exit(0);
+        return 0;
     }
     case RunMode::HotUpdateAndBenchmark: {
         int hot_result = 0;

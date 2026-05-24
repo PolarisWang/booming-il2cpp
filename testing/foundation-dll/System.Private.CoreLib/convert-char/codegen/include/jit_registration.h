@@ -62,7 +62,17 @@ extern "C" struct HybridEntry {
 // Processes an array of JitEntry descriptors to create JitPrecode +
 // PrecodeArena trampolines for each method.  On first call, the trampoline
 // triggers JitStubDispatchImpl → Compile() → direct_ptr patched to compiled code.
+// JitT4Entry is an alias for JitEntry — codegen targeting T4 (JIT Tier 4)
+// emits arrays of JitT4Entry for forward compatibility with tiered dispatch.
 extern "C" void RegisterJitEntryMethods(const JitEntry* entries, uint32_t count) noexcept;
+typedef JitEntry JitT4Entry;
+
+// T4 alias — codegen targeting T4 (JIT Tier 4) emits RegisterT4JitMethods()
+// for forward compatibility with tiered dispatch. Maps to RegisterJitEntryMethods
+// since T4 is currently the only JIT tier.
+inline void RegisterT4JitMethods(const JitT4Entry* entries, uint32_t count) noexcept {
+    RegisterJitEntryMethods(entries, count);
+}
 
 // ── RegisterHybridMethods ────────────────────────────────────────────────
 // Called once at startup to register all methods for Hybrid mode.

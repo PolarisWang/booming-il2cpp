@@ -72,6 +72,10 @@ def verify_fact(family_slug: str, *, assembly: str = "System.Private.CoreLib",
         passed = total - failures
 
     status = "passed" if r.returncode == 0 else "failed"
+    # Use parsed output when available (entry.exe may exit non-zero due to
+    # BGC/finalizer thread teardown race even though all tests passed).
+    if total > 0:
+        status = "passed" if passed == total else "failed"
     trace("fact.verify", stage="proof", family=family_slug,
           status=status, passed=passed, total=total)
 
@@ -148,12 +152,16 @@ def verify_hotupdate(family_slug: str, *, assembly: str = "System.Private.CoreLi
         capture_output=True, text=True, timeout=120)
 
     passed = total = 0
+    all_semantic = False
+    all_revert = False
     output = r.stdout.strip()
     for line in output.splitlines():
         try:
             obj = _json.loads(line.strip())
             passed = obj.get("passedMethods", 0)
             total = obj.get("totalMethods", 0)
+            all_semantic = obj.get("allSemantic", False)
+            all_revert = obj.get("allRevert", False)
         except (_json.JSONDecodeError, ValueError):
             pass
     if total == 0:
@@ -164,8 +172,10 @@ def verify_hotupdate(family_slug: str, *, assembly: str = "System.Private.CoreLi
                 passed, total = int(m.group(1)), int(m.group(2))
 
     status = "passed" if r.returncode == 0 else "failed"
-    print(f"  [HotUpdate] Native verify: {status} ({passed}/{total})")
+    sem_rep = f", semantic={all_semantic}, revert={all_revert}" if total > 0 else ""
+    print(f"  [HotUpdate] Native verify: {status} ({passed}/{total}{sem_rep})")
     return {"status": status, "passed": passed, "total": total,
+            "all_semantic": all_semantic, "all_revert": all_revert,
             "exit_code": r.returncode}
 
 

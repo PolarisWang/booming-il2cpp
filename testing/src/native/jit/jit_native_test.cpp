@@ -1802,7 +1802,9 @@ static bool Test_Switch_Dispatch() {
 
     // Test via T4 native codegen — verify code generation and execution
     if (!CanCompile(rm)) { std::printf("    FAIL: CanCompile false\n"); return false; }
-    auto* nm = Compile(rm);
+    CompileConfig cfg_switch;
+    cfg_switch.enable_optimizer = false;
+    auto* nm = Compile(rm, cfg_switch);
     if (nm == nullptr) { std::printf("    FAIL: Compile null\n"); return false; }
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
     RegisterNativeCodeSection(entry, nm->code_size, nm);
@@ -2347,7 +2349,9 @@ static bool Test_Fuzz() {
         // Run via T4 if eligible
         if (CanCompile(rm)) {
             t4_eligible++;
-            auto* nm = Compile(rm);
+            CompileConfig cfg_fuzz;
+            cfg_fuzz.enable_optimizer = false;
+            auto* nm = Compile(rm, cfg_fuzz);
             if (nm == nullptr) continue;
             void* entry = SealAndGetEntry(nm);
             if (entry == nullptr) continue;
@@ -3105,8 +3109,9 @@ static bool Test_LdSFld_StSFld() {
             InstrRet(1),
         };
         rm.max_regs = 2;
+        CompileConfig cfg; cfg.enable_optimizer = false;
         if (!CanCompile(rm)) { std::printf("    FAIL case1: CanCompile false\n"); return false; }
-        auto* nm = Compile(rm);
+        auto* nm = Compile(rm, cfg);
         if (nm == nullptr) { std::printf("    FAIL case1: Compile null\n"); return false; }
         void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
         uint64_t result = ExecuteNative(entry);
@@ -3122,8 +3127,9 @@ static bool Test_LdSFld_StSFld() {
             InstrRet(0),
         };
         rm.max_regs = 1;
+        CompileConfig cfg; cfg.enable_optimizer = false;
         if (!CanCompile(rm)) { std::printf("    FAIL case2: CanCompile false\n"); return false; }
-        auto* nm = Compile(rm);
+        auto* nm = Compile(rm, cfg);
         if (nm == nullptr) { std::printf("    FAIL case2: Compile null\n"); return false; }
         void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
         uint64_t result = ExecuteNative(entry);
@@ -3284,8 +3290,9 @@ static bool Test_LdInd_StInd() {
             InstrRet(2),
         };
         rm.max_regs = 3;
+        CompileConfig cfg; cfg.enable_optimizer = false;
         if (!CanCompile(rm)) { std::printf("    FAIL: CanCompile false\n"); return false; }
-        auto* nm = Compile(rm);
+        auto* nm = Compile(rm, cfg);
         if (nm == nullptr) { std::printf("    FAIL: Compile null\n"); return false; }
         void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
         uint64_t result = ExecuteNative(entry);

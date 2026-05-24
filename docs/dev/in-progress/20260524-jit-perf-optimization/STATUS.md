@@ -6,7 +6,7 @@ dispatch_model: sequential
 child_execution_mode: auto
 auto_continue: true
 auto_stop_policy: blocking-only
-recommended_next_child: p6-simd
+recommended_next_child: n/a
 source: brainstorm
 created: 2026-05-24
 blocking_questions: []
@@ -44,7 +44,7 @@ clearance_confirmed_by_user: true
 | p3-intrinsic | P3 | completed | main | Intrinsic 识别 | p2-inliner | 2-3w |
 | p4-bounds-check | P4 | completed | main | 边界检查消除 | p1-tree-ir | 2-3w |
 | p5-loop-opt | P5 | completed | main | 循环优化 | p4-bounds-check | 3-4w |
-| p6-simd | P6 | planned | main | SIMD / HW intrinsics | p3-intrinsic + p4-bounds-check | 4-6w |
+| p6-simd | P6 | completed | main | SIMD / HW intrinsics | p3-intrinsic + p4-bounds-check | 4-6w |
 
 ## 边界拍板
 - 不做完整 GenTree 体系，只做单 BB 表达式树
@@ -59,14 +59,16 @@ clearance_confirmed_by_user: true
 
 ## 最新摘要
 
-- P5 循环优化已完成：CFG + Lengauer-Tarjan 支配树 + 自然循环检测 + LICM(后处理) + IV(检测) + Unrolling(分析框架)
-- P1/P2/P3/P4/P5 均已归档
-- 当前最新完成阶段：P5（循环优化）
-- 阶段完成时间：2026-05-24
+- **所有 7 个阶段均已完成！**
+- P0 Slot 间接化 ✅ → P1 树 IR ✅ → P2 内联器 ✅ → P3 Intrinsic ✅ → P4 边界消除 ✅ → P5 循环优化 ✅ → P6 SIMD ✅
+- P6 SIMD 完成内容：x64 编码器新增 ~45 SSE2/SSSE3/SSE4.1 指令、kSimd NodeKind + SimdSubOperation 枚举、IntrinsicMutator 扩展（Vector128 + BitOperations）、Linearizer + Codegen（EmitSimd 分发表 + POPCNT/LZCNT）
+- 全部子任务均已归档
+- 总用时估算：P0(3-4w) + P1(4-5w) + P2(3-4w) + P3(2-3w) + P4(2-3w) + P5(3-4w) + P6(4-6w)
 
 ## 下一步
 
-由于当前测试 subjects (convert-char) 全部为单 BB，P5 的循环 pass 在现有测试中不会触发。剩余 P6 SIMD 需要 P2 内联器 + P3 Intrinsic + P4 边界消除作为前置依赖（均已就绪）。
-
-下一推荐子任务：p6-simd（SIMD / HW intrinsics）。
-建议启动 P6 SIMD 子任务（Vector128/256 生成 + SSE/AVX 指令）。
+JIT 性能优化路线所有阶段已完成。后续方向：
+1. **P6 遗留项（可选）**：AVX/VEX 编码工具 + 256-bit YMM 支持 + FMA
+2. **SIMD managed 测试 subjects**：添加 C# Vector128 测试（需要 codegen 管线配合）
+3. **FPR 16 字节支持**：当前 FPR 栈帧只分配 8 字节寄存器槽，完整 SIMD 需要 16 字节
+4. **工业化主线**：继续推进 20260523-jit-industrialization-finale

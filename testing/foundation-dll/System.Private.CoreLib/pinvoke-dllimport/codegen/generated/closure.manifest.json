@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "PinvokeDllimportSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "System.Private.CoreLib/pinvoke-dllimport/codegen/_subjects_input/PinvokeDllimportSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/pinvoke-dllimport/managed/subjects/build-output/PinvokeDllimportSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "PinvokeDllimportSubjects",
-      "path": "System.Private.CoreLib/pinvoke-dllimport/codegen/_subjects_input/PinvokeDllimportSubjects.dll"
+      "path": "testing/foundation-dll/System.Private.CoreLib/pinvoke-dllimport/managed/subjects/build-output/PinvokeDllimportSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "c127fc21-9ae2-4563-81a0-ac2610a3b0b0",
+  "inputModuleVersionId": "631c39fa-0def-4ecd-8f58-b8b485e27b07",
   "artifacts": [
     {
       "kind": "typedIlIr",

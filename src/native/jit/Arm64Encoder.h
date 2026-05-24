@@ -232,6 +232,9 @@ public:
     void EmitCallRel32(int32_t offset) override {
         EmitBl(buf_, offset);
     }
+    void EmitCallRipRel(int32_t disp) override {
+        CHAOS_IL2CPP_FAIL(FATAL);
+    }
     void EmitCallReg(uint8_t reg) override {
         EmitBlr(buf_, reg);
     }
@@ -345,6 +348,35 @@ public:
     void EmitPxorRR(uint8_t dst, uint8_t src) override {
         EmitXor16B(buf_, dst, dst, src);
     }
+
+    // SSE2 integer ALU — ARM64 NEON stubs (not implemented; x64-only codegen)
+    void EmitPaddbRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
+    void EmitPaddwRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
+    void EmitPadddRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
+    void EmitPaddqRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
+    void EmitPsubbRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
+    void EmitPsubwRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
+    void EmitPsubdRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
+    void EmitPsubqRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
+    void EmitPmullwRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
+    void EmitPmuludqRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
+    void EmitPandRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
+    void EmitPorRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
+    void EmitPandnRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
+    void EmitPcmpeqbRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
+    void EmitPcmpeqwRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
+    void EmitPcmpeqdRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
+    void EmitPcmpeqqRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
+    void EmitPcmpgtbRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
+    void EmitPcmpgtwRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
+    void EmitPcmpgtdRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
+    void EmitPcmpgtqRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
+    void EmitPshufdRR(uint8_t, uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
+    void EmitPabsbRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
+    void EmitPabswRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
+    void EmitPabsdRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
+    void EmitPopcntRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
+    void EmitLzcntRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
 
 private:
     // ── Helper: map x64 condition code → ARM64 condition code ────────────

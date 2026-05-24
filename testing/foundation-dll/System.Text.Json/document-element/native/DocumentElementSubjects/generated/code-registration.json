@@ -1,0 +1,426 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "DocumentElementSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_0",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_1",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_2",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_3",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_4",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_5",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_6",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_7",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_8",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_8:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_9",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_9:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_10",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_10:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_11",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_11:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_12",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_12:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_13",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_13:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_14",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_14:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_15",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_15:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_16",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_16:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_17",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_17:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_18",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_18:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 19,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_19",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_19:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 20,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_20",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_20:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 21,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_21",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_21:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 22,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_22",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_22:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 23,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_23",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_23:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 24,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_24",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_24:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 25,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_25",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_25:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 26,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_26",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_26:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 27,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_27",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_27:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 28,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_28",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_28:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 29,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_29",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_29:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 30,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_30",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_30:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 31,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_31",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_31:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 32,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_32",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_32:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 33,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_33",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_33:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 34,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_34",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_34:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 35,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_35",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_35:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 36,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_36",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_36:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 37,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_37",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_37:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 38,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_38",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_38:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 39,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_39",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_39:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 40,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_40",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_40:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 41,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_41",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_41:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 42,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_42",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_42:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 43,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_43",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_43:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 44,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_44",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_44:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 45,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_45",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_45:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 46,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_46",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_46:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 47,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_47",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_47:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 48,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_48",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_48:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 49,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_49",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_49:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 50,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_50",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_50:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 51,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_51",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_51:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 52,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_52",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_52:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 53,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_53",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_53:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 54,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_54",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_54:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 55,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_55",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_55:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 56,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_56",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_56:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 57,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_57",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_57:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 58,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_58",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_58:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 59,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_59",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_59:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 60,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_60",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_60:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 61,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_61",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_61:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 62,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_62",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_62:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 63,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_63",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_63:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 64,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_64",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_64:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 65,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_65",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_65:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 66,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_66",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_66:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 67,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_67",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_67:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 68,
+          "symbol": "DocumentElementSubjects_DocumentElementSubjects_CustomEntrySubject_68",
+          "subjectId": "DocumentElementSubjects/DocumentElementSubjects::CustomEntrySubject_68:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

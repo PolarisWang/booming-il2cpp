@@ -159,6 +159,7 @@ public:
     virtual void EmitJccRel8(uint8_t cc, int8_t offset) = 0;
     virtual void EmitJmpReg(uint8_t reg) = 0;
     virtual void EmitCallRel32(int32_t offset) = 0;
+    virtual void EmitCallRipRel(int32_t disp) = 0;
     virtual void EmitCallReg(uint8_t reg) = 0;
     virtual void EmitRet() = 0;
     virtual void EmitPush(uint8_t reg) = 0;
@@ -197,7 +198,41 @@ public:
     virtual void EmitMovdMrx(uint8_t reg, uint8_t xmm) = 0;
     virtual void EmitMovqXrm(uint8_t xmm, uint8_t reg) = 0;
     virtual void EmitMovqMrx(uint8_t reg, uint8_t xmm) = 0;
+    virtual void EmitMovdqaRR(uint8_t dst, uint8_t src) = 0;
+    virtual void EmitMovdqaMR(uint8_t base, int32_t disp, uint8_t src) = 0;
+    virtual void EmitMovdqaRM(uint8_t dst, uint8_t base, int32_t disp) = 0;
     virtual void EmitPxorRR(uint8_t dst, uint8_t src) = 0;
+
+    // SSE2 integer ALU
+    virtual void EmitPaddbRR(uint8_t dst, uint8_t src) = 0;
+    virtual void EmitPaddwRR(uint8_t dst, uint8_t src) = 0;
+    virtual void EmitPadddRR(uint8_t dst, uint8_t src) = 0;
+    virtual void EmitPaddqRR(uint8_t dst, uint8_t src) = 0;
+    virtual void EmitPsubbRR(uint8_t dst, uint8_t src) = 0;
+    virtual void EmitPsubwRR(uint8_t dst, uint8_t src) = 0;
+    virtual void EmitPsubdRR(uint8_t dst, uint8_t src) = 0;
+    virtual void EmitPsubqRR(uint8_t dst, uint8_t src) = 0;
+    virtual void EmitPmullwRR(uint8_t dst, uint8_t src) = 0;
+    virtual void EmitPmuludqRR(uint8_t dst, uint8_t src) = 0;
+    virtual void EmitPandRR(uint8_t dst, uint8_t src) = 0;
+    virtual void EmitPorRR(uint8_t dst, uint8_t src) = 0;
+    virtual void EmitPandnRR(uint8_t dst, uint8_t src) = 0;
+    virtual void EmitPcmpeqbRR(uint8_t dst, uint8_t src) = 0;
+    virtual void EmitPcmpeqwRR(uint8_t dst, uint8_t src) = 0;
+    virtual void EmitPcmpeqdRR(uint8_t dst, uint8_t src) = 0;
+    virtual void EmitPcmpeqqRR(uint8_t dst, uint8_t src) = 0;
+    virtual void EmitPcmpgtbRR(uint8_t dst, uint8_t src) = 0;
+    virtual void EmitPcmpgtwRR(uint8_t dst, uint8_t src) = 0;
+    virtual void EmitPcmpgtdRR(uint8_t dst, uint8_t src) = 0;
+    virtual void EmitPcmpgtqRR(uint8_t dst, uint8_t src) = 0;
+    virtual void EmitPshufdRR(uint8_t dst, uint8_t src, uint8_t imm) = 0;
+    virtual void EmitPabsbRR(uint8_t dst, uint8_t src) = 0;
+    virtual void EmitPabswRR(uint8_t dst, uint8_t src) = 0;
+    virtual void EmitPabsdRR(uint8_t dst, uint8_t src) = 0;
+
+    // Bit manipulation
+    virtual void EmitPopcntRR(uint8_t dst, uint8_t src) = 0;
+    virtual void EmitLzcntRR(uint8_t dst, uint8_t src) = 0;
 };
 
 }  // namespace chaos::il2cpp::jit

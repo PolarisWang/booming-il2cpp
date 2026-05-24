@@ -1,0 +1,244 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadata",
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  },
+  "types": [
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenericsSubjects",
+      "metadataToken": 33554434,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box`1",
+      "metadataToken": 33554435,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Pair`2",
+      "metadataToken": 33554436,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Util",
+      "metadataToken": 33554437,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper`1",
+      "metadataToken": 33554438,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box<System.Int32>",
+      "metadataToken": 452984834,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Pair<System.Int32,System.String>",
+      "metadataToken": 452984835,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper<System.String>",
+      "metadataToken": 452984836,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box<!0>",
+      "metadataToken": 452984837,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Pair<!0,!1>",
+      "metadataToken": 452984839,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper<!0>",
+      "metadataToken": 452984842,
+      "sourceKind": "ReferencedAot"
+    }
+  ],
+  "methods": [
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenericsSubjects::Subject_0:System.Void()",
+      "metadataToken": 100663297,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenericsSubjects::Subject_1:System.Void()",
+      "metadataToken": 100663298,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenericsSubjects::Subject_2:System.Void()",
+      "metadataToken": 100663299,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenericsSubjects::Subject_3:System.Void()",
+      "metadataToken": 100663300,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenericsSubjects::Subject_4:System.Void()",
+      "metadataToken": 100663301,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenericsSubjects::Subject_5:System.Void()",
+      "metadataToken": 100663302,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box`1::.ctor:System.Void(!0)",
+      "metadataToken": 100663303,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box`1::Get:!0()",
+      "metadataToken": 100663304,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box`1::Set:System.Void(!0)",
+      "metadataToken": 100663305,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box`1::IsDefault:System.Boolean()",
+      "metadataToken": 100663306,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Pair`2::.ctor:System.Void(!0,!1)",
+      "metadataToken": 100663307,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Pair`2::Deconstruct:System.Void(!0&,!1&)",
+      "metadataToken": 100663308,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Util::Echo`1:!!0(!!0)",
+      "metadataToken": 100663309,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Util::Equal`1:System.Boolean(!!0,!!0)",
+      "metadataToken": 100663310,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Util::.ctor:System.Void()",
+      "metadataToken": 100663311,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper`1::.ctor:System.Void(!0)",
+      "metadataToken": 100663312,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper`1::GetRefType:System.Type()",
+      "metadataToken": 100663313,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Util::Echo<System.Int32>:System.Int32(System.Int32)",
+      "metadataToken": 721420289,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Util::Equal<System.Int32>:System.Boolean(System.Int32,System.Int32)",
+      "metadataToken": 721420290,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box<System.Int32>::.ctor:System.Void(System.Int32)",
+      "metadataToken": 1912602624,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box<System.Int32>::Get:System.Int32()",
+      "metadataToken": 1912602625,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box<System.Int32>::Set:System.Void(System.Int32)",
+      "metadataToken": 1912602626,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box<System.Int32>::IsDefault:System.Boolean()",
+      "metadataToken": 1912602627,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Pair<System.Int32,System.String>::.ctor:System.Void(System.Int32,System.String)",
+      "metadataToken": 1912602628,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Pair<System.Int32,System.String>::Deconstruct:System.Void(System.Int32&,System.String&)",
+      "metadataToken": 1912602629,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper<System.String>::.ctor:System.Void(System.String)",
+      "metadataToken": 1912602630,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper<System.String>::GetRefType:System.Type()",
+      "metadataToken": 1912602631,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box<!0>::.ctor:System.Void(!0)",
+      "metadataToken": 1912602632,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box<!0>::Get:!0()",
+      "metadataToken": 1912602633,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box<!0>::Set:System.Void(!0)",
+      "metadataToken": 1912602634,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Box<!0>::IsDefault:System.Boolean()",
+      "metadataToken": 1912602635,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Pair<!0,!1>::.ctor:System.Void(!0,!1)",
+      "metadataToken": 1912602636,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Pair<!0,!1>::Deconstruct:System.Void(!0&,!1&)",
+      "metadataToken": 1912602637,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper<!0>::.ctor:System.Void(!0)",
+      "metadataToken": 1912602638,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "CustomGenericsSubjects/CustomGenerics.Wrapper<!0>::GetRefType:System.Type()",
+      "metadataToken": 1912602639,
+      "sourceKind": "ReferencedAot"
+    }
+  ],
+  "genericInstantiations": []
+}

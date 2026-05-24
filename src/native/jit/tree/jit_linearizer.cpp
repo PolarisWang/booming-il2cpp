@@ -63,6 +63,8 @@ static interpreter::IROpCode MapToIROpCode(NodeKind kind) noexcept {
         case kReturn:   return interpreter::IROpCode::Ret;
         case kBox:      return interpreter::IROpCode::Box;
         case kUnbox:    return interpreter::IROpCode::Unbox;
+        case kPopcnt:   return interpreter::IROpCode::Popcnt;
+        case kLzcnt:    return interpreter::IROpCode::Lzcnt;
         default:        return static_cast<interpreter::IROpCode>(0); // unreachable for valid nodes
     }
 }
@@ -173,7 +175,7 @@ uint32_t Linearizer::LinearizeNode(
     }
 
     // ── Unary nodes ────────────────────────────────────────────────────
-    if ((k >= kNeg && k <= kLdLen) || k == kAbs) {
+    if ((k >= kNeg && k <= kLdLen) || k == kAbs || k == kPopcnt || k == kLzcnt) {
         uint32_t src_vreg = LinearizeNode(node->child0, out);
         if (src_vreg == 0) return 0;
 
@@ -249,6 +251,34 @@ uint32_t Linearizer::LinearizeNode(
                              interpreter::kRegHasSrc1 |
                              interpreter::kRegHasSrc2);
         ri.imm.i4 = 0;
+        out.push_back(ri);
+
+        if (node->vn_id() > 0 && node->vn_id() < kMaxVN)
+            emitted_vn_[node->vn_id()] = true;
+
+        return dst;
+    }
+
+    // ── SIMD operations ─────────────────────────────────────────────────
+    if (k == kSimd) {
+        uint32_t src1_vreg = LinearizeNode(node->child0, out);
+        uint32_t src2_vreg = (node->child1) ? LinearizeNode(node->child1, out) : 0;
+        if (src1_vreg == 0 && node->child0) return 0;
+
+        uint32_t dst = NextVReg();
+        // Pack simd_op(8) + elem_type(8) + simd_imm(16) into imm field
+        int64_t simd_meta = static_cast<int64_t>(node->simd_op()) |
+                           (static_cast<int64_t>(node->simd_elem_type()) << 8) |
+                           (static_cast<int64_t>(node->simd_imm()) << 16);
+
+        interpreter::RegisterInstruction ri;
+        ri.header = MakeHdr(interpreter::IROpCode::Simd, dst,
+                             static_cast<uint8_t>(src1_vreg),
+                             static_cast<uint8_t>(src2_vreg),
+                             interpreter::kRegHasDst |
+                             interpreter::kRegHasSrc1 |
+                             (src2_vreg ? interpreter::kRegHasSrc2 : 0));
+        ri.imm.i8 = simd_meta;
         out.push_back(ri);
 
         if (node->vn_id() > 0 && node->vn_id() < kMaxVN)

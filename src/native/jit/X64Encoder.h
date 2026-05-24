@@ -194,6 +194,9 @@ public:
     void EmitCallRel32(int32_t offset) override {
         ::chaos::il2cpp::jit::EmitCallRel32(buf_, offset);
     }
+    void EmitCallRipRel(int32_t disp) override {
+        ::chaos::il2cpp::jit::EmitCallRipRel(buf_, disp);
+    }
     void EmitCallReg(uint8_t reg) override {
         ::chaos::il2cpp::jit::EmitCallReg(buf_, reg);
     }
@@ -300,8 +303,102 @@ public:
     void EmitMovqMrx(uint8_t reg, uint8_t xmm) override {
         ::chaos::il2cpp::jit::EmitMovqMrx(buf_, reg, xmm);
     }
+    void EmitMovdqaRR(uint8_t dst, uint8_t src) override {
+        ::chaos::il2cpp::jit::EmitMovdqaRR(buf_, dst, src);
+    }
+    void EmitMovdqaMR(uint8_t base, int32_t disp, uint8_t src) override {
+        ::chaos::il2cpp::jit::EmitMovdqaMR(buf_, base, disp, src);
+    }
+    void EmitMovdqaRM(uint8_t dst, uint8_t base, int32_t disp) override {
+        ::chaos::il2cpp::jit::EmitMovdqaRM(buf_, dst, base, disp);
+    }
     void EmitPxorRR(uint8_t dst, uint8_t src) override {
         ::chaos::il2cpp::jit::EmitPxorRR(buf_, dst, src);
+    }
+
+    // SSE2 integer ALU
+    void EmitPaddbRR(uint8_t dst, uint8_t src) override {
+        ::chaos::il2cpp::jit::EmitPaddbRR(buf_, dst, src);
+    }
+    void EmitPaddwRR(uint8_t dst, uint8_t src) override {
+        ::chaos::il2cpp::jit::EmitPaddwRR(buf_, dst, src);
+    }
+    void EmitPadddRR(uint8_t dst, uint8_t src) override {
+        ::chaos::il2cpp::jit::EmitPadddRR(buf_, dst, src);
+    }
+    void EmitPaddqRR(uint8_t dst, uint8_t src) override {
+        ::chaos::il2cpp::jit::EmitPaddqRR(buf_, dst, src);
+    }
+    void EmitPsubbRR(uint8_t dst, uint8_t src) override {
+        ::chaos::il2cpp::jit::EmitPsubbRR(buf_, dst, src);
+    }
+    void EmitPsubwRR(uint8_t dst, uint8_t src) override {
+        ::chaos::il2cpp::jit::EmitPsubwRR(buf_, dst, src);
+    }
+    void EmitPsubdRR(uint8_t dst, uint8_t src) override {
+        ::chaos::il2cpp::jit::EmitPsubdRR(buf_, dst, src);
+    }
+    void EmitPsubqRR(uint8_t dst, uint8_t src) override {
+        ::chaos::il2cpp::jit::EmitPsubqRR(buf_, dst, src);
+    }
+    void EmitPmullwRR(uint8_t dst, uint8_t src) override {
+        ::chaos::il2cpp::jit::EmitPmullwRR(buf_, dst, src);
+    }
+    void EmitPmuludqRR(uint8_t dst, uint8_t src) override {
+        ::chaos::il2cpp::jit::EmitPmuludqRR(buf_, dst, src);
+    }
+    void EmitPandRR(uint8_t dst, uint8_t src) override {
+        ::chaos::il2cpp::jit::EmitPandRR(buf_, dst, src);
+    }
+    void EmitPorRR(uint8_t dst, uint8_t src) override {
+        ::chaos::il2cpp::jit::EmitPorRR(buf_, dst, src);
+    }
+    void EmitPandnRR(uint8_t dst, uint8_t src) override {
+        ::chaos::il2cpp::jit::EmitPandnRR(buf_, dst, src);
+    }
+    void EmitPcmpeqbRR(uint8_t dst, uint8_t src) override {
+        ::chaos::il2cpp::jit::EmitPcmpeqbRR(buf_, dst, src);
+    }
+    void EmitPcmpeqwRR(uint8_t dst, uint8_t src) override {
+        ::chaos::il2cpp::jit::EmitPcmpeqwRR(buf_, dst, src);
+    }
+    void EmitPcmpeqdRR(uint8_t dst, uint8_t src) override {
+        ::chaos::il2cpp::jit::EmitPcmpeqdRR(buf_, dst, src);
+    }
+    void EmitPcmpeqqRR(uint8_t dst, uint8_t src) override {
+        ::chaos::il2cpp::jit::EmitPcmpeqqRR(buf_, dst, src);
+    }
+    void EmitPcmpgtbRR(uint8_t dst, uint8_t src) override {
+        ::chaos::il2cpp::jit::EmitPcmpgtbRR(buf_, dst, src);
+    }
+    void EmitPcmpgtwRR(uint8_t dst, uint8_t src) override {
+        ::chaos::il2cpp::jit::EmitPcmpgtwRR(buf_, dst, src);
+    }
+    void EmitPcmpgtdRR(uint8_t dst, uint8_t src) override {
+        ::chaos::il2cpp::jit::EmitPcmpgtdRR(buf_, dst, src);
+    }
+    void EmitPcmpgtqRR(uint8_t dst, uint8_t src) override {
+        ::chaos::il2cpp::jit::EmitPcmpgtqRR(buf_, dst, src);
+    }
+    void EmitPshufdRR(uint8_t dst, uint8_t src, uint8_t imm) override {
+        ::chaos::il2cpp::jit::EmitPshufdRR(buf_, dst, src, imm);
+    }
+    void EmitPabsbRR(uint8_t dst, uint8_t src) override {
+        ::chaos::il2cpp::jit::EmitPabsbRR(buf_, dst, src);
+    }
+    void EmitPabswRR(uint8_t dst, uint8_t src) override {
+        ::chaos::il2cpp::jit::EmitPabswRR(buf_, dst, src);
+    }
+    void EmitPabsdRR(uint8_t dst, uint8_t src) override {
+        ::chaos::il2cpp::jit::EmitPabsdRR(buf_, dst, src);
+    }
+
+    // Bit manipulation
+    void EmitPopcntRR(uint8_t dst, uint8_t src) override {
+        ::chaos::il2cpp::jit::EmitPopcntRR(buf_, dst, src);
+    }
+    void EmitLzcntRR(uint8_t dst, uint8_t src) override {
+        ::chaos::il2cpp::jit::EmitLzcntRR(buf_, dst, src);
     }
 
 private:
