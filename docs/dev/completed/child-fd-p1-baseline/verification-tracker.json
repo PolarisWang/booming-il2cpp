@@ -1,0 +1,106 @@
+{
+  "trackerVersion": 1,
+  "scope": "Phase 0–1 — Pipeline Precheck + Baseline Scan",
+  "baseline": {
+    "totalFamilies": 164,
+    "passed": 138,
+    "failed": 10,
+    "noReport": 16,
+    "passRate": 84.1,
+    "timestamp": "2026-05-23T17:30:00"
+  },
+  "failures": [
+    { "assembly": "--family", "family": "pinvoke-dllimport", "type": "preflight", "reason": "missing capability-family-contract.json" },
+    { "assembly": "--family", "family": "threading-monitor-interlocked", "type": "preflight", "reason": "missing capability-family-contract.json" },
+    { "assembly": "System.Runtime.Serialization", "family": "surrogates-selection", "type": "preflight", "reason": "missing capability-family-contract.json" },
+    { "assembly": "System.Security.Claims", "family": "windows-identity", "type": "preflight", "reason": "missing capability-family-contract.json" },
+    { "assembly": "System.Formats.Asn1", "family": "tag-model", "type": "codegen", "reason": "KI-001: chaos_* macros undefined" },
+    { "assembly": "System.IO.Compression.Brotli", "family": "decoder", "type": "codegen", "reason": "KI-001: chaos_* macros undefined" },
+    { "assembly": "System.Private.CoreLib", "family": "garbage-collection", "type": "subjects_compile", "reason": "GC.LatencyMode not available in target runtime" },
+    { "assembly": "System.Private.CoreLib", "family": "interface-dispatch,pinvoke-dllimport,primitive-numeric-conversions-core", "type": "codegen", "reason": "KI-001 + triple-composite slug" },
+    { "assembly": "System.Private.CoreLib", "family": "buffer-memory", "type": "patch_compile", "reason": "_exitCode duplicate in BufferMemoryPatchEntry" },
+    { "assembly": "System.Text.Json", "family": "document-element", "type": "audit_violation", "reason": "p1_lowering: 0/138 methods with lowering" }
+  ],
+  "systemicIssues": [
+    {
+      "id": "SYS-001",
+      "title": "Codegen — missing chaos_* macros in runtime headers",
+      "type": "codegen",
+      "affectedFamilies": ["all"],
+      "severity": "blocker",
+      "description": "codegen emits chaos_array, chaos_value, chaos_managed_pointer_local_slot_tag, chaos_is_type_compatible but runtime headers don't define them"
+    },
+    {
+      "id": "SYS-002",
+      "title": "4 preflight failures — missing capability-family-contract.json",
+      "type": "preflight",
+      "affectedFamilies": ["--family/pinvoke-dllimport", "--family/threading-monitor-interlocked", "System.Runtime.Serialization/surrogates-selection", "System.Security.Claims/windows-identity"],
+      "severity": "low",
+      "description": "These families have unified-verification-report.json but no contract.json or capability-family-contract.json"
+    },
+    {
+      "id": "SYS-003",
+      "title": "GC.LatencyMode not available in managed subjects",
+      "type": "subjects_compile",
+      "affectedFamilies": ["System.Private.CoreLib/garbage-collection"],
+      "severity": "medium",
+      "description": "CRAG GC doesn't expose GC.LatencyMode like CoreCLR does"
+    },
+    {
+      "id": "SYS-004",
+      "title": "p1_lowering principle VIOLATION",
+      "type": "audit_violation",
+      "affectedFamilies": ["System.Text.Json/document-element"],
+      "severity": "medium",
+      "description": "0/N methods have lowering — codegen generates only simple forwards/stubs"
+    }
+  ],
+  "fixes": [
+    {
+      "id": "FIX-001",
+      "title": "BgcTryMark SEH protection",
+      "fileChanged": "src/native/runtime-core/gc/gc_old_gen.cpp",
+      "status": "applied"
+    },
+    {
+      "id": "FIX-002",
+      "title": "Audit counting alignment",
+      "fileChanged": "build/toolchains/run/testing/foundation_dll/mechanism_audit.py",
+      "status": "applied"
+    },
+    {
+      "id": "FIX-003",
+      "title": "Asn1/encoding-rules subject IDs",
+      "fileChanged": "testing/foundation-dll/System.Formats.Asn1/encoding-rules/contract.json",
+      "status": "applied"
+    },
+    {
+      "id": "FIX-004",
+      "title": "Text.Json/attributes subject IDs",
+      "fileChanged": "testing/foundation-dll/System.Text.Json/attributes/contract.json",
+      "status": "applied"
+    },
+    {
+      "id": "FIX-005",
+      "title": "pipeline-config.yaml alignment",
+      "fileChanged": "testing/config/foundation-dll/pipeline-config.yaml",
+      "status": "applied"
+    }
+  ],
+  "knownIssues": [
+    {
+      "id": "KI-001",
+      "scope": "all families",
+      "stage": "codegen_aot",
+      "severity": "blocker",
+      "impact": "entry.exe rebuild fails; AOT fact uses pre-built binary; new families without binary cannot run"
+    },
+    {
+      "id": "KI-002",
+      "scope": "partial",
+      "stage": "benchmark",
+      "severity": "medium",
+      "impact": "benchmark data unavailable for regression tracking"
+    }
+  ]
+}

@@ -1,0 +1,146 @@
+{
+  "System.Private.CoreLib/System.Math::Abs:System.Int32(System.Int32)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 2.69,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Math::Abs:System.Double(System.Double)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 6.93,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Math::Ceiling:System.Double(System.Double)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 7.63,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Math::Floor:System.Double(System.Double)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 7.89,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Math::Round:System.Double(System.Double)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 5.2,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Math::Round:System.Double(System.Double,System.Int32)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 9.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Math::Max:System.Int32(System.Int32,System.Int32)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 4.74,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Math::Max:System.Double(System.Double,System.Double)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 7.75,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Math::Min:System.Int32(System.Int32,System.Int32)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 4.34,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Math::Sqrt:System.Double(System.Double)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 6.85,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Math::Pow:System.Double(System.Double,System.Double)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 21.39,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Math::Sin:System.Double(System.Double)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 16.5,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Math::Cos:System.Double(System.Double)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 17.66,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Math::BigMul:System.Int64(System.Int32,System.Int32)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 5.64,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.BitConverter::GetBytes:System.Byte[](System.Int32)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 186.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.BitConverter::GetBytes:System.Byte[](System.Double)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 5.33,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.BitConverter::ToInt32:System.Int32(System.Byte[],System.Int32)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 182.86,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.BitConverter::ToDouble:System.Double(System.Byte[],System.Int32)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 194.53,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  }
+}

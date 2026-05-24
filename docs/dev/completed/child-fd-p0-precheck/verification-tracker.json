@@ -1,0 +1,126 @@
+{
+  "trackerVersion": 1,
+  "scope": "Phase 0 — Pipeline Precheck",
+  "families": [
+    {
+      "id": "family/System.Formats.Asn1/encoding-rules",
+      "assembly": "System.Formats.Asn1",
+      "displayName": "ASN.1 Encoding Rules",
+      "methods": 5,
+      "stages": {
+        "preflight": "pending",
+        "codegen_aot": "pending",
+        "jit_codegen": "pending",
+        "fact_aot": "pending",
+        "fact_jit": "pending",
+        "audit": "pending",
+        "asm_compare": "pending",
+        "microbench": "pending",
+        "benchmark": "pending",
+        "hotupdate_aot": "pending",
+        "hotupdate_jit_fact": "pending",
+        "hotupdate_jit_benchmark": "pending",
+        "hotupdate_aot_benchmark": "pending"
+      },
+      "riskScore": null,
+      "blocker": null
+    },
+    {
+      "id": "family/System.Text.Json/attributes",
+      "assembly": "System.Text.Json",
+      "displayName": "JSON Attributes",
+      "methods": 23,
+      "stages": {
+        "preflight": "pending",
+        "codegen_aot": "pending",
+        "jit_codegen": "pending",
+        "fact_aot": "pending",
+        "fact_jit": "pending",
+        "audit": "pending",
+        "asm_compare": "pending",
+        "microbench": "pending",
+        "benchmark": "pending",
+        "hotupdate_aot": "pending",
+        "hotupdate_jit_fact": "pending",
+        "hotupdate_jit_benchmark": "pending",
+        "hotupdate_aot_benchmark": "pending"
+      },
+      "riskScore": null,
+      "blocker": null
+    }
+  ],
+  "fixes": [
+    {
+      "id": "FIX-001",
+      "title": "BgcTryMark SEH protection",
+      "affectedFamilies": ["all"],
+      "fileChanged": "src/native/runtime-core/gc/gc_old_gen.cpp",
+      "beforeBenchmark": null,
+      "afterBenchmark": null,
+      "benchmarkDelta": null
+    },
+    {
+      "id": "FIX-002",
+      "title": "Audit counting alignment",
+      "affectedFamilies": ["all"],
+      "fileChanged": "build/toolchains/run/testing/foundation_dll/mechanism_audit.py",
+      "beforeBenchmark": null,
+      "afterBenchmark": null,
+      "benchmarkDelta": null
+    },
+    {
+      "id": "FIX-003",
+      "title": "Asn1/encoding-rules subject IDs",
+      "affectedFamilies": ["family/System.Formats.Asn1/encoding-rules"],
+      "fileChanged": "testing/foundation-dll/System.Formats.Asn1/encoding-rules/contract.json",
+      "beforeBenchmark": null,
+      "afterBenchmark": null,
+      "benchmarkDelta": null
+    },
+    {
+      "id": "FIX-004",
+      "title": "Text.Json/attributes subject IDs",
+      "affectedFamilies": ["family/System.Text.Json/attributes"],
+      "fileChanged": "testing/foundation-dll/System.Text.Json/attributes/contract.json",
+      "beforeBenchmark": null,
+      "afterBenchmark": null,
+      "benchmarkDelta": null
+    },
+    {
+      "id": "FIX-005",
+      "title": "pipeline-config.yaml alignment",
+      "affectedFamilies": ["all"],
+      "fileChanged": "testing/config/foundation-dll/pipeline-config.yaml",
+      "beforeBenchmark": null,
+      "afterBenchmark": null,
+      "benchmarkDelta": null
+    }
+  ],
+  "knownIssues": [
+    {
+      "id": "KI-001",
+      "title": "Codegen build failure — missing chaos_* macros",
+      "scope": "all families",
+      "stage": "codegen_aot",
+      "severity": "high",
+      "impact": "entry.exe rebuild fails; AOT fact/benchmark use pre-built binary"
+    },
+    {
+      "id": "KI-002",
+      "title": "Benchmark stub detection — no managed harness",
+      "scope": "partial families",
+      "stage": "benchmark",
+      "severity": "medium",
+      "impact": "benchmark data unavailable for regression tracking"
+    }
+  ],
+  "baseline": {
+    "familiesPassed": 0,
+    "familiesFailed": 0,
+    "familiesSkipped": 0,
+    "totalMethods": 28,
+    "methodsPassed": 0,
+    "methodsFailed": 0,
+    "timestamp": "2026-05-23T17:00:00"
+  }
+}

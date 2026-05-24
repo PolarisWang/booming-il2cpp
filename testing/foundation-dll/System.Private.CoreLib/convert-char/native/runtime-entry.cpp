@@ -193,6 +193,9 @@ int main(int argc, char** argv) {
     // Fill unresolved external runtime table entries with safe stubs.
     FillExternalRuntimeStubs();
 
+    // Register JIT methods for interpreter dispatch (no-op in AOT mode).
+    ChaosJitRegisterAll();
+
     RunMode mode = RunMode::Fact;
     int entry_index = 0;
     int iterations = 10000;

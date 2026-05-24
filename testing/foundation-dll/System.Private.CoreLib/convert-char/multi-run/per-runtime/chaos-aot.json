@@ -1,0 +1,146 @@
+{
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 822.45,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Byte)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 2.05,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Char)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 2.33,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.DateTime)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 802.61,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Decimal)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 186.33,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Double)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 3.77,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int16)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 2.07,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int32)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 2.07,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int64)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 3.61,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 2.06,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object,System.IFormatProvider)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 173.38,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.SByte)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 2.07,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Single)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 5.26,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 13.49,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 8.77,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt16)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 2.06,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt32)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 2.06,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt64)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 3.66,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  }
+}
