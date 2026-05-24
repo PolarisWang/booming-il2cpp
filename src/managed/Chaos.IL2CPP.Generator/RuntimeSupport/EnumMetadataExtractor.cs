@@ -190,24 +190,35 @@ internal static class EnumMetadataExtractor
             }
         }
 
+        // ── Emit shared FNV-1a 32-bit hash helper ─────────────────────────
+        sb.AppendLine("/// Compute FNV-1a 32-bit hash for a null-terminated string.");
+        sb.AppendLine("/// Shared by chaos_find_enum_metadata and compute_enum_hash24.");
+        sb.AppendLine("inline static CHAOS_IL2CPP_UINT32 compute_enum_hash32(");
+        sb.AppendLine("    const char* s) noexcept");
+        sb.AppendLine("{");
+        sb.AppendLine("    CHAOS_IL2CPP_UINT32 h = 2166136261u;");
+        sb.AppendLine("    for (; *s; ++s) {");
+        sb.AppendLine("        h ^= static_cast<CHAOS_IL2CPP_UINT8>(*s);");
+        sb.AppendLine("        h *= 16777619u;");
+        sb.AppendLine("    }");
+        sb.AppendLine("    return h;");
+        sb.AppendLine("}");
+        sb.AppendLine();
+        sb.AppendLine("/// Compute FNV-1a 24-bit hash (matching ChaosReflectionGetTypeFromHandle).");
+        sb.AppendLine("inline static CHAOS_IL2CPP_UINT32 compute_enum_hash24(");
+        sb.AppendLine("    const char* s) noexcept {");
+        sb.AppendLine("    return s && s[0] ? compute_enum_hash32(s) & 0xFFFFFFu : 0u;");
+        sb.AppendLine("}");
+        sb.AppendLine();
         // ── Emit lookup function (by subject_id string) ────────────────────
         sb.AppendLine("/// Lookup enum metadata by subject_id FNV-1a 32-bit hash via dispatch table binary search.");
         sb.AppendLine("/// Returns nullptr if the type is unknown (fallback to reflection API).");
         sb.AppendLine("inline static const EnumMetadataTable* chaos_find_enum_metadata(");
         sb.AppendLine("    const char* subject_id) noexcept");
         sb.AppendLine("{");
-        sb.AppendLine("    if (subject_id == nullptr || subject_id[0] == '\\0')");
+        sb.AppendLine("    if (subject_id == nullptr || subject_id[0] == ' ')");
         sb.AppendLine("        return nullptr;");
-        sb.AppendLine();
-        sb.AppendLine("    // FNV-1a 32-bit hash");
-        sb.AppendLine("    CHAOS_IL2CPP_UINT32 h = 2166136261u;");
-        sb.AppendLine("    for (const char* s = subject_id; *s; ++s) {");
-        sb.AppendLine("        h ^= static_cast<CHAOS_IL2CPP_UINT8>(*s);");
-        sb.AppendLine("        h *= 16777619u;");
-        sb.AppendLine("    }");
-        sb.AppendLine();
-        sb.AppendLine("    // Dispatch via FNV-24 hash binary search (sorted dispatch table)");
-        sb.AppendLine("    return chaos_dispatch_lookup(h & 0xFFFFFFu);");
+        sb.AppendLine("    return chaos_dispatch_lookup(compute_enum_hash32(subject_id) & 0xFFFFFFu);");
         sb.AppendLine("}");
         sb.AppendLine();
 
@@ -269,17 +280,6 @@ internal static class EnumMetadataExtractor
         sb.AppendLine("    const char* subject_id) noexcept;");
         sb.AppendLine("extern \"C\" const EnumMetadataTable* (*g_chaos_resolve_enum_metadata_by_fnv24)(");
         sb.AppendLine("    CHAOS_IL2CPP_UINT32 fnv24) noexcept;");
-        sb.AppendLine();
-        sb.AppendLine("// Helper: compute FNV-1a 24-bit hash (matching ChaosReflectionGetTypeFromHandle).");
-        sb.AppendLine("static inline CHAOS_IL2CPP_UINT32 compute_enum_hash24(const char* s) noexcept {");
-        sb.AppendLine("    if (s == nullptr || s[0] == '\\0') return 0u;");
-        sb.AppendLine("    CHAOS_IL2CPP_UINT32 h = 2166136261u;");
-        sb.AppendLine("    for (; *s; ++s) {");
-        sb.AppendLine("        h ^= static_cast<CHAOS_IL2CPP_UINT8>(*s);");
-        sb.AppendLine("        h *= 16777619u;");
-        sb.AppendLine("    }");
-        sb.AppendLine("    return h & 0xFFFFFFu;");
-        sb.AppendLine("}");
         sb.AppendLine();
         sb.AppendLine("namespace {");
         sb.AppendLine("struct _EnumMetadataRegistrar {");
